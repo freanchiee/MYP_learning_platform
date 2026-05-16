@@ -1,0 +1,49 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* IB Brand colours */
+  --ib-blue:   #003b5c;
+  --ib-teal:   #0079a8;
+  --ib-teal-l: #e5f4fa;
+  --ib-green:  #3daa35;
+  --ib-amber:  #f5a623;
+  --ib-red:    #c0392b;
+
+  /* MYP Criterion colours */
+  --cA: #0079a8;
+  --cB: #3daa35;
+  --cC: #f5a623;
+  --cD: #7b2d8b;
+
+  /* Generic surface tokens */
+  --background: #f9fafb;
+  --foreground:  #111827;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground:  #ededed;
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: var(--font-source-sans, Arial, Helvetica, sans-serif);
+}
+
+code,
+pre,
+kbd,
+samp {
+  font-family: var(--font-jetbrains-mono, 'Courier New', monospace);
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
