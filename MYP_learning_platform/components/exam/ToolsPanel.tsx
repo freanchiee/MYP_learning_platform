@@ -1,118 +1,5 @@
 'use client'
-import { useState } from 'react'
 import { useExamStore } from '@/store/examStore'
-
-// ---------------------------------------------------------------------------
-// Calculator
-// ---------------------------------------------------------------------------
-
-function Calculator() {
-  const [expr, setExpr] = useState('')
-  const [result, setResult] = useState<string | null>(null)
-  const [hasError, setHasError] = useState(false)
-
-  const append = (val: string) => {
-    setResult(null)
-    setHasError(false)
-    setExpr((p) => p + val)
-  }
-  const clear = () => { setExpr(''); setResult(null); setHasError(false) }
-  const backspace = () => { setExpr((p) => p.slice(0, -1)); setResult(null); setHasError(false) }
-
-  const evaluate = () => {
-    try {
-      const sanitised = expr
-        .replace(/×/g, '*')
-        .replace(/÷/g, '/')
-        .replace(/π/g, String(Math.PI))
-        .replace(/sin\(/g, 'Math.sin(')
-        .replace(/cos\(/g, 'Math.cos(')
-        .replace(/tan\(/g, 'Math.tan(')
-        .replace(/√\(/g, 'Math.sqrt(')
-        .replace(/\^/g, '**')
-      // Safety: only allow chars that appear after the replacements above
-      if (/[^0-9+\-*/().\sMathsincotaqrPIe_]/.test(sanitised)) {
-        throw new Error('Invalid characters')
-      }
-      // eslint-disable-next-line no-new-func
-      const val = new Function(`"use strict"; return (${sanitised})`)() as number
-      if (typeof val !== 'number' || !isFinite(val)) throw new Error('Bad result')
-      setResult(Number(val.toPrecision(10)).toString())
-      setHasError(false)
-    } catch {
-      setHasError(true)
-      setResult('Error')
-    }
-  }
-
-  type Btn = { label: string; action: () => void; wide?: boolean; accent?: boolean }
-  const buttons: Btn[] = [
-    { label: 'AC', action: clear, accent: true },
-    { label: '⌫', action: backspace },
-    { label: '(', action: () => append('(') },
-    { label: ')', action: () => append(')') },
-    { label: '7', action: () => append('7') },
-    { label: '8', action: () => append('8') },
-    { label: '9', action: () => append('9') },
-    { label: '÷', action: () => append('÷') },
-    { label: '4', action: () => append('4') },
-    { label: '5', action: () => append('5') },
-    { label: '6', action: () => append('6') },
-    { label: '×', action: () => append('×') },
-    { label: '1', action: () => append('1') },
-    { label: '2', action: () => append('2') },
-    { label: '3', action: () => append('3') },
-    { label: '-', action: () => append('-') },
-    { label: '0', action: () => append('0') },
-    { label: '.', action: () => append('.') },
-    { label: '^', action: () => append('^') },
-    { label: '+', action: () => append('+') },
-    { label: 'sin(', action: () => append('sin(') },
-    { label: 'cos(', action: () => append('cos(') },
-    { label: 'tan(', action: () => append('tan(') },
-    { label: '√(', action: () => append('√(') },
-    { label: 'π', action: () => append('π') },
-    { label: '=', action: evaluate, wide: true, accent: true },
-  ]
-
-  return (
-    <div className="flex gap-4 items-start">
-      <div className="flex flex-col gap-2">
-        <div
-          className="w-52 rounded-lg px-3 py-2 font-mono text-right text-sm min-h-[40px]"
-          style={{
-            background: '#0d1117',
-            color: hasError ? '#ff4444' : '#3daa35',
-            border: '1px solid #1e3a2e',
-            wordBreak: 'break-all',
-          }}
-        >
-          {result !== null ? result : expr || '0'}
-        </div>
-        {expr && result === null && (
-          <div className="text-xs text-gray-400 font-mono pl-1 truncate max-w-[208px]">{expr}</div>
-        )}
-      </div>
-      <div className="grid grid-cols-4 gap-1">
-        {buttons.map((btn, i) => (
-          <button
-            key={i}
-            onClick={btn.action}
-            className={`px-3 py-1.5 rounded text-xs font-semibold transition hover:opacity-80 active:scale-95 ${btn.wide ? 'col-span-2' : ''}`}
-            style={{
-              background: btn.accent ? '#0079a8' : '#e8edf2',
-              color: btn.accent ? '#ffffff' : '#003b5c',
-              border: '1px solid #c8d4de',
-              minWidth: 36,
-            }}
-          >
-            {btn.label}
-          </button>
-        ))}
-      </div>
-    </div>
-  )
-}
 
 // ---------------------------------------------------------------------------
 // Formulae
@@ -258,7 +145,15 @@ export default function ToolsPanel() {
       <div className="text-xs font-semibold text-[#0079a8] uppercase tracking-wider mb-3">
         {TITLES[activeTool]}
       </div>
-      {activeTool === 'calculator' && <Calculator />}
+      {activeTool === 'calculator' && (
+        <iframe
+          src="https://www.desmos.com/scientific"
+          title="Desmos Scientific Calculator"
+          className="rounded-lg border border-gray-200"
+          style={{ height: '320px', width: '560px', maxWidth: '100%' }}
+          allow="fullscreen"
+        />
+      )}
       {activeTool === 'formulae' && <Formulae />}
       {activeTool === 'booklet' && <DataBooklet />}
       {activeTool === 'converter' && <Converter />}

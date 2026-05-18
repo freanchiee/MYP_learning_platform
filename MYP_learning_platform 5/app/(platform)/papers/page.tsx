@@ -1,0 +1,190 @@
+import { redirect } from 'next/navigation'
+import Link from 'next/link'
+import { createClient } from '@/lib/supabase/server'
+
+interface Paper {
+  id: string
+  subject: string
+  session: string
+  year: number
+  total_marks: number
+  duration_minutes: number
+  is_published: boolean
+}
+
+interface AttemptRow {
+  paper_id: string
+  status: string
+}
+
+// Subject → color palette
+const SUBJECT_COLORS: Record<string, { border: string; badge: string; badgeText: string }> = {
+  Physics:   { border: '#3cb563', badge: '#3cb563', badgeText: '#fff' },
+  Chemistry: { border: '#3498db', badge: '#3498db', badgeText: '#fff' },
+  Biology:   { border: '#f39c12', badge: '#f39c12', badgeText: '#fff' },
+  Combined:  { border: '#6c3f9e', badge: '#6c3f9e', badgeText: '#fff' },
+}
+const DEFAULT_COLOR = { border: '#1a2338', badge: '#1a2338', badgeText: '#fff' }
+
+// Static criteria count per paper (extend as more papers are added)
+const CRITERIA_LABELS = '4 criteria'
+
+export default async function PapersPage() {
+  const supabase = createClient()
+
+  const { data: { session } } = await supabase.auth.getSession()
+  if (!session) redirect('/login')
+
+  const [papersRes, attemptsRes] = await Promise.all([
+    supabase
+      .from('papers')
+      .select('id, subject, session, year, total_marks, duration_minutes, is_published')
+      .eq('is_published', true)
+      .order('year', { ascending: false }),
+
+    supabase
+      .from('attempts')
+      .select('paper_id, status')
+      .eq('user_id', session.user.id),
+  ])
+
+  const papers: Paper[] = papersRes.data ?? []
+
+  // Override Supabase values with local paper metadata (source of truth)
+  const LOCAL_PAPER_META: Record<string, Partial<Paper>> = {
+    'physics-nov-2023': { total_marks: 100, duration_minutes: 90 },
+  }
+  const papersWithMeta = papers.map(p => ({ ...p, ...(LOCAL_PAPER_META[p.id] ?? {}) }))
+
+  const attempts: AttemptRow[] = attemptsRes.data ?? []
+
+  // Build lookup: paper_id → completion status
+  const completedPapers = new Set(
+    attempts
+      .filter((a) => a.status === 'completed')
+      .map((a) => a.paper_id)
+  )
+  const inProgressPapers = new Set(
+    attempts
+      .filter((a) => a.status === 'in_progress')
+      .map((a) => a.paper_id)
+  )
+
+  // Unique subjects for filter bar
+  const subjects = Array.from(new Set(papersWithMeta.map((p) => p.subject)))
+
+  return (
+    <div className="max-w-6xl mx-auto px-4 py-8" style={{ background: 'var(--background)' }}>
+
+      {/* ── Page header ── */}
+      <div className="mb-8">
+        <h1 className="text-2xl md:text-3xl font-bold text-[var(--brand-navy)]">Practice Papers</h1>
+        <p className="text-gray-500 mt-1 text-sm">
+          Attempt past IB MYP Sciences papers with AI-powered grading and instant feedback.
+        </p>
+      </div>
+
+      {/* ── Filter bar ── */}
+      <div className="flex flex-wrap items-center gap-2 mb-8">
+        <span className="text-xs font-semibold uppercase tracking-wide text-gray-400 mr-1">
+          Subjects:
+        </span>
+        {subjects.map((subject) => {
+          const colors = SUBJECT_COLORS[subject] ?? DEFAULT_COLOR
+          return (
+            <span
+              key={subject}
+              className="px-3 py-1 rounded-full text-xs font-semibold"
+              style={{ background: colors.badge, color: colors.badgeText }}
+            >
+              {subject}
+            </span>
+          )
+        })}
+        {subjects.length === 0 && (
+          <span className="text-xs text-gray-400">No subjects available</span>
+        )}
+      </div>
+
+      {/* ── Papers grid ── */}
+      {papersWithMeta.length === 0 ? (
+        <div className="flex flex-col items-center py-20 text-gray-400">
+          <span className="text-5xl mb-4">📋</span>
+          <p className="text-sm font-medium">No papers published yet. Check back soon!</p>
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          {papersWithMeta.map((paper) => {
+            const colors = SUBJECT_COLORS[paper.subject] ?? DEFAULT_COLOR
+            const isCompleted  = completedPapers.has(paper.id)
+            const isInProgress = inProgressPapers.has(paper.id)
+
+            return (
+              <div
+                key={paper.id}
+                className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow flex flex-col"
+                style={{ borderLeft: `4px solid ${colors.border}` }}
+              >
+                {/* Card header */}
+                <div className="p-5 flex-1">
+                  <div className="flex items-start justify-between gap-2 mb-3">
+                    {/* Subject badge */}
+                    <span
+                      className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold"
+                      style={{ background: colors.badge, color: colors.badgeText }}
+                    >
+                      {paper.subject}
+                    </span>
+
+                    {/* Status chip */}
+                    {isCompleted && (
+                      <span className="flex items-center gap-1 text-xs font-semibold text-green-600 bg-green-50 px-2 py-0.5 rounded-full border border-green-200">
+                        <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                        Completed
+                      </span>
+                    )}
+                    {isInProgress && !isCompleted && (
+                      <span className="flex items-center gap-1 text-xs font-semibold text-amber-600 bg-amber-50 px-2 py-0.5 rounded-full border border-amber-200">
+                        ⏳ In Progress
+                      </span>
+                    )}
+                  </div>
+
+                  {/* Title */}
+                  <h3 className="text-base font-bold text-gray-900 mb-0.5">{paper.subject}</h3>
+                  <p className="text-sm text-gray-500">{paper.session} {paper.year}</p>
+
+                  {/* Meta pills */}
+                  <div className="flex flex-wrap gap-1.5 mt-3">
+                    <span className="text-xs text-gray-500 bg-gray-50 border border-gray-100 rounded px-2 py-0.5">
+                      {paper.total_marks} marks
+                    </span>
+                    <span className="text-xs text-gray-500 bg-gray-50 border border-gray-100 rounded px-2 py-0.5">
+                      {paper.duration_minutes} min
+                    </span>
+                    <span className="text-xs text-gray-500 bg-gray-50 border border-gray-100 rounded px-2 py-0.5">
+                      {CRITERIA_LABELS}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Card footer */}
+                <div className="px-5 pb-5">
+                  <Link
+                    href={`/exam/${paper.id}`}
+                    className="block w-full text-center py-2.5 rounded-lg text-sm font-semibold text-white transition-opacity hover:opacity-90 active:opacity-80"
+                    style={{ background: colors.border }}
+                  >
+                    {isCompleted ? 'Practice Again' : isInProgress ? 'Continue Paper' : 'Start Paper'}
+                  </Link>
+                </div>
+              </div>
+            )
+          })}
+        </div>
+      )}
+    </div>
+  )
+}

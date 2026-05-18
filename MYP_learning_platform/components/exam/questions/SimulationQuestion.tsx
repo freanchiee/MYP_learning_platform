@@ -7,6 +7,48 @@ import LiveKeywordTracker from '@/components/exam/keyword/LiveKeywordTracker'
 import HintPanel from '@/components/exam/hints/HintPanel'
 import SpringCanvas from '@/components/simulations/SpringCanvas'
 import PendulumGeoGebra from '@/components/simulations/PendulumGeoGebra'
+import BounceCanvas from '@/components/simulations/BounceCanvas'
+import VariableClassifyTable from '@/components/exam/widgets/VariableClassifyTable'
+import BounceGraphsAB from '@/components/exam/widgets/BounceGraphsAB'
+import RichTextEditor from '@/components/exam/widgets/RichTextEditor'
+import Q4eDataTable from '@/components/exam/widgets/Q4eDataTable'
+
+function renderTaskText(text: string) {
+  const lines = text.split('\n')
+  const out: React.ReactNode[] = []
+  let bullets: string[] = []
+
+  function flushBullets() {
+    if (bullets.length === 0) return
+    out.push(
+      <ul key={`bl-${out.length}`} className="list-disc list-outside ml-5 space-y-1">
+        {bullets.map((b, i) => (
+          <li key={i} className="text-sm leading-relaxed text-gray-800" style={{ fontFamily: 'Georgia, "Times New Roman", serif' }}>
+            {b}
+          </li>
+        ))}
+      </ul>
+    )
+    bullets = []
+  }
+
+  for (const raw of lines) {
+    const line = raw.trim()
+    if (!line) { flushBullets(); continue }
+    if (line.startsWith('•')) {
+      bullets.push(line.slice(1).trim())
+    } else {
+      flushBullets()
+      out.push(
+        <p key={`p-${out.length}`} className="text-sm leading-relaxed text-gray-800" style={{ fontFamily: 'Georgia, "Times New Roman", serif' }}>
+          {line}
+        </p>
+      )
+    }
+  }
+  flushBullets()
+  return <div className="space-y-1.5">{out}</div>
+}
 
 interface SimulationQuestionProps {
   q: Question
@@ -30,6 +72,7 @@ const simTypeLabel: Record<string, string> = {
   pendulum_geogebra: 'Pendulum',
   wave: 'Wave',
   decay: 'Radioactive Decay',
+  bounce: 'Bouncing Ball',
 }
 
 function SimulationBody({ q }: { q: Question }) {
@@ -39,6 +82,9 @@ function SimulationBody({ q }: { q: Question }) {
 
     case 'pendulum_geogebra':
       return <PendulumGeoGebra />
+
+    case 'bounce':
+      return <BounceCanvas />
 
     case 'spring_data':
       return (
@@ -89,12 +135,31 @@ export default function SimulationQuestion({ q, qIdx }: SimulationQuestionProps)
       {/* Stem card */}
       <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-6">
         {q.stem && (
-          <p
-            className="text-base leading-relaxed text-gray-800"
-            style={{ fontFamily: 'Georgia, "Times New Roman", serif' }}
-          >
+          <p className="text-base leading-relaxed text-gray-800 mb-4" style={{ fontFamily: 'Georgia, "Times New Roman", serif' }}>
             {q.stem}
           </p>
+        )}
+
+        {/* PDF page images (fallback if no nativeContent) */}
+        {!q.nativeContent && q.figImages && q.figImages.length > 0 && (
+          <div className="space-y-3 mt-2">
+            {q.figImages.map((src, i) => (
+              <img
+                key={i}
+                src={src}
+                alt={`Question figure ${i + 1}`}
+                className="w-full rounded-lg border border-gray-200 shadow-sm"
+                style={{ maxHeight: '600px', objectFit: 'contain', background: '#fff' }}
+              />
+            ))}
+          </div>
+        )}
+
+        {/* Legacy figCaption */}
+        {q.figCaption && (
+          <pre className="mt-3 bg-gray-900 text-green-300 rounded-lg p-4 text-xs font-mono whitespace-pre-wrap overflow-x-auto border border-gray-700">
+            {q.figCaption}
+          </pre>
         )}
       </div>
 
@@ -149,29 +214,38 @@ export default function SimulationQuestion({ q, qIdx }: SimulationQuestionProps)
             </div>
 
             <div className="p-4 space-y-3">
-              <p
-                className="text-sm leading-relaxed text-gray-800"
-                style={{ fontFamily: 'Georgia, "Times New Roman", serif' }}
-              >
-                {task.text}
-              </p>
+              {renderTaskText(task.text)}
 
-              <div className="space-y-1">
-                <textarea
-                  value={task.ans ?? ''}
-                  onChange={e => setTaskAnswer(qIdx, taskIdx, e.target.value)}
-                  placeholder={task.ph}
-                  rows={4}
-                  className={cn(
-                    'w-full rounded-xl border border-gray-300 px-3 py-2.5 text-sm text-gray-800 resize-y',
-                    'placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[var(--ib-teal)] focus:border-transparent',
-                    'transition-colors min-h-[100px]',
-                  )}
+              {/* Widget or RichTextEditor */}
+              {task.widget === 'q4e_table' ? (
+                <Q4eDataTable onAnswer={(ans) => setTaskAnswer(qIdx, taskIdx, ans)} />
+              ) : task.widget === 'variable_classify' ? (
+                <VariableClassifyTable
+                  onAnswer={(ans) => setTaskAnswer(qIdx, taskIdx, ans)}
                 />
-                <div className="flex justify-end">
-                  <span className="text-[10px] text-gray-400 font-mono">{charCount} characters</span>
+              ) : task.widget === 'bounce_graphs_ab' ? (
+                <div className="space-y-3">
+                  <BounceGraphsAB />
+                  <RichTextEditor
+                    value={task.ans ?? ''}
+                    onChange={(val) => setTaskAnswer(qIdx, taskIdx, val)}
+                    placeholder={task.ph}
+                    rows={4}
+                  />
                 </div>
-              </div>
+              ) : (
+                <div className="space-y-1">
+                  <RichTextEditor
+                    value={task.ans ?? ''}
+                    onChange={(val) => setTaskAnswer(qIdx, taskIdx, val)}
+                    placeholder={task.ph}
+                    rows={4}
+                  />
+                  <div className="flex justify-end">
+                    <span className="text-[10px] text-gray-400 font-mono">{charCount} characters</span>
+                  </div>
+                </div>
+              )}
 
               <LiveKeywordTracker
                 qId={q.id}

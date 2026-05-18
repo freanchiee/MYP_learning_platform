@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Gameducation palette */
+  --brand-bg:     #faf6e0;
+  --brand-navy:   #1a2338;
+  --brand-green:  #3cb563;
+  --brand-red:    #e84040;
+  --brand-blue:   #3498db;
+  --brand-purple: #6c3f9e;
+  --brand-orange: #f39c12;
+
+  /* Mapped to old token names so existing components don't break */
+  --ib-blue:   #1a2338;
+  --ib-teal:   #3cb563;
+  --ib-teal-l: #e8f8ee;
+  --ib-green:  #3cb563;
+  --ib-amber:  #f39c12;
+  --ib-red:    #e84040;
+
+  /* MYP Criterion colours */
+  --cA: #3498db;
+  --cB: #3cb563;
+  --cC: #f39c12;
+  --cD: #6c3f9e;
+
+  /* Surface */
+  --background: #faf6e0;
+  --foreground: #1a2338;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: var(--font-source-sans, Arial, Helvetica, sans-serif);
+}
+
+code, pre, kbd, samp {
+  font-family: var(--font-jetbrains-mono, 'Courier New', monospace);
+}
+
+@layer utilities {
+  .text-balance { text-wrap: balance; }
+}

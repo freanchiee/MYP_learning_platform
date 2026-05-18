@@ -2,14 +2,14 @@
 
 import { useMemo, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Brain } from 'lucide-react'
-import { CONCEPTS_PUBLIC } from '@/data/papers/physics-nov-2023/conceptsPublic'
+import { Brain, Lock } from 'lucide-react'
+import { useExamStore } from '@/store/examStore'
+import { getConceptEntry } from '@/data/concepts/registry'
 
 interface LiveKeywordTrackerProps {
   qId: number
   taskLabel: string
   text: string
-  markSchemeKey?: string
 }
 
 /** Normalise text for matching: lowercase, strip punctuation, collapse spaces */
@@ -24,9 +24,7 @@ function normalise(s: string): string {
 /** Check if a concept phrase appears anywhere in the normalised student text */
 function conceptHit(concept: string, normText: string): boolean {
   const normConcept = normalise(concept)
-  // Try direct includes first
   if (normText.includes(normConcept)) return true
-  // Also check each word of the concept individually if concept is a single word
   const words = normConcept.split(' ')
   if (words.length === 1) return normText.includes(normConcept)
   // Multi-word: require all words to appear somewhere (order-independent fallback)
@@ -38,45 +36,53 @@ export default function LiveKeywordTracker({
   taskLabel,
   text,
 }: LiveKeywordTrackerProps) {
-  // Build key matching CONCEPTS_PUBLIC format: 'q{id}_{label}'
+  const paperId = useExamStore(s => s.paperId)
+
   const conceptKey = `q${qId}_${taskLabel}`
-  const entry = CONCEPTS_PUBLIC[conceptKey]
+  const entry = getConceptEntry(paperId, conceptKey)
 
-  // Track which concepts were previously hit for new-hit animation
-  const prevHitsRef = useRef<Set<string>>(new Set())
+  // Track previous hits for new-hit pop animation
+  const prevHitsRef = useRef<Set<number>>(new Set())
 
-  const { hits, misses } = useMemo(() => {
-    if (!entry) return { hits: [], misses: [] }
+  const hitIndices = useMemo(() => {
+    if (!entry) return new Set<number>()
     const normText = normalise(text)
-    const hits: string[] = []
-    const misses: string[] = []
-    for (const concept of entry.keyConcepts) {
-      if (conceptHit(concept, normText)) {
-        hits.push(concept)
-      } else {
-        misses.push(concept)
-      }
-    }
-    return { hits, misses }
+    const set = new Set<number>()
+    entry.keyConcepts.forEach((concept, idx) => {
+      if (conceptHit(concept, normText)) set.add(idx)
+    })
+    return set
   }, [entry, text])
 
-  // Determine newly detected (for animation)
+  // Determine newly hit indices for pop animation
   const newlyHit = useMemo(() => {
-    const set = new Set<string>()
-    for (const h of hits) {
-      if (!prevHitsRef.current.has(h)) set.add(h)
-    }
-    // Update ref
-    prevHitsRef.current = new Set(hits)
+    const set = new Set<number>()
+    hitIndices.forEach(idx => {
+      if (!prevHitsRef.current.has(idx)) set.add(idx)
+    })
+    prevHitsRef.current = new Set(hitIndices)
     return set
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [hits.join(',')])
+  }, [Array.from(hitIndices).join(',')])
 
   if (!entry || entry.keyConcepts.length === 0) return null
 
   const total = entry.keyConcepts.length
-  const hitCount = hits.length
+  const hitCount = hitIndices.size
   const pct = total > 0 ? Math.round((hitCount / total) * 100) : 0
+
+  /**
+   * Sequential reveal logic:
+   * - Show all concepts that have been HIT (green)
+   * - Show the next un-hit concept as the current TARGET (grey outline)
+   * - Everything beyond that is LOCKED (shown as a count)
+   *
+   * "Next target" = the first index not yet hit.
+   */
+  const nextTargetIdx = entry.keyConcepts.findIndex((_, idx) => !hitIndices.has(idx))
+  const lockedCount = nextTargetIdx === -1
+    ? 0
+    : total - nextTargetIdx - 1  // how many after the next target
 
   return (
     <div className="mt-2 border border-gray-200 bg-gray-50 rounded-xl overflow-hidden">
@@ -111,39 +117,77 @@ export default function LiveKeywordTracker({
         </div>
       </div>
 
-      {/* Chips */}
+      {/* Chips — sequential reveal */}
       <div
-        className="flex flex-wrap gap-1.5 p-2.5 max-h-[120px] overflow-y-auto"
+        className="flex flex-wrap gap-1.5 p-2.5 max-h-[120px] overflow-y-auto items-center"
         style={{ scrollbarWidth: 'thin' }}
       >
         <AnimatePresence mode="popLayout">
-          {hits.map(concept => (
-            <motion.span
-              key={concept}
-              layout
-              initial={newlyHit.has(concept) ? { scale: 0.4, opacity: 0 } : false}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.5, opacity: 0 }}
-              transition={{ type: 'spring', stiffness: 400, damping: 20 }}
-              className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-medium bg-green-100 text-green-800 border border-green-200"
-            >
-              <span className="w-1.5 h-1.5 rounded-full bg-green-500 flex-shrink-0" />
-              {concept}
-            </motion.span>
-          ))}
-          {misses.map(concept => (
-            <motion.span
-              key={concept}
-              layout
-              initial={false}
-              animate={{ scale: 1, opacity: 1 }}
-              className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-medium bg-gray-100 text-gray-500 border border-gray-200"
-            >
-              <span className="w-1.5 h-1.5 rounded-full bg-gray-300 flex-shrink-0" />
-              {concept}
-            </motion.span>
-          ))}
+          {entry.keyConcepts.map((concept, idx) => {
+            const isHit = hitIndices.has(idx)
+            const isNextTarget = idx === nextTargetIdx
+            const isLocked = !isHit && !isNextTarget
+
+            if (isLocked) return null  // hidden — counted in the "locked" badge below
+
+            if (isHit) {
+              return (
+                <motion.span
+                  key={`hit-${idx}`}
+                  layout
+                  initial={newlyHit.has(idx) ? { scale: 0.4, opacity: 0 } : false}
+                  animate={{ scale: 1, opacity: 1 }}
+                  exit={{ scale: 0.5, opacity: 0 }}
+                  transition={{ type: 'spring', stiffness: 400, damping: 20 }}
+                  className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-medium bg-green-100 text-green-800 border border-green-200"
+                >
+                  <span className="w-1.5 h-1.5 rounded-full bg-green-500 flex-shrink-0" />
+                  {concept}
+                </motion.span>
+              )
+            }
+
+            // Next target chip — show the concept so student knows what to aim for
+            return (
+              <motion.span
+                key={`target-${idx}`}
+                layout
+                initial={{ scale: 0.8, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ type: 'spring', stiffness: 300, damping: 22 }}
+                className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-medium bg-blue-50 text-blue-700 border border-blue-200 border-dashed"
+                title="Next concept to cover"
+              >
+                <span className="w-1.5 h-1.5 rounded-full bg-blue-400 flex-shrink-0" />
+                {concept}
+              </motion.span>
+            )
+          })}
         </AnimatePresence>
+
+        {/* Locked badge */}
+        {lockedCount > 0 && (
+          <motion.span
+            layout
+            animate={{ opacity: 1 }}
+            className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-medium bg-gray-100 text-gray-400 border border-gray-200"
+            title={`${lockedCount} more concept${lockedCount !== 1 ? 's' : ''} to unlock`}
+          >
+            <Lock size={9} className="flex-shrink-0" />
+            +{lockedCount} more
+          </motion.span>
+        )}
+
+        {/* All done state */}
+        {hitCount === total && total > 0 && (
+          <motion.span
+            initial={{ scale: 0.6, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-green-500 text-white ml-1"
+          >
+            ✓ All concepts covered!
+          </motion.span>
+        )}
       </div>
     </div>
   )

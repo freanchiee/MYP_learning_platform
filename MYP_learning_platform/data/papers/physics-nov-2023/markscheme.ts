@@ -1,3 +1,5 @@
+import 'server-only'
+
 export type MSEntry = {
   marks: number
   exemplar: string
@@ -7,571 +9,307 @@ export type MSEntry = {
   feedbackMiss: string
 }
 
-export type MSRecord =
-  | { type: 'mcq'; correct: number }
-  | MSEntry
-
-export const MS: Record<string, MSRecord> = {
-  q1: { type: 'mcq', correct: 3 },
-  q2: { type: 'mcq', correct: 3 },
-  q3_a: {
-    marks: 1,
-    exemplar:
-      'No. The smallest division is 1 mm = 0.001 m, giving precision to ±0.5 mm. Recording 0.835 m (to nearest mm) gives 3 significant figures, which is justified as the ruler reads to 1 mm.',
-    keyConcepts: ['precision', 'significant figures', 'justified', '1mm', '3 sig fig'],
-    keywords: ['smallest division', 'accurate', 'precision', 'mm', '0.001'],
-    feedbackHit:
-      'Good — you correctly linked significant figures to the precision of the measuring instrument.',
-    feedbackMiss:
-      "Key idea: 1 mm precision → 0.001 m → 3 significant figures IS justified because the last digit (5) is meaningful to the ruler's resolution.",
-  },
-  q3_b: {
-    marks: 2,
-    exemplar:
-      'The SI unit of density is kg/m³ (kilograms per cubic metre). g/cm³ is also accepted.',
-    keyConcepts: ['kg/m3', 'kilogram', 'cubic metre'],
-    keywords: ['kg', 'm3', 'g/cm3', 'density unit', 'si unit'],
-    feedbackHit: 'Correct SI unit stated.',
-    feedbackMiss:
-      'The SI unit is kg/m³. Note: g/cm³ is acceptable in some contexts but kg/m³ is the SI standard.',
-  },
-  q3_c: {
-    marks: 3,
-    exemplar: 'ρ = m/V = 120 g ÷ 15 cm³ = 8 g/cm³ (or 8000 kg/m³ with conversion)',
-    keyConcepts: ['density equals', 'mass divided by volume', '8', 'formula'],
-    keywords: ['rho', 'm/v', '120', '15', '8 g', '8000 kg', 'divide', 'calculation'],
-    feedbackHit: 'Formula correctly applied and numerical answer obtained.',
-    feedbackMiss: 'Use ρ = m/V. Substitute: 120 ÷ 15 = 8 g/cm³.',
-  },
-  q4_a: {
-    marks: 2,
-    exemplar: 'R_total = R₁ + R₂ = 2 + 1 = 3 Ω',
-    keyConcepts: ['3 ohm', 'series', 'add', 'total resistance'],
-    keywords: ['2+1', 'r1+r2', '3', 'series resistance', 'ohm'],
-    feedbackHit: 'Correct: series resistances are added.',
-    feedbackMiss: 'In series: R_total = R₁ + R₂ = 2 + 1 = 3 Ω',
-  },
-  q4_b: {
-    marks: 2,
-    exemplar:
-      'I = V/R = 6/3 = 2 A. In series the current is the same through both resistors: 2 A each.',
-    keyConcepts: ['2 ampere', 'v/r', 'current same', 'ohm law'],
-    keywords: ['6/3', '2a', 'current', 'same', 'series', 'ohm', 'i=v/r'],
-    feedbackHit: "Ohm's law correctly applied.",
-    feedbackMiss: 'I = V/R = 6÷3 = 2 A.',
-  },
-  q4_c: {
-    marks: 2,
-    exemplar: 'V₁ = IR₁ = 2×2 = 4 V; V₂ = IR₂ = 2×1 = 2 V. Check: 4+2 = 6V ✓',
-    keyConcepts: ['4 volt', '2 volt', 'v=ir', 'potential difference'],
-    keywords: ['4v', '2v', 'v=ir', 'potential', 'voltage', 'check'],
-    feedbackHit: 'V = IR applied correctly to each resistor.',
-    feedbackMiss: 'V₁ = I×R₁ = 2×2 = 4V and V₂ = I×R₂ = 2×1 = 2V.',
-  },
-  q5_i: {
-    marks: 2,
-    exemplar:
-      'How does the load (force) applied to a spring affect its extension? (IV = load/force in N; DV = extension in cm/m)',
-    keyConcepts: ['how does', 'affect', 'extension', 'load', 'force'],
-    keywords: ['spring', 'investigate', 'load', 'extension', 'force', 'variable', 'relationship', 'proportional'],
-    feedbackHit: 'Research question identifies IV and DV.',
-    feedbackMiss:
-      'A good RQ names IV (load/force) and DV (extension): "How does load affect extension of a spring?"',
-  },
-  q5_ii: {
-    marks: 2,
-    exemplar:
-      "I predict that as the load increases, the extension will increase proportionally, because according to Hooke's Law (F = kx), force is directly proportional to extension within the elastic limit.",
-    keyConcepts: ["hooke's law", 'directly proportional', 'elastic limit', 'extension increases'],
-    keywords: ['proportional', 'increase', 'hooke', 'f=kx', 'spring constant', 'elastic', 'linear', 'predict'],
-    feedbackHit: "Hypothesis uses Hooke's Law correctly.",
-    feedbackMiss: 'State prediction (extension increases with load) AND justify using F = kx.',
-  },
-  q5_iii: {
-    marks: 2,
-    exemplar:
-      'IV: load (mass/force in N)\nDV: extension of spring (cm or m)\nControlled: same spring, same ruler position, temperature of spring',
-    keyConcepts: ['independent variable', 'dependent variable', 'controlled', 'same spring', 'load', 'extension'],
-    keywords: ['iv', 'dv', 'control', 'fixed', 'same', 'spring', 'ruler', 'temperature', 'mass', 'force', 'extension'],
-    feedbackHit: 'IV, DV and at least 2 controlled variables correctly identified.',
-    feedbackMiss:
-      'IV = load (what you change), DV = extension (what you measure), CVs = same spring, same ruler, temperature.',
-  },
-  q5_iv: {
-    marks: 2,
-    exemplar:
-      '1. Measure natural length of unloaded spring. 2. Add 100g mass, wait for spring to stop oscillating. 3. Record new length and calculate extension. 4. Repeat for 200g, 300g... up to 500g. 5. Repeat each measurement 3 times for reliability.',
-    keyConcepts: ['measure', 'repeat', 'reliability', 'mass', 'length', 'extension'],
-    keywords: ['ruler', 'clamp', 'stand', 'masses', 'measure', 'record', 'extension', 'repeat', 'average', 'oscillation', 'settle'],
-    feedbackHit: 'Method is systematic with clear steps and mentions reliability.',
-    feedbackMiss:
-      'Key elements: measure natural length, add masses in steps, wait for spring to be stationary, record extension, repeat each mass 3× for average.',
-  },
-  q6_i: {
-    marks: 2,
-    exemplar:
-      'How does the length of a pendulum affect its period (time for one complete oscillation)?',
-    keyConcepts: ['how does', 'length', 'affect', 'period', 'oscillation'],
-    keywords: ['pendulum', 'length', 'period', 'time', 'complete', 'swing', 'oscillate'],
-    feedbackHit: 'Research question correctly identifies IV (length) and DV (period).',
-    feedbackMiss:
-      'RQ must name: IV = length of pendulum, DV = period (time for one complete oscillation).',
-  },
-  q6_ii: {
-    marks: 2,
-    exemplar:
-      'I predict that as length increases, period increases. This is because a longer pendulum has a greater arc distance to travel; T = 2π√(l/g) shows period is proportional to the square root of length.',
-    keyConcepts: ['period increases', 'length increases', 't=2pi', 'square root'],
-    keywords: ['longer', 'increase', 't=2pi', 'root', 'proportional', 'sqrt', 'formula'],
-    feedbackHit: 'Correct prediction with mathematical justification.',
-    feedbackMiss: 'As length increases, period increases. Use T = 2π√(l/g) to justify.',
-  },
-  q6_iii: {
-    marks: 2,
-    exemplar:
-      'IV: length of pendulum (cm)\nDV: period T (s)\nCVs: mass of bob, amplitude of swing, same timing method',
-    keyConcepts: ['independent', 'dependent', 'controlled', 'length', 'period', 'mass bob', 'amplitude'],
-    keywords: ['iv', 'dv', 'cv', 'length', 'period', 'mass', 'amplitude', 'angle', 'controlled'],
-    feedbackHit: 'All three variable types correctly identified.',
-    feedbackMiss: 'IV = length, DV = period, CVs = mass of bob, amplitude, same timing method.',
-  },
-  q6_iv: {
-    marks: 2,
-    exemplar:
-      '1. Time 10 complete oscillations (not just 1) to reduce percentage error in timing. 2. Release from same small angle each time (<15°) to ensure simple harmonic motion.',
-    keyConcepts: ['10 oscillations', 'percentage error', 'timing', 'small angle'],
-    keywords: ['10', 'oscillations', 'error', 'reaction', 'angle', 'small', 'consistent', 'repeat', 'average'],
-    feedbackHit: 'Two valid reliability precautions stated with reasoning.',
-    feedbackMiss:
-      'Key precautions: (1) time multiple oscillations (10T) to reduce reaction time error, (2) keep amplitude small and constant.',
-  },
-  q7_a: {
-    marks: 3,
-    exemplar:
-      'Extension = length - 10.0 cm. Row values: 0, 3.5, 7.0, 10.5, 14.0, 17.5, 24.0 cm → divide by 100 for metres: 0, 0.035, 0.070, 0.105, 0.140, 0.175, 0.240 m',
-    keyConcepts: ['extension', 'subtract', 'natural length', 'divide by 100', 'metres'],
-    keywords: ['extension', 'subtract', '10', '100', 'cm', 'm', 'convert', 'column'],
-    feedbackHit: 'Extensions correctly calculated and converted to metres.',
-    feedbackMiss:
-      'Extension = measured length − 10.0 cm (natural length). Convert to m by dividing by 100.',
-  },
-  q7_b: {
-    marks: 3,
-    exemplar:
-      'Graph should show: Extension (m) on y-axis, Load (N) on x-axis, points plotted at (0,0),(1,0.035),(2,0.070),(3,0.105),(4,0.14),(5,0.175), best-fit straight line through origin (up to 5N), point at 6N deviates above line.',
-    keyConcepts: ['extension y-axis', 'load x-axis', 'best-fit', 'straight line', 'origin'],
-    keywords: ['y-axis', 'x-axis', 'extension', 'load', 'plot', 'graph', 'best fit', 'straight', 'origin', 'points'],
-    feedbackHit: 'Graph axes correctly labelled and best-fit line drawn through origin.',
-    feedbackMiss:
-      'y-axis = Extension (m), x-axis = Load (N). Points up to 5N should lie on a straight line through origin. 6N point deviates.',
-  },
-  q7_c: {
-    marks: 2,
-    exemplar:
-      'k = gradient = ΔF/Δx = (0.175-0)/(5-0) / ... Wait: k = Load/Extension = gradient of Load vs Extension but inverted. If plotting Extension vs Load: gradient = Δextension/ΔLoad = 0.035 m/N. So k = 1/0.035 ≈ 28.6 N/m',
-    keyConcepts: ['gradient', 'spring constant', 'calculation', 'N/m', 'delta'],
-    keywords: ['gradient', 'rise', 'run', 'delta', 'k', '28', 'spring constant', 'n/m', '0.035'],
-    feedbackHit: 'Gradient correctly calculated from best-fit line and k determined.',
-    feedbackMiss:
-      'Gradient = Δy/Δx = Δextension/ΔLoad ≈ 0.035 m/N. k = 1/gradient ≈ 28.6 N/m.',
-  },
-  q7_d: {
-    marks: 2,
-    exemplar:
-      "The spring goes beyond its limit of proportionality at 6 N load. The data point at 6N (extension = 0.240m) lies above the best-fit line, showing greater extension than predicted by Hooke's Law.",
-    keyConcepts: ['6 newton', 'limit of proportionality', 'above line', 'deviates'],
-    keywords: ['6', '6n', 'limit', 'proportionality', 'elastic', 'deviates', 'above', 'greater', 'hooke'],
-    feedbackHit: 'Correct load identified with reference to deviation from best-fit line.',
-    feedbackMiss:
-      'At 6 N, the extension (0.240 m) is greater than expected from the best-fit line → limit of proportionality exceeded.',
-  },
-  q8_a: {
-    marks: 3,
-    exemplar:
-      'Average 10T: (9.0+9.2)/2=9.1, (11.0+11.2)/2=11.1, (12.6+12.8)/2=12.7, (14.1+14.3)/2=14.2, (15.5+15.5)/2=15.5, (16.7+16.9)/2=16.8. T=Average/10. T²=T×T.',
-    keyConcepts: ['average', 'divide by 10', 'period', 'T squared', 'calculation'],
-    keywords: ['average', 'sum', 'divide', '10', 'period', 'T', 'square', 'T2', 't squared'],
-    feedbackHit: 'Correct averages, periods and T² values calculated.',
-    feedbackMiss: 'Average = (Trial1+Trial2)/2. Period T = Average/10. T² = T×T.',
-  },
-  q8_b: {
-    marks: 3,
-    exemplar:
-      'T² vs length graph: T²(y-axis), length in cm (x-axis), points should lie near a straight line through origin, best-fit drawn.',
-    keyConcepts: ['T squared y-axis', 'length x-axis', 'straight line', 'best fit'],
-    keywords: ['t2', 't squared', 'length', 'y-axis', 'x-axis', 'graph', 'plot', 'straight', 'best fit'],
-    feedbackHit: 'Correct axes and straight best-fit line drawn.',
-    feedbackMiss:
-      'y-axis = T² (s²), x-axis = length (cm). Points should lie approximately on a straight line.',
-  },
-  q8_c: {
-    marks: 2,
-    exemplar:
-      'g = 4π²/gradient. Gradient ≈ 0.04 s²/cm = 4 s²/m. g = 4π²/4 ≈ 9.87 m/s² ≈ 9.8 m/s²',
-    keyConcepts: ['gradient', '4pi squared', 'calculate g', '9.8'],
-    keywords: ['gradient', '4pi', '9.8', '9.87', 'g', 'calculation', 'formula'],
-    feedbackHit: 'Gradient used correctly to calculate g ≈ 9.8 m/s².',
-    feedbackMiss:
-      'Read gradient from graph, then g = 4π²/gradient. Expected g ≈ 9.8 m/s².',
-  },
-  q8_d: {
-    marks: 2,
-    exemplar:
-      'Limitation: only 2 trials per length reduces reliability. Improvement: repeat each length 3-5 times and average to reduce effect of random timing errors.',
-    keyConcepts: ['limitation', 'repeat', 'reliability', 'random error', 'improvement'],
-    keywords: ['limitation', 'improve', 'repeat', 'trials', 'random', 'error', 'average', 'reliability'],
-    feedbackHit: 'Specific limitation and improvement with reasoning.',
-    feedbackMiss:
-      'Limitation = only 2 trials → low reliability. Improvement = repeat 3+ times and average to reduce random error.',
-  },
-  q9_a: {
-    marks: 3,
-    exemplar:
-      'R = V/I for each pair: 1.0/0.25=4Ω, 2.0/0.50=4Ω, 3.0/0.74=4.05Ω, 4.0/1.00=4Ω, 5.0/1.25=4Ω, 6.0/1.52=3.95Ω',
-    keyConcepts: ['R=V/I', 'ohm', 'resistance', 'calculation', 'formula'],
-    keywords: ['r=v/i', 'ohm', '4', 'resistance', 'divide', 'calculation', 'v/i'],
-    feedbackHit: 'R = V/I correctly applied with numerical answers.',
-    feedbackMiss:
-      'Use R = V/I for each pair. R ≈ 4 Ω for all pairs (approximately constant).',
-  },
-  q9_b: {
-    marks: 2,
-    exemplar:
-      "The resistance values are approximately constant (≈4Ω) across all measurements. This indicates the resistor is ohmic — it obeys Ohm's law at constant temperature.",
-    keyConcepts: ['constant resistance', 'ohmic', "ohm's law"],
-    keywords: ['constant', 'ohmic', 'ohm', 'temperature', 'approximately', '4 ohm'],
-    feedbackHit: 'Correctly identifies constant resistance → ohmic conductor.',
-    feedbackMiss: 'Resistance stays approximately constant → ohmic conductor.',
-  },
-  q9_c: {
-    marks: 2,
-    exemplar:
-      '1. Temperature change: as current flows the wire heats up, changing resistance. 2. Parallax error reading analogue meters.',
-    keyConcepts: ['temperature', 'parallax', 'error', 'source'],
-    keywords: ['temperature', 'heat', 'parallax', 'reading', 'contact', 'resistance', 'error'],
-    feedbackHit: 'Two distinct sources of error identified.',
-    feedbackMiss:
-      'Sources: (1) Temperature rise in wire, (2) Parallax error in reading ammeter/voltmeter.',
-  },
-  q9_d: {
-    marks: 1,
-    exemplar:
-      'Repeat each voltage measurement at least 3 times and calculate an average current to reduce random errors.',
-    keyConcepts: ['repeat', 'average', 'reliability', 'random error'],
-    keywords: ['repeat', 'average', '3 times', 'reliability', 'multiple', 'random', 'error'],
-    feedbackHit: 'Specific improvement targeting reliability.',
-    feedbackMiss: 'Repeat measurements and average to reduce random errors.',
-  },
-  q10_a: {
-    marks: 4,
-    exemplar:
-      'Advantage: Nuclear produces no CO₂ or greenhouse gases during operation.\nDisadvantage: Produces radioactive waste that remains hazardous for thousands of years.',
-    keyConcepts: ['no CO2', 'greenhouse gas', 'radioactive waste', 'thousands of years'],
-    keywords: ['co2', 'greenhouse', 'carbon', 'climate', 'warming', 'radioactive', 'waste', 'storage', 'hazardous', 'thousand years'],
-    feedbackHit: 'Both advantage and disadvantage correctly stated.',
-    feedbackMiss:
-      'Advantage: no CO₂ emissions. Disadvantage: radioactive waste requiring safe storage for thousands of years.',
-  },
-  q10_b: {
-    marks: 4,
-    exemplar:
-      'Climate perspective: nuclear reduces carbon emissions. Safety perspective: risk of accidents (Chernobyl/Fukushima), radiation exposure. Economic perspective: high construction cost. Balanced conclusion needed.',
-    keyConcepts: ['climate perspective', 'safety perspective', 'balanced', 'risk', 'accident'],
-    keywords: ['perspective', 'balanced', 'climate', 'safety', 'risk', 'accident', 'chernobyl', 'radiation', 'community', 'cost'],
-    feedbackHit: 'Two perspectives with balanced conclusion.',
-    feedbackMiss: 'Must present ≥2 perspectives and reach a balanced judgement.',
-  },
-  q11: { type: 'mcq', correct: 1 },
-  q12_a: {
-    marks: 4,
-    exemplar:
-      'Advantages: 1. Renewable, 2. No greenhouse gas emissions.\nDisadvantages: 1. Intermittent, 2. Visual/noise pollution, may harm wildlife.',
-    keyConcepts: ['renewable', 'no emissions', 'intermittent', 'visual pollution'],
-    keywords: ['renewable', 'inexhaustible', 'no emissions', 'carbon', 'intermittent', 'unreliable', 'visual', 'noise', 'birds', 'wildlife', 'land'],
-    feedbackHit: 'Two advantages and two disadvantages with reasoning.',
-    feedbackMiss: 'Advantages: renewable, no CO₂. Disadvantages: intermittent, visual/noise impact.',
-  },
-  q12_b: {
-    marks: 4,
-    exemplar:
-      'Supporting: less CO₂, urgent climate action needed. Challenges: grid stability, storage costs, social disruption. Conclusion: rapid but managed transition is more realistic.',
-    keyConcepts: ['CO2 reduction', 'balanced', 'challenges', 'transition', 'not immediate'],
-    keywords: ['co2', 'carbon', 'climate', 'urgent', 'renewable', 'cost', 'grid', 'storage', 'transition', 'realistic', 'balanced', 'conclusion'],
-    feedbackHit: 'Both sides addressed with justified conclusion.',
-    feedbackMiss:
-      'Address why "immediately" is unrealistic AND why the direction is right. Reach an evaluative conclusion.',
-  },
-  q13: { type: 'mcq', correct: 0 },
-  q14_a: {
-    marks: 3,
-    exemplar:
-      'N = N₀ × (½)ⁿ. 25 = 100 × (½)ⁿ → (½)ⁿ = 0.25 = (½)² → n = 2 half-lives. Time = 2 × 1 hour = 2 hours.',
-    keyConcepts: ['2 half-lives', '2 hours', 'formula', 'calculation'],
-    keywords: ['half life', 'n=n0', '0.25', '2 hours', '120 minutes', 'calculation', '25/100'],
-    feedbackHit: 'Half-life formula correctly applied, n=2, time=2 hours.',
-    feedbackMiss: 'N = N₀(½)ⁿ → 25 = 100(½)ⁿ → n=2 → 2×1 = 2 hours.',
-  },
-  'q14_b i': {
-    marks: 2,
-    exemplar:
-      'α: stopped by paper — least penetrating. β: stopped by a few mm of aluminium. γ: requires several cm of lead — most penetrating.',
-    keyConcepts: ['alpha least', 'paper', 'beta aluminium', 'gamma lead', 'most penetrating'],
-    keywords: ['alpha', 'paper', 'least', 'beta', 'aluminium', 'gamma', 'lead', 'concrete', 'penetrating'],
-    feedbackHit: 'All three radiations correctly ranked.',
-    feedbackMiss: 'Order (least→most): α (paper) < β (aluminium) < γ (lead/concrete)',
-  },
-  'q14_b ii': {
-    marks: 2,
-    exemplar: 'α: highest ionising power. β: medium. γ: lowest ionising power.',
-    keyConcepts: ['alpha highest', 'beta medium', 'gamma lowest', 'ionising'],
-    keywords: ['alpha', 'highest', 'beta', 'medium', 'gamma', 'lowest', 'ionise', 'charge'],
-    feedbackHit: 'Ionising power correctly ranked.',
-    feedbackMiss: 'Order (most→least): α > β > γ. α is most ionising due to large charge.',
-  },
-  q15_a: {
-    marks: 3,
-    exemplar: 'd = 1600 m; t = 480 s; v = 1600/480 = 3.33 m/s',
-    keyConcepts: ['1600 metres', '480 seconds', '3.33', 'v=s/t'],
-    keywords: ['1600', '480', '3.3', 'v=s/t', 'm/s', 'convert'],
-    feedbackHit: 'Both unit conversions correct and formula applied.',
-    feedbackMiss: 'Convert: 1.6km→1600m, 8min→480s. v = 1600/480 = 3.33 m/s.',
-  },
-  q15_b: {
-    marks: 1,
-    exemplar: 'Her average speed increases because she is accelerating.',
-    keyConcepts: ['increases', 'accelerates'],
-    keywords: ['increases', 'greater', 'higher', 'accelerate', 'faster', 'downhill'],
-    feedbackHit: 'Correct: speed increases.',
-    feedbackMiss: 'Speed increases — she is accelerating.',
-  },
-  q16_a: {
-    marks: 3,
-    exemplar: 'W = mg = 90 × 9.8 = 882 N',
-    keyConcepts: ['W=mg', '882 newton', 'formula'],
-    keywords: ['w=mg', '90', '9.8', '882', 'weight', 'newton', 'n'],
-    feedbackHit: 'W = mg correctly applied.',
-    feedbackMiss: 'W = mg = 90 × 9.8 = 882 N.',
-  },
-  q16_b: {
-    marks: 1,
-    exemplar: 'Mass on Moon = 90 kg. Mass does not change with location.',
-    keyConcepts: ['90 kg', 'mass unchanged'],
-    keywords: ['90', 'kg', 'same', 'unchanged', 'constant', 'mass does not change'],
-    feedbackHit: 'Correctly states mass unchanged at 90 kg.',
-    feedbackMiss: 'Mass = 90 kg on the Moon — mass does not change with location.',
-  },
-  q16_c: {
-    marks: 2,
-    exemplar: 'g_moon = 9.8/6 = 1.63 N/kg. W_moon = mg = 90 × 1.63 = 147 N',
-    keyConcepts: ['1.63', '147 newton', 'g divided by 6', 'W=mg'],
-    keywords: ['9.8/6', '1.63', '147', '150', 'w=mg', 'moon', 'newton', '1/6'],
-    feedbackHit: 'g_moon correctly calculated and applied.',
-    feedbackMiss: 'g_moon = 9.8÷6 ≈ 1.63 N/kg. W = 90 × 1.63 ≈ 147 N.',
-  },
+export type MCQEntry = {
+  type: 'mcq'
+  correct: number
 }
 
-// ---------------------------------------------------------------------------
-// HINTS bank — per task key, an ordered array of progressive hints
-// ---------------------------------------------------------------------------
-export const HINTS: Record<string, string[]> = {
-  q3_a: [
-    'Think about what "precision" means for a measuring instrument.',
-    'The smallest division is 1 mm = 0.001 m. What is the last significant digit in 0.835 m?',
-    '0.835 m recorded to the nearest mm → 3 significant figures IS justified. The digit 5 in the thousandths place is meaningful.',
-  ],
-  q3_b: [
-    'Density is measured in mass per volume. What are the SI base units for mass and volume?',
-    'SI unit of mass = kilogram (kg). SI unit of volume = cubic metre (m³).',
-    'SI unit of density = kg/m³.',
-  ],
-  q3_c: [
-    'Write the formula for density: ρ = m/V',
-    'Substitute: m = 120 g, V = 15 cm³. Calculate 120 ÷ 15.',
-    'ρ = 120 ÷ 15 = 8 g/cm³. To convert to SI: 8 g/cm³ = 8000 kg/m³.',
-  ],
-  q4_a: [
-    'In a series circuit, how do resistances combine?',
-    'Series rule: R_total = R₁ + R₂.',
-    'R_total = 2 + 1 = 3 Ω.',
-  ],
-  q4_b: [
-    "Use Ohm's Law: I = V/R.",
-    'V = 6 V, R = 3 Ω (from part a). Calculate I = 6 ÷ 3.',
-    'I = 2 A. In series, this same current flows through both resistors.',
-  ],
-  q4_c: [
-    'For each resistor, use V = IR.',
-    'Resistor 1: V₁ = I × R₁ = 2 × 2. Resistor 2: V₂ = I × R₂ = 2 × 1.',
-    'V₁ = 4 V, V₂ = 2 V. Check: 4 + 2 = 6 V ✓',
-  ],
-  q5_i: [
-    'A research question should clearly state what you are changing (IV) and what you are measuring (DV).',
-    'IV = load/force applied to spring. DV = extension of spring.',
-    'Example: "How does the load (N) applied to a spring affect its extension (cm)?"',
-  ],
-  q5_ii: [
-    "What does Hooke's Law state about force and extension?",
-    "Hooke's Law: F = kx, meaning force is directly proportional to extension (within the elastic limit).",
-    'Prediction: as load increases, extension increases proportionally. Graph should be a straight line through origin.',
-  ],
-  q5_iii: [
-    'Identify what you deliberately change, what you measure, and what you keep constant.',
-    'IV = load/force (N). DV = extension (cm or m).',
-    'CVs: same spring, same starting position of ruler, room temperature (to prevent spring expansion).',
-  ],
-  q5_iv: [
-    'Think about the steps in order: setup → measure → record → repeat.',
-    'Key steps: 1) Measure natural length. 2) Add mass. 3) Record new length. 4) Calculate extension.',
-    'For reliability: repeat each mass measurement 3 times and calculate average. Wait for spring to stop oscillating before measuring.',
-  ],
-  q6_i: [
-    'Your research question should identify the independent variable (IV) and dependent variable (DV).',
-    'IV = length of pendulum. DV = period (time for one complete oscillation).',
-    'Example: "How does the length of a pendulum affect its period of oscillation?"',
-  ],
-  q6_ii: [
-    'Use the formula T = 2π√(l/g) to predict the relationship.',
-    'From T = 2π√(l/g): as l increases, √l increases, so T increases.',
-    'Prediction: period increases as length increases. The relationship is T ∝ √l (not linear).',
-  ],
-  q6_iii: [
-    'Name the variable you change, the variable you measure, and three you keep constant.',
-    'IV = length of pendulum (cm). DV = period T (s).',
-    'CVs: mass of bob, amplitude (angle of release), same timing method/equipment.',
-  ],
-  q6_iv: [
-    'Think about what causes timing errors in pendulum experiments.',
-    'Human reaction time when pressing a stopwatch causes error. How can you reduce its percentage impact?',
-    '1) Time 10 complete oscillations and divide by 10 — reduces reaction time as a % of total time. 2) Keep amplitude small (<15°) to maintain simple harmonic motion.',
-  ],
-  q7_a: [
-    'Extension = current length − natural length. What is the natural length of the spring?',
-    'Natural length = 10.0 cm (the length with 0 N load). Subtract 10.0 from each length reading.',
-    'Once you have extension in cm, divide by 100 to get metres. E.g., 3.5 cm ÷ 100 = 0.035 m.',
-  ],
-  q7_b: [
-    'Decide which variable goes on which axis. The dependent variable (extension) goes on the y-axis.',
-    'x-axis: Load (N) from 0 to 7. y-axis: Extension (m) from 0 to 0.30.',
-    'Plot each (Load, Extension) pair. Draw the best-fit straight line through the first 6 points. The 6 N point should deviate above the line.',
-  ],
-  q7_c: [
-    'The spring constant k = Force / Extension. From the graph, calculate the gradient.',
-    'Gradient = Δy/Δx = Δextension/ΔLoad. Use two well-separated points on the best-fit line.',
-    'Gradient ≈ 0.035 m/N. Since k = Force/Extension: k = 1/gradient ≈ 28.6 N/m.',
-  ],
-  q7_d: [
-    "Look for the data point that does not lie on the best-fit straight line. This indicates Hooke's Law is no longer obeyed.",
-    'Which load produces an extension larger than the straight line predicts?',
-    "At 6 N, the extension (24.0 cm = 0.240 m) is greater than the best-fit line predicts. This is where the spring exceeds its limit of proportionality.",
-  ],
-  q8_a: [
-    'Average = (Trial 1 + Trial 2) ÷ 2. Then Period T = Average ÷ 10. Then T² = T × T.',
-    'Example for l = 20 cm: Average = (9.0 + 9.2)/2 = 9.1 s. T = 9.1/10 = 0.91 s. T² = 0.91² = 0.828 s².',
-    'Complete all rows using the same method. Keep values to 2 decimal places.',
-  ],
-  q8_b: [
-    'Plot T² on the y-axis and length l (cm) on the x-axis.',
-    'Your points should approximately lie on a straight line through the origin.',
-    'Draw the line of best fit — a single straight line that passes as close to all points as possible.',
-  ],
-  q8_c: [
-    'Read the gradient of your T² vs l graph: gradient = ΔT²/Δl.',
-    'The formula is: gradient = 4π²/g, so g = 4π²/gradient.',
-    'If gradient ≈ 0.04 s²/cm = 4 s²/m, then g = 4π²/4 = π² ≈ 9.87 ≈ 9.8 m/s².',
-  ],
-  q8_d: [
-    'A limitation is something that reduces the accuracy or reliability of the experiment.',
-    'Only 2 trials per length means limited data to identify outliers.',
-    'Limitation: only 2 trials → small number reduces reliability. Improvement: repeat each length 3–5 times and calculate an average to reduce random error.',
-  ],
-  q9_a: [
-    'Use the formula R = V/I for each data pair.',
-    'Pair 1: R = 1.0/0.25. Pair 2: R = 2.0/0.50. Continue for all pairs.',
-    'All resistances should be approximately 4 Ω. Show one full calculation: R = V/I = 1.0/0.25 = 4 Ω.',
-  ],
-  q9_b: [
-    'Look at the pattern in your calculated resistance values.',
-    'Are the resistance values roughly constant or changing significantly?',
-    'The values are approximately constant (≈4 Ω). This indicates an ohmic conductor — resistance does not change with voltage at constant temperature.',
-  ],
-  q9_c: [
-    'Think about physical changes that happen during the experiment that could affect resistance.',
-    'What happens to the resistor as current flows through it? What errors arise when reading instruments?',
-    'Sources: (1) Temperature increase causes resistance to change. (2) Parallax error when reading analogue ammeter or voltmeter scales.',
-  ],
-  q9_d: [
-    'What is the main cause of variation in your resistance values?',
-    'Random errors can be reduced by repeating measurements.',
-    'Improvement: repeat each voltage setting at least 3 times and use the average current to calculate resistance.',
-  ],
-  q10_a: [
-    'Compare nuclear power to fossil fuels for one advantage and one disadvantage.',
-    'Advantage: think about greenhouse gas emissions during operation.',
-    'Advantage: no CO₂/greenhouse gases produced during operation. Disadvantage: produces radioactive waste that is hazardous for thousands of years.',
-  ],
-  q10_b: [
-    'Identify at least two different groups of people and how they might view a nuclear power station.',
-    'Consider: climate scientists, local residents near the site, economists, safety experts.',
-    'Climate view: reduces carbon emissions, helps meet climate targets. Safety/community view: risk of accidents, radiation exposure, psychological impact. Conclude with a balanced judgement.',
-  ],
-  q11: [
-    'Think about what microwaves do and how mobile phones use them.',
-    'Mobile phones transmit via microwaves. Consider both benefits (global communication) and risks (health concerns).',
-    'The best answer acknowledges both the benefit (connectivity) and the risk (potential health concerns) — showing science has a dual role.',
-  ],
-  q12_a: [
-    'For advantages: think about fuel source and emissions. For disadvantages: think about reliability and visual impact.',
-    'Advantages: wind is renewable/inexhaustible; no CO₂ produced during operation.',
-    'Disadvantages: wind is intermittent (unreliable); visual and noise pollution, potential harm to birds/wildlife.',
-  ],
-  q12_b: [
-    'This is an evaluate question — you must present both sides before concluding.',
-    'For "immediately": urgency of climate change, CO₂ reduction needed. Against: grid instability, storage costs, transition time needed.',
-    'Balanced conclusion: the direction is right but "immediate" replacement is unrealistic — a managed, phased transition is more appropriate.',
-  ],
-  q13: [
-    'More cycles per second = higher frequency = higher pitch. Smaller amplitude = quieter sound.',
-    'P has more cycles → higher frequency → higher pitch than Q.',
-    'P has smaller amplitude → quieter (less loud) than Q. Answer: P has higher pitch and is not so loud.',
-  ],
-  q14_a: [
-    'Use the decay equation: N = N₀ × (½)ⁿ where n = number of half-lives.',
-    '25 = 100 × (½)ⁿ → (½)ⁿ = 25/100 = 0.25. What power of ½ gives 0.25?',
-    '(½)² = 0.25 → n = 2 half-lives. Time = 2 × 1 hour = 2 hours.',
-  ],
-  'q14_b i': [
-    'Think about what stops each type of radiation.',
-    'α is stopped by paper/skin. β is stopped by a few mm of aluminium. γ requires cm of lead.',
-    'Penetrating power (least to most): α < β < γ.',
-  ],
-  'q14_b ii': [
-    'Which type of radiation causes the most ionisation of surrounding atoms?',
-    'α has 2 protons and 2 neutrons — large charge causes most ionisation. γ is electromagnetic — least ionising.',
-    'Ionising power (most to least): α > β > γ.',
-  ],
-  q15_a: [
-    'First, convert both distance and time to SI units (m and s).',
-    '1.6 km = 1600 m. 8 minutes = 8 × 60 = 480 s.',
-    'v = distance/time = 1600/480 = 3.33 m/s (to 3 s.f.).',
-  ],
-  q15_b: [
-    'What does "accelerates" mean for speed?',
-    'If she accelerates, her velocity (and speed) is increasing.',
-    'Her average speed increases because the downhill gradient causes her to accelerate.',
-  ],
-  q16_a: [
-    'Use the weight formula: W = mg.',
-    'm = 90 kg, g = 9.8 N/kg. Calculate W = 90 × 9.8.',
-    'W = 90 × 9.8 = 882 N. Include the unit: Newtons (N).',
-  ],
-  q16_b: [
-    'Does mass change with location?',
-    'Mass is a measure of the amount of matter — it does not change between Earth and Moon.',
-    'Mass on Moon = 90 kg. (Only weight changes, not mass.)',
-  ],
-  q16_c: [
-    'The gravitational field strength on the Moon is 1/6 of Earth\'s. Calculate g_moon first.',
-    'g_moon = 9.8 ÷ 6 ≈ 1.63 N/kg. Now use W = mg.',
-    'W_moon = 90 × 1.63 ≈ 147 N.',
-  ],
+export type MSRecord = MSEntry | MCQEntry
+
+export const MS: Record<string, MSRecord> = {
+  // Q1 — Astronomy
+  'q1_a': {
+    marks: 2,
+    exemplar: 'The two missing objects in order from the Sun are: Jupiter (between Mars and Saturn) and then any two of: Pluto or Ceres (dwarf planets beyond Neptune).',
+    keyConcepts: ['Jupiter', 'between Mars and Saturn', 'order from sun', 'dwarf planet'],
+    keywords: ['Jupiter', 'Pluto', 'Ceres', 'order', 'Mars', 'Saturn'],
+    feedbackHit: 'Correct identification of Jupiter and the dwarf planets.',
+    feedbackMiss: 'Jupiter is the largest planet, located between Mars and Saturn. Pluto and Ceres are dwarf planets beyond Neptune.',
+  },
+  'q1_b': {
+    marks: 1,
+    exemplar: 'Acceptable answers include: moons/natural satellites, comets, asteroids, meteoroids, dwarf planets (e.g. Pluto, Ceres), the Oort cloud.',
+    keyConcepts: ['moon', 'comet', 'asteroid', 'meteoroid', 'natural satellite'],
+    keywords: ['moon', 'comet', 'asteroid', 'meteoroid', 'natural', 'satellite', 'dwarf'],
+    feedbackHit: 'Correct — a valid non-human-made solar system object was named.',
+    feedbackMiss: 'Examples include: moons (natural satellites), comets, asteroids, meteoroids, or dwarf planets.',
+  },
+  'q1_c': {
+    marks: 2,
+    exemplar: '1. A star produces its own light/energy (by nuclear fusion), whereas a planet does not produce its own light and only reflects light from a star. 2. A star is much larger/more massive than a planet.',
+    keyConcepts: ['star produces light', 'nuclear fusion', 'planet reflects light', 'size mass difference'],
+    keywords: ['fusion', 'produces', 'own light', 'reflects', 'larger', 'more massive', 'energy'],
+    feedbackHit: 'Good — valid differences between stars and planets identified.',
+    feedbackMiss: 'Key differences: (1) Stars produce their own light via nuclear fusion; planets only reflect light. (2) Stars are far larger/more massive than planets.',
+  },
+  'q1_d': {
+    marks: 3,
+    exemplar: 'The Big Bang theory states that the universe began from an extremely hot, dense point (singularity) and has been expanding ever since. The observation that distant galaxies are moving away from us (and the further away, the faster they recede) supports this theory because it shows the universe is still expanding — consistent with starting from a single point. This is also supported by cosmic microwave background radiation.',
+    keyConcepts: ['hot dense point', 'expanding universe', 'singularity', 'galaxies moving away', 'supports expansion'],
+    keywords: ['big bang', 'expanding', 'hot', 'dense', 'singularity', 'galaxies receding', 'faster', 'further', 'supports'],
+    feedbackHit: 'Well done — the Big Bang theory was described and linked to the observational evidence.',
+    feedbackMiss: 'The Big Bang: universe started as hot, dense singularity and expanded. Evidence: galaxies moving away (red-shift), further = faster, showing ongoing expansion from a single point.',
+  },
+  'q1_e': {
+    marks: 2,
+    exemplar: 'Advantage: parsecs are more convenient/practical for expressing very large astronomical distances (4×10¹⁶ m vs 1.3 parsecs — a much smaller number). Disadvantage: non-SI units can cause confusion/errors when doing calculations with SI-based equations, or when comparing with other scientific fields.',
+    keyConcepts: ['convenient', 'practical', 'large distances', 'confusion', 'calculation errors', 'non-SI'],
+    keywords: ['convenient', 'smaller number', 'easier', 'confusion', 'error', 'calculation', 'convert', 'comparison'],
+    feedbackHit: 'Good — a valid advantage and disadvantage of non-SI units were given.',
+    feedbackMiss: 'Advantage: convenient for very large distances (smaller numbers). Disadvantage: confusion/errors when mixing with SI units in calculations.',
+  },
+
+  // Q2 — Carbon Dating
+  'q2_a': {
+    marks: 2,
+    exemplar: 'Number of protons = 6 (the atomic number). Number of neutrons = 14 − 6 = 8.',
+    keyConcepts: ['protons equals atomic number', '6 protons', '8 neutrons', 'mass number minus atomic number'],
+    keywords: ['6', '8', 'protons', 'neutrons', 'atomic number', 'mass number', 'subtract'],
+    feedbackHit: 'Correct — protons = atomic number = 6; neutrons = mass number − atomic number = 8.',
+    feedbackMiss: 'Protons = atomic number = 6. Neutrons = mass number − atomic number = 14 − 6 = 8.',
+  },
+  'q2_b': {
+    marks: 2,
+    exemplar: 'Type of decay: beta (β⁻) decay. One product (apart from nitrogen-14): a beta particle (fast-moving electron, β⁻) or an antineutrino.',
+    keyConcepts: ['beta decay', 'beta particle', 'electron', 'antineutrino'],
+    keywords: ['beta', 'β', 'electron', 'antineutrino', 'negative', 'beta minus'],
+    feedbackHit: 'Correct — beta decay identified and a valid product stated.',
+    feedbackMiss: 'C-14 → N-14 is beta (β⁻) decay. A neutron converts to a proton, emitting a beta particle (electron) and an antineutrino.',
+  },
+  'q2_c': {
+    marks: 1,
+    exemplar: 'Half-life of carbon-14 ≈ 5,700 years (accept 5,500–6,000 years from reading the graph where 100% → 50%).',
+    keyConcepts: ['half life', '5700 years', 'time for 50 percent', 'graph reading'],
+    keywords: ['5700', '5730', '5500', '6000', 'half', '50%', 'years'],
+    feedbackHit: 'Correct graph reading — half-life approximately 5,700 years.',
+    feedbackMiss: 'Find where the curve reaches 50% on the y-axis, then read the corresponding x-value. This gives the half-life ≈ 5,700 years.',
+  },
+  'q2_d': {
+    marks: 1,
+    exemplar: '20% remaining means the sample has gone through approximately 2.3 half-lives. From the graph, at 20% the time is approximately 13,000–14,000 years.',
+    keyConcepts: ['20 percent', '13000 years', '14000 years', 'graph reading'],
+    keywords: ['20%', '13000', '14000', '13', '14', 'thousand', 'years'],
+    feedbackHit: 'Correct — reading ~13,000–14,000 years from the graph at 20%.',
+    feedbackMiss: 'Read the time on the x-axis where the curve passes through y = 20%. This gives approximately 13,000–14,000 years.',
+  },
+  'q2_e': {
+    marks: 2,
+    exemplar: 'The claim is incorrect/invalid. The half-life of carbon-14 is approximately 5,700 years. After 65 million years, the amount of carbon-14 remaining would be so tiny (effectively zero) that it could not be detected or measured. The graph shows that carbon-14 is essentially gone after ~40,000 years. Therefore, carbon-14 dating cannot be used for samples older than about 50,000 years — making it impossible to date 65-million-year-old dinosaur bones.',
+    keyConcepts: ['incorrect claim', 'too old', 'undetectable', '40000 years', 'carbon 14 gone', 'cannot date'],
+    keywords: ['incorrect', 'invalid', 'too old', 'zero', 'undetectable', '40000', '50000', 'cannot', 'impossible'],
+    feedbackHit: 'Excellent evaluation — the claim correctly rejected using evidence from the graph.',
+    feedbackMiss: 'C-14 has a half-life of ~5,700 years. After 40,000 years, essentially no C-14 remains. 65 million years is way beyond the detection limit (~50,000 years), so C-14 dating cannot be used for dinosaur bones.',
+  },
+
+  // Q3 — LED vs Filament
+  'q3_a': {
+    marks: 2,
+    exemplar: 'Thermal energy output = 100 − 5 = 95 J. The two output forms are: light energy (5 J) and thermal/heat energy (95 J).',
+    keyConcepts: ['95 joules', 'thermal energy', 'heat', 'conservation of energy', '100 minus 5'],
+    keywords: ['95', 'thermal', 'heat', 'light', '5', 'conservation', 'energy'],
+    feedbackHit: 'Correct — energy conservation applied: thermal = 100 − 5 = 95 J.',
+    feedbackMiss: 'By conservation of energy: thermal energy = total input − light output = 100 − 5 = 95 J.',
+  },
+  'q3_b': {
+    marks: 2,
+    exemplar: 'Connect an ammeter in series with the LED (to measure current through it). Connect a voltmeter in parallel across the LED (to measure voltage across it). The circuit also needs a battery/power supply and possibly a variable resistor.',
+    keyConcepts: ['ammeter in series', 'voltmeter in parallel', 'measure current', 'measure voltage'],
+    keywords: ['ammeter', 'series', 'voltmeter', 'parallel', 'current', 'voltage', 'in series', 'across'],
+    feedbackHit: 'Correct circuit design — ammeter in series, voltmeter in parallel.',
+    feedbackMiss: 'Ammeter measures current and must be connected in SERIES with the LED. Voltmeter measures voltage and must be connected in PARALLEL (across) the LED.',
+  },
+  'q3_c': {
+    marks: 2,
+    exemplar: 'P = IV = 0.05 A × 1 V = 0.05 W',
+    keyConcepts: ['P equals IV', '0.05 watts', 'power formula', 'substitution'],
+    keywords: ['p=iv', '0.05', 'watts', 'power', 'multiply', '1v', '0.05a'],
+    feedbackHit: 'Correct calculation: P = IV = 0.05 × 1 = 0.05 W.',
+    feedbackMiss: 'Use P = IV. Substitute I = 0.05 A and V = 1 V: P = 0.05 × 1 = 0.05 W.',
+  },
+  'q3_d': {
+    marks: 3,
+    exemplar: 'Filament efficiency = useful output / total input = 5/100 = 0.05 (5%). LED efficiency = 0.02 W / 0.05 W = 0.40 (40%). The LED is much more efficient (40% vs 5%) — it converts a much greater proportion of electrical energy into useful light energy.',
+    keyConcepts: ['efficiency formula', '5 percent filament', '40 percent LED', 'LED more efficient', 'comparison'],
+    keywords: ['efficiency', '5%', '40%', 'more efficient', '0.05', '0.40', 'filament', 'LED', 'useful', 'output/input'],
+    feedbackHit: 'Both efficiencies calculated correctly and a clear comparison made.',
+    feedbackMiss: 'Efficiency = useful power out / total power in. Filament: 5/100 = 5%. LED: 0.02/0.05 = 40%. LED is 8× more efficient.',
+  },
+
+  // Q4 — Bouncing Ball
+  'q4_a': {
+    marks: 1,
+    exemplar: 'How does the drop height of a ball affect the height of the first bounce?',
+    keyConcepts: ['drop height', 'first bounce height', 'research question', 'affect'],
+    keywords: ['drop height', 'bounce height', 'affect', 'how does', 'first bounce'],
+    feedbackHit: 'Good research question — clearly states independent and dependent variables.',
+    feedbackMiss: 'A good research question names both variables: "How does [drop height] affect [height of first bounce]?"',
+  },
+  'q4_b': {
+    marks: 3,
+    exemplar: 'Independent variable: Drop height (this is what you change). Dependent variable: Height of the first bounce (this is what you measure). Control variables: The kind of ball used, the surface the ball bounces from, and the temperature of the ball.',
+    keyConcepts: ['independent drop height', 'dependent bounce height', 'control ball type', 'control surface', 'control temperature'],
+    keywords: ['independent', 'dependent', 'control', 'drop height', 'bounce height', 'ball type', 'surface', 'temperature'],
+    feedbackHit: 'Variables correctly classified.',
+    feedbackMiss: 'Independent: drop height (what you change). Dependent: height of first bounce (what you measure). Controls: ball type, surface, temperature (things kept the same).',
+  },
+  'q4_c': {
+    marks: 2,
+    exemplar: 'When dropped from approximately 60 cm, the height of the first bounce is approximately 8–10 cm (accept reasonable values from simulation observation).',
+    keyConcepts: ['bounce height', 'cm', 'observation', 'less than drop height'],
+    keywords: ['cm', 'bounce', 'height', 'approximately', 'observation'],
+    feedbackHit: 'Simulation observation recorded.',
+    feedbackMiss: 'Read the height of the bounce from the ruler in the simulation. The ball bounces to a lower height than it was dropped from.',
+  },
+  'q4_d': {
+    marks: 3,
+    exemplar: 'When the ball is held at the drop height, it has gravitational potential energy (GPE). As it falls, GPE is converted to kinetic energy (KE). When the ball hits the floor, some KE is converted to thermal energy (heat) and sound energy due to the inelastic collision. Therefore the ball bounces back with less KE, and rises to a lower height than it started.',
+    keyConcepts: ['gravitational potential energy', 'kinetic energy', 'thermal energy', 'sound', 'energy conversion', 'not all converted back'],
+    keywords: ['GPE', 'KE', 'thermal', 'heat', 'sound', 'converted', 'less', 'inelastic', 'collision', 'energy'],
+    feedbackHit: 'Excellent — energy transformation chain correctly described.',
+    feedbackMiss: 'GPE (at drop height) → KE (falling) → at impact: some KE converts to heat + sound. Less KE remains to convert back to GPE, so the ball bounces lower.',
+  },
+  'q4_e': {
+    marks: 2,
+    exemplar: 'Average = (0.25 + 0.27 + 0.25) / 3 = 0.77 / 3 = 0.257 m ≈ 0.26 m',
+    keyConcepts: ['0.26 m', 'average calculation', 'add three values', 'divide by three'],
+    keywords: ['0.26', '0.257', 'average', '0.25', '0.27', 'divide', 'three'],
+    feedbackHit: 'Average correctly calculated.',
+    feedbackMiss: 'Average = (0.25 + 0.27 + 0.25) ÷ 3 = 0.77 ÷ 3 ≈ 0.26 m.',
+  },
+  'q4_f': {
+    marks: 2,
+    exemplar: 'Multiple trials were performed to reduce the effect of random errors/anomalies. Taking an average of multiple trials gives a more reliable result because it reduces the impact of any single inaccurate measurement. If an anomalous result occurs in one trial, the other trials prevent it from significantly affecting the average.',
+    keyConcepts: ['random error', 'anomaly', 'average', 'reliable', 'reduce error'],
+    keywords: ['random error', 'anomalous', 'average', 'reliable', 'reduce', 'error', 'repeat', 'trials'],
+    feedbackHit: 'Good explanation linking multiple trials to reliability through averaging.',
+    feedbackMiss: 'Multiple trials reduce random errors. The average is more reliable than any single result because anomalous readings have less effect.',
+  },
+  'q4_g': {
+    marks: 2,
+    exemplar: 'Graph B shows the relationship more clearly. Graph B\'s best-fit line passes through the origin, showing a proportional relationship. The scale in Graph B is more appropriate (y-axis 0–1.0 m), making the data points spread more evenly and the trend clearer to see.',
+    keyConcepts: ['Graph B', 'passes through origin', 'proportional', 'better scale', 'relationship clearer'],
+    keywords: ['graph B', 'origin', 'proportional', 'scale', 'clearer', 'trendline', 'best fit'],
+    feedbackHit: 'Graph B correctly identified with valid justification.',
+    feedbackMiss: 'Graph B is better: its trendline passes through the origin (showing proportionality) and the y-axis scale (0–1.0) makes the relationship easier to see.',
+  },
+  'q4_h': {
+    marks: 3,
+    exemplar: 'The prediction is partially correct. The first part is supported: as drop height increases, bounce height does also increase (both graphs show a positive relationship). The second part about proportionality is also supported: Graph B shows the best-fit line passing through the origin, which is characteristic of a proportional (directly proportional) relationship. The data points lie close to the line of best fit, confirming the proportional relationship.',
+    keyConcepts: ['partially correct', 'positive relationship', 'proportional', 'through origin', 'supported by data'],
+    keywords: ['correct', 'increases', 'proportional', 'origin', 'linear', 'positive', 'evidence', 'graph', 'support'],
+    feedbackHit: 'Prediction well-evaluated with reference to both parts and the graphical evidence.',
+    feedbackMiss: 'First part correct (bounce height increases with drop height — both graphs show this). Second part: Graph B shows the line through the origin → proportional relationship confirmed.',
+  },
+
+  // Q5 — Coefficient of Restitution
+  'q5_a': {
+    marks: 1,
+    exemplar: 'Height is easier to measure than speed because a ruler can be used to directly measure the height of the bounce visually/using a ruler/camera. Speed would require electronic sensors or high-speed cameras to measure the very fast-moving ball, which are more complex and expensive.',
+    keyConcepts: ['ruler', 'direct measurement', 'speed difficult', 'sensors needed', 'easier'],
+    keywords: ['ruler', 'easier', 'direct', 'speed', 'fast', 'sensor', 'measure', 'difficult', 'height'],
+    feedbackHit: 'Good — practical reason why height measurement is easier given.',
+    feedbackMiss: 'Height can be measured directly with a ruler. Speed requires electronic sensors/high-speed cameras because the ball moves too fast to measure easily.',
+  },
+  'q5_b': {
+    marks: 1,
+    exemplar: 'If e = 0, the ball would not bounce at all — it would come to rest immediately upon hitting the ground (all kinetic energy is lost in the collision).',
+    keyConcepts: ['no bounce', 'comes to rest', 'no rebound', 'all energy lost'],
+    keywords: ['no bounce', 'rest', 'stop', 'zero bounce', 'does not bounce', 'energy lost', 'all'],
+    feedbackHit: 'Correct — e = 0 means no rebound/bounce.',
+    feedbackMiss: 'e = speed after / speed before = 0 means speed after = 0, so the ball does not bounce and stays on the ground.',
+  },
+  'q5_c': {
+    marks: 6,
+    exemplar: 'Corrected table (consistent SI units, correct column headers with units):\n\nDrop height (h₁) / m | Avg bounce height (h₂) / m | e\n0.50                 | 0.34                       | 0.82\n1.00                 | 0.65                       | 0.806\n1.50                 | 0.94                       | 0.79\n2.00                 | 1.21                       | 0.78\n2.50                 | 1.44                       | 0.76\n\nCalculation: e = √(1.21/2.00) = √(0.605) = 0.778 ≈ 0.78',
+    keyConcepts: ['consistent units', 'SI units', 'square root', '0.78', 'correct table format', 'headers with units'],
+    keywords: ['0.78', '0.777', '0.605', 'square root', 'consistent', 'units', 'metres', 'SI', 'table'],
+    feedbackHit: 'Data presented correctly with consistent units and e value calculated correctly.',
+    feedbackMiss: 'All drop heights should be in metres (0.50 m, not 50 cm). e = √(h₂/h₁) = √(1.21/2.00) = √0.605 ≈ 0.78.',
+  },
+  'q5_d': {
+    marks: 3,
+    exemplar: 'The data partially supports the hypothesis. Looking at the e values: 0.82, 0.806, 0.79, 0.78, 0.76 — these are not exactly constant; they decrease slightly as drop height increases. However, the values are all similar (approximately 0.76–0.82), suggesting e is roughly constant. The hypothesis that e depends on material not height has some support, but there is a slight trend showing e decreases at higher heights, which contradicts perfect constancy.',
+    keyConcepts: ['not exactly constant', 'slight decrease', 'broadly similar', 'partially supported', 'trend'],
+    keywords: ['constant', 'not constant', 'decreases', 'similar', 'support', 'hypothesis', 'trend', 'material'],
+    feedbackHit: 'Good evaluation using the data values to assess the hypothesis.',
+    feedbackMiss: 'e values: 0.82 → 0.806 → 0.79 → 0.78 → 0.76. They are similar but not identical — a slight downward trend. Hypothesis is partially supported but not perfectly.',
+  },
+  'q5_e': {
+    marks: 3,
+    exemplar: 'The statement is incorrect. If e = 0.5, then v₂ = 0.5v₁. The fraction of KE remaining = KE₂/KE₁ = (½mv₂²)/(½mv₁²) = (v₂/v₁)² = e² = (0.5)² = 0.25. So only 25% of the KE remains after the collision, meaning 75% is converted — not 50% as the student claimed.',
+    keyConcepts: ['e squared', '0.25', '25 percent remains', '75 percent converted', 'incorrect statement'],
+    keywords: ['e squared', '0.25', '25%', '75%', 'incorrect', 'KE', 'kinetic', 'v squared', 'half'],
+    feedbackHit: 'Excellent — correctly derived that KE fraction = e², so e = 0.5 means 75% KE converted, not 50%.',
+    feedbackMiss: 'KE ∝ v². If e = v₂/v₁ = 0.5, then KE₂/KE₁ = (v₂/v₁)² = e² = 0.25. Only 25% KE remains, so 75% is converted. The statement is wrong.',
+  },
+
+  // Q6 — Table Tennis Investigation
+  'q6_a': {
+    marks: 14,
+    exemplar: 'Independent variable: thickness of sponge layer (varied from 0 to 2.5 mm)\nDependent variable: height of first bounce (measured with ruler)\nControl variable (with justification): drop height — keep constant (e.g. 1.0 m) to ensure any change in bounce height is due to sponge thickness only\n\nHypothesis: As sponge thickness increases, the height of the first bounce will increase, because thicker sponge absorbs and releases more elastic potential energy during collision, reducing energy lost to heat.\n\nEquipment: Table tennis ball, rackets with different sponge thicknesses (0, 0.5, 1.0, 1.5, 2.0, 2.5 mm), metre ruler, clamp stand, retort stand, camera (optional for accuracy)\n\nMethod: 1. Set up ruler vertically. 2. Drop ball from fixed height (e.g. 1.0 m) onto racket lying flat. 3. Measure height of first bounce using ruler. 4. Repeat 3 times for each sponge thickness. 5. Calculate average. 6. Repeat for each sponge thickness (0–2.5 mm in 0.5 mm steps).',
+    keyConcepts: ['independent variable', 'dependent variable', 'control variable', 'justification', 'hypothesis', 'equipment list', 'method steps', 'repeat trials'],
+    keywords: ['sponge', 'thickness', 'bounce', 'height', 'ruler', 'control', 'drop height', 'repeat', 'average', 'hypothesis', 'equipment'],
+    feedbackHit: 'Comprehensive investigation plan with all required components.',
+    feedbackMiss: 'Check: Did you state IV, DV, a justified CV, a hypothesis with explanation, equipment, and a step-by-step method with repeats?',
+  },
+  'q6_b': {
+    marks: 4,
+    exemplar: 'Research question: How does the temperature of the ball affect the height of the first bounce?\nIndependent variable: temperature of the ball (e.g. varied from 5°C to 40°C)\nControl variable 1: drop height (kept constant, e.g. 1.0 m)\nControl variable 2: type/brand of ball (use same ball throughout)',
+    keyConcepts: ['research question', 'independent variable', 'control variables', 'new factor'],
+    keywords: ['research question', 'independent', 'control', 'temperature', 'pressure', 'mass', 'type of ball', 'surface'],
+    feedbackHit: 'Good — a valid new investigation design with research question and variables.',
+    feedbackMiss: 'Choose a new factor (e.g. ball temperature, inflation pressure, ball material). State a research question, the independent variable, and two control variables.',
+  },
+
+  // Q7 — Passive Houses
+  'q7_a': {
+    marks: 2,
+    exemplar: 'Passive houses use thick insulation in walls, roof, and floor to reduce heat loss by conduction. Airtight construction prevents heat loss by convection (drafts). Triple-glazed windows reduce heat loss and allow solar gain. These features greatly reduce the rate of heat transfer from inside to outside, so less energy input is needed to maintain a warm temperature.',
+    keyConcepts: ['insulation', 'reduces conduction', 'airtight', 'reduces convection', 'less energy needed', 'heat transfer reduced'],
+    keywords: ['insulation', 'conduction', 'convection', 'airtight', 'heat loss', 'reduce', 'less energy', 'thermal'],
+    feedbackHit: 'Good explanation linking passive house features to reduced heat loss.',
+    feedbackMiss: 'Passive houses reduce heat loss by: insulation (less conduction), airtightness (less convection/drafts), triple glazing. Less heat escapes → less energy needed to stay warm.',
+  },
+  'q7_b': {
+    marks: 2,
+    exemplar: 'Three layers of glass create two air gaps (or vacuum/gas gaps) between the panes. Air (or the sealed gas) is a poor thermal conductor, so heat must travel through multiple layers of poorly conducting material. This greatly reduces the rate of heat transfer by conduction compared to a single pane of glass.',
+    keyConcepts: ['air gap', 'poor conductor', 'two gaps', 'reduces conduction', 'multiple layers'],
+    keywords: ['air gap', 'poor conductor', 'insulator', 'three layers', 'two gaps', 'conduction', 'reduce', 'transfer'],
+    feedbackHit: 'Correct — air gaps between glass layers reduce conduction.',
+    feedbackMiss: 'Three layers → two air gaps. Air is a poor conductor of heat. Heat must pass through multiple insulating layers → much less conduction than one pane.',
+  },
+  'q7_c': {
+    marks: 3,
+    exemplar: 'Higher pressure inside means there are more gas particles per unit volume moving with high speed. These particles collide with the walls more frequently. Where there are gaps/cracks, particles will flow outward from high to low pressure (net movement of particles from inside to outside). Technicians can detect this airflow using smoke, special sensors, or by feeling air movement, allowing them to identify where leaks are located.',
+    keyConcepts: ['more particles', 'higher frequency collisions', 'particles move through gaps', 'high to low pressure', 'detect leaks'],
+    keywords: ['particles', 'pressure', 'higher', 'gaps', 'flow', 'escape', 'collisions', 'detect', 'kinetic theory', 'movement'],
+    feedbackHit: 'Good kinetic theory explanation linking particle behaviour to leak detection.',
+    feedbackMiss: 'Higher pressure = more particles moving faster. At gaps, particles flow out (high → low pressure). Technicians detect this outward air movement to find leaks.',
+  },
+  'q7_d': {
+    marks: 1,
+    exemplar: 'Approximately 15% of households use oil as a source of energy for heating (reading from the stacked bar chart).',
+    keyConcepts: ['15 percent', 'oil', 'bar chart reading'],
+    keywords: ['15', 'percent', '%', 'oil'],
+    feedbackHit: 'Correct reading from the bar chart.',
+    feedbackMiss: 'Read the oil section from the stacked bar chart. Oil occupies approximately the 50–65% band, making it about 15%.',
+  },
+  'q7_e': {
+    marks: 2,
+    exemplar: 'Passive housing reduces energy consumption for heating. This means less fossil fuel is burned, leading to lower CO₂ and other greenhouse gas emissions. This reduces the contribution to global warming/climate change, making it environmentally beneficial. Less fuel use also reduces air pollution.',
+    keyConcepts: ['less energy', 'less fossil fuel', 'less CO2', 'greenhouse gas', 'climate change', 'positive environment'],
+    keywords: ['energy', 'fossil fuel', 'CO2', 'carbon', 'greenhouse', 'climate', 'pollution', 'reduce', 'emission'],
+    feedbackHit: 'Good — energy reduction linked to fewer emissions and environmental benefit.',
+    feedbackMiss: 'Less heating energy → less fossil fuel burned → fewer CO₂/greenhouse gas emissions → reduced contribution to climate change.',
+  },
+
+  // Q8 — Passive Housing Policy
+  'q8_': {
+    marks: 13,
+    exemplar: 'Social/economic positives for individuals: reduced heating bills (saves ~€822/year), improved health (better air quality, warmer home reduces cold-related illness), reduced fuel poverty. Negatives: high upfront upgrade cost (€15,000), disruption during renovation, low-income households may not afford upgrade even with subsidy.\n\nFor governments/businesses: Positive: reduced national energy consumption, meets climate targets, creates jobs in construction/retrofit sector. Negative: high public expenditure (many houses to upgrade), slow regulatory process, may increase inequality if only wealthier households can afford.\n\nConclusion: Overall, government funding is justified because the long-term savings (energy, healthcare, environmental) outweigh the costs, and it addresses fuel poverty by helping those who cannot afford the upgrade independently.',
+    keyConcepts: ['positive social', 'negative social', 'positive economic', 'negative economic', 'government perspective', 'conclusion', 'opinion'],
+    keywords: ['savings', 'health', 'fuel poverty', 'upfront cost', 'climate', 'jobs', 'inequality', 'environment', 'justify', 'government'],
+    feedbackHit: 'Comprehensive discussion covering all required aspects with a justified conclusion.',
+    feedbackMiss: 'Ensure you cover: (1) social+economic pros/cons for individuals, (2) pros/cons for government/businesses, (3) your own concluded opinion with justification.',
+  },
 }

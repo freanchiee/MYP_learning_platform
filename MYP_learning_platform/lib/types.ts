@@ -1,6 +1,6 @@
 export type Criterion = 'A' | 'B' | 'C' | 'D'
 export type QuestionType = 'mcq' | 'extended' | 'simulation' | 'dataTable'
-export type SimType = 'spring' | 'spring_data' | 'pendulum_geogebra' | 'wave' | 'decay'
+export type SimType = 'spring' | 'spring_data' | 'pendulum_geogebra' | 'wave' | 'decay' | 'bounce'
 export type ExamPhase = 'lock' | 'active' | 'grading' | 'results'
 export type TimerState = 'normal' | 'warning' | 'critical' | 'expired'
 
@@ -10,6 +10,10 @@ export interface Task {
   marks: number
   ph: string
   ans?: string
+  figImages?: string[]   // optional per-task diagram images, shown just above the answer box
+  widget?: 'drag_drop_planets' | 'variable_classify' | 'sankey_q3' | 'bounce_graphs_ab' | 'q4e_table' | 'q5c_table' | 'cannonball_paths' | 'energy_chain' | 'radio_select'
+  widgetOptions?: string[]   // used by radio_select and other configurable widgets
+  passage?: string           // reading passage / article shown above the task question
 }
 
 export interface Question {
@@ -23,6 +27,8 @@ export interface Question {
   correct?: number
   tableData?: { hd: string[]; rows: string[][] }
   figCaption?: string
+  figImages?: string[]
+  nativeContent?: 'solar_system' | 'carbon_decay' | 'sankey_q3' | 'bounce_graphs_ab'
   tasks?: Task[]
   simType?: SimType
   simCaption?: string

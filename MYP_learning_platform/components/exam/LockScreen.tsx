@@ -60,14 +60,14 @@ export default function LockScreen() {
   return (
     <div
       className="min-h-screen flex items-center justify-center px-4 py-10"
-      style={{ background: 'linear-gradient(135deg, #001e30 0%, #003b5c 100%)' }}
+      style={{ background: 'linear-gradient(135deg, #1a2338 0%, #2c3e70 100%)' }}
     >
       <div className="bg-white rounded-2xl shadow-2xl max-w-lg w-full p-8">
         {/* Logo */}
         <div className="flex justify-center mb-5">
           <div
             className="w-16 h-16 rounded-full flex items-center justify-center text-white font-bold text-xl"
-            style={{ background: '#0079a8' }}
+            style={{ background: '#3cb563' }}
           >
             MYP
           </div>
@@ -77,7 +77,7 @@ export default function LockScreen() {
         <h1 className="text-center text-2xl font-bold text-[#003b5c] mb-1">
           IB MYP Sciences
         </h1>
-        <p className="text-center font-semibold mb-6" style={{ color: '#0079a8' }}>
+        <p className="text-center font-semibold mb-6" style={{ color: '#3cb563' }}>
           Physics — November 2023
         </p>
 
@@ -133,7 +133,7 @@ export default function LockScreen() {
               value={candidate.name}
               onChange={handleNameChange}
               placeholder="Enter your full name"
-              className={`w-full border rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#0079a8] transition ${
+              className={`w-full border rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#3cb563] transition ${
                 nameErr ? 'border-red-400 bg-red-50' : 'border-gray-300'
               }`}
             />
@@ -147,7 +147,7 @@ export default function LockScreen() {
               value={candidate.school}
               onChange={handleSchoolChange}
               placeholder="Enter your school name"
-              className={`w-full border rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#0079a8] transition ${
+              className={`w-full border rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#3cb563] transition ${
                 schoolErr ? 'border-red-400 bg-red-50' : 'border-gray-300'
               }`}
             />
@@ -159,7 +159,7 @@ export default function LockScreen() {
         <button
           onClick={handleBegin}
           className="w-full py-3 rounded-xl text-white font-bold text-lg transition hover:opacity-90 active:scale-95"
-          style={{ background: 'linear-gradient(90deg, #003b5c, #0079a8)' }}
+          style={{ background: 'linear-gradient(90deg, #1a2338, #3cb563)' }}
         >
           Begin Examination →
         </button>

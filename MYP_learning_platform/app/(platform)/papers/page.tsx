@@ -19,13 +19,12 @@ interface AttemptRow {
 
 // Subject → color palette
 const SUBJECT_COLORS: Record<string, { border: string; badge: string; badgeText: string }> = {
-  Physics:   { border: '#0079a8', badge: '#0079a8',   badgeText: '#fff' },
-  Chemistry: { border: '#3daa35', badge: '#3daa35',   badgeText: '#fff' },
-  Biology:   { border: '#f5a623', badge: '#f5a623',   badgeText: '#fff' },
-  Combined:  { border: '#7b2d8b', badge: '#7b2d8b',   badgeText: '#fff' },
+  Physics:   { border: '#3cb563', badge: '#3cb563', badgeText: '#fff' },
+  Chemistry: { border: '#3498db', badge: '#3498db', badgeText: '#fff' },
+  Biology:   { border: '#f39c12', badge: '#f39c12', badgeText: '#fff' },
+  Combined:  { border: '#6c3f9e', badge: '#6c3f9e', badgeText: '#fff' },
 }
-
-const DEFAULT_COLOR = { border: '#6b7280', badge: '#6b7280', badgeText: '#fff' }
+const DEFAULT_COLOR = { border: '#1a2338', badge: '#1a2338', badgeText: '#fff' }
 
 // Static criteria count per paper (extend as more papers are added)
 const CRITERIA_LABELS = '4 criteria'
@@ -50,6 +49,14 @@ export default async function PapersPage() {
   ])
 
   const papers: Paper[] = papersRes.data ?? []
+
+  // Override Supabase values with local paper metadata (source of truth)
+  const LOCAL_PAPER_META: Record<string, Partial<Paper>> = {
+    'physics-nov-2023': { total_marks: 100, duration_minutes: 90 },
+    'physics-may-2025': { total_marks: 100, duration_minutes: 90 },
+  }
+  const papersWithMeta = papers.map(p => ({ ...p, ...(LOCAL_PAPER_META[p.id] ?? {}) }))
+
   const attempts: AttemptRow[] = attemptsRes.data ?? []
 
   // Build lookup: paper_id → completion status
@@ -65,14 +72,14 @@ export default async function PapersPage() {
   )
 
   // Unique subjects for filter bar
-  const subjects = Array.from(new Set(papers.map((p) => p.subject)))
+  const subjects = Array.from(new Set(papersWithMeta.map((p) => p.subject)))
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-8">
+    <div className="max-w-6xl mx-auto px-4 py-8" style={{ background: 'var(--background)' }}>
 
       {/* ── Page header ── */}
       <div className="mb-8">
-        <h1 className="text-2xl md:text-3xl font-bold text-gray-900">Practice Papers</h1>
+        <h1 className="text-2xl md:text-3xl font-bold text-[var(--brand-navy)]">Practice Papers</h1>
         <p className="text-gray-500 mt-1 text-sm">
           Attempt past IB MYP Sciences papers with AI-powered grading and instant feedback.
         </p>
@@ -101,14 +108,14 @@ export default async function PapersPage() {
       </div>
 
       {/* ── Papers grid ── */}
-      {papers.length === 0 ? (
+      {papersWithMeta.length === 0 ? (
         <div className="flex flex-col items-center py-20 text-gray-400">
           <span className="text-5xl mb-4">📋</span>
           <p className="text-sm font-medium">No papers published yet. Check back soon!</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {papers.map((paper) => {
+          {papersWithMeta.map((paper) => {
             const colors = SUBJECT_COLORS[paper.subject] ?? DEFAULT_COLOR
             const isCompleted  = completedPapers.has(paper.id)
             const isInProgress = inProgressPapers.has(paper.id)
