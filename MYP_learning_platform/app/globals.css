@@ -3,32 +3,31 @@
 @tailwind utilities;
 
 :root {
-  /* Gameducation palette */
-  --brand-bg:     #faf6e0;
-  --brand-navy:   #1a2338;
-  --brand-green:  #3cb563;
-  --brand-red:    #e84040;
-  --brand-blue:   #3498db;
-  --brand-purple: #6c3f9e;
-  --brand-orange: #f39c12;
+  /* ── Finalized brand palette ── */
+  --brand-bg:     #f5edcc;   /* warm cream  */
+  --brand-mint:   #adf1c4;   /* mint accent */
+  --brand-navy:   #1f3674;   /* deep navy – primary */
+  --brand-red:    #c3282d;   /* crimson – action / CTA */
+  --brand-steel:  #547ca4;   /* steel blue – secondary */
+  --brand-dark:   #274e68;   /* dark teal – nav / surfaces */
 
-  /* Mapped to old token names so existing components don't break */
-  --ib-blue:   #1a2338;
-  --ib-teal:   #3cb563;
-  --ib-teal-l: #e8f8ee;
-  --ib-green:  #3cb563;
-  --ib-amber:  #f39c12;
-  --ib-red:    #e84040;
+  /* Legacy token aliases – keep existing components working */
+  --ib-blue:   #1f3674;
+  --ib-teal:   #547ca4;
+  --ib-teal-l: #e0edf7;
+  --ib-green:  #547ca4;
+  --ib-amber:  #c3282d;
+  --ib-red:    #c3282d;
 
   /* MYP Criterion colours */
-  --cA: #3498db;
-  --cB: #3cb563;
-  --cC: #f39c12;
-  --cD: #6c3f9e;
+  --cA: #1f3674;
+  --cB: #547ca4;
+  --cC: #c3282d;
+  --cD: #274e68;
 
   /* Surface */
-  --background: #faf6e0;
-  --foreground: #1a2338;
+  --background: #f5edcc;
+  --foreground: #1f3674;
 }
 
 body {
@@ -43,4 +42,116 @@ code, pre, kbd, samp {
 
 @layer utilities {
   .text-balance { text-wrap: balance; }
+}
+
+/* ─────────────────────────────────────────────
+   FLOATING PHYSICS SYMBOLS  (auth background)
+   ───────────────────────────────────────────── */
+@keyframes float-rise {
+  0%   { transform: translateY(110vh) rotate(0deg);   opacity: 0; }
+  8%   { opacity: 0.18; }
+  92%  { opacity: 0.18; }
+  100% { transform: translateY(-12vh) rotate(420deg); opacity: 0; }
+}
+@keyframes sway {
+  0%, 100% { margin-left: 0; }
+  50%       { margin-left: 28px; }
+}
+
+.physics-symbol {
+  position: absolute;
+  bottom: -5rem;
+  font-family: var(--font-jetbrains-mono, monospace);
+  color: #1f3674;
+  font-size: 1.5rem;
+  font-weight: 700;
+  pointer-events: none;
+  user-select: none;
+  animation: float-rise linear infinite, sway ease-in-out infinite;
+}
+
+/* ─────────────────────────────────────────────
+   PAPER CARD HOVER GLOW
+   ───────────────────────────────────────────── */
+.paper-card {
+  transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1),
+              box-shadow 0.22s ease;
+}
+.paper-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 32px rgba(31, 54, 116, 0.18);
+}
+
+/* ─────────────────────────────────────────────
+   XP BAR SHIMMER
+   ───────────────────────────────────────────── */
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+.xp-bar-fill {
+  background: linear-gradient(
+    90deg,
+    #1f3674 0%,
+    #547ca4 40%,
+    #adf1c4 50%,
+    #547ca4 60%,
+    #1f3674 100%
+  );
+  background-size: 200% auto;
+  animation: shimmer 3s linear infinite;
+  transition: width 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* ─────────────────────────────────────────────
+   PULSE DOT  (in-progress badge)
+   ───────────────────────────────────────────── */
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.5; transform: scale(1.5); }
+}
+.pulse-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #c3282d;
+  display: inline-block;
+  animation: pulse-dot 1.4s ease-in-out infinite;
+}
+
+/* ─────────────────────────────────────────────
+   GRADING SCAN LINE
+   ───────────────────────────────────────────── */
+@keyframes scan-line {
+  0%   { top: 0%; opacity: 0.7; }
+  100% { top: 100%; opacity: 0; }
+}
+.scan-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #adf1c4, transparent);
+  animation: scan-line 1.6s ease-in-out infinite;
+}
+
+/* ─────────────────────────────────────────────
+   CRITERION BAR FILL ANIMATION
+   ───────────────────────────────────────────── */
+@keyframes bar-fill {
+  from { width: 0%; }
+}
+.crit-bar {
+  animation: bar-fill 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+/* ─────────────────────────────────────────────
+   STAGGER FADE-UP  (CSS fallback)
+   ───────────────────────────────────────────── */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-up {
+  animation: fade-up 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }

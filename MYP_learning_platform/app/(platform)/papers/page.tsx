@@ -1,6 +1,6 @@
 import { redirect } from 'next/navigation'
-import Link from 'next/link'
 import { createClient } from '@/lib/supabase/server'
+import PapersGrid from '@/components/papers/PapersGrid'
 
 interface Paper {
   id: string
@@ -16,18 +16,6 @@ interface AttemptRow {
   paper_id: string
   status: string
 }
-
-// Subject → color palette
-const SUBJECT_COLORS: Record<string, { border: string; badge: string; badgeText: string }> = {
-  Physics:   { border: '#3cb563', badge: '#3cb563', badgeText: '#fff' },
-  Chemistry: { border: '#3498db', badge: '#3498db', badgeText: '#fff' },
-  Biology:   { border: '#f39c12', badge: '#f39c12', badgeText: '#fff' },
-  Combined:  { border: '#6c3f9e', badge: '#6c3f9e', badgeText: '#fff' },
-}
-const DEFAULT_COLOR = { border: '#1a2338', badge: '#1a2338', badgeText: '#fff' }
-
-// Static criteria count per paper (extend as more papers are added)
-const CRITERIA_LABELS = '4 criteria'
 
 export default async function PapersPage() {
   const supabase = createClient()
@@ -77,133 +65,68 @@ export default async function PapersPage() {
 
   const attempts: AttemptRow[] = attemptsRes.data ?? []
 
-  // Build lookup: paper_id → completion status
   const completedPapers = new Set(
-    attempts
-      .filter((a) => a.status === 'completed')
-      .map((a) => a.paper_id)
+    attempts.filter((a) => a.status === 'completed').map((a) => a.paper_id)
   )
   const inProgressPapers = new Set(
-    attempts
-      .filter((a) => a.status === 'in_progress')
-      .map((a) => a.paper_id)
+    attempts.filter((a) => a.status === 'in_progress').map((a) => a.paper_id)
   )
 
-  // Unique subjects for filter bar
   const subjects = Array.from(new Set(papersWithMeta.map((p) => p.subject)))
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-8" style={{ background: 'var(--background)' }}>
+    <div className="max-w-6xl mx-auto px-4 py-10">
 
       {/* ── Page header ── */}
-      <div className="mb-8">
-        <h1 className="text-2xl md:text-3xl font-bold text-[var(--brand-navy)]">Practice Papers</h1>
-        <p className="text-gray-500 mt-1 text-sm">
+      <div className="mb-8 fade-up">
+        <p
+          className="text-xs font-bold uppercase tracking-widest mb-1"
+          style={{ color: '#547ca4' }}
+        >
+          IB MYP Sciences
+        </p>
+        <h1
+          className="text-3xl md:text-4xl font-extrabold leading-tight"
+          style={{ color: '#1f3674' }}
+        >
+          Practice Papers
+        </h1>
+        <p className="mt-2 text-sm" style={{ color: '#547ca4' }}>
           Attempt past IB MYP Sciences papers with AI-powered grading and instant feedback.
         </p>
       </div>
 
-      {/* ── Filter bar ── */}
-      <div className="flex flex-wrap items-center gap-2 mb-8">
-        <span className="text-xs font-semibold uppercase tracking-wide text-gray-400 mr-1">
-          Subjects:
-        </span>
-        {subjects.map((subject) => {
-          const colors = SUBJECT_COLORS[subject] ?? DEFAULT_COLOR
-          return (
+      {/* ── Subject filter pills ── */}
+      {subjects.length > 0 && (
+        <div className="flex flex-wrap items-center gap-2 mb-8 fade-up" style={{ animationDelay: '0.05s' }}>
+          <span
+            className="text-xs font-bold uppercase tracking-widest mr-1"
+            style={{ color: '#274e68' }}
+          >
+            Subjects:
+          </span>
+          {subjects.map((subject) => (
             <span
               key={subject}
-              className="px-3 py-1 rounded-full text-xs font-semibold"
-              style={{ background: colors.badge, color: colors.badgeText }}
+              className="px-3 py-1 rounded-full text-xs font-bold"
+              style={{
+                background: '#1f3674',
+                color: '#adf1c4',
+                letterSpacing: '0.04em',
+              }}
             >
               {subject}
             </span>
-          )
-        })}
-        {subjects.length === 0 && (
-          <span className="text-xs text-gray-400">No subjects available</span>
-        )}
-      </div>
-
-      {/* ── Papers grid ── */}
-      {papersWithMeta.length === 0 ? (
-        <div className="flex flex-col items-center py-20 text-gray-400">
-          <span className="text-5xl mb-4">📋</span>
-          <p className="text-sm font-medium">No papers published yet. Check back soon!</p>
-        </div>
-      ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {papersWithMeta.map((paper) => {
-            const colors = SUBJECT_COLORS[paper.subject] ?? DEFAULT_COLOR
-            const isCompleted  = completedPapers.has(paper.id)
-            const isInProgress = inProgressPapers.has(paper.id)
-
-            return (
-              <div
-                key={paper.id}
-                className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow flex flex-col"
-                style={{ borderLeft: `4px solid ${colors.border}` }}
-              >
-                {/* Card header */}
-                <div className="p-5 flex-1">
-                  <div className="flex items-start justify-between gap-2 mb-3">
-                    {/* Subject badge */}
-                    <span
-                      className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold"
-                      style={{ background: colors.badge, color: colors.badgeText }}
-                    >
-                      {paper.subject}
-                    </span>
-
-                    {/* Status chip */}
-                    {isCompleted && (
-                      <span className="flex items-center gap-1 text-xs font-semibold text-green-600 bg-green-50 px-2 py-0.5 rounded-full border border-green-200">
-                        <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                        </svg>
-                        Completed
-                      </span>
-                    )}
-                    {isInProgress && !isCompleted && (
-                      <span className="flex items-center gap-1 text-xs font-semibold text-amber-600 bg-amber-50 px-2 py-0.5 rounded-full border border-amber-200">
-                        ⏳ In Progress
-                      </span>
-                    )}
-                  </div>
-
-                  {/* Title */}
-                  <h3 className="text-base font-bold text-gray-900 mb-0.5">{paper.subject}</h3>
-                  <p className="text-sm text-gray-500">{paper.session} {paper.year}</p>
-
-                  {/* Meta pills */}
-                  <div className="flex flex-wrap gap-1.5 mt-3">
-                    <span className="text-xs text-gray-500 bg-gray-50 border border-gray-100 rounded px-2 py-0.5">
-                      {paper.total_marks} marks
-                    </span>
-                    <span className="text-xs text-gray-500 bg-gray-50 border border-gray-100 rounded px-2 py-0.5">
-                      {paper.duration_minutes} min
-                    </span>
-                    <span className="text-xs text-gray-500 bg-gray-50 border border-gray-100 rounded px-2 py-0.5">
-                      {CRITERIA_LABELS}
-                    </span>
-                  </div>
-                </div>
-
-                {/* Card footer */}
-                <div className="px-5 pb-5">
-                  <Link
-                    href={`/exam/${paper.id}`}
-                    className="block w-full text-center py-2.5 rounded-lg text-sm font-semibold text-white transition-opacity hover:opacity-90 active:opacity-80"
-                    style={{ background: colors.border }}
-                  >
-                    {isCompleted ? 'Practice Again' : isInProgress ? 'Continue Paper' : 'Start Paper'}
-                  </Link>
-                </div>
-              </div>
-            )
-          })}
+          ))}
         </div>
       )}
+
+      {/* ── Animated papers grid (client component) ── */}
+      <PapersGrid
+        papers={papersWithMeta}
+        completedPapers={completedPapers}
+        inProgressPapers={inProgressPapers}
+      />
     </div>
   )
 }

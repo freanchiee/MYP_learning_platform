@@ -33,53 +33,69 @@ export default async function PlatformLayout({ children }: { children: ReactNode
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50">
-      {/* Top Navigation Bar */}
+    <div className="min-h-screen flex flex-col" style={{ background: 'var(--background)' }}>
+
+      {/* ── Top Navigation Bar ── */}
       <nav
-        className="sticky top-0 z-40 flex items-center justify-between px-6 h-14 shadow-md"
-        style={{ background: '#003b5c' }}
+        className="sticky top-0 z-40 flex items-center justify-between px-6 h-14"
+        style={{
+          background: 'linear-gradient(90deg, #1f3674 0%, #274e68 100%)',
+          boxShadow: '0 2px 16px rgba(31,54,116,0.18)',
+          borderBottom: '1px solid rgba(173,241,196,0.12)',
+        }}
       >
         {/* Logo */}
-        <Link href="/dashboard" className="flex items-center gap-2 select-none shrink-0">
-          <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center">
-            <span className="text-xs font-extrabold" style={{ color: '#003b5c' }}>
+        <Link href="/dashboard" className="flex items-center gap-2.5 select-none shrink-0 group">
+          <div
+            className="w-8 h-8 rounded-lg flex items-center justify-center transition-transform group-hover:scale-105"
+            style={{
+              background: 'rgba(173,241,196,0.15)',
+              border: '1px solid rgba(173,241,196,0.3)',
+            }}
+          >
+            <span className="text-xs font-extrabold tracking-tight" style={{ color: '#adf1c4' }}>
               MYP
             </span>
           </div>
-          <span className="text-white font-semibold text-base tracking-wide hidden sm:block">
+          <span className="text-white font-bold text-sm tracking-wide hidden sm:block">
             MYP Sciences
           </span>
         </Link>
 
-        {/* Nav links — center */}
+        {/* Nav links */}
         <div className="flex items-center gap-1">
-          <Link
-            href="/dashboard"
-            className="text-blue-100 hover:text-white hover:bg-white/10 px-4 py-1.5 rounded-lg text-sm font-medium transition-colors"
-          >
-            Dashboard
-          </Link>
-          <Link
-            href="/papers"
-            className="text-blue-100 hover:text-white hover:bg-white/10 px-4 py-1.5 rounded-lg text-sm font-medium transition-colors"
-          >
-            Papers
-          </Link>
+          {[
+            { href: '/dashboard', label: 'Dashboard' },
+            { href: '/papers',    label: 'Papers' },
+          ].map(({ href, label }) => (
+            <Link
+              key={href}
+              href={href}
+              className="px-4 py-1.5 rounded-lg text-sm font-semibold transition-all hover:bg-white/10 hover:text-white"
+              style={{ color: 'rgba(255,255,255,0.75)' }}
+            >
+              {label}
+            </Link>
+          ))}
         </div>
 
-        {/* User info + logout — right */}
+        {/* Right: user + XP + logout */}
         <div className="flex items-center gap-3 shrink-0">
-          <span className="text-white text-sm font-medium hidden md:block truncate max-w-[140px]">
+          <span className="text-white text-sm font-medium hidden md:block truncate max-w-[130px]">
             {displayName}
           </span>
 
           {/* XP chip */}
           <span
-            className="flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold"
-            style={{ background: '#0079a8', color: '#fff' }}
+            className="flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold"
+            style={{
+              background: 'rgba(173,241,196,0.15)',
+              color: '#adf1c4',
+              border: '1px solid rgba(173,241,196,0.25)',
+            }}
           >
-            <span className="opacity-80">Lv{level}</span>
-            <span className="opacity-50 mx-0.5">·</span>
+            <span style={{ opacity: 0.7 }}>Lv{level}</span>
+            <span style={{ opacity: 0.35 }}>·</span>
             <span>{xp.toLocaleString()} XP</span>
           </span>
 
@@ -87,7 +103,11 @@ export default async function PlatformLayout({ children }: { children: ReactNode
           <form action={handleLogout}>
             <button
               type="submit"
-              className="text-blue-200 hover:text-white hover:bg-white/10 px-3 py-1.5 rounded-lg text-xs font-medium transition-colors border border-white/20"
+              className="text-xs font-semibold px-3 py-1.5 rounded-lg transition-all hover:bg-white/10 hover:text-white"
+              style={{
+                color: 'rgba(255,255,255,0.6)',
+                border: '1px solid rgba(255,255,255,0.15)',
+              }}
             >
               Logout
             </button>

@@ -2,6 +2,7 @@ import { redirect } from 'next/navigation'
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase/server'
 import type { Profile, UserBadge, Attempt } from '@/lib/types'
+import DashboardStats, { XPBar } from '@/components/dashboard/DashboardStats'
 
 // ── Badge definitions ──────────────────────────────────────────────────────────
 type Rarity = 'common' | 'rare' | 'epic' | 'legendary'
@@ -113,60 +114,50 @@ export default async function DashboardPage() {
 
       {/* ── Welcome card ── */}
       <section
-        className="rounded-2xl p-6 md:p-8 text-white shadow-lg"
-        style={{ background: 'linear-gradient(135deg, #001e30 0%, #003b5c 60%, #0079a8 100%)' }}
+        className="rounded-2xl p-6 md:p-8 text-white shadow-xl fade-up"
+        style={{
+          background: 'linear-gradient(135deg, #1f3674 0%, #274e68 60%, #547ca4 100%)',
+          border: '1px solid rgba(173,241,196,0.12)',
+        }}
       >
-        <h1 className="text-2xl md:text-3xl font-bold mb-1">Welcome back, {name}!</h1>
-        {school && <p className="text-blue-200 text-sm">{school}</p>}
-        <p className="text-blue-100 text-sm mt-3 opacity-75">
+        <p className="text-xs font-bold uppercase tracking-widest mb-2" style={{ color: '#adf1c4' }}>
+          Good to have you back
+        </p>
+        <h1 className="text-2xl md:text-3xl font-extrabold mb-1">{name}</h1>
+        {school && <p className="text-sm mt-1" style={{ color: 'rgba(173,241,196,0.7)' }}>{school}</p>}
+        <p className="text-sm mt-3" style={{ color: 'rgba(255,255,255,0.6)' }}>
           Ready to continue your MYP Sciences journey?
         </p>
+        <Link
+          href="/papers"
+          className="inline-block mt-5 px-5 py-2.5 rounded-xl text-sm font-bold transition-all hover:opacity-90"
+          style={{ background: '#c3282d', color: '#fff' }}
+        >
+          Browse Papers →
+        </Link>
       </section>
 
-      {/* ── Stats row ── */}
-      <section className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        {[
-          { label: 'Level',             value: level,                  sub: 'current level',   color: '#0079a8' },
-          { label: 'Total XP',          value: xp.toLocaleString(),    sub: 'experience points',color: '#3daa35' },
-          { label: 'Day Streak',        value: streakDays,             sub: 'consecutive days', color: '#f5a623' },
-          { label: 'Papers Completed',  value: papersCompleted,        sub: 'completed papers', color: '#7b2d8b' },
-        ].map(({ label, value, sub, color }) => (
-          <div
-            key={label}
-            className="bg-white rounded-xl p-5 shadow-sm border border-gray-100 flex flex-col gap-1"
-          >
-            <span className="text-3xl font-extrabold" style={{ color }}>{value}</span>
-            <span className="text-sm font-semibold text-gray-700">{label}</span>
-            <span className="text-xs text-gray-400">{sub}</span>
-          </div>
-        ))}
+      {/* ── Animated stats ── */}
+      <section>
+        <DashboardStats stats={[
+          { label: 'Level',            value: level,          sub: 'current level',    color: '#1f3674', icon: '🎯' },
+          { label: 'Total XP',         value: xp,             sub: 'experience points', color: '#547ca4', icon: '⭐' },
+          { label: 'Day Streak',       value: streakDays,     sub: 'consecutive days',  color: '#c3282d', icon: '🔥' },
+          { label: 'Papers Completed', value: papersCompleted, sub: 'completed papers', color: '#274e68', icon: '📋' },
+        ]} />
       </section>
 
-      {/* ── XP Progress bar ── */}
-      <section className="bg-white rounded-xl p-5 shadow-sm border border-gray-100">
-        <div className="flex items-center justify-between mb-3">
-          <div>
-            <h2 className="text-sm font-semibold text-gray-700">Level {level} Progress</h2>
-            <p className="text-xs text-gray-400 mt-0.5">
-              {xpInLevel.toLocaleString()} / {xpNeeded.toLocaleString()} XP to Level {level + 1}
-            </p>
-          </div>
-          <span className="text-xs font-bold text-blue-600">{xpPct}%</span>
-        </div>
-        <div className="w-full h-3 bg-gray-100 rounded-full overflow-hidden">
-          <div
-            className="h-full rounded-full transition-all duration-700"
-            style={{
-              width: `${xpPct}%`,
-              background: 'linear-gradient(90deg, #0079a8, #3daa35)',
-            }}
-          />
-        </div>
+      {/* ── Animated XP bar ── */}
+      <section>
+        <XPBar pct={xpPct} level={level} xpInLevel={xpInLevel} xpNeeded={xpNeeded} />
       </section>
 
       {/* ── Badge shelf ── */}
-      <section className="bg-white rounded-xl p-5 shadow-sm border border-gray-100">
-        <h2 className="text-base font-bold text-gray-800 mb-4">Badges Earned</h2>
+      <section
+        className="rounded-2xl p-5"
+        style={{ background: '#fff', border: '1px solid rgba(31,54,116,0.09)', boxShadow: '0 2px 12px rgba(31,54,116,0.06)' }}
+      >
+        <h2 className="text-base font-bold mb-4" style={{ color: '#1f3674' }}>Badges Earned</h2>
 
         {badges.length === 0 ? (
           <div className="flex flex-col items-center py-10 text-gray-400">
@@ -202,8 +193,11 @@ export default async function DashboardPage() {
       </section>
 
       {/* ── Recent attempts ── */}
-      <section className="bg-white rounded-xl p-5 shadow-sm border border-gray-100">
-        <h2 className="text-base font-bold text-gray-800 mb-4">Recent Attempts</h2>
+      <section
+        className="rounded-2xl p-5"
+        style={{ background: '#fff', border: '1px solid rgba(31,54,116,0.09)', boxShadow: '0 2px 12px rgba(31,54,116,0.06)' }}
+      >
+        <h2 className="text-base font-bold mb-4" style={{ color: '#1f3674' }}>Recent Attempts</h2>
 
         {attempts.length === 0 ? (
           <div className="flex flex-col items-center py-10 text-gray-400">
@@ -212,7 +206,7 @@ export default async function DashboardPage() {
             <Link
               href="/papers"
               className="mt-4 px-4 py-2 rounded-lg text-sm font-semibold text-white"
-              style={{ background: '#0079a8' }}
+              style={{ background: '#1f3674' }}
             >
               Browse Papers
             </Link>
@@ -274,7 +268,7 @@ export default async function DashboardPage() {
                         <Link
                           href={`/results/${attempt.id}`}
                           className="px-3 py-1.5 rounded-lg text-xs font-semibold text-white transition-opacity hover:opacity-80"
-                          style={{ background: '#0079a8' }}
+                          style={{ background: '#1f3674' }}
                         >
                           View
                         </Link>

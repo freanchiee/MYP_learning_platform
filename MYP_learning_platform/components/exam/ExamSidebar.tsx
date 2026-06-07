@@ -3,10 +3,10 @@ import { useExamStore } from '@/store/examStore'
 import type { Question, Criterion } from '@/lib/types'
 
 const CRIT_META: Record<Criterion, { color: string; label: string; border: string }> = {
-  A: { color: '#0079a8', label: 'Criterion A', border: '#0079a8' },
-  B: { color: '#3daa35', label: 'Criterion B', border: '#3daa35' },
-  C: { color: '#f5a623', label: 'Criterion C', border: '#f5a623' },
-  D: { color: '#7b2d8b', label: 'Criterion D', border: '#7b2d8b' },
+  A: { color: '#1f3674', label: 'Criterion A', border: '#1f3674' },
+  B: { color: '#547ca4', label: 'Criterion B', border: '#547ca4' },
+  C: { color: '#c3282d', label: 'Criterion C', border: '#c3282d' },
+  D: { color: '#274e68', label: 'Criterion D', border: '#274e68' },
 }
 
 const CRITERIA_ORDER: Criterion[] = ['A', 'B', 'C', 'D']
@@ -29,12 +29,12 @@ export default function ExamSidebar() {
   return (
     <aside
       className="flex flex-col flex-shrink-0 overflow-y-auto"
-      style={{ width: 200, background: '#e8edf2', borderRight: '1px solid #c8d4de' }}
+      style={{ width: 200, background: '#edf1f7', borderRight: '1px solid rgba(31,54,116,0.14)' }}
     >
       {/* Header */}
       <div
         className="px-3 py-2 text-xs font-bold tracking-widest text-white uppercase flex-shrink-0"
-        style={{ background: '#003b5c' }}
+        style={{ background: '#1f3674' }}
       >
         Questions
       </div>
@@ -77,13 +77,13 @@ export default function ExamSidebar() {
                   let borderColor = meta.color + '44'
 
                   if (isCurrent) {
-                    bgColor = '#0079a8'
-                    textColor = '#ffffff'
-                    borderColor = '#0079a8'
+                    bgColor = '#1f3674'
+                    textColor = '#adf1c4'
+                    borderColor = '#1f3674'
                   } else if (answered) {
-                    bgColor = '#d1fae5'
-                    textColor = '#065f46'
-                    borderColor = '#3daa35'
+                    bgColor = '#e0edf7'
+                    textColor = '#1f3674'
+                    borderColor = '#547ca4'
                   }
 
                   return (
@@ -131,7 +131,7 @@ export default function ExamSidebar() {
             className="h-full rounded-full transition-all duration-500"
             style={{
               width: `${questions.length > 0 ? (answeredCount / questions.length) * 100 : 0}%`,
-              background: '#3daa35',
+              background: '#547ca4',
             }}
           />
         </div>
@@ -143,10 +143,10 @@ export default function ExamSidebar() {
         style={{ fontSize: 10 }}
       >
         {[
-          { color: '#ffffff', border: '#9ca3af', label: 'Unanswered' },
-          { color: '#d1fae5', border: '#3daa35', label: 'Answered' },
-          { color: '#f5a623', border: '#f5a623', label: 'Flagged', dot: true },
-          { color: '#0079a8', border: '#0079a8', label: 'Current' },
+          { color: '#ffffff',  border: 'rgba(31,54,116,0.3)', label: 'Unanswered' },
+          { color: '#e0edf7',  border: '#547ca4',             label: 'Answered' },
+          { color: '#f5edcc',  border: '#c3282d',             label: 'Flagged', dot: true },
+          { color: '#1f3674',  border: '#1f3674',             label: 'Current' },
         ].map(({ color, border, label, dot }) => (
           <div key={label} className="flex items-center gap-2 text-gray-600">
             <div className="relative flex-shrink-0">
