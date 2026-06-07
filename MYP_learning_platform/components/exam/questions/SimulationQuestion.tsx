@@ -8,6 +8,11 @@ import HintPanel from '@/components/exam/hints/HintPanel'
 import SpringCanvas from '@/components/simulations/SpringCanvas'
 import PendulumGeoGebra from '@/components/simulations/PendulumGeoGebra'
 import BounceCanvas from '@/components/simulations/BounceCanvas'
+import OsmosisCanvas from '@/components/simulations/OsmosisCanvas'
+import MitosisAnimation from '@/components/simulations/MitosisAnimation'
+import PunnettSquare from '@/components/simulations/PunnettSquare'
+import FoodWebDrag from '@/components/simulations/FoodWebDrag'
+import EnzymeRateGraph from '@/components/simulations/EnzymeRateGraph'
 import VariableClassifyTable from '@/components/exam/widgets/VariableClassifyTable'
 import BounceGraphsAB from '@/components/exam/widgets/BounceGraphsAB'
 import RichTextEditor from '@/components/exam/widgets/RichTextEditor'
@@ -73,6 +78,11 @@ const simTypeLabel: Record<string, string> = {
   wave: 'Wave',
   decay: 'Radioactive Decay',
   bounce: 'Bouncing Ball',
+  osmosis: 'Osmosis & Diffusion',
+  mitosis: 'Cell Division (Mitosis)',
+  punnett: 'Genetics (Punnett Square)',
+  food_web: 'Ecosystems (Food Web)',
+  enzyme_rate: 'Enzyme Kinetics',
 }
 
 function SimulationBody({ q }: { q: Question }) {
@@ -85,6 +95,21 @@ function SimulationBody({ q }: { q: Question }) {
 
     case 'bounce':
       return <BounceCanvas />
+
+    case 'osmosis':
+      return <OsmosisCanvas />
+
+    case 'mitosis':
+      return <MitosisAnimation />
+
+    case 'punnett':
+      return <PunnettSquare />
+
+    case 'food_web':
+      return <FoodWebDrag />
+
+    case 'enzyme_rate':
+      return <EnzymeRateGraph />
 
     case 'spring_data':
       return (

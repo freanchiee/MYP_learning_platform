@@ -21,6 +21,7 @@ export interface QuestionTags {
 }
 export type QuestionType = 'mcq' | 'extended' | 'simulation' | 'dataTable'
 export type SimType = 'spring' | 'spring_data' | 'pendulum_geogebra' | 'wave' | 'decay' | 'bounce'
+  | 'osmosis' | 'mitosis' | 'punnett' | 'food_web' | 'enzyme_rate'
 export type ExamPhase = 'lock' | 'active' | 'grading' | 'results'
 export type TimerState = 'normal' | 'warning' | 'critical' | 'expired'
 

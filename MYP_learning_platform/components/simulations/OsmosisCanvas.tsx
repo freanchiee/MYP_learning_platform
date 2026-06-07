@@ -183,6 +183,7 @@ export default function OsmosisCanvas() {
       rafRef.current = requestAnimationFrame(tick)
     }
 
+    const PORE_H = 28
     const PORE_POSITIONS = Array.from({ length: PORE_COUNT }, (_, i) => (i + 1) * H / (PORE_COUNT + 1))
 
     const tick = () => {
@@ -208,7 +209,7 @@ export default function OsmosisCanvas() {
             if (m.x > MEMBRANE_X && m.vx < 0) m.vx = -m.vx
           } else {
             // Water can pass through pores
-            const nearPore = PORE_POSITIONS.some(py => Math.abs(m.y - py) < poreH / 2)
+            const nearPore = PORE_POSITIONS.some(py => Math.abs(m.y - py) < PORE_H / 2)
             if (nearPore) {
               // Allow crossing — bias direction based on concentration gradient
               const crossBias = netFlow === 'right' ? 0.7 : netFlow === 'left' ? 0.3 : 0.5
