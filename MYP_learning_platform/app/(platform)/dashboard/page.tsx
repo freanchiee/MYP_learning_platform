@@ -110,7 +110,7 @@ export default async function DashboardPage() {
   const xpPct        = Math.min(100, Math.round((xpInLevel / xpNeeded) * 100))
 
   return (
-    <div className="space-y-0" style={{ background: '#060d1f' }}>
+    <div className="space-y-0">
 
       {/* ══════════════════════════════════════════
           TRUE 100VH HERO — full viewport, cinematic
@@ -284,163 +284,127 @@ export default async function DashboardPage() {
       </section>
 
       {/* ══════════════════════════════════════════
-          BELOW-HERO CONTENT — dark cinematic
+          BELOW-HERO — cream editorial (finalized palette)
           ══════════════════════════════════════════ */}
-      <div
-        className="relative"
-        style={{
-          background: 'linear-gradient(180deg, #060d1f 0%, #0d1a32 100%)',
-          borderTop: '1px solid rgba(173,241,196,0.06)',
-        }}
-      >
-        {/* Subtle dot-grid carried through */}
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            backgroundImage: 'radial-gradient(circle, rgba(173,241,196,0.03) 1px, transparent 1px)',
-            backgroundSize: '50px 50px',
-          }}
-          aria-hidden
-        />
+      <div style={{ background: '#f5edcc' }}>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 py-12 space-y-12">
-
-          {/* ── Section label ── */}
-          <div className="flex items-center gap-4">
-            <div className="text-[10px] font-black tracking-[0.3em]" style={{ color: 'rgba(173,241,196,0.35)' }}>
-              YOUR STATS
-            </div>
-            <div className="flex-1 h-px" style={{ background: 'rgba(255,255,255,0.06)' }} />
-          </div>
-
-          {/* ── Animated stats tiles ── */}
+        {/* ── STATS ROW ── */}
+        <div className="max-w-7xl mx-auto px-6 md:px-12 pt-16">
           <DashboardStats stats={[
-            { label: 'Level',            value: level,           sub: 'current level',     color: '#adf1c4', icon: '🎯' },
-            { label: 'Total XP',         value: xp,              sub: 'experience points',  color: '#547ca4', icon: '⭐' },
-            { label: 'Day Streak',       value: streakDays,      sub: 'consecutive days',   color: '#c3282d', icon: '🔥' },
-            { label: 'Papers Completed', value: papersCompleted, sub: 'completed papers',   color: '#adf1c4', icon: '📋' },
+            { label: 'Level',            value: level,           sub: 'current level',    color: '#1f3674', icon: '' },
+            { label: 'Total XP',         value: xp,              sub: 'experience points', color: '#547ca4', icon: '' },
+            { label: 'Day Streak',       value: streakDays,      sub: 'consecutive days',  color: '#c3282d', icon: '' },
+            { label: 'Papers Completed', value: papersCompleted, sub: 'papers done',       color: '#274e68', icon: '' },
           ]} />
-
-          {/* ── Animated XP bar ── */}
           <XPBar pct={xpPct} level={level} xpInLevel={xpInLevel} xpNeeded={xpNeeded} />
+        </div>
 
-          {/* ── Section label ── */}
-          <div className="flex items-center gap-4">
-            <div className="text-[10px] font-black tracking-[0.3em]" style={{ color: 'rgba(173,241,196,0.35)' }}>
-              ACHIEVEMENTS
+        {/* ── ACHIEVEMENTS ── */}
+        <div className="max-w-7xl mx-auto px-6 md:px-12 py-16">
+
+          {/* Section header — editorial numbered style */}
+          <div className="flex items-end justify-between mb-10" style={{ borderBottom: '1px solid rgba(31,54,116,0.12)', paddingBottom: '1.25rem' }}>
+            <div>
+              <div className="text-[9px] font-black tracking-[0.35em] mb-2" style={{ color: 'rgba(31,54,116,0.35)' }}>01</div>
+              <h2 className="text-2xl font-extrabold" style={{ color: '#1f3674', letterSpacing: '-0.5px' }}>Achievements</h2>
             </div>
-            <div className="flex-1 h-px" style={{ background: 'rgba(255,255,255,0.06)' }} />
+            <span className="text-xs font-bold" style={{ color: 'rgba(31,54,116,0.35)' }}>
+              {badges.length} earned
+            </span>
           </div>
 
-          {/* ── Badge shelf ── */}
-          <section
-            style={{
-              background: 'rgba(255,255,255,0.03)',
-              border: '1px solid rgba(255,255,255,0.07)',
-            }}
-            className="p-6"
-          >
-            {badges.length === 0 ? (
-              <div className="flex flex-col items-center py-10">
-                <span className="text-4xl mb-4">🏅</span>
-                <p
-                  className="text-xs font-black tracking-[0.2em]"
-                  style={{ color: 'rgba(255,255,255,0.2)' }}
-                >
-                  NO BADGES YET — COMPLETE YOUR FIRST PAPER
-                </p>
-              </div>
-            ) : (
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
-                {badges.map(({ badge_id, earned_at }) => {
-                  const def = BADGE_DEFS[badge_id]
-                  if (!def) return null
-                  const rarityColor: Record<string, string> = {
-                    common: 'rgba(255,255,255,0.2)',
-                    rare: '#547ca4',
-                    epic: '#9b59b6',
-                    legendary: '#f39c12',
-                  }
-                  const col = rarityColor[def.rarity] ?? 'rgba(255,255,255,0.2)'
-                  return (
+          {badges.length === 0 ? (
+            /* Empty state — editorial */
+            <div
+              className="flex flex-col items-center justify-center py-20"
+              style={{ borderBottom: '1px solid rgba(31,54,116,0.08)' }}
+            >
+              <div className="text-6xl mb-6" style={{ opacity: 0.3 }}>🏅</div>
+              <p className="text-xs font-black tracking-[0.3em] mb-6" style={{ color: 'rgba(31,54,116,0.3)' }}>
+                NO BADGES YET
+              </p>
+              <Link
+                href="/papers"
+                className="inline-block font-black text-xs tracking-[0.2em] text-white transition-opacity hover:opacity-80"
+                style={{ background: '#1f3674', padding: '12px 32px' }}
+              >
+                START YOUR FIRST PAPER
+              </Link>
+            </div>
+          ) : (
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-px" style={{ background: 'rgba(31,54,116,0.08)' }}>
+              {badges.map(({ badge_id, earned_at }) => {
+                const def = BADGE_DEFS[badge_id]
+                if (!def) return null
+                const rarityAccent: Record<string, string> = {
+                  common: '#547ca4', rare: '#1f3674', epic: '#c3282d', legendary: '#274e68',
+                }
+                const col = rarityAccent[def.rarity] ?? '#1f3674'
+                return (
+                  <div
+                    key={badge_id}
+                    className="flex flex-col items-center gap-2 p-5"
+                    style={{ background: '#f5edcc' }}
+                  >
                     <div
-                      key={badge_id}
-                      className="flex flex-col items-center gap-1.5 p-4"
-                      style={{
-                        background: 'rgba(255,255,255,0.04)',
-                        border: `1px solid ${col}40`,
-                      }}
+                      className="w-14 h-14 flex items-center justify-center text-2xl"
+                      style={{ background: col + '12', border: `1px solid ${col}30` }}
                     >
-                      <span className="text-3xl">{def.icon}</span>
-                      <span
-                        className="text-xs font-bold text-center leading-tight"
-                        style={{ color: 'rgba(255,255,255,0.7)' }}
-                      >
-                        {def.name}
-                      </span>
-                      <span
-                        className="text-[9px] font-black uppercase tracking-[0.2em]"
-                        style={{ color: col }}
-                      >
-                        {def.rarity}
-                      </span>
-                      <span className="text-[9px]" style={{ color: 'rgba(255,255,255,0.2)' }}>
-                        {new Date(earned_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: '2-digit' })}
-                      </span>
+                      {def.icon}
                     </div>
-                  )
-                })}
-              </div>
-            )}
-          </section>
-
-          {/* ── Section label ── */}
-          <div className="flex items-center gap-4">
-            <div className="text-[10px] font-black tracking-[0.3em]" style={{ color: 'rgba(173,241,196,0.35)' }}>
-              RECENT ATTEMPTS
+                    <span className="text-xs font-bold text-center leading-tight" style={{ color: '#1f3674' }}>
+                      {def.name}
+                    </span>
+                    <span className="text-[9px] font-black uppercase tracking-[0.25em]" style={{ color: col }}>
+                      {def.rarity}
+                    </span>
+                    <span className="text-[9px]" style={{ color: 'rgba(31,54,116,0.3)' }}>
+                      {new Date(earned_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: '2-digit' })}
+                    </span>
+                  </div>
+                )
+              })}
             </div>
-            <div className="flex-1 h-px" style={{ background: 'rgba(255,255,255,0.06)' }} />
-          </div>
+          )}
 
-          {/* ── Recent attempts ── */}
-          <section
-            style={{
-              background: 'rgba(255,255,255,0.03)',
-              border: '1px solid rgba(255,255,255,0.07)',
-            }}
-            className="p-6"
-          >
+          {/* ── RECENT ATTEMPTS ── */}
+          <div className="mt-20">
+            <div className="flex items-end justify-between mb-10" style={{ borderBottom: '1px solid rgba(31,54,116,0.12)', paddingBottom: '1.25rem' }}>
+              <div>
+                <div className="text-[9px] font-black tracking-[0.35em] mb-2" style={{ color: 'rgba(31,54,116,0.35)' }}>02</div>
+                <h2 className="text-2xl font-extrabold" style={{ color: '#1f3674', letterSpacing: '-0.5px' }}>Recent Attempts</h2>
+              </div>
+              <span className="text-xs font-bold" style={{ color: 'rgba(31,54,116,0.35)' }}>
+                {attempts.length > 0 ? `${attempts.length} sessions` : 'none yet'}
+              </span>
+            </div>
+
             {attempts.length === 0 ? (
-              <div className="flex flex-col items-center py-10">
-                <span className="text-4xl mb-4">📝</span>
-                <p
-                  className="text-xs font-black tracking-[0.2em] mb-6"
-                  style={{ color: 'rgba(255,255,255,0.2)' }}
-                >
+              <div
+                className="flex flex-col items-center justify-center py-20"
+              >
+                <div className="text-5xl mb-6" style={{ opacity: 0.25 }}>📝</div>
+                <p className="text-xs font-black tracking-[0.3em] mb-8" style={{ color: 'rgba(31,54,116,0.3)' }}>
                   NO COMPLETED ATTEMPTS YET
                 </p>
                 <Link
                   href="/papers"
-                  className="inline-block font-black text-xs tracking-[0.2em] text-white"
-                  style={{
-                    background: '#c3282d',
-                    padding: '12px 32px',
-                    boxShadow: '0 0 30px rgba(195,40,45,0.3)',
-                  }}
+                  className="inline-block font-black text-xs tracking-[0.2em] text-white transition-opacity hover:opacity-80"
+                  style={{ background: '#c3282d', padding: '14px 40px' }}
                 >
-                  ENTER THE ARENA
+                  ENTER THE ARENA →
                 </Link>
               </div>
             ) : (
               <div className="overflow-x-auto">
-                <table className="w-full text-sm">
+                <table className="w-full">
                   <thead>
-                    <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
-                      {['Paper', 'Score', 'MYP Grade', 'XP', 'Date', ''].map((h) => (
+                    <tr>
+                      {['Paper', 'Score', 'MYP Grade', 'XP Earned', 'Date', ''].map((h, i) => (
                         <th
-                          key={h}
-                          className={`py-3 px-3 text-[9px] font-black tracking-[0.2em] ${h === 'Paper' ? 'text-left' : 'text-center'}`}
-                          style={{ color: 'rgba(255,255,255,0.25)' }}
+                          key={h + i}
+                          className={`pb-4 text-[9px] font-black tracking-[0.25em] ${i === 0 ? 'text-left' : 'text-center'}`}
+                          style={{ color: 'rgba(31,54,116,0.35)', borderBottom: '1px solid rgba(31,54,116,0.12)' }}
                         >
                           {h}
                         </th>
@@ -448,7 +412,7 @@ export default async function DashboardPage() {
                     </tr>
                   </thead>
                   <tbody>
-                    {attempts.map((attempt) => {
+                    {attempts.map((attempt, rowIdx) => {
                       const scoreStr =
                         attempt.total_score != null && attempt.max_score != null
                           ? `${attempt.total_score}/${attempt.max_score}`
@@ -461,59 +425,64 @@ export default async function DashboardPage() {
                       return (
                         <tr
                           key={attempt.id}
-                          style={{ borderBottom: '1px solid rgba(255,255,255,0.04)' }}
-                          className="transition-colors hover:bg-white/[0.02]"
+                          className="group transition-colors"
+                          style={{ borderBottom: '1px solid rgba(31,54,116,0.07)' }}
                         >
-                          <td className="py-4 px-3">
-                            <span className="font-bold text-xs tracking-wide" style={{ color: 'rgba(255,255,255,0.75)' }}>
-                              {attempt.paper_id
-                                .split('-')
-                                .map((w: string) => w.charAt(0).toUpperCase() + w.slice(1))
-                                .join(' ')}
-                            </span>
+                          {/* Index */}
+                          <td className="py-5 pr-4">
+                            <div className="flex items-center gap-4">
+                              <span
+                                className="text-[9px] font-black tracking-widest w-6 shrink-0"
+                                style={{ color: 'rgba(31,54,116,0.25)' }}
+                              >
+                                {String(rowIdx + 1).padStart(2, '0')}
+                              </span>
+                              <span className="font-bold text-sm" style={{ color: '#1f3674' }}>
+                                {attempt.paper_id
+                                  .split('-')
+                                  .map((w: string) => w.charAt(0).toUpperCase() + w.slice(1))
+                                  .join(' ')}
+                              </span>
+                            </div>
                           </td>
-                          <td className="py-4 px-3 text-center">
-                            <span className="font-black" style={{ color: 'white' }}>{scoreStr}</span>
+                          <td className="py-5 px-3 text-center">
+                            <span className="font-extrabold text-sm" style={{ color: '#1f3674' }}>{scoreStr}</span>
                             {pct != null && (
-                              <span className="ml-1 text-xs" style={{ color: 'rgba(255,255,255,0.3)' }}>({pct}%)</span>
+                              <span className="ml-1 text-xs" style={{ color: 'rgba(31,54,116,0.4)' }}>({pct}%)</span>
                             )}
                           </td>
-                          <td className="py-4 px-3 text-center">
+                          <td className="py-5 px-3 text-center">
                             {attempt.myp_grade ? (
                               <span
-                                className="inline-flex items-center justify-center w-8 h-8 text-sm font-black"
-                                style={{
-                                  background: 'rgba(173,241,196,0.1)',
-                                  color: '#adf1c4',
-                                  border: '1px solid rgba(173,241,196,0.2)',
-                                }}
+                                className="inline-flex items-center justify-center w-8 h-8 text-sm font-extrabold"
+                                style={{ background: '#1f3674', color: '#adf1c4' }}
                               >
                                 {attempt.myp_grade}
                               </span>
                             ) : (
-                              <span style={{ color: 'rgba(255,255,255,0.2)' }}>—</span>
+                              <span style={{ color: 'rgba(31,54,116,0.25)' }}>—</span>
                             )}
                           </td>
-                          <td className="py-4 px-3 text-center">
-                            <span className="font-black text-xs" style={{ color: '#adf1c4' }}>
-                              +{attempt.xp_earned}
+                          <td className="py-5 px-3 text-center">
+                            <span className="font-extrabold text-sm" style={{ color: '#c3282d' }}>
+                              +{attempt.xp_earned} XP
                             </span>
                           </td>
-                          <td className="py-4 px-3 text-center text-xs" style={{ color: 'rgba(255,255,255,0.25)' }}>
+                          <td className="py-5 px-3 text-center text-xs font-medium" style={{ color: 'rgba(31,54,116,0.4)' }}>
                             {attempt.completed_at
                               ? new Date(attempt.completed_at).toLocaleDateString('en-GB', {
                                   day: 'numeric', month: 'short', year: '2-digit',
                                 })
                               : '—'}
                           </td>
-                          <td className="py-4 px-3 text-center">
+                          <td className="py-5 pl-3 text-right">
                             <Link
                               href={`/results/${attempt.id}`}
-                              className="inline-block text-[9px] font-black tracking-[0.15em] transition-opacity hover:opacity-70"
+                              className="inline-block text-[9px] font-black tracking-[0.2em] transition-all hover:opacity-70"
                               style={{
-                                color: 'rgba(255,255,255,0.5)',
-                                border: '1px solid rgba(255,255,255,0.12)',
-                                padding: '6px 14px',
+                                color: '#1f3674',
+                                border: '1px solid rgba(31,54,116,0.25)',
+                                padding: '7px 16px',
                               }}
                             >
                               VIEW →
@@ -526,11 +495,11 @@ export default async function DashboardPage() {
                 </table>
               </div>
             )}
-          </section>
-
-          {/* Bottom spacer */}
-          <div className="h-8" />
+          </div>
         </div>
+
+        {/* Bottom spacer */}
+        <div className="h-20" />
       </div>
     </div>
   )

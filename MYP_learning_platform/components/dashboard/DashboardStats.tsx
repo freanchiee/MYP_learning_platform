@@ -19,7 +19,7 @@ interface XPBarProps {
 }
 
 /* Count-up hook */
-function useCountUp(target: number, duration = 900) {
+function useCountUp(target: number, duration = 1000) {
   const [display, setDisplay] = useState(0)
   const raf = useRef<number>(0)
 
@@ -39,102 +39,128 @@ function useCountUp(target: number, duration = 900) {
   return display
 }
 
-/* Individual animated stat tile — dark glass */
-function StatTile({ stat, delay }: { stat: Stat; delay: number }) {
+/* Single stat — editorial typographic style */
+function StatTile({ stat, delay, index }: { stat: Stat; delay: number; index: number }) {
   const numericValue = typeof stat.value === 'number' ? stat.value : 0
   const isNumeric = typeof stat.value === 'number'
-  const counted = useCountUp(numericValue, 800)
+  const counted = useCountUp(numericValue, 1000)
   const displayValue = isNumeric ? counted.toLocaleString() : stat.value
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 22 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.45, delay, ease: [0.25, 0.46, 0.45, 0.94] }}
-      className="relative overflow-hidden flex flex-col gap-1 p-5"
-      style={{
-        background: 'rgba(255,255,255,0.04)',
-        border: '1px solid rgba(255,255,255,0.08)',
-        backdropFilter: 'blur(12px)',
-      }}
-    >
-      {/* Accent top bar */}
-      <div
-        className="absolute top-0 left-0 right-0 h-0.5"
-        style={{ background: stat.color }}
-      />
-
-      {/* Gate-style label */}
-      <div
-        className="text-[9px] font-black tracking-[0.3em] mb-3"
-        style={{ color: 'rgba(255,255,255,0.3)' }}
-      >
-        {stat.label.toUpperCase()}
-      </div>
-
-      {/* Big value */}
-      <span
-        className="text-4xl font-extrabold leading-none"
-        style={{ color: 'white', letterSpacing: '-1px' }}
-      >
-        {displayValue}
-      </span>
-
-      {/* Sub label */}
-      <span className="text-xs font-semibold mt-1" style={{ color: 'rgba(173,241,196,0.45)' }}>
-        {stat.icon} {stat.sub}
-      </span>
-    </motion.div>
-  )
-}
-
-/* Animated XP progress bar — dark glass */
-export function XPBar({ pct, level, xpInLevel, xpNeeded }: XPBarProps) {
-  const [width, setWidth] = useState(0)
-
-  useEffect(() => {
-    const t = setTimeout(() => setWidth(pct), 200)
-    return () => clearTimeout(t)
-  }, [pct])
 
   return (
     <motion.div
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.45, delay: 0.35 }}
-      className="p-5"
+      transition={{ duration: 0.5, delay, ease: [0.25, 0.46, 0.45, 0.94] }}
+      className="relative flex flex-col py-8 px-6"
       style={{
-        background: 'rgba(255,255,255,0.04)',
-        border: '1px solid rgba(255,255,255,0.08)',
+        borderRight: index < 3 ? '1px solid rgba(31,54,116,0.1)' : 'none',
       }}
     >
-      <div className="flex items-center justify-between mb-4">
-        <div>
-          <h2 className="text-xs font-black tracking-[0.2em]" style={{ color: 'rgba(255,255,255,0.5)' }}>
-            LEVEL {level} PROGRESS
-          </h2>
-          <p className="text-xs mt-1" style={{ color: 'rgba(255,255,255,0.25)' }}>
-            {xpInLevel.toLocaleString()} / {xpNeeded.toLocaleString()} XP to Level {level + 1}
-          </p>
-        </div>
-        <span className="text-2xl font-black" style={{ color: '#adf1c4' }}>{pct}%</span>
+      {/* Small label — top */}
+      <div
+        className="text-[9px] font-black uppercase tracking-[0.3em] mb-5"
+        style={{ color: 'rgba(31,54,116,0.35)' }}
+      >
+        {stat.label}
       </div>
-      <div className="h-1 overflow-hidden" style={{ background: 'rgba(255,255,255,0.08)' }}>
+
+      {/* Giant number */}
+      <div
+        className="font-extrabold leading-none"
+        style={{
+          fontSize: 'clamp(52px, 6vw, 88px)',
+          color: '#1f3674',
+          letterSpacing: '-3px',
+          fontVariantNumeric: 'tabular-nums',
+        }}
+      >
+        {displayValue}
+      </div>
+
+      {/* Sub label */}
+      <div
+        className="mt-3 text-xs font-semibold"
+        style={{ color: 'rgba(84,124,164,0.7)' }}
+      >
+        {stat.sub}
+      </div>
+
+      {/* Accent bar — bottom left on hover */}
+      <div
+        className="absolute bottom-0 left-6"
+        style={{
+          width: 32,
+          height: 2,
+          background: stat.color,
+        }}
+      />
+    </motion.div>
+  )
+}
+
+/* Animated XP progress bar — editorial style */
+export function XPBar({ pct, level, xpInLevel, xpNeeded }: XPBarProps) {
+  const [width, setWidth] = useState(0)
+
+  useEffect(() => {
+    const t = setTimeout(() => setWidth(pct), 300)
+    return () => clearTimeout(t)
+  }, [pct])
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 12 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: 0.3 }}
+      className="flex items-center gap-10 py-8 px-6"
+      style={{ borderTop: '1px solid rgba(31,54,116,0.1)' }}
+    >
+      {/* Left: label block */}
+      <div className="flex-shrink-0 w-48">
         <div
-          className="h-full xp-bar-fill"
-          style={{ width: `${width}%` }}
-        />
+          className="text-[9px] font-black uppercase tracking-[0.3em] mb-1"
+          style={{ color: 'rgba(31,54,116,0.35)' }}
+        >
+          Level {level} Progress
+        </div>
+        <div className="text-xs" style={{ color: 'rgba(84,124,164,0.6)' }}>
+          {xpInLevel.toLocaleString()} / {xpNeeded.toLocaleString()} XP
+        </div>
+      </div>
+
+      {/* Middle: bar */}
+      <div className="flex-1">
+        <div
+          className="relative h-px overflow-visible"
+          style={{ background: 'rgba(31,54,116,0.12)' }}
+        >
+          <div
+            className="absolute top-0 left-0 h-full xp-bar-fill"
+            style={{ width: `${width}%`, height: '2px', top: '-0.5px' }}
+          />
+        </div>
+      </div>
+
+      {/* Right: percent */}
+      <div
+        className="flex-shrink-0 text-2xl font-extrabold tabular-nums"
+        style={{ color: '#1f3674', letterSpacing: '-1px' }}
+      >
+        {pct}%
       </div>
     </motion.div>
   )
 }
 
-/* Stats grid */
+/* Stats row — editorial four-column */
 export default function DashboardStats({ stats }: { stats: Stat[] }) {
   return (
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-px" style={{ background: 'rgba(255,255,255,0.06)' }}>
+    <div
+      className="grid grid-cols-2 md:grid-cols-4"
+      style={{ borderTop: '1px solid rgba(31,54,116,0.1)', borderBottom: '1px solid rgba(31,54,116,0.1)' }}
+    >
       {stats.map((stat, i) => (
-        <StatTile key={stat.label} stat={stat} delay={i * 0.08} />
+        <StatTile key={stat.label} stat={stat} delay={i * 0.07} index={i} />
       ))}
     </div>
   )
