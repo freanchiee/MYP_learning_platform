@@ -23,6 +23,9 @@ import EditableText from '@/components/exam/EditableText'
 import WaveLabelDragDrop from '@/components/exam/widgets/WaveLabelDragDrop'
 import InlineDropdownSelect from '@/components/exam/widgets/InlineDropdownSelect'
 import RefractionLabelDragDrop from '@/components/exam/widgets/RefractionLabelDragDrop'
+import CheckboxSelectWidget from '@/components/exam/widgets/CheckboxSelectWidget'
+import FillBlankWidget from '@/components/exam/widgets/FillBlankWidget'
+import MatchDragDropWidget from '@/components/exam/widgets/MatchDragDropWidget'
 
 interface ExtendedQuestionProps {
   q: Question
@@ -410,6 +413,25 @@ export default function ExtendedQuestion({ q, qIdx }: ExtendedQuestionProps) {
                   items={task.widgetItems ?? []}
                   onAnswer={(ans) => setTaskAnswer(qIdx, taskIdx, ans)}
                   initialValue={task.ans ?? ''}
+                />
+              ) : task.widget === 'checkbox_select' ? (
+                <CheckboxSelectWidget
+                  options={task.widgetOptions ?? []}
+                  savedAnswer={task.ans ?? ''}
+                  onAnswer={(ans) => setTaskAnswer(qIdx, taskIdx, ans)}
+                />
+              ) : task.widget === 'fill_blank' ? (
+                <FillBlankWidget
+                  text={task.text}
+                  savedAnswer={task.ans ?? ''}
+                  onAnswer={(ans) => setTaskAnswer(qIdx, taskIdx, ans)}
+                />
+              ) : task.widget === 'match_drag_drop' ? (
+                <MatchDragDropWidget
+                  items={task.widgetItems ?? []}
+                  targets={task.widgetOptions ?? []}
+                  savedAnswer={task.ans ?? ''}
+                  onAnswer={(ans) => setTaskAnswer(qIdx, taskIdx, ans)}
                 />
               ) : (
                 <div className="space-y-1">

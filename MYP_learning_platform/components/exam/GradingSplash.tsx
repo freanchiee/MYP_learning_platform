@@ -58,9 +58,20 @@ export default function GradingSplash({ onComplete }: GradingSplashProps) {
   }, [])
 
   useEffect(() => {
+    // Attach BYOAI headers from localStorage if available
+    const aiProvider = typeof window !== 'undefined' ? localStorage.getItem('myp_ai_provider') : null
+    const aiKey      = typeof window !== 'undefined' ? localStorage.getItem('myp_ai_key') : null
+    const aiModel    = typeof window !== 'undefined' ? localStorage.getItem('myp_ai_model') : null
+    const extraHeaders: Record<string, string> = {}
+    if (aiProvider && aiKey) {
+      extraHeaders['x-ai-provider'] = aiProvider
+      extraHeaders['x-ai-key']      = aiKey
+      if (aiModel) extraHeaders['x-ai-model'] = aiModel
+    }
+
     fetch('/api/grade', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json', ...extraHeaders },
       body: JSON.stringify({ questions, paperId, timeRemaining: timerSeconds }),
     })
       .then((r) => { if (!r.ok) throw new Error(`Grade API error: ${r.status}`); return r.json() as Promise<GradeResults> })

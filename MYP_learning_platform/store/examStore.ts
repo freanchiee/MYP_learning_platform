@@ -18,6 +18,8 @@ interface ExamStore {
   // Paper metadata
   paperId: string
   questions: Question[]
+  /** O(1) question-id → array-index map; computed once in initExam */
+  qIndexMap: Record<number, number>
   candidateName: string
   candidateSchool: string
 
@@ -165,6 +167,7 @@ interface ExamStore {
 const initialState = {
   paperId: '',
   questions: [] as Question[],
+  qIndexMap: {} as Record<number, number>,
   candidateName: '',
   candidateSchool: '',
   phase: 'lock' as ExamPhase,
@@ -199,9 +202,11 @@ export const useExamStore = create<ExamStore>((set, get) => ({
 
   // ---- Paper initialisation ------------------------------------------------
 
-  initExam: (questions, paperId) =>
-    set({
-      questions: questions.map(q => ({ ...q, ans: null, flagged: false })),
+  initExam: (questions, paperId) => {
+    const mapped = questions.map(q => ({ ...q, ans: null, flagged: false }))
+    return set({
+      questions: mapped,
+      qIndexMap: Object.fromEntries(mapped.map((q, i) => [q.id, i])),
       paperId,
       currentIdx: 0,
       phase: 'lock',
@@ -213,7 +218,8 @@ export const useExamStore = create<ExamStore>((set, get) => ({
       graphPoints: {},
       candidate: { name: '', school: '' },
       attemptId: null,
-    }),
+    })
+  },
 
   // ---- Candidate info ------------------------------------------------------
 

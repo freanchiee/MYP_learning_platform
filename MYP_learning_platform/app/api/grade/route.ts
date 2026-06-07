@@ -4,8 +4,10 @@ import {
   toMYPGrade,
   calculateCriterionScores,
 } from '@/lib/marking-engine'
+import { getMSForPaper } from '@/data/markschemes/registry'
 import { calculateXP, checkBadges } from '@/lib/gamification'
-import type { Question, QuestionGradeResult } from '@/lib/types'
+import { aiGradeTask, isOpenEndedTask, type AIProvider } from '@/lib/ai-grading'
+import type { Question, QuestionGradeResult, TaskResult } from '@/lib/types'
 
 interface GradeRequestBody {
   questions: Question[]
@@ -15,8 +17,9 @@ interface GradeRequestBody {
 
 export async function POST(req: NextRequest) {
   try {
-    const body = (await req.json()) as GradeRequestBody
+    const body  = (await req.json()) as GradeRequestBody
     const { questions, timeRemaining = 0 } = body
+    const paperId = body.paperId || 'physics-nov-2023'
 
     if (!Array.isArray(questions) || questions.length === 0) {
       return NextResponse.json(
@@ -25,36 +28,88 @@ export async function POST(req: NextRequest) {
       )
     }
 
-    // Grade each question using the correct paper's mark scheme
-    const { paperId = 'physics-nov-2023' } = body
+    // ── BYOAI headers ────────────────────────────────────────────────────
+    const aiProvider = req.headers.get('x-ai-provider') as AIProvider | null
+    const aiKey      = req.headers.get('x-ai-key')
+    const aiModel    = req.headers.get('x-ai-model') ?? undefined
+    const useAI      = !!(aiProvider && aiKey && ['claude', 'openai', 'gemini'].includes(aiProvider))
+
+    // ── Grade each question ───────────────────────────────────────────────
+    const ms = getMSForPaper(paperId)
     const grades: Record<number, QuestionGradeResult> = {}
+
     for (const q of questions) {
-      grades[q.id] = gradeQuestion(q, paperId)
+      // MCQ — always keyword engine
+      if (q.type === 'mcq') {
+        grades[q.id] = gradeQuestion(q, paperId)
+        continue
+      }
+
+      // Extended / simulation / dataTable — hybrid per task
+      const keywordResult = gradeQuestion(q, paperId)
+
+      if (!useAI) {
+        grades[q.id] = keywordResult
+        continue
+      }
+
+      // Try AI for open-ended tasks
+      const upgradedTasks: TaskResult[] = []
+      for (const taskResult of keywordResult.tasks) {
+        const task = q.tasks?.find((t) => t.label === taskResult.label)
+        if (!task || !isOpenEndedTask(task.widget)) {
+          upgradedTasks.push(taskResult)
+          continue
+        }
+
+        // Look up MS entry
+        const msKey = `q${q.id}_${task.label.replace(/\s+/g, '_')}`
+        const msEntry = ms[msKey] as { marks: number; exemplar: string; keyConcepts: string[]; keywords: string[]; feedbackHit: string; feedbackMiss: string } | undefined
+
+        if (!msEntry || !('keyConcepts' in msEntry)) {
+          upgradedTasks.push(taskResult)
+          continue
+        }
+
+        try {
+          const aiResult = await aiGradeTask({
+            taskText: task.text,
+            markScheme: msEntry,
+            studentAnswer: task.ans ?? '',
+            provider: aiProvider!,
+            apiKey: aiKey!,
+            model: aiModel,
+          })
+
+          upgradedTasks.push({
+            ...taskResult,
+            marksAwarded: Math.min(aiResult.marksAwarded, msEntry.marks),
+            hitConcepts: aiResult.hitConcepts,
+            missConcepts: msEntry.keyConcepts.filter((c) => !aiResult.hitConcepts.includes(c)),
+            feedback: aiResult.feedback,
+            rawScore: aiResult.marksAwarded / msEntry.marks,
+          })
+        } catch (err) {
+          console.warn(`[grade] AI grading failed for ${msKey}:`, err)
+          upgradedTasks.push(taskResult) // fallback to keyword
+        }
+      }
+
+      grades[q.id] = {
+        ...keywordResult,
+        tasks: upgradedTasks,
+        totalAwarded: upgradedTasks.reduce((s, t) => s + t.marksAwarded, 0),
+      }
     }
 
-    // Aggregate scores
-    const totalScore = Object.values(grades).reduce((s, g) => s + g.totalAwarded, 0)
-    const maxScore = Object.values(grades).reduce((s, g) => s + g.totalAvailable, 0)
-
-    // Criterion breakdown
+    // ── Aggregate ─────────────────────────────────────────────────────────
+    const totalScore     = Object.values(grades).reduce((s, g) => s + g.totalAwarded, 0)
+    const maxScore       = Object.values(grades).reduce((s, g) => s + g.totalAvailable, 0)
     const criterionScores = calculateCriterionScores(questions, grades)
-
-    // MYP grade
-    const pct = maxScore > 0 ? (totalScore / maxScore) * 100 : 0
+    const pct            = maxScore > 0 ? (totalScore / maxScore) * 100 : 0
     const { grade: mypGrade, label: mypLabel } = toMYPGrade(pct)
-
-    // XP and badges (simplified: no hints used, treat as first attempt)
-    const hintsUsed = 0
-    const isFirstAttempt = true
-    const xpEarned = calculateXP(grades, timeRemaining, hintsUsed)
-    const badgesEarned = checkBadges(
-      grades,
-      criterionScores,
-      timeRemaining,
-      hintsUsed,
-      isFirstAttempt,
-      []
-    )
+    const xpEarned       = calculateXP(grades, timeRemaining, 0)
+    const badgesEarned   = checkBadges(grades, criterionScores, timeRemaining, 0, true, [])
 
     return NextResponse.json({
       grades,
@@ -65,6 +120,7 @@ export async function POST(req: NextRequest) {
       mypLabel,
       xpEarned,
       badgesEarned,
+      gradedByAI: useAI,
     })
   } catch (err) {
     console.error('[grade] unexpected error:', err)
