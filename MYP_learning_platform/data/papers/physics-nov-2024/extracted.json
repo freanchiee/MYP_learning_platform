@@ -1,0 +1,398 @@
+{
+  "paper_id": "physics-nov-2024",
+  "qp_hash": "synthetic_test",
+  "ms_hash": "synthetic_test",
+  "pages": [
+    {
+      "page_num": 1,
+      "raw_text": "Question 1 (12 marks)\nQuestion 1a (1 mark)\nA student investigates a pendulum...",
+      "has_diagram": true,
+      "diagram_crops": []
+    },
+    {
+      "page_num": 2,
+      "raw_text": "Question 1b (2 marks)\nState two factors that affect the period of a pendulum.",
+      "has_diagram": false,
+      "diagram_crops": []
+    },
+    {
+      "page_num": 3,
+      "raw_text": "Question 2 (12 marks)\nQuestion 2a (2 marks)\nRadioactive decay...",
+      "has_diagram": false,
+      "diagram_crops": []
+    },
+    {
+      "page_num": 4,
+      "raw_text": "Question 2c (1 mark)\nWhich particle has the largest mass?",
+      "has_diagram": true,
+      "diagram_crops": [
+        {
+          "file": "/images/papers/physics-nov-2024/page-04-crop.png",
+          "bbox": [
+            30,
+            500,
+            1242,
+            900
+          ],
+          "nonwhite_pct": 35.0,
+          "region_y": [
+            500,
+            900
+          ],
+          "density": 0.28
+        }
+      ]
+    },
+    {
+      "page_num": 5,
+      "raw_text": "Question 3 (17 marks)\nQuestion 3a (2 marks)\nA student investigates resistance...",
+      "has_diagram": true,
+      "diagram_crops": [
+        {
+          "file": "/images/papers/physics-nov-2024/page-05-crop.png",
+          "bbox": [
+            30,
+            200,
+            1242,
+            700
+          ],
+          "nonwhite_pct": 22.0,
+          "region_y": [
+            200,
+            700
+          ],
+          "density": 0.25
+        }
+      ]
+    },
+    {
+      "page_num": 6,
+      "raw_text": "Question 3b (3 marks)\nIdentify the independent and dependent variables.",
+      "has_diagram": false,
+      "diagram_crops": []
+    },
+    {
+      "page_num": 7,
+      "raw_text": "Question 3c (4 marks)\nPlot the results and draw a line of best fit.",
+      "has_diagram": false,
+      "diagram_crops": []
+    },
+    {
+      "page_num": 8,
+      "raw_text": "Question 3f (1 mark)\nWhich graph shows the correct relationship?",
+      "has_diagram": false,
+      "diagram_crops": []
+    },
+    {
+      "page_num": 9,
+      "raw_text": "Question 4 (14 marks)\nQuestion 4a (1 mark)\nDescribe how an LDR works.",
+      "has_diagram": true,
+      "diagram_crops": [
+        {
+          "file": "/images/papers/physics-nov-2024/page-09-crop.png",
+          "bbox": [
+            30,
+            400,
+            1242,
+            800
+          ],
+          "nonwhite_pct": 18.0,
+          "region_y": [
+            400,
+            800
+          ],
+          "density": 0.21
+        },
+        {
+          "file": "/images/papers/physics-nov-2024/page-09b-crop.png",
+          "bbox": [
+            30,
+            900,
+            1242,
+            1400
+          ],
+          "nonwhite_pct": 45.0,
+          "region_y": [
+            900,
+            1400
+          ],
+          "density": 0.42
+        }
+      ]
+    },
+    {
+      "page_num": 10,
+      "raw_text": "Question 4b (13 marks)\nDesign an investigation into LDR resistance vs. light intensity.",
+      "has_diagram": false,
+      "diagram_crops": []
+    },
+    {
+      "page_num": 11,
+      "raw_text": "Question 5 (19 marks)\nQuestion 5a (3 marks)\nAnalyse the R vs T graph.",
+      "has_diagram": true,
+      "diagram_crops": [
+        {
+          "file": "/images/papers/physics-nov-2024/page-11-crop.png",
+          "bbox": [
+            30,
+            500,
+            1242,
+            1200
+          ],
+          "nonwhite_pct": 28.0,
+          "region_y": [
+            500,
+            1200
+          ],
+          "density": 0.31
+        }
+      ]
+    },
+    {
+      "page_num": 12,
+      "raw_text": "Question 5b (4 marks)\nCalculate the gradient of the graph.",
+      "has_diagram": false,
+      "diagram_crops": []
+    },
+    {
+      "page_num": 13,
+      "raw_text": "Question 6 (13 marks)\nQuestion 6a (2 marks)\nExplain how the water tower works.",
+      "has_diagram": true,
+      "diagram_crops": [
+        {
+          "file": "/images/papers/physics-nov-2024/page-13-crop.png",
+          "bbox": [
+            30,
+            600,
+            1242,
+            1100
+          ],
+          "nonwhite_pct": 32.0,
+          "region_y": [
+            600,
+            1100
+          ],
+          "density": 0.3
+        }
+      ]
+    },
+    {
+      "page_num": 14,
+      "raw_text": "Question 7 (13 marks)\nQuestion 7a (1 mark)\nSunlight is part of which EM spectrum region?",
+      "has_diagram": false,
+      "diagram_crops": []
+    },
+    {
+      "page_num": 15,
+      "raw_text": "Question 7b (2 marks)\nDescribe how SODIS purifies water.",
+      "has_diagram": true,
+      "diagram_crops": [
+        {
+          "file": "/images/papers/physics-nov-2024/page-15-crop.png",
+          "bbox": [
+            30,
+            800,
+            1242,
+            1100
+          ],
+          "nonwhite_pct": 20.0,
+          "region_y": [
+            800,
+            1100
+          ],
+          "density": 0.22
+        }
+      ]
+    }
+  ],
+  "questions_raw": [
+    {
+      "id": 1,
+      "parts": [
+        {
+          "label": "a",
+          "marks": 1
+        },
+        {
+          "label": "b",
+          "marks": 2
+        },
+        {
+          "label": "c",
+          "marks": 2
+        },
+        {
+          "label": "d",
+          "marks": 3
+        },
+        {
+          "label": "e",
+          "marks": 2
+        },
+        {
+          "label": "f",
+          "marks": 2
+        }
+      ],
+      "total_marks": 12,
+      "criterion": "A"
+    },
+    {
+      "id": 2,
+      "parts": [
+        {
+          "label": "a",
+          "marks": 2
+        },
+        {
+          "label": "b",
+          "marks": 3
+        },
+        {
+          "label": "c",
+          "marks": 1
+        },
+        {
+          "label": "d",
+          "marks": 2
+        },
+        {
+          "label": "e",
+          "marks": 1
+        },
+        {
+          "label": "f",
+          "marks": 3
+        }
+      ],
+      "total_marks": 12,
+      "criterion": "A"
+    },
+    {
+      "id": 3,
+      "parts": [
+        {
+          "label": "a",
+          "marks": 2
+        },
+        {
+          "label": "b",
+          "marks": 3
+        },
+        {
+          "label": "c",
+          "marks": 4
+        },
+        {
+          "label": "d",
+          "marks": 3
+        },
+        {
+          "label": "e",
+          "marks": 3
+        },
+        {
+          "label": "f",
+          "marks": 1
+        },
+        {
+          "label": "g",
+          "marks": 1
+        }
+      ],
+      "total_marks": 17,
+      "criterion": "B"
+    },
+    {
+      "id": 4,
+      "parts": [
+        {
+          "label": "a",
+          "marks": 1
+        },
+        {
+          "label": "b",
+          "marks": 13
+        }
+      ],
+      "total_marks": 14,
+      "criterion": "B"
+    },
+    {
+      "id": 5,
+      "parts": [
+        {
+          "label": "a",
+          "marks": 3
+        },
+        {
+          "label": "b",
+          "marks": 4
+        },
+        {
+          "label": "c",
+          "marks": 3
+        },
+        {
+          "label": "d",
+          "marks": 4
+        },
+        {
+          "label": "e",
+          "marks": 2
+        },
+        {
+          "label": "f",
+          "marks": 3
+        }
+      ],
+      "total_marks": 19,
+      "criterion": "C"
+    },
+    {
+      "id": 6,
+      "parts": [
+        {
+          "label": "a",
+          "marks": 2
+        },
+        {
+          "label": "b",
+          "marks": 2
+        },
+        {
+          "label": "c",
+          "marks": 9
+        }
+      ],
+      "total_marks": 13,
+      "criterion": "D"
+    },
+    {
+      "id": 7,
+      "parts": [
+        {
+          "label": "a",
+          "marks": 1
+        },
+        {
+          "label": "b",
+          "marks": 2
+        },
+        {
+          "label": "c",
+          "marks": 10
+        }
+      ],
+      "total_marks": 13,
+      "criterion": "D"
+    }
+  ],
+  "qp_full_text": "Question 1 (12 marks)\nQuestion 1a (1 mark)\nA student investigates a pendulum...\n\n--- PAGE BREAK ---\n\nQuestion 1b (2 marks)\nState two factors that affect the period of a pendulum.\n\n--- PAGE BREAK ---\n\nQuestion 2 (12 marks)\nQuestion 2a (2 marks)\nRadioactive decay...\n\n--- PAGE BREAK ---\n\nQuestion 2c (1 mark)\nWhich particle has the largest mass?\n\n--- PAGE BREAK ---\n\nQuestion 3 (17 marks)\nQuestion 3a (2 marks)\nA student investigates resistance...\n\n--- PAGE BREAK ---\n\nQuestion 3b (3 marks)\nIdentify the independent and dependent variables.\n\n--- PAGE BREAK ---\n\nQuestion 3c (4 marks)\nPlot the results and draw a line of best fit.\n\n--- PAGE BREAK ---\n\nQuestion 3f (1 mark)\nWhich graph shows the correct relationship?\n\n--- PAGE BREAK ---\n\nQuestion 4 (14 marks)\nQuestion 4a (1 mark)\nDescribe how an LDR works.\n\n--- PAGE BREAK ---\n\nQuestion 4b (13 marks)\nDesign an investigation into LDR resistance vs. light intensity.\n\n--- PAGE BREAK ---\n\nQuestion 5 (19 marks)\nQuestion 5a (3 marks)\nAnalyse the R vs T graph.\n\n--- PAGE BREAK ---\n\nQuestion 5b (4 marks)\nCalculate the gradient of the graph.\n\n--- PAGE BREAK ---\n\nQuestion 6 (13 marks)\nQuestion 6a (2 marks)\nExplain how the water tower works.\n\n--- PAGE BREAK ---\n\nQuestion 7 (13 marks)\nQuestion 7a (1 mark)\nSunlight is part of which EM spectrum region?\n\n--- PAGE BREAK ---\n\nQuestion 7b (2 marks)\nDescribe how SODIS purifies water.",
+  "ms_full_text": "Q1a: correct = option 2 (B). Q1b: 2 marks: period increases / longer string / larger amplitude... Q3f: option 3 (D)... Q7a: correct = option 1 (B) infrared...",
+  "total_crops": 7,
+  "self_check": {
+    "all_crops_nonblank": true,
+    "total_marks_detected": 100
+  }
+}

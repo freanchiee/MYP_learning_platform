@@ -1,6 +1,6 @@
 import 'server-only'
-import { MS } from '@/data/papers/physics-nov-2023/markscheme'
-import type { MSEntry } from '@/data/papers/physics-nov-2023/markscheme'
+import { getMSForPaper } from '@/data/markschemes/registry'
+import type { MSEntry, MCQEntry } from '@/data/papers/physics-nov-2023/markscheme'
 import type { Question, TaskResult, QuestionGradeResult } from '@/lib/types'
 
 // ---------------------------------------------------------------------------
@@ -170,8 +170,11 @@ function conceptScore(studentText: string, ms: MSEntry): ConceptScoreResult {
 /**
  * Grade a single question against the mark scheme.
  * Handles MCQ, extended, simulation, and dataTable question types.
+ * @param q        The question with student answers populated.
+ * @param paperId  The paper this question belongs to (used to select the correct MS).
  */
-export function gradeQuestion(q: Question): QuestionGradeResult {
+export function gradeQuestion(q: Question, paperId = 'physics-nov-2023'): QuestionGradeResult {
+  const MS = getMSForPaper(paperId)
   const taskResults: TaskResult[] = []
 
   // ---- MCQ questions -------------------------------------------------------
@@ -226,7 +229,31 @@ export function gradeQuestion(q: Question): QuestionGradeResult {
     const studentAnswer = task.ans ?? ''
     const maxMarks = task.marks
 
-    if (!msEntry || 'type' in msEntry) {
+    // MCQ task inside an extended question (radio_select widget)
+    if (msEntry && 'type' in msEntry && msEntry.type === 'mcq') {
+      const mcqEntry = msEntry as unknown as MCQEntry
+      const correctOption = task.widgetOptions?.[mcqEntry.correct] ?? String(mcqEntry.correct)
+      const isCorrect = studentAnswer.trim() === correctOption
+      taskResults.push({
+        label: task.label,
+        marksAwarded: isCorrect ? maxMarks : 0,
+        maxMarks,
+        hitConcepts: [],
+        missConcepts: [],
+        rawScore: isCorrect ? maxMarks : 0,
+        studentAnswer,
+        exemplar: `Correct answer: ${correctOption}`,
+        feedback: isCorrect
+          ? 'Correct answer selected.'
+          : `Incorrect. The correct answer was ${correctOption}.`,
+      })
+      totalAwarded += isCorrect ? maxMarks : 0
+      // eslint-disable-next-line no-continue
+      totalAvailable += maxMarks
+      continue
+    }
+
+    if (!msEntry) {
       // No mark-scheme entry found — award 0
       taskResults.push({
         label: task.label,

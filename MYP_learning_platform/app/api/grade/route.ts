@@ -25,10 +25,11 @@ export async function POST(req: NextRequest) {
       )
     }
 
-    // Grade each question
+    // Grade each question using the correct paper's mark scheme
+    const { paperId = 'physics-nov-2023' } = body
     const grades: Record<number, QuestionGradeResult> = {}
     for (const q of questions) {
-      grades[q.id] = gradeQuestion(q)
+      grades[q.id] = gradeQuestion(q, paperId)
     }
 
     // Aggregate scores

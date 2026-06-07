@@ -2,6 +2,7 @@
 import { useEffect } from 'react'
 import { useExamStore } from '@/store/examStore'
 import { formatTime } from '@/lib/utils'
+import EditModeBanner from '@/components/exam/EditModeBanner'
 
 type ToolId = 'calculator' | 'formulae' | 'booklet' | 'converter'
 
@@ -20,6 +21,8 @@ export default function ExamToolbar() {
   const strikes = useExamStore((s) => s.strikes)
   const tick = useExamStore((s) => s.tick)
   const phase = useExamStore((s) => s.phase)
+  const editMode = useExamStore((s) => s.editMode)
+  const setEditMode = useExamStore((s) => s.setEditMode)
 
   // Drive the countdown timer
   useEffect(() => {
@@ -43,9 +46,11 @@ export default function ExamToolbar() {
       : ''
 
   return (
+    <>
+    {editMode && <EditModeBanner />}
     <div
       className="flex items-center justify-between px-4 flex-shrink-0 select-none"
-      style={{ height: 48, background: '#1c3d5a' }}
+      style={{ height: 48, background: editMode ? '#78350f' : '#1c3d5a' }}
     >
       {/* Left: Branding */}
       <div className="flex items-center gap-3">
@@ -81,32 +86,52 @@ export default function ExamToolbar() {
         })}
       </div>
 
-      {/* Right: Focus indicator + Timer */}
+      {/* Right: Edit toggle + Focus indicator + Timer */}
       <div className="flex items-center gap-4">
-        {/* Strike dots */}
-        <div className="flex items-center gap-1.5">
-          {[0, 1, 2].map((i) => (
-            <div
-              key={i}
-              className="w-2.5 h-2.5 rounded-full border border-white"
-              style={{
-                background: i < strikes ? '#c0392b' : 'transparent',
-                borderColor: i < strikes ? '#c0392b' : 'rgba(255,255,255,0.4)',
-              }}
-              title={i < strikes ? 'Focus violation' : 'Focus OK'}
-            />
-          ))}
-        </div>
-
-        {/* Timer */}
-        <div
-          className={`font-mono text-base font-bold tracking-widest ${timerClass}`}
-          style={{ color: timerColor, fontFamily: 'var(--font-jetbrains-mono, monospace)' }}
-          title="Time remaining"
+        {/* Edit / Published mode toggle */}
+        <button
+          onClick={() => setEditMode(!editMode)}
+          title={editMode ? 'Exit edit mode → Published view' : 'Enter edit mode (content editors only)'}
+          className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[11px] font-bold
+                     transition-all border select-none"
+          style={{
+            background: editMode ? '#fbbf24' : 'transparent',
+            color:      editMode ? '#78350f' : 'rgba(255,255,255,0.65)',
+            border:     editMode ? '1px solid #f59e0b' : '1px solid rgba(255,255,255,0.18)',
+          }}
         >
-          {formatTime(timerSeconds)}
-        </div>
+          {editMode ? '✏ EDIT' : '✏ Edit'}
+        </button>
+
+        {/* Strike dots */}
+        {!editMode && (
+          <div className="flex items-center gap-1.5">
+            {[0, 1, 2].map((i) => (
+              <div
+                key={i}
+                className="w-2.5 h-2.5 rounded-full border border-white"
+                style={{
+                  background: i < strikes ? '#c0392b' : 'transparent',
+                  borderColor: i < strikes ? '#c0392b' : 'rgba(255,255,255,0.4)',
+                }}
+                title={i < strikes ? 'Focus violation' : 'Focus OK'}
+              />
+            ))}
+          </div>
+        )}
+
+        {/* Timer — hidden in edit mode */}
+        {!editMode && (
+          <div
+            className={`font-mono text-base font-bold tracking-widest ${timerClass}`}
+            style={{ color: timerColor, fontFamily: 'var(--font-jetbrains-mono, monospace)' }}
+            title="Time remaining"
+          >
+            {formatTime(timerSeconds)}
+          </div>
+        )}
       </div>
     </div>
+    </>
   )
 }

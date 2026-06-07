@@ -49,6 +49,15 @@ interface ExamStore {
   // Floating tool panel
   activeTool: 'calculator' | 'formulae' | 'booklet' | 'converter' | null
 
+  // Edit mode (for content editors / teachers; future: auth-gated)
+  editMode: boolean
+  /** Per-image URL overrides: maps original src → replacement src (data URL or new path) */
+  imageOverrides: Record<string, string>
+  /** Images marked as deleted; hidden in published mode, shown as placeholder in edit mode */
+  deletedImages: Record<string, true>
+  /** Text overrides: maps key (e.g. "q1:stem", "q1:task:a:text") → replacement string */
+  textOverrides: Record<string, string>
+
   // Legacy compat — kept so existing components don't break
   candidate: CandidateInfo
   attemptId: string | null
@@ -101,6 +110,18 @@ interface ExamStore {
 
   /** Toggle a tool panel; passing the active tool closes it. */
   setActiveTool: (tool: ExamStore['activeTool']) => void
+
+  /** Toggle between edit and published mode. */
+  setEditMode: (on: boolean) => void
+
+  /** Store an image URL override (replacement src for an original src). Pass empty string to clear. */
+  setImageOverride: (originalSrc: string, replacementSrc: string) => void
+
+  /** Mark an image as deleted (hidden in published mode). Pass false to restore. */
+  setDeletedImage: (src: string, deleted: boolean) => void
+
+  /** Store a text override for a key like "q1:stem" or "q2:task:a:text". Pass empty string to clear. */
+  setTextOverride: (key: string, text: string) => void
 
   /** Append a graph data point to a question's graph canvas. */
   addGraphPoint: (qId: number, point: GraphPoint) => void
@@ -160,6 +181,10 @@ const initialState = {
   starsPerQ: {} as Record<number, 0 | 1 | 2 | 3>,
   badgesEarned: [] as string[],
   activeTool: null as ExamStore['activeTool'],
+  editMode: false,
+  imageOverrides: {} as Record<string, string>,
+  deletedImages: {} as Record<string, true>,
+  textOverrides: {} as Record<string, string>,
   // Legacy compat
   candidate: { name: '', school: '' } as CandidateInfo,
   attemptId: null as string | null,
@@ -322,6 +347,29 @@ export const useExamStore = create<ExamStore>((set, get) => ({
     set(state => ({
       activeTool: state.activeTool === tool ? null : tool,
     })),
+
+  setEditMode: (on) => set({ editMode: on }),
+
+  setImageOverride: (originalSrc, replacementSrc) =>
+    set(state => {
+      const next = { ...state.imageOverrides }
+      if (replacementSrc === '') { delete next[originalSrc] } else { next[originalSrc] = replacementSrc }
+      return { imageOverrides: next }
+    }),
+
+  setDeletedImage: (src, deleted) =>
+    set(state => {
+      const next = { ...state.deletedImages } as Record<string, true>
+      if (!deleted) { delete next[src] } else { next[src] = true }
+      return { deletedImages: next }
+    }),
+
+  setTextOverride: (key, text) =>
+    set(state => {
+      const next = { ...state.textOverrides }
+      if (text === '') { delete next[key] } else { next[key] = text }
+      return { textOverrides: next }
+    }),
 
   // ---- Graph canvas --------------------------------------------------------
 

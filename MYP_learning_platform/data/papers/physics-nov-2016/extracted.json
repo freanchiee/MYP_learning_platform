@@ -1,0 +1,781 @@
+{
+  "paper_id": "physics-nov-2016",
+  "qp_hash": "0d212e67064987a6fcd46cf26bba886f",
+  "ms_hash": "0b9f133f36f0ee0cab84058721e5ba4d",
+  "pages": [
+    {
+      "page_num": 1,
+      "raw_text": "",
+      "has_diagram": false,
+      "diagram_crops": []
+    },
+    {
+      "page_num": 2,
+      "raw_text": "",
+      "has_diagram": false,
+      "diagram_crops": []
+    },
+    {
+      "page_num": 3,
+      "raw_text": "",
+      "has_diagram": false,
+      "diagram_crops": []
+    },
+    {
+      "page_num": 4,
+      "raw_text": "",
+      "has_diagram": false,
+      "diagram_crops": []
+    },
+    {
+      "page_num": 5,
+      "raw_text": "",
+      "has_diagram": false,
+      "diagram_crops": []
+    },
+    {
+      "page_num": 6,
+      "raw_text": "",
+      "has_diagram": false,
+      "diagram_crops": []
+    },
+    {
+      "page_num": 7,
+      "raw_text": "",
+      "has_diagram": false,
+      "diagram_crops": []
+    },
+    {
+      "page_num": 8,
+      "raw_text": "",
+      "has_diagram": false,
+      "diagram_crops": []
+    },
+    {
+      "page_num": 9,
+      "raw_text": "",
+      "has_diagram": false,
+      "diagram_crops": []
+    },
+    {
+      "page_num": 10,
+      "raw_text": "",
+      "has_diagram": false,
+      "diagram_crops": []
+    },
+    {
+      "page_num": 11,
+      "raw_text": "",
+      "has_diagram": false,
+      "diagram_crops": []
+    },
+    {
+      "page_num": 12,
+      "raw_text": "",
+      "has_diagram": false,
+      "diagram_crops": []
+    },
+    {
+      "page_num": 13,
+      "raw_text": "",
+      "has_diagram": false,
+      "diagram_crops": []
+    },
+    {
+      "page_num": 14,
+      "raw_text": "",
+      "has_diagram": false,
+      "diagram_crops": []
+    },
+    {
+      "page_num": 15,
+      "raw_text": "",
+      "has_diagram": false,
+      "diagram_crops": []
+    },
+    {
+      "page_num": 16,
+      "raw_text": "",
+      "has_diagram": false,
+      "diagram_crops": []
+    },
+    {
+      "page_num": 17,
+      "raw_text": "",
+      "has_diagram": false,
+      "diagram_crops": []
+    },
+    {
+      "page_num": 18,
+      "raw_text": "",
+      "has_diagram": false,
+      "diagram_crops": []
+    },
+    {
+      "page_num": 19,
+      "raw_text": "",
+      "has_diagram": true,
+      "diagram_crops": [
+        {
+          "file": "/images/papers/physics-nov-2016/page-19-crop.png",
+          "bbox": [
+            125,
+            189,
+            1265,
+            689
+          ],
+          "nonwhite_pct": 92.1,
+          "region_y": [
+            204,
+            676
+          ],
+          "density": 0.741
+        }
+      ]
+    },
+    {
+      "page_num": 20,
+      "raw_text": "",
+      "has_diagram": true,
+      "diagram_crops": [
+        {
+          "file": "/images/papers/physics-nov-2016/page-20-crop.png",
+          "bbox": [
+            119,
+            146,
+            1293,
+            680
+          ],
+          "nonwhite_pct": 92.0,
+          "region_y": [
+            161,
+            666
+          ],
+          "density": 0.763
+        }
+      ]
+    },
+    {
+      "page_num": 21,
+      "raw_text": "",
+      "has_diagram": false,
+      "diagram_crops": []
+    },
+    {
+      "page_num": 22,
+      "raw_text": "",
+      "has_diagram": false,
+      "diagram_crops": []
+    },
+    {
+      "page_num": 23,
+      "raw_text": "",
+      "has_diagram": false,
+      "diagram_crops": []
+    },
+    {
+      "page_num": 24,
+      "raw_text": "",
+      "has_diagram": false,
+      "diagram_crops": []
+    },
+    {
+      "page_num": 25,
+      "raw_text": "",
+      "has_diagram": false,
+      "diagram_crops": []
+    },
+    {
+      "page_num": 26,
+      "raw_text": "",
+      "has_diagram": true,
+      "diagram_crops": [
+        {
+          "file": "/images/papers/physics-nov-2016/page-26-crop.png",
+          "bbox": [
+            113,
+            100,
+            1345,
+            682
+          ],
+          "nonwhite_pct": 93.4,
+          "region_y": [
+            115,
+            669
+          ],
+          "density": 0.803
+        }
+      ]
+    },
+    {
+      "page_num": 27,
+      "raw_text": "",
+      "has_diagram": false,
+      "diagram_crops": []
+    },
+    {
+      "page_num": 28,
+      "raw_text": "",
+      "has_diagram": true,
+      "diagram_crops": [
+        {
+          "file": "/images/papers/physics-nov-2016/page-28-crop.png",
+          "bbox": [
+            333,
+            199,
+            1111,
+            649
+          ],
+          "nonwhite_pct": 90.6,
+          "region_y": [
+            214,
+            636
+          ],
+          "density": 0.501
+        }
+      ]
+    },
+    {
+      "page_num": 29,
+      "raw_text": "",
+      "has_diagram": true,
+      "diagram_crops": [
+        {
+          "file": "/images/papers/physics-nov-2016/page-29-crop.png",
+          "bbox": [
+            113,
+            171,
+            1305,
+            665
+          ],
+          "nonwhite_pct": 92.5,
+          "region_y": [
+            186,
+            652
+          ],
+          "density": 0.776
+        }
+      ]
+    },
+    {
+      "page_num": 30,
+      "raw_text": "",
+      "has_diagram": true,
+      "diagram_crops": [
+        {
+          "file": "/images/papers/physics-nov-2016/page-30-crop.png",
+          "bbox": [
+            135,
+            164,
+            1337,
+            696
+          ],
+          "nonwhite_pct": 92.4,
+          "region_y": [
+            179,
+            683
+          ],
+          "density": 0.781
+        }
+      ]
+    },
+    {
+      "page_num": 31,
+      "raw_text": "",
+      "has_diagram": false,
+      "diagram_crops": []
+    },
+    {
+      "page_num": 32,
+      "raw_text": "",
+      "has_diagram": true,
+      "diagram_crops": [
+        {
+          "file": "/images/papers/physics-nov-2016/page-32-crop.png",
+          "bbox": [
+            135,
+            146,
+            1301,
+            718
+          ],
+          "nonwhite_pct": 93.0,
+          "region_y": [
+            161,
+            704
+          ],
+          "density": 0.757
+        }
+      ]
+    },
+    {
+      "page_num": 33,
+      "raw_text": "",
+      "has_diagram": false,
+      "diagram_crops": []
+    },
+    {
+      "page_num": 34,
+      "raw_text": "",
+      "has_diagram": true,
+      "diagram_crops": [
+        {
+          "file": "/images/papers/physics-nov-2016/page-34-crop.png",
+          "bbox": [
+            151,
+            111,
+            1349,
+            711
+          ],
+          "nonwhite_pct": 92.9,
+          "region_y": [
+            126,
+            698
+          ],
+          "density": 0.779
+        }
+      ]
+    },
+    {
+      "page_num": 35,
+      "raw_text": "",
+      "has_diagram": true,
+      "diagram_crops": [
+        {
+          "file": "/images/papers/physics-nov-2016/page-35-crop.png",
+          "bbox": [
+            139,
+            151,
+            1311,
+            709
+          ],
+          "nonwhite_pct": 92.4,
+          "region_y": [
+            166,
+            695
+          ],
+          "density": 0.763
+        }
+      ]
+    },
+    {
+      "page_num": 36,
+      "raw_text": "",
+      "has_diagram": false,
+      "diagram_crops": []
+    },
+    {
+      "page_num": 37,
+      "raw_text": "",
+      "has_diagram": false,
+      "diagram_crops": []
+    },
+    {
+      "page_num": 38,
+      "raw_text": "",
+      "has_diagram": false,
+      "diagram_crops": []
+    },
+    {
+      "page_num": 39,
+      "raw_text": "",
+      "has_diagram": false,
+      "diagram_crops": []
+    },
+    {
+      "page_num": 40,
+      "raw_text": "",
+      "has_diagram": false,
+      "diagram_crops": []
+    },
+    {
+      "page_num": 41,
+      "raw_text": "",
+      "has_diagram": false,
+      "diagram_crops": []
+    },
+    {
+      "page_num": 42,
+      "raw_text": "",
+      "has_diagram": false,
+      "diagram_crops": []
+    },
+    {
+      "page_num": 43,
+      "raw_text": "",
+      "has_diagram": false,
+      "diagram_crops": []
+    },
+    {
+      "page_num": 44,
+      "raw_text": "",
+      "has_diagram": false,
+      "diagram_crops": []
+    },
+    {
+      "page_num": 45,
+      "raw_text": "",
+      "has_diagram": false,
+      "diagram_crops": []
+    },
+    {
+      "page_num": 46,
+      "raw_text": "",
+      "has_diagram": true,
+      "diagram_crops": [
+        {
+          "file": "/images/papers/physics-nov-2016/page-46-crop.png",
+          "bbox": [
+            123,
+            121,
+            1333,
+            717
+          ],
+          "nonwhite_pct": 93.3,
+          "region_y": [
+            136,
+            703
+          ],
+          "density": 0.787
+        }
+      ]
+    },
+    {
+      "page_num": 47,
+      "raw_text": "",
+      "has_diagram": true,
+      "diagram_crops": [
+        {
+          "file": "/images/papers/physics-nov-2016/page-47-crop.png",
+          "bbox": [
+            123,
+            127,
+            1315,
+            707
+          ],
+          "nonwhite_pct": 92.9,
+          "region_y": [
+            142,
+            694
+          ],
+          "density": 0.776
+        }
+      ]
+    },
+    {
+      "page_num": 48,
+      "raw_text": "",
+      "has_diagram": false,
+      "diagram_crops": []
+    },
+    {
+      "page_num": 49,
+      "raw_text": "",
+      "has_diagram": false,
+      "diagram_crops": []
+    },
+    {
+      "page_num": 50,
+      "raw_text": "",
+      "has_diagram": true,
+      "diagram_crops": [
+        {
+          "file": "/images/papers/physics-nov-2016/page-50-crop.png",
+          "bbox": [
+            123,
+            155,
+            1349,
+            715
+          ],
+          "nonwhite_pct": 92.7,
+          "region_y": [
+            170,
+            701
+          ],
+          "density": 0.797
+        }
+      ]
+    },
+    {
+      "page_num": 51,
+      "raw_text": "",
+      "has_diagram": false,
+      "diagram_crops": []
+    },
+    {
+      "page_num": 52,
+      "raw_text": "",
+      "has_diagram": false,
+      "diagram_crops": []
+    },
+    {
+      "page_num": 53,
+      "raw_text": "",
+      "has_diagram": false,
+      "diagram_crops": []
+    },
+    {
+      "page_num": 54,
+      "raw_text": "",
+      "has_diagram": false,
+      "diagram_crops": []
+    },
+    {
+      "page_num": 55,
+      "raw_text": "",
+      "has_diagram": false,
+      "diagram_crops": []
+    },
+    {
+      "page_num": 56,
+      "raw_text": "",
+      "has_diagram": false,
+      "diagram_crops": []
+    },
+    {
+      "page_num": 57,
+      "raw_text": "",
+      "has_diagram": false,
+      "diagram_crops": []
+    },
+    {
+      "page_num": 58,
+      "raw_text": "",
+      "has_diagram": false,
+      "diagram_crops": []
+    },
+    {
+      "page_num": 59,
+      "raw_text": "",
+      "has_diagram": false,
+      "diagram_crops": []
+    },
+    {
+      "page_num": 60,
+      "raw_text": "",
+      "has_diagram": false,
+      "diagram_crops": []
+    },
+    {
+      "page_num": 61,
+      "raw_text": "",
+      "has_diagram": false,
+      "diagram_crops": []
+    },
+    {
+      "page_num": 62,
+      "raw_text": "",
+      "has_diagram": false,
+      "diagram_crops": []
+    },
+    {
+      "page_num": 63,
+      "raw_text": "",
+      "has_diagram": true,
+      "diagram_crops": [
+        {
+          "file": "/images/papers/physics-nov-2016/page-63-crop.png",
+          "bbox": [
+            151,
+            102,
+            1327,
+            700
+          ],
+          "nonwhite_pct": 93.4,
+          "region_y": [
+            117,
+            687
+          ],
+          "density": 0.765
+        }
+      ]
+    },
+    {
+      "page_num": 64,
+      "raw_text": "",
+      "has_diagram": true,
+      "diagram_crops": [
+        {
+          "file": "/images/papers/physics-nov-2016/page-64-crop.png",
+          "bbox": [
+            133,
+            121,
+            1323,
+            721
+          ],
+          "nonwhite_pct": 93.3,
+          "region_y": [
+            136,
+            708
+          ],
+          "density": 0.776
+        }
+      ]
+    },
+    {
+      "page_num": 65,
+      "raw_text": "",
+      "has_diagram": true,
+      "diagram_crops": [
+        {
+          "file": "/images/papers/physics-nov-2016/page-65-crop.png",
+          "bbox": [
+            123,
+            122,
+            1331,
+            714
+          ],
+          "nonwhite_pct": 93.1,
+          "region_y": [
+            137,
+            700
+          ],
+          "density": 0.787
+        }
+      ]
+    },
+    {
+      "page_num": 66,
+      "raw_text": "",
+      "has_diagram": false,
+      "diagram_crops": []
+    },
+    {
+      "page_num": 67,
+      "raw_text": "",
+      "has_diagram": true,
+      "diagram_crops": [
+        {
+          "file": "/images/papers/physics-nov-2016/page-67-crop.png",
+          "bbox": [
+            123,
+            176,
+            1309,
+            680
+          ],
+          "nonwhite_pct": 92.1,
+          "region_y": [
+            191,
+            666
+          ],
+          "density": 0.771
+        }
+      ]
+    },
+    {
+      "page_num": 68,
+      "raw_text": "",
+      "has_diagram": false,
+      "diagram_crops": []
+    },
+    {
+      "page_num": 69,
+      "raw_text": "",
+      "has_diagram": false,
+      "diagram_crops": []
+    },
+    {
+      "page_num": 70,
+      "raw_text": "",
+      "has_diagram": false,
+      "diagram_crops": []
+    },
+    {
+      "page_num": 71,
+      "raw_text": "",
+      "has_diagram": true,
+      "diagram_crops": [
+        {
+          "file": "/images/papers/physics-nov-2016/page-71-crop.png",
+          "bbox": [
+            119,
+            113,
+            1331,
+            705
+          ],
+          "nonwhite_pct": 93.1,
+          "region_y": [
+            128,
+            692
+          ],
+          "density": 0.789
+        }
+      ]
+    },
+    {
+      "page_num": 72,
+      "raw_text": "",
+      "has_diagram": false,
+      "diagram_crops": []
+    },
+    {
+      "page_num": 73,
+      "raw_text": "",
+      "has_diagram": false,
+      "diagram_crops": []
+    },
+    {
+      "page_num": 74,
+      "raw_text": "",
+      "has_diagram": false,
+      "diagram_crops": []
+    },
+    {
+      "page_num": 75,
+      "raw_text": "",
+      "has_diagram": false,
+      "diagram_crops": []
+    },
+    {
+      "page_num": 76,
+      "raw_text": "",
+      "has_diagram": true,
+      "diagram_crops": [
+        {
+          "file": "/images/papers/physics-nov-2016/page-76-crop.png",
+          "bbox": [
+            123,
+            152,
+            1337,
+            706
+          ],
+          "nonwhite_pct": 93.0,
+          "region_y": [
+            167,
+            693
+          ],
+          "density": 0.789
+        }
+      ]
+    },
+    {
+      "page_num": 77,
+      "raw_text": "",
+      "has_diagram": true,
+      "diagram_crops": [
+        {
+          "file": "/images/papers/physics-nov-2016/page-77-crop.png",
+          "bbox": [
+            139,
+            133,
+            1339,
+            729
+          ],
+          "nonwhite_pct": 93.1,
+          "region_y": [
+            148,
+            715
+          ],
+          "density": 0.781
+        }
+      ]
+    }
+  ],
+  "questions_raw": [],
+  "qp_full_text": "\n\n--- PAGE BREAK ---\n\n\n\n--- PAGE BREAK ---\n\n\n\n--- PAGE BREAK ---\n\n\n\n--- PAGE BREAK ---\n\n\n\n--- PAGE BREAK ---\n\n\n\n--- PAGE BREAK ---\n\n\n\n--- PAGE BREAK ---\n\n\n\n--- PAGE BREAK ---\n\n\n\n--- PAGE BREAK ---\n\n\n\n--- PAGE BREAK ---\n\n\n\n--- PAGE BREAK ---\n\n\n\n--- PAGE BREAK ---\n\n\n\n--- PAGE BREAK ---\n\n\n\n--- PAGE BREAK ---\n\n\n\n--- PAGE BREAK ---\n\n\n\n--- PAGE BREAK ---\n\n\n\n--- PAGE BREAK ---\n\n\n\n--- PAGE BREAK ---\n\n\n\n--- PAGE BREAK ---\n\n\n\n--- PAGE BREAK ---\n\n\n\n--- PAGE BREAK ---\n\n\n\n--- PAGE BREAK ---\n\n\n\n--- PAGE BREAK ---\n\n\n\n--- PAGE BREAK ---\n\n\n\n--- PAGE BREAK ---\n\n\n\n--- PAGE BREAK ---\n\n\n\n--- PAGE BREAK ---\n\n\n\n--- PAGE BREAK ---\n\n\n\n--- PAGE BREAK ---\n\n\n\n--- PAGE BREAK ---\n\n\n\n--- PAGE BREAK ---\n\n\n\n--- PAGE BREAK ---\n\n\n\n--- PAGE BREAK ---\n\n\n\n--- PAGE BREAK ---\n\n\n\n--- PAGE BREAK ---\n\n\n\n--- PAGE BREAK ---\n\n\n\n--- PAGE BREAK ---\n\n\n\n--- PAGE BREAK ---\n\n\n\n--- PAGE BREAK ---\n\n\n\n--- PAGE BREAK ---\n\n\n\n--- PAGE BREAK ---\n\n\n\n--- PAGE BREAK ---\n\n\n\n--- PAGE BREAK ---\n\n\n\n--- PAGE BREAK ---\n\n\n\n--- PAGE BREAK ---\n\n\n\n--- PAGE BREAK ---\n\n\n\n--- PAGE BREAK ---\n\n\n\n--- PAGE BREAK ---\n\n\n\n--- PAGE BREAK ---\n\n\n\n--- PAGE BREAK ---\n\n\n\n--- PAGE BREAK ---\n\n\n\n--- PAGE BREAK ---\n\n\n\n--- PAGE BREAK ---\n\n\n\n--- PAGE BREAK ---\n\n\n\n--- PAGE BREAK ---\n\n\n\n--- PAGE BREAK ---\n\n\n\n--- PAGE BREAK ---\n\n\n\n--- PAGE BREAK ---\n\n\n\n--- PAGE BREAK ---\n\n\n\n--- PAGE BREAK ---\n\n\n\n--- PAGE BREAK ---\n\n\n\n--- PAGE BREAK ---\n\n\n\n--- PAGE BREAK ---\n\n\n\n--- PAGE BREAK ---\n\n\n\n--- PAGE BREAK ---\n\n\n\n--- PAGE BREAK ---\n\n\n\n--- PAGE BREAK ---\n\n\n\n--- PAGE BREAK ---\n\n\n\n--- PAGE BREAK ---\n\n\n\n--- PAGE BREAK ---\n\n\n\n--- PAGE BREAK ---\n\n\n\n--- PAGE BREAK ---\n\n\n\n--- PAGE BREAK ---\n\n\n\n--- PAGE BREAK ---\n\n\n\n--- PAGE BREAK ---\n\n\n\n--- PAGE BREAK ---\n\n",
+  "ms_full_text": "Question Answers Notes Marks Criterion\n1 a 50 (km h-1) 1 A\nb any two reasonable suggestions, for example\n head wind\n drag\n2 A\n different weather systems such as rain\n increasing fatigue or other physiological feature as they fly\n behavioural flight patterns eg flying in groups\nc diagram 4\n1 A\nd force:\nbetween points C and D the retarding force is increasing or forces are no longer balanced\nspeed:\nreducing to zero ECF from 1st marking point for marking\npoints 2, 3 and 4 4 C\nacceleration:\ndeceleration / retardation / negative acceleration\nNewton’s law:\nsecond law or quoting F=ma\ne (20*120*0.5) or 1200 or 1.2\n2 C\nm or km Unit to agree with numerical value\n2 a labels in order from top to bottom: wavelength – amplitude – compression -\nrarefaction\nany two labels correct 2 A\nall labels correct\nb 12 (Hz) 1 C\nc A and B 1 C\nd 6 waves in 1 second or f = 6 Hz\n330 Unit required for 2nd mark 2 C\n(wavelength = =) 55 m Award one mark only for correct\n6\nwavelength without unit\ne wave D 1 C\nf identification of diffraction\ngeneral explanation of diffraction\n3 A\nhow diffraction relates to the specific situation\n3 a\n2 A\nair correctly identified\nwater and glass correctly identified\nb light refracts or changes direction or bends (when it changes medium)\ndegree to which it refracts is dependent on change in density of the medium WTTE but there must be an implied\nor change in medium for marking point 2\ndegree to which it refracts is dependent on the relative change in the refractive index of\nthe materials 3 A\nor\ndegree to which it refracts is dependent on the change in its speed\n(because) the ray bends towards the normal as it slows down ORA\n4 a\nCharge\nElectron -1\n1 A\nProton +1\nNeutron 0\nb electrons are the only particle which can move\nelectrons are transferred Accept “negative charge in place of 3 A\nelectron” for marks 2 and 3\n(so) a lack of electrons creates a positive charge\nc cat is charged by rubbing the carpet\npellets are uncharged\nreference to the charge on the cat inducing or causing or creating an opposite charge in\n4 A\nthe pellets\nthe charge on the cat is attracted to the electrons/protons/opposite charges in the pellets\nor\nthe pellets are then attracted to the cat\n5 a conduction\nconvection 3 A\nradiation\nb any reasonable suggestion of equipment, for example Do not accept ice or paper\n timer\n balance 2 B\ncorrectly linked justification\nc statement of prediction that links number of sheets of paper and mass of ice that\nhas melted, for example\nmass of ice melted decreases as number of sheets of paper increases\n2 B\ncorrectly linked justification, for example\nnumber of sheets of paper is increasing gives more insulation which reduces mass of ice\nthat melts\nd statement of reasonable variable\nstatement of how the variable should be controlled 3 B\njustification of why the variable should be controlled\ne indication of how mass lost will be determined\ncollect at least five sets of data 3 B\nrepeat each set at least three times and average\n6 a (not supported because) as the thickness increases the time taken to cool down follows\nno trend\nor 1 C\n2 mm coffee cup was the slowest to cool down\nb Four weaknesses and correctly linked scientific explanation of the effect of each Accept answers relating to number of\nweakness, for example trials even though this is a procedural\ndifferent thicknesses of cup were used weakness\ndifferent materials were used which will have different thermal conductivities\ndifferent coloured materials were used\ndifferent coloured materials will radiate thermal energy / heat differently\nvolume was not the same each time 8 C\nfilling to the same height does not give the same volume as the dimensions are different\nthe cups were of different dimensions\nthe surface area exposed to the air was different for each cup\nthe room temperature was not measured\nthe room temperature may not have been controlled or could have varied\n7 a IV – thickness of aluminium sheet\n2 B\nDV – amount / intensity of beta radiation absorbed or that penetrates\nb electron 2\nA\n(that is) high-energy or fast-moving\nc as the thickness of the aluminium sheet increases the intensity of the beta radiation that ORA\npenetrates the sheet decreases\n2 B\nas the aluminium sheet is made thicker the electrons would have less chance of\npenetrating due to more energy loss or increased interaction or collisions with atoms\nd Four points describing the method given below\n at least five conditions of the independent variable\n measurements repeated at least three times or counts averaged\n count rate measured with no aluminium between source and GM tube\n measurements taken with aluminium sheets of increasing number between source and 6\nGM tube B\nAny two further reasonable points, for example\n control variable e.g. distance/orientation between source and GM tube should be fixed\n aluminium sheets of the same thickness\n same source should be used for each test\ne Any reasonable source of background radiation, for example\n cosmic rays\n1 A\n rocks\n fallout from nuclear testing\nf background radiation should be measured without the presence of the beta source\n2 B\nbackground count should be deducted from all future measurements\ng any two reasonable precautions and correctly related reason, for example\nPrecaution Reason\nminimize time of exposure reduce dose because exposure~time\nincrease distance between\nsource and person or use reduce dose because exposure~1/distance\ntongs 4 B\nreduce dose because radiation is absorbed by Do not accept gloves or goggles\nshielding/protective clothing\nshielding\navoid pregnant women reduce risk of genetic abnormality\ndo not point source towards\nreduce dose because β radiation is directional\nbody\nh hypothesis\nalpha particles would be stopped completely by the first aluminium sheet\nexplanation 2 B\nalpha particles are less penetrating than beta particles\nor\nalpha particles have higher mass and have more interaction with matter than beta\n8 a six times identified\nvalues ranging between 0 and 100\nequally spaced values\n6 C\ntwo averages calculated correctly\nall correct\naverages expressed as whole numbers Award the sig fig marks for any\nnumber correctly expressed\nb smooth curve 1 C\nc one half life correctly read from graph\ntwo further half lives calculated 3 C\ncorrect calculation of average\nd 4 half lives Award only one mark for four years\n2 A\n8 years\n9 a Any two reasonable suggestions, for example\n pollution from smoke Do not accept “dangerous”\n unsightly 2 D\n noisy operation\n large lorries delivering coal\nb large quantity of water is required for cooling Do not accept “use water to dispose\nor of nuclear waste”\nlarge quantity of water is required to turn turbines 1 D\nor\nlarge quantity of water is required to generate steam\nc (the secondary current) halves 1 A\nd energy loss is proportional to size of the current WTTE\nincreasing the voltage reduces the current\n3 D\nless heat is generated (so less energy is lost)\ne for any two gases:\nwater vapour\ngreenhouse gas\ncollects in the atmosphere and acts to stop heat from the Earth escaping WTTE\nleads to climate change\nCO\n2\ngreenhouse gas 6 D\ncollects in the atmosphere and acts to stop heat from the Earth escaping WTTE\nleads to climate change\nSO\n2\nacid rain\nreacts with rain water to produce an acid\nacid rain causes damage eg to buildings and forests\nf there is an excess of electrical energy at night\nor\nlower demand at night time\n3 D\nelectrical energy cannot be stored\nin order to encourage people to use this energy it is sold more cheaply\n10 a any reasonable application requiring a constant source of electricity\n1 D\nb\n incomplete statement of reason for constant source of\nelectricity with no reference to application in 10a 1–2\n advantage or disadvantage stated with no reference to 10a\n reason for a constant source of electricity related to\napplication in 10a is stated\n3–5\n advantage and disadvantage related to 10a is stated\n an impact on society or an economic impact\n reason for a constant source of electricity in application in\n10a is clearly explained\n15 D\n advantage outlined 6–9\n disadvantage outlined\n an impact on society and an economic impact\n reason for a constant source of electricity in application in\n10a is clearly explained and justified\n advantage explained in detail\n disadvantage explained in detail 10–15\n a clearly reasoned impact on society\n a clearly reasoned economic impact\n a concluding appraisal",
+  "total_crops": 19,
+  "self_check": {
+    "all_crops_nonblank": true,
+    "total_marks_detected": 0
+  }
+}

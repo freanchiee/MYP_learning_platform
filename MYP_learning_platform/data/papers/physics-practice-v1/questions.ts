@@ -17,6 +17,7 @@ export const questions: Question[] = [
     type: 'mcq',
     topic: 'SI Units & Measurement',
     marks: 1,
+    tags: { unit: 'measurement-motion', topics: ['SI units and conversions'], level: 'foundation' },
     stem: 'Which combination gives the basic SI units of mass, length and time?',
     opts: [
       'kilogram, kilometre, second',
@@ -32,6 +33,7 @@ export const questions: Question[] = [
     type: 'mcq',
     topic: 'Forces & Motion',
     marks: 1,
+    tags: { unit: 'forces-interactions', topics: ['Newton\'s first law', 'Newton\'s second law', 'weight and mass'], level: 'developing' },
     stem: 'A 3.1 kg mass falls at terminal velocity. Select the correct combination for weight, air resistance and resultant force.',
     tableData: {
       hd: ['', 'Weight', 'Air resistance', 'Resultant'],
@@ -51,6 +53,7 @@ export const questions: Question[] = [
     type: 'extended',
     topic: 'Density & Measurement',
     marks: 6,
+    tags: { unit: 'measurement-motion', topics: ['SI units and conversions', 'displacement vs distance'], level: 'developing' },
     stem: 'A student measures properties of an object in the laboratory.',
     tasks: [
       { label: 'a', text: 'The smallest division on a metre ruler is 1 mm. A student records a length as 0.835 m. Is he justified in giving three significant figures? Explain.', marks: 1, ph: 'Write your answer here…' },
@@ -64,6 +67,7 @@ export const questions: Question[] = [
     type: 'extended',
     topic: 'Circuits',
     marks: 6,
+    tags: { unit: 'electricity-circuits', topics: ['series circuits', 'parallel circuits', "Ohm's law"], level: 'developing' },
     stem: 'A series circuit has a 6 V battery connected to two resistors: 2 Ω and 1 Ω in series.',
     figCaption: 'Circuit diagram:\n  (+6V) ──[2Ω]──[1Ω]── (−)\n  (Series connection — same current through both)',
     tasks: [
@@ -78,6 +82,7 @@ export const questions: Question[] = [
     type: 'extended',
     topic: 'Hooke\'s Law Investigation',
     marks: 8,
+    tags: { unit: 'forces-interactions', topics: ['Hooke\'s law', 'elastic and inelastic collisions'], level: 'proficient' },
     stem: 'A student investigates how the extension of a spring depends on the load applied.',
     tasks: [
       { label: 'a', text: 'State the research question for this investigation.', marks: 1, ph: 'How does … affect …?' },
@@ -95,6 +100,7 @@ export const questions: Question[] = [
     simCaption: 'Adjust the load on the spring and observe the extension.',
     topic: 'Hooke\'s Law Simulation',
     marks: 4,
+    tags: { unit: 'forces-interactions', topics: ['Hooke\'s law'], level: 'proficient' },
     stem: 'Use the simulation to investigate the relationship between load and spring extension.',
     tasks: [
       { label: 'a', text: 'Record the extension for loads of 1N, 2N, 3N, and 4N from the simulation.', marks: 2, ph: '1N → … cm\n2N → … cm\n3N → … cm\n4N → … cm' },
@@ -107,6 +113,7 @@ export const questions: Question[] = [
     type: 'dataTable',
     topic: 'Motion & Speed Calculations',
     marks: 6,
+    tags: { unit: 'measurement-motion', topics: ['speed and velocity', 'distance-time graphs', 'acceleration'], level: 'developing' },
     stem: 'A student records the following distance-time data for a moving object.',
     tableHeaders: ['Time / s', 'Distance / m', 'Speed / m s⁻¹'],
     tableRows: [
@@ -130,6 +137,7 @@ export const questions: Question[] = [
     type: 'extended',
     topic: 'Nuclear Physics & Half-life',
     marks: 7,
+    tags: { unit: 'atomic-physics', topics: ['half-life', 'half-life calculations', 'radioactive decay'], level: 'developing' },
     stem: 'A radioactive sample initially contains 1600 atoms of a radioactive isotope with a half-life of 4 days.',
     tasks: [
       { label: 'a', text: 'State what is meant by the term "half-life".', marks: 1, ph: 'The half-life is the time taken for…' },
@@ -143,6 +151,7 @@ export const questions: Question[] = [
     type: 'extended',
     topic: 'Renewable Energy & Environment',
     marks: 8,
+    tags: { unit: 'work-energy', topics: ['energy sources (renewable vs non-renewable)', 'energy efficiency'], level: 'advanced' },
     stem: 'Many countries are transitioning from fossil fuels to renewable energy sources to reduce environmental impact.',
     tasks: [
       { label: 'a', text: 'State two advantages of solar energy over coal-fired power stations.', marks: 2, ph: 'Advantage 1:\nAdvantage 2:' },
@@ -156,6 +165,7 @@ export const questions: Question[] = [
     type: 'extended',
     topic: 'Physics & Society',
     marks: 8,
+    tags: { unit: 'work-energy', topics: ['energy sources (renewable vs non-renewable)'], level: 'advanced' },
     stem: 'Nuclear power stations generate electricity using nuclear fission. The table below shows a comparison of nuclear power and coal power.',
     figCaption: 'Comparison:\n  | Nuclear Power      | Coal Power         |\n  | Low CO₂ emissions  | High CO₂ emissions |\n  | Radioactive waste  | Air/water pollution|\n  | High setup cost    | Lower setup cost   |\n  | Very reliable      | Fuel-supply risk   |',
     tasks: [

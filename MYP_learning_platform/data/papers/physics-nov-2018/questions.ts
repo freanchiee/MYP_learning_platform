@@ -1,0 +1,338 @@
+import type { Question } from '@/lib/types'
+
+const P = '/images/papers/physics-nov-2018/'
+
+export const paperMeta = {
+  id: 'physics-nov-2018',
+  subject: 'Physics',
+  session: 'November',
+  year: 2018,
+  totalMarks: 100,
+  durationMinutes: 90,
+  criteria: ['A', 'B', 'C', 'D'] as const,
+}
+
+export const questions: Question[] = [
+  {
+    id: 1,
+    crit: 'A',
+    type: 'extended',
+    topic: 'Sound and Light — Lightning Storm',
+    marks: 8,
+    stem: 'This question is about light and sound waves and the different speeds at which they move through the air.',
+    figImages: [`${P}q1-lightning.png`],
+    tasks: [
+      {
+        label: 'a',
+        text: '**Select** the correct response from the choices below.\n\nThe speed of sound in air is ___ and the speed of light in air is ___.',
+        marks: 1,
+        widget: 'radio_select',
+        widgetOptions: ['330 ms⁻¹ and 300 000 000 ms⁻¹', '300 000 000 ms⁻¹ and 330 ms⁻¹', '55 000 ms⁻¹ and 300 000 000 ms⁻¹', '330 ms⁻¹ and 55 000 ms⁻¹'],
+        ph: 'Select the correct pair of speeds.',
+      },
+      {
+        label: 'b',
+        text: 'If you watch lightning from a storm and listen until you hear the thunder, it is possible to find the distance to the lightning strike. **Outline** what quantity you would measure and the calculation you would perform to calculate the distance.',
+        marks: 3,
+        ph: 'Quantity to measure: time between seeing lightning and hearing thunder\nCalculation: use speed = distance/time → distance = speed of sound × time\n(speed of sound in air = 330 ms⁻¹)',
+      },
+      {
+        label: 'c',
+        text: 'A student is watching a storm. He calculates the distance to the storm every five minutes and draws the following graph of his results. Use the graph to **describe** the journey of the storm as it passes the student.',
+        marks: 2,
+        figImages: [`${P}q1c-graph.png`],
+        ph: 'The storm is moving with constant/unchanging speed (not accelerating). It moves toward the student AND then away from the student. It passes at a distance of about 1 km and passes overhead.',
+      },
+      {
+        label: 'd',
+        text: 'Use information from the graph to **calculate** the speed of the storm between 08:00 and 08:10. Give your answer in km h⁻¹.',
+        marks: 2,
+        ph: 'Read values from graph: distance at 08:00 ≈ 4 km, distance at 08:10 ≈ 2 km\nDistance covered = 2 km in 10 min = 1/6 hour\nSpeed = 2 ÷ (1/6) = 12 km h⁻¹',
+      },
+    ],
+    tags: { unit: 'sound-waves', topics: ['speed of light', 'speed of sound', 'distance-time graph', 'wave speed'], level: 'developing' },
+  },
+
+  {
+    id: 2,
+    crit: 'A',
+    type: 'extended',
+    topic: 'Electricity — Lightning and Conductors',
+    marks: 9,
+    stem: 'This question is about lightning and electricity.',
+    tasks: [
+      {
+        label: 'a',
+        text: '**Select** the sentence that best describes the process by which the water and crystals become charged.',
+        marks: 1,
+        widget: 'radio_select',
+        widgetOptions: [
+          'Electrons are transferred from the small upward moving crystals to the water drops.',
+          'Electrons are transferred from the water drops to the small upward moving crystals.',
+          'Protons are transferred from the small upward moving crystals to the water drops.',
+          'Neutrons are transferred from the water drops to the small upward moving crystals.',
+        ],
+        ph: 'Select the correct charge transfer process.',
+      },
+      {
+        label: 'b',
+        text: 'A build-up of charge in a thunderstorm may discharge with a huge spark of lightning between the bottom of a cloud and the ground. When lightning strikes, the air is heated to a plasma (super high temperature gas) which has a low resistance so that a current can flow. Using information from the picture, **calculate** the resistance of the plasma during the lightning strike.',
+        marks: 3,
+        figImages: [`${P}q2b-circuit.png`],
+        ph: 'R = V/I\n= 500 000 / 20 000\n= 25 Ω',
+      },
+      {
+        label: 'c',
+        text: 'A bolt of lightning has a duration of 30 μs. **Calculate** the charge transferred during this time.',
+        marks: 2,
+        ph: 'ΔQ = I × Δt\n= 20 000 × 30 × 10⁻⁶\n= 0.6 C',
+      },
+      {
+        label: 'd',
+        text: 'Tall buildings are often struck by lightning. To prevent them from being damaged, metal lightning conductors are attached to buildings. **Explain** how lightning conductors prevent buildings from being damaged.',
+        marks: 3,
+        figImages: [`${P}q2d-conductor.png`],
+        ph: 'Metal is a better conductor / has lower resistance than building materials. Current/charge from the lightning will flow through the conductor (path of least resistance). Current/charge passes to earth (without passing through the building), preventing damage.',
+      },
+    ],
+    tags: { unit: 'electricity-circuits', topics: ['charge', 'current', 'resistance', 'V = IR', 'Q = It', 'lightning'], level: 'developing' },
+  },
+
+  {
+    id: 3,
+    crit: 'A',
+    type: 'extended',
+    topic: 'Radioactivity — Decay and Half-life',
+    marks: 9,
+    stem: 'This question is about decay and half-life.',
+    tasks: [
+      {
+        label: 'a',
+        text: 'When unstable isotopes decay, they may release an alpha or a beta particle. For each of the decay equations below, **select** the particle released during decay.',
+        marks: 1,
+        figImages: [`${P}q3a-decay.png`],
+        ph: '²⁴¹Am(95) → ²³⁷Np(93) + ⁴α(2): alpha particle\n²¹⁰Po(84) → ²⁰⁶Pb(82) + ⁴α(2): alpha particle\n²⁴⁰Np(93) → ²⁴⁰Pu(94) + ⁰β(−1): beta particle\n(Award 1 mark for all three correct)',
+      },
+      {
+        label: 'b',
+        text: 'Meitnerium-274 emits an alpha particle when it decays. **Identify** the atomic number, mass number and name of the element formed when an atom of meitnerium-274 decays. You may refer to the periodic table.',
+        marks: 3,
+        ph: 'Alpha particle has mass number 4, atomic number 2.\nNew mass number = 274 − 4 = 270\nNew atomic number = 109 − 2 = 107\nElement with atomic number 107 = Bohrium (Bh)',
+      },
+      {
+        label: 'c',
+        text: 'After decay has taken place, the daughter nucleus emits gamma radiation. **Outline** the nature of gamma radiation.',
+        marks: 2,
+        ph: 'Gamma radiation is a high energy electromagnetic wave (or: high frequency / short wavelength). It is radiation/a photon — do NOT describe it as a particle.',
+      },
+      {
+        label: 'd',
+        text: 'The following table lists some unstable isotopes, their half-lives and some additional information regarding the elements. **Evaluate** the information in the table to determine which of the isotopes listed above would best assist us in dating an ancient artifact used by early humans, suspected to be 10 000 years old.',
+        marks: 3,
+        figImages: [`${P}q3d-isotopes.png`],
+        ph: 'Carbon-14 is most appropriate. Reasons: (1) its half-life of 5 700 years means after 10 000 years the change in abundance will be noticeable; (2) the half-life is appropriate to the timescale (similar order of magnitude); (3) it exists in nature (found in organic materials used by humans).',
+      },
+    ],
+    tags: { unit: 'atomic-physics', topics: ['radioactive decay', 'alpha beta gamma', 'half-life', 'carbon dating'], level: 'developing' },
+  },
+
+  {
+    id: 4,
+    crit: 'B',
+    type: 'extended',
+    topic: 'Football Bounce — Experiment Design and Analysis',
+    marks: 18,
+    stem: 'A change in the characteristics of a football (soccer) ball may impact the ball\'s performance. FIFA has a global standard to guarantee that every game will be played with balls with identical characteristics.\n\nThe bounciness of the ball is an important factor that can affect its performance. Your class is studying factors that affect the performance of the ball. You decide that you are going to study one factor: the effect of the ball\'s internal air pressure.\n\nYou plan to drop the ball from a measured height towards a horizontal surface and determine the height of the first bounce. Your hypothesis for the experiment is:\n\n*Bounce height is proportional to internal air pressure because higher pressure reduces the energy loss due to deformation when the ball bounces.*',
+    tasks: [
+      {
+        label: 'a',
+        text: '**Select** the following variables.',
+        marks: 4,
+        figImages: [`${P}q4a-variables.png`],
+        widget: 'variable_classify',
+        widgetItems: ['Drop height', 'Internal air pressure', 'Bounce height', 'Size of ball', 'Bouncing surface', 'Material of the ball'],
+        ph: 'Internal air pressure → Independent variable\nBounce height → Dependent variable\nDrop height → Control variable\nSize of ball → Control variable\nBouncing surface → Control variable\nMaterial of the ball → Control variable',
+      },
+      {
+        label: 'b',
+        text: 'FIFA\'s guidelines require the pressure in the ball to be between 60 kPa to 120 kPa. **Select** the most appropriate option for collecting data. **Justify** your answer.',
+        marks: 3,
+        widget: 'radio_select',
+        widgetOptions: [
+          'Measurements each 5 kPa; 1 repetition at each pressure',
+          'Measurements each 10 kPa; 3 repetitions at each pressure',
+          'Measurements each 30 kPa; 8 repetitions at each pressure',
+        ],
+        ph: 'Select: Measurements each 10 kPa; 3 repetitions at each pressure.\nJustification: 3 repetitions allows a mean to be calculated and reduces experimental uncertainty. 10 kPa intervals provide sufficient data across the full range (7 data points).',
+      },
+      {
+        label: 'c',
+        text: '**State** and **justify** one safety measure that you must take as you perform the experiment.',
+        marks: 2,
+        ph: 'Safety measure: e.g. use a safe method to drop the ball from height / avoid bouncing the ball into the face / avoid over-pressurizing the ball.\nJustification: to avoid falling injury / to avoid injury from the ball / the ball might explode if over-pressurized.',
+      },
+      {
+        label: 'd',
+        text: 'The following is an image of the pressure gauge meter that you will use. **Measure** the pressure of the ball shown in the image above using an appropriate unit.',
+        marks: 2,
+        figImages: [`${P}q4d-gauge.png`],
+        ph: '83 ± 0.5 kPa\n(Also accept 12.5 PSI if that unit is also stated alongside the kPa reading)',
+      },
+      {
+        label: 'e',
+        text: 'Some of the results from another student who performed a similar experiment are shown in the graph below. **Draw** a line of best fit on the graph.',
+        marks: 1,
+        figImages: [`${P}q4e-graph.png`],
+        ph: 'A straight line of best fit that passes through all (or as close as possible to all) the data points.',
+      },
+      {
+        label: 'f',
+        text: 'Use your line of best fit to **estimate** the bounce height for a pressure of 38 kPa.',
+        marks: 1,
+        ph: 'Read from LOBF at 38 kPa: approximately 0.63–0.65 m',
+      },
+      {
+        label: 'g',
+        text: 'Use the graph to **explain** why the y-intercept of the line of best fit has no significance.',
+        marks: 3,
+        ph: 'The y-intercept corresponds to a bounce height of approximately 0.40 m when pressure = 0 kPa. However, when the ball is deflated (pressure = 0 kPa), it will not bounce at all — so in reality it will not bounce at all. The y-intercept is physically meaningless.',
+      },
+      {
+        label: 'h',
+        text: 'The hypothesis proposed at the start of the investigation was: *Bounce height is proportional to internal air pressure because higher pressure reduces the energy loss due to deformation when the ball bounces.* Use the graph of the results of the experiment to **evaluate** the validity of this hypothesis.',
+        marks: 2,
+        ph: 'If the relationship was proportional, the line of best fit would go through the origin of the graph. The line does not go through the origin — therefore the relationship is NOT proportional and the hypothesis is not fully supported.',
+      },
+    ],
+    tags: { unit: 'pressure', topics: ['pressure', 'experiment design', 'variables', 'graph analysis', 'LOBF', 'hypothesis'], level: 'developing' },
+  },
+
+  {
+    id: 5,
+    crit: 'C',
+    type: 'extended',
+    topic: 'Ball Bounce — Data Processing',
+    marks: 15,
+    stem: 'Another student decided to do a similar experiment using a basketball and a tennis ball.',
+    figImages: [`${P}q5-basketball.png`],
+    tasks: [
+      {
+        label: 'a',
+        text: '**Evaluate** the validity of the method shown in the animation. In your answer, you should identify steps in the method that affect the validity of the data, what effect each step has on the validity of the data and how the method can be improved.',
+        marks: 6,
+        ph: 'Step 1: Ruler not used correctly (e.g. at an angle, not placed on floor)\nEffect 1: Bounce height measured incorrectly / inconsistent\nImprovement 1: Hold ruler vertically / place ruler on floor\n\nStep 2: Ball is dropped not thrown / same ball not always used / different angles\nEffect 2: Measurement of bounce height will be inconsistent\nImprovement 2: Use same ball for all repeats / drop from same hand position',
+      },
+      {
+        label: 'b',
+        text: 'The following are the bounce height values for 3 repetitions at a height of 1.8 m: 0.52 m, 0.47 m and 5.5 × 10² cm. **Calculate** the average value of bounce height for the drop height of 1.8 m. Give your answer in metres.',
+        marks: 2,
+        figImages: [`${P}q5bc-data.png`],
+        ph: 'Convert 5.5 × 10² cm = 550 cm → Note: this appears to be 55 cm = 0.55 m (student unit error)\nAverage = (0.52 + 0.47 + 0.55) / 3 = 0.51(33) m ≈ 0.51 m',
+      },
+      {
+        label: 'c',
+        text: 'The student\'s data is shown below. **Organise** and **present** this data in a table. You should include the answer from part (b) in your table.',
+        marks: 5,
+        figImages: [`${P}q5c-rawdata.png`],
+        ph: 'Table with:\nColumn 1 header: Drop height / m (or metres)\nColumn 2 header: Bounce height / m (or metres)\nData in ascending or descending order of drop height\nAll values to consistent decimal places\nInclude 0.51 m from part (b) at 1.8 m drop height',
+      },
+      {
+        label: 'd',
+        text: 'The mean data from the experiment is shown below. **State** the labels for the x and y axes and plot your calculated data point from part (b).',
+        marks: 2,
+        figImages: [`${P}q5d-graph.png`],
+        ph: 'X axis: Drop height / m\nY axis: Bounce height / m\nPlot point at (1.8, 0.51) — ECF from part (b)',
+      },
+    ],
+    tags: { unit: 'forces-interactions', topics: ['data processing', 'table', 'graph', 'mean calculation', 'evaluation of method'], level: 'developing' },
+  },
+
+  {
+    id: 6,
+    crit: 'B',
+    type: 'extended',
+    topic: 'Squash Ball — Investigation Design',
+    marks: 17,
+    stem: 'Squash is a sport played by two players in a four-walled court. A small, hollow, rubber ball is hit by the players onto the playing surfaces of the four walls of the court.\n\nBefore a game begins, the players must warm the ball to improve the way it bounces when it hits the playing surface.\n\nIn this question you will design an investigation to determine how the temperature of the ball affects its bounce height. You will place the ball into a water bath, as shown in the diagram, and slowly increase the temperature of the water bath, determining how the ball\'s bounce is affected by the temperature.',
+    figImages: [`${P}q6-squash.png`, `${P}q6-setup.png`],
+    tasks: [
+      {
+        label: 'a',
+        text: '**State** the variables in this investigation. The independent variable has been completed for you.\n\nIndependent variable: Temperature of the ball\nDependent variable: ___\nControl variables: ___, ___',
+        marks: 3,
+        ph: 'Dependent variable: bounce height (of the ball)\nControl variable 1: drop height (height from which ball is dropped)\nControl variable 2: any other relevant variable, e.g. surface type, ball size, ball mass, ball material',
+      },
+      {
+        label: 'b',
+        text: '**Design** a method to investigate the effect of changing the ball\'s temperature. In your answer, you should include:\n- a hypothesis that your method will test\n- how you will manipulate the variables\n- how you will collect sufficient data\n- a justification of why your data is sufficient\n- safety considerations',
+        marks: 14,
+        ph: 'Hypothesis: As the temperature of the ball increases, the bounce height will increase, because higher temperature gives the rubber more elastic energy and reduces energy loss.\n\nManipulation: Heat water bath to specific temperatures (e.g. 20°C, 30°C, 40°C, 50°C, 60°C) using electronic heater. Place squash ball in water bath for 2 minutes at each temperature before testing.\n\nData collection: Drop ball from fixed height (e.g. 1.5 m) on fixed surface. Record bounce height. Take 3 repetitions at each temperature.\n\nJustification: 5+ temperatures gives sufficient range; 3 repeats allows mean calculation to reduce random error.\n\nSafety: Use thermometer to monitor water temperature (risk of scalding); use tongs to handle ball in hot water; wear goggles.',
+      },
+    ],
+    tags: { unit: 'thermal-physics', topics: ['temperature', 'experiment design', 'variables', 'method', 'hypothesis', 'safety'], level: 'developing' },
+  },
+
+  {
+    id: 7,
+    crit: 'D',
+    type: 'extended',
+    topic: 'Climate Change — CO₂ and Global Temperature',
+    marks: 13,
+    stem: 'This question is about how individual lifestyle choices can have a global impact.\n\nThe climate has been changing significantly over the past 100 years. Scientific evidence shows that significant climate change is caused by changes in the atmosphere as a consequence of human activity. Individual travel choices can have an impact on a global scale.',
+    tasks: [
+      {
+        label: 'a',
+        text: '**Select** the source of renewable energy from the following list.',
+        marks: 1,
+        widget: 'radio_select',
+        widgetOptions: ['Coal', 'Uranium', 'Wind', 'Natural gas'],
+        ph: 'Select the renewable energy source.',
+      },
+      {
+        label: 'b',
+        text: 'Scientists have measured or calculated both the amount of carbon dioxide in the atmosphere over the last thousand years and the average global temperature. **Outline** how the graph supports this statement.',
+        marks: 2,
+        figImages: [`${P}q7b-co2graph.png`],
+        ph: 'Both global temperature AND the amount of CO₂ increase together (positive correlation). As CO₂ levels rise (especially after 1800), global temperature also rises. The graph shows both variables increasing from around 1900 onwards.',
+      },
+      {
+        label: 'c',
+        text: '**Suggest** a cause for the increase in CO₂ after 1800, as seen in the graph.',
+        marks: 2,
+        ph: 'Increased use of fossil fuels (coal, oil, gas) due to industrialization. The Industrial Revolution began around 1800, leading to increased burning of fossil fuels which releases CO₂.',
+      },
+      {
+        label: 'd',
+        text: '**State** two possible consequences of increasing global temperature and **outline** the impact of each.',
+        marks: 4,
+        ph: 'Consequence 1: Rising sea levels (as polar ice sheets melt) → impact: coastal flooding, loss of land, displacement of populations.\nConsequence 2: Changing weather patterns / more extreme weather → impact: drought, reduced plant growth, reduced food production, loss of biodiversity.',
+      },
+      {
+        label: 'e',
+        text: '**Suggest** one type of technology that scientists are developing to slow down the trend identified in part (b). **Outline** how the technology reduces CO₂ production and a strength and a limitation of its use.',
+        marks: 4,
+        ph: 'Technology: e.g. electric vehicles / carbon capture / solar panels / wind turbines\nHow it reduces CO₂: e.g. electric vehicles do not burn fossil fuels so no CO₂ is directly produced\nStrength: e.g. no fossil fuels are burned / existing technology can be used\nLimitation: e.g. visual/noise impact, high cost, unknown impact of long-term storage (carbon capture), electric vehicles still need electricity which may come from fossil fuels',
+      },
+    ],
+    tags: { unit: 'em-spectrum', topics: ['climate change', 'CO₂', 'global temperature', 'renewable energy', 'greenhouse effect'], level: 'developing' },
+  },
+
+  {
+    id: 8,
+    crit: 'D',
+    type: 'extended',
+    topic: 'Transport Choices — Extended Evaluation',
+    marks: 11,
+    stem: 'Fenna is a student at a school in a city with a range of transport options. She lives 8 km away from her school. These are the options for her journey to school.',
+    figImages: [`${P}q8-transport.png`],
+    tasks: [
+      {
+        label: 'a',
+        text: 'Use the information provided and your wider MYP studies to **discuss** and **evaluate** two methods of transport from the list above and recommend a method of travel for Fenna. In your answer, you should include:\n- positive and negative health and well-being impacts of your two chosen methods\n- positive and negative economic or social impacts of your two chosen methods\n- a comparison of the impacts of your two chosen methods\n- a final recommendation',
+        marks: 11,
+        ph: 'Choose two methods (e.g. cycling and bus).\n\nHealth/well-being:\n+ Cycling: exercise, fitness improvement\n− Cycling: exposure to pollution, risk of accident\n+ Bus: shelter from weather\n− Bus: sedentary, exposure to other people\'s illness\n\nEconomic/social:\n+ Cycling: low cost, reduces traffic, environmental benefit\n− Cycling: requires equipment, weather dependent\n+ Bus: affordable, reduced car use\n− Bus: ticket cost, delays, overcrowding\n\nComparison: Cycling provides health benefits but has safety risks; bus is safer but more sedentary.\n\nRecommendation: Cycling is recommended for Fenna as it provides exercise AND transport at low cost, with appropriate safety precautions.',
+      },
+    ],
+    tags: { unit: 'forces-interactions', topics: ['transport', 'health', 'economics', 'evaluation', 'lifestyle choices'], level: 'developing' },
+  },
+]

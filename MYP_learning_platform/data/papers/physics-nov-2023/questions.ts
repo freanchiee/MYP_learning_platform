@@ -20,6 +20,7 @@ export const questions: Question[] = [
     type: 'extended',
     topic: 'Astronomy & Astrophysics',
     marks: 10,
+    tags: { unit: 'astrophysics', topics: ['solar system structure', 'Big Bang theory', 'stars and stellar evolution'], level: 'developing' },
     stem: 'This question is about astronomy, astrophysics and units. The diagram below shows the solar system (not to scale). The planets are arranged in order from the Sun, but some labels are missing.',
     nativeContent: 'solar_system',
     tasks: [
@@ -66,6 +67,7 @@ export const questions: Question[] = [
     type: 'extended',
     topic: 'Radioactivity & Carbon Dating',
     marks: 8,
+    tags: { unit: 'atomic-physics', topics: ['radioactive decay', 'half-life', 'atomic structure'], level: 'proficient' },
     stem: 'This question is about using carbon dating to identify the age of organic matter. An atom of carbon-14 is represented as: ¹⁴₆C (mass number 14, atomic number 6).',
     nativeContent: 'carbon_decay',
     tasks: [
@@ -111,6 +113,7 @@ export const questions: Question[] = [
     type: 'extended',
     topic: 'Energy Efficiency & Circuits',
     marks: 9,
+    tags: { unit: 'electricity-circuits', topics: ['electrical power', "Ohm's law", 'energy efficiency'], level: 'proficient' },
     stem: 'A student decides to compare the efficiency of modern lightbulbs using Light Emitting Diodes (LEDs) to older filament lightbulbs.',
     nativeContent: 'sankey_q3',
     tasks: [
@@ -153,6 +156,7 @@ export const questions: Question[] = [
     simCaption: 'Interactive: Click "Drop Ball" to drop the ball from ~60 cm. Observe the bounce height. You can reset and try again.',
     topic: 'Bouncing Ball Investigation',
     marks: 18,
+    tags: { unit: 'work-energy', topics: ['kinetic energy', 'gravitational potential energy', 'conservation of energy'], level: 'proficient' },
     stem: 'A student wants to study the motion of balls when they bounce. The student decides to find out how the height the ball is dropped from affects the height of the first bounce by carrying out an investigation.',
     tasks: [
       {
@@ -218,6 +222,7 @@ export const questions: Question[] = [
     type: 'extended',
     topic: 'Coefficient of Restitution',
     marks: 14,
+    tags: { unit: 'work-energy', topics: ['kinetic energy', 'conservation of energy', 'energy efficiency'], level: 'proficient' },
     stem: 'Another student is doing a similar investigation on bouncing balls. They research the coefficient of restitution (e).\n\nWhen two objects collide, their velocities change. For a bouncing ball, e is calculated by dividing the speed after the collision by the speed before the collision.\n\nFor bouncing balls, this can be written using heights:\n\n  e = √(height of first bounce / drop height) = √(h₂/h₁)\n\nWhen e = 1, the ball has the same speed after the collision as before (perfectly elastic). The quantity e has no units.',
     figImages: ['/images/papers/physics-nov-2023/page-17.png', '/images/papers/physics-nov-2023/page-18.png', '/images/papers/physics-nov-2023/page-19.png', '/images/papers/physics-nov-2023/page-20.png'],
     tasks: [
@@ -264,6 +269,7 @@ export const questions: Question[] = [
     type: 'extended',
     topic: 'Experimental Design — Table Tennis',
     marks: 18,
+    tags: { unit: 'work-energy', topics: ['kinetic energy', 'conservation of energy'], level: 'proficient' },
     stem: 'The game of table tennis involves hitting a plastic ball with a wooden racket. The racket is usually made from wood covered with a layer of sponge and rubber on top. The thickness of the sponge layer depends on the choice of the player — it can vary from no sponge to around 2.5 mm. A student is interested in how the bounce of a table tennis ball is affected by the thickness of the sponge layer on the racket. They decide to put a table tennis racket on the floor, drop table tennis balls onto the racket and measure the height of the first bounce.',
     figImages: ['/images/papers/physics-nov-2023/page-21.png', '/images/papers/physics-nov-2023/page-22.png', '/images/papers/physics-nov-2023/page-23.png'],
     tasks: [
@@ -291,6 +297,7 @@ export const questions: Question[] = [
     type: 'extended',
     topic: 'Passive Housing & Heat Transfer',
     marks: 10,
+    tags: { unit: 'thermal-physics', topics: ['conduction', 'convection', 'radiation (thermal)'], level: 'advanced' },
     stem: 'Houses in cold climates are usually heated to provide a comfortable living environment. Passively heated houses are designed to lower the energy required for heating. In passively heated houses, the amount of heat lost to the surroundings is greatly reduced compared to houses which are actively heated.\n\nKey features of passive houses include:\n• Airtightness — prevents air moving between inside and outside\n• Heat recirculation — mechanical ventilation system circulates warm air\n• Thermal insulation of walls and roof — does not easily transfer heat\n• Insulated floor slab — minimizes thermal contact with ground\n• Direction of windows — positioned to maximize solar heat entering\n• Windows with three layers of glass — sealed, coated to allow sunlight in but prevent radiation leaving',
     figImages: ['/images/papers/physics-nov-2023/page-23.png', '/images/papers/physics-nov-2023/page-24.png', '/images/papers/physics-nov-2023/page-25.png', '/images/papers/physics-nov-2023/page-26.png', '/images/papers/physics-nov-2023/page-27.png', '/images/papers/physics-nov-2023/page-28.png', '/images/papers/physics-nov-2023/page-29.png', '/images/papers/physics-nov-2023/page-30.png'],
     tasks: [
@@ -336,6 +343,7 @@ export const questions: Question[] = [
     type: 'extended',
     topic: 'Science, Society & Environment',
     marks: 13,
+    tags: { unit: 'work-energy', topics: ['energy sources (renewable vs non-renewable)', 'energy efficiency'], level: 'advanced' },
     stem: 'The government of a country in a cold climate is considering giving money to people to upgrade their houses to meet the standards for passively heated houses.\n\nKey information from the infographic:\n\nCOST COMPARISON:\n• Active house: €180,000 to build; Passive house: €195,000 to build\n• Passive houses save 90% on heating costs (≈ €822/year saving)\n• Upgrade cost: €15,000 per house\n• Upgrade costs are decreasing with increasing demand\n\nREGULATION:\n• Governments determine building regulations and urban planning\n• Developing passive house standards is slow and costly\n• Legal standards guarantee safety, quality and performance\n\nPAYING FOR HEAT:\n• Heating costs are a large part of family expenditure\n• "Fuel poverty" — households choose between heating and food/clothing\n• Fuel poverty linked to adverse physical and mental health effects\n• Most common in low-income areas with poor housing quality\n\nAIR QUALITY:\n• Outdoor pollutants cannot enter (airtight)\n• Need well-maintained filter systems\n• If maintained, higher air quality than actively heated houses\n• Indoor pollutants from printers, copiers, fossil-fuel heaters',
     figImages: ['/images/papers/physics-nov-2023/page-31.png', '/images/papers/physics-nov-2023/page-32.png', '/images/papers/physics-nov-2023/page-33.png'],
     tasks: [

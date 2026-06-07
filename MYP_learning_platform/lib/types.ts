@@ -1,4 +1,24 @@
 export type Criterion = 'A' | 'B' | 'C' | 'D'
+
+// ── MYP tagging ──────────────────────────────────────────────────────────────
+// Re-exported from data/curriculum/physics-myp.ts for convenience
+export type { MYPUnit, QuestionLevel } from '@/data/curriculum/physics-myp'
+
+/**
+ * Tags attached to every question and task in the pipeline.
+ *
+ * unit     – MYP curriculum unit (e.g. 'atomic-physics')
+ * topics   – specific sub-topics within the unit (1-3 per question)
+ * level    – overall question difficulty aligned to MYP achievement bands
+ *            foundation=1-2 · developing=3-4 · proficient=5-6 · advanced=7-8
+ *
+ * Note: criterion (A/B/C/D) is already stored on Question.crit — no duplication.
+ */
+export interface QuestionTags {
+  unit:    import('@/data/curriculum/physics-myp').MYPUnit
+  topics:  string[]
+  level:   import('@/data/curriculum/physics-myp').QuestionLevel
+}
 export type QuestionType = 'mcq' | 'extended' | 'simulation' | 'dataTable'
 export type SimType = 'spring' | 'spring_data' | 'pendulum_geogebra' | 'wave' | 'decay' | 'bounce'
 export type ExamPhase = 'lock' | 'active' | 'grading' | 'results'
@@ -11,9 +31,11 @@ export interface Task {
   ph: string
   ans?: string
   figImages?: string[]   // optional per-task diagram images, shown just above the answer box
-  widget?: 'drag_drop_planets' | 'variable_classify' | 'sankey_q3' | 'bounce_graphs_ab' | 'q4e_table' | 'q5c_table' | 'cannonball_paths' | 'energy_chain' | 'radio_select'
-  widgetOptions?: string[]   // used by radio_select and other configurable widgets
+  widget?: 'drag_drop_planets' | 'variable_classify' | 'sankey_q3' | 'bounce_graphs_ab' | 'q4e_table' | 'q5c_table' | 'cannonball_paths' | 'energy_chain' | 'radio_select' | 'wave_label_drag_drop' | 'inline_dropdown_select' | 'refraction_label_drag_drop'
+  widgetOptions?: string[]   // dropdown choices for radio_select / inline_dropdown_select
+  widgetItems?: string[]     // row labels for inline_dropdown_select (e.g. ['Electron','Proton','Neutron'])
   passage?: string           // reading passage / article shown above the task question
+  level?: import('@/data/curriculum/physics-myp').QuestionLevel  // per-task difficulty (overrides question-level if set)
 }
 
 export interface Question {
@@ -28,7 +50,7 @@ export interface Question {
   tableData?: { hd: string[]; rows: string[][] }
   figCaption?: string
   figImages?: string[]
-  nativeContent?: 'solar_system' | 'carbon_decay' | 'sankey_q3' | 'bounce_graphs_ab'
+  nativeContent?: 'solar_system' | 'carbon_decay' | 'sankey_q3' | 'bounce_graphs_ab' | 'wave_animations' | 'radiation_q7'
   tasks?: Task[]
   simType?: SimType
   simCaption?: string
@@ -40,6 +62,8 @@ export interface Question {
   ans?: number | string | null
   flagged?: boolean
   tableData_user?: Record<number, Record<number, string>>
+  /** Curriculum tags — required for all pipeline-generated questions */
+  tags?: QuestionTags
 }
 
 export interface MarkSchemeEntry {

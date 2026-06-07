@@ -16,6 +16,13 @@ import Q5cDataTable from '@/components/exam/widgets/Q5cDataTable'
 import CannonballPathsWidget from '@/components/exam/widgets/CannonballPathsWidget'
 import EnergyChainWidget from '@/components/exam/widgets/EnergyChainWidget'
 import RadioSelectWidget from '@/components/exam/widgets/RadioSelectWidget'
+import WaveAnimationsWidget from '@/components/exam/widgets/WaveAnimationsWidget'
+import RadiationQ7Widget from '@/components/exam/widgets/RadiationQ7Widget'
+import EditableImage from '@/components/exam/EditableImage'
+import EditableText from '@/components/exam/EditableText'
+import WaveLabelDragDrop from '@/components/exam/widgets/WaveLabelDragDrop'
+import InlineDropdownSelect from '@/components/exam/widgets/InlineDropdownSelect'
+import RefractionLabelDragDrop from '@/components/exam/widgets/RefractionLabelDragDrop'
 
 interface ExtendedQuestionProps {
   q: Question
@@ -82,6 +89,95 @@ function renderTaskText(text: string) {
   return <div className="space-y-1.5">{out}</div>
 }
 
+/** Renders a markdown table block (array of | lines) as a styled HTML table */
+function renderMarkdownTable(lines: string[]): React.ReactNode {
+  const parseRow = (line: string): string[] =>
+    line.split('|').map(c => c.trim()).filter((_, i, arr) => i > 0 && i < arr.length - 1)
+
+  const headerLine = lines[0]
+  const bodyLines  = lines.slice(2)   // skip header + separator row
+
+  const headers = parseRow(headerLine)
+  const rows    = bodyLines.map(parseRow).filter(r => r.some(c => c !== ''))
+
+  return (
+    <div className="my-3 overflow-x-auto rounded-lg border border-gray-200 shadow-sm">
+      <table className="min-w-full text-sm" style={{ fontFamily: 'Georgia, "Times New Roman", serif' }}>
+        <thead>
+          <tr className="bg-gray-50 border-b border-gray-200">
+            {headers.map((h, i) => (
+              <th key={i} className="px-4 py-2 text-left text-xs font-semibold text-gray-700 uppercase tracking-wide whitespace-nowrap">
+                {parseInlineMd(h)}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((row, ri) => (
+            <tr key={ri} className={ri % 2 === 0 ? 'bg-white' : 'bg-gray-50/70'}>
+              {row.map((cell, ci) => (
+                <td key={ci} className="px-4 py-2 text-gray-800 border-t border-gray-100">
+                  {parseInlineMd(cell)}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  )
+}
+
+/**
+ * Renders stem text:
+ *  - Markdown pipe tables → styled HTML <table>
+ *  - **bold** → <strong>
+ *  - Multi-paragraph (blank line separated) → individual <p> elements
+ */
+function renderStemText(text: string): React.ReactNode {
+  const lines = text.split('\n')
+  const out: React.ReactNode[] = []
+  let tableLines: string[] = []
+
+  function flushTable() {
+    if (tableLines.length >= 3) {
+      out.push(<div key={`tbl-${out.length}`}>{renderMarkdownTable(tableLines)}</div>)
+    } else {
+      // Not enough rows to be a real table — fall back to plain text
+      tableLines.forEach(l => {
+        if (l.trim()) {
+          out.push(
+            <p key={`p-${out.length}`} className="text-base leading-relaxed text-gray-800"
+               style={{ fontFamily: 'Georgia, "Times New Roman", serif' }}>
+              {parseInlineMd(l.trim())}
+            </p>
+          )
+        }
+      })
+    }
+    tableLines = []
+  }
+
+  for (const raw of lines) {
+    const line = raw.trim()
+    if (line.startsWith('|')) {
+      tableLines.push(line)
+    } else {
+      if (tableLines.length > 0) flushTable()
+      if (!line) continue
+      out.push(
+        <p key={`p-${out.length}`} className="text-base leading-relaxed text-gray-800"
+           style={{ fontFamily: 'Georgia, "Times New Roman", serif' }}>
+          {parseInlineMd(line)}
+        </p>
+      )
+    }
+  }
+  if (tableLines.length > 0) flushTable()
+
+  return <div className="space-y-2">{out}</div>
+}
+
 const critBorder: Record<string, string> = {
   A: 'border-[var(--cA)]',
   B: 'border-[var(--cB)]',
@@ -120,13 +216,23 @@ function NativeContent({
       // BounceGraphsAB is rendered per-task for task g (widget: 'bounce_graphs_ab')
       return null
 
+    case 'wave_animations':
+      return (
+        <div className="mt-4">
+          <WaveAnimationsWidget />
+        </div>
+      )
+
+    case 'radiation_q7':
+      return <RadiationQ7Widget />
+
     default:
       // Fallback: render figImages if present
       if (q.figImages && q.figImages.length > 0) {
         return (
           <div className="space-y-3 mt-2">
             {q.figImages.map((src, i) => (
-              <img
+              <EditableImage
                 key={i}
                 src={src}
                 alt={`Question figure ${i + 1}`}
@@ -142,17 +248,23 @@ function NativeContent({
 }
 
 export default function ExtendedQuestion({ q, qIdx }: ExtendedQuestionProps) {
-  const setTaskAnswer = useExamStore(s => s.setTaskAnswer)
-  const tasks = useExamStore(s => s.questions[qIdx]?.tasks ?? q.tasks ?? [])
+  const setTaskAnswer  = useExamStore(s => s.setTaskAnswer)
+  const tasks          = useExamStore(s => s.questions[qIdx]?.tasks ?? q.tasks ?? [])
+  const textOverrides  = useExamStore(s => s.textOverrides)
 
   return (
     <div className="max-w-3xl mx-auto py-6 px-4 space-y-5">
       {/* Stem card */}
       <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-6">
         {q.stem && (
-          <p className="text-base leading-relaxed text-gray-800 mb-4" style={{ fontFamily: 'Georgia, "Times New Roman", serif' }}>
-            {q.stem}
-          </p>
+          <div className="mb-4">
+            <EditableText
+              textKey={`q${q.id}:stem`}
+              originalText={q.stem}
+              renderText={renderStemText}
+              label="Question stem"
+            />
+          </div>
         )}
 
         {/* Native content or fallback figImages */}
@@ -168,7 +280,9 @@ export default function ExtendedQuestion({ q, qIdx }: ExtendedQuestionProps) {
 
       {/* Tasks */}
       {tasks.map((task, taskIdx) => {
-        const cmdTerm = detectCommandTerm(task.text)
+        // Use text override when present so the command-term badge stays in sync
+        const effectiveTaskText = textOverrides[`q${q.id}:task:${task.label}:text`] ?? task.text
+        const cmdTerm   = detectCommandTerm(effectiveTaskText)
         const charCount = task.ans?.length ?? 0
         const borderClass = critBorder[q.crit] ?? 'border-[var(--ib-teal)]'
 
@@ -203,7 +317,7 @@ export default function ExtendedQuestion({ q, qIdx }: ExtendedQuestionProps) {
               {task.figImages && task.figImages.length > 0 && (
                 <div className="space-y-2 mb-1">
                   {task.figImages.map((src, i) => (
-                    <img
+                    <EditableImage
                       key={i}
                       src={src}
                       alt={`Figure for part (${task.label})`}
@@ -225,7 +339,12 @@ export default function ExtendedQuestion({ q, qIdx }: ExtendedQuestionProps) {
               )}
 
               {/* Task text with bullet-point rendering */}
-              {renderTaskText(task.text)}
+              <EditableText
+                textKey={`q${q.id}:task:${task.label}:text`}
+                originalText={task.text}
+                renderText={renderTaskText}
+                label={`Task (${task.label}) text`}
+              />
 
               {/* Widget or RichTextEditor */}
               {task.widget === 'drag_drop_planets' ? (
@@ -271,6 +390,24 @@ export default function ExtendedQuestion({ q, qIdx }: ExtendedQuestionProps) {
               ) : task.widget === 'radio_select' ? (
                 <RadioSelectWidget
                   options={task.widgetOptions ?? []}
+                  onAnswer={(ans) => setTaskAnswer(qIdx, taskIdx, ans)}
+                  initialValue={task.ans ?? ''}
+                />
+              ) : task.widget === 'wave_label_drag_drop' ? (
+                <WaveLabelDragDrop
+                  onAnswer={(ans) => setTaskAnswer(qIdx, taskIdx, ans)}
+                  initialValue={task.ans ?? ''}
+                />
+              ) : task.widget === 'inline_dropdown_select' ? (
+                <InlineDropdownSelect
+                  items={task.widgetItems ?? []}
+                  options={task.widgetOptions ?? []}
+                  onAnswer={(ans) => setTaskAnswer(qIdx, taskIdx, ans)}
+                  initialValue={task.ans ?? ''}
+                />
+              ) : task.widget === 'refraction_label_drag_drop' ? (
+                <RefractionLabelDragDrop
+                  items={task.widgetItems ?? []}
                   onAnswer={(ans) => setTaskAnswer(qIdx, taskIdx, ans)}
                   initialValue={task.ans ?? ''}
                 />

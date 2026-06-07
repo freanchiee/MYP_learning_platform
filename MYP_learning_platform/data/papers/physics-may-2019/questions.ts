@@ -1,0 +1,330 @@
+import type { Question } from '@/lib/types'
+
+const P = '/images/papers/physics-may-2019/'
+
+export const paperMeta = {
+  id: 'physics-may-2019',
+  subject: 'Physics',
+  session: 'May',
+  year: 2019,
+  totalMarks: 100,
+  durationMinutes: 90,
+  criteria: ['A', 'B', 'C', 'D'] as const,
+}
+
+export const questions: Question[] = [
+  {
+    id: 1,
+    crit: 'A',
+    type: 'extended',
+    topic: 'Thermal Physics — Dewar Flask',
+    marks: 7,
+    stem: 'Heat and temperature are different quantities associated with the study of thermal physics. Heat transfer takes place through three processes: conduction, convection and radiation.',
+    figImages: [`${P}q1a-heattransfer.png`],
+    tasks: [
+      {
+        label: 'a',
+        text: 'The diagram shows heat transfer occurring from a campfire. **Select** the process label (Convection, Radiation, or Conduction) for each situation shown in the diagram.',
+        marks: 1,
+        ph: 'Describe which heat transfer process applies to each scenario shown.',
+      },
+      {
+        label: 'b',
+        text: '**State** the units used to measure temperature and heat.',
+        marks: 2,
+        ph: 'Temperature: ...\nHeat: ...',
+      },
+      {
+        label: 'c',
+        text: 'A student places a mix of ice and water into a Dewar flask and leaves it in the sunshine. Four hours later she returns and finds the ice has not melted. **Explain** why the ice has not melted. In your answer, you should refer to two features of the flask and use your knowledge and understanding of heat transfer.',
+        marks: 4,
+        figImages: [`${P}q1c-dewar.png`],
+        ph: 'Feature 1 of flask: ...\nFeature 2 of flask: ...\nExplanation of how these prevent heat transfer: ...',
+      },
+    ],
+    tags: { unit: 'thermal-physics', topics: ['heat transfer', 'conduction', 'convection', 'radiation', 'insulation'], level: 'developing' },
+  },
+
+  {
+    id: 2,
+    crit: 'A',
+    type: 'extended',
+    topic: 'Atomic Structure — Electrostatic Copying',
+    marks: 10,
+    stem: 'For centuries, atoms were believed to be solid spheres with no internal components. However, as experimental procedures improved, it was found that they contain protons, neutrons and electrons.',
+    tasks: [
+      {
+        label: 'a',
+        text: 'A helium atom has 2 protons, 2 neutrons and 2 electrons. **Draw** a diagram to show the structure of an atom of helium.',
+        marks: 1,
+        figImages: [`${P}q2a-atom.png`],
+        ph: 'Describe your diagram: nucleus contains 2 protons and 2 neutrons; 2 electrons orbit/surround the nucleus.',
+      },
+      {
+        label: 'b',
+        text: '**Select** the force that keeps the electron in the atom.',
+        marks: 1,
+        widget: 'radio_select',
+        widgetOptions: ['Magnetic force', 'Gravitational force', 'Electrostatic force', 'Frictional force'],
+        ph: 'Select the correct force.',
+      },
+      {
+        label: 'c',
+        text: 'Copying machines work using the electric properties of matter. The process can be simplified as: a positively charged surface attracts negatively charged ink particles. **Outline** why positive and negative charges attract each other.',
+        marks: 2,
+        ph: 'Positive and negative charges are opposite charges. Opposite charges attract each other (unlike charges attract). The electrostatic force acts between them.',
+      },
+      {
+        label: 'd',
+        text: 'The diagram below shows a negatively charged ink particle and the positively charged paper. **Draw** arrows to represent the forces acting on the ink particle. Use the text tool to label your arrows.',
+        marks: 3,
+        figImages: [`${P}q2d-inkparticle.png`],
+        ph: 'Arrow 1: pointing upward toward positive photosensitive surface — label: electrostatic (attractive) force\nArrow 2: pointing downward — label: weight/gravitational force\n(Arrows must touch/start from the particle surface)',
+      },
+      {
+        label: 'e',
+        text: '**Outline** the importance of the opposite charge of the negatively charged ink particle and the positively charged paper being in close proximity in the process of making a copy.',
+        marks: 3,
+        ph: 'The distance needs to be small so that the electric force is large enough to overcome opposing forces (e.g. weight). As distance increases, the electric/electrostatic force decreases. The ink must stick to the paper to fix the image in place.',
+      },
+    ],
+    tags: { unit: 'electricity-circuits', topics: ['atomic structure', 'electrostatics', 'charge', 'forces', 'electric field'], level: 'developing' },
+  },
+
+  {
+    id: 3,
+    crit: 'A',
+    type: 'extended',
+    topic: 'Gravity — Solar System and Oumuamua',
+    marks: 10,
+    stem: 'The movement of planets and asteroids in the solar system can be determined by our understanding of the action of gravitational attraction.',
+    figImages: [`${P}q3a-solarsystem.png`],
+    tasks: [
+      {
+        label: 'a',
+        text: 'The diagram of the solar system below is missing some information. **Label** the diagram to show: the asteroid belt, Mercury and Saturn.',
+        marks: 2,
+        ph: 'Asteroid belt: ring of objects between Mars and Jupiter. Mercury: first (innermost) planet from the Sun. Saturn: sixth planet from the Sun (the one with prominent rings).',
+      },
+      {
+        label: 'b',
+        text: '**State** one factor that determines the size of the force of attraction between objects in the solar system.',
+        marks: 1,
+        ph: 'Distance between the objects OR mass of the objects.',
+      },
+      {
+        label: 'c',
+        text: 'Not all objects observed in our solar system move around the Sun as planets do. In 2017, scientists discovered an object that would visit our solar system only once. The scientists named the object Oumuamua. **Draw** arrows to represent the force of attraction that the Sun exerts on Oumuamua at positions A and B shown in the diagram.',
+        marks: 3,
+        figImages: [`${P}q3c-trajectory.png`],
+        ph: 'Arrow at A: pointing toward the Sun, shorter length (A is farther from Sun).\nArrow at B: pointing toward the Sun, longer/larger length (B is closer so greater gravitational force).\nBoth arrows must point directly toward the Sun.',
+      },
+      {
+        label: 'd',
+        text: 'The estimated volume of Oumuamua was 281 000 m³. The typical density of an asteroid is 2000 kg m⁻³. **Calculate** the mass of Oumuamua.',
+        marks: 2,
+        ph: 'mass = density × volume\n= 2000 × 281 000\n= 562 000 000 kg  (or 5.62 × 10⁸ kg)',
+      },
+      {
+        label: 'e',
+        text: 'At its closest, Oumuamua was 1.5 × 10¹¹ m away from the Sun. At this distance the gravitational field strength is 0.1 N kg⁻¹. Using the formula sheet and your answer to part (d), **calculate** the force of attraction experienced by Oumuamua.',
+        marks: 2,
+        ph: 'F = m × g\n= 5.62 × 10⁸ × 0.1\n= 5.62 × 10⁷ N  (or 56 200 000 N)',
+      },
+    ],
+    tags: { unit: 'forces-interactions', topics: ['gravity', 'solar system', 'gravitational field strength', 'mass calculation', 'force'], level: 'developing' },
+  },
+
+  {
+    id: 4,
+    crit: 'B',
+    type: 'extended',
+    topic: 'Body Flying — Experiment Design',
+    marks: 15,
+    stem: 'Body flying is a way for people to experience the adventure of sky diving, without jumping out of a plane. Air is blown through large tubes at high speed and this allows people to float above the ground. Rather than falling fast through the air, fast air travels past the person. The drag force this creates must be large enough to balance the weight of the person.\n\nTo determine this relationship between air speed and weight we can model body flying using balls of different weights in a controlled stream of air in the lab.\n\nThe relationship can be summarised in the following equation:\n**Weight of ball = constant × CSA × air speed²**\n(where CSA is cross-sectional area of the ball)',
+    figImages: [`${P}q4-bodyflying.png`],
+    tasks: [
+      {
+        label: 'a',
+        text: 'The graph below shows the air speed needed for people with different body weights to float above the ground. Using the graph, **state** the air speed needed for a 600 N person to float above the ground.',
+        marks: 2,
+        figImages: [`${P}q4a-graph.png`],
+        ph: 'Read from graph at weight = 600 N: approximately 100 km/h',
+      },
+      {
+        label: 'b',
+        text: 'A list of variables that are important in this experiment is provided below. **Select** the description that best describes each variable.',
+        marks: 3,
+        figImages: [`${P}q4b-variables.png`],
+        widget: 'variable_classify',
+        widgetItems: ['Weight', 'Air speed', 'CSA', 'Mass', 'Volume'],
+        ph: 'Weight → Independent variable (IV)\nAir speed → Dependent variable (DV)\nCSA → Control variable\nMass → Control variable\nVolume → Control variable',
+      },
+      {
+        label: 'c',
+        text: 'Using the information contained in the video and the equation above, **formulate and explain** a suitable hypothesis that could address the research question above.',
+        marks: 3,
+        ph: 'As the weight of the ball increases, the air speed needed to keep it floating will increase. From Weight = k × CSA × v², if CSA is controlled, weight ∝ v², so as weight increases, the required air speed squared increases proportionally. This means v ∝ √weight.',
+      },
+      {
+        label: 'd',
+        text: 'You have a box of balls which contains a variety of different CSAs. **Select** the balls you will use for this experiment and place them in the equipment box.',
+        marks: 3,
+        figImages: [`${P}q4d-balls.png`],
+        ph: 'Select balls that: (1) all have the same CSA (to control this variable), (2) cover the greatest possible range of weights, (3) at least 5 balls with regular weight intervals (e.g. 0.40 N increments).',
+      },
+      {
+        label: 'e',
+        text: '**Justify** the selection you have made in part (d).',
+        marks: 2,
+        ph: 'The balls all have the same CSA to keep this as a control variable. They cover the greatest possible range of weights to allow a relationship to be established. Regular intervals allow patterns to be identified.',
+      },
+      {
+        label: 'f',
+        text: '**State** how many trials you will record. **Justify** your answer.',
+        marks: 2,
+        ph: '3–5 trials per data point.\nJustification: Repeating measurements reduces the effect of random errors and allows calculation of a mean. More trials improve reliability.',
+      },
+    ],
+    tags: { unit: 'forces-interactions', topics: ['drag force', 'weight', 'experiment design', 'variables', 'hypothesis', 'CSA'], level: 'developing' },
+  },
+
+  {
+    id: 5,
+    crit: 'C',
+    type: 'extended',
+    topic: 'CSA Investigation — Data Processing',
+    marks: 14,
+    stem: 'A student chooses to investigate the effect that the CSA of the ball has on the air speed needed to keep it floating. He proposes the following hypothesis:\n\n"According to my research I know that the CSA of the ball is inversely proportional to the square of the air speed flowing past it. I can write this as: CSA ∝ 1/air speed². This means that as the CSA of the ball increases, the air speed needed for the ball to float can be reduced."\n\nThe student collects one set of data. His results are shown below.',
+    figImages: [`${P}q5-csadata.png`],
+    tasks: [
+      {
+        label: 'a',
+        text: '**State** the question that the student is investigating.',
+        marks: 1,
+        ph: 'How does the CSA of the ball affect the air speed needed to keep it floating?',
+      },
+      {
+        label: 'b',
+        text: 'The student has recorded the first value as radius rather than area. The student used the equation **area = πr²** to calculate the CSA. **Select** which of the following values would be most appropriate to present the CSA in a results table.',
+        marks: 1,
+        widget: 'radio_select',
+        widgetOptions: ['2.5 cm (radius)', '7.85 cm (circumference)', '19.6 cm² (area from πr²)', '38 cm² (area — correct value)'],
+        ph: 'Select the most appropriate CSA value.',
+      },
+      {
+        label: 'c',
+        text: '**Organise** and present the data into a table. In your answer you should include the result from part (b).',
+        marks: 4,
+        ph: 'Table with:\n- Column title: CSA / cm² and unit in column header\n- Column title: Air speed / m s⁻¹ and unit in column header\n- Data arranged in ascending or descending order\n- All data recorded to 2 decimal places\n- Include 38 cm² from part (b)',
+      },
+      {
+        label: 'd',
+        text: 'The student draws three graphs of the data he has collected. **Select** the most appropriate graph to determine the relationship between CSA and air speed. **Justify** your choice.',
+        marks: 3,
+        figImages: [`${P}q5d-graphs.png`],
+        widget: 'radio_select',
+        widgetOptions: ['Graph A', 'Graph B', 'Graph C'],
+        ph: 'Graph C — it plots 1/v² against CSA, which allows a straight-line relationship to be identified (if hypothesis is correct). Graph C is most appropriate to determine an inversely proportional relationship.',
+      },
+      {
+        label: 'e',
+        text: 'The student\'s hypothesis was: CSA ∝ 1/air speed². **Explain** if the data supports the hypothesis.',
+        marks: 3,
+        ph: 'If Graph C shows a straight line through the origin, this confirms CSA ∝ 1/v², which supports the hypothesis. State whether the line of best fit is straight, passes through the origin, and whether there are any anomalous points. Conclude whether hypothesis is supported/not supported with reference to the graph.',
+      },
+      {
+        label: 'f',
+        text: 'The student\'s results do not all sit on the line of best fit. **Describe** what change should be made to the method and data collected that would benefit the scientific investigation.',
+        marks: 2,
+        ph: 'Repeat measurements for each CSA value and calculate the mean, to reduce the effect of random errors. OR Collect more data points over a greater range to better establish the relationship.',
+      },
+    ],
+    tags: { unit: 'forces-interactions', topics: ['data analysis', 'graphs', 'hypothesis testing', 'CSA', 'processing data', 'line of best fit'], level: 'developing' },
+  },
+
+  {
+    id: 6,
+    crit: 'B',
+    type: 'extended',
+    topic: 'Boats Floating — Analysis and Design',
+    marks: 20,
+    stem: 'A second student decides to perform a different experiment. She chooses to model how boats float in water. She knows that the weight of the boat floating in a liquid and the volume of the boat below the water will be linked by the following equation:\n\n**Weight of the boat = volume of the boat below water × gravitational field strength × density of liquid**\n\nHer hypothesis is: "As the weight of the boat increases, the volume of the boat below the water will increase proportionally. I can write this as: weight of boat ∝ volume of boat below the water. This means that as the weight of the boat doubles the volume of the boat under the water will also double."\n\nThe student collects one set of data shown in the table.',
+    figImages: [`${P}q6-shipdata.png`],
+    tasks: [
+      {
+        label: 'a',
+        text: '**Identify** the type of graph that the student should draw of this data. **State** the quantities that should be presented on the graph.',
+        marks: 3,
+        ph: 'Type: Scatter graph / line graph.\nX-axis: weight of boat (N)\nY-axis: volume of boat below the water (cm³)\nTitle: Graph of weight of boat against volume below water.',
+      },
+      {
+        label: 'b',
+        text: 'The results support the relationship given in the hypothesis. Without drawing the graph, **describe** two features of the graph that would support the hypothesis.',
+        marks: 2,
+        ph: '1. Straight line through the data points (linear relationship).\n2. Line passes through the origin (directly proportional — when weight = 0, volume = 0).',
+      },
+      {
+        label: 'c',
+        text: '**Discuss** two improvements to the method and data collected that would benefit the scientific investigation.',
+        marks: 4,
+        ph: 'Improvement 1: greater range of weights\nEffect 1: gives more evidence for a proportional relationship over a wider range\n\nImprovement 2: more trials (repeat readings) at each weight\nEffect 2: reduces experimental uncertainty / allows anomalous results to be identified',
+      },
+      {
+        label: 'd',
+        text: 'You decide to extend the experiment and investigate how the density of sea water affects the weight of a boat able to float. Your teacher suggests the following prediction: "As the mass of salt dissolved in the water increases, the weight of the boat able to float at a fixed level in the water will also increase."\n\n**Design** an investigation that you could use to test this prediction. In your plan you should include:\n- the research question to test this prediction\n- the independent, dependent and two control variables\n- the equipment you will use\n- your method for manipulating the variables\n- how you will collect sufficient data',
+        marks: 11,
+        ph: 'Research question: How does the mass of salt dissolved in water affect the weight of a boat able to float at a fixed level?\n\nIV: mass of salt dissolved in the water (g)\nDV: weight of boat able to float at the fixed level (N)\nControl variables: volume of water (constant e.g. 500 mL), same container, same boat shape/size\n\nEquipment: measuring cylinder, top-pan balance, NaCl salt, water, small model boat, ruler/marker for fixed waterline\n\nMethod: Dissolve increasing measured masses of salt in a fixed volume of water. Float the model boat and measure the maximum weight of cargo/boat able to float at the fixed waterline marker. Repeat for each salt concentration.\n\nData: Minimum 5 different salt masses, 3 trials per concentration, record mean weight. Range: 0–100 g salt (or similar).',
+      },
+    ],
+    tags: { unit: 'forces-interactions', topics: ['buoyancy', 'density', 'experiment design', 'graphing', 'Archimedes'], level: 'developing' },
+  },
+
+  {
+    id: 7,
+    crit: 'D',
+    type: 'extended',
+    topic: 'Radioactivity — Technetium-99 Medical Imaging',
+    marks: 13,
+    stem: 'Over 10 000 hospitals around the world use radioisotopes. About 80% of this use is in helping to diagnose disease. The most common radioactive isotope used in helping to make diagnostic images is Tc-99 (Technetium-99). Tc-99 is produced in nuclear reactors from Mo-99. Tc-99 emits gamma rays which have enough energy to be detected by a gamma camera. Tc-99 has a half-life of about 6 hours. When injected into the human body, the Tc-99 allows for medically useful images to be produced.',
+    tasks: [
+      {
+        label: 'a',
+        text: '**Outline** why a half-life of 6 hours is useful for producing medical images.',
+        marks: 2,
+        ph: 'Long enough half-life to record/produce images (lasts sufficient time in the body for scanning).\nShort enough to prevent long-term exposure / minimise radiation dose to the patient after scanning.',
+      },
+      {
+        label: 'b',
+        text: '**Outline** two advantages a gamma-emitting isotope would have when used for detection purposes in the human body rather than alpha and beta emitters.',
+        marks: 2,
+        ph: 'Advantage 1: Gamma rays are not blocked by bone or skin — can penetrate the body and be detected externally by a gamma camera.\nAdvantage 2: Gamma rays do not ionise cells strongly (lower ionising power) so they do not damage tissue as much as alpha or beta.',
+      },
+      {
+        label: 'c',
+        text: 'The source of Tc-99 is produced in nuclear reactors. Most of these reactors are over 50 years old and are due to be decommissioned. This would cause the supply of Tc-99 to decrease. You are an adviser to a government agency. Using the information above, **discuss** and **evaluate** which method you think should be used to produce Tc-99 in a country of your choice. In your answer, you should include:\n- the advantages and disadvantages of your chosen method for your country\n- a conclusion',
+        marks: 9,
+        ph: 'Choose one method (nuclear reactor / cyclotron / linear accelerator).\n\nAdvantages of chosen method (linked to country): e.g. cyclotron — inside a hospital (1-day radius), small size, no radioactive waste, produces Tc-99 directly...\n\nDisadvantages of chosen method: e.g. cyclotron — only supplies local area, takes 6 hours to produce, modern equipment needed...\n\nConclusion: Justify recommendation with reference to country-specific factors (location of hospitals, existing infrastructure, cost, safety).',
+      },
+    ],
+    tags: { unit: 'atomic-physics', topics: ['radioactivity', 'half-life', 'gamma radiation', 'medical imaging', 'nuclear reactors', 'evaluation'], level: 'developing' },
+  },
+
+  {
+    id: 8,
+    crit: 'D',
+    type: 'extended',
+    topic: 'Radioactive Materials in Medicine — Extended Evaluation',
+    marks: 11,
+    stem: 'In 1987, a forgotten radiotherapy source was stolen from an abandoned hospital in Brazil. By the time the authorities had been notified, 249 people who had been in contact with the stolen source were found to have very high levels of radioactive matter in or on their bodies. Four people died from exposure to the radioactive isotope. Houses that had been contaminated had to be demolished and the topsoil had to be removed due to contamination. The International Atomic Energy Agency called it "one of the world\'s worst radiological incidents".\n\nUsing radioactive materials for diagnoses and treatment helps many patients but there are also risks attached to its use.',
+    tasks: [
+      {
+        label: 'a',
+        text: '**Discuss** and **evaluate** the implications of using radioactive materials in medicine. In your answer you should include:\n- an advantage and a disadvantage of using radioactive materials in a hospital\n- the political implications for governments of using radioactive materials in medicine\n- the environmental implications\n- a concluding appraisal',
+        marks: 11,
+        ph: 'Advantage: Radioactive materials enable cancer diagnosis/treatment, organ imaging — saves lives.\nDisadvantage: Risk of contamination, exposure, accidents (e.g. Brazil incident — 4 deaths, mass contamination).\n\nPolitical implications: Governments must regulate storage, transport and disposal of radioactive materials. Responsibility for public safety. International obligations (IAEA). Cost of emergency response and clean-up.\n\nEnvironmental implications: Radioactive contamination of soil and water. Long-term environmental hazards. Need for permanent disposal facilities for radioactive waste.\n\nConclusion: Weigh the significant medical benefits (life-saving diagnostics, cancer treatment) against risks (accidents, waste, contamination). With strict safety regulations and protocols, the benefits outweigh the risks.',
+      },
+    ],
+    tags: { unit: 'atomic-physics', topics: ['radioactivity', 'medical applications', 'evaluation', 'implications', 'safety'], level: 'developing' },
+  },
+]
