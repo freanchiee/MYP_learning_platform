@@ -14,42 +14,44 @@ import type { ConceptEntry } from '@/data/papers/physics-nov-2023/conceptsPublic
 export type { ConceptEntry }
 
 import { CONCEPTS_PUBLIC as CONCEPTS_physics_nov_2023 } from '@/data/papers/physics-nov-2023/conceptsPublic'
+import { CONCEPTS_PUBLIC_MAY2016 as CONCEPTS_physics_may_2016 } from '@/data/papers/physics-may-2016/conceptsPublic'
+import { CONCEPTS_PUBLIC_MAY2017 as CONCEPTS_physics_may_2017 } from '@/data/papers/physics-may-2017/conceptsPublic'
+import { CONCEPTS_PUBLIC_MAY2018 as CONCEPTS_physics_may_2018 } from '@/data/papers/physics-may-2018/conceptsPublic'
+import { CONCEPTS_PUBLIC_MAY2019 as CONCEPTS_physics_may_2019 } from '@/data/papers/physics-may-2019/conceptsPublic'
+import { CONCEPTS_PUBLIC_MAY2021 as CONCEPTS_physics_may_2021 } from '@/data/papers/physics-may-2021/conceptsPublic'
+import { CONCEPTS_PUBLIC_MAY2022 as CONCEPTS_physics_may_2022 } from '@/data/papers/physics-may-2022/conceptsPublic'
+import { CONCEPTS_PUBLIC_MAY2023 as CONCEPTS_physics_may_2023 } from '@/data/papers/physics-may-2023/conceptsPublic'
+import { CONCEPTS_PUBLIC_MAY2024 as CONCEPTS_physics_may_2024 } from '@/data/papers/physics-may-2024/conceptsPublic'
 import { CONCEPTS_PUBLIC_MAY2025 as CONCEPTS_physics_may_2025 } from '@/data/papers/physics-may-2025/conceptsPublic'
 import { CONCEPTS_PUBLIC as CONCEPTS_physics_nov_2016 } from '@/data/papers/physics-nov-2016/conceptsPublic'
-import { CONCEPTS_PUBLIC_NOV2024 as CONCEPTS_physics_nov_2024 } from '@/data/papers/physics-nov-2024/conceptsPublic'
-import { CONCEPTS_PUBLIC_MAY2024 as CONCEPTS_physics_may_2024 } from '@/data/papers/physics-may-2024/conceptsPublic'
-import { CONCEPTS_PUBLIC_NOV2022 as CONCEPTS_physics_nov_2022 } from '@/data/papers/physics-nov-2022/conceptsPublic'
-import { CONCEPTS_PUBLIC_MAY2023 as CONCEPTS_physics_may_2023 } from '@/data/papers/physics-may-2023/conceptsPublic'
-import { CONCEPTS_PUBLIC_MAY2022 as CONCEPTS_physics_may_2022 } from '@/data/papers/physics-may-2022/conceptsPublic'
-import { CONCEPTS_PUBLIC_NOV2021 as CONCEPTS_physics_nov_2021 } from '@/data/papers/physics-nov-2021/conceptsPublic'
-import { CONCEPTS_PUBLIC_MAY2021 as CONCEPTS_physics_may_2021 } from '@/data/papers/physics-may-2021/conceptsPublic'
-import { CONCEPTS_PUBLIC_NOV2020 as CONCEPTS_physics_nov_2020 } from '@/data/papers/physics-nov-2020/conceptsPublic'
-import { CONCEPTS_PUBLIC_NOV2019 as CONCEPTS_physics_nov_2019 } from '@/data/papers/physics-nov-2019/conceptsPublic'
-import { CONCEPTS_PUBLIC_MAY2019 as CONCEPTS_physics_may_2019 } from '@/data/papers/physics-may-2019/conceptsPublic'
-import { CONCEPTS_PUBLIC_NOV2018 as CONCEPTS_physics_nov_2018 } from '@/data/papers/physics-nov-2018/conceptsPublic'
-import { CONCEPTS_PUBLIC_MAY2018 as CONCEPTS_physics_may_2018 } from '@/data/papers/physics-may-2018/conceptsPublic'
 import { CONCEPTS_PUBLIC_NOV2017 as CONCEPTS_physics_nov_2017 } from '@/data/papers/physics-nov-2017/conceptsPublic'
-import { CONCEPTS_PUBLIC_MAY2017 as CONCEPTS_physics_may_2017 } from '@/data/papers/physics-may-2017/conceptsPublic'
+import { CONCEPTS_PUBLIC_NOV2018 as CONCEPTS_physics_nov_2018 } from '@/data/papers/physics-nov-2018/conceptsPublic'
+import { CONCEPTS_PUBLIC_NOV2019 as CONCEPTS_physics_nov_2019 } from '@/data/papers/physics-nov-2019/conceptsPublic'
+import { CONCEPTS_PUBLIC_NOV2020 as CONCEPTS_physics_nov_2020 } from '@/data/papers/physics-nov-2020/conceptsPublic'
+import { CONCEPTS_PUBLIC_NOV2021 as CONCEPTS_physics_nov_2021 } from '@/data/papers/physics-nov-2021/conceptsPublic'
+import { CONCEPTS_PUBLIC_NOV2022 as CONCEPTS_physics_nov_2022 } from '@/data/papers/physics-nov-2022/conceptsPublic'
+import { CONCEPTS_PUBLIC_NOV2024 as CONCEPTS_physics_nov_2024 } from '@/data/papers/physics-nov-2024/conceptsPublic'
 
 // Build the merged registry
 const _registry: Record<string, Record<string, ConceptEntry>> = {
   'physics-nov-2023': CONCEPTS_physics_nov_2023,
+  'physics-may-2016': CONCEPTS_physics_may_2016,
+  'physics-may-2017': CONCEPTS_physics_may_2017,
+  'physics-may-2018': CONCEPTS_physics_may_2018,
+  'physics-may-2019': CONCEPTS_physics_may_2019,
+  'physics-may-2021': CONCEPTS_physics_may_2021,
+  'physics-may-2022': CONCEPTS_physics_may_2022,
+  'physics-may-2023': CONCEPTS_physics_may_2023,
+  'physics-may-2024': CONCEPTS_physics_may_2024,
   'physics-may-2025': CONCEPTS_physics_may_2025,
   'physics-nov-2016': CONCEPTS_physics_nov_2016,
-  'physics-nov-2024': CONCEPTS_physics_nov_2024,
-  'physics-may-2024': CONCEPTS_physics_may_2024,
-  'physics-nov-2022': CONCEPTS_physics_nov_2022,
-  'physics-may-2023': CONCEPTS_physics_may_2023,
-  'physics-may-2022': CONCEPTS_physics_may_2022,
-  'physics-nov-2021': CONCEPTS_physics_nov_2021,
-  'physics-may-2021': CONCEPTS_physics_may_2021,
-  'physics-nov-2020': CONCEPTS_physics_nov_2020,
-  'physics-nov-2019': CONCEPTS_physics_nov_2019,
-  'physics-may-2019': CONCEPTS_physics_may_2019,
-  'physics-nov-2018': CONCEPTS_physics_nov_2018,
-  'physics-may-2018': CONCEPTS_physics_may_2018,
   'physics-nov-2017': CONCEPTS_physics_nov_2017,
-  'physics-may-2017': CONCEPTS_physics_may_2017,
+  'physics-nov-2018': CONCEPTS_physics_nov_2018,
+  'physics-nov-2019': CONCEPTS_physics_nov_2019,
+  'physics-nov-2020': CONCEPTS_physics_nov_2020,
+  'physics-nov-2021': CONCEPTS_physics_nov_2021,
+  'physics-nov-2022': CONCEPTS_physics_nov_2022,
+  'physics-nov-2024': CONCEPTS_physics_nov_2024,
 }
 
 /**

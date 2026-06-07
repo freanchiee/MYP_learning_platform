@@ -9,41 +9,43 @@ import type { MSRecord } from '@/data/papers/physics-nov-2023/markscheme'
 export type { MSRecord }
 
 import { MS as MS_physics_nov_2023 } from '@/data/papers/physics-nov-2023/markscheme'
+import { MS as MS_physics_may_2016 } from '@/data/papers/physics-may-2016/markscheme'
+import { MS as MS_physics_may_2017 } from '@/data/papers/physics-may-2017/markscheme'
+import { MS as MS_physics_may_2018 } from '@/data/papers/physics-may-2018/markscheme'
+import { MS as MS_physics_may_2019 } from '@/data/papers/physics-may-2019/markscheme'
+import { MS as MS_physics_may_2021 } from '@/data/papers/physics-may-2021/markscheme'
+import { MS as MS_physics_may_2022 } from '@/data/papers/physics-may-2022/markscheme'
+import { MS as MS_physics_may_2023 } from '@/data/papers/physics-may-2023/markscheme'
+import { MS as MS_physics_may_2024 } from '@/data/papers/physics-may-2024/markscheme'
 import { MS as MS_physics_may_2025 } from '@/data/papers/physics-may-2025/markscheme'
 import { MS as MS_physics_nov_2016 } from '@/data/papers/physics-nov-2016/markscheme'
-import { MS as MS_physics_nov_2024 } from '@/data/papers/physics-nov-2024/markscheme'
-import { MS as MS_physics_may_2024 } from '@/data/papers/physics-may-2024/markscheme'
-import { MS as MS_physics_nov_2022 } from '@/data/papers/physics-nov-2022/markscheme'
-import { MS as MS_physics_may_2023 } from '@/data/papers/physics-may-2023/markscheme'
-import { MS as MS_physics_may_2022 } from '@/data/papers/physics-may-2022/markscheme'
-import { MS as MS_physics_nov_2021 } from '@/data/papers/physics-nov-2021/markscheme'
-import { MS as MS_physics_may_2021 } from '@/data/papers/physics-may-2021/markscheme'
-import { MS as MS_physics_nov_2020 } from '@/data/papers/physics-nov-2020/markscheme'
-import { MS as MS_physics_nov_2019 } from '@/data/papers/physics-nov-2019/markscheme'
-import { MS as MS_physics_may_2019 } from '@/data/papers/physics-may-2019/markscheme'
-import { MS as MS_physics_nov_2018 } from '@/data/papers/physics-nov-2018/markscheme'
-import { MS as MS_physics_may_2018 } from '@/data/papers/physics-may-2018/markscheme'
 import { MS as MS_physics_nov_2017 } from '@/data/papers/physics-nov-2017/markscheme'
-import { MS as MS_physics_may_2017 } from '@/data/papers/physics-may-2017/markscheme'
+import { MS as MS_physics_nov_2018 } from '@/data/papers/physics-nov-2018/markscheme'
+import { MS as MS_physics_nov_2019 } from '@/data/papers/physics-nov-2019/markscheme'
+import { MS as MS_physics_nov_2020 } from '@/data/papers/physics-nov-2020/markscheme'
+import { MS as MS_physics_nov_2021 } from '@/data/papers/physics-nov-2021/markscheme'
+import { MS as MS_physics_nov_2022 } from '@/data/papers/physics-nov-2022/markscheme'
+import { MS as MS_physics_nov_2024 } from '@/data/papers/physics-nov-2024/markscheme'
 
 const _registry: Record<string, Record<string, MSRecord>> = {
   'physics-nov-2023': MS_physics_nov_2023,
+  'physics-may-2016': MS_physics_may_2016,
+  'physics-may-2017': MS_physics_may_2017,
+  'physics-may-2018': MS_physics_may_2018,
+  'physics-may-2019': MS_physics_may_2019,
+  'physics-may-2021': MS_physics_may_2021,
+  'physics-may-2022': MS_physics_may_2022,
+  'physics-may-2023': MS_physics_may_2023,
+  'physics-may-2024': MS_physics_may_2024,
   'physics-may-2025': MS_physics_may_2025,
   'physics-nov-2016': MS_physics_nov_2016,
-  'physics-nov-2024': MS_physics_nov_2024,
-  'physics-may-2024': MS_physics_may_2024,
-  'physics-nov-2022': MS_physics_nov_2022,
-  'physics-may-2023': MS_physics_may_2023,
-  'physics-may-2022': MS_physics_may_2022,
-  'physics-nov-2021': MS_physics_nov_2021,
-  'physics-may-2021': MS_physics_may_2021,
-  'physics-nov-2020': MS_physics_nov_2020,
-  'physics-nov-2019': MS_physics_nov_2019,
-  'physics-may-2019': MS_physics_may_2019,
-  'physics-nov-2018': MS_physics_nov_2018,
-  'physics-may-2018': MS_physics_may_2018,
   'physics-nov-2017': MS_physics_nov_2017,
-  'physics-may-2017': MS_physics_may_2017,
+  'physics-nov-2018': MS_physics_nov_2018,
+  'physics-nov-2019': MS_physics_nov_2019,
+  'physics-nov-2020': MS_physics_nov_2020,
+  'physics-nov-2021': MS_physics_nov_2021,
+  'physics-nov-2022': MS_physics_nov_2022,
+  'physics-nov-2024': MS_physics_nov_2024,
   // Add new papers by running: node scripts/update-registries.js
 }
 
