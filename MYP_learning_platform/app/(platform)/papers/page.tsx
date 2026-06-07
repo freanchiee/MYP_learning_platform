@@ -75,7 +75,7 @@ export default async function PapersPage() {
   const subjects = Array.from(new Set(papersWithMeta.map((p) => p.subject)))
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-10">
+    <div className="max-w-7xl mx-auto px-6 md:px-12 py-10">
 
       {/* ── Page header ── */}
       <div className="mb-8 fade-up">

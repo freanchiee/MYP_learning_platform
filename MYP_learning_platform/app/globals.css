@@ -146,6 +146,22 @@ code, pre, kbd, samp {
 }
 
 /* ─────────────────────────────────────────────
+   PAPER CARD VISUAL ANIMATIONS
+   ───────────────────────────────────────────── */
+@keyframes wave-move {
+  from { transform: translateX(0) translateY(0); }
+  to   { transform: translateX(-30px) translateY(8px); }
+}
+@keyframes float-particle {
+  from { transform: translateY(0) scale(1); }
+  to   { transform: translateY(-12px) scale(1.15); }
+}
+@keyframes slow-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* ─────────────────────────────────────────────
    STAGGER FADE-UP  (CSS fallback)
    ───────────────────────────────────────────── */
 @keyframes fade-up {

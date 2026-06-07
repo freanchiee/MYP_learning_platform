@@ -23,6 +23,18 @@ export default function ExamToolbar() {
   const phase = useExamStore((s) => s.phase)
   const editMode = useExamStore((s) => s.editMode)
   const setEditMode = useExamStore((s) => s.setEditMode)
+  const paperId = useExamStore((s) => s.paperId)
+
+  // Parse paperId → "Physics — May 2024"
+  const paperLabel = (() => {
+    if (!paperId) return 'MYP Sciences'
+    const parts = paperId.split('-') // ['physics','may','2024'] or ['physics','nov','2023']
+    const subject  = parts[0] ? parts[0].charAt(0).toUpperCase() + parts[0].slice(1) : ''
+    const session  = parts[1] ? parts[1].charAt(0).toUpperCase() + parts[1].slice(1) : ''
+    const year     = parts[2] ?? ''
+    if (parts[1] === 'practice') return `${subject} — Practice`
+    return `${subject} — ${session} ${year}`
+  })()
 
   // Drive the countdown timer
   useEffect(() => {
@@ -62,7 +74,7 @@ export default function ExamToolbar() {
         </div>
         <span className="text-white font-semibold text-sm">MYP Sciences</span>
         <span className="text-white opacity-30 text-lg">|</span>
-        <span className="text-white opacity-70 text-xs">Physics — Nov 2023</span>
+        <span className="text-white opacity-70 text-xs">{paperLabel}</span>
       </div>
 
       {/* Center: Tool tabs */}

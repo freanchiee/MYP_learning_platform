@@ -110,34 +110,99 @@ export default async function DashboardPage() {
   const xpPct        = Math.min(100, Math.round((xpInLevel / xpNeeded) * 100))
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-8 space-y-8">
+    <div className="space-y-0">
 
-      {/* ── Welcome card ── */}
+      {/* ══════════════════════════════════════════
+          FULL-BLEED HERO — edge to edge, cinematic
+          ══════════════════════════════════════════ */}
       <section
-        className="rounded-2xl p-6 md:p-8 text-white shadow-xl fade-up"
+        className="relative w-full overflow-hidden"
         style={{
-          background: 'linear-gradient(135deg, #1f3674 0%, #274e68 60%, #547ca4 100%)',
-          border: '1px solid rgba(173,241,196,0.12)',
+          minHeight: 420,
+          background: 'linear-gradient(145deg, #1f3674 0%, #274e68 50%, #0e1f45 100%)',
         }}
       >
-        <p className="text-xs font-bold uppercase tracking-widest mb-2" style={{ color: '#adf1c4' }}>
-          Good to have you back
-        </p>
-        <h1 className="text-2xl md:text-3xl font-extrabold mb-1">{name}</h1>
-        {school && <p className="text-sm mt-1" style={{ color: 'rgba(173,241,196,0.7)' }}>{school}</p>}
-        <p className="text-sm mt-3" style={{ color: 'rgba(255,255,255,0.6)' }}>
-          Ready to continue your MYP Sciences journey?
-        </p>
-        <Link
-          href="/papers"
-          className="inline-block mt-5 px-5 py-2.5 rounded-xl text-sm font-bold transition-all hover:opacity-90"
-          style={{ background: '#c3282d', color: '#fff' }}
-        >
-          Browse Papers →
-        </Link>
+        {/* Dot-grid overlay */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            backgroundImage: 'radial-gradient(circle, rgba(173,241,196,0.07) 1px, transparent 1px)',
+            backgroundSize: '44px 44px',
+          }}
+          aria-hidden
+        />
+
+        {/* Large translucent rings — decorative */}
+        <div className="absolute pointer-events-none" style={{ right: -120, top: -120, width: 500, height: 500, borderRadius: '50%', border: '1px solid rgba(173,241,196,0.07)' }} aria-hidden />
+        <div className="absolute pointer-events-none" style={{ right: -60, top: -60, width: 320, height: 320, borderRadius: '50%', border: '1px solid rgba(173,241,196,0.05)' }} aria-hidden />
+
+        {/* Content */}
+        <div className="relative z-10 max-w-7xl mx-auto px-8 md:px-16 py-16 md:py-20 flex flex-col md:flex-row items-start md:items-end justify-between gap-10">
+          {/* Left: greeting */}
+          <div className="fade-up">
+            <p className="text-xs font-black uppercase tracking-[0.2em] mb-3" style={{ color: '#adf1c4' }}>
+              Welcome back
+            </p>
+            <h1 className="text-4xl md:text-6xl font-extrabold text-white leading-tight" style={{ letterSpacing: '-1px' }}>
+              {name}
+            </h1>
+            {school && (
+              <p className="text-base mt-2 font-medium" style={{ color: 'rgba(173,241,196,0.6)' }}>
+                {school}
+              </p>
+            )}
+            <p className="text-sm mt-4 max-w-md" style={{ color: 'rgba(255,255,255,0.45)' }}>
+              Continue your IB MYP Sciences journey with AI-powered grading and instant feedback.
+            </p>
+            <div className="flex gap-3 mt-8">
+              <Link
+                href="/papers"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-extrabold text-white transition-all hover:opacity-90"
+                style={{ background: '#c3282d', boxShadow: '0 4px 20px rgba(195,40,45,0.4)' }}
+              >
+                Browse Papers →
+              </Link>
+              <Link
+                href="/papers"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-bold transition-all hover:bg-white/10"
+                style={{ color: 'rgba(255,255,255,0.7)', border: '1px solid rgba(255,255,255,0.15)' }}
+              >
+                View Results
+              </Link>
+            </div>
+          </div>
+
+          {/* Right: quick stats strip */}
+          <div className="fade-up flex flex-row md:flex-col gap-6 md:gap-4 flex-shrink-0" style={{ animationDelay: '0.15s' }}>
+            {[
+              { label: 'Level',   value: level,          icon: '🎯' },
+              { label: 'XP',      value: xp.toLocaleString(), icon: '⭐' },
+              { label: 'Streak',  value: `${streakDays}d`, icon: '🔥' },
+            ].map(({ label, value, icon }) => (
+              <div key={label} className="text-right">
+                <div className="text-3xl font-extrabold text-white leading-none">{value}</div>
+                <div className="text-xs font-bold mt-0.5" style={{ color: 'rgba(173,241,196,0.55)' }}>
+                  {icon} {label}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Bottom fade into page bg */}
+        <div
+          className="absolute bottom-0 left-0 right-0 h-12 pointer-events-none"
+          style={{ background: 'linear-gradient(to bottom, transparent, #f5edcc)' }}
+          aria-hidden
+        />
       </section>
 
-      {/* ── Animated stats ── */}
+      {/* ══════════════════════════════════════════
+          BELOW-HERO CONTENT — constrained width
+          ══════════════════════════════════════════ */}
+      <div className="max-w-7xl mx-auto px-6 md:px-12 py-10 space-y-8">
+
+      {/* ── Animated stats tiles ── */}
       <section>
         <DashboardStats stats={[
           { label: 'Level',            value: level,          sub: 'current level',    color: '#1f3674', icon: '🎯' },
@@ -281,6 +346,7 @@ export default async function DashboardPage() {
           </div>
         )}
       </section>
+      </div> {/* end constrained content */}
     </div>
   )
 }
