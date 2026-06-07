@@ -1,6 +1,6 @@
 import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
-import PapersGrid from '@/components/papers/PapersGrid'
+import PapersGates from '@/components/papers/PapersGates'
 
 interface Paper {
   id: string
@@ -72,61 +72,11 @@ export default async function PapersPage() {
     attempts.filter((a) => a.status === 'in_progress').map((a) => a.paper_id)
   )
 
-  const subjects = Array.from(new Set(papersWithMeta.map((p) => p.subject)))
-
   return (
-    <div className="max-w-7xl mx-auto px-6 md:px-12 py-10">
-
-      {/* ── Page header ── */}
-      <div className="mb-8 fade-up">
-        <p
-          className="text-xs font-bold uppercase tracking-widest mb-1"
-          style={{ color: '#547ca4' }}
-        >
-          IB MYP Sciences
-        </p>
-        <h1
-          className="text-3xl md:text-4xl font-extrabold leading-tight"
-          style={{ color: '#1f3674' }}
-        >
-          Practice Papers
-        </h1>
-        <p className="mt-2 text-sm" style={{ color: '#547ca4' }}>
-          Attempt past IB MYP Sciences papers with AI-powered grading and instant feedback.
-        </p>
-      </div>
-
-      {/* ── Subject filter pills ── */}
-      {subjects.length > 0 && (
-        <div className="flex flex-wrap items-center gap-2 mb-8 fade-up" style={{ animationDelay: '0.05s' }}>
-          <span
-            className="text-xs font-bold uppercase tracking-widest mr-1"
-            style={{ color: '#274e68' }}
-          >
-            Subjects:
-          </span>
-          {subjects.map((subject) => (
-            <span
-              key={subject}
-              className="px-3 py-1 rounded-full text-xs font-bold"
-              style={{
-                background: '#1f3674',
-                color: '#adf1c4',
-                letterSpacing: '0.04em',
-              }}
-            >
-              {subject}
-            </span>
-          ))}
-        </div>
-      )}
-
-      {/* ── Animated papers grid (client component) ── */}
-      <PapersGrid
-        papers={papersWithMeta}
-        completedPapers={completedPapers}
-        inProgressPapers={inProgressPapers}
-      />
-    </div>
+    <PapersGates
+      papers={papersWithMeta}
+      completedPapers={completedPapers}
+      inProgressPapers={inProgressPapers}
+    />
   )
 }

@@ -113,88 +113,174 @@ export default async function DashboardPage() {
     <div className="space-y-0">
 
       {/* ══════════════════════════════════════════
-          FULL-BLEED HERO — edge to edge, cinematic
+          TRUE 100VH HERO — full viewport, cinematic
           ══════════════════════════════════════════ */}
       <section
         className="relative w-full overflow-hidden"
         style={{
-          minHeight: 420,
-          background: 'linear-gradient(145deg, #1f3674 0%, #274e68 50%, #0e1f45 100%)',
+          height: 'calc(100vh - 56px)',
+          background: 'linear-gradient(145deg, #060d1f 0%, #1f3674 40%, #274e68 75%, #0d1e32 100%)',
         }}
       >
         {/* Dot-grid overlay */}
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
-            backgroundImage: 'radial-gradient(circle, rgba(173,241,196,0.07) 1px, transparent 1px)',
-            backgroundSize: '44px 44px',
+            backgroundImage: 'radial-gradient(circle, rgba(173,241,196,0.06) 1px, transparent 1px)',
+            backgroundSize: '50px 50px',
           }}
           aria-hidden
         />
 
-        {/* Large translucent rings — decorative */}
-        <div className="absolute pointer-events-none" style={{ right: -120, top: -120, width: 500, height: 500, borderRadius: '50%', border: '1px solid rgba(173,241,196,0.07)' }} aria-hidden />
-        <div className="absolute pointer-events-none" style={{ right: -60, top: -60, width: 320, height: 320, borderRadius: '50%', border: '1px solid rgba(173,241,196,0.05)' }} aria-hidden />
+        {/* Animated wave lines */}
+        <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" style={{ opacity: 0.08 }} aria-hidden>
+          {[0, 1, 2, 3].map((i) => (
+            <path
+              key={i}
+              d={`M -100 ${180 + i * 160} Q 360 ${80 + i * 160} 720 ${180 + i * 160} Q 1080 ${280 + i * 160} 1540 ${180 + i * 160}`}
+              fill="none" stroke="white" strokeWidth={1.2 - i * 0.15}
+              style={{ animation: `wave-move ${6 + i * 1.5}s ease-in-out infinite alternate`, animationDelay: `${i * 0.9}s` }}
+            />
+          ))}
+        </svg>
 
-        {/* Content */}
-        <div className="relative z-10 max-w-7xl mx-auto px-8 md:px-16 py-16 md:py-20 flex flex-col md:flex-row items-start md:items-end justify-between gap-10">
-          {/* Left: greeting */}
-          <div className="fade-up">
-            <p className="text-xs font-black uppercase tracking-[0.2em] mb-3" style={{ color: '#adf1c4' }}>
-              Welcome back
-            </p>
-            <h1 className="text-4xl md:text-6xl font-extrabold text-white leading-tight" style={{ letterSpacing: '-1px' }}>
-              {name}
-            </h1>
-            {school && (
-              <p className="text-base mt-2 font-medium" style={{ color: 'rgba(173,241,196,0.6)' }}>
-                {school}
-              </p>
-            )}
-            <p className="text-sm mt-4 max-w-md" style={{ color: 'rgba(255,255,255,0.45)' }}>
-              Continue your IB MYP Sciences journey with AI-powered grading and instant feedback.
-            </p>
-            <div className="flex gap-3 mt-8">
-              <Link
-                href="/papers"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-extrabold text-white transition-all hover:opacity-90"
-                style={{ background: '#c3282d', boxShadow: '0 4px 20px rgba(195,40,45,0.4)' }}
-              >
-                Browse Papers →
-              </Link>
-              <Link
-                href="/papers"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-bold transition-all hover:bg-white/10"
-                style={{ color: 'rgba(255,255,255,0.7)', border: '1px solid rgba(255,255,255,0.15)' }}
-              >
-                View Results
-              </Link>
-            </div>
-          </div>
+        {/* Large rotating rings — right side */}
+        {[520, 380, 250].map((size, i) => (
+          <div
+            key={i}
+            className="absolute rounded-full pointer-events-none"
+            style={{
+              width: size, height: size,
+              right: -(size / 3), top: -(size / 4),
+              border: '1px solid rgba(173,241,196,0.06)',
+              animation: `slow-spin ${14 + i * 5}s linear infinite ${i % 2 ? 'reverse' : ''}`,
+            }}
+            aria-hidden
+          />
+        ))}
 
-          {/* Right: quick stats strip */}
-          <div className="fade-up flex flex-row md:flex-col gap-6 md:gap-4 flex-shrink-0" style={{ animationDelay: '0.15s' }}>
-            {[
-              { label: 'Level',   value: level,          icon: '🎯' },
-              { label: 'XP',      value: xp.toLocaleString(), icon: '⭐' },
-              { label: 'Streak',  value: `${streakDays}d`, icon: '🔥' },
-            ].map(({ label, value, icon }) => (
-              <div key={label} className="text-right">
-                <div className="text-3xl font-extrabold text-white leading-none">{value}</div>
-                <div className="text-xs font-bold mt-0.5" style={{ color: 'rgba(173,241,196,0.55)' }}>
-                  {icon} {label}
-                </div>
+        {/* Floating particles */}
+        {[...Array(18)].map((_, i) => {
+          const x = ((i * 79 + 13) % 88) + 6
+          const y = ((i * 61 + 7) % 80) + 5
+          return (
+            <div
+              key={i}
+              className="absolute rounded-full bg-white pointer-events-none"
+              style={{
+                width: 2 + (i % 3), height: 2 + (i % 3),
+                left: `${x}%`, top: `${y}%`,
+                opacity: 0.04 + (i % 4) * 0.02,
+                animation: `float-particle ${3 + i % 5}s ease-in-out infinite alternate`,
+                animationDelay: `${i * 0.28}s`,
+              }}
+              aria-hidden
+            />
+          )
+        })}
+
+        {/* ── TOP LEFT: Welcome tag ── */}
+        <div
+          className="absolute top-10 left-10 z-10 text-xs font-black uppercase tracking-[0.3em]"
+          style={{ color: 'rgba(173,241,196,0.5)', letterSpacing: '0.3em' }}
+        >
+          IB MYP Sciences
+        </div>
+
+        {/* ── TOP RIGHT: Quick stats ── */}
+        <div className="absolute top-10 right-10 z-10 flex items-center gap-8">
+          {[
+            { label: 'LVL', value: level },
+            { label: 'XP',  value: xp.toLocaleString() },
+            { label: 'STREAK', value: `${streakDays}D` },
+          ].map(({ label, value }) => (
+            <div key={label} className="text-right">
+              <div className="text-2xl md:text-3xl font-black text-white leading-none">{value}</div>
+              <div
+                className="text-[9px] font-black tracking-[0.2em] mt-0.5"
+                style={{ color: 'rgba(173,241,196,0.45)' }}
+              >
+                {label}
               </div>
-            ))}
+            </div>
+          ))}
+        </div>
+
+        {/* ── CENTER: Giant name + CTA ── */}
+        <div className="absolute inset-0 flex flex-col items-center justify-center z-10 text-center px-8">
+          <p
+            className="text-xs font-black uppercase tracking-[0.35em] mb-6"
+            style={{ color: 'rgba(173,241,196,0.55)' }}
+          >
+            Welcome Back
+          </p>
+
+          {/* GIANT name */}
+          <h1
+            className="font-extrabold text-white leading-none select-none"
+            style={{
+              fontSize: 'clamp(64px, 12vw, 160px)',
+              letterSpacing: '-4px',
+              textShadow: '0 8px 80px rgba(0,0,0,0.5)',
+            }}
+          >
+            {name}
+          </h1>
+
+          {school && (
+            <p
+              className="mt-4 text-sm font-bold tracking-[0.2em]"
+              style={{ color: 'rgba(173,241,196,0.5)' }}
+            >
+              {school.toUpperCase()}
+            </p>
+          )}
+
+          {/* Papers completed sub-line */}
+          <p
+            className="mt-3 text-xs font-black tracking-[0.2em]"
+            style={{ color: 'rgba(255,255,255,0.2)' }}
+          >
+            {papersCompleted} PAPER{papersCompleted !== 1 ? 'S' : ''} COMPLETED
+          </p>
+
+          {/* CTA buttons */}
+          <div className="flex gap-4 mt-12">
+            <Link
+              href="/papers"
+              className="inline-block font-black text-sm tracking-[0.2em] text-white transition-all hover:opacity-80"
+              style={{
+                background: '#c3282d',
+                padding: '16px 48px',
+                boxShadow: '0 0 50px rgba(195,40,45,0.45)',
+              }}
+            >
+              ENTER THE ARENA
+            </Link>
+            {attempts.length > 0 && (
+              <Link
+                href={`/results/${attempts[0].id}`}
+                className="inline-block font-black text-sm tracking-[0.2em] transition-all hover:opacity-80"
+                style={{
+                  padding: '16px 36px',
+                  color: 'rgba(255,255,255,0.6)',
+                  border: '1px solid rgba(255,255,255,0.15)',
+                }}
+              >
+                LAST RESULT
+              </Link>
+            )}
           </div>
         </div>
 
-        {/* Bottom fade into page bg */}
+        {/* ── BOTTOM: scroll hint ── */}
         <div
-          className="absolute bottom-0 left-0 right-0 h-12 pointer-events-none"
-          style={{ background: 'linear-gradient(to bottom, transparent, #f5edcc)' }}
-          aria-hidden
-        />
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 text-xs font-black tracking-[0.25em]"
+          style={{ color: 'rgba(255,255,255,0.2)', animation: 'float-particle 2.5s ease-in-out infinite alternate' }}
+        >
+          SCROLL FOR STATS
+          <div style={{ width: 1, height: 28, background: 'rgba(255,255,255,0.12)' }} />
+        </div>
       </section>
 
       {/* ══════════════════════════════════════════
