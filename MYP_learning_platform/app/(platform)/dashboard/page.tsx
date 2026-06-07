@@ -110,7 +110,7 @@ export default async function DashboardPage() {
   const xpPct        = Math.min(100, Math.round((xpInLevel / xpNeeded) * 100))
 
   return (
-    <div className="space-y-0">
+    <div className="space-y-0" style={{ background: '#060d1f' }}>
 
       {/* ══════════════════════════════════════════
           TRUE 100VH HERO — full viewport, cinematic
@@ -284,155 +284,254 @@ export default async function DashboardPage() {
       </section>
 
       {/* ══════════════════════════════════════════
-          BELOW-HERO CONTENT — constrained width
+          BELOW-HERO CONTENT — dark cinematic
           ══════════════════════════════════════════ */}
-      <div className="max-w-7xl mx-auto px-6 md:px-12 py-10 space-y-8">
-
-      {/* ── Animated stats tiles ── */}
-      <section>
-        <DashboardStats stats={[
-          { label: 'Level',            value: level,          sub: 'current level',    color: '#1f3674', icon: '🎯' },
-          { label: 'Total XP',         value: xp,             sub: 'experience points', color: '#547ca4', icon: '⭐' },
-          { label: 'Day Streak',       value: streakDays,     sub: 'consecutive days',  color: '#c3282d', icon: '🔥' },
-          { label: 'Papers Completed', value: papersCompleted, sub: 'completed papers', color: '#274e68', icon: '📋' },
-        ]} />
-      </section>
-
-      {/* ── Animated XP bar ── */}
-      <section>
-        <XPBar pct={xpPct} level={level} xpInLevel={xpInLevel} xpNeeded={xpNeeded} />
-      </section>
-
-      {/* ── Badge shelf ── */}
-      <section
-        className="rounded-2xl p-5"
-        style={{ background: '#fff', border: '1px solid rgba(31,54,116,0.09)', boxShadow: '0 2px 12px rgba(31,54,116,0.06)' }}
+      <div
+        className="relative"
+        style={{
+          background: 'linear-gradient(180deg, #060d1f 0%, #0d1a32 100%)',
+          borderTop: '1px solid rgba(173,241,196,0.06)',
+        }}
       >
-        <h2 className="text-base font-bold mb-4" style={{ color: '#1f3674' }}>Badges Earned</h2>
+        {/* Subtle dot-grid carried through */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            backgroundImage: 'radial-gradient(circle, rgba(173,241,196,0.03) 1px, transparent 1px)',
+            backgroundSize: '50px 50px',
+          }}
+          aria-hidden
+        />
 
-        {badges.length === 0 ? (
-          <div className="flex flex-col items-center py-10 text-gray-400">
-            <span className="text-4xl mb-3">🏅</span>
-            <p className="text-sm font-medium">No badges yet — complete your first paper!</p>
+        <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 py-12 space-y-12">
+
+          {/* ── Section label ── */}
+          <div className="flex items-center gap-4">
+            <div className="text-[10px] font-black tracking-[0.3em]" style={{ color: 'rgba(173,241,196,0.35)' }}>
+              YOUR STATS
+            </div>
+            <div className="flex-1 h-px" style={{ background: 'rgba(255,255,255,0.06)' }} />
           </div>
-        ) : (
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
-            {badges.map(({ badge_id, earned_at }) => {
-              const def = BADGE_DEFS[badge_id]
-              if (!def) return null
-              const { border, bg, label, text } = rarityClasses(def.rarity)
-              return (
-                <div
-                  key={badge_id}
-                  className={`flex flex-col items-center gap-1.5 p-3 rounded-xl border-2 ${border} ${bg}`}
+
+          {/* ── Animated stats tiles ── */}
+          <DashboardStats stats={[
+            { label: 'Level',            value: level,           sub: 'current level',     color: '#adf1c4', icon: '🎯' },
+            { label: 'Total XP',         value: xp,              sub: 'experience points',  color: '#547ca4', icon: '⭐' },
+            { label: 'Day Streak',       value: streakDays,      sub: 'consecutive days',   color: '#c3282d', icon: '🔥' },
+            { label: 'Papers Completed', value: papersCompleted, sub: 'completed papers',   color: '#adf1c4', icon: '📋' },
+          ]} />
+
+          {/* ── Animated XP bar ── */}
+          <XPBar pct={xpPct} level={level} xpInLevel={xpInLevel} xpNeeded={xpNeeded} />
+
+          {/* ── Section label ── */}
+          <div className="flex items-center gap-4">
+            <div className="text-[10px] font-black tracking-[0.3em]" style={{ color: 'rgba(173,241,196,0.35)' }}>
+              ACHIEVEMENTS
+            </div>
+            <div className="flex-1 h-px" style={{ background: 'rgba(255,255,255,0.06)' }} />
+          </div>
+
+          {/* ── Badge shelf ── */}
+          <section
+            style={{
+              background: 'rgba(255,255,255,0.03)',
+              border: '1px solid rgba(255,255,255,0.07)',
+            }}
+            className="p-6"
+          >
+            {badges.length === 0 ? (
+              <div className="flex flex-col items-center py-10">
+                <span className="text-4xl mb-4">🏅</span>
+                <p
+                  className="text-xs font-black tracking-[0.2em]"
+                  style={{ color: 'rgba(255,255,255,0.2)' }}
                 >
-                  <span className="text-3xl">{def.icon}</span>
-                  <span className="text-xs font-semibold text-gray-700 text-center leading-tight">
-                    {def.name}
-                  </span>
-                  <span className={`text-[10px] font-bold uppercase tracking-wide ${label}`}>
-                    {text}
-                  </span>
-                  <span className="text-[9px] text-gray-400">
-                    {new Date(earned_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: '2-digit' })}
-                  </span>
-                </div>
-              )
-            })}
-          </div>
-        )}
-      </section>
-
-      {/* ── Recent attempts ── */}
-      <section
-        className="rounded-2xl p-5"
-        style={{ background: '#fff', border: '1px solid rgba(31,54,116,0.09)', boxShadow: '0 2px 12px rgba(31,54,116,0.06)' }}
-      >
-        <h2 className="text-base font-bold mb-4" style={{ color: '#1f3674' }}>Recent Attempts</h2>
-
-        {attempts.length === 0 ? (
-          <div className="flex flex-col items-center py-10 text-gray-400">
-            <span className="text-4xl mb-3">📝</span>
-            <p className="text-sm font-medium">No completed attempts yet.</p>
-            <Link
-              href="/papers"
-              className="mt-4 px-4 py-2 rounded-lg text-sm font-semibold text-white"
-              style={{ background: '#1f3674' }}
-            >
-              Browse Papers
-            </Link>
-          </div>
-        ) : (
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm">
-              <thead>
-                <tr className="border-b border-gray-100">
-                  <th className="text-left py-2 px-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">Paper</th>
-                  <th className="text-center py-2 px-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">Score</th>
-                  <th className="text-center py-2 px-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">MYP Grade</th>
-                  <th className="text-center py-2 px-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">XP</th>
-                  <th className="text-center py-2 px-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">Date</th>
-                  <th className="text-center py-2 px-3 text-xs font-semibold text-gray-500 uppercase tracking-wide"></th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-gray-50">
-                {attempts.map((attempt) => {
-                  const scoreStr =
-                    attempt.total_score != null && attempt.max_score != null
-                      ? `${attempt.total_score}/${attempt.max_score}`
-                      : '—'
-                  const pct =
-                    attempt.total_score != null && attempt.max_score != null
-                      ? Math.round((attempt.total_score / attempt.max_score) * 100)
-                      : null
-
+                  NO BADGES YET — COMPLETE YOUR FIRST PAPER
+                </p>
+              </div>
+            ) : (
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
+                {badges.map(({ badge_id, earned_at }) => {
+                  const def = BADGE_DEFS[badge_id]
+                  if (!def) return null
+                  const rarityColor: Record<string, string> = {
+                    common: 'rgba(255,255,255,0.2)',
+                    rare: '#547ca4',
+                    epic: '#9b59b6',
+                    legendary: '#f39c12',
+                  }
+                  const col = rarityColor[def.rarity] ?? 'rgba(255,255,255,0.2)'
                   return (
-                    <tr key={attempt.id} className="hover:bg-gray-50/60 transition-colors">
-                      <td className="py-3 px-3">
-                        <span className="font-medium text-gray-800">
-                          {attempt.paper_id
-                            .split('-')
-                            .map((w: string) => w.charAt(0).toUpperCase() + w.slice(1))
-                            .join(' ')}
-                        </span>
-                      </td>
-                      <td className="py-3 px-3 text-center">
-                        <span className="font-semibold text-gray-700">{scoreStr}</span>
-                        {pct != null && (
-                          <span className="ml-1 text-xs text-gray-400">({pct}%)</span>
-                        )}
-                      </td>
-                      <td className="py-3 px-3 text-center">
-                        {mypGradeBadge(attempt.myp_grade)}
-                      </td>
-                      <td className="py-3 px-3 text-center">
-                        <span className="font-semibold text-green-600">+{attempt.xp_earned}</span>
-                      </td>
-                      <td className="py-3 px-3 text-center text-gray-500 text-xs">
-                        {attempt.completed_at
-                          ? new Date(attempt.completed_at).toLocaleDateString('en-GB', {
-                              day: 'numeric', month: 'short', year: '2-digit',
-                            })
-                          : '—'}
-                      </td>
-                      <td className="py-3 px-3 text-center">
-                        <Link
-                          href={`/results/${attempt.id}`}
-                          className="px-3 py-1.5 rounded-lg text-xs font-semibold text-white transition-opacity hover:opacity-80"
-                          style={{ background: '#1f3674' }}
-                        >
-                          View
-                        </Link>
-                      </td>
-                    </tr>
+                    <div
+                      key={badge_id}
+                      className="flex flex-col items-center gap-1.5 p-4"
+                      style={{
+                        background: 'rgba(255,255,255,0.04)',
+                        border: `1px solid ${col}40`,
+                      }}
+                    >
+                      <span className="text-3xl">{def.icon}</span>
+                      <span
+                        className="text-xs font-bold text-center leading-tight"
+                        style={{ color: 'rgba(255,255,255,0.7)' }}
+                      >
+                        {def.name}
+                      </span>
+                      <span
+                        className="text-[9px] font-black uppercase tracking-[0.2em]"
+                        style={{ color: col }}
+                      >
+                        {def.rarity}
+                      </span>
+                      <span className="text-[9px]" style={{ color: 'rgba(255,255,255,0.2)' }}>
+                        {new Date(earned_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: '2-digit' })}
+                      </span>
+                    </div>
                   )
                 })}
-              </tbody>
-            </table>
+              </div>
+            )}
+          </section>
+
+          {/* ── Section label ── */}
+          <div className="flex items-center gap-4">
+            <div className="text-[10px] font-black tracking-[0.3em]" style={{ color: 'rgba(173,241,196,0.35)' }}>
+              RECENT ATTEMPTS
+            </div>
+            <div className="flex-1 h-px" style={{ background: 'rgba(255,255,255,0.06)' }} />
           </div>
-        )}
-      </section>
-      </div> {/* end constrained content */}
+
+          {/* ── Recent attempts ── */}
+          <section
+            style={{
+              background: 'rgba(255,255,255,0.03)',
+              border: '1px solid rgba(255,255,255,0.07)',
+            }}
+            className="p-6"
+          >
+            {attempts.length === 0 ? (
+              <div className="flex flex-col items-center py-10">
+                <span className="text-4xl mb-4">📝</span>
+                <p
+                  className="text-xs font-black tracking-[0.2em] mb-6"
+                  style={{ color: 'rgba(255,255,255,0.2)' }}
+                >
+                  NO COMPLETED ATTEMPTS YET
+                </p>
+                <Link
+                  href="/papers"
+                  className="inline-block font-black text-xs tracking-[0.2em] text-white"
+                  style={{
+                    background: '#c3282d',
+                    padding: '12px 32px',
+                    boxShadow: '0 0 30px rgba(195,40,45,0.3)',
+                  }}
+                >
+                  ENTER THE ARENA
+                </Link>
+              </div>
+            ) : (
+              <div className="overflow-x-auto">
+                <table className="w-full text-sm">
+                  <thead>
+                    <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
+                      {['Paper', 'Score', 'MYP Grade', 'XP', 'Date', ''].map((h) => (
+                        <th
+                          key={h}
+                          className={`py-3 px-3 text-[9px] font-black tracking-[0.2em] ${h === 'Paper' ? 'text-left' : 'text-center'}`}
+                          style={{ color: 'rgba(255,255,255,0.25)' }}
+                        >
+                          {h}
+                        </th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {attempts.map((attempt) => {
+                      const scoreStr =
+                        attempt.total_score != null && attempt.max_score != null
+                          ? `${attempt.total_score}/${attempt.max_score}`
+                          : '—'
+                      const pct =
+                        attempt.total_score != null && attempt.max_score != null
+                          ? Math.round((attempt.total_score / attempt.max_score) * 100)
+                          : null
+
+                      return (
+                        <tr
+                          key={attempt.id}
+                          style={{ borderBottom: '1px solid rgba(255,255,255,0.04)' }}
+                          className="transition-colors hover:bg-white/[0.02]"
+                        >
+                          <td className="py-4 px-3">
+                            <span className="font-bold text-xs tracking-wide" style={{ color: 'rgba(255,255,255,0.75)' }}>
+                              {attempt.paper_id
+                                .split('-')
+                                .map((w: string) => w.charAt(0).toUpperCase() + w.slice(1))
+                                .join(' ')}
+                            </span>
+                          </td>
+                          <td className="py-4 px-3 text-center">
+                            <span className="font-black" style={{ color: 'white' }}>{scoreStr}</span>
+                            {pct != null && (
+                              <span className="ml-1 text-xs" style={{ color: 'rgba(255,255,255,0.3)' }}>({pct}%)</span>
+                            )}
+                          </td>
+                          <td className="py-4 px-3 text-center">
+                            {attempt.myp_grade ? (
+                              <span
+                                className="inline-flex items-center justify-center w-8 h-8 text-sm font-black"
+                                style={{
+                                  background: 'rgba(173,241,196,0.1)',
+                                  color: '#adf1c4',
+                                  border: '1px solid rgba(173,241,196,0.2)',
+                                }}
+                              >
+                                {attempt.myp_grade}
+                              </span>
+                            ) : (
+                              <span style={{ color: 'rgba(255,255,255,0.2)' }}>—</span>
+                            )}
+                          </td>
+                          <td className="py-4 px-3 text-center">
+                            <span className="font-black text-xs" style={{ color: '#adf1c4' }}>
+                              +{attempt.xp_earned}
+                            </span>
+                          </td>
+                          <td className="py-4 px-3 text-center text-xs" style={{ color: 'rgba(255,255,255,0.25)' }}>
+                            {attempt.completed_at
+                              ? new Date(attempt.completed_at).toLocaleDateString('en-GB', {
+                                  day: 'numeric', month: 'short', year: '2-digit',
+                                })
+                              : '—'}
+                          </td>
+                          <td className="py-4 px-3 text-center">
+                            <Link
+                              href={`/results/${attempt.id}`}
+                              className="inline-block text-[9px] font-black tracking-[0.15em] transition-opacity hover:opacity-70"
+                              style={{
+                                color: 'rgba(255,255,255,0.5)',
+                                border: '1px solid rgba(255,255,255,0.12)',
+                                padding: '6px 14px',
+                              }}
+                            >
+                              VIEW →
+                            </Link>
+                          </td>
+                        </tr>
+                      )
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            )}
+          </section>
+
+          {/* Bottom spacer */}
+          <div className="h-8" />
+        </div>
+      </div>
     </div>
   )
 }
