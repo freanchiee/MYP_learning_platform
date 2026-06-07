@@ -21,6 +21,7 @@ import { questions as physics_nov_2021Questions, paperMeta as physics_nov_2021Me
 import { questions as physics_nov_2022Questions, paperMeta as physics_nov_2022Meta } from '@/data/papers/physics-nov-2022/questions'
 import { questions as physics_nov_2024Questions, paperMeta as physics_nov_2024Meta } from '@/data/papers/physics-nov-2024/questions'
 import { questions as physics_practice_v1Questions, paperMeta as physics_practice_v1Meta } from '@/data/papers/physics-practice-v1/questions'
+import { questions as biology_may_2025Questions, paperMeta as biology_may_2025Meta } from '@/data/papers/biology-may-2025/questions'
 import type { Question } from '@/lib/types'
 
 interface PageProps {
@@ -57,6 +58,7 @@ const PAPERS: Record<string, { questions: Question[]; meta: PaperMeta }> = {
   'physics-nov-2022': { questions: physics_nov_2022Questions, meta: physics_nov_2022Meta },
   'physics-nov-2024': { questions: physics_nov_2024Questions, meta: physics_nov_2024Meta },
   'physics-practice-v1': { questions: physics_practice_v1Questions, meta: physics_practice_v1Meta },
+  'biology-may-2025': { questions: biology_may_2025Questions, meta: biology_may_2025Meta },
 }
 
 export default function ExamPage({ params }: PageProps) {

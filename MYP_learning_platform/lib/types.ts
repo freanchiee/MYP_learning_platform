@@ -32,7 +32,7 @@ export interface Task {
   ph: string
   ans?: string
   figImages?: string[]   // optional per-task diagram images, shown just above the answer box
-  widget?: 'drag_drop_planets' | 'variable_classify' | 'sankey_q3' | 'bounce_graphs_ab' | 'q4e_table' | 'q5c_table' | 'cannonball_paths' | 'energy_chain' | 'radio_select' | 'wave_label_drag_drop' | 'inline_dropdown_select' | 'refraction_label_drag_drop'
+  widget?: 'drag_drop_planets' | 'variable_classify' | 'sankey_q3' | 'bounce_graphs_ab' | 'q4e_table' | 'q5c_table' | 'cannonball_paths' | 'energy_chain' | 'radio_select' | 'wave_label_drag_drop' | 'inline_dropdown_select' | 'refraction_label_drag_drop' | 'match_drag_drop' | 'checkbox_select' | 'fill_blank'
   widgetOptions?: string[]   // dropdown choices for radio_select / inline_dropdown_select
   widgetItems?: string[]     // row labels for inline_dropdown_select (e.g. ['Electron','Proton','Neutron'])
   passage?: string           // reading passage / article shown above the task question

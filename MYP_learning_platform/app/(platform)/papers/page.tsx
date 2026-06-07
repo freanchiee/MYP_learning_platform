@@ -60,6 +60,7 @@ export default async function PapersPage() {
     'physics-nov-2023': { total_marks: 100, duration_minutes: 90 },
     'physics-nov-2024': { total_marks: 100, duration_minutes: 90 },
     'physics-practice-v1': { total_marks: 85, duration_minutes: 90 },
+    'biology-may-2025': { total_marks: 88, duration_minutes: 90 },
   }
   const papersWithMeta = papers.map(p => ({ ...p, ...(LOCAL_PAPER_META[p.id] ?? {}) }))
 
