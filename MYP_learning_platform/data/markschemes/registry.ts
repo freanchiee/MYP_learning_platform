@@ -27,6 +27,10 @@ import { MS as MS_physics_nov_2021 } from '@/data/papers/physics-nov-2021/marksc
 import { MS as MS_physics_nov_2022 } from '@/data/papers/physics-nov-2022/markscheme'
 import { MS as MS_physics_nov_2024 } from '@/data/papers/physics-nov-2024/markscheme'
 import { MS as MS_biology_may_2025 } from '@/data/papers/biology-may-2025/markscheme'
+import { MS as MS_biology_may_2024 } from '@/data/papers/biology-may-2024/markscheme'
+import { MS as MS_biology_nov_2024 } from '@/data/papers/biology-nov-2024/markscheme'
+import { MS as MS_biology_nov_2019 } from '@/data/papers/biology-nov-2019/markscheme'
+import { MS as MS_biology_may_2019 } from '@/data/papers/biology-may-2019/markscheme'
 
 const _registry: Record<string, Record<string, MSRecord>> = {
   'physics-nov-2023': MS_physics_nov_2023,
@@ -48,6 +52,10 @@ const _registry: Record<string, Record<string, MSRecord>> = {
   'physics-nov-2022': MS_physics_nov_2022,
   'physics-nov-2024': MS_physics_nov_2024,
   'biology-may-2025': MS_biology_may_2025,
+  'biology-may-2024': MS_biology_may_2024,
+  'biology-nov-2024': MS_biology_nov_2024,
+  'biology-nov-2019': MS_biology_nov_2019,
+  'biology-may-2019': MS_biology_may_2019,
   // Add new papers by running: node scripts/update-registries.js
 }
 

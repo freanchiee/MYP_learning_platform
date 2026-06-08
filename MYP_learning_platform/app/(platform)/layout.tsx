@@ -3,6 +3,7 @@ import Link from 'next/link'
 import type { ReactNode } from 'react'
 import { createClient } from '@/lib/supabase/server'
 import type { Profile } from '@/lib/types'
+import PapersDropdownNav from '@/components/nav/PapersDropdownNav'
 
 export default async function PlatformLayout({ children }: { children: ReactNode }) {
   const supabase = createClient()
@@ -66,7 +67,6 @@ export default async function PlatformLayout({ children }: { children: ReactNode
         <div className="flex items-center gap-1">
           {[
             { href: '/dashboard', label: 'Dashboard' },
-            { href: '/papers',    label: 'Papers' },
             { href: '/settings',  label: 'Settings' },
           ].map(({ href, label }) => (
             <Link
@@ -78,6 +78,7 @@ export default async function PlatformLayout({ children }: { children: ReactNode
               {label}
             </Link>
           ))}
+          <PapersDropdownNav />
         </div>
 
         {/* Right: user + XP + logout */}

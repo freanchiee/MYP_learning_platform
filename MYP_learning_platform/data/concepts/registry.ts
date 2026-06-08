@@ -32,6 +32,10 @@ import { CONCEPTS_PUBLIC_NOV2021 as CONCEPTS_physics_nov_2021 } from '@/data/pap
 import { CONCEPTS_PUBLIC_NOV2022 as CONCEPTS_physics_nov_2022 } from '@/data/papers/physics-nov-2022/conceptsPublic'
 import { CONCEPTS_PUBLIC_NOV2024 as CONCEPTS_physics_nov_2024 } from '@/data/papers/physics-nov-2024/conceptsPublic'
 import { CONCEPTS_PUBLIC_BIOLOGY_MAY2025 as CONCEPTS_biology_may_2025 } from '@/data/papers/biology-may-2025/conceptsPublic'
+import { CONCEPTS_PUBLIC_BIOLOGY_MAY2024 as CONCEPTS_biology_may_2024 } from '@/data/papers/biology-may-2024/conceptsPublic'
+import { CONCEPTS_PUBLIC_BIOLOGY_NOV2024 as CONCEPTS_biology_nov_2024 } from '@/data/papers/biology-nov-2024/conceptsPublic'
+import { CONCEPTS_PUBLIC_BIOLOGY_NOV2019 as CONCEPTS_biology_nov_2019 } from '@/data/papers/biology-nov-2019/conceptsPublic'
+import { CONCEPTS_PUBLIC_BIOLOGY_MAY2019 as CONCEPTS_biology_may_2019 } from '@/data/papers/biology-may-2019/conceptsPublic'
 
 // Build the merged registry
 const _registry: Record<string, Record<string, ConceptEntry>> = {
@@ -54,6 +58,10 @@ const _registry: Record<string, Record<string, ConceptEntry>> = {
   'physics-nov-2022': CONCEPTS_physics_nov_2022,
   'physics-nov-2024': CONCEPTS_physics_nov_2024,
   'biology-may-2025': CONCEPTS_biology_may_2025,
+  'biology-may-2024': CONCEPTS_biology_may_2024,
+  'biology-nov-2024': CONCEPTS_biology_nov_2024,
+  'biology-nov-2019': CONCEPTS_biology_nov_2019,
+  'biology-may-2019': CONCEPTS_biology_may_2019,
 }
 
 /**

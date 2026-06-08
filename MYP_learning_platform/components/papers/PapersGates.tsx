@@ -26,7 +26,7 @@ interface Props {
 const BG: Record<string, { from: string; via: string; to: string }> = {
   Physics:   { from: '#0a0f2e', via: '#1f3674', to: '#274e68' },
   Chemistry: { from: '#0d1a2e', via: '#274e68', to: '#547ca4' },
-  Biology:   { from: '#071a12', via: '#1a3d2e', to: '#274e68' },
+  Biology:   { from: '#0d2e1a', via: '#1e6640', to: '#2d9e5f' },
   Combined:  { from: '#1a0a0a', via: '#3d1515', to: '#c3282d' },
 }
 const DEFAULT_BG = { from: '#0a0f2e', via: '#1f3674', to: '#274e68' }

@@ -10,8 +10,16 @@ const CRITERION_META: Record<string, { bg: string; label: string }> = {
   D: { bg: '#274e68', label: 'Reflecting' },
 }
 
+// Derive subject name and theme colour from paperId
+function subjectFromPaperId(paperId: string): { name: string; accent: string; gradient: string } {
+  if (paperId.startsWith('biology'))   return { name: 'Biology',   accent: '#2d7a4f', gradient: 'linear-gradient(135deg, #1a4a2e, #2d7a4f)' }
+  if (paperId.startsWith('chemistry')) return { name: 'Chemistry', accent: '#274e68', gradient: 'linear-gradient(135deg, #0d1a2e, #274e68)' }
+  return                                      { name: 'Physics',   accent: '#1f3674', gradient: 'linear-gradient(135deg, #1f3674, #274e68)' }
+}
+
 export default function LockScreen() {
   const questions    = useExamStore((s) => s.questions)
+  const paperId      = useExamStore((s) => s.paperId)
   const candidate    = useExamStore((s) => s.candidate)
   const setCandidate = useExamStore((s) => s.setCandidate)
   const setPhase     = useExamStore((s) => s.setPhase)
@@ -19,6 +27,8 @@ export default function LockScreen() {
 
   const [nameErr,   setNameErr]   = useState(false)
   const [schoolErr, setSchoolErr] = useState(false)
+
+  const { name: subjectName, accent, gradient } = subjectFromPaperId(paperId)
 
   const handleBegin = () => {
     let valid = true
@@ -36,7 +46,7 @@ export default function LockScreen() {
   return (
     <div
       className="min-h-screen flex items-center justify-center px-4 py-10 relative overflow-hidden"
-      style={{ background: 'linear-gradient(145deg, #274e68 0%, #1f3674 55%, #0e1f45 100%)' }}
+      style={{ background: paperId.startsWith('biology') ? 'linear-gradient(145deg, #071a12 0%, #1a3d2e 55%, #0e2818 100%)' : 'linear-gradient(145deg, #274e68 0%, #1f3674 55%, #0e1f45 100%)' }}
     >
       {/* Dot grid */}
       <div
@@ -64,7 +74,7 @@ export default function LockScreen() {
             <div
               className="w-16 h-16 rounded-2xl flex items-center justify-center font-extrabold text-xl shadow-lg"
               style={{
-                background: 'linear-gradient(135deg, #1f3674, #274e68)',
+                background: gradient,
                 border: '2px solid rgba(173,241,196,0.3)',
               }}
             >
@@ -75,14 +85,14 @@ export default function LockScreen() {
           <h1 className="text-center text-2xl font-extrabold mb-0.5" style={{ color: '#1f3674' }}>
             IB MYP Sciences
           </h1>
-          <p className="text-center text-sm font-semibold mb-6" style={{ color: '#547ca4' }}>
-            Physics Examination
+          <p className="text-center text-sm font-semibold mb-6" style={{ color: accent }}>
+            {subjectName} Examination
           </p>
 
           {/* Paper info grid */}
           <div className="grid grid-cols-2 gap-3 mb-6">
             {[
-              { label: 'Subject',     value: 'Physics' },
+              { label: 'Subject',     value: subjectName },
               { label: 'Total Marks', value: String(totalMarks) },
               { label: 'Duration',    value: '90 min' },
               { label: 'Questions',   value: String(questions.length) },
@@ -167,7 +177,7 @@ export default function LockScreen() {
             whileHover={{ scale: 1.015 }}
             whileTap={{ scale: 0.97 }}
             className="w-full py-3.5 rounded-xl text-white font-extrabold text-base shadow-lg"
-            style={{ background: 'linear-gradient(90deg, #1f3674 0%, #274e68 100%)' }}
+            style={{ background: gradient }}
           >
             Begin Examination →
           </motion.button>
