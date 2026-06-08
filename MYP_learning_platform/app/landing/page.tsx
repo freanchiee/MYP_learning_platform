@@ -192,8 +192,8 @@ export default function LandingPage() {
             className="absolute inset-0"
             style={{
               background: dark
-                ? 'linear-gradient(105deg, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.45) 45%, rgba(0,0,0,0.1) 100%), linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 40%)'
-                : 'linear-gradient(105deg, rgba(245,237,204,0.88) 0%, rgba(245,237,204,0.35) 45%, rgba(245,237,204,0) 100%), linear-gradient(to top, rgba(245,237,204,0.75) 0%, transparent 40%)',
+                ? 'linear-gradient(105deg, rgba(0,0,0,0.93) 0%, rgba(0,0,0,0.7) 30%, rgba(0,0,0,0.25) 60%, rgba(0,0,0,0.05) 100%), linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 45%)'
+                : 'linear-gradient(105deg, rgba(245,237,204,0.97) 0%, rgba(245,237,204,0.82) 28%, rgba(245,237,204,0.3) 55%, rgba(245,237,204,0) 100%), linear-gradient(to top, rgba(245,237,204,0.85) 0%, transparent 45%)',
             }}
           />
         </motion.div>
