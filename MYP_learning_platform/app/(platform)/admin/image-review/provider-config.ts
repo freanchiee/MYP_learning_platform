@@ -95,7 +95,9 @@ export async function generateImageWithProvider(
   prompt: string,
   destPath: string,
   overrideProvider?: ProviderId,
-): Promise<{ ok: boolean; error?: string }> {
+  /** Path to original image (relative to /public) — enables img2img / structure control */
+  originalImagePath?: string,
+): Promise<{ ok: boolean; error?: string; method?: string }> {
   const cfg = await readProviderConfig()
   const provider = overrideProvider ?? cfg.activeProvider
   const providerName = PROVIDER_NAMES[provider] ?? provider
@@ -112,14 +114,32 @@ export async function generateImageWithProvider(
   try {
     if (provider === 'openai') {
       await generateOpenAI(prompt, destPath, cfg.openai.key, cfg.openai.model)
+      return { ok: true, method: 'text2img' }
     } else if (provider === 'gemini') {
       await generateGemini(prompt, destPath, cfg.gemini.key, cfg.gemini.model)
+      return { ok: true, method: 'text2img' }
     } else if (provider === 'stability') {
+      // When the original image is available, use Structure Control:
+      // it preserves the spatial layout (crane position, heights, building) while
+      // generating new original artwork — much better than text-only for diagrams.
+      if (originalImagePath) {
+        const physOrig = path.join(PUBLIC, originalImagePath)
+        if (fs.existsSync(physOrig)) {
+          try {
+            await generateStabilityStructure(prompt, destPath, cfg.stability.key, physOrig)
+            return { ok: true, method: 'structure_control' }
+          } catch (structErr: unknown) {
+            // Structure control failed — fall through to plain text2img
+            const msg = structErr instanceof Error ? structErr.message : String(structErr)
+            console.warn(`[stability] Structure control failed (${msg.slice(0, 80)}) → falling back to text2img`)
+          }
+        }
+      }
       await generateStability(prompt, destPath, cfg.stability.key)
+      return { ok: true, method: 'text2img' }
     } else {
       return { ok: false, error: `Unknown provider: ${provider}` }
     }
-    return { ok: true }
   } catch (e: unknown) {
     return { ok: false, error: e instanceof Error ? e.message : String(e) }
   }
@@ -223,6 +243,53 @@ async function generateStability(prompt: string, destPath: string, key: string) 
   if (!res.ok) {
     const body = await res.text()
     throw new Error(`Stability ${res.status}: ${body.slice(0, 300)}`)
+  }
+  await saveImageBuffer(Buffer.from(await res.arrayBuffer()), destPath)
+}
+
+/**
+ * Stability AI Structure Control — uses the original image's edges/outline as a
+ * spatial guide while regenerating content from the prompt.
+ *
+ * Perfect for educational diagrams: preserves the layout (crane position, building,
+ * heights, ball positions) while producing new original artwork.
+ * Cost: ~$0.01/image (slightly more than Core).
+ * Docs: https://platform.stability.ai/docs/api-reference#tag/Control/paths/~1v2beta~1stable-image~1control~1structure/post
+ */
+async function generateStabilityStructure(
+  prompt: string,
+  destPath: string,
+  key: string,
+  /** Absolute filesystem path to the original image */
+  origPhysPath: string,
+  /** 0–1: how strongly to follow the original's structure (0.7 = good balance) */
+  controlStrength = 0.7,
+) {
+  if (!key) throw new Error('Stability AI key not configured')
+
+  const imgBuf = fs.readFileSync(origPhysPath)
+  const ext = path.extname(origPhysPath).toLowerCase()
+  const mime = ext === '.jpg' || ext === '.jpeg' ? 'image/jpeg'
+    : ext === '.webp' ? 'image/webp' : 'image/png'
+
+  const formData = new FormData()
+  formData.append('prompt', prompt.slice(0, 10000))
+  formData.append('image', new Blob([imgBuf], { type: mime }), path.basename(origPhysPath))
+  formData.append('control_strength', String(controlStrength))
+  formData.append('output_format', 'png')
+
+  const res = await fetch('https://api.stability.ai/v2beta/stable-image/control/structure', {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${key}`,
+      'Accept': 'image/*',
+    },
+    body: formData,
+    signal: AbortSignal.timeout(90_000),
+  })
+  if (!res.ok) {
+    const body = await res.text()
+    throw new Error(`Stability structure control ${res.status}: ${body.slice(0, 300)}`)
   }
   await saveImageBuffer(Buffer.from(await res.arrayBuffer()), destPath)
 }

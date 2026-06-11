@@ -195,7 +195,7 @@ export async function approveImage(
 export async function regenerateImage(
   paperId: string,
   taskPath: string,
-): Promise<{ ok: boolean; newUrl?: string; error?: string; visionUsed?: boolean }> {
+): Promise<{ ok: boolean; newUrl?: string; error?: string; visionUsed?: boolean; method?: string }> {
   const entries = readSidecar(paperId)
   const idx = entries.findIndex(e => e.taskPath === taskPath)
   if (idx === -1) return { ok: false, error: `Entry not found: ${taskPath}` }
@@ -228,7 +228,13 @@ export async function regenerateImage(
     return { ok: false, error: 'No image_prompt — use Edit Prompt first' }
   }
 
-  const result = await generateImageWithProvider(prompt, entry.generated_path)
+  // Pass original_path so Stability can use Structure Control (preserves spatial layout)
+  const result = await generateImageWithProvider(
+    prompt,
+    entry.generated_path,
+    undefined,
+    entry.original_path ?? undefined,
+  )
   if (!result.ok) return { ok: false, error: result.error }
 
   entries[idx] = {
@@ -241,7 +247,7 @@ export async function regenerateImage(
   writeSidecar(paperId, entries)
 
   revalidatePath('/admin/image-review')
-  return { ok: true, newUrl: entry.generated_path, visionUsed }
+  return { ok: true, newUrl: entry.generated_path, visionUsed, method: result.method }
 }
 
 /**
