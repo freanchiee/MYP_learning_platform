@@ -8,6 +8,72 @@ import { generateImageWithProvider } from './provider-config'
 
 const REPO_ROOT = path.join(process.cwd())
 const DATA_PAPERS = path.join(REPO_ROOT, 'data', 'papers')
+const PUBLIC_DIR  = path.join(REPO_ROOT, 'public')
+
+// ─── Claude Vision helper ─────────────────────────────────────────────────────
+
+const VISION_PROMPT = `You are helping recreate a scientific diagram for an MYP educational platform.
+Analyze this image carefully and write a detailed generation prompt for an AI image generator
+to create an equivalent ORIGINAL illustration.
+
+Describe: the subject matter, all visible components and their spatial relationships,
+any labels and their positions, the visual style (schematic flat illustration vs realistic),
+the composition, and ALL scientifically important details — including any numerical values,
+measurements, or annotations visible in the diagram.
+
+Format your response as a single paragraph starting with exactly:
+"Clean educational illustration, white background, flat design, no watermarks, no text overlays, school science textbook style. [YOUR DESCRIPTION]"
+
+Do NOT say 'copy' or 'reproduce'. Describe what an original equivalent should look like.`
+
+async function callClaudeVision(imagePath: string): Promise<string> {
+  const key = process.env.ANTHROPIC_API_KEY
+  if (!key) throw new Error('ANTHROPIC_API_KEY not set in environment')
+
+  const physPath = path.join(PUBLIC_DIR, imagePath)
+  if (!fs.existsSync(physPath)) throw new Error(`Original image not found: ${physPath}`)
+
+  const base64Data = fs.readFileSync(physPath).toString('base64')
+  const lower = imagePath.toLowerCase()
+  const mediaType: 'image/jpeg' | 'image/png' | 'image/webp' =
+    lower.endsWith('.jpg') || lower.endsWith('.jpeg') ? 'image/jpeg'
+    : lower.endsWith('.webp') ? 'image/webp'
+    : 'image/png'
+
+  const res = await fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: {
+      'x-api-key': key,
+      'anthropic-version': '2023-06-01',
+      'content-type': 'application/json',
+    },
+    body: JSON.stringify({
+      model: 'claude-sonnet-4-6',
+      max_tokens: 1024,
+      messages: [{
+        role: 'user',
+        content: [
+          { type: 'image', source: { type: 'base64', media_type: mediaType, data: base64Data } },
+          { type: 'text', text: VISION_PROMPT },
+        ],
+      }],
+    }),
+    signal: AbortSignal.timeout(60_000),
+  })
+
+  if (!res.ok) {
+    const body = await res.text()
+    throw new Error(`Claude Vision error ${res.status}: ${body.slice(0, 200)}`)
+  }
+
+  const json = await res.json() as { content?: { type: string; text: string }[] }
+  let prompt = json.content?.[0]?.text ?? ''
+  if (!prompt.startsWith('Clean educational')) {
+    const match = prompt.match(/Clean educational[\s\S]+/)
+    prompt = match ? match[0].trim() : `Clean educational illustration, white background, flat design. ${prompt}`
+  }
+  return prompt.trim()
+}
 
 // ─── types ───────────────────────────────────────────────────────────────────
 
@@ -118,27 +184,62 @@ export async function approveImage(
 
 /**
  * Regenerate an image using the configured provider.
+ *
+ * Auto-upgrade logic: if the entry is sub_type 2B (text-only prompt) AND the original
+ * image still exists AND ANTHROPIC_API_KEY is in the environment, we first call Claude
+ * Vision to get a specific, image-derived prompt (upgrading to 2A) before generating.
+ * This makes the dashboard Regenerate button produce much better results without any
+ * extra clicks.
  */
 export async function regenerateImage(
   paperId: string,
   taskPath: string,
-): Promise<{ ok: boolean; newUrl?: string; error?: string }> {
+): Promise<{ ok: boolean; newUrl?: string; error?: string; visionUsed?: boolean }> {
   const entries = readSidecar(paperId)
   const idx = entries.findIndex(e => e.taskPath === taskPath)
   if (idx === -1) return { ok: false, error: `Entry not found: ${taskPath}` }
 
   const entry = entries[idx]
-  if (!entry.image_prompt) return { ok: false, error: 'No image_prompt — use Edit Prompt first' }
   if (!entry.generated_path) return { ok: false, error: 'No generated_path on this entry' }
 
-  const result = await generateImageWithProvider(entry.image_prompt, entry.generated_path)
+  let prompt = entry.image_prompt ?? ''
+  let subType = entry.sub_type ?? '2B'
+  let visionUsed = false
+
+  // Auto Vision upgrade: 2B + existing original + Anthropic key available
+  const originalExists =
+    entry.original_path &&
+    fs.existsSync(path.join(PUBLIC_DIR, entry.original_path))
+
+  if (originalExists && process.env.ANTHROPIC_API_KEY) {
+    try {
+      prompt = await callClaudeVision(entry.original_path!)
+      subType = '2A'
+      visionUsed = true
+    } catch (e: unknown) {
+      // Vision failed — fall back to existing/text prompt
+      const msg = e instanceof Error ? e.message : String(e)
+      console.warn(`[vision] Failed (${msg}), using existing prompt`)
+      if (!prompt) return { ok: false, error: `Vision failed and no fallback prompt: ${msg}` }
+    }
+  } else if (!prompt) {
+    return { ok: false, error: 'No image_prompt — use Edit Prompt first' }
+  }
+
+  const result = await generateImageWithProvider(prompt, entry.generated_path)
   if (!result.ok) return { ok: false, error: result.error }
 
-  entries[idx] = { ...entry, regenerated_at: new Date().toISOString(), _error: undefined }
+  entries[idx] = {
+    ...entry,
+    image_prompt: prompt,
+    sub_type: subType as '2A' | '2B' | null,
+    regenerated_at: new Date().toISOString(),
+    _error: undefined,
+  }
   writeSidecar(paperId, entries)
 
   revalidatePath('/admin/image-review')
-  return { ok: true, newUrl: entry.generated_path }
+  return { ok: true, newUrl: entry.generated_path, visionUsed }
 }
 
 /**

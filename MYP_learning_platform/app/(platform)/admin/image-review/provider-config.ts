@@ -62,6 +62,12 @@ export async function saveProviderConfig(
 
 const PUBLIC = path.join(REPO_ROOT, 'public')
 
+const PROVIDER_NAMES: Record<ProviderId, string> = {
+  openai:    'OpenAI (DALL-E 3)',
+  gemini:    'Google Gemini (Imagen 3)',
+  stability: 'Stability AI (SDXL Core)',
+}
+
 export async function generateImageWithProvider(
   prompt: string,
   destPath: string,
@@ -69,6 +75,16 @@ export async function generateImageWithProvider(
 ): Promise<{ ok: boolean; error?: string }> {
   const cfg = await readProviderConfig()
   const provider = overrideProvider ?? cfg.activeProvider
+  const providerName = PROVIDER_NAMES[provider] ?? provider
+
+  // Check key upfront — give a clear, actionable error
+  const providerKey = (cfg[provider] as { key: string })?.key
+  if (!providerKey) {
+    return {
+      ok: false,
+      error: `${providerName} is the active provider but no API key is saved. Open ⚙️ Image Providers → enter your key → Save Configuration.`,
+    }
+  }
 
   try {
     if (provider === 'openai') {

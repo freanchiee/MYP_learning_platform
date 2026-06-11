@@ -12,8 +12,13 @@
  *   node scripts/classify-images.mjs --paperId physics-nov-2024
  *   node scripts/classify-images.mjs --paperId physics-nov-2024 --dryRun
  *   node scripts/classify-images.mjs --paperId physics-nov-2024 --skipVision
+ *   node scripts/classify-images.mjs --paperId physics-nov-2024 --reVision
  *   node scripts/classify-images.mjs --paperId physics-nov-2024 --status existing_source_image
  *   node scripts/classify-images.mjs --paperId physics-nov-2024 --max 3
+ *
+ * --reVision  Re-runs Claude Vision on any 2B entries that have an existing original image,
+ *             upgrading them to 2A and regenerating with a better prompt.
+ *             Requires ANTHROPIC_API_KEY.
  *
  * Environment (set ONE image provider):
  *   HF_TOKEN          HuggingFace token (free at huggingface.co/settings/tokens)  ← recommended
@@ -42,11 +47,12 @@ function getArg(name) {
   const i = args.indexOf(name)
   return i !== -1 ? args[i + 1] : null
 }
-const paperId    = getArg('--paperId')
+const paperId      = getArg('--paperId')
 const statusFilter = getArg('--status') ?? null
-const dryRun     = args.includes('--dryRun') || args.includes('--dry-run')
-const skipVision = args.includes('--skipVision') || args.includes('--skip-vision')
-const maxImages  = parseInt(getArg('--max') ?? '99999', 10)
+const dryRun       = args.includes('--dryRun') || args.includes('--dry-run')
+const skipVision   = args.includes('--skipVision') || args.includes('--skip-vision')
+const reVision     = args.includes('--reVision') || args.includes('--re-vision')
+const maxImages    = parseInt(getArg('--max') ?? '99999', 10)
 
 if (!paperId) {
   console.error(`
@@ -55,13 +61,14 @@ Usage: node scripts/classify-images.mjs --paperId <paperId> [options]
 Options:
   --dryRun        Preview without downloading images or writing sidecar
   --skipVision    Skip Claude Vision (use text-only 2B prompts for all entries)
+  --reVision      Re-run Claude Vision on 2B entries that have an existing original,
+                  upgrading them to 2A with a specific prompt, then regenerate
   --status <s>    Only process entries with this audit status
   --max <n>       Limit to first N entries (useful for testing)
 
 Environment:
-  HF_TOKEN         HuggingFace token — free at huggingface.co/settings/tokens
-  TOGETHER_API_KEY Together AI key — together.ai (cheap, ~$0.002/image)
-  ANTHROPIC_API_KEY Anthropic key — only needed for Claude Vision (skippable)
+  OPENAI_API_KEY    OpenAI key — DALL-E 3, ~$0.04/image  ← recommended
+  ANTHROPIC_API_KEY Anthropic key — required for Claude Vision (--skipVision to omit)
 `)
   process.exit(1)
 }
@@ -155,9 +162,28 @@ function taskPathKey(entry) {
   const t = entry.taskLabel ? `.tasks[${entry.taskLabel}]` : ''
   return `q${entry.questionId}${t}`
 }
-function existingSidecarEntry(sidecar, tp) {
-  // Only skip if approved, OR needs_review AND no error (i.e. successfully generated)
-  return sidecar.find(e => e.taskPath === tp && (e.approved || (e.needs_review && !e._error)))
+function existingSidecarEntry(sidecar, tp, auditEntry) {
+  const existing = sidecar.find(e => e.taskPath === tp)
+  if (!existing) return null
+
+  // Always skip approved entries
+  if (existing.approved) return existing
+
+  // --reVision: re-run 2B entries that have an original image on disk
+  if (reVision && !skipVision && ANTHROPIC_KEY &&
+      existing.sub_type === '2B' &&
+      auditEntry?.fileExists && auditEntry?.path) {
+    const physPath = path.join(PUBLIC, auditEntry.path)
+    if (fs.existsSync(physPath)) {
+      console.log(`   🔍 --reVision: will upgrade ${tp} from 2B → 2A`)
+      return null  // Don't skip — re-process
+    }
+  }
+
+  // Skip successfully generated entries (needs_review true, no error)
+  if (existing.needs_review && !existing._error) return existing
+
+  return null
 }
 function guessType(stemText, taskText, topic) {
   const combined = [stemText, taskText, topic].join(' ').toLowerCase()
@@ -428,9 +454,9 @@ function buildTextPrompt(stemText, taskText, topic, pid) {
 
 async function classifyEntry(entry, pid, sidecar) {
   const tp = taskPathKey(entry)
-  const existing = existingSidecarEntry(sidecar, tp)
+  const existing = existingSidecarEntry(sidecar, tp, entry)
   if (existing) {
-    console.log(`   ⏭️  Skip ${tp} (already: ${existing.image_type})`)
+    console.log(`   ⏭️  Skip ${tp} (already: ${existing.image_type}${existing.sub_type ? ' ' + existing.sub_type : ''})`)
     return null
   }
 
@@ -509,7 +535,8 @@ async function classifyEntry(entry, pid, sidecar) {
 async function main() {
   console.log(`\n🎨  Image classifier — paper: ${paperId}`)
   console.log(`    Provider: ${PROVIDER === 'none' ? '(dry run only)' : PROVIDER}`)
-  console.log(`    Vision:   ${skipVision ? 'skipped (--skipVision)' : ANTHROPIC_KEY ? 'Claude Vision' : 'text-only (no ANTHROPIC_API_KEY)'}`)
+  console.log(`    Vision:   ${skipVision ? 'skipped (--skipVision)' : ANTHROPIC_KEY ? 'Claude Vision ✓' : '⚠️  text-only (set ANTHROPIC_API_KEY for image-specific prompts)'}`)
+  if (reVision) console.log(`    ReVision: ON — will upgrade 2B entries with originals → 2A`)
   if (dryRun) console.log('    Mode:     DRY RUN')
   console.log()
 

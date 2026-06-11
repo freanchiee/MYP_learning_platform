@@ -23,13 +23,17 @@ export default function ReviewCard({ entry }: ReviewCardProps) {
   const [result, setResult] = useState<{ type: 'ok' | 'err'; msg: string } | null>(null)
   const [generatedUrl, setGeneratedUrl] = useState<string | null>(entry.generated_path ?? null)
 
-  function run(action: () => Promise<{ ok: boolean; error?: string; newUrl?: string }>) {
+  function run(action: () => Promise<{ ok: boolean; error?: string; newUrl?: string; visionUsed?: boolean }>) {
     startTransition(async () => {
       setResult(null)
       const res = await action()
       if (res.ok) {
-        setResult({ type: 'ok', msg: 'Done!' })
-        if (res.newUrl) setGeneratedUrl(res.newUrl)
+        const msg = res.visionUsed ? '✅ Done! (Vision prompt used)' : '✅ Done!'
+        setResult({ type: 'ok', msg })
+        if (res.newUrl) {
+          // Bust the browser cache by appending a timestamp query param
+          setGeneratedUrl(`${res.newUrl}?t=${Date.now()}`)
+        }
       } else {
         setResult({ type: 'err', msg: res.error ?? 'Unknown error' })
       }
