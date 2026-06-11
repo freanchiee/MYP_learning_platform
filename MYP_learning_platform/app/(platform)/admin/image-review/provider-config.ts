@@ -32,7 +32,7 @@ const DEFAULT_CONFIG: ProviderConfig = {
 
 // ─── read / write ─────────────────────────────────────────────────────────────
 
-export function readProviderConfig(): ProviderConfig {
+export async function readProviderConfig(): Promise<ProviderConfig> {
   if (!fs.existsSync(CONFIG_FILE)) return DEFAULT_CONFIG
   try {
     const raw = JSON.parse(fs.readFileSync(CONFIG_FILE, 'utf8'))
@@ -45,7 +45,7 @@ export function readProviderConfig(): ProviderConfig {
 export async function saveProviderConfig(
   config: Partial<ProviderConfig>,
 ): Promise<{ ok: boolean }> {
-  const current = readProviderConfig()
+  const current = await readProviderConfig()
   const merged: ProviderConfig = {
     ...current,
     ...config,
@@ -67,7 +67,7 @@ export async function generateImageWithProvider(
   destPath: string,
   overrideProvider?: ProviderId,
 ): Promise<{ ok: boolean; error?: string }> {
-  const cfg = readProviderConfig()
+  const cfg = await readProviderConfig()
   const provider = overrideProvider ?? cfg.activeProvider
 
   try {
