@@ -20,7 +20,7 @@ export const questions: Question[] = [
     topic: 'Atomic structure & the periodic table',
     marks: 4,
     stem: 'Talcum powder is a widely used cosmetic product made from the mineral talc. Talc is a naturally occurring clay mineral composed mainly of magnesium, silicon, oxygen and hydrogen. The chemical formula for talc is Mg₃Si₄O₁₀(OH)₂.',
-    figImages: ['page-02.png'],
+    figImages: ['/images/papers/chemistry-nov-2019/page-02.png'],
     tasks: [
       {
         label: 'a',
@@ -56,7 +56,7 @@ export const questions: Question[] = [
     topic: 'Properties of metals & mixtures',
     marks: 11,
     stem: 'The innerspring mattress was invented in the 1870s and used a type of nickel-steel alloy. Nickel-steel is composed of iron with nickel and small amounts of carbon. Springs with different compositions of nickel and carbon are used for different applications. Here are the properties of four different nickel-steel compositions.',
-    figImages: ['page-03.png', 'page-04.png', 'page-05.png', 'page-06.png'],
+    figImages: ['/images/papers/chemistry-nov-2019/page-03.png', '/images/papers/chemistry-nov-2019/page-04.png', '/images/papers/chemistry-nov-2019/page-05.png', '/images/papers/chemistry-nov-2019/page-06.png'],
     tasks: [
       {
         label: 'a',
@@ -107,7 +107,7 @@ export const questions: Question[] = [
     topic: 'Radioactivity & atomic structure',
     marks: 10,
     stem: 'Luminous radium paint, used in watch dials from 1910 to 1960, contained radium-226 and zinc sulphide. Workers known as "Radium Girls" painted watch dials using brushes they pointed with their lips, unknowingly ingesting radioactive material. The radium in the paint also caused radioactive decay to produce radon-222 and other products.',
-    figImages: ['page-07.png', 'page-08.png', 'page-09.png'],
+    figImages: ['/images/papers/chemistry-nov-2019/page-07.png', '/images/papers/chemistry-nov-2019/page-08.png', '/images/papers/chemistry-nov-2019/page-09.png'],
     tasks: [
       {
         label: 'a',
@@ -155,7 +155,7 @@ export const questions: Question[] = [
     topic: 'Scientific investigation – superabsorbent polymers',
     marks: 16,
     stem: 'A student investigates which brand of superabsorbent polymer (SAP) wound dressing absorbs the most liquid. The student measures 500 cm³ of saline solution into a beaker, adds a fixed mass of SAP, stirs for 5 minutes, and then pours the mixture through a filter. The volume of saline remaining is recorded.',
-    figImages: ['page-11.png', 'page-12.png', 'page-13.png', 'page-14.png'],
+    figImages: ['/images/papers/chemistry-nov-2019/page-11.png', '/images/papers/chemistry-nov-2019/page-12.png', '/images/papers/chemistry-nov-2019/page-13.png', '/images/papers/chemistry-nov-2019/page-14.png'],
     tasks: [
       {
         label: 'a',
@@ -200,7 +200,7 @@ export const questions: Question[] = [
     topic: 'Environmental impact & experimental design',
     marks: 20,
     stem: 'The main absorbent material in disposable wound dressings is superabsorbent polymer (SAP). Millions of disposable wound dressings are used in hospitals each year, contributing to medical waste. Reusable wound dressings made from cotton can be sterilised and used multiple times, but require energy and water for the sterilisation process.',
-    figImages: ['page-14.png', 'page-15.png', 'page-16.png'],
+    figImages: ['/images/papers/chemistry-nov-2019/page-14.png', '/images/papers/chemistry-nov-2019/page-15.png', '/images/papers/chemistry-nov-2019/page-16.png'],
     tasks: [
       {
         label: 'a',
@@ -225,7 +225,7 @@ export const questions: Question[] = [
     topic: 'Data analysis – wound dressing absorbency',
     marks: 8,
     stem: 'A researcher tests five brands of SAP wound dressing. Each dressing contains a different mass of SAP crystal and a different mass of gauze (cotton fibre material). The total volume of saline absorbed by each brand is measured.',
-    figImages: ['page-17.png', 'page-18.png'],
+    figImages: ['/images/papers/chemistry-nov-2019/page-17.png', '/images/papers/chemistry-nov-2019/page-18.png'],
     tasks: [
       {
         label: 'a',
@@ -256,7 +256,7 @@ export const questions: Question[] = [
     topic: 'Chromatography & data interpretation',
     marks: 8,
     stem: 'A food scientist investigates the dyes used to colour sports drinks. The scientist tests four reference dyes (A, B, C and D) and a sample taken from a sports drink using chromatography. One of the dyes has been linked to allergic reactions.',
-    figImages: ['page-19.png', 'page-20.png', 'page-21.png'],
+    figImages: ['/images/papers/chemistry-nov-2019/page-19.png', '/images/papers/chemistry-nov-2019/page-20.png', '/images/papers/chemistry-nov-2019/page-21.png'],
     tasks: [
       {
         label: 'a',
@@ -289,7 +289,7 @@ export const questions: Question[] = [
     topic: 'Organic chemistry – biopolymers & plastics',
     marks: 10,
     stem: 'Bioplastics are plastics produced from renewable biological sources such as corn starch or vegetable oils. Polyhydroxybutyrate (PHB) is a bioplastic that can be produced by bacteria and used as an alternative to conventional oil-based plastics such as high-density polyethylene (HDPE).',
-    figImages: ['page-22.png', 'page-23.png', 'page-24.png'],
+    figImages: ['/images/papers/chemistry-nov-2019/page-22.png', '/images/papers/chemistry-nov-2019/page-23.png', '/images/papers/chemistry-nov-2019/page-24.png'],
     tasks: [
       {
         label: 'a',
@@ -317,7 +317,7 @@ export const questions: Question[] = [
     topic: 'Sustainability – biofuels vs fossil fuels',
     marks: 13,
     stem: 'Most transport vehicles run on petrol or diesel, which are fossil fuels refined from crude oil. Scientists are finding innovative solutions to replace fossil fuels with biofuels — fuels made from recently living biological material such as sugar cane, corn or algae. Oil-based fuels release large amounts of CO₂ when burned. Biofuels can be grown and harvested on agricultural land. However, large volumes of biofuel are needed, requiring large areas of land and significant water resources. Biofuels also provide jobs in rural farming communities, but can compete with food crops for agricultural land.',
-    figImages: ['page-25.png'],
+    figImages: ['/images/papers/chemistry-nov-2019/page-25.png'],
     tasks: [
       {
         label: '',

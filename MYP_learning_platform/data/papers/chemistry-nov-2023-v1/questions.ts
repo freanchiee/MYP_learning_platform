@@ -56,7 +56,7 @@ export const questions: Question[] = [
     topic: 'Chemical Equilibrium & Bonding',
     marks: 10,
     stem: 'Carbon dioxide (CO₂) is dissolved in sparkling mineral water under high pressure to make it fizzy. When the bottle is opened the pressure drops and the CO₂ starts to escape from the liquid.',
-    figImages: ['chemistry-nov-2023/page-02.png', 'chemistry-nov-2023/page-03.png'],
+    figImages: ['/images/papers/chemistry-nov-2023/page-02.png', '/images/papers/chemistry-nov-2023/page-03.png'],
     tasks: [
       {
         label: 'a',

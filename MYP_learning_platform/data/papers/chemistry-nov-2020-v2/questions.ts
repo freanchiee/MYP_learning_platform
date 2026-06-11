@@ -104,7 +104,7 @@ export const questions: Question[] = [
     topic: 'Karst cave dissolved gases and noble gas isotopes',
     marks: 9,
     stem: 'Water flowing through limestone karst caves dissolves gases including hydrogen sulfide (H₂S), carbon dioxide (CO₂), and hydrogen chloride (HCl). Springs emerging from karst systems often have very low pH. Xenon, a noble gas, is also found dissolved in some deep karst groundwater and is used by scientists as a tracer to study water movement.',
-    figImages: ['page-03.png', 'page-04.png'],
+    figImages: ['/images/papers/chemistry-nov-2020/page-03.png', '/images/papers/chemistry-nov-2020/page-04.png'],
     tasks: [
       {
         label: 'a',
@@ -119,7 +119,7 @@ export const questions: Question[] = [
         ph: 'First option shows correct lone pairs on Cl',
         widget: 'radio_select',
         widgetOptions: ['A', 'B', 'C', 'D'],
-        figImages: ['page-03.png'],
+        figImages: ['/images/papers/chemistry-nov-2020/page-03.png'],
       },
       {
         label: 'c',
@@ -149,7 +149,7 @@ export const questions: Question[] = [
     topic: 'Biofuel monomers and industrial processing',
     marks: 10,
     stem: 'Biofuels can be made from plant-derived alkenes. Two key monomers used in biopolymer production are molecule A (pent-1-ene, C₅H₁₀) and molecule B (hex-1-ene, C₆H₁₂). These are obtained by cracking longer-chain hydrocarbons from plant-based oils. Factories producing biofuel polymers must manage waste gases to minimise environmental impact. Non-recyclable polymer waste can be incinerated using a controlled thermovaporization process to generate electricity.',
-    figImages: ['page-07.png', 'page-08.png', 'page-11.png'],
+    figImages: ['/images/papers/chemistry-nov-2020/page-07.png', '/images/papers/chemistry-nov-2020/page-08.png', '/images/papers/chemistry-nov-2020/page-11.png'],
     tasks: [
       {
         label: 'a',
@@ -158,7 +158,7 @@ export const questions: Question[] = [
         ph: 'Both have C=C double bonds',
         widget: 'radio_select',
         widgetOptions: ['Alkene', 'Alkane', 'Alcohol', 'Carboxylic acid'],
-        figImages: ['page-07.png'],
+        figImages: ['/images/papers/chemistry-nov-2020/page-07.png'],
       },
       {
         label: 'b',
@@ -173,7 +173,7 @@ export const questions: Question[] = [
         text: 'Molecules A and B are obtained by cracking pentadecane, C₁₅H₃₂: C₁₅H₃₂ → C₅H₁₀ + C₆H₁₂ + X. **Deduce** the molecular formula of the missing product X.',
         marks: 1,
         ph: 'Balance carbons and hydrogens',
-        figImages: ['page-08.png'],
+        figImages: ['/images/papers/chemistry-nov-2020/page-08.png'],
       },
       {
         label: 'd',
@@ -198,7 +198,7 @@ export const questions: Question[] = [
         text: 'There has been a move from non-biodegradable to biodegradable biopolymers. The rate of biodegradation was tested for three biopolymer samples A, B, and C with different particle sizes. **List** the order of the three samples in order of increasing particle size. **Justify** your answer.',
         marks: 3,
         ph: 'B < C < A; smaller particles = greater surface area = faster reaction',
-        figImages: ['page-11.png'],
+        figImages: ['/images/papers/chemistry-nov-2020/page-11.png'],
       },
     ],
   },
@@ -210,7 +210,7 @@ export const questions: Question[] = [
     topic: 'Deep-sea bioluminescent bacteria investigation',
     marks: 17,
     stem: 'Deep-sea bacteria produce light through a bioluminescent reaction. A substrate molecule (bacterial luciferin) is oxidised in the presence of bacterial luciferase — an enzyme that acts as a catalyst. A student investigated the effect of temperature on how long a bacterial culture glows by placing cultures in water baths at different temperatures.',
-    figImages: ['page-13.png', 'page-14.png', 'page-15.png', 'page-17.png'],
+    figImages: ['/images/papers/chemistry-nov-2020/page-13.png', '/images/papers/chemistry-nov-2020/page-14.png', '/images/papers/chemistry-nov-2020/page-15.png', '/images/papers/chemistry-nov-2020/page-17.png'],
     tasks: [
       {
         label: 'a',
@@ -225,14 +225,14 @@ export const questions: Question[] = [
         ph: 'Ester linkage (C=O with O–C)',
         widget: 'radio_select',
         widgetOptions: ['Alkene', 'Ester', 'Alcohol', 'Carboxylic acid'],
-        figImages: ['page-13.png'],
+        figImages: ['/images/papers/chemistry-nov-2020/page-13.png'],
       },
       {
         label: 'c',
         text: 'The student placed cultures in water baths at different temperatures. **Measure** the missing temperature from the thermometer shown (temperatures used: 30°C, 40°C, ?, 70°C).',
         marks: 1,
         ph: '55°C',
-        figImages: ['page-14.png'],
+        figImages: ['/images/papers/chemistry-nov-2020/page-14.png'],
       },
       {
         label: 'd',
@@ -251,7 +251,7 @@ export const questions: Question[] = [
         text: 'The student plotted a graph of average glow duration (min) vs temperature (°C). **Predict** the time taken for the bacterial glow to stop at 25°C.',
         marks: 2,
         ph: '220 ± 20 minutes',
-        figImages: ['page-17.png'],
+        figImages: ['/images/papers/chemistry-nov-2020/page-17.png'],
       },
       {
         label: 'g',
@@ -269,28 +269,28 @@ export const questions: Question[] = [
     topic: 'Mineral sunscreen and UV protection investigation',
     marks: 20,
     stem: 'Mineral sunscreens contain physical UV blockers such as zinc oxide and titanium dioxide. These reflect and scatter UV radiation before it can penetrate the skin. A student investigated how many UV-reactive beads changed colour when covered by three different mineral sunscreens: UltraGuard (8% beads changed), SunSmart (24% changed), UrbanScreen (45% changed).',
-    figImages: ['page-19.png', 'page-20.png', 'page-21.png'],
+    figImages: ['/images/papers/chemistry-nov-2020/page-19.png', '/images/papers/chemistry-nov-2020/page-20.png', '/images/papers/chemistry-nov-2020/page-21.png'],
     tasks: [
       {
         label: 'a',
         text: '**State** which is the most effective mineral sunscreen.',
         marks: 1,
         ph: 'UltraGuard (fewest beads changed colour = best UV block)',
-        figImages: ['page-20.png'],
+        figImages: ['/images/papers/chemistry-nov-2020/page-20.png'],
       },
       {
         label: 'b',
         text: 'The experimental method uses a UV fluorescent lamp as a substitute for natural sunlight. **Outline** why this UV lamp is not a good model for natural sunlight.',
         marks: 2,
         ph: 'Sunlight has all wavelengths; UV lamp only emits a narrow UV band',
-        figImages: ['page-21.png'],
+        figImages: ['/images/papers/chemistry-nov-2020/page-21.png'],
       },
       {
         label: 'c',
         text: 'Using the equipment below, **design** an investigation to determine which of the individual chemical compounds present in SunSmart sunscreen provides the best protection from the sun. In your answer you should include: an identification of the variables, a list of the additional equipment you will use, details of your method for manipulating the variables, details of the data you will collect, and how you will ensure your method is safe.',
         marks: 17,
         ph: 'Crit B design: IV=sunscreen ingredient, DV=% beads changed, CVs=time/concentration/UV source',
-        figImages: ['page-21.png'],
+        figImages: ['/images/papers/chemistry-nov-2020/page-21.png'],
       },
     ],
   },
@@ -302,7 +302,7 @@ export const questions: Question[] = [
     topic: 'UV absorbance analysis — octinoxate experiment',
     marks: 10,
     stem: 'SunSmart was one of the sunscreens investigated in question 5. SunSmart contains: Zinc oxide, Titanium dioxide, Iron oxide, Silica. The research question was: "Is zinc oxide the best blocker of UV light?" Chemists are also analysing a new compound, octinoxate, to see if it can be used to block UV light in sunscreens. They make different concentrations of octinoxate and measure absorbance (AU). Concentrations tested (μmol dm⁻³): 0, 8, 16, 24, 32, 40, 50.',
-    figImages: ['page-22.png', 'page-23.png', 'page-24.png'],
+    figImages: ['/images/papers/chemistry-nov-2020/page-22.png', '/images/papers/chemistry-nov-2020/page-23.png', '/images/papers/chemistry-nov-2020/page-24.png'],
     tasks: [
       {
         label: 'a',
@@ -321,7 +321,7 @@ export const questions: Question[] = [
         text: 'The results show absorbance increasing with concentration (data: 0→0.00, 8→0.16, 16→0.34, 24→0.50, 32→0.69, 40→0.62 anomalous, 50→0.82 AU). **Plot** a graph of absorbance versus concentration of octinoxate. Label the axes, give your graph a suitable title, and add a line of best fit.',
         marks: 6,
         ph: 'Title links absorbance and concentration; LOBF from (0,0) through all except 40 μmol dm⁻³',
-        figImages: ['page-23.png', 'page-24.png'],
+        figImages: ['/images/papers/chemistry-nov-2020/page-23.png', '/images/papers/chemistry-nov-2020/page-24.png'],
       },
       {
         label: 'd',
@@ -339,7 +339,7 @@ export const questions: Question[] = [
     topic: 'Climate change, deforestation, and Zn-based CO₂ capture',
     marks: 12,
     stem: "Rising atmospheric CO₂ is the principal driver of climate change. In the natural carbon cycle, forests remove CO₂ by photosynthesis. Widespread deforestation has reduced this natural carbon sink. Scientists are investigating reactions of zinc (Zn) with CO₂ and H₂O to capture carbon dioxide as a solid carbonate mineral: Zn + CO₂ + H₂O → ZnCO₃(s) + H₂(g). The H₂ produced can also be used as a clean fuel.",
-    figImages: ['page-26.png', 'page-27.png', 'page-28.png'],
+    figImages: ['/images/papers/chemistry-nov-2020/page-26.png', '/images/papers/chemistry-nov-2020/page-27.png', '/images/papers/chemistry-nov-2020/page-28.png'],
     tasks: [
       {
         label: 'a',
@@ -395,7 +395,7 @@ export const questions: Question[] = [
     topic: 'Ocean acidification solutions — evaluation essay',
     marks: 15,
     stem: "Ocean acidification occurs when the ocean absorbs atmospheric CO₂, forming carbonic acid. Three possible systems to address ocean acidification are: System 1 — Ocean liming (adding calcium oxide (CaO) to the ocean to neutralise carbonic acid; CaO reacts with CO₂ + H₂O; removes 50 kg CO₂ at a cost of USD 18); System 2 — Seagrass restoration (planting seagrass meadows to absorb dissolved CO₂ by photosynthesis; slow-growing; removes 50 kg CO₂ at a cost of USD 7); System 3 — Shipping emission controls (IMO regulations requiring low-sulfur fuels on ships reduce CO₂ and SO₂; costly for shipping companies; removes 50 kg CO₂ equivalent at a cost of USD 12).",
-    figImages: ['page-29.png', 'page-30.png', 'page-31.png', 'page-32.png'],
+    figImages: ['/images/papers/chemistry-nov-2020/page-29.png', '/images/papers/chemistry-nov-2020/page-30.png', '/images/papers/chemistry-nov-2020/page-31.png', '/images/papers/chemistry-nov-2020/page-32.png'],
     tasks: [
       {
         label: '',

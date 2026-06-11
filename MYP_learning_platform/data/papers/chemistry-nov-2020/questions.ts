@@ -59,7 +59,7 @@ export const questions: Question[] = [
     topicGroup: 'Bonding & Structure',
     marks: 7,
     stem: "In May 2018 Kilauea, a volcano on Hawaii's Big Island, erupted. The volcano expelled lava, ash, and toxic gas. Flows of lava from the crater flowed into the ocean. Three types of lava are basaltic, andesitic, and rhyolitic — classified by their SiO₂ content by mass: Basaltic 45.6–55.2%, Andesitic 52.0–63.7%, Rhyolitic 68.3–77.4%. A 2.00 g sample of rock from Kilauea contained 0.994 g of SiO₂ (49.7%). A 2.00 g sample of rock from Mount Vesuvius contained 1.16 g of SiO₂.",
-    figImages: ['page-01.png'],
+    figImages: ['/images/papers/chemistry-nov-2020/page-01.png'],
     tasks: [
       {
         label: 'a',
@@ -111,7 +111,7 @@ export const questions: Question[] = [
     topicGroup: 'Atomic Structure & Periodic Table',
     marks: 9,
     stem: 'It was once believed each volcano had its own particular type of gas: SO₂ at Mount Etna or HCl at Mount Vesuvius. This proved to be untrue: volcanic gases are mixtures of water vapour, CO₂, H₂S, and others. In the case of Kilauea, gaseous HCl is a major component. Some noble gases such as helium, neon, and argon can also be released.',
-    figImages: ['page-03.png', 'page-04.png'],
+    figImages: ['/images/papers/chemistry-nov-2020/page-03.png', '/images/papers/chemistry-nov-2020/page-04.png'],
     tasks: [
       {
         label: 'a',
@@ -126,7 +126,7 @@ export const questions: Question[] = [
         ph: 'First option shows correct lone pairs on S',
         widget: 'radio_select',
         widgetOptions: ['A', 'B', 'C', 'D'],
-        figImages: ['page-03.png'],
+        figImages: ['/images/papers/chemistry-nov-2020/page-03.png'],
       },
       {
         label: 'c',
@@ -158,7 +158,7 @@ export const questions: Question[] = [
     topicGroup: 'Organic Chemistry',
     marks: 10,
     stem: 'Plastics are synthetic materials with high molecular masses. In the past, synthetic plastics were made using chemicals from oil. Molecules A and B are used to make common plastics (A = ethene, B = propene). Throwaway culture refers to the widespread use of single-use plastics that contribute to a global rubbish problem. Countries have implemented thermovaporization — burning non-recyclable plastic waste to generate electricity.',
-    figImages: ['page-07.png', 'page-08.png', 'page-11.png'],
+    figImages: ['/images/papers/chemistry-nov-2020/page-07.png', '/images/papers/chemistry-nov-2020/page-08.png', '/images/papers/chemistry-nov-2020/page-11.png'],
     tasks: [
       {
         label: 'a',
@@ -167,7 +167,7 @@ export const questions: Question[] = [
         ph: 'Both have C=C double bonds',
         widget: 'radio_select',
         widgetOptions: ['Alkene', 'Alkane', 'Alcohol', 'Carboxylic acid'],
-        figImages: ['page-07.png'],
+        figImages: ['/images/papers/chemistry-nov-2020/page-07.png'],
       },
       {
         label: 'b',
@@ -182,7 +182,7 @@ export const questions: Question[] = [
         text: 'Molecules A and B can be obtained by breaking down long chain molecules such as decane, C₁₀H₂₂: C₁₀H₂₂ → C₃H₆ + C₂H₄ + X. **Deduce** the molecular formula of the missing product X.',
         marks: 1,
         ph: 'Balance carbons and hydrogens',
-        figImages: ['page-08.png'],
+        figImages: ['/images/papers/chemistry-nov-2020/page-08.png'],
       },
       {
         label: 'd',
@@ -207,7 +207,7 @@ export const questions: Question[] = [
         text: 'There has been a move from non-biodegradable to biodegradable plastics. The rate of biodegradation was tested for three plastic samples A, B, and C with different particle sizes. **List** the order of the three samples in order of increasing particle size. **Justify** your answer.',
         marks: 3,
         ph: 'A < C < B; smaller particles = greater surface area = faster reaction',
-        figImages: ['page-11.png'],
+        figImages: ['/images/papers/chemistry-nov-2020/page-11.png'],
       },
     ],
   },
@@ -221,7 +221,7 @@ export const questions: Question[] = [
     topicGroup: 'Chemical Reactions',
     marks: 17,
     stem: 'Glow sticks produce light in a chemical reaction called chemiluminescence. One of the chemicals involved is phenyl oxalate — a catalyst is also present. The catalyst is separated from the reactants inside a sealed tube. A student investigated the effect of temperature on how long a glow stick glows by placing glow sticks in beakers of water at different temperatures.',
-    figImages: ['page-13.png', 'page-14.png', 'page-15.png', 'page-17.png'],
+    figImages: ['/images/papers/chemistry-nov-2020/page-13.png', '/images/papers/chemistry-nov-2020/page-14.png', '/images/papers/chemistry-nov-2020/page-15.png', '/images/papers/chemistry-nov-2020/page-17.png'],
     tasks: [
       {
         label: 'a',
@@ -236,14 +236,14 @@ export const questions: Question[] = [
         ph: 'Ester linkage (C=O with O–C)',
         widget: 'radio_select',
         widgetOptions: ['Alkene', 'Ester', 'Alcohol', 'Carboxylic acid'],
-        figImages: ['page-13.png'],
+        figImages: ['/images/papers/chemistry-nov-2020/page-13.png'],
       },
       {
         label: 'c',
         text: 'The student placed glow sticks in beakers at different temperatures. **Measure** the missing temperature from the thermometer shown (one of: 30°C, 35°C, 50°C, ?).',
         marks: 1,
         ph: '65°C',
-        figImages: ['page-14.png'],
+        figImages: ['/images/papers/chemistry-nov-2020/page-14.png'],
       },
       {
         label: 'd',
@@ -262,7 +262,7 @@ export const questions: Question[] = [
         text: 'The student calculated average data and plotted a graph of average time (min) vs temperature (°C). **Predict** the time taken for the glow stick to stop glowing at 15°C.',
         marks: 2,
         ph: '330 ± 10 minutes',
-        figImages: ['page-17.png'],
+        figImages: ['/images/papers/chemistry-nov-2020/page-17.png'],
       },
       {
         label: 'g',
@@ -282,28 +282,28 @@ export const questions: Question[] = [
     topicGroup: 'Chemical Reactions',
     marks: 20,
     stem: 'Sunlight is important for producing vitamin D and energy. However, exposure to UV light increases the risk of skin cancer. It is recommended to apply sunscreen every 20–30 minutes. Sunscreen contains several chemical compounds including homosalate, titanium dioxide, zinc oxide, and others. A student investigated how many UV-reactive beads changed colour when protected from UV light by three different sunscreens: Hi-Sun (100% beads changed), Solar Flex (28% changed), Aurum (10% changed).',
-    figImages: ['page-19.png', 'page-20.png', 'page-21.png'],
+    figImages: ['/images/papers/chemistry-nov-2020/page-19.png', '/images/papers/chemistry-nov-2020/page-20.png', '/images/papers/chemistry-nov-2020/page-21.png'],
     tasks: [
       {
         label: 'a',
         text: '**State** which is the most effective sunscreen.',
         marks: 1,
         ph: 'Aurum (fewest beads changed colour = best UV block)',
-        figImages: ['page-20.png'],
+        figImages: ['/images/papers/chemistry-nov-2020/page-20.png'],
       },
       {
         label: 'b',
         text: 'The experimental method uses a UV lamp as a substitute for natural sunlight. **Outline** why this UV lamp is not a good model for natural sunlight.',
         marks: 2,
         ph: 'Sunlight has all wavelengths; UV lamp only emits a narrow band / UVA only',
-        figImages: ['page-21.png'],
+        figImages: ['/images/papers/chemistry-nov-2020/page-21.png'],
       },
       {
         label: 'c',
         text: 'Using the equipment below, **design** an investigation to determine which of the individual chemical compounds present in Solar Flex sunscreen provides the best protection from the sun. In your answer you should include: an identification of the variables, a list of the additional equipment you will use, details of your method for manipulating the variables, details of the data you will collect, and how you will ensure your method is safe.',
         marks: 17,
         ph: 'Crit B design: IV=sunscreen ingredient, DV=% beads changed, CVs=time/concentration/UV source',
-        figImages: ['page-21.png'],
+        figImages: ['/images/papers/chemistry-nov-2020/page-21.png'],
       },
     ],
   },
@@ -317,7 +317,7 @@ export const questions: Question[] = [
     topicGroup: 'Chemical Reactions',
     marks: 10,
     stem: 'Solar Flex was one of the sunscreens investigated in question 5. Solar Flex contains: Homosalate, Octisalate, Octinoxate, Titanium dioxide. The research question was: "Is titanium dioxide the best blocker of UV light?" Chemists are also analysing a new chemical, myporium, to see if it can be used to block UV light in sunscreens. They make different concentrations of myporium and measure absorbance (AU). Concentrations tested (μmol dm⁻³): 0, 10, 30, 50, 70, 90, 100.',
-    figImages: ['page-22.png', 'page-23.png', 'page-24.png'],
+    figImages: ['/images/papers/chemistry-nov-2020/page-22.png', '/images/papers/chemistry-nov-2020/page-23.png', '/images/papers/chemistry-nov-2020/page-24.png'],
     tasks: [
       {
         label: 'a',
@@ -336,7 +336,7 @@ export const questions: Question[] = [
         text: 'The results show absorbance increasing with concentration (data: 0→0.00, 10→0.15, 30→0.46, 50→0.60, 70→0.55 anomalous, 90→0.90, 100→1.00 AU). **Plot** a graph of absorbance versus concentration of myporium. Label the axes, give your graph a suitable title, and add a line of best fit.',
         marks: 6,
         ph: 'Title links absorbance and concentration; LOBF from (0,0) through all except 70 μmol dm⁻³',
-        figImages: ['page-23.png', 'page-24.png'],
+        figImages: ['/images/papers/chemistry-nov-2020/page-23.png', '/images/papers/chemistry-nov-2020/page-24.png'],
       },
       {
         label: 'd',
@@ -356,7 +356,7 @@ export const questions: Question[] = [
     topicGroup: 'Environmental Chemistry',
     marks: 12,
     stem: 'Climate change is a global threat recognised by the IPCC. Increased CO₂ from fossil fuels and industrial processes has raised Earth\'s average temperature. In the natural carbon cycle, CO₂ is removed by photosynthesis: carbon dioxide + water → glucose + oxygen. Extensive deforestation reduces this natural carbon sink. Scientists propose reacting Fe with CO₂ and H₂O to form iron carbonate and hydrogen gas: Fe + CO₂ + H₂O → FeCO₃(s) + H₂(g).',
-    figImages: ['page-26.png', 'page-27.png', 'page-28.png'],
+    figImages: ['/images/papers/chemistry-nov-2020/page-26.png', '/images/papers/chemistry-nov-2020/page-27.png', '/images/papers/chemistry-nov-2020/page-28.png'],
     tasks: [
       {
         label: 'a',
@@ -414,7 +414,7 @@ export const questions: Question[] = [
     topicGroup: 'Environmental Chemistry',
     marks: 15,
     stem: 'Scientists have been developing different systems of carbon dioxide sinks to deal with climate change. Three possible systems are: System 1 — Ferrock (new construction material made from waste iron and glass bottles that absorbs CO₂; harder and more stable than concrete; removal of 50 kg CO₂ costs USD10); System 2 — Carbon dioxide capture (CDC) (dissolves CO₂ in carbonate solution; at early stage; scientists exploring combining trapped CO₂ with H₂ to produce hydrocarbons; removal of 50 kg CO₂ costs USD10); System 3 — Conversion of desert areas (plant growth with cell-wall substances retains water/nutrients; reduces sand storms; removal of 50 kg CO₂ costs USD20).',
-    figImages: ['page-29.png', 'page-30.png', 'page-31.png', 'page-32.png'],
+    figImages: ['/images/papers/chemistry-nov-2020/page-29.png', '/images/papers/chemistry-nov-2020/page-30.png', '/images/papers/chemistry-nov-2020/page-31.png', '/images/papers/chemistry-nov-2020/page-32.png'],
     tasks: [
       {
         label: '',

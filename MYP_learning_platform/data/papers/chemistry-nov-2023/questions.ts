@@ -60,7 +60,7 @@ export const questions: Question[] = [
     topicGroup: 'Bonding & Structure',
     marks: 10,
     stem: 'Carbon dioxide (CO₂) is dissolved in cola drinks under pressure to make them fizzy. When the can is opened, the pressure is released and the CO₂ comes out of solution.',
-    figImages: ['chemistry-nov-2023/page-02.png', 'chemistry-nov-2023/page-03.png'],
+    figImages: ['/images/papers/chemistry-nov-2023/page-02.png', '/images/papers/chemistry-nov-2023/page-03.png'],
     tasks: [
       {
         label: 'a',
@@ -108,7 +108,7 @@ export const questions: Question[] = [
     topicGroup: 'Quantitative Chemistry',
     marks: 9,
     stem: 'Phosphoric acid (H₃PO₄) is added to cola to make it sour and to balance the sweet taste of sucrose. In some varieties of cola, sugar is replaced with artificial sweeteners such as xylitol and aspartame.',
-    figImages: ['chemistry-nov-2023/page-03.png', 'chemistry-nov-2023/page-04.png', 'chemistry-nov-2023/page-05.png', 'chemistry-nov-2023/page-06.png'],
+    figImages: ['/images/papers/chemistry-nov-2023/page-03.png', '/images/papers/chemistry-nov-2023/page-04.png', '/images/papers/chemistry-nov-2023/page-05.png', '/images/papers/chemistry-nov-2023/page-06.png'],
     tasks: [
       {
         label: 'a',
@@ -129,7 +129,7 @@ export const questions: Question[] = [
         text: '**Determine** the molecular formula of xylitol from the 3D molecular model shown.',
         marks: 3,
         ph: 'C₅H₁₂O₅',
-        figImages: ['chemistry-nov-2023/page-04.png', 'chemistry-nov-2023/page-05.png'],
+        figImages: ['/images/papers/chemistry-nov-2023/page-04.png', '/images/papers/chemistry-nov-2023/page-05.png'],
         widget: 'fill_blank',
       },
       {
@@ -137,7 +137,7 @@ export const questions: Question[] = [
         text: '**Select** the name of the highlighted functional group in each structure of aspartame.',
         marks: 2,
         ph: 'Carboxylic acid (COOH), Ester (COO)',
-        figImages: ['chemistry-nov-2023/page-05.png', 'chemistry-nov-2023/page-06.png'],
+        figImages: ['/images/papers/chemistry-nov-2023/page-05.png', '/images/papers/chemistry-nov-2023/page-06.png'],
         widget: 'inline_dropdown_select',
         widgetItems: ['First highlighted group', 'Second highlighted group'],
         widgetOptions: ['Alcohol', 'Alkene', 'Carboxylic acid', 'Ester'],
@@ -155,7 +155,7 @@ export const questions: Question[] = [
     topicGroup: 'Atomic Structure & Periodic Table',
     marks: 5,
     stem: 'For many years, food and drink have been stored in cans to make them easy to transport and store. Most cans were made from tin-plated steel. More recently, aluminium has been used to make cans.',
-    figImages: ['chemistry-nov-2023/page-06.png', 'chemistry-nov-2023/page-07.png'],
+    figImages: ['/images/papers/chemistry-nov-2023/page-06.png', '/images/papers/chemistry-nov-2023/page-07.png'],
     tasks: [
       {
         label: 'a',
@@ -183,28 +183,28 @@ export const questions: Question[] = [
     topicGroup: 'States of Matter',
     marks: 15,
     stem: 'In cooking, and in particular the manufacture of sweets, the mass of sugar in the stirring mixture will determine what type of sweets can be produced. A student decided to investigate the maximum mass of sugar that can be dissolved in 100 cm³ of water at different temperatures. The student\'s raw data is shown.',
-    figImages: ['chemistry-nov-2023/page-08.png', 'chemistry-nov-2023/page-09.png'],
+    figImages: ['/images/papers/chemistry-nov-2023/page-08.png', '/images/papers/chemistry-nov-2023/page-09.png'],
     tasks: [
       {
         label: 'a',
         text: '**Present** the student\'s raw data collected during the experiment in a table.',
         marks: 3,
         ph: 'Two labelled columns with units; data in ascending temperature order',
-        figImages: ['chemistry-nov-2023/page-08.png'],
+        figImages: ['/images/papers/chemistry-nov-2023/page-08.png'],
       },
       {
         label: 'b',
         text: '**Present** the data in part (a) in a graph.',
         marks: 5,
         ph: 'Scatter graph; x=Temperature/°C; y=Mass of sugar/g; suitable scale; all points; line of best fit',
-        figImages: ['chemistry-nov-2023/page-09.png'],
+        figImages: ['/images/papers/chemistry-nov-2023/page-09.png'],
       },
       {
         label: 'c',
         text: '**Select** the graph that shows the most appropriate line of best fit for the second student\'s data.',
         marks: 1,
         ph: 'Graph C — best straight line through majority of points',
-        figImages: ['chemistry-nov-2023/page-10.png'],
+        figImages: ['/images/papers/chemistry-nov-2023/page-10.png'],
         widget: 'radio_select',
         widgetOptions: ['A', 'B', 'C', 'D'],
       },
@@ -213,14 +213,14 @@ export const questions: Question[] = [
         text: '**Identify** the data point that is an outlier in part (c). **Suggest** what the expected mass of sugar would be.',
         marks: 2,
         ph: 'Outlier at 60°C; expected mass ≈ 290 g',
-        figImages: ['chemistry-nov-2023/page-10.png', 'chemistry-nov-2023/page-11.png'],
+        figImages: ['/images/papers/chemistry-nov-2023/page-10.png', '/images/papers/chemistry-nov-2023/page-11.png'],
       },
       {
         label: 'e',
         text: 'Candy floss is made from pure sugar. The machine melts sugar at 160°C, spins it through holes to form fine threads, and the threads solidify in the collection bowl. **Select** the state and expected behaviour of sugar in each location when the candy floss machine is operating.',
         marks: 4,
         ph: 'Spinning container = liquid (takes shape of container); Collection bowl = solid (no change of shape)',
-        figImages: ['chemistry-nov-2023/page-11.png', 'chemistry-nov-2023/page-12.png', 'chemistry-nov-2023/page-13.png'],
+        figImages: ['/images/papers/chemistry-nov-2023/page-11.png', '/images/papers/chemistry-nov-2023/page-12.png', '/images/papers/chemistry-nov-2023/page-13.png'],
         widget: 'inline_dropdown_select',
         widgetItems: [
           'Sugar in spinning container — State',
@@ -251,7 +251,7 @@ export const questions: Question[] = [
     topicGroup: 'Chemical Reactions',
     marks: 12,
     stem: 'Chemical changes take place when food is cooked. When eggs are cooked there is a change in colour, state or even gas produced, all of which are indicators that a chemical change has taken place. The Maillard reaction between sugars and proteins causes browning in foods such as bread and toast.',
-    figImages: ['chemistry-nov-2023/page-14.png', 'chemistry-nov-2023/page-15.png', 'chemistry-nov-2023/page-16.png', 'chemistry-nov-2023/page-17.png'],
+    figImages: ['/images/papers/chemistry-nov-2023/page-14.png', '/images/papers/chemistry-nov-2023/page-15.png', '/images/papers/chemistry-nov-2023/page-16.png', '/images/papers/chemistry-nov-2023/page-17.png'],
     tasks: [
       {
         label: 'a',
@@ -271,14 +271,14 @@ export const questions: Question[] = [
         text: '**Outline** why bread turns brown when toast is made.',
         marks: 3,
         ph: 'Sugar and protein react with heat; Maillard reaction causes brown colour',
-        figImages: ['chemistry-nov-2023/page-17.png'],
+        figImages: ['/images/papers/chemistry-nov-2023/page-17.png'],
       },
       {
         label: 'd',
         text: 'A student lowered the temperature of the toaster and heated a piece of bread for the same time. **Predict** how the appearance would be different to the original toast shown. **Justify** your answer.',
         marks: 2,
         ph: 'Less brown; lower temperature → slower/fewer Maillard reactions',
-        figImages: ['chemistry-nov-2023/page-17.png'],
+        figImages: ['/images/papers/chemistry-nov-2023/page-17.png'],
       },
     ],
   },
@@ -293,7 +293,7 @@ export const questions: Question[] = [
     topicGroup: 'Chemical Reactions',
     marks: 25,
     stem: 'Protein is an important part of the human diet. Another method of causing chemical change in food is to use acids from fruit juice. Ceviche uses lemon juice and lime juice to "cook" fish. A company has developed a new laboratory-based meat substitute called MR-P that is cooked using lime juice and lemon juice. After 25 minutes, the product is ready to eat. A student investigated the best juice to cook MR-P by measuring the force needed to break samples cooked in different juices.',
-    figImages: ['chemistry-nov-2023/page-18.png', 'chemistry-nov-2023/page-19.png', 'chemistry-nov-2023/page-20.png'],
+    figImages: ['/images/papers/chemistry-nov-2023/page-18.png', '/images/papers/chemistry-nov-2023/page-19.png', '/images/papers/chemistry-nov-2023/page-20.png'],
     tasks: [
       {
         label: 'a',
@@ -325,14 +325,14 @@ export const questions: Question[] = [
         text: 'The student wanted to know the minimum pH that would cook MR-P, between pH 2.0 and 3.8. They decided to use HCl to model the behaviour of fruit juice. **Suggest** a research question for the student\'s investigation.',
         marks: 1,
         ph: 'What is the effect of pH on (breaking force of MR-P)?',
-        figImages: ['chemistry-nov-2023/page-21.png'],
+        figImages: ['/images/papers/chemistry-nov-2023/page-21.png'],
       },
       {
         label: 'f',
         text: '**Design** a method to identify the pH that would cook MR-P. In your answer you should include:\n• the independent, dependent and two control variables\n• a list of equipment you will use\n• details of the method you will use\n• how many measurements you will take to collect sufficient data\n• safety considerations.',
         marks: 17,
         ph: 'IV=pH; DV=breaking force; CVs=size of sample+time; equipment list; ≥5 pH levels; ≥3 trials; acid safety',
-        figImages: ['chemistry-nov-2023/page-21.png', 'chemistry-nov-2023/page-22.png'],
+        figImages: ['/images/papers/chemistry-nov-2023/page-21.png', '/images/papers/chemistry-nov-2023/page-22.png'],
       },
     ],
   },
@@ -347,21 +347,21 @@ export const questions: Question[] = [
     topicGroup: 'Environmental Chemistry',
     marks: 9,
     stem: 'Many people around the world are choosing to reduce the amount of meat they eat. The graphs show data comparing food production of different diets. Due to increasing demand for meat substitutes, a growing industry provides plant-based products such as beef burgers and chicken nuggets. The table below shows nutritional information for a plant-based burger designed to taste like meat.',
-    figImages: ['chemistry-nov-2023/page-22.png', 'chemistry-nov-2023/page-23.png', 'chemistry-nov-2023/page-24.png', 'chemistry-nov-2023/page-25.png'],
+    figImages: ['/images/papers/chemistry-nov-2023/page-22.png', '/images/papers/chemistry-nov-2023/page-23.png', '/images/papers/chemistry-nov-2023/page-24.png', '/images/papers/chemistry-nov-2023/page-25.png'],
     tasks: [
       {
         label: 'a',
         text: '**Using** the graphs above, calculate the carbon footprint from the production of protein in the average US diet.',
         marks: 2,
         ph: '2000 − 950 = 1050 kg CO₂ eq (accept 1050–1100)',
-        figImages: ['chemistry-nov-2023/page-23.png', 'chemistry-nov-2023/page-24.png'],
+        figImages: ['/images/papers/chemistry-nov-2023/page-23.png', '/images/papers/chemistry-nov-2023/page-24.png'],
       },
       {
         label: 'b',
         text: '**Using** the graphs in part (a) and the data in the table above, **discuss and evaluate** the advantages and disadvantages of plant-based burgers compared to beef burgers. In your answer you should include:\n• the advantages of the production of plant-based protein compared to meat-based protein\n• a comparison of the nutritional data\n• your opinion of why people may choose plant-based burgers rather than beef burgers.',
         marks: 7,
         ph: 'AD: lower carbon/water/land; Nutritional data: similar energy/protein, less fat; opinion justified',
-        figImages: ['chemistry-nov-2023/page-24.png', 'chemistry-nov-2023/page-25.png'],
+        figImages: ['/images/papers/chemistry-nov-2023/page-24.png', '/images/papers/chemistry-nov-2023/page-25.png'],
       },
     ],
   },
@@ -376,7 +376,7 @@ export const questions: Question[] = [
     topicGroup: 'Environmental Chemistry',
     marks: 15,
     stem: 'In the effort to reduce the environmental impact of the meat industry and to meet the demands of a growing global population, companies have developed a process to grow meat in a lab using a small sample of animal cells. The lab-grown cells combine to form muscle tissue. During the growth process, the cells could be harvested from a live animal and then checked for animal borne disease. From one tissue sample, 80,000 burgers can be grown compared to 1,250 from one cow. The cost of a lab-grown burger has reduced significantly to $10 per burger in 2020. In the future, it is anticipated that more people will choose lab-grown burgers and they will become widely available.',
-    figImages: ['chemistry-nov-2023/page-26.png', 'chemistry-nov-2023/page-27.png', 'chemistry-nov-2023/page-28.png'],
+    figImages: ['/images/papers/chemistry-nov-2023/page-26.png', '/images/papers/chemistry-nov-2023/page-27.png', '/images/papers/chemistry-nov-2023/page-28.png'],
     tasks: [
       {
         label: '',

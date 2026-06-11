@@ -20,7 +20,7 @@ export const questions: Question[] = [
     topic: 'Atomic structure & the periodic table',
     marks: 4,
     stem: 'Ancient Roman concrete is famous for its incredible durability, lasting more than 2,000 years. One of the key minerals that gives Roman concrete its strength is diopside. Diopside is a naturally occurring mineral. The chemical formula for diopside is CaMgSi₂O₆.',
-    figImages: ['page-02.png'],
+    figImages: ['/images/papers/chemistry-nov-2019/page-02.png'],
     tasks: [
       {
         label: 'a',
@@ -56,7 +56,7 @@ export const questions: Question[] = [
     topic: 'Properties of metals & mixtures',
     marks: 11,
     stem: 'Guitar strings have been made from bronze (an alloy of copper and tin) for hundreds of years. Modern guitar strings use various brass (copper-zinc) and steel alloys. Different compositions of metal give strings different acoustic properties. Here are the compositions and properties of four different guitar string alloys.',
-    figImages: ['page-03.png', 'page-04.png', 'page-05.png', 'page-06.png'],
+    figImages: ['/images/papers/chemistry-nov-2019/page-03.png', '/images/papers/chemistry-nov-2019/page-04.png', '/images/papers/chemistry-nov-2019/page-05.png', '/images/papers/chemistry-nov-2019/page-06.png'],
     tasks: [
       {
         label: 'a',
@@ -107,7 +107,7 @@ export const questions: Question[] = [
     topic: 'Radioactivity & atomic structure',
     marks: 10,
     stem: 'Fireworks contain various metal salts that produce colourful effects when burned. Historical fireworks also contained small amounts of radium compounds for luminous effects. Scientific investigations into the chemistry of fireworks led to the discovery of actinium-227 and francium-223 as decay products of uranium. Both actinium and francium are radioactive elements.',
-    figImages: ['page-07.png', 'page-08.png', 'page-09.png'],
+    figImages: ['/images/papers/chemistry-nov-2019/page-07.png', '/images/papers/chemistry-nov-2019/page-08.png', '/images/papers/chemistry-nov-2019/page-09.png'],
     tasks: [
       {
         label: 'a',
@@ -155,7 +155,7 @@ export const questions: Question[] = [
     topic: 'Scientific investigation – soil wetting agents',
     marks: 16,
     stem: 'A student investigates how much water different brands of soil wetting agent can absorb when mixed with sandy soil. The student measures 400 cm³ of water into a beaker, adds a fixed mass of treated sandy soil containing a wetting agent, stirs for 5 minutes, and then pours the mixture through a filter. The volume of water left over is recorded.',
-    figImages: ['page-11.png', 'page-12.png', 'page-13.png', 'page-14.png'],
+    figImages: ['/images/papers/chemistry-nov-2019/page-11.png', '/images/papers/chemistry-nov-2019/page-12.png', '/images/papers/chemistry-nov-2019/page-13.png', '/images/papers/chemistry-nov-2019/page-14.png'],
     tasks: [
       {
         label: 'a',
@@ -200,7 +200,7 @@ export const questions: Question[] = [
     topic: 'Environmental impact & experimental design',
     marks: 20,
     stem: 'The main insulating material in disposable coffee cups is expanded polystyrene (EPS) or paper with a plastic lining. Approximately 500 billion disposable coffee cups are used worldwide each year, and fewer than 1% are recycled due to their plastic lining. Reusable cups made from ceramic or stainless steel can be used hundreds of times but require energy and water for washing.',
-    figImages: ['page-14.png', 'page-15.png', 'page-16.png'],
+    figImages: ['/images/papers/chemistry-nov-2019/page-14.png', '/images/papers/chemistry-nov-2019/page-15.png', '/images/papers/chemistry-nov-2019/page-16.png'],
     tasks: [
       {
         label: 'a',
@@ -225,7 +225,7 @@ export const questions: Question[] = [
     topic: 'Data analysis – cup insulation',
     marks: 8,
     stem: 'A researcher tests five brands of reusable coffee cup. Each cup has a different wall thickness and a different type of insulation material. The researcher measures how much heat is lost after 30 minutes for each cup brand.',
-    figImages: ['page-17.png', 'page-18.png'],
+    figImages: ['/images/papers/chemistry-nov-2019/page-17.png', '/images/papers/chemistry-nov-2019/page-18.png'],
     tasks: [
       {
         label: 'a',
@@ -256,7 +256,7 @@ export const questions: Question[] = [
     topic: 'Chromatography & data interpretation',
     marks: 8,
     stem: 'A forensic scientist investigates the ink dyes used in four different brands of blue pen (A, B, C and D) to help identify which pen was used to write a disputed signature. A sample taken from the document is also tested using chromatography.',
-    figImages: ['page-19.png', 'page-20.png', 'page-21.png'],
+    figImages: ['/images/papers/chemistry-nov-2019/page-19.png', '/images/papers/chemistry-nov-2019/page-20.png', '/images/papers/chemistry-nov-2019/page-21.png'],
     tasks: [
       {
         label: 'a',
@@ -289,7 +289,7 @@ export const questions: Question[] = [
     topic: 'Organic chemistry – biopolymers & packaging',
     marks: 10,
     stem: 'Polyhydroxyalkanoate (PHA) is a bioplastic produced by bacteria feeding on organic waste. It can be used as an environmentally friendly alternative to conventional plastics. High-density polyethylene (HDPE) is the most widely used packaging plastic today.',
-    figImages: ['page-22.png', 'page-23.png', 'page-24.png'],
+    figImages: ['/images/papers/chemistry-nov-2019/page-22.png', '/images/papers/chemistry-nov-2019/page-23.png', '/images/papers/chemistry-nov-2019/page-24.png'],
     tasks: [
       {
         label: 'a',
@@ -317,7 +317,7 @@ export const questions: Question[] = [
     topic: 'Sustainability – wind energy vs fossil fuels',
     marks: 13,
     stem: 'Fossil fuels such as coal, oil and natural gas supply approximately 80% of the world\'s energy needs. Scientists and engineers are developing renewable energy sources to replace fossil fuels. Wind energy is produced by wind turbines, which convert kinetic energy from wind into electricity. Wind turbines are made from fibreglass, steel and rare earth metals. Fossil fuel power stations release CO₂ and other pollutants. Wind turbines can be built on farmland, allowing agricultural use to continue underneath them, but they require large areas of land and can affect local wildlife and communities.',
-    figImages: ['page-25.png'],
+    figImages: ['/images/papers/chemistry-nov-2019/page-25.png'],
     tasks: [
       {
         label: '',

@@ -104,7 +104,7 @@ export const questions: Question[] = [
     topic: 'Fumarolic gases and noble gas isotopes',
     marks: 9,
     stem: 'Scientists studying Mount Etna have identified fumarolic gases at volcanic vents, including hydrogen sulfide (H₂S), sulfur dioxide (SO₂), and carbon dioxide (CO₂). These gases can dissolve in rainwater or in shallow crater pools. Noble gases such as helium, neon, and krypton are also emitted from volcanic vents and are used to study magma movement.',
-    figImages: ['page-03.png', 'page-04.png'],
+    figImages: ['/images/papers/chemistry-nov-2020/page-03.png', '/images/papers/chemistry-nov-2020/page-04.png'],
     tasks: [
       {
         label: 'a',
@@ -119,7 +119,7 @@ export const questions: Question[] = [
         ph: 'First option shows correct lone pairs on O',
         widget: 'radio_select',
         widgetOptions: ['A', 'B', 'C', 'D'],
-        figImages: ['page-03.png'],
+        figImages: ['/images/papers/chemistry-nov-2020/page-03.png'],
       },
       {
         label: 'c',
@@ -149,7 +149,7 @@ export const questions: Question[] = [
     topic: 'Synthetic rubber and industrial processing',
     marks: 10,
     stem: 'Synthetic rubber is produced from petroleum-derived monomers. Two common monomers used in rubber manufacture are molecule A (butene, C₄H₈) and molecule B (pentene, C₅H₁₀), both obtained from the cracking of longer-chain hydrocarbons. Factories producing synthetic rubber must manage waste gases to minimise environmental impact. Some countries now require that non-recyclable rubber waste is incinerated using a controlled thermovaporization process to generate electricity.',
-    figImages: ['page-07.png', 'page-08.png', 'page-11.png'],
+    figImages: ['/images/papers/chemistry-nov-2020/page-07.png', '/images/papers/chemistry-nov-2020/page-08.png', '/images/papers/chemistry-nov-2020/page-11.png'],
     tasks: [
       {
         label: 'a',
@@ -158,7 +158,7 @@ export const questions: Question[] = [
         ph: 'Both have C=C double bonds',
         widget: 'radio_select',
         widgetOptions: ['Alkene', 'Alkane', 'Alcohol', 'Carboxylic acid'],
-        figImages: ['page-07.png'],
+        figImages: ['/images/papers/chemistry-nov-2020/page-07.png'],
       },
       {
         label: 'b',
@@ -173,7 +173,7 @@ export const questions: Question[] = [
         text: 'Molecules A and B are obtained by cracking hexadecane, C₁₆H₃₄: C₁₆H₃₄ → C₄H₈ + C₅H₁₀ + X. **Deduce** the molecular formula of the missing product X.',
         marks: 1,
         ph: 'Balance carbons and hydrogens',
-        figImages: ['page-08.png'],
+        figImages: ['/images/papers/chemistry-nov-2020/page-08.png'],
       },
       {
         label: 'd',
@@ -198,7 +198,7 @@ export const questions: Question[] = [
         text: 'There has been a move from non-biodegradable to biodegradable synthetic rubbers. The rate of biodegradation was tested for three rubber samples A, B, and C with different particle sizes. **List** the order of the three samples in order of increasing particle size. **Justify** your answer.',
         marks: 3,
         ph: 'C < A < B; smaller particles = greater surface area = faster reaction',
-        figImages: ['page-11.png'],
+        figImages: ['/images/papers/chemistry-nov-2020/page-11.png'],
       },
     ],
   },
@@ -210,7 +210,7 @@ export const questions: Question[] = [
     topic: 'Firefly bioluminescence investigation',
     marks: 17,
     stem: 'Fireflies produce light through a bioluminescent reaction. Luciferin (the light-emitting substrate) is oxidised in the presence of luciferase — an enzyme that acts as a catalyst. A student investigated the effect of temperature on the duration of firefly light emission by placing firefly extract solutions in water baths at different temperatures.',
-    figImages: ['page-13.png', 'page-14.png', 'page-15.png', 'page-17.png'],
+    figImages: ['/images/papers/chemistry-nov-2020/page-13.png', '/images/papers/chemistry-nov-2020/page-14.png', '/images/papers/chemistry-nov-2020/page-15.png', '/images/papers/chemistry-nov-2020/page-17.png'],
     tasks: [
       {
         label: 'a',
@@ -225,14 +225,14 @@ export const questions: Question[] = [
         ph: 'Ester linkage (C=O with O–C)',
         widget: 'radio_select',
         widgetOptions: ['Alkene', 'Ester', 'Alcohol', 'Carboxylic acid'],
-        figImages: ['page-13.png'],
+        figImages: ['/images/papers/chemistry-nov-2020/page-13.png'],
       },
       {
         label: 'c',
         text: 'The student placed solutions in water baths at different temperatures. **Measure** the missing temperature from the thermometer shown (temperatures used: 30°C, 40°C, 55°C, ?).',
         marks: 1,
         ph: '70°C',
-        figImages: ['page-14.png'],
+        figImages: ['/images/papers/chemistry-nov-2020/page-14.png'],
       },
       {
         label: 'd',
@@ -251,7 +251,7 @@ export const questions: Question[] = [
         text: 'The student plotted a graph of average light duration (min) vs temperature (°C). **Predict** the time taken for the firefly light to stop at 10°C.',
         marks: 2,
         ph: '440 ± 20 minutes',
-        figImages: ['page-17.png'],
+        figImages: ['/images/papers/chemistry-nov-2020/page-17.png'],
       },
       {
         label: 'g',
@@ -269,28 +269,28 @@ export const questions: Question[] = [
     topic: 'SPF sunscreen and UV protection investigation',
     marks: 20,
     stem: 'Prolonged exposure to UV light from the sun can damage skin cells and increase the risk of skin cancer. SPF (Sun Protection Factor) sunscreens contain chemical compounds that absorb or reflect UV radiation. A student investigated how many UV-reactive beads changed colour when covered by three different sunscreens: BioBlock (5% beads changed), NatureGuard (35% changed), SunProtect (68% changed).',
-    figImages: ['page-19.png', 'page-20.png', 'page-21.png'],
+    figImages: ['/images/papers/chemistry-nov-2020/page-19.png', '/images/papers/chemistry-nov-2020/page-20.png', '/images/papers/chemistry-nov-2020/page-21.png'],
     tasks: [
       {
         label: 'a',
         text: '**State** which is the most effective sunscreen.',
         marks: 1,
         ph: 'BioBlock (fewest beads changed colour = best UV block)',
-        figImages: ['page-20.png'],
+        figImages: ['/images/papers/chemistry-nov-2020/page-20.png'],
       },
       {
         label: 'b',
         text: 'The experimental method uses a UV LED lamp as a substitute for natural sunlight. **Outline** why this UV lamp is not a good model for natural sunlight.',
         marks: 2,
         ph: 'Sunlight has all wavelengths; UV lamp only emits a narrow band',
-        figImages: ['page-21.png'],
+        figImages: ['/images/papers/chemistry-nov-2020/page-21.png'],
       },
       {
         label: 'c',
         text: 'Using the equipment below, **design** an investigation to determine which of the individual chemical compounds present in NatureGuard sunscreen provides the best protection from the sun. In your answer you should include: an identification of the variables, a list of the additional equipment you will use, details of your method for manipulating the variables, details of the data you will collect, and how you will ensure your method is safe.',
         marks: 17,
         ph: 'Crit B design: IV=sunscreen ingredient, DV=% beads changed, CVs=time/concentration/UV source',
-        figImages: ['page-21.png'],
+        figImages: ['/images/papers/chemistry-nov-2020/page-21.png'],
       },
     ],
   },
@@ -302,7 +302,7 @@ export const questions: Question[] = [
     topic: 'UV absorbance analysis — ethanolamine experiment',
     marks: 10,
     stem: 'NatureGuard was one of the sunscreens investigated in question 5. NatureGuard contains: Homosalate, Avobenzone, Titanium dioxide, Zinc oxide. The research question was: "Is avobenzone the best blocker of UV light?" Chemists are also testing a new compound, ethanolamine, to see if it can be used to block UV light in sunscreens. They make different concentrations of ethanolamine and measure absorbance (AU). Concentrations tested (μmol dm⁻³): 0, 5, 15, 25, 35, 45, 50.',
-    figImages: ['page-22.png', 'page-23.png', 'page-24.png'],
+    figImages: ['/images/papers/chemistry-nov-2020/page-22.png', '/images/papers/chemistry-nov-2020/page-23.png', '/images/papers/chemistry-nov-2020/page-24.png'],
     tasks: [
       {
         label: 'a',
@@ -321,7 +321,7 @@ export const questions: Question[] = [
         text: 'The results show absorbance increasing with concentration (data: 0→0.00, 5→0.11, 15→0.36, 25→0.54, 35→0.50 anomalous, 45→0.74, 50→0.85 AU). **Plot** a graph of absorbance versus concentration of ethanolamine. Label the axes, give your graph a suitable title, and add a line of best fit.',
         marks: 6,
         ph: 'Title links absorbance and concentration; LOBF from (0,0) through all except 35 μmol dm⁻³',
-        figImages: ['page-23.png', 'page-24.png'],
+        figImages: ['/images/papers/chemistry-nov-2020/page-23.png', '/images/papers/chemistry-nov-2020/page-24.png'],
       },
       {
         label: 'd',
@@ -339,7 +339,7 @@ export const questions: Question[] = [
     topic: 'Carbon cycle, deforestation, and Mg-based CO₂ capture',
     marks: 12,
     stem: "Climate change is driven by increasing atmospheric CO₂. In the natural carbon cycle, CO₂ is removed by photosynthesis. Deforestation removes natural carbon sinks. Scientists are investigating reactions of magnesium (Mg) with CO₂ and H₂O to capture carbon dioxide as a solid mineral: Mg + CO₂ + H₂O → MgCO₃(s) + H₂(g). The H₂ produced could also serve as a clean fuel.",
-    figImages: ['page-26.png', 'page-27.png', 'page-28.png'],
+    figImages: ['/images/papers/chemistry-nov-2020/page-26.png', '/images/papers/chemistry-nov-2020/page-27.png', '/images/papers/chemistry-nov-2020/page-28.png'],
     tasks: [
       {
         label: 'a',
@@ -395,7 +395,7 @@ export const questions: Question[] = [
     topic: 'Renewable energy systems — evaluation essay',
     marks: 15,
     stem: 'Scientists are developing renewable energy systems to reduce CO₂ emissions from fossil fuels. Three possible systems are: System 1 — Solar energy (photovoltaic panels convert sunlight to electricity; no CO₂ in operation but energy intensive to manufacture; reduces 50 kg CO₂ per year costs USD 8); System 2 — Wind energy (turbines convert kinetic energy of wind to electricity; no CO₂ in operation; intermittent power; reduces 50 kg CO₂ per year costs USD 5); System 3 — Tidal energy (barrages or underwater turbines harness predictable tidal flows; no CO₂ in operation; disrupts marine habitats; reduces 50 kg CO₂ per year costs USD 15).',
-    figImages: ['page-29.png', 'page-30.png', 'page-31.png', 'page-32.png'],
+    figImages: ['/images/papers/chemistry-nov-2020/page-29.png', '/images/papers/chemistry-nov-2020/page-30.png', '/images/papers/chemistry-nov-2020/page-31.png', '/images/papers/chemistry-nov-2020/page-32.png'],
     tasks: [
       {
         label: '',

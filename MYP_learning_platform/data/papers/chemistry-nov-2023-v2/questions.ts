@@ -56,7 +56,7 @@ export const questions: Question[] = [
     topic: 'Chemical Equilibrium & Bonding',
     marks: 10,
     stem: 'Carbon dioxide (CO₂) is injected under pressure into water to make soda water. Soda water machines allow people to carbonate tap water at home. When the bottle is sealed, an equilibrium is established between dissolved CO₂ and the gas above the liquid.',
-    figImages: ['chemistry-nov-2023/page-02.png', 'chemistry-nov-2023/page-03.png'],
+    figImages: ['/images/papers/chemistry-nov-2023/page-02.png', '/images/papers/chemistry-nov-2023/page-03.png'],
     tasks: [
       {
         label: 'a',

@@ -31,7 +31,7 @@ export const questions: Question[] = [
     topicGroup: 'Atomic Structure & Periodic Table',
     marks: 4,
     stem: 'Terracotta is made from baked clay. Clay is composed of a number of minerals including kaolin. One of the main compounds found in kaolin is nacrite. The formula for nacrite is Al₂Si₂O₅(OH)₄.',
-    figImages: ['page-02.png'],
+    figImages: ['/images/papers/chemistry-nov-2019/page-02.png'],
     tasks: [
       {
         label: 'a',
@@ -69,7 +69,7 @@ export const questions: Question[] = [
     topicGroup: 'Bonding & Structure',
     marks: 11,
     stem: 'The Slinky was invented in 1943 and was made of a type of high carbon steel. High carbon steel is composed of iron with carbon and manganese. In the 1970s, plastic became more common and a large number of cheaper Slinkys were produced from this new material.',
-    figImages: ['page-03.png', 'page-04.png', 'page-05.png', 'page-06.png'],
+    figImages: ['/images/papers/chemistry-nov-2019/page-03.png', '/images/papers/chemistry-nov-2019/page-04.png', '/images/papers/chemistry-nov-2019/page-05.png', '/images/papers/chemistry-nov-2019/page-06.png'],
     tasks: [
       {
         label: 'a',
@@ -122,7 +122,7 @@ export const questions: Question[] = [
     topicGroup: 'Nuclear Chemistry',
     marks: 10,
     stem: 'The Gilbert U-238 Atomic Energy Lab was a chemistry set produced in the 1950s. It contained real radioactive samples including strontium-90 and radium-226, alongside other materials such as zinc sulphide.',
-    figImages: ['page-07.png', 'page-08.png', 'page-09.png'],
+    figImages: ['/images/papers/chemistry-nov-2019/page-07.png', '/images/papers/chemistry-nov-2019/page-08.png', '/images/papers/chemistry-nov-2019/page-09.png'],
     tasks: [
       {
         label: 'a',
@@ -172,7 +172,7 @@ export const questions: Question[] = [
     topicGroup: 'States of Matter',
     marks: 16,
     stem: 'A student investigates how much water different hydrogels can absorb. The student measures 400 cm³ of water into a beaker, adds a fixed mass of hydrogel, stirs for 5 minutes, and then pours the mixture through a filter. The volume of water left over is recorded.',
-    figImages: ['page-11.png', 'page-12.png', 'page-13.png', 'page-14.png'],
+    figImages: ['/images/papers/chemistry-nov-2019/page-11.png', '/images/papers/chemistry-nov-2019/page-12.png', '/images/papers/chemistry-nov-2019/page-13.png', '/images/papers/chemistry-nov-2019/page-14.png'],
     tasks: [
       {
         label: 'a',
@@ -219,7 +219,7 @@ export const questions: Question[] = [
     topicGroup: 'Environmental Chemistry',
     marks: 20,
     stem: 'The main absorbent material in disposable nappies is hydrogel. In the UK, 2–3 % of all household waste is estimated to be disposable nappies. This is approximately 3 × 10⁹ nappies, equivalent to approximately 5 × 10⁵ kg of waste (nappy + body waste) each year. The alternative is reusable nappies, which reduce demands on landfill but require energy and water for washing.',
-    figImages: ['page-14.png', 'page-15.png', 'page-16.png'],
+    figImages: ['/images/papers/chemistry-nov-2019/page-14.png', '/images/papers/chemistry-nov-2019/page-15.png', '/images/papers/chemistry-nov-2019/page-16.png'],
     tasks: [
       {
         label: 'a',
@@ -246,7 +246,7 @@ export const questions: Question[] = [
     topicGroup: 'States of Matter',
     marks: 8,
     stem: 'A student investigates different brands of nappy. Each nappy contains a different mass of hydrogel and a different mass of fluff pulp (cellulose material). The student measures the total volume of water each brand absorbs.',
-    figImages: ['page-17.png', 'page-18.png'],
+    figImages: ['/images/papers/chemistry-nov-2019/page-17.png', '/images/papers/chemistry-nov-2019/page-18.png'],
     tasks: [
       {
         label: 'a',
@@ -279,7 +279,7 @@ export const questions: Question[] = [
     topicGroup: 'States of Matter',
     marks: 8,
     stem: 'A scientist investigates the dyes used to colour disposable nappies. The scientist tests four different dyes (A, B, C and D) and a sample from the nappy using chromatography.',
-    figImages: ['page-19.png', 'page-20.png', 'page-21.png'],
+    figImages: ['/images/papers/chemistry-nov-2019/page-19.png', '/images/papers/chemistry-nov-2019/page-20.png', '/images/papers/chemistry-nov-2019/page-21.png'],
     tasks: [
       {
         label: 'a',
@@ -314,7 +314,7 @@ export const questions: Question[] = [
     topicGroup: 'Organic Chemistry',
     marks: 10,
     stem: 'Plastic is a synthetic material made from a variety of organic polymers. Polymers are made up from a large number of monomers that are chemically bonded together.',
-    figImages: ['page-22.png', 'page-23.png', 'page-24.png'],
+    figImages: ['/images/papers/chemistry-nov-2019/page-22.png', '/images/papers/chemistry-nov-2019/page-23.png', '/images/papers/chemistry-nov-2019/page-24.png'],
     tasks: [
       {
         label: 'a',
@@ -344,7 +344,7 @@ export const questions: Question[] = [
     topicGroup: 'Environmental Chemistry',
     marks: 13,
     stem: 'Most plastics are made from chemicals that come from oil. Scientists are finding innovative solutions to produce plastics that have less impact on the environment. One solution is to produce plastic using algae. Oil-based plastics are made from fossil fuels and have unlimited uses but they release greenhouse gases. Algae-based plastics can be made into new plastic alternatively it can be reused and made into household items. In some areas of the ocean, plastics form large islands of waste that pose threats to wildlife.',
-    figImages: ['page-25.png'],
+    figImages: ['/images/papers/chemistry-nov-2019/page-25.png'],
     tasks: [
       {
         label: '',

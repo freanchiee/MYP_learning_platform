@@ -56,7 +56,7 @@ export const questions: Question[] = [
     topic: 'Periodic Table, Organic Chemistry & States of Matter',
     marks: 9,
     stem: 'Medieval chemists called alchemists attempted to turn common metals into gold and silver. They also refined and purified medicinal compounds. One technique they developed was distillation, used to purify plant extracts and produce concentrated alcohol for medicines. Magnesium sulfate (MgSO₄), known as "bitter salt" or Epsom salt, was discovered through analysis of natural spring water.',
-    figImages: ['chemistry-nov-2024/page-01.png'],
+    figImages: ['/images/papers/chemistry-nov-2024/page-01.png'],
     tasks: [
       {
         label: 'a',
@@ -79,7 +79,7 @@ export const questions: Question[] = [
         text: '**Describe** the state changes that take place from X to Y and from Y to Z on the distillation apparatus image. Use particle theory in your answer.',
         marks: 4,
         ph: 'X to Y: liquid evaporates (particles gain energy, escape as gas); Y to Z: gas condenses (particles lose energy, return to liquid)',
-        figImages: ['chemistry-nov-2024/page-01.png'],
+        figImages: ['/images/papers/chemistry-nov-2024/page-01.png'],
       },
       {
         label: 'd',
@@ -88,7 +88,7 @@ export const questions: Question[] = [
         ph: 'B — CH₃CH₂CH₂CH₂OH: four carbons with Hs, ending in OH',
         widget: 'radio_select',
         widgetOptions: ['A', 'B', 'C', 'D'],
-        figImages: ['chemistry-nov-2024/page-02.png'],
+        figImages: ['/images/papers/chemistry-nov-2024/page-02.png'],
       },
       {
         label: 'e',
@@ -108,7 +108,7 @@ export const questions: Question[] = [
     topic: 'Covalent Bonding, Moles & Rates of Reaction',
     marks: 11,
     stem: 'Carbon dioxide (CO₂) is produced naturally during fermentation and has many industrial uses, including carbonating beverages, preserving food, and as a supercritical solvent to decaffeinate coffee. CO₂ has a boiling point of −78 °C and can exist as "dry ice" in solid form.',
-    figImages: ['chemistry-nov-2024/page-03.png'],
+    figImages: ['/images/papers/chemistry-nov-2024/page-03.png'],
     tasks: [
       {
         label: 'a',
@@ -123,7 +123,7 @@ export const questions: Question[] = [
         text: 'CO₂ is dissolved in sparkling wine under high pressure. **Explain** why the liquid foams and bubbles are seen when a bottle of sparkling wine is opened and poured. In your answer include why the fizzing decreases over time.',
         marks: 3,
         ph: 'Pressure drops on opening; CO₂ escapes from solution; bubbles form; fizzing decreases as dissolved CO₂ is depleted',
-        figImages: ['chemistry-nov-2024/page-04.png'],
+        figImages: ['/images/papers/chemistry-nov-2024/page-04.png'],
       },
       {
         label: 'c',
@@ -131,7 +131,7 @@ export const questions: Question[] = [
         marks: 4,
         ph: 'n(CO₂)=264/44=6mol; n(C₂H₅OH)=6/2=3mol; m=3×46=138g=1.38×10² g',
         widget: 'fill_blank',
-        figImages: ['chemistry-nov-2024/page-04.png'],
+        figImages: ['/images/papers/chemistry-nov-2024/page-04.png'],
       },
       {
         label: 'd',
@@ -150,7 +150,7 @@ export const questions: Question[] = [
     topic: 'Periodic Table & Noble Gases',
     marks: 8,
     stem: 'Noble gases are used in many applications including food preservation, lighting, and anaesthesia. Nitrogen and xenon (Xe) are sometimes used in food packaging to maintain freshness.',
-    figImages: ['chemistry-nov-2024/page-05.png'],
+    figImages: ['/images/papers/chemistry-nov-2024/page-05.png'],
     tasks: [
       {
         label: 'a',
@@ -159,7 +159,7 @@ export const questions: Question[] = [
         ph: 'Oxygen',
         widget: 'radio_select',
         widgetOptions: ['Nitrogen', 'Oxygen', 'Carbon dioxide', 'Xenon'],
-        figImages: ['chemistry-nov-2024/page-05.png'],
+        figImages: ['/images/papers/chemistry-nov-2024/page-05.png'],
       },
       {
         label: 'b',
@@ -179,7 +179,7 @@ export const questions: Question[] = [
         text: 'Xenon is used in some high-intensity car headlights. If xenon leaks from the headlight bulb over time and is replaced by air, the bulb filament can fail suddenly. **Outline** why the bulb might fail if xenon is replaced by air.',
         marks: 2,
         ph: 'Oxygen in air reacts with hot metal filament; exothermic reaction; rapid heating/expansion; filament breaks',
-        figImages: ['chemistry-nov-2024/page-06.png'],
+        figImages: ['/images/papers/chemistry-nov-2024/page-06.png'],
       },
     ],
   },
@@ -192,7 +192,7 @@ export const questions: Question[] = [
     topic: 'Scientific Investigation & Ionic Compounds',
     marks: 16,
     stem: 'Dental filling materials must be safe, durable, and compatible with the natural chemistry of the mouth. Fluoride ions (F⁻) protect natural tooth enamel against acid erosion. A dentist proposed that F⁻ ions from fluoridated mouthwash might also protect dental filling materials.',
-    figImages: ['chemistry-nov-2024/page-06.png', 'chemistry-nov-2024/page-07.png'],
+    figImages: ['/images/papers/chemistry-nov-2024/page-06.png', '/images/papers/chemistry-nov-2024/page-07.png'],
     tasks: [
       {
         label: 'a',
@@ -206,28 +206,28 @@ export const questions: Question[] = [
         marks: 4,
         ph: 'IV=type of filling material; DV=conductivity/F⁻ concentration; CV=time (10 min); CV=volume of F⁻ solution',
         widget: 'fill_blank',
-        figImages: ['chemistry-nov-2024/page-07.png'],
+        figImages: ['/images/papers/chemistry-nov-2024/page-07.png'],
       },
       {
         label: 'c',
         text: 'A second student simplified the setup by omitting the "before" conductivity reading. **Comment** on the validity of the second student\'s method. **Justify** your answer.',
         marks: 2,
         ph: 'Less valid; without initial reading cannot determine change in F⁻ concentration; no baseline for comparison',
-        figImages: ['chemistry-nov-2024/page-08.png'],
+        figImages: ['/images/papers/chemistry-nov-2024/page-08.png'],
       },
       {
         label: 'd',
         text: 'A dental hygienist suggested using fluoride mouthwash both morning and evening instead of once daily. **Formulate** a testable hypothesis to determine whether twice-daily mouthwash use increases F⁻ protection. If… Then… Because…',
         marks: 3,
         ph: 'If mouthwash used twice daily, then higher F⁻ concentration maintained in mouth, because twice daily replenishes fluoride more frequently',
-        figImages: ['chemistry-nov-2024/page-08.png'],
+        figImages: ['/images/papers/chemistry-nov-2024/page-08.png'],
       },
       {
         label: 'e',
         text: 'Students tested four mouthwash brands on the same filling material. **Identify** the anomalous result in the data. **Suggest** an experimental reason that may have produced this result.',
         marks: 2,
         ph: 'Identify trial furthest from others for same brand; contamination, air bubble in meter probe, temperature change',
-        figImages: ['chemistry-nov-2024/page-09.png'],
+        figImages: ['/images/papers/chemistry-nov-2024/page-09.png'],
       },
       {
         label: 'f',
@@ -235,21 +235,21 @@ export const questions: Question[] = [
         marks: 2,
         ph: 'Average = sum of valid trials / number of trials; mg dm⁻³',
         widget: 'fill_blank',
-        figImages: ['chemistry-nov-2024/page-09.png'],
+        figImages: ['/images/papers/chemistry-nov-2024/page-09.png'],
       },
       {
         label: 'g',
         text: '**Use** the data in part (f) to justify the best choice of mouthwash.',
         marks: 1,
         ph: 'Brand with highest conductivity = most F⁻ remaining = best fluoride delivery to teeth',
-        figImages: ['chemistry-nov-2024/page-09.png'],
+        figImages: ['/images/papers/chemistry-nov-2024/page-09.png'],
       },
       {
         label: 'h',
         text: 'Dentists recommend different amounts of fluoride toothpaste for different age groups. **Suggest** why the recommended mass of toothpaste increases as children grow.',
         marks: 1,
         ph: 'More/larger teeth as children grow; greater tooth surface area; body mass increases so more fluoride within safe limit',
-        figImages: ['chemistry-nov-2024/page-10.png'],
+        figImages: ['/images/papers/chemistry-nov-2024/page-10.png'],
       },
     ],
   },
@@ -262,7 +262,7 @@ export const questions: Question[] = [
     topic: 'Chemical Reactions & Scientific Investigation Design',
     marks: 20,
     stem: 'Bridges are built from materials that must resist weathering and chemical attack, including from acid rain. Civil engineers need to select the most acid-resistant materials for use in bridge construction. A student investigated the rate at which different bridge-building materials react with dilute sulfuric acid to model the effects of acid rain.',
-    figImages: ['chemistry-nov-2024/page-10.png', 'chemistry-nov-2024/page-11.png'],
+    figImages: ['/images/papers/chemistry-nov-2024/page-10.png', '/images/papers/chemistry-nov-2024/page-11.png'],
     tasks: [
       {
         label: 'a',
@@ -271,14 +271,14 @@ export const questions: Question[] = [
         ph: 'Change in colour',
         widget: 'radio_select',
         widgetOptions: ['Change in colour', 'Change in size', 'Change in temperature', 'Change in mass'],
-        figImages: ['chemistry-nov-2024/page-11.png'],
+        figImages: ['/images/papers/chemistry-nov-2024/page-11.png'],
       },
       {
         label: 'b',
         text: 'You are given a (10 cm × 10 cm) sample of each type of bridge material (steel, aluminium, limestone, granite, concrete) to model its rate of reaction with acid rain using 1 mol dm⁻³ H₂SO₄. **Design** an experiment that will determine the rate of reaction of H₂SO₄ with each type of bridge material. In your answer you should include:\n• the independent variable, the dependent variable and two additional control variables\n• a list of equipment you will use\n• details of your method\n• details of the data you will collect\n• how you will ensure that your method is safe.',
         marks: 18,
         ph: 'IV=type of bridge material; DV=mass lost/bubble volume/rate; CVs=volume H₂SO₄ + temp; equipment; method with repeats; corrosive acid safety',
-        figImages: ['chemistry-nov-2024/page-12.png'],
+        figImages: ['/images/papers/chemistry-nov-2024/page-12.png'],
       },
       {
         label: 'c',
@@ -297,14 +297,14 @@ export const questions: Question[] = [
     topic: 'Electrochemistry & Data Analysis',
     marks: 13,
     stem: 'Gold-plated jewellery is made by electroplating a base metal (copper or zinc) with a thin layer of gold. Over time, the gold layer can wear away and the base metal corrodes when exposed to sweat (which contains NaCl). A student modelled this corrosion by measuring mass lost from gold-plated zinc nails in different concentrations of NaCl solution after 7 days.',
-    figImages: ['chemistry-nov-2024/page-13.png'],
+    figImages: ['/images/papers/chemistry-nov-2024/page-13.png'],
     tasks: [
       {
         label: 'a',
         text: '**Plot** a graph of concentration and average mass lost. You should include a line of best fit.\n\nData:\n| Concentration / mol dm⁻³ | Average mass lost / mg |\n|---|---|\n| 0.0 | 6 |\n| 0.1 | 12 |\n| 0.3 | 32 |\n| 0.5 | 48 |\n| 0.8 | 70 |',
         marks: 6,
         ph: 'x=NaCl concentration/mol dm⁻³; y=mass lost/mg; 5 points; line of best fit; axes labelled with units',
-        figImages: ['chemistry-nov-2024/page-13.png'],
+        figImages: ['/images/papers/chemistry-nov-2024/page-13.png'],
       },
       {
         label: 'b',
@@ -335,7 +335,7 @@ export const questions: Question[] = [
     topic: 'Nuclear Chemistry, Energy & Environmental Impact',
     marks: 10,
     stem: 'Wind energy and nuclear energy are two alternatives to fossil fuels. Both can generate large amounts of electricity but have very different impacts on the environment and society. Nuclear fission generates a large amount of electricity per kilogram of fuel but produces long-lived radioactive waste that must be carefully managed.',
-    figImages: ['chemistry-nov-2024/page-14.png'],
+    figImages: ['/images/papers/chemistry-nov-2024/page-14.png'],
     tasks: [
       {
         label: 'a',
@@ -348,14 +348,14 @@ export const questions: Question[] = [
         text: 'In a nuclear power station, a neutron is fired at a uranium-235 nucleus. The nucleus becomes unstable and splits into two smaller nuclei, releasing energy and additional neutrons. These neutrons cause further fission reactions. **Describe** the chain reaction of nuclear fission. In your answer you should include:\n• what causes the nucleus to become unstable\n• what is released when the nucleus splits\n• how a chain reaction occurs.',
         marks: 3,
         ph: 'Neutron hits U-235 nucleus → unstable → splits into 2 smaller nuclei + 2-3 neutrons + large energy → neutrons hit more nuclei → sustained chain reaction',
-        figImages: ['chemistry-nov-2024/page-15.png'],
+        figImages: ['/images/papers/chemistry-nov-2024/page-15.png'],
       },
       {
         label: 'c',
         text: 'Radioactive waste from nuclear power stations must be transported safely to storage facilities. Transport options include road, train, river barge, and air. **Discuss** the considerations when choosing a method of transport. In your answer you should include:\n• what risks are involved when transporting radioactive waste\n• what precautions should be taken when using each method of transport\n• a conclusion with justification of which is the safest method of transport.',
         marks: 6,
         ph: 'Risks: radiation leak if accident. Per method precautions. Conclusion: trains safest (controlled route, low accident rate, purpose-built containers).',
-        figImages: ['chemistry-nov-2024/page-16.png'],
+        figImages: ['/images/papers/chemistry-nov-2024/page-16.png'],
       },
     ],
   },
@@ -368,7 +368,7 @@ export const questions: Question[] = [
     topic: 'Nuclear Waste, Ethics & Societal Impact',
     marks: 13,
     stem: 'Nuclear power stations in many countries produce thousands of tonnes of radioactive waste each year. This waste remains hazardous for thousands of years. Scientists and governments are debating the safest and most ethical methods of disposal.\n\nProposal 1 — Deep seabed injection: Some scientists propose injecting liquid radioactive waste under pressure into deep seabed sediments far from human populations. Supporters argue this is far cheaper than land-based alternatives. Critics warn that ocean currents could gradually spread contamination, and the impact on deep-sea ecosystems is not fully understood.\n\nProposal 2 — Deep geological repositories: Many countries (e.g. Finland, Sweden) are constructing underground repositories several hundred metres deep in stable granite bedrock. These facilities are engineered to isolate waste for over 100,000 years. Construction costs are very high, but no significant surface contamination has been recorded.',
-    figImages: ['chemistry-nov-2024/page-17.png'],
+    figImages: ['/images/papers/chemistry-nov-2024/page-17.png'],
     tasks: [
       {
         label: '',

@@ -87,7 +87,7 @@ export const questions: Question[] = [
         text: 'The diagram below shows the Bohr model of a sodium atom and a lithium atom. Using the Bohr model, **explain** why sodium is more reactive than lithium.',
         marks: 3,
         ph: 'More electron shells → outer e⁻ further from nucleus → less attraction → easier to remove',
-        figImages: ['papers/chemistry-nov-2021/page-02.png'],
+        figImages: ['/images/papers/chemistry-nov-2021/page-02.png'],
       },
     ],
   },
@@ -102,7 +102,7 @@ export const questions: Question[] = [
     topicGroup: 'Chemical Reactions',
     marks: 9,
     stem: 'Personal hygiene products have changed as a result of developments over time. Recently, people have been using more teeth whitening products. Many of these teeth whitening products contain hydrogen peroxide as the active ingredient.',
-    figImages: ['papers/chemistry-nov-2021/page-03.png'],
+    figImages: ['/images/papers/chemistry-nov-2021/page-03.png'],
     tasks: [
       {
         label: 'a',
@@ -119,7 +119,7 @@ export const questions: Question[] = [
         ph: 'Option C — H bonded to O, lone pairs on each O, single O–O bond',
         widget: 'radio_select',
         widgetOptions: ['A', 'B', 'C', 'D'],
-        figImages: ['papers/chemistry-nov-2021/page-03.png'],
+        figImages: ['/images/papers/chemistry-nov-2021/page-03.png'],
       },
       {
         label: 'c',
@@ -134,7 +134,7 @@ export const questions: Question[] = [
         ph: 'Option D — oxidising (flame over circle)',
         widget: 'radio_select',
         widgetOptions: ['A', 'B', 'C', 'D'],
-        figImages: ['papers/chemistry-nov-2021/page-04.png'],
+        figImages: ['/images/papers/chemistry-nov-2021/page-04.png'],
       },
       {
         label: 'e',
@@ -162,7 +162,7 @@ export const questions: Question[] = [
         marks: 2,
         ph: 'Nitrogen 78%, Oxygen 20.9%',
         widget: 'fill_blank',
-        figImages: ['papers/chemistry-nov-2021/page-05.png'],
+        figImages: ['/images/papers/chemistry-nov-2021/page-05.png'],
       },
       {
         label: 'b',
@@ -184,7 +184,7 @@ export const questions: Question[] = [
         text: 'Aerosol sprays, like deodorants, are filled with a compressed gas that mixes with the deodorant liquid and sprays the liquid out of the can onto your skin. In the past, the compressed gases used in aerosols were chlorofluorocarbons (CFCs), like Freon® (chemical name trichlorotrifluoroethane). Here is the structure of Freon®. Use the periodic table to **calculate** the relative molecular mass of Freon®.',
         marks: 2,
         ph: '2(12) + 3(35.5) + 3(19) = 187.5',
-        figImages: ['papers/chemistry-nov-2021/page-07.png'],
+        figImages: ['/images/papers/chemistry-nov-2021/page-07.png'],
       },
       {
         label: 'e',
@@ -211,7 +211,7 @@ export const questions: Question[] = [
     topicGroup: 'Bonding & Structure',
     marks: 12,
     stem: 'State of matter is a physical characteristic which allows materials to be classified and grouped together. Melting point is a useful property which is an important characteristic of materials. Two students wanted to check the melting point of the metal gallium. One student used a thermometer and the other used a temperature probe. The samples of gallium are placed in boiling tubes which are placed in water baths as shown in the diagram below. As the temperature of the water increased, the students observed the change in state of the gallium.',
-    figImages: ['papers/chemistry-nov-2021/page-08.png'],
+    figImages: ['/images/papers/chemistry-nov-2021/page-08.png'],
     tasks: [
       {
         label: 'a',
@@ -244,7 +244,7 @@ export const questions: Question[] = [
         text: 'Using the data from the table, **formulate** a hypothesis to predict how the density of a brass alloy changes as the percentage of zinc increases. Use the If/Then/Because format.',
         marks: 3,
         ph: 'If zinc % increases then density decreases because zinc has lower density than copper',
-        figImages: ['papers/chemistry-nov-2021/page-09.png'],
+        figImages: ['/images/papers/chemistry-nov-2021/page-09.png'],
       },
       {
         label: 'f',
@@ -252,7 +252,7 @@ export const questions: Question[] = [
         marks: 2,
         ph: '1000°C (±10)',
         widget: 'fill_blank',
-        figImages: ['papers/chemistry-nov-2021/page-10.png'],
+        figImages: ['/images/papers/chemistry-nov-2021/page-10.png'],
       },
       {
         label: 'g',
@@ -312,14 +312,14 @@ export const questions: Question[] = [
     topicGroup: 'States of Matter',
     marks: 14,
     stem: 'Chocolate is a mixture of cocoa, cocoa butter and other substances. The process of melting and cooling chocolate at specific temperatures, called tempering, allows the chocolate to form crystals. There are different forms of crystals possible, with Form V producing the best tasting chocolate. The table shows the melting points of chocolate samples with different percentages of cocoa for three different forms.',
-    figImages: ['papers/chemistry-nov-2021/page-16.png'],
+    figImages: ['/images/papers/chemistry-nov-2021/page-16.png'],
     tasks: [
       {
         label: 'a',
         text: '**Plot** the data for Sample B on the graph provided. Your graph should include: missing data points, a title linking temperature change with time, and correct axis labels (time in s, temperature in °C).',
         marks: 5,
         ph: 'Plot all Sample B data points; title: Temperature of chocolate sample B vs time; x-axis: time (s); y-axis: temperature (°C)',
-        figImages: ['papers/chemistry-nov-2021/page-17.png'],
+        figImages: ['/images/papers/chemistry-nov-2021/page-17.png'],
       },
       {
         label: 'b',
@@ -333,7 +333,7 @@ export const questions: Question[] = [
         marks: 3,
         ph: '(37.0 + 36.0 + 37.0) / 3 = 36.7°C',
         widget: 'fill_blank',
-        figImages: ['papers/chemistry-nov-2021/page-18.png'],
+        figImages: ['/images/papers/chemistry-nov-2021/page-18.png'],
       },
       {
         label: 'd',
@@ -341,7 +341,7 @@ export const questions: Question[] = [
         marks: 2,
         ph: '43°C (±0.5)',
         widget: 'fill_blank',
-        figImages: ['papers/chemistry-nov-2021/page-18.png'],
+        figImages: ['/images/papers/chemistry-nov-2021/page-18.png'],
       },
       {
         label: 'e',
