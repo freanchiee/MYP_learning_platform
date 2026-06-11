@@ -1,7 +1,10 @@
 'use client'
 
 import { useState, useTransition } from 'react'
-import { saveProviderConfig, testProvider, testAnthropicKey, GEMINI_DEFAULT_MODEL, type ProviderId, type ProviderConfig } from './provider-config'
+import { saveProviderConfig, testProvider, testAnthropicKey, type ProviderId, type ProviderConfig } from './provider-config'
+
+// Keep in sync with the server-side default in provider-config.ts
+const GEMINI_DEFAULT_MODEL = 'gemini-2.0-flash-exp-image-generation'
 
 interface Props {
   initialConfig: ProviderConfig

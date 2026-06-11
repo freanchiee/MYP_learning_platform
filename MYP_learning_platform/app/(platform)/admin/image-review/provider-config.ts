@@ -27,10 +27,10 @@ export interface ProviderConfig {
 }
 
 // Gemini image-gen model names (as of 2025 — check aistudio.google.com if one fails):
-// gemini-2.0-flash-exp-image-generation   ← default, confirmed working with AI Studio keys
+// gemini-2.0-flash-exp-image-generation   ← default, works with standard AI Studio keys
 // gemini-2.0-flash-preview-image-generation
 // imagen-3.0-generate-001                 ← Vertex AI / special quota only
-export const GEMINI_DEFAULT_MODEL = 'gemini-2.0-flash-exp-image-generation'
+const GEMINI_DEFAULT_MODEL = 'gemini-2.0-flash-exp-image-generation'
 
 const DEFAULT_CONFIG: ProviderConfig = {
   activeProvider: 'openai',
