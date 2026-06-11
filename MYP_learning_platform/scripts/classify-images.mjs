@@ -70,11 +70,15 @@ Environment:
 
 const HF_TOKEN      = process.env.HF_TOKEN ?? ''
 const TOGETHER_KEY  = process.env.TOGETHER_API_KEY ?? ''
+const FAL_KEY       = process.env.FAL_KEY ?? ''
+const OPENAI_KEY    = process.env.OPENAI_API_KEY ?? ''
 const ANTHROPIC_KEY = process.env.ANTHROPIC_API_KEY ?? ''
 
 function detectProvider() {
+  if (OPENAI_KEY)   return 'openai'       // DALL-E 3 — recommended
   if (HF_TOKEN)     return 'huggingface'
   if (TOGETHER_KEY) return 'together'
+  if (FAL_KEY)      return 'fal'
   return 'none'
 }
 
@@ -86,11 +90,12 @@ if (!dryRun && PROVIDER === 'none') {
 
 Set ONE of these environment variables:
 
-  HF_TOKEN=hf_...          (free — get at huggingface.co/settings/tokens)
-  TOGETHER_API_KEY=...     (cheap — together.ai, ~$0.002/image)
+  OPENAI_API_KEY=sk-...    (ChatGPT key — DALL-E 3, ~$0.04/image)  ← recommended
+  HF_TOKEN=hf_...          (HuggingFace free tier)
+  TOGETHER_API_KEY=...     (together.ai, ~$0.002/image)
 
 Example:
-  HF_TOKEN=hf_xxxx node scripts/classify-images.mjs --paperId physics-nov-2024
+  OPENAI_API_KEY=sk-... node scripts/classify-images.mjs --paperId physics-nov-2024
 
 Or run with --dryRun to preview without generating images.
 `)
@@ -215,23 +220,43 @@ async function callClaudeVision(imagePath) {
 
 // ─── Image generation ─────────────────────────────────────────────────────────
 
+async function pingHuggingFace() {
+  try {
+    const res = await fetch('https://huggingface.co', { method: 'HEAD', signal: AbortSignal.timeout(8000) })
+    return { ok: true, status: res.status }
+  } catch (e) {
+    return { ok: false, cause: e.cause?.message ?? e.message }
+  }
+}
+
 async function downloadHuggingFace(prompt, destPath, retries = 3) {
   for (let attempt = 1; attempt <= retries; attempt++) {
-    const res = await fetch(HF_API, {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${HF_TOKEN}`,
-        'Content-Type': 'application/json',
-        'X-Wait-For-Model': 'true',
-      },
-      body: JSON.stringify({
-        inputs: prompt,
-        parameters: { width: 800, height: 600, num_inference_steps: 4 },
-      }),
-    })
+    let res
+    try {
+      res = await fetch(HF_API, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${HF_TOKEN}`,
+          'Content-Type': 'application/json',
+          'X-Wait-For-Model': 'true',
+        },
+        body: JSON.stringify({
+          inputs: prompt,
+          parameters: { width: 800, height: 600, num_inference_steps: 4 },
+        }),
+        signal: AbortSignal.timeout(120_000),
+      })
+    } catch (e) {
+      const cause = e.cause?.message ?? e.cause ?? e.message
+      if (attempt < retries) {
+        console.log(`      ⚠️  HF attempt ${attempt} network error: ${cause} — retrying in 5s…`)
+        await sleep(5000)
+        continue
+      }
+      throw new Error(`HuggingFace network error: ${cause}`)
+    }
 
     if (res.status === 503) {
-      // Model loading — HF needs a moment
       const wait = attempt * 20
       console.log(`      ⏳ HF model loading, waiting ${wait}s…`)
       await sleep(wait * 1000)
@@ -290,16 +315,113 @@ async function downloadTogether(prompt, destPath) {
   console.log(`      ✅ Together → ${path.relative(REPO_ROOT, physDest)} (${(buf.length / 1024).toFixed(1)} KB)`)
 }
 
+async function downloadFal(prompt, destPath) {
+  // Submit job
+  const submitRes = await fetch('https://queue.fal.run/fal-ai/flux/schnell', {
+    method: 'POST',
+    headers: {
+      'Authorization': `Key ${FAL_KEY}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      prompt,
+      image_size: { width: 800, height: 600 },
+      num_inference_steps: 4,
+      num_images: 1,
+    }),
+    signal: AbortSignal.timeout(30_000),
+  })
+  if (!submitRes.ok) {
+    const body = await submitRes.text()
+    throw new Error(`fal.ai submit error ${submitRes.status}: ${body.slice(0, 200)}`)
+  }
+  const { request_id, response_url } = await submitRes.json()
+  const pollUrl = response_url ?? `https://queue.fal.run/fal-ai/flux/schnell/requests/${request_id}`
+
+  // Poll for result
+  for (let i = 0; i < 30; i++) {
+    await sleep(3000)
+    const pollRes = await fetch(pollUrl, {
+      headers: { 'Authorization': `Key ${FAL_KEY}` },
+      signal: AbortSignal.timeout(15_000),
+    })
+    if (!pollRes.ok) continue
+    const data = await pollRes.json()
+    if (data.status === 'COMPLETED' || data.images?.[0]?.url) {
+      const imgUrl = data.images?.[0]?.url ?? data.output?.images?.[0]?.url
+      if (!imgUrl) throw new Error(`fal.ai: no image URL in result: ${JSON.stringify(data).slice(0, 200)}`)
+      const imgRes = await fetch(imgUrl, { signal: AbortSignal.timeout(30_000) })
+      if (!imgRes.ok) throw new Error(`fal.ai image download error ${imgRes.status}`)
+      const buf = Buffer.from(await imgRes.arrayBuffer())
+      const physDest = path.join(PUBLIC, destPath)
+      fs.mkdirSync(path.dirname(physDest), { recursive: true })
+      fs.writeFileSync(physDest, buf)
+      console.log(`      ✅ fal.ai → ${path.relative(REPO_ROOT, physDest)} (${(buf.length / 1024).toFixed(1)} KB)`)
+      return
+    }
+    if (data.status === 'FAILED') throw new Error(`fal.ai job failed: ${JSON.stringify(data).slice(0, 200)}`)
+    if (i % 5 === 0) process.stdout.write('.')
+  }
+  throw new Error('fal.ai: timeout waiting for result')
+}
+
+async function downloadOpenAI(prompt, destPath) {
+  // DALL-E 3 — $0.04 per image at 1024x1024 standard quality
+  // Truncate prompt to 4000 chars (DALL-E 3 limit)
+  const truncatedPrompt = prompt.slice(0, 4000)
+
+  const res = await fetch('https://api.openai.com/v1/images/generations', {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${OPENAI_KEY}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      model: 'dall-e-3',
+      prompt: truncatedPrompt,
+      n: 1,
+      size: '1024x1024',
+      quality: 'standard',
+      response_format: 'url',
+    }),
+    signal: AbortSignal.timeout(60_000),
+  })
+
+  if (!res.ok) {
+    const body = await res.text()
+    throw new Error(`DALL-E 3 error ${res.status}: ${body.slice(0, 300)}`)
+  }
+
+  const json = await res.json()
+  const imgUrl = json.data?.[0]?.url
+  if (!imgUrl) throw new Error(`DALL-E 3: no URL in response: ${JSON.stringify(json).slice(0, 200)}`)
+
+  // Download the image from OpenAI CDN
+  const imgRes = await fetch(imgUrl, { signal: AbortSignal.timeout(30_000) })
+  if (!imgRes.ok) throw new Error(`DALL-E 3 image download error ${imgRes.status}`)
+  const buf = Buffer.from(await imgRes.arrayBuffer())
+
+  const physDest = path.join(PUBLIC, destPath)
+  fs.mkdirSync(path.dirname(physDest), { recursive: true })
+  fs.writeFileSync(physDest, buf)
+  console.log(`      ✅ DALL-E 3 → ${path.relative(REPO_ROOT, physDest)} (${(buf.length / 1024).toFixed(1)} KB)`)
+}
+
 async function downloadImage(prompt, destPath) {
+  if (PROVIDER === 'openai')      return downloadOpenAI(prompt, destPath)
   if (PROVIDER === 'huggingface') return downloadHuggingFace(prompt, destPath)
   if (PROVIDER === 'together')    return downloadTogether(prompt, destPath)
+  if (PROVIDER === 'fal')         return downloadFal(prompt, destPath)
   throw new Error('No provider configured')
 }
 
 function buildTextPrompt(stemText, taskText, topic, pid) {
   const subject = pid.split('-')[0]
-  const context = [topic, stemText, taskText].filter(Boolean).join('. ').slice(0, 400)
-  return `Clean educational illustration, white background, flat design, no watermarks, no text overlays, school science textbook style. ${subject} science: ${context}. Clear, accurate, professional educational diagram.`
+  // Strip markdown bold (**text**) from task text — DALL-E reads it literally
+  const cleanTask = taskText.replace(/\*\*([^*]+)\*\*/g, '$1').replace(/\*/g, '')
+  const cleanStem = stemText.replace(/\*\*([^*]+)\*\*/g, '$1').replace(/\*/g, '')
+  const context = [topic, cleanStem, cleanTask].filter(Boolean).join('. ').slice(0, 500)
+  return `Clean educational illustration for a ${subject} science textbook. White background, flat design style, no watermarks, no logos, clear labels. Subject: ${context}.`
 }
 
 // ─── classify one entry ───────────────────────────────────────────────────────
@@ -390,6 +512,26 @@ async function main() {
   console.log(`    Vision:   ${skipVision ? 'skipped (--skipVision)' : ANTHROPIC_KEY ? 'Claude Vision' : 'text-only (no ANTHROPIC_API_KEY)'}`)
   if (dryRun) console.log('    Mode:     DRY RUN')
   console.log()
+
+  // Connectivity check (skip in dry-run)
+  if (!dryRun && PROVIDER === 'huggingface') {
+    process.stdout.write('   🌐 Testing HuggingFace connectivity… ')
+    const ping = await pingHuggingFace()
+    if (ping.ok) {
+      console.log('✅ reachable')
+    } else {
+      console.log(`❌ unreachable (${ping.cause})`)
+      console.log(`
+⚠️  Cannot reach huggingface.co from this network.
+
+    Use OpenAI (DALL-E 3) instead — it IS reachable:
+       OPENAI_API_KEY=sk-... node scripts/classify-images.mjs --paperId ${paperId}
+       ~$0.04/image with DALL-E 3 (15 images = ~$0.60)
+       Get key: https://platform.openai.com/api-keys
+`)
+      process.exit(1)
+    }
+  }
 
   if (!fs.existsSync(AUDIT_FILE)) {
     console.error('❌  audit-results.json not found. Run first:\n   node scripts/audit-image-classification.mjs')
