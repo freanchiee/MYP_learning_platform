@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useTransition } from 'react'
-import { saveProviderConfig, testProvider, testAnthropicKey, type ProviderId, type ProviderConfig } from './provider-config'
+import { saveProviderConfig, testProvider, testAnthropicKey, GEMINI_DEFAULT_MODEL, type ProviderId, type ProviderConfig } from './provider-config'
 
 interface Props {
   initialConfig: ProviderConfig
@@ -50,6 +50,16 @@ const PROVIDERS: ProviderDef[] = [
     keyLabel: 'Google AI Studio Key',
     keyPlaceholder: 'AIza...',
     docsUrl: 'https://aistudio.google.com/app/apikey',
+    extraField: {
+      label: 'Model',
+      key: 'model',
+      options: [
+        { value: 'gemini-2.0-flash-exp-image-generation', label: 'gemini-2.0-flash-exp-image-generation (recommended)' },
+        { value: 'gemini-2.0-flash-preview-image-generation', label: 'gemini-2.0-flash-preview-image-generation' },
+        { value: 'gemini-2.0-flash-exp', label: 'gemini-2.0-flash-exp (generic multimodal)' },
+        { value: 'imagen-3.0-generate-001', label: 'imagen-3.0-generate-001 (Vertex AI / special quota)' },
+      ],
+    },
   },
   {
     id: 'stability',
@@ -106,6 +116,7 @@ export default function ProviderSettings({ initialConfig }: Props) {
   const [open, setOpen] = useState(false)
   const [config, setConfig] = useState<ProviderConfig>({
     ...initialConfig,
+    gemini:    { ...initialConfig.gemini, model: initialConfig.gemini?.model || GEMINI_DEFAULT_MODEL },
     anthropic: initialConfig.anthropic ?? { key: '' },
   })
   const [testResults, setTestResults] = useState<Record<string, { ok: boolean; msg: string }>>({})

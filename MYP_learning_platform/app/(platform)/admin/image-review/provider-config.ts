@@ -19,16 +19,23 @@ export type ProviderId = 'openai' | 'gemini' | 'stability'
 export interface ProviderConfig {
   activeProvider: ProviderId
   openai: { key: string; model: 'dall-e-3' | 'dall-e-2' }
-  gemini: { key: string }
+  /** model: Gemini image-gen model name — Google renames these often, so it's configurable */
+  gemini: { key: string; model: string }
   stability: { key: string }
   /** Anthropic key — used for Claude Vision (prompt analysis), NOT image generation */
   anthropic: { key: string }
 }
 
+// Gemini image-gen model names (as of 2025 — check aistudio.google.com if one fails):
+// gemini-2.0-flash-exp-image-generation   ← default, confirmed working with AI Studio keys
+// gemini-2.0-flash-preview-image-generation
+// imagen-3.0-generate-001                 ← Vertex AI / special quota only
+export const GEMINI_DEFAULT_MODEL = 'gemini-2.0-flash-exp-image-generation'
+
 const DEFAULT_CONFIG: ProviderConfig = {
   activeProvider: 'openai',
   openai: { key: '', model: 'dall-e-3' },
-  gemini: { key: '' },
+  gemini: { key: '', model: GEMINI_DEFAULT_MODEL },
   stability: { key: '' },
   anthropic: { key: '' },
 }
@@ -106,7 +113,7 @@ export async function generateImageWithProvider(
     if (provider === 'openai') {
       await generateOpenAI(prompt, destPath, cfg.openai.key, cfg.openai.model)
     } else if (provider === 'gemini') {
-      await generateGemini(prompt, destPath, cfg.gemini.key)
+      await generateGemini(prompt, destPath, cfg.gemini.key, cfg.gemini.model)
     } else if (provider === 'stability') {
       await generateStability(prompt, destPath, cfg.stability.key)
     } else {
@@ -158,12 +165,13 @@ async function generateOpenAI(
   await saveImageBuffer(Buffer.from(await imgRes.arrayBuffer()), destPath)
 }
 
-async function generateGemini(prompt: string, destPath: string, key: string) {
+async function generateGemini(prompt: string, destPath: string, key: string, model: string) {
   if (!key) throw new Error('Gemini key not configured')
 
-  // Use Gemini 2.0 Flash image generation — works with standard AI Studio keys.
-  // (imagen-3.0-generate-001 is Vertex AI only and requires special quota.)
-  const model = 'gemini-2.0-flash-preview-image-generation'
+  // Uses generateContent with responseModalities IMAGE — works with standard AI Studio keys.
+  // If you get a 404, open ⚙️ Image Providers and try a different model name.
+  // Common alternatives: gemini-2.0-flash-exp-image-generation, gemini-2.0-flash-exp
+  model = model || GEMINI_DEFAULT_MODEL
   const res = await fetch(
     `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${key}`,
     {
@@ -246,12 +254,15 @@ export async function testProvider(
       // Check if the image-generation model is in the list
       const json = await res.json() as { models?: { name: string }[] }
       const models = json.models?.map(m => m.name) ?? []
-      const hasFlash = models.some(n => n.includes('gemini-2.0-flash-preview-image-generation'))
+      // Check for any image-capable Gemini model
+      const imgModels = models.filter(n =>
+        n.includes('image-generation') || n.includes('imagen') || n.includes('flash-exp'),
+      )
       return {
         ok: true,
-        error: hasFlash
-          ? '✅ Image generation available'
-          : '⚠️ Key valid but gemini-2.0-flash-preview-image-generation not listed — generation may fail',
+        error: imgModels.length > 0
+          ? `✅ Key valid · image models: ${imgModels.map(n => n.split('/').pop()).slice(0, 3).join(', ')}`
+          : `⚠️ Key valid but no image-gen model found — try a different model name`,
       }
     }
 
