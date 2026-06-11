@@ -195,7 +195,7 @@ export async function approveImage(
 export async function regenerateImage(
   paperId: string,
   taskPath: string,
-): Promise<{ ok: boolean; newUrl?: string; error?: string; visionUsed?: boolean; method?: string }> {
+): Promise<{ ok: boolean; newUrl?: string; error?: string; visionUsed?: boolean; visionError?: string; method?: string }> {
   const entries = readSidecar(paperId)
   const idx = entries.findIndex(e => e.taskPath === taskPath)
   if (idx === -1) return { ok: false, error: `Entry not found: ${taskPath}` }
@@ -206,23 +206,36 @@ export async function regenerateImage(
   let prompt = entry.image_prompt ?? ''
   let subType = entry.sub_type ?? '2B'
   let visionUsed = false
+  let visionError: string | undefined
 
-  // Auto Vision upgrade: 2B + existing original + Anthropic key available (env OR config)
-  const originalExists =
-    entry.original_path &&
-    fs.existsSync(path.join(PUBLIC_DIR, entry.original_path))
+  // ── Vision upgrade diagnostics ──────────────────────────────────────────────
+  const originalPhysPath = entry.original_path
+    ? path.join(PUBLIC_DIR, entry.original_path) : null
+  const originalExists = originalPhysPath && fs.existsSync(originalPhysPath)
   const visionKey = await getVisionKey()
+
+  // Log why Vision won't run (shows in server console for debugging)
+  if (!originalPhysPath) console.log('[vision] SKIP — no original_path on entry')
+  else if (!originalExists) console.log(`[vision] SKIP — original file missing: ${originalPhysPath}`)
+  else if (!visionKey) console.log('[vision] SKIP — no Anthropic key (check ⚙️ Image Providers → Claude Vision)')
+  else console.log(`[vision] RUNNING on ${entry.original_path} …`)
 
   if (originalExists && visionKey) {
     try {
       prompt = await callClaudeVision(entry.original_path!)
       subType = '2A'
       visionUsed = true
+      console.log(`[vision] SUCCESS — prompt: ${prompt.slice(0, 100)}…`)
     } catch (e: unknown) {
-      // Vision failed — fall back to existing/text prompt
       const msg = e instanceof Error ? e.message : String(e)
-      console.warn(`[vision] Failed (${msg}), using existing prompt`)
-      if (!prompt) return { ok: false, error: `Vision failed and no fallback prompt: ${msg}` }
+      visionError = msg   // ← surface to UI instead of silently swallowing
+      console.error(`[vision] FAILED: ${msg}`)
+      if (!prompt) return {
+        ok: false,
+        error: `Claude Vision failed and no fallback prompt: ${msg}`,
+        visionError: msg,
+      }
+      // Has a fallback prompt — continue with generation but tell the user Vision failed
     }
   } else if (!prompt) {
     return { ok: false, error: 'No image_prompt — use Edit Prompt first' }
@@ -235,7 +248,7 @@ export async function regenerateImage(
     undefined,
     entry.original_path ?? undefined,
   )
-  if (!result.ok) return { ok: false, error: result.error }
+  if (!result.ok) return { ok: false, error: result.error, visionError }
 
   entries[idx] = {
     ...entry,
@@ -247,7 +260,7 @@ export async function regenerateImage(
   writeSidecar(paperId, entries)
 
   revalidatePath('/admin/image-review')
-  return { ok: true, newUrl: entry.generated_path, visionUsed, method: result.method }
+  return { ok: true, newUrl: entry.generated_path, visionUsed, visionError, method: result.method }
 }
 
 /**

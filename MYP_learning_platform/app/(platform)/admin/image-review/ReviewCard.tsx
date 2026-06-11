@@ -21,11 +21,13 @@ export default function ReviewCard({ entry }: ReviewCardProps) {
   const [flagging, setFlagging] = useState(false)
   const [flagNote, setFlagNote] = useState('')
   const [result, setResult] = useState<{ type: 'ok' | 'err'; msg: string } | null>(null)
+  const [visionWarning, setVisionWarning] = useState<string | null>(null)
   const [generatedUrl, setGeneratedUrl] = useState<string | null>(entry.generated_path ?? null)
 
-  function run(action: () => Promise<{ ok: boolean; error?: string; newUrl?: string; visionUsed?: boolean; method?: string }>) {
+  function run(action: () => Promise<{ ok: boolean; error?: string; newUrl?: string; visionUsed?: boolean; visionError?: string; method?: string }>) {
     startTransition(async () => {
       setResult(null)
+      setVisionWarning(null)
       const res = await action()
       if (res.ok) {
         const parts = []
@@ -33,12 +35,18 @@ export default function ReviewCard({ entry }: ReviewCardProps) {
         if (res.method === 'structure_control') parts.push('Structure Control layout')
         const suffix = parts.length ? ` (${parts.join(' + ')})` : ''
         setResult({ type: 'ok', msg: `✅ Done!${suffix}` })
+        // Surface Vision failure as an orange warning (generation still succeeded)
+        if (res.visionError) {
+          setVisionWarning(`⚠️ Vision failed (used old prompt): ${res.visionError}`)
+        }
         if (res.newUrl) {
-          // Bust the browser cache by appending a timestamp query param
           setGeneratedUrl(`${res.newUrl}?t=${Date.now()}`)
         }
       } else {
         setResult({ type: 'err', msg: res.error ?? 'Unknown error' })
+        if (res.visionError && !res.error?.includes('Vision')) {
+          setVisionWarning(`⚠️ Vision failed: ${res.visionError}`)
+        }
       }
     })
   }
@@ -218,14 +226,21 @@ export default function ReviewCard({ entry }: ReviewCardProps) {
           ❌ Flag
         </button>
 
-        {result && (
-          <span className={`ml-auto text-xs font-semibold px-2 py-1 rounded ${result.type === 'ok' ? 'bg-green-50 text-green-700' : 'bg-red-50 text-red-700'}`}>
-            {result.msg}
-          </span>
-        )}
-        {isPending && (
-          <span className="ml-auto text-xs text-gray-400 animate-pulse">Processing…</span>
-        )}
+        <div className="ml-auto flex flex-col items-end gap-1">
+          {result && (
+            <span className={`text-xs font-semibold px-2 py-1 rounded ${result.type === 'ok' ? 'bg-green-50 text-green-700' : 'bg-red-50 text-red-700'}`}>
+              {result.msg}
+            </span>
+          )}
+          {visionWarning && (
+            <span className="text-xs px-2 py-1 rounded bg-amber-50 text-amber-700 max-w-xs text-right">
+              {visionWarning}
+            </span>
+          )}
+          {isPending && (
+            <span className="text-xs text-gray-400 animate-pulse">Processing…</span>
+          )}
+        </div>
       </div>
     </div>
   )
