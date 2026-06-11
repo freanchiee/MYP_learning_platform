@@ -21,6 +21,8 @@ export interface ProviderConfig {
   openai: { key: string; model: 'dall-e-3' | 'dall-e-2' }
   gemini: { key: string }
   stability: { key: string }
+  /** Anthropic key — used for Claude Vision (prompt analysis), NOT image generation */
+  anthropic: { key: string }
 }
 
 const DEFAULT_CONFIG: ProviderConfig = {
@@ -28,6 +30,7 @@ const DEFAULT_CONFIG: ProviderConfig = {
   openai: { key: '', model: 'dall-e-3' },
   gemini: { key: '' },
   stability: { key: '' },
+  anthropic: { key: '' },
 }
 
 // ─── read / write ─────────────────────────────────────────────────────────────
@@ -49,13 +52,26 @@ export async function saveProviderConfig(
   const merged: ProviderConfig = {
     ...current,
     ...config,
-    openai:    { ...current.openai,    ...(config.openai    ?? {}) },
-    gemini:    { ...current.gemini,    ...(config.gemini    ?? {}) },
-    stability: { ...current.stability, ...(config.stability ?? {}) },
+    openai:     { ...current.openai,     ...(config.openai     ?? {}) },
+    gemini:     { ...current.gemini,     ...(config.gemini     ?? {}) },
+    stability:  { ...current.stability,  ...(config.stability  ?? {}) },
+    anthropic:  { ...current.anthropic,  ...(config.anthropic  ?? {}) },
   }
   fs.mkdirSync(path.dirname(CONFIG_FILE), { recursive: true })
   fs.writeFileSync(CONFIG_FILE, JSON.stringify(merged, null, 2))
   return { ok: true }
+}
+
+// ─── vision key helper ────────────────────────────────────────────────────────
+
+/**
+ * Returns the Anthropic key for Claude Vision.
+ * Priority: ANTHROPIC_API_KEY env var → config file → empty string.
+ */
+export async function getVisionKey(): Promise<string> {
+  if (process.env.ANTHROPIC_API_KEY) return process.env.ANTHROPIC_API_KEY
+  const cfg = await readProviderConfig()
+  return cfg.anthropic?.key ?? ''
 }
 
 // ─── generate image via configured provider ───────────────────────────────────
@@ -144,29 +160,41 @@ async function generateOpenAI(
 
 async function generateGemini(prompt: string, destPath: string, key: string) {
   if (!key) throw new Error('Gemini key not configured')
-  // Imagen 3 via Google AI Generative Language API
+
+  // Use Gemini 2.0 Flash image generation — works with standard AI Studio keys.
+  // (imagen-3.0-generate-001 is Vertex AI only and requires special quota.)
+  const model = 'gemini-2.0-flash-preview-image-generation'
   const res = await fetch(
-    `https://generativelanguage.googleapis.com/v1beta/models/imagen-3.0-generate-001:predict?key=${key}`,
+    `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${key}`,
     {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        instances: [{ prompt: prompt.slice(0, 2000) }],
-        parameters: { sampleCount: 1, aspectRatio: '4:3' },
+        contents: [{ parts: [{ text: prompt.slice(0, 2000) }] }],
+        generationConfig: { responseModalities: ['TEXT', 'IMAGE'] },
       }),
-      signal: AbortSignal.timeout(60_000),
+      signal: AbortSignal.timeout(90_000),
     },
   )
   if (!res.ok) {
     const body = await res.text()
-    throw new Error(`Gemini ${res.status}: ${body.slice(0, 300)}`)
+    throw new Error(`Gemini ${res.status}: ${body.slice(0, 400)}`)
   }
+
+  type GeminiPart = { text?: string } | { inlineData?: { mimeType?: string; data?: string } }
   const json = await res.json() as {
-    predictions?: { bytesBase64Encoded?: string; mimeType?: string }[]
+    candidates?: { content?: { parts?: GeminiPart[] } }[]
   }
-  const b64 = json.predictions?.[0]?.bytesBase64Encoded
-  if (!b64) throw new Error(`Gemini: no image in response: ${JSON.stringify(json).slice(0, 200)}`)
-  await saveImageBuffer(Buffer.from(b64, 'base64'), destPath)
+
+  const parts = json.candidates?.[0]?.content?.parts ?? []
+  const imgPart = parts.find(
+    (p): p is { inlineData: { mimeType: string; data: string } } =>
+      'inlineData' in p && !!p.inlineData?.data,
+  )
+  if (!imgPart) {
+    throw new Error(`Gemini: no image in response — ${JSON.stringify(json).slice(0, 300)}`)
+  }
+  await saveImageBuffer(Buffer.from(imgPart.inlineData.data, 'base64'), destPath)
 }
 
 async function generateStability(prompt: string, destPath: string, key: string) {
@@ -215,7 +243,16 @@ export async function testProvider(
       )
       if (res.status === 400 || res.status === 403) return { ok: false, error: 'Invalid API key' }
       if (!res.ok) return { ok: false, error: `HTTP ${res.status}` }
-      return { ok: true }
+      // Check if the image-generation model is in the list
+      const json = await res.json() as { models?: { name: string }[] }
+      const models = json.models?.map(m => m.name) ?? []
+      const hasFlash = models.some(n => n.includes('gemini-2.0-flash-preview-image-generation'))
+      return {
+        ok: true,
+        error: hasFlash
+          ? '✅ Image generation available'
+          : '⚠️ Key valid but gemini-2.0-flash-preview-image-generation not listed — generation may fail',
+      }
     }
 
     if (provider === 'stability') {
@@ -230,6 +267,23 @@ export async function testProvider(
     }
 
     return { ok: false, error: 'Unknown provider' }
+  } catch (e: unknown) {
+    const msg = e instanceof Error ? (e.cause as { message?: string } | undefined)?.message ?? e.message : String(e)
+    return { ok: false, error: `Connection error: ${msg}` }
+  }
+}
+
+export async function testAnthropicKey(
+  key: string,
+): Promise<{ ok: boolean; error?: string }> {
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/models', {
+      headers: { 'x-api-key': key, 'anthropic-version': '2023-06-01' },
+      signal: AbortSignal.timeout(10_000),
+    })
+    if (res.status === 401) return { ok: false, error: 'Invalid API key' }
+    if (!res.ok) return { ok: false, error: `HTTP ${res.status}` }
+    return { ok: true, error: '✅ Connected — Claude Vision ready' }
   } catch (e: unknown) {
     const msg = e instanceof Error ? (e.cause as { message?: string } | undefined)?.message ?? e.message : String(e)
     return { ok: false, error: `Connection error: ${msg}` }

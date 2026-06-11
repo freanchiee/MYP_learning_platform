@@ -4,7 +4,7 @@ import fs from 'fs'
 import path from 'path'
 import { revalidatePath } from 'next/cache'
 import { execSync } from 'child_process'
-import { generateImageWithProvider } from './provider-config'
+import { generateImageWithProvider, getVisionKey } from './provider-config'
 
 const REPO_ROOT = path.join(process.cwd())
 const DATA_PAPERS = path.join(REPO_ROOT, 'data', 'papers')
@@ -27,8 +27,9 @@ Format your response as a single paragraph starting with exactly:
 Do NOT say 'copy' or 'reproduce'. Describe what an original equivalent should look like.`
 
 async function callClaudeVision(imagePath: string): Promise<string> {
-  const key = process.env.ANTHROPIC_API_KEY
-  if (!key) throw new Error('ANTHROPIC_API_KEY not set in environment')
+  // Priority: env var → saved config file
+  const key = await getVisionKey()
+  if (!key) throw new Error('Anthropic key not configured. Add it in ⚙️ Image Providers → Claude Vision section.')
 
   const physPath = path.join(PUBLIC_DIR, imagePath)
   if (!fs.existsSync(physPath)) throw new Error(`Original image not found: ${physPath}`)
@@ -206,12 +207,13 @@ export async function regenerateImage(
   let subType = entry.sub_type ?? '2B'
   let visionUsed = false
 
-  // Auto Vision upgrade: 2B + existing original + Anthropic key available
+  // Auto Vision upgrade: 2B + existing original + Anthropic key available (env OR config)
   const originalExists =
     entry.original_path &&
     fs.existsSync(path.join(PUBLIC_DIR, entry.original_path))
+  const visionKey = await getVisionKey()
 
-  if (originalExists && process.env.ANTHROPIC_API_KEY) {
+  if (originalExists && visionKey) {
     try {
       prompt = await callClaudeVision(entry.original_path!)
       subType = '2A'

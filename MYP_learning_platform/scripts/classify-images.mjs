@@ -73,13 +73,22 @@ Environment:
   process.exit(1)
 }
 
+// ─── load saved provider config (keys set via dashboard fall back here) ───────
+
+let _savedConfig = {}
+const _configFile = path.join(REPO_ROOT, 'data', '.image-pipeline-keys.json')
+if (fs.existsSync(_configFile)) {
+  try { _savedConfig = JSON.parse(fs.readFileSync(_configFile, 'utf8')) } catch {}
+}
+
 // ─── detect image provider ───────────────────────────────────────────────────
 
+// Env vars take priority; config file values used as fallback
 const HF_TOKEN      = process.env.HF_TOKEN ?? ''
 const TOGETHER_KEY  = process.env.TOGETHER_API_KEY ?? ''
 const FAL_KEY       = process.env.FAL_KEY ?? ''
-const OPENAI_KEY    = process.env.OPENAI_API_KEY ?? ''
-const ANTHROPIC_KEY = process.env.ANTHROPIC_API_KEY ?? ''
+const OPENAI_KEY    = process.env.OPENAI_API_KEY    || _savedConfig.openai?.key    || ''
+const ANTHROPIC_KEY = process.env.ANTHROPIC_API_KEY || _savedConfig.anthropic?.key || ''
 
 function detectProvider() {
   if (OPENAI_KEY)   return 'openai'       // DALL-E 3 — recommended

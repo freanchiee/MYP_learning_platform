@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useTransition } from 'react'
-import { saveProviderConfig, testProvider, type ProviderId, type ProviderConfig } from './provider-config'
+import { saveProviderConfig, testProvider, testAnthropicKey, type ProviderId, type ProviderConfig } from './provider-config'
 
 interface Props {
   initialConfig: ProviderConfig
@@ -43,9 +43,9 @@ const PROVIDERS: ProviderDef[] = [
   {
     id: 'gemini',
     name: 'Google Gemini',
-    badge: 'Imagen 3',
+    badge: 'Flash 2.0',
     color: 'bg-blue-100 text-blue-800',
-    description: 'Google Imagen 3 via AI Studio. Good quality, generous free tier.',
+    description: 'Gemini 2.0 Flash image generation via AI Studio. Works with standard free-tier keys.',
     pricingNote: 'Free tier available · get key at aistudio.google.com',
     keyLabel: 'Google AI Studio Key',
     keyPlaceholder: 'AIza...',
@@ -104,7 +104,10 @@ function KeyInput({
 
 export default function ProviderSettings({ initialConfig }: Props) {
   const [open, setOpen] = useState(false)
-  const [config, setConfig] = useState<ProviderConfig>(initialConfig)
+  const [config, setConfig] = useState<ProviderConfig>({
+    ...initialConfig,
+    anthropic: initialConfig.anthropic ?? { key: '' },
+  })
   const [testResults, setTestResults] = useState<Record<string, { ok: boolean; msg: string }>>({})
   const [isPending, startTransition] = useTransition()
   const [saved, setSaved] = useState(false)
@@ -117,6 +120,9 @@ export default function ProviderSettings({ initialConfig }: Props) {
       ...c,
       [provider]: { ...(c[provider] as Record<string, string>), model },
     }))
+  }
+  function updateAnthropicKey(key: string) {
+    setConfig(c => ({ ...c, anthropic: { key } }))
   }
   function setActive(provider: ProviderId) {
     setConfig(c => ({ ...c, activeProvider: provider }))
@@ -134,6 +140,25 @@ export default function ProviderSettings({ initialConfig }: Props) {
       setTestResults(r => ({
         ...r,
         [provider]: {
+          ok: res.ok,
+          msg: res.ok ? (res.error ?? '✅ Connected') : `❌ ${res.error}`,
+        },
+      }))
+    })
+  }
+
+  function handleTestAnthropic() {
+    const key = config.anthropic?.key ?? ''
+    if (!key) {
+      setTestResults(r => ({ ...r, anthropic: { ok: false, msg: 'Enter a key first' } }))
+      return
+    }
+    startTransition(async () => {
+      setTestResults(r => ({ ...r, anthropic: { ok: false, msg: 'Testing…' } }))
+      const res = await testAnthropicKey(key)
+      setTestResults(r => ({
+        ...r,
+        anthropic: {
           ok: res.ok,
           msg: res.ok ? (res.error ?? '✅ Connected') : `❌ ${res.error}`,
         },
@@ -286,6 +311,57 @@ export default function ProviderSettings({ initialConfig }: Props) {
               </div>
             )
           })}
+
+          {/* ── Claude Vision section (inside scrollable list) ──────────────── */}
+          <div className="rounded-2xl border-2 border-orange-200 bg-orange-50/40 p-4 space-y-3">
+            {/* Header */}
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <span className="font-bold text-sm text-gray-900">Anthropic</span>
+                <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-orange-100 text-orange-800">
+                  Claude Vision
+                </span>
+              </div>
+              <a
+                href="https://console.anthropic.com/settings/keys"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[11px] text-blue-600 hover:underline"
+              >
+                Get key ↗
+              </a>
+            </div>
+
+            <p className="text-xs text-gray-600">
+              Analyzes original exam images and writes specific, detailed prompts before generation.
+              Enables <strong>2A (Vision)</strong> upgrades — much better results than text-only 2B prompts.
+            </p>
+            <p className="text-[11px] text-gray-400">
+              claude-sonnet-4-6 · ~$0.003/analysis · console.anthropic.com
+            </p>
+
+            <KeyInput
+              label="Anthropic API Key"
+              placeholder="sk-ant-..."
+              value={config.anthropic?.key ?? ''}
+              onChange={updateAnthropicKey}
+            />
+
+            {/* Test result */}
+            {testResults['anthropic'] && (
+              <p className={`text-xs font-medium px-3 py-1.5 rounded-lg ${testResults['anthropic'].ok ? 'bg-green-50 text-green-700' : 'bg-red-50 text-red-700'}`}>
+                {testResults['anthropic'].msg}
+              </p>
+            )}
+
+            <button
+              onClick={handleTestAnthropic}
+              disabled={isPending || !(config.anthropic?.key)}
+              className="px-3 py-1.5 rounded-lg border border-orange-200 text-xs font-semibold text-orange-700 hover:bg-orange-100 disabled:opacity-40 transition-colors"
+            >
+              Test Connection
+            </button>
+          </div>
         </div>
 
         {/* Save footer */}
