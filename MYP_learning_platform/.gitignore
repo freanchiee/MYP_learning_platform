@@ -34,3 +34,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# IB copyright exam scan images — never commit originals
+# Generated replacements are also excluded until the pipeline is approved & stable
+public/images/papers/
+
+# supabase temp
+supabase/.temp/

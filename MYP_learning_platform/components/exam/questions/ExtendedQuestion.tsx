@@ -19,6 +19,7 @@ import RadioSelectWidget from '@/components/exam/widgets/RadioSelectWidget'
 import WaveAnimationsWidget from '@/components/exam/widgets/WaveAnimationsWidget'
 import RadiationQ7Widget from '@/components/exam/widgets/RadiationQ7Widget'
 import EditableImage from '@/components/exam/EditableImage'
+import QuestionImage from '@/components/exam/QuestionImage'
 import EditableText from '@/components/exam/EditableText'
 import WaveLabelDragDrop from '@/components/exam/widgets/WaveLabelDragDrop'
 import InlineDropdownSelect from '@/components/exam/widgets/InlineDropdownSelect'
@@ -236,8 +237,9 @@ function NativeContent({
         return (
           <div className="space-y-3 mt-2">
             {q.figImages.map((src, i) => (
-              <EditableImage
+              <QuestionImage
                 key={i}
+                image_type="original"
                 src={src}
                 alt={`Question figure ${i + 1}`}
                 className="w-full rounded-lg border border-gray-200 shadow-sm"
@@ -321,8 +323,9 @@ export default function ExtendedQuestion({ q, qIdx }: ExtendedQuestionProps) {
               {task.figImages && task.figImages.length > 0 && (
                 <div className="space-y-2 mb-1">
                   {task.figImages.map((src, i) => (
-                    <EditableImage
+                    <QuestionImage
                       key={i}
+                      image_type="original"
                       src={src}
                       alt={`Figure for part (${task.label})`}
                       className="rounded-lg border border-gray-200 shadow-sm mx-auto block"
