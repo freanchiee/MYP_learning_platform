@@ -4,6 +4,7 @@ import fs from 'fs'
 import path from 'path'
 import { revalidatePath } from 'next/cache'
 import { execSync } from 'child_process'
+import { generateImageWithProvider } from './provider-config'
 
 const REPO_ROOT = path.join(process.cwd())
 const DATA_PAPERS = path.join(REPO_ROOT, 'data', 'papers')
@@ -24,6 +25,7 @@ export interface SidecarEntry {
   flagged?: boolean
   flag_note?: string | null
   regenerated_at?: string | null
+  _error?: string | undefined
 }
 
 function readSidecar(paperId: string): SidecarEntry[] {
@@ -115,7 +117,7 @@ export async function approveImage(
 }
 
 /**
- * Regenerate an image using the same prompt → Pollinations download.
+ * Regenerate an image using the configured provider.
  */
 export async function regenerateImage(
   paperId: string,
@@ -126,27 +128,17 @@ export async function regenerateImage(
   if (idx === -1) return { ok: false, error: `Entry not found: ${taskPath}` }
 
   const entry = entries[idx]
-  if (!entry.image_prompt) return { ok: false, error: 'No image_prompt on this entry' }
+  if (!entry.image_prompt) return { ok: false, error: 'No image_prompt — use Edit Prompt first' }
   if (!entry.generated_path) return { ok: false, error: 'No generated_path on this entry' }
 
-  const url = `https://image.pollinations.ai/prompt/${encodeURIComponent(entry.image_prompt)}?width=800&height=600&nologo=true&model=flux`
+  const result = await generateImageWithProvider(entry.image_prompt, entry.generated_path)
+  if (!result.ok) return { ok: false, error: result.error }
 
-  try {
-    const res = await fetch(url)
-    if (!res.ok) return { ok: false, error: `Pollinations error: ${res.status}` }
-    const buf = Buffer.from(await res.arrayBuffer())
-    const destFile = path.join(REPO_ROOT, 'public', entry.generated_path)
-    fs.mkdirSync(path.dirname(destFile), { recursive: true })
-    fs.writeFileSync(destFile, buf)
+  entries[idx] = { ...entry, regenerated_at: new Date().toISOString(), _error: undefined }
+  writeSidecar(paperId, entries)
 
-    entries[idx] = { ...entry, regenerated_at: new Date().toISOString() }
-    writeSidecar(paperId, entries)
-
-    revalidatePath('/admin/image-review')
-    return { ok: true, newUrl: entry.generated_path }
-  } catch (e: unknown) {
-    return { ok: false, error: e instanceof Error ? e.message : String(e) }
-  }
+  revalidatePath('/admin/image-review')
+  return { ok: true, newUrl: entry.generated_path }
 }
 
 /**
@@ -161,7 +153,6 @@ export async function editPromptAndRegenerate(
   const idx = entries.findIndex(e => e.taskPath === taskPath)
   if (idx === -1) return { ok: false, error: `Entry not found: ${taskPath}` }
 
-  // Update prompt in sidecar first
   entries[idx] = { ...entries[idx], image_prompt: newPrompt }
   writeSidecar(paperId, entries)
 

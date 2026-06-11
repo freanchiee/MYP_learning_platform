@@ -35,6 +35,9 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# Image pipeline API keys — stored locally, never committed
+data/.image-pipeline-keys.json
+
 # IB copyright exam scan images — never commit originals
 # Generated replacements are also excluded until the pipeline is approved & stable
 public/images/papers/

@@ -1,7 +1,9 @@
 import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
 import { loadReviewQueue, loadAllEntries } from './actions'
+import { readProviderConfig } from './provider-config'
 import ReviewCard from './ReviewCard'
+import ProviderSettings from './ProviderSettings'
 
 export const dynamic = 'force-dynamic'
 
@@ -20,7 +22,11 @@ export default async function ImageReviewPage({
   const statusFilter = params.status ?? 'needs_review'
   const tab = params.tab ?? 'queue'
 
-  const [queue, all] = await Promise.all([loadReviewQueue(), loadAllEntries()])
+  const [queue, all, providerConfig] = await Promise.all([
+    loadReviewQueue(),
+    loadAllEntries(),
+    readProviderConfig(),
+  ])
 
   const displayEntries = tab === 'queue' ? queue : all
 
@@ -48,11 +54,16 @@ export default async function ImageReviewPage({
       {/* Header */}
       <div className="bg-white border-b border-gray-200 px-6 py-5">
         <div className="max-w-4xl mx-auto">
-          <h1 className="text-2xl font-bold text-gray-900">Image Review Queue</h1>
-          <p className="text-sm text-gray-500 mt-1">
-            Review AI-generated replacement images before they go live.
-            Approve to update questions.ts, Regenerate to try again, Flag for manual attention.
-          </p>
+          <div className="flex items-start justify-between gap-4">
+            <div>
+              <h1 className="text-2xl font-bold text-gray-900">Image Review Queue</h1>
+              <p className="text-sm text-gray-500 mt-1">
+                Review AI-generated replacement images before they go live.
+                Approve to update questions.ts, Regenerate to try again, Flag for manual attention.
+              </p>
+            </div>
+            <ProviderSettings initialConfig={providerConfig} />
+          </div>
 
           {/* Stats row */}
           <div className="flex gap-6 mt-4">
