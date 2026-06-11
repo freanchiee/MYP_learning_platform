@@ -26,6 +26,7 @@ import RefractionLabelDragDrop from '@/components/exam/widgets/RefractionLabelDr
 import CheckboxSelectWidget from '@/components/exam/widgets/CheckboxSelectWidget'
 import FillBlankWidget from '@/components/exam/widgets/FillBlankWidget'
 import MatchDragDropWidget from '@/components/exam/widgets/MatchDragDropWidget'
+import TableInputWidget from '@/components/exam/widgets/TableInputWidget'
 
 interface ExtendedQuestionProps {
   q: Question
@@ -368,7 +369,6 @@ export default function ExtendedQuestion({ q, qIdx }: ExtendedQuestionProps) {
                   <RichTextEditor
                     value={task.ans ?? ''}
                     onChange={(val) => setTaskAnswer(qIdx, taskIdx, val)}
-                    placeholder={task.ph}
                     rows={4}
                   />
                 </div>
@@ -433,12 +433,18 @@ export default function ExtendedQuestion({ q, qIdx }: ExtendedQuestionProps) {
                   savedAnswer={task.ans ?? ''}
                   onAnswer={(ans) => setTaskAnswer(qIdx, taskIdx, ans)}
                 />
+              ) : task.widget === 'table_input' ? (
+                <TableInputWidget
+                  headers={task.widgetItems ?? []}
+                  rows={task.widgetOptions ?? []}
+                  savedAnswer={task.ans ?? ''}
+                  onAnswer={(ans) => setTaskAnswer(qIdx, taskIdx, ans)}
+                />
               ) : (
                 <div className="space-y-1">
                   <RichTextEditor
                     value={task.ans ?? ''}
                     onChange={(val) => setTaskAnswer(qIdx, taskIdx, val)}
-                    placeholder={task.ph}
                     rows={4}
                   />
                   <div className="flex justify-end">

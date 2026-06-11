@@ -1,0 +1,396 @@
+import type { Question } from '@/lib/types'
+
+export const paperMeta = {
+  id: 'chemistry-may-2024',
+  subject: 'Chemistry',
+  session: 'May',
+  year: 2024,
+  totalMarks: 100,
+  durationMinutes: 90,
+  criteria: ['A', 'B', 'C', 'D'] as const,
+}
+
+export const questions: Question[] = [
+  // ── Q1 (10 marks, Crit A) — Photosynthesis, chromatography ────────────────
+  {
+    id: 1,
+    crit: 'A',
+    type: 'extended',
+    topic: 'Photosynthesis, Lewis structures & chromatography — coral reef algae',
+    topicCanonical: 'Separation & Purification',
+    topicGroup: 'States of Matter',
+    marks: 10,
+    stem: 'Algae carry out photosynthesis to produce glucose, which is used for food by the coral. The word equation for the process of photosynthesis is: water + carbon dioxide → glucose + oxygen.',
+    figImages: ['/images/papers/chemistry-may-2024/page-02.png'],
+    tasks: [
+      {
+        label: 'a',
+        text: '**Select** the correct coefficients to balance the chemical equation for the process of photosynthesis:\n\n[?]H₂O + [?]CO₂ → [?]C₆H₁₂O₆ + [?]O₂',
+        marks: 2,
+        ph: '6H₂O + 6CO₂ → C₆H₁₂O₆ + 6O₂ (reactants correct [1]; products correct [1])',
+        widget: 'fill_blank',
+        widgetOptions: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '12'],
+      },
+      {
+        label: 'b',
+        text: 'Below is the structure of glucose, C₆H₁₂O₆. **Identify** the functional group that is circled.',
+        marks: 1,
+        ph: 'Alcohol / hydroxyl (–OH) group',
+        figImages: ['/images/papers/chemistry-may-2024/page-02.png'],
+      },
+      {
+        label: 'c',
+        text: 'Through photosynthesis, the algae also provide the coral with oxygen. **Select** the Lewis structure (dot and cross) for O₂.',
+        marks: 1,
+        ph: 'O₂ has a double bond: :O=O: with 2 lone pairs each — select C',
+        widget: 'radio_select',
+        widgetOptions: ['A', 'B', 'C', 'D'],
+        figImages: ['/images/papers/chemistry-may-2024/page-03.png'],
+      },
+      {
+        label: 'd',
+        text: 'Leaves also produce pigments. The animation below shows how the pigments in a leaf are separated by the process of chromatography.\n\n**Select** the term that best describes the leaf stain used in this animation of chromatography.',
+        marks: 1,
+        ph: 'The leaf stain contains many pigments mixed together — Mixture',
+        widget: 'radio_select',
+        widgetOptions: ['An element', 'A mixture', 'An alloy', 'An allotrope'],
+        figImages: ['/images/papers/chemistry-may-2024/page-04.png'],
+      },
+      {
+        label: 'e',
+        text: '**Identify** the organic pigments corresponding to each band in the chromatography column.\n\nBand 1: [top]\nBand 2: [middle]\nBand 3: [bottom near leaf stain]',
+        marks: 2,
+        ph: 'Band 1 = Pigment C; Band 2 = Pigment B; Band 3 = Pigment A (one correct [1]; all correct [2])',
+        figImages: ['/images/papers/chemistry-may-2024/page-05.png'],
+      },
+      {
+        label: 'f',
+        text: 'The Rf value is the ratio of the solute\'s distance travelled to the solvent\'s distance travelled. The following diagram shows how the Rf value is calculated:\n\nRf = 2.1 / 2.8 = 0.75\n\nUsing the ruler in the diagram below, **calculate** the Rf value for band 1.',
+        marks: 3,
+        ph: 'Solvent front from application point = 10.0; Band 1 distance = 9.8; Rf = 9.8/10.0 = 0.98 (±0.01)',
+        figImages: ['/images/papers/chemistry-may-2024/page-06.png'],
+      },
+    ],
+  },
+
+  // ── Q2 (9 marks, Crit A) — Hydrangeas, pH, calcium carbonate ─────────────
+  {
+    id: 2,
+    crit: 'A',
+    type: 'extended',
+    topic: 'pH, acids, salts & molar mass — hydrangea soil chemistry',
+    topicCanonical: 'Acids, Bases & Salts',
+    topicGroup: 'Chemical Reactions',
+    marks: 9,
+    stem: 'Hydrangea flowers are known for changing colour in response to changes in soil pH.',
+    figImages: ['/images/papers/chemistry-may-2024/page-07.png'],
+    tasks: [
+      {
+        label: 'a',
+        text: 'To measure the soil pH, a pH probe or universal indicator could be used.\n\n**Select** the pH of universal indicator when added to pure water.',
+        marks: 1,
+        ph: 'Pure water is neutral — pH 7',
+        widget: 'radio_select',
+        widgetOptions: ['4', '5', '7', '10'],
+        figImages: ['/images/papers/chemistry-may-2024/page-07.png'],
+      },
+      {
+        label: 'b',
+        text: 'Sulfuric acid (H₂SO₄) can be used to decrease the pH of the soil, and calcium carbonate (CaCO₃) to increase it. Hydrangea flowers are blue in soil with a pH of 5.5 or lower and pink if soil pH is 7 or higher.\n\n**Outline** how you could grow blue flowers if the soil has pH = 6.',
+        marks: 2,
+        ph: 'Increase acidity / decrease the pH by adding sulfuric acid / H₂SO₄ (or any acid)',
+      },
+      {
+        label: 'c',
+        text: 'Calcium carbonate is a metal carbonate. Using the periodic table, **calculate** the molar mass of calcium carbonate.',
+        marks: 2,
+        ph: 'M(CaCO₃) = 40 + 12 + (3×16) = 100 g mol⁻¹',
+      },
+      {
+        label: 'd',
+        text: 'Calcium carbonate can be used to neutralize sulfuric acid, which produces a salt.\n\nH₂SO₄ + CaCO₃ → salt + product A + product B\n\n**Select** the other two products that are formed when acid is neutralized by a metal carbonate.',
+        marks: 2,
+        ph: 'Products are H₂O and CO₂ (in either order)',
+        widget: 'inline_dropdown_select',
+        widgetItems: ['Product A', 'Product B'],
+        widgetOptions: ['H₂O', 'CO₂', 'H₂', 'CaO', 'SO₂'],
+        figImages: ['/images/papers/chemistry-may-2024/page-09.png'],
+      },
+      {
+        label: 'e',
+        text: '**Determine** the formula of the salt that is produced when calcium carbonate neutralizes sulfuric acid.',
+        marks: 1,
+        ph: 'CaSO₄ (calcium sulfate; correct subscripts required)',
+      },
+      {
+        label: 'f',
+        text: '**State** the pH of a solution of the salt produced in part (e).',
+        marks: 1,
+        ph: 'pH = 7 (CaSO₄ is a neutral salt)',
+      },
+    ],
+  },
+
+  // ── Q3 (9 marks, Crit A/D) — Tractor, nitrogen monoxide, gas particles ─────
+  {
+    id: 3,
+    crit: 'A',
+    type: 'extended',
+    topic: 'Balancing equations, particle model & diffusion — tractor emissions',
+    topicCanonical: 'States of Matter & Particle Theory',
+    topicGroup: 'States of Matter',
+    marks: 9,
+    stem: 'Some farming techniques can have a significant impact on nature and can change environmental conditions. The image below shows a tractor working on a farm.\n\nThe heat generated by the engine in a tractor causes nitrogen and oxygen from the air to react to produce nitrogen monoxide gas as an emission.',
+    figImages: ['/images/papers/chemistry-may-2024/page-11.png'],
+    tasks: [
+      {
+        label: 'a',
+        text: '**Write down** the balanced chemical equation when nitrogen monoxide is formed by the reaction of nitrogen and oxygen.',
+        marks: 2,
+        ph: 'N₂ + O₂ → 2NO (reactants correct [1]; products correct [1])',
+      },
+      {
+        label: 'b',
+        text: 'In the box below, **draw** a diagram showing the arrangement of particles in a gas.',
+        marks: 1,
+        ph: 'Two or more particles randomly placed, not touching each other',
+      },
+      {
+        label: 'c',
+        text: '**Outline** how particles move in a gas.',
+        marks: 2,
+        ph: 'Random motion; high kinetic energy / high speed',
+      },
+      {
+        label: 'd',
+        text: 'Even though a tractor is slow and does not travel far, the emitted nitrogen monoxide can pollute a large area, even without wind.\n\n**Explain** why the emission can pollute a large area. You should use scientific terminology in your answer.',
+        marks: 4,
+        ph: 'NO is a gas; gas particles spread/move/travel out; from area of high concentration to low concentration; this is diffusion',
+        figImages: ['/images/papers/chemistry-may-2024/page-12.png'],
+      },
+    ],
+  },
+
+  // ── Q4 (9 marks, Crit C/B/D) — Egg yolk colour, denaturation ────────────
+  {
+    id: 4,
+    crit: 'C',
+    type: 'extended',
+    topic: 'Hypothesis, measurement & denaturation — egg yolk pigments',
+    topicCanonical: 'Organic Chemistry & Fuels',
+    topicGroup: 'Organic Chemistry',
+    marks: 9,
+    stem: 'Chicken eggs are commonly eaten either whole or as an ingredient in a recipe. When we crack open an egg, we are immediately aware of the yolk\'s colour and make a judgement about whether the egg is safe to eat.\n\nIn the picture of the three eggs below, the yolks are different colours.\n\nThe difference in colour of the yolks is due to the chicken\'s diet. Farmers use a qualitative measuring tool called a YolkFan™ to compare the colour of the yolks. Consumers prefer a yolk colour between 7 and 8. The farmer can change the colour of the yolk by adding yellow and red organic pigments as additives to the chicken\'s diet.',
+    figImages: ['/images/papers/chemistry-may-2024/page-13.png'],
+    tasks: [
+      {
+        label: 'a',
+        text: 'Two students are investigating the colour of eggs laid by the same chicken. One student uses a colorimeter; the other uses the YolkFan™ scale.\n\n**Justify** which method gives a better measurement of the colour of the yolk.',
+        marks: 1,
+        ph: 'Colorimeter — gives quantitative/numerical data OR more accurate/precise OR removes human error',
+      },
+      {
+        label: 'b',
+        text: 'The table below shows how additives can change the yolk colour.\n\n| YolkFan™ score | Yellow pigment / ppm | Red pigment / ppm |\n|---|---|---|\n| 4 | 7.5 | 0.5 |\n| 6 | 12.5 | 1.5 |\n| 8 | 30.5 | 3 |\n| 10 | 52.5 | 4 |\n| 12 | 76.1 | 5.5 |\n| 14 | 86.1 | 6.5 |\n| 16 | 90.5 | 7 |\n\nA student wants to determine how the yolk colour changes with additives. Using the information in the table, **formulate** the student\'s hypothesis.',
+        marks: 3,
+        ph: 'If concentration of red/yellow pigment is increased; Then the yolk colour will become darker/more orange/closer to 16; Because the pigment changes the colour of the yolk',
+        figImages: ['/images/papers/chemistry-may-2024/page-15.png'],
+      },
+      {
+        label: 'c',
+        text: 'Eggs are often used in cooking. They can be used whole or separately as the yolk or white. When they are heated, these proteins denature and become solid. A student separated an egg into the yolk and white, heated each one and measured the temperature when the proteins became solid. The results are shown below.\n\n| | Starting temperature / °C | Temperature at which protein is denatured / °C |\n|---|---|---|\n| Yolk | 20 | 76 |\n| White | 20 | [blank] |\n\n**Measure** the temperature at which the egg white becomes denatured. Add your value to the table.',
+        marks: 1,
+        ph: 'Accept any single value in the range 62–70 °C',
+        figImages: ['/images/papers/chemistry-may-2024/page-16.png'],
+      },
+      {
+        label: 'd',
+        text: 'The diagram below shows two different methods for measuring temperature.\n\n**Select** which method would produce the most valid measurement of the temperature at which the proteins denature. **Justify** your answer.',
+        marks: 1,
+        ph: 'Method B — thermometer is measuring where the egg white / proteins are (not in water)',
+        widget: 'radio_select',
+        widgetOptions: ['Method A', 'Method B'],
+        figImages: ['/images/papers/chemistry-may-2024/page-17.png'],
+      },
+      {
+        label: 'e',
+        text: '**Predict** the temperature for a mixture of yolk and white to denature. **Justify** your answer.',
+        marks: 3,
+        ph: 'Accept range 62–70 °C; unit °C; because that was the maximum temperature that the individual components of the egg denatured',
+      },
+    ],
+  },
+
+  // ── Q5 (8 marks, Crit B/C) — Pickling eggs in vinegar ────────────────────
+  {
+    id: 5,
+    crit: 'B',
+    type: 'extended',
+    topic: 'Criterion B/C: Pickling eggs investigation — vinegar pH and tenderness',
+    topicCanonical: 'Acids, Bases & Salts',
+    topicGroup: 'Chemical Reactions',
+    marks: 8,
+    stem: 'One method of food preservation is pickling, in which the food is soaked in vinegar. Cooked peeled eggs can be pickled. When pickling, care has to be taken that the white of the eggs stays tender and the yolk keeps its yellow colour.\n\nA student has decided to investigate the effect of vinegars with different pH on pickled eggs. They read a research paper. In this paper, the taste and tenderness scores were given by a trained panel consisting of a group of people who gave a score out of 10, where 10 is the best score. The average of the values for each vinegar was calculated and is shown in the following table:\n\n| Solution | Average starting pH of solution | Average pH of egg white after 3 weeks | Average panel score for taste | Average panel score for tenderness |\n|---|---|---|---|---|\n| Apple cider vinegar (~1.5% sol) | 3.1 | 4.8 | 6.1 | 7.2 |\n| Red wine vinegar (~1.5% sol) | 3.6 | pH meter not working | 5.0 | 7.2 |\n| Distilled white vinegar (~1.5% sol) | 2.9 | 4.2 | 6.7 | 5.2 |',
+    figImages: ['/images/papers/chemistry-may-2024/page-19.png'],
+    tasks: [
+      {
+        label: 'a',
+        text: '**Identify** the independent variable, dependent variable and two control variables for this investigation.',
+        marks: 4,
+        ph: 'IV: type of vinegar; DV: pH of egg white OR tenderness OR taste score; CVs x2: volume of solution, temperature, size of egg, initial concentration of solution, % of salt, time, type of egg',
+      },
+      {
+        label: 'b',
+        text: '**Suggest** a suitable research question for this investigation.',
+        marks: 2,
+        ph: 'How does the type of vinegar affect the final pH of the egg whites / tenderness of the egg?',
+      },
+      {
+        label: 'c',
+        text: 'The starting pH of the cooked egg white was pH = 7. **State** what happens to the pH of the egg white when pickled with apple cider vinegar.',
+        marks: 1,
+        ph: 'The pH decreases (from 7 to ~4.8)',
+      },
+      {
+        label: 'd',
+        text: 'The student was surprised that there was no value for the pH of egg white after being pickled for three weeks with red wine vinegar. **Suggest** an improvement to the method to increase the validity of the data.',
+        marks: 1,
+        ph: 'Repeat the investigation with a new pH meter OR use a pH meter AND universal indicator to measure pH',
+      },
+    ],
+  },
+
+  // ── Q6 (14 marks, Crit C) — Vitamin C in juices and oranges ──────────────
+  {
+    id: 6,
+    crit: 'C',
+    type: 'extended',
+    topic: 'Criterion C: Data processing & graph — vitamin C in juices',
+    topicCanonical: 'Organic Chemistry & Fuels',
+    topicGroup: 'Organic Chemistry',
+    marks: 14,
+    stem: 'Vitamin C is an essential nutrient without which the body cannot function. The stability of the vitamin C structure is dependent upon environmental conditions such as temperature and oxygen availability. In the presence of oxygen, vitamin C oxidises, causing it to break down. The structure of vitamin C is shown below.',
+    figImages: ['/images/papers/chemistry-may-2024/page-22.png'],
+    tasks: [
+      {
+        label: 'a',
+        text: 'The table below shows the vitamin C concentration of some juices:\n\n| Juice sample | Vitamin C concentration / mg 100cm⁻³ |\n|---|---|\n| Apple | 240 |\n| Pink grapefruit | 82 |\n| Beetroot | 33 |\n| Red cabbage | 41 |\n| Tomato | 143 |\n\n**Present** this data in a graph.',
+        marks: 5,
+        ph: 'Title linking vit C and juice type; x-axis = juice type; y-axis = vit C concentration; correct scale from 0; all values plotted correctly (bar chart)',
+        figImages: ['/images/papers/chemistry-may-2024/page-23.png'],
+      },
+      {
+        label: 'b',
+        text: 'Oranges are a good source of vitamin C and are recommended as part of a healthy diet. Orange juice is extracted from the pulp in oranges.\n\nA student was interested in determining if the vitamin C concentration of orange juice changes over time when kept in a fridge at 4°C over a period of 3 weeks. The following three orange juices were tested:\n- fresh orange juice\n- orange juice that had been heat-treated to 70°C\n- orange juice that had been treated with CO₂ to remove some of the oxygen present\n\nThe graph shows the vitamin C concentration over 21 days for the three juices.\n\n**Identify** which juice has the lowest vitamin C concentration at the start of the investigation. **Justify** your answer using scientific reasoning.',
+        marks: 3,
+        ph: 'Heat-treated juice (pasteurized); vitamin C is broken down at high temperatures; reference to oxidized or denatured',
+        figImages: ['/images/papers/chemistry-may-2024/page-25.png'],
+      },
+      {
+        label: 'c',
+        text: 'Using the graph from part (b), **calculate** the rate of change in vitamin C concentration for the CO₂-treated orange juice over the 21-day period.',
+        marks: 2,
+        ph: 'Change = 375−350 = 25 μg cm⁻³; rate = 25/21 = 1.19 μg cm⁻³ day⁻¹ (accept 0.95–1.43)',
+        figImages: ['/images/papers/chemistry-may-2024/page-25.png'],
+      },
+      {
+        label: 'd',
+        text: 'The student made the following hypothesis:\n\n"If a whole orange is left for a number of weeks, the vitamin C concentration will decrease because the vitamin C will be oxidized."\n\nUsing the graph from part (b), **evaluate** the validity of this hypothesis.',
+        marks: 4,
+        ph: 'The vitamin C will not be oxidized as much / oxidized as much; because the pulp/juice is not exposed to oxygen / lower exposure to oxygen; due to protective layer of the peel; therefore invalid',
+      },
+    ],
+  },
+
+  // ── Q7 (16 marks, Crit B) — Can material investigation design ────────────
+  {
+    id: 7,
+    crit: 'B',
+    type: 'extended',
+    topic: 'Criterion B: Investigation design — can materials for soft drinks',
+    topicCanonical: 'Electrochemistry & Redox',
+    topicGroup: 'Electrochemistry',
+    marks: 16,
+    stem: 'Cans are used to extend the shelf life of the food they contain.\n\nThe four main materials currently used in can production are steel, tin-coated steel, chromium-coated steel and aluminium. These materials are known to react with acidic soft drinks. A packaging company has developed a new alloy called can-x aimed at the soft drink market.\n\n**Design** an investigation to determine the best material from steel, tin-coated steel, chromium-coated steel and can-x to make the soft drink containers from. You are provided with standard laboratory equipment, samples of each material and a sample of the soft drink.\n\nIn your answer, you should include:\n- the independent, dependent and two control variables\n- a list of equipment you will use\n- the method you will follow\n- details of measurements you will take to collect sufficient data.',
+    figImages: ['/images/papers/chemistry-may-2024/page-26.png'],
+    tasks: [
+      {
+        label: '',
+        text: '**Design** an investigation to determine the best material from steel, tin-coated steel, chromium-coated steel and can-x to make the soft drink containers from. You are provided with standard laboratory equipment, samples of each material and a sample of the soft drink.\n\nIn your answer, you should include:\n- the independent, dependent and two control variables\n- a list of equipment you will use\n- the method you will follow\n- details of measurements you will take to collect sufficient data.',
+        marks: 16,
+        ph: 'IV: type of material; DV: amount of corrosion/mass change; CVs: volume/type of soft drink, mass of sample, time; equipment; method with 5 values, 3 repeats, mean',
+      },
+    ],
+  },
+
+  // ── Q8 (8 marks, Crit D/C) — Saline water, crops, conductivity ──────────
+  {
+    id: 8,
+    crit: 'D',
+    type: 'extended',
+    topic: 'Electrical conductivity, salinity & crop yield — irrigation water',
+    topicCanonical: 'Environmental Impact & Sustainability',
+    topicGroup: 'Environmental Chemistry',
+    marks: 8,
+    stem: 'The global human population has increased from 6 billion to 9 billion in the last 20 years. The availability of land to produce food to sustain this increasing population needs to be addressed before we run out of time. According to a study carried out in 2014, at least 20% of all land used to grow crops is affected by the increased salinity of the water that is used for irrigation.\n\nSalinity in water is caused by dissolved salts such as sodium chloride, and it is determined by measuring the water\'s electrical conductivity.',
+    figImages: ['/images/papers/chemistry-may-2024/page-28.png'],
+    tasks: [
+      {
+        label: 'a',
+        text: '**Outline** why electrical conductivity can be used to determine the salt content of water.',
+        marks: 2,
+        ph: 'Na⁺ and Cl⁻ are charged particles; ions are mobile when dissolved in water / ions can conduct electricity',
+      },
+      {
+        label: 'b',
+        text: 'The table below contains information about the salinity of water from four different locations. Electrical conductivity is measured in units of S m⁻¹ (siemens per metre).\n\n| | Andes | Colorado | Napa | Pacific |\n|---|---|---|---|---|\n| Electrical conductivity / S m⁻¹ | 0.45 | 0.13 | 0.35 | 15 |\n| Dissolved salt / μg m⁻³ | 2000 | 950 | 2730 | 10 000 |\n\nUsing the information in the table, **identify** the location of water with the highest salinity. **Justify** your answer.',
+        marks: 2,
+        ph: 'Pacific (ocean) water; highest electrical conductivity OR highest dissolved salts',
+        figImages: ['/images/papers/chemistry-may-2024/page-29.png'],
+      },
+      {
+        label: 'c',
+        text: 'High salinity affects plant growth and crop yield. The graph shows the crop yield of three types of plants grown with different concentrations of salt in water, compared with how the plants would grow with fresh water.\n\n**Determine** the optimum concentration of salt for a maximum crop yield for plant C.',
+        marks: 1,
+        ph: '1.4 ±0.2 mmol dm⁻³ (read from graph at maximum of plant C curve)',
+        figImages: ['/images/papers/chemistry-may-2024/page-29.png'],
+      },
+      {
+        label: 'd',
+        text: '**Compare** how salinity affects the percentage crop yield of plant A and plant B. You should include data from the graph in your answer.',
+        marks: 3,
+        ph: 'Plant A decreases rapidly to 20% at low salinity (0.5 mmol dm⁻³); plant B yield starts decreasing at a higher concentration (0.8 mmol dm⁻³) and at a lower rate; plant B tolerates higher salinity than plant A',
+        figImages: ['/images/papers/chemistry-may-2024/page-30.png'],
+      },
+    ],
+  },
+
+  // ── Q9 (17 marks, Crit D) — Desalination systems ─────────────────────────
+  {
+    id: 9,
+    crit: 'D',
+    type: 'extended',
+    topic: 'Criterion D: Desalination systems — efficiency, economy & environment',
+    topicCanonical: 'Environmental Impact & Sustainability',
+    topicGroup: 'Environmental Chemistry',
+    marks: 17,
+    stem: 'Most of the drinking water consumed in the world comes from either surface water (streams, rivers, lakes, reservoirs) or ground water sources (spaces between rocks). This water has a low concentration of salts and is known as fresh water.\n\nOne other source of water is saline water from seas and oceans. Through the process of desalination, saline water is converted into water suitable for human consumption or irrigation of plants and crops. While desalination is very costly and requires a lot of energy, it is necessary in places where fresh water is not available. How efficient a process is can be determined by how much energy or resources are needed to produce fresh water.\n\nThe images in the tabs below show three different desalination systems: thermal-based, membrane-based, and solar-based.',
+    figImages: ['/images/papers/chemistry-may-2024/page-31.png'],
+    tasks: [
+      {
+        label: 'a',
+        text: 'Use the data in both tabs to **identify** the region with the highest number of desalination systems in the world and **justify** why this is the case.',
+        marks: 3,
+        ph: 'Latin America and Caribbean; surrounded by saline water OR little surface water suitable for drinking or irrigation; freshwater required for high populations',
+        figImages: ['/images/papers/chemistry-may-2024/page-32.png'],
+      },
+      {
+        label: 'b',
+        text: 'There are various systems used for desalination such as thermal-based, membrane-based and solar-based systems.\n\nUsing the information provided and your wider MYP knowledge, **discuss** and **evaluate** the systems available for water desalination. In your answer you should include:\n- a comparison of the efficiencies of the three systems\n- the economic impacts of the three systems\n- the environmental impacts of the three systems\n- an appraisal of the three systems.',
+        marks: 14,
+        ph: 'Efficiency: thermal high CO₂ & energy; membrane low energy; solar no energy; Economy: membrane expensive to build/maintain; solar cheap; thermal moderate; Environment: thermal CO₂ emissions (24 kg); membrane low CO₂ (0.3 kg); solar minimal; Appraisal with evidence',
+        figImages: ['/images/papers/chemistry-may-2024/page-33.png'],
+      },
+    ],
+  },
+]

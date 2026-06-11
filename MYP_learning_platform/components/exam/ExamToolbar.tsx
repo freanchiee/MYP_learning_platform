@@ -24,6 +24,7 @@ export default function ExamToolbar() {
   const editMode = useExamStore((s) => s.editMode)
   const setEditMode = useExamStore((s) => s.setEditMode)
   const paperId = useExamStore((s) => s.paperId)
+  const practiceMode = useExamStore((s) => s.practiceMode)
 
   // Parse paperId → "Physics — May 2024"
   const paperLabel = (() => {
@@ -115,8 +116,8 @@ export default function ExamToolbar() {
           {editMode ? '✏ EDIT' : '✏ Edit'}
         </button>
 
-        {/* Strike dots */}
-        {!editMode && (
+        {/* Strike dots — hidden in practice and edit mode */}
+        {!editMode && !practiceMode && (
           <div className="flex items-center gap-1.5">
             {[0, 1, 2].map((i) => (
               <div
@@ -132,8 +133,18 @@ export default function ExamToolbar() {
           </div>
         )}
 
-        {/* Timer — hidden in edit mode */}
-        {!editMode && (
+        {/* Practice badge — shown instead of timer in practice mode */}
+        {!editMode && practiceMode && (
+          <span
+            className="text-[10px] font-black tracking-[0.2em] px-2.5 py-1 rounded-full"
+            style={{ background: 'rgba(173,241,196,0.15)', color: '#adf1c4', border: '1px solid rgba(173,241,196,0.3)' }}
+          >
+            PRACTICE
+          </span>
+        )}
+
+        {/* Timer — hidden in edit mode and practice mode */}
+        {!editMode && !practiceMode && (
           <div
             className={`font-mono text-base font-bold tracking-widest ${timerClass}`}
             style={{ color: timerColor, fontFamily: 'var(--font-jetbrains-mono, monospace)' }}

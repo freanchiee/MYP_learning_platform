@@ -20,6 +20,8 @@ export const questions: Question[] = [
     type: 'extended',
     topic: 'atomic-physics',
     marks: 7,
+    topicCanonical: 'Atomic Structure & Radioactivity',
+    topicGroup: 'Nuclear & Atomic Physics',
     stem: 'Atoms are made up of particles called protons, neutrons and electrons, which are responsible for the mass and charge of atoms.',
     tags: { unit: 'atomic-physics', topics: ['atomic structure', 'static electricity', 'charge'], level: 'developing' },
     tasks: [
@@ -57,6 +59,8 @@ export const questions: Question[] = [
     type: 'extended',
     topic: 'forces-interactions',
     marks: 12,
+    topicCanonical: "Newton's Laws & Momentum",
+    topicGroup: 'Forces & Motion',
     stem: 'A raindrop falls from a cloud that is 500 m above the ground.',
     tags: { unit: 'forces-interactions', topics: ['terminal velocity', 'momentum', 'free fall', 'forces'], level: 'developing' },
     tasks: [
@@ -118,6 +122,8 @@ export const questions: Question[] = [
     type: 'extended',
     topic: 'electricity-circuits',
     marks: 14,
+    topicCanonical: 'Circuits, Resistance & Power',
+    topicGroup: 'Electricity & Magnetism',
     stem: 'A flow of charge around a circuit allows us to transfer energy. The circuit diagram shows a simple circuit with a battery, bulb, ammeter (0.5 A) and voltmeter (12 V).',
     figImages: [`${P}q3-circuit.png`],
     tags: { unit: 'electricity-circuits', topics: ['energy transfer', 'power', 'charge', 'resistance'], level: 'developing' },
@@ -170,6 +176,8 @@ export const questions: Question[] = [
     type: 'extended',
     topic: 'thermal-physics',
     marks: 21,
+    topicCanonical: 'States of Matter & Kinetic Theory',
+    topicGroup: 'Thermal Physics',
     stem: 'The video shows how the particles in a liquid leave the surface and become gas particles when the liquid evaporates.\n\nMany different factors affect the rate at which a liquid evaporates. You have been asked to investigate the effect that **surface area** has on the **mass of liquid evaporated in an hour**.',
     tags: { unit: 'thermal-physics', topics: ['evaporation', 'surface area', 'variables', 'data processing'], level: 'proficient' },
     tasks: [
@@ -235,6 +243,8 @@ export const questions: Question[] = [
     type: 'extended',
     topic: 'thermal-physics',
     marks: 6,
+    topicCanonical: 'States of Matter & Kinetic Theory',
+    topicGroup: 'Thermal Physics',
     stem: 'A student wants to investigate the effect of **temperature** on the **rate of evaporation** of a liquid.',
     tags: { unit: 'thermal-physics', topics: ['evaporation', 'temperature', 'variables', 'hypothesis'], level: 'developing' },
     tasks: [
@@ -266,6 +276,8 @@ export const questions: Question[] = [
     type: 'extended',
     topic: 'thermal-physics',
     marks: 10,
+    topicCanonical: 'States of Matter & Kinetic Theory',
+    topicGroup: 'Thermal Physics',
     stem: 'A student living in Tanzania decides to investigate if there is a relationship between the altitude (height above sea level) and the boiling point of water. She climbs Mount Kilimanjaro recording the temperature at which water boils at different altitudes, from the bottom of the mountain to the top.',
     figImages: [`${P}q6-kilimanjaro.png`],
     tags: { unit: 'thermal-physics', topics: ['boiling point', 'altitude', 'pressure', 'data processing'], level: 'proficient' },
@@ -312,6 +324,8 @@ export const questions: Question[] = [
     type: 'extended',
     topic: 'thermal-physics',
     marks: 17,
+    topicCanonical: 'States of Matter & Kinetic Theory',
+    topicGroup: 'Thermal Physics',
     stem: 'A student wants to design a laboratory investigation to test if the altitude (air pressure) affects the boiling point of a liquid. The student has access to a laboratory vacuum pump that can reduce the air pressure in a sealed container.',
     tags: { unit: 'thermal-physics', topics: ['experimental design', 'variables', 'boiling point', 'pressure'], level: 'proficient' },
     tasks: [
@@ -331,6 +345,8 @@ export const questions: Question[] = [
     type: 'extended',
     topic: 'thermal-physics',
     marks: 13,
+    topicCanonical: 'Heat Transfer',
+    topicGroup: 'Thermal Physics',
     stem: 'Humans need shelter every night and that means they have been looking for a temperate place to live for centuries. Hundreds of years ago, one method of keeping houses warm in winter was to build part of the construction underground or inside mountains. Italy, Canada and the United States have examples of these constructions which are, in general, named dugouts.\n\nNowadays extreme temperatures in some cities means that large quantities of energy are used in air conditioners or heaters to keep people at comfortable temperatures. One way we could reduce the use of energy in cities is to build accommodation underground.',
     tags: { unit: 'thermal-physics', topics: ['thermal insulation', 'solar energy', 'sustainability', 'evaluation'], level: 'advanced' },
     tasks: [

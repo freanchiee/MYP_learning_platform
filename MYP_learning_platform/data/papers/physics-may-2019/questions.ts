@@ -19,6 +19,8 @@ export const questions: Question[] = [
     type: 'extended',
     topic: 'Thermal Physics — Dewar Flask',
     marks: 7,
+    topicCanonical: 'Heat Transfer',
+    topicGroup: 'Thermal Physics',
     stem: 'Heat and temperature are different quantities associated with the study of thermal physics. Heat transfer takes place through three processes: conduction, convection and radiation.',
     figImages: [`${P}q1a-heattransfer.png`],
     tasks: [
@@ -51,6 +53,8 @@ export const questions: Question[] = [
     type: 'extended',
     topic: 'Atomic Structure — Electrostatic Copying',
     marks: 10,
+    topicCanonical: 'Atomic Structure & Radioactivity',
+    topicGroup: 'Nuclear & Atomic Physics',
     stem: 'For centuries, atoms were believed to be solid spheres with no internal components. However, as experimental procedures improved, it was found that they contain protons, neutrons and electrons.',
     tasks: [
       {
@@ -97,6 +101,8 @@ export const questions: Question[] = [
     type: 'extended',
     topic: 'Gravity — Solar System and Oumuamua',
     marks: 10,
+    topicCanonical: 'Solar System, Gravity & Space',
+    topicGroup: 'Space & Astrophysics',
     stem: 'The movement of planets and asteroids in the solar system can be determined by our understanding of the action of gravitational attraction.',
     figImages: [`${P}q3a-solarsystem.png`],
     tasks: [
@@ -141,6 +147,8 @@ export const questions: Question[] = [
     type: 'extended',
     topic: 'Body Flying — Experiment Design',
     marks: 15,
+    topicCanonical: "Newton's Laws & Momentum",
+    topicGroup: 'Forces & Motion',
     stem: 'Body flying is a way for people to experience the adventure of sky diving, without jumping out of a plane. Air is blown through large tubes at high speed and this allows people to float above the ground. Rather than falling fast through the air, fast air travels past the person. The drag force this creates must be large enough to balance the weight of the person.\n\nTo determine this relationship between air speed and weight we can model body flying using balls of different weights in a controlled stream of air in the lab.\n\nThe relationship can be summarised in the following equation:\n**Weight of ball = constant × CSA × air speed²**\n(where CSA is cross-sectional area of the ball)',
     figImages: [`${P}q4-bodyflying.png`],
     tasks: [
@@ -195,6 +203,8 @@ export const questions: Question[] = [
     type: 'extended',
     topic: 'CSA Investigation — Data Processing',
     marks: 14,
+    topicCanonical: "Newton's Laws & Momentum",
+    topicGroup: 'Forces & Motion',
     stem: 'A student chooses to investigate the effect that the CSA of the ball has on the air speed needed to keep it floating. He proposes the following hypothesis:\n\n"According to my research I know that the CSA of the ball is inversely proportional to the square of the air speed flowing past it. I can write this as: CSA ∝ 1/air speed². This means that as the CSA of the ball increases, the air speed needed for the ball to float can be reduced."\n\nThe student collects one set of data. His results are shown below.',
     figImages: [`${P}q5-csadata.png`],
     tasks: [
@@ -249,6 +259,8 @@ export const questions: Question[] = [
     type: 'extended',
     topic: 'Boats Floating — Analysis and Design',
     marks: 20,
+    topicCanonical: 'Pressure, Density & Buoyancy',
+    topicGroup: 'Pressure & Fluids',
     stem: 'A second student decides to perform a different experiment. She chooses to model how boats float in water. She knows that the weight of the boat floating in a liquid and the volume of the boat below the water will be linked by the following equation:\n\n**Weight of the boat = volume of the boat below water × gravitational field strength × density of liquid**\n\nHer hypothesis is: "As the weight of the boat increases, the volume of the boat below the water will increase proportionally. I can write this as: weight of boat ∝ volume of boat below the water. This means that as the weight of the boat doubles the volume of the boat under the water will also double."\n\nThe student collects one set of data shown in the table.',
     figImages: [`${P}q6-shipdata.png`],
     tasks: [
@@ -286,6 +298,8 @@ export const questions: Question[] = [
     type: 'extended',
     topic: 'Radioactivity — Technetium-99 Medical Imaging',
     marks: 13,
+    topicCanonical: 'Atomic Structure & Radioactivity',
+    topicGroup: 'Nuclear & Atomic Physics',
     stem: 'Over 10 000 hospitals around the world use radioisotopes. About 80% of this use is in helping to diagnose disease. The most common radioactive isotope used in helping to make diagnostic images is Tc-99 (Technetium-99). Tc-99 is produced in nuclear reactors from Mo-99. Tc-99 emits gamma rays which have enough energy to be detected by a gamma camera. Tc-99 has a half-life of about 6 hours. When injected into the human body, the Tc-99 allows for medically useful images to be produced.',
     tasks: [
       {
@@ -316,6 +330,8 @@ export const questions: Question[] = [
     type: 'extended',
     topic: 'Radioactive Materials in Medicine — Extended Evaluation',
     marks: 11,
+    topicCanonical: 'Atomic Structure & Radioactivity',
+    topicGroup: 'Nuclear & Atomic Physics',
     stem: 'In 1987, a forgotten radiotherapy source was stolen from an abandoned hospital in Brazil. By the time the authorities had been notified, 249 people who had been in contact with the stolen source were found to have very high levels of radioactive matter in or on their bodies. Four people died from exposure to the radioactive isotope. Houses that had been contaminated had to be demolished and the topsoil had to be removed due to contamination. The International Atomic Energy Agency called it "one of the world\'s worst radiological incidents".\n\nUsing radioactive materials for diagnoses and treatment helps many patients but there are also risks attached to its use.',
     tasks: [
       {

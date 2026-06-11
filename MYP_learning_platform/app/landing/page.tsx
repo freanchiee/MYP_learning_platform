@@ -5,8 +5,12 @@ import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion'
 import Link from 'next/link'
 
 // ─── tiny helpers ────────────────────────────────────────────────────────────
+const PAPER_SUBJECTS = [
+  { label: '⚛ Physics',   href: '/physics-papers' },
+  { label: '🌿 Biology',   href: '/bio-papers' },
+]
+
 const NAV_LINKS = [
-  { label: 'Papers',    href: '/papers' },
   { label: 'Dashboard', href: '/dashboard' },
   { label: 'Settings',  href: '/settings' },
   { label: 'Login',     href: '/login' },
@@ -20,9 +24,9 @@ const STATS = [
 ]
 
 const SUBJECTS = [
-  { id: 'physics',   color: '#1f3674', icon: '⚛', session: 'MYP Physics' },
-  { id: 'chemistry', color: '#274e68', icon: '⚗', session: 'MYP Chemistry' },
-  { id: 'biology',   color: '#1a4a2e', icon: '🌿', session: 'MYP Biology' },
+  { id: 'physics',   icon: '⚛', label: 'Physics',   href: '/physics-papers' },
+  { id: 'chemistry', icon: '⚗', label: 'Chemistry',  href: null },
+  { id: 'biology',   icon: '🌿', label: 'Biology',   href: '/bio-papers' },
 ]
 
 // ─── component ───────────────────────────────────────────────────────────────
@@ -31,6 +35,7 @@ export default function LandingPage() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [loaded, setLoaded] = useState(false)
   const [hoveredSubject, setHoveredSubject] = useState<string | null>(null)
+  const [papersOpen, setPapersOpen] = useState(false)
   const heroRef = useRef<HTMLDivElement>(null)
 
   const { scrollYProgress } = useScroll({ target: heroRef })
@@ -77,6 +82,50 @@ export default function LandingPage() {
 
         {/* Desktop nav */}
         <nav className="hidden md:flex items-center gap-8">
+          {/* Papers dropdown */}
+          <div className="relative" onMouseEnter={() => setPapersOpen(true)} onMouseLeave={() => setPapersOpen(false)}>
+            <button className="text-[13px] font-medium tracking-wide opacity-60 hover:opacity-100 transition-opacity duration-200 flex items-center gap-1">
+              Papers
+              <motion.span
+                animate={{ rotate: papersOpen ? 180 : 0 }}
+                transition={{ duration: 0.2 }}
+                className="text-[10px]"
+              >
+                ▾
+              </motion.span>
+            </button>
+            <AnimatePresence>
+              {papersOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: 6, scale: 0.97 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: 6, scale: 0.97 }}
+                  transition={{ duration: 0.15 }}
+                  className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-44 rounded-xl overflow-hidden z-50"
+                  style={{
+                    background: dark ? 'rgba(20,20,20,0.95)' : 'rgba(255,255,255,0.97)',
+                    border: `1px solid ${dark ? 'rgba(255,255,255,0.1)' : 'rgba(31,54,116,0.12)'}`,
+                    boxShadow: '0 8px 32px rgba(0,0,0,0.18)',
+                    backdropFilter: 'blur(16px)',
+                  }}
+                >
+                  {PAPER_SUBJECTS.map(s => (
+                    <Link
+                      key={s.href}
+                      href={s.href}
+                      className="flex items-center gap-2.5 px-4 py-3 text-[13px] font-medium transition-all duration-150"
+                      style={{ color: dark ? 'rgba(255,255,255,0.8)' : '#1f3674' }}
+                      onMouseEnter={e => (e.currentTarget.style.background = dark ? 'rgba(255,255,255,0.07)' : 'rgba(31,54,116,0.06)')}
+                      onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}
+                    >
+                      {s.label}
+                    </Link>
+                  ))}
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+
           {NAV_LINKS.map(l => (
             <Link
               key={l.href}
@@ -134,7 +183,7 @@ export default function LandingPage() {
             className="fixed inset-0 z-40 flex flex-col items-center justify-center gap-8"
             style={{ background: dark ? 'rgba(10,10,10,0.97)' : 'rgba(245,237,204,0.97)', backdropFilter: 'blur(20px)' }}
           >
-            {NAV_LINKS.map((l, i) => (
+            {[...PAPER_SUBJECTS, ...NAV_LINKS].map((l, i) => (
               <motion.div
                 key={l.href}
                 initial={{ opacity: 0, y: 20 }}
@@ -272,7 +321,7 @@ export default function LandingPage() {
             </Link>
 
             <Link
-              href="/papers"
+              href="/physics-papers"
               className="flex items-center gap-2 px-7 py-3.5 rounded-full font-semibold text-[14px] tracking-wide transition-all duration-300 hover:scale-[1.03]"
               style={{
                 border: `1.5px solid ${dark ? 'rgba(255,255,255,0.2)' : 'rgba(31,54,116,0.25)'}`,
@@ -291,31 +340,63 @@ export default function LandingPage() {
           transition={{ delay: 0.7, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           className="absolute top-1/2 -translate-y-1/2 right-7 md:right-14 flex flex-col gap-3 hidden md:flex"
         >
-          {SUBJECTS.map((s, i) => (
-            <motion.div
-              key={s.id}
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: loaded ? 1 : 0, x: loaded ? 0 : 20 }}
-              transition={{ delay: 0.75 + i * 0.1, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-              onHoverStart={() => setHoveredSubject(s.id)}
-              onHoverEnd={() => setHoveredSubject(null)}
-              className="flex items-center gap-3 px-4 py-3 rounded-xl cursor-pointer transition-all duration-300"
-              style={{
-                background: hoveredSubject === s.id
-                  ? dark ? 'rgba(255,255,255,0.12)' : 'rgba(31,54,116,0.12)'
-                  : dark ? 'rgba(255,255,255,0.06)' : 'rgba(245,237,204,0.7)',
-                backdropFilter: 'blur(12px)',
-                border: `1px solid ${dark ? 'rgba(255,255,255,0.1)' : 'rgba(31,54,116,0.12)'}`,
-                transform: hoveredSubject === s.id ? 'translateX(-4px)' : 'translateX(0)',
-              }}
-            >
-              <span className="text-xl">{s.icon}</span>
-              <div>
-                <div className="text-[10px] font-bold tracking-[0.15em] uppercase opacity-40">MYP</div>
-                <div className="text-sm font-semibold capitalize">{s.id}</div>
-              </div>
-            </motion.div>
-          ))}
+          {SUBJECTS.map((s, i) => {
+            const chipContent = (
+              <>
+                <span className="text-xl">{s.icon}</span>
+                <div>
+                  <div className="text-[10px] font-bold tracking-[0.15em] uppercase opacity-40">MYP</div>
+                  <div className="text-sm font-semibold">{s.label}</div>
+                </div>
+                {s.href && (
+                  <span
+                    className="ml-1 text-[10px] opacity-0 group-hover:opacity-60 transition-opacity"
+                    style={{ color: dark ? '#adf1c4' : '#1f3674' }}
+                  >
+                    →
+                  </span>
+                )}
+              </>
+            )
+
+            const chipStyle = {
+              background: hoveredSubject === s.id
+                ? dark ? 'rgba(255,255,255,0.12)' : 'rgba(31,54,116,0.12)'
+                : dark ? 'rgba(255,255,255,0.06)' : 'rgba(245,237,204,0.7)',
+              backdropFilter: 'blur(12px)',
+              border: `1px solid ${dark ? 'rgba(255,255,255,0.1)' : 'rgba(31,54,116,0.12)'}`,
+              transform: hoveredSubject === s.id ? 'translateX(-6px)' : 'translateX(0)',
+              transition: 'all 0.25s ease',
+              cursor: s.href ? 'pointer' : 'default',
+            }
+
+            return s.href ? (
+              <Link key={s.id} href={s.href}>
+                <motion.div
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: loaded ? 1 : 0, x: loaded ? 0 : 20 }}
+                  transition={{ delay: 0.75 + i * 0.1, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                  onHoverStart={() => setHoveredSubject(s.id)}
+                  onHoverEnd={() => setHoveredSubject(null)}
+                  className="group flex items-center gap-3 px-4 py-3 rounded-xl"
+                  style={chipStyle}
+                >
+                  {chipContent}
+                </motion.div>
+              </Link>
+            ) : (
+              <motion.div
+                key={s.id}
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: loaded ? 0.45 : 0, x: loaded ? 0 : 20 }}
+                transition={{ delay: 0.75 + i * 0.1, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                className="flex items-center gap-3 px-4 py-3 rounded-xl"
+                style={{ ...chipStyle, filter: 'grayscale(0.4)' }}
+              >
+                {chipContent}
+              </motion.div>
+            )
+          })}
         </motion.div>
 
         {/* Scroll indicator */}

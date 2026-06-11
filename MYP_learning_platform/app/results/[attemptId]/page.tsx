@@ -4,6 +4,7 @@ import { createClient } from '@/lib/supabase/server'
 import type { Attempt, QuestionGradeResult } from '@/lib/types'
 import { formatTime } from '@/lib/utils'
 import { QuestionAccordion } from '@/components/results/QuestionAccordion'
+import LocalResultsPage from '@/components/results/LocalResultsPage'
 
 // ── Badge definitions ─────────────────────────────────────────────────────────
 const BADGE_DEFS: Record<string, { name: string; icon: string; rarity: string }> = {
@@ -74,6 +75,11 @@ export default async function ResultsPage({
     data: { session },
   } = await supabase.auth.getSession()
   if (!session) redirect('/login')
+
+  // Practice sessions that failed Supabase submit — render client-side from sessionStorage
+  if (params.attemptId.startsWith('local-')) {
+    return <LocalResultsPage attemptId={params.attemptId} />
+  }
 
   const { data: attempt } = await supabase
     .from('attempts')

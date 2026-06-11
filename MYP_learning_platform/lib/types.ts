@@ -4,6 +4,9 @@ export type Criterion = 'A' | 'B' | 'C' | 'D'
 // Re-exported from data/curriculum/physics-myp.ts for convenience
 export type { MYPUnit, QuestionLevel } from '@/data/curriculum/physics-myp'
 
+// Controlled-vocabulary topic taxonomy (single source of truth).
+export type { Topic, TopicGroup } from '@/data/taxonomy/topics'
+
 /**
  * Tags attached to every question and task in the pipeline.
  *
@@ -32,7 +35,7 @@ export interface Task {
   ph: string
   ans?: string
   figImages?: string[]   // optional per-task diagram images, shown just above the answer box
-  widget?: 'drag_drop_planets' | 'variable_classify' | 'sankey_q3' | 'bounce_graphs_ab' | 'q4e_table' | 'q5c_table' | 'cannonball_paths' | 'energy_chain' | 'radio_select' | 'wave_label_drag_drop' | 'inline_dropdown_select' | 'refraction_label_drag_drop' | 'match_drag_drop' | 'checkbox_select' | 'fill_blank'
+  widget?: 'drag_drop_planets' | 'variable_classify' | 'sankey_q3' | 'bounce_graphs_ab' | 'q4e_table' | 'q5c_table' | 'cannonball_paths' | 'energy_chain' | 'radio_select' | 'wave_label_drag_drop' | 'inline_dropdown_select' | 'refraction_label_drag_drop' | 'match_drag_drop' | 'checkbox_select' | 'fill_blank' | 'table_input'
   widgetOptions?: string[]   // dropdown choices for radio_select / inline_dropdown_select
   widgetItems?: string[]     // row labels for inline_dropdown_select (e.g. ['Electron','Proton','Neutron'])
   passage?: string           // reading passage / article shown above the task question
@@ -43,7 +46,18 @@ export interface Question {
   id: number
   crit: Criterion
   type: QuestionType
+  /** Human-readable display header shown as the question title in the exam UI. */
   topic: string
+  /**
+   * Controlled-vocabulary tagging (data/taxonomy/topics.ts). Optional on the
+   * shared type so un-migrated subjects still compile; populated for every
+   * audited question. `topicCanonical` is the single dominant sub-topic (drives
+   * stats + default filtering); `topicGroup` is its parent; `topicsAlso` holds
+   * 0–2 extra co-assessed sub-topics.
+   */
+  topicCanonical?: import('@/data/taxonomy/topics').Topic
+  topicGroup?: import('@/data/taxonomy/topics').TopicGroup
+  topicsAlso?: import('@/data/taxonomy/topics').Topic[]
   marks: number
   stem?: string
   opts?: string[]
@@ -65,6 +79,11 @@ export interface Question {
   tableData_user?: Record<number, Record<number, string>>
   /** Curriculum tags — required for all pipeline-generated questions */
   tags?: QuestionTags
+  /**
+   * Set when this question is assembled into a cross-paper practice set.
+   * Tells the grade API which paper's mark scheme to use for this question.
+   */
+  sourcePaperId?: string
 }
 
 export interface MarkSchemeEntry {

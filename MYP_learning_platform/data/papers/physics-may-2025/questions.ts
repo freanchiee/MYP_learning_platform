@@ -20,6 +20,8 @@ export const questions: Question[] = [
     type: 'extended',
     topic: 'Electricity — Defibrillators',
     marks: 7,
+    topicCanonical: 'Circuits, Resistance & Power',
+    topicGroup: 'Electricity & Magnetism',
     tags: { unit: 'electricity-circuits', topics: ['electric charge', 'electrical power', 'potential difference (voltage)'], level: 'proficient' },
     stem: 'Defibrillators are used to apply an electric current to the heart. Defibrillators are made from two metal plates. During a charging process, one of the plates becomes positively charged and the other becomes negatively charged.',
     figImages: [
@@ -65,6 +67,8 @@ export const questions: Question[] = [
     type: 'extended',
     topic: 'Waves — Refraction of Light',
     marks: 10,
+    topicCanonical: 'Light, Reflection & Refraction',
+    topicGroup: 'Electromagnetic Waves & Optics',
     tags: { unit: 'light-optics', topics: ['refraction', 'refractive index', "Snell's law"], level: 'proficient' },
     stem: 'Refraction of light can help people to see more clearly but it can also cause optical illusions, as shown in the image of a straw in a glass of water.',
     figImages: [
@@ -122,6 +126,8 @@ export const questions: Question[] = [
     type: 'extended',
     topic: 'Nuclear Physics — Uranium Fission',
     marks: 9,
+    topicCanonical: 'Nuclear Reactions & Energy',
+    topicGroup: 'Nuclear & Atomic Physics',
     tags: { unit: 'atomic-physics', topics: ['nuclear equations', 'radioactive decay', 'nuclear energy'], level: 'proficient' },
     stem: 'Nuclear energy is a possible solution to our growing energy demands. Nuclear power stations use uranium as a fuel. Uranium-235 (²³⁵U) can absorb a neutron to form uranium-236 (²³⁶U), which then undergoes nuclear fission:\n\n    ²³⁶U  →  ¹⁴⁰Xe  +  ⁹³Sr  +  ? n\n\nEach fission reaction releases 2.8 × 10⁻¹¹ J of energy.',
     tasks: [
@@ -173,6 +179,8 @@ export const questions: Question[] = [
     type: 'extended',
     topic: 'Motion — Cotton Reel Model Car',
     marks: 10,
+    topicCanonical: 'Kinematics & Motion Graphs',
+    topicGroup: 'Forces & Motion',
     tags: { unit: 'measurement-motion', topics: ['speed and velocity', 'acceleration', 'distance-time graphs'], level: 'proficient' },
     stem: 'An MYP student investigates the motion of a simple model car made from a cotton reel. The car is powered by a wound elastic (rubber) band. The student uses video analysis to track the car\'s position at regular time intervals.',
     figImages: [
@@ -227,6 +235,8 @@ export const questions: Question[] = [
     type: 'extended',
     topic: 'Experimental Design — Cotton Reel Investigation',
     marks: 17,
+    topicCanonical: 'Kinematics & Motion Graphs',
+    topicGroup: 'Forces & Motion',
     tags: { unit: 'measurement-motion', topics: ['speed and velocity', 'acceleration', 'equations of motion (SUVAT)'], level: 'proficient' },
     stem: 'After completing the first experiment investigating the motion of a model car, a student wants to extend their investigation by measuring a different dependent variable.',
     tasks: [
@@ -257,6 +267,8 @@ export const questions: Question[] = [
     type: 'extended',
     topic: 'Energy — Thermoelectric Generator (Seebeck Effect)',
     marks: 23,
+    topicCanonical: 'Circuits, Resistance & Power',
+    topicGroup: 'Electricity & Magnetism',
     tags: { unit: 'work-energy', topics: ['energy efficiency', 'power', 'energy transfer mechanisms'], level: 'proficient' },
     stem: 'A student has a kit that uses the Seebeck effect. The kit contains a thermoelectric generator (TEG) which comprises two wires made of different metals and two water tanks (hot and cold). When there is a temperature difference (ΔT) between the hot and cold sides of the TEG, a voltage (V) is produced. The student investigates the relationship between voltage produced and temperature difference.',
     figImages: [
@@ -346,6 +358,8 @@ export const questions: Question[] = [
     type: 'extended',
     topic: 'Space Physics — Satellites & Orbital Mechanics',
     marks: 16,
+    topicCanonical: 'Solar System, Gravity & Space',
+    topicGroup: 'Space & Astrophysics',
     tags: { unit: 'astrophysics', topics: ['satellites and orbital mechanics', 'gravitational fields', "Newton's law of gravitation"], level: 'proficient' },
     stem: 'In 1728, Isaac Newton conducted a thought experiment often referred to as "Newton\'s cannonball". In this thought experiment, a cannonball is fired from a cannon placed at the top of a very tall mountain. If the only force experienced by the cannonball is the gravitational force, then the path followed by the cannonball would depend on its initial horizontal speed.',
     figImages: [
@@ -393,6 +407,8 @@ export const questions: Question[] = [
     type: 'extended',
     topic: 'Science & Society — Space Elevator',
     marks: 8,
+    topicCanonical: 'Solar System, Gravity & Space',
+    topicGroup: 'Space & Astrophysics',
     tags: { unit: 'astrophysics', topics: ['satellites and orbital mechanics', 'gravitational fields'], level: 'advanced' },
     stem: 'Satellites are put into orbit using rockets. However, space elevators have been proposed as an alternative method of putting objects into space. A space elevator would consist of a cable anchored at the Earth\'s equator, extending up to a counterweight in geostationary orbit (approximately 36 000 km above the surface). A "climber" vehicle would travel up and down the cable, carrying cargo or passengers to orbit without the need for rockets.\n\nThe concept was first seriously proposed by Russian scientist Konstantin Tsiolkovsky in 1895 and features in Arthur C. Clarke\'s 1979 novel "The Fountains of Paradise".\n\nThe main technological challenge is that no known material currently has sufficient tensile strength to withstand the enormous forces involved, although carbon nanotube composites are being investigated.',
     tasks: [

@@ -51,6 +51,9 @@ interface ExamStore {
   // Floating tool panel
   activeTool: 'calculator' | 'formulae' | 'booklet' | 'converter' | null
 
+  // Practice mode — skips lock screen, disables timer & anti-cheat
+  practiceMode: boolean
+
   // Edit mode (for content editors / teachers; future: auth-gated)
   editMode: boolean
   /** Per-image URL overrides: maps original src → replacement src (data URL or new path) */
@@ -184,6 +187,7 @@ const initialState = {
   starsPerQ: {} as Record<number, 0 | 1 | 2 | 3>,
   badgesEarned: [] as string[],
   activeTool: null as ExamStore['activeTool'],
+  practiceMode: false,
   editMode: false,
   imageOverrides: {} as Record<string, string>,
   deletedImages: {} as Record<string, true>,
@@ -203,15 +207,17 @@ export const useExamStore = create<ExamStore>((set, get) => ({
   // ---- Paper initialisation ------------------------------------------------
 
   initExam: (questions, paperId) => {
+    const isPractice = paperId.startsWith('practice-')
     const mapped = questions.map(q => ({ ...q, ans: null, flagged: false }))
     return set({
       questions: mapped,
       qIndexMap: Object.fromEntries(mapped.map((q, i) => [q.id, i])),
       paperId,
       currentIdx: 0,
-      phase: 'lock',
+      phase: isPractice ? 'active' : 'lock',
       timerSeconds: 90 * 60,
       timerState: 'normal',
+      practiceMode: isPractice,
       strikes: 0,
       showStrikeOverlay: false,
       activeTool: null,
@@ -313,7 +319,7 @@ export const useExamStore = create<ExamStore>((set, get) => ({
 
   tick: () =>
     set(state => {
-      if (state.phase !== 'active') return {}
+      if (state.phase !== 'active' || state.practiceMode) return {}
       const t = state.timerSeconds - 1
 
       if (t <= 0) {
@@ -331,7 +337,7 @@ export const useExamStore = create<ExamStore>((set, get) => ({
 
   addStrike: () =>
     set(state => {
-      if (state.phase !== 'active') return {}
+      if (state.phase !== 'active' || state.practiceMode) return {}
       const strikes = state.strikes + 1
       if (strikes >= 3) {
         return { strikes, showStrikeOverlay: false, phase: 'grading' as ExamPhase }

@@ -10,6 +10,7 @@ export default function ExamNavBar() {
   const prevQuestion = useExamStore((s) => s.prevQuestion)
   const toggleFlag  = useExamStore((s) => s.toggleFlag)
   const startGrading = useExamStore((s) => s.startGrading)
+  const hintsUsed   = useExamStore((s) => s.hintsUsed)
 
   const [showConfirm, setShowConfirm] = useState(false)
 
@@ -174,9 +175,10 @@ export default function ExamNavBar() {
                 style={{ background: 'rgba(31,54,116,0.06)', border: '1px solid rgba(31,54,116,0.1)' }}
               >
                 {[
-                  { label: 'Answered',   value: answered,                              color: '#1f3674' },
-                  { label: 'Unanswered', value: questions.length - answered,            color: '#c3282d' },
-                  { label: 'Flagged',    value: questions.filter((q) => q.flagged).length, color: '#547ca4' },
+                  { label: 'Answered',   value: answered,                                   color: '#1f3674' },
+                  { label: 'Unanswered', value: questions.length - answered,                color: '#c3282d' },
+                  { label: 'Flagged',    value: questions.filter((q) => q.flagged).length,  color: '#547ca4' },
+                  { label: 'Hints used', value: hintsUsed,                                  color: '#d97706' },
                 ].map(({ label, value, color }) => (
                   <div key={label} className="text-center">
                     <div className="text-2xl font-extrabold" style={{ color }}>{value}</div>

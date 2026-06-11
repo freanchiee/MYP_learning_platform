@@ -19,6 +19,8 @@ export const questions: Question[] = [
     type: 'extended',
     topic: 'Sound and Light — Lightning Storm',
     marks: 8,
+    topicCanonical: 'Waves, Sound & Frequency',
+    topicGroup: 'Waves & Sound',
     stem: 'This question is about light and sound waves and the different speeds at which they move through the air.',
     figImages: [`${P}q1-lightning.png`],
     tasks: [
@@ -59,6 +61,8 @@ export const questions: Question[] = [
     type: 'extended',
     topic: 'Electricity — Lightning and Conductors',
     marks: 9,
+    topicCanonical: 'Circuits, Resistance & Power',
+    topicGroup: 'Electricity & Magnetism',
     stem: 'This question is about lightning and electricity.',
     tasks: [
       {
@@ -104,6 +108,8 @@ export const questions: Question[] = [
     type: 'extended',
     topic: 'Radioactivity — Decay and Half-life',
     marks: 9,
+    topicCanonical: 'Atomic Structure & Radioactivity',
+    topicGroup: 'Nuclear & Atomic Physics',
     stem: 'This question is about decay and half-life.',
     tasks: [
       {
@@ -142,6 +148,8 @@ export const questions: Question[] = [
     type: 'extended',
     topic: 'Football Bounce — Experiment Design and Analysis',
     marks: 18,
+    topicCanonical: 'Pressure, Density & Buoyancy',
+    topicGroup: 'Pressure & Fluids',
     stem: 'A change in the characteristics of a football (soccer) ball may impact the ball\'s performance. FIFA has a global standard to guarantee that every game will be played with balls with identical characteristics.\n\nThe bounciness of the ball is an important factor that can affect its performance. Your class is studying factors that affect the performance of the ball. You decide that you are going to study one factor: the effect of the ball\'s internal air pressure.\n\nYou plan to drop the ball from a measured height towards a horizontal surface and determine the height of the first bounce. Your hypothesis for the experiment is:\n\n*Bounce height is proportional to internal air pressure because higher pressure reduces the energy loss due to deformation when the ball bounces.*',
     tasks: [
       {
@@ -213,6 +221,8 @@ export const questions: Question[] = [
     type: 'extended',
     topic: 'Ball Bounce — Data Processing',
     marks: 15,
+    topicCanonical: 'Kinematics & Motion Graphs',
+    topicGroup: 'Forces & Motion',
     stem: 'Another student decided to do a similar experiment using a basketball and a tennis ball.',
     figImages: [`${P}q5-basketball.png`],
     tasks: [
@@ -253,6 +263,8 @@ export const questions: Question[] = [
     type: 'extended',
     topic: 'Squash Ball — Investigation Design',
     marks: 17,
+    topicCanonical: 'States of Matter & Kinetic Theory',
+    topicGroup: 'Thermal Physics',
     stem: 'Squash is a sport played by two players in a four-walled court. A small, hollow, rubber ball is hit by the players onto the playing surfaces of the four walls of the court.\n\nBefore a game begins, the players must warm the ball to improve the way it bounces when it hits the playing surface.\n\nIn this question you will design an investigation to determine how the temperature of the ball affects its bounce height. You will place the ball into a water bath, as shown in the diagram, and slowly increase the temperature of the water bath, determining how the ball\'s bounce is affected by the temperature.',
     figImages: [`${P}q6-squash.png`, `${P}q6-setup.png`],
     tasks: [
@@ -278,6 +290,8 @@ export const questions: Question[] = [
     type: 'extended',
     topic: 'Climate Change — CO₂ and Global Temperature',
     marks: 13,
+    topicCanonical: 'Electromagnetic Spectrum',
+    topicGroup: 'Electromagnetic Waves & Optics',
     stem: 'This question is about how individual lifestyle choices can have a global impact.\n\nThe climate has been changing significantly over the past 100 years. Scientific evidence shows that significant climate change is caused by changes in the atmosphere as a consequence of human activity. Individual travel choices can have an impact on a global scale.',
     tasks: [
       {
@@ -323,6 +337,8 @@ export const questions: Question[] = [
     type: 'extended',
     topic: 'Transport Choices — Extended Evaluation',
     marks: 11,
+    topicCanonical: 'Kinematics & Motion Graphs',
+    topicGroup: 'Forces & Motion',
     stem: 'Fenna is a student at a school in a city with a range of transport options. She lives 8 km away from her school. These are the options for her journey to school.',
     figImages: [`${P}q8-transport.png`],
     tasks: [

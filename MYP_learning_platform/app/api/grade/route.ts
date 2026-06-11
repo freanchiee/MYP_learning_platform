@@ -35,18 +35,20 @@ export async function POST(req: NextRequest) {
     const useAI      = !!(aiProvider && aiKey && ['claude', 'openai', 'gemini'].includes(aiProvider))
 
     // ── Grade each question ───────────────────────────────────────────────
-    const ms = getMSForPaper(paperId)
     const grades: Record<number, QuestionGradeResult> = {}
 
     for (const q of questions) {
+      // Per-question paper ID — supports practice sets assembled from multiple papers
+      const qPaperId = q.sourcePaperId ?? paperId
+
       // MCQ — always keyword engine
       if (q.type === 'mcq') {
-        grades[q.id] = gradeQuestion(q, paperId)
+        grades[q.id] = gradeQuestion(q, qPaperId)
         continue
       }
 
       // Extended / simulation / dataTable — hybrid per task
-      const keywordResult = gradeQuestion(q, paperId)
+      const keywordResult = gradeQuestion(q, qPaperId)
 
       if (!useAI) {
         grades[q.id] = keywordResult
@@ -54,6 +56,7 @@ export async function POST(req: NextRequest) {
       }
 
       // Try AI for open-ended tasks
+      const qMs = getMSForPaper(qPaperId)
       const upgradedTasks: TaskResult[] = []
       for (const taskResult of keywordResult.tasks) {
         const task = q.tasks?.find((t) => t.label === taskResult.label)
@@ -64,7 +67,7 @@ export async function POST(req: NextRequest) {
 
         // Look up MS entry
         const msKey = `q${q.id}_${task.label.replace(/\s+/g, '_')}`
-        const msEntry = ms[msKey] as { marks: number; exemplar: string; keyConcepts: string[]; keywords: string[]; feedbackHit: string; feedbackMiss: string } | undefined
+        const msEntry = qMs[msKey] as { marks: number; exemplar: string; keyConcepts: string[]; keywords: string[]; feedbackHit: string; feedbackMiss: string } | undefined
 
         if (!msEntry || !('keyConcepts' in msEntry)) {
           upgradedTasks.push(taskResult)

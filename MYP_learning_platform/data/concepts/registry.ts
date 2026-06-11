@@ -15,53 +15,259 @@ export type { ConceptEntry }
 
 import { CONCEPTS_PUBLIC as CONCEPTS_physics_nov_2023 } from '@/data/papers/physics-nov-2023/conceptsPublic'
 import { CONCEPTS_PUBLIC_MAY2016 as CONCEPTS_physics_may_2016 } from '@/data/papers/physics-may-2016/conceptsPublic'
+import { CONCEPTS_PUBLIC_MAY2016_V1 as CONCEPTS_physics_may_2016_v1 } from '@/data/papers/physics-may-2016-v1/conceptsPublic'
+import { CONCEPTS_PUBLIC_MAY2016_V2 as CONCEPTS_physics_may_2016_v2 } from '@/data/papers/physics-may-2016-v2/conceptsPublic'
 import { CONCEPTS_PUBLIC_MAY2017 as CONCEPTS_physics_may_2017 } from '@/data/papers/physics-may-2017/conceptsPublic'
+import { CONCEPTS_PUBLIC_MAY2017_V1 as CONCEPTS_physics_may_2017_v1 } from '@/data/papers/physics-may-2017-v1/conceptsPublic'
+import { CONCEPTS_PUBLIC_MAY2017_V2 as CONCEPTS_physics_may_2017_v2 } from '@/data/papers/physics-may-2017-v2/conceptsPublic'
 import { CONCEPTS_PUBLIC_MAY2018 as CONCEPTS_physics_may_2018 } from '@/data/papers/physics-may-2018/conceptsPublic'
+import { CONCEPTS_PUBLIC_MAY2018_V1 as CONCEPTS_physics_may_2018_v1 } from '@/data/papers/physics-may-2018-v1/conceptsPublic'
+import { CONCEPTS_PUBLIC_MAY2018_V2 as CONCEPTS_physics_may_2018_v2 } from '@/data/papers/physics-may-2018-v2/conceptsPublic'
 import { CONCEPTS_PUBLIC_MAY2019 as CONCEPTS_physics_may_2019 } from '@/data/papers/physics-may-2019/conceptsPublic'
+import { CONCEPTS_PUBLIC_MAY2019_V1 as CONCEPTS_physics_may_2019_v1 } from '@/data/papers/physics-may-2019-v1/conceptsPublic'
+import { CONCEPTS_PUBLIC_MAY2019_V2 as CONCEPTS_physics_may_2019_v2 } from '@/data/papers/physics-may-2019-v2/conceptsPublic'
 import { CONCEPTS_PUBLIC_MAY2021 as CONCEPTS_physics_may_2021 } from '@/data/papers/physics-may-2021/conceptsPublic'
+import { CONCEPTS_PUBLIC_MAY2021_V1 as CONCEPTS_physics_may_2021_v1 } from '@/data/papers/physics-may-2021-v1/conceptsPublic'
+import { CONCEPTS_PUBLIC_MAY2021_V2 as CONCEPTS_physics_may_2021_v2 } from '@/data/papers/physics-may-2021-v2/conceptsPublic'
 import { CONCEPTS_PUBLIC_MAY2022 as CONCEPTS_physics_may_2022 } from '@/data/papers/physics-may-2022/conceptsPublic'
+import { CONCEPTS_PUBLIC_MAY2022_V1 as CONCEPTS_physics_may_2022_v1 } from '@/data/papers/physics-may-2022-v1/conceptsPublic'
+import { CONCEPTS_PUBLIC_MAY2022_V2 as CONCEPTS_physics_may_2022_v2 } from '@/data/papers/physics-may-2022-v2/conceptsPublic'
 import { CONCEPTS_PUBLIC_MAY2023 as CONCEPTS_physics_may_2023 } from '@/data/papers/physics-may-2023/conceptsPublic'
+import { CONCEPTS_PUBLIC_MAY2023_V1 as CONCEPTS_physics_may_2023_v1 } from '@/data/papers/physics-may-2023-v1/conceptsPublic'
+import { CONCEPTS_PUBLIC_MAY2023_V2 as CONCEPTS_physics_may_2023_v2 } from '@/data/papers/physics-may-2023-v2/conceptsPublic'
 import { CONCEPTS_PUBLIC_MAY2024 as CONCEPTS_physics_may_2024 } from '@/data/papers/physics-may-2024/conceptsPublic'
+import { CONCEPTS_PUBLIC_MAY2024_V1 as CONCEPTS_physics_may_2024_v1 } from '@/data/papers/physics-may-2024-v1/conceptsPublic'
+import { CONCEPTS_PUBLIC_MAY2024_V2 as CONCEPTS_physics_may_2024_v2 } from '@/data/papers/physics-may-2024-v2/conceptsPublic'
 import { CONCEPTS_PUBLIC_MAY2025 as CONCEPTS_physics_may_2025 } from '@/data/papers/physics-may-2025/conceptsPublic'
+import { CONCEPTS_PUBLIC_MAY2025_V1 as CONCEPTS_physics_may_2025_v1 } from '@/data/papers/physics-may-2025-v1/conceptsPublic'
+import { CONCEPTS_PUBLIC_MAY2025_V2 as CONCEPTS_physics_may_2025_v2 } from '@/data/papers/physics-may-2025-v2/conceptsPublic'
 import { CONCEPTS_PUBLIC as CONCEPTS_physics_nov_2016 } from '@/data/papers/physics-nov-2016/conceptsPublic'
+import { CONCEPTS_PUBLIC_NOV2016_V1 as CONCEPTS_physics_nov_2016_v1 } from '@/data/papers/physics-nov-2016-v1/conceptsPublic'
+import { CONCEPTS_PUBLIC_NOV2016_V2 as CONCEPTS_physics_nov_2016_v2 } from '@/data/papers/physics-nov-2016-v2/conceptsPublic'
 import { CONCEPTS_PUBLIC_NOV2017 as CONCEPTS_physics_nov_2017 } from '@/data/papers/physics-nov-2017/conceptsPublic'
+import { CONCEPTS_PUBLIC_NOV2017_V1 as CONCEPTS_physics_nov_2017_v1 } from '@/data/papers/physics-nov-2017-v1/conceptsPublic'
+import { CONCEPTS_PUBLIC_NOV2017_V2 as CONCEPTS_physics_nov_2017_v2 } from '@/data/papers/physics-nov-2017-v2/conceptsPublic'
 import { CONCEPTS_PUBLIC_NOV2018 as CONCEPTS_physics_nov_2018 } from '@/data/papers/physics-nov-2018/conceptsPublic'
+import { CONCEPTS_PUBLIC_NOV2018_V1 as CONCEPTS_physics_nov_2018_v1 } from '@/data/papers/physics-nov-2018-v1/conceptsPublic'
+import { CONCEPTS_PUBLIC_NOV2018_V2 as CONCEPTS_physics_nov_2018_v2 } from '@/data/papers/physics-nov-2018-v2/conceptsPublic'
 import { CONCEPTS_PUBLIC_NOV2019 as CONCEPTS_physics_nov_2019 } from '@/data/papers/physics-nov-2019/conceptsPublic'
+import { CONCEPTS_PUBLIC_NOV2019_V1 as CONCEPTS_physics_nov_2019_v1 } from '@/data/papers/physics-nov-2019-v1/conceptsPublic'
+import { CONCEPTS_PUBLIC_NOV2019_V2 as CONCEPTS_physics_nov_2019_v2 } from '@/data/papers/physics-nov-2019-v2/conceptsPublic'
 import { CONCEPTS_PUBLIC_NOV2020 as CONCEPTS_physics_nov_2020 } from '@/data/papers/physics-nov-2020/conceptsPublic'
+import { CONCEPTS_PUBLIC_NOV2020_V1 as CONCEPTS_physics_nov_2020_v1 } from '@/data/papers/physics-nov-2020-v1/conceptsPublic'
+import { CONCEPTS_PUBLIC_NOV2020_V2 as CONCEPTS_physics_nov_2020_v2 } from '@/data/papers/physics-nov-2020-v2/conceptsPublic'
 import { CONCEPTS_PUBLIC_NOV2021 as CONCEPTS_physics_nov_2021 } from '@/data/papers/physics-nov-2021/conceptsPublic'
+import { CONCEPTS_PUBLIC_NOV2021_V1 as CONCEPTS_physics_nov_2021_v1 } from '@/data/papers/physics-nov-2021-v1/conceptsPublic'
+import { CONCEPTS_PUBLIC_NOV2021_V2 as CONCEPTS_physics_nov_2021_v2 } from '@/data/papers/physics-nov-2021-v2/conceptsPublic'
 import { CONCEPTS_PUBLIC_NOV2022 as CONCEPTS_physics_nov_2022 } from '@/data/papers/physics-nov-2022/conceptsPublic'
+import { CONCEPTS_PUBLIC_NOV2022_V1 as CONCEPTS_physics_nov_2022_v1 } from '@/data/papers/physics-nov-2022-v1/conceptsPublic'
+import { CONCEPTS_PUBLIC_NOV2022_V2 as CONCEPTS_physics_nov_2022_v2 } from '@/data/papers/physics-nov-2022-v2/conceptsPublic'
 import { CONCEPTS_PUBLIC_NOV2024 as CONCEPTS_physics_nov_2024 } from '@/data/papers/physics-nov-2024/conceptsPublic'
+import { CONCEPTS_PUBLIC_NOV2024_V1 as CONCEPTS_physics_nov_2024_v1 } from '@/data/papers/physics-nov-2024-v1/conceptsPublic'
+import { CONCEPTS_PUBLIC_NOV2024_V2 as CONCEPTS_physics_nov_2024_v2 } from '@/data/papers/physics-nov-2024-v2/conceptsPublic'
 import { CONCEPTS_PUBLIC_BIOLOGY_MAY2025 as CONCEPTS_biology_may_2025 } from '@/data/papers/biology-may-2025/conceptsPublic'
+import { CONCEPTS_PUBLIC_BIOLOGY_MAY2025_V1 as CONCEPTS_biology_may_2025_v1 } from '@/data/papers/biology-may-2025-v1/conceptsPublic'
+import { CONCEPTS_PUBLIC_BIOLOGY_MAY2025_V2 as CONCEPTS_biology_may_2025_v2 } from '@/data/papers/biology-may-2025-v2/conceptsPublic'
 import { CONCEPTS_PUBLIC_BIOLOGY_MAY2024 as CONCEPTS_biology_may_2024 } from '@/data/papers/biology-may-2024/conceptsPublic'
 import { CONCEPTS_PUBLIC_BIOLOGY_NOV2024 as CONCEPTS_biology_nov_2024 } from '@/data/papers/biology-nov-2024/conceptsPublic'
 import { CONCEPTS_PUBLIC_BIOLOGY_NOV2019 as CONCEPTS_biology_nov_2019 } from '@/data/papers/biology-nov-2019/conceptsPublic'
 import { CONCEPTS_PUBLIC_BIOLOGY_MAY2019 as CONCEPTS_biology_may_2019 } from '@/data/papers/biology-may-2019/conceptsPublic'
+import { CONCEPTS_PUBLIC_BIOLOGY_NOV2018 as CONCEPTS_biology_nov_2018 } from '@/data/papers/biology-nov-2018/conceptsPublic'
+import { CONCEPTS_PUBLIC_BIOLOGY_MAY2018 as CONCEPTS_biology_may_2018 } from '@/data/papers/biology-may-2018/conceptsPublic'
+import { CONCEPTS_PUBLIC_BIOLOGY_NOV2017 as CONCEPTS_biology_nov_2017 } from '@/data/papers/biology-nov-2017/conceptsPublic'
+import { CONCEPTS_PUBLIC_BIOLOGY_MAY2017 as CONCEPTS_biology_may_2017 } from '@/data/papers/biology-may-2017/conceptsPublic'
+import { CONCEPTS_PUBLIC_BIOLOGY_NOV2016 as CONCEPTS_biology_nov_2016 } from '@/data/papers/biology-nov-2016/conceptsPublic'
+import { CONCEPTS_PUBLIC_BIOLOGY_NOV2020 as CONCEPTS_biology_nov_2020 } from '@/data/papers/biology-nov-2020/conceptsPublic'
+import { CONCEPTS_PUBLIC_BIOLOGY_MAY2016 as CONCEPTS_biology_may_2016 } from '@/data/papers/biology-may-2016/conceptsPublic'
+import { CONCEPTS_PUBLIC_BIOLOGY_MAY2021 as CONCEPTS_biology_may_2021 } from '@/data/papers/biology-may-2021/conceptsPublic'
+import { CONCEPTS_PUBLIC_BIOLOGY_NOV2021 as CONCEPTS_biology_nov_2021 } from '@/data/papers/biology-nov-2021/conceptsPublic'
+import { CONCEPTS_PUBLIC_BIOLOGY_MAY2022 as CONCEPTS_biology_may_2022 } from '@/data/papers/biology-may-2022/conceptsPublic'
+import { CONCEPTS_PUBLIC_BIOLOGY_NOV2022 as CONCEPTS_biology_nov_2022 } from '@/data/papers/biology-nov-2022/conceptsPublic'
+import { CONCEPTS_PUBLIC_BIOLOGY_MAY2023 as CONCEPTS_biology_may_2023 } from '@/data/papers/biology-may-2023/conceptsPublic'
+import { CONCEPTS_PUBLIC_BIOLOGY_NOV2023 as CONCEPTS_biology_nov_2023 } from '@/data/papers/biology-nov-2023/conceptsPublic'
+import { CONCEPTS_PUBLIC_CHEMISTRY_MAY2016 as CONCEPTS_chemistry_may_2016 } from '@/data/papers/chemistry-may-2016/conceptsPublic'
+import { CONCEPTS_PUBLIC_CHEMISTRY_MAY2016_V1 as CONCEPTS_chemistry_may_2016_v1 } from '@/data/papers/chemistry-may-2016-v1/conceptsPublic'
+import { CONCEPTS_PUBLIC_CHEMISTRY_MAY2016_V2 as CONCEPTS_chemistry_may_2016_v2 } from '@/data/papers/chemistry-may-2016-v2/conceptsPublic'
+import { CONCEPTS_PUBLIC_CHEMISTRY_MAY2017 as CONCEPTS_chemistry_may_2017 } from '@/data/papers/chemistry-may-2017/conceptsPublic'
+import { CONCEPTS_PUBLIC_CHEMISTRY_MAY2017_V1 as CONCEPTS_chemistry_may_2017_v1 } from '@/data/papers/chemistry-may-2017-v1/conceptsPublic'
+import { CONCEPTS_PUBLIC_CHEMISTRY_MAY2017_V2 as CONCEPTS_chemistry_may_2017_v2 } from '@/data/papers/chemistry-may-2017-v2/conceptsPublic'
+import { CONCEPTS_PUBLIC_CHEMISTRY_MAY2018 as CONCEPTS_chemistry_may_2018 } from '@/data/papers/chemistry-may-2018/conceptsPublic'
+import { CONCEPTS_PUBLIC_CHEMISTRY_MAY2018_V1 as CONCEPTS_chemistry_may_2018_v1 } from '@/data/papers/chemistry-may-2018-v1/conceptsPublic'
+import { CONCEPTS_PUBLIC_CHEMISTRY_MAY2018_V2 as CONCEPTS_chemistry_may_2018_v2 } from '@/data/papers/chemistry-may-2018-v2/conceptsPublic'
+import { CONCEPTS_PUBLIC_CHEMISTRY_MAY2019 as CONCEPTS_chemistry_may_2019 } from '@/data/papers/chemistry-may-2019/conceptsPublic'
+import { CONCEPTS_PUBLIC_CHEMISTRY_MAY2019_V1 as CONCEPTS_chemistry_may_2019_v1 } from '@/data/papers/chemistry-may-2019-v1/conceptsPublic'
+import { CONCEPTS_PUBLIC_CHEMISTRY_MAY2019_V2 as CONCEPTS_chemistry_may_2019_v2 } from '@/data/papers/chemistry-may-2019-v2/conceptsPublic'
+import { CONCEPTS_PUBLIC_CHEMISTRY_MAY2021 as CONCEPTS_chemistry_may_2021 } from '@/data/papers/chemistry-may-2021/conceptsPublic'
+import { CONCEPTS_PUBLIC_CHEMISTRY_MAY2021_V1 as CONCEPTS_chemistry_may_2021_v1 } from '@/data/papers/chemistry-may-2021-v1/conceptsPublic'
+import { CONCEPTS_PUBLIC_CHEMISTRY_MAY2021_V2 as CONCEPTS_chemistry_may_2021_v2 } from '@/data/papers/chemistry-may-2021-v2/conceptsPublic'
+import { CONCEPTS_PUBLIC_CHEMISTRY_MAY2022 as CONCEPTS_chemistry_may_2022 } from '@/data/papers/chemistry-may-2022/conceptsPublic'
+import { CONCEPTS_PUBLIC_CHEMISTRY_MAY2022_V1 as CONCEPTS_chemistry_may_2022_v1 } from '@/data/papers/chemistry-may-2022-v1/conceptsPublic'
+import { CONCEPTS_PUBLIC_CHEMISTRY_MAY2022_V2 as CONCEPTS_chemistry_may_2022_v2 } from '@/data/papers/chemistry-may-2022-v2/conceptsPublic'
+import { CONCEPTS_PUBLIC_CHEMISTRY_MAY2023 as CONCEPTS_chemistry_may_2023 } from '@/data/papers/chemistry-may-2023/conceptsPublic'
+import { CONCEPTS_PUBLIC_CHEMISTRY_MAY2023_V1 as CONCEPTS_chemistry_may_2023_v1 } from '@/data/papers/chemistry-may-2023-v1/conceptsPublic'
+import { CONCEPTS_PUBLIC_CHEMISTRY_MAY2023_V2 as CONCEPTS_chemistry_may_2023_v2 } from '@/data/papers/chemistry-may-2023-v2/conceptsPublic'
+import { CONCEPTS_PUBLIC_CHEMISTRY_MAY2024 as CONCEPTS_chemistry_may_2024 } from '@/data/papers/chemistry-may-2024/conceptsPublic'
+import { CONCEPTS_PUBLIC_CHEMISTRY_MAY2024_V1 as CONCEPTS_chemistry_may_2024_v1 } from '@/data/papers/chemistry-may-2024-v1/conceptsPublic'
+import { CONCEPTS_PUBLIC_CHEMISTRY_MAY2024_V2 as CONCEPTS_chemistry_may_2024_v2 } from '@/data/papers/chemistry-may-2024-v2/conceptsPublic'
+import { CONCEPTS_PUBLIC_CHEMISTRY_MAY2025 as CONCEPTS_chemistry_may_2025 } from '@/data/papers/chemistry-may-2025/conceptsPublic'
+import { CONCEPTS_PUBLIC_CHEMISTRY_MAY2025_V1 as CONCEPTS_chemistry_may_2025_v1 } from '@/data/papers/chemistry-may-2025-v1/conceptsPublic'
+import { CONCEPTS_PUBLIC_CHEMISTRY_MAY2025_V2 as CONCEPTS_chemistry_may_2025_v2 } from '@/data/papers/chemistry-may-2025-v2/conceptsPublic'
+import { CONCEPTS_PUBLIC_CHEMISTRY_NOV2016 as CONCEPTS_chemistry_nov_2016 } from '@/data/papers/chemistry-nov-2016/conceptsPublic'
+import { CONCEPTS_PUBLIC_CHEMISTRY_NOV2016_V1 as CONCEPTS_chemistry_nov_2016_v1 } from '@/data/papers/chemistry-nov-2016-v1/conceptsPublic'
+import { CONCEPTS_PUBLIC_CHEMISTRY_NOV2016_V2 as CONCEPTS_chemistry_nov_2016_v2 } from '@/data/papers/chemistry-nov-2016-v2/conceptsPublic'
+import { CONCEPTS_PUBLIC_CHEMISTRY_NOV2017 as CONCEPTS_chemistry_nov_2017 } from '@/data/papers/chemistry-nov-2017/conceptsPublic'
+import { CONCEPTS_PUBLIC_CHEMISTRY_NOV2017_V1 as CONCEPTS_chemistry_nov_2017_v1 } from '@/data/papers/chemistry-nov-2017-v1/conceptsPublic'
+import { CONCEPTS_PUBLIC_CHEMISTRY_NOV2017_V2 as CONCEPTS_chemistry_nov_2017_v2 } from '@/data/papers/chemistry-nov-2017-v2/conceptsPublic'
+import { CONCEPTS_PUBLIC_CHEMISTRY_NOV2018 as CONCEPTS_chemistry_nov_2018 } from '@/data/papers/chemistry-nov-2018/conceptsPublic'
+import { CONCEPTS_PUBLIC_CHEMISTRY_NOV2018_V1 as CONCEPTS_chemistry_nov_2018_v1 } from '@/data/papers/chemistry-nov-2018-v1/conceptsPublic'
+import { CONCEPTS_PUBLIC_CHEMISTRY_NOV2018_V2 as CONCEPTS_chemistry_nov_2018_v2 } from '@/data/papers/chemistry-nov-2018-v2/conceptsPublic'
+import { CONCEPTS_PUBLIC_CHEMISTRY_NOV2019 as CONCEPTS_chemistry_nov_2019 } from '@/data/papers/chemistry-nov-2019/conceptsPublic'
+import { CONCEPTS_PUBLIC_CHEMISTRY_NOV2019_V1 as CONCEPTS_chemistry_nov_2019_v1 } from '@/data/papers/chemistry-nov-2019-v1/conceptsPublic'
+import { CONCEPTS_PUBLIC_CHEMISTRY_NOV2019_V2 as CONCEPTS_chemistry_nov_2019_v2 } from '@/data/papers/chemistry-nov-2019-v2/conceptsPublic'
+import { CONCEPTS_PUBLIC_CHEMISTRY_NOV2020 as CONCEPTS_chemistry_nov_2020 } from '@/data/papers/chemistry-nov-2020/conceptsPublic'
+import { CONCEPTS_PUBLIC_CHEMISTRY_NOV2020_V1 as CONCEPTS_chemistry_nov_2020_v1 } from '@/data/papers/chemistry-nov-2020-v1/conceptsPublic'
+import { CONCEPTS_PUBLIC_CHEMISTRY_NOV2020_V2 as CONCEPTS_chemistry_nov_2020_v2 } from '@/data/papers/chemistry-nov-2020-v2/conceptsPublic'
+import { CONCEPTS_PUBLIC_CHEMISTRY_NOV2021 as CONCEPTS_chemistry_nov_2021 } from '@/data/papers/chemistry-nov-2021/conceptsPublic'
+import { CONCEPTS_PUBLIC_CHEMISTRY_NOV2021_V1 as CONCEPTS_chemistry_nov_2021_v1 } from '@/data/papers/chemistry-nov-2021-v1/conceptsPublic'
+import { CONCEPTS_PUBLIC_CHEMISTRY_NOV2021_V2 as CONCEPTS_chemistry_nov_2021_v2 } from '@/data/papers/chemistry-nov-2021-v2/conceptsPublic'
+import { CONCEPTS_PUBLIC_CHEMISTRY_NOV2022 as CONCEPTS_chemistry_nov_2022 } from '@/data/papers/chemistry-nov-2022/conceptsPublic'
+import { CONCEPTS_PUBLIC_CHEMISTRY_NOV2022_V1 as CONCEPTS_chemistry_nov_2022_v1 } from '@/data/papers/chemistry-nov-2022-v1/conceptsPublic'
+import { CONCEPTS_PUBLIC_CHEMISTRY_NOV2022_V2 as CONCEPTS_chemistry_nov_2022_v2 } from '@/data/papers/chemistry-nov-2022-v2/conceptsPublic'
+import { CONCEPTS_PUBLIC_CHEMISTRY_NOV2023 as CONCEPTS_chemistry_nov_2023 } from '@/data/papers/chemistry-nov-2023/conceptsPublic'
+import { CONCEPTS_PUBLIC_CHEMISTRY_NOV2023_V1 as CONCEPTS_chemistry_nov_2023_v1 } from '@/data/papers/chemistry-nov-2023-v1/conceptsPublic'
+import { CONCEPTS_PUBLIC_CHEMISTRY_NOV2023_V2 as CONCEPTS_chemistry_nov_2023_v2 } from '@/data/papers/chemistry-nov-2023-v2/conceptsPublic'
+import { CONCEPTS_PUBLIC_CHEMISTRY_NOV2024 as CONCEPTS_chemistry_nov_2024 } from '@/data/papers/chemistry-nov-2024/conceptsPublic'
+import { CONCEPTS_PUBLIC_CHEMISTRY_NOV2024_V1 as CONCEPTS_chemistry_nov_2024_v1 } from '@/data/papers/chemistry-nov-2024-v1/conceptsPublic'
+import { CONCEPTS_PUBLIC_CHEMISTRY_NOV2024_V2 as CONCEPTS_chemistry_nov_2024_v2 } from '@/data/papers/chemistry-nov-2024-v2/conceptsPublic'
 
 // Build the merged registry
 const _registry: Record<string, Record<string, ConceptEntry>> = {
   'physics-nov-2023': CONCEPTS_physics_nov_2023,
   'physics-may-2016': CONCEPTS_physics_may_2016,
+  'physics-may-2016-v1': CONCEPTS_physics_may_2016_v1,
+  'physics-may-2016-v2': CONCEPTS_physics_may_2016_v2,
   'physics-may-2017': CONCEPTS_physics_may_2017,
+  'physics-may-2017-v1': CONCEPTS_physics_may_2017_v1,
+  'physics-may-2017-v2': CONCEPTS_physics_may_2017_v2,
   'physics-may-2018': CONCEPTS_physics_may_2018,
+  'physics-may-2018-v1': CONCEPTS_physics_may_2018_v1,
+  'physics-may-2018-v2': CONCEPTS_physics_may_2018_v2,
   'physics-may-2019': CONCEPTS_physics_may_2019,
+  'physics-may-2019-v1': CONCEPTS_physics_may_2019_v1,
+  'physics-may-2019-v2': CONCEPTS_physics_may_2019_v2,
   'physics-may-2021': CONCEPTS_physics_may_2021,
+  'physics-may-2021-v1': CONCEPTS_physics_may_2021_v1,
+  'physics-may-2021-v2': CONCEPTS_physics_may_2021_v2,
   'physics-may-2022': CONCEPTS_physics_may_2022,
+  'physics-may-2022-v1': CONCEPTS_physics_may_2022_v1,
+  'physics-may-2022-v2': CONCEPTS_physics_may_2022_v2,
   'physics-may-2023': CONCEPTS_physics_may_2023,
+  'physics-may-2023-v1': CONCEPTS_physics_may_2023_v1,
+  'physics-may-2023-v2': CONCEPTS_physics_may_2023_v2,
   'physics-may-2024': CONCEPTS_physics_may_2024,
+  'physics-may-2024-v1': CONCEPTS_physics_may_2024_v1,
+  'physics-may-2024-v2': CONCEPTS_physics_may_2024_v2,
   'physics-may-2025': CONCEPTS_physics_may_2025,
+  'physics-may-2025-v1': CONCEPTS_physics_may_2025_v1,
+  'physics-may-2025-v2': CONCEPTS_physics_may_2025_v2,
   'physics-nov-2016': CONCEPTS_physics_nov_2016,
+  'physics-nov-2016-v1': CONCEPTS_physics_nov_2016_v1,
+  'physics-nov-2016-v2': CONCEPTS_physics_nov_2016_v2,
   'physics-nov-2017': CONCEPTS_physics_nov_2017,
+  'physics-nov-2017-v1': CONCEPTS_physics_nov_2017_v1,
+  'physics-nov-2017-v2': CONCEPTS_physics_nov_2017_v2,
   'physics-nov-2018': CONCEPTS_physics_nov_2018,
+  'physics-nov-2018-v1': CONCEPTS_physics_nov_2018_v1,
+  'physics-nov-2018-v2': CONCEPTS_physics_nov_2018_v2,
   'physics-nov-2019': CONCEPTS_physics_nov_2019,
+  'physics-nov-2019-v1': CONCEPTS_physics_nov_2019_v1,
+  'physics-nov-2019-v2': CONCEPTS_physics_nov_2019_v2,
   'physics-nov-2020': CONCEPTS_physics_nov_2020,
+  'physics-nov-2020-v1': CONCEPTS_physics_nov_2020_v1,
+  'physics-nov-2020-v2': CONCEPTS_physics_nov_2020_v2,
   'physics-nov-2021': CONCEPTS_physics_nov_2021,
+  'physics-nov-2021-v1': CONCEPTS_physics_nov_2021_v1,
+  'physics-nov-2021-v2': CONCEPTS_physics_nov_2021_v2,
   'physics-nov-2022': CONCEPTS_physics_nov_2022,
+  'physics-nov-2022-v1': CONCEPTS_physics_nov_2022_v1,
+  'physics-nov-2022-v2': CONCEPTS_physics_nov_2022_v2,
   'physics-nov-2024': CONCEPTS_physics_nov_2024,
+  'physics-nov-2024-v1': CONCEPTS_physics_nov_2024_v1,
+  'physics-nov-2024-v2': CONCEPTS_physics_nov_2024_v2,
   'biology-may-2025': CONCEPTS_biology_may_2025,
+  'biology-may-2025-v1': CONCEPTS_biology_may_2025_v1,
+  'biology-may-2025-v2': CONCEPTS_biology_may_2025_v2,
   'biology-may-2024': CONCEPTS_biology_may_2024,
   'biology-nov-2024': CONCEPTS_biology_nov_2024,
   'biology-nov-2019': CONCEPTS_biology_nov_2019,
   'biology-may-2019': CONCEPTS_biology_may_2019,
+  'biology-nov-2018': CONCEPTS_biology_nov_2018,
+  'biology-may-2018': CONCEPTS_biology_may_2018,
+  'biology-nov-2017': CONCEPTS_biology_nov_2017,
+  'biology-may-2017': CONCEPTS_biology_may_2017,
+  'biology-nov-2016': CONCEPTS_biology_nov_2016,
+  'biology-nov-2020': CONCEPTS_biology_nov_2020,
+  'biology-may-2016': CONCEPTS_biology_may_2016,
+  'biology-may-2021': CONCEPTS_biology_may_2021,
+  'biology-nov-2021': CONCEPTS_biology_nov_2021,
+  'biology-may-2022': CONCEPTS_biology_may_2022,
+  'biology-nov-2022': CONCEPTS_biology_nov_2022,
+  'biology-may-2023': CONCEPTS_biology_may_2023,
+  'biology-nov-2023': CONCEPTS_biology_nov_2023,
+  'chemistry-may-2016': CONCEPTS_chemistry_may_2016,
+  'chemistry-may-2016-v1': CONCEPTS_chemistry_may_2016_v1,
+  'chemistry-may-2016-v2': CONCEPTS_chemistry_may_2016_v2,
+  'chemistry-may-2017': CONCEPTS_chemistry_may_2017,
+  'chemistry-may-2017-v1': CONCEPTS_chemistry_may_2017_v1,
+  'chemistry-may-2017-v2': CONCEPTS_chemistry_may_2017_v2,
+  'chemistry-may-2018': CONCEPTS_chemistry_may_2018,
+  'chemistry-may-2018-v1': CONCEPTS_chemistry_may_2018_v1,
+  'chemistry-may-2018-v2': CONCEPTS_chemistry_may_2018_v2,
+  'chemistry-may-2019': CONCEPTS_chemistry_may_2019,
+  'chemistry-may-2019-v1': CONCEPTS_chemistry_may_2019_v1,
+  'chemistry-may-2019-v2': CONCEPTS_chemistry_may_2019_v2,
+  'chemistry-may-2021': CONCEPTS_chemistry_may_2021,
+  'chemistry-may-2021-v1': CONCEPTS_chemistry_may_2021_v1,
+  'chemistry-may-2021-v2': CONCEPTS_chemistry_may_2021_v2,
+  'chemistry-may-2022': CONCEPTS_chemistry_may_2022,
+  'chemistry-may-2022-v1': CONCEPTS_chemistry_may_2022_v1,
+  'chemistry-may-2022-v2': CONCEPTS_chemistry_may_2022_v2,
+  'chemistry-may-2023': CONCEPTS_chemistry_may_2023,
+  'chemistry-may-2023-v1': CONCEPTS_chemistry_may_2023_v1,
+  'chemistry-may-2023-v2': CONCEPTS_chemistry_may_2023_v2,
+  'chemistry-may-2024': CONCEPTS_chemistry_may_2024,
+  'chemistry-may-2024-v1': CONCEPTS_chemistry_may_2024_v1,
+  'chemistry-may-2024-v2': CONCEPTS_chemistry_may_2024_v2,
+  'chemistry-may-2025': CONCEPTS_chemistry_may_2025,
+  'chemistry-may-2025-v1': CONCEPTS_chemistry_may_2025_v1,
+  'chemistry-may-2025-v2': CONCEPTS_chemistry_may_2025_v2,
+  'chemistry-nov-2016': CONCEPTS_chemistry_nov_2016,
+  'chemistry-nov-2016-v1': CONCEPTS_chemistry_nov_2016_v1,
+  'chemistry-nov-2016-v2': CONCEPTS_chemistry_nov_2016_v2,
+  'chemistry-nov-2017': CONCEPTS_chemistry_nov_2017,
+  'chemistry-nov-2017-v1': CONCEPTS_chemistry_nov_2017_v1,
+  'chemistry-nov-2017-v2': CONCEPTS_chemistry_nov_2017_v2,
+  'chemistry-nov-2018': CONCEPTS_chemistry_nov_2018,
+  'chemistry-nov-2018-v1': CONCEPTS_chemistry_nov_2018_v1,
+  'chemistry-nov-2018-v2': CONCEPTS_chemistry_nov_2018_v2,
+  'chemistry-nov-2019': CONCEPTS_chemistry_nov_2019,
+  'chemistry-nov-2019-v1': CONCEPTS_chemistry_nov_2019_v1,
+  'chemistry-nov-2019-v2': CONCEPTS_chemistry_nov_2019_v2,
+  'chemistry-nov-2020': CONCEPTS_chemistry_nov_2020,
+  'chemistry-nov-2020-v1': CONCEPTS_chemistry_nov_2020_v1,
+  'chemistry-nov-2020-v2': CONCEPTS_chemistry_nov_2020_v2,
+  'chemistry-nov-2021': CONCEPTS_chemistry_nov_2021,
+  'chemistry-nov-2021-v1': CONCEPTS_chemistry_nov_2021_v1,
+  'chemistry-nov-2021-v2': CONCEPTS_chemistry_nov_2021_v2,
+  'chemistry-nov-2022': CONCEPTS_chemistry_nov_2022,
+  'chemistry-nov-2022-v1': CONCEPTS_chemistry_nov_2022_v1,
+  'chemistry-nov-2022-v2': CONCEPTS_chemistry_nov_2022_v2,
+  'chemistry-nov-2023': CONCEPTS_chemistry_nov_2023,
+  'chemistry-nov-2023-v1': CONCEPTS_chemistry_nov_2023_v1,
+  'chemistry-nov-2023-v2': CONCEPTS_chemistry_nov_2023_v2,
+  'chemistry-nov-2024': CONCEPTS_chemistry_nov_2024,
+  'chemistry-nov-2024-v1': CONCEPTS_chemistry_nov_2024_v1,
+  'chemistry-nov-2024-v2': CONCEPTS_chemistry_nov_2024_v2,
 }
 
 /**

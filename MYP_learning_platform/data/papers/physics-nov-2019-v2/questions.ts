@@ -1,0 +1,338 @@
+import type { Question } from '@/lib/types'
+
+const P = '/images/papers/physics-nov-2019/'
+
+export const paperMeta = {
+  id: 'physics-nov-2019-v2',
+  subject: 'Physics',
+  session: 'November',
+  year: 2019,
+  totalMarks: 99,
+  durationMinutes: 90,
+  criteria: ['A', 'B', 'C', 'D'] as const,
+}
+
+export const questions: Question[] = [
+
+  {
+    id: 1,
+    crit: 'A',
+    type: 'extended',
+    topic: 'Forces & Interactions — Momentum in a Moving Van',
+    marks: 7,
+    topicCanonical: "Newton's Laws & Momentum",
+    topicGroup: 'Forces & Motion',
+    tags: { unit: 'forces-interactions', topics: ['momentum', 'Newton\'s laws', 'inertia', 'friction'], level: 'proficient' },
+    stem: 'This question is about motion and momentum. To calculate an object\'s momentum, we use the equation p = mv.',
+    tasks: [
+      {
+        label: 'a',
+        text: '**Select** the units in which each of the quantities is measured.\n\n| Symbol | Quantity | Unit |\n|--------|----------|------|\n| p | momentum | ? |\n| m | mass | ? |\n| v | velocity | ? |',
+        marks: 2,
+        ph: 'momentum = Ns or kg m s⁻¹; mass = kg; velocity = m s⁻¹.',
+      },
+      {
+        label: 'b',
+        text: 'A dog is sitting in a moving van. The dog and the van are both travelling at a speed of 12 m s⁻¹. **State** why the van has more momentum than the dog.',
+        marks: 1,
+        ph: 'The van has a much greater mass than the dog.',
+      },
+      {
+        label: 'c',
+        text: 'Two items are in the back of the moving van; a rubber ball and a heavy box. When the van brakes suddenly to a halt, the rubber ball rolls forward. Use Newton\'s Laws to **explain** why the ball moves forward after the van has stopped.',
+        marks: 3,
+        ph: '(1) ball has forward momentum; (2) a force is needed to change momentum; (3) no net force acts on the ball — velocity unchanged (Newton\'s 1st law / inertia).',
+      },
+      {
+        label: 'd',
+        text: 'The heavy box does not move when the van stops. **Suggest** why the box does not move.',
+        marks: 1,
+        ph: 'Friction between the box and the van floor creates a retarding force that prevents the box from sliding forward.',
+      },
+    ],
+  },
+
+  {
+    id: 2,
+    crit: 'A',
+    type: 'extended',
+    topic: 'Electricity & Circuits — Industrial Electrostatic Precipitator',
+    marks: 7,
+    topicCanonical: 'Atomic Structure & Radioactivity',
+    topicGroup: 'Nuclear & Atomic Physics',
+    tags: { unit: 'electricity-circuits', topics: ['electrical power', 'current', 'electrostatic attraction', 'ionization'], level: 'proficient' },
+    stem: 'Industrial electrostatic precipitators are used in power stations and factories to remove soot and fine dust from exhaust gases. Inside the precipitator, electrons are fired at pollutant particles, giving them a negative charge. The charged particles then pass near positively charged collection plates and stick to them. Clean gas exits the other side.',
+    figImages: [`${P}q2-smog.png`, `${P}q2-ionization.png`],
+    tasks: [
+      {
+        label: 'a',
+        text: 'The precipitator requires 1320 W of electrical power and is connected to a 220 V supply. **Calculate** the current flowing through the precipitator. Give the appropriate unit with your answer.',
+        marks: 3,
+        ph: 'P = IV → I = P/V = 1320/220 = 6 A.',
+      },
+      {
+        label: 'b',
+        text: '**Outline** why charged soot particles collect on the positive collection plate.',
+        marks: 2,
+        ph: 'Soot particles are negatively charged. Opposite charges attract — negatively charged soot is attracted to the positive plate.',
+      },
+      {
+        label: 'c',
+        text: 'Over time, the collection plates become less effective. Using your understanding of electrical fields, **suggest** why the plates need to be regularly cleaned.',
+        marks: 2,
+        ph: 'Negative soot on the plate reduces the net positive charge → weaker electric field → less attractive force → fewer particles collected.',
+      },
+    ],
+  },
+
+  {
+    id: 3,
+    crit: 'A',
+    type: 'extended',
+    topic: 'EM Spectrum & Magnetism — RFID in Supply Chain',
+    marks: 10,
+    topicCanonical: 'Electromagnetic Spectrum',
+    topicGroup: 'Electromagnetic Waves & Optics',
+    tags: { unit: 'em-spectrum', topics: ['electromagnetic spectrum', 'radio waves', 'induction', 'RFID'], level: 'proficient' },
+    stem: 'RFID (radio-frequency identification) tags are widely used in supermarkets and warehouses to track inventory. The RFID tag consists of a wire coil, a radio transmitter and a microchip to store information. When a scanner passes near the tag, the scanner\'s coil induces a current in the tag\'s coil, powering the chip which then transmits its stored data.',
+    figImages: [`${P}q3a-spectrum.png`, `${P}q3b-rfid-cat.png`, `${P}q3-rfid-structure.png`],
+    tasks: [
+      {
+        label: 'a',
+        text: 'Radio waves form a section of the electromagnetic spectrum. **Drag and drop** the labels to classify the missing sections in the spectrum.\n\nSpectrum order (low to high frequency): Radio — Microwave — **?** — Visible — **?** — X-rays — Gamma ray\n\nDraggable labels: X-rays, Infra-red, Radio',
+        marks: 1,
+        ph: 'Infrared between Microwave and Visible; Ultraviolet between Visible and X-rays.',
+      },
+      {
+        label: 'b',
+        text: 'RFID tags in warehouses transmit information using radio waves. Infra-red waves can also be used to transmit information. **Suggest** one advantage of using radio waves instead of infra-red waves for warehouse RFID systems.',
+        marks: 1,
+        ph: 'Radio waves penetrate packaging/walls better; infra-red requires line of sight; radio waves can reach further.',
+      },
+      {
+        label: 'c',
+        text: 'The frequency of the radio waves used is 150 000 Hz and their wavelength is 2000 m. **Calculate** the speed of radio waves. Give your answer in scientific notation.',
+        marks: 3,
+        ph: 'v = fλ = 150 000 × 2000 = 300 000 000 = 3.00 × 10⁸ m s⁻¹.',
+      },
+      {
+        label: 'd',
+        text: 'The wire coil in the scanner carries an alternating current. Inside the RFID there is also a coil of wire. When the two coils act together they behave like a transformer, inducing a current in the RFID coil.\n\n**Outline** one advantage of powering the RFID using induction rather than using a battery.',
+        marks: 2,
+        ph: 'No internal battery needed; batteries would run flat and require replacement; a battery would add cost and bulk to the tag.',
+      },
+      {
+        label: 'e',
+        text: '**Explain**, using the principle of induction, how an alternating current flowing in the coil of the scanner generates a current in the RFID tag.',
+        marks: 3,
+        ph: '(1) AC in scanner coil → alternating magnetic field; (2) changing field reaches RFID coil; (3) changing field induces EMF/current in RFID coil (electromagnetic induction).',
+      },
+    ],
+  },
+
+  {
+    id: 4,
+    crit: 'B',
+    type: 'extended',
+    topic: 'Light & Optics — Dental Mirror Investigation',
+    marks: 12,
+    topicCanonical: 'Light, Reflection & Refraction',
+    topicGroup: 'Electromagnetic Waves & Optics',
+    tags: { unit: 'light-optics', topics: ['reflection', 'virtual images', 'inverse proportion', 'experimental design'], level: 'proficient' },
+    stem: 'An object placed in front of a mirror produces an image due to the reflection of light waves from the surface of the mirror. When two mirrors are placed together in contact along one side, the number of images varies depending on the angle between the mirrors. In the picture shown here, there are seven virtual images. The only thing that has changed between these situations is the angle between the mirrors.',
+    figImages: [`${P}q4-mirrors.png`],
+    tasks: [
+      {
+        label: 'a',
+        text: 'A student wants to investigate the relationship between the number of virtual images when the angle between two mirrors changes. **State** the question that could be answered in this scientific investigation.',
+        marks: 1,
+        ph: 'Research question naming IV (angle) and DV (number of virtual images).',
+      },
+      {
+        label: 'b',
+        text: 'Below is a list of variables for this experiment. **Select** the appropriate description for each of the variables.\n\n| Variable | Independent | Dependent | Control |\n|----------|-------------|-----------|--------|\n| The object used | | | |\n| The position of the object | | | |\n| The number of images observed | | | |\n| The size of the mirrors used | | | |\n| The angle between the mirrors | | | |\n| The shape of the mirrors used | | | |',
+        marks: 3,
+        widget: 'variable_classify',
+        widgetOptions: ['The object used', 'The position of the object', 'The number of images observed', 'The size of the mirrors used', 'The angle between the mirrors', 'The shape of the mirrors used'],
+        ph: 'IV = angle; DV = number of images; Controls = object, position, size of mirrors, shape of mirrors.',
+      },
+      {
+        label: 'c',
+        text: '**Identify** the measuring instrument that would be needed for this experiment.',
+        marks: 1,
+        ph: 'Protractor.',
+      },
+      {
+        label: 'd',
+        text: 'After collecting data, the student presents the results in the form of a graph.\n\nUse the graph to **predict** the angle that would produce three images.',
+        marks: 1,
+        figImages: [`${P}q4d-graph.png`],
+        ph: 'Approximately 60° (accept 55°–65°).',
+      },
+      {
+        label: 'e',
+        text: 'The student makes the following prediction: "I predict that as the angle between the mirrors increases, the number of images decreases. The relationship between these variables will be inversely proportional."\n\nUsing data from the graph, **outline** if the graph supports this prediction. You should include calculations to support your answer.',
+        marks: 3,
+        ph: 'Images decrease as angle increases ✓. Test N × angle = constant: 7×24≈168; 5×40=200; 3×60=180 — not exactly constant. Approximately but not perfectly inversely proportional.',
+      },
+      {
+        label: 'f',
+        text: 'The bar chart below is an alternative presentation of the data. **Justify** why a bar chart is a more appropriate way of presenting this data.',
+        marks: 2,
+        figImages: [`${P}q4f-barchart.png`],
+        ph: 'Number of images can only take integer values — data is discrete. Bar chart is appropriate for discrete data; a line graph would imply continuous data, which is misleading.',
+      },
+      {
+        label: 'g',
+        text: 'A second student presents a table of results. **Outline** if the first student\'s data or the second student\'s data are better for exploring the relationship between the two variables.',
+        marks: 1,
+        ph: 'Second student\'s data: more data points / at regular intervals → easier to identify the trend.',
+      },
+    ],
+  },
+
+  {
+    id: 5,
+    crit: 'C',
+    type: 'extended',
+    topic: 'Sound & Waves — Speed of Sound via Echo',
+    marks: 20,
+    topicCanonical: 'Waves, Sound & Frequency',
+    topicGroup: 'Waves & Sound',
+    tags: { unit: 'sound-waves', topics: ['speed of sound', 'echo', 'data processing', 'graph analysis', 'accuracy'], level: 'proficient' },
+    stem: 'Like light, sound also reflects. We experience reflected sound as an echo. Echoes can be used to investigate the speed of sound. A student stands a known distance away from a wall and makes a loud sound by hitting two pieces of wood together. The time that the sound takes to travel to the wall and back can be used to calculate a value for the speed of sound.',
+    figImages: [`${P}q5-echo.png`],
+    tasks: [
+      {
+        label: 'a',
+        text: 'Two students work in a pair to collect data. One student claps wood together and the other measures the time between the sound and the echo. The result is:\n\n**Time for sound to travel = 0.55 s**\n\nThe student stands **90 m** from the wall. **Calculate** a value for the speed of sound using this raw data. Give your answer to two significant figures.',
+        marks: 3,
+        ph: 'Total distance = 2 × 90 = 180 m. Speed = 180/0.55 = 327 ≈ 330 m s⁻¹ (2 s.f.).',
+      },
+      {
+        label: 'b',
+        text: 'The students are concerned that their measurements may not be accurate. **Describe and justify** two things that the students could do to improve the accuracy of their measurements while using the same basic method. Your improvements should not require any new equipment.',
+        marks: 4,
+        ph: 'Improvement 1: Repeat measurements and average → reduces random timing errors. Improvement 2: Increase distance to wall → small timing errors become less significant relative to total time.',
+      },
+      {
+        label: 'c',
+        text: 'Instead of a stopwatch, a laptop with a microphone and recording software is used.\n\nUse the sound recording image to **calculate** the time taken for the sound to travel 640 m.',
+        marks: 2,
+        ph: 'Read peaks: t₁ ≈ 0.70 s, t₂ ≈ 2.60 s. Time = 2.60 − 0.70 = 1.90 ± 0.06 s.',
+      },
+      {
+        label: 'd',
+        text: 'The students vary the distance the sound travels and write down four sets of results. **Organise and present** the data in a table showing the distance travelled and the time taken. Include the data from part (c) in your answer.',
+        marks: 4,
+        figImages: [`${P}q5d-table.png`],
+        ph: 'Table: Distance/m | Time/s. Ordered. Units in headings only. ECF value from (c) for 640 m row.',
+      },
+      {
+        label: 'e',
+        text: 'Another student plots a graph of distance against time.\n\nUse data from the graph to **calculate** the speed of sound.',
+        marks: 2,
+        figImages: [`${P}q5e-graph.png`],
+        ph: 'Speed = gradient of LOBF = Δd/Δt ≈ 330–355 m s⁻¹.',
+      },
+      {
+        label: 'f',
+        text: 'The student thought that a mistake had been made when measuring one of the times. **Suggest** which measurement was performed incorrectly. **State** whether the actual time should be higher or lower than the value recorded.',
+        marks: 2,
+        ph: 'Anomalous point at 400 m / ≈1 s. Actual time should be higher than recorded.',
+      },
+      {
+        label: 'g',
+        text: 'During any speed of sound investigation, it is important to measure temperature. For temperatures close to room temperature:\n\n**speed of sound in air = 330 + (0.6 × T)**\n\nwhere T is in °C.\n\n**Explain** why the speed of sound is dependent on temperature. Your answer should reference the motion of particles.',
+        marks: 3,
+        ph: '(1) Sound faster at higher temperature; (2) higher T → particles move faster / have more kinetic energy; (3) shorter time between collisions → faster energy transfer through air.',
+      },
+    ],
+  },
+
+  {
+    id: 6,
+    crit: 'B',
+    type: 'extended',
+    topic: 'Sound & Waves — Spring Oscillation Design',
+    marks: 19,
+    topicCanonical: 'Waves, Sound & Frequency',
+    topicGroup: 'Waves & Sound',
+    tags: { unit: 'sound-waves', topics: ['oscillation', 'experimental design', 'variables', 'hypothesis', 'period'], level: 'advanced' },
+    stem: 'A sound wave in air is created due to the oscillations of air particles. The air particles oscillate around a fixed point, known as the equilibrium position. An MYP student is interested in the factors that affect oscillations of air particles. He decides to model an oscillating particle using a hanging mass on a spring.\n\n**Research question:** If the stiffness (spring constant) of the spring increases, what happens to the time period of the oscillation?',
+    figImages: [`${P}q6-spring.png`],
+    tasks: [
+      {
+        label: 'a',
+        text: '**Design** an experiment to investigate this research question. In your plan you must include:\n- the independent variable, the dependent variable and the justification of two control variables\n- a hypothesis that can be tested by this investigation\n- how you will collect sufficient data\n- a method detailing the procedure you will follow',
+        marks: 14,
+        ph: 'IV = spring constant/stiffness (use different springs); DV = time period; CV = mass AND amplitude (justify each).\nHypothesis: Stiffer spring → shorter time period, because greater restoring force accelerates mass more.\nData: ≥5 different springs, 3 trials each, time 10 oscillations ÷10.\nMethod: attach mass to spring, displace, release, time 10 oscillations, calculate mean period.',
+      },
+      {
+        label: 'b',
+        text: '**Suggest** a second investigation into another factor that could affect the time period of a mass oscillating on a spring. For this new investigation you should include:\n- the independent and dependent variables\n- a research question\n- two relevant control variables',
+        marks: 5,
+        ph: 'IV = mass on spring (use different masses); DV = time period; RQ = How does mass affect time period?; CVs = spring constant AND amplitude. (Do not repeat spring constant as IV.)',
+      },
+    ],
+  },
+
+  {
+    id: 7,
+    crit: 'A',
+    type: 'extended',
+    topic: 'Forces & Interactions — Stopping Distance on Ice',
+    marks: 10,
+    topicCanonical: 'Kinematics & Motion Graphs',
+    topicGroup: 'Forces & Motion',
+    tags: { unit: 'forces-interactions', topics: ['stopping distance', 'kinematics', 'deceleration', 'friction', 'driver factors'], level: 'proficient' },
+    stem: 'This task considers factors that affect the stopping distance of a car. Stopping distance consists of thinking distance (distance during reaction time) and braking distance (distance during deceleration).',
+    figImages: [`${P}q7-stopping.png`],
+    tasks: [
+      {
+        label: 'a',
+        text: 'In the diagram, the car decelerates from 24 m s⁻¹ to rest. If the brakes are worn and are only able to decelerate the car at 4 m s⁻², **calculate** the new braking distance.',
+        marks: 4,
+        ph: 'v² = u² + 2as: 0 = 24² + 2×(−4)×s → 0 = 576 − 8s → s = 72 m.',
+      },
+      {
+        label: 'b',
+        text: 'Factors related to the driver, the car or the environment affect stopping distance. **Classify** the following into environmental factors, driver factors, and car factors.',
+        marks: 2,
+        figImages: [`${P}q7b-factors.png`],
+        widget: 'inline_dropdown_select',
+        widgetOptions: ['environmental factor', 'driver factor', 'car factor'],
+        widgetItems: ['Using a cell phone', 'Heavy rain', 'Worn out tyre tread', 'Faulty brakes', 'Drinking alcohol', 'Poor road surface'],
+        ph: 'Cell phone → driver; Rain → environmental; Worn tyres → car; Faulty brakes → car; Alcohol → driver; Road surface → environmental.',
+      },
+      {
+        label: 'c',
+        text: 'Drinking alcohol and poor road surface are two factors affecting stopping distance. For each factor, **select** which part of the stopping distance it affects and **outline** the impact using your scientific knowledge.',
+        marks: 4,
+        ph: 'Alcohol → reaction time → thinking distance increases. Poor road → friction decreases → braking force decreases → braking distance increases.',
+      },
+    ],
+  },
+
+  {
+    id: 8,
+    crit: 'D',
+    type: 'extended',
+    topic: 'Forces & Transport — Drone Delivery Systems',
+    marks: 14,
+    topicCanonical: 'Kinematics & Motion Graphs',
+    topicGroup: 'Forces & Motion',
+    tags: { unit: 'forces-interactions', topics: ['technology evaluation', 'road safety', 'societal implications', 'economic implications'], level: 'advanced' },
+    stem: 'In recent years, a number of companies have explored using delivery drones to replace traditional van-based parcel delivery. Drones are small unmanned aerial vehicles that use GPS and sensors to navigate autonomously. It is estimated that by 2030, drone delivery could account for up to 20% of all urban parcel deliveries.',
+    figImages: [`${P}q8-driverless.png`],
+    tasks: [
+      {
+        label: 'a',
+        text: 'Drone delivery technology could change how goods are moved in urban areas, with significant consequences for society, the economy, and the environment. **Discuss and evaluate** the consequences of widespread drone delivery replacing van delivery. In your answer you should include:\n- an outline of the technological improvements related to safety\n- the advantages and disadvantages for society\n- the economic implications of drone delivery\n- a concluding appraisal giving your opinion on the use of drone delivery',
+        marks: 14,
+        ph: '(1) Safety: autonomous navigation, no driver fatigue, but risk of mid-air collision or equipment failure. (2) Society: faster delivery, less traffic, but noise pollution and privacy concerns. (3) Economic: lower long-term cost, but high initial cost, job losses for van drivers. (4) Conclusion: justified opinion linking all arguments.',
+      },
+    ],
+  },
+
+]

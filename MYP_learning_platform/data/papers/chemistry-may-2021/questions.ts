@@ -1,0 +1,376 @@
+import type { Question } from '@/lib/types'
+
+export const paperMeta = {
+  id: 'chemistry-may-2021',
+  subject: 'Chemistry',
+  session: 'May',
+  year: 2021,
+  totalMarks: 100,
+  durationMinutes: 90,
+  criteria: ['A', 'B', 'C', 'D'] as const,
+}
+
+export const questions: Question[] = [
+  // ── Q1 (9 marks, Crit A) — Rocky/gas-rich planets, atomic structure ──────
+  {
+    id: 1,
+    crit: 'A',
+    type: 'extended',
+    topic: 'Atomic structure & periodic table',
+    topicCanonical: 'Periodic Table & Atomic Structure',
+    topicGroup: 'Atomic Structure & Periodic Table',
+    marks: 9,
+    stem: 'All of the planets in our solar system orbit around the Sun, which is a star. Rocky planets consist mainly of magnesium (Mg), silicon (Si) and iron (Fe). Gas-rich planets have major components including helium (He), hydrogen (H₂) and ammonia (NH₃).',
+    figImages: ['/images/papers/chemistry-may-2021/page-01.png'],
+    tasks: [
+      {
+        label: 'a',
+        text: '**Select** the number of electrons in the outer shell of an atom of magnesium.',
+        marks: 1,
+        ph: 'Select number of outer shell electrons for Mg',
+        widget: 'radio_select',
+        widgetOptions: ['1', '2', '4', '8'],
+      },
+      {
+        label: 'b',
+        text: 'Using the periodic table, **state** the group and period of silicon.\n\nGroup:\n\nPeriod:',
+        marks: 2,
+        ph: 'State group number and period number for Si',
+      },
+      {
+        label: 'c',
+        text: '**Select** the region of the periodic table where iron is located.',
+        marks: 1,
+        ph: 'Select the region of the periodic table for iron',
+        widget: 'radio_select',
+        widgetOptions: ['Alkali metals', 'Transition metals', 'Noble gases', 'Halogens'],
+      },
+      {
+        label: 'd',
+        text: 'Some of the major components of gas-rich planets are helium (He), hydrogen (H₂) and ammonia (NH₃). **Explain** why hydrogen occurs as diatomic molecules, but helium does not.',
+        marks: 4,
+        ph: 'Explain electron sharing vs full outer shell for H vs He',
+      },
+      {
+        label: 'e',
+        text: '**Select** the diagram that shows the Lewis structure (electron dot or dot cross diagram) of ammonia, NH₃.',
+        marks: 1,
+        ph: 'Select correct Lewis structure for NH₃',
+        widget: 'radio_select',
+        widgetOptions: ['A', 'B', 'C', 'D'],
+        figImages: ['/images/papers/chemistry-may-2021/page-03.png'],
+      },
+    ],
+  },
+
+  // ── Q2 (12 marks, Crit A) — Oxygen on exoplanets, isotopes, catalysts ────
+  {
+    id: 2,
+    crit: 'A',
+    type: 'extended',
+    topic: 'Isotopes, reactions & catalysts',
+    topicCanonical: 'Rates of Reaction & Catalysis',
+    topicGroup: 'Chemical Reactions',
+    marks: 12,
+    stem: 'Scientists studying space wonder whether life would be possible on planets other than the Earth. Most believe that, if molecular oxygen is present on a planet, then life is possible on this planet. But molecular oxygen itself is not a sign of life on a planet, because it might have formed from water. Samples collected from the Moon contain several isotopes of oxygen.',
+    tasks: [
+      {
+        label: 'a',
+        text: 'Oxygen occurs as a mixture of three isotopes, which have 8, 9 and 10 neutrons respectively. **Calculate** the mass number of the isotope which has 9 neutrons.',
+        marks: 2,
+        ph: 'Mass number = protons + neutrons; protons = 8',
+      },
+      {
+        label: 'b',
+        text: 'Molecular oxygen has been found on the Moon and detected on exoplanets. For life to exist, an atmosphere of at least 16% must be present. **Suggest** why the presence of molecular oxygen does not necessarily indicate the presence of life.',
+        marks: 1,
+        ph: 'Oxygen can come from non-biological sources',
+      },
+      {
+        label: 'c',
+        text: '**Calculate** the relative molecular mass of carbon dioxide containing one atom of oxygen-16 and one atom of oxygen-18.',
+        marks: 1,
+        ph: 'Add atomic masses: 12 + 16 + 18',
+      },
+      {
+        label: 'd',
+        text: 'Carbon dioxide gas is soluble in water. One way to test if a solution contains carbon dioxide is to use an indicator to determine its pH. Different indicators change colour over different ranges of pH.\n\nThe chart below shows the colour changes for two indicators, indicator A and indicator B.\n\nUse information from the chart to **determine** the **range** of pH possible for the carbon dioxide solution.',
+        marks: 2,
+        ph: 'Read where both indicators overlap; range 4.3–7',
+        figImages: ['/images/papers/chemistry-may-2021/page-05.png'],
+      },
+      {
+        label: 'e',
+        text: 'There is evidence of specific chemical reactions on the surface of some exoplanets. One of these reactions is the decomposition of carbon dioxide:\n\n2CO₂(g) → 2CO(g) + O₂(g)\n\n**Suggest** why the rate of the decomposition reaction increases the closer the exoplanet is to the star it orbits.',
+        marks: 2,
+        ph: 'Higher temperature near star → faster reaction rate',
+      },
+      {
+        label: 'f',
+        text: 'Carbon dioxide can be re-formed in the presence of catalysts:\n\n2CO(g) + O₂(g) → 2CO₂(g)\n\n**Outline** the role of a catalyst in a chemical reaction.',
+        marks: 2,
+        ph: 'Catalyst speeds up reaction, not consumed',
+      },
+      {
+        label: 'g',
+        text: 'Several nations are showing renewed interest in going back to the Moon. So far, they have sent un-manned probes to orbit or land on the Moon. Future missions could involve building a space station or mining the Moon\'s resources.\n\n**Suggest** two additional reasons why nations are interested in going back to the Moon, and are launching these missions.',
+        marks: 2,
+        ph: 'Suggest two reasons beyond those in the text',
+      },
+    ],
+  },
+
+  // ── Q3 (16 marks, Crit A/B/C) — Candles ─────────────────────────────────
+  {
+    id: 3,
+    crit: 'A',
+    type: 'extended',
+    topic: 'States of matter, combustion & data analysis',
+    topicCanonical: 'Organic Chemistry & Fuels',
+    topicGroup: 'Organic Chemistry',
+    marks: 16,
+    stem: 'Candles can be used for a variety of reasons, such as relaxing or in ceremonies. The length of time that a candle burns will determine its use.',
+    tasks: [
+      {
+        label: 'a',
+        text: 'Several changes occur when a candle burns.\n\n**Select** the state of the candle at A and B in the diagram above.',
+        marks: 2,
+        ph: 'A = solid wax base; B = liquid wax near wick',
+        widget: 'inline_dropdown_select',
+        widgetItems: ['A', 'B'],
+        widgetOptions: ['Solid', 'Liquid', 'Gas'],
+        figImages: ['/images/papers/chemistry-may-2021/page-08.png'],
+      },
+      {
+        label: 'b',
+        text: 'Wax is composed of hydrocarbons with the formula C₂₅H₅₂. Another hydrocarbon in the same class is C₅H₁₂. **State** the name and chemical class of C₅H₁₂.\n\nName:\n\nChemical class:',
+        marks: 2,
+        ph: 'Pentane; Alkane',
+      },
+      {
+        label: 'c',
+        text: '**Select** numbers to balance the equation showing complete combustion of C₅H₁₂.\n\n[?] C₅H₁₂(l) + [?] O₂(g) → [?] CO₂(g) + [?] H₂O(g)',
+        marks: 2,
+        ph: 'Coefficients: 1, 8, 5, 6',
+        widget: 'fill_blank',
+        widgetOptions: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
+      },
+      {
+        label: 'd',
+        text: 'A student wanted to compare the time it took different candles to burn. One candle was in a metal holder and the other candle was not.\n\n**Formulate** a hypothesis for the student\'s question.\n\nIf the candle is contained in a metal holder then the time taken for the candle to burn will [blank] because:',
+        marks: 3,
+        ph: 'Direction: increase or decrease; give scientific reason',
+        widget: 'fill_blank',
+        widgetOptions: ['increase', 'decrease'],
+        figImages: ['/images/papers/chemistry-may-2021/page-10.png'],
+      },
+      {
+        label: 'e',
+        text: 'A student wanted to investigate the effect of altitude on how quickly a candle burns. Her processed data is shown in the table below.\n\n| Altitude / m | Rate of wax combustion / g min⁻¹ |\n|---|---|\n| 990 | 0.161 |\n| 2700 | 0.130 |\n| 3200 | 0.110 |\n| 3720 | 0.106 |\n| 4700 | 0.0906 |\n\n**State** the rate of wax combustion at an altitude of 3720 m in standard form.',
+        marks: 1,
+        ph: '1.06 × 10⁻¹ g min⁻¹',
+      },
+      {
+        label: 'f',
+        text: 'The student produced a graph of her results. **Identify** two errors in the presentation of the data in the graph above.',
+        marks: 2,
+        ph: 'Axes swapped; should be scatter/line not bar chart',
+        figImages: ['/images/papers/chemistry-may-2021/page-12.png'],
+      },
+      {
+        label: 'g',
+        text: 'The student repeated the experiment the following day. The equipment set up on each day is shown.\n\nDay 1: lantern (enclosed flame). Day 2: open tea-light candle.\n\n**Outline** why the sets of results are different and **suggest** how the **rate** of wax combustion would be affected.',
+        marks: 4,
+        ph: 'Different equipment / weather / oxygen availability; state direction of rate change',
+        figImages: ['/images/papers/chemistry-may-2021/page-13.png'],
+      },
+    ],
+  },
+
+  // ── Q4 (10 marks, Crit B/C) — Vanilla vs strawberry candles ─────────────
+  {
+    id: 4,
+    crit: 'C',
+    type: 'extended',
+    topic: 'Investigation variables & data evaluation',
+    topicCanonical: 'Organic Chemistry & Fuels',
+    topicGroup: 'Organic Chemistry',
+    marks: 10,
+    stem: 'Some candles have fragrance added to them to provide relaxation or a memory of an experience. A student did a comparison between two candles: one fragranced with vanilla and one fragranced with strawberry.\n\nVanilla candle (in a glass jar): 185 g; trials 29.0, 24.3, 28.0 hours; average 27.1 hours.\nStrawberry candle (in a glass container): 114 g; trials 32.0, 28.5, 29.5 hours; average not shown.',
+    figImages: ['/images/papers/chemistry-may-2021/page-15.png'],
+    tasks: [
+      {
+        label: 'a',
+        text: '**State** the independent variable and the dependent variable in **this** investigation.\n\nIndependent variable:\n\nDependent variable:',
+        marks: 2,
+        ph: 'IV = fragrance type; DV = burn time',
+      },
+      {
+        label: 'b',
+        text: '**Calculate** the average burn time for the strawberry candle.',
+        marks: 2,
+        ph: '(32.0 + 28.5 + 29.5) ÷ 3 = 30.0 hours',
+      },
+      {
+        label: 'c',
+        text: 'The student\'s friend examined the data and suggested that the average burn time for a vanilla candle should be 28.5 hours and not 27.1 hours. **Suggest** a reason for this different average time.',
+        marks: 1,
+        ph: 'Friend excluded the outlier 24.3 hours',
+      },
+      {
+        label: 'd',
+        text: 'The student hypothesized that the candle with vanilla fragrance would take a longer time to burn because the candle had a smaller surface area. Use the data in the tables above part (a) to **evaluate** the validity of the student\'s hypothesis.',
+        marks: 3,
+        ph: 'Not valid — strawberry burns longer; ignore surface area references',
+      },
+      {
+        label: 'e',
+        text: '**Suggest** one improvement to increase the validity of the method. **Justify** your answer.\n\nImprovement:\n\nJustification:',
+        marks: 2,
+        ph: 'Same container type or same mass of wax; gives identical heat transfer',
+      },
+    ],
+  },
+
+  // ── Q5 (12 marks, Crit A/B/C/D) — Coffee grounds & biomass ──────────────
+  {
+    id: 5,
+    crit: 'C',
+    type: 'extended',
+    topic: 'Separation, energy & green chemistry',
+    topicCanonical: 'Organic Chemistry & Fuels',
+    topicGroup: 'Organic Chemistry',
+    marks: 12,
+    stem: 'Coffee is one of the most widely consumed drinks in the world. Coffee is produced by grinding coffee beans and then extracting the coffee from the grounds by filtration. This generates approximately six million tonnes of waste coffee grounds. The first stage of making coffee logs is to treat the grounds with an organic solvent. Esters, which give the coffee smell, dissolve in the solvent. The mixture is then filtered, producing a liquid fraction and a solid fraction.',
+    figImages: ['/images/papers/chemistry-may-2021/page-19.png'],
+    tasks: [
+      {
+        label: 'a',
+        text: '**Organise** the equipment below to show how to separate the solid and liquid fractions from the coffee ground/solvent mixture.\n\nNote: the filter funnel stand is already provided; drag the filter paper and correct beaker to complete the setup.',
+        marks: 2,
+        ph: 'Drag filter paper into funnel; place beaker underneath',
+        figImages: ['/images/papers/chemistry-may-2021/page-20.png'],
+      },
+      {
+        label: 'b',
+        text: 'Organic solvents are chemicals which can be used to dissolve a solute. Hexane is an example of an organic solvent. **Select** the hazard symbol for hexane.',
+        marks: 1,
+        ph: 'Hexane is flammable — select flammable symbol',
+        widget: 'radio_select',
+        widgetOptions: ['A', 'B', 'C', 'D'],
+        figImages: ['/images/papers/chemistry-may-2021/page-21.png'],
+      },
+      {
+        label: 'c',
+        text: 'Once the coffee grounds have been treated with the organic solvent, they can be treated further to produce biodiesel or solid fuel (coffee logs). The table below shows data for different forms of biomass compared with coffee logs.\n\n| Biomass | Energy / MJ tonne⁻¹ |\n|---|---|\n| Coffee logs | 18 000 |\n| Compost | 11 500 |\n| Poultry waste | 10 800 |\n| Straw | 14 400 |\n| Wood chips | 13 000 |\n\n**Plot** the energy content of biomass fuels data shown in the table. You should **label** the axes and use the tools in the drawing palette to create your graph.',
+        marks: 6,
+        ph: 'Bar chart; x=biomass type; y=energy/MJ tonne⁻¹; even scale from 0; all 5 bars correct',
+      },
+      {
+        label: 'd',
+        text: 'The coffee logs and the biodiesel obtained from coffee grounds can be used to produce energy. **Select** the type of process used to produce energy.',
+        marks: 1,
+        ph: 'Burning fuel is an exothermic process',
+        widget: 'radio_select',
+        widgetOptions: ['Endothermic', 'Exothermic', 'Photosynthesis', 'Fermentation'],
+      },
+      {
+        label: 'e',
+        text: '**Suggest** why it is important to recycle coffee grounds. **Justify** your answer.',
+        marks: 2,
+        ph: 'Reduces waste, reduces landfill, provides fuel source; justify with linked reason',
+      },
+    ],
+  },
+
+  // ── Q6 (16 marks, Crit B) — Design: fuel energy density investigation ─────
+  {
+    id: 6,
+    crit: 'B',
+    type: 'extended',
+    topic: 'Criterion B: Investigation design (fuel energy density)',
+    topicCanonical: 'Organic Chemistry & Fuels',
+    topicGroup: 'Organic Chemistry',
+    marks: 16,
+    stem: 'Different fuels release different amounts of energy when they burn, depending on their chemical composition. Energy density can be determined by measuring the mass change of the fuel burned to produce a specific temperature increase. The diagram shows two ways to set up equipment to determine the energy density of a liquid fuel. A student wants to investigate the energy density of five new solid fuels A, B, C, D and E.',
+    figImages: ['/images/papers/chemistry-may-2021/page-26.png'],
+    tasks: [
+      {
+        label: '',
+        text: '**Design** an investigation to find out which fuel has the highest energy density. In your answer, you should include:\n- an identification of the independent, dependent and two control variables\n- a justification of which equipment set-up you will use\n- details of the method to allow you to collect sufficient data\n- how you will ensure that your method is safe.',
+        marks: 16,
+        ph: 'Variables, set-up justification, method, safety; all five fuels, repeated trials, standard heating procedure',
+      },
+    ],
+  },
+
+  // ── Q7 (12 marks, Crit C/D) — Global water consumption & filtration ──────
+  {
+    id: 7,
+    crit: 'D',
+    type: 'extended',
+    topic: 'Water purification & filtration evaluation',
+    topicCanonical: 'Environmental Impact & Sustainability',
+    topicGroup: 'Environmental Chemistry',
+    marks: 12,
+    stem: 'Global water consumption has changed dramatically over the last 120 years. The graph below shows the change in water consumption for each region during this period.',
+    figImages: ['/images/papers/chemistry-may-2021/page-28.png'],
+    tasks: [
+      {
+        label: 'a',
+        text: 'Use the graph to **identify** the region that had the smallest increase in water consumption between 1900 and 1980.',
+        marks: 1,
+        ph: 'Read graph; smallest increase = Australia and Oceania',
+      },
+      {
+        label: 'b',
+        text: 'Use the graph to **state** the water consumption in Asia in 1905.',
+        marks: 2,
+        ph: 'Read graph at 1905; ~2150 billion m³',
+      },
+      {
+        label: 'c',
+        text: '**Suggest** a reason why the water consumption in Asia has increased dramatically during the period shown on the graph.',
+        marks: 1,
+        ph: 'Population increase (do not accept industrialisation alone)',
+      },
+      {
+        label: 'd',
+        text: 'Kamal and Sandra have moved into a home in the USA that has a private water well. They need to purchase a filtration device to use in their home to make their water safe for drinking. \n\n**Select** the most important feature of the filter that is needed in a filtration device. **Justify** your answer.\n\nJustification:',
+        marks: 2,
+        ph: 'Pore size — must be smaller than material being filtered out',
+        widget: 'radio_select',
+        widgetOptions: ['Cost of unit', 'Filter life span', 'Pore size', 'Water flow rate'],
+        figImages: ['/images/papers/chemistry-may-2021/page-30.png'],
+      },
+      {
+        label: 'e',
+        text: 'Using the information in the tables above, **explain** the advantages and disadvantages of using a ceramic core unit compared to an activated carbon unit for personal drinking, when obtaining water from a private well. In your answer, you should:\n- describe the advantages and disadvantages of a ceramic core unit compared to the activated carbon unit\n- justify which would be the most suitable filter for Kamal and Sandra.',
+        marks: 6,
+        ph: 'Compare cost, lifespan, pore size, flow rate; justify choice for well water',
+        figImages: ['/images/papers/chemistry-may-2021/page-30.png'],
+      },
+    ],
+  },
+
+  // ── Q8 (13 marks, Crit D) — Water purification technology evaluation ──────
+  {
+    id: 8,
+    crit: 'D',
+    type: 'extended',
+    topic: 'Criterion D: Water purification technologies',
+    topicCanonical: 'Environmental Impact & Sustainability',
+    topicGroup: 'Environmental Chemistry',
+    marks: 13,
+    stem: 'The city planners in a coastal region are planning for expansion over the next 10 years. One of their priorities is to ensure an adequate water supply for the increased population. The city is located next to the ocean with farming land next to the city boundaries. The main industry in the city is metal recycling.\n\nUsing your knowledge of water purification techniques, information from the video and your wider MYP studies, discuss and evaluate the different technologies available for water treatment. In your answer, you should include:\n- a comparison of the economic implications of each of the three technologies\n- an example of the environmental impact of each of the three technologies\n- an outline of the social aspects of the building and running of a water purification facility\n- an appraisal of which technology would not be suitable for the city.',
+    figImages: ['/images/papers/chemistry-may-2021/page-33.png', '/images/papers/chemistry-may-2021/page-34.png'],
+    tasks: [
+      {
+        label: '',
+        text: '**Discuss** and **evaluate** the different technologies available for water treatment for the coastal city.',
+        marks: 13,
+        ph: 'Economic/environmental/social comparison of micro/nanofiltration and desalination; identify unsuitable technology with justification',
+      },
+    ],
+  },
+]

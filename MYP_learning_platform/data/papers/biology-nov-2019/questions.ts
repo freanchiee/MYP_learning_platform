@@ -20,6 +20,9 @@ export const questions: Question[] = [
     crit: 'A',
     type: 'extended',
     topic: 'Ecosystems & Food Webs',
+    topicCanonical: 'Food Chains & Webs',
+    topicGroup: 'Interactions Between Organisms',
+    topicsAlso: ['Interdependency'],
     marks: 11,
     stem: 'The diagram shows a food web from a savanna ecosystem. The organisms shown include: lion, vulture, leopard, giraffe, rhino, baboon, skunk, shrike, snake, impala, caracal, grasshopper, mouse, tree, grass, and shrub.',
     figImages: ['/images/papers/biology-nov-2019/page-03.png'],
@@ -71,6 +74,9 @@ export const questions: Question[] = [
     crit: 'A',
     type: 'extended',
     topic: 'Cell Biology & Photosynthesis',
+    topicCanonical: 'Photosynthesis',
+    topicGroup: 'Processes',
+    topicsAlso: ['Cell Structure & Function'],
     marks: 12,
     stem: 'This question is about cells and how plants produce glucose.',
     figImages: [
@@ -120,6 +126,9 @@ export const questions: Question[] = [
     crit: 'B',
     type: 'extended',
     topic: 'Scientific Investigation — Respiration',
+    topicCanonical: 'Aerobic & Anaerobic Respiration',
+    topicGroup: 'Processes',
+    topicsAlso: ['Cell Respiration'],
     marks: 10,
     stem: 'Yeast is a microorganism that is commonly used to make bread and beer.\n\nYeast must respire to survive. Respiration is a reaction that occurs in the cells of living things, and is controlled by specific enzymes.\n\nSome students planned a simple experiment to find out how temperature affects respiration in yeast. The students collected the carbon dioxide produced during respiration in a balloon. They suggested the following research question:\n\n**"How does temperature affect the rate of respiration in yeast as measured by the volume of carbon dioxide produced in 15 minutes?"**\n\nThe experiment used sugar solution mixed with yeast solution, placed in three flasks held in water baths at 20 °C, 40 °C, and 60 °C for 15 minutes. The size of the balloon attached to each flask was compared after 15 minutes.',
     figImages: [
@@ -156,6 +165,9 @@ export const questions: Question[] = [
     crit: 'B',
     type: 'extended',
     topic: 'Scientific Investigation — Enzymes & Sugars',
+    topicCanonical: 'Aerobic & Anaerobic Respiration',
+    topicGroup: 'Processes',
+    topicsAlso: ['Enzymes & Biochemistry'],
     marks: 21,
     stem: 'The students continued to investigate respiration in yeast. They were interested in investigating different sugars.\n\nZymase is an enzyme found in yeast which is important in respiration. The image below shows a model of zymase and five different sugars: fructose, glucose, sucrose, lactose and maltose.',
     figImages: [
@@ -192,6 +204,8 @@ export const questions: Question[] = [
     crit: 'C',
     type: 'extended',
     topic: 'Data Analysis — Fermentation & Biofuels',
+    topicCanonical: 'Aerobic & Anaerobic Respiration',
+    topicGroup: 'Processes',
     marks: 23,
     stem: 'Another term for respiration in yeast is *fermentation*. Fermentation of plant materials is used to produce ethanol, which can be used as biofuel. The main sources of plant material used around the world today are wheat, corn, soybeans, and sugarcane. These food sources are used because they have a high sugar content and they ferment easily.\n\nSome students decided to investigate if other food sources could be fermented. They were particularly interested in waste products — parts of food that are thrown away rather than eaten.\n\nThe food waste they chose to study was from **water chestnuts** and **pineapples**.',
     figImages: [
@@ -268,6 +282,9 @@ export const questions: Question[] = [
     crit: 'D',
     type: 'extended',
     topic: 'Diabetes, Hormones & Genetics',
+    topicCanonical: 'Homeostasis',
+    topicGroup: 'Metabolism',
+    topicsAlso: ['Receptors & Hormones'],
     marks: 23,
     stem: 'Diabetes has been recognised since ancient times as a disease that can be linked to diet. We now know that this disease is caused when the body cannot regulate its blood sugar levels. In the 1920s, it was discovered that the hormone insulin is involved in regulating blood sugar levels.\n\nBetween the 1930s and the 1980s, factories purified insulin extracted from pigs\' pancreases. Around 1980, human insulin was produced by genetically modified bacteria for the first time. By changing the human insulin gene slightly, different versions of insulin are produced. In 1980, there were 108 million people worldwide with diabetes; by 2014 this figure rose to 422 million. However, over this time the death rate from diabetes dropped dramatically.',
     figImages: [
@@ -295,6 +312,7 @@ export const questions: Question[] = [
         marks: 4,
         ph: 'Select the correct statement for each of the four stages.',
         widget: 'inline_dropdown_select',
+        widgetItems: ['Stage 1', 'Stage 2', 'Stage 3', 'Stage 4'],
         widgetOptions: [
           'Human insulin gene extracted',
           'Plasmid DNA opened',

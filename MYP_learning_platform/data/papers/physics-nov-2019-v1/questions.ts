@@ -1,0 +1,338 @@
+import type { Question } from '@/lib/types'
+
+const P = '/images/papers/physics-nov-2019/'
+
+export const paperMeta = {
+  id: 'physics-nov-2019-v1',
+  subject: 'Physics',
+  session: 'November',
+  year: 2019,
+  totalMarks: 99,
+  durationMinutes: 90,
+  criteria: ['A', 'B', 'C', 'D'] as const,
+}
+
+export const questions: Question[] = [
+
+  {
+    id: 1,
+    crit: 'A',
+    type: 'extended',
+    topic: 'Forces & Interactions — Momentum on a Bus',
+    marks: 7,
+    topicCanonical: "Newton's Laws & Momentum",
+    topicGroup: 'Forces & Motion',
+    tags: { unit: 'forces-interactions', topics: ['momentum', 'Newton\'s laws', 'inertia', 'friction'], level: 'proficient' },
+    stem: 'This question is about motion and momentum. To calculate an object\'s momentum, we use the equation p = mv.',
+    tasks: [
+      {
+        label: 'a',
+        text: '**Select** the units in which each of the quantities is measured.\n\n| Symbol | Quantity | Unit |\n|--------|----------|------|\n| p | momentum | ? |\n| m | mass | ? |\n| v | velocity | ? |',
+        marks: 2,
+        ph: 'momentum = Ns or kg m s⁻¹; mass = kg; velocity = m s⁻¹.',
+      },
+      {
+        label: 'b',
+        text: 'A woman is sitting on a moving bus. Both the woman and the bus are travelling at a speed of 8 m s⁻¹. **State** why the bus has more momentum than the woman.',
+        marks: 1,
+        ph: 'The bus has a greater mass than the woman.',
+      },
+      {
+        label: 'c',
+        text: 'Two passengers are sitting on the same moving bus; one places a tennis ball on the floor and the other places a heavy suitcase on the floor. When the bus comes to a sudden stop, the tennis ball rolls forward. Use Newton\'s Laws to **explain** why the ball moves forward after the bus has stopped.',
+        marks: 3,
+        ph: '(1) ball has forward momentum; (2) force is required to change momentum; (3) no net force on ball → velocity unchanged (Newton\'s 1st law / inertia).',
+      },
+      {
+        label: 'd',
+        text: 'The passenger\'s heavy suitcase does not move when the bus stops. **Suggest** why the suitcase does not move.',
+        marks: 1,
+        ph: 'Friction between suitcase and floor creates a force that prevents the suitcase from sliding forward.',
+      },
+    ],
+  },
+
+  {
+    id: 2,
+    crit: 'A',
+    type: 'extended',
+    topic: 'Electricity & Circuits — Air Purifier Power and Charge',
+    marks: 7,
+    topicCanonical: 'Atomic Structure & Radioactivity',
+    topicGroup: 'Nuclear & Atomic Physics',
+    tags: { unit: 'electricity-circuits', topics: ['electrical power', 'current', 'electrostatic attraction', 'ionization'], level: 'proficient' },
+    stem: 'Air purifiers are now common in urban areas with high pollution. They use ionization to remove fine particles from the air. Air containing dust enters an ionization chamber where electrons collide with dust particles, giving them a negative charge. The charged dust then passes near positively charged collection plates and is attracted to the plates. Clean air exits the other side.',
+    figImages: [`${P}q2-smog.png`, `${P}q2-ionization.png`],
+    tasks: [
+      {
+        label: 'a',
+        text: 'The air purifier requires 1760 W of electrical power and is connected to a 220 V supply. **Calculate** the current flowing through the purifier. Give the appropriate unit with your answer.',
+        marks: 3,
+        ph: 'P = IV → I = P/V = 1760/220 = 8 A.',
+      },
+      {
+        label: 'b',
+        text: '**Outline** why dust particles collect on the positive plate of the air purifier.',
+        marks: 2,
+        ph: 'Dust particles are negatively charged. Opposite charges attract — negative dust is attracted to the positive plate.',
+      },
+      {
+        label: 'c',
+        text: 'Over time, the collection plates become less effective. Using your understanding of electrical fields, **suggest** why the plates need to be regularly cleaned.',
+        marks: 2,
+        ph: 'Accumulated negative dust on the positive plate partially cancels its positive charge. This weakens the electric field/attractive force, reducing collection efficiency.',
+      },
+    ],
+  },
+
+  {
+    id: 3,
+    crit: 'A',
+    type: 'extended',
+    topic: 'EM Spectrum & Magnetism — RFID in Wildlife Tracking',
+    marks: 10,
+    topicCanonical: 'Electromagnetic Spectrum',
+    topicGroup: 'Electromagnetic Waves & Optics',
+    tags: { unit: 'em-spectrum', topics: ['electromagnetic spectrum', 'radio waves', 'induction', 'RFID'], level: 'proficient' },
+    stem: 'Wildlife biologists now implant RFID (radio-frequency identification) chips under the skin of animals to track their movements and health. The RFID consists of a wire coil, a radio transmitter and a microchip to store information.',
+    figImages: [`${P}q3a-spectrum.png`, `${P}q3b-rfid-cat.png`, `${P}q3-rfid-structure.png`],
+    tasks: [
+      {
+        label: 'a',
+        text: 'Radio waves form a section of the electromagnetic spectrum. **Drag and drop** the labels to classify the missing sections in the spectrum.\n\nSpectrum order (low to high frequency): Radio — Microwave — **?** — Visible — **?** — X-rays — Gamma ray\n\nDraggable labels: X-rays, Infra-red, Radio',
+        marks: 1,
+        ph: 'Infrared between Microwave and Visible; Ultraviolet between Visible and X-rays.',
+      },
+      {
+        label: 'b',
+        text: 'The RFID transmits information using radio waves. Infra-red waves can also be used to transmit information. **Suggest** one advantage of using radio waves instead of infra-red waves inside animals.',
+        marks: 1,
+        ph: 'Radio waves penetrate tissue/fur better; infra-red is absorbed by tissue; infra-red has higher energy and could damage tissue.',
+      },
+      {
+        label: 'c',
+        text: 'The frequency of the radio waves used is 125 000 Hz and their wavelength is 2400 m. **Calculate** the speed of radio waves. Give your answer in scientific notation.',
+        marks: 3,
+        ph: 'v = fλ = 125 000 × 2400 = 300 000 000 = 3.00 × 10⁸ m s⁻¹.',
+      },
+      {
+        label: 'd',
+        text: 'The wire coil in the scanner carries an alternating current. Inside the RFID there is also a coil of wire. When the two coils act together they behave like a transformer, inducing a current in the RFID coil.\n\n**Outline** one advantage of powering the RFID using induction rather than using a battery.',
+        marks: 2,
+        ph: 'No battery needed; a battery would run out over time / would be too large to fit under the skin.',
+      },
+      {
+        label: 'e',
+        text: '**Explain**, using the principle of induction, how an alternating current flowing in the coil of the hand-held scanner generates a current in the RFID.',
+        marks: 3,
+        ph: '(1) AC in scanner coil → alternating magnetic field; (2) changing field passes through animal to RFID coil; (3) changing field induces EMF/current in RFID coil.',
+      },
+    ],
+  },
+
+  {
+    id: 4,
+    crit: 'B',
+    type: 'extended',
+    topic: 'Light & Optics — Kaleidoscope Mirror Investigation',
+    marks: 12,
+    topicCanonical: 'Light, Reflection & Refraction',
+    topicGroup: 'Electromagnetic Waves & Optics',
+    tags: { unit: 'light-optics', topics: ['reflection', 'virtual images', 'inverse proportion', 'experimental design'], level: 'proficient' },
+    stem: 'Kaleidoscopes use two plane mirrors placed at an angle to create multiple reflections of a small object. When the mirrors are placed together in contact along one side, the number of images varies depending on the angle between the mirrors. In the picture shown here, there are seven virtual images. The only thing that has changed between these situations is the angle between the mirrors.',
+    figImages: [`${P}q4-mirrors.png`],
+    tasks: [
+      {
+        label: 'a',
+        text: 'A student wants to investigate the relationship between the number of virtual images when the angle between two mirrors changes. **State** the question that could be answered in this scientific investigation.',
+        marks: 1,
+        ph: 'Research question naming IV (angle between mirrors) and DV (number of virtual images).',
+      },
+      {
+        label: 'b',
+        text: 'Below is a list of variables for this experiment. **Select** the appropriate description for each of the variables.\n\n| Variable | Independent | Dependent | Control |\n|----------|-------------|-----------|--------|\n| The object used | | | |\n| The position of the object | | | |\n| The number of images observed | | | |\n| The size of the mirrors used | | | |\n| The angle between the mirrors | | | |\n| The shape of the mirrors used | | | |',
+        marks: 3,
+        widget: 'variable_classify',
+        widgetOptions: ['The object used', 'The position of the object', 'The number of images observed', 'The size of the mirrors used', 'The angle between the mirrors', 'The shape of the mirrors used'],
+        ph: 'IV = angle; DV = number of images; Controls = object used, position, size of mirrors, shape of mirrors.',
+      },
+      {
+        label: 'c',
+        text: '**Identify** the measuring instrument that would be needed for this experiment.',
+        marks: 1,
+        ph: 'Protractor.',
+      },
+      {
+        label: 'd',
+        text: 'After collecting data, the student presents the results in the form of a graph.\n\nUse the graph to **predict** the angle that would produce three images.',
+        marks: 1,
+        figImages: [`${P}q4d-graph.png`],
+        ph: 'Approximately 60° (accept 55°–65°).',
+      },
+      {
+        label: 'e',
+        text: 'The student makes the following prediction: "I predict that as the angle between the mirrors increases, the number of images decreases. The relationship between these variables will be inversely proportional."\n\nUsing data from the graph, **outline** if the graph supports this prediction. You should include calculations to support your answer.',
+        marks: 3,
+        ph: 'As angle increases, images decrease ✓. Test N × angle = constant? 7×24≈168; 5×40=200; 3×60=180 — not exactly constant → approximately but not perfectly inversely proportional.',
+      },
+      {
+        label: 'f',
+        text: 'The bar chart below is an alternative presentation of the data. **Justify** why a bar chart is a more appropriate way of presenting this data.',
+        marks: 2,
+        figImages: [`${P}q4f-barchart.png`],
+        ph: 'Only integer values are possible (cannot have 3.5 images). Data is discrete — bar chart is more appropriate than a continuous line graph.',
+      },
+      {
+        label: 'g',
+        text: 'A second student presents a table of results for her investigation. **Outline** if the first student\'s data or the second student\'s data are better for exploring the relationship between the two variables.',
+        marks: 1,
+        ph: 'Second student\'s data: more data points / taken at regular intervals → easier to identify trends.',
+      },
+    ],
+  },
+
+  {
+    id: 5,
+    crit: 'C',
+    type: 'extended',
+    topic: 'Sound & Waves — Speed of Sound via Echo',
+    marks: 20,
+    topicCanonical: 'Waves, Sound & Frequency',
+    topicGroup: 'Waves & Sound',
+    tags: { unit: 'sound-waves', topics: ['speed of sound', 'echo', 'data processing', 'graph analysis', 'accuracy'], level: 'proficient' },
+    stem: 'Like light, sound also reflects. We experience reflected sound as an echo. Echoes can be used to investigate the speed of sound. A student stands a known distance away from a wall and makes a loud sound by hitting two pieces of wood together. The time that the sound takes to travel to the wall and back can be used to calculate a value for the speed of sound.',
+    figImages: [`${P}q5-echo.png`],
+    tasks: [
+      {
+        label: 'a',
+        text: 'Two students work in a pair to collect data for this investigation. One student claps the wood together and the other measures the time between the sound and the echo. The result is shown below:\n\n**Time for sound to travel = 0.78 s**\n\nThe student stands **130 m** from the wall. **Calculate** a value for the speed of sound using this raw data. Give your answer to two significant figures.',
+        marks: 3,
+        ph: 'Total distance = 2 × 130 = 260 m. Speed = 260/0.78 = 333 ≈ 330 m s⁻¹ (2 s.f.).',
+      },
+      {
+        label: 'b',
+        text: 'The students are concerned that their measurements may not be accurate so they decide to improve their method. **Describe and justify** two things that the students could do to improve the accuracy of their measurements while using the same basic method. Your improvements should not require any new equipment.',
+        marks: 4,
+        ph: 'Improvement 1: More repeated measurements at this distance → reduces random timing errors. Improvement 2: Increase distance to wall → small timing errors become less significant relative to total time.',
+      },
+      {
+        label: 'c',
+        text: 'Instead of a stopwatch, a laptop with a microphone and sound recording software is used.\n\nUse the sound recording image to **calculate** the time taken for the sound to travel 520 m.',
+        marks: 2,
+        ph: 'Read peaks from recording: t₁ ≈ 1.10 s, t₂ ≈ 2.65 s. Time = 2.65 − 1.10 = 1.55 ± 0.06 s.',
+      },
+      {
+        label: 'd',
+        text: 'The students vary the distance the sound travels and write down four sets of results in their notebook. **Organise and present** the data in a table showing distance travelled and time taken. Include the data from part (c) in your answer.',
+        marks: 4,
+        figImages: [`${P}q5d-table.png`],
+        ph: 'Table: Distance/m | Time/s. In order. ECF value from (c) for 520 m row. Units in headings only.',
+      },
+      {
+        label: 'e',
+        text: 'Another student collects data using the same method and plots a graph of distance against time.\n\nUse data from the graph to **calculate** the speed of sound.',
+        marks: 2,
+        figImages: [`${P}q5e-graph.png`],
+        ph: 'Speed = gradient of LOBF = Δdistance/Δtime ≈ 330–355 m s⁻¹.',
+      },
+      {
+        label: 'f',
+        text: 'The student thought that a mistake had been made when measuring one of the times. **Suggest** which measurement was performed incorrectly by referring to the graph. **State** whether the actual time should be higher or lower than the value recorded.',
+        marks: 2,
+        ph: 'Anomalous point at 400 m / time ≈ 1 s. The actual time should be higher (greater) than recorded.',
+      },
+      {
+        label: 'g',
+        text: 'During any speed of sound investigation, it is important to measure temperature as sound travels at different speeds through air at different temperatures. For temperatures close to room temperature, the relationship is given by:\n\n**speed of sound in air = 330 + (0.6 × T)**\n\nwhere T is the temperature of the air in degrees Celsius.\n\n**Explain** why the speed of sound is dependent on temperature. Your answer should contain reference to the motion of particles.',
+        marks: 3,
+        ph: '(1) Higher temperature → faster sound; (2) higher temperature → particles have more kinetic energy; (3) shorter time between collisions → faster energy transfer.',
+      },
+    ],
+  },
+
+  {
+    id: 6,
+    crit: 'B',
+    type: 'extended',
+    topic: 'Sound & Waves — Pendulum Oscillation Design',
+    marks: 19,
+    topicCanonical: 'Waves, Sound & Frequency',
+    topicGroup: 'Waves & Sound',
+    tags: { unit: 'sound-waves', topics: ['oscillation', 'experimental design', 'variables', 'hypothesis', 'period'], level: 'advanced' },
+    stem: 'A sound wave in air is created due to the oscillations of air particles. The air particles oscillate around a fixed point, known as the equilibrium position. An MYP student is interested in the factors that affect oscillations of air particles. She decides to model an oscillating particle using a simple pendulum (a mass on a string).\n\n**Research question:** If the length of the pendulum string increases, what happens to the time period of the oscillation?',
+    figImages: [`${P}q6-spring.png`],
+    tasks: [
+      {
+        label: 'a',
+        text: '**Design** an experiment to investigate this research question. In your plan you must include:\n- the independent variable, the dependent variable and the justification of two control variables\n- a hypothesis that can be tested by this investigation\n- how you will collect sufficient data\n- a method detailing the procedure you will follow',
+        marks: 14,
+        ph: 'IV = length of string; DV = time period; CV = mass of pendulum bob AND amplitude of swing (justify).\nHypothesis: If string length increases, time period increases (longer path → slower oscillation).\nData: ≥5 lengths, 3 trials each, time 10 oscillations and divide by 10.\nMethod: measure length, displace, release, record 10 oscillations, calculate mean period.',
+      },
+      {
+        label: 'b',
+        text: '**Suggest** a second investigation into another factor that could affect the time period of a simple pendulum. For this new investigation you should include:\n- the independent and dependent variables\n- a research question\n- two relevant control variables',
+        marks: 5,
+        ph: 'IV = mass of pendulum bob; DV = time period; RQ = How does mass affect time period?; CVs = string length AND amplitude. (Note: mass actually has no effect on period — an excellent student may identify this and still earn marks.)',
+      },
+    ],
+  },
+
+  {
+    id: 7,
+    crit: 'A',
+    type: 'extended',
+    topic: 'Forces & Interactions — Stopping Distance on a Wet Road',
+    marks: 10,
+    topicCanonical: 'Kinematics & Motion Graphs',
+    topicGroup: 'Forces & Motion',
+    tags: { unit: 'forces-interactions', topics: ['stopping distance', 'kinematics', 'deceleration', 'friction', 'driver factors'], level: 'proficient' },
+    stem: 'This task considers factors that affect the stopping distance of a car. Stopping distance is made up of two components: the thinking distance (distance travelled during driver reaction time) and the braking distance (distance travelled while decelerating).',
+    figImages: [`${P}q7-stopping.png`],
+    tasks: [
+      {
+        label: 'a',
+        text: 'In the diagram, the car decelerates from 30 m s⁻¹ to rest. If the brakes are worn and are only able to decelerate the car at 3 m s⁻², **calculate** the new braking distance.',
+        marks: 4,
+        ph: 'v² = u² + 2as: 0 = 30² + 2×(−3)×s → 0 = 900 − 6s → s = 150 m.',
+      },
+      {
+        label: 'b',
+        text: 'Factors related to the driver, the car or the environment can affect stopping distance. **Classify** the following into environmental factors, driver factors, and car factors.',
+        marks: 2,
+        figImages: [`${P}q7b-factors.png`],
+        widget: 'inline_dropdown_select',
+        widgetOptions: ['environmental factor', 'driver factor', 'car factor'],
+        widgetItems: ['Using a cell phone', 'Heavy rain', 'Worn out tyre tread', 'Faulty brakes', 'Drinking alcohol', 'Poor road surface'],
+        ph: 'Cell phone → driver; Rain → environmental; Worn tyres → car; Faulty brakes → car; Alcohol → driver; Poor road → environmental.',
+      },
+      {
+        label: 'c',
+        text: 'Drinking alcohol and poor road surface are two factors affecting stopping distance. For each factor, **select** which part of the stopping distance each factor affects and **outline** the impact of each factor using your scientific knowledge.',
+        marks: 4,
+        ph: 'Alcohol → increases reaction time → increases thinking distance. Poor road → reduces friction → less braking force → longer braking distance.',
+      },
+    ],
+  },
+
+  {
+    id: 8,
+    crit: 'D',
+    type: 'extended',
+    topic: 'Forces & Transport — Autonomous Electric Buses',
+    marks: 14,
+    topicCanonical: 'Kinematics & Motion Graphs',
+    topicGroup: 'Forces & Motion',
+    tags: { unit: 'forces-interactions', topics: ['technology evaluation', 'road safety', 'societal implications', 'economic implications'], level: 'advanced' },
+    stem: 'In recent years, many cities have focused on improving public transport safety and reducing emissions. One such innovation is the development of autonomous (self-driving) electric buses. By 2040, several cities plan to have fully autonomous electric bus fleets. Autonomous electric buses use sensors, cameras, and AI to navigate roads without a human driver.',
+    figImages: [`${P}q8-driverless.png`],
+    tasks: [
+      {
+        label: 'a',
+        text: 'Autonomous electric buses will change the way people are moved through cities, with significant consequences for society, the economy, and the environment. **Discuss and evaluate** the consequences of replacing all city buses with autonomous electric buses. In your answer you should include:\n- an outline of the technological improvements related to safety\n- the advantages and disadvantages for society\n- the economic implications of the technology\n- a concluding appraisal giving your opinion on the use of autonomous electric buses',
+        marks: 14,
+        ph: '(1) Safety: sensors react faster than humans; fewer accidents; disabled/elderly mobility improved. (2) Society: safer, quieter streets vs job losses for bus drivers. (3) Economic: high development cost; reduced operating costs; impact on transport workers. (4) Conclusion: justify your opinion linking all arguments.',
+      },
+    ],
+  },
+
+]

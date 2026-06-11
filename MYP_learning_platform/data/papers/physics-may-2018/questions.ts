@@ -20,6 +20,8 @@ export const questions: Question[] = [
     type: 'extended',
     topic: 'magnetism-electromagnetism',
     marks: 10,
+    topicCanonical: 'Electromagnetic Induction & Motors',
+    topicGroup: 'Electricity & Magnetism',
     stem: 'Magnets can be used to induce a current in a wire.',
     tags: { unit: 'magnetism-electromagnetism', topics: ['electromagnetic induction', 'transformers'], level: 'developing' },
     tasks: [
@@ -74,6 +76,8 @@ export const questions: Question[] = [
     type: 'extended',
     topic: 'work-energy',
     marks: 9,
+    topicCanonical: 'Solar System, Gravity & Space',
+    topicGroup: 'Space & Astrophysics',
     stem: 'Dry ski slopes are an example of artificial landscapes built by humans.',
     figImages: [`${P}q2-ski-slopes.png`],
     tags: { unit: 'work-energy', topics: ['kinetic energy', 'gravitational potential energy', 'efficiency'], level: 'developing' },
@@ -122,6 +126,8 @@ export const questions: Question[] = [
     type: 'extended',
     topic: 'thermal-physics',
     marks: 9,
+    topicCanonical: 'Heat Transfer',
+    topicGroup: 'Thermal Physics',
     stem: 'In addition to the efficiency of indoor snow slopes, environmental conditions such as temperature need to be reproduced. In the design of the cooling system for an indoor snow slope, a decision must be made about the position of the air cooling units. The air cooling units are positioned at the top of the building.',
     tags: { unit: 'thermal-physics', topics: ['heat transfer', 'convection', 'evaporation', 'radiation'], level: 'developing' },
     tasks: [
@@ -161,6 +167,8 @@ export const questions: Question[] = [
     type: 'extended',
     topic: 'measurement-motion',
     marks: 19,
+    topicCanonical: 'Kinematics & Motion Graphs',
+    topicGroup: 'Forces & Motion',
     stem: 'Water clocks are amongst the world\'s oldest timing devices. They use the flow of water to measure the passing of time.\n\nAn **inflow water clock** uses a constant flow of water into a fixed container. The time is recorded either when the water reaches the top of the container or against a scale as the water rises.\n\nAn **outflow water clock** uses a prefilled container of water. As the water drains out of the container the time is recorded either when the container is empty or against a scale as the water falls.',
     tags: { unit: 'measurement-motion', topics: ['variables', 'hypothesis', 'data collection', 'proportionality'], level: 'developing' },
     tasks: [
@@ -233,6 +241,8 @@ export const questions: Question[] = [
     type: 'extended',
     topic: 'measurement-motion',
     marks: 13,
+    topicCanonical: 'Kinematics & Motion Graphs',
+    topicGroup: 'Forces & Motion',
     stem: 'A student wants to design an investigation into how the volume of water in the container affects the time taken to empty the container.',
     tags: { unit: 'measurement-motion', topics: ['experimental design', 'variables', 'method', 'data collection'], level: 'proficient' },
     tasks: [
@@ -252,6 +262,8 @@ export const questions: Question[] = [
     type: 'extended',
     topic: 'measurement-motion',
     marks: 16,
+    topicCanonical: 'Kinematics & Motion Graphs',
+    topicGroup: 'Forces & Motion',
     stem: 'A student decides to investigate the effect that the initial height of water in a tube has on the time taken for the tube to empty. He adds water to five tubes, fitted with a tap at the bottom, at different heights and allows the water to drain out.',
     tags: { unit: 'measurement-motion', topics: ['data processing', 'graphs', 'proportionality', 'evaluation'], level: 'proficient' },
     tasks: [
@@ -313,6 +325,8 @@ export const questions: Question[] = [
     type: 'extended',
     topic: 'work-energy',
     marks: 10,
+    topicCanonical: 'Solar System, Gravity & Space',
+    topicGroup: 'Space & Astrophysics',
     stem: 'The graph above shows the electrical energy consumption in kWh per person in China compared to the world average for the years 1975 to 2005.',
     figImages: [`${P}q7-energy-graph.png`],
     tags: { unit: 'work-energy', topics: ['energy resources', 'hydroelectric power', 'data interpretation'], level: 'developing' },
@@ -359,6 +373,8 @@ export const questions: Question[] = [
     type: 'extended',
     topic: 'work-energy',
     marks: 14,
+    topicCanonical: 'Solar System, Gravity & Space',
+    topicGroup: 'Space & Astrophysics',
     stem: 'Towards the end of the 20th century, China planned the largest hydropower project the world had ever seen called the Three Gorges Dam. The dam, which was completed in 2006, remains one of the most controversial projects in modern times.',
     tags: { unit: 'work-energy', topics: ['evaluation', 'Three Gorges Dam', 'environmental impact', 'hydroelectric power'], level: 'advanced' },
     tasks: [

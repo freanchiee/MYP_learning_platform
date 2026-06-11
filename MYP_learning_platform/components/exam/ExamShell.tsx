@@ -46,6 +46,18 @@ export default function ExamShell({ questions, paperId }: ExamShellProps) {
   }, [phase, attemptId, router])
 
   const handleGradingComplete = async (results: GradeResults) => {
+    const saveFallback = () => {
+      const tempId = `local-${Date.now()}`
+      try {
+        sessionStorage.setItem(
+          `practice-${tempId}`,
+          JSON.stringify({ results, paperId, questions })
+        )
+      } catch (_) {}
+      setAttemptId(tempId)
+      router.push(`/results/${tempId}`)
+    }
+
     try {
       const resp = await fetch('/api/exam/submit', {
         method: 'POST',
@@ -58,14 +70,10 @@ export default function ExamShell({ questions, paperId }: ExamShellProps) {
         setAttemptId(id)
         router.push(`/results/${id}`)
       } else {
-        const tempId = `local-${Date.now()}`
-        setAttemptId(tempId)
-        router.push(`/results/${tempId}`)
+        saveFallback()
       }
     } catch {
-      const tempId = `local-${Date.now()}`
-      setAttemptId(tempId)
-      router.push(`/results/${tempId}`)
+      saveFallback()
     }
   }
 

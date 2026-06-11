@@ -20,6 +20,9 @@ export const questions: Question[] = [
     crit: 'A',
     type: 'extended',
     topic: 'Classification & Biological Molecules',
+    topicCanonical: 'Classification',
+    topicGroup: 'Organisms',
+    topicsAlso: ['Unity & Diversity of Life'],
     marks: 12,
     stem: 'Living organisms can be grouped according to their characteristics. This process is known as classification.\n\nThe diagram below shows how six different big cat species have been classified into a taxonomic hierarchy. All six species share Kingdom (Animals), Phylum (Chordates), Class (Mammals), Order (Carnivores) and Family (Felines).\n\nThe species are: Jaguar (Panthera onca), Tiger (Panthera tigris), Lion (Panthera leo) — all Genus: Panthera; Clouded leopard (Neofelis nebulosa) — Genus: Neofelis; Cheetah (Acinonyx jubatus) — Genus: Acinonyx; Cougar (Puma concolor) — Genus: Puma.',
     figImages: [
@@ -46,7 +49,7 @@ export const questions: Question[] = [
         text: 'Snow leopards (Panthera uncia) are also big cats. Select and justify which species of cat they are most closely related to.',
         marks: 2,
         ph: 'Most closely related to: [select species]\n\nJustification: They share the same genus (Panthera), meaning they share more classification levels...',
-        widget: 'inline_dropdown_select',
+        widget: 'radio_select',
         widgetOptions: ['Jaguar (Panthera onca)', 'Tiger (Panthera tigris)', 'Lion (Panthera leo)', 'Clouded leopard (Neofelis nebulosa)', 'Cheetah (Acinonyx jubatus)', 'Cougar (Puma concolor)'],
       },
       {
@@ -91,6 +94,9 @@ export const questions: Question[] = [
     crit: 'A',
     type: 'extended',
     topic: 'Gas Exchange & Blood',
+    topicCanonical: 'Gas Exchange',
+    topicGroup: 'Metabolism',
+    topicsAlso: ['Circulation'],
     marks: 13,
     stem: 'Smartwatches can provide wearers with data about their lifestyles, such as blood oxygen levels, pulse rates and breathing rates. The diagram below shows gas exchange occurring in the lungs.',
     figImages: [
@@ -122,7 +128,7 @@ export const questions: Question[] = [
         marks: 2,
         ph: 'The person most likely to resist infection is: [select]\nJustification: Because they have the highest white blood cell count (9500 per mm³), and white blood cells fight infection...',
         figImages: ['/images/papers/biology-may-2025/page-16.png'],
-        widget: 'inline_dropdown_select',
+        widget: 'radio_select',
         widgetOptions: ['Alex', 'Denzel', 'Imad', 'Victor'],
       },
       {
@@ -142,6 +148,9 @@ export const questions: Question[] = [
     crit: 'B',
     type: 'extended',
     topic: 'Seed Germination & Light Intensity',
+    topicCanonical: 'Life Cycles',
+    topicGroup: 'Evolution',
+    topicsAlso: ['Photosynthesis'],
     marks: 10,
     stem: 'Light is an environmental factor that is essential for life on Earth. Different seeds need different environmental conditions to germinate. An experiment measured the effect of light intensity on seed germination using three species (A, B, C) in a germination chamber.\n\nResults (number of seeds germinated out of 10):\nLight 100%: A=10, B=8, C=7\nLight 75%: A=7, B=6, C=6\nLight 50%: A=4, B=3, C=7\nLight 25%: A=2, B=1, C=6\nLight 0%: A=1, B=0, C=6',
     figImages: [
@@ -205,6 +214,8 @@ export const questions: Question[] = [
     crit: 'A',
     type: 'extended',
     topic: 'Photosynthesis & Plant Growth',
+    topicCanonical: 'Photosynthesis',
+    topicGroup: 'Processes',
     marks: 14,
     stem: 'Construction of high-rise buildings in urban areas reduces the intensity of natural light reaching ground level. A student decided to investigate the effect of light intensity on plant growth.',
     figImages: [
@@ -277,6 +288,9 @@ export const questions: Question[] = [
     crit: 'B',
     type: 'extended',
     topic: 'Temperature Effect on Plant Growth',
+    topicCanonical: 'Photosynthesis',
+    topicGroup: 'Processes',
+    topicsAlso: ['Habitats & Ecosystems'],
     marks: 9,
     stem: 'The student also noticed that urban areas have higher temperatures than rural areas. Therefore, they decided to measure the effect of temperature on plant growth. They used the following method:\n1. Select plants with similar length of stems.\n2. Place the plant in an enclosed container with a heater and carbon dioxide controller.\n3. Conduct the experiment at different temperatures: 30°C, 35°C, 40°C, 45°C and 50°C.\n4. Measure the increase in the lengths of the plant stems after 15 days.\n5. Repeat the experiment for each temperature.\n\nResults:\nTemperature 30°C → Stem increase 9 mm\nTemperature 35°C → Stem increase 21 mm\nTemperature 40°C → Stem increase 42 mm\nTemperature 45°C → Stem increase 43 mm\nTemperature 50°C → Stem increase 2 mm',
     figImages: [
@@ -312,6 +326,9 @@ export const questions: Question[] = [
     crit: 'B',
     type: 'extended',
     topic: 'Experimental Design: Soil pH & Plant Growth',
+    topicCanonical: 'Habitats & Ecosystems',
+    topicGroup: 'Organisms',
+    topicsAlso: ['Pollution & Conservation'],
     marks: 16,
     stem: 'Industrialization has resulted in more factories producing waste gases which cause acid rain. Acid rain leads to changes in soil pH which can affect plant growth.\n\nDesign an investigation to test how changing soil pH affects plant growth. You are provided with standard laboratory equipment and a range of solutions with pH between 3.5 and 10.0.\n\nIn your answer, you should include:\n• the independent variable, dependent variable and two controlled variables\n• equipment you will use\n• details of how to manipulate, measure or monitor the variables\n• details of the method you will use to collect sufficient data\n• a safety consideration.',
     tasks: [
@@ -332,6 +349,9 @@ export const questions: Question[] = [
     crit: 'C',
     type: 'extended',
     topic: 'Animal Tracking & Conservation',
+    topicCanonical: 'Habitats & Ecosystems',
+    topicGroup: 'Organisms',
+    topicsAlso: ['Pollution & Conservation'],
     marks: 10,
     stem: 'Animal tracking has been used for hundreds of years. It began as a method of hunting and of keeping track of animals. As technology has advanced, animal tracking has evolved into a method for scientific data collection.\n\nBird banding is a method of collecting data for research, management and conservation. Bird banding uses plastic or metal rings placed around the leg of a bird. The band has a unique number or colour sequence allowing the bird to be identified individually. It does not harm the bird or affect its behaviour.\n\nIn 1902, 23 young birds were banded with aluminium rings marked with the year, a serial number and a return address. Only one of the 23 rings was returned from 69km away. This was the first use of bird banding for scientific research.',
     figImages: [
@@ -383,6 +403,9 @@ export const questions: Question[] = [
     crit: 'D',
     type: 'extended',
     topic: 'Technology in Animal Research',
+    topicCanonical: 'Pollution & Conservation',
+    topicGroup: 'Human Interactions with Environments',
+    topicsAlso: ['Habitats & Ecosystems'],
     marks: 16,
     stem: 'Radio and satellite tracking systems provide information about an animal\'s location and movement. Scientists attach a small tracking device to an animal. The device sends a signal to a receiver or satellite, which records the animal\'s location.\n\nSatellite tracking allows scientists to record an animal\'s location every few minutes, anywhere in the world, for months or years.',
     figImages: [
