@@ -24,15 +24,18 @@ export default function ReviewCard({ entry }: ReviewCardProps) {
   const [visionWarning, setVisionWarning] = useState<string | null>(null)
   const [generatedUrl, setGeneratedUrl] = useState<string | null>(entry.generated_path ?? null)
 
-  function run(action: () => Promise<{ ok: boolean; error?: string; newUrl?: string; visionUsed?: boolean; visionError?: string; method?: string }>) {
+  function run(action: () => Promise<{ ok: boolean; error?: string; newUrl?: string; visionUsed?: boolean; visionProvider?: string; visionError?: string; method?: string }>) {
     startTransition(async () => {
       setResult(null)
       setVisionWarning(null)
       const res = await action()
       if (res.ok) {
         const parts = []
-        if (res.visionUsed) parts.push('Vision prompt')
-        if (res.method === 'structure_control') parts.push('Structure Control layout')
+        if (res.visionUsed) {
+          const label = res.visionProvider === 'gpt4o' ? 'GPT-4o Vision' : 'Claude Vision'
+          parts.push(label)
+        }
+        if (res.method === 'structure_control') parts.push('Structure Control')
         const suffix = parts.length ? ` (${parts.join(' + ')})` : ''
         setResult({ type: 'ok', msg: `✅ Done!${suffix}` })
         // Surface Vision failure as an orange warning (generation still succeeded)

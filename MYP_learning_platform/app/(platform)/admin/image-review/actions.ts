@@ -4,13 +4,13 @@ import fs from 'fs'
 import path from 'path'
 import { revalidatePath } from 'next/cache'
 import { execSync } from 'child_process'
-import { generateImageWithProvider, getVisionKey } from './provider-config'
+import { generateImageWithProvider, getVisionKey, readProviderConfig } from './provider-config'
 
 const REPO_ROOT = path.join(process.cwd())
 const DATA_PAPERS = path.join(REPO_ROOT, 'data', 'papers')
 const PUBLIC_DIR  = path.join(REPO_ROOT, 'public')
 
-// ─── Claude Vision helper ─────────────────────────────────────────────────────
+// ─── Vision helpers (Claude → GPT-4o fallback) ───────────────────────────────
 
 const VISION_PROMPT = `You are helping recreate a scientific diagram for an MYP educational platform.
 Analyze this image carefully and write a detailed generation prompt for an AI image generator
@@ -26,21 +26,25 @@ Format your response as a single paragraph starting with exactly:
 
 Do NOT say 'copy' or 'reproduce'. Describe what an original equivalent should look like.`
 
-async function callClaudeVision(imagePath: string): Promise<string> {
-  // Priority: env var → saved config file
-  const key = await getVisionKey()
-  if (!key) throw new Error('Anthropic key not configured. Add it in ⚙️ Image Providers → Claude Vision section.')
-
-  const physPath = path.join(PUBLIC_DIR, imagePath)
-  if (!fs.existsSync(physPath)) throw new Error(`Original image not found: ${physPath}`)
-
-  const base64Data = fs.readFileSync(physPath).toString('base64')
-  const lower = imagePath.toLowerCase()
+function imageToBase64(physPath: string): { base64: string; mediaType: 'image/jpeg' | 'image/png' | 'image/webp' } {
+  const base64 = fs.readFileSync(physPath).toString('base64')
+  const lower = physPath.toLowerCase()
   const mediaType: 'image/jpeg' | 'image/png' | 'image/webp' =
     lower.endsWith('.jpg') || lower.endsWith('.jpeg') ? 'image/jpeg'
     : lower.endsWith('.webp') ? 'image/webp'
     : 'image/png'
+  return { base64, mediaType }
+}
 
+function normaliseVisionResponse(raw: string): string {
+  if (raw.startsWith('Clean educational')) return raw.trim()
+  const match = raw.match(/Clean educational[\s\S]+/)
+  return match ? match[0].trim() : `Clean educational illustration, white background, flat design. ${raw}`
+}
+
+/** Claude Sonnet Vision — requires Anthropic API credits */
+async function callClaudeVision(physPath: string, key: string): Promise<string> {
+  const { base64, mediaType } = imageToBase64(physPath)
   const res = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',
     headers: {
@@ -54,26 +58,83 @@ async function callClaudeVision(imagePath: string): Promise<string> {
       messages: [{
         role: 'user',
         content: [
-          { type: 'image', source: { type: 'base64', media_type: mediaType, data: base64Data } },
+          { type: 'image', source: { type: 'base64', media_type: mediaType, data: base64 } },
           { type: 'text', text: VISION_PROMPT },
         ],
       }],
     }),
     signal: AbortSignal.timeout(60_000),
   })
-
   if (!res.ok) {
     const body = await res.text()
-    throw new Error(`Claude Vision error ${res.status}: ${body.slice(0, 200)}`)
+    throw new Error(`Claude Vision error ${res.status}: ${body.slice(0, 300)}`)
+  }
+  const json = await res.json() as { content?: { type: string; text: string }[] }
+  return normaliseVisionResponse(json.content?.[0]?.text ?? '')
+}
+
+/** GPT-4o Vision — uses the existing OpenAI key, no extra cost beyond per-token rate */
+async function callGPT4Vision(physPath: string, key: string): Promise<string> {
+  const { base64, mediaType } = imageToBase64(physPath)
+  const res = await fetch('https://api.openai.com/v1/chat/completions', {
+    method: 'POST',
+    headers: { 'Authorization': `Bearer ${key}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      model: 'gpt-4o',
+      max_tokens: 1024,
+      messages: [{
+        role: 'user',
+        content: [
+          { type: 'image_url', image_url: { url: `data:${mediaType};base64,${base64}`, detail: 'high' } },
+          { type: 'text', text: VISION_PROMPT },
+        ],
+      }],
+    }),
+    signal: AbortSignal.timeout(60_000),
+  })
+  if (!res.ok) {
+    const body = await res.text()
+    throw new Error(`GPT-4o Vision error ${res.status}: ${body.slice(0, 300)}`)
+  }
+  const json = await res.json() as { choices?: { message?: { content?: string } }[] }
+  return normaliseVisionResponse(json.choices?.[0]?.message?.content ?? '')
+}
+
+/**
+ * Unified vision: tries Claude → falls back to GPT-4o.
+ * Returns { prompt, provider } so the caller can report which ran.
+ */
+async function callVisionForPrompt(
+  imagePath: string,
+): Promise<{ prompt: string; provider: 'claude' | 'gpt4o' }> {
+  const physPath = path.join(PUBLIC_DIR, imagePath)
+  if (!fs.existsSync(physPath)) throw new Error(`Image not found: ${physPath}`)
+
+  const claudeKey = await getVisionKey()          // Anthropic key (env or config)
+  const cfg = await readProviderConfig()
+  const openaiKey = process.env.OPENAI_API_KEY || cfg.openai?.key || ''
+
+  // 1 — Try Claude
+  if (claudeKey) {
+    try {
+      const prompt = await callClaudeVision(physPath, claudeKey)
+      console.log('[vision] Claude succeeded')
+      return { prompt, provider: 'claude' }
+    } catch (e: unknown) {
+      const msg = e instanceof Error ? e.message : String(e)
+      console.warn(`[vision] Claude failed (${msg.slice(0, 120)}) → trying GPT-4o…`)
+      if (!openaiKey) throw new Error(`Claude Vision failed: ${msg} (no GPT-4o fallback key)`)
+    }
   }
 
-  const json = await res.json() as { content?: { type: string; text: string }[] }
-  let prompt = json.content?.[0]?.text ?? ''
-  if (!prompt.startsWith('Clean educational')) {
-    const match = prompt.match(/Clean educational[\s\S]+/)
-    prompt = match ? match[0].trim() : `Clean educational illustration, white background, flat design. ${prompt}`
+  // 2 — Fall back to GPT-4o Vision
+  if (openaiKey) {
+    const prompt = await callGPT4Vision(physPath, openaiKey)
+    console.log('[vision] GPT-4o succeeded')
+    return { prompt, provider: 'gpt4o' }
   }
-  return prompt.trim()
+
+  throw new Error('No vision provider available. Add Anthropic OR OpenAI key in ⚙️ Image Providers.')
 }
 
 // ─── types ───────────────────────────────────────────────────────────────────
@@ -195,7 +256,7 @@ export async function approveImage(
 export async function regenerateImage(
   paperId: string,
   taskPath: string,
-): Promise<{ ok: boolean; newUrl?: string; error?: string; visionUsed?: boolean; visionError?: string; method?: string }> {
+): Promise<{ ok: boolean; newUrl?: string; error?: string; visionUsed?: boolean; visionProvider?: string; visionError?: string; method?: string }> {
   const entries = readSidecar(paperId)
   const idx = entries.findIndex(e => e.taskPath === taskPath)
   if (idx === -1) return { ok: false, error: `Entry not found: ${taskPath}` }
@@ -206,39 +267,38 @@ export async function regenerateImage(
   let prompt = entry.image_prompt ?? ''
   let subType = entry.sub_type ?? '2B'
   let visionUsed = false
+  let visionProvider: string | undefined
   let visionError: string | undefined
 
-  // ── Vision upgrade diagnostics ──────────────────────────────────────────────
+  // ── Vision upgrade: original image exists → run Claude (or GPT-4o fallback) ─
   const originalPhysPath = entry.original_path
     ? path.join(PUBLIC_DIR, entry.original_path) : null
-  const originalExists = originalPhysPath && fs.existsSync(originalPhysPath)
-  const visionKey = await getVisionKey()
+  const originalExists = !!(originalPhysPath && fs.existsSync(originalPhysPath))
 
-  // Log why Vision won't run (shows in server console for debugging)
-  if (!originalPhysPath) console.log('[vision] SKIP — no original_path on entry')
-  else if (!originalExists) console.log(`[vision] SKIP — original file missing: ${originalPhysPath}`)
-  else if (!visionKey) console.log('[vision] SKIP — no Anthropic key (check ⚙️ Image Providers → Claude Vision)')
-  else console.log(`[vision] RUNNING on ${entry.original_path} …`)
-
-  if (originalExists && visionKey) {
+  if (originalExists) {
+    console.log(`[vision] RUNNING callVisionForPrompt on ${entry.original_path}…`)
     try {
-      prompt = await callClaudeVision(entry.original_path!)
+      const result = await callVisionForPrompt(entry.original_path!)
+      prompt = result.prompt
       subType = '2A'
       visionUsed = true
-      console.log(`[vision] SUCCESS — prompt: ${prompt.slice(0, 100)}…`)
+      visionProvider = result.provider
+      console.log(`[vision] SUCCESS via ${result.provider}: ${prompt.slice(0, 100)}…`)
     } catch (e: unknown) {
       const msg = e instanceof Error ? e.message : String(e)
-      visionError = msg   // ← surface to UI instead of silently swallowing
-      console.error(`[vision] FAILED: ${msg}`)
+      visionError = msg
+      console.error(`[vision] ALL PROVIDERS FAILED: ${msg}`)
       if (!prompt) return {
         ok: false,
-        error: `Claude Vision failed and no fallback prompt: ${msg}`,
+        error: `Vision failed with no fallback prompt: ${msg}`,
         visionError: msg,
       }
-      // Has a fallback prompt — continue with generation but tell the user Vision failed
+      // Has a fallback prompt — continue generation but warn the user
     }
-  } else if (!prompt) {
-    return { ok: false, error: 'No image_prompt — use Edit Prompt first' }
+  } else {
+    if (!originalPhysPath) console.log('[vision] SKIP — no original_path on entry')
+    else console.log(`[vision] SKIP — file missing: ${originalPhysPath}`)
+    if (!prompt) return { ok: false, error: 'No image_prompt — use Edit Prompt first' }
   }
 
   // Pass original_path so Stability can use Structure Control (preserves spatial layout)
@@ -260,7 +320,7 @@ export async function regenerateImage(
   writeSidecar(paperId, entries)
 
   revalidatePath('/admin/image-review')
-  return { ok: true, newUrl: entry.generated_path, visionUsed, visionError, method: result.method }
+  return { ok: true, newUrl: entry.generated_path, visionUsed, visionProvider, visionError, method: result.method }
 }
 
 /**
