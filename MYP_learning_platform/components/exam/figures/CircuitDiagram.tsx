@@ -101,6 +101,7 @@ export default function CircuitDiagram({ data }: { data: CircuitDiagramData }) {
     const symbolY = loopT
 
     return (
+      <div className="figure-surface p-2 inline-block">
       <svg viewBox={`0 0 ${W} ${H}`} width={W} height={H} className="w-full max-w-full" role="img" aria-label="Series circuit diagram">
         {/* Rectangle outline */}
         <rect x={loopL} y={loopT} width={topWireW} height={loopB - loopT} stroke="#111" strokeWidth={1.5} fill="none" />
@@ -118,6 +119,7 @@ export default function CircuitDiagram({ data }: { data: CircuitDiagramData }) {
           )
         })}
       </svg>
+      </div>
     )
   }
 
@@ -131,6 +133,7 @@ export default function CircuitDiagram({ data }: { data: CircuitDiagramData }) {
   const slotW = (W - 80) / Math.max(branch1.length, 1)
 
   return (
+    <div className="figure-surface p-2 inline-block">
     <svg viewBox={`0 0 ${W} ${H}`} width={W} height={H} className="w-full max-w-full" role="img" aria-label="Parallel circuit diagram">
       {/* Top and bottom bus wires */}
       <line x1={20} y1={cy1} x2={W - 20} y2={cy1} stroke="#111" strokeWidth={1.5} />
@@ -166,5 +169,6 @@ export default function CircuitDiagram({ data }: { data: CircuitDiagramData }) {
         )
       })}
     </svg>
+    </div>
   )
 }

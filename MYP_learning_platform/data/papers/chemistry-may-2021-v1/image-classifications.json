@@ -1,0 +1,26 @@
+[
+  {
+    "taskPath": "q3.tasks[f]",
+    "questionId": 3,
+    "taskLabel": "f",
+    "topic": "Rate of fuel combustion vs altitude (presentation errors)",
+    "original_path": "/images/papers/chemistry-may-2021/page-12.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: bar chart with deliberate presentation errors (axes swapped, bars instead of scatter). y-axis Altitude / m (0 to 5000, ticks every 500, minor every 100), x-axis categorical Rate of fuel combustion / g min\u207b\u00b9 with labels 0.153, 0.126, 0.103, 0.0850, 0.0774. Five teal bars at heights 850, 2400, 3100, 3900, 4600 m.",
+    "generated_path": "/images/papers/chemistry-may-2021-v1/q3f-altitude-bar.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q7",
+    "questionId": 7,
+    "taskLabel": null,
+    "topic": "Global water consumption by region",
+    "original_path": "/images/papers/chemistry-may-2021/page-28.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: multi-series smooth line graph, x-axis Year (1900 to 2020, ticks every 10, minor every 5), y-axis Billion cubic metres per year (0 to 3500, ticks every 500, minor every 100). Six regional series, smooth curves, colours teal/orange/magenta/green/violet/cyan (no red): Asia (highest, largest increase 1900-2020, ~3050 at 2020), North America (reaches ~1000 at 1960, dramatic rise 1950-1980, ~1600 at 2020), Europe (~800), Africa (~610), South America (~420), Australia and Oceania (lowest, ~185).",
+    "generated_path": "/images/papers/chemistry-may-2021-v1/q7-water-consumption.svg",
+    "needs_review": true,
+    "approved": false
+  }
+]

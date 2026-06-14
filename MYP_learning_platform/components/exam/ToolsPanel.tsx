@@ -30,11 +30,11 @@ function Formulae() {
       {FORMULAE.map(({ f, name }) => (
         <div
           key={f}
-          className="rounded-lg p-2 text-center"
-          style={{ background: '#f0f7ff', border: '1px solid #c8d8ec' }}
+          className="p-2 text-center"
+          style={{ background: 'var(--surface-tint)', border: '1px solid var(--border)', borderRadius: 'var(--radius-control)' }}
         >
-          <div className="font-mono text-xs font-bold text-[#003b5c] mb-0.5">{f}</div>
-          <div className="text-gray-500" style={{ fontSize: 10 }}>{name}</div>
+          <div className="font-mono text-xs font-bold mb-0.5" style={{ color: 'var(--accent)' }}>{f}</div>
+          <div className="text-ink-subtle" style={{ fontSize: 10 }}>{name}</div>
         </div>
       ))}
     </div>
@@ -60,8 +60,8 @@ function DataBooklet() {
   return (
     <div className="flex flex-col gap-1" style={{ minWidth: 400 }}>
       <div
-        className="grid text-xs font-semibold text-gray-500 uppercase tracking-wide pb-1 mb-1"
-        style={{ gridTemplateColumns: '60px 150px 1fr', borderBottom: '1px solid #e5e7eb' }}
+        className="grid text-xs font-semibold text-ink-subtle uppercase tracking-wide pb-1 mb-1"
+        style={{ gridTemplateColumns: '60px 150px 1fr', borderBottom: '1px solid var(--border)' }}
       >
         <span>Symbol</span>
         <span>Value</span>
@@ -71,11 +71,11 @@ function DataBooklet() {
         <div
           key={sym}
           className="grid items-center py-1 text-sm"
-          style={{ gridTemplateColumns: '60px 150px 1fr', borderBottom: '1px solid #f3f4f6' }}
+          style={{ gridTemplateColumns: '60px 150px 1fr', borderBottom: '1px solid var(--divider)' }}
         >
-          <span className="font-mono font-bold text-[#003b5c]">{sym}</span>
-          <span className="font-mono text-xs text-[#0079a8]">{val}</span>
-          <span className="text-gray-500 text-xs">{desc}</span>
+          <span className="font-mono font-bold" style={{ color: 'var(--accent)' }}>{sym}</span>
+          <span className="font-mono text-xs" style={{ color: 'var(--accent-2)' }}>{val}</span>
+          <span className="text-ink-subtle text-xs">{desc}</span>
         </div>
       ))}
     </div>
@@ -103,15 +103,15 @@ function Converter() {
       {CONVERSIONS.map(({ from, to, cat }) => (
         <div
           key={`${from}-${to}`}
-          className="flex items-center gap-2 rounded-lg px-3 py-2"
-          style={{ background: '#fafafa', border: '1px solid #e5e7eb' }}
+          className="flex items-center gap-2 px-3 py-2"
+          style={{ background: 'var(--surface-2)', border: '1px solid var(--border)', borderRadius: 'var(--radius-control)' }}
         >
-          <span className="font-mono text-xs font-bold text-[#003b5c]">{from}</span>
-          <span className="text-gray-400 text-xs">=</span>
-          <span className="font-mono text-xs text-[#0079a8] flex-1">{to}</span>
+          <span className="font-mono text-xs font-bold" style={{ color: 'var(--accent)' }}>{from}</span>
+          <span className="text-ink-subtle text-xs">=</span>
+          <span className="font-mono text-xs flex-1" style={{ color: 'var(--accent-2)' }}>{to}</span>
           <span
-            className="text-gray-400 rounded-full px-1.5 py-0.5 flex-shrink-0"
-            style={{ fontSize: 9, background: '#f3f4f6' }}
+            className="text-ink-subtle rounded-full px-1.5 py-0.5 flex-shrink-0"
+            style={{ fontSize: 9, background: 'var(--surface-3)' }}
           >
             {cat}
           </span>
@@ -140,16 +140,16 @@ export default function ToolsPanel() {
   return (
     <div
       className="flex-shrink-0 overflow-x-auto px-5 py-3"
-      style={{ background: '#ffffff', borderBottom: '2px solid #0079a8' }}
+      style={{ background: 'var(--surface)', borderBottom: '2px solid var(--accent)' }}
     >
-      <div className="text-xs font-semibold text-[#0079a8] uppercase tracking-wider mb-3">
+      <div className="text-xs font-semibold uppercase tracking-wider mb-3" style={{ color: 'var(--accent)' }}>
         {TITLES[activeTool]}
       </div>
       {activeTool === 'calculator' && (
         <iframe
           src="https://www.desmos.com/scientific"
           title="Desmos Scientific Calculator"
-          className="rounded-lg border border-gray-200"
+          className="rounded-lg border border-line"
           style={{ height: '320px', width: '560px', maxWidth: '100%' }}
           allow="fullscreen"
         />

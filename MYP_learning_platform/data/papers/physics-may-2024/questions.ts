@@ -29,7 +29,7 @@ export const questions: Question[] = [
     topicGroup: 'Thermal Physics',
     tags: { unit: 'thermal-physics', topics: ['states of matter', 'kinetic theory', 'specific heat capacity', 'phase changes'], level: 'proficient' },
     stem: 'Coal-burning thermal power plants are systems that convert chemical potential energy into electricity, starting with the combustion of coal to heat water.\n\nA coal-burning thermal power plant involves three states of matter. The diagram shows the main components of the plant.',
-    figImages: [`${P}q1-power-station.png`],
+    figImages: ['/images/papers/physics-may-2024/q1-power-station.svg?t=1781198922104'],
     tasks: [
       {
         label: 'a',
@@ -80,7 +80,7 @@ export const questions: Question[] = [
           'Heat energy from the ground',
           'Heat energy absorbed and re-emitted by greenhouse gases',
         ],
-        figImages: [`${P}q1f-greenhouse.png`],
+        figImages: ['/images/papers/physics-may-2024/q1f-greenhouse.svg?t=1781245303180'],
         ph: 'Select the most appropriate arrow',
         level: 'developing',
       },
@@ -108,7 +108,7 @@ export const questions: Question[] = [
     topicGroup: 'Nuclear & Atomic Physics',
     tags: { unit: 'atomic-physics', topics: ['atomic structure', 'radioactive decay', 'nuclear equations', 'half-life', 'nuclear energy'], level: 'proficient' },
     stem: 'Nuclear fission is a reaction in which a heavy nucleus splits into two smaller nuclei, releasing large amounts of energy and two or more free neutrons.\n\nThe animation shows the fission of uranium-235 when it absorbs a neutron. The uranium nucleus splits into caesium-140 and rubidium-94, releasing two free neutrons and energy.',
-    figImages: [`${P}q2-fission.png`],
+    figImages: ['/images/papers/physics-may-2024/q2-fission.svg'],
     tasks: [
       {
         label: 'a',
@@ -142,7 +142,7 @@ export const questions: Question[] = [
         label: 'e',
         text: 'Nuclear power plants use uranium in the form of fuel rods. These rods are no longer useable when the level of uranium-235 remaining is low. However, used fuel rods still contain a small amount of remaining uranium-235 which decays over time, emitting radiation as shown in the graph below.\n\nUse the graph to **predict** how many years it would take for **75 %** of the remaining uranium to decay.',
         marks: 1,
-        figImages: [`${P}q2e-decay-graph.png`],
+        figImages: ['/images/papers/physics-may-2024/q2e-decay-graph.svg?t=1781198953289'],
         ph: 'Read from graph: 75% decayed means 25% remaining.\nFind time at 25% on the graph.\n≈ ... million years',
         level: 'developing',
       },
@@ -211,7 +211,7 @@ export const questions: Question[] = [
         label: 'e',
         text: '**Select** the location in the circuit below for each piece of equipment required to take measurements to calculate the resistance of a wire.',
         marks: 1,
-        figImages: [`${P}q3e-circuit.png`],
+        figImages: ['/images/papers/physics-may-2024/q3e-circuit.svg?t=1781199083759'],
         widget: 'radio_select',
         widgetOptions: [
           'Voltmeter in parallel with wire; Ammeter in series with wire',
@@ -233,7 +233,7 @@ export const questions: Question[] = [
         label: 'g',
         text: 'The graph below shows the processed data from the experiment. **Plot** the value you determined in part (f) and **draw** the line of best fit on the graph.',
         marks: 2,
-        figImages: [`${P}q3g-graph.png`],
+        figImages: ['/images/papers/physics-may-2024/q3g-graph.svg'],
         ph: 'Plot the point at (100, 6.25) on the graph.\nDraw a straight line of best fit through the origin that best models all data points.',
         level: 'developing',
       },
@@ -263,7 +263,7 @@ export const questions: Question[] = [
     topicGroup: 'Electricity & Magnetism',
     tags: { unit: 'magnetism-electromagnetism', topics: ['magnetic poles and fields', 'magnetic field lines', 'work done'], level: 'advanced' },
     stem: 'A student sets up an experiment with two iron spheres held magnetically on one side of a very strong ferrite magnet placed on a wooden track. A single sphere is rolled towards the other side of the magnet. As this sphere collides with the magnet, the sphere on the other side shoots out with a much faster velocity, as shown in the slow-motion video.',
-    figImages: [`${P}q4b-forces-diagram.png`],
+    figImages: ['/images/papers/physics-may-2024/q4b-forces-diagram.svg'],
     tasks: [
       {
         label: 'a',
@@ -295,7 +295,7 @@ export const questions: Question[] = [
         marks: 1,
         widget: 'radio_select',
         widgetOptions: ['A', 'B', 'C', 'D'],
-        figImages: [`${P}q4d-magnetic-fields.png`],
+        figImages: ['/images/papers/physics-may-2024/q4d-magnetic-fields.svg?t=1781199142393'],
         ph: 'Select A, B, C, or D',
         level: 'foundation',
       },
@@ -311,7 +311,7 @@ export const questions: Question[] = [
         text: 'You plan to design an investigation to find out the relationship between the maximum height (h₂) reached by the exiting sphere and the initial height (h₁) of the incoming sphere. In your plan, you should include:\n\n• the independent variable, dependent variable and one control variable\n• a hypothesis which is explained using scientific reasoning\n• a detailed method for how you will collect data, including the equipment you will use\n• the values of the independent variable that will be used\n• details of how you will make sure your method is safe',
         marks: 11,
         ph: 'Independent variable (IV): initial height h₁ of the incoming sphere\nDependent variable (DV): maximum height h₂ reached by the exiting sphere\nControl variable: mass of spheres / angle of track\n\nHypothesis: As h₁ increases, h₂ will increase because...\n\nMethod:\n1. Set up the inclined wooden track...\n2. Release the sphere from h₁ = 5 cm and measure h₂ using a ruler...\n3. Repeat for h₁ = 10, 15, 20, 25 cm\n4. Repeat each value 3 times and calculate the mean...\n\nSafety: ...',
-        figImages: [`${P}q4f-setup.png`],
+        figImages: ['/images/papers/physics-may-2024/q4f-setup.svg?t=1781199347522'],
         level: 'advanced',
       },
       {
@@ -339,7 +339,7 @@ export const questions: Question[] = [
     topicGroup: 'Electricity & Magnetism',
     tags: { unit: 'magnetism-electromagnetism', topics: ['motors', "Fleming\'s left-hand rule", 'electromagnetic induction'], level: 'proficient' },
     stem: 'A student carries out an experiment using the equipment below. The conducting rod rests between two rows of magnets on a level surface. When the switch is closed, a current flows through the rod. The rod accelerates to the right. The student adjusts the current of the power supply. The rod is initially at rest and the student measures the time taken by the rod to move **18 cm**.\n\nThe table shows results collected by the student at different current values:\n\n| Current / A | Time / s |\n|-------------|----------|\n| 7           | 2.73     |\n| 8           | 2.40     |\n| 9           | 2.10     |\n| 10          | (missing)|\n| 11          | 1.83     |\n| 12          | 1.70     |',
-    figImages: [`${P}q5-motor-setup.png`],
+    figImages: ['/images/papers/physics-may-2024/q5-motor-setup.svg?t=1781199420447'],
     tasks: [
       {
         label: 'a',
@@ -375,7 +375,7 @@ export const questions: Question[] = [
         label: 'e',
         text: 'Another student processed the data and calculated the force on the rod for each current. The student plotted their data on the graph shown below.\n\nReferring to the graph, **outline** why the student\'s hypothesis in part (d) is **not** supported by the data.',
         marks: 2,
-        figImages: [`${P}q5e-force-graph.png`],
+        figImages: ['/images/papers/physics-may-2024/q5e-force-graph.svg?t=1781245287095'],
         ph: 'The line of best fit does not pass through the origin.\nThe x-intercept of the line of best fit is at approximately 4 A (there is no force below 4 A).\nThis means that doubling the current does not double the force, so the relationship is not proportional.',
         level: 'proficient',
       },
@@ -429,7 +429,7 @@ export const questions: Question[] = [
           'Opening at bottom = Eyepiece; large mirror at top = Primary',
           'Small mirror at top = Primary; large mirror at bottom = Secondary',
         ],
-        figImages: [`${P}q6b-reflecting-telescope.png`],
+        figImages: ['/images/papers/physics-may-2024/q6b-reflecting-telescope.svg?t=1781245267662'],
         ph: 'Select the correct labelling arrangement',
         level: 'foundation',
       },
@@ -437,7 +437,7 @@ export const questions: Question[] = [
         label: 'c',
         text: 'One of the most famous telescopes of the 20th century was called the Hooker telescope. It was the world\'s largest telescope from 1917 to 1949 and included a 2.5 m reflecting mirror.\n\n**State** the number of times a single ray of light is reflected after it enters the Hooker telescope.',
         marks: 1,
-        figImages: [`${P}q6c-hooker-telescope.png`],
+        figImages: ['/images/papers/physics-may-2024/q6c-hooker-telescope.svg?t=1781252389772'],
         ph: 'Number of reflections = ...',
         level: 'foundation',
       },

@@ -1,0 +1,66 @@
+[
+  {
+    "taskPath": "q4",
+    "questionId": 4,
+    "taskLabel": null,
+    "topic": "Metal reactivity — average reaction time bar chart",
+    "original_path": "/images/papers/chemistry-nov-2017/page-21.png",
+    "image_type": "code_rendered",
+    "render_component": "RateSim",
+    "render_data": {
+      "title": "Average time to produce 50 cm³ of gas / s",
+      "source": "MYP chemistry-nov-2017-v1",
+      "mode": "bars",
+      "variable": "Coin composition",
+      "metric": "Average time / s",
+      "yLabel": "Average time / s",
+      "yAxis": { "label": "Average time / s", "min": 0, "max": 140, "tick": 20 },
+      "bars": [
+        { "label": "Cu", "time_s": 120 },
+        { "label": "Cu/Sn", "time_s": 100 },
+        { "label": "Cu/Ni", "time_s": 86 },
+        { "label": "Cu/Zn/Sn", "time_s": 74 },
+        { "label": "Cu/Zn", "time_s": 63 },
+        { "label": "Zn/Cu", "time_s": 30 }
+      ],
+      "task": "Match each tested coin to a composition by its reaction time: Coin 1 (≈ 55 s) → Cu/Zn → minted 1962–1982; Coin 2 (≈ 25 s) → Zn/Cu → minted 1982–present; Coin 3 (≈ 90 s) → Cu/Ni → minted 1857–1865.",
+      "note": "The shorter the bar, the faster the reaction and the more reactive (more zinc) the coin."
+    },
+    "generated_path": "/images/papers/chemistry-nov-2017-v1/q4-average-time-graph.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q6",
+    "questionId": 6,
+    "taskLabel": null,
+    "topic": "Global temperature anomaly — Land-Ocean Temperature Index",
+    "original_path": "/images/papers/chemistry-nov-2017/page-28.png",
+    "image_type": "code_rendered",
+    "render_component": "DragSort",
+    "render_data": {
+      "title": "Carbon cycle key — label the arrows",
+      "source": "MYP chemistry-nov-2017-v1",
+      "mode": "slots",
+      "prompt": "Drag each chemical reaction onto the correct arrow in the carbon-cycle key.",
+      "slots": [
+        { "id": "grey", "label": "Grey arrow (1) — combustion" },
+        { "id": "red", "label": "Red arrow (2) — respiration" },
+        { "id": "green", "label": "Green arrow (3) — photosynthesis" }
+      ],
+      "items": [
+        "carbon dioxide + water → glucose + oxygen",
+        "fuel + oxygen → carbon dioxide + water",
+        "glucose + oxygen → carbon dioxide + water"
+      ],
+      "correct": {
+        "grey": "fuel + oxygen → carbon dioxide + water",
+        "red": "glucose + oxygen → carbon dioxide + water",
+        "green": "carbon dioxide + water → glucose + oxygen"
+      }
+    },
+    "generated_path": "/images/papers/chemistry-nov-2017-v1/q6-temperature-index-graph.svg",
+    "needs_review": true,
+    "approved": false
+  }
+]

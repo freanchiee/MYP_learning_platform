@@ -1,0 +1,155 @@
+[
+  {
+    "taskPath": "q2.tasks[f]",
+    "questionId": 2,
+    "taskLabel": "f",
+    "topic": "Terminal velocity vs radius",
+    "original_path": "/images/papers/physics-nov-2017/q2f-terminal-vel-graph.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: scatter graph, Terminal velocity / m s⁻¹ (y, 0–25, ticks every 5) vs Radius of raindrop / m (x, 0.000–0.012, ticks every 0.002); 10 points rising and curving (concave-down), from (0.001,6.5) to (0.010,20.7).",
+    "generated_path": "/images/papers/physics-nov-2017/q2f-terminal-vel-graph.svg",
+    "needs_review": false,
+    "approved": true
+  },
+  {
+    "taskPath": "q2.tasks[g]",
+    "questionId": 2,
+    "taskLabel": "g",
+    "topic": "Terminal velocity squared vs radius",
+    "original_path": "/images/papers/physics-nov-2017/q2g-hailstones-graph.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: scatter + straight best-fit line through origin, Terminal velocity squared / m² s⁻² (y, 0–1000, ticks every 200) vs Radius of hailstones / m (x, 0–0.025, ticks every 0.005); 11 points on a line gradient ≈39200 from (0,0) to (0.020,784).",
+    "generated_path": "/images/papers/physics-nov-2017/q2g-hailstones-graph.svg",
+    "needs_review": false,
+    "approved": true
+  },
+  {
+    "taskPath": "q3.tasks[e]",
+    "questionId": 3,
+    "taskLabel": "e",
+    "topic": "Bulb cost vs time",
+    "original_path": "/images/papers/physics-nov-2017/q3e-bulb-cost-graph.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: line graph Cost / GBP (y, 0–30, ticks every 10) vs Time / hours (x, 0–35 000, ticks 5000/15 000/25 000/35 000); four straight lines with legend — Halogen 18 W (green, 5.3→15.3), LED 4 W (orange, nearly flat 10→14), Fluorescent 10 W (teal, 8→26.5), Filament 25 W (magenta, steepest 1.5→27).",
+    "generated_path": "/images/papers/physics-nov-2017/q3e-bulb-cost-graph.svg",
+    "needs_review": false,
+    "approved": true
+  },
+  {
+    "taskPath": "q4.tasks[f]",
+    "questionId": 4,
+    "taskLabel": "f",
+    "topic": "Mass evaporated vs area",
+    "original_path": "/images/papers/physics-nov-2017/q4f-evap-graph.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: scatter + straight best-fit line, Mass of water evaporated after one hour / g (y, 0.00–10.00, ticks every 2.00) vs Area of dish / cm² (x, 0–350, ticks every 50); 7 points on a straight line from (25,0.75) to (315,8.85).",
+    "generated_path": "/images/papers/physics-nov-2017/q4f-evap-graph.svg",
+    "needs_review": false,
+    "approved": true
+  },
+  {
+    "taskPath": "q6.tasks[c]",
+    "questionId": 6,
+    "taskLabel": "c",
+    "topic": "Boiling point vs altitude (anomaly)",
+    "original_path": "/images/papers/physics-nov-2017/q6c-anomalous-graph.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: line graph Boiling point / °C (y, 50–100, ticks every 10) vs Altitude / m (x, 0–7000, ticks every 1000); 11 points decreasing linearly with a best-fit line, the (3700,88.0) point sitting clearly ABOVE the line as the anomaly. Data reconstructed from the q6a results table since the original crop showed only the y-axis 50–60 band.",
+    "generated_path": "/images/papers/physics-nov-2017/q6c-anomalous-graph.svg",
+    "needs_review": false,
+    "approved": true
+  },
+  {
+    "taskPath": "q2.tasks[b]",
+    "questionId": 2,
+    "taskLabel": "b",
+    "topic": "Free body diagram options (terminal velocity)",
+    "original_path": "/images/papers/physics-nov-2017/q2b-fbd-options.png",
+    "image_type": "diagram",
+    "image_prompt": "SVG: four free-body-diagram options of a glossy blue raindrop, each with force A (up) and B (down) arrows of differing lengths — Diagram 1: short A up, long B down; Diagram 2: equal long A up and B down (balanced); Diagram 3: long A up, short B down; Diagram 4: long A up only, no B.",
+    "generated_path": "/images/papers/physics-nov-2017/q2b-fbd-options.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q2.tasks[c]",
+    "questionId": 2,
+    "taskLabel": "c",
+    "topic": "Label forces A and B",
+    "original_path": "/images/papers/physics-nov-2017/q2c-forces-label.png",
+    "image_type": "text_only",
+    "image_prompt": "Mis-crop: shows only the question prompt 'Label the forces A and B' with two empty answer-input boxes (Force A, Force B). No diagram in the source crop — renders nothing.",
+    "generated_path": null,
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q3",
+    "questionId": 3,
+    "taskLabel": null,
+    "topic": "Simple circuit (battery, bulb, ammeter, voltmeter)",
+    "original_path": "/images/papers/physics-nov-2017/q3-circuit.png",
+    "image_type": "diagram",
+    "image_prompt": "SVG circuit: cell/battery on top branch, bulb (⊗) and voltmeter (V) on a lower branch, ammeter (A) in series on the right, with digital meter readouts 0.5 A and 12 V.",
+    "generated_path": "/images/papers/physics-nov-2017/q3-circuit.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q3.tasks[d]",
+    "questionId": 3,
+    "taskLabel": "d",
+    "topic": "Circuit with variable resistor in series",
+    "original_path": "/images/papers/physics-nov-2017/q3d-var-resistor.png",
+    "image_type": "code_rendered",
+    "image_prompt": "SVG circuit: cell on top, bulb (⊗) with voltmeter (V) across it on the lower-left branch, a variable resistor (rectangle with diagonal arrow) in series, and an ammeter (A) on the right side.",
+    "generated_path": "/images/papers/physics-nov-2017/q3d-var-resistor.svg",
+    "render_component": "CircuitSim",
+    "render_data": {
+      "title": "Variable resistor in series with the bulb",
+      "source": "MYP physics-nov-2017",
+      "mode": "iv",
+      "component": "bulb",
+      "emf": 12,
+      "variableResistor": {
+        "min": 0,
+        "max": 48,
+        "step": 4,
+        "label": "Variable resistor / Ω"
+      },
+      "ivPairs": [
+        { "Rvar": 0, "I": 0.5, "Vbulb": 12, "brightness": "full" },
+        { "Rvar": 12, "I": 0.333, "Vbulb": 8, "brightness": "dimmer" },
+        { "Rvar": 24, "I": 0.25, "Vbulb": 6, "brightness": "dim" },
+        { "Rvar": 48, "I": 0.167, "Vbulb": 4, "brightness": "very dim" }
+      ],
+      "task": "The bulb is 24 Ω (12 V ÷ 0.5 A). A variable resistor is added in series. As R_var increases, total resistance rises, so the current I = 12 / (24 + R_var) falls and the voltage across the bulb (V = 24·I) drops, making the bulb dimmer."
+    },
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q6",
+    "questionId": 6,
+    "taskLabel": null,
+    "topic": "Kilimanjaro boiling point vs altitude scene",
+    "original_path": "/images/papers/physics-nov-2017/q6-kilimanjaro.png",
+    "image_type": "diagram",
+    "image_prompt": "SVG scene: snow-capped Mount Kilimanjaro under a blue sky with a thermometer (and magnifying glass) on grass at left; dashed leader lines link 11 altitudes (5900, 5200, 4700, 4200, 3700, 3200, 2700, 2200, 1700, 1200, 700 m) to boiling points (80.0, [blank at 5200], 84.5, 90.0, 88.0, 89.5, 91.5, 92.0, 94.0, 96.0, 97.5 °C). Titled 'Kilimanjaro results'.",
+    "generated_path": "/images/papers/physics-nov-2017/q6-kilimanjaro.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q6.tasks[a]",
+    "questionId": 6,
+    "taskLabel": "a",
+    "topic": "Results table (unlabelled headings, missing 5200 m value)",
+    "original_path": "/images/papers/physics-nov-2017/q6a-data-table.png",
+    "image_type": "table",
+    "image_prompt": "Clean ruled two-column table with placeholder headers 'Heading 1' and 'Heading 2'; rows 5900/80.0, 5200/(blank), 4700/84.5, 4200/90.0, 3700/88.0, 3200/89.5, 2700/91.5, 2200/92.0, 1700/94.0, 1200/96.0, 700/97.5. The 5200 m boiling-point cell is intentionally blank for the student to fill.",
+    "generated_path": "/images/papers/physics-nov-2017/q6a-data-table.svg",
+    "needs_review": true,
+    "approved": false
+  }
+]

@@ -37,6 +37,11 @@ export default function ExamToolbar() {
     return `${subject} — ${session} ${year}`
   })()
 
+  // Subject-group brand: Individuals & Societies (humanities/geography/history) vs Sciences.
+  const brand = ['geography', 'history', 'humanities'].includes((paperId ?? '').split('-')[0])
+    ? 'MYP Individuals & Societies'
+    : 'MYP Sciences'
+
   // Drive the countdown timer
   useEffect(() => {
     if (phase !== 'active') return
@@ -46,10 +51,10 @@ export default function ExamToolbar() {
 
   const timerColor =
     timerState === 'critical'
-      ? '#ff4444'
+      ? 'var(--danger)'
       : timerState === 'warning'
-      ? '#f5a623'
-      : '#ffffff'
+      ? 'var(--warning)'
+      : 'var(--bar-fg)'
 
   const timerClass =
     timerState === 'critical'
@@ -62,20 +67,25 @@ export default function ExamToolbar() {
     <>
     {editMode && <EditModeBanner />}
     <div
-      className="flex items-center justify-between px-4 flex-shrink-0 select-none"
-      style={{ height: 48, background: editMode ? '#78350f' : '#1c3d5a' }}
+      className="flex items-center justify-between px-4 flex-shrink-0 select-none chrome-bar"
+      style={{
+        height: 48,
+        background: editMode ? 'var(--warning-fg)' : 'var(--bar-bg)',
+        color: editMode ? '#fff' : 'var(--bar-fg)',
+        borderBottom: '1px solid var(--nav-border)',
+      }}
     >
       {/* Left: Branding */}
       <div className="flex items-center gap-3">
         <div
-          className="w-8 h-8 rounded-full flex items-center justify-center text-white font-bold text-xs flex-shrink-0"
-          style={{ background: '#0079a8' }}
+          className="w-8 h-8 rounded-full flex items-center justify-center font-bold text-xs flex-shrink-0"
+          style={{ background: 'var(--accent)', color: 'var(--text-on-accent)' }}
         >
           MYP
         </div>
-        <span className="text-white font-semibold text-sm">MYP Sciences</span>
-        <span className="text-white opacity-30 text-lg">|</span>
-        <span className="text-white opacity-70 text-xs">{paperLabel}</span>
+        <span className="font-semibold text-sm" style={{ color: 'inherit' }}>{brand}</span>
+        <span className="opacity-30 text-lg">|</span>
+        <span className="opacity-70 text-xs">{paperLabel}</span>
       </div>
 
       {/* Center: Tool tabs */}
@@ -88,9 +98,10 @@ export default function ExamToolbar() {
               onClick={() => setActiveTool(tool.id)}
               className="px-3 py-1 rounded text-xs font-medium transition-colors"
               style={{
-                background: isActive ? '#ffffff' : 'transparent',
-                color: isActive ? '#003b5c' : 'rgba(255,255,255,0.75)',
-                border: isActive ? 'none' : '1px solid rgba(255,255,255,0.15)',
+                background: isActive ? 'var(--accent)' : 'transparent',
+                color: isActive ? 'var(--text-on-accent)' : 'inherit',
+                opacity: isActive ? 1 : 0.78,
+                border: isActive ? 'none' : '1px solid var(--nav-border)',
               }}
             >
               {tool.label}
@@ -108,9 +119,10 @@ export default function ExamToolbar() {
           className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[11px] font-bold
                      transition-all border select-none"
           style={{
-            background: editMode ? '#fbbf24' : 'transparent',
-            color:      editMode ? '#78350f' : 'rgba(255,255,255,0.65)',
-            border:     editMode ? '1px solid #f59e0b' : '1px solid rgba(255,255,255,0.18)',
+            background: editMode ? 'var(--warning)' : 'transparent',
+            color:      editMode ? 'var(--warning-fg)' : 'inherit',
+            opacity:    editMode ? 1 : 0.7,
+            border:     editMode ? '1px solid var(--warning)' : '1px solid var(--nav-border)',
           }}
         >
           {editMode ? '✏ EDIT' : '✏ Edit'}
@@ -122,10 +134,10 @@ export default function ExamToolbar() {
             {[0, 1, 2].map((i) => (
               <div
                 key={i}
-                className="w-2.5 h-2.5 rounded-full border border-white"
+                className="w-2.5 h-2.5 rounded-full"
                 style={{
-                  background: i < strikes ? '#c0392b' : 'transparent',
-                  borderColor: i < strikes ? '#c0392b' : 'rgba(255,255,255,0.4)',
+                  background: i < strikes ? 'var(--danger)' : 'transparent',
+                  border: `1px solid ${i < strikes ? 'var(--danger)' : 'color-mix(in srgb, var(--bar-fg) 40%, transparent)'}`,
                 }}
                 title={i < strikes ? 'Focus violation' : 'Focus OK'}
               />
@@ -136,8 +148,8 @@ export default function ExamToolbar() {
         {/* Practice badge — shown instead of timer in practice mode */}
         {!editMode && practiceMode && (
           <span
-            className="text-[10px] font-black tracking-[0.2em] px-2.5 py-1 rounded-full"
-            style={{ background: 'rgba(173,241,196,0.15)', color: '#adf1c4', border: '1px solid rgba(173,241,196,0.3)' }}
+            className="nav-fill text-[10px] font-black tracking-[0.2em] px-2.5 py-1 rounded-full"
+            style={{ color: 'inherit' }}
           >
             PRACTICE
           </span>
@@ -147,7 +159,7 @@ export default function ExamToolbar() {
         {!editMode && !practiceMode && (
           <div
             className={`font-mono text-base font-bold tracking-widest ${timerClass}`}
-            style={{ color: timerColor, fontFamily: 'var(--font-jetbrains-mono, monospace)' }}
+            style={{ color: timerColor, fontFamily: 'var(--font-mono, monospace)' }}
             title="Time remaining"
           >
             {formatTime(timerSeconds)}

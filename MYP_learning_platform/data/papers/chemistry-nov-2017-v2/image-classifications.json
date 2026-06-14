@@ -1,0 +1,67 @@
+[
+  {
+    "taskPath": "q4",
+    "questionId": 4,
+    "taskLabel": null,
+    "topic": "Metal reactivity — average reaction time bar chart",
+    "original_path": "/images/papers/chemistry-nov-2017/page-21.png",
+    "image_type": "code_rendered",
+    "render_component": "RateSim",
+    "render_data": {
+      "title": "Average time to produce 50 cm³ of gas vs coin composition",
+      "source": "MYP chemistry-nov-2017-v2",
+      "mode": "bars",
+      "yLabel": "Average time / s",
+      "yAxis": { "label": "Average time / s", "min": 0, "max": 140, "tick": 20 },
+      "variable": "Coin composition",
+      "metric": "Average time to produce 50 cm³ of gas / s",
+      "reaction": "metal + phosphoric acid → metal phosphate + hydrogen",
+      "bars": [
+        { "label": "Cu", "time_s": 120 },
+        { "label": "Cu/Sn", "time_s": 100 },
+        { "label": "Cu/Ni", "time_s": 86 },
+        { "label": "Cu/Zn/Sn", "time_s": 74 },
+        { "label": "Cu/Zn", "time_s": 63 },
+        { "label": "Zn/Cu", "time_s": 30 }
+      ],
+      "task": "More copper → slower reaction (longer time). Cross-reference each coin's reaction time with this composition chart, then with the year–composition table.",
+      "answer": "Coin 1 (≈ 120 s) → 1793–1849 (100% Cu, slowest). Coin 2 (≈ 70 s) → 1865–1943 (95% Cu, medium). Coin 3 (≈ 35 s) → 1982–present (97.5% Zn, fastest)."
+    },
+    "generated_path": "/images/papers/chemistry-nov-2017-v2/q4-average-time-graph.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q6",
+    "questionId": 6,
+    "taskLabel": null,
+    "topic": "Global temperature anomaly — Land-Ocean Temperature Index",
+    "original_path": "/images/papers/chemistry-nov-2017/page-28.png",
+    "image_type": "code_rendered",
+    "render_component": "DragSort",
+    "render_data": {
+      "title": "Carbon cycle key — match each reaction to its arrow",
+      "source": "MYP chemistry-nov-2017-v2",
+      "mode": "bins",
+      "prompt": "Label the grey (1), red (2) and green (3) arrows in the key with the correct chemical reaction. Click a reaction, then click the arrow it belongs to.",
+      "bins": [
+        { "id": "grey", "label": "Grey arrow (1) — combustion" },
+        { "id": "red", "label": "Red arrow (2) — respiration" },
+        { "id": "green", "label": "Green arrow (3) — photosynthesis" }
+      ],
+      "items": [
+        "fuel + oxygen → carbon dioxide + water",
+        "glucose + oxygen → carbon dioxide + water",
+        "carbon dioxide + water → glucose + oxygen"
+      ],
+      "correct": {
+        "grey": "fuel + oxygen → carbon dioxide + water",
+        "red": "glucose + oxygen → carbon dioxide + water",
+        "green": "carbon dioxide + water → glucose + oxygen"
+      }
+    },
+    "generated_path": "/images/papers/chemistry-nov-2017-v2/q6-temperature-index-graph.svg",
+    "needs_review": true,
+    "approved": false
+  }
+]

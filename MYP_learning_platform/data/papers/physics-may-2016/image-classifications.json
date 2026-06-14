@@ -1,0 +1,133 @@
+[
+  {
+    "taskPath": "q1",
+    "questionId": 1,
+    "taskLabel": null,
+    "topic": "Mass vs Weight table",
+    "original_path": "/images/papers/physics-may-2016/q1-table.png",
+    "image_type": "code_rendered",
+    "image_prompt": "SVG: clean ruled two-column table (Mass | Weight) with shaded header, row labels Units, Type of quantity, Effect of gravitational field strength, and blank data cells for the student to fill.",
+    "generated_path": "/images/papers/physics-may-2016/q1-mass-weight-table.svg",
+    "render_component": "DragSort",
+    "render_data": {
+      "mode": "bins",
+      "title": "Describe mass or weight",
+      "source": "MYP physics-may-2016",
+      "prompt": "Place each item into the Mass or Weight column.",
+      "bins": ["Mass", "Weight"],
+      "items": [
+        "kilogram",
+        "newton",
+        "size only",
+        "size and direction",
+        "independent of gravitational field strength",
+        "dependent on gravitational field strength"
+      ],
+      "correct": {
+        "Mass": [
+          "kilogram",
+          "size only",
+          "independent of gravitational field strength"
+        ],
+        "Weight": [
+          "newton",
+          "size and direction",
+          "dependent on gravitational field strength"
+        ]
+      }
+    },
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q2",
+    "questionId": 2,
+    "taskLabel": null,
+    "topic": "Space probe drop simulation",
+    "original_path": "/images/papers/physics-may-2016/q2-probe.png",
+    "image_type": "code_rendered",
+    "image_prompt": "SVG: space-probe simulation scene over a curved orange planet limb in starry space; vertical 'Metres' scale (0,20,40,60,80,100), a space probe at 0 m on the surface, a 'time / s — Mars: 7.3 s' readout box, and planet-selector buttons Mercury, Venus, Mars, Earth.",
+    "generated_path": "/images/papers/physics-may-2016/q2-probe-scene.svg",
+    "render_component": "ProjectileSim",
+    "render_data": {
+      "mode": "drop",
+      "title": "Space probe: drop a test object 100.0 m",
+      "source": "MYP physics-may-2016",
+      "dropHeight_m": 100.0,
+      "scaleMarks_m": [0, 20, 40, 60, 80, 100],
+      "readout": "time / s",
+      "planets": [
+        { "name": "Mercury", "g": 3.7, "fallTime_s": 7.3 },
+        { "name": "Venus", "g": 8.9, "fallTime_s": 4.7 },
+        { "name": "Mars", "g": 3.8, "fallTime_s": 7.3 },
+        { "name": "Earth", "g": 9.8, "fallTime_s": 4.5 }
+      ]
+    },
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q4",
+    "questionId": 4,
+    "taskLabel": null,
+    "topic": "Moon phases",
+    "original_path": "/images/papers/physics-may-2016/q4-moon.png",
+    "image_type": "code_rendered",
+    "image_prompt": "SVG: two starry panels — left shows a crescent Moon orbiting a small blue Earth with a dashed orbit arc ('Moon orbiting the Earth'); right shows a mostly-lit gibbous Moon with craters as seen from Earth over a month.",
+    "generated_path": "/images/papers/physics-may-2016/q4-moon-phases.svg",
+    "render_component": "OrbitSim",
+    "render_data": {
+      "mode": "phases",
+      "title": "The Moon orbiting the Earth over a month",
+      "source": "MYP physics-may-2016",
+      "central": "Earth",
+      "synodicMonth": 29.5,
+      "bodies": [
+        { "name": "Earth", "role": "center" },
+        {
+          "name": "Moon",
+          "role": "orbiter",
+          "orbitalPeriod_days": 27.3,
+          "synodicMonth_days": 29.5
+        }
+      ],
+      "phases": [
+        "new",
+        "waxing crescent",
+        "first quarter",
+        "waxing gibbous",
+        "full",
+        "waning gibbous",
+        "last quarter",
+        "waning crescent"
+      ],
+      "caption": "Gravity keeps the Moon in orbit; different lit fractions are seen from Earth."
+    },
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q6",
+    "questionId": 6,
+    "taskLabel": null,
+    "topic": "Ammeter circuit (correct vs incorrect)",
+    "original_path": "/images/papers/physics-may-2016/q6a-circuits.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: two circuit diagrams using standard symbols (cell, open switch, filament bulb ⊗, ammeter Ⓐ). 'Incorrect' has the ammeter on a parallel branch off the bulb (not in series). 'Correct' has the ammeter in series with the bulb in the single loop.",
+    "generated_path": "/images/papers/physics-may-2016/q6a-circuits.svg",
+    "needs_review": false,
+    "approved": true
+  },
+  {
+    "taskPath": "q11.tasks[d]",
+    "questionId": 11,
+    "taskLabel": "d",
+    "topic": "Radiation absorption table",
+    "original_path": "/images/papers/physics-may-2016/q11d-xray-table.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: clean ruled table of radiation absorption by body tissue. Columns ultraviolet, X-rays, gamma rays; rows absorption by skin (high, low, low), absorption by bones (high, high, low), absorption by soft tissue (high, medium, low).",
+    "generated_path": "/images/papers/physics-may-2016/q11d-absorption-table.svg",
+    "needs_review": false,
+    "approved": true
+  }
+]

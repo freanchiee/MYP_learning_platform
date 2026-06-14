@@ -1,0 +1,63 @@
+[
+  {
+    "taskPath": "q2.tasks[c]",
+    "questionId": 2,
+    "taskLabel": "c",
+    "topic": "Titanium–molybdenum alloy: yield strength",
+    "original_path": "/images/papers/chemistry-nov-2016/page-06.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: grouped bar chart, Yield strength / MPa (y, 0-700, ticks every 100, no gridlines) vs Alloy type (x, 1-5), two bars per alloy (Pure Ti teal, Ti–Mo alloy orange) with legend; alloy bar always higher, yield strength rising across alloys 1-5.",
+    "generated_path": "/images/papers/chemistry-nov-2016-v2/q2c-yield-strength-bar.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q9",
+    "questionId": 9,
+    "taskLabel": null,
+    "topic": "Alkaline battery charge vs storage temperature",
+    "original_path": "/images/papers/chemistry-nov-2016/page-27.png",
+    "image_type": "code_rendered",
+    "render_component": "GraphSim",
+    "render_data": {
+      "title": "Percentage charge remaining vs storage temperature (6 months)",
+      "source": "MYP chemistry-nov-2016-v2",
+      "mode": "readoff",
+      "xLabel": "Temperature / °C",
+      "yLabel": "Percentage charge / %",
+      "xRange": [0, 90],
+      "yRange": [0, 100],
+      "minor": 15,
+      "points": [
+        [0, 98],
+        [15, 93],
+        [30, 86],
+        [45, 75],
+        [60, 58],
+        [75, 38]
+      ],
+      "dataMaxX": 75,
+      "readouts": [
+        { "x": 45, "note": "interpolation (within data) — valid", "expected": "≈ 75% (accept 70–80%)" },
+        { "x": 85, "note": "extrapolation (beyond 75°C data) — less reliable", "expected": "≈ 25% (accept 20–30%)" }
+      ],
+      "units": "%",
+      "task": "Drag the cursor to 45 °C and to 85 °C to estimate the percentage charge remaining."
+    },
+    "generated_path": "/images/papers/chemistry-nov-2016-v2/q9-charge-vs-temperature-scatter.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q12",
+    "questionId": 12,
+    "taskLabel": "",
+    "topic": "Sustainability in copper production",
+    "original_path": "/images/papers/chemistry-nov-2016/page-35.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: two smooth line panels vs Year (1970-2010), no gridlines. Left: Energy used in Cu production / % (0-100) falling from 100 in 1975 to ~58 by 2005 with a small plateau near 1985-1990 (teal). Right: Copper recycling rate / % (0-60) rising from ~18 in 1978 to ~52 by 2005 (orange).",
+    "generated_path": "/images/papers/chemistry-nov-2016-v2/q12-steel-sustainability-graphs.svg",
+    "needs_review": true,
+    "approved": false
+  }
+]

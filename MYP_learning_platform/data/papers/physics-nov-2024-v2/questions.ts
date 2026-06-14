@@ -32,7 +32,7 @@ export const questions: Question[] = [
         marks: 1,
         widget: 'radio_select',
         widgetOptions: ['A', 'B', 'C', 'D'],
-        figImages: [`${P}page-01-crop.png`],
+        figImages: ['/images/papers/physics-nov-2024-v2/periodic-motion-options.svg'],
         ph: 'Select A, B, C, or D',
       },
       {
@@ -153,7 +153,7 @@ export const questions: Question[] = [
         label: 'b',
         text: '**Select** the graphite rods the student should use to collect appropriate data by choosing from the available rods shown.',
         marks: 3,
-        figImages: [`${P}page-05b-crop.png`],
+        figImages: ['/images/papers/physics-nov-2024-v2/available-cylinders.svg'],
         ph: 'I would select:\n• Material: only Material ___ (one material only)\n• Number of rods: ___ rods with ___ different diameters\n• Reason: to keep material and length constant while only varying diameter',
       },
       {
@@ -166,7 +166,7 @@ export const questions: Question[] = [
         label: 'd',
         text: 'Having carried out one trial for each rod, the student records their data in a notebook.\n\n**Organize** and **present** the data in a table with appropriate headings and units.\n\nData recorded:\n• 8 mm diameter → 128 Ω\n• 12 mm diameter → 56 Ω\n• 16 mm diameter → 32 Ω\n• 20 mm diameter → 20 Ω\n• 24 mm diameter → 14 Ω',
         marks: 4,
-        figImages: [`${P}page-06-crop.png`],
+        figImages: ['/images/papers/physics-nov-2024-v2/notebook-raw-data.svg'],
         ph: 'Draw a table:\n| Diameter / mm | Resistance / Ω |\n|---------------|----------------|\n| 8             | 128            |\n| 12            | 56             |\n| 16            | 32             |\n| 20            | 20             |\n| 24            | 14             |',
       },
       {
@@ -181,7 +181,7 @@ export const questions: Question[] = [
         marks: 1,
         widget: 'radio_select',
         widgetOptions: ['A', 'B', 'C', 'D'],
-        figImages: [`${P}page-07-crop.png`],
+        figImages: ['/images/papers/physics-nov-2024-v2/page-07.svg'],
         ph: 'Select A, B, C, or D',
       },
       {

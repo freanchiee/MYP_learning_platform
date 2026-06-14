@@ -1,0 +1,213 @@
+[
+  {
+    "taskPath": "q2.tasks[c]",
+    "questionId": 2,
+    "taskLabel": "c",
+    "topic": "Radioactive half-life (iodine-131)",
+    "original_path": "/images/papers/physics-may-2021-v1/q2c-halflife.png",
+    "image_type": "code_rendered",
+    "render_component": "DecaySim",
+    "render_data": {
+      "title": "Decay of iodine-131",
+      "source": "MYP physics-may-2021-v1",
+      "isotope": "iodine-131",
+      "daughter": "xenon-131",
+      "decayMode": "beta and gamma",
+      "halfLife": 8,
+      "units": "days",
+      "initialMass": 100,
+      "massUnits": "g",
+      "axisMax": 40,
+      "axisTimeMax": 40,
+      "xAxis": "Time / days",
+      "yAxis": "Mass of iodine-131 / g",
+      "axis": { "x": "Time / days", "y": "Mass of iodine-131 / g" }
+    },
+    "generated_path": "/images/papers/physics-may-2021-v1/q2c-halflife.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q4.tasks[d]",
+    "questionId": 4,
+    "taskLabel": "d",
+    "topic": "Motion graphs (s = ½at²)",
+    "original_path": "/images/papers/physics-may-2021-v1/q4d-graphs.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: four small qualitative graphs labelled A-D, each with y-axis 's' and no numeric ticks. A: s vs t² concave-up curve. B: s vs t² straight line through the origin (correct for s = ½at²). C: s vs t straight line through the origin. D: s vs t decreasing line.",
+    "generated_path": "/images/papers/physics-may-2021-v1/q4d-graphs.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q6.tasks[e]",
+    "questionId": 6,
+    "taskLabel": "e",
+    "topic": "Lens focal length (1/dᵢ vs 1/dₒ)",
+    "original_path": "/images/papers/physics-may-2021-v1/q6e-graphs.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: four scatter graphs labelled A-D, same six data points (1/dₒ, 1/dᵢ in m⁻¹): (6.67,3.33), (5.00,5.00), (4.00,5.99), (3.33,6.67), (2.50,5.56 anomalous), (2.00,8.00). X-axis 0-7 (1/dₒ), Y-axis 0-10 (1/dᵢ), minor 0.5. A: kinked dogleg line. B: straight line with wrong (low) intercept, pulled toward the anomaly. C (correct): straight best-fit line ignoring the anomalous point, y-intercept 1/f = 10.0 m⁻¹. D: curved line through the clean points.",
+    "generated_path": "/images/papers/physics-may-2021-v1/q6e-graphs.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q1",
+    "questionId": 1,
+    "topic": "Maritime radio (stem image)",
+    "original_path": "/images/papers/physics-may-2021-v1/q1-radio-rescue.png",
+    "image_type": "text_only",
+    "needs_review": false,
+    "approved": true
+  },
+  {
+    "taskPath": "q2.tasks[b]",
+    "questionId": 2,
+    "taskLabel": "b",
+    "topic": "Beta radiation through electric field (3 panels)",
+    "original_path": "/images/papers/physics-may-2021-v1/q2b-beta-field.png",
+    "image_type": "code_rendered",
+    "render_component": "FieldSim",
+    "render_data": {
+      "title": "Beta radiation in an electric field",
+      "source": "MYP physics-may-2021-v1",
+      "field": "E",
+      "plates": { "top": "+ (positive plate)", "bottom": "− (negative plate)" },
+      "particles": [
+        { "name": "alpha (+)", "charge": 1 },
+        { "name": "beta (−)", "charge": -1 },
+        { "name": "gamma (neutral)", "charge": 0 }
+      ],
+      "particle": "beta (−)",
+      "expected": "Beta particles are electrons (negative), so they are attracted to and deflect upward toward the positive plate — this is image C."
+    },
+    "generated_path": "/images/papers/physics-may-2021-v1/q2b-beta-field.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q3.tasks[d]",
+    "questionId": 3,
+    "taskLabel": "d",
+    "topic": "Energy transformation chain (regenerative braking)",
+    "original_path": "/images/papers/physics-may-2021-v1/q3d-energy-diagram.png",
+    "image_type": "code_rendered",
+    "render_component": "DragSort",
+    "render_data": {
+      "mode": "slots",
+      "title": "Regenerative braking energy chain",
+      "source": "MYP physics-may-2021-v1",
+      "prompt": "Kinetic energy → [Blank 1] → Electrical energy → [Blank 2] → Thermal energy. Fill the blanks from the labels.",
+      "palette": [
+        "Kinetic energy",
+        "Chemical potential energy",
+        "Sound energy",
+        "Gravitational potential energy"
+      ],
+      "slots": [
+        "Blank 1 (after kinetic energy)",
+        "Blank 2 (before thermal energy)"
+      ],
+      "correct": {
+        "Blank 1 (after kinetic energy)": "Kinetic energy",
+        "Blank 2 (before thermal energy)": "Chemical potential energy"
+      }
+    },
+    "generated_path": "/images/papers/physics-may-2021-v1/q3d-energy-diagram.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q4",
+    "questionId": 4,
+    "topic": "Galileo ramp variables table",
+    "original_path": "/images/papers/physics-may-2021-v1/q4-galileo.png",
+    "image_type": "code_rendered",
+    "render_component": "DragSort",
+    "render_data": {
+      "mode": "bins",
+      "title": "Galileo's ramp — classify the variables",
+      "source": "MYP physics-may-2021-v1",
+      "prompt": "Classify each variable as the independent, dependent, or a control variable for the ball-on-ramp investigation.",
+      "bins": ["Independent variable", "Dependent variable", "Control variable"],
+      "items": [
+        { "id": "distance", "label": "Distance travelled by ball", "correctBin": "Independent variable" },
+        { "id": "time", "label": "Time taken", "correctBin": "Dependent variable" },
+        { "id": "mass", "label": "Mass of ball", "correctBin": "Control variable" },
+        { "id": "size", "label": "Size of ball", "correctBin": "Control variable" },
+        { "id": "angle", "label": "Angle of slope", "correctBin": "Control variable" }
+      ],
+      "correct": {
+        "Independent variable": ["Distance travelled by ball"],
+        "Dependent variable": ["Time taken"],
+        "Control variable": ["Mass of ball", "Size of ball", "Angle of slope"]
+      }
+    },
+    "generated_path": "/images/papers/physics-may-2021-v1/q4-galileo.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q4.tasks[e]",
+    "questionId": 4,
+    "taskLabel": "e",
+    "topic": "Distance / Time / (Time)² data table",
+    "original_path": "/images/papers/physics-may-2021-v1/q4e-table.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: 3-column 5-row results table with header (Distance / m, Time / s, (Time)² /[blank unit]). Variant data; the last (Time)² cell is left blank for the student to fill.",
+    "generated_path": "/images/papers/physics-may-2021-v1/q4e-table.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q5",
+    "questionId": 5,
+    "topic": "coffee filters",
+    "original_path": "/images/papers/physics-may-2021-v1/q5-coffee-filters.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: left panel shows five stacks of coffee filters (1–5 filters) with identical surface area but different mass. Right panel shows the drop apparatus: vertical metre ruler from 0 to 2.0 m, a hand at the top releasing a filter, a stopwatch on the ground.",
+    "generated_path": "/images/papers/physics-may-2021-v1/q5-coffee-filters.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q6",
+    "questionId": 6,
+    "topic": "Convex lens optical bench setup",
+    "original_path": "/images/papers/physics-may-2021-v1/q6-lens-setup.png",
+    "image_type": "code_rendered",
+    "render_component": "OpticsSim",
+    "render_data": {
+      "title": "Convex lens on an optical bench",
+      "source": "MYP physics-may-2021-v1",
+      "mode": "lens",
+      "focalLength": 10,
+      "objectDistance": 25,
+      "objectHeight": 36,
+      "unit": "cm"
+    },
+    "generated_path": "/images/papers/physics-may-2021-v1/q6-lens-setup.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q7",
+    "questionId": 7,
+    "topic": "helicopter",
+    "original_path": "/images/papers/physics-may-2021-v1/q7-helicopter.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: three force diagrams A/B/C of a helicopter with thrust T (upward) and weight W (downward) arrows. A: T > W (taking off). B: helicopter tilted, T at angle (forward flight). C: T = W (hovering).",
+    "generated_path": "/images/papers/physics-may-2021-v1/q7-helicopter.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q8",
+    "questionId": 8,
+    "topic": "Drone applications (stem image)",
+    "original_path": "/images/papers/physics-may-2021-v1/q8-drone-disaster.png",
+    "image_type": "text_only",
+    "needs_review": false,
+    "approved": true
+  }
+]

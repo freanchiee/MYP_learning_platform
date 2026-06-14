@@ -1,0 +1,66 @@
+[
+  {
+    "taskPath": "q3.tasks[g]",
+    "questionId": 3,
+    "taskLabel": "g",
+    "topic": "Rate of biodegradation",
+    "original_path": "/images/papers/chemistry-nov-2020/page-11.png",
+    "image_type": "code_rendered",
+    "render_component": "RateSim",
+    "render_data": {
+      "title": "Rate of biodegradation of three biopolymer samples",
+      "source": "MYP chemistry-nov-2020-v2",
+      "mode": "saturating",
+      "xAxis": { "label": "Time / days", "min": 0, "max": 50, "tick": 10 },
+      "yAxis": { "label": "Biodegradation / %", "min": 0, "max": 60, "tick": 10 },
+      "variable": "particle size of the biopolymer sample",
+      "series": [
+        { "label": "B", "color": "teal", "plateau": 55, "particleSize": "smallest particles (fastest)" },
+        { "label": "C", "color": "orange", "plateau": 46, "particleSize": "medium particles" },
+        { "label": "A", "color": "purple", "plateau": 37, "particleSize": "largest particles (slowest)" }
+      ],
+      "task": "List the samples in order of increasing particle size and justify your answer.",
+      "answer": "Increasing particle size: B < C < A. B biodegrades fastest (smallest particles, greatest surface area); A biodegrades slowest (largest particles).",
+      "trend": "Smaller particle size → greater surface area → faster biodegradation."
+    },
+    "generated_path": "/images/papers/chemistry-nov-2020-v2/q3-biodegradation-curves.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q4.tasks[f]",
+    "questionId": 4,
+    "taskLabel": "f",
+    "topic": "Reaction rate vs temperature",
+    "original_path": "/images/papers/chemistry-nov-2020/page-17.png",
+    "image_type": "code_rendered",
+    "render_component": "RateSim",
+    "render_data": {
+      "title": "Average time taken for the bacterial glow to stop",
+      "source": "MYP chemistry-nov-2020-v2",
+      "mode": "scatter",
+      "lineOfBestFit": false,
+      "xAxis": { "label": "Temperature of water / °C", "min": 0, "max": 70, "tick": 10 },
+      "yAxis": { "label": "Time the glow stick glows / min", "min": 0, "max": 600, "tick": 100 },
+      "variable": "temperature of the water bath",
+      "points": [
+        [5, 470],
+        [10, 380],
+        [15, 300],
+        [20, 260],
+        [25, 220],
+        [30, 180],
+        [35, 150],
+        [45, 105],
+        [55, 82],
+        [65, 72]
+      ],
+      "task": "Predict the time taken for the bacterial glow to stop at 25 °C.",
+      "answer": "≈ 220 minutes (read from the curve at 25 °C).",
+      "trend": "As temperature increases, glow duration decreases (reaction rate increases)."
+    },
+    "generated_path": "/images/papers/chemistry-nov-2020-v2/q4-glowstick-time-temp.svg",
+    "needs_review": true,
+    "approved": false
+  }
+]

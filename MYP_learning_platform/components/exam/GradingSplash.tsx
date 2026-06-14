@@ -91,7 +91,7 @@ export default function GradingSplash({ onComplete }: GradingSplashProps) {
   return (
     <div
       className="fixed inset-0 z-50 flex flex-col items-center justify-center relative overflow-hidden"
-      style={{ background: 'linear-gradient(145deg, #274e68 0%, #1f3674 55%, #0e1f45 100%)' }}
+      style={{ background: 'var(--bg)', backgroundImage: 'var(--bg-image)' }}
     >
       {/* Scan line */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden>
@@ -102,7 +102,7 @@ export default function GradingSplash({ onComplete }: GradingSplashProps) {
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          backgroundImage: 'radial-gradient(circle, rgba(173,241,196,0.07) 1px, transparent 1px)',
+          backgroundImage: 'radial-gradient(circle, var(--accent-soft) 1px, transparent 1px)',
           backgroundSize: '40px 40px',
         }}
         aria-hidden
@@ -124,20 +124,20 @@ export default function GradingSplash({ onComplete }: GradingSplashProps) {
         </motion.div>
 
         {/* Title */}
-        <h1 className="text-white text-2xl font-extrabold mb-1 tracking-wide">AI Marking Engine</h1>
-        <p className="text-sm mb-8" style={{ color: 'rgba(173,241,196,0.7)' }}>
+        <h1 className="text-2xl font-extrabold mb-1 tracking-wide" style={{ color: 'var(--text)' }}>AI Marking Engine</h1>
+        <p className="text-sm mb-8" style={{ color: 'var(--text-muted)' }}>
           Analysing responses with concept matching…
         </p>
 
         {/* Progress bar */}
         <div
           className="w-80 h-2.5 rounded-full mb-3 overflow-hidden"
-          style={{ background: 'rgba(255,255,255,0.1)' }}
+          style={{ background: 'var(--surface-3)' }}
         >
           <motion.div
             className="h-full rounded-full"
             style={{
-              background: 'linear-gradient(90deg, #1f3674, #547ca4, #adf1c4)',
+              background: 'var(--gradient-brand)',
             }}
             animate={{ width: `${progress}%` }}
             transition={{ duration: 0.35, ease: 'easeOut' }}
@@ -145,7 +145,7 @@ export default function GradingSplash({ onComplete }: GradingSplashProps) {
         </div>
 
         {/* Percentage */}
-        <div className="font-mono text-sm mb-5" style={{ color: '#adf1c4' }}>
+        <div className="font-mono text-sm mb-5" style={{ color: 'var(--accent)' }}>
           {Math.round(progress)}%
         </div>
 
@@ -154,7 +154,7 @@ export default function GradingSplash({ onComplete }: GradingSplashProps) {
           <motion.p
             key={msgIdx}
             className="text-sm"
-            style={{ color: 'rgba(255,255,255,0.65)' }}
+            style={{ color: 'var(--text-muted)' }}
             initial={{ opacity: 0, y: 6 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -6 }}
@@ -172,7 +172,7 @@ export default function GradingSplash({ onComplete }: GradingSplashProps) {
               <motion.div
                 key={i}
                 className="w-2 h-2 rounded-full"
-                animate={{ background: filled ? '#adf1c4' : 'rgba(255,255,255,0.15)' }}
+                animate={{ background: filled ? 'var(--accent)' : 'var(--surface-3)' }}
                 transition={{ duration: 0.3 }}
               />
             )

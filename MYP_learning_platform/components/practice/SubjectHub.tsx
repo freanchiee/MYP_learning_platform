@@ -171,6 +171,8 @@ export default function SubjectHub({
           overflowY: 'scroll',
           scrollSnapType: 'y mandatory',
           scrollBehavior: 'smooth',
+          background: 'var(--bg)',
+          backgroundImage: 'var(--bg-image)',
         }}
       >
         {modes.map((mode, idx) => {

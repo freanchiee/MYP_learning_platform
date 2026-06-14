@@ -17,9 +17,9 @@ const VARIABLES = [
 ]
 
 const COLUMNS: { id: VarType; label: string; color: string; accent: string }[] = [
-  { id: 'IV', label: 'Independent Variable', color: '#3498db', accent: '#1d6fa4' },
-  { id: 'DV', label: 'Dependent Variable', color: '#3cb563', accent: '#289147' },
-  { id: 'CV', label: 'Control Variable', color: '#f39c12', accent: '#c47d0e' },
+  { id: 'IV', label: 'Independent Variable', color: 'var(--info)', accent: 'var(--info)' },
+  { id: 'DV', label: 'Dependent Variable', color: 'var(--success)', accent: 'var(--success)' },
+  { id: 'CV', label: 'Control Variable', color: 'var(--warning)', accent: 'var(--warning)' },
 ]
 
 const CORRECT_ANSWERS: Record<string, VarType> = {
@@ -64,18 +64,18 @@ export default function VariableClassifyTable({ onAnswer }: VariableClassifyTabl
 
   return (
     <div className="space-y-3">
-      <div className="overflow-x-auto rounded-xl border-2 border-gray-200 shadow-sm">
+      <div className="overflow-x-auto rounded-xl border-2 border-line shadow-sm">
         <table className="w-full text-sm border-collapse">
           <thead>
             <tr>
-              <th className="px-4 py-3 text-left text-gray-700 font-semibold bg-gray-50 border-b border-gray-200 text-xs uppercase tracking-wide">
+              <th className="px-4 py-3 text-left text-ink-muted font-semibold bg-surface-2 border-b border-line text-xs uppercase tracking-wide">
                 Variable
               </th>
               {COLUMNS.map(col => (
                 <th
                   key={col.id}
-                  className="px-4 py-3 text-center text-white font-bold text-xs border-b border-gray-200"
-                  style={{ backgroundColor: col.color, minWidth: '140px' }}
+                  className="px-4 py-3 text-center font-bold text-xs border-b border-line"
+                  style={{ backgroundColor: col.color, color: 'var(--criterion-fg)', minWidth: '140px' }}
                 >
                   {col.label}
                 </th>
@@ -91,9 +91,9 @@ export default function VariableClassifyTable({ onAnswer }: VariableClassifyTabl
                 <tr
                   key={variable.id}
                   className="transition-colors"
-                  style={{ backgroundColor: idx % 2 === 0 ? '#ffffff' : '#f9fafb' }}
+                  style={{ backgroundColor: idx % 2 === 0 ? 'var(--surface)' : 'var(--surface-2)' }}
                 >
-                  <td className="px-4 py-3 text-gray-800 font-medium border-b border-gray-100" style={{ fontFamily: 'Georgia, serif' }}>
+                  <td className="px-4 py-3 text-ink font-medium border-b border-divider" style={{ fontFamily: 'Georgia, serif' }}>
                     <div className="flex items-center gap-2">
                       {variable.label}
                       {sel && (
@@ -104,7 +104,7 @@ export default function VariableClassifyTable({ onAnswer }: VariableClassifyTabl
                     </div>
                   </td>
                   {COLUMNS.map(col => (
-                    <td key={col.id} className="px-4 py-3 text-center border-b border-gray-100">
+                    <td key={col.id} className="px-4 py-3 text-center border-b border-divider">
                       <label className="flex items-center justify-center cursor-pointer">
                         <input
                           type="radio"
@@ -130,9 +130,9 @@ export default function VariableClassifyTable({ onAnswer }: VariableClassifyTabl
         <div
           className="rounded-xl px-4 py-3 text-sm font-medium flex items-center gap-2"
           style={{
-            background: allCorrect ? '#f0fdf4' : '#fff7ed',
-            border: `1px solid ${allCorrect ? '#86efac' : '#fed7aa'}`,
-            color: allCorrect ? '#166534' : '#9a3412',
+            background: allCorrect ? 'var(--success-surface)' : 'var(--warning-surface)',
+            border: `1px solid ${allCorrect ? 'var(--success)' : 'var(--warning)'}`,
+            color: allCorrect ? 'var(--success)' : 'var(--warning-fg)',
           }}
         >
           {allCorrect ? (

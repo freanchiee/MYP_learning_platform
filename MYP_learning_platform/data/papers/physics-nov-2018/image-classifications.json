@@ -1,0 +1,308 @@
+[
+  {
+    "taskPath": "q1.tasks[c]",
+    "questionId": 1,
+    "taskLabel": "c",
+    "topic": "Distance-time graph of storm",
+    "original_path": "/images/papers/physics-nov-2018/q1c-graph.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: Distance / km (0–4.0) vs Time of day (07:55–08:25), V-shaped line falling 4→1 km then rising back to 3 km; points at each 5-min interval.",
+    "generated_path": "/images/papers/physics-nov-2018/q1c-graph.svg",
+    "needs_review": false,
+    "approved": true
+  },
+  {
+    "taskPath": "q4.tasks[e]",
+    "questionId": 4,
+    "taskLabel": "e",
+    "topic": "Bounce height vs pressure scatter",
+    "original_path": "/images/papers/physics-nov-2018/q4e-graph.png",
+    "image_type": "code_rendered",
+    "render_component": "DragSort",
+    "render_data": {
+      "mode": "select",
+      "title": "Choose the correct line of best fit",
+      "source": "MYP physics-nov-2018",
+      "prompt": "The graph shows another student's results — average bounce height / m (y, 0–0.80) against internal air pressure / kPa (x, 0–50), with five rising data points: (30, 0.59), (35, 0.62), (40, 0.65), (45, 0.68), (50, 0.71). Select the option that best describes a correct line of best fit for these points.",
+      "options": [
+        "A straight line passing through (or as close as possible to) all five points — about 0.41 m at 0 kPa rising to about 0.71 m at 50 kPa",
+        "A straight line through the origin (0, 0), rising steeply to the data",
+        "A curve that bends sharply upward through the last two points only",
+        "A horizontal line at 0.65 m across every pressure value"
+      ],
+      "correct": "A straight line passing through (or as close as possible to) all five points — about 0.41 m at 0 kPa rising to about 0.71 m at 50 kPa"
+    },
+    "generated_path": "/images/papers/physics-nov-2018/q4e-graph.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q5.tasks[d]",
+    "questionId": 5,
+    "taskLabel": "d",
+    "topic": "Bounce height vs drop height scatter",
+    "original_path": "/images/papers/physics-nov-2018/q5d-graph.png",
+    "image_type": "code_rendered",
+    "render_component": "DragSort",
+    "render_data": {
+      "mode": "slots",
+      "title": "Label the axes of the bounce-height graph",
+      "source": "MYP physics-nov-2018",
+      "prompt": "The mean data from the experiment is plotted with unlabelled axes. Drag the correct label into the x-axis (horizontal) slot and the y-axis (vertical) slot. (You would then plot your value from part (b), the point (1.8, 0.51), on the grid.)",
+      "palette": [
+        "Drop height / m",
+        "Bounce height / m",
+        "Internal air pressure / kPa",
+        "Time / s"
+      ],
+      "slots": [
+        "x-axis (horizontal)",
+        "y-axis (vertical)"
+      ],
+      "correct": {
+        "x-axis (horizontal)": "Drop height / m",
+        "y-axis (vertical)": "Bounce height / m"
+      }
+    },
+    "generated_path": "/images/papers/physics-nov-2018/q5d-graph.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q7.tasks[b]",
+    "questionId": 7,
+    "taskLabel": "b",
+    "topic": "CO2 and global temperature over time",
+    "original_path": "/images/papers/physics-nov-2018/q7b-co2graph.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: dual-axis line graph, Concentration of CO₂ / ppm (250–390, left) and Temperature / °C (13.5–14.5, right) vs Year (1000–2000); both flat until ~1900 then spike sharply; key for the two curves.",
+    "generated_path": "/images/papers/physics-nov-2018/q7b-co2graph.svg",
+    "needs_review": false,
+    "approved": true
+  },
+  {
+    "taskPath": "q1",
+    "questionId": 1,
+    "taskLabel": null,
+    "topic": "Lightning over water (stylised photo)",
+    "original_path": "/images/papers/physics-nov-2018/q1-lightning.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: night storm scene — a bright forked lightning bolt striking down to a dark sea, blue night sky and clouds, soft glow around the bolt.",
+    "generated_path": "/images/papers/physics-nov-2018/q1-lightning.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q2.tasks[b]",
+    "questionId": 2,
+    "taskLabel": "b",
+    "topic": "Cloud-to-ground lightning strike (V and I labels)",
+    "original_path": "/images/papers/physics-nov-2018/q2b-circuit.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: lightning strike between Cloud and Ground; dimension line labelled 500 000 V across the gap and a downward current arrow labelled 20 000 A on the bolt.",
+    "generated_path": "/images/papers/physics-nov-2018/q2b-circuit.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q2.tasks[d]",
+    "questionId": 2,
+    "taskLabel": "d",
+    "topic": "Lightning conductor on a tall building",
+    "original_path": "/images/papers/physics-nov-2018/q2d-conductor.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: a tiled-roof tower with a metal lightning-conductor rod at the apex and a down-conductor strap running to earth; labels 'Lightning conductor' and 'to earth'.",
+    "generated_path": "/images/papers/physics-nov-2018/q2d-conductor.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q3.tasks[a]",
+    "questionId": 3,
+    "taskLabel": "a",
+    "topic": "Alpha/beta decay equations with draggable particles",
+    "original_path": "/images/papers/physics-nov-2018/q3a-decay.png",
+    "image_type": "code_rendered",
+    "render_component": "DragSort",
+    "render_data": {
+      "mode": "bins",
+      "title": "Select the particle released in each decay",
+      "source": "MYP physics-nov-2018",
+      "prompt": "Drop each decay equation into the box for the particle it releases. (Alpha ⁴₂α lowers the mass number by 4 and the atomic number by 2; beta ⁰₋₁β keeps the mass number the same and raises the atomic number by 1.)",
+      "items": [
+        "²⁴¹₉₅Am → ²³⁷₉₃Np + ___",
+        "²¹⁰₈₄Po → ²⁰⁶₈₂Pb + ___",
+        "²⁴⁰₉₃Np → ²⁴⁰₉₄Pu + ___"
+      ],
+      "bins": [
+        "Alpha particle ⁴₂α",
+        "Beta particle ⁰₋₁β"
+      ],
+      "correct": {
+        "Alpha particle ⁴₂α": [
+          "²⁴¹₉₅Am → ²³⁷₉₃Np + ___",
+          "²¹⁰₈₄Po → ²⁰⁶₈₂Pb + ___"
+        ],
+        "Beta particle ⁰₋₁β": [
+          "²⁴⁰₉₃Np → ²⁴⁰₉₄Pu + ___"
+        ]
+      }
+    },
+    "generated_path": "/images/papers/physics-nov-2018/q3a-decay.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q3.tasks[d]",
+    "questionId": 3,
+    "taskLabel": "d",
+    "topic": "Unstable isotopes / half-life data table",
+    "original_path": "/images/papers/physics-nov-2018/q3d-isotopes.png",
+    "image_type": "ai_generated",
+    "image_prompt": "Data table: Isotope | Half-life / years | Additional information — Curium-242 / 4 730 / artificially produced, not found in nature; Carbon-14 / 5 700 / alongside carbon-12, found in organic materials; Potassium-40 / 1 300 000 000 / found in sedimentary rocks from volcanic dust; Uranium-238 / 4 500 000 000 / found as an ore bonded to other elements.",
+    "generated_path": "/images/papers/physics-nov-2018/q3d-isotopes.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q4.tasks[a]",
+    "questionId": 4,
+    "taskLabel": "a",
+    "topic": "Variable classification checkbox table",
+    "original_path": "/images/papers/physics-nov-2018/q4a-variables.png",
+    "image_type": "code_rendered",
+    "render_component": "DragSort",
+    "render_data": {
+      "mode": "bins",
+      "title": "Classify the variables in the football-bounce experiment",
+      "source": "MYP physics-nov-2018",
+      "prompt": "Drop each variable into the correct column: the one factor you change (independent), the one you measure (dependent), or those you keep constant (control).",
+      "items": [
+        "Drop height",
+        "Internal air pressure",
+        "Bounce height",
+        "Size of ball",
+        "Bouncing surface",
+        "Material of the ball"
+      ],
+      "bins": [
+        "Independent variable",
+        "Dependent variable",
+        "Control variables"
+      ],
+      "correct": {
+        "Independent variable": [
+          "Internal air pressure"
+        ],
+        "Dependent variable": [
+          "Bounce height"
+        ],
+        "Control variables": [
+          "Drop height",
+          "Size of ball",
+          "Bouncing surface",
+          "Material of the ball"
+        ]
+      }
+    },
+    "generated_path": "/images/papers/physics-nov-2018/q4a-variables.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q4.tasks[d]",
+    "questionId": 4,
+    "taskLabel": "d",
+    "topic": "Pressure gauge dial reading ~83 kPa",
+    "original_path": "/images/papers/physics-nov-2018/q4d-gauge.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: analog pressure gauge with outer black kPa scale (0–90) and inner red psi scale (0–15), needle pointing to ~83 kPa (≈12.5 psi); attached to a football on a green pitch; labels 'Pressure gauge' and 'Football'.",
+    "generated_path": "/images/papers/physics-nov-2018/q4d-gauge.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q5",
+    "questionId": 5,
+    "taskLabel": null,
+    "topic": "Basketball / tennis ball drop animation scene",
+    "original_path": "/images/papers/physics-nov-2018/q5-basketball.png",
+    "image_type": "code_rendered",
+    "render_component": "ProjectileSim",
+    "render_data": {
+      "mode": "bounce",
+      "title": "Ball drop-and-bounce experiment",
+      "source": "MYP physics-nov-2018",
+      "g": 9.8,
+      "bounce": {
+        "reboundFraction": 0.28,
+        "dropHeight_m": 1.5,
+        "dropHeightMin_m": 1.0,
+        "dropHeightMax_m": 2.0
+      }
+    },
+    "generated_path": "/images/papers/physics-nov-2018/q5-basketball.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q5.tasks[b]",
+    "questionId": 5,
+    "taskLabel": "b",
+    "topic": "Handwritten bounce-height trial note (1.8 m)",
+    "original_path": "/images/papers/physics-nov-2018/q5bc-data.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: handwritten lined-paper note 'Ball bounce height experiment' with a 1.8 m drop diagram and a Trial 1/2/3 table reading 0.52 m, 47 cm, 5.5×10¹ cm; two marker pens on a wooden desk.",
+    "generated_path": "/images/papers/physics-nov-2018/q5bc-data.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q5.tasks[c]",
+    "questionId": 5,
+    "taskLabel": "c",
+    "topic": "Handwritten 'My data' raw drop/bounce pairs",
+    "original_path": "/images/papers/physics-nov-2018/q5c-rawdata.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: handwritten 'My data' note with five drop/bounce diagrams — 3 m→0.82 m, 3.4 m→0.89 m, 2.2 m→0.63 m, 140 cm→40 cm, 1×10² cm→18 cm.",
+    "generated_path": "/images/papers/physics-nov-2018/q5c-rawdata.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q6",
+    "questionId": 6,
+    "taskLabel": null,
+    "topic": "Squash court with two players (photo replacement)",
+    "original_path": "/images/papers/physics-nov-2018/q6-squash.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: stylised squash court interior with red service lines on a white wall and glass back wall, two players with rackets, a small black squash ball in flight.",
+    "generated_path": "/images/papers/physics-nov-2018/q6-squash.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q6",
+    "questionId": 6,
+    "taskLabel": null,
+    "topic": "Squash ball in warm water bath on heater",
+    "original_path": "/images/papers/physics-nov-2018/q6-setup.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: a beaker of warm water containing a black squash ball, sitting on an electronic hotplate heater; labels 'Warm water', 'Squash ball', 'Electronic heater'.",
+    "generated_path": "/images/papers/physics-nov-2018/q6-setup.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q8",
+    "questionId": 8,
+    "taskLabel": null,
+    "topic": "Transport-options infographic to school",
+    "original_path": "/images/papers/physics-nov-2018/q8-transport.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: infographic of coloured transport bubbles — Tram 30 minutes, Walking 70 minutes, Bicycle 20 minutes, Car 10 minutes, Bus 15 minutes — with the student Fenna and a large arrow pointing to a School building.",
+    "generated_path": "/images/papers/physics-nov-2018/q8-transport.svg",
+    "needs_review": true,
+    "approved": false
+  }
+]

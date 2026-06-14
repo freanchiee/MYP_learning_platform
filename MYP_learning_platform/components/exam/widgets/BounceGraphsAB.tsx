@@ -199,7 +199,7 @@ export default function BounceGraphsAB() {
     <div className="space-y-3">
       <div className="flex flex-col sm:flex-row gap-4">
         {/* Graph A */}
-        <div className="flex-1 bg-white rounded-xl border border-gray-200 shadow-sm p-3">
+        <div className="figure-surface flex-1 shadow-card p-3">
           <Graph
             title="Graph A"
             xMax={A_X_MAX}
@@ -214,7 +214,7 @@ export default function BounceGraphsAB() {
         </div>
 
         {/* Graph B */}
-        <div className="flex-1 bg-white rounded-xl border border-gray-200 shadow-sm p-3">
+        <div className="figure-surface flex-1 shadow-card p-3">
           <Graph
             title="Graph B"
             xMax={B_X_MAX}
@@ -229,7 +229,7 @@ export default function BounceGraphsAB() {
         </div>
       </div>
 
-      <p className="text-xs text-gray-500 text-center italic px-2">
+      <p className="text-xs text-ink-subtle text-center italic px-2">
         The same data is plotted in both graphs with different axis scales.
         Graph B also shows the best-fit line (y = 0.476x, dashed red).
       </p>

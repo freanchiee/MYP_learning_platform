@@ -8,6 +8,9 @@ import Link from 'next/link'
 const PAPER_SUBJECTS = [
   { label: '⚛ Physics',   href: '/physics-papers' },
   { label: '🌿 Biology',   href: '/bio-papers' },
+  { label: '⚗ Chemistry', href: '/chem-papers' },
+  { label: '🌍 Humanities (I&S)', href: '/humanities-papers' },
+  { label: '🗺 Geography', href: '/geography-papers' },
 ]
 
 const NAV_LINKS = [
@@ -18,15 +21,17 @@ const NAV_LINKS = [
 
 const STATS = [
   { value: '20+', label: 'Past Papers' },
-  { value: '3',   label: 'Subjects' },
+  { value: '5',   label: 'Subjects' },
   { value: '88+', label: 'Questions / Paper' },
   { value: 'AI',  label: 'Grading' },
 ]
 
 const SUBJECTS = [
-  { id: 'physics',   icon: '⚛', label: 'Physics',   href: '/physics-papers' },
-  { id: 'chemistry', icon: '⚗', label: 'Chemistry',  href: null },
-  { id: 'biology',   icon: '🌿', label: 'Biology',   href: '/bio-papers' },
+  { id: 'physics',   icon: '⚛', label: 'Physics',    href: '/physics-papers' },
+  { id: 'chemistry', icon: '⚗', label: 'Chemistry',  href: '/chem-papers' },
+  { id: 'biology',   icon: '🌿', label: 'Biology',    href: '/bio-papers' },
+  { id: 'humanities', icon: '🌍', label: 'Humanities (I&S)', href: '/humanities-papers' },
+  { id: 'geography', icon: '🗺', label: 'Geography',  href: '/geography-papers' },
 ]
 
 // ─── component ───────────────────────────────────────────────────────────────
@@ -56,7 +61,7 @@ export default function LandingPage() {
   return (
     <div
       className="min-h-screen font-sans antialiased overflow-x-hidden"
-      style={{ background: dark ? '#0a0a0a' : '#f5edcc', color: dark ? '#e8e0cc' : '#1f3674' }}
+      style={{ background: dark ? '#0a0a0a' : 'var(--bg)', color: dark ? '#e8e0cc' : 'var(--text)' }}
     >
 
       {/* ── TOP NAV ─────────────────────────────────────────────────── */}
@@ -103,8 +108,8 @@ export default function LandingPage() {
                   transition={{ duration: 0.15 }}
                   className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-44 rounded-xl overflow-hidden z-50"
                   style={{
-                    background: dark ? 'rgba(20,20,20,0.95)' : 'rgba(255,255,255,0.97)',
-                    border: `1px solid ${dark ? 'rgba(255,255,255,0.1)' : 'rgba(31,54,116,0.12)'}`,
+                    background: dark ? 'rgba(20,20,20,0.95)' : 'var(--surface)',
+                    border: `1px solid ${dark ? 'rgba(255,255,255,0.1)' : 'var(--border)'}`,
                     boxShadow: '0 8px 32px rgba(0,0,0,0.18)',
                     backdropFilter: 'blur(16px)',
                   }}
@@ -114,8 +119,8 @@ export default function LandingPage() {
                       key={s.href}
                       href={s.href}
                       className="flex items-center gap-2.5 px-4 py-3 text-[13px] font-medium transition-all duration-150"
-                      style={{ color: dark ? 'rgba(255,255,255,0.8)' : '#1f3674' }}
-                      onMouseEnter={e => (e.currentTarget.style.background = dark ? 'rgba(255,255,255,0.07)' : 'rgba(31,54,116,0.06)')}
+                      style={{ color: dark ? 'rgba(255,255,255,0.8)' : 'var(--accent)' }}
+                      onMouseEnter={e => (e.currentTarget.style.background = dark ? 'rgba(255,255,255,0.07)' : 'var(--accent-soft)')}
                       onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}
                     >
                       {s.label}
@@ -142,8 +147,8 @@ export default function LandingPage() {
             aria-label="Toggle theme"
             className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110"
             style={{
-              background: dark ? 'rgba(255,255,255,0.1)' : 'rgba(31,54,116,0.08)',
-              border: `1px solid ${dark ? 'rgba(255,255,255,0.15)' : 'rgba(31,54,116,0.15)'}`,
+              background: dark ? 'rgba(255,255,255,0.1)' : 'var(--accent-soft)',
+              border: `1px solid ${dark ? 'rgba(255,255,255,0.15)' : 'var(--border-strong)'}`,
             }}
           >
             <AnimatePresence mode="wait" initial={false}>
@@ -181,7 +186,7 @@ export default function LandingPage() {
             exit={{ opacity: 0, y: -16 }}
             transition={{ duration: 0.25 }}
             className="fixed inset-0 z-40 flex flex-col items-center justify-center gap-8"
-            style={{ background: dark ? 'rgba(10,10,10,0.97)' : 'rgba(245,237,204,0.97)', backdropFilter: 'blur(20px)' }}
+            style={{ background: dark ? 'rgba(10,10,10,0.97)' : 'var(--bg)', backdropFilter: 'blur(20px)' }}
           >
             {[...PAPER_SUBJECTS, ...NAV_LINKS].map((l, i) => (
               <motion.div
@@ -242,7 +247,7 @@ export default function LandingPage() {
             style={{
               background: dark
                 ? 'linear-gradient(105deg, rgba(0,0,0,0.93) 0%, rgba(0,0,0,0.7) 30%, rgba(0,0,0,0.25) 60%, rgba(0,0,0,0.05) 100%), linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 45%)'
-                : 'linear-gradient(105deg, rgba(245,237,204,0.97) 0%, rgba(245,237,204,0.82) 28%, rgba(245,237,204,0.3) 55%, rgba(245,237,204,0) 100%), linear-gradient(to top, rgba(245,237,204,0.85) 0%, transparent 45%)',
+                : 'linear-gradient(105deg, color-mix(in srgb, var(--bg) 97%, transparent) 0%, color-mix(in srgb, var(--bg) 82%, transparent) 28%, color-mix(in srgb, var(--bg) 30%, transparent) 55%, color-mix(in srgb, var(--bg) 0%, transparent) 100%), linear-gradient(to top, color-mix(in srgb, var(--bg) 85%, transparent) 0%, transparent 45%)',
             }}
           />
         </motion.div>
@@ -262,12 +267,12 @@ export default function LandingPage() {
             <span
               className="inline-block px-3 py-1 text-[11px] font-bold tracking-[0.2em] uppercase rounded-full"
               style={{
-                background: dark ? 'rgba(173,241,196,0.15)' : 'rgba(31,54,116,0.1)',
-                border: `1px solid ${dark ? 'rgba(173,241,196,0.3)' : 'rgba(31,54,116,0.2)'}`,
-                color: dark ? '#adf1c4' : '#1f3674',
+                background: dark ? 'rgba(173,241,196,0.15)' : 'var(--accent-soft)',
+                border: `1px solid ${dark ? 'rgba(173,241,196,0.3)' : 'var(--border-strong)'}`,
+                color: dark ? '#adf1c4' : 'var(--accent)',
               }}
             >
-              IB MYP Sciences
+              IB MYP
             </span>
             <span className="text-xs opacity-40 tracking-wide">e-Assessment Platform</span>
           </motion.div>
@@ -282,7 +287,7 @@ export default function LandingPage() {
           >
             Learn.
             <br />
-            <span style={{ color: dark ? '#adf1c4' : '#c3282d' }}>Practice.</span>
+            <span style={{ color: dark ? '#adf1c4' : 'var(--accent-action)' }}>Practice.</span>
             <br />
             Excel.
           </motion.h1>
@@ -295,7 +300,7 @@ export default function LandingPage() {
             className="text-[15px] leading-relaxed opacity-70 max-w-sm mb-10"
           >
             Past papers, AI-powered grading, instant feedback — all in one place
-            for IB MYP Physics, Chemistry & Biology.
+            for IB MYP Physics, Chemistry, Biology, Humanities & Geography.
           </motion.p>
 
           {/* CTAs */}
@@ -308,7 +313,7 @@ export default function LandingPage() {
             <Link
               href="/login"
               className="group flex items-center gap-2 px-7 py-3.5 rounded-full font-bold text-[14px] tracking-wide transition-all duration-300 hover:scale-[1.03] hover:shadow-xl"
-              style={{ background: dark ? '#adf1c4' : '#1f3674', color: dark ? '#0a0a0a' : '#fff' }}
+              style={{ background: dark ? '#adf1c4' : 'var(--accent)', color: dark ? '#0a0a0a' : 'var(--text-on-accent)' }}
             >
               Start Learning
               <motion.span
@@ -324,8 +329,8 @@ export default function LandingPage() {
               href="/physics-papers"
               className="flex items-center gap-2 px-7 py-3.5 rounded-full font-semibold text-[14px] tracking-wide transition-all duration-300 hover:scale-[1.03]"
               style={{
-                border: `1.5px solid ${dark ? 'rgba(255,255,255,0.2)' : 'rgba(31,54,116,0.25)'}`,
-                color: dark ? 'rgba(255,255,255,0.8)' : '#1f3674',
+                border: `1.5px solid ${dark ? 'rgba(255,255,255,0.2)' : 'var(--border-strong)'}`,
+                color: dark ? 'rgba(255,255,255,0.8)' : 'var(--accent)',
               }}
             >
               Browse Papers
@@ -351,7 +356,7 @@ export default function LandingPage() {
                 {s.href && (
                   <span
                     className="ml-1 text-[10px] opacity-0 group-hover:opacity-60 transition-opacity"
-                    style={{ color: dark ? '#adf1c4' : '#1f3674' }}
+                    style={{ color: dark ? '#adf1c4' : 'var(--accent)' }}
                   >
                     →
                   </span>
@@ -361,10 +366,10 @@ export default function LandingPage() {
 
             const chipStyle = {
               background: hoveredSubject === s.id
-                ? dark ? 'rgba(255,255,255,0.12)' : 'rgba(31,54,116,0.12)'
-                : dark ? 'rgba(255,255,255,0.06)' : 'rgba(245,237,204,0.7)',
+                ? dark ? 'rgba(255,255,255,0.12)' : 'var(--accent-soft)'
+                : dark ? 'rgba(255,255,255,0.06)' : 'var(--surface)',
               backdropFilter: 'blur(12px)',
-              border: `1px solid ${dark ? 'rgba(255,255,255,0.1)' : 'rgba(31,54,116,0.12)'}`,
+              border: `1px solid ${dark ? 'rgba(255,255,255,0.1)' : 'var(--border)'}`,
               transform: hoveredSubject === s.id ? 'translateX(-6px)' : 'translateX(0)',
               transition: 'all 0.25s ease',
               cursor: s.href ? 'pointer' : 'default',
@@ -430,7 +435,7 @@ export default function LandingPage() {
         viewport={{ once: true, margin: '-60px' }}
         transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         className="border-t border-b flex items-stretch overflow-x-auto"
-        style={{ borderColor: dark ? 'rgba(255,255,255,0.08)' : 'rgba(31,54,116,0.1)' }}
+        style={{ borderColor: dark ? 'rgba(255,255,255,0.08)' : 'var(--border)' }}
       >
         {STATS.map((s, i) => (
           <div
@@ -438,13 +443,13 @@ export default function LandingPage() {
             className="flex-1 min-w-[120px] flex flex-col items-center justify-center py-6 px-4 gap-1"
             style={{
               borderRight: i < STATS.length - 1
-                ? `1px solid ${dark ? 'rgba(255,255,255,0.08)' : 'rgba(31,54,116,0.1)'}`
+                ? `1px solid ${dark ? 'rgba(255,255,255,0.08)' : 'var(--border)'}`
                 : 'none',
             }}
           >
             <span
               className="text-3xl font-black tracking-tight"
-              style={{ color: dark ? '#adf1c4' : '#1f3674' }}
+              style={{ color: dark ? '#adf1c4' : 'var(--accent)' }}
             >
               {s.value}
             </span>
@@ -457,7 +462,7 @@ export default function LandingPage() {
 
       {/* ── FEATURES SECTION ─────────────────────────────────────────── */}
       <section className="px-7 md:px-14 py-24 grid md:grid-cols-3 gap-px"
-        style={{ borderColor: dark ? 'rgba(255,255,255,0.06)' : 'rgba(31,54,116,0.08)' }}
+        style={{ borderColor: dark ? 'rgba(255,255,255,0.06)' : 'var(--border)' }}
       >
         {[
           {
@@ -483,7 +488,7 @@ export default function LandingPage() {
             viewport={{ once: true, margin: '-40px' }}
             transition={{ delay: i * 0.1, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             className="p-8 rounded-2xl"
-            style={{ background: dark ? 'rgba(255,255,255,0.03)' : 'rgba(31,54,116,0.04)' }}
+            style={{ background: dark ? 'rgba(255,255,255,0.03)' : 'var(--surface)' }}
           >
             <div className="text-4xl mb-5">{f.icon}</div>
             <h3 className="text-lg font-bold mb-3 tracking-tight">{f.title}</h3>
@@ -499,7 +504,7 @@ export default function LandingPage() {
         viewport={{ once: true }}
         transition={{ duration: 0.8 }}
         className="relative overflow-hidden"
-        style={{ background: dark ? '#111' : '#1f3674' }}
+        style={{ background: dark ? '#111' : 'var(--accent)' }}
       >
         {/* Background image (dark mode version, heavily tinted) */}
         <div className="absolute inset-0">
@@ -508,7 +513,7 @@ export default function LandingPage() {
             alt=""
             className="w-full h-full object-cover opacity-20"
           />
-          <div className="absolute inset-0" style={{ background: dark ? 'rgba(10,10,10,0.7)' : 'rgba(31,54,116,0.85)' }} />
+          <div className="absolute inset-0" style={{ background: dark ? 'rgba(10,10,10,0.7)' : 'color-mix(in srgb, var(--accent) 85%, transparent)' }} />
         </div>
 
         <div className="relative z-10 flex flex-col items-center text-center px-7 py-28 gap-8">
@@ -522,7 +527,7 @@ export default function LandingPage() {
           >
             Your IB MYP exam
             <br />
-            <span style={{ color: '#adf1c4' }}>starts here.</span>
+            <span style={{ color: 'var(--accent-fg)' }}>starts here.</span>
           </motion.h2>
 
           <motion.p
@@ -545,7 +550,7 @@ export default function LandingPage() {
             <Link
               href="/login"
               className="inline-flex items-center gap-3 px-10 py-4 rounded-full font-bold text-[15px] tracking-wide transition-all duration-300 hover:scale-[1.04] hover:shadow-2xl"
-              style={{ background: '#adf1c4', color: '#0a0a0a' }}
+              style={{ background: 'var(--accent-fg)', color: 'var(--accent)' }}
             >
               Get Started — it&apos;s free
               <span>→</span>
@@ -557,11 +562,11 @@ export default function LandingPage() {
       {/* ── FOOTER ───────────────────────────────────────────────────── */}
       <footer
         className="flex flex-col md:flex-row items-center justify-between gap-4 px-7 md:px-14 py-8 text-[12px] opacity-40"
-        style={{ borderTop: `1px solid ${dark ? 'rgba(255,255,255,0.08)' : 'rgba(31,54,116,0.1)'}` }}
+        style={{ borderTop: `1px solid ${dark ? 'rgba(255,255,255,0.08)' : 'var(--border)'}` }}
       >
         <span className="font-bold tracking-tight text-sm">EDUVAULT</span>
-        <span>IB MYP Sciences e-Assessment Platform · {new Date().getFullYear()}</span>
-        <span>Physics · Chemistry · Biology</span>
+        <span>IB MYP e-Assessment Platform · {new Date().getFullYear()}</span>
+        <span>Physics · Chemistry · Biology · Humanities · Geography</span>
       </footer>
     </div>
   )

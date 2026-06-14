@@ -207,7 +207,7 @@ export default function BounceCanvas() {
         ref={canvasRef}
         width={CANVAS_W}
         height={CANVAS_H}
-        className="rounded-xl border border-gray-200 shadow-sm"
+        className="figure-surface rounded-card shadow-card"
         style={{ maxWidth: '100%' }}
       />
 
@@ -216,8 +216,8 @@ export default function BounceCanvas() {
           onClick={handleDrop}
           disabled={phase === 'falling' || phase === 'bouncing'}
           whileTap={{ scale: 0.95 }}
-          className="px-5 py-2 rounded-lg text-sm font-bold text-white disabled:opacity-50 disabled:cursor-not-allowed transition-opacity"
-          style={{ background: '#3498db' }}
+          className="px-5 py-2 rounded-control text-sm font-bold text-on-accent disabled:opacity-50 disabled:cursor-not-allowed transition-opacity"
+          style={{ background: 'var(--accent)' }}
         >
           Drop Ball
         </motion.button>
@@ -225,7 +225,7 @@ export default function BounceCanvas() {
         <motion.button
           onClick={handleReset}
           whileTap={{ scale: 0.95 }}
-          className="px-5 py-2 rounded-lg text-sm font-semibold border border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
+          className="px-5 py-2 rounded-control text-sm font-semibold border border-line-strong bg-surface text-ink-muted hover:bg-surface-2"
         >
           Reset
         </motion.button>
@@ -235,13 +235,13 @@ export default function BounceCanvas() {
         <motion.div
           initial={{ opacity: 0, y: 4 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-sm font-mono font-semibold text-[#e84040] bg-red-50 border border-red-200 px-4 py-2 rounded-lg"
+          className="text-sm font-mono font-semibold text-danger bg-danger-surface border border-line px-4 py-2 rounded-control"
         >
           Bounce height ≈ {bounceHeight.toFixed(1)} cm
         </motion.div>
       )}
 
-      <p className="text-[10px] text-gray-400 text-center">
+      <p className="text-[10px] text-ink-subtle text-center">
         Ball drops from 60 cm. Observe and record the bounce height.
       </p>
     </div>

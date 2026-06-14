@@ -1,0 +1,26 @@
+[
+  {
+    "taskPath": "q4",
+    "questionId": 4,
+    "taskLabel": null,
+    "topic": "Capsaicin content bar chart (V1)",
+    "original_path": "/images/papers/chemistry-nov-2018/page-18.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: vertical bar chart titled 'Graph shows the capsaicin content / mg dm⁻³ in chilli peppers'. x-axis categorical 'Peppers' (Carolina Reaper, Ghost pepper, Jalapeño, Bell pepper); y-axis 'Capsaicin content / mg dm⁻³' from 0.0 to 0.6 in steps of 0.1 with minor gridlines every 0.02. Bar heights: Carolina Reaper 0.48, Ghost pepper 0.22, Jalapeño 0.07, Bell pepper 0.00. Teal bars.",
+    "generated_path": "/images/papers/chemistry-nov-2018-v1/q4-capsaicin-bar.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q6.tasks[a]",
+    "questionId": 6,
+    "taskLabel": "a",
+    "topic": "Carbon footprint grouped bar chart (V1, pork meal)",
+    "original_path": "/images/papers/chemistry-nov-2018/page-25.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: grouped vertical bar chart. y-axis 'Carbon footprint / kg CO₂e' from 0.0 to 30.0 in steps of 5.0 with minor gridlines every 1.0. Two series per food: 'Emissions per kg' (teal) and 'Emissions per 4.2 kJ' (orange). Foods in x-order Beef, Cheese, Pork, Chicken, Eggs, Potatoes, Rice, Nuts, Yogurt, Broccoli, Tofu, Dry Beans, Milk, Tomatoes, Lentils. per-kg values 27.0,13.5,7.6,6.9,4.8,2.9,2.7,2.3,2.2,0.7,2.0,2.0,1.9,1.1,0.9 (Pork=7.6 and Broccoli=0.7 match the V1 table); per-4.2kJ values 11.8,3.6,5.5,4.8,3.4,3.8,0.7,0.4,3.6,5.9,2.9,0.6,3.8,6.1,0.3. Key box top-right.",
+    "generated_path": "/images/papers/chemistry-nov-2018-v1/q6-carbon-footprint-bar.svg",
+    "needs_review": true,
+    "approved": false
+  }
+]

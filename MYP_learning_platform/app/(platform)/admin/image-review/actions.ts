@@ -5,6 +5,7 @@ import path from 'path'
 import { revalidatePath } from 'next/cache'
 import { execSync } from 'child_process'
 import { generateImageWithProvider, getVisionKey, readProviderConfig } from './provider-config'
+import { uploadPapersAsset } from '@/lib/supabase/admin'
 
 const REPO_ROOT = path.join(process.cwd())
 const DATA_PAPERS = path.join(REPO_ROOT, 'data', 'papers')
@@ -43,7 +44,7 @@ function normaliseVisionResponse(raw: string): string {
 }
 
 /** Claude Sonnet Vision — requires Anthropic API credits */
-async function callClaudeVision(physPath: string, key: string): Promise<string> {
+async function callClaudeVision(physPath: string, key: string, customPrompt = VISION_PROMPT): Promise<string> {
   const { base64, mediaType } = imageToBase64(physPath)
   const res = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',
@@ -54,16 +55,16 @@ async function callClaudeVision(physPath: string, key: string): Promise<string> 
     },
     body: JSON.stringify({
       model: 'claude-sonnet-4-6',
-      max_tokens: 1024,
+      max_tokens: 4096,   // SVG output needs more tokens than a text prompt
       messages: [{
         role: 'user',
         content: [
           { type: 'image', source: { type: 'base64', media_type: mediaType, data: base64 } },
-          { type: 'text', text: VISION_PROMPT },
+          { type: 'text', text: customPrompt },
         ],
       }],
     }),
-    signal: AbortSignal.timeout(60_000),
+    signal: AbortSignal.timeout(90_000),
   })
   if (!res.ok) {
     const body = await res.text()
@@ -74,23 +75,23 @@ async function callClaudeVision(physPath: string, key: string): Promise<string> 
 }
 
 /** GPT-4o Vision — uses the existing OpenAI key, no extra cost beyond per-token rate */
-async function callGPT4Vision(physPath: string, key: string): Promise<string> {
+async function callGPT4Vision(physPath: string, key: string, customPrompt = VISION_PROMPT): Promise<string> {
   const { base64, mediaType } = imageToBase64(physPath)
   const res = await fetch('https://api.openai.com/v1/chat/completions', {
     method: 'POST',
     headers: { 'Authorization': `Bearer ${key}`, 'Content-Type': 'application/json' },
     body: JSON.stringify({
       model: 'gpt-4o',
-      max_tokens: 1024,
+      max_tokens: 4096,
       messages: [{
         role: 'user',
         content: [
           { type: 'image_url', image_url: { url: `data:${mediaType};base64,${base64}`, detail: 'high' } },
-          { type: 'text', text: VISION_PROMPT },
+          { type: 'text', text: customPrompt },
         ],
       }],
     }),
-    signal: AbortSignal.timeout(60_000),
+    signal: AbortSignal.timeout(90_000),
   })
   if (!res.ok) {
     const body = await res.text()
@@ -101,46 +102,142 @@ async function callGPT4Vision(physPath: string, key: string): Promise<string> {
 }
 
 /**
- * Unified vision: tries Claude → falls back to GPT-4o.
+ * Gemini Vision — FREE tier (Google AI Studio key).
+ * Probes candidate models in order because not every AI Studio key has every model
+ * enabled. The *image-generation* model (flash-exp-image-generation) only outputs
+ * images; here we need text output, so we use regular Flash/Pro variants.
+ */
+async function callGeminiVision(physPath: string, key: string, customPrompt = VISION_PROMPT): Promise<string> {
+  const { base64, mediaType } = imageToBase64(physPath)
+
+  // Try these in order — stop at the first 200.
+  // If one 404s, move on; any other error is fatal.
+  const VISION_MODELS = [
+    'gemini-2.0-flash',             // newest stable (text+vision in/text out)
+    'gemini-2.0-flash-exp',         // exp variant, same capability set
+    'gemini-1.5-flash-latest',      // 1.5 latest alias
+    'gemini-1.5-flash',             // 1.5 specific
+    'gemini-1.5-pro',               // pro fallback (slower but widely available)
+  ]
+
+  const notFound: string[] = []
+  for (const model of VISION_MODELS) {
+    const res = await fetch(
+      `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${key}`,
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          contents: [{
+            parts: [
+              { inlineData: { mimeType: mediaType, data: base64 } },
+              { text: customPrompt },
+            ],
+          }],
+          generationConfig: { maxOutputTokens: 4096 },
+        }),
+        signal: AbortSignal.timeout(60_000),
+      },
+    )
+
+    if (res.status === 404) {
+      notFound.push(model)
+      continue
+    }
+    if (!res.ok) {
+      const body = await res.text()
+      throw new Error(`Gemini Vision ${res.status} (${model}): ${body.slice(0, 300)}`)
+    }
+    const json = await res.json() as {
+      candidates?: { content?: { parts?: { text?: string }[] } }[]
+    }
+    const text = json.candidates?.[0]?.content?.parts?.[0]?.text ?? ''
+    if (!text) throw new Error(`Gemini Vision (${model}): empty response`)
+    console.log(`[vision] ✅ Gemini succeeded with model: ${model}`)
+    return normaliseVisionResponse(text)
+  }
+
+  throw new Error(
+    `Gemini Vision: none of the candidate models are available on this key. ` +
+    `Tried: ${VISION_MODELS.join(', ')}. ` +
+    `Check aistudio.google.com/app/apikey for model access.`,
+  )
+}
+
+/**
+ * Unified vision: Claude → GPT-4o → Gemini (free tier).
+ * Each provider is only tried if its key is configured.
  * Returns { prompt, provider } so the caller can report which ran.
  */
 async function callVisionForPrompt(
   imagePath: string,
-): Promise<{ prompt: string; provider: 'claude' | 'gpt4o' }> {
+): Promise<{ prompt: string; provider: 'claude' | 'gpt4o' | 'gemini' }> {
   const physPath = path.join(PUBLIC_DIR, imagePath)
   if (!fs.existsSync(physPath)) throw new Error(`Image not found: ${physPath}`)
 
   const claudeKey = await getVisionKey()          // Anthropic key (env or config)
   const cfg = await readProviderConfig()
-  const openaiKey = process.env.OPENAI_API_KEY || cfg.openai?.key || ''
+  const openaiKey  = process.env.OPENAI_API_KEY || cfg.openai?.key || ''
+  const geminiKey  = cfg.gemini?.key || ''
 
-  // 1 — Try Claude
+  const errors: string[] = []
+
+  // 1 — Try Claude (best quality, pays per token)
   if (claudeKey) {
     try {
       const prompt = await callClaudeVision(physPath, claudeKey)
-      console.log('[vision] Claude succeeded')
+      console.log('[vision] ✅ Claude succeeded')
       return { prompt, provider: 'claude' }
     } catch (e: unknown) {
       const msg = e instanceof Error ? e.message : String(e)
-      console.warn(`[vision] Claude failed (${msg.slice(0, 120)}) → trying GPT-4o…`)
-      if (!openaiKey) throw new Error(`Claude Vision failed: ${msg} (no GPT-4o fallback key)`)
+      errors.push(`Claude: ${msg.slice(0, 120)}`)
+      console.warn(`[vision] Claude failed → trying GPT-4o… (${msg.slice(0, 80)})`)
     }
+  } else {
+    console.log('[vision] Claude skipped — no key')
   }
 
-  // 2 — Fall back to GPT-4o Vision
+  // 2 — Try GPT-4o Vision (per-token cost, high quality)
   if (openaiKey) {
-    const prompt = await callGPT4Vision(physPath, openaiKey)
-    console.log('[vision] GPT-4o succeeded')
-    return { prompt, provider: 'gpt4o' }
+    try {
+      const prompt = await callGPT4Vision(physPath, openaiKey)
+      console.log('[vision] ✅ GPT-4o succeeded')
+      return { prompt, provider: 'gpt4o' }
+    } catch (e: unknown) {
+      const msg = e instanceof Error ? e.message : String(e)
+      errors.push(`GPT-4o: ${msg.slice(0, 120)}`)
+      console.warn(`[vision] GPT-4o failed → trying Gemini… (${msg.slice(0, 80)})`)
+    }
+  } else {
+    console.log('[vision] GPT-4o skipped — no key')
   }
 
-  throw new Error('No vision provider available. Add Anthropic OR OpenAI key in ⚙️ Image Providers.')
+  // 3 — Try Gemini 1.5 Flash (FREE tier with Google AI Studio key)
+  if (geminiKey) {
+    try {
+      const prompt = await callGeminiVision(physPath, geminiKey)
+      console.log('[vision] ✅ Gemini succeeded (free tier)')
+      return { prompt, provider: 'gemini' }
+    } catch (e: unknown) {
+      const msg = e instanceof Error ? e.message : String(e)
+      errors.push(`Gemini: ${msg.slice(0, 120)}`)
+      console.error(`[vision] Gemini also failed: ${msg.slice(0, 80)}`)
+    }
+  } else {
+    console.log('[vision] Gemini skipped — no key')
+  }
+
+  throw new Error(
+    `All vision providers failed.\n${errors.join('\n')}\n` +
+    'Fix: add at least one key in ⚙️ Image Providers (Gemini free tier is easiest).',
+  )
 }
 
 // ─── types ───────────────────────────────────────────────────────────────────
 
 export interface SidecarEntry {
   taskPath: string
+  topic?: string
   original_path: string | null
   image_type: 'ai_generated' | 'code_rendered' | 'text_only' | 'original' | 'pending'
   sub_type?: '2A' | '2B' | null
@@ -195,10 +292,47 @@ function replacePathInQuestionsTs(content: string, originalPath: string, newPath
   return updated
 }
 
+/**
+ * For a code_rendered (interactive artefact) entry, inject an `artefact: { component, data, caption? }`
+ * property into questions.ts, anchored immediately after the `figImages: [...]` array that references
+ * `originalPath`. This is what makes the artefact render in the live exam (ExtendedQuestion reads
+ * q.artefact / task.artefact, and figImages are suppressed when an artefact is present).
+ * Returns the updated content (unchanged if no anchor found).
+ */
+function injectArtefactIntoQuestionsTs(
+  content: string,
+  originalPath: string,
+  component: string,
+  data: unknown,
+  caption?: string | null,
+): { content: string; changed: boolean } {
+  const base = escapeRe(path.basename(originalPath))
+  // The figImages array literal that contains the figure's basename (template `${P}stem` or quoted path).
+  const re = new RegExp('figImages:\\s*\\[[^\\]]*' + base + '[^\\]]*\\]')
+  const m = content.match(re)
+  if (!m) return { content, changed: false }
+
+  const dataLiteral = JSON.stringify(data ?? {})
+  const capLiteral = caption ? `, caption: ${JSON.stringify(caption)}` : ''
+  const artefactLiteral = `artefact: { component: ${JSON.stringify(component)}, data: ${dataLiteral}${capLiteral} }`
+  // Insert AFTER the figImages array; the comma keeps the object literal valid whether or not
+  // figImages was the last property.
+  const insertion = `${m[0]},\n        ${artefactLiteral}`
+  // If an artefact already exists adjacent, replace it instead of duplicating.
+  const dupRe = new RegExp(escapeRe(m[0]) + ',\\s*\\n\\s*artefact:\\s*\\{[\\s\\S]*?\\}\\s*\\}')
+  if (dupRe.test(content)) {
+    return { content: content.replace(dupRe, insertion), changed: true }
+  }
+  return { content: content.replace(m[0], insertion), changed: true }
+}
+
 // ─── server actions ───────────────────────────────────────────────────────────
 
 /**
- * Approve an image: update sidecar, replace path in questions.ts, run tsc.
+ * Approve a figure. Two kinds:
+ *  - ai_generated (SVG): swap the figImages path in questions.ts to the generated .svg.
+ *  - code_rendered (interactive artefact): inject `artefact:{component,data}` into questions.ts.
+ * Both run tsc and roll back on failure.
  */
 export async function approveImage(
   paperId: string,
@@ -211,14 +345,45 @@ export async function approveImage(
 
   const entry = entries[idx]
   const originalPath = entry.original_path
+  const isArtefact = entry.image_type === 'code_rendered' && !!entry.render_component
 
   // Update sidecar
   entries[idx] = { ...entry, approved: true, needs_review: false }
   writeSidecar(paperId, entries)
 
-  // Update questions.ts if there's a path to replace
+  const qFile = path.join(DATA_PAPERS, paperId, 'questions.ts')
+
+  if (isArtefact && originalPath && fs.existsSync(qFile)) {
+    // ── interactive artefact path ──
+    const content = fs.readFileSync(qFile, 'utf8')
+    const { content: updated, changed } = injectArtefactIntoQuestionsTs(
+      content,
+      originalPath,
+      entry.render_component as string,
+      entry.render_data,
+      (entry.render_data as { caption?: string } | null)?.caption ?? entry.topic ?? null,
+    )
+    if (!changed) {
+      entries[idx] = entry
+      writeSidecar(paperId, entries)
+      return { ok: false, error: `Could not find a figImages anchor for ${path.basename(originalPath)} in questions.ts to attach the artefact.` }
+    }
+    fs.writeFileSync(qFile, updated)
+    try {
+      execSync('npx tsc --noEmit', { cwd: REPO_ROOT, stdio: 'pipe' })
+    } catch (e: unknown) {
+      fs.writeFileSync(qFile, content)
+      entries[idx] = entry
+      writeSidecar(paperId, entries)
+      const msg = e instanceof Error ? e.message : String(e)
+      return { ok: false, error: `TypeScript error after approval — rolled back:\n${msg}` }
+    }
+    revalidatePath('/admin/image-review')
+    return { ok: true }
+  }
+
+  // ── ai_generated (SVG) path: swap the figImages path ──
   if (originalPath && generatedPath) {
-    const qFile = path.join(DATA_PAPERS, paperId, 'questions.ts')
     if (fs.existsSync(qFile)) {
       const content = fs.readFileSync(qFile, 'utf8')
       const updated = replacePathInQuestionsTs(content, originalPath, generatedPath)
@@ -256,7 +421,7 @@ export async function approveImage(
 export async function regenerateImage(
   paperId: string,
   taskPath: string,
-): Promise<{ ok: boolean; newUrl?: string; error?: string; visionUsed?: boolean; visionProvider?: string; visionError?: string; method?: string }> {
+): Promise<{ ok: boolean; newUrl?: string; error?: string; visionUsed?: boolean; visionProvider?: string; visionError?: string; method?: string; generationProvider?: string; generationNote?: string }> {
   const entries = readSidecar(paperId)
   const idx = entries.findIndex(e => e.taskPath === taskPath)
   if (idx === -1) return { ok: false, error: `Entry not found: ${taskPath}` }
@@ -320,7 +485,18 @@ export async function regenerateImage(
   writeSidecar(paperId, entries)
 
   revalidatePath('/admin/image-review')
-  return { ok: true, newUrl: entry.generated_path, visionUsed, visionProvider, visionError, method: result.method }
+  return {
+    ok: true,
+    newUrl: entry.generated_path,
+    visionUsed,
+    visionProvider,
+    visionError,
+    method: result.method,
+    generationProvider: result.usedProvider,
+    // When active provider failed but Stability took over, surface as an info note
+    generationNote: result.usedProvider && result.usedProvider !== 'stability' ? undefined
+      : result.error?.startsWith('Note:') ? result.error : undefined,
+  }
 }
 
 /**
@@ -339,6 +515,87 @@ export async function editPromptAndRegenerate(
   writeSidecar(paperId, entries)
 
   return regenerateImage(paperId, taskPath)
+}
+
+/**
+ * Upload a replacement image manually (PNG/JPG/WebP).
+ * Saves to the same generated_path slot so the card refreshes correctly.
+ */
+export async function uploadReplacementImage(
+  paperId: string,
+  taskPath: string,
+  formData: FormData,
+): Promise<{ ok: boolean; newUrl?: string; error?: string }> {
+  const file = formData.get('file') as File | null
+  if (!file || file.size === 0) return { ok: false, error: 'No file provided' }
+
+  const allowed = ['image/png', 'image/jpeg', 'image/webp', 'image/svg+xml']
+  if (!allowed.includes(file.type)) {
+    return { ok: false, error: `Unsupported type "${file.type}" — use PNG, JPG, WebP, or SVG` }
+  }
+  if (file.size > 10 * 1024 * 1024) {
+    return { ok: false, error: 'File too large (max 10 MB)' }
+  }
+
+  const entries = readSidecar(paperId)
+  const idx = entries.findIndex(e => e.taskPath === taskPath)
+  if (idx === -1) return { ok: false, error: `Entry not found: ${taskPath}` }
+
+  const entry = entries[idx]
+  // Use existing generated_path or derive one from paperId + taskPath
+  const ext =
+    file.type === 'image/jpeg' ? 'jpg'
+    : file.type === 'image/webp' ? 'webp'
+    : file.type === 'image/svg+xml' ? 'svg'
+    : 'png'
+  const destPath = entry.generated_path
+    ?? `/images/papers/${paperId}/${taskPath.replace(/[^a-z0-9]/gi, '-')}-uploaded.${ext}`
+
+  // Upload to the subject-wise Supabase Storage bucket (images no longer live in public/)
+  const uploaded = await uploadPapersAsset(destPath, Buffer.from(await file.arrayBuffer()))
+  if (!uploaded.ok) return { ok: false, error: `Upload to Storage failed: ${uploaded.error}` }
+
+  entries[idx] = {
+    ...entry,
+    generated_path: destPath,
+    needs_review: true,
+    regenerated_at: new Date().toISOString(),
+    _error: undefined,
+  }
+  writeSidecar(paperId, entries)
+
+  revalidatePath('/admin/image-review')
+  // cache-bust the resolved bucket URL so the card shows the new image immediately
+  return { ok: true, newUrl: destPath }
+}
+
+/**
+ * Switch an entry to code_rendered and assign an SVG component.
+ * On approval the questions.ts reference will point to the component name.
+ */
+export async function applySvgComponent(
+  paperId: string,
+  taskPath: string,
+  componentName: string,
+): Promise<{ ok: boolean; error?: string }> {
+  if (!componentName.trim()) return { ok: false, error: 'Component name required' }
+
+  const entries = readSidecar(paperId)
+  const idx = entries.findIndex(e => e.taskPath === taskPath)
+  if (idx === -1) return { ok: false, error: `Entry not found: ${taskPath}` }
+
+  entries[idx] = {
+    ...entries[idx],
+    image_type: 'code_rendered',
+    render_component: componentName.trim(),
+    needs_review: true,
+    approved: false,
+    _error: undefined,
+  }
+  writeSidecar(paperId, entries)
+
+  revalidatePath('/admin/image-review')
+  return { ok: true }
 }
 
 /**

@@ -19,17 +19,17 @@ export function Button({
   ...props
 }: ButtonProps) {
   const base =
-    'inline-flex items-center justify-center font-semibold rounded-lg transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed'
+    'inline-flex items-center justify-center font-semibold rounded-control transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed'
 
   const variants = {
     primary:
-      'bg-[#0079a8] hover:bg-[#005f82] text-white focus:ring-[#0079a8]',
+      'bg-accent hover:bg-[color:var(--accent-hover)] text-on-accent focus:ring-[color:var(--accent)]',
     secondary:
-      'border border-[#0079a8] text-[#0079a8] bg-white hover:bg-[#e5f4fa] focus:ring-[#0079a8]',
+      'border border-accent text-accent bg-surface hover:bg-accent-soft focus:ring-[color:var(--accent)]',
     danger:
-      'bg-[#c0392b] hover:bg-[#a93226] text-white focus:ring-[#c0392b]',
+      'bg-danger hover:brightness-90 text-on-accent focus:ring-[color:var(--danger)]',
     ghost:
-      'bg-transparent hover:bg-gray-100 text-gray-700 focus:ring-gray-400',
+      'bg-transparent hover:bg-surface-3 text-ink-muted focus:ring-[color:var(--border-strong)]',
   }
 
   const sizes = {

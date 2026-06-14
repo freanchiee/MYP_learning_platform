@@ -1,0 +1,235 @@
+[
+  {
+    "taskPath": "q2.tasks[e]",
+    "questionId": 2,
+    "taskLabel": "e",
+    "topic": "Radioactive decay graph",
+    "original_path": "/images/papers/physics-may-2024-v2/q2e-decay-graph.png",
+    "image_type": "code_rendered",
+    "image_prompt": "SVG: exponential decay graph — Percentage of uranium-235 nuclei remaining (0–100, minor 2 %) vs Time / millions of years (0–4000, minor 200). Smooth decay curve, half-life ≈ 700 My; 87.5 % decayed (12.5 % remaining = 3 half-lives) read at ~2100 My.",
+    "generated_path": "/images/papers/physics-may-2024-v2/q2e-decay-graph.svg",
+    "needs_review": true,
+    "approved": false,
+    "render_component": "DecaySim",
+    "render_data": {
+      "title": "Decay of uranium-235 in used fuel rods",
+      "source": "MYP physics-may-2024-v2",
+      "isotope": "U-235",
+      "daughter": "Th-231",
+      "decayMode": "alpha",
+      "halfLife": 700,
+      "units": "million years",
+      "initialCount": 100,
+      "axisMax": 4000,
+      "xAxis": "Time / millions of years",
+      "yAxis": "Percentage of uranium-235 remaining / %"
+    }
+  },
+  {
+    "taskPath": "q3.tasks[g]",
+    "questionId": 3,
+    "taskLabel": "g",
+    "topic": "Resistance vs length graph",
+    "original_path": "/images/papers/physics-may-2024-v2/q3g-graph.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: scatter plot Resistance / Ω (0–12.0, minor 0.2) vs Length / cm (0–130, minor 2) with 4 data points at (40,3.0), (60,4.7), (80,6.5), (120,9.6). Student plots (100, 8.0) and draws best-fit line through the origin (manganin wire).",
+    "generated_path": "/images/papers/physics-may-2024-v2/q3g-graph.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q5.tasks[e]",
+    "questionId": 5,
+    "taskLabel": "e",
+    "topic": "Force vs current graph",
+    "original_path": "/images/papers/physics-may-2024-v2/q5e-force-graph.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: Force / mN (-2.0 to 6.0, minor 0.4) vs Current / A (0–12, minor 0.4), scatter at I=6–11 with best-fit line crossing the x-axis at 4 A and y-intercept ≈ -2.6 mN (friction threshold).",
+    "generated_path": "/images/papers/physics-may-2024-v2/q5e-force-graph.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q1.figImages[0]",
+    "questionId": 1,
+    "taskLabel": "stem",
+    "topic": "Oil-fired power station diagram",
+    "original_path": "/images/papers/physics-may-2024-v2/q1-power-station.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: oil-fired power plant schematic — crude oil tank → oil burner / furnace → boiler / heat exchanger (liquid water → steam) → turbine → generator → electricity; used steam → cooling tower / condenser → condensed water returns.",
+    "generated_path": "/images/papers/physics-may-2024-v2/q1-power-station.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q1.tasks[f]",
+    "questionId": 1,
+    "taskLabel": "f",
+    "topic": "Greenhouse effect energy flow",
+    "original_path": "/images/papers/physics-may-2024-v2/q1f-greenhouse.png",
+    "image_type": "code_rendered",
+    "image_prompt": "SVG: Earth–Sun energy-flow diagram with 4 labelled arrows (A: solar from Sun; B: reflected by clouds; C: heat from ground; D: absorbed and re-emitted by greenhouse gases).",
+    "generated_path": "/images/papers/physics-may-2024-v2/q1f-greenhouse.svg",
+    "needs_review": true,
+    "approved": false,
+    "render_component": "SankeySim",
+    "render_data": {
+      "title": "Energy flow through Earth's atmosphere",
+      "source": "MYP physics-may-2024-v2",
+      "units": "%",
+      "flows": [
+        {
+          "label": "Solar energy from the Sun",
+          "value": 100,
+          "units": "%",
+          "kind": "in"
+        },
+        {
+          "label": "Energy reflected by top of clouds",
+          "value": 30,
+          "units": "%",
+          "kind": "loss"
+        },
+        {
+          "label": "Heat energy from the ground",
+          "value": 20,
+          "units": "%",
+          "kind": "out"
+        },
+        {
+          "label": "Heat energy absorbed and re-emitted by greenhouse gases",
+          "value": 50,
+          "units": "%",
+          "kind": "out",
+          "highlight": true
+        }
+      ],
+      "selectTarget": "Heat energy absorbed and re-emitted by greenhouse gases",
+      "options": [
+        "Solar energy from the Sun",
+        "Energy reflected by top of clouds",
+        "Heat energy from the ground",
+        "Heat energy absorbed and re-emitted by greenhouse gases"
+      ]
+    }
+  },
+  {
+    "taskPath": "q2.figImages[0]",
+    "questionId": 2,
+    "taskLabel": "stem",
+    "topic": "U-235 fission products diagram",
+    "original_path": "/images/papers/physics-may-2024-v2/q2-fission.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: incoming neutron + uranium-235 → iodine-139 + yttrium-95 + 2 free neutrons + energy. Equation strip below.",
+    "generated_path": "/images/papers/physics-may-2024-v2/q2-fission.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q3.tasks[e]",
+    "questionId": 3,
+    "taskLabel": "e",
+    "topic": "Resistance measurement circuit",
+    "original_path": "/images/papers/physics-may-2024-v2/q3e-circuit.png",
+    "image_type": "code_rendered",
+    "image_prompt": "SVG: circuit with cell, switch, ammeter in series with wire-under-test, voltmeter in parallel with wire. Position labels.",
+    "generated_path": "/images/papers/physics-may-2024-v2/q3e-circuit.svg",
+    "needs_review": true,
+    "approved": false,
+    "render_component": "CircuitSim",
+    "render_data": {
+      "title": "Build the resistance-measuring circuit",
+      "source": "MYP physics-may-2024-v2",
+      "mode": "place",
+      "component": "manganin wire",
+      "slots": [
+        {
+          "id": "ammeter",
+          "correct": "series with wire"
+        },
+        {
+          "id": "voltmeter",
+          "correct": "parallel with wire"
+        }
+      ],
+      "knownTrial": {
+        "V": 2.4,
+        "I": 0.3,
+        "R": 8.0
+      },
+      "task": "Place the ammeter in series with the wire and the voltmeter in parallel with the wire to measure its resistance."
+    }
+  },
+  {
+    "taskPath": "q4.figImages[0]",
+    "questionId": 4,
+    "taskLabel": "stem",
+    "topic": "Rare-earth magnet collision setup",
+    "original_path": "/images/papers/physics-may-2024-v2/q4-setup.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: aluminium inclined track + level track, rare-earth magnet (N-S) with two iron spheres held magnetically on right side; incoming iron sphere rolling down from height h₁.",
+    "generated_path": "/images/papers/physics-may-2024-v2/q4-setup.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q4.tasks[d]",
+    "questionId": 4,
+    "taskLabel": "d",
+    "topic": "Magnetic field options A B C D",
+    "original_path": "/images/papers/physics-may-2024-v2/q4d-magnetic-fields.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: 4 labelled panels of bar magnet field patterns. A = correct looped N→S lines; B = reversed direction; C = parallel straight lines; D = concentric circles.",
+    "generated_path": "/images/papers/physics-may-2024-v2/q4d-magnetic-fields.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q4.tasks[f]",
+    "questionId": 4,
+    "taskLabel": "f",
+    "topic": "Investigation setup h1 h2",
+    "original_path": "/images/papers/physics-may-2024-v2/q4f-setup.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: two-ramp magnetic collision setup with labelled initial height h₁ on left aluminium ramp and maximum exit height h₂ on right aluminium ramp, rare-earth magnet at base.",
+    "generated_path": "/images/papers/physics-may-2024-v2/q4f-setup.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q5.figImages[0]",
+    "questionId": 5,
+    "taskLabel": "stem",
+    "topic": "Motor effect rod setup",
+    "original_path": "/images/papers/physics-may-2024-v2/q5-motor-setup.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: conducting rod across two parallel rails between rows of magnets (N below, S above); switch, ammeter, power supply on the left; 20 cm travel-distance arrow.",
+    "generated_path": "/images/papers/physics-may-2024-v2/q5-motor-setup.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q6.tasks[b]",
+    "questionId": 6,
+    "taskLabel": "b",
+    "topic": "Reflecting telescope ray diagram",
+    "original_path": "/images/papers/physics-may-2024-v2/q6b-reflecting-telescope.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: reflecting telescope ray diagram — parallel rays from a distant object reflected off large curved primary mirror at far end, onto a small angled flat secondary mirror, then up through eyepiece opening at top.",
+    "generated_path": "/images/papers/physics-may-2024-v2/q6b-reflecting-telescope.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q6.tasks[c]",
+    "questionId": 6,
+    "taskLabel": "c",
+    "topic": "Keck Telescope observatory illustration",
+    "original_path": "/images/papers/physics-may-2024-v2/q6c-keck-telescope.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: twin observatory domes of the W. M. Keck Observatory at Mauna Kea, Hawaii — 10 m segmented primary mirror with hexagonal segment inset and annotation panel.",
+    "generated_path": "/images/papers/physics-may-2024-v2/q6c-keck-telescope.svg",
+    "needs_review": true,
+    "approved": false
+  }
+]

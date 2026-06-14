@@ -1,0 +1,46 @@
+[
+  {
+    "taskPath": "q2.tasks[d]",
+    "questionId": 2,
+    "taskLabel": "d",
+    "topic": "Cooling curve of tin",
+    "original_path": "/images/papers/chemistry-nov-2019/page-05.png",
+    "image_type": "code_rendered",
+    "render_component": "ThermalSim",
+    "render_data": {
+      "title": "Cooling curve of tin",
+      "source": "MYP chemistry-nov-2019-v1",
+      "mode": "cool",
+      "substance": "tin",
+      "timeUnit": "min",
+      "tempUnit": "°C",
+      "timeMin": 0,
+      "totalTime": 20,
+      "yMinC": 200,
+      "yMaxC": 250,
+      "yTicksC": [200, 210, 220, 230, 240, 250],
+      "plateaus": [
+        { "atC": 232, "label": "freezing", "fromTime": 4, "toTime": 11 }
+      ],
+      "series": [
+        [0, 250],
+        [1.5, 242],
+        [3, 235],
+        [4, 232],
+        [7.5, 232],
+        [11, 232],
+        [12.5, 226],
+        [14.5, 218],
+        [17, 210],
+        [20, 204]
+      ],
+      "markers": [
+        { "id": "A", "time": 1.5, "tempC": 242, "state": "liquid" },
+        { "id": "B", "time": 14.5, "tempC": 218, "state": "solid" }
+      ]
+    },
+    "generated_path": "/images/papers/chemistry-nov-2019-v1/q2-cooling-curve.svg",
+    "needs_review": true,
+    "approved": false
+  }
+]

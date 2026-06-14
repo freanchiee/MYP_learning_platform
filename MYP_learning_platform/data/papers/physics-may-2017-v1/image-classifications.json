@@ -1,0 +1,118 @@
+[
+  {
+    "taskPath": "q8",
+    "questionId": 8,
+    "taskLabel": null,
+    "topic": "Inverse relationship (stopping distance vs sail width)",
+    "original_path": "/images/papers/physics-may-2017-v1/q7e-graph1.svg",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG scatter graph 'Stopping distance against sail width'. X-axis W / m from 0 to 0.2 (ticks 0, 0.05, 0.10, 0.15, 0.20), no minor gridlines; Y-axis Stopping distance / m from 0 to 25 (ticks 0,5,10,15,20,25). Smooth inverse-decay best-fit curve (d = k/W, k = 2.1) through teal × markers descending from (0.10, 21) to (0.19, 11). Domain stops at the data — does not extend to the origin.",
+    "generated_path": "/images/papers/physics-may-2017-v1/q7e-graph1.svg",
+    "needs_review": false,
+    "approved": true
+  },
+  {
+    "taskPath": "q8",
+    "questionId": 8,
+    "taskLabel": null,
+    "topic": "Linearisation test (stopping distance vs 1/W squared)",
+    "original_path": "/images/papers/physics-may-2017-v1/q7g-graph4.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG scatter graph 'Stopping distance against inverse of sail width squared'. X-axis W⁻² / m⁻² from 0 to 120 (ticks 0,20,40,60,80,100,120), no minor gridlines; Y-axis Stopping distance / m from 0 to 25 (ticks 0,5,10,15,20,25). Because the true relationship is d ∝ 1/W (not 1/W²), the plot against 1/W² is a concave-down rising curve (d = 2.1·√x), NOT a straight line through the origin. Teal × markers from (27.7, 11) to (100, 21); curve drawn only across the data domain 27.7 to 100.",
+    "generated_path": "/images/papers/physics-may-2017-v1/q7g-graph4.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q1",
+    "questionId": 1,
+    "taskLabel": null,
+    "topic": "Red dwarf vs blue hypergiant",
+    "original_path": "/images/papers/physics-may-2017-v1/q1-stars.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: two side-by-side space panels showing a small cool red dwarf star (orange-red, surface flares) and a very large hot blue hypergiant (blue-white with corona), labelled 'Red dwarf (cool)' and 'Blue hypergiant (hot)'.",
+    "generated_path": "/images/papers/physics-may-2017-v1/q1-stars.svg",
+    "needs_review": false,
+    "approved": true
+  },
+  {
+    "taskPath": "q4",
+    "questionId": 4,
+    "taskLabel": null,
+    "topic": "Binary star system with transiting exoplanet",
+    "original_path": "/images/papers/physics-may-2017-v1/q4-binary.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: binary star system on dark space background — a large hot blue star (left) and a small cool red star (right) orbiting a common centre of mass (yellow dot). Dashed elliptical orbital paths and dashed green habitable-zone rings around each star (the blue star's HZ is much farther out). A dark exoplanet transits in front of the blue star with a motion-arrow. Inset light-curve panel shows brightness-vs-time with a transit dip.",
+    "generated_path": "/images/papers/physics-may-2017-v1/q4-binary.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q5",
+    "questionId": 5,
+    "taskLabel": null,
+    "topic": "Ramp investigation apparatus — steel ball",
+    "original_path": "/images/papers/physics-may-2017-v1/q5-ramp-setup.png",
+    "image_type": "code_rendered",
+    "render_component": "ProjectileSim",
+    "render_data": {
+      "title": "Ramp investigation — steel ball rolling onto a flat surface",
+      "source": "MYP physics-may-2017-v1",
+      "mode": "launch",
+      "g": 10,
+      "launch": {
+        "angleDeg": 34,
+        "speed": 3.0,
+        "angleMin": 5,
+        "angleMax": 60,
+        "speedMin": 1,
+        "speedMax": 6,
+        "g": 10
+      }
+    },
+    "image_prompt": "SVG: ramp on a clamp stand sloping down to a flat bench. A steel ball (mass 0.30 kg) sits partway down the ramp; label 'Steel ball — 0.30 kg'. Ramp height marked 45 cm ('Ramp height / cm') and ramp length marked 80 cm ('Ramp length / cm'). A teal double-arrow below the flat surface shows 'distance rolled on flat'.",
+    "generated_path": "/images/papers/physics-may-2017-v1/q5-ramp-setup.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q7",
+    "questionId": 7,
+    "taskLabel": null,
+    "topic": "Dynamic trolley with rectangular sail",
+    "original_path": "/images/papers/physics-may-2017-v1/q7-trolley.png",
+    "image_type": "code_rendered",
+    "render_component": "ProjectileSim",
+    "render_data": {
+      "title": "Dynamic trolley with rectangular sail — measure the stopping distance",
+      "source": "MYP physics-may-2017-v1",
+      "mode": "launch",
+      "g": 10,
+      "launch": {
+        "angleDeg": 30,
+        "speed": 7.25,
+        "angleMin": 5,
+        "angleMax": 60,
+        "speedMin": 1,
+        "speedMax": 12,
+        "g": 10
+      }
+    },
+    "image_prompt": "SVG: 'Dynamic trolley experiment — rectangular sail' — wooden toy trolley with red wheels and a vertical RECTANGULAR dark-grey sail of width W mounted on a mast. Yellow double-arrow above the sail shows the width W. Ruler scale below labelled 0.0 to 25 m; 'Click to push down release mechanism' callout at the launcher.",
+    "generated_path": "/images/papers/physics-may-2017-v1/q7-trolley.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q9",
+    "questionId": 9,
+    "taskLabel": null,
+    "topic": "Prosthetic materials data table — UHMWPE / Bone / Titanium alloy / Carbon fibre",
+    "original_path": "/images/papers/physics-may-2017-v1/q8-materials-table.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG data table with columns Material, E / GPa, Density / g cm^-3 and rows: Material P (UHMWPE) 0.7 0.94; Bone 15 1.75; Titanium alloy 110 4.50; Carbon fibre 40 1.60.",
+    "generated_path": "/images/papers/physics-may-2017-v1/q8-materials-table.svg",
+    "needs_review": true,
+    "approved": false
+  }
+]

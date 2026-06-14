@@ -1,0 +1,236 @@
+[
+  {
+    "taskPath": "q5.tasks[d]",
+    "questionId": 5,
+    "taskLabel": "d",
+    "topic": "Electromagnetism — proportional relationship",
+    "original_path": "/images/papers/physics-nov-2020/q5d-graph.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: scatter graph of weight of pins supported (0–1.6 N, ticks every 0.2, minor 0.05) vs number of turns per centimetre (0–7 cm⁻¹, integer ticks, minor 0.2). Second group uses pins of weight 0.01 N each, so readings are quantized to 0.01 N. Data points scattered along a straight best-fit line through the origin reaching (6, 1.5), gradient ≈ 0.25 N per cm⁻¹, showing direct proportionality.",
+    "generated_path": "/images/papers/physics-nov-2020-v1/q5d-graph.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q8.tasks[d]",
+    "questionId": 8,
+    "taskLabel": "d",
+    "topic": "Magnetism — inverse force–distance relationship",
+    "original_path": "/images/papers/physics-nov-2020/q8d-graph.png",
+    "image_type": "code_rendered",
+    "render_component": "FieldSim",
+    "render_data": {
+      "title": "Repelling force vs distance between maglev magnets",
+      "source": "MYP physics-nov-2020-v1",
+      "quantity": "magnetic repelling force",
+      "relationship": "force ∝ 1/distance",
+      "k": 700,
+      "distanceUnits": "cm",
+      "distanceRange": [0.23, 2.6],
+      "forceUnits": "kN",
+      "forceRange": [270, 3000],
+      "slider": "distance between magnets",
+      "readout": "repelling force",
+      "passengerCoupling": "More passengers → greater load → the train sinks closer to the track → the gap between the magnets decreases → from the curve the repelling force increases."
+    },
+    "generated_path": "/images/papers/physics-nov-2020-v1/q8d-graph.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q1",
+    "questionId": 1,
+    "taskLabel": null,
+    "topic": "Four animals — thermoregulation",
+    "original_path": "/images/papers/physics-nov-2020/q1-animals.png",
+    "image_type": "ai_generated",
+    "image_prompt": "Hand-authored copyright-safe SVG recreation for variant: Four animals — thermoregulation.",
+    "generated_path": "/images/papers/physics-nov-2020-v1/q1-animals.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q2",
+    "questionId": 2,
+    "taskLabel": null,
+    "topic": "Stelvio Pass mountain course",
+    "original_path": "/images/papers/physics-nov-2020/q2-pikes.png",
+    "image_type": "ai_generated",
+    "image_prompt": "Hand-authored copyright-safe SVG recreation for variant: Stelvio Pass mountain course.",
+    "generated_path": "/images/papers/physics-nov-2020-v1/q2-pikes.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q2.tasks[a]",
+    "questionId": 2,
+    "taskLabel": "a",
+    "topic": "Sankey energy flow — race car engine",
+    "original_path": "/images/papers/physics-nov-2020/q2a-sankey.png",
+    "image_type": "code_rendered",
+    "render_component": "SankeySim",
+    "render_data": {
+      "title": "Energy changes in a race car engine",
+      "source": "MYP physics-nov-2020-v1",
+      "units": "%",
+      "mode": "drag-labels-onto-arrows",
+      "input": { "label": "Chemical energy (fuel)", "value": 100 },
+      "outputs": [
+        { "label": "Useful energy output", "value": 25, "kind": "out" },
+        { "label": "Heat losses", "value": 70, "kind": "loss" },
+        { "label": "Frictional losses", "value": 5, "kind": "loss" }
+      ],
+      "labelBank": ["Useful energy output", "Heat losses", "Frictional losses"],
+      "conservation": "25% + 70% + 5% = 100%"
+    },
+    "generated_path": "/images/papers/physics-nov-2020-v1/q2a-sankey.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q2.tasks[b]",
+    "questionId": 2,
+    "taskLabel": "b",
+    "topic": "Heavy car vs lighter race car",
+    "original_path": "/images/papers/physics-nov-2020/q2b-cars.png",
+    "image_type": "ai_generated",
+    "image_prompt": "Hand-authored copyright-safe SVG recreation for variant: Heavy car vs lighter race car.",
+    "generated_path": "/images/papers/physics-nov-2020-v1/q2b-cars.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q3",
+    "questionId": 3,
+    "taskLabel": null,
+    "topic": "Night sky — moon, stars, satellite",
+    "original_path": "/images/papers/physics-nov-2020/q3-nightsky.png",
+    "image_type": "ai_generated",
+    "image_prompt": "Hand-authored copyright-safe SVG recreation for variant: Night sky — moon, stars, satellite.",
+    "generated_path": "/images/papers/physics-nov-2020-v1/q3-nightsky.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q4",
+    "questionId": 4,
+    "taskLabel": null,
+    "topic": "Kibble balance — electromagnet vs steel washers",
+    "original_path": "/images/papers/physics-nov-2020/q4-kibble.png",
+    "image_type": "ai_generated",
+    "image_prompt": "Hand-authored copyright-safe SVG recreation for variant: Kibble balance — electromagnet vs steel washers.",
+    "generated_path": "/images/papers/physics-nov-2020-v1/q4-kibble.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q5",
+    "questionId": 5,
+    "taskLabel": null,
+    "topic": "Electromagnet investigation — 6 coil spacings",
+    "original_path": "/images/papers/physics-nov-2020/q5-paperclips.png",
+    "image_type": "code_rendered",
+    "render_component": "CircuitSim",
+    "render_data": {
+      "title": "Electromagnet investigation — turns per cm vs weight supported",
+      "source": "MYP physics-nov-2020-v1",
+      "mode": "iv",
+      "component": "Electromagnet",
+      "battery": "fixed 2 A",
+      "task": "Current is kept constant at 2 A. Sweep the slider through the six coil settings; as the turns per centimetre increase, the electromagnet supports more weight of washers (each washer = 0.3 N).",
+      "variableResistor": { "label": "Turns per centimetre", "min": 1.0, "max": 6.0 },
+      "ivPairs": [
+        { "Rvar": 6.0, "I": 2, "Vbulb": 1.8, "brightness": "full", "label": "6.0 cm⁻¹ → 1.8 N" },
+        { "Rvar": 3.0, "I": 2, "Vbulb": 0.9, "brightness": "bright", "label": "3.0 cm⁻¹ → 0.9 N" },
+        { "Rvar": 2.0, "I": 2, "Vbulb": 0.6, "brightness": "medium", "label": "2.0 cm⁻¹ → 0.6 N" },
+        { "Rvar": 1.5, "I": 2, "Vbulb": 0.3, "brightness": "dim", "label": "1.5 cm⁻¹ → 0.3 N" },
+        { "Rvar": 1.2, "I": 2, "Vbulb": 0.3, "brightness": "dim", "label": "1.2 cm⁻¹ → 0.3 N" },
+        { "Rvar": 1.0, "I": 2, "Vbulb": 0.3, "brightness": "very dim", "label": "1.0 cm⁻¹ → 0.3 N" }
+      ]
+    },
+    "generated_path": "/images/papers/physics-nov-2020-v1/q5-paperclips.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q6",
+    "questionId": 6,
+    "taskLabel": null,
+    "topic": "Capillary tubes — water height vs diameter",
+    "original_path": "/images/papers/physics-nov-2020/q6-capillary.png",
+    "image_type": "ai_generated",
+    "image_prompt": "Hand-authored copyright-safe SVG recreation for variant: Capillary tubes — water height vs diameter.",
+    "generated_path": "/images/papers/physics-nov-2020-v1/q6-capillary.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q7",
+    "questionId": 7,
+    "taskLabel": null,
+    "topic": "Tall structures — heights bar chart",
+    "original_path": "/images/papers/physics-nov-2020/q7-redwood.png",
+    "image_type": "ai_generated",
+    "image_prompt": "Hand-authored copyright-safe SVG recreation for variant: Tall structures — heights bar chart.",
+    "generated_path": "/images/papers/physics-nov-2020-v1/q7-redwood.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q8",
+    "questionId": 8,
+    "taskLabel": null,
+    "topic": "Maglev train (variant palette)",
+    "original_path": "/images/papers/physics-nov-2020/q8-maglev.png",
+    "image_type": "ai_generated",
+    "image_prompt": "Hand-authored copyright-safe SVG recreation for variant: Maglev train (variant palette).",
+    "generated_path": "/images/papers/physics-nov-2020-v1/q8-maglev.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q8.tasks[b]",
+    "questionId": 8,
+    "taskLabel": "b",
+    "topic": "Maglev forces diagram",
+    "original_path": "/images/papers/physics-nov-2020/q8b-forces.png",
+    "image_type": "code_rendered",
+    "render_component": "DragSort",
+    "render_data": {
+      "title": "Maglev forces — match each system to its force",
+      "source": "MYP physics-nov-2020-v1",
+      "mode": "bins",
+      "prompt": "Identify the force corresponding to each maglev system shown in the diagram.",
+      "items": [
+        "Upward force (blue)",
+        "Sideways force (green)",
+        "Forward force (red)"
+      ],
+      "bins": [
+        "Levitation system",
+        "Guidance system",
+        "Propulsion system"
+      ],
+      "correct": {
+        "Levitation system": "Upward force (blue)",
+        "Guidance system": "Sideways force (green)",
+        "Propulsion system": "Forward force (red)"
+      }
+    },
+    "generated_path": "/images/papers/physics-nov-2020-v1/q8b-forces.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q9",
+    "questionId": 9,
+    "taskLabel": null,
+    "topic": "Transport options infographic",
+    "original_path": "/images/papers/physics-nov-2020/q9-transport.png",
+    "image_type": "ai_generated",
+    "image_prompt": "Hand-authored copyright-safe SVG recreation for variant: Transport options infographic.",
+    "generated_path": "/images/papers/physics-nov-2020-v1/q9-transport.svg",
+    "needs_review": true,
+    "approved": false
+  }
+]

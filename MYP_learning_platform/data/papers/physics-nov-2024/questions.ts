@@ -57,7 +57,7 @@ export const questions: Question[] = [
         label: 'e',
         text: 'A wrecking ball is an example of a pendulum that can be used to demolish buildings. It is a very heavy steel ball hanging from a crane, which is released and swung to hit the structure. Mass of steel ball = 2000 kg.\n\nInitially, the ball is stationary. The crane operator releases the ball from a height of 12.5 m. The ball hits the building at 4.5 m above the ground.\n\n**Calculate** the kinetic energy of the ball when it hits the building at 4.5 m above the ground. You should assume that the acceleration due to gravity g = 9.81 m s⁻². Give your result in kJ rounded to two significant figures.',
         marks: 4,
-        figImages: [`${P}page-02-crop.png`],
+        figImages: ['/images/papers/physics-nov-2024/page-02.svg'],
         ph: 'Show your working:\nHeight change: Δh = 12.5 − 4.5 = ... m\nUsing conservation of energy: KE = mgh\nKE = 2000 × 9.81 × ...\nKE = ... J = ... kJ (2 s.f.)',
       },
       {
@@ -80,7 +80,7 @@ export const questions: Question[] = [
     topicGroup: 'Nuclear & Atomic Physics',
     tags: { unit: 'atomic-physics', topics: ['alpha radiation', 'radioactive decay', 'half-life'], level: 'proficient' },
     stem: 'Smoke detectors are devices that sound an alarm when smoke enters them. The sound of the alarm warns people to take action in the event of a fire. Some smoke detectors use the properties of radiation to detect smoke.',
-    figImages: [`${P}page-03-crop.png`],
+    figImages: ['/images/papers/physics-nov-2024/page-03.svg'],
     tasks: [
       {
         label: 'a',
@@ -112,7 +112,7 @@ export const questions: Question[] = [
         label: 'e',
         text: '**Determine** the half-life of americium-241 in years using the graph shown.',
         marks: 1,
-        figImages: [`${P}page-04-crop.png`],
+        figImages: ['/images/papers/physics-nov-2024/page-04.svg'],
         ph: 'Starting nuclei = 10 000. Half = 5 000.\nRead the time on the x-axis where the curve crosses 5 000 nuclei.\nHalf-life ≈ ___ years',
       },
       {
@@ -141,7 +141,7 @@ export const questions: Question[] = [
     topicGroup: 'Electricity & Magnetism',
     tags: { unit: 'electricity-circuits', topics: ['resistance', "Ohm's law", 'series circuits'], level: 'proficient' },
     stem: 'A resistor is an electrical component that limits the flow of current in a circuit and converts electrical energy to heat. Resistance can be measured using an ohmmeter.\n\nA student is interested in studying resistance. They decide to model resistors using cylinders of conducting material. Their research question is:\n\n"What is the relationship between the diameter of a cylinder and its resistance?"',
-    figImages: [`${P}page-05-crop.png`],
+    figImages: ['/images/papers/physics-nov-2024/page-05.svg'],
     tasks: [
       {
         label: 'a',
@@ -181,7 +181,7 @@ export const questions: Question[] = [
         marks: 1,
         widget: 'radio_select',
         widgetOptions: ['A', 'B', 'C', 'D'],
-        figImages: [`${P}page-07-crop.png`],
+        figImages: ['/images/papers/physics-nov-2024/page-07.svg?t=1781193618295'],
         ph: 'Select A, B, C, or D',
       },
       {
@@ -215,7 +215,7 @@ export const questions: Question[] = [
         label: 'b',
         text: 'The student uses a lamp as a light source and an ohmmeter to measure the resistance.\n\n**Design** an investigation the student could use to test their prediction. In your answer, you should include:\n\n• the independent variable and dependent variable\n• two control variables and a justification of why they should be controlled\n• a list of equipment\n• a detailed method for how you will collect data\n• an explanation of how you will collect sufficient data.',
         marks: 13,
-        figImages: [`${P}page-08-crop.png`],
+        figImages: ['/images/papers/physics-nov-2024/page-08.svg'],
         ph: 'VARIABLES:\nIndependent variable: distance between lamp and LDR (cm)\nDependent variable: resistance of LDR (Ω, measured by ohmmeter)\nControl variable 1: ___ — because if this changes, it would affect the light intensity...\nControl variable 2: ___ — because...\n\nEQUIPMENT:\n•\n•\n•\n\nMETHOD:\n1. Set up the lamp and LDR on a ruler/track.\n2. Place the LDR at a distance of ___ cm from the lamp.\n3. Record the resistance shown on the ohmmeter.\n4. Move the LDR to the next distance (___ cm) and repeat...\n\nSUFFICIENT DATA:\n• Range of distances: ___ cm to ___ cm\n• Intervals: every ___ cm (___ data points)\n• Repeats: ___ trials per distance (to calculate mean)',
       },
     ],
@@ -232,7 +232,7 @@ export const questions: Question[] = [
     topicGroup: 'Electricity & Magnetism',
     tags: { unit: 'electricity-circuits', topics: ['resistance', "Ohm's law", 'measuring current and voltage'], level: 'proficient' },
     stem: 'Another student decides to investigate the effect of varying the temperature of a resistor on its resistance. Instead of using an ohmmeter, this student measures current in order to calculate resistance. The supply voltage is kept constant throughout the investigation. The temperature of each resistor is modified by immersing it in a temperature-controlled bead bath.\n\nThe student\'s research question is: "How does the temperature of a resistor affect the current in a circuit?"',
-    figImages: [`${P}page-09-crop.png`],
+    figImages: ['/images/papers/physics-nov-2024/page-09.svg?t=1781193960296'],
     tasks: [
       {
         label: 'a',
@@ -263,14 +263,14 @@ export const questions: Question[] = [
         label: 'e',
         text: 'The student predicts: "As the temperature of the resistor increases, the current through the resistor will decrease. I predict that there will be an **inversely proportional** relationship between the variables."\n\nThe graph of their results is shown below.\n\nUse data from the graph and a calculation to **explain** whether the student\'s prediction is supported.',
         marks: 2,
-        figImages: [`${P}page-11-crop.png`],
+        figImages: ['/images/papers/physics-nov-2024/current-vs-temperature.svg'],
         ph: 'To test inverse proportion: check if I × T = constant for all data points.\nFrom the graph:\n• At T = ___ °C, I ≈ ___ mA → product = ___\n• At T = ___ °C, I ≈ ___ mA → product = ___\nAre the products constant? ___\nConclusion: The prediction is (supported / not supported) because...',
       },
       {
         label: 'f',
         text: 'Having measured the current and voltage, additional processing is required to find the relationship between temperature and resistance. The voltage was kept constant at 30 V.\n\nUsing the graph in part (e) and information from the formula sheet, **calculate** the missing resistance value for the data shown.',
         marks: 2,
-        figImages: [`${P}page-11b-crop.png`],
+        figImages: ['/images/papers/physics-nov-2024/page-11b.svg'],
         ph: 'Read the current at 50 °C from the graph: I ≈ ___ mA = ___ A\nFormula: R = V / I\nR = 30 / ___ = ___ Ω\n(Round to nearest whole number)',
       },
       {
@@ -311,7 +311,7 @@ export const questions: Question[] = [
     topicGroup: 'Space & Astrophysics',
     tags: { unit: 'work-energy', topics: ['energy sources (renewable vs non-renewable)', 'energy efficiency'], level: 'advanced' },
     stem: 'Different communities around the world do not have equal access to clean water and this is a challenge for fair development.\n\nA water tower is an elevated structure found in many economically developed countries. It holds a water tank high above the ground. This allows the water to be distributed to the local area through a network of pipes.\n\nThe images below show a water tower in Finland with a capacity of 12 600 m³ and a height of 52 m.',
-    figImages: [`${P}page-13-crop.png`],
+    figImages: ['/images/papers/physics-nov-2024/page-13.svg'],
     tasks: [
       {
         label: 'a',
@@ -353,7 +353,7 @@ export const questions: Question[] = [
         marks: 1,
         widget: 'radio_select',
         widgetOptions: ['1', '2', '3', '4'],
-        figImages: [`${P}page-15-crop.png`],
+        figImages: ['/images/papers/physics-nov-2024/page-15.svg'],
         ph: 'Select 1, 2, 3, or 4',
       },
       {

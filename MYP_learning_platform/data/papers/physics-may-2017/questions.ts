@@ -23,7 +23,7 @@ export const questions: Question[] = [
     topicCanonical: 'Solar System, Gravity & Space',
     topicGroup: 'Space & Astrophysics',
     stem: 'The colours of visible light emitted from a star are related to the star\'s temperature. Stars appear more red when they cool down and approach the end of their life. Young, hot stars appear more blue.',
-    figImages: [`${P}q1-stars.png`],
+    figImages: ['/images/papers/physics-may-2017/q1-stars.svg'],
     tags: { unit: 'astrophysics', topics: ['star temperature', 'colour', 'EM spectrum', 'light properties'], level: 'developing' },
     tasks: [
       {
@@ -148,7 +148,7 @@ export const questions: Question[] = [
     topicCanonical: 'Solar System, Gravity & Space',
     topicGroup: 'Space & Astrophysics',
     stem: 'Astronomers searching for Earth-like planets use a transit method: a planet passing in front of its star causes a measurable reduction in the brightness of light reaching Earth.',
-    figImages: [`${P}q1-stars.png`],
+    figImages: ['/images/papers/physics-may-2017/q1-stars.svg'],
     tags: { unit: 'astrophysics', topics: ['planets', 'habitable zone', 'transit method', 'luminosity'], level: 'developing' },
     tasks: [
       {
@@ -352,7 +352,7 @@ export const questions: Question[] = [
     topicCanonical: "Newton's Laws & Momentum",
     topicGroup: 'Forces & Motion',
     stem: 'The student analyses their stopping distance data further by plotting four graphs: Graph 1 (stopping distance vs radius R), Graph 2 (stopping distance vs R²), Graph 3 (stopping distance vs 1/R), Graph 4 (stopping distance vs 1/R²).',
-    figImages: [`${P}q7e-graph1.png`, `${P}q7g-graph4.png`],
+    figImages: ['/images/papers/physics-may-2017/q7e-graph1.svg', `${P}q7g-graph4.png`],
     tags: { unit: 'forces-interactions', topics: ['data processing', 'proportionality', 'inverse relationship', 'drag'], level: 'advanced' },
     tasks: [
       {
@@ -392,7 +392,7 @@ export const questions: Question[] = [
     topicCanonical: "Newton's Laws & Momentum",
     topicGroup: 'Forces & Motion',
     stem: 'When a force is applied to a material it can cause a change in the length of that material. Young\'s modulus (E) is a measure of how much the material can be changed. Stiffer or more rigid materials have a bigger value of E. The table shows data for some of the materials used in prostheses.',
-    figImages: [`${P}q8-materials-table.png`],
+    figImages: ['/images/papers/physics-may-2017/q8-materials-table.svg'],
     tags: { unit: 'forces-interactions', topics: ['materials', 'Young\'s modulus', 'density', 'prosthetics'], level: 'proficient' },
     tasks: [
       {

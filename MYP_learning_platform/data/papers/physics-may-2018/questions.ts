@@ -31,7 +31,7 @@ export const questions: Question[] = [
         marks: 1,
         widget: 'radio_select',
         widgetOptions: ['A', 'B', 'C', 'D'],
-        figImages: [`${P}q1a-field-diagrams.png`],
+        figImages: ['/images/papers/physics-may-2018/q1a-field-diagrams.svg'],
         ph: 'Select A, B, C, or D',
       },
       {
@@ -50,14 +50,14 @@ export const questions: Question[] = [
         label: 'd',
         text: 'The diagram shows a transformer with a primary coil of **10 turns** connected to a **110 V** supply. The secondary coil has **20 turns**. **Calculate** the output voltage of the secondary coil. Show your working.',
         marks: 2,
-        figImages: [`${P}q1d-transformer.png`],
+        figImages: ['/images/papers/physics-may-2018/q1d-transformer.svg'],
         ph: 'V_s / V_p = N_s / N_p → V_s = 110 × 20/10 = 220 V',
       },
       {
         label: 'e',
         text: 'The following data is taken from a real transformer which is not 100% efficient.\n\n| | Primary coil | Secondary coil |\n|---|---|---|\n| Voltage | 24 V | 12 V |\n| Current | 2.50 A | 4.75 A |\n\n**Calculate the efficiency** of this transformer.',
         marks: 2,
-        figImages: [`${P}q1e-table.png`],
+        figImages: ['/images/papers/physics-may-2018/q1e-table.svg'],
         ph: 'P_primary = 24 × 2.50 = 60 W; P_secondary = 12 × 4.75 = 57 W; efficiency = 57/60 = 0.95 = 95%',
       },
       {
@@ -208,21 +208,21 @@ export const questions: Question[] = [
         label: 'f',
         text: 'The student carries out the experiment and plots two graphs. **Write a title** for Graph 1 that links the independent and dependent variables.',
         marks: 1,
-        figImages: [`${P}q4-graphs.png`],
+        figImages: ['/images/papers/physics-may-2018/q4-graphs.svg'],
         ph: 'Variation of fill time with area of the hole / How the area of the hole affects the time to fill the container',
       },
       {
         label: 'g',
         text: 'Using Graph 2, **describe the relationship** between the fill time and the inverse of the area shown in the second graph.',
         marks: 2,
-        figImages: [`${P}q4-graphs.png`],
+        figImages: ['/images/papers/physics-may-2018/q4-graphs.svg'],
         ph: 'As the inverse of the area increases, the fill time increases proportionally / The fill time is directly proportional to the inverse of the area (straight line through origin)...',
       },
       {
         label: 'h',
         text: '**Find the constant of proportionality** from Graph 2.',
         marks: 2,
-        figImages: [`${P}q4-graphs.png`],
+        figImages: ['/images/papers/physics-may-2018/q4-graphs.svg'],
         ph: 'k = gradient = Δy/Δx ≈ 15 s cm²',
       },
       {
@@ -271,7 +271,7 @@ export const questions: Question[] = [
         label: 'a',
         text: 'The time for the tube with the **8 cm** height of water was not recorded by the student. **Measure the time** shown in the stopwatch picture. Include the unit in your answer.',
         marks: 2,
-        figImages: [`${P}q6a-simulation.png`, `${P}q6a-stopwatch.png`],
+        figImages: ['/images/papers/physics-may-2018/q6a-simulation.svg', `${P}q6a-stopwatch.png`],
         ph: '12.8 s (accept 12.8 seconds; do not accept 12.8 sec)',
       },
       {
@@ -286,14 +286,14 @@ export const questions: Question[] = [
         marks: 1,
         widget: 'radio_select',
         widgetOptions: ['A', 'B', 'C', 'D'],
-        figImages: [`${P}q6c-graph-options.png`],
+        figImages: ['/images/papers/physics-may-2018/q6c-graph-options.svg'],
         ph: 'Select A, B, C, or D',
       },
       {
         label: 'd',
         text: 'Once the experiment is completed, the results produce the graph shown. The student declares that his results **support** the hypothesis. **Use the graph to outline one reason** why the student is incorrect.',
         marks: 2,
-        figImages: [`${P}q6d-graph.png`],
+        figImages: ['/images/papers/physics-may-2018/q6d-graph.svg'],
         ph: 'For the results to be proportional the line must go through (0,0), but the line crosses the y-axis at approximately 5.0 (not zero), so the relationship is not proportional / OR the line of best fit is not straight (a curve fits the data better), so the results are not proportional...',
       },
       {
@@ -328,7 +328,7 @@ export const questions: Question[] = [
     topicCanonical: 'Solar System, Gravity & Space',
     topicGroup: 'Space & Astrophysics',
     stem: 'The graph above shows the electrical energy consumption in kWh per person in China compared to the world average for the years 1975 to 2005.',
-    figImages: [`${P}q7-energy-graph.png`],
+    figImages: ['/images/papers/physics-may-2018/q7-energy-graph.svg'],
     tags: { unit: 'work-energy', topics: ['energy resources', 'hydroelectric power', 'data interpretation'], level: 'developing' },
     tasks: [
       {
@@ -347,7 +347,7 @@ export const questions: Question[] = [
         label: 'c',
         text: 'The total number of units of electrical energy consumed in China in 1975 was **6.24 × 10¹¹ kWh**. Using appropriate data from the graphs below, **calculate the total electrical energy consumed** in China in 2005. Show your working clearly. Give your answer in kWh.',
         marks: 2,
-        figImages: [`${P}q7-energy-graph.png`, `${P}q7c-population-graph.png`],
+        figImages: ['/images/papers/physics-may-2018/q7-energy-graph.svg', '/images/papers/physics-may-2018/q7c-population-graph.svg'],
         ph: 'From energy graph: China 2005 ≈ 3150 kWh/person. From population graph: China 2005 ≈ 1.25 × 10⁹ people. Total = 3150 × 1.25 × 10⁹ = 3.94 × 10¹² kWh',
       },
       {

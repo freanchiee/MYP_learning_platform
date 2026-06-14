@@ -238,12 +238,15 @@ export default function SpringCanvas() {
   const force = (massG / 1000) * G
 
   return (
-    <div className="flex flex-col items-center gap-3 p-4 bg-[#0a0f1a] rounded-xl">
+    <div
+      className="flex flex-col items-center gap-3 p-4 rounded-card"
+      style={{ background: 'var(--surface-deep)', color: 'var(--surface-deep-fg)' }}
+    >
       <canvas
         ref={canvasRef}
         width={CANVAS_W}
         height={CANVAS_H}
-        className="rounded-lg block"
+        className="rounded-control block"
         style={{ imageRendering: 'crisp-edges' }}
       />
 
@@ -251,8 +254,8 @@ export default function SpringCanvas() {
       <div className="w-full max-w-[400px] space-y-3">
         {/* Slider */}
         <div className="space-y-1">
-          <div className="flex justify-between text-xs text-gray-400">
-            <span>Mass: <span className="text-white font-mono font-bold">{massG} g</span></span>
+          <div className="flex justify-between text-xs opacity-70">
+            <span>Mass: <span className="font-mono font-bold opacity-100">{massG} g</span></span>
             <span>Force: <span className="text-[#4eecd4] font-mono">{force.toFixed(3)} N</span></span>
           </div>
           <input
@@ -264,9 +267,9 @@ export default function SpringCanvas() {
             onChange={e => setMassG(Number(e.target.value))}
             className="w-full accent-[#4eecd4] cursor-pointer"
           />
-          <div className="flex justify-between text-[10px] text-gray-600">
+          <div className="flex justify-between text-[10px] opacity-50">
             <span>0 g</span>
-            <span className="text-yellow-500 text-[10px]">← elastic limit ~510 g</span>
+            <span className="text-yellow-500 text-[10px] opacity-100">← elastic limit ~510 g</span>
             <span>500 g</span>
           </div>
         </div>
@@ -274,7 +277,11 @@ export default function SpringCanvas() {
         {/* Reset */}
         <button
           onClick={handleReset}
-          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gray-800 text-gray-300 text-xs hover:bg-gray-700 transition-colors"
+          className="flex items-center gap-1.5 px-3 py-1.5 rounded-control text-xs transition-colors"
+          style={{
+            background: 'color-mix(in srgb, var(--surface-deep-fg) 12%, transparent)',
+            color: 'var(--surface-deep-fg)',
+          }}
         >
           <RotateCcw size={12} />
           Reset

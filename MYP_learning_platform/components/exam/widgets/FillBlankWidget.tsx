@@ -56,7 +56,7 @@ export default function FillBlankWidget({ text, savedAnswer, onAnswer }: Props) 
     // Push text before this blank
     if (matchStart > lastIdx) {
       segments.push(
-        <span key={`text-${lastIdx}`} className="text-sm leading-relaxed" style={{ color: '#1f3674' }}>
+        <span key={`text-${lastIdx}`} className="text-sm leading-relaxed" style={{ color: 'var(--text)' }}>
           {text.slice(lastIdx, matchStart)}
         </span>
       )
@@ -76,13 +76,13 @@ export default function FillBlankWidget({ text, savedAnswer, onAnswer }: Props) 
         style={{
           width: Math.max(80, (values[bi]?.length ?? 4) * 9 + 24),
           minWidth: 80,
-          background: '#f5edcc',
-          border: '1.5px solid rgba(31,54,116,0.25)',
-          color: '#1f3674',
+          background: 'var(--surface-inset)',
+          border: '1.5px solid var(--border-strong)',
+          color: 'var(--text)',
           // focus ring handled via onFocus/onBlur below
         }}
-        onFocus={(e) => { e.target.style.borderColor = '#547ca4'; e.target.style.boxShadow = '0 0 0 2px rgba(84,124,164,0.2)' }}
-        onBlur={(e) => { e.target.style.borderColor = 'rgba(31,54,116,0.25)'; e.target.style.boxShadow = 'none' }}
+        onFocus={(e) => { e.target.style.borderColor = 'var(--accent-2)'; e.target.style.boxShadow = '0 0 0 2px var(--accent-soft)' }}
+        onBlur={(e) => { e.target.style.borderColor = 'var(--border-strong)'; e.target.style.boxShadow = 'none' }}
       />
     )
     blankNum++
@@ -92,20 +92,20 @@ export default function FillBlankWidget({ text, savedAnswer, onAnswer }: Props) 
   // Remaining text after last blank
   if (lastIdx < text.length) {
     segments.push(
-      <span key="text-end" className="text-sm leading-relaxed" style={{ color: '#1f3674' }}>
+      <span key="text-end" className="text-sm leading-relaxed" style={{ color: 'var(--text)' }}>
         {text.slice(lastIdx)}
       </span>
     )
   }
 
   return (
-    <div className="rounded-lg p-4" style={{ background: '#fff', border: '1px solid rgba(31,54,116,0.12)' }}>
-      <p className="text-xs font-semibold mb-3" style={{ color: '#547ca4' }}>
+    <div className="rounded-control p-4" style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}>
+      <p className="text-xs font-semibold mb-3" style={{ color: 'var(--accent-2)' }}>
         Fill in the blanks.
       </p>
       <div className="leading-loose">{segments}</div>
       {count === 0 && (
-        <p className="text-xs text-red-500 mt-2">
+        <p className="text-xs text-danger mt-2">
           No blanks detected — check question data.
         </p>
       )}

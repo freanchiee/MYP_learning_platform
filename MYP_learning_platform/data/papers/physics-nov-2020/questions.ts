@@ -225,7 +225,7 @@ export const questions: Question[] = [
         label: 'd',
         text: 'The relationship given for this experiment was:\n\n**weight supported ~ current × number of turns per centimetre**\n\nThe second group produced the following graph of their results. Use the graph to **explain** if the data supports the relationship.',
         marks: 4,
-        figImages: [`${P}q5d-graph.png`],
+        figImages: ['/images/papers/physics-nov-2020/q5d-graph.svg'],
         ph: 'Describe: straight line through the origin → relationship is proportional. State this supports the given relationship (weight ∝ turns per cm at constant current).',
       },
       {
@@ -336,7 +336,7 @@ export const questions: Question[] = [
         label: 'd',
         text: 'The size of the repelling force depends on the distance between the magnets. The graph below shows how the repelling force varies when the distance between the magnets increases.\n\nUse the graph to **explain** the effect on the repelling force of an increase in the number of passengers.',
         marks: 3,
-        figImages: [`${P}q8d-graph.png`],
+        figImages: ['/images/papers/physics-nov-2020/q8d-graph.svg'],
         ph: 'Step 1: more passengers → greater weight/load on train. Step 2: train sinks closer to track → smaller distance between magnets. Step 3: from graph, smaller distance → larger repelling force.',
       },
     ],

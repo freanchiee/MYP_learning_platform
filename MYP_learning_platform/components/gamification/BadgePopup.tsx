@@ -18,10 +18,10 @@ interface BadgePopupProps {
 }
 
 const rarityStyle: Record<string, string> = {
-  common: 'bg-gray-200 text-gray-700',
-  rare: 'bg-blue-100 text-blue-700 border border-blue-300',
+  common: 'bg-surface-3 text-ink-muted',
+  rare: 'bg-info-surface text-info border border-info',
   epic: 'bg-purple-100 text-purple-700 border border-purple-300',
-  legendary: 'bg-yellow-100 text-yellow-700 border border-yellow-400',
+  legendary: 'bg-warning-surface text-warning border border-warning',
 }
 
 const PARTICLE_COUNT = 18
@@ -73,7 +73,7 @@ export default function BadgePopup({ badges, onDone }: BadgePopupProps) {
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         className="fixed inset-0 z-[200] flex items-center justify-center"
-        style={{ background: 'rgba(10, 10, 30, 0.88)' }}
+        style={{ background: 'var(--scrim)' }}
         onClick={handleNext}
       >
         {/* Floating particles */}
@@ -110,7 +110,7 @@ export default function BadgePopup({ badges, onDone }: BadgePopupProps) {
           exit={{ scale: 0.8, opacity: 0, y: -20 }}
           transition={{ type: 'spring', stiffness: 280, damping: 22 }}
           onClick={e => e.stopPropagation()}
-          className="relative z-10 bg-white rounded-3xl shadow-2xl p-10 flex flex-col items-center gap-4 max-w-sm w-full mx-4"
+          className="relative z-10 bg-surface rounded-card shadow-elevated p-10 flex flex-col items-center gap-4 max-w-sm w-full mx-4"
         >
           {/* Subtitle */}
           <p className="text-xs font-bold tracking-[0.2em] uppercase text-[var(--ib-teal)]">
@@ -143,7 +143,7 @@ export default function BadgePopup({ badges, onDone }: BadgePopupProps) {
           </div>
 
           {/* Name */}
-          <h2 className="text-2xl font-bold text-gray-900 text-center">{current.name}</h2>
+          <h2 className="text-2xl font-bold text-ink text-center">{current.name}</h2>
 
           {/* Rarity chip */}
           <span
@@ -156,7 +156,7 @@ export default function BadgePopup({ badges, onDone }: BadgePopupProps) {
           </span>
 
           {/* Description */}
-          <p className="text-sm text-gray-600 text-center leading-relaxed">
+          <p className="text-sm text-ink-muted text-center leading-relaxed">
             {current.description}
           </p>
 
@@ -168,14 +168,14 @@ export default function BadgePopup({ badges, onDone }: BadgePopupProps) {
                   key={i}
                   className={cn(
                     'w-2 h-2 rounded-full transition-all',
-                    i <= idx ? 'bg-[var(--ib-teal)]' : 'bg-gray-200',
+                    i <= idx ? 'bg-[var(--ib-teal)]' : 'bg-surface-3',
                   )}
                 />
               ))}
             </div>
             <button
               onClick={handleNext}
-              className="mt-1 px-6 py-2 bg-[var(--ib-blue)] text-white rounded-full text-sm font-semibold hover:opacity-90 transition-opacity"
+              className="mt-1 px-6 py-2 bg-[var(--ib-blue)] text-on-accent rounded-full text-sm font-semibold hover:opacity-90 transition-opacity"
             >
               {idx < badges.length - 1 ? 'Next Badge →' : 'Continue'}
             </button>

@@ -31,6 +31,7 @@ function TransverseWave({ data }: { data: WaveDiagramData }) {
   const x1 = x0 + lambda
 
   return (
+    <div className="figure-surface inline-block p-2">
     <svg viewBox={`0 0 ${W} ${H}`} width={W} height={H} className="w-full max-w-full" role="img" aria-label="Transverse wave diagram">
       {/* Centre line */}
       <line x1={20} y1={cy} x2={W - 20} y2={cy} stroke="#9ca3af" strokeWidth={1} strokeDasharray="4 3" />
@@ -82,6 +83,7 @@ function TransverseWave({ data }: { data: WaveDiagramData }) {
         </marker>
       </defs>
     </svg>
+    </div>
   )
 }
 
@@ -110,6 +112,7 @@ function LongitudinalWave() {
   }
 
   return (
+    <div className="figure-surface inline-block p-2">
     <svg viewBox={`0 0 ${W} ${H}`} width={W} height={H} className="w-full max-w-full" role="img" aria-label="Longitudinal wave diagram">
       {lines.map((ln, i) => (
         <line key={i} x1={ln.x} y1={cy - lineH / 2} x2={ln.x} y2={cy + lineH / 2}
@@ -133,6 +136,7 @@ function LongitudinalWave() {
         </marker>
       </defs>
     </svg>
+    </div>
   )
 }
 

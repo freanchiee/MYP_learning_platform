@@ -255,7 +255,7 @@ export default function OsmosisCanvas() {
         ref={canvasRef}
         width={W}
         height={H}
-        className="w-full rounded-xl border border-gray-200"
+        className="figure-surface w-full rounded-card"
         style={{ maxHeight: 340 }}
       />
 

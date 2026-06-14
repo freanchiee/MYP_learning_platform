@@ -1,0 +1,223 @@
+[
+  {
+    "taskPath": "q4.tasks[d]",
+    "questionId": 4,
+    "taskLabel": "d",
+    "topic": "Plane mirrors — number of images vs angle",
+    "original_path": "/images/papers/physics-nov-2019/q4d-graph.png",
+    "image_type": "code_rendered",
+    "render_component": "OpticsSim",
+    "render_data": {
+      "title": "Two plane mirrors at an angle — virtual images",
+      "source": "MYP physics-nov-2019-v1",
+      "mode": "mirror",
+      "mirror": {
+        "kaleidoscope": true,
+        "angle": 60,
+        "min": 24,
+        "max": 180,
+        "step": 6,
+        "imagesFormula": "N = 360/θ − 1",
+        "readoutTarget": "Use the graph data (24°→7, 40°→5, 60°→3, 120°→1 images) to predict the angle that produces 3 images — answer ≈ 60°"
+      }
+    },
+    "generated_path": "/images/papers/physics-nov-2019-v1/q4d-graph.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q4.tasks[f]",
+    "questionId": 4,
+    "taskLabel": "f",
+    "topic": "Plane mirrors — bar chart of images vs angle",
+    "original_path": "/images/papers/physics-nov-2019/q4f-barchart.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG bar chart: Number of images (y, 0-8) vs Angle between the mirrors in degrees (x); discrete teal bars at angles 24°→7, 40°→5, 60°→3, 120°→1, presenting the same data as part (d) as discrete categories.",
+    "generated_path": "/images/papers/physics-nov-2019-v1/q4f-barchart.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q5.tasks[e]",
+    "questionId": 5,
+    "taskLabel": "e",
+    "topic": "Speed of sound — distance-time graph for echoes",
+    "original_path": "/images/papers/physics-nov-2019/q5e-graph.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG scatter graph: Distance / m (y, 0-600) vs Time / s (x, 0-1.6); best-fit straight line through the origin with gradient ≈ 340 m s⁻¹; five teal × data points, four on the line at (0.30,100), (0.60,200), (0.90,300), (1.50,510) and one anomalous outlier at (1.0,400) sitting above/left of the line (time too low); minor gridlines.",
+    "generated_path": "/images/papers/physics-nov-2019-v1/q5e-graph.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q2",
+    "questionId": 2,
+    "taskLabel": null,
+    "topic": "Smog over a city",
+    "original_path": "/images/papers/physics-nov-2019/q2-smog.png",
+    "image_type": "ai_generated",
+    "image_prompt": "Hand-authored copyright-safe SVG recreation for variant: Smog over a city.",
+    "generated_path": "/images/papers/physics-nov-2019-v1/q2-smog.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q2",
+    "questionId": 2,
+    "taskLabel": null,
+    "topic": "Air purifier ionization chamber",
+    "original_path": "/images/papers/physics-nov-2019/q2-ionization.png",
+    "image_type": "ai_generated",
+    "image_prompt": "Hand-authored copyright-safe SVG recreation for variant: Air purifier ionization chamber.",
+    "generated_path": "/images/papers/physics-nov-2019-v1/q2-ionization.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q3.tasks[a]",
+    "questionId": 3,
+    "taskLabel": "a",
+    "topic": "EM spectrum drag-and-drop",
+    "original_path": "/images/papers/physics-nov-2019/q3a-spectrum.png",
+    "image_type": "ai_generated",
+    "image_prompt": "Hand-authored copyright-safe SVG recreation for variant: EM spectrum drag-and-drop.",
+    "generated_path": "/images/papers/physics-nov-2019-v1/q3a-spectrum.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q3.tasks[b]",
+    "questionId": 3,
+    "taskLabel": "b",
+    "topic": "RFID implant in a cat (X-ray)",
+    "original_path": "/images/papers/physics-nov-2019/q3b-rfid-cat.png",
+    "image_type": "ai_generated",
+    "image_prompt": "Hand-authored copyright-safe SVG recreation for variant: RFID implant in a cat (X-ray).",
+    "generated_path": "/images/papers/physics-nov-2019-v1/q3b-rfid-cat.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q3",
+    "questionId": 3,
+    "taskLabel": null,
+    "topic": "RFID tag internal structure",
+    "original_path": "/images/papers/physics-nov-2019/q3-rfid-structure.png",
+    "image_type": "code_rendered",
+    "render_component": "SpectrumSim",
+    "render_data": {
+      "title": "The electromagnetic spectrum (RFID uses radio waves)",
+      "source": "MYP physics-nov-2019-v1",
+      "mode": "scrub",
+      "bands": ["Radio", "Microwave", "Infrared", "Visible", "Ultraviolet", "X-rays", "Gamma ray"],
+      "axis": "frequency increases left → right",
+      "energyAxis": "energy / frequency increases →",
+      "target": "Radio",
+      "wavelengthRange": ["1 km", "1 pm"],
+      "visibleRange": ["700 nm", "400 nm"]
+    },
+    "generated_path": "/images/papers/physics-nov-2019-v1/q3-rfid-structure.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q4",
+    "questionId": 4,
+    "taskLabel": null,
+    "topic": "Two plane mirrors at an angle",
+    "original_path": "/images/papers/physics-nov-2019/q4-mirrors.png",
+    "image_type": "ai_generated",
+    "image_prompt": "Hand-authored copyright-safe SVG recreation for variant: Two plane mirrors at an angle.",
+    "generated_path": "/images/papers/physics-nov-2019-v1/q4-mirrors.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q5",
+    "questionId": 5,
+    "taskLabel": null,
+    "topic": "Speed of sound — echo setup",
+    "original_path": "/images/papers/physics-nov-2019/q5-echo.png",
+    "image_type": "ai_generated",
+    "image_prompt": "Hand-authored copyright-safe SVG recreation for variant: Speed of sound — echo setup.",
+    "generated_path": "/images/papers/physics-nov-2019-v1/q5-echo.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q5.tasks[d]",
+    "questionId": 5,
+    "taskLabel": "d",
+    "topic": "Echo investigation — raw data table",
+    "original_path": "/images/papers/physics-nov-2019/q5d-table.png",
+    "image_type": "ai_generated",
+    "image_prompt": "Hand-authored copyright-safe SVG recreation for variant: Echo investigation — raw data table.",
+    "generated_path": "/images/papers/physics-nov-2019-v1/q5d-table.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q6",
+    "questionId": 6,
+    "taskLabel": null,
+    "topic": "Simple pendulum oscillation setup",
+    "original_path": "/images/papers/physics-nov-2019/q6-spring.png",
+    "image_type": "code_rendered",
+    "render_component": "OscillatorSim",
+    "render_data": {
+      "title": "Simple pendulum — period vs string length",
+      "source": "MYP physics-nov-2019-v1",
+      "type": "pendulum",
+      "g": 9.81,
+      "lengthSlider": { "min": 0.2, "max": 1.5, "step": 0.1, "unit": "m" },
+      "periodFormula": "T = 2π√(L/g)"
+    },
+    "generated_path": "/images/papers/physics-nov-2019-v1/q6-spring.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q7",
+    "questionId": 7,
+    "taskLabel": null,
+    "topic": "Stopping distance — thinking and braking",
+    "original_path": "/images/papers/physics-nov-2019/q7-stopping.png",
+    "image_type": "ai_generated",
+    "image_prompt": "Hand-authored copyright-safe SVG recreation for variant: Stopping distance — thinking and braking.",
+    "generated_path": "/images/papers/physics-nov-2019-v1/q7-stopping.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q7.tasks[b]",
+    "questionId": 7,
+    "taskLabel": "b",
+    "topic": "Factors affecting stopping distance",
+    "original_path": "/images/papers/physics-nov-2019/q7b-factors.png",
+    "image_type": "code_rendered",
+    "render_component": "DragSort",
+    "render_data": {
+      "mode": "bins",
+      "title": "Classify factors affecting stopping distance",
+      "source": "MYP physics-nov-2019-v1",
+      "prompt": "Place each factor into the correct category: driver, environmental, or car.",
+      "items": [
+        "Using a cell phone",
+        "Heavy rain",
+        "Worn out tyre tread",
+        "Faulty brakes",
+        "Drinking alcohol",
+        "Poor road surface"
+      ],
+      "bins": ["Driver factor", "Environmental factor", "Car factor"],
+      "correct": {
+        "Driver factor": ["Using a cell phone", "Drinking alcohol"],
+        "Environmental factor": ["Heavy rain", "Poor road surface"],
+        "Car factor": ["Worn out tyre tread", "Faulty brakes"]
+      }
+    },
+    "generated_path": "/images/papers/physics-nov-2019-v1/q7b-factors.svg",
+    "needs_review": true,
+    "approved": false
+  }
+]

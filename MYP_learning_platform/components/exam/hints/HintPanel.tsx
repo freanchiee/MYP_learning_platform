@@ -40,15 +40,22 @@ export default function HintPanel({ qId, taskLabel }: HintPanelProps) {
       <button
         onClick={handleToggle}
         className={cn(
-          'flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium border transition-all',
-          'border-amber-400 text-amber-700 bg-amber-50 hover:bg-amber-100',
+          'flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium border transition-all hover:brightness-95',
         )}
+        style={{
+          borderColor: 'var(--warning)',
+          color: 'var(--warning-fg)',
+          background: 'var(--warning-surface)',
+        }}
       >
-        <Lightbulb size={13} className="text-amber-500" />
+        <Lightbulb size={13} style={{ color: 'var(--warning)' }} />
         {open ? 'Hide hints' : '💡 Show hint'}
         {open ? <ChevronUp size={12} /> : <ChevronDown size={12} />}
         {revealed > 0 && (
-          <span className="ml-1 bg-amber-200 text-amber-800 rounded-full px-1.5 py-0.5 text-[10px] font-bold">
+          <span
+            className="ml-1 rounded-full px-1.5 py-0.5 text-[10px] font-bold"
+            style={{ background: 'var(--warning)', color: 'var(--text-on-accent)' }}
+          >
             {revealed}/{hints.length}
           </span>
         )}
@@ -64,7 +71,10 @@ export default function HintPanel({ qId, taskLabel }: HintPanelProps) {
             transition={{ duration: 0.2 }}
             className="overflow-hidden"
           >
-            <div className="mt-2 border border-amber-200 bg-amber-50 rounded-xl p-3 space-y-2">
+            <div
+              className="mt-2 border rounded-xl p-3 space-y-2"
+              style={{ borderColor: 'var(--warning)', background: 'var(--warning-surface)' }}
+            >
               {/* Revealed hints */}
               {Array.from({ length: revealed }).map((_, i) => (
                 <motion.div
@@ -72,9 +82,13 @@ export default function HintPanel({ qId, taskLabel }: HintPanelProps) {
                   initial={{ opacity: 0, x: -8 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.05 * i }}
-                  className="flex gap-2 text-sm text-amber-900"
+                  className="flex gap-2 text-sm"
+                  style={{ color: 'var(--warning-fg)' }}
                 >
-                  <span className="flex-shrink-0 w-5 h-5 bg-amber-200 text-amber-800 rounded-full flex items-center justify-center text-[11px] font-bold mt-0.5">
+                  <span
+                    className="flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center text-[11px] font-bold mt-0.5"
+                    style={{ background: 'var(--warning)', color: 'var(--text-on-accent)' }}
+                  >
                     {i + 1}
                   </span>
                   <span>{hints[i]}</span>
@@ -85,13 +99,14 @@ export default function HintPanel({ qId, taskLabel }: HintPanelProps) {
               {revealed < hints.length ? (
                 <button
                   onClick={handleRevealNext}
-                  className="flex items-center gap-1.5 text-xs text-amber-700 font-medium hover:text-amber-900 transition-colors mt-1 border border-dashed border-amber-300 rounded-lg px-3 py-1.5 w-full justify-center hover:bg-amber-100"
+                  className="flex items-center gap-1.5 text-xs font-medium transition-colors mt-1 border border-dashed rounded-lg px-3 py-1.5 w-full justify-center hover:brightness-95"
+                  style={{ color: 'var(--warning-fg)', borderColor: 'var(--warning)', background: 'var(--warning-surface)' }}
                 >
                   <Lightbulb size={12} />
                   Reveal hint {revealed + 1} of {hints.length}
                 </button>
               ) : (
-                <p className="text-[11px] text-amber-600 text-center pt-1">
+                <p className="text-[11px] text-center pt-1" style={{ color: 'var(--text-muted)' }}>
                   All hints revealed. Try applying them to your answer!
                 </p>
               )}

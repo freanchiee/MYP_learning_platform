@@ -142,6 +142,8 @@ export default function CritPicker({ subjectSlug, counts, backHref }: CritPicker
           overflowY: 'scroll',
           scrollSnapType: 'y mandatory',
           scrollBehavior: 'smooth',
+          background: 'var(--bg)',
+          backgroundImage: 'var(--bg-image)',
         }}
       >
         {CRIT_META.map((c, idx) => {

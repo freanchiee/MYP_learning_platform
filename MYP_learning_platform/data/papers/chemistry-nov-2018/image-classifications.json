@@ -1,0 +1,290 @@
+[
+  {
+    "taskPath": "q4",
+    "questionId": 4,
+    "taskLabel": null,
+    "topic": "Capsaicin content bar chart",
+    "original_path": "/images/papers/chemistry-nov-2018/page-18.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: vertical bar chart titled 'Capsaicin content / mg dm⁻³ in chilli peppers'. x-axis categorical 'Peppers' (Red chilli, Jalapeño, Habanero, Cayenne); y-axis 'Capsaicin content / mg dm⁻³' from 0 to 0.6 in steps of 0.1. Bar heights: Red chilli 0.22, Jalapeño 0.07, Habanero 0.48, Cayenne 0.04. Teal bars.",
+    "generated_path": "/images/papers/chemistry-nov-2018/q4-capsaicin-bar.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q6.tasks[a]",
+    "questionId": 6,
+    "taskLabel": "a",
+    "topic": "Carbon footprint grouped bar chart",
+    "original_path": "/images/papers/chemistry-nov-2018/page-25.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: grouped vertical bar chart. y-axis 'Carbon footprint / kg CO₂e' from 0 to 30 in steps of 5. Two series per food: 'Emissions per kg' (teal) and 'Emissions per 4.2 kJ' (orange). Foods in x-order Beef, Cheese, Pork, Chicken, Eggs, Potatoes, Rice, Nuts, Yogurt, Broccoli, Tofu, Dry Beans, Milk, Tomatoes, Lentils. per-kg values 27.0,13.5,12.1,6.9,4.8,2.9,2.7,2.3,2.2,2.0,2.0,2.0,1.9,1.1,0.9; per-4.2kJ values 11.8,3.6,5.5,4.8,3.4,3.8,0.7,0.4,3.6,5.9,2.9,0.6,3.8,6.1,0.3. Legend top-right.",
+    "generated_path": "/images/papers/chemistry-nov-2018/q6-carbon-footprint-bar.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q2",
+    "questionId": 2,
+    "taskLabel": null,
+    "topic": "Glass jars for recycling",
+    "original_path": "/images/papers/chemistry-nov-2018/page-05.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: two clear glass jars with black steel screw lids and blank plastic labels, on a white surface, soft shadows; annotations 'steel lid' and 'glass jar'.",
+    "generated_path": "/images/papers/chemistry-nov-2018/q2-glass-jars.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q2",
+    "questionId": 2,
+    "taskLabel": null,
+    "topic": "Glass composition data table",
+    "original_path": "/images/papers/chemistry-nov-2018/page-06.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG data table: percentage chemical composition by mass of compounds used to make glass. Columns: Common name, Chemical formula, Modern glass (bottles and windows), Laboratory glass, Optical and crystal glass, Ancient Roman glass. Rows: Silica SiO2 (73.6, 80.0, 35.0, 67.0); Soda Na2O (5.2, 4.0, –, 18.0); Lime CaO (0.6, –, –, 8.0); Potash K2O (3.6, 0.4, 7.2, 1.0); Magnesia MgO (1.0, –, –, 1.0); Alumina Al2O3 (–, 2.0, –, 2.5); Iron oxide Fe2O3 (–, –, –, 0.5); Boric oxide B2O3 (–, 13.0, –, –); Lead oxide PbO (–, –, 58.0, 0.01).",
+    "generated_path": "/images/papers/chemistry-nov-2018/q2-glass-composition-table.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q2.tasks[e]",
+    "questionId": 2,
+    "taskLabel": "e",
+    "topic": "Silicon dioxide giant covalent structure",
+    "original_path": "/images/papers/chemistry-nov-2018/page-07.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: giant covalent (macromolecular) structure of silicon dioxide SiO2 — larger silicon atoms each bonded to four smaller oxygen atoms in a tetrahedral lattice; key showing Silicon atom and Oxygen atom. Distinct green/orange palette (not IB blue/red).",
+    "generated_path": "/images/papers/chemistry-nov-2018/q2-silicon-oxide-structure.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q3",
+    "questionId": 3,
+    "taskLabel": null,
+    "topic": "Family sharing a meal (context illustration)",
+    "original_path": "/images/papers/chemistry-nov-2018/page-09.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: flat illustration of a family of four sharing a meal at a table — plates with vegetables and glasses of water; warm neutral background. Decorative context scene.",
+    "generated_path": "/images/papers/chemistry-nov-2018/q3-family-meal.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q3",
+    "questionId": 3,
+    "taskLabel": null,
+    "topic": "pH measurement apparatus (blender + pH probe)",
+    "original_path": "/images/papers/chemistry-nov-2018/page-10.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: lab apparatus on a tropical beach backdrop — blender, clamp-stand holding a pH probe dipped into a beaker of green fruit juice, a pH meter console reading a value, and a key of fruits (Apple, Pear, Grape, Cranberry, Tomato).",
+    "generated_path": "/images/papers/chemistry-nov-2018/q3-ph-apparatus.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q3",
+    "questionId": 3,
+    "taskLabel": null,
+    "topic": "pH measurement apparatus (blender + pH probe)",
+    "original_path": "/images/papers/chemistry-nov-2018/page-11.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: lab apparatus on a tropical beach backdrop — blender, clamp-stand holding a pH probe dipped into a beaker of green fruit juice, a pH meter console reading a value, and a key of fruits (Apple, Pear, Grape, Cranberry, Tomato).",
+    "generated_path": "/images/papers/chemistry-nov-2018/q3-ph-apparatus.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q3",
+    "questionId": 3,
+    "taskLabel": null,
+    "topic": "pH measurement apparatus (blender + pH probe)",
+    "original_path": "/images/papers/chemistry-nov-2018/page-12.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: lab apparatus on a tropical beach backdrop — blender, clamp-stand holding a pH probe dipped into a beaker of green fruit juice, a pH meter console reading a value, and a key of fruits (Apple, Pear, Grape, Cranberry, Tomato).",
+    "generated_path": "/images/papers/chemistry-nov-2018/q3-ph-apparatus.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q3.tasks[c]",
+    "questionId": 3,
+    "taskLabel": "c",
+    "topic": "Fruit juice pH results table",
+    "original_path": "/images/papers/chemistry-nov-2018/page-13.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG data table 'pH of each fruit juice'. Columns: Type of fruit juice, pH. Rows: apple 3.5; pear 3.8; grape 2.9; cranberry 2.4; tomato 4.1. Shaded header, alternating row shading.",
+    "generated_path": "/images/papers/chemistry-nov-2018/q3-fruit-ph-table.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q3.tasks[g]",
+    "questionId": 3,
+    "taskLabel": "g",
+    "topic": "Cherry juice indicator scale and beakers",
+    "original_path": "/images/papers/chemistry-nov-2018/page-15.png",
+    "image_type": "code_rendered",
+    "render_component": "DragSort",
+    "render_data": {
+      "mode": "bins",
+      "title": "Cherry juice indicator — match each beaker to its colour",
+      "source": "MYP chemistry-nov-2018",
+      "prompt": "Cherry juice changes colour with pH (Red pH 1–3.5, Orange pH 3.5–6, Purple pH 6–9, Green pH 9–12). Place each beaker into the colour the cherry juice would turn.",
+      "items": [
+        { "id": "ph-3-2", "label": "Beaker pH 3.2", "correctBin": "red" },
+        { "id": "ph-9-5", "label": "Beaker pH 9.5", "correctBin": "green" },
+        { "id": "ph-7-0", "label": "Beaker pH 7.0", "correctBin": "purple" },
+        { "id": "ph-3-6", "label": "Beaker pH 3.6", "correctBin": "red" }
+      ],
+      "bins": [
+        { "id": "red", "label": "Red (pH 1–3.5)" },
+        { "id": "orange", "label": "Orange (pH 3.5–6)" },
+        { "id": "purple", "label": "Purple (pH 6–9)" },
+        { "id": "green", "label": "Green (pH 9–12)" }
+      ]
+    },
+    "generated_path": "/images/papers/chemistry-nov-2018/q3-cherry-indicator-scale.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q3.tasks[g]",
+    "questionId": 3,
+    "taskLabel": "g",
+    "topic": "Cherry juice indicator scale and beakers",
+    "original_path": "/images/papers/chemistry-nov-2018/page-16.png",
+    "image_type": "code_rendered",
+    "render_component": "DragSort",
+    "render_data": {
+      "mode": "bins",
+      "title": "Cherry juice indicator — match each beaker to its colour",
+      "source": "MYP chemistry-nov-2018",
+      "prompt": "Cherry juice changes colour with pH (Red pH 1–3.5, Orange pH 3.5–6, Purple pH 6–9, Green pH 9–12). Place each beaker into the colour the cherry juice would turn.",
+      "items": [
+        { "id": "ph-3-2", "label": "Beaker pH 3.2", "correctBin": "red" },
+        { "id": "ph-9-5", "label": "Beaker pH 9.5", "correctBin": "green" },
+        { "id": "ph-7-0", "label": "Beaker pH 7.0", "correctBin": "purple" },
+        { "id": "ph-3-6", "label": "Beaker pH 3.6", "correctBin": "red" }
+      ],
+      "bins": [
+        { "id": "red", "label": "Red (pH 1–3.5)" },
+        { "id": "orange", "label": "Orange (pH 3.5–6)" },
+        { "id": "purple", "label": "Purple (pH 6–9)" },
+        { "id": "green", "label": "Green (pH 9–12)" }
+      ]
+    },
+    "generated_path": "/images/papers/chemistry-nov-2018/q3-cherry-indicator-scale.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q4",
+    "questionId": 4,
+    "taskLabel": null,
+    "topic": "Chilli peppers and Michelle's prediction",
+    "original_path": "/images/papers/chemistry-nov-2018/page-17.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: illustration of four chilli peppers labelled Habanero pepper (bulbous orange), Jalapeño pepper (green cluster), Red chilli pepper (slender red), Cayenne pepper (long curved red), plus a speech bubble from a person: 'The red chilli pepper will have the most capsaicin as it tastes spicier than the others.'",
+    "generated_path": "/images/papers/chemistry-nov-2018/q4-chilli-peppers.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q4.tasks[c]",
+    "questionId": 4,
+    "taskLabel": "c",
+    "topic": "Capsaicin family skeletal structures",
+    "original_path": "/images/papers/chemistry-nov-2018/page-19.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: two displayed structures of capsaicin-family molecules. Structure 1 (16 000 000 SHU): 'Remainder of the molecule' box –CH2–N(H)–C(=O)–CH2–CH2–CH2–CH2–CH=CH–CH(CH3)2 with a C=C double bond near the end. Structure 2 (9 100 000 SHU): same amide head but a fully saturated, slightly longer chain –CH2–N(H)–C(=O)–CH2–CH2–CH2–CH2–CH2–CH(CH3)2 with no C=C double bond. Key differences: C=C double bond present in structure 1, and structure 1 has the unsaturation/branched terminus.",
+    "generated_path": "/images/papers/chemistry-nov-2018/q4-capsaicin-structures.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q5",
+    "questionId": 5,
+    "taskLabel": null,
+    "topic": "Heartburn remedies and HCl apparatus",
+    "original_path": "/images/papers/chemistry-nov-2018/page-20.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: four labelled jars of heartburn remedies — Gaviscon® tablets (pink), TUMS® powder (white), Hai piao xiao (cuttle fish bone), Wa leng zi (cockle shell) — beside a graduated beaker labelled '25 cm³ 0.1 mol dm⁻³ HCl (aq)'.",
+    "generated_path": "/images/papers/chemistry-nov-2018/q5-heartburn-remedies.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q5",
+    "questionId": 5,
+    "taskLabel": null,
+    "topic": "Heartburn remedies and HCl apparatus",
+    "original_path": "/images/papers/chemistry-nov-2018/page-21.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: four labelled jars of heartburn remedies — Gaviscon® tablets (pink), TUMS® powder (white), Hai piao xiao (cuttle fish bone), Wa leng zi (cockle shell) — beside a graduated beaker labelled '25 cm³ 0.1 mol dm⁻³ HCl (aq)'.",
+    "generated_path": "/images/papers/chemistry-nov-2018/q5-heartburn-remedies.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q6",
+    "questionId": 6,
+    "taskLabel": null,
+    "topic": "Vegetable-based vs meat-based diet illustration",
+    "original_path": "/images/papers/chemistry-nov-2018/page-22.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: illustration contrasting a 'Vegetable-based diet' plate (rice bowl, tomato, broccoli, beans) and a 'Meat-based diet' plate (beef steak, potatoes, broccoli) over a green farm-field backdrop. (Copyrighted book cover from the original omitted.)",
+    "generated_path": "/images/papers/chemistry-nov-2018/q6-diet-comparison.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q6",
+    "questionId": 6,
+    "taskLabel": null,
+    "topic": "Food supply chain diagram",
+    "original_path": "/images/papers/chemistry-nov-2018/page-23.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: circular 'Food supply chain' infographic with five linked nodes and red arrows — Animal and crop farms → Processing centre → Storage, warehouse cold houses → Transport and distribution → Shops and markets.",
+    "generated_path": "/images/papers/chemistry-nov-2018/q6-food-supply-chain.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q6",
+    "questionId": 6,
+    "taskLabel": null,
+    "topic": "Carbon footprint emissions-per-kg table",
+    "original_path": "/images/papers/chemistry-nov-2018/page-24.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG data table 'Carbon footprint of 1 kg of different foods' — Emissions per kg / kg CO₂e: Beef 27.0, Cheese 13.5, Pork 12.1, Chicken 6.9, Eggs 4.8, Potatoes 2.9, Rice 2.7, Nuts 2.3, Yogurt 2.2, Broccoli 2.0, Tofu 2.0, Dry beans 2.0, 2 % milk 1.9, Tomatoes 1.1, Lentils 0.9. Broccoli row highlighted.",
+    "generated_path": "/images/papers/chemistry-nov-2018/q6-emissions-table.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q6.tasks[a]",
+    "questionId": 6,
+    "taskLabel": "a",
+    "topic": "Vegetable vs meat meal plates and completion tables",
+    "original_path": "/images/papers/chemistry-nov-2018/page-26.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: two labelled meal plates (Vegetable-based meal: rice, tomato, broccoli, beans; Meat-based meal: potato, broccoli, beef steak) each ≈3000 kJ, with their carbon-footprint tables. Vegetable table complete (Rice 0.18/2.7/0.49; Tomato 0.20/1.1/0.22; Broccoli 0.20/2.0/0.40; Beans 0.40/2.0/0.80; Total 1.91). Meat table partially complete (Potato 0.24 blanks to fill; Broccoli 0.18/2.0/0.36; Beef steak 0.38/27/10.26; Total blank).",
+    "generated_path": "/images/papers/chemistry-nov-2018/q6-meal-comparison.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q7",
+    "questionId": 7,
+    "taskLabel": null,
+    "topic": "Methane combustion equation (text only)",
+    "original_path": "/images/papers/chemistry-nov-2018/page-27.png",
+    "image_type": "text_only",
+    "image_prompt": "Mis-crop: page shows only the question text and the balance-the-equation widget (CH4(g) + O2(g) → CO2(g) + H2O(g)). No diagram to recreate.",
+    "generated_path": null,
+    "needs_review": true,
+    "approved": false
+  }
+]

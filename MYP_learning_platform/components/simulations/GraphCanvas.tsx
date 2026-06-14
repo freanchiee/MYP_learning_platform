@@ -210,10 +210,10 @@ export default function GraphCanvas({ q, qIdx }: GraphCanvasProps) {
   const lineCount = points.filter(p => p.type === 'line').length
 
   return (
-    <div className="mt-4 border border-gray-200 rounded-xl overflow-hidden bg-white">
+    <div className="mt-4 border border-line rounded-card overflow-hidden bg-surface">
       {/* Toolbar */}
-      <div className="flex items-center gap-2 px-3 py-2 bg-gray-50 border-b border-gray-200 flex-wrap">
-        <span className="text-xs font-semibold text-gray-600 mr-1">Graph Tool:</span>
+      <div className="chrome-bar flex items-center gap-2 px-3 py-2 border-b border-line flex-wrap">
+        <span className="text-xs font-semibold mr-1">Graph Tool:</span>
 
         <button
           onClick={() => { setGraphMode(modeKey, 'point'); pendingLineStart.current = null }}
@@ -221,7 +221,7 @@ export default function GraphCanvas({ q, qIdx }: GraphCanvasProps) {
             'flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium border transition-all',
             mode === 'point'
               ? 'bg-[var(--ib-teal)] text-white border-[var(--ib-teal)]'
-              : 'bg-white text-gray-600 border-gray-300 hover:border-[var(--ib-teal)]',
+              : 'bg-surface text-ink-muted border-line-strong hover:border-[var(--ib-teal)]',
           )}
         >
           <Crosshair size={12} />
@@ -234,7 +234,7 @@ export default function GraphCanvas({ q, qIdx }: GraphCanvasProps) {
             'flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium border transition-all',
             mode === 'line'
               ? 'bg-red-500 text-white border-red-500'
-              : 'bg-white text-gray-600 border-gray-300 hover:border-red-400',
+              : 'bg-surface text-ink-muted border-line-strong hover:border-red-400',
           )}
         >
           <Minus size={12} />
@@ -243,13 +243,13 @@ export default function GraphCanvas({ q, qIdx }: GraphCanvasProps) {
 
         <button
           onClick={() => { clearGraphPoints(q.id); pendingLineStart.current = null }}
-          className="flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium border border-gray-300 bg-white text-gray-600 hover:border-red-400 hover:text-red-500 transition-all"
+          className="flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium border border-line-strong bg-surface text-ink-muted hover:border-red-400 hover:text-red-500 transition-all"
         >
           <Trash2 size={12} />
           Clear
         </button>
 
-        <span className="ml-auto text-[11px] text-gray-500 font-mono">
+        <span className="ml-auto text-[11px] font-mono opacity-80">
           {pointCount} pts · {lineCount} line{lineCount !== 1 ? 's' : ''}
           {mode === 'line' && pendingLineStart.current && (
             <span className="ml-2 text-red-500">Click 2nd point to complete line</span>
@@ -271,7 +271,7 @@ export default function GraphCanvas({ q, qIdx }: GraphCanvasProps) {
         />
       </div>
 
-      <p className="px-3 py-1.5 text-[10px] text-gray-400 border-t border-gray-100">
+      <p className="px-3 py-1.5 text-[10px] text-ink-subtle border-t border-divider">
         Left-click to add point/line endpoint · Right-click to undo last action
       </p>
     </div>

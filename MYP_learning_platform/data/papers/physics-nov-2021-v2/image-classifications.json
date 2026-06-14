@@ -1,0 +1,219 @@
+[
+  {
+    "taskPath": "q3.tasks[b]",
+    "questionId": 3,
+    "taskLabel": "b",
+    "topic": "Doppler effect / red-shift waveforms",
+    "original_path": "/images/papers/physics-nov-2021/q3b-waves.png",
+    "image_type": "code_rendered",
+    "image_prompt": "Four waveform panels A-D in one row, each a sine wave on a fine-gridded box with the x-axis crossing at zero. All four share the SAME amplitude but have different periods: A shortest wavelength (~5 cycles), B ~3 cycles, C ~2 cycles, D longest wavelength (one cycle across the window). Answer = D, because a receding source stretches the wavelength (red-shift / Doppler effect).",
+    "generated_path": "/images/papers/physics-nov-2021-v2/q3b-waves.svg",
+    "render_component": "WaveSim",
+    "render_data": {
+      "title": "Red-shift: which wave shows the source moving away?",
+      "source": "MYP physics-nov-2021-v2",
+      "mode": "match",
+      "windowSeconds": 4,
+      "stationary": { "label": "Stationary source", "cycles": 4, "amplitude_cm": 2 },
+      "options": [
+        { "id": "A", "cycles": 5, "amplitude_cm": 2, "note": "Shorter wavelength than the stationary wave (blue-shift), not red-shift." },
+        { "id": "B", "cycles": 3, "amplitude_cm": 2, "note": "Slightly stretched, but not the most red-shifted option." },
+        { "id": "C", "cycles": 2, "amplitude_cm": 2, "note": "Stretched, but D shows a longer wavelength still." },
+        { "id": "D", "cycles": 1, "amplitude_cm": 2, "note": "Longest wavelength = lowest frequency: a receding source stretches the wave (Doppler red-shift)." }
+      ],
+      "correct": "D",
+      "concept": "Doppler effect / red-shift",
+      "task": "A receding source stretches the wavelength (lower frequency). Pick the wave with the longest wavelength."
+    },
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q3.tasks[d]",
+    "questionId": 3,
+    "taskLabel": "d",
+    "topic": "Hubble's law (velocity vs distance)",
+    "original_path": "/images/papers/physics-nov-2021/q3d-hubble.png",
+    "image_type": "ai_generated",
+    "image_prompt": "Hubble velocity-distance fan-shaped scatter through the origin. x-axis Distance / Mpc (0, 50, 100), y-axis Velocity / km s⁻¹ (0, 5000, 10⁴). Two populations with a key: grey 'galaxies observed today' forming a wide fan that widens with distance, and teal 'galaxies observed in 1930' clustered near the origin (small distances/velocities) giving the shallow 1930 best-fit and the 1.8 billion year age estimate. Part (d) asks for a best-fit line through the origin.",
+    "generated_path": "/images/papers/physics-nov-2021-v2/q3d-hubble.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q5.tasks[b]",
+    "questionId": 5,
+    "taskLabel": "b",
+    "topic": "Resistance vs length of a wire",
+    "original_path": "/images/papers/physics-nov-2021/q5b-resistance-graph.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG titled 'A graph of resistance against length for a conducting wire'. x-axis Length / m (0.00 to 1.20 step 0.20), y-axis Resistance / Ω (0.00 to 0.05 step 0.01). Five data points at (0.20,0.011), (0.40,0.020), (0.60,0.024), (0.80,0.034), (1.00,0.041), with a best-fit straight line of gradient ~0.035 Ω/m (variant value) and a NON-ZERO y-intercept of ~0.005 Ω (evidence of systematic error). Later parts compute the gradient and discuss the intercept.",
+    "generated_path": "/images/papers/physics-nov-2021-v2/q5b-resistance-graph.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q1",
+    "questionId": 1,
+    "taskLabel": null,
+    "topic": "Brownian motion — fat droplet in milk",
+    "original_path": "/images/papers/physics-nov-2021/q1-brownian.png",
+    "image_type": "ai_generated",
+    "image_prompt": "Hand-authored copyright-safe SVG recreation for variant: Brownian motion — fat droplet in milk.",
+    "generated_path": "/images/papers/physics-nov-2021-v2/q1-brownian.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q2.tasks[a]",
+    "questionId": 2,
+    "taskLabel": "a",
+    "topic": "E = mc² — match symbols to SI units",
+    "original_path": "/images/papers/physics-nov-2021/q2a-units.png",
+    "image_type": "ai_generated",
+    "image_prompt": "Hand-authored copyright-safe SVG recreation for variant: E = mc² — match symbols to SI units.",
+    "generated_path": "/images/papers/physics-nov-2021-v2/q2a-units.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q2.tasks[b]",
+    "questionId": 2,
+    "taskLabel": "b",
+    "topic": "Sankey diagram with 550 J input",
+    "original_path": "/images/papers/physics-nov-2021/q2b-sankey.png",
+    "image_type": "code_rendered",
+    "image_prompt": "Hand-authored copyright-safe SVG recreation for variant: Sankey diagram with 550 J input.",
+    "generated_path": "/images/papers/physics-nov-2021-v2/q2b-sankey.svg",
+    "render_component": "SankeySim",
+    "render_data": {
+      "title": "Energy transfer as a child slides down (Sankey diagram)",
+      "source": "MYP physics-nov-2021-v2",
+      "units": "J",
+      "inputJ": 550,
+      "branches": [
+        { "form": "Kinetic energy", "valueJ": 490, "direction": "straight" },
+        { "form": "Thermal energy", "valueJ": null, "direction": "down", "blank": true },
+        { "form": "Sound energy", "valueJ": 10, "direction": "down" }
+      ],
+      "missingForm": "Thermal energy",
+      "missingValueJ": 50,
+      "conservation": "Conservation of energy: 550 J in = 490 J kinetic + 50 J thermal + 10 J sound."
+    },
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q2.tasks[d]",
+    "questionId": 2,
+    "taskLabel": "d",
+    "topic": "Two electrons — mass and energy",
+    "original_path": "/images/papers/physics-nov-2021/q2d-particles.png",
+    "image_type": "ai_generated",
+    "image_prompt": "Hand-authored copyright-safe SVG recreation for variant: Two electrons — mass and energy.",
+    "generated_path": "/images/papers/physics-nov-2021-v2/q2d-particles.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q4",
+    "questionId": 4,
+    "taskLabel": null,
+    "topic": "Component X — notepad measurements",
+    "original_path": "/images/papers/physics-nov-2021/q4-component-x.png",
+    "image_type": "code_rendered",
+    "image_prompt": "Hand-authored copyright-safe SVG recreation for variant: Component X — notepad measurements.",
+    "generated_path": "/images/papers/physics-nov-2021-v2/q4-component-x.svg",
+    "render_component": "CircuitSim",
+    "render_data": {
+      "title": "Component X — measure current at each voltage",
+      "source": "MYP physics-nov-2021-v2",
+      "mode": "iv",
+      "component": "Component X",
+      "ivPairs": [
+        { "V": 0.5, "I": 0.08 },
+        { "V": 1.0, "I": 0.16 },
+        { "V": 1.5, "I": 0.24 },
+        { "V": 2.0, "I": 0.504, "readFromAmmeter": "504 mA" },
+        { "V": 2.5, "I": 0.40 }
+      ],
+      "task": "Sweep the supply voltage and read the ammeter. The missing 2.0 V reading is 504 mA (= 0.50 A). Note 2.0 V is anomalous: expected 0.32 A if X were ohmic."
+    },
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q4.tasks[c]",
+    "questionId": 4,
+    "taskLabel": "c",
+    "topic": "Component Y — current vs voltage graph",
+    "original_path": "/images/papers/physics-nov-2021/q4c-component-y.png",
+    "image_type": "ai_generated",
+    "image_prompt": "Hand-authored copyright-safe SVG recreation for variant: Component Y — current vs voltage graph.",
+    "generated_path": "/images/papers/physics-nov-2021-v2/q4c-component-y.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q5",
+    "questionId": 5,
+    "taskLabel": null,
+    "topic": "Wire — length, area and resistance",
+    "original_path": "/images/papers/physics-nov-2021/q5-wire.png",
+    "image_type": "ai_generated",
+    "image_prompt": "Hand-authored copyright-safe SVG recreation for variant: Wire — length, area and resistance.",
+    "generated_path": "/images/papers/physics-nov-2021-v2/q5-wire.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q6",
+    "questionId": 6,
+    "taskLabel": null,
+    "topic": "Series LED lighting + circuit palette",
+    "original_path": "/images/papers/physics-nov-2021/q6-lights.png",
+    "image_type": "code_rendered",
+    "image_prompt": "Hand-authored copyright-safe SVG recreation for variant: Series LED lighting + circuit palette.",
+    "generated_path": "/images/papers/physics-nov-2021-v2/q6-lights.svg",
+    "render_component": "DragSort",
+    "render_data": {
+      "title": "Measuring the current through two LEDs in series",
+      "source": "MYP physics-nov-2021-v2",
+      "mode": "select",
+      "prompt": "Choose the circuit that correctly measures the current flowing through two LEDs connected in series.",
+      "options": [
+        { "id": "A", "label": "Two LEDs in series with the battery, ammeter in series in the single loop", "correct": true },
+        { "id": "B", "label": "Two LEDs in parallel with each other, ammeter in series with the battery" },
+        { "id": "C", "label": "Two LEDs in series with the battery, ammeter connected in parallel across one LED" },
+        { "id": "D", "label": "Two LEDs in series with the battery, voltmeter (not ammeter) in series in the loop" }
+      ],
+      "correct": "A"
+    },
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q7",
+    "questionId": 7,
+    "taskLabel": null,
+    "topic": "Carbon-neutral electricity generation",
+    "original_path": "/images/papers/physics-nov-2021/q7-energy.png",
+    "image_type": "ai_generated",
+    "image_prompt": "Hand-authored copyright-safe SVG recreation for variant: Carbon-neutral electricity generation.",
+    "generated_path": "/images/papers/physics-nov-2021-v2/q7-energy.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q8",
+    "questionId": 8,
+    "taskLabel": null,
+    "topic": "Malta electricity options",
+    "original_path": "/images/papers/physics-nov-2021/q8-malta.png",
+    "image_type": "ai_generated",
+    "image_prompt": "Hand-authored copyright-safe SVG recreation for variant: Malta electricity options.",
+    "generated_path": "/images/papers/physics-nov-2021-v2/q8-malta.svg",
+    "needs_review": true,
+    "approved": false
+  }
+]

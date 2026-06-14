@@ -1,6 +1,8 @@
 import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
+import { createAdminClient } from '@/lib/supabase/admin'
 import PapersGates from '@/components/papers/PapersGates'
+import { DEV_NO_AUTH } from '@/lib/dev-auth'
 
 interface Paper {
   id: string
@@ -146,6 +148,57 @@ const LOCAL_PAPER_META: Record<string, Partial<Paper>> = {
   'chemistry-nov-2024':    { total_marks: 100, duration_minutes: 90 },
   'chemistry-nov-2024-v1': { total_marks: 100, duration_minutes: 90 },
   'chemistry-nov-2024-v2': { total_marks: 100, duration_minutes: 90 },
+  'humanities-may-2025':   { total_marks: 80,  duration_minutes: 120 },
+  'humanities-nov-2019':   { total_marks: 80,  duration_minutes: 120 },
+  'humanities-nov-2022':   { total_marks: 80,  duration_minutes: 120 },
+  'humanities-may-2023':   { total_marks: 80,  duration_minutes: 120 },
+  'humanities-may-2024':   { total_marks: 80,  duration_minutes: 120 },
+  'humanities-nov-2024':   { total_marks: 80,  duration_minutes: 120 },
+  'humanities-may-2025-v1': { total_marks: 80, duration_minutes: 120 },
+  'humanities-may-2025-v2': { total_marks: 80, duration_minutes: 120 },
+  'humanities-nov-2019-v1': { total_marks: 80, duration_minutes: 120 },
+  'humanities-nov-2019-v2': { total_marks: 80, duration_minutes: 120 },
+  'humanities-nov-2022-v1': { total_marks: 80, duration_minutes: 120 },
+  'humanities-nov-2022-v2': { total_marks: 80, duration_minutes: 120 },
+  'humanities-may-2023-v1': { total_marks: 80, duration_minutes: 120 },
+  'humanities-may-2023-v2': { total_marks: 80, duration_minutes: 120 },
+  'humanities-may-2024-v1': { total_marks: 80, duration_minutes: 120 },
+  'humanities-may-2024-v2': { total_marks: 80, duration_minutes: 120 },
+  'humanities-nov-2024-v1': { total_marks: 80, duration_minutes: 120 },
+  'humanities-nov-2024-v2': { total_marks: 80, duration_minutes: 120 },
+  'geography-may-2025':   { total_marks: 80,  duration_minutes: 120 },
+  'geography-may-2024':   { total_marks: 80,  duration_minutes: 120 },
+  'geography-may-2023':   { total_marks: 80,  duration_minutes: 120 },
+  'geography-may-2022':   { total_marks: 80,  duration_minutes: 120 },
+  'geography-may-2021':   { total_marks: 80,  duration_minutes: 120 },
+  'geography-nov-2024':   { total_marks: 80,  duration_minutes: 120 },
+  'geography-nov-2023':   { total_marks: 80,  duration_minutes: 120 },
+  'geography-nov-2022':   { total_marks: 80,  duration_minutes: 120 },
+  'geography-nov-2021':   { total_marks: 80,  duration_minutes: 120 },
+  'geography-nov-2020':   { total_marks: 80,  duration_minutes: 120 },
+  'geography-nov-2019':   { total_marks: 80,  duration_minutes: 120 },
+  'geography-may-2021-v1': { total_marks: 80, duration_minutes: 120 },
+  'geography-may-2021-v2': { total_marks: 80, duration_minutes: 120 },
+  'geography-may-2022-v1': { total_marks: 80, duration_minutes: 120 },
+  'geography-may-2022-v2': { total_marks: 80, duration_minutes: 120 },
+  'geography-may-2023-v1': { total_marks: 80, duration_minutes: 120 },
+  'geography-may-2023-v2': { total_marks: 80, duration_minutes: 120 },
+  'geography-may-2024-v1': { total_marks: 80, duration_minutes: 120 },
+  'geography-may-2024-v2': { total_marks: 80, duration_minutes: 120 },
+  'geography-may-2025-v1': { total_marks: 80, duration_minutes: 120 },
+  'geography-may-2025-v2': { total_marks: 80, duration_minutes: 120 },
+  'geography-nov-2019-v1': { total_marks: 80, duration_minutes: 120 },
+  'geography-nov-2019-v2': { total_marks: 80, duration_minutes: 120 },
+  'geography-nov-2020-v1': { total_marks: 80, duration_minutes: 120 },
+  'geography-nov-2020-v2': { total_marks: 80, duration_minutes: 120 },
+  'geography-nov-2021-v1': { total_marks: 80, duration_minutes: 120 },
+  'geography-nov-2021-v2': { total_marks: 80, duration_minutes: 120 },
+  'geography-nov-2022-v1': { total_marks: 80, duration_minutes: 120 },
+  'geography-nov-2022-v2': { total_marks: 80, duration_minutes: 120 },
+  'geography-nov-2023-v1': { total_marks: 80, duration_minutes: 120 },
+  'geography-nov-2023-v2': { total_marks: 80, duration_minutes: 120 },
+  'geography-nov-2024-v1': { total_marks: 80, duration_minutes: 120 },
+  'geography-nov-2024-v2': { total_marks: 80, duration_minutes: 120 },
 }
 
 interface Props {
@@ -157,19 +210,23 @@ export default async function PapersPageLoader({ subject }: Props) {
   const supabase = createClient()
 
   const { data: { session } } = await supabase.auth.getSession()
-  if (!session) redirect('/login')
+  if (!session && !DEV_NO_AUTH) redirect('/login')
+  const userId = session?.user?.id
+
+  // RLS blocks anon reads of `papers`; in dev-bypass (no session) read via the
+  // service-role admin client so the gate is browsable. Production always has a session.
+  const papersClient = !session && DEV_NO_AUTH ? createAdminClient() : supabase
 
   const [papersRes, attemptsRes] = await Promise.all([
-    supabase
+    papersClient
       .from('papers')
       .select('id, subject, session, year, total_marks, duration_minutes, is_published')
       .eq('is_published', true)
       .order('year', { ascending: false }),
 
-    supabase
-      .from('attempts')
-      .select('paper_id, status')
-      .eq('user_id', session.user.id),
+    userId
+      ? supabase.from('attempts').select('paper_id, status').eq('user_id', userId)
+      : Promise.resolve({ data: [] as AttemptRow[] }),
   ])
 
   let papers: Paper[] = papersRes.data ?? []

@@ -29,7 +29,7 @@ export const questions: Question[] = [
     topicGroup: 'Space & Astrophysics',
     tags: { unit: 'work-energy', topics: ['speed and velocity', 'work done', 'power', 'gravitational potential energy'], level: 'proficient' },
     stem: 'Horses can perform work for farming activities. In the past, they were used to clear land before planting. Physics can be used to explore the ways in which horses complete these tasks.',
-    figImages: [`${P}q1-horses.png`],
+    figImages: ['/images/papers/physics-may-2023/q1-horses.svg?t=1781259040077'],
     tasks: [
       {
         label: 'a',
@@ -145,7 +145,7 @@ export const questions: Question[] = [
     topicGroup: 'Nuclear & Atomic Physics',
     tags: { unit: 'atomic-physics', topics: ['atomic structure', 'isotopes', 'alpha and beta decay', 'gamma radiation and x-rays'], level: 'proficient' },
     stem: 'The diagram shows an atom of carbon-14, which has 6 protons and 8 neutrons.',
-    figImages: [`${P}q3-carbon14-atom.png`],
+    figImages: ['/images/papers/physics-may-2023/q3-carbon14-atom.svg'],
     tasks: [
       {
         label: 'a',
@@ -165,7 +165,7 @@ export const questions: Question[] = [
         label: 'c',
         text: 'Gamma rays and X-rays are both types of electromagnetic radiation. The key below shows where each type is produced. **Classify** each type of radiation by dragging it to the correct location on the atom diagram.\n\n• Gamma ray — produced from the nucleus of an atom\n• X-ray — produced from inner orbit of electrons\n• Cosmic ray — produced outside the atom (drag to tray)\n• Ultrasound wave — not EM radiation (drag to tray)',
         marks: 2,
-        figImages: [`${P}q3c-radiation-atom.png`],
+        figImages: ['/images/papers/physics-may-2023/q3c-radiation-atom.svg'],
         widget: 'variable_classify',
         widgetOptions: ['Gamma ray', 'X-ray', 'Cosmic ray', 'Ultrasound wave'],
         widgetItems: ['Produced from nucleus', 'Produced from inner electron orbit', 'Neither'],
@@ -243,7 +243,7 @@ export const questions: Question[] = [
         label: 'e',
         text: 'The student calculated the pressure for each of the masses used. They presented the processed data in the graphs below.\n\n**Use both graphs** above to **describe** the relationship between pressure and volume of a gas.',
         marks: 2,
-        figImages: [`${P}q4e-graphs.png`],
+        figImages: ['/images/papers/physics-may-2023/q4e-graphs.svg'],
         ph: 'As the pressure increases, the volume decreases. The relationship is an inverse (non-linear) relationship — as seen in the curved line of the V vs P graph. The volume is inversely proportional to the pressure (Boyle\'s law).',
         level: 'proficient',
       },
@@ -251,7 +251,7 @@ export const questions: Question[] = [
         label: 'f',
         text: 'Another student decided to multiply pressure by volume (pV) and presented this on the graph below.\n\nBoyle\'s law states that pV is constant for a fixed amount of gas at constant temperature. **Suggest** whether the graph supports Boyle\'s law. **Justify** your answer.',
         marks: 2,
-        figImages: [`${P}q4f-pv-graph.png`],
+        figImages: ['/images/papers/physics-may-2023/q4f-pv-graph.svg'],
         ph: 'The graph (does / does not) fully support Boyle\'s law.\nJustification: The pV values are approximately constant (close to horizontal line) across the range of pressures, but there is a slight slope / the value is not perfectly constant. Within experimental error, the data supports Boyle\'s law.',
         level: 'advanced',
       },
@@ -279,7 +279,7 @@ export const questions: Question[] = [
     topicGroup: 'Thermal Physics',
     tags: { unit: 'thermal-physics', topics: ['kinetic theory', 'temperature and gas volume', 'experimental design'], level: 'advanced' },
     stem: 'Another group of students decides to use balloons to investigate the relationship between the volume of a gas and its temperature.\n\nThey make the following prediction:\n\n*"If the temperature of a fixed amount of gas inside a balloon increases, the volume of the balloon will increase."*',
-    figImages: [`${P}q5-balloon.png`],
+    figImages: ['/images/papers/physics-may-2023/q5-balloon.svg?t=1781259822734'],
     tasks: [
       {
         label: 'a',
@@ -313,7 +313,7 @@ export const questions: Question[] = [
     topicGroup: 'Forces & Motion',
     tags: { unit: 'measurement-motion', topics: ['Newton\'s second law', 'Newton\'s third law', 'data processing', 'hypothesis evaluation'], level: 'advanced' },
     stem: 'When the air inside an inflated balloon is released, the balloon accelerates forward.',
-    figImages: [`${P}q6-balloon-rocket.png`],
+    figImages: ['/images/papers/physics-may-2023/q6-balloon-rocket.svg'],
     tasks: [
       {
         label: 'a',
@@ -347,7 +347,7 @@ export const questions: Question[] = [
         label: 'e',
         text: 'Before their investigation, the students suggested the following hypothesis:\n\n*"If the circumference of the balloon increases, then the distance travelled will increase because the resultant or net force will be greater with an increased volume of air."*\n\nThe students plotted three different graphs of their data below. **Use the graphs** to **describe** the relationship between pressure and volume of a gas and evaluate the validity of their hypothesis.',
         marks: 3,
-        figImages: [`${P}q6e-hypothesis-graphs.png`],
+        figImages: ['/images/papers/physics-may-2023/q6e-hypothesis-graphs.svg'],
         ph: 'The graphs show that as circumference increases, the distance travelled increases (positive relationship — hypothesis is partially valid on direction).\nHowever, the relationship is NOT directly proportional (Graph A) — the data fits better with circumference cubed (Graph C shows a straight line through origin), suggesting distance ∝ circumference³.\nThe hypothesis is therefore only partially valid: direction is correct but the "directly proportional" claim is not supported.',
         level: 'advanced',
       },
@@ -388,7 +388,7 @@ export const questions: Question[] = [
         label: 'a',
         text: 'The student plotted this data on a graph. **Calculate** the frequency of the waveform shown below. Give your answer to two significant figures and include a unit.',
         marks: 3,
-        figImages: [`${P}q7a-waveform.png`],
+        figImages: ['/images/papers/physics-may-2023/q7a-waveform.svg?t=1781260430276'],
         ph: 'Period T = read from graph (one complete wave cycle) ≈ ... s\nFrequency f = 1/T = 1/... = ... Hz\nAnswer to 2 s.f. with unit: ... Hz',
         level: 'proficient',
       },
@@ -396,7 +396,7 @@ export const questions: Question[] = [
         label: 'b',
         text: '**Select** the waveform with the same frequency as the waveform in part (a).',
         marks: 1,
-        figImages: [`${P}q7b-waveforms.png`],
+        figImages: ['/images/papers/physics-may-2023/q7b-waveforms.svg?t=1781262035130'],
         widget: 'radio_select',
         widgetOptions: ['A', 'B', 'C', 'D'],
         ph: 'C',
@@ -406,7 +406,7 @@ export const questions: Question[] = [
         label: 'c',
         text: 'Pedro and Natasha are communicating using mobile phones. The phones send and receive information in the form of radio waves. Different frequencies are used to transmit this information.\n\nThe animation below shows a simplified view of the mobile phone network that is used. **Put the following statements in order** to outline the process taking place in the animation.',
         marks: 1,
-        figImages: [`${P}q7-phone-network.png`],
+        figImages: ['/images/papers/physics-may-2023/q7-phone-network.svg'],
         ph: '1. Pedro\'s voice is converted into an electrical signal by the microphone in his mobile phone. The phone then converts that electrical signal into a radio wave.\n2. The radio wave signal is transmitted from the mobile phone to tower A.\n3. Tower A receives the signal, then sends the signal out through a connection using wires or fibre-optic cables to Tower B, where the signal is converted again.\n4. Natasha\'s phone receives the radio wave signal and converts it back into a sound wave that she can hear.',
         level: 'proficient',
       },

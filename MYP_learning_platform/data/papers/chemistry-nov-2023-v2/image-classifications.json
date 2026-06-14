@@ -1,0 +1,26 @@
+[
+  {
+    "taskPath": "q1.figImages[0]",
+    "questionId": 1,
+    "taskLabel": null,
+    "topic": "Home soda water — sealed bottle equilibrium",
+    "original_path": "/images/papers/chemistry-nov-2023/page-02.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: sealed soda-water bottle from home carbonation machine showing CO₂ gas ⇌ dissolved CO₂ equilibrium with up + down arrows between gas space and water; dark cap labelled 'SEALED'; blue label 'HOME SODA'.",
+    "generated_path": "/images/papers/chemistry-nov-2023-v2/page-02.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q1.figImages[1]",
+    "questionId": 1,
+    "taskLabel": null,
+    "topic": "Home soda water — opened bottle CO₂ escapes",
+    "original_path": "/images/papers/chemistry-nov-2023/page-03.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: same soda bottle opened with cap to side; CO₂ cloud above neck; up arrow from liquid surface to CO₂ cloud; rapidly rising bubbles; caption 'Pressure drops → CO₂ comes out of solution'.",
+    "generated_path": "/images/papers/chemistry-nov-2023-v2/page-03.svg",
+    "needs_review": true,
+    "approved": false
+  }
+]

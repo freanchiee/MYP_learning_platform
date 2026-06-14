@@ -1,0 +1,73 @@
+[
+  {
+    "taskPath": "q3.tasks[g]",
+    "questionId": 3,
+    "taskLabel": "g",
+    "topic": "Rate of biodegradation",
+    "original_path": "/images/papers/chemistry-nov-2020/page-11.png",
+    "image_type": "code_rendered",
+    "render_component": "RateSim",
+    "render_data": {
+      "title": "Rate of biodegradation of three synthetic-rubber samples",
+      "source": "MYP chemistry-nov-2020-v1",
+      "mode": "saturating",
+      "xAxis": { "label": "Time / days", "min": 0, "max": 50, "tick": 10 },
+      "yAxis": { "label": "Biodegradation / %", "min": 0, "max": 60, "tick": 10 },
+      "variable": "particle size",
+      "series": [
+        { "label": "C", "color": "green", "plateau": 55 },
+        { "label": "A", "color": "teal", "plateau": 46 },
+        { "label": "B", "color": "orange", "plateau": 37 }
+      ],
+      "prompt": "Sample C biodegrades fastest and plateaus highest; B is slowest. Choose a sample, press Play to build its curve, then drag the cursor to read the biodegradation % at any time.",
+      "task": "List the three samples in order of increasing particle size and justify your answer.",
+      "answer": "Increasing particle size: C < A < B. C has the smallest particles (largest surface area), so it biodegrades fastest; B has the largest particles, so it is slowest.",
+      "trend": "Smaller particle size means greater surface area, so a faster rate of biodegradation."
+    },
+    "generated_path": "/images/papers/chemistry-nov-2020-v1/q3-biodegradation-curves.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q4.tasks[f]",
+    "questionId": 4,
+    "taskLabel": "f",
+    "topic": "Reaction rate vs temperature",
+    "original_path": "/images/papers/chemistry-nov-2020/page-17.png",
+    "image_type": "code_rendered",
+    "render_component": "RateSim",
+    "render_data": {
+      "title": "Average time taken for the firefly light to stop vs temperature",
+      "source": "MYP chemistry-nov-2020-v1",
+      "mode": "saturating",
+      "xAxis": { "label": "Temperature of water / °C", "min": 0, "max": 70, "tick": 10 },
+      "yAxis": { "label": "Time the light lasts / min", "min": 0, "max": 600, "tick": 100 },
+      "variable": "temperature",
+      "series": [
+        {
+          "label": "Average light duration",
+          "color": "purple",
+          "points": [
+            [5, 540],
+            [10, 440],
+            [15, 330],
+            [20, 240],
+            [25, 195],
+            [30, 150],
+            [35, 120],
+            [45, 85],
+            [55, 70],
+            [65, 62]
+          ]
+        }
+      ],
+      "prompt": "Press Play to trace the curve, then drag the cursor to read the average light duration at any temperature.",
+      "task": "Predict the time taken for the firefly light to stop at 10 °C.",
+      "answer": "At 10 °C the light lasts about 440 minutes (read off the curve). At 20 °C it lasts 240 minutes.",
+      "trend": "As temperature increases, the bioluminescent reaction is faster, so the light stops sooner (duration decreases)."
+    },
+    "generated_path": "/images/papers/chemistry-nov-2020-v1/q4-glowstick-time-temp.svg",
+    "needs_review": true,
+    "approved": false
+  }
+]

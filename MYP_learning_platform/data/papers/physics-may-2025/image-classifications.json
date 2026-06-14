@@ -1,0 +1,293 @@
+[
+  {
+    "taskPath": "q1",
+    "questionId": 1,
+    "taskLabel": null,
+    "topic": "Defibrillators / static charge",
+    "original_path": "/images/papers/physics-may-2025/page-01-crop.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: automated external defibrillator (AED) unit with ECG screen and two adhesive pads applied to a patient.",
+    "generated_path": "/images/papers/physics-may-2025/page-01.svg",
+    "needs_review": false,
+    "approved": true,
+    "regenerated_at": "2026-06-11T16:57:27.886Z"
+  },
+  {
+    "taskPath": "q1.tasks[d]",
+    "questionId": 1,
+    "taskLabel": "d",
+    "topic": "Defibrillators",
+    "original_path": "/images/papers/physics-may-2025/page-05-crop.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: two defibrillator types — Type 1 AED with stick-on adhesive pads, Type 2 handheld paddles with monitor.",
+    "generated_path": "/images/papers/physics-may-2025/page-05.svg",
+    "needs_review": false,
+    "approved": true,
+    "regenerated_at": "2026-06-11T16:59:00.640Z"
+  },
+  {
+    "taskPath": "q2",
+    "questionId": 2,
+    "taskLabel": null,
+    "topic": "Refraction of light",
+    "original_path": "/images/papers/physics-may-2025/page-06-crop.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: a straw in a glass of water appearing bent at the water surface (refraction).",
+    "generated_path": "/images/papers/physics-may-2025/page-06.svg",
+    "needs_review": false,
+    "approved": true,
+    "regenerated_at": "2026-06-11T17:03:42.422Z"
+  },
+  {
+    "taskPath": "q2.tasks[c]",
+    "questionId": 2,
+    "taskLabel": "c",
+    "topic": "Refraction — air to water",
+    "original_path": "/images/papers/physics-may-2025/page-09-crop.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: light ray travelling from air into water, bending toward the dashed normal at the boundary; Air and Water labelled.",
+    "generated_path": "/images/papers/physics-may-2025/page-09.svg",
+    "needs_review": false,
+    "approved": true
+  },
+  {
+    "taskPath": "q2.tasks[d]",
+    "questionId": 2,
+    "taskLabel": "d",
+    "topic": "Apparent depth",
+    "original_path": "/images/papers/physics-may-2025/page-11-crop.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: observer on a cliff viewing a fish; real fish (solid) deeper, apparent fish (dashed) shallower, refracted light ray to the eye.",
+    "generated_path": "/images/papers/physics-may-2025/page-11.svg",
+    "needs_review": false,
+    "approved": true,
+    "regenerated_at": "2026-06-11T17:05:05.719Z"
+  },
+  {
+    "taskPath": "q2.tasks[e]",
+    "questionId": 2,
+    "taskLabel": "e",
+    "topic": "Short sight / diverging lens",
+    "original_path": "/images/papers/physics-may-2025/page-13-crop.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: two eye diagrams — short-sighted eye focusing before the retina, and the same eye corrected by a diverging lens; labels Light rays, Retina, Diverging lens.",
+    "generated_path": "/images/papers/physics-may-2025/page-13.svg",
+    "needs_review": false,
+    "approved": true,
+    "regenerated_at": "2026-06-11T17:06:14.380Z"
+  },
+  {
+    "taskPath": "q4",
+    "questionId": 4,
+    "taskLabel": null,
+    "topic": "Cotton-reel car — equipment",
+    "original_path": "/images/papers/physics-may-2025/page-20-crop.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: equipment list with icons — cotton reel, stick, rubber band, pencil.",
+    "generated_path": "/images/papers/physics-may-2025/page-20.svg",
+    "needs_review": false,
+    "approved": true
+  },
+  {
+    "taskPath": "q4.tasks[b]",
+    "questionId": 4,
+    "taskLabel": "b",
+    "topic": "Reading a velocity value (JUDGMENT CALL)",
+    "original_path": "/images/papers/physics-may-2025/page-21-crop.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: motion DATA TABLE (Time / s vs Velocity / cm s-1). NOTE: the IB original here is a build-instructions photo, but the task text asks the student to read velocity at t=0.35 s, so this recreation is a data table (v=38 at 0.35 s) to make the task answerable. Please review this substitution.",
+    "generated_path": "/images/papers/physics-may-2025/page-21.svg",
+    "needs_review": false,
+    "approved": true,
+    "regenerated_at": "2026-06-11T17:09:29.479Z"
+  },
+  {
+    "taskPath": "q4.tasks[c]",
+    "questionId": 4,
+    "taskLabel": "c",
+    "topic": "Velocity–time graph",
+    "original_path": "/images/papers/physics-may-2025/page-36-crop.png",
+    "image_type": "code_rendered",
+    "image_prompt": "SVG: velocity–time scatter graph (Velocity / cm s-1 0–50 vs Time / s 0–2.0), rise then fall.",
+    "render_component": "GraphSim",
+    "render_data": {
+      "title": "Velocity–time graph of the cotton-reel car",
+      "source": "MYP physics-may-2025",
+      "mode": "readoff",
+      "xAxis": { "label": "Time / s", "min": 0, "max": 2.0, "tick": 0.2 },
+      "yAxis": { "label": "Velocity / cm s⁻¹", "min": 0, "max": 50, "tick": 10 },
+      "points": [
+        [0.0, 5.6],
+        [0.1, 17.6],
+        [0.2, 27.2],
+        [0.33, 38.0],
+        [0.44, 45.4],
+        [0.55, 47.0],
+        [0.64, 49.0],
+        [0.74, 48.2],
+        [0.85, 43.4],
+        [0.95, 38.5],
+        [1.05, 33.5],
+        [1.15, 28.3],
+        [1.26, 24.0],
+        [1.35, 18.9],
+        [1.44, 16.1],
+        [1.55, 11.9],
+        [1.64, 10.0],
+        [1.75, 4.7]
+      ],
+      "dataMaxX": 1.75,
+      "readouts": [
+        { "x": 0.05, "note": "start of line of best fit interval", "expected": "≈ 9 cm s⁻¹" },
+        { "x": 0.35, "note": "end of line of best fit interval", "expected": "≈ 40 cm s⁻¹" }
+      ],
+      "gradientReadout": "Gradient between t = 0.05 s and t = 0.35 s ≈ Δv/Δt ≈ 105 cm s⁻² (accept 100–110)",
+      "units": "Gradient unit = cm s⁻²; the gradient represents acceleration",
+      "task": "Calculate the gradient of the line of best fit between t = 0.05 s and t = 0.35 s, give its unit, and state the quantity it represents."
+    },
+    "generated_path": "/images/papers/physics-may-2025/page-36.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q5.tasks[a]",
+    "questionId": 5,
+    "taskLabel": "a",
+    "topic": "Investigation design (JUDGMENT CALL)",
+    "original_path": "/images/papers/physics-may-2025/page-40-crop.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: schematic of the cotton-reel model car (reel, wound elastic band, stick lever, pencil axle). NOTE: the IB original here is essentially repeated text, not a diagram — this recreation gives a useful labelled figure for the design task. Please review whether an image is wanted here at all.",
+    "generated_path": "/images/papers/physics-may-2025/page-40.svg",
+    "needs_review": false,
+    "approved": true
+  },
+  {
+    "taskPath": "q6",
+    "questionId": 6,
+    "taskLabel": null,
+    "topic": "Seebeck effect / thermoelectric generator",
+    "original_path": "/images/papers/physics-may-2025/page-44-crop.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: thermoelectric generator bridging a hot-water tank and a cold-water tank, with electrical wires; labels Hot water, Cold water, Water tanks, Thermoelectric generator, Electrical wires.",
+    "generated_path": "/images/papers/physics-may-2025/page-44.svg",
+    "needs_review": false,
+    "approved": true
+  },
+  {
+    "taskPath": "q6.tasks[c]",
+    "questionId": 6,
+    "taskLabel": "c",
+    "topic": "TEG data table",
+    "original_path": "/images/papers/physics-may-2025/page-47-crop.png",
+    "image_type": "code_rendered",
+    "image_prompt": "SVG: data table Temperature 1/°C, Temperature 2/°C, Temperature difference/°C, Voltage/V. Four rows from the original plus a highlighted blank-difference row for the student to fill in. NOTE: the 5th row's other values are illustrative (cut off in the IB crop) — review.",
+    "render_component": "CircuitSim",
+    "render_data": {
+      "title": "Thermoelectric generator (TEG): voltage vs temperature difference",
+      "source": "MYP physics-may-2025",
+      "mode": "iv",
+      "component": "TEG",
+      "battery": "TEG",
+      "variableResistor": { "label": "Temperature difference ΔT" },
+      "ivPairs": [
+        { "V": 0.298, "I": 0, "label": "ΔT = 45.0 °C" },
+        { "V": 0.251, "I": 0, "label": "ΔT = 40.0 °C" },
+        { "V": 0.206, "I": 0, "label": "ΔT = 35.6 °C" },
+        { "V": 0.131, "I": 0, "label": "ΔT = 28.8 °C" }
+      ],
+      "task": "One temperature difference is missing from the table: ΔT = T₁ − T₂ = 20.0 °C. Plot V against ΔT, judge whether voltage is directly proportional to ΔT, and find the Seebeck coefficient from the gradient (S = −ΔV/ΔT)."
+    },
+    "generated_path": "/images/papers/physics-may-2025/page-47.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q7",
+    "questionId": 7,
+    "taskLabel": null,
+    "topic": "Newton's cannonball",
+    "original_path": "/images/papers/physics-may-2025/page-62-crop.png",
+    "image_type": "code_rendered",
+    "image_prompt": "SVG: Newton's cannonball thought experiment — globe with mountain V, projectile paths of increasing range and orbital circles, labelled A–G and V.",
+    "render_component": "OrbitSim",
+    "render_data": {
+      "title": "Newton's cannonball — circular orbit around Earth",
+      "source": "MYP physics-may-2025",
+      "mode": "orbit",
+      "central": "Earth",
+      "bodies": [
+        { "name": "Earth", "role": "center" },
+        { "name": "Cannonball", "role": "orbiter", "orbitalPeriod": 90, "colour": "#94a3b8", "radius": 6 }
+      ],
+      "showForce": true,
+      "caption": "Fired horizontally from a tall mountain, the cannonball's path depends on its initial horizontal speed: 0 m s⁻¹ drops straight down; 4700 m s⁻¹ curves back to the surface; 7800 m s⁻¹ gives a circular orbit; 14 200 m s⁻¹ is fast enough to escape Earth's gravity. The only force acting is gravity, directed toward Earth's centre."
+    },
+    "generated_path": "/images/papers/physics-may-2025/page-62.svg",
+    "needs_review": true,
+    "approved": false,
+    "regenerated_at": "2026-06-11T17:11:34.098Z"
+  },
+  {
+    "taskPath": "q7.tasks[a]",
+    "questionId": 7,
+    "taskLabel": "a",
+    "topic": "Cannonball launch speeds",
+    "original_path": "/images/papers/physics-may-2025/page-65-crop.png",
+    "image_type": "code_rendered",
+    "image_prompt": "SVG: four Earth diagrams A–D, each with a cannon on top firing at increasing speed — short arc, partial orbit, circular orbit, escape ellipse. 'Diagram not to scale'.",
+    "render_component": "OrbitSim",
+    "render_data": {
+      "title": "Matching cannonball launch speeds to their paths (A–D)",
+      "source": "MYP physics-may-2025",
+      "mode": "orbit",
+      "central": "Earth",
+      "bodies": [
+        { "name": "Earth", "role": "center" },
+        { "name": "Cannonball", "role": "orbiter", "orbitalPeriod": 90, "colour": "#94a3b8", "radius": 6 }
+      ],
+      "showForce": true,
+      "caption": "Correct matches (all four required): C = 0 m s⁻¹ (falls straight down); A = 4700 m s⁻¹ (curved arc that falls back to Earth); B = 7800 m s⁻¹ (circular orbit); D = 14 200 m s⁻¹ (escape trajectory). Animation shows the B = 7800 m s⁻¹ circular-orbit case with gravity directed toward Earth's centre."
+    },
+    "generated_path": "/images/papers/physics-may-2025/page-65.svg",
+    "needs_review": true,
+    "approved": false,
+    "regenerated_at": "2026-06-11T17:16:05.078Z"
+  },
+  {
+    "taskPath": "q7.tasks[b]",
+    "questionId": 7,
+    "taskLabel": "b",
+    "topic": "Satellite in circular orbit",
+    "original_path": "/images/papers/physics-may-2025/page-66-crop.png",
+    "image_type": "code_rendered",
+    "image_prompt": "SVG: satellite (dot) in a dashed circular orbit around Earth with direction arrows.",
+    "render_component": "OrbitSim",
+    "render_data": {
+      "title": "Cannonball / satellite in a circular orbit around Earth",
+      "source": "MYP physics-may-2025",
+      "mode": "orbit",
+      "central": "Earth",
+      "bodies": [
+        { "name": "Earth", "role": "center" },
+        { "name": "Cannonball", "role": "orbiter", "orbitalPeriod": 90, "colour": "#94a3b8", "radius": 6 }
+      ],
+      "showForce": true,
+      "caption": "In a circular orbit the only force on the cannonball is gravity (its weight), which always points toward the centre of the Earth and provides the centripetal force. The correct free-body diagram is B — a single arrow directed inward toward Earth's centre, with no thrust."
+    },
+    "generated_path": "/images/papers/physics-may-2025/page-66.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q7.tasks[b].img2",
+    "questionId": 7,
+    "taskLabel": "b",
+    "topic": "Free-body force diagrams",
+    "original_path": "/images/papers/physics-may-2025/page-67-crop.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: four free-body diagrams A–D of the orbiting satellite — A Thrust up + Weight right, B Weight right, C Weight up, D Thrust up.",
+    "generated_path": "/images/papers/physics-may-2025/page-67.svg",
+    "needs_review": false,
+    "approved": true
+  }
+]

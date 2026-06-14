@@ -1,0 +1,232 @@
+[
+  {
+    "taskPath": "q3.tasks[f]",
+    "questionId": 3,
+    "taskLabel": "f",
+    "topic": "Rate of wax combustion vs altitude",
+    "original_path": "/images/papers/chemistry-may-2021/page-12.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: bar chart, y-axis Altitude / m (0 to 5000, ticks every 500), x-axis categorical Rate of wax combustion / g min⁻¹ with labels 0.161, 0.13, 0.11, 0.106, 0.0906 (deliberately non-monotonic). Five teal bars at heights ~1000, 2700, 3200, 3700, 4700 m.",
+    "generated_path": "/images/papers/chemistry-may-2021/q3f-altitude-bar.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q7",
+    "questionId": 7,
+    "taskLabel": null,
+    "topic": "Global water consumption by region",
+    "original_path": "/images/papers/chemistry-may-2021/page-28.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: multi-series line graph, x-axis Year (1900 to 2020, ticks every 10), y-axis Billion cubic metres per year (0 to 3500, ticks every 500). Six regional series with key: Asia (highest, rises sharply after 1950 to ~3000, ~2000 at 1995), North America (rises to ~830 with a small dip near 1980), Europe (~590), Africa (~360), South America (~220), Australia and Oceania (lowest, ~180; smallest increase 1900-1980).",
+    "generated_path": "/images/papers/chemistry-may-2021/q7-water-consumption.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q1",
+    "questionId": 1,
+    "taskLabel": null,
+    "topic": "Solar system — rocky vs gas-rich planets",
+    "original_path": "/images/papers/chemistry-may-2021/page-01.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: solar system panorama on deep space background. Partial Sun at left edge; 'Rocky' bracket over Mercury, Venus, Earth (blue), Mars; dashed asteroid belt (labelled); 'Gas-rich' bracket over Jupiter (banded, red spot), Saturn (rings), Uranus (cyan), Neptune (blue). Each planet labelled vertically.",
+    "generated_path": "/images/papers/chemistry-may-2021/q1-solar-system.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q1.tasks[e]",
+    "questionId": 1,
+    "taskLabel": "e",
+    "topic": "Lewis (dot-cross) structure of ammonia NH₃",
+    "original_path": "/images/papers/chemistry-may-2021/page-03.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: four NH₃ Lewis dot-cross diagrams labelled A–D, central N with three H (two horizontal, one below). Teal dots and red crosses. C is correct: each N–H bond a shared dot+cross pair and one lone pair (crosses) on N; A, B, D show incorrect electron arrangements.",
+    "generated_path": "/images/papers/chemistry-may-2021/q1e-nh3-lewis.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q2.tasks[d]",
+    "questionId": 2,
+    "taskLabel": "d",
+    "topic": "pH indicator colour-change chart",
+    "original_path": "/images/papers/chemistry-may-2021/page-05.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: pH colour-change chart, axis 0–14 with gridlines. Indicator A: Red band pH 0–3, Yellow band pH 4.3–14. Indicator B: Yellow band pH 0–6, Blue band pH 7.5–14. Bands coloured (red/yellow/blue), rows labelled A and B, axis labelled pH.",
+    "generated_path": "/images/papers/chemistry-may-2021/q2d-ph-indicators.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q3.tasks[a]",
+    "questionId": 3,
+    "taskLabel": "a",
+    "topic": "Burning candle — states of matter",
+    "original_path": "/images/papers/chemistry-may-2021/page-08.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: lit candle on dark scene. Yellow/orange flame with blue base and dark wick. Label 'Water vapour and carbon dioxide' to flame top, label B to the wick/liquid-wax pool, label A to the solid candle body.",
+    "generated_path": "/images/papers/chemistry-may-2021/q3a-candle.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q3.tasks[d]",
+    "questionId": 3,
+    "taskLabel": "d",
+    "topic": "Tea-light candle with vs without metal holder",
+    "original_path": "/images/papers/chemistry-may-2021/page-10.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: two lit tea-light candles on a dark background. Left candle sits in a reflective grey metal holder; right candle is plain white wax with no metal rim. Both flames small and yellow.",
+    "generated_path": "/images/papers/chemistry-may-2021/q3d-tealights.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q3.tasks[g]",
+    "questionId": 3,
+    "taskLabel": "g",
+    "topic": "Day 1 vs Day 2 equipment and altitude data",
+    "original_path": "/images/papers/chemistry-may-2021/page-13.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: data table (Altitude / m vs Rate of wax combustion / g min⁻¹ for Day 1 and Day 2: 990/0.161/0.148, 2700/0.130/0.119, 3200/0.110/0.108, 3720/0.106/0.095, 4700/0.0906/0.082) plus two apparatus photos — a white lantern (enclosed flame) for day 1 and an open tea-light for day 2.",
+    "generated_path": "/images/papers/chemistry-may-2021/q3g-equipment.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q4",
+    "questionId": 4,
+    "taskLabel": null,
+    "topic": "Vanilla vs strawberry candle apparatus and data tables",
+    "original_path": "/images/papers/chemistry-may-2021/page-15.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: vanilla candle in a tall glass jar (white label) and strawberry candle in a short glass container (pink wax), each labelled. Two data tables: vanilla (185 g; 29.0, 24.3, 28.0 h; average 27.1) and strawberry (114 g; 32.0, 28.5, 29.5 h; average blank for student to fill).",
+    "generated_path": "/images/papers/chemistry-may-2021/q4-candles-data.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q5",
+    "questionId": 5,
+    "taskLabel": null,
+    "topic": "Coffee grounds (decorative)",
+    "original_path": "/images/papers/chemistry-may-2021/page-19.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: decorative circular coffee illustration — brown ring framing dark roasted coffee grounds with scattered whole beans and a lighter spilled-ground area, bold white 'Coffee' wordmark across the centre.",
+    "generated_path": "/images/papers/chemistry-may-2021/q5-coffee.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q5.tasks[a]",
+    "questionId": 5,
+    "taskLabel": "a",
+    "topic": "Filtration apparatus organiser (drag and drop)",
+    "original_path": "/images/papers/chemistry-may-2021/page-20.png",
+    "image_type": "code_rendered",
+    "image_prompt": "SVG: drag-and-drop workspace with a provided filter-funnel stand (Y-shaped outline) on the left and a 'Draggable items:' panel on the right containing a filter-paper triangle, an electronic balance, a thermometer, a 150 ml beaker and a 500 ml beaker. Dark toolbar strip with cursor, trash and undo/redo icons.",
+    "generated_path": "/images/papers/chemistry-may-2021/q5a-filtration-setup.svg",
+    "render_component": "DragSort",
+    "render_data": {
+      "mode": "bins",
+      "title": "Build the filtration set-up",
+      "source": "MYP chemistry-may-2021",
+      "prompt": "Organise the equipment to separate the solid and liquid fractions from the coffee ground/solvent mixture. The filter funnel stand is already provided. Place the filter paper inside the funnel and a beaker underneath to collect the filtrate; everything else is not needed.",
+      "items": [
+        "Filter paper (cone)",
+        "150 ml beaker",
+        "500 ml beaker",
+        "Electronic balance",
+        "Thermometer"
+      ],
+      "bins": [
+        "Inside funnel",
+        "Underneath funnel",
+        "Not needed"
+      ],
+      "correct": {
+        "Filter paper (cone)": "Inside funnel",
+        "150 ml beaker": "Underneath funnel",
+        "500 ml beaker": "Not needed",
+        "Electronic balance": "Not needed",
+        "Thermometer": "Not needed"
+      }
+    },
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q5.tasks[b]",
+    "questionId": 5,
+    "taskLabel": "b",
+    "topic": "GHS hazard symbols",
+    "original_path": "/images/papers/chemistry-may-2021/page-21.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: four GHS hazard pictograms labelled A–D. A corrosive (red diamond, liquid attacking surface/hand), B explosive (red diamond, bursting bomb), C flammable (red diamond, flame — the correct answer for hexane), D radioactive (yellow triangle, trefoil).",
+    "generated_path": "/images/papers/chemistry-may-2021/q5b-hazard-symbols.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q6",
+    "questionId": 6,
+    "taskLabel": null,
+    "topic": "Energy-density calorimetry equipment set-ups",
+    "original_path": "/images/papers/chemistry-may-2021/page-26.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: two labelled calorimetry set-ups. Set-up one: beaker of water with thermometer on a tripod and gauze, spirit burner beneath, electronic balance (labels Thermometer, Water, Gauze, Tripod, Spirit burner, Balance). Set-up two: coffee-can calorimeter with a small metal can of water and thermometer inside, glass rod, spirit burner with air holes, balance (labels Thermometer, Glass rod, Coffee can, Small metal can, Water, Spirit burner, Air holes, Balance).",
+    "generated_path": "/images/papers/chemistry-may-2021/q6-energy-density-setups.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q7.tasks[d]",
+    "questionId": 7,
+    "taskLabel": "d",
+    "topic": "Water contaminant and filter comparison tables",
+    "original_path": "/images/papers/chemistry-may-2021/page-30.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: two data tables. Contaminant table (Contaminant, Size / µm, Source, Symptoms or diseases) for E. coli, Giardia, Hepatitis A, Heavy metals, Fuel, Nitrates. Filter comparison table (Ceramic core unit vs Activated carbon unit) for cost of unit (166.00 / 92.00), cost of filters (67 / 26), filter life span (12 / 6 months), water flow (1.8–3.8 / 1.2–2.5 dm³ min⁻¹), pore size (0.22 / 0.60 µm), operating temperature (5–30 / −1–51 °C).",
+    "generated_path": "/images/papers/chemistry-may-2021/q7-filter-tables.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q7.tasks[e]",
+    "questionId": 7,
+    "taskLabel": "e",
+    "topic": "Water contaminant and filter comparison tables",
+    "original_path": "/images/papers/chemistry-may-2021/page-30.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: two data tables. Contaminant table (Contaminant, Size / µm, Source, Symptoms or diseases) for E. coli, Giardia, Hepatitis A, Heavy metals, Fuel, Nitrates. Filter comparison table (Ceramic core unit vs Activated carbon unit) for cost of unit (166.00 / 92.00), cost of filters (67 / 26), filter life span (12 / 6 months), water flow (1.8–3.8 / 1.2–2.5 dm³ min⁻¹), pore size (0.22 / 0.60 µm), operating temperature (5–30 / −1–51 °C).",
+    "generated_path": "/images/papers/chemistry-may-2021/q7-filter-tables.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q8.page-33",
+    "questionId": 8,
+    "taskLabel": null,
+    "topic": "Water treatment script (text only)",
+    "original_path": "/images/papers/chemistry-may-2021/page-33.png",
+    "image_type": "text_only",
+    "image_prompt": "Pure-text page — the water-treatment video script paragraphs. No diagram present; renders nothing.",
+    "generated_path": null,
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q8",
+    "questionId": 8,
+    "taskLabel": null,
+    "topic": "Water treatment technologies comparison table",
+    "original_path": "/images/papers/chemistry-may-2021/page-34.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: water-treatment technologies comparison table. Columns Method, Filter, Functionality, Lifespan, Output / m³ per day, and Cost of water / US$ per 100 m³ (Initial building cost, Replacement parts, Labour costs to run the facility, Total). Rows: Microfiltration and ultrafiltration (metal screen filter, 15 years, 8 000, 0.15, 0.00, 0.03 low skill, 0.18); Nanofiltration (polyester membrane, 3–5 years, 100 000, 6.27, 2.34, 0.30 low skill, 8.91); Desalination by reverse osmosis (membrane, 2–3 years, 250 000, 3.66, 0.12, 1.47 high skill, 5.25).",
+    "generated_path": "/images/papers/chemistry-may-2021/q8-water-tech-table.svg",
+    "needs_review": true,
+    "approved": false
+  }
+]

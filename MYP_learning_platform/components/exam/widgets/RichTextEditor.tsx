@@ -67,18 +67,25 @@ export default function RichTextEditor({
   }, [value])
 
   return (
-    <div className="rounded-xl border border-gray-300 focus-within:ring-2 focus-within:ring-[#3cb563] focus-within:border-transparent overflow-hidden bg-white transition-shadow">
+    <div
+      className="rounded-control focus-within:ring-2 focus-within:border-transparent overflow-hidden transition-shadow"
+      style={{
+        border: '1px solid var(--border-strong)',
+        background: 'var(--surface)',
+        ['--tw-ring-color' as string]: 'var(--accent)',
+      }}
+    >
       {/* Toolbar */}
-      <div className="bg-gray-50 border-b border-gray-200 px-2 py-1 flex gap-1 items-center">
+      <div className="px-2 py-1 flex gap-1 items-center" style={{ background: 'var(--surface-2)', borderBottom: '1px solid var(--border)' }}>
         {/* Bold */}
         <button
           type="button"
           onMouseDown={e => { e.preventDefault(); execFormat('bold') }}
-          className="px-2 py-1 rounded text-sm font-bold transition-colors"
+          className="px-2 py-1 rounded-control text-sm font-bold transition-colors"
           style={{
-            background: activeFormats.bold ? '#3cb563' : 'white',
-            color: activeFormats.bold ? 'white' : '#374151',
-            border: activeFormats.bold ? 'none' : '1px solid #d1d5db',
+            background: activeFormats.bold ? 'var(--accent)' : 'var(--surface)',
+            color: activeFormats.bold ? 'var(--text-on-accent)' : 'var(--text-muted)',
+            border: activeFormats.bold ? 'none' : '1px solid var(--border-strong)',
           }}
           title="Bold"
         >
@@ -89,11 +96,11 @@ export default function RichTextEditor({
         <button
           type="button"
           onMouseDown={e => { e.preventDefault(); execFormat('italic') }}
-          className="px-2 py-1 rounded text-sm italic transition-colors"
+          className="px-2 py-1 rounded-control text-sm italic transition-colors"
           style={{
-            background: activeFormats.italic ? '#3cb563' : 'white',
-            color: activeFormats.italic ? 'white' : '#374151',
-            border: activeFormats.italic ? 'none' : '1px solid #d1d5db',
+            background: activeFormats.italic ? 'var(--accent)' : 'var(--surface)',
+            color: activeFormats.italic ? 'var(--text-on-accent)' : 'var(--text-muted)',
+            border: activeFormats.italic ? 'none' : '1px solid var(--border-strong)',
           }}
           title="Italic"
         >
@@ -104,11 +111,11 @@ export default function RichTextEditor({
         <button
           type="button"
           onMouseDown={e => { e.preventDefault(); execFormat('underline') }}
-          className="px-2 py-1 rounded text-sm underline transition-colors"
+          className="px-2 py-1 rounded-control text-sm underline transition-colors"
           style={{
-            background: activeFormats.underline ? '#3cb563' : 'white',
-            color: activeFormats.underline ? 'white' : '#374151',
-            border: activeFormats.underline ? 'none' : '1px solid #d1d5db',
+            background: activeFormats.underline ? 'var(--accent)' : 'var(--surface)',
+            color: activeFormats.underline ? 'var(--text-on-accent)' : 'var(--text-muted)',
+            border: activeFormats.underline ? 'none' : '1px solid var(--border-strong)',
           }}
           title="Underline"
         >
@@ -119,7 +126,7 @@ export default function RichTextEditor({
         <div className="flex-1" />
 
         {/* Word count */}
-        <span className="text-[10px] text-gray-400 font-mono pr-1">
+        <span className="text-[10px] font-mono pr-1" style={{ color: 'var(--text-subtle)' }}>
           {wordCount} word{wordCount !== 1 ? 's' : ''}
         </span>
       </div>
@@ -132,11 +139,13 @@ export default function RichTextEditor({
         onInput={handleInput}
         onKeyUp={handleKeyUp}
         onMouseUp={handleMouseUp}
-        className="px-3 py-2.5 text-sm text-gray-800 outline-none"
+        className="px-3 py-2.5 text-sm outline-none"
         style={{
           minHeight,
           fontFamily: 'Georgia, "Times New Roman", serif',
           lineHeight: '1.6',
+          background: 'var(--surface-inset)',
+          color: 'var(--text)',
         }}
         data-placeholder={placeholder}
       />
@@ -144,7 +153,7 @@ export default function RichTextEditor({
       <style>{`
         [contenteditable]:empty:before {
           content: attr(data-placeholder);
-          color: #9ca3af;
+          color: var(--text-subtle);
           pointer-events: none;
         }
       `}</style>

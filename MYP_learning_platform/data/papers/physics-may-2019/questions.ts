@@ -156,7 +156,7 @@ export const questions: Question[] = [
         label: 'a',
         text: 'The graph below shows the air speed needed for people with different body weights to float above the ground. Using the graph, **state** the air speed needed for a 600 N person to float above the ground.',
         marks: 2,
-        figImages: [`${P}q4a-graph.png`],
+        figImages: ['/images/papers/physics-may-2019/q4a-graph.svg'],
         ph: 'Read from graph at weight = 600 N: approximately 100 km/h',
       },
       {
@@ -232,7 +232,7 @@ export const questions: Question[] = [
         label: 'd',
         text: 'The student draws three graphs of the data he has collected. **Select** the most appropriate graph to determine the relationship between CSA and air speed. **Justify** your choice.',
         marks: 3,
-        figImages: [`${P}q5d-graphs.png`],
+        figImages: ['/images/papers/physics-may-2019/q5d-graphs.svg'],
         widget: 'radio_select',
         widgetOptions: ['Graph A', 'Graph B', 'Graph C'],
         ph: 'Graph C — it plots 1/v² against CSA, which allows a straight-line relationship to be identified (if hypothesis is correct). Graph C is most appropriate to determine an inversely proportional relationship.',

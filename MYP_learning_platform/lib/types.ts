@@ -28,6 +28,18 @@ export type SimType = 'spring' | 'spring_data' | 'pendulum_geogebra' | 'wave' | 
 export type ExamPhase = 'lock' | 'active' | 'grading' | 'results'
 export type TimerState = 'normal' | 'warning' | 'critical' | 'expired'
 
+/**
+ * Data-driven interactive artefact (I&S / humanities AI-age stimulus).
+ * `component` names a renderer in components/exam/QuestionImage.tsx's code_rendered
+ * switch; `data` is passed to it as render_data. Lets a question/task embed a reusable
+ * interactive figure (map, chart, source viewer, timeline, flow…) configured by data.
+ */
+export interface ArtefactSpec {
+  component: string
+  data?: unknown
+  caption?: string
+}
+
 export interface Task {
   label: string
   text: string
@@ -35,6 +47,7 @@ export interface Task {
   ph: string
   ans?: string
   figImages?: string[]   // optional per-task diagram images, shown just above the answer box
+  artefact?: ArtefactSpec  // interactive artefact shown above the answer box
   widget?: 'drag_drop_planets' | 'variable_classify' | 'sankey_q3' | 'bounce_graphs_ab' | 'q4e_table' | 'q5c_table' | 'cannonball_paths' | 'energy_chain' | 'radio_select' | 'wave_label_drag_drop' | 'inline_dropdown_select' | 'refraction_label_drag_drop' | 'match_drag_drop' | 'checkbox_select' | 'fill_blank' | 'table_input'
   widgetOptions?: string[]   // dropdown choices for radio_select / inline_dropdown_select
   widgetItems?: string[]     // row labels for inline_dropdown_select (e.g. ['Electron','Proton','Neutron'])
@@ -65,7 +78,9 @@ export interface Question {
   tableData?: { hd: string[]; rows: string[][] }
   figCaption?: string
   figImages?: string[]
-  nativeContent?: 'solar_system' | 'carbon_decay' | 'sankey_q3' | 'bounce_graphs_ab' | 'wave_animations' | 'radiation_q7'
+  nativeContent?: 'solar_system' | 'carbon_decay' | 'sankey_q3' | 'bounce_graphs_ab' | 'wave_animations' | 'radiation_q7' | 'water_stress_map'
+  /** Question-level interactive artefact (rendered in the context/stimulus slot). */
+  artefact?: ArtefactSpec
   tasks?: Task[]
   simType?: SimType
   simCaption?: string
@@ -144,6 +159,8 @@ export interface Profile {
   level: number
   streak_days: number
   last_active: string | null
+  /** Atlas UI theme id; null = use device/localStorage default */
+  theme: string | null
   created_at: string
 }
 

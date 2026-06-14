@@ -18,17 +18,17 @@ interface LocalResultsPageProps {
 }
 
 const CRITERION_META: Record<string, { label: string; color: string; bg: string }> = {
-  A: { label: 'Knowing & Understanding', color: '#0079a8', bg: 'rgba(0,121,168,0.12)' },
-  B: { label: 'Inquiring & Designing',   color: '#3daa35', bg: 'rgba(61,170,53,0.12)' },
-  C: { label: 'Processing & Evaluating', color: '#f5a623', bg: 'rgba(245,166,35,0.12)' },
-  D: { label: 'Reflecting on Impacts',   color: '#7b2d8b', bg: 'rgba(123,45,139,0.12)' },
+  A: { label: 'Knowing & Understanding', color: 'var(--cA)', bg: 'color-mix(in srgb, var(--cA) 12%, transparent)' },
+  B: { label: 'Inquiring & Designing',   color: 'var(--cB)', bg: 'color-mix(in srgb, var(--cB) 12%, transparent)' },
+  C: { label: 'Processing & Evaluating', color: 'var(--cC)', bg: 'color-mix(in srgb, var(--cC) 12%, transparent)' },
+  D: { label: 'Reflecting on Impacts',   color: 'var(--cD)', bg: 'color-mix(in srgb, var(--cD) 12%, transparent)' },
 }
 
 function mypGradeColor(grade: number): string {
-  if (grade >= 7) return '#3daa35'
-  if (grade >= 5) return '#0079a8'
-  if (grade >= 4) return '#f5a623'
-  return '#c3282d'
+  if (grade >= 7) return 'var(--success)'
+  if (grade >= 5) return 'var(--accent-2)'
+  if (grade >= 4) return 'var(--warning)'
+  return 'var(--danger)'
 }
 
 function derivePracticeLabel(paperId: string): { title: string; backHref: string } {
@@ -69,9 +69,9 @@ export default function LocalResultsPage({ attemptId }: LocalResultsPageProps) {
 
   if (missing) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center" style={{ background: '#0d1b2a', color: '#e2e8f0' }}>
-        <p className="text-gray-400 mb-6">Practice results are no longer available (session ended).</p>
-        <Link href="/dashboard" className="px-6 py-2.5 rounded-xl text-sm font-semibold text-white" style={{ background: '#1f3674' }}>
+      <div className="min-h-screen flex flex-col items-center justify-center" style={{ background: 'var(--bg)', backgroundImage: 'var(--bg-image)', color: 'var(--text)' }}>
+        <p className="text-ink-subtle mb-6">Practice results are no longer available (session ended).</p>
+        <Link href="/dashboard" className="px-6 py-2.5 rounded-xl text-sm font-semibold" style={{ background: 'var(--accent)', color: 'var(--text-on-accent)' }}>
           ← Dashboard
         </Link>
       </div>
@@ -80,31 +80,36 @@ export default function LocalResultsPage({ attemptId }: LocalResultsPageProps) {
 
   if (!data) {
     return (
-      <div className="min-h-screen flex items-center justify-center" style={{ background: '#0d1b2a' }}>
-        <div className="w-6 h-6 rounded-full border-2 border-white/30 border-t-white animate-spin" />
+      <div className="min-h-screen flex items-center justify-center" style={{ background: 'var(--bg)', backgroundImage: 'var(--bg-image)' }}>
+        <div className="w-6 h-6 rounded-full border-2 animate-spin" style={{ borderColor: 'var(--border)', borderTopColor: 'var(--accent)' }} />
       </div>
     )
   }
 
   const { results, paperId, questions } = data
   const { title, backHref } = derivePracticeLabel(paperId)
+
+  // Criterion labels differ by subject group: I&S (geography/history/humanities) vs Sciences.
+  const critLabels: Record<string, string> = ['geography', 'history', 'humanities'].includes((paperId ?? '').split('-')[0])
+    ? { A: 'Knowing & Understanding', B: 'Investigating', C: 'Communicating', D: 'Thinking Critically' }
+    : { A: CRITERION_META.A.label, B: CRITERION_META.B.label, C: CRITERION_META.C.label, D: CRITERION_META.D.label }
   const totalPct = results.maxScore > 0
     ? Math.round((results.totalScore / results.maxScore) * 100)
     : 0
 
   return (
-    <div className="min-h-screen py-8 px-4" style={{ background: '#0d1b2a', color: '#e2e8f0' }}>
+    <div className="min-h-screen py-8 px-4" style={{ background: 'var(--bg)', backgroundImage: 'var(--bg-image)', color: 'var(--text)' }}>
       <div className="max-w-4xl mx-auto space-y-6">
 
         {/* Top bar */}
         <div className="flex flex-wrap items-center gap-3 justify-between">
           <div>
-            <h1 className="text-xl font-bold text-white">{title}</h1>
-            <p className="text-sm text-gray-400 mt-0.5">Practice Session — AI Marked</p>
+            <h1 className="text-xl font-bold text-ink">{title}</h1>
+            <p className="text-sm text-ink-subtle mt-0.5">Practice Session — AI Marked</p>
           </div>
           <Link
             href={backHref}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-white/10 hover:bg-white/20 text-gray-200 transition-colors"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-control text-xs font-semibold bg-surface-2 hover:bg-surface-3 text-ink-muted transition-colors border border-line"
           >
             ← Back to Practice
           </Link>
@@ -113,43 +118,43 @@ export default function LocalResultsPage({ attemptId }: LocalResultsPageProps) {
         {/* Summary row */}
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
           {/* Total score */}
-          <div className="bg-white/5 border border-white/10 rounded-xl p-4 flex flex-col items-center text-center">
-            <span className="text-xs text-gray-400 uppercase tracking-wide font-semibold mb-1">Total Score</span>
-            <span className="text-3xl font-extrabold text-white">
+          <div className="bg-surface border border-line rounded-card p-4 flex flex-col items-center text-center shadow-card">
+            <span className="text-xs text-ink-subtle uppercase tracking-wide font-semibold mb-1">Total Score</span>
+            <span className="text-3xl font-extrabold text-ink">
               {results.totalScore}
-              <span className="text-lg text-gray-400">/{results.maxScore}</span>
+              <span className="text-lg text-ink-subtle">/{results.maxScore}</span>
             </span>
-            <span className="text-sm font-medium text-gray-300 mt-1">{totalPct}%</span>
+            <span className="text-sm font-medium text-ink-muted mt-1">{totalPct}%</span>
           </div>
 
           {/* MYP Grade */}
-          <div className="bg-white/5 border border-white/10 rounded-xl p-4 flex flex-col items-center text-center">
-            <span className="text-xs text-gray-400 uppercase tracking-wide font-semibold mb-1">MYP Grade</span>
+          <div className="bg-surface border border-line rounded-card p-4 flex flex-col items-center text-center shadow-card">
+            <span className="text-xs text-ink-subtle uppercase tracking-wide font-semibold mb-1">MYP Grade</span>
             <motion.div
               initial={{ scale: 0.6, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ type: 'spring', stiffness: 260, damping: 18 }}
-              className="w-14 h-14 rounded-full flex items-center justify-center text-2xl font-extrabold mt-1 text-white"
-              style={{ background: mypGradeColor(results.mypGrade) }}
+              className="w-14 h-14 rounded-full flex items-center justify-center text-2xl font-extrabold mt-1"
+              style={{ background: mypGradeColor(results.mypGrade), color: 'var(--text-on-accent)' }}
             >
               {results.mypGrade}
             </motion.div>
-            <span className="text-xs text-gray-400 mt-1">{results.mypLabel}</span>
+            <span className="text-xs text-ink-subtle mt-1">{results.mypLabel}</span>
           </div>
 
           {/* XP */}
-          <div className="bg-white/5 border border-white/10 rounded-xl p-4 flex flex-col items-center text-center">
-            <span className="text-xs text-gray-400 uppercase tracking-wide font-semibold mb-1">XP Earned</span>
-            <span className="text-3xl font-extrabold" style={{ color: '#3daa35' }}>
+          <div className="bg-surface border border-line rounded-card p-4 flex flex-col items-center text-center shadow-card">
+            <span className="text-xs text-ink-subtle uppercase tracking-wide font-semibold mb-1">XP Earned</span>
+            <span className="text-3xl font-extrabold" style={{ color: 'var(--success)' }}>
               +{results.xpEarned}
             </span>
-            <span className="text-xs text-gray-400 mt-1">experience points</span>
+            <span className="text-xs text-ink-subtle mt-1">experience points</span>
           </div>
         </div>
 
         {/* Criterion breakdown */}
         <div>
-          <h2 className="text-base font-bold text-white mb-3">Criterion Breakdown</h2>
+          <h2 className="text-base font-bold text-ink mb-3">Criterion Breakdown</h2>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
             {(['A', 'B', 'C', 'D'] as const).map((crit) => {
               const meta = CRITERION_META[crit]
@@ -158,23 +163,23 @@ export default function LocalResultsPage({ attemptId }: LocalResultsPageProps) {
               const max = cs?.max ?? null
               const pct = score != null && max != null && max > 0 ? Math.round((score / max) * 100) : null
               return (
-                <div key={crit} className="rounded-xl p-4 border border-white/10" style={{ background: meta.bg }}>
+                <div key={crit} className="rounded-card p-4 border border-line" style={{ background: meta.bg }}>
                   <div className="flex items-center gap-2 mb-3">
                     <span
-                      className="w-7 h-7 rounded-lg flex items-center justify-center text-sm font-extrabold text-white"
-                      style={{ background: meta.color }}
+                      className="w-7 h-7 rounded-control flex items-center justify-center text-sm font-extrabold"
+                      style={{ background: meta.color, color: 'var(--criterion-fg)' }}
                     >
                       {crit}
                     </span>
-                    <span className="text-xs text-gray-300 leading-tight">{meta.label}</span>
+                    <span className="text-xs text-ink-muted leading-tight">{critLabels[crit]}</span>
                   </div>
                   <div className="flex items-end gap-1 mb-2">
                     <span className="text-2xl font-extrabold" style={{ color: meta.color }}>
                       {score ?? '—'}
                     </span>
-                    {max != null && <span className="text-sm text-gray-400 mb-0.5">/{max}</span>}
+                    {max != null && <span className="text-sm text-ink-subtle mb-0.5">/{max}</span>}
                   </div>
-                  <div className="w-full h-2 bg-white/10 rounded-full overflow-hidden">
+                  <div className="w-full h-2 rounded-full overflow-hidden" style={{ background: 'var(--surface-3)' }}>
                     <motion.div
                       className="h-full rounded-full"
                       style={{ background: meta.color }}
@@ -184,7 +189,7 @@ export default function LocalResultsPage({ attemptId }: LocalResultsPageProps) {
                     />
                   </div>
                   {pct !== null && (
-                    <p className="text-xs text-gray-400 mt-1 text-right">{pct}%</p>
+                    <p className="text-xs text-ink-subtle mt-1 text-right">{pct}%</p>
                   )}
                 </div>
               )
@@ -194,7 +199,7 @@ export default function LocalResultsPage({ attemptId }: LocalResultsPageProps) {
 
         {/* Question breakdown */}
         <div>
-          <h2 className="text-base font-bold text-white mb-3">Question Breakdown</h2>
+          <h2 className="text-base font-bold text-ink mb-3">Question Breakdown</h2>
           <div className="space-y-2">
             {questions.map((q, idx) => {
               const gradeResult = results.grades[q.id] as QuestionGradeResult | undefined
@@ -215,15 +220,15 @@ export default function LocalResultsPage({ attemptId }: LocalResultsPageProps) {
         <div className="flex justify-center gap-4 py-4">
           <Link
             href={backHref}
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold text-white transition-opacity hover:opacity-90"
-            style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.15)' }}
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-card text-sm font-semibold transition-opacity hover:opacity-90"
+            style={{ background: 'var(--surface-2)', border: '1px solid var(--border)', color: 'var(--text)' }}
           >
             ← Back to Practice
           </Link>
           <Link
             href="/dashboard"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold text-white transition-opacity hover:opacity-90"
-            style={{ background: 'linear-gradient(135deg, #1f3674, #274e68)' }}
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-card text-sm font-semibold transition-opacity hover:opacity-90"
+            style={{ background: 'var(--gradient-cta)', color: 'var(--text-on-accent)' }}
           >
             Dashboard
           </Link>

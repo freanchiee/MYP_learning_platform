@@ -1,0 +1,363 @@
+[
+  {
+    "taskPath": "q6.tasks[b]",
+    "questionId": 6,
+    "taskLabel": "b",
+    "topic": "Vitamin C stability over storage time",
+    "original_path": "/images/papers/chemistry-may-2024/page-25.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: line graph of Vitamin C concentration (µg cm⁻³, y-axis 200–500, ticks every 100) vs Storage time (Days, x-axis 0,7,14,21) for three orange juices — Fresh juice (~430→410), CO₂-treated juice (~375→350), Heat-treated juice (~240→232) — with × cross markers and a Key.",
+    "generated_path": "/images/papers/chemistry-may-2024/q6b-vitamin-c-storage.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q8.tasks[c]",
+    "questionId": 8,
+    "taskLabel": "c",
+    "topic": "Crop yield vs salt concentration (salinity tolerance)",
+    "original_path": "/images/papers/chemistry-may-2024/page-29.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: line graph of Percentage crop yields (y-axis 0–140, ticks every 20) vs Concentration of salt (mmol dm⁻³, x-axis 0.0–3.5, ticks every 0.5) for three plants — Plant A drops steeply from (0,100) to (0.5,20); Plant B flat at 100 to 1.0 then declines to (3.0,20); Plant C an inverted parabola peaking ~125 at ~1.4 and ending ~(3.5,69) — with inline A/B/C labels and a Key.",
+    "generated_path": "/images/papers/chemistry-may-2024/q8c-crop-yield-salinity.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q1.tasks[b]",
+    "questionId": 1,
+    "taskLabel": "b",
+    "topic": "Glucose structure — identify circled functional group",
+    "original_path": "/images/papers/chemistry-may-2024/page-02.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: skeletal/Haworth-style ring structure of glucose (C₆H₁₂O₆) with CH₂OH, OH, H and HO groups labelled, and the anomeric –OH (hydroxyl) group circled in pink as the answer.",
+    "generated_path": "/images/papers/chemistry-may-2024/q1b-glucose-structure.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q1.tasks[c]",
+    "questionId": 1,
+    "taskLabel": "c",
+    "topic": "Lewis structure of O₂ — select correct option",
+    "original_path": "/images/papers/chemistry-may-2024/page-03.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: four Lewis (dot-and-cross) structure options A–D for O₂. A and B show single O–O bonds; C shows O=O double bond with two lone pairs on each O (correct); D shows a double bond with too many lone pairs.",
+    "generated_path": "/images/papers/chemistry-may-2024/q1c-o2-lewis-options.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q1.tasks[d]",
+    "questionId": 1,
+    "taskLabel": "d",
+    "topic": "Paper chromatography animation — leaf stain",
+    "original_path": "/images/papers/chemistry-may-2024/page-04.png",
+    "image_type": "code_rendered",
+    "image_prompt": "SVG: paper-chromatography apparatus shown at two stages — a covered glass cylinder with chromatography paper and a leaf-stain spot at the start, and the same with pigments separated into orange/yellow/green bands after the solvent has risen. Labels: Cylinder cover, Cylinder, Chromatography paper, Leaf stain, Solvent.",
+    "generated_path": "/images/papers/chemistry-may-2024/q1d-chromatography-apparatus.svg",
+    "needs_review": true,
+    "approved": false,
+    "render_component": "ParticleSim",
+    "render_data": {
+      "title": "Paper chromatography — separating leaf pigments",
+      "source": "MYP chemistry-may-2024",
+      "mode": "diffusion",
+      "substance": "leaf stain (mixture of pigments)",
+      "options": [
+        "An element",
+        "A mixture",
+        "An alloy",
+        "An allotrope"
+      ],
+      "stages": [
+        {
+          "label": "Leaf stain spotted at start",
+          "state": "mixture",
+          "particles": "orange + yellow + green pigments together"
+        },
+        {
+          "label": "Solvent rises, pigments separate",
+          "state": "mixture",
+          "particles": "orange (top) · yellow (middle) · green (bottom)"
+        }
+      ]
+    }
+  },
+  {
+    "taskPath": "q1.tasks[e]",
+    "questionId": 1,
+    "taskLabel": "e",
+    "topic": "Identify organic pigments from chromatography bands",
+    "original_path": "/images/papers/chemistry-may-2024/page-05.png",
+    "image_type": "code_rendered",
+    "image_prompt": "SVG: chromatography strip with three separated bands (Band 1 orange, Band 2 yellow, Band 3 green), solvent front and leaf-stain application point labelled, three blank answer boxes, and a draggable-items panel listing Pigment A–D.",
+    "generated_path": "/images/papers/chemistry-may-2024/q1e-chromatography-bands.svg",
+    "needs_review": true,
+    "approved": false,
+    "render_component": "DragSort",
+    "render_data": {
+      "title": "Identify the pigment in each chromatography band",
+      "source": "MYP chemistry-may-2024",
+      "mode": "bins",
+      "prompt": "The pigment closest to the solvent front has the highest Rf (travels furthest). Place each pigment in its correct band.",
+      "items": [
+        "Pigment A",
+        "Pigment B",
+        "Pigment C",
+        "Pigment D"
+      ],
+      "bins": [
+        "Band 1 (top)",
+        "Band 2 (middle)",
+        "Band 3 (bottom, near leaf stain)"
+      ],
+      "correct": {
+        "Band 1 (top)": "Pigment C",
+        "Band 2 (middle)": "Pigment B",
+        "Band 3 (bottom, near leaf stain)": "Pigment A"
+      }
+    }
+  },
+  {
+    "taskPath": "q1.tasks[f]",
+    "questionId": 1,
+    "taskLabel": "f",
+    "topic": "Calculate Rf value using ruler",
+    "original_path": "/images/papers/chemistry-may-2024/page-06.png",
+    "image_type": "code_rendered",
+    "image_prompt": "SVG: chromatography strip with Band 1/2/3, solvent front and application point marked with dashed lines, beside a draggable ruler graduated 0–15 cm (0 aligned with the application point) for measuring distances to compute the Rf value of band 1.",
+    "generated_path": "/images/papers/chemistry-may-2024/q1f-rf-ruler.svg",
+    "needs_review": true,
+    "approved": false,
+    "render_component": "DragSort",
+    "render_data": {
+      "title": "Calculate the Rf value for band 1",
+      "source": "MYP chemistry-may-2024",
+      "mode": "slots",
+      "prompt": "Rf = (distance band 1 travelled from the application point) ÷ (distance solvent front travelled from the application point). Read both distances from the ruler (0 cm at the leaf-stain application point), then fill in each blank.",
+      "slots": [
+        "Distance solvent front travelled / cm",
+        "Distance band 1 travelled / cm",
+        "Rf value of band 1"
+      ],
+      "items": [
+        "9.8",
+        "10.0",
+        "0.98",
+        "0.75",
+        "2.8",
+        "2.1"
+      ],
+      "correct": {
+        "Distance solvent front travelled / cm": "10.0",
+        "Distance band 1 travelled / cm": "9.8",
+        "Rf value of band 1": "0.98"
+      }
+    }
+  },
+  {
+    "taskPath": "q2.tasks[a]",
+    "questionId": 2,
+    "taskLabel": "a",
+    "topic": "Universal indicator pH scale",
+    "original_path": "/images/papers/chemistry-may-2024/page-07.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: universal-indicator colour chart numbered pH 1–14 (red acidic → green neutral at 7 → blue/violet alkaline), with acidic/neutral(pure water)/alkaline labels and a small stylised hydrangea motif.",
+    "generated_path": "/images/papers/chemistry-may-2024/q2-ph-indicator-scale.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q3",
+    "questionId": 3,
+    "taskLabel": null,
+    "topic": "Tractor emissions on a farm",
+    "original_path": "/images/papers/chemistry-may-2024/page-11.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: a yellow tractor ploughing a brown field with a grey exhaust-smoke plume rising into the sky, distant green hills — illustrating nitrogen monoxide emission.",
+    "generated_path": "/images/papers/chemistry-may-2024/q3-tractor-farm.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q4",
+    "questionId": 4,
+    "taskLabel": null,
+    "topic": "Three egg yolks of different colours",
+    "original_path": "/images/papers/chemistry-may-2024/page-13.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: an egg carton holding three brown shells in the back row and three cracked eggs in front whose yolks range from pale yellow to deep orange.",
+    "generated_path": "/images/papers/chemistry-may-2024/q4-egg-yolks.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q4.tasks[b]",
+    "questionId": 4,
+    "taskLabel": "b",
+    "topic": "YolkFan score vs pigment data table",
+    "original_path": "/images/papers/chemistry-may-2024/page-15.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: ruled data table 'How additives change yolk colour' with columns YolkFan™ score, Yellow pigment / ppm, Red pigment / ppm; rows for scores 8–16 (e.g. 8: 7.5/0.5 … 16: 12/8) and a ppm footnote.",
+    "generated_path": "/images/papers/chemistry-may-2024/q4b-yolkfan-table.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q4.tasks[c]",
+    "questionId": 4,
+    "taskLabel": "c",
+    "topic": "Denaturation temperature — thermometer apparatus with zoomed readings",
+    "original_path": "/images/papers/chemistry-may-2024/page-16.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: two retort-stand setups (Yolk and White) each with a beaker on a Bunsen burner and a thermometer, plus zoomed-in callouts of the thermometer scales — Yolk reading 76 °C, White reading ~64 °C.",
+    "generated_path": "/images/papers/chemistry-may-2024/q4c-denature-thermometers.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q4.tasks[d]",
+    "questionId": 4,
+    "taskLabel": "d",
+    "topic": "Method A vs Method B thermometer placement",
+    "original_path": "/images/papers/chemistry-may-2024/page-17.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: two retort-stand temperature setups — Method A with the thermometer bulb in the water, Method B with the thermometer bulb inside the egg sample (the more valid method).",
+    "generated_path": "/images/papers/chemistry-may-2024/q4d-method-a-b.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q5",
+    "questionId": 5,
+    "taskLabel": null,
+    "topic": "Pickled eggs in vinegar",
+    "original_path": "/images/papers/chemistry-may-2024/page-19.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: a clamp-top glass jar of amber vinegar holding two peeled white eggs with mustard seeds/peppercorns and dill sprigs — illustrating pickling.",
+    "generated_path": "/images/papers/chemistry-may-2024/q5-pickled-eggs.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q6",
+    "questionId": 6,
+    "taskLabel": null,
+    "topic": "Structure of vitamin C (ascorbic acid)",
+    "original_path": "/images/papers/chemistry-may-2024/page-22.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: skeletal structure of vitamin C (ascorbic acid) — five-membered lactone ring with a C=C enediol (two OH groups) and the side chain –CH(OH)–CH2OH, all atoms and OH/H groups labelled.",
+    "generated_path": "/images/papers/chemistry-may-2024/q6-vitamin-c-structure.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q7",
+    "questionId": 7,
+    "taskLabel": null,
+    "topic": "Metal cans for soft drinks",
+    "original_path": "/images/papers/chemistry-may-2024/page-26.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: two open metal cans — one with a gold-lined rim and one with a silver-lined rim — with subtle ribbed banding, illustrating candidate can materials.",
+    "generated_path": "/images/papers/chemistry-may-2024/q7-cans.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q8.tasks[b]",
+    "questionId": 8,
+    "taskLabel": "b",
+    "topic": "Salinity data table for four locations",
+    "original_path": "/images/papers/chemistry-may-2024/page-28.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: ruled data table comparing salinity of water from Andes, Colorado, Napa and Pacific — rows for Electrical conductivity / S m⁻¹ (0.45, 0.13, 0.35, 15) and Dissolved salt / µg m⁻³ (2000, 950, 2730, 10 000).",
+    "generated_path": "/images/papers/chemistry-may-2024/q8b-salinity-table.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q9",
+    "questionId": 9,
+    "taskLabel": null,
+    "topic": "Number of desalination systems per region (pie chart)",
+    "original_path": "/images/papers/chemistry-may-2024/page-31.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: pie chart of number of desalination systems per region with a colour key — Latin America and Caribbean 4826, East Asia and Pacific 3505, North America 2341, Western Europe 2337, Middle East and North Africa 1373, Southern Asia 655, Eastern Europe and Central Asia 566, Sub-Saharan Africa 303.",
+    "generated_path": "/images/papers/chemistry-may-2024/q9-desalination-by-region.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q9.tasks[a]",
+    "questionId": 9,
+    "taskLabel": "a",
+    "topic": "Thermal-based desalination system",
+    "original_path": "/images/papers/chemistry-may-2024/page-32.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: schematic of a thermal-based desalination system — steam-in boiler with heating coil, main evaporation vessel with condensing coils under vacuum, saline water in / fresh water out, condensate out and high-concentration salt wastewater outlet.",
+    "generated_path": "/images/papers/chemistry-may-2024/q9a-thermal-desalination.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q9.tasks[b]",
+    "questionId": 9,
+    "taskLabel": "b",
+    "topic": "Membrane-based desalination system",
+    "original_path": "/images/papers/chemistry-may-2024/page-33.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: schematic of a membrane-based (reverse-osmosis) desalination system — a U-vessel with saline water (salt particles) on the left under applied pressure, a green semi-permeable membrane in the centre, fresh water on the right, and an arrow showing direction of water flow.",
+    "generated_path": "/images/papers/chemistry-may-2024/q9b-membrane-desalination.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q2.tasks[d]",
+    "questionId": 2,
+    "taskLabel": "d",
+    "topic": "Product A/B dropdown (UI) + question text",
+    "original_path": "/images/papers/chemistry-may-2024/page-09.png",
+    "image_type": "text_only",
+    "image_prompt": null,
+    "generated_path": null,
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q3.tasks[d]",
+    "questionId": 3,
+    "taskLabel": "d",
+    "topic": "Blank particle-drawing box (UI) + question text",
+    "original_path": "/images/papers/chemistry-may-2024/page-12.png",
+    "image_type": "text_only",
+    "image_prompt": null,
+    "generated_path": null,
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q6.tasks[a]",
+    "questionId": 6,
+    "taskLabel": "a",
+    "topic": "Blank plotting grid (UI) for bar chart",
+    "original_path": "/images/papers/chemistry-may-2024/page-23.png",
+    "image_type": "text_only",
+    "image_prompt": null,
+    "generated_path": null,
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q8.tasks[d]",
+    "questionId": 8,
+    "taskLabel": "d",
+    "topic": "Question text (8d) + Q9 intro text",
+    "original_path": "/images/papers/chemistry-may-2024/page-30.png",
+    "image_type": "text_only",
+    "image_prompt": null,
+    "generated_path": null,
+    "needs_review": true,
+    "approved": false
+  }
+]

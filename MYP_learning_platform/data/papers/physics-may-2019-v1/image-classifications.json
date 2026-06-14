@@ -1,0 +1,239 @@
+[
+  {
+    "taskPath": "q1",
+    "questionId": 1,
+    "taskLabel": "a",
+    "topic": "Heat transfer — hot radiator",
+    "original_path": "/images/papers/physics-may-2019-v1/q1a-heattransfer.png",
+    "image_type": "code_rendered",
+    "render_component": "DragSort",
+    "render_data": {
+      "mode": "bins",
+      "title": "Heat transfer from a hot radiator",
+      "source": "MYP physics-may-2019-v1",
+      "prompt": "Match each heat-transfer process label to the scenario shown around the hot radiator.",
+      "items": ["Convection", "Radiation", "Conduction"],
+      "bins": [
+        { "id": "warm-air", "label": "Warm air rising above the radiator", "hint": "fluid carries heat upward" },
+        { "id": "no-contact", "label": "Heat felt from a distance without contact", "hint": "heat transferred through space" },
+        { "id": "metal-bracket", "label": "Heat spreading through the metal bracket", "hint": "heat through a solid in contact" }
+      ],
+      "correct": {
+        "warm-air": "Convection",
+        "no-contact": "Radiation",
+        "metal-bracket": "Conduction"
+      }
+    },
+    "image_prompt": "SVG: heat-transfer scene around a hot radiator with draggable labels (Convection, Radiation, Conduction) and three numbered answer markers. Dashed orange convection arrows rise above the radiator (warm air rising); wavy red radiation arrows reach a person on the right; a blue conduction arrow runs along a metal bracket to the floor.",
+    "generated_path": "/images/papers/physics-may-2019-v1/q1a-heattransfer.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q1.tasks[c]",
+    "questionId": 1,
+    "taskLabel": "c",
+    "topic": "Thermos flask (vacuum) cross-section",
+    "original_path": "/images/papers/physics-may-2019-v1/q1c-dewar.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: labelled cross-section of a thermos flask containing hot coffee. Leader-line labels: Plastic stopper, Double-walled metal container, Vacuum (no particles → no conduction/convection), Silvered-surface double-walled glass, Hot coffee, Insulated support. Small cyclist scene for context.",
+    "generated_path": "/images/papers/physics-may-2019-v1/q1c-dewar.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q2.tasks[a]",
+    "questionId": 2,
+    "taskLabel": "a",
+    "topic": "Atom drawing canvas",
+    "original_path": "/images/papers/physics-may-2019-v1/q2a-atom.png",
+    "image_type": "code_rendered",
+    "render_component": "DragSort",
+    "render_data": {
+      "mode": "bins",
+      "title": "Build a helium atom",
+      "source": "MYP physics-may-2019-v1",
+      "prompt": "A helium atom has 2 protons, 2 neutrons and 2 electrons. Place each particle into the correct region of the atom.",
+      "items": [
+        { "id": "p1", "label": "Proton (+)" },
+        { "id": "p2", "label": "Proton (+)" },
+        { "id": "n1", "label": "Neutron (0)" },
+        { "id": "n2", "label": "Neutron (0)" },
+        { "id": "e1", "label": "Electron (−)" },
+        { "id": "e2", "label": "Electron (−)" }
+      ],
+      "bins": [
+        { "id": "nucleus", "label": "Nucleus", "hint": "contains protons and neutrons" },
+        { "id": "shell", "label": "Electron shell (orbit)", "hint": "electrons surround the nucleus" }
+      ],
+      "correct": {
+        "nucleus": ["Proton (+)", "Neutron (0)"],
+        "shell": ["Electron (−)"]
+      }
+    },
+    "image_prompt": "SVG: blank atom-building canvas (dark) with dashed inner nucleus circle and dashed outer electron-shell circle, plus a draggable-items panel showing a red + (proton), white 0 (neutron) and blue − (electron). Build the helium atom (2p, 2n, 2e).",
+    "generated_path": "/images/papers/physics-may-2019-v1/q2a-atom.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q2.tasks[d]",
+    "questionId": 2,
+    "taskLabel": "d",
+    "topic": "Negatively charged toner particle and positively charged drum",
+    "original_path": "/images/papers/physics-may-2019-v1/q2d-inkparticle.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: a positively charged drum surface (row of red + charges along a curved metal drum) above a single negatively charged toner particle (blue circle with −) with a photosensitive paper below. Dashed answer region asks student to draw force arrows.",
+    "generated_path": "/images/papers/physics-may-2019-v1/q2d-inkparticle.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q3",
+    "questionId": 3,
+    "taskLabel": "a",
+    "topic": "Solar system (label asteroid belt, Mercury, Saturn)",
+    "original_path": "/images/papers/physics-may-2019-v1/q3a-solarsystem.png",
+    "image_type": "code_rendered",
+    "render_component": "DragSort",
+    "render_data": {
+      "mode": "bins",
+      "title": "Label the solar system",
+      "source": "MYP physics-may-2019-v1",
+      "prompt": "Place each label on the feature it identifies in the solar system diagram.",
+      "items": ["Asteroid belt", "Mercury", "Saturn"],
+      "bins": [
+        { "id": "marker-inner", "label": "Innermost planet (closest to the Sun)", "hint": "first planet from the Sun" },
+        { "id": "marker-belt", "label": "Ring of rocky objects between Mars and Jupiter", "hint": "band of debris" },
+        { "id": "marker-rings", "label": "Sixth planet, with prominent rings", "hint": "ringed gas giant" }
+      ],
+      "correct": {
+        "marker-inner": "Mercury",
+        "marker-belt": "Asteroid belt",
+        "marker-rings": "Saturn"
+      }
+    },
+    "image_prompt": "SVG: solar system on a starfield — Sun at left, all eight planets along orbit arcs, asteroid belt band of dots between Mars and Jupiter, Saturn with rings. Three red arrows point UP at Mercury, the asteroid belt, and Saturn; draggable labels (Asteroid belt, Mercury, Saturn) sit beneath for the student to place.",
+    "generated_path": "/images/papers/physics-may-2019-v1/q3a-solarsystem.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q3.tasks[c]",
+    "questionId": 3,
+    "taskLabel": "c",
+    "topic": "Asteroid Apophis flyby trajectory",
+    "original_path": "/images/papers/physics-may-2019-v1/q3c-trajectory.png",
+    "image_type": "code_rendered",
+    "render_component": "OrbitSim",
+    "render_data": {
+      "mode": "orbit",
+      "title": "Gravitational attraction on Apophis",
+      "source": "MYP physics-may-2019-v1",
+      "central": "Sun",
+      "showForce": true,
+      "caption": "The Sun's gravitational force always points toward the Sun. The force is stronger at position B (closer) than at position A (farther), so the arrow at B is longer.",
+      "bodies": [
+        { "name": "Sun", "role": "center", "fixed": true, "colour": "#f5a623" },
+        { "name": "Apophis (B: closest approach, 3.8 × 10¹⁰ m)", "role": "orbiter", "orbitRadius": 70, "orbitalPeriod": 323, "colour": "#9b9b9b" },
+        { "name": "Apophis (A: farther from Sun)", "role": "orbiter", "orbitRadius": 130, "orbitalPeriod": 800, "colour": "#6b6b6b" }
+      ]
+    },
+    "image_prompt": "SVG: hyperbolic flyby trajectory of Apophis on starfield. Orange arrow path enters from upper-left, swings below the Sun, and exits lower-right. Position A marked far from the Sun (upper-left), position B closer to the Sun (lower middle). Earth shown for context near close approach. Student draws gravitational-force arrows.",
+    "generated_path": "/images/papers/physics-may-2019-v1/q3c-trajectory.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q4",
+    "questionId": 4,
+    "taskLabel": null,
+    "topic": "Parachute model in wind-tunnel air flow",
+    "original_path": "/images/papers/physics-may-2019-v1/q4-bodyflying.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: parachute model with skydiver held in an upward air stream inside a wind tunnel. Two columns of upward blue air-flow arrows labelled 'Air flow'. Caption: 'Parachute model held in upward air stream — drag balances weight'.",
+    "generated_path": "/images/papers/physics-may-2019-v1/q4-bodyflying.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q4.tasks[b]",
+    "questionId": 4,
+    "taskLabel": "b",
+    "topic": "Variable classification table",
+    "original_path": "/images/papers/physics-may-2019-v1/q4b-variables.png",
+    "image_type": "code_rendered",
+    "render_component": "DragSort",
+    "render_data": {
+      "mode": "bins",
+      "title": "Classify the experiment variables",
+      "source": "MYP physics-may-2019-v1",
+      "prompt": "Place each quantity into the box that best describes its role in the parachute experiment.",
+      "items": ["Weight", "Air speed", "CSA", "Mass", "Volume"],
+      "bins": [
+        { "id": "iv", "label": "Independent variable (IV)", "hint": "the quantity you change" },
+        { "id": "dv", "label": "Dependent variable (DV)", "hint": "the quantity you measure" },
+        { "id": "cv", "label": "Control variable (CV)", "hint": "kept the same" }
+      ],
+      "correct": {
+        "iv": "Weight",
+        "dv": "Air speed",
+        "cv": ["CSA", "Mass", "Volume"]
+      }
+    },
+    "image_prompt": "SVG: clean ruled table with shaded header row. Columns: Quantity | Independent variable (IV) | Dependent variable (DV) | Control variable (CV). Rows: Weight, Air speed, CSA, Mass, Volume — each with empty checkboxes in the three variable columns.",
+    "generated_path": "/images/papers/physics-may-2019-v1/q4b-variables.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q4.tasks[d]",
+    "questionId": 4,
+    "taskLabel": "d",
+    "topic": "Box of parachute models — CSA selection",
+    "original_path": "/images/papers/physics-may-2019-v1/q4d-balls.png",
+    "image_type": "code_rendered",
+    "render_component": "DragSort",
+    "render_data": {
+      "mode": "select",
+      "title": "Select the parachute models to use",
+      "source": "MYP physics-may-2019-v1",
+      "prompt": "From the box of parachute models (each labelled Weight / CSA), choose the selection that gives a valid experiment to relate weight to air speed. Weight must be controlled while CSA is varied across the widest possible range.",
+      "options": [
+        { "id": "A", "label": "Five models that all support the SAME weight, with CSA values spread over the greatest possible range at regular intervals", "correct": true },
+        { "id": "B", "label": "Five models that all have the SAME CSA but different weights" },
+        { "id": "C", "label": "Two models with the largest and smallest CSA only" },
+        { "id": "D", "label": "All ten models regardless of their weights and CSAs" }
+      ],
+      "correct": "A"
+    },
+    "image_prompt": "SVG: brown 'Available box' with ten red balls each labelled with weight and CSA (0.80N/10cm², 0.40N/12cm², 0.60N/9cm², 0.60N/12cm², 1.20N/12cm², 1.20N/12cm², 1.00N/12cm², 1.00N/11cm², 0.80N/12cm², 0.40N/8cm²), an empty blue 'Equipment box' with ten holes, and a key (Weight / CSA).",
+    "generated_path": "/images/papers/physics-may-2019-v1/q4d-balls.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q5",
+    "questionId": 5,
+    "taskLabel": null,
+    "topic": "Parachute CSA investigation raw data",
+    "original_path": "/images/papers/physics-may-2019-v1/q5-csadata.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: student's recorded raw data shown as a row of red balls annotated with size and measured air speed. First ball labelled Radius = 4.0 cm (not area!) → 14 m s⁻¹; remaining areas 13, 20, 24, 16, 28, 33 cm² with air speeds 25, 22, 19, 23, 17, 16 m s⁻¹.",
+    "generated_path": "/images/papers/physics-may-2019-v1/q5-csadata.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q6",
+    "questionId": 6,
+    "taskLabel": null,
+    "topic": "Logs floating data",
+    "original_path": "/images/papers/physics-may-2019-v1/q6-shipdata.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: two side panels of a log floating in water — lightly loaded sitting high, heavily loaded sitting low — captioned 'The log sinks lower in the water as its weight increases', above a clean ruled results table. Columns: Weight of the log / N | Volume of log below water / cm³; rows 0.5→50, 1.1→110, 2.0→200, 4.2→420.",
+    "generated_path": "/images/papers/physics-may-2019-v1/q6-shipdata.svg",
+    "needs_review": true,
+    "approved": false
+  }
+]

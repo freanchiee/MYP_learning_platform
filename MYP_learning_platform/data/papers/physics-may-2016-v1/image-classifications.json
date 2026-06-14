@@ -1,0 +1,106 @@
+[
+  {
+    "taskPath": "q1",
+    "questionId": 1,
+    "taskLabel": null,
+    "topic": "Mass vs Weight table",
+    "original_path": "/images/papers/physics-may-2016-v1/q1-table.png",
+    "image_type": "code_rendered",
+    "image_prompt": "SVG: clean ruled two-column table (Mass | Weight) with shaded header, row labels Units, Type of quantity, Effect of gravitational field strength, and blank data cells for the student to fill.",
+    "generated_path": "/images/papers/physics-may-2016-v1/q1-table.svg",
+    "render_component": "DragSort",
+    "render_data": {
+      "mode": "bins",
+      "title": "Mass vs Weight",
+      "source": "MYP physics-may-2016-v1",
+      "prompt": "Place each property into the Mass or Weight column: Units, Type of quantity, Effect of gravitational field strength.",
+      "bins": ["Mass", "Weight"],
+      "items": [
+        { "id": "kilogram", "label": "kilogram", "correctBin": "Mass" },
+        { "id": "size-only", "label": "size only", "correctBin": "Mass" },
+        { "id": "independent", "label": "independent of gravitational field strength", "correctBin": "Mass" },
+        { "id": "newton", "label": "newton", "correctBin": "Weight" },
+        { "id": "size-and-direction", "label": "size and direction", "correctBin": "Weight" },
+        { "id": "dependent", "label": "dependent on gravitational field strength", "correctBin": "Weight" }
+      ]
+    },
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q2",
+    "questionId": 2,
+    "taskLabel": null,
+    "topic": "Space probe drop simulation — Jupiter's moons",
+    "original_path": "/images/papers/physics-may-2016-v1/q2-probe.png",
+    "image_type": "code_rendered",
+    "image_prompt": "SVG: space-probe simulation scene over an Io-like sulphurous surface in starry space with Jupiter visible; vertical 'Metres' scale 0–50 (in 10 m steps); probe at 0 m; 'time / s — Io: 7.4 s' readout box; moon-selector buttons Io, Europa, Ganymede, Callisto.",
+    "generated_path": "/images/papers/physics-may-2016-v1/q2-probe.svg",
+    "render_component": "ProjectileSim",
+    "render_data": {
+      "mode": "drop",
+      "title": "Probe test-object drop on Jupiter's moons",
+      "source": "MYP physics-may-2016-v1",
+      "readout": "time / s",
+      "dropHeight_m": 50.0,
+      "scaleMarks_m": [0, 10, 20, 30, 40, 50],
+      "planets": [
+        { "name": "Io", "g": 1.83, "fallTime_s": 7.4 },
+        { "name": "Europa", "g": 1.3 },
+        { "name": "Callisto", "g": 0.81, "fallTime_s": 11.1 }
+      ]
+    },
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q4",
+    "questionId": 4,
+    "taskLabel": null,
+    "topic": "Phases of Europa around Jupiter",
+    "original_path": "/images/papers/physics-may-2016-v1/q4-moon.png",
+    "image_type": "code_rendered",
+    "image_prompt": "SVG: two starry panels — left shows Europa (icy crescent with surface streaks) orbiting a striped Jupiter with a dashed orbit arc; right shows a gibbous Europa as seen from Earth.",
+    "generated_path": "/images/papers/physics-may-2016-v1/q4-moon.svg",
+    "render_component": "OrbitSim",
+    "render_data": {
+      "mode": "phases",
+      "title": "Phases of Europa orbiting Jupiter",
+      "source": "MYP physics-may-2016-v1",
+      "central": "Jupiter",
+      "synodicMonth": 3.5,
+      "phases": ["new", "waxing crescent", "first quarter", "waxing gibbous", "full", "waning gibbous", "last quarter", "waning crescent"],
+      "caption": "Europa orbits Jupiter in approximately 3.5 days; its lit face seen from Earth cycles through phases.",
+      "bodies": [
+        { "name": "Jupiter", "role": "center", "fixed": true, "colour": "#d8a36b" },
+        { "name": "Europa", "role": "orbiter", "orbitalPeriod_days": 3.5, "synodicMonth_days": 3.5, "colour": "#cfe3ef" }
+      ]
+    },
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q6",
+    "questionId": 6,
+    "taskLabel": null,
+    "topic": "Ammeter + resistance wire circuits (correct vs incorrect)",
+    "original_path": "/images/papers/physics-may-2016-v1/q6a-circuits.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: two circuit diagrams using standard symbols (cell, open switch, resistance wire as rectangle resistor, ammeter Ⓐ). 'Incorrect' has the ammeter on a parallel branch off the wire (not in series). 'Correct' has the ammeter in series with the resistance wire in the single loop.",
+    "generated_path": "/images/papers/physics-may-2016-v1/q6a-circuits.svg",
+    "needs_review": false,
+    "approved": true
+  },
+  {
+    "taskPath": "q11.tasks[d]",
+    "questionId": 11,
+    "taskLabel": "d",
+    "topic": "Radiation absorption table (radiotherapy context)",
+    "original_path": "/images/papers/physics-may-2016-v1/q11d-radiation-table.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: clean ruled table of radiation absorption by body tissue. Columns ultraviolet, X-rays (low energy), gamma rays; rows absorption by skin (high, low, low), absorption by bones (high, high, low), absorption by soft tissue (high, medium, low).",
+    "generated_path": "/images/papers/physics-may-2016-v1/q11d-radiation-table.svg",
+    "needs_review": false,
+    "approved": true
+  }
+]

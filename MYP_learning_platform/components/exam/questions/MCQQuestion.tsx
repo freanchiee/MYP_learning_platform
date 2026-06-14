@@ -20,109 +20,118 @@ export default function MCQQuestion({ q, qIdx }: MCQQuestionProps) {
   })
 
   return (
-    <div className="max-w-3xl mx-auto py-6 px-4 space-y-5">
-      {/* Stem card */}
-      <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-6">
-        {q.stem && (
-          <div
-            className="text-base leading-relaxed text-gray-800"
-            style={{ fontFamily: 'Georgia, "Times New Roman", serif' }}
-            dangerouslySetInnerHTML={{ __html: q.stem }}
-          />
-        )}
+    <div className="max-w-3xl mx-auto py-6 px-4">
+      <div data-exam-layout className="exam-layout-wrap">
+        {/* ── CONTEXT slot ── */}
+        <div data-exam-slot="context" className="space-y-5">
+          {/* Stem card */}
+          <div className="rounded-card p-6" style={{ background: 'var(--surface)', border: '1px solid var(--border)', boxShadow: 'var(--shadow-card)' }}>
+            {q.stem && (
+              <div
+                className="text-base leading-relaxed"
+                style={{ fontFamily: 'Georgia, "Times New Roman", serif', color: 'var(--text)' }}
+                dangerouslySetInnerHTML={{ __html: q.stem }}
+              />
+            )}
 
-        {/* Table data (e.g. Q2 terminal velocity table) */}
-        {q.tableData && (
-          <div className="mt-4 overflow-x-auto">
-            <table className="w-full border-collapse text-sm">
-              <thead>
-                <tr className="bg-gray-50">
-                  {q.tableData.hd.map((h, i) => (
-                    <th
-                      key={i}
-                      className={cn(
-                        'border border-gray-300 px-3 py-2 font-semibold text-gray-700',
-                        i === 0 ? 'text-left' : 'text-center',
-                      )}
-                    >
-                      {h}
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {q.tableData.rows.map((row, ri) => (
-                  <tr key={ri} className={ri % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
-                    {row.map((cell, ci) => (
-                      <td
-                        key={ci}
-                        className={cn(
-                          'border border-gray-300 px-3 py-2 text-gray-700',
-                          ci === 0 ? 'font-bold text-center w-10' : 'text-center',
-                        )}
-                      >
-                        {cell}
-                      </td>
+            {/* Table data (e.g. Q2 terminal velocity table) */}
+            {q.tableData && (
+              <div className="mt-4 overflow-x-auto">
+                <table className="w-full border-collapse text-sm">
+                  <thead>
+                    <tr style={{ background: 'var(--surface-2)' }}>
+                      {q.tableData.hd.map((h, i) => (
+                        <th
+                          key={i}
+                          className={cn(
+                            'px-3 py-2 font-semibold',
+                            i === 0 ? 'text-left' : 'text-center',
+                          )}
+                          style={{ border: '1px solid var(--border-strong)', color: 'var(--text-muted)' }}
+                        >
+                          {h}
+                        </th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {q.tableData.rows.map((row, ri) => (
+                      <tr key={ri} style={{ background: ri % 2 === 0 ? 'var(--surface)' : 'var(--surface-2)' }}>
+                        {row.map((cell, ci) => (
+                          <td
+                            key={ci}
+                            className={cn(
+                              'px-3 py-2',
+                              ci === 0 ? 'font-bold text-center w-10' : 'text-center',
+                            )}
+                            style={{ border: '1px solid var(--border-strong)', color: 'var(--text-muted)' }}
+                          >
+                            {cell}
+                          </td>
+                        ))}
+                      </tr>
                     ))}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+                  </tbody>
+                </table>
+              </div>
+            )}
           </div>
-        )}
-      </div>
-
-      {/* Options */}
-      {q.opts && (
-        <div className="space-y-2">
-          {q.opts.map((opt, i) => {
-            const letter = OPTION_LETTERS[i] ?? String(i + 1)
-            const selected = selectedIdx === i
-            return (
-              <motion.button
-                key={i}
-                onClick={() => setMCQAnswer(qIdx, i)}
-                whileTap={{ scale: 0.985 }}
-                className={cn(
-                  'w-full flex items-start gap-3 rounded-xl border-2 px-4 py-3 text-left transition-all duration-150',
-                  selected
-                    ? 'border-[var(--ib-teal)] bg-[var(--ib-teal-l)] shadow-sm'
-                    : 'border-gray-200 bg-white hover:border-gray-300 hover:bg-gray-50',
-                )}
-              >
-                {/* Letter badge */}
-                <span
-                  className={cn(
-                    'flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold mt-0.5',
-                    selected
-                      ? 'bg-[var(--ib-teal)] text-white'
-                      : 'bg-gray-100 text-gray-600',
-                  )}
-                >
-                  {letter}
-                </span>
-
-                {/* Option text */}
-                <span
-                  className={cn(
-                    'text-sm leading-relaxed flex-1',
-                    selected ? 'text-gray-900 font-medium' : 'text-gray-700',
-                  )}
-                  style={{ fontFamily: 'Georgia, "Times New Roman", serif' }}
-                >
-                  {opt}
-                </span>
-              </motion.button>
-            )
-          })}
         </div>
-      )}
 
-      {selectedIdx !== null && (
-        <p className="text-xs text-[var(--ib-teal)] font-medium text-center">
-          Option {OPTION_LETTERS[selectedIdx]} selected — click another to change
-        </p>
-      )}
+        {/* ── ANSWER slot ── */}
+        <div data-exam-slot="answer" className="space-y-5">
+          {/* Options */}
+          {q.opts && (
+            <div className="space-y-2">
+              {q.opts.map((opt, i) => {
+                const letter = OPTION_LETTERS[i] ?? String(i + 1)
+                const selected = selectedIdx === i
+                return (
+                  <motion.button
+                    key={i}
+                    onClick={() => setMCQAnswer(qIdx, i)}
+                    whileTap={{ scale: 0.985 }}
+                    className="w-full flex items-start gap-3 rounded-control border-2 px-4 py-3 text-left transition-all duration-150"
+                    style={{
+                      borderColor: selected ? 'var(--accent)' : 'var(--border)',
+                      background: selected ? 'var(--accent-soft)' : 'var(--surface)',
+                      boxShadow: selected ? 'var(--shadow-card)' : undefined,
+                    }}
+                  >
+                    {/* Letter badge */}
+                    <span
+                      className="flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold mt-0.5"
+                      style={{
+                        background: selected ? 'var(--accent)' : 'var(--surface-3)',
+                        color: selected ? 'var(--text-on-accent)' : 'var(--text-muted)',
+                      }}
+                    >
+                      {letter}
+                    </span>
+
+                    {/* Option text */}
+                    <span
+                      className={cn(
+                        'text-sm leading-relaxed flex-1',
+                        selected && 'font-medium',
+                      )}
+                      style={{ fontFamily: 'Georgia, "Times New Roman", serif', color: selected ? 'var(--text)' : 'var(--text-muted)' }}
+                    >
+                      {opt}
+                    </span>
+                  </motion.button>
+                )
+              })}
+            </div>
+          )}
+
+          {selectedIdx !== null && (
+            <p className="text-xs font-medium text-center" style={{ color: 'var(--accent)' }}>
+              Option {OPTION_LETTERS[selectedIdx]} selected — click another to change
+            </p>
+          )}
+        </div>
+      </div>
     </div>
   )
 }

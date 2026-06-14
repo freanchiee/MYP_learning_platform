@@ -1,0 +1,124 @@
+[
+  {
+    "taskPath": "q1",
+    "questionId": 1,
+    "taskLabel": null,
+    "topic": "Mass vs Weight table",
+    "original_path": "/images/papers/physics-may-2016-v2/q1-table.png",
+    "image_type": "code_rendered",
+    "render_component": "DragSort",
+    "render_data": {
+      "mode": "bins",
+      "title": "Mass vs Weight",
+      "source": "MYP physics-may-2016-v2",
+      "prompt": "Place each property into the correct column for Mass or Weight.",
+      "bins": ["Mass", "Weight"],
+      "items": [
+        "kilogram",
+        "newton",
+        "size only",
+        "size and direction",
+        "independent of gravitational field strength",
+        "dependent on gravitational field strength"
+      ],
+      "correct": {
+        "kilogram": "Mass",
+        "size only": "Mass",
+        "independent of gravitational field strength": "Mass",
+        "newton": "Weight",
+        "size and direction": "Weight",
+        "dependent on gravitational field strength": "Weight"
+      }
+    },
+    "image_prompt": "SVG: clean ruled two-column table (Mass | Weight) with shaded header, row labels Units, Type of quantity, Effect of gravitational field strength, and blank data cells for the student to fill.",
+    "generated_path": "/images/papers/physics-may-2016-v2/q1-table.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q2",
+    "questionId": 2,
+    "taskLabel": null,
+    "topic": "Space probe drop simulation — inner planets",
+    "original_path": "/images/papers/physics-may-2016-v2/q2-probe.png",
+    "image_type": "code_rendered",
+    "render_component": "ProjectileSim",
+    "render_data": {
+      "mode": "drop",
+      "title": "Space-probe drop — inner planets",
+      "source": "MYP physics-may-2016-v2",
+      "dropHeight_m": 90.0,
+      "scaleMarks_m": [0, 15, 30, 45, 60, 75, 90],
+      "readout": "time / s",
+      "planets": [
+        { "name": "Mercury", "g": 3.7, "fallTime_s": 7.0 },
+        { "name": "Venus", "g": 8.9, "fallTime_s": 4.5 },
+        { "name": "Earth", "g": 9.8 },
+        { "name": "Mars", "g": 3.8 }
+      ]
+    },
+    "image_prompt": "SVG: space-probe simulation scene over a Venus-like warm-toned surface with a small Sun visible; vertical 'Metres' scale 0–90 (in 15 m steps); probe at 0 m; 'time / s — Venus: 4.5 s' readout box; planet-selector buttons Mercury, Venus, Earth, Mars.",
+    "generated_path": "/images/papers/physics-may-2016-v2/q2-probe.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q4",
+    "questionId": 4,
+    "taskLabel": null,
+    "topic": "Phases of Venus around the Sun",
+    "original_path": "/images/papers/physics-may-2016-v2/q4-venus.png",
+    "image_type": "code_rendered",
+    "render_component": "OrbitSim",
+    "render_data": {
+      "mode": "phases",
+      "title": "Phases of Venus",
+      "source": "MYP physics-may-2016-v2",
+      "central": "Sun",
+      "synodicMonth": 584,
+      "phases": [
+        "new",
+        "waxing crescent",
+        "first quarter",
+        "waxing gibbous",
+        "full",
+        "waning gibbous",
+        "last quarter",
+        "waning crescent"
+      ],
+      "bodies": [
+        { "name": "Sun", "role": "center", "fixed": true, "colour": "#f5b301" },
+        { "name": "Venus", "role": "orbiter", "orbitalPeriod_days": 225, "synodicMonth_days": 584, "colour": "#d98a4b" }
+      ],
+      "caption": "Venus orbits the Sun closer than Earth; the lit fraction seen from Earth changes through its orbit."
+    },
+    "image_prompt": "SVG: two starry panels — left shows a crescent Venus orbiting the Sun with a dashed orbit arc (Sun shown with corona spikes, lower-left); right shows a half/gibbous Venus with cloud bands as seen from Earth.",
+    "generated_path": "/images/papers/physics-may-2016-v2/q4-venus.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q6",
+    "questionId": 6,
+    "taskLabel": null,
+    "topic": "Ammeter + LED circuits (correct vs incorrect)",
+    "original_path": "/images/papers/physics-may-2016-v2/q6a-circuits.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: two circuit diagrams using standard symbols (cell, open switch, LED with cathode bar and two emission arrows, ammeter Ⓐ). 'Incorrect' has the ammeter on a parallel branch off the LED. 'Correct' has the ammeter in series with the LED.",
+    "generated_path": "/images/papers/physics-may-2016-v2/q6a-circuits.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q11.tasks[d]",
+    "questionId": 11,
+    "taskLabel": "d",
+    "topic": "Radiation penetration table (airport baggage screening)",
+    "original_path": "/images/papers/physics-may-2016-v2/q11d-radiation-table.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: clean ruled table of radiation absorption by baggage contents. Columns ultraviolet, X-rays, gamma rays; rows absorption by metal (high, high, low), absorption by plastic (high, medium, low), absorption by clothing (high, low, low).",
+    "generated_path": "/images/papers/physics-may-2016-v2/q11d-radiation-table.svg",
+    "needs_review": true,
+    "approved": false
+  }
+]

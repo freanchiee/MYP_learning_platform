@@ -242,25 +242,25 @@ export default function RadiationQ7Widget() {
   return (
     <div className="space-y-4 mt-3">
       {/* ── Diagram 1: Penetration ── */}
-      <div className="border border-gray-200 rounded-xl overflow-hidden bg-white shadow-sm">
-        <div className="px-3 py-2 bg-gray-50 border-b border-gray-200">
-          <p className="text-xs font-semibold text-gray-600 uppercase tracking-wide">
+      <div className="chrome-card border border-line rounded-xl overflow-hidden">
+        <div className="px-3 py-2 bg-surface-2 border-b border-line">
+          <p className="text-xs font-semibold text-ink-muted uppercase tracking-wide">
             Penetrating power of α, β and γ radiation
           </p>
         </div>
-        <div className="p-3" style={{ aspectRatio: '520/210' }}>
+        <div className="figure-surface p-3" style={{ aspectRatio: '520/210' }}>
           <PenetrationDiagram />
         </div>
       </div>
 
       {/* ── Diagram 2: Factory monitor ── */}
-      <div className="border border-gray-200 rounded-xl overflow-hidden bg-white shadow-sm">
-        <div className="px-3 py-2 bg-gray-50 border-b border-gray-200">
-          <p className="text-xs font-semibold text-gray-600 uppercase tracking-wide">
+      <div className="chrome-card border border-line rounded-xl overflow-hidden">
+        <div className="px-3 py-2 bg-surface-2 border-b border-line">
+          <p className="text-xs font-semibold text-ink-muted uppercase tracking-wide">
             Beta radiation — aluminium thickness monitor
           </p>
         </div>
-        <div className="p-3" style={{ aspectRatio: '400/220' }}>
+        <div className="figure-surface p-3" style={{ aspectRatio: '400/220' }}>
           <BetaMonitorDiagram />
         </div>
       </div>

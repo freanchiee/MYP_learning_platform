@@ -95,25 +95,33 @@ export default function EditableText({
   // ── Edit mode: editing ──────────────────────────────────────────────────────
   if (isEditing) {
     return (
-      <div className="rounded-xl border-2 border-amber-400 bg-amber-50/60 p-3 space-y-2.5 shadow-sm">
+      <div
+        className="rounded-xl border-2 p-3 space-y-2.5 shadow-sm"
+        style={{ borderColor: 'var(--warning)', background: 'var(--warning-surface)' }}
+      >
         {/* Header */}
         <div className="flex items-center justify-between">
-          <span className="text-[10px] font-bold uppercase tracking-widest text-amber-600">
+          <span className="text-[10px] font-bold uppercase tracking-widest" style={{ color: 'var(--warning-fg)' }}>
             {label ?? 'Editing'} — raw markdown
           </span>
           <div className="flex items-center gap-1.5">
             {hasOverride && (
               <button
                 onClick={resetToOriginal}
-                className="text-[10px] text-red-400 hover:text-red-600 underline"
+                className="text-[10px] underline hover:brightness-90"
+                style={{ color: 'var(--danger)' }}
               >
                 Reset to original
               </button>
             )}
-            <kbd className="text-[9px] text-gray-400 bg-gray-100 border border-gray-200
-                            rounded px-1 py-0.5">Ctrl+↵ save</kbd>
-            <kbd className="text-[9px] text-gray-400 bg-gray-100 border border-gray-200
-                            rounded px-1 py-0.5">Esc cancel</kbd>
+            <kbd
+              className="text-[9px] rounded px-1 py-0.5 border"
+              style={{ color: 'var(--text-subtle)', background: 'var(--surface-3)', borderColor: 'var(--border)' }}
+            >Ctrl+↵ save</kbd>
+            <kbd
+              className="text-[9px] rounded px-1 py-0.5 border"
+              style={{ color: 'var(--text-subtle)', background: 'var(--surface-3)', borderColor: 'var(--border)' }}
+            >Esc cancel</kbd>
           </div>
         </div>
 
@@ -127,27 +135,33 @@ export default function EditableText({
             if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) { e.preventDefault(); save() }
           }}
           spellCheck
-          className="w-full px-3 py-2.5 rounded-lg border-2 border-amber-300 bg-white
-                     text-gray-800 text-[13px] leading-relaxed resize-none
-                     focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-200"
-          style={{ fontFamily: '"JetBrains Mono", "Fira Code", monospace', minHeight: 72 }}
+          className="w-full px-3 py-2.5 rounded-lg border-2
+                     text-[13px] leading-relaxed resize-none
+                     focus:outline-none focus:ring-2"
+          style={{
+            fontFamily: '"JetBrains Mono", "Fira Code", monospace',
+            minHeight: 72,
+            borderColor: 'var(--warning)',
+            background: 'var(--surface-inset)',
+            color: 'var(--text)',
+          }}
         />
 
         {/* Character count */}
         <div className="flex items-center justify-between">
-          <span className="text-[10px] text-gray-400 font-mono">{draft.length} chars</span>
+          <span className="text-[10px] font-mono" style={{ color: 'var(--text-subtle)' }}>{draft.length} chars</span>
           <div className="flex gap-2">
             <button
               onClick={discard}
-              className="px-3 py-1 rounded-lg text-xs bg-gray-200 hover:bg-gray-300
-                         text-gray-700 font-semibold transition-colors"
+              className="px-3 py-1 rounded-lg text-xs font-semibold transition-colors hover:brightness-95"
+              style={{ background: 'var(--surface-3)', color: 'var(--text-muted)' }}
             >
               Cancel
             </button>
             <button
               onClick={save}
-              className="px-4 py-1 rounded-lg text-xs bg-emerald-500 hover:bg-emerald-400
-                         text-white font-bold transition-colors"
+              className="px-4 py-1 rounded-lg text-xs font-bold transition-colors hover:brightness-110"
+              style={{ background: 'var(--success)', color: 'var(--text-on-accent)' }}
             >
               ✓ Save
             </button>
@@ -155,8 +169,8 @@ export default function EditableText({
         </div>
 
         {/* Live preview */}
-        <div className="rounded-lg border border-amber-200 bg-white px-4 py-3">
-          <p className="text-[9px] font-bold uppercase tracking-widest text-amber-400 mb-2">
+        <div className="rounded-lg border px-4 py-3" style={{ borderColor: 'var(--warning)', background: 'var(--surface)' }}>
+          <p className="text-[9px] font-bold uppercase tracking-widest mb-2" style={{ color: 'var(--warning)' }}>
             Preview
           </p>
           <div className="text-sm">
@@ -172,7 +186,7 @@ export default function EditableText({
     <div
       className="relative group/text"
       style={{
-        outline: hasOverride ? '1.5px solid #10b981' : '1.5px dashed #fbbf24',
+        outline: hasOverride ? '1.5px solid var(--success)' : '1.5px dashed var(--warning)',
         outlineOffset: 5,
         borderRadius: 6,
       }}
@@ -187,8 +201,9 @@ export default function EditableText({
         className="absolute -top-4 right-0 z-10
                    opacity-0 group-hover/text:opacity-100 transition-opacity
                    flex items-center gap-1 px-2 py-0.5
-                   bg-amber-400 hover:bg-amber-300 text-black text-[10px] font-bold
+                   text-[10px] font-bold hover:brightness-95
                    rounded-full shadow-sm"
+        style={{ background: 'var(--accent)', color: 'var(--text-on-accent)' }}
       >
         ✏ edit
       </button>
@@ -197,8 +212,9 @@ export default function EditableText({
       {hasOverride && (
         <span
           className="absolute -top-4 left-0 z-10 pointer-events-none
-                     bg-emerald-500 text-white text-[8px] font-bold
+                     text-[8px] font-bold
                      px-1.5 py-0.5 rounded-full shadow"
+          style={{ background: 'var(--success)', color: 'var(--text-on-accent)' }}
         >
           edited
         </span>

@@ -1,0 +1,126 @@
+[
+  {
+    "taskPath": "q1",
+    "questionId": 1,
+    "taskLabel": null,
+    "topic": "Cell Biology & Organisation",
+    "original_path": "/images/papers/biology-may-2019/page-02.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: Venn diagram (Plant cell / Both cells / Animal cell) with draggable-items panel, plus labelled cross-section of a mitochondrion showing cristae folds, inner & outer membrane, and matrix.",
+    "generated_path": "/images/papers/biology-may-2019/page-02.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q2",
+    "questionId": 2,
+    "taskLabel": null,
+    "topic": "Mountain Rabbit Distribution",
+    "original_path": "/images/papers/biology-may-2019/page-05.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: five rabbits of varying fur colour (white, light, mid-brown, dark brown, mixed) shown as roundel portraits with leader lines pointing to snowy upper, mid-altitude and lower-valley zones of a snow-capped mountain — illustrating natural-selection distribution.",
+    "generated_path": "/images/papers/biology-may-2019/page-05.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q3",
+    "questionId": 3,
+    "taskLabel": null,
+    "topic": "Mass extinction Q3 text page",
+    "original_path": "/images/papers/biology-may-2019/page-07.png",
+    "image_type": "text_only",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q4-first",
+    "questionId": 4,
+    "taskLabel": null,
+    "topic": "Pea plant — leaves & duckweed top page",
+    "original_path": "/images/papers/biology-may-2019/page-09.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: Common duckweed botanical schematic — view-from-above three-lobed leaf and view-from-the-side ellipse with hanging roots, plus thumbnail of duckweed on a fingertip and a pond surface covered in duckweed.",
+    "generated_path": "/images/papers/biology-may-2019/page-09.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q4-second",
+    "questionId": 4,
+    "taskLabel": null,
+    "topic": "Q4 plant nutrition continued",
+    "original_path": "/images/papers/biology-may-2019/page-10.png",
+    "image_type": "text_only",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q5",
+    "questionId": 5,
+    "taskLabel": null,
+    "topic": "Duckweed investigation — text page",
+    "original_path": "/images/papers/biology-may-2019/page-12.png",
+    "image_type": "text_only",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q6",
+    "questionId": 6,
+    "taskLabel": null,
+    "topic": "Changing Fishing Methods menu panel",
+    "original_path": "/images/papers/biology-may-2019/page-13.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: interactive teal panel with five clickable headings (Changing populations, Fishing wild populations, Fish farming, Genetic modification of fish, Impacts), each preceded by a small fish/shark-fin icon. Large rotated white title 'CHANGING FISHING METHODS' fills the right side.",
+    "generated_path": "/images/papers/biology-may-2019/page-13.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q7",
+    "questionId": 7,
+    "taskLabel": null,
+    "topic": "Fishing market photo collage",
+    "original_path": "/images/papers/biology-may-2019/page-15.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: photo collage — five small thumbnails of fishing scenes (fisherman on dock, crew hauling, boat side view, cast net, fish heap) above a large fish market scene with hanging scales, two vendors and counter trays of mixed catch.",
+    "generated_path": "/images/papers/biology-may-2019/page-15.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q8-foodweb",
+    "questionId": 8,
+    "taskLabel": null,
+    "topic": "Tuna food web",
+    "original_path": "/images/papers/biology-may-2019/page-17.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: aquatic food web titled 'The tuna food web' — Shark, Tuna, Marlin at top; Mahi mahi, Krill and small fish, Plankton in middle; Algae and Bacteria at bottom. Black arrows mark all energy-transfer relationships. 'Not to scale' note.",
+    "generated_path": "/images/papers/biology-may-2019/page-17.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q8-salmon",
+    "questionId": 8,
+    "taskLabel": null,
+    "topic": "GM vs Farmed salmon comparison",
+    "original_path": "/images/papers/biology-may-2019/page-18.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: side-by-side comparison of a large genetically-modified farmed salmon (Length 60 cm, Mass 3.0 kg) and a smaller regular farmed salmon (Length 33 cm, Mass 1.3 kg). Title 'Genetic modification allows farmers to grow bigger fish.' Note: both fish are 18 months of age.",
+    "generated_path": "/images/papers/biology-may-2019/page-18.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q9",
+    "questionId": 9,
+    "taskLabel": null,
+    "topic": "GM salmon Q9 text page",
+    "original_path": "/images/papers/biology-may-2019/page-19.png",
+    "image_type": "text_only",
+    "needs_review": true,
+    "approved": false
+  }
+]

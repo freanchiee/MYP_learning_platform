@@ -1,0 +1,161 @@
+[
+  {
+    "taskPath": "q2.tasks[e]",
+    "questionId": 2,
+    "taskLabel": "e",
+    "topic": "Atomic Structure & Radioactivity",
+    "original_path": "/images/papers/physics-nov-2024/page-04-crop.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: smooth exponential decay graph, number of americium-241 nuclei (y-axis 0 to 10 000, major every 1000, minor every 500) vs time / years (x-axis 0 to 2000, major every 200, minor every 50). Curve starts at (0, 10 000) and follows N(t) = 10000 x 0.5^(t/420), giving a half-life of 420 years: passes through (420, 5000), (840, 2500), (1260, 1250), (1680, 625). Teal smooth line, fine gridlines.",
+    "generated_path": "/images/papers/physics-nov-2024-v2/page-04.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q3.tasks[f]",
+    "questionId": 3,
+    "taskLabel": "f",
+    "topic": "Circuits, Resistance & Power",
+    "original_path": "/images/papers/physics-nov-2024/page-07-crop.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: four trend-line graphs (A, B, C, D) of resistance / ohm (y-axis 0 to 140, major every 20, minor every 5) vs diameter / mm (x-axis 5 to 30, major every 5, minor every 1). All four panels plot the same five data points (8, 128), (12, 56), (16, 32), (20, 20), (24, 14) as teal crosses. A: straight dot-to-dot segments (jagged). B: a single straight best-fit line through the cloud. C: a smooth curve that under-fits and misses the points. D: a smooth inverse curve passing through every point (the correct trend line).",
+    "generated_path": "/images/papers/physics-nov-2024-v2/page-07.svg",
+    "needs_review": false,
+    "approved": true
+  },
+  {
+    "taskPath": "q1.tasks[a]",
+    "questionId": 1,
+    "taskLabel": "a",
+    "topic": "Periodic motion options A-D",
+    "original_path": "/images/papers/physics-nov-2024/page-01-crop.png",
+    "image_type": "code_rendered",
+    "image_prompt": "SVG: four labelled panels A-D for \"which does NOT show periodic motion\" MCQ.",
+    "generated_path": "/images/papers/physics-nov-2024-v2/periodic-motion-options.svg",
+    "needs_review": true,
+    "approved": false,
+    "render_component": "OrbitSim",
+    "render_data": {
+      "title": "Periodic motion — Earth orbiting the Sun",
+      "source": "MYP physics-nov-2024-v2",
+      "mode": "orbit",
+      "central": "Sun",
+      "bodies": [
+        {
+          "name": "Sun",
+          "role": "center",
+          "fixed": true,
+          "radius": 14,
+          "colour": "#f5a524"
+        },
+        {
+          "name": "Earth",
+          "role": "orbiter",
+          "orbitalPeriod": 365,
+          "orbitRadius": 110,
+          "radius": 7,
+          "colour": "#3b82f6"
+        }
+      ],
+      "showForce": true,
+      "caption": "Earth's orbit repeats every 365 days — regular, repeating movement, so it IS periodic motion (like a swinging pendulum). The MCQ asks which option does NOT show periodic motion: option C (a one-off, non-repeating motion) is the odd one out. Correct answer: C."
+    }
+  },
+  {
+    "taskPath": "q3.tasks[b]",
+    "questionId": 3,
+    "taskLabel": "b",
+    "topic": "Available rods tray (Materials A, B, C, various diameters)",
+    "original_path": "/images/papers/physics-nov-2024/page-05b-crop.png",
+    "image_type": "code_rendered",
+    "image_prompt": "SVG: isometric tray labelled \"Available rods\" with assorted rods of three materials at various diameters. Variant: rods instead of cylinders.",
+    "generated_path": "/images/papers/physics-nov-2024-v2/available-cylinders.svg",
+    "render_component": "DragSort",
+    "render_data": {
+      "mode": "bins",
+      "title": "Select the graphite rods to collect appropriate data",
+      "source": "MYP physics-nov-2024-v2",
+      "prompt": "To answer the research question, vary the diameter ONLY — keep material and length constant. Sort each available rod into the correct group: use five rods of one material (graphite, Material A) at five different diameters; leave the rest in the tray.",
+      "bins": [
+        {
+          "id": "use",
+          "label": "Use in investigation"
+        },
+        {
+          "id": "leave",
+          "label": "Leave in the tray"
+        }
+      ],
+      "items": [
+        {
+          "id": "A-8",
+          "label": "Material A (graphite) — 8 mm diameter",
+          "correctBin": "use"
+        },
+        {
+          "id": "A-12",
+          "label": "Material A (graphite) — 12 mm diameter",
+          "correctBin": "use"
+        },
+        {
+          "id": "A-16",
+          "label": "Material A (graphite) — 16 mm diameter",
+          "correctBin": "use"
+        },
+        {
+          "id": "A-20",
+          "label": "Material A (graphite) — 20 mm diameter",
+          "correctBin": "use"
+        },
+        {
+          "id": "A-24",
+          "label": "Material A (graphite) — 24 mm diameter",
+          "correctBin": "use"
+        },
+        {
+          "id": "B-12",
+          "label": "Material B — 12 mm diameter",
+          "correctBin": "leave"
+        },
+        {
+          "id": "B-20",
+          "label": "Material B — 20 mm diameter",
+          "correctBin": "leave"
+        },
+        {
+          "id": "C-16",
+          "label": "Material C — 16 mm diameter",
+          "correctBin": "leave"
+        }
+      ],
+      "correct": {
+        "use": [
+          "A-8",
+          "A-12",
+          "A-16",
+          "A-20",
+          "A-24"
+        ],
+        "leave": [
+          "B-12",
+          "B-20",
+          "C-16"
+        ]
+      }
+    },
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q3.tasks[d]",
+    "questionId": 3,
+    "taskLabel": "d",
+    "topic": "Student notebook raw data (rod diameter and resistance, variant values)",
+    "original_path": "/images/papers/physics-nov-2024/page-06-crop.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: notepad with handwritten data entries: 16 mm/32 Ω, 8 mm/128 Ω, 24 mm/14 Ω, 12 mm/56 Ω, 20 mm/20 Ω (rod diameters and resistance, variant values).",
+    "generated_path": "/images/papers/physics-nov-2024-v2/notebook-raw-data.svg",
+    "needs_review": false,
+    "approved": true
+  }
+]

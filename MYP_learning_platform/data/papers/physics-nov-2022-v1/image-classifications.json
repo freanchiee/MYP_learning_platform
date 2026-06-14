@@ -1,0 +1,140 @@
+[
+  {
+    "taskPath": "q1.tasks[c]",
+    "questionId": 1,
+    "taskLabel": "c",
+    "topic": "Radioactive decay graph",
+    "original_path": "/images/papers/physics-nov-2022/q1c-decay-graph.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: radioactive decay curve, Activity / Bq (0-1100, ticks every 100, minor 20) vs Time / minutes (0-60, ticks every 10, minor 2), smooth exponential falling from 1000 Bq with half-life = 18.5 min (500 Bq at 18.5 min).",
+    "generated_path": "/images/papers/physics-nov-2022-v1/q1c-decay-graph.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q2.tasks[c]",
+    "questionId": 2,
+    "taskLabel": "c",
+    "topic": "Cooling by evaporation graph",
+    "original_path": "/images/papers/physics-nov-2022/q2c-cooling-graph.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: three cooling curves, Temperature / °C (8.0-22.0, ticks every 2, minor 0.5) vs Time / s (0-60, ticks every 10, minor 2). Cooking oil flat near 20.6°C (orange); Water smooth decay to plateau ~14.8°C (teal); Ethanol dips to minimum ~9.8°C near 18-20 s, plateaus, then recovers to ~14°C (magenta). Key included.",
+    "generated_path": "/images/papers/physics-nov-2022-v1/q2c-cooling-graph.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q7.tasks[a]",
+    "questionId": 7,
+    "taskLabel": "a",
+    "topic": "Best-fit line selection (projectile)",
+    "original_path": "/images/papers/physics-nov-2022/q7a-graphs.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: four scatter panels A-D, Maximum height reached / m (0-6, ticks every 1, minor 0.5) vs Angle / degrees (0-90, ticks every 10, minor 5). Identical data with a 30° outlier (point at 30°,3.0 sits below trend); A=straight best-fit line; B=concave-down parabola (flat left, steep right); C=kinked dot-to-dot polyline through all points; D=smooth S best-fit that flattens at top-left and bottom-right and ignores the outlier (the correct choice). Height at 0° ~5.1 m, angle at height 0 ~82°.",
+    "generated_path": "/images/papers/physics-nov-2022-v1/q7a-graphs.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q8.tasks[c]",
+    "questionId": 8,
+    "taskLabel": "c",
+    "topic": "Sex ratio at birth vs year",
+    "original_path": "/images/papers/physics-nov-2022/q8c-sex-ratio-graph.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: line graph, Sex ratio at birth (100-108, ticks every 1, minor 0.5) vs Year (1960-2000, ticks every 5, minor 1). Flat near 105.3 from 1960-1975 then rising smoothly to ~107.7 by 2000, points joined by a smooth curve with dot markers.",
+    "generated_path": "/images/papers/physics-nov-2022-v1/q8c-sex-ratio-graph.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q1",
+    "questionId": 1,
+    "topic": "Uranium-235 fission products diagram",
+    "original_path": "/images/papers/physics-nov-2022/q1-fission.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: dark space background showing two fission fragments (clusters of proton/neutron spheres) and 3 free neutrons labelled, with dashed motion arrows from a central position. Key at top left for Proton (blue) and Neutron (grey).",
+    "generated_path": "/images/papers/physics-nov-2022-v1/q1-fission.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q3",
+    "questionId": 3,
+    "topic": "Galileo Jupiter and four moons",
+    "original_path": "/images/papers/physics-nov-2022/q3-jupiters-moons.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: dark starry sky with Jupiter (banded gas-giant) on right and four Galilean moons (Ganymede, Callisto, Io, Europa) as small bright points with labels.",
+    "generated_path": "/images/papers/physics-nov-2022-v1/q3-jupiters-moons.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q3.tasks[c]",
+    "questionId": 3,
+    "taskLabel": "c",
+    "topic": "Enceladus cross-section with water-ice geysers",
+    "original_path": "/images/papers/physics-nov-2022/q3c-europa.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: cross-section through icy moon (Enceladus). Labelled layers: ice shell (top), liquid ocean (middle), rocky core (bottom). Water-ice geysers (white plumes) erupting through cracks at the top.",
+    "generated_path": "/images/papers/physics-nov-2022-v1/q3c-europa.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q3.tasks[d]",
+    "questionId": 3,
+    "taskLabel": "d",
+    "topic": "Electromagnetic spectrum bar",
+    "original_path": "/images/papers/physics-nov-2022/q3d-em-spectrum.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: horizontal EM spectrum bar with wavelength scale from 10^-16 m to 10^8 m. Gamma rays, X-rays, UV, Visible (rainbow slit), IR, Radio. Inset showing visible spectrum 400-700 nm.",
+    "generated_path": "/images/papers/physics-nov-2022-v1/q3d-em-spectrum.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q4",
+    "questionId": 4,
+    "topic": "Motor + pulley + load lifting setup (warehouse boxes)",
+    "original_path": "/images/papers/physics-nov-2022/q4-motor-setup.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: lab apparatus. Bench with electric motor connected to power supply via leads. String runs from motor spindle up over pulley on retort stand and down to a hanging load (labelled \"Box (load)\"). Stopwatch on bench. Variant: warehouse box context.",
+    "generated_path": "/images/papers/physics-nov-2022-v1/q4-motor-setup.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q6",
+    "questionId": 6,
+    "topic": "Motor + pulley + load lifting setup (with student holding stopwatch)",
+    "original_path": "/images/papers/physics-nov-2022/q6-motor-setup.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: same setup as q4 but with student silhouette holding stopwatch on left, no separate stopwatch on bench. Load labelled \"Box (load)\".",
+    "generated_path": "/images/papers/physics-nov-2022-v1/q6-motor-setup.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q7",
+    "questionId": 7,
+    "topic": "Toy catapult projectile launcher with parabolic trajectory",
+    "original_path": "/images/papers/physics-nov-2022/q7-launcher.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: toy catapult launcher tilted with protractor showing launch angle measured from vertical (0°). Red parabolic trajectory arc to the right, ground line, max-height double arrow. Ball landing at end. Barrel labelled CATAPULT.",
+    "generated_path": "/images/papers/physics-nov-2022-v1/q7-launcher.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q8",
+    "questionId": 8,
+    "topic": "Ultrasound vs X-ray comparison table",
+    "original_path": "/images/papers/physics-nov-2022/q8-comparison-table.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: two-column comparison table with blue Ultrasound header and orange X-ray header, six data rows comparing image-formation, capabilities, health effects, image quality, cost per scan and machine cost.",
+    "generated_path": "/images/papers/physics-nov-2022-v1/q8-comparison-table.svg",
+    "needs_review": true,
+    "approved": false
+  }
+]

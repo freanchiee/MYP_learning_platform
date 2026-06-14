@@ -28,10 +28,10 @@ export default function Q4eDataTable({ onAnswer }: Q4eDataTableProps) {
 
   return (
     <div className="space-y-3">
-      <div className="overflow-x-auto rounded-xl border border-gray-200">
+      <div className="overflow-x-auto rounded-xl border border-line">
         <table className="w-full text-sm border-collapse">
           <thead>
-            <tr className="bg-[#1a2338] text-white">
+            <tr style={{ background: 'var(--surface-deep)', color: 'var(--surface-deep-fg)' }}>
               <th className="px-3 py-2 text-left font-semibold text-xs whitespace-nowrap">Drop height / m</th>
               <th className="px-3 py-2 text-center font-semibold text-xs">Trial 1</th>
               <th className="px-3 py-2 text-center font-semibold text-xs">Trial 2</th>
@@ -41,12 +41,12 @@ export default function Q4eDataTable({ onAnswer }: Q4eDataTableProps) {
           </thead>
           <tbody>
             {ROWS.map((row, i) => (
-              <tr key={row.drop} className={i % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
-                <td className="px-3 py-2 font-mono text-xs font-bold text-[#1a2338] border-b border-gray-100">{row.drop}</td>
-                <td className="px-3 py-2 font-mono text-xs text-center border-b border-gray-100">{row.t1}</td>
-                <td className="px-3 py-2 font-mono text-xs text-center border-b border-gray-100">{row.t2}</td>
-                <td className="px-3 py-2 font-mono text-xs text-center border-b border-gray-100">{row.t3}</td>
-                <td className="px-3 py-2 text-center border-b border-gray-100">
+              <tr key={row.drop} className={i % 2 === 0 ? 'bg-surface' : 'bg-surface-2'}>
+                <td className="px-3 py-2 font-mono text-xs font-bold text-ink border-b border-divider">{row.drop}</td>
+                <td className="px-3 py-2 font-mono text-xs text-center border-b border-divider">{row.t1}</td>
+                <td className="px-3 py-2 font-mono text-xs text-center border-b border-divider">{row.t2}</td>
+                <td className="px-3 py-2 font-mono text-xs text-center border-b border-divider">{row.t3}</td>
+                <td className="px-3 py-2 text-center border-b border-divider">
                   {row.avg !== null ? (
                     <span className="font-mono text-xs">{row.avg}</span>
                   ) : (
@@ -63,9 +63,9 @@ export default function Q4eDataTable({ onAnswer }: Q4eDataTableProps) {
                       className={`w-20 rounded border px-2 py-1 text-xs font-mono text-center focus:outline-none focus:ring-2 ${
                         checked
                           ? isCorrect
-                            ? 'border-green-400 ring-green-300 bg-green-50 text-green-800'
-                            : 'border-red-400 ring-red-300 bg-red-50 text-red-800'
-                          : 'border-[#3cb563] ring-[#3cb563] bg-white'
+                            ? 'border-success bg-success-surface text-success'
+                            : 'border-danger bg-danger-surface text-danger'
+                          : 'border-success bg-surface'
                       }`}
                     />
                   )}
@@ -80,19 +80,19 @@ export default function Q4eDataTable({ onAnswer }: Q4eDataTableProps) {
         <button
           onClick={handleCheck}
           disabled={!val}
-          className="px-4 py-1.5 rounded-lg text-xs font-bold text-white bg-[#1a2338] hover:bg-[#2c3e70] disabled:opacity-40 transition-colors"
+          className="px-4 py-1.5 rounded-lg text-xs font-bold text-on-accent bg-action hover:opacity-90 disabled:opacity-40 transition-colors"
         >
           Check answer
         </button>
         {checked && (
-          <span className={`text-xs font-semibold ${isCorrect ? 'text-green-600' : 'text-red-600'}`}>
+          <span className={`text-xs font-semibold ${isCorrect ? 'text-success' : 'text-danger'}`}>
             {isCorrect
               ? '✓ Correct! Average = (0.25 + 0.27 + 0.25) / 3 = 0.257 ≈ 0.26 m'
               : `✗ Try again. Hint: add the three trial values and divide by 3.`}
           </span>
         )}
       </div>
-      <p className="text-[10px] text-gray-400">
+      <p className="text-[10px] text-ink-subtle">
         Bounce heights are in metres (m). The missing average for the 0.40 m drop is calculated from the three trials above.
       </p>
     </div>

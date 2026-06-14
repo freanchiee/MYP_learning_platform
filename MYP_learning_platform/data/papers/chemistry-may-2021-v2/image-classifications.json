@@ -1,0 +1,26 @@
+[
+  {
+    "taskPath": "q3.tasks[f]",
+    "questionId": 3,
+    "taskLabel": "f",
+    "topic": "Rate of wax combustion vs wick diameter (presentation errors)",
+    "original_path": "/images/papers/chemistry-may-2021/page-12.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: bar chart with deliberate presentation errors (axes swapped, bars instead of scatter). y-axis Wick diameter / mm (0 to 3.0, ticks every 0.5, minor every 0.1), x-axis categorical Rate of wax combustion / g min\u207b\u00b9 with labels 0.0651, 0.0743, 0.0850, 0.0921, 0.105. Five teal bars at heights 0.5, 1.0, 1.5, 2.0, 2.5 mm.",
+    "generated_path": "/images/papers/chemistry-may-2021-v2/q3f-altitude-bar.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q7",
+    "questionId": 7,
+    "taskLabel": null,
+    "topic": "Global water consumption by region",
+    "original_path": "/images/papers/chemistry-may-2021/page-28.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: multi-series smooth line graph, x-axis Year (1900 to 2020, ticks every 10, minor every 5), y-axis Billion cubic metres per year (0 to 3500, ticks every 500, minor every 100). Six regional series, smooth curves, colours teal/orange/magenta/green/violet/cyan (no red): Asia (highest, ~3150 at 2020, dramatic rise after 1960), North America (second highest in 2020, ~1450), Europe (~500 at 1950, ~880 at 2020), Africa (~630), South America (~430), Australia and Oceania (lowest, ~182).",
+    "generated_path": "/images/papers/chemistry-may-2021-v2/q7-water-consumption.svg",
+    "needs_review": true,
+    "approved": false
+  }
+]

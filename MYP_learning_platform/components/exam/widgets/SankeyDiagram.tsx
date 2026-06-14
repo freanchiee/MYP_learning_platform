@@ -78,7 +78,7 @@ export default function SankeyDiagram({ onAnswer }: SankeyDiagramProps) {
   return (
     <div className="space-y-4">
       {/* SVG Sankey diagram */}
-      <div className="w-full overflow-x-auto bg-white rounded-xl border border-gray-200 shadow-sm p-4">
+      <div className="figure-surface w-full overflow-x-auto rounded-xl border border-line shadow-sm p-4">
         <svg
           viewBox={`0 0 ${W} ${H}`}
           className="w-full max-w-2xl mx-auto block"
@@ -175,7 +175,7 @@ export default function SankeyDiagram({ onAnswer }: SankeyDiagramProps) {
       {/* Student input fields */}
       <div className="space-y-3 px-1">
         <div className="flex items-center gap-3 flex-wrap">
-          <label className="text-sm text-gray-700 font-medium min-w-[220px]">
+          <label className="text-sm text-ink-muted font-medium min-w-[220px]">
             Thermal energy output =
           </label>
           <div className="flex items-center gap-2">
@@ -184,14 +184,14 @@ export default function SankeyDiagram({ onAnswer }: SankeyDiagramProps) {
               value={thermalValue}
               onChange={e => setThermalValue(e.target.value)}
               placeholder="___"
-              className="w-20 rounded-lg border border-gray-300 px-3 py-1.5 text-sm text-center focus:outline-none focus:ring-2 focus:ring-[#3cb563] focus:border-transparent"
+              className="w-20 rounded-lg border border-line-strong bg-surface-inset px-3 py-1.5 text-sm text-center focus:outline-none focus:ring-2 focus:ring-[color:var(--success)] focus:border-transparent"
             />
-            <span className="text-sm text-gray-700">J</span>
+            <span className="text-sm text-ink-muted">J</span>
           </div>
         </div>
 
         <div className="flex items-start gap-3 flex-wrap">
-          <label className="text-sm text-gray-700 font-medium min-w-[220px]">
+          <label className="text-sm text-ink-muted font-medium min-w-[220px]">
             Identify the two output energy forms:
           </label>
           <input
@@ -199,12 +199,12 @@ export default function SankeyDiagram({ onAnswer }: SankeyDiagramProps) {
             value={outputForms}
             onChange={e => setOutputForms(e.target.value)}
             placeholder="e.g. light energy and thermal energy"
-            className="flex-1 min-w-[200px] rounded-lg border border-gray-300 px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#3cb563] focus:border-transparent"
+            className="flex-1 min-w-[200px] rounded-lg border border-line-strong bg-surface-inset px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-[color:var(--success)] focus:border-transparent"
           />
         </div>
 
         {thermalValue === '95' && (
-          <div className="rounded-xl bg-green-50 border border-green-200 px-4 py-2 text-sm text-green-800 font-medium">
+          <div className="rounded-xl bg-success-surface border border-success px-4 py-2 text-sm text-success font-medium">
             Correct! 100 J input − 5 J light = 95 J thermal energy.
           </div>
         )}

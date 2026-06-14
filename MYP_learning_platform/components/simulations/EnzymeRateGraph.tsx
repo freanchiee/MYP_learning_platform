@@ -229,7 +229,7 @@ export default function EnzymeRateGraph() {
         ref={canvasRef}
         width={W}
         height={H}
-        className="w-full rounded-xl border border-gray-200"
+        className="figure-surface w-full rounded-card"
         style={{ maxHeight: 320 }}
       />
 
@@ -292,7 +292,7 @@ export default function EnzymeRateGraph() {
           {inhibitor ? '⚠ Inhibitor ON' : 'Add Inhibitor'}
         </button>
         {inhibitor && (
-          <span className="text-xs text-gray-500">Competitive inhibitor reduces rate by ~45%</span>
+          <span className="text-xs text-ink-subtle">Competitive inhibitor reduces rate by ~45%</span>
         )}
       </div>
 

@@ -44,22 +44,22 @@ export default function SignupPage() {
 
   if (success) {
     return (
-      <div className="bg-white rounded-2xl shadow-2xl p-8 text-center">
+      <div className="rounded-2xl shadow-2xl p-8 text-center" style={{ background: 'var(--surface)' }}>
         <div className="flex justify-center mb-4">
-          <CheckCircle2 className="w-14 h-14" style={{ color: '#3daa35' }} />
+          <CheckCircle2 className="w-14 h-14" style={{ color: 'var(--success)' }} />
         </div>
-        <h2 className="text-2xl font-bold mb-2" style={{ color: '#003b5c' }}>
+        <h2 className="text-2xl font-bold mb-2" style={{ color: 'var(--accent)' }}>
           Check your email
         </h2>
-        <p className="text-gray-500 text-sm mb-6">
+        <p className="text-sm mb-6" style={{ color: 'var(--text-subtle)' }}>
           We&apos;ve sent a confirmation link to{' '}
-          <span className="font-medium text-gray-700">{email}</span>. Click the link
+          <span className="font-medium" style={{ color: 'var(--text-muted)' }}>{email}</span>. Click the link
           to activate your account, then come back and sign in.
         </p>
         <Link
           href="/login"
-          className="inline-block py-2.5 px-6 rounded-lg text-white text-sm font-semibold transition-opacity hover:opacity-90"
-          style={{ backgroundColor: '#003b5c' }}
+          className="inline-block py-2.5 px-6 rounded-lg text-sm font-semibold transition-opacity hover:opacity-90"
+          style={{ background: 'var(--gradient-cta)', color: 'var(--text-on-accent)' }}
         >
           Go to Sign In
         </Link>
@@ -68,17 +68,17 @@ export default function SignupPage() {
   }
 
   return (
-    <div className="bg-white rounded-2xl shadow-2xl p-8">
-      <h2 className="text-2xl font-bold mb-1" style={{ color: '#003b5c' }}>
+    <div className="rounded-2xl shadow-2xl p-8" style={{ background: 'var(--surface)' }}>
+      <h2 className="text-2xl font-bold mb-1" style={{ color: 'var(--accent)' }}>
         Create your account
       </h2>
-      <p className="text-gray-500 text-sm mb-6">
+      <p className="text-sm mb-6" style={{ color: 'var(--text-subtle)' }}>
         Join MYP Sciences and start your e-assessment journey
       </p>
 
       {/* Error banner */}
       {error && (
-        <div className="flex items-start gap-2 bg-red-50 border border-red-200 text-red-700 rounded-lg px-4 py-3 mb-5 text-sm">
+        <div className="flex items-start gap-2 rounded-lg px-4 py-3 mb-5 text-sm" style={{ background: 'var(--danger-surface)', border: '1px solid var(--danger)', color: 'var(--danger)' }}>
           <AlertCircle className="w-4 h-4 mt-0.5 shrink-0" />
           <span>{error}</span>
         </div>
@@ -87,11 +87,11 @@ export default function SignupPage() {
       <form onSubmit={handleSignup} className="space-y-4">
         {/* Full Name */}
         <div>
-          <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="name" className="block text-sm font-medium mb-1" style={{ color: 'var(--text-muted)' }}>
             Full name
           </label>
           <div className="relative">
-            <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+            <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4" style={{ color: 'var(--text-subtle)' }} />
             <input
               id="name"
               type="text"
@@ -100,19 +100,19 @@ export default function SignupPage() {
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="Jane Smith"
-              className="w-full pl-9 pr-4 py-2.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:border-transparent transition"
-              style={{ '--tw-ring-color': '#0079a8' } as React.CSSProperties}
+              className="w-full pl-9 pr-4 py-2.5 rounded-lg text-sm focus:outline-none focus:ring-2 focus:border-transparent transition"
+              style={{ background: 'var(--surface-inset)', border: '1px solid var(--border-strong)', color: 'var(--text)', '--tw-ring-color': 'var(--accent)' } as React.CSSProperties}
             />
           </div>
         </div>
 
         {/* School */}
         <div>
-          <label htmlFor="school" className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="school" className="block text-sm font-medium mb-1" style={{ color: 'var(--text-muted)' }}>
             School / Organisation
           </label>
           <div className="relative">
-            <Building2 className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+            <Building2 className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4" style={{ color: 'var(--text-subtle)' }} />
             <input
               id="school"
               type="text"
@@ -121,19 +121,19 @@ export default function SignupPage() {
               value={school}
               onChange={(e) => setSchool(e.target.value)}
               placeholder="IB World School"
-              className="w-full pl-9 pr-4 py-2.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:border-transparent transition"
-              style={{ '--tw-ring-color': '#0079a8' } as React.CSSProperties}
+              className="w-full pl-9 pr-4 py-2.5 rounded-lg text-sm focus:outline-none focus:ring-2 focus:border-transparent transition"
+              style={{ background: 'var(--surface-inset)', border: '1px solid var(--border-strong)', color: 'var(--text)', '--tw-ring-color': 'var(--accent)' } as React.CSSProperties}
             />
           </div>
         </div>
 
         {/* Email */}
         <div>
-          <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="email" className="block text-sm font-medium mb-1" style={{ color: 'var(--text-muted)' }}>
             Email address
           </label>
           <div className="relative">
-            <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+            <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4" style={{ color: 'var(--text-subtle)' }} />
             <input
               id="email"
               type="email"
@@ -142,19 +142,19 @@ export default function SignupPage() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="you@school.edu"
-              className="w-full pl-9 pr-4 py-2.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:border-transparent transition"
-              style={{ '--tw-ring-color': '#0079a8' } as React.CSSProperties}
+              className="w-full pl-9 pr-4 py-2.5 rounded-lg text-sm focus:outline-none focus:ring-2 focus:border-transparent transition"
+              style={{ background: 'var(--surface-inset)', border: '1px solid var(--border-strong)', color: 'var(--text)', '--tw-ring-color': 'var(--accent)' } as React.CSSProperties}
             />
           </div>
         </div>
 
         {/* Password */}
         <div>
-          <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="password" className="block text-sm font-medium mb-1" style={{ color: 'var(--text-muted)' }}>
             Password
           </label>
           <div className="relative">
-            <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+            <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4" style={{ color: 'var(--text-subtle)' }} />
             <input
               id="password"
               type="password"
@@ -164,30 +164,30 @@ export default function SignupPage() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="At least 8 characters"
-              className="w-full pl-9 pr-4 py-2.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:border-transparent transition"
-              style={{ '--tw-ring-color': '#0079a8' } as React.CSSProperties}
+              className="w-full pl-9 pr-4 py-2.5 rounded-lg text-sm focus:outline-none focus:ring-2 focus:border-transparent transition"
+              style={{ background: 'var(--surface-inset)', border: '1px solid var(--border-strong)', color: 'var(--text)', '--tw-ring-color': 'var(--accent)' } as React.CSSProperties}
             />
           </div>
-          <p className="text-xs text-gray-400 mt-1">Minimum 8 characters</p>
+          <p className="text-xs mt-1" style={{ color: 'var(--text-subtle)' }}>Minimum 8 characters</p>
         </div>
 
         <button
           type="submit"
           disabled={loading}
-          className="w-full flex items-center justify-center gap-2 py-2.5 rounded-lg text-white text-sm font-semibold transition-opacity disabled:opacity-60 disabled:cursor-not-allowed"
-          style={{ backgroundColor: '#003b5c' }}
+          className="w-full flex items-center justify-center gap-2 py-2.5 rounded-lg text-sm font-semibold transition-opacity disabled:opacity-60 disabled:cursor-not-allowed"
+          style={{ background: 'var(--gradient-cta)', color: 'var(--text-on-accent)' }}
         >
           {loading && <Loader2 className="w-4 h-4 animate-spin" />}
           Create account
         </button>
       </form>
 
-      <p className="text-center text-sm text-gray-500 mt-6">
+      <p className="text-center text-sm mt-6" style={{ color: 'var(--text-subtle)' }}>
         Already have an account?{' '}
         <Link
           href="/login"
           className="font-medium hover:underline"
-          style={{ color: '#0079a8' }}
+          style={{ color: 'var(--accent)' }}
         >
           Sign in
         </Link>

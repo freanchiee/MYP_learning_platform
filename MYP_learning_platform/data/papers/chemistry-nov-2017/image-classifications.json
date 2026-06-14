@@ -1,0 +1,183 @@
+[
+  {
+    "taskPath": "q4",
+    "questionId": 4,
+    "taskLabel": null,
+    "topic": "Metal reactivity rates",
+    "original_path": "/images/papers/chemistry-nov-2017/page-21.png",
+    "image_type": "code_rendered",
+    "render_component": "RateSim",
+    "render_data": {
+      "title": "Average time to produce 50 cm³ of gas",
+      "source": "MYP chemistry-nov-2017",
+      "mode": "bars",
+      "variable": "coin composition",
+      "metric": "Average time to produce 50 cm³ gas / s",
+      "xLabel": "Coin composition",
+      "yLabel": "Average time / s",
+      "yAxis": { "label": "Average time / s", "min": 0, "max": 140, "tick": 20 },
+      "reaction": "metal + nitric acid → metal nitrate + hydrogen",
+      "task": "Read each coin's average reaction time off the bar chart, cross-reference the bar to its coin composition, then use the year-composition table to determine the year of manufacture.",
+      "answer": "Coin 1 (~80 s) → Cu/Ni → 1857–1865; Coin 2 (~100 s) → Cu/Sn → 1857–1865 (accept 1849–1857); Coin 3 (~70 s) → Cu/Zn/Sn → 1962–1982.",
+      "bars": [
+        { "label": "Cu", "time_s": 120 },
+        { "label": "Cu/Sn", "time_s": 100 },
+        { "label": "Cu/Ni", "time_s": 86 },
+        { "label": "Cu/Zn/Sn", "time_s": 74 },
+        { "label": "Cu/Zn", "time_s": 63 },
+        { "label": "Zu/Cu", "time_s": 30 }
+      ]
+    },
+    "generated_path": "/images/papers/chemistry-nov-2017/q4-average-time-graph.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q6",
+    "questionId": 6,
+    "taskLabel": null,
+    "topic": "Global temperature anomaly",
+    "original_path": "/images/papers/chemistry-nov-2017/page-28.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: line/scatter graph 'Global Land-Ocean Temperature Index'. X-axis years 1960-2020 ticks every 10. Y-axis 'Temperature Anomaly / °C' -0.5 to 1.0 ticks every 0.5. Rising trend from ~0.0 in 1960 (dipping slightly negative ~1965) up to ~0.75 by 2014; ~0.22 at 1980 and ~0.62 at 2010.",
+    "generated_path": "/images/papers/chemistry-nov-2017/q6-temperature-index-graph.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q7",
+    "questionId": 7,
+    "taskLabel": null,
+    "topic": "Car emissions comparison",
+    "original_path": "/images/papers/chemistry-nov-2017/page-34.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: bar chart 'Emission comparison graph'. X-axis 'Type of car': Petrol, Electric, Hybrid, Plug-in hybrid. Y-axis 'Emissions from fuel used / CO₂' 0-5 ticks every 1. Petrol ~4.75, Electric 0, Hybrid ~3.5, Plug-in hybrid ~1.9.",
+    "generated_path": "/images/papers/chemistry-nov-2017/q7-emission-comparison-graph.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q1",
+    "questionId": 1,
+    "taskLabel": null,
+    "topic": "Make-up history and coloured ores",
+    "original_path": "/images/papers/chemistry-nov-2017/page-02.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG illustration: history of make-up — a classical painted portrait (cosmetics/social status), radial arrangement of henna-decorated hands, coloured ores of copper (teal/blue/native copper) and iron, and a row of mineral cosmetic powder pots.",
+    "generated_path": "/images/papers/chemistry-nov-2017/q1-makeup-ores.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q1",
+    "questionId": 1,
+    "taskLabel": null,
+    "topic": "Periodic table — lead and arsenic",
+    "original_path": "/images/papers/chemistry-nov-2017/page-03.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: MYP short-form periodic table with groups 1 2 3 4 5 6 7 0 and periods 1-7; lead (Pb) highlighted green in Group 4 Period 6, arsenic (As) highlighted red in Group 5 Period 4; legend identifying Pb (metal) and As (metalloid).",
+    "generated_path": "/images/papers/chemistry-nov-2017/q1-periodic-table.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q2",
+    "questionId": 2,
+    "taskLabel": null,
+    "topic": "Perfume esters evaporating from skin",
+    "original_path": "/images/papers/chemistry-nov-2017/page-07.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG illustration: ball-and-stick ester molecules scattered above a skin-toned surface ('the molecules in the perfume start to evaporate and leave the surface of the skin'); a second 'After 1 hour' panel with fewer, larger molecules near the skin surface.",
+    "generated_path": "/images/papers/chemistry-nov-2017/q2-perfume-evaporation.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q2",
+    "questionId": 2,
+    "taskLabel": null,
+    "topic": "Ester molecular structures",
+    "original_path": "/images/papers/chemistry-nov-2017/page-09.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: ball-and-stick structures of five methanoate esters (methyl, ethyl, propyl, butyl, pentyl methanoate) showing the H-C(=O)-O- formyl ester group and increasing alkyl chain length, with a Key for H, C and O atoms.",
+    "generated_path": "/images/papers/chemistry-nov-2017/q2-ester-structures.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q3",
+    "questionId": 3,
+    "taskLabel": null,
+    "topic": "Hazard symbols and lab equipment",
+    "original_path": "/images/papers/chemistry-nov-2017/page-13.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: four GHS-style hazard pictograms A (corrosive), B (oxidising), C (toxic — skull & crossbones), D (flammable); and a row of laboratory equipment — ruler, thermometer, pH probe, gas syringe, temperature probe — each labelled.",
+    "generated_path": "/images/papers/chemistry-nov-2017/q3-hazard-equipment.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q4",
+    "questionId": 4,
+    "taskLabel": null,
+    "topic": "US penny composition table",
+    "original_path": "/images/papers/chemistry-nov-2017/page-17.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: row of seven US penny coins and a 'Composition / %' data table by year range (1793-1849 to 1982-present) with Copper, Nickel, Zinc and Tin percentage columns reproduced exactly.",
+    "generated_path": "/images/papers/chemistry-nov-2017/q4-coin-composition.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q5",
+    "questionId": 5,
+    "taskLabel": null,
+    "topic": "Gold nugget",
+    "original_path": "/images/papers/chemistry-nov-2017/page-23.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG illustration: a large irregular crystalline gold nugget (the Perth Mint nugget, mass 23 218.3 g) on a dark museum display stand with a soft backlight halo.",
+    "generated_path": "/images/papers/chemistry-nov-2017/q5-gold-nugget.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q6",
+    "questionId": 6,
+    "taskLabel": null,
+    "topic": "Carbon cycle diagram",
+    "original_path": "/images/papers/chemistry-nov-2017/page-29.png",
+    "image_type": "code_rendered",
+    "render_component": "DragSort",
+    "render_data": {
+      "mode": "bins",
+      "title": "Carbon cycle — label the coloured arrows",
+      "source": "MYP chemistry-nov-2017",
+      "prompt": "Drag each chemical reaction onto the correctly coloured arrow in the key: grey (1), red (2) and green (3).",
+      "bins": [
+        { "id": "grey", "label": "Grey arrow (1)" },
+        { "id": "red", "label": "Red arrow (2)" },
+        { "id": "green", "label": "Green arrow (3)" }
+      ],
+      "items": [
+        { "text": "fuel + oxygen → carbon dioxide + water", "correctBin": "grey" },
+        { "text": "glucose + oxygen → carbon dioxide + water", "correctBin": "red" },
+        { "text": "carbon dioxide + water → glucose + oxygen", "correctBin": "green" }
+      ]
+    },
+    "generated_path": "/images/papers/chemistry-nov-2017/q6-carbon-cycle.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q7",
+    "questionId": 7,
+    "taskLabel": null,
+    "topic": "Hybrid car schematic",
+    "original_path": "/images/papers/chemistry-nov-2017/page-32.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: side-view schematic of a hybrid car and a plug-in hybrid car, each labelled Battery, Motor, Fuel tank and Engine, with a blue electric power arrow (battery↔motor) and green petrol arrows (fuel tank→engine, petrol station→fuel tank); the plug-in adds an Electricity mains charging connection to the battery.",
+    "generated_path": "/images/papers/chemistry-nov-2017/q7-hybrid-car.svg",
+    "needs_review": true,
+    "approved": false
+  }
+]

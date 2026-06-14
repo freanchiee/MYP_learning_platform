@@ -34,7 +34,7 @@ export default function CheckboxSelectWidget({ options, savedAnswer, onAnswer }:
 
   return (
     <div className="space-y-2">
-      <p className="text-xs font-semibold mb-3" style={{ color: '#547ca4' }}>
+      <p className="text-xs font-semibold mb-3" style={{ color: 'var(--accent-2)' }}>
         Select all correct answers.
       </p>
       {options.map((opt, idx) => {
@@ -46,18 +46,18 @@ export default function CheckboxSelectWidget({ options, savedAnswer, onAnswer }:
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.28, delay: idx * 0.05 }}
             onClick={() => toggle(idx)}
-            className="w-full flex items-start gap-3 px-4 py-3 rounded-lg text-left transition-all"
+            className="w-full flex items-start gap-3 px-4 py-3 rounded-control text-left transition-all"
             style={{
-              background: isChecked ? 'rgba(31,54,116,0.08)' : '#fff',
-              border: `2px solid ${isChecked ? '#1f3674' : 'rgba(31,54,116,0.15)'}`,
+              background: isChecked ? 'var(--accent-soft)' : 'var(--surface)',
+              border: `2px solid ${isChecked ? 'var(--accent)' : 'var(--border)'}`,
             }}
           >
             {/* Checkbox */}
             <div
               className="flex-shrink-0 w-5 h-5 rounded flex items-center justify-center mt-0.5 transition-all"
               style={{
-                background: isChecked ? '#1f3674' : '#fff',
-                border: `2px solid ${isChecked ? '#1f3674' : 'rgba(31,54,116,0.3)'}`,
+                background: isChecked ? 'var(--accent)' : 'var(--surface)',
+                border: `2px solid ${isChecked ? 'var(--accent)' : 'var(--border-strong)'}`,
               }}
             >
               {isChecked && (
@@ -66,21 +66,21 @@ export default function CheckboxSelectWidget({ options, savedAnswer, onAnswer }:
                   animate={{ scale: 1 }}
                   width="10" height="8" viewBox="0 0 10 8" fill="none"
                 >
-                  <path d="M1 4L4 7L9 1" stroke="#adf1c4" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M1 4L4 7L9 1" stroke="var(--accent-fg)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </motion.svg>
               )}
             </div>
             {/* Label */}
             <span
               className="text-sm font-medium leading-relaxed"
-              style={{ color: isChecked ? '#1f3674' : '#374151' }}
+              style={{ color: isChecked ? 'var(--accent)' : 'var(--text-muted)' }}
               dangerouslySetInnerHTML={{ __html: opt }}
             />
           </motion.button>
         )
       })}
       {selected.size > 0 && (
-        <p className="text-xs pt-1" style={{ color: 'rgba(31,54,116,0.45)' }}>
+        <p className="text-xs pt-1" style={{ color: 'var(--text-subtle)' }}>
           {selected.size} option{selected.size !== 1 ? 's' : ''} selected
         </p>
       )}

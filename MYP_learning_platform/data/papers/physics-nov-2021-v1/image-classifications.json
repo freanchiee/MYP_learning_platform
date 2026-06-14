@@ -1,0 +1,292 @@
+[
+  {
+    "taskPath": "q3.tasks[b]",
+    "questionId": 3,
+    "taskLabel": "b",
+    "topic": "Doppler effect / red-shift waveforms",
+    "original_path": "/images/papers/physics-nov-2021/q3b-waves.png",
+    "image_type": "code_rendered",
+    "image_prompt": "Four waveform panels A-D in one row, each a sine wave on a fine-gridded box with the x-axis crossing at zero. All four share the SAME amplitude but have different periods: A shortest wavelength (~5 cycles), B ~3 cycles, C ~2 cycles, D longest wavelength (one cycle across the window). Answer = D, because a receding source stretches the wavelength (red-shift / Doppler effect).",
+    "generated_path": "/images/papers/physics-nov-2021-v1/q3b-waves.svg",
+    "needs_review": true,
+    "approved": false,
+    "render_component": "WaveSim",
+    "render_data": {
+      "title": "Light wave from a stationary source vs a receding source",
+      "source": "MYP physics-nov-2021-v1",
+      "mode": "match",
+      "windowSeconds": 4,
+      "stationary": {
+        "id": "stationary",
+        "label": "Stationary source",
+        "cycles": 3,
+        "amplitude_cm": 2
+      },
+      "target": {
+        "id": "stationary",
+        "label": "Stationary source",
+        "cycles": 3,
+        "amplitude_cm": 2
+      },
+      "options": [
+        {
+          "id": "A",
+          "cycles": 5,
+          "amplitude_cm": 2,
+          "note": "Shorter wavelength than stationary — blue-shift (source approaching)."
+        },
+        {
+          "id": "B",
+          "cycles": 3,
+          "amplitude_cm": 2,
+          "note": "Same wavelength as stationary — no relative motion."
+        },
+        {
+          "id": "C",
+          "cycles": 2,
+          "amplitude_cm": 2,
+          "note": "Slightly longer wavelength."
+        },
+        {
+          "id": "D",
+          "cycles": 1,
+          "amplitude_cm": 2,
+          "note": "Longest wavelength — wave stretched (red-shift) for a receding source."
+        }
+      ],
+      "correct": "D",
+      "answer": "D",
+      "concept": "Doppler effect / red-shift",
+      "task": "Select the graph showing how the wave changes when the source moves away from the observer."
+    }
+  },
+  {
+    "taskPath": "q3.tasks[d]",
+    "questionId": 3,
+    "taskLabel": "d",
+    "topic": "Hubble's law (velocity vs distance)",
+    "original_path": "/images/papers/physics-nov-2021/q3d-hubble.png",
+    "image_type": "ai_generated",
+    "image_prompt": "Hubble velocity-distance fan-shaped scatter through the origin. x-axis Distance / Mpc (0, 50, 100), y-axis Velocity / km s⁻¹ (0, 5000, 10⁴). Two populations with a key: grey 'galaxies observed today' forming a wide fan that widens with distance, and teal 'galaxies observed in 1930' clustered near the origin (small distances/velocities) giving the shallow 1930 best-fit and the 1.8 billion year age estimate. Part (d) asks for a best-fit line through the origin.",
+    "generated_path": "/images/papers/physics-nov-2021-v1/q3d-hubble.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q5.tasks[b]",
+    "questionId": 5,
+    "taskLabel": "b",
+    "topic": "Resistance vs length of a wire",
+    "original_path": "/images/papers/physics-nov-2021/q5b-resistance-graph.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG titled 'A graph of resistance against length for a conducting wire'. x-axis Length / m (0.00 to 1.20 step 0.20), y-axis Resistance / Ω (0.00 to 0.06 step 0.01). Five data points at (0.20,0.015), (0.40,0.027), (0.60,0.033), (0.80,0.045), (1.00,0.056), with a best-fit straight line of gradient ~0.065 Ω/m (variant value) and a NON-ZERO y-intercept of ~0.0075 Ω (evidence of systematic error). Later parts compute the gradient and discuss the intercept.",
+    "generated_path": "/images/papers/physics-nov-2021-v1/q5b-resistance-graph.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q1",
+    "questionId": 1,
+    "taskLabel": null,
+    "topic": "Brownian motion — pollen grain in water",
+    "original_path": "/images/papers/physics-nov-2021/q1-brownian.png",
+    "image_type": "ai_generated",
+    "image_prompt": "Hand-authored copyright-safe SVG recreation for variant: Brownian motion — pollen grain in water.",
+    "generated_path": "/images/papers/physics-nov-2021-v1/q1-brownian.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q2.tasks[a]",
+    "questionId": 2,
+    "taskLabel": "a",
+    "topic": "E = mc² — match symbols to SI units",
+    "original_path": "/images/papers/physics-nov-2021/q2a-units.png",
+    "image_type": "ai_generated",
+    "image_prompt": "Hand-authored copyright-safe SVG recreation for variant: E = mc² — match symbols to SI units.",
+    "generated_path": "/images/papers/physics-nov-2021-v1/q2a-units.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q2.tasks[b]",
+    "questionId": 2,
+    "taskLabel": "b",
+    "topic": "Sankey diagram with 900 J input",
+    "original_path": "/images/papers/physics-nov-2021/q2b-sankey.png",
+    "image_type": "code_rendered",
+    "image_prompt": "Hand-authored copyright-safe SVG recreation for variant: Sankey diagram with 900 J input.",
+    "generated_path": "/images/papers/physics-nov-2021-v1/q2b-sankey.svg",
+    "needs_review": true,
+    "approved": false,
+    "render_component": "SankeySim",
+    "render_data": {
+      "title": "Energy transfers as a child slides down a slide",
+      "source": "MYP physics-nov-2021-v1",
+      "inputJ": 900,
+      "branches": [
+        {
+          "form": "Kinetic energy",
+          "valueJ": 800,
+          "direction": "straight"
+        },
+        {
+          "form": "Thermal (heat) energy",
+          "valueJ": 90,
+          "direction": "down",
+          "blank": true
+        },
+        {
+          "form": "Sound energy",
+          "valueJ": 10,
+          "direction": "down"
+        }
+      ],
+      "missingForm": "Thermal (heat) energy",
+      "missingValueJ": 90,
+      "conservation": "900 J in = 800 J kinetic + 90 J thermal + 10 J sound"
+    }
+  },
+  {
+    "taskPath": "q2.tasks[d]",
+    "questionId": 2,
+    "taskLabel": "d",
+    "topic": "Two electrons — mass and energy",
+    "original_path": "/images/papers/physics-nov-2021/q2d-particles.png",
+    "image_type": "ai_generated",
+    "image_prompt": "Hand-authored copyright-safe SVG recreation for variant: Two electrons — mass and energy.",
+    "generated_path": "/images/papers/physics-nov-2021-v1/q2d-particles.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q4",
+    "questionId": 4,
+    "taskLabel": null,
+    "topic": "Component X — notepad measurements",
+    "original_path": "/images/papers/physics-nov-2021/q4-component-x.png",
+    "image_type": "code_rendered",
+    "image_prompt": "Hand-authored copyright-safe SVG recreation for variant: Component X — notepad measurements.",
+    "generated_path": "/images/papers/physics-nov-2021-v1/q4-component-x.svg",
+    "needs_review": true,
+    "approved": false,
+    "render_component": "CircuitSim",
+    "render_data": {
+      "title": "Measuring current and voltage for component X",
+      "source": "MYP physics-nov-2021-v1",
+      "mode": "iv",
+      "component": "Component X",
+      "ivPairs": [
+        {
+          "V": 0.5,
+          "I": 0.15
+        },
+        {
+          "V": 1.0,
+          "I": 0.3
+        },
+        {
+          "V": 1.5,
+          "I": 0.45
+        },
+        {
+          "V": 2.0,
+          "I": 0.81,
+          "readFromAmmeter": "811 mA"
+        },
+        {
+          "V": 2.5,
+          "I": 0.75
+        }
+      ],
+      "task": "Read the ammeter at each supply voltage. At 2.0 V the ammeter reads 811 mA = 0.81 A (the anomalous value)."
+    }
+  },
+  {
+    "taskPath": "q4.tasks[c]",
+    "questionId": 4,
+    "taskLabel": "c",
+    "topic": "Component Y — current vs voltage graph",
+    "original_path": "/images/papers/physics-nov-2021/q4c-component-y.png",
+    "image_type": "ai_generated",
+    "image_prompt": "Hand-authored copyright-safe SVG recreation for variant: Component Y — current vs voltage graph.",
+    "generated_path": "/images/papers/physics-nov-2021-v1/q4c-component-y.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q5",
+    "questionId": 5,
+    "taskLabel": null,
+    "topic": "Wire — length, area and resistance",
+    "original_path": "/images/papers/physics-nov-2021/q5-wire.png",
+    "image_type": "ai_generated",
+    "image_prompt": "Hand-authored copyright-safe SVG recreation for variant: Wire — length, area and resistance.",
+    "generated_path": "/images/papers/physics-nov-2021-v1/q5-wire.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q6",
+    "questionId": 6,
+    "taskLabel": null,
+    "topic": "Series decorative lights + circuit palette",
+    "original_path": "/images/papers/physics-nov-2021/q6-lights.png",
+    "image_type": "code_rendered",
+    "image_prompt": "Hand-authored copyright-safe SVG recreation for variant: Series decorative lights + circuit palette.",
+    "generated_path": "/images/papers/physics-nov-2021-v1/q6-lights.svg",
+    "needs_review": true,
+    "approved": false,
+    "render_component": "DragSort",
+    "render_data": {
+      "title": "Measuring the current through two resistors in series",
+      "source": "MYP physics-nov-2021-v1",
+      "mode": "select",
+      "prompt": "Select the circuit that correctly measures the current flowing through two resistors connected in series.",
+      "options": [
+        {
+          "id": "A",
+          "label": "Two resistors in series with the battery; ammeter in series in the main loop",
+          "correct": true
+        },
+        {
+          "id": "B",
+          "label": "Two resistors in parallel with each other; ammeter in series"
+        },
+        {
+          "id": "C",
+          "label": "Two resistors in series; ammeter connected in parallel across one resistor"
+        },
+        {
+          "id": "D",
+          "label": "Two resistors in series; voltmeter (not ammeter) in series in the loop"
+        }
+      ],
+      "correct": "A"
+    }
+  },
+  {
+    "taskPath": "q7",
+    "questionId": 7,
+    "taskLabel": null,
+    "topic": "Carbon-neutral electricity generation",
+    "original_path": "/images/papers/physics-nov-2021/q7-energy.png",
+    "image_type": "ai_generated",
+    "image_prompt": "Hand-authored copyright-safe SVG recreation for variant: Carbon-neutral electricity generation.",
+    "generated_path": "/images/papers/physics-nov-2021-v1/q7-energy.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q8",
+    "questionId": 8,
+    "taskLabel": null,
+    "topic": "Malta electricity options",
+    "original_path": "/images/papers/physics-nov-2021/q8-malta.png",
+    "image_type": "ai_generated",
+    "image_prompt": "Hand-authored copyright-safe SVG recreation for variant: Malta electricity options.",
+    "generated_path": "/images/papers/physics-nov-2021-v1/q8-malta.svg",
+    "needs_review": true,
+    "approved": false
+  }
+]

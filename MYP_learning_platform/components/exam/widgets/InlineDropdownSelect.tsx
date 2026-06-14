@@ -65,19 +65,19 @@ export default function InlineDropdownSelect({
           return (
             <label
               key={item}
-              className="flex items-center gap-2 text-sm font-medium text-gray-700"
+              className="flex items-center gap-2 text-sm font-medium text-ink-muted"
             >
               <span className="shrink-0">{item}:</span>
               <select
                 value={val}
                 onChange={e => handleChange(item, e.target.value)}
                 className={`
-                  rounded-lg border px-3 py-1.5 text-sm font-medium
+                  rounded-control border px-3 py-1.5 text-sm font-medium
                   transition-colors cursor-pointer outline-none
                   focus:ring-2 focus:ring-[var(--ib-teal)] focus:border-[var(--ib-teal)]
                   ${isSet
                     ? 'border-[var(--ib-teal)] bg-[var(--ib-teal)]/5 text-[var(--ib-teal)]'
-                    : 'border-gray-300 bg-white text-gray-500 hover:border-gray-400'
+                    : 'border-line-strong bg-surface text-ink-subtle hover:border-line-strong'
                   }
                 `}
               >
@@ -93,7 +93,7 @@ export default function InlineDropdownSelect({
 
       {/* Completion indicator */}
       {allSelected && (
-        <p className="mt-2 text-xs font-semibold text-green-600 flex items-center gap-1">
+        <p className="mt-2 text-xs font-semibold text-success flex items-center gap-1">
           <span>✓</span>
           <span>All selections complete</span>
         </p>

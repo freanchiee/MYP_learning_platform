@@ -1,0 +1,213 @@
+[
+  {
+    "taskPath": "q2.tasks[c]",
+    "questionId": 2,
+    "taskLabel": "c",
+    "topic": "Radioactive half-life (technetium-99m)",
+    "original_path": "/images/papers/physics-may-2021-v2/q2c-halflife.png",
+    "image_type": "code_rendered",
+    "render_component": "DecaySim",
+    "render_data": {
+      "title": "Decay of technetium-99m",
+      "source": "MYP physics-may-2021-v2",
+      "isotope": "technetium-99m",
+      "decayMode": "gamma",
+      "halfLife": 6,
+      "units": "h",
+      "initialMass": 100,
+      "massUnits": "g",
+      "axisMax": 36,
+      "xAxis": "Time / h",
+      "yAxis": "Mass of technetium-99m / g"
+    },
+    "generated_path": "/images/papers/physics-may-2021-v2/q2c-halflife.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q4.tasks[d]",
+    "questionId": 4,
+    "taskLabel": "d",
+    "topic": "Motion graphs (s = \u00bdat\u00b2)",
+    "original_path": "/images/papers/physics-may-2021-v2/q4d-graphs.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: four small qualitative graphs labelled A-D, each with y-axis 's' and no numeric ticks. A: s vs t\u00b2 concave-up curve. B: s vs t\u00b2 straight line through the origin (correct for s = \u00bdat\u00b2). C: s vs t straight line through the origin. D: s vs t decreasing line.",
+    "generated_path": "/images/papers/physics-may-2021-v2/q4d-graphs.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q6.tasks[e]",
+    "questionId": 6,
+    "taskLabel": "e",
+    "topic": "Lens focal length (1/d\u1d62 vs 1/d\u2092)",
+    "original_path": "/images/papers/physics-may-2021-v2/q6e-graphs.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: four scatter graphs labelled A-D, same six data points (1/d\u2092, 1/d\u1d62 in m\u207b\u00b9): (5.00,1.90), (4.00,2.90), (3.33,3.57), (2.50,4.40), (2.00,6.25 anomalous), (1.67,5.24). X-axis 0-6 (1/d\u2092), Y-axis 0-8 (1/d\u1d62), minor 0.5. A: kinked dogleg line. B: straight line with wrong (high) intercept, pulled toward the anomaly. C (correct): straight best-fit line ignoring the anomalous point, y-intercept 1/f = 6.90 m\u207b\u00b9. D: curved line through the clean points.",
+    "generated_path": "/images/papers/physics-may-2021-v2/q6e-graphs.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q1",
+    "questionId": 1,
+    "topic": "Aviation radio (stem image)",
+    "original_path": "/images/papers/physics-may-2021-v2/q1-aviation-radio.png",
+    "image_type": "text_only",
+    "needs_review": false,
+    "approved": true
+  },
+  {
+    "taskPath": "q2.tasks[b]",
+    "questionId": 2,
+    "taskLabel": "b",
+    "topic": "Beta radiation through electric field (3 panels)",
+    "original_path": "/images/papers/physics-may-2021-v2/q2b-beta-field.png",
+    "image_type": "code_rendered",
+    "render_component": "FieldSim",
+    "render_data": {
+      "title": "Charged particle in an electric field",
+      "source": "MYP physics-may-2021-v2",
+      "field": "E",
+      "plates": { "top": "+", "bottom": "\u2212" },
+      "particles": [
+        { "name": "alpha (+)", "charge": 1 },
+        { "name": "beta (\u2212)", "charge": -1 },
+        { "name": "gamma (0)", "charge": 0 }
+      ],
+      "particle": "beta",
+      "expected": "Beta particles are electrons (negative), so they curve up toward the positive (top) plate \u2014 this matches image C."
+    },
+    "generated_path": "/images/papers/physics-may-2021-v2/q2b-beta-field.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q3.tasks[d]",
+    "questionId": 3,
+    "taskLabel": "d",
+    "topic": "Energy transformation chain (regenerative braking)",
+    "original_path": "/images/papers/physics-may-2021-v2/q3d-energy-diagram.png",
+    "image_type": "code_rendered",
+    "render_component": "DragSort",
+    "render_data": {
+      "mode": "slots",
+      "title": "Regenerative braking energy chain",
+      "source": "MYP physics-may-2021-v2",
+      "prompt": "Kinetic energy \u2192 [blank 1] \u2192 Electrical energy \u2192 [blank 2] \u2192 Thermal energy. Fill the two blanks with the correct energy forms.",
+      "items": [
+        "Kinetic energy (mechanical)",
+        "Chemical potential energy",
+        "Sound energy",
+        "Gravitational potential energy"
+      ],
+      "slots": [
+        "Kinetic energy \u2192 ___ \u2192 Electrical energy",
+        "Electrical energy \u2192 ___ \u2192 Thermal energy"
+      ],
+      "correct": {
+        "Kinetic energy \u2192 ___ \u2192 Electrical energy": "Kinetic energy (mechanical)",
+        "Electrical energy \u2192 ___ \u2192 Thermal energy": "Chemical potential energy"
+      }
+    },
+    "generated_path": "/images/papers/physics-may-2021-v2/q3d-energy-diagram.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q4",
+    "questionId": 4,
+    "topic": "Galileo ramp variables table",
+    "original_path": "/images/papers/physics-may-2021-v2/q4-galileo.png",
+    "image_type": "code_rendered",
+    "render_component": "DragSort",
+    "render_data": {
+      "mode": "bins",
+      "title": "Classify the variables — ball on a ramp",
+      "source": "MYP physics-may-2021-v2",
+      "prompt": "Sort each variable into the correct category for this investigation.",
+      "items": [
+        "Mass of ball",
+        "Time taken",
+        "Size of ball",
+        "Distance travelled by ball",
+        "Angle of slope"
+      ],
+      "bins": [
+        "Independent variable",
+        "Dependent variable",
+        "Control variable"
+      ],
+      "correct": {
+        "Independent variable": ["Distance travelled by ball"],
+        "Dependent variable": ["Time taken"],
+        "Control variable": ["Mass of ball", "Size of ball", "Angle of slope"]
+      }
+    },
+    "generated_path": "/images/papers/physics-may-2021-v2/q4-galileo.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q4.tasks[e]",
+    "questionId": 4,
+    "taskLabel": "e",
+    "topic": "Distance / Time / (Time)\u00b2 data table",
+    "original_path": "/images/papers/physics-may-2021-v2/q4e-table.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: 3-column 5-row results table with header (Distance / m, Time / s, (Time)\u00b2 /[blank unit]). Variant data; the last (Time)\u00b2 cell is left blank for the student to fill.",
+    "generated_path": "/images/papers/physics-may-2021-v2/q4e-table.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q5",
+    "questionId": 5,
+    "topic": "cone drag",
+    "original_path": "/images/papers/physics-may-2021-v2/q5-cone-drag.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: left panel shows five paper cones with progressively larger base areas (10, 20, 30, 40, 50 cm\u00b2) but identical paper mass. Right panel shows the drop apparatus: vertical metre ruler 0 to 2.0 m, a hand at the top releasing a cone, a stopwatch on the ground.",
+    "generated_path": "/images/papers/physics-may-2021-v2/q5-cone-drag.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q6",
+    "questionId": 6,
+    "topic": "Convex lens optical bench setup",
+    "original_path": "/images/papers/physics-may-2021-v2/q6-lens-setup.png",
+    "image_type": "code_rendered",
+    "render_component": "OpticsSim",
+    "render_data": {
+      "title": "Convex lens optical bench",
+      "source": "MYP physics-may-2021-v2",
+      "mode": "lens",
+      "focalLength": 14.5,
+      "objectDistance": 30,
+      "unit": "cm"
+    },
+    "generated_path": "/images/papers/physics-may-2021-v2/q6-lens-setup.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q7",
+    "questionId": 7,
+    "topic": "hot air balloon",
+    "original_path": "/images/papers/physics-may-2021-v2/q7-hot-air-balloon.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: three force diagrams A/B/C of a hot air balloon with upward buoyancy T and downward weight W arrows. A: T > W (ascending). B: T < W (descending). C: T = W (floating at constant altitude).",
+    "generated_path": "/images/papers/physics-may-2021-v2/q7-hot-air-balloon.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q8",
+    "questionId": 8,
+    "topic": "Marine drone applications (stem image)",
+    "original_path": "/images/papers/physics-may-2021-v2/q8-marine-drones.png",
+    "image_type": "text_only",
+    "needs_review": false,
+    "approved": true
+  }
+]

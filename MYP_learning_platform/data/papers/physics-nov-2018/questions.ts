@@ -42,7 +42,7 @@ export const questions: Question[] = [
         label: 'c',
         text: 'A student is watching a storm. He calculates the distance to the storm every five minutes and draws the following graph of his results. Use the graph to **describe** the journey of the storm as it passes the student.',
         marks: 2,
-        figImages: [`${P}q1c-graph.png`],
+        figImages: ['/images/papers/physics-nov-2018/q1c-graph.svg'],
         ph: 'The storm is moving with constant/unchanging speed (not accelerating). It moves toward the student AND then away from the student. It passes at a distance of about 1 km and passes overhead.',
       },
       {
@@ -190,7 +190,7 @@ export const questions: Question[] = [
         label: 'e',
         text: 'Some of the results from another student who performed a similar experiment are shown in the graph below. **Draw** a line of best fit on the graph.',
         marks: 1,
-        figImages: [`${P}q4e-graph.png`],
+        figImages: ['/images/papers/physics-nov-2018/q4e-graph.svg'],
         ph: 'A straight line of best fit that passes through all (or as close as possible to all) the data points.',
       },
       {
@@ -250,7 +250,7 @@ export const questions: Question[] = [
         label: 'd',
         text: 'The mean data from the experiment is shown below. **State** the labels for the x and y axes and plot your calculated data point from part (b).',
         marks: 2,
-        figImages: [`${P}q5d-graph.png`],
+        figImages: ['/images/papers/physics-nov-2018/q5d-graph.svg'],
         ph: 'X axis: Drop height / m\nY axis: Bounce height / m\nPlot point at (1.8, 0.51) — ECF from part (b)',
       },
     ],
@@ -306,7 +306,7 @@ export const questions: Question[] = [
         label: 'b',
         text: 'Scientists have measured or calculated both the amount of carbon dioxide in the atmosphere over the last thousand years and the average global temperature. **Outline** how the graph supports this statement.',
         marks: 2,
-        figImages: [`${P}q7b-co2graph.png`],
+        figImages: ['/images/papers/physics-nov-2018/q7b-co2graph.svg'],
         ph: 'Both global temperature AND the amount of CO₂ increase together (positive correlation). As CO₂ levels rise (especially after 1800), global temperature also rises. The graph shows both variables increasing from around 1900 onwards.',
       },
       {

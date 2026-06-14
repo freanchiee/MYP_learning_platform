@@ -1,0 +1,342 @@
+[
+  {
+    "taskPath": "q1",
+    "questionId": 1,
+    "taskLabel": "a",
+    "topic": "Heat transfer — beach bonfire",
+    "original_path": "/images/papers/physics-may-2019-v2/q1a-heattransfer.png",
+    "image_type": "code_rendered",
+    "image_prompt": "SVG: heat-transfer scene at a beach bonfire with draggable labels (Convection, Radiation, Conduction) and three numbered answer markers. Dashed orange convection arrows rise above the flames; wavy red radiation arrows reach a person warming hands on the right; a blue conduction arrow runs along hot sand to a bare foot on the left.",
+    "generated_path": "/images/papers/physics-may-2019-v2/q1a-heattransfer.svg",
+    "needs_review": true,
+    "approved": false,
+    "render_component": "DragSort",
+    "render_data": {
+      "mode": "bins",
+      "title": "Heat transfer at the beach bonfire",
+      "source": "MYP physics-may-2019-v2",
+      "prompt": "Match each heat-transfer process to the situation it explains in the bonfire scene. Click a process chip, then click the situation it belongs to.",
+      "items": [
+        "Convection",
+        "Radiation",
+        "Conduction"
+      ],
+      "bins": [
+        {
+          "id": "rising-air",
+          "label": "Hot air rising above the flames"
+        },
+        {
+          "id": "felt-distance",
+          "label": "Heat felt from a distance (no contact)"
+        },
+        {
+          "id": "hot-sand",
+          "label": "Heat spreading through the hot sand"
+        }
+      ],
+      "correct": {
+        "Convection": "rising-air",
+        "Radiation": "felt-distance",
+        "Conduction": "hot-sand"
+      }
+    }
+  },
+  {
+    "taskPath": "q1.tasks[c]",
+    "questionId": 1,
+    "taskLabel": "c",
+    "topic": "Insulated lunchbox cross-section",
+    "original_path": "/images/papers/physics-may-2019-v2/q1c-dewar.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: labelled cross-section of an insulated lunchbox containing an ice pack. Leader-line labels: Plastic clip/handle, Outer plastic shell, Foam insulation (traps air → no convection), Ice pack (cold load), Reflective inner lining (reflects radiation), Sealed lid (stops air flow), Insulated base.",
+    "generated_path": "/images/papers/physics-may-2019-v2/q1c-dewar.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q2.tasks[a]",
+    "questionId": 2,
+    "taskLabel": "a",
+    "topic": "Atom drawing canvas",
+    "original_path": "/images/papers/physics-may-2019-v2/q2a-atom.png",
+    "image_type": "code_rendered",
+    "image_prompt": "SVG: blank atom-building canvas (dark) with dashed inner nucleus circle and dashed outer electron-shell circle, plus a draggable-items panel showing a red + (proton), white 0 (neutron) and blue − (electron). Build the helium atom (2p, 2n, 2e).",
+    "generated_path": "/images/papers/physics-may-2019-v2/q2a-atom.svg",
+    "needs_review": true,
+    "approved": false,
+    "render_component": "DragSort",
+    "render_data": {
+      "mode": "bins",
+      "title": "Build a helium atom (2 protons, 2 neutrons, 2 electrons)",
+      "source": "MYP physics-may-2019-v2",
+      "prompt": "A helium atom has 2 protons, 2 neutrons and 2 electrons. Place each particle where it belongs: protons and neutrons in the nucleus, electrons in the orbiting electron shell.",
+      "items": [
+        "Proton (+)",
+        "Proton (+)",
+        "Neutron (0)",
+        "Neutron (0)",
+        "Electron (−)",
+        "Electron (−)"
+      ],
+      "bins": [
+        {
+          "id": "nucleus",
+          "label": "Nucleus (protons + neutrons)"
+        },
+        {
+          "id": "shell",
+          "label": "Electron shell (orbiting)"
+        }
+      ],
+      "correct": {
+        "Nucleus (protons + neutrons)": [
+          "Proton (+)",
+          "Proton (+)",
+          "Neutron (0)",
+          "Neutron (0)"
+        ],
+        "Electron shell (orbiting)": [
+          "Electron (−)",
+          "Electron (−)"
+        ]
+      }
+    }
+  },
+  {
+    "taskPath": "q2.tasks[d]",
+    "questionId": 2,
+    "taskLabel": "d",
+    "topic": "Negatively charged ink droplet and positively charged deflector plate",
+    "original_path": "/images/papers/physics-may-2019-v2/q2d-inkparticle.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: a positively charged deflector plate (row of red + charges on a flat metal bar) above a single negatively charged ink droplet (blue teardrop with −) with paper below. Dashed answer region asks student to draw force arrows.",
+    "generated_path": "/images/papers/physics-may-2019-v2/q2d-inkparticle.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q3",
+    "questionId": 3,
+    "taskLabel": "a",
+    "topic": "Solar system (label asteroid belt, Mercury, Saturn)",
+    "original_path": "/images/papers/physics-may-2019-v2/q3a-solarsystem.png",
+    "image_type": "code_rendered",
+    "image_prompt": "SVG: solar system on a starfield — Sun at left, all eight planets along orbit arcs, asteroid belt band of dots between Mars and Jupiter, Saturn with rings. Three red arrows point UP at Mercury, the asteroid belt, and Saturn; draggable labels (Asteroid belt, Mercury, Saturn) sit beneath for the student to place.",
+    "generated_path": "/images/papers/physics-may-2019-v2/q3a-solarsystem.svg",
+    "needs_review": true,
+    "approved": false,
+    "render_component": "DragSort",
+    "render_data": {
+      "mode": "bins",
+      "title": "Label the solar system",
+      "source": "MYP physics-may-2019-v2",
+      "prompt": "Label the diagram by placing each name on the body or region it identifies. Click a label, then click its target.",
+      "items": [
+        "Mercury",
+        "Asteroid belt",
+        "Saturn"
+      ],
+      "bins": [
+        {
+          "id": "innermost",
+          "label": "Innermost planet (nearest the Sun)"
+        },
+        {
+          "id": "belt",
+          "label": "Rocky band between Mars and Jupiter"
+        },
+        {
+          "id": "ringed",
+          "label": "Sixth planet, with prominent rings"
+        }
+      ],
+      "correct": {
+        "Mercury": "innermost",
+        "Asteroid belt": "belt",
+        "Saturn": "ringed"
+      }
+    }
+  },
+  {
+    "taskPath": "q3.tasks[c]",
+    "questionId": 3,
+    "taskLabel": "c",
+    "topic": "Comet Halley elliptical orbit",
+    "original_path": "/images/papers/physics-may-2019-v2/q3c-trajectory.png",
+    "image_type": "code_rendered",
+    "image_prompt": "SVG: elliptical orbit of Comet Halley around the Sun on a starfield. Sun at one focus (left of centre). Position A at aphelion (far right, far from Sun) and position B at perihelion (far left, close to Sun); each comet has a tail pointing away from the Sun. Student draws gravitational-force arrows at A and B.",
+    "generated_path": "/images/papers/physics-may-2019-v2/q3c-trajectory.svg",
+    "needs_review": true,
+    "approved": false,
+    "render_component": "OrbitSim",
+    "render_data": {
+      "mode": "orbit",
+      "title": "Comet Halley orbiting the Sun",
+      "source": "MYP physics-may-2019-v2",
+      "central": "Sun",
+      "showForce": true,
+      "bodies": [
+        {
+          "name": "Sun",
+          "role": "center",
+          "fixed": true,
+          "colour": "#f6c343"
+        },
+        {
+          "name": "Comet Halley",
+          "role": "orbiter",
+          "orbitalPeriod": 27759,
+          "colour": "#9bd1ff"
+        }
+      ],
+      "caption": "The Sun's gravitational pull on Comet Halley always points toward the Sun. The force is largest at perihelion (closest, B; ~8.9 × 10¹⁰ m) and smallest at aphelion (farthest, A). At perihelion F = mg = 4.15 × 10⁸ kg × 0.025 N kg⁻¹ ≈ 1.0 × 10⁷ N."
+    }
+  },
+  {
+    "taskPath": "q4",
+    "questionId": 4,
+    "taskLabel": null,
+    "topic": "Hot-air balloon model in air flow rig",
+    "original_path": "/images/papers/physics-may-2019-v2/q4-bodyflying.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: hot-air balloon model held in an upward air stream inside a test rig. Two columns of upward blue air-flow arrows labelled 'Air flow'. Caption: 'Balloon model in upward air stream — drag balances weight'.",
+    "generated_path": "/images/papers/physics-may-2019-v2/q4-bodyflying.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q4.tasks[b]",
+    "questionId": 4,
+    "taskLabel": "b",
+    "topic": "Variable classification table",
+    "original_path": "/images/papers/physics-may-2019-v2/q4b-variables.png",
+    "image_type": "code_rendered",
+    "image_prompt": "SVG: clean ruled table with shaded header row. Columns: Quantity | Independent variable (IV) | Dependent variable (DV) | Control variable (CV). Rows: Weight, Air speed, CSA, Mass, Volume — each with empty checkboxes in the three variable columns.",
+    "generated_path": "/images/papers/physics-may-2019-v2/q4b-variables.svg",
+    "needs_review": true,
+    "approved": false,
+    "render_component": "DragSort",
+    "render_data": {
+      "mode": "bins",
+      "title": "Classify the experiment variables",
+      "source": "MYP physics-may-2019-v2",
+      "prompt": "Sort each quantity into the correct variable type for the balloon experiment (Weight = constant × CSA × air speed²). Click a quantity, then click its variable type.",
+      "items": [
+        "Weight",
+        "Air speed",
+        "CSA",
+        "Mass",
+        "Volume"
+      ],
+      "bins": [
+        {
+          "id": "iv",
+          "label": "Independent variable (IV)"
+        },
+        {
+          "id": "dv",
+          "label": "Dependent variable (DV)"
+        },
+        {
+          "id": "cv",
+          "label": "Control variable (CV)"
+        }
+      ],
+      "correct": {
+        "Independent variable (IV)": [
+          "Weight"
+        ],
+        "Dependent variable (DV)": [
+          "Air speed"
+        ],
+        "Control variable (CV)": [
+          "CSA",
+          "Mass",
+          "Volume"
+        ]
+      }
+    }
+  },
+  {
+    "taskPath": "q4.tasks[d]",
+    "questionId": 4,
+    "taskLabel": "d",
+    "topic": "Box of balloon models — CSA selection",
+    "original_path": "/images/papers/physics-may-2019-v2/q4d-balls.png",
+    "image_type": "code_rendered",
+    "image_prompt": "SVG: brown 'Available box' with ten balloon models each labelled with weight and CSA (0.50N/8cm², 0.30N/10cm², 0.50N/12cm², 0.50N/16cm², 0.50N/20cm², 0.80N/14cm², 0.50N/24cm², 1.00N/14cm², 0.50N/28cm², 0.30N/6cm²), an empty blue 'Equipment box' with ten holes, and a key (Weight / CSA).",
+    "generated_path": "/images/papers/physics-may-2019-v2/q4d-balls.svg",
+    "needs_review": true,
+    "approved": false,
+    "render_component": "DragSort",
+    "render_data": {
+      "mode": "bins",
+      "title": "Choose balloon models for the CSA experiment",
+      "source": "MYP physics-may-2019-v2",
+      "prompt": "Pick the models for the experiment: keep weight controlled (same for every model), cover the widest CSA range, and use regular CSA intervals (at least 5 models). Place each model in 'Equipment box' (use) or 'Leave in available box' (reject). The chosen set is the 0.50 N models at 8, 12, 16, 20, 24, 28 cm² (regular 4 cm² steps).",
+      "items": [
+        "0.50 N · 8 cm²",
+        "0.30 N · 10 cm²",
+        "0.50 N · 12 cm²",
+        "0.50 N · 16 cm²",
+        "0.50 N · 20 cm²",
+        "0.80 N · 14 cm²",
+        "0.50 N · 24 cm²",
+        "1.00 N · 14 cm²",
+        "0.50 N · 28 cm²",
+        "0.30 N · 6 cm²"
+      ],
+      "bins": [
+        {
+          "id": "use",
+          "label": "Equipment box (use)"
+        },
+        {
+          "id": "reject",
+          "label": "Leave in available box (reject)"
+        }
+      ],
+      "correct": {
+        "Equipment box (use)": [
+          "0.50 N · 8 cm²",
+          "0.50 N · 12 cm²",
+          "0.50 N · 16 cm²",
+          "0.50 N · 20 cm²",
+          "0.50 N · 24 cm²",
+          "0.50 N · 28 cm²"
+        ],
+        "Leave in available box (reject)": [
+          "0.30 N · 10 cm²",
+          "0.80 N · 14 cm²",
+          "1.00 N · 14 cm²",
+          "0.30 N · 6 cm²"
+        ]
+      }
+    }
+  },
+  {
+    "taskPath": "q5",
+    "questionId": 5,
+    "taskLabel": null,
+    "topic": "Balloon CSA investigation raw data",
+    "original_path": "/images/papers/physics-may-2019-v2/q5-csadata.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: student's recorded raw data shown as a row of red balloons annotated with size and measured air speed. First balloon labelled Radius = 5.0 cm (not area!) → 11 m s⁻¹; remaining areas 40, 60, 100, 140, 180 cm² with air speeds 16, 13, 10, 8, 7 m s⁻¹. Note: πr² = ~76 cm² (accept 78.5 cm²) for the first balloon.",
+    "generated_path": "/images/papers/physics-may-2019-v2/q5-csadata.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q6",
+    "questionId": 6,
+    "taskLabel": null,
+    "topic": "Ice blocks floating data",
+    "original_path": "/images/papers/physics-may-2019-v2/q6-shipdata.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: two side panels of an ice block floating in water — small block sitting high, large block sitting low — captioned 'The ice block sinks lower as its weight increases', above a clean ruled results table. Columns: Weight of the ice block / N | Volume of block below water / cm³; rows 0.6→65, 1.2→130, 2.4→260, 4.8→520.",
+    "generated_path": "/images/papers/physics-may-2019-v2/q6-shipdata.svg",
+    "needs_review": true,
+    "approved": false
+  }
+]

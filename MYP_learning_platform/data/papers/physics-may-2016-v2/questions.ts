@@ -23,7 +23,7 @@ export const questions: Question[] = [
     topicCanonical: 'Solar System, Gravity & Space',
     topicGroup: 'Space & Astrophysics',
     stem: 'An astronaut is planning a mission to the inner planets of the solar system. The following table contains information that can be used to describe mass or weight.',
-    figImages: [`${P}q1-table.png`],
+    figImages: ['/images/papers/physics-may-2016-v2/q1-table.svg'],
     tags: { unit: 'forces-interactions', topics: ['mass', 'weight', 'gravitational field strength', 'solar system'], level: 'developing' },
     tasks: [
       {

@@ -32,7 +32,7 @@ export const questions: Question[] = [
         marks: 1,
         widget: 'radio_select',
         widgetOptions: ['A', 'B', 'C', 'D'],
-        figImages: [`${P}page-01-crop.png`],
+        figImages: ['/images/papers/physics-nov-2024-v1/periodic-motion-options.svg'],
         ph: 'Select A, B, C, or D',
       },
       {
@@ -153,7 +153,7 @@ export const questions: Question[] = [
         label: 'b',
         text: '**Select** the cylinders the student should use to collect appropriate data by choosing from the available cylinders shown.',
         marks: 3,
-        figImages: [`${P}page-05b-crop.png`],
+        figImages: ['/images/papers/physics-nov-2024-v1/available-cylinders.svg'],
         ph: 'I would select:\n• Material: only Material ___ (one material only)\n• Number of cylinders: ___ cylinders with ___ different diameters\n• Reason: to keep material and length constant while only varying diameter',
       },
       {
@@ -166,7 +166,7 @@ export const questions: Question[] = [
         label: 'd',
         text: 'Having carried out one trial for each cylinder, the student records their data in a notebook.\n\n**Organize** and **present** the data in a table with appropriate headings and units.\n\nData recorded:\n• 10 mm diameter → 82 Ω\n• 15 mm diameter → 36 Ω\n• 18 mm diameter → 22 Ω\n• 22 mm diameter → 16 Ω\n• 25 mm diameter → 12 Ω',
         marks: 4,
-        figImages: [`${P}page-06-crop.png`],
+        figImages: ['/images/papers/physics-nov-2024-v1/notebook-raw-data.svg'],
         ph: 'Draw a table:\n| Diameter / mm | Resistance / Ω |\n|---------------|----------------|\n| 10            | 82             |\n| 15            | 36             |\n| 18            | 22             |\n| 22            | 16             |\n| 25            | 12             |',
       },
       {

@@ -77,24 +77,24 @@ export default function EnergyChainWidget({
                   onDrop={handleDrop}
                   onDragOver={handleDragOver}
                   onClick={filled ? clearSlot : undefined}
-                  className={`min-w-[110px] h-10 rounded-lg border-2 border-dashed flex items-center justify-center text-[13px] font-semibold transition-all cursor-pointer
+                  className={`min-w-[110px] h-10 rounded-control border-2 border-dashed flex items-center justify-center text-[13px] font-semibold transition-all cursor-pointer
                     ${filled
-                      ? `${TERM_COLORS[filled] ?? 'bg-teal-100 border-teal-300 text-teal-800'} border-solid`
-                      : 'border-gray-300 bg-gray-50 text-gray-400 hover:border-[var(--ib-teal)] hover:bg-teal-50'
+                      ? `${TERM_COLORS[filled] ?? 'bg-accent-soft border-accent text-accent'} border-solid`
+                      : 'border-line-strong bg-surface-2 text-ink-subtle hover:border-[var(--accent)] hover:bg-accent-soft'
                     }`}
                   title={filled ? 'Click to clear' : 'Drag or click an option below'}
                 >
                   {filled || '?'}
                 </div>
               ) : (
-                <div className={`px-3 h-10 rounded-lg border flex items-center text-[13px] font-semibold ${TERM_COLORS[term] ?? 'bg-gray-100 border-gray-300 text-gray-700'}`}>
+                <div className={`px-3 h-10 rounded-control border flex items-center text-[13px] font-semibold ${TERM_COLORS[term] ?? 'bg-surface-3 border-line-strong text-ink-muted'}`}>
                   {term}
                 </div>
               )}
 
               {/* Arrow between terms */}
               {!isLast && (
-                <span className="text-gray-400 font-bold text-lg select-none">→</span>
+                <span className="text-ink-subtle font-bold text-lg select-none">→</span>
               )}
             </div>
           )
@@ -111,10 +111,10 @@ export default function EnergyChainWidget({
               draggable
               onDragStart={() => handleDragStart(opt)}
               onClick={() => select(opt)}
-              className={`px-3 py-1.5 rounded-lg border text-[13px] font-medium cursor-pointer select-none transition-all
+              className={`px-3 py-1.5 rounded-control border text-[13px] font-medium cursor-pointer select-none transition-all
                 ${isSelected
                   ? 'opacity-40 cursor-not-allowed scale-95'
-                  : `${TERM_COLORS[opt] ?? 'bg-gray-100 border-gray-300 text-gray-700'} hover:scale-105 hover:shadow-sm active:scale-95`
+                  : `${TERM_COLORS[opt] ?? 'bg-surface-3 border-line-strong text-ink-muted'} hover:scale-105 hover:shadow-sm active:scale-95`
                 }`}
               title={isSelected ? 'Already placed' : `Click or drag to place "${opt}"`}
             >
@@ -125,7 +125,7 @@ export default function EnergyChainWidget({
       </div>
 
       {filled && (
-        <p className="text-center text-[11px] text-gray-400">
+        <p className="text-center text-[11px] text-ink-subtle">
           Click the filled box to clear, or click another option to swap.
         </p>
       )}

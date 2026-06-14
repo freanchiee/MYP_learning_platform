@@ -1,0 +1,116 @@
+[
+  {
+    "taskPath": "q8",
+    "questionId": 8,
+    "taskLabel": null,
+    "topic": "Inverse relationship (stopping distance vs sail radius)",
+    "original_path": "/images/papers/physics-may-2017/q7e-graph1.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: scatter graph 'Stopping distance against sail radius'. X-axis R / m from 0 to 0.2 (ticks 0, 0.05, 0.10, 0.15, 0.20); Y-axis Stopping distance / m from 0 to 25 (ticks 0,5,10,15,20,25). Smooth inverse-decay best-fit line through plotted points descending from (0.10, 21) to (0.19, 6).",
+    "generated_path": "/images/papers/physics-may-2017/q7e-graph1.svg",
+    "needs_review": false,
+    "approved": true
+  },
+  {
+    "taskPath": "q8",
+    "questionId": 8,
+    "taskLabel": null,
+    "topic": "Linearised relationship (stopping distance vs 1/R squared)",
+    "original_path": "/images/papers/physics-may-2017/q7g-graph4.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: scatter graph 'Stopping distance against inverse of sail radius squared'. X-axis R^-2 / m^-2 from 0 to 120 (ticks 0,20,40,60,80,100,120); Y-axis Stopping distance / m from 0 to 25 (ticks 0,5,10,15,20,25). Near-straight best-fit line through plotted points rising from (27.7, 6) to (100, 21), derived from the same (R, d) dataset as Graph 1.",
+    "generated_path": "/images/papers/physics-may-2017/q7g-graph4.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q1",
+    "questionId": 1,
+    "taskLabel": null,
+    "topic": "Star colour vs temperature",
+    "original_path": "/images/papers/physics-may-2017/q1-stars.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: two side-by-side space panels showing a cool red star (orange-red, with surface flares) and a hot blue star (blue-white with corona), labelled 'Cool star (red)' and 'Hot star (blue)'.",
+    "generated_path": "/images/papers/physics-may-2017/q1-stars.svg",
+    "needs_review": false,
+    "approved": true
+  },
+  {
+    "taskPath": "q1.tasks[a]",
+    "questionId": 1,
+    "taskLabel": "a",
+    "topic": "Red vs blue light comparison (dropdowns)",
+    "original_path": "/images/papers/physics-may-2017/q1a-inline.png",
+    "image_type": "text_only",
+    "image_prompt": "Mis-crop: the original is only question prose plus 'Select' dropdown UI (speed/wavelength/frequency of red vs blue light) with no diagram to recreate.",
+    "generated_path": null,
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q5",
+    "questionId": 5,
+    "taskLabel": null,
+    "topic": "Ramp investigation apparatus",
+    "original_path": "/images/papers/physics-may-2017/q5-ramp-setup.png",
+    "image_type": "code_rendered",
+    "render_component": "ProjectileSim",
+    "render_data": {
+      "title": "Ramp investigation: block sliding from a height",
+      "source": "MYP physics-may-2017",
+      "mode": "launch",
+      "g": 10,
+      "launch": {
+        "angleDeg": 36,
+        "speed": 12,
+        "angleMin": 10,
+        "angleMax": 60,
+        "speedMin": 2,
+        "speedMax": 20,
+        "g": 10
+      }
+    },
+    "generated_path": "/images/papers/physics-may-2017/q5-ramp-setup.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q7",
+    "questionId": 7,
+    "taskLabel": null,
+    "topic": "Dynamic trolley with sail experiment",
+    "original_path": "/images/papers/physics-may-2017/q7-trolley.png",
+    "image_type": "code_rendered",
+    "render_component": "ProjectileSim",
+    "render_data": {
+      "title": "Dynamic trolley with sail: launch and stop",
+      "source": "MYP physics-may-2017",
+      "mode": "launch",
+      "g": 10,
+      "launch": {
+        "angleDeg": 20,
+        "speed": 12,
+        "angleMin": 5,
+        "angleMax": 45,
+        "speedMin": 2,
+        "speedMax": 25,
+        "g": 10
+      }
+    },
+    "generated_path": "/images/papers/physics-may-2017/q7-trolley.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q9",
+    "questionId": 9,
+    "taskLabel": null,
+    "topic": "Prosthetic materials data table",
+    "original_path": "/images/papers/physics-may-2017/q8-materials-table.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG data table with columns Material, E / GPa, Density / g cm^-3 and rows: Polypropylene 2 0.95; Bone 15 1.75; Material X 17 4.23; Carbon fibre 40 1.60.",
+    "generated_path": "/images/papers/physics-may-2017/q8-materials-table.svg",
+    "needs_review": false,
+    "approved": true
+  }
+]

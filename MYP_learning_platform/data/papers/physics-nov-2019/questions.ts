@@ -170,7 +170,7 @@ export const questions: Question[] = [
         label: 'd',
         text: 'After collecting data, the student presents the results in the form of a graph.\n\nUse the graph to **predict** the angle that would produce three images.',
         marks: 1,
-        figImages: [`${P}q4d-graph.png`],
+        figImages: ['/images/papers/physics-nov-2019/q4d-graph.svg'],
         ph: 'Read off the graph: at 3 images, the angle is approximately 60°.',
       },
       {
@@ -183,7 +183,7 @@ export const questions: Question[] = [
         label: 'f',
         text: 'The bar chart below is an alternative presentation of the data from part (d). **Justify** why a bar chart is a more appropriate way of presenting this data.',
         marks: 2,
-        figImages: [`${P}q4f-barchart.png`],
+        figImages: ['/images/papers/physics-nov-2019/q4f-barchart.svg'],
         ph: 'Only integer values of number of images are allowed (you cannot have 3.5 images). The relationship between angle and images is discrete, making a bar chart more appropriate than a continuous line graph.',
       },
       {
@@ -237,7 +237,7 @@ export const questions: Question[] = [
         label: 'e',
         text: 'Another student collects data using the same method. To process their data to find the speed of sound, they plot a graph of the distance travelled by the sound wave against the time taken.\n\nUse data from the graph to **calculate** the speed of sound.',
         marks: 2,
-        figImages: [`${P}q5e-graph.png`],
+        figImages: ['/images/papers/physics-nov-2019/q5e-graph.svg'],
         ph: 'Read gradient from the line of best fit: speed = Δdistance / Δtime = gradient ≈ 330–355 m s⁻¹.',
       },
       {

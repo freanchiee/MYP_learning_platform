@@ -57,7 +57,7 @@ export const questions: Question[] = [
     topicCanonical: 'Solar System, Gravity & Space',
     topicGroup: 'Space & Astrophysics',
     stem: 'While passing close by each moon, the probe drops a test object from a height of 50.0 m. The shape of the object ensures that any frictional forces are negligible over a fall of this distance. All of the test object\'s gravitational potential energy (E_p) transforms to kinetic energy before hitting the surface.',
-    figImages: [`${P}q2-probe.png`],
+    figImages: ['/images/papers/physics-may-2016-v1/q2-probe.svg'],
     tags: { unit: 'forces-interactions', topics: ['gravitational field strength', 'density', 'gravitational potential energy', 'kinetic energy', 'velocity'], level: 'proficient' },
     tasks: [
       {
@@ -136,7 +136,7 @@ export const questions: Question[] = [
     topicCanonical: 'Solar System, Gravity & Space',
     topicGroup: 'Space & Astrophysics',
     stem: 'Jupiter\'s moon Europa orbits Jupiter in approximately 3.5 days. Observers using powerful telescopes can watch Europa\'s lit face change over the course of its orbit.',
-    figImages: [`${P}q4-moon.png`],
+    figImages: ['/images/papers/physics-may-2016-v1/q4-moon.svg'],
     tags: { unit: 'astrophysics', topics: ['moon phases', 'gravity', 'orbit'], level: 'developing' },
     tasks: [
       {
@@ -185,7 +185,7 @@ export const questions: Question[] = [
     topicCanonical: 'Circuits, Resistance & Power',
     topicGroup: 'Electricity & Magnetism',
     stem: 'A student is planning to investigate how the voltage (potential difference) across a nichrome resistance wire affects the current through it.',
-    figImages: [`${P}q6a-circuits.png`],
+    figImages: ['/images/papers/physics-may-2016-v1/q6a-circuits.svg'],
     tags: { unit: 'electricity-circuits', topics: ['voltage', 'current', 'experimental design', 'ammeter', 'circuit'], level: 'developing' },
     tasks: [
       {
@@ -384,7 +384,7 @@ export const questions: Question[] = [
         label: 'd',
         text: 'In external beam radiotherapy, beams of high-energy radiation are directed at a tumour from multiple angles outside the body. The table shows how different radiation types penetrate tissue.\n\n**Explain** why high-energy gamma rays are used for external beam radiotherapy rather than ultraviolet radiation or low-energy X-rays.',
         marks: 3,
-        figImages: [`${P}q11d-radiation-table.png`],
+        figImages: ['/images/papers/physics-may-2016-v1/q11d-radiation-table.svg'],
         ph: 'UV is absorbed by skin → cannot reach deep tumours. Low-energy X-rays are absorbed by tissue before reaching deep tumours. Only high-energy gamma rays penetrate deeply enough to reach tumours deep within the body. Multiple beams from different angles ensure maximum dose at the tumour, minimising damage to surrounding healthy tissue.',
       },
     ],

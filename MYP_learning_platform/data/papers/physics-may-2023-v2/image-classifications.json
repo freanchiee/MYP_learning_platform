@@ -1,0 +1,247 @@
+[
+  {
+    "taskPath": "q1",
+    "questionId": 1,
+    "topic": "Donkeys carrying loads in field",
+    "original_path": "/images/papers/physics-may-2023-v2/q1-donkeys.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: side-view pair of grey donkeys with long ears, carrying loads on their backs; arid agricultural field with handler.",
+    "generated_path": "/images/papers/physics-may-2023-v2/q1-donkeys.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q2.tasks[a]",
+    "questionId": 2,
+    "taskLabel": "a",
+    "topic": "Prism dispersion (yellow emphasis)",
+    "original_path": "/images/papers/physics-may-2023-v2/q2-prism.png",
+    "image_type": "code_rendered",
+    "render_component": "SpectrumSim",
+    "render_data": {
+      "title": "Dispersion of white light through a prism",
+      "source": "MYP physics-may-2023-v2",
+      "mode": "scrub",
+      "bands": ["Red", "Orange", "Yellow", "Green", "Blue", "Indigo", "Violet"],
+      "axis": "wavelength decreases / frequency increases (red → violet)",
+      "target": "Yellow",
+      "wavelengthRange": [700e-9, 400e-9],
+      "visibleRange": [700e-9, 400e-9]
+    },
+    "generated_path": "/images/papers/physics-may-2023-v2/q2-prism.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q3",
+    "questionId": 3,
+    "topic": "Oxygen-18 atom (8p, 10n, 2-6 electrons)",
+    "original_path": "/images/papers/physics-may-2023-v2/q3-oxygen18-atom.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: Bohr-style oxygen-18 atom with 8 red protons + 10 grey neutrons in nucleus; two electron shells (2 inner, 6 outer); legend.",
+    "generated_path": "/images/papers/physics-may-2023-v2/q3-oxygen18-atom.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q3.tasks[c]",
+    "questionId": 3,
+    "taskLabel": "c",
+    "topic": "Gamma/X-ray classify atom",
+    "original_path": "/images/papers/physics-may-2023-v2/q3c-radiation-atom.png",
+    "image_type": "code_rendered",
+    "render_component": "DragSort",
+    "render_data": {
+      "title": "Classify each radiation by where it is produced",
+      "source": "MYP physics-may-2023-v2",
+      "mode": "bins",
+      "prompt": "Place each type of radiation into the correct category.",
+      "items": ["Gamma ray", "X-ray", "Cosmic ray", "Ultrasound wave"],
+      "bins": [
+        "Produced from nucleus",
+        "Produced from inner electron orbit",
+        "Neither"
+      ],
+      "correct": {
+        "Produced from nucleus": "Gamma ray",
+        "Produced from inner electron orbit": "X-ray"
+      }
+    },
+    "generated_path": "/images/papers/physics-may-2023-v2/q3c-radiation-atom.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q4",
+    "questionId": 4,
+    "topic": "Sealed flask with weighted bung (Boyle's law)",
+    "original_path": "/images/papers/physics-may-2023-v2/q4-flask.png",
+    "image_type": "code_rendered",
+    "render_component": "GasLawSim",
+    "render_data": {
+      "title": "Gas trapped in a sealed flask under a weighted bung",
+      "source": "MYP physics-may-2023-v2",
+      "vessel": "sealed flask with a weighted bung",
+      "plungerArea": 0.0005,
+      "atmPressure": 102000,
+      "g": 9.81,
+      "massSlider_kg": [0, 0.5, 1.0, 2.0, 3.0],
+      "coupling": "Total pressure P = P_atm + m·g/A compresses the trapped gas (Boyle's law, constant temperature).",
+      "constantPV_kPa_cm3": 11000,
+      "pvUnit": "kPa·cm³"
+    },
+    "generated_path": "/images/papers/physics-may-2023-v2/q4-flask.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q4.tasks[e]",
+    "questionId": 4,
+    "taskLabel": "e",
+    "topic": "Boyle's law graphs",
+    "original_path": "/images/papers/physics-may-2023-v2/q4e-graphs.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: two graphs — left Volume / cm³ (0–160) vs Pressure / kPa (0–450) as an inverse smooth curve through data points giving pV ≈ 11000; right 1/V × 10⁻³ / cm⁻³ (0–40) vs Pressure / kPa (0–450) as a straight line through the origin.",
+    "generated_path": "/images/papers/physics-may-2023-v2/q4e-graphs.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q4.tasks[f]",
+    "questionId": 4,
+    "taskLabel": "f",
+    "topic": "pV constant graph",
+    "original_path": "/images/papers/physics-may-2023-v2/q4f-pv-graph.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: pV / kPa cm³ (1000–19000) vs Pressure / kPa (0–450), a near-horizontal best-fit line at ≈ 11000 with scattered data points so that V(75 kPa) = 11000/75 ≈ 147 cm³.",
+    "generated_path": "/images/papers/physics-may-2023-v2/q4f-pv-graph.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q5",
+    "questionId": 5,
+    "topic": "Inflated balloon with tape measure",
+    "original_path": "/images/papers/physics-may-2023-v2/q5-balloon.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: orange inflated balloon with knot and string, tape measure wrapped around it labelled 'Circumference'.",
+    "generated_path": "/images/papers/physics-may-2023-v2/q5-balloon.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q6",
+    "questionId": 6,
+    "topic": "Balloon rocket on string",
+    "original_path": "/images/papers/physics-may-2023-v2/q6-balloon-rocket.png",
+    "image_type": "code_rendered",
+    "render_component": "ProjectileSim",
+    "render_data": {
+      "title": "Balloon rocket propelled along a string",
+      "source": "MYP physics-may-2023-v2",
+      "mode": "launch",
+      "g": 9.8,
+      "launch": {
+        "angleDeg": 5,
+        "speed": 6,
+        "angleMin": 0,
+        "angleMax": 45,
+        "speedMin": 0,
+        "speedMax": 12,
+        "g": 9.8
+      },
+      "readout": "distance travelled / m"
+    },
+    "generated_path": "/images/papers/physics-may-2023-v2/q6-balloon-rocket.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q6.tasks[e]",
+    "questionId": 6,
+    "taskLabel": "e",
+    "topic": "Hypothesis graphs",
+    "original_path": "/images/papers/physics-may-2023-v2/q6e-hypothesis-graphs.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: three Distance / m (0–9) graphs of the v2 balloon data (30.2/0.45, 38.6/1.20, 47.1/2.50, 55.8/4.18, 62.5/6.20, 68.0/8.10) — vs Circumference / cm (25–70) rising curve; vs Circumference cubed / cm³ (0–350000) straight line through origin; vs 1/circumference / cm⁻¹ (0.014–0.034) falling curve.",
+    "generated_path": "/images/papers/physics-may-2023-v2/q6e-hypothesis-graphs.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q7.tasks[a]",
+    "questionId": 7,
+    "taskLabel": "a",
+    "topic": "Waveform frequency",
+    "original_path": "/images/papers/physics-may-2023-v2/q7a-waveform.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: sine waveform, Position / cm (−1.5 to 1.5) vs Time / s (0–4.5), period T = 1.6 s so frequency f = 0.625 ≈ 0.63 Hz (~2.8 cycles shown).",
+    "generated_path": "/images/papers/physics-may-2023-v2/q7a-waveform.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q7.tasks[b]",
+    "questionId": 7,
+    "taskLabel": "b",
+    "topic": "Matching waveform (answer C)",
+    "original_path": "/images/papers/physics-may-2023-v2/q7b-waveforms.png",
+    "image_type": "code_rendered",
+    "render_component": "WaveSim",
+    "render_data": {
+      "title": "Select the waveform with the same frequency as part (a)",
+      "source": "MYP physics-may-2023-v2",
+      "mode": "match",
+      "windowSeconds": 4.5,
+      "amplitudeGridUnits": 1.5,
+      "target": {
+        "id": "target",
+        "label": "Waveform from part (a)",
+        "period_s": 1.6,
+        "frequency_Hz": 0.625,
+        "amplitude_cm": 1.5
+      },
+      "options": {
+        "A": { "label": "A", "period_s": 6.0, "amplitude_cm": 1.5, "note": "Period ≈ 6 s → much lower frequency." },
+        "B": { "label": "B", "period_s": 0.8, "amplitude_cm": 1.5, "note": "Period ≈ 0.8 s → higher frequency." },
+        "C": { "label": "C", "period_s": 1.6, "frequency_Hz": 0.625, "amplitude_cm": 1.5, "note": "Period = 1.6 s → 0.63 Hz, matches part (a)." },
+        "D": { "label": "D", "period_s": 0.4, "amplitude_cm": 1.5, "note": "Period ≈ 0.4 s → much higher frequency." }
+      },
+      "correct": "C"
+    },
+    "generated_path": "/images/papers/physics-may-2023-v2/q7b-waveforms.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q7.tasks[c]",
+    "questionId": 7,
+    "taskLabel": "c",
+    "topic": "Phone network (Marina & Tomas)",
+    "original_path": "/images/papers/physics-may-2023-v2/q7-phone-network.png",
+    "image_type": "code_rendered",
+    "render_component": "DragSort",
+    "render_data": {
+      "title": "Order the steps of a mobile phone call (Marina → Tomas)",
+      "source": "MYP physics-may-2023-v2",
+      "mode": "order",
+      "prompt": "Put the statements in the correct order to outline how the network transmits the call.",
+      "slots": ["Step 1", "Step 2", "Step 3", "Step 4"],
+      "items": [
+        "The tower sends the signal via fibre-optic cables to the tower nearest to Tomas.",
+        "Marina's voice is converted into an electrical signal by the microphone, then into a radio wave.",
+        "Tomas's phone receives the radio wave and converts it back into sound he can hear.",
+        "The radio wave is transmitted from Marina's phone to the nearest tower."
+      ],
+      "correctOrder": [
+        "Marina's voice is converted into an electrical signal by the microphone, then into a radio wave.",
+        "The radio wave is transmitted from Marina's phone to the nearest tower.",
+        "The tower sends the signal via fibre-optic cables to the tower nearest to Tomas.",
+        "Tomas's phone receives the radio wave and converts it back into sound he can hear."
+      ]
+    },
+    "generated_path": "/images/papers/physics-may-2023-v2/q7-phone-network.svg",
+    "needs_review": true,
+    "approved": false
+  }
+]

@@ -135,7 +135,7 @@ export default function PapersGrid({ papers, completedPapers, inProgressPapers }
 
   if (papers.length === 0) {
     return (
-      <div className="flex flex-col items-center py-20" style={{ color: '#547ca4' }}>
+      <div className="flex flex-col items-center py-20" style={{ color: 'var(--text-muted)' }}>
         <span className="text-5xl mb-4">📋</span>
         <p className="text-sm font-medium">No papers published yet. Check back soon!</p>
       </div>
@@ -163,11 +163,12 @@ export default function PapersGrid({ papers, completedPapers, inProgressPapers }
                 variants={cardVariant}
                 layout
                 whileHover={{ y: -6, transition: { type: 'spring', stiffness: 300, damping: 20 } }}
-                className="rounded-2xl overflow-hidden flex flex-col"
+                className="overflow-hidden flex flex-col"
                 style={{
-                  background: '#fff',
-                  border: '1px solid rgba(31,54,116,0.1)',
-                  boxShadow: '0 4px 20px rgba(31,54,116,0.08)',
+                  background: 'var(--surface)',
+                  border: '1px solid var(--border)',
+                  borderRadius: 'var(--radius-card)',
+                  boxShadow: 'var(--shadow-card)',
                   minHeight: 400,
                 }}
               >
@@ -180,7 +181,7 @@ export default function PapersGrid({ papers, completedPapers, inProgressPapers }
                     {isCompleted && (
                       <span
                         className="flex items-center gap-1 text-xs font-bold px-2.5 py-1 rounded-full backdrop-blur-sm"
-                        style={{ background: 'rgba(255,255,255,0.9)', color: '#1f3674' }}
+                        style={{ background: 'rgba(255,255,255,0.9)', color: 'var(--accent)' }}
                       >
                         ✓ Done
                       </span>
@@ -188,9 +189,9 @@ export default function PapersGrid({ papers, completedPapers, inProgressPapers }
                     {isInProgress && (
                       <span
                         className="flex items-center gap-1.5 text-xs font-bold px-2.5 py-1 rounded-full backdrop-blur-sm"
-                        style={{ background: 'rgba(255,255,255,0.9)', color: '#c3282d' }}
+                        style={{ background: 'rgba(255,255,255,0.9)', color: 'var(--danger)' }}
                       >
-                        <span className="pulse-dot" style={{ background: '#c3282d' }} />
+                        <span className="pulse-dot" style={{ background: 'var(--danger)' }} />
                         In Progress
                       </span>
                     )}
@@ -243,7 +244,7 @@ export default function PapersGrid({ papers, completedPapers, inProgressPapers }
                   </div>
 
                   {/* Paper ID hint */}
-                  <p className="text-xs font-mono" style={{ color: 'rgba(31,54,116,0.35)' }}>
+                  <p className="text-xs font-mono" style={{ color: 'var(--text-subtle)' }}>
                     {paper.id}
                   </p>
 
@@ -278,10 +279,10 @@ export default function PapersGrid({ papers, completedPapers, inProgressPapers }
             whileTap={{ scale: 0.97 }}
             className="flex items-center gap-2 px-8 py-3 rounded-full text-sm font-bold transition-all"
             style={{
-              background: '#1f3674',
-              color: '#adf1c4',
-              border: '2px solid rgba(173,241,196,0.2)',
-              boxShadow: '0 4px 20px rgba(31,54,116,0.2)',
+              background: 'var(--accent)',
+              color: 'var(--accent-fg)',
+              border: '2px solid var(--accent-soft)',
+              boxShadow: 'var(--shadow-card)',
             }}
           >
             {showAll ? (

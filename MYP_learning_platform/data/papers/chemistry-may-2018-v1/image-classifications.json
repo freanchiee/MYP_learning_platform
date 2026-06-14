@@ -1,0 +1,74 @@
+[
+  {
+    "taskPath": "q4",
+    "questionId": 4,
+    "taskLabel": null,
+    "topic": "CO₂ volume vs CaCO₃ mass",
+    "original_path": "/images/papers/chemistry-may-2018/page-13.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: scatter graph, x-axis Mass of CaCO₃ / g (1.00 to 3.00, major ticks every 0.50, minor every 0.10), y-axis Volume of CO₂ produced / cm³ (200 to 700, ticks every 100, minor every 20). 17 teal × points (no best-fit line) rising near-linearly along V = 187.5·m + 125 from (1.4,388) to (3.0,688), with the read-off point (2.0,500) on the trend; two anomalies: 1.9 g high (545) and 2.5 g low (480).",
+    "generated_path": "/images/papers/chemistry-may-2018-v1/q4-caco3-graph.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q3",
+    "questionId": 3,
+    "taskLabel": null,
+    "topic": "Percentage by mass of calcium carbonate (African savanna animals)",
+    "original_path": "/images/papers/chemistry-may-2018/page-09.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG data table: Animal vs 'Percentage by mass of calcium carbonate / %' split into Teeth and Bone. Rows: Giraffe 31.45/25.82; Lion 27.36/23.84; Zebra 30.12/24.33; Buffalo 28.94/22.76; Crocodile 19.67/17.43. Teal header, ruled grid.",
+    "generated_path": "/images/papers/chemistry-may-2018-v1/q3-caco3-percent-table.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q3",
+    "questionId": 3,
+    "taskLabel": null,
+    "topic": "Text-only crop (Q3a dropdown / Q3b variables boxes)",
+    "original_path": "/images/papers/chemistry-may-2018/page-10.png",
+    "image_type": "text_only",
+    "image_prompt": "Mis-crop: dropdown and answer boxes only, no diagram.",
+    "generated_path": null,
+    "needs_review": false,
+    "approved": true
+  },
+  {
+    "taskPath": "q3",
+    "questionId": 3,
+    "taskLabel": null,
+    "topic": "Text-only crop (control variable boxes / table-builder widget)",
+    "original_path": "/images/papers/chemistry-may-2018/page-11.png",
+    "image_type": "text_only",
+    "image_prompt": "Mis-crop: answer boxes and a 'Create New Table' UI widget, no recreatable diagram.",
+    "generated_path": null,
+    "needs_review": false,
+    "approved": true
+  },
+  {
+    "taskPath": "q3.tasks[d]",
+    "questionId": 3,
+    "taskLabel": "d",
+    "topic": "Gas syringe + conical flask apparatus",
+    "original_path": "/images/papers/chemistry-may-2018/page-12.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG apparatus: horizontal gas syringe (graduated barrel + plunger) connected by delivery tubing through a bung into a conical flask containing a reaction mixture with effervescence and solid chips. Labels: Gas syringe, Conical flask, Reaction mixture.",
+    "generated_path": "/images/papers/chemistry-may-2018-v1/q3d-gas-syringe-apparatus.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q4",
+    "questionId": 4,
+    "taskLabel": null,
+    "topic": "Percentage by mass of calcium carbonate (data table, repeated in Q4)",
+    "original_path": "/images/papers/chemistry-may-2018/page-14.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG data table: Animal vs 'Percentage by mass of calcium carbonate / %' split into Teeth and Bone (variant v1: Giraffe/Lion/Zebra/Buffalo/Crocodile). Teal header, ruled grid.",
+    "generated_path": "/images/papers/chemistry-may-2018-v1/q3-caco3-percent-table.svg",
+    "needs_review": true,
+    "approved": false
+  }
+]

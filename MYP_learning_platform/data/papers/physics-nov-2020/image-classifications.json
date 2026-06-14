@@ -1,0 +1,255 @@
+[
+  {
+    "taskPath": "q5.tasks[d]",
+    "questionId": 5,
+    "taskLabel": "d",
+    "topic": "Electromagnetism — proportional relationship",
+    "original_path": "/images/papers/physics-nov-2020/q5d-graph.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: scatter graph of weight of pins supported (0–1.6 N, ticks every 0.2) vs number of turns per centimetre (0–7 cm⁻¹, integer ticks). Data points scattered along a straight best-fit line through the origin reaching (6, 1.5), gradient ≈ 0.25 N per cm⁻¹, showing direct proportionality.",
+    "generated_path": "/images/papers/physics-nov-2020/q5d-graph.svg",
+    "needs_review": false,
+    "approved": true
+  },
+  {
+    "taskPath": "q8.tasks[d]",
+    "questionId": 8,
+    "taskLabel": "d",
+    "topic": "Magnetism — inverse force–distance relationship",
+    "original_path": "/images/papers/physics-nov-2020/q8d-graph.png",
+    "image_type": "code_rendered",
+    "render_component": "FieldSim",
+    "render_data": {
+      "title": "Repelling force vs distance between magnets",
+      "source": "MYP physics-nov-2020",
+      "quantity": "magnetic repelling force",
+      "relationship": "force ∝ 1/distance",
+      "k": 700,
+      "distanceUnits": "cm",
+      "distanceRange": [0.2, 3.0],
+      "forceUnits": "kN",
+      "forceRange": [250, 3000],
+      "slider": "distance between magnets",
+      "readout": "repelling force",
+      "passengerCoupling": "More passengers → heavier train → train sinks closer to the track → smaller gap between magnets → larger repelling force."
+    },
+    "generated_path": "/images/papers/physics-nov-2020/q8d-graph.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q1",
+    "questionId": 1,
+    "taskLabel": null,
+    "topic": "Thermal Physics — Thermoregulation",
+    "original_path": "/images/papers/physics-nov-2020/q1-animals.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: four labelled animal cards — Pig (smooth light skin), Zebra (short smooth black/white fur), Polar bear (thick long white fur), Buffalo (short grey hair) — for selecting the best cold-adapted animal.",
+    "generated_path": "/images/papers/physics-nov-2020/q1-animals.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q1.tasks[b]",
+    "questionId": 1,
+    "taskLabel": "b",
+    "topic": "Heat transfer — hollow hair insulation",
+    "original_path": "/images/papers/physics-nov-2020/q1b-reindeer.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: two panels — a reindeer in cold landscape, and a labelled cross-section of a hollow hair showing trapped air pockets, hollow medulla and hair shaft (air is a poor conductor → reduces heat loss).",
+    "generated_path": "/images/papers/physics-nov-2020/q1b-reindeer.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q1.tasks[c]",
+    "questionId": 1,
+    "taskLabel": "c",
+    "topic": "Thermoregulation — Arctic vs fennec fox",
+    "original_path": "/images/papers/physics-nov-2020/q1c-foxes.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: Arctic fox (white fur, small ears, on snow) beside fennec fox (sandy fur, very large ears, on desert ground), contrasting fur colour and ear size for thermoregulation.",
+    "generated_path": "/images/papers/physics-nov-2020/q1c-foxes.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q2",
+    "questionId": 2,
+    "taskLabel": null,
+    "topic": "Work, Energy & Power — Pikes Peak hill climb",
+    "original_path": "/images/papers/physics-nov-2020/q2-pikes.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: mountain landscape with a red winding course route from Start (2860 m) at the base to Finish (4300 m) at the snow-capped summit; title panel 'Pikes Peak Course, Length 20 km'.",
+    "generated_path": "/images/papers/physics-nov-2020/q2-pikes.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q2.tasks[a]",
+    "questionId": 2,
+    "taskLabel": "a",
+    "topic": "Sankey diagram — car engine energy",
+    "original_path": "/images/papers/physics-nov-2020/q2a-sankey.png",
+    "image_type": "code_rendered",
+    "render_component": "SankeySim",
+    "render_data": {
+      "title": "Car engine energy Sankey diagram",
+      "source": "MYP physics-nov-2020",
+      "units": "%",
+      "input": { "label": "Chemical energy (fuel)", "value": 100 },
+      "outputs": [
+        { "label": "Useful energy output", "value": 25, "kind": "out" },
+        { "label": "Heat losses", "value": 70, "kind": "loss" },
+        { "label": "Frictional losses", "value": 5, "kind": "loss" }
+      ],
+      "mode": "drag-labels-onto-arrows",
+      "labelBank": ["Useful energy output", "Heat losses", "Frictional losses"]
+    },
+    "generated_path": "/images/papers/physics-nov-2020/q2a-sankey.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q2.tasks[b]",
+    "questionId": 2,
+    "taskLabel": "b",
+    "topic": "Hill-climb race cars",
+    "original_path": "/images/papers/physics-nov-2020/q2b-cars.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: two side-view race cars — a 1988 hill-climb car (880 kg, blue/white, number 1) and a lighter modern race car (red/white), each on a track strip.",
+    "generated_path": "/images/papers/physics-nov-2020/q2b-cars.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q3",
+    "questionId": 3,
+    "taskLabel": null,
+    "topic": "Astrophysics — the night sky",
+    "original_path": "/images/papers/physics-nov-2020/q3-nightsky.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: a night sky over a mountain silhouette with stars, a full moon with soft glow, and a graded twilight horizon, with distant town lights.",
+    "generated_path": "/images/papers/physics-nov-2020/q3-nightsky.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q4",
+    "questionId": 4,
+    "taskLabel": null,
+    "topic": "Kibble balance apparatus",
+    "original_path": "/images/papers/physics-nov-2020/q4-kibble.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: a Kibble balance — a beam balance on a central pivot with a 1 kg mass hanging on one side and a coil-wound electromagnet on the other; note that the current is increased until the two sides balance.",
+    "generated_path": "/images/papers/physics-nov-2020/q4-kibble.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q5",
+    "questionId": 5,
+    "taskLabel": null,
+    "topic": "Electromagnet paper-clip apparatus",
+    "original_path": "/images/papers/physics-nov-2020/q5-paperclips.png",
+    "image_type": "code_rendered",
+    "render_component": "CircuitSim",
+    "render_data": {
+      "title": "Electromagnet strength vs coil turn-spacing",
+      "source": "MYP physics-nov-2020",
+      "mode": "iv",
+      "component": "Electromagnet (iron rod + coil)",
+      "battery": "fixed",
+      "task": "Drag the slider to sweep the six electromagnets (current held constant at 2 A). Each has its copper coil wound over a different length, supporting a different number of 0.2 N paper clips.",
+      "variableResistor": { "min": 1, "max": 6, "step": 1, "label": "Coil length / cm" },
+      "ivPairs": [
+        { "Rvar": 1.0, "I": 2, "brightness": "6 clips (1.2 N)" },
+        { "Rvar": 2.0, "I": 2, "brightness": "3 clips (0.6 N)" },
+        { "Rvar": 3.0, "I": 2, "brightness": "2 clips (0.4 N)" },
+        { "Rvar": 4.0, "I": 2, "brightness": "1 clip (0.2 N)" },
+        { "Rvar": 5.0, "I": 2, "brightness": "1 clip (0.2 N)" },
+        { "Rvar": 6.0, "I": 2, "brightness": "1 clip (0.2 N)" }
+      ]
+    },
+    "generated_path": "/images/papers/physics-nov-2020/q5-paperclips.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q6.tasks[a]",
+    "questionId": 6,
+    "taskLabel": "a",
+    "topic": "Capillary action apparatus",
+    "original_path": "/images/papers/physics-nov-2020/q6-capillary.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: five capillary tubes A–E standing in a reservoir with purple water risen to different heights (A 37 mm, B 19 mm, C ≈12 mm blank for the student, D 9 mm, E 7 mm), a mm ruler, and a data table with the diameter, 1/diameter and height columns (row C blank to fill).",
+    "generated_path": "/images/papers/physics-nov-2020/q6-capillary.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q6.tasks[d]",
+    "questionId": 6,
+    "taskLabel": "d",
+    "topic": "Tall structures height comparison",
+    "original_path": "/images/papers/physics-nov-2020/q7-redwood.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: height-comparison chart (Height / m, 0–120) of a giant redwood (≈115 m), a lighthouse (≈50 m) and the Statue of Liberty (≈93 m), each silhouette scaled to its height.",
+    "generated_path": "/images/papers/physics-nov-2020/q7-redwood.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q8.tasks[b]",
+    "questionId": 8,
+    "taskLabel": "b",
+    "topic": "Maglev train",
+    "original_path": "/images/papers/physics-nov-2020/q8-maglev.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: a sleek blue-and-silver maglev train floating on an elevated guideway, side view, with city background and a support pylon.",
+    "generated_path": "/images/papers/physics-nov-2020/q8-maglev.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q8.tasks[b]",
+    "questionId": 8,
+    "taskLabel": "b",
+    "topic": "Maglev force systems diagram",
+    "original_path": "/images/papers/physics-nov-2020/q8b-forces.png",
+    "image_type": "code_rendered",
+    "render_component": "DragSort",
+    "render_data": {
+      "title": "Maglev force systems",
+      "source": "MYP physics-nov-2020",
+      "mode": "bins",
+      "prompt": "Identify the force corresponding to each system: drag each label onto the matching force arrow.",
+      "items": ["Levitation", "Guidance", "Propulsion"],
+      "bins": [
+        { "id": "up-arrow", "label": "Upward force (blue arrow, up)", "hint": "blue arrow pointing up" },
+        { "id": "side-arrow", "label": "Sideways force (green arrow, lateral)", "hint": "green arrow pointing sideways" },
+        { "id": "forward-arrow", "label": "Forward force (red arrow, forward)", "hint": "red diagonal arrow forward" }
+      ],
+      "correct": {
+        "Levitation": "up-arrow",
+        "Guidance": "side-arrow",
+        "Propulsion": "forward-arrow"
+      }
+    },
+    "generated_path": "/images/papers/physics-nov-2020/q8b-forces.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q9",
+    "questionId": 9,
+    "taskLabel": null,
+    "topic": "Transport options infographic",
+    "original_path": "/images/papers/physics-nov-2020/q9-transport.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: transport infographic with a map between Paris and Amsterdam, a sidebar of four mode icons (Car, Train, Air, Coach), 'Driving distance 480 km', and a Reset button.",
+    "generated_path": "/images/papers/physics-nov-2020/q9-transport.svg",
+    "needs_review": true,
+    "approved": false
+  }
+]

@@ -80,13 +80,15 @@ function TransverseCanvas() {
   }, [])
 
   return (
-    <canvas
-      ref={canvasRef}
-      width={320}
-      height={160}
-      className="rounded-lg border border-blue-200"
-      style={{ imageRendering: 'pixelated' }}
-    />
+    <div className="figure-surface p-1">
+      <canvas
+        ref={canvasRef}
+        width={320}
+        height={160}
+        className="rounded-lg border border-line block"
+        style={{ imageRendering: 'pixelated' }}
+      />
+    </div>
   )
 }
 
@@ -170,13 +172,15 @@ function LongitudinalCanvas() {
   }, [])
 
   return (
-    <canvas
-      ref={canvasRef}
-      width={320}
-      height={160}
-      className="rounded-lg border border-gray-300"
-      style={{ imageRendering: 'pixelated' }}
-    />
+    <div className="figure-surface p-1">
+      <canvas
+        ref={canvasRef}
+        width={320}
+        height={160}
+        className="rounded-lg border border-line-strong block"
+        style={{ imageRendering: 'pixelated' }}
+      />
+    </div>
   )
 }
 
@@ -186,11 +190,11 @@ export default function WaveAnimationsWidget() {
     <div className="flex flex-col sm:flex-row gap-4 my-3 justify-center">
       {/* Transverse */}
       <div className="flex flex-col items-center gap-2">
-        <span className="text-xs font-semibold uppercase tracking-wide text-blue-700 bg-blue-50 px-3 py-1 rounded-full border border-blue-200">
+        <span className="text-xs font-semibold uppercase tracking-wide text-info bg-info-surface px-3 py-1 rounded-full border border-info">
           Transverse Wave
         </span>
         <TransverseCanvas />
-        <p className="text-[11px] text-gray-500 max-w-[320px] text-center">
+        <p className="text-[11px] text-ink-subtle max-w-[320px] text-center">
           Particles vibrate <strong>perpendicular</strong> to the direction of wave travel.
           Example: light, water waves, waves on a string.
         </p>
@@ -198,14 +202,14 @@ export default function WaveAnimationsWidget() {
 
       {/* Longitudinal */}
       <div className="flex flex-col items-center gap-2">
-        <span className="text-xs font-semibold uppercase tracking-wide text-gray-700 bg-gray-100 px-3 py-1 rounded-full border border-gray-300">
+        <span className="text-xs font-semibold uppercase tracking-wide text-ink-muted bg-surface-3 px-3 py-1 rounded-full border border-line-strong">
           Longitudinal Wave
         </span>
         <LongitudinalCanvas />
-        <p className="text-[11px] text-gray-500 max-w-[320px] text-center">
+        <p className="text-[11px] text-ink-subtle max-w-[320px] text-center">
           Particles vibrate <strong>parallel</strong> to the direction of wave travel,
-          creating <span className="text-red-600 font-semibold">compressions</span> and{' '}
-          <span className="text-blue-600 font-semibold">rarefactions</span>.
+          creating <span className="text-danger font-semibold">compressions</span> and{' '}
+          <span className="text-info font-semibold">rarefactions</span>.
           Example: sound, infrasound.
         </p>
       </div>

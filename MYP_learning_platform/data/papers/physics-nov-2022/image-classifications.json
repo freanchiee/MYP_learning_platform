@@ -1,0 +1,220 @@
+[
+  {
+    "taskPath": "q1.tasks[c]",
+    "questionId": 1,
+    "taskLabel": "c",
+    "topic": "Radioactive decay graph",
+    "original_path": "/images/papers/physics-nov-2022/q1c-decay-graph.png",
+    "image_type": "code_rendered",
+    "image_prompt": "SVG: radioactive decay curve, Activity / Bq (0–1100, ticks every 100) vs Time / minutes (0–60, ticks every 10), smooth exponential falling from 1000 Bq with half-life ≈ 18.5 min (500 Bq at ~18.5 min).",
+    "generated_path": "/images/papers/physics-nov-2022/q1c-decay-graph.svg",
+    "render_component": "DecaySim",
+    "render_data": {
+      "title": "Activity of barium-141 against time",
+      "source": "MYP physics-nov-2022",
+      "isotope": "Ba-141",
+      "halfLife": 18.5,
+      "units": "minutes",
+      "initialActivity": 1000,
+      "activityUnits": "Bq",
+      "axisTimeMax": 60,
+      "axisActivityMax": 1100,
+      "xAxis": "Time / minutes",
+      "yAxis": "Activity / Bq"
+    },
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q2.tasks[c]",
+    "questionId": 2,
+    "taskLabel": "c",
+    "topic": "Cooling by evaporation graph",
+    "original_path": "/images/papers/physics-nov-2022/q2c-cooling-graph.png",
+    "image_type": "code_rendered",
+    "image_prompt": "SVG: three cooling curves, Temperature / °C (8.0–22.0, ticks every 2) vs Time / s (0–60, ticks every 10). Cooling oil flat near 20.8°C; Water exponential decay to ~15°C; Ethanol dips to ~9.8°C near 22 s then recovers to ~14°C. Key included.",
+    "generated_path": "/images/papers/physics-nov-2022/q2c-cooling-graph.svg",
+    "render_component": "ThermalSim",
+    "render_data": {
+      "title": "Temperature of probes in three liquids after removal",
+      "source": "MYP physics-nov-2022",
+      "mode": "cool",
+      "timeUnit": "s",
+      "tempUnit": "°C",
+      "totalTime": 60,
+      "yMinC": 8,
+      "yMaxC": 22,
+      "yTicksC": [8, 10, 12, 14, 16, 18, 20, 22],
+      "labTempC": 21.2,
+      "probes": [
+        { "liquid": "cooking oil", "startTempC": 21.2, "endTempC": 20.8, "behaviour": "flat" },
+        { "liquid": "water", "startTempC": 21.2, "endTempC": 15, "behaviour": "decay" },
+        { "liquid": "ethanol", "startTempC": 21.2, "minTempC": 9.8, "endTempC": 14, "behaviour": "dip-recover" }
+      ]
+    },
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q7.tasks[a]",
+    "questionId": 7,
+    "taskLabel": "a",
+    "topic": "Best-fit line selection (projectile)",
+    "original_path": "/images/papers/physics-nov-2022/q7a-graphs.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: four scatter panels A–D, Maximum height reached / m (0–6, ticks every 1) vs Angle / degrees (0–90, ticks every 10). Same data points with a 30° outlier; A=straight best-fit line, B=concave-down parabola, C=kinked polyline, D=smooth cosine S-curve best fit (the correct choice).",
+    "generated_path": "/images/papers/physics-nov-2022/q7a-graphs.svg",
+    "needs_review": false,
+    "approved": true
+  },
+  {
+    "taskPath": "q8.tasks[c]",
+    "questionId": 8,
+    "taskLabel": "c",
+    "topic": "Sex ratio at birth vs year",
+    "original_path": "/images/papers/physics-nov-2022/q8c-sex-ratio-graph.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: line graph, Sex ratio at birth (100–108, ticks every 1) vs Year (1960–2000, ticks every 5). Flat near 105.3 from 1960–1975 then rising to ~107.7 by 2000, points joined.",
+    "generated_path": "/images/papers/physics-nov-2022/q8c-sex-ratio-graph.svg",
+    "needs_review": false,
+    "approved": true
+  },
+  {
+    "taskPath": "q1",
+    "questionId": 1,
+    "taskLabel": null,
+    "topic": "Nuclear fission fragments",
+    "original_path": "/images/papers/physics-nov-2022/q1-fission.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: nuclear fission diagram on a dark space background. Two fission-fragment nuclei (clusters of blue protons and white/grey neutrons) flying apart, with three free neutrons ejected. Key for Proton (blue) and Neutron (grey), labels 'Fission fragment' and 'Neutron'.",
+    "generated_path": "/images/papers/physics-nov-2022/q1-fission.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q3",
+    "questionId": 3,
+    "taskLabel": null,
+    "topic": "Jupiter and its Galilean moons",
+    "original_path": "/images/papers/physics-nov-2022/q3-jupiters-moons.png",
+    "image_type": "code_rendered",
+    "image_prompt": "SVG: Galileo's telescope view — banded planet Jupiter (with a red-spot oval) lower right, and four small bright point-like moons labelled Ganymede, Callisto, Io and Europa on a dark starry sky.",
+    "generated_path": "/images/papers/physics-nov-2022/q3-jupiters-moons.svg",
+    "render_component": "OrbitSim",
+    "render_data": {
+      "title": "Galileo's view: the four moons of Jupiter",
+      "source": "MYP physics-nov-2022",
+      "mode": "moons",
+      "central": "Jupiter",
+      "caption": "The four Galilean moons orbit Jupiter, not Earth — evidence against the geocentric model.",
+      "bodies": [
+        { "name": "Jupiter", "role": "center", "fixed": true },
+        { "name": "Io", "periodDays": 1.77, "role": "orbiter" },
+        { "name": "Europa", "periodDays": 3.55, "role": "orbiter" },
+        { "name": "Ganymede", "periodDays": 7.15, "role": "orbiter" },
+        { "name": "Callisto", "periodDays": 16.69, "role": "orbiter" }
+      ]
+    },
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q3.tasks[c]",
+    "questionId": 3,
+    "taskLabel": "c",
+    "topic": "Europa subsurface ocean cross-section",
+    "original_path": "/images/papers/physics-nov-2022/q3c-europa.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: cross-section wedge of the moon Europa against black space — pale cracked 'Ice shell' over a deep-blue 'Ocean', with water plumes erupting through cracks. Labels 'Ice shell' and 'Ocean' with leader lines.",
+    "generated_path": "/images/papers/physics-nov-2022/q3c-europa.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q3.tasks[d]",
+    "questionId": 3,
+    "taskLabel": "d",
+    "topic": "Electromagnetic spectrum",
+    "original_path": "/images/papers/physics-nov-2022/q3d-em-spectrum.png",
+    "image_type": "code_rendered",
+    "image_prompt": "SVG: electromagnetic spectrum bar labelled Gamma rays, X-rays, UV, IR, Radio waves with a 'Wavelength / m' scale (10^-16 to 10^8). A thin visible slit expands to a rainbow 'Visible light' inset with a 400–700 nm scale.",
+    "generated_path": "/images/papers/physics-nov-2022/q3d-em-spectrum.svg",
+    "render_component": "SpectrumSim",
+    "render_data": {
+      "title": "The electromagnetic spectrum",
+      "source": "MYP physics-nov-2022",
+      "mode": "scrub",
+      "bands": ["Radio waves", "IR", "Visible light", "UV", "X-rays", "Gamma rays"],
+      "axis": "energy increases left → right (wavelength decreases)",
+      "target": "IR",
+      "wavelengthRange": ["10^8 m", "10^-16 m"],
+      "visibleRange": ["700 nm", "400 nm"]
+    },
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q4",
+    "questionId": 4,
+    "taskLabel": null,
+    "topic": "Electric motor and pulley apparatus",
+    "original_path": "/images/papers/physics-nov-2022/q4-motor-setup.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: bench apparatus to test a motor's efficiency — electric motor on bench driving a string over a pulley (on a retort stand) lifting a hanging mass; labelled Stopwatch, Power supply, Pulley, Motor, Mass; 'Diagram not to scale'.",
+    "generated_path": "/images/papers/physics-nov-2022/q4-motor-setup.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q6",
+    "questionId": 6,
+    "taskLabel": null,
+    "topic": "Motor and pulley apparatus with student",
+    "original_path": "/images/papers/physics-nov-2022/q6-motor-setup.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: same motor/pulley/mass efficiency apparatus as q4 but with a student standing at the bench holding a stopwatch; labelled Stopwatch, Power supply, Pulley, Motor, Mass; 'Diagram not to scale'.",
+    "generated_path": "/images/papers/physics-nov-2022/q6-motor-setup.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q7",
+    "questionId": 7,
+    "taskLabel": null,
+    "topic": "Ball launcher and projectile trajectory",
+    "original_path": "/images/papers/physics-nov-2022/q7-launcher.png",
+    "image_type": "code_rendered",
+    "image_prompt": "SVG: spring ball-launcher on a base with a protractor, launching a ball along a red parabolic trajectory; dashed vertical reference at 0°, shaded 'Launch angle' from vertical, double-headed 'Maximum height' arrow to the apex, ball landing on the ground line.",
+    "generated_path": "/images/papers/physics-nov-2022/q7-launcher.svg",
+    "render_component": "ProjectileSim",
+    "render_data": {
+      "title": "Spring ball launcher: launch angle and maximum height",
+      "source": "MYP physics-nov-2022",
+      "mode": "launch",
+      "g": 9.81,
+      "launch": {
+        "angleDeg": 82,
+        "speed": 10,
+        "angleMin": 0,
+        "angleMax": 82,
+        "speedMin": 5,
+        "speedMax": 15,
+        "g": 9.81
+      }
+    },
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q8",
+    "questionId": 8,
+    "taskLabel": null,
+    "topic": "Ultrasound vs X-ray comparison table",
+    "original_path": "/images/papers/physics-nov-2022/q8-comparison-table.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: two-column comparison table 'Ultrasound scans' vs 'X-ray images' reproducing every row: how images are made, what is imaged, uses, health risk, interpretation, $500 vs $150 per scan/image, $40 000 vs $30 000 per machine.",
+    "generated_path": "/images/papers/physics-nov-2022/q8-comparison-table.svg",
+    "needs_review": true,
+    "approved": false
+  }
+]

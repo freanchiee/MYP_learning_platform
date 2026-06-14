@@ -23,14 +23,14 @@ export default function EditModeBanner() {
   return (
     <div
       className="flex items-center justify-between gap-3 px-4 py-1.5 text-xs select-none flex-wrap"
-      style={{ background: '#fef3c7', borderBottom: '2px solid #f59e0b' }}
+      style={{ background: 'var(--warning-surface)', borderBottom: '2px solid var(--warning)' }}
     >
       {/* Left: mode label + instructions */}
       <div className="flex items-center gap-2.5 flex-wrap">
-        <span className="font-black text-amber-800 uppercase tracking-widest text-[10px]">
+        <span className="font-black uppercase tracking-widest text-[10px]" style={{ color: 'var(--warning-fg)' }}>
           ✏ Edit Mode
         </span>
-        <span className="text-amber-700 hidden sm:inline">
+        <span className="hidden sm:inline" style={{ color: 'var(--warning-fg)' }}>
           Hover any image for crop / upload / delete · Hover any text for inline editing
         </span>
       </div>
@@ -53,12 +53,12 @@ export default function EditModeBanner() {
       {/* Right: exit button */}
       <div className="flex items-center gap-2 ml-auto">
         {totalChanges === 0 && (
-          <span className="text-amber-600 text-[10px]">No changes yet</span>
+          <span className="text-[10px]" style={{ color: 'var(--warning-fg)' }}>No changes yet</span>
         )}
         <button
           onClick={() => setEditMode(false)}
-          className="px-3 py-1 bg-amber-600 hover:bg-amber-700 text-white text-[11px]
-                     font-bold rounded-lg transition-colors"
+          className="px-3 py-1 text-[11px] font-bold rounded-lg transition-colors"
+          style={{ background: 'var(--warning)', color: 'var(--text-on-accent)' }}
         >
           Exit Edit Mode
         </button>
@@ -68,13 +68,16 @@ export default function EditModeBanner() {
 }
 
 function Chip({ color, label }: { color: string; label: string }) {
-  const colors: Record<string, string> = {
-    emerald: 'bg-emerald-100 text-emerald-800 border-emerald-300',
-    red:     'bg-red-100     text-red-800     border-red-300',
-    blue:    'bg-blue-100    text-blue-800    border-blue-300',
+  const styles: Record<string, React.CSSProperties> = {
+    emerald: { background: 'var(--success-surface)', color: 'var(--success)', borderColor: 'var(--success)' },
+    red:     { background: 'var(--danger-surface)',  color: 'var(--danger)',  borderColor: 'var(--danger)' },
+    blue:    { background: 'var(--info-surface)',    color: 'var(--info)',    borderColor: 'var(--info)' },
   }
   return (
-    <span className={`border rounded-full px-2 py-0.5 font-semibold text-[10px] ${colors[color] ?? ''}`}>
+    <span
+      className="border rounded-full px-2 py-0.5 font-semibold text-[10px]"
+      style={styles[color] ?? undefined}
+    >
       {label}
     </span>
   )

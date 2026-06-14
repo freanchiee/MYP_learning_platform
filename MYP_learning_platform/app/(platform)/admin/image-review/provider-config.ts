@@ -97,7 +97,7 @@ export async function generateImageWithProvider(
   overrideProvider?: ProviderId,
   /** Path to original image (relative to /public) — enables img2img / structure control */
   originalImagePath?: string,
-): Promise<{ ok: boolean; error?: string; method?: string }> {
+): Promise<{ ok: boolean; error?: string; method?: string; usedProvider?: ProviderId }> {
   const cfg = await readProviderConfig()
   const provider = overrideProvider ?? cfg.activeProvider
   const providerName = PROVIDER_NAMES[provider] ?? provider
@@ -111,37 +111,66 @@ export async function generateImageWithProvider(
     }
   }
 
+  // ── inner helper — run Stability (with Structure Control when original exists) ─
+  async function tryStability(): Promise<{ method: string }> {
+    if (originalImagePath) {
+      const physOrig = path.join(PUBLIC, originalImagePath)
+      if (fs.existsSync(physOrig)) {
+        try {
+          await generateStabilityStructure(prompt, destPath, cfg.stability.key, physOrig)
+          return { method: 'structure_control' }
+        } catch (structErr: unknown) {
+          const msg = structErr instanceof Error ? structErr.message : String(structErr)
+          console.warn(`[stability] Structure control failed (${msg.slice(0, 80)}) → text2img`)
+        }
+      }
+    }
+    await generateStability(prompt, destPath, cfg.stability.key)
+    return { method: 'text2img' }
+  }
+
   try {
     if (provider === 'openai') {
       await generateOpenAI(prompt, destPath, cfg.openai.key, cfg.openai.model)
-      return { ok: true, method: 'text2img' }
+      return { ok: true, method: 'text2img', usedProvider: 'openai' }
     } else if (provider === 'gemini') {
       await generateGemini(prompt, destPath, cfg.gemini.key, cfg.gemini.model)
-      return { ok: true, method: 'text2img' }
+      return { ok: true, method: 'text2img', usedProvider: 'gemini' }
     } else if (provider === 'stability') {
-      // When the original image is available, use Structure Control:
-      // it preserves the spatial layout (crane position, heights, building) while
-      // generating new original artwork — much better than text-only for diagrams.
-      if (originalImagePath) {
-        const physOrig = path.join(PUBLIC, originalImagePath)
-        if (fs.existsSync(physOrig)) {
-          try {
-            await generateStabilityStructure(prompt, destPath, cfg.stability.key, physOrig)
-            return { ok: true, method: 'structure_control' }
-          } catch (structErr: unknown) {
-            // Structure control failed — fall through to plain text2img
-            const msg = structErr instanceof Error ? structErr.message : String(structErr)
-            console.warn(`[stability] Structure control failed (${msg.slice(0, 80)}) → falling back to text2img`)
-          }
-        }
-      }
-      await generateStability(prompt, destPath, cfg.stability.key)
-      return { ok: true, method: 'text2img' }
+      const { method } = await tryStability()
+      return { ok: true, method, usedProvider: 'stability' }
     } else {
       return { ok: false, error: `Unknown provider: ${provider}` }
     }
   } catch (e: unknown) {
-    return { ok: false, error: e instanceof Error ? e.message : String(e) }
+    const primaryError = e instanceof Error ? e.message : String(e)
+
+    // ── Auto-fallback to Stability when the active provider is not Stability ────
+    // This handles account-level failures (quota, model not available, billing)
+    // without requiring the user to manually switch in settings.
+    if (provider !== 'stability' && cfg.stability?.key) {
+      console.warn(
+        `[gen] ${provider} failed (${primaryError.slice(0, 80)}) → auto-fallback to Stability…`,
+      )
+      try {
+        const { method } = await tryStability()
+        return {
+          ok: true,
+          method,
+          usedProvider: 'stability',
+          // Pass the primary error through so the UI can show it as info (not a hard failure)
+          error: `Note: ${PROVIDER_NAMES[provider]} failed — used Stability fallback. Original error: ${primaryError.slice(0, 120)}`,
+        }
+      } catch (fallbackErr: unknown) {
+        const fallbackMsg = fallbackErr instanceof Error ? fallbackErr.message : String(fallbackErr)
+        return {
+          ok: false,
+          error: `${PROVIDER_NAMES[provider]} failed: ${primaryError.slice(0, 120)} | Stability fallback also failed: ${fallbackMsg.slice(0, 120)}`,
+        }
+      }
+    }
+
+    return { ok: false, error: primaryError }
   }
 }
 
@@ -160,29 +189,42 @@ async function generateOpenAI(
   model: string,
 ) {
   if (!key) throw new Error('OpenAI key not configured')
+
+  // Build request — newer OpenAI models (gpt-image-1) removed response_format and quality,
+  // so we omit both and handle whichever response shape comes back (url or b64_json).
+  const reqBody: Record<string, unknown> = {
+    model,
+    prompt: prompt.slice(0, 4000),
+    n: 1,
+    size: '1024x1024',
+  }
+  // quality only on dall-e-3 (dall-e-2 and gpt-image-1 don't support it)
+  if (model === 'dall-e-3') reqBody.quality = 'standard'
+
   const res = await fetch('https://api.openai.com/v1/images/generations', {
     method: 'POST',
     headers: { 'Authorization': `Bearer ${key}`, 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      model,
-      prompt: prompt.slice(0, 4000),
-      n: 1,
-      size: '1024x1024',
-      quality: 'standard',
-      response_format: 'url',
-    }),
+    body: JSON.stringify(reqBody),
     signal: AbortSignal.timeout(60_000),
   })
   if (!res.ok) {
     const body = await res.text()
     throw new Error(`OpenAI ${res.status}: ${body.slice(0, 300)}`)
   }
-  const json = await res.json() as { data?: { url?: string }[] }
-  const imgUrl = json.data?.[0]?.url
-  if (!imgUrl) throw new Error('OpenAI: no URL in response')
-  const imgRes = await fetch(imgUrl, { signal: AbortSignal.timeout(30_000) })
-  if (!imgRes.ok) throw new Error(`OpenAI CDN download error ${imgRes.status}`)
-  await saveImageBuffer(Buffer.from(await imgRes.arrayBuffer()), destPath)
+  const json = await res.json() as { data?: { url?: string; b64_json?: string }[] }
+  const item = json.data?.[0]
+
+  if (item?.b64_json) {
+    // gpt-image-1 and b64_json mode return inline data
+    await saveImageBuffer(Buffer.from(item.b64_json, 'base64'), destPath)
+  } else if (item?.url) {
+    // dall-e-3 default: temporary CDN URL
+    const imgRes = await fetch(item.url, { signal: AbortSignal.timeout(30_000) })
+    if (!imgRes.ok) throw new Error(`OpenAI CDN download error ${imgRes.status}`)
+    await saveImageBuffer(Buffer.from(await imgRes.arrayBuffer()), destPath)
+  } else {
+    throw new Error(`OpenAI: no image in response — ${JSON.stringify(json).slice(0, 200)}`)
+  }
 }
 
 async function generateGemini(prompt: string, destPath: string, key: string, model: string) {

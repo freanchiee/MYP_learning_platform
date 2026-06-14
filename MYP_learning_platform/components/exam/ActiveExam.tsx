@@ -11,7 +11,10 @@ export default function ActiveExam() {
   const activeTool = useExamStore((s) => s.activeTool)
 
   return (
-    <div className="flex flex-col h-screen overflow-hidden bg-gray-100">
+    <div
+      className="flex flex-col h-screen overflow-hidden"
+      style={{ background: 'var(--bg)', backgroundImage: 'var(--bg-image)' }}
+    >
       <ExamToolbar />
       {activeTool !== null && <ToolsPanel />}
       <div className="flex flex-1 overflow-hidden">

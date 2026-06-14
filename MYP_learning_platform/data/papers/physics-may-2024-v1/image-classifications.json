@@ -1,0 +1,203 @@
+[
+  {
+    "taskPath": "q2.tasks[e]",
+    "questionId": 2,
+    "taskLabel": "e",
+    "topic": "Radioactive decay graph",
+    "original_path": "/images/papers/physics-may-2024-v1/q2e-decay-graph.png",
+    "image_type": "code_rendered",
+    "render_component": "DecaySim",
+    "render_data": {
+      "title": "Decay of remaining uranium-235 in a used fuel rod",
+      "source": "MYP physics-may-2024-v1",
+      "isotope": "uranium-235",
+      "daughter": "thorium-231",
+      "decayMode": "alpha",
+      "halfLife": 700,
+      "units": "millions of years",
+      "initialCount": 100,
+      "axisMax": 4000,
+      "axisTimeMax": 4000,
+      "timeRange": { "min": 0, "max": 4000, "units": "millions of years" },
+      "xAxis": "Time / millions of years",
+      "yAxis": "Percentage of uranium-235 nuclei remaining / %"
+    },
+    "generated_path": "/images/papers/physics-may-2024-v1/q2e-decay-graph.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q3.tasks[g]",
+    "questionId": 3,
+    "taskLabel": "g",
+    "topic": "Resistance vs length graph",
+    "original_path": "/images/papers/physics-may-2024-v1/q3g-graph.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: scatter plot Resistance / Ω (0–8.0, minor 0.2) vs Length / cm (0–130, minor 2) with 4 data points at (40,2.2), (60,3.9), (80,5.1), (120,7.2). Student plots (100, 6.0) and draws best-fit line through the origin (constantan wire).",
+    "generated_path": "/images/papers/physics-may-2024-v1/q3g-graph.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q5.tasks[e]",
+    "questionId": 5,
+    "taskLabel": "e",
+    "topic": "Force vs current graph",
+    "original_path": "/images/papers/physics-may-2024-v1/q5e-force-graph.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: Force / mN (-2.0 to 6.0, minor 0.4) vs Current / A (0–12, minor 0.4), scatter at I=6–11 with best-fit line crossing the x-axis at 4 A and y-intercept ≈ -2.6 mN (friction threshold).",
+    "generated_path": "/images/papers/physics-may-2024-v1/q5e-force-graph.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q1.figImages[0]",
+    "questionId": 1,
+    "taskLabel": "stem",
+    "topic": "Natural gas power station diagram",
+    "original_path": "/images/papers/physics-may-2024-v1/q1-power-station.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: natural gas power plant schematic — gas supply / combustion chamber → boiler / heat exchanger (liquid water → steam) → turbine → generator → electricity; used steam → cooling tower / condenser → condensed water returns.",
+    "generated_path": "/images/papers/physics-may-2024-v1/q1-power-station.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q1.tasks[f]",
+    "questionId": 1,
+    "taskLabel": "f",
+    "topic": "Greenhouse effect energy flow",
+    "original_path": "/images/papers/physics-may-2024-v1/q1f-greenhouse.png",
+    "image_type": "code_rendered",
+    "render_component": "SankeySim",
+    "render_data": {
+      "title": "Flow of energy through Earth's atmosphere",
+      "source": "MYP physics-may-2024-v1",
+      "flows": [
+        { "label": "Solar energy from the Sun", "kind": "in" },
+        { "label": "Energy reflected by top of clouds", "kind": "loss" },
+        { "label": "Heat energy from the ground", "kind": "out" },
+        { "label": "Heat energy absorbed and re-emitted by greenhouse gases", "kind": "out", "highlight": true }
+      ],
+      "selectTarget": "Heat energy absorbed and re-emitted by greenhouse gases",
+      "options": [
+        "Solar energy from the Sun",
+        "Energy reflected by top of clouds",
+        "Heat energy from the ground",
+        "Heat energy absorbed and re-emitted by greenhouse gases"
+      ]
+    },
+    "generated_path": "/images/papers/physics-may-2024-v1/q1f-greenhouse.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q2.figImages[0]",
+    "questionId": 2,
+    "taskLabel": "stem",
+    "topic": "U-235 fission products diagram",
+    "original_path": "/images/papers/physics-may-2024-v1/q2-fission.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: incoming neutron + uranium-235 → lanthanum-142 + bromine-93 + 1 free neutron + energy. Equation strip below.",
+    "generated_path": "/images/papers/physics-may-2024-v1/q2-fission.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q3.tasks[e]",
+    "questionId": 3,
+    "taskLabel": "e",
+    "topic": "Resistance measurement circuit",
+    "original_path": "/images/papers/physics-may-2024-v1/q3e-circuit.png",
+    "image_type": "code_rendered",
+    "render_component": "CircuitSim",
+    "render_data": {
+      "title": "Build the circuit to measure the resistance of a wire",
+      "source": "MYP physics-may-2024-v1",
+      "mode": "place",
+      "component": "constantan wire",
+      "wire": "constantan wire",
+      "battery": "cell",
+      "slots": [
+        { "id": "ammeter", "correct": "series with wire" },
+        { "id": "voltmeter", "correct": "parallel with wire" }
+      ],
+      "knownTrial": { "V": 1.8, "I": 0.3, "R": 6.0 }
+    },
+    "generated_path": "/images/papers/physics-may-2024-v1/q3e-circuit.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q4.figImages[0]",
+    "questionId": 4,
+    "taskLabel": "stem",
+    "topic": "Ceramic magnet collision setup",
+    "original_path": "/images/papers/physics-may-2024-v1/q4-setup.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: wooden inclined track + level track, ceramic magnet (N-S) with two steel balls held magnetically on right side; incoming steel ball rolling down from height h₁.",
+    "generated_path": "/images/papers/physics-may-2024-v1/q4-setup.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q4.tasks[d]",
+    "questionId": 4,
+    "taskLabel": "d",
+    "topic": "Magnetic field options A B C D",
+    "original_path": "/images/papers/physics-may-2024-v1/q4d-magnetic-fields.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: 4 labelled panels of bar magnet field patterns. A = correct looped N→S lines; B = reversed direction; C = parallel straight lines; D = concentric circles.",
+    "generated_path": "/images/papers/physics-may-2024-v1/q4d-magnetic-fields.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q4.tasks[f]",
+    "questionId": 4,
+    "taskLabel": "f",
+    "topic": "Investigation setup h1 h2",
+    "original_path": "/images/papers/physics-may-2024-v1/q4f-setup.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: two-ramp magnetic collision setup with labelled initial height h₁ on left wooden ramp and maximum exit height h₂ on right wooden ramp, ceramic magnet at base.",
+    "generated_path": "/images/papers/physics-may-2024-v1/q4f-setup.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q5.figImages[0]",
+    "questionId": 5,
+    "taskLabel": "stem",
+    "topic": "Motor effect rod setup",
+    "original_path": "/images/papers/physics-may-2024-v1/q5-motor-setup.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: conducting rod across two parallel rails between rows of magnets (N below, S above); switch, ammeter, power supply on the left; 15 cm travel-distance arrow.",
+    "generated_path": "/images/papers/physics-may-2024-v1/q5-motor-setup.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q6.tasks[b]",
+    "questionId": 6,
+    "taskLabel": "b",
+    "topic": "Reflecting telescope ray diagram",
+    "original_path": "/images/papers/physics-may-2024-v1/q6b-reflecting-telescope.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: reflecting telescope ray diagram — parallel rays from a distant object reflected off large curved primary mirror at far end, onto a small angled flat secondary mirror, then up through eyepiece opening at top.",
+    "generated_path": "/images/papers/physics-may-2024-v1/q6b-reflecting-telescope.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q6.tasks[c]",
+    "questionId": 6,
+    "taskLabel": "c",
+    "topic": "Hale Telescope observatory illustration",
+    "original_path": "/images/papers/physics-may-2024-v1/q6c-hale-telescope.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: observatory dome of the Hale Telescope at Palomar Observatory, California — 5 m (200-inch) primary mirror; annotation panel describing the telescope.",
+    "generated_path": "/images/papers/physics-may-2024-v1/q6c-hale-telescope.svg",
+    "needs_review": true,
+    "approved": false
+  }
+]

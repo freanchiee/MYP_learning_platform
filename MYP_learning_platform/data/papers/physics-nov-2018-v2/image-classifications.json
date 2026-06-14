@@ -1,0 +1,306 @@
+[
+  {
+    "taskPath": "q1.tasks[c]",
+    "questionId": 1,
+    "taskLabel": "c",
+    "topic": "Distance-time graph of storm",
+    "original_path": "/images/papers/physics-nov-2018/q1c-graph.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: Distance / km (0–10) vs Time of day (09:55–10:30), V-shaped line of constant-speed segments falling from 10 km at 09:55 to a minimum 2 km at 10:15 then rising; points every 5 min, reading 8.0 km at 10:00 and 4.0 km at 10:10 (gives 24 km h⁻¹).",
+    "generated_path": "/images/papers/physics-nov-2018-v2/q1c-graph.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q4.tasks[e]",
+    "questionId": 4,
+    "taskLabel": "e",
+    "topic": "Bounce height vs pressure scatter",
+    "original_path": "/images/papers/physics-nov-2018/q4e-graph.png",
+    "image_type": "code_rendered",
+    "render_component": "DragSort",
+    "render_data": {
+      "mode": "select",
+      "title": "Bounce height vs internal air pressure",
+      "source": "MYP physics-nov-2018-v2",
+      "prompt": "The data points are: (35 kPa, 0.685 m), (40 kPa, 0.72 m), (45 kPa, 0.76 m), (50 kPa, 0.80 m), (55 kPa, 0.83 m). Imagine a straight line of best fit through these points. Using your line of best fit, select the best estimate of the bounce height at a pressure of 55 kPa.",
+      "options": [
+        "0.685 m",
+        "0.76 m",
+        "0.83 m",
+        "0.90 m"
+      ],
+      "correct": "0.83 m"
+    },
+    "generated_path": "/images/papers/physics-nov-2018-v2/q4e-graph.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q5.tasks[d]",
+    "questionId": 5,
+    "taskLabel": "d",
+    "topic": "Bounce height vs drop height scatter",
+    "original_path": "/images/papers/physics-nov-2018/q5d-graph.png",
+    "image_type": "code_rendered",
+    "image_prompt": "SVG: mean-data scatter, x 0.00–4.00 and y 0.00–1.00 (unlabelled axes for student to fill), seven rising points from (0.4,0.12) to (3.2,0.96), with a gap at drop height 1.6 m where the student plots their calculated (1.6, 0.53) point.",
+    "generated_path": "/images/papers/physics-nov-2018-v2/q5d-graph.svg",
+    "needs_review": true,
+    "approved": false,
+    "render_component": "DragSort",
+    "render_data": {
+      "mode": "slots",
+      "title": "Label the axes and place your calculated point",
+      "source": "MYP physics-nov-2018-v2",
+      "prompt": "The mean-data graph plots bounce height against drop height. Fill each blank from the palette: state the correct label for each axis, and place the data point you calculated in part (b) for the 1.6 m drop height.",
+      "items": [
+        "Drop height / m",
+        "Bounce height / m",
+        "(1.6, 0.53)",
+        "(0.53, 1.6)",
+        "Pressure / kPa"
+      ],
+      "slots": [
+        { "id": "x-axis", "label": "x-axis label" },
+        { "id": "y-axis", "label": "y-axis label" },
+        { "id": "point", "label": "Calculated point at 1.6 m drop height" }
+      ],
+      "correct": {
+        "x-axis": "Drop height / m",
+        "y-axis": "Bounce height / m",
+        "point": "(1.6, 0.53)"
+      }
+    }
+  },
+  {
+    "taskPath": "q7.tasks[b]",
+    "questionId": 7,
+    "taskLabel": "b",
+    "topic": "Arctic sea ice and global temperature over time",
+    "original_path": "/images/papers/physics-nov-2018/q7b-co2graph.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: dual-axis line graph, Arctic sea-ice extent / million km² (8.0–4.0, left) and Temperature / °C (14.0–15.0, right) vs Year (1900–2020); ice extent flat then falls sharply from ~1970 while temperature flat then rises from ~1960 (negative correlation, curves cross ~2000); key for the two curves.",
+    "generated_path": "/images/papers/physics-nov-2018-v2/q7b-co2graph.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q1.stem",
+    "questionId": 1,
+    "taskLabel": "stem",
+    "topic": "Fireworks display — light vs sound",
+    "original_path": "/images/papers/physics-nov-2018/q1-lightning.png",
+    "image_type": "ai_generated",
+    "image_prompt": "Night cityscape with three coloured firework bursts (yellow, blue, pink) over a silhouetted skyline reflected in water. Labels: 'Light: 3.0 × 10⁸ m s⁻¹', 'Sound: 330 m s⁻¹'.",
+    "generated_path": "/images/papers/physics-nov-2018-v2/q1-lightning.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q2.tasks[b]",
+    "questionId": 2,
+    "taskLabel": "b",
+    "topic": "Lightning discharge (600 000 V, 20 000 A)",
+    "original_path": "/images/papers/physics-nov-2018/q2b-circuit.png",
+    "image_type": "ai_generated",
+    "image_prompt": "Night sky with storm cloud above, ground below. Lightning bolt with bright core and blue halo. Dimension line marks 600 000 V between cloud and ground; current arrow alongside marks 20 000 A.",
+    "generated_path": "/images/papers/physics-nov-2018-v2/q2b-circuit.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q2.tasks[d]",
+    "questionId": 2,
+    "taskLabel": "d",
+    "topic": "Surge protector wire on a building (lightning rod)",
+    "original_path": "/images/papers/physics-nov-2018/q2d-conductor.png",
+    "image_type": "ai_generated",
+    "image_prompt": "Modern multi-storey office building with rooftop lightning rod. Yellow/green surge-protector wire (insulated) running from rod down the wall to an earth electrode in the ground. Distant lightning bolt approaching the rod. Labels: Lightning rod, Surge protector wire, to earth.",
+    "generated_path": "/images/papers/physics-nov-2018-v2/q2d-conductor.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q3.tasks[a]",
+    "questionId": 3,
+    "taskLabel": "a",
+    "topic": "Decay equations (alpha/beta drag-and-drop)",
+    "original_path": "/images/papers/physics-nov-2018/q3a-decay.png",
+    "image_type": "code_rendered",
+    "image_prompt": "Drag-and-drop palette with α (4/2) and β (0/−1) chips on the left and three decay equations with empty placeholder boxes: Am-241→Np-237+[ ], Po-210→Pb-206+[ ], Np-240→Pu-240+[ ]. Variant palette warm tones.",
+    "generated_path": "/images/papers/physics-nov-2018-v2/q3a-decay.svg",
+    "needs_review": true,
+    "approved": false,
+    "render_component": "DragSort",
+    "render_data": {
+      "mode": "bins",
+      "title": "Identify the particle released in each decay",
+      "source": "MYP physics-nov-2018-v2",
+      "prompt": "For each decay equation, place it in the bin for the particle it releases. Alpha: mass −4, atomic number −2. Beta: mass unchanged, atomic number +1.",
+      "items": [
+        "²⁴¹₉₅Am → ²³⁷₉₃Np + ?",
+        "²¹⁰₈₄Po → ²⁰⁶₈₂Pb + ?",
+        "²⁴⁰₉₃Np → ²⁴⁰₉₄Pu + ?"
+      ],
+      "bins": [
+        { "id": "alpha", "label": "Alpha particle (⁴₂α)" },
+        { "id": "beta", "label": "Beta particle (⁰₋₁β)" }
+      ],
+      "correct": {
+        "alpha": ["²⁴¹₉₅Am → ²³⁷₉₃Np + ?", "²¹⁰₈₄Po → ²⁰⁶₈₂Pb + ?"],
+        "beta": ["²⁴⁰₉₃Np → ²⁴⁰₉₄Pu + ?"]
+      }
+    }
+  },
+  {
+    "taskPath": "q3.tasks[d]",
+    "questionId": 3,
+    "taskLabel": "d",
+    "topic": "Isotopes half-life data table",
+    "original_path": "/images/papers/physics-nov-2018/q3d-isotopes.png",
+    "image_type": "ai_generated",
+    "image_prompt": "Three-column table: Isotope | Half-life / years | Additional information. Same four isotopes as v1 (Curium-242, Carbon-14, Potassium-40, Uranium-238).",
+    "generated_path": "/images/papers/physics-nov-2018-v2/q3d-isotopes.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q4.tasks[a]",
+    "questionId": 4,
+    "taskLabel": "a",
+    "topic": "Basketball bounce variable-classification grid",
+    "original_path": "/images/papers/physics-nov-2018/q4a-variables.png",
+    "image_type": "code_rendered",
+    "image_prompt": "Three-column checkbox grid (Independent / Dependent / Control) × 6 variables: Drop height, Internal air pressure, Bounce height, Size of ball, Bouncing surface, Material of the ball.",
+    "generated_path": "/images/papers/physics-nov-2018-v2/q4a-variables.svg",
+    "needs_review": true,
+    "approved": false,
+    "render_component": "DragSort",
+    "render_data": {
+      "mode": "bins",
+      "title": "Classify the variables",
+      "source": "MYP physics-nov-2018-v2",
+      "prompt": "Place each variable into its correct category for this basketball-bounce experiment.",
+      "items": [
+        "Internal air pressure",
+        "Bounce height",
+        "Drop height",
+        "Size of ball",
+        "Bouncing surface",
+        "Material of the ball"
+      ],
+      "bins": [
+        {
+          "id": "iv",
+          "label": "Independent variable"
+        },
+        {
+          "id": "dv",
+          "label": "Dependent variable"
+        },
+        {
+          "id": "cv",
+          "label": "Control variable"
+        }
+      ],
+      "correct": {
+        "iv": [
+          "Internal air pressure"
+        ],
+        "dv": [
+          "Bounce height"
+        ],
+        "cv": [
+          "Drop height",
+          "Size of ball",
+          "Bouncing surface",
+          "Material of the ball"
+        ]
+      }
+    }
+  },
+  {
+    "taskPath": "q4.tasks[d]",
+    "questionId": 4,
+    "taskLabel": "d",
+    "topic": "Pressure gauge reading 75 kPa (basketball)",
+    "original_path": "/images/papers/physics-nov-2018/q4d-gauge.png",
+    "image_type": "ai_generated",
+    "image_prompt": "Pressure gauge dial 0–120 kPa with inner psi scale 0–18, needle pointing to 75 kPa (between 60 top and 80). Basketball below on a court background. Labels: 'Pressure gauge', 'Basketball'.",
+    "generated_path": "/images/papers/physics-nov-2018-v2/q4d-gauge.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q5.stem",
+    "questionId": 5,
+    "taskLabel": "stem",
+    "topic": "Cricket ball + bouncy ball drop animation scene",
+    "original_path": "/images/papers/physics-nov-2018/q5-basketball.png",
+    "image_type": "ai_generated",
+    "image_prompt": "Indoor scene: man on a ladder holding a cricket ball at 1.6 m, woman with a ruler. Control panel on right with Cricket ball / Bouncy ball headers and three drop heights (1.6/1.2/0.8 m) each with 'Drop ball' buttons; selection arrow at 1.6 m cricket.",
+    "generated_path": "/images/papers/physics-nov-2018-v2/q5-basketball.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q5.tasks[b]",
+    "questionId": 5,
+    "taskLabel": "b",
+    "topic": "Trial data: 1.6 m drop, three repetitions in mixed units",
+    "original_path": "/images/papers/physics-nov-2018/q5bc-data.png",
+    "image_type": "ai_generated",
+    "image_prompt": "Notebook on a wooden desk: 'Cricket ball bounce experiment'; 1.6 m drop labelled; trial table with Trial 1 0.56 m, Trial 2 52 cm, Trial 3 5.1 × 10² mm. Marker pens beside.",
+    "generated_path": "/images/papers/physics-nov-2018-v2/q5bc-data.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q5.tasks[c]",
+    "questionId": 5,
+    "taskLabel": "c",
+    "topic": "Raw drop/bounce data (mixed units, unsorted)",
+    "original_path": "/images/papers/physics-nov-2018/q5c-rawdata.png",
+    "image_type": "ai_generated",
+    "image_prompt": "Lined-paper 'My data' notes with five unsorted drop/bounce pairs: 2.4 m → 0.78 m, 2.8 m → 88 cm, 2.0 m → 0.66 m, 120 cm → 36 cm, 8×10¹ cm → 22 cm.",
+    "generated_path": "/images/papers/physics-nov-2018-v2/q5c-rawdata.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q6.stem.0",
+    "questionId": 6,
+    "taskLabel": "stem-court",
+    "topic": "Racquetball court scene (q6-squash slot)",
+    "original_path": "/images/papers/physics-nov-2018/q6-squash.png",
+    "image_type": "ai_generated",
+    "image_prompt": "Two players on an indoor racquetball court (blue lines), racquets in hand, blue racquetball in flight.",
+    "generated_path": "/images/papers/physics-nov-2018-v2/q6-squash.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q6.stem.1",
+    "questionId": 6,
+    "taskLabel": "stem-setup",
+    "topic": "Racquetball in warm water bath apparatus",
+    "original_path": "/images/papers/physics-nov-2018/q6-setup.png",
+    "image_type": "ai_generated",
+    "image_prompt": "Beaker of warm water on an electronic heater with a thermometer; racquetball (blue) submerged. Labels: Warm water, Racquetball, Thermometer, Electronic heater.",
+    "generated_path": "/images/papers/physics-nov-2018-v2/q6-setup.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q8.stem",
+    "questionId": 8,
+    "taskLabel": "stem",
+    "topic": "Transport options for Sara (10 km)",
+    "original_path": "/images/papers/physics-nov-2018/q8-transport.png",
+    "image_type": "ai_generated",
+    "image_prompt": "Coloured bubbles for transport options (Tram 45 min, Walking 120 min, Bicycle 35 min, Car 18 min, Bus 28 min) with a directional arrow from Sara to a School icon; banner 'Distance: 10 km'.",
+    "generated_path": "/images/papers/physics-nov-2018-v2/q8-transport.svg",
+    "needs_review": true,
+    "approved": false
+  }
+]

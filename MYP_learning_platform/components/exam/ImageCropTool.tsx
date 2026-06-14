@@ -366,13 +366,13 @@ export default function ImageCropTool({ src, onApply, onClose }: ImageCropToolPr
   return (
     <div
       className="fixed inset-0 z-50 flex flex-col items-center justify-center gap-3 p-4"
-      style={{ background: 'rgba(0,0,0,0.85)' }}
+      style={{ background: 'var(--scrim)' }}
     >
       {/* ── Header ── */}
       <div className="w-full flex items-center justify-between" style={{ maxWidth: canvasSize.w }}>
         <div className="flex items-center gap-2">
-          <span className="text-white font-bold text-sm">✂ Crop Image</span>
-          <span className="text-gray-400 text-xs font-mono truncate max-w-xs">{src.split('/').pop()}</span>
+          <span className="font-bold text-sm" style={{ color: 'var(--surface-deep-fg)' }}>✂ Crop Image</span>
+          <span className="text-xs font-mono truncate max-w-xs" style={{ color: 'var(--text-subtle)' }}>{src.split('/').pop()}</span>
         </div>
         <div className="flex items-center gap-2">
           <button
@@ -380,16 +380,16 @@ export default function ImageCropTool({ src, onApply, onClose }: ImageCropToolPr
             disabled={!imageLoaded || smartRunning}
             title="Auto-detect content bounds by pixel analysis"
             className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold
-                       bg-violet-600 hover:bg-violet-500 disabled:opacity-40
-                       text-white transition-colors"
+                       disabled:opacity-40 transition-colors hover:brightness-110"
+            style={{ background: 'var(--cmd-justify)', color: 'var(--text-on-accent)' }}
           >
             {smartRunning ? '…' : '⚡'} Smart Crop
           </button>
           <button
             onClick={() => setCrop({ x: 0, y: 0, w: canvasSize.w, h: canvasSize.h })}
             disabled={!imageLoaded}
-            className="px-3 py-1.5 rounded-lg text-xs font-bold bg-gray-600 hover:bg-gray-500
-                       text-white transition-colors disabled:opacity-40"
+            className="px-3 py-1.5 rounded-lg text-xs font-bold transition-colors disabled:opacity-40 hover:brightness-95"
+            style={{ background: 'var(--surface-3)', color: 'var(--text-muted)' }}
           >
             Reset
           </button>
@@ -398,21 +398,21 @@ export default function ImageCropTool({ src, onApply, onClose }: ImageCropToolPr
 
       {/* ── Canvas ── */}
       <div
-        className="rounded-xl overflow-hidden shadow-2xl border border-gray-700"
-        style={{ maxWidth: '100%', maxHeight: '65vh', lineHeight: 0 }}
+        className="rounded-xl overflow-hidden shadow-2xl border"
+        style={{ maxWidth: '100%', maxHeight: '65vh', lineHeight: 0, borderColor: 'var(--border-strong)' }}
       >
         {!imageLoaded && !error && (
           <div
-            className="flex items-center justify-center bg-gray-800 text-gray-400 text-sm"
-            style={{ width: 600, height: 400 }}
+            className="flex items-center justify-center text-sm"
+            style={{ width: 600, height: 400, background: 'var(--surface-deep)', color: 'var(--text-subtle)' }}
           >
             Loading image…
           </div>
         )}
         {error && (
           <div
-            className="flex items-center justify-center bg-gray-800 text-red-400 text-sm px-6 text-center"
-            style={{ width: 600, height: 200 }}
+            className="flex items-center justify-center text-sm px-6 text-center"
+            style={{ width: 600, height: 200, background: 'var(--surface-deep)', color: 'var(--danger)' }}
           >
             {error}
           </div>
@@ -431,18 +431,18 @@ export default function ImageCropTool({ src, onApply, onClose }: ImageCropToolPr
 
       {/* ── Info bar ── */}
       {imageLoaded && (
-        <div className="flex items-center gap-4 text-xs text-gray-400" style={{ maxWidth: canvasSize.w }}>
+        <div className="flex items-center gap-4 text-xs" style={{ maxWidth: canvasSize.w, color: 'var(--text-subtle)' }}>
           {canHaveCrop ? (
             <>
               <span>
                 Selection:{' '}
-                <span className="text-amber-300 font-mono">
+                <span className="font-mono" style={{ color: 'var(--warning)' }}>
                   {Math.round(crop!.w * (loadedImgRef.current!.naturalWidth / canvasSize.w))}
                   {' × '}
                   {Math.round(crop!.h * (loadedImgRef.current!.naturalHeight / canvasSize.h))} px
                 </span>
               </span>
-              <span className="text-gray-600">|</span>
+              <span style={{ color: 'var(--text-subtle)', opacity: 0.6 }}>|</span>
               <span>Drag corners to resize · Drag inside to move · Drag outside to redraw</span>
             </>
           ) : (
@@ -455,8 +455,8 @@ export default function ImageCropTool({ src, onApply, onClose }: ImageCropToolPr
       <div className="flex items-center gap-3">
         <button
           onClick={onClose}
-          className="px-5 py-2 rounded-xl text-sm font-semibold bg-gray-700 hover:bg-gray-600
-                     text-white transition-colors"
+          className="px-5 py-2 rounded-xl text-sm font-semibold transition-colors hover:brightness-95"
+          style={{ background: 'var(--surface-3)', color: 'var(--text-muted)' }}
         >
           Cancel
         </button>
@@ -464,8 +464,9 @@ export default function ImageCropTool({ src, onApply, onClose }: ImageCropToolPr
           onClick={applyCrop}
           disabled={!canHaveCrop}
           className="px-6 py-2 rounded-xl text-sm font-bold
-                     bg-amber-500 hover:bg-amber-400 disabled:opacity-35 disabled:cursor-not-allowed
-                     text-black transition-colors"
+                     disabled:opacity-35 disabled:cursor-not-allowed
+                     transition-colors hover:brightness-110"
+          style={{ background: 'var(--warning)', color: 'var(--text-on-accent)' }}
         >
           ✓ Apply Crop
         </button>

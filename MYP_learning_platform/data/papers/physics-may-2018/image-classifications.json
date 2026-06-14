@@ -1,0 +1,217 @@
+[
+  {
+    "taskPath": "q4.tasks[f]",
+    "questionId": 4,
+    "taskLabel": "f",
+    "topic": "Kinematics & Motion Graphs",
+    "original_path": "/images/papers/physics-may-2018/q4-graphs.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: two-panel water-clock graphs. Graph 1: scatter+inverse curve of Time/s (y 0-35, ticks every 5) vs Area/cm² (x 0-2.5, ticks every 0.5), t = 15/area decreasing from 30 s at 0.5 cm² to ~7.5 s at 2.0 cm². Graph 2 (titled 'Variation of fill time with the inverse of different areas of hole'): straight line through origin, Time/s (y 0-35) vs Inverse of area/cm⁻² (x 0-2.5), gradient 15 s·cm², points (0.5,7.5) to (2.0,30).",
+    "generated_path": "/images/papers/physics-may-2018/q4-graphs.svg",
+    "needs_review": false,
+    "approved": true
+  },
+  {
+    "taskPath": "q6.tasks[c]",
+    "questionId": 6,
+    "taskLabel": "c",
+    "topic": "Proportionality graph shapes",
+    "original_path": "/images/papers/physics-may-2018/q6c-graph-options.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: four multiple-choice graph-shape sketches (no numeric axes), labelled A-D. A: straight line through origin (directly proportional). B: upward-curving line, increasing gradient (concave up). C: decreasing decay curve toward zero. D: straight line with positive y-intercept and negative gradient.",
+    "generated_path": "/images/papers/physics-may-2018/q6c-graph-options.svg",
+    "needs_review": false,
+    "approved": true
+  },
+  {
+    "taskPath": "q6.tasks[d]",
+    "questionId": 6,
+    "taskLabel": "d",
+    "topic": "Non-proportional line graph",
+    "original_path": "/images/papers/physics-may-2018/q6d-graph.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG titled 'Variation of time to empty the water tube with initial height of water in the tube': scatter + best-fit straight line, Time/s (y 0-16, ticks every 2) vs Initial height of water/m (x 0-0.6, ticks every 0.1). Line has positive y-intercept ~5.0 s (NOT through origin); points (0.1,6.4),(0.2,9.0),(0.3,11.1),(0.4,13.0),(0.5,14.2).",
+    "generated_path": "/images/papers/physics-may-2018/q6d-graph.svg",
+    "needs_review": false,
+    "approved": true
+  },
+  {
+    "taskPath": "q6.tasks[e]",
+    "questionId": 6,
+    "taskLabel": "e",
+    "topic": "Validity of data range",
+    "original_path": "/images/papers/physics-may-2018/q6e-student-graphs.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: four student-method graphs A-D, each Time/s (y 0-35) vs Initial height of water/m (x 0-0.6). Method A: steep straight line over narrow low-height range (0.05-0.11 m). Method B: straight line, y-intercept ~11, points clustered 0.18-0.28 m. Method C: straight line, y-intercept ~15, points clustered 0.40-0.52 m. Method D (most valid): full-range square-root curve t≈40√h covering 0.02-0.58 m, showing the true non-linear relationship.",
+    "generated_path": "/images/papers/physics-may-2018/q6e-student-graphs.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q7",
+    "questionId": 7,
+    "taskLabel": null,
+    "topic": "Energy consumption data",
+    "original_path": "/images/papers/physics-may-2018/q7-energy-graph.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG titled 'Electrical energy consumption between 1975 and 2005 – China compared to the world average': two rising line series, Electrical energy consumption / kWh per person per year (y 0-3500, ticks every 500) vs Year (x 1970-2010, ticks every 5). World average rises ~1350 (1975) to ~2600 (2005). China rises ~700 (1975) to ~3050 (2005), crossing above the world average around 2000. Key distinguishes China and World average.",
+    "generated_path": "/images/papers/physics-may-2018/q7-energy-graph.svg",
+    "needs_review": false,
+    "approved": true
+  },
+  {
+    "taskPath": "q7.tasks[c]",
+    "questionId": 7,
+    "taskLabel": "c",
+    "topic": "Population data",
+    "original_path": "/images/papers/physics-may-2018/q7c-population-graph.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG titled 'Population of China between 1975 and 2005': single rising line, Population / billions (y 0.80-1.30, ticks every 0.05) vs Year (x 1975-2005, ticks every 5). Population rises from ~0.83 billion (1975) to ~1.26 billion (2005).",
+    "generated_path": "/images/papers/physics-may-2018/q7c-population-graph.svg",
+    "needs_review": false,
+    "approved": true
+  },
+  {
+    "taskPath": "q1.tasks[a]",
+    "questionId": 1,
+    "taskLabel": "a",
+    "topic": "Electromagnetic Induction & Motors",
+    "original_path": "/images/papers/physics-may-2018/q1a-field-diagrams.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: four multiple-choice bar-magnet field-line diagrams A-D, each magnet red N (top) / dark S (bottom). A: radial straight arrows pointing outward (incorrect). B: closed field loops leaving the N pole and entering the S pole, arrows pointing away from N (correct). C: same loops but arrows reversed, pointing into N (incorrect). D: nested concentric closed ovals around the whole magnet (incorrect).",
+    "generated_path": "/images/papers/physics-may-2018/q1a-field-diagrams.svg",
+    "needs_review": false,
+    "approved": true
+  },
+  {
+    "taskPath": "q1.tasks[d]",
+    "questionId": 1,
+    "taskLabel": "d",
+    "topic": "Electromagnetic Induction & Motors",
+    "original_path": "/images/papers/physics-may-2018/q1d-transformer.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: transformer circuit on a toroidal iron core. Primary coil P (left, 10 turns, copper windings) connected to a Power supply 110 V battery (+/-). Secondary coil S (right, 20 turns) connected to an ammeter (A circle). Core labelled P and S.",
+    "generated_path": "/images/papers/physics-may-2018/q1d-transformer.svg",
+    "needs_review": false,
+    "approved": true
+  },
+  {
+    "taskPath": "q1.tasks[e]",
+    "questionId": 1,
+    "taskLabel": "e",
+    "topic": "Electromagnetic Induction & Motors",
+    "original_path": "/images/papers/physics-may-2018/q1e-table.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG data table: columns Primary coil / Secondary coil; rows Voltage (24 V / 12 V) and Current (2.50 A / 4.75 A). Shaded teal header row, clean ruled grid.",
+    "generated_path": "/images/papers/physics-may-2018/q1e-table.svg",
+    "needs_review": false,
+    "approved": true
+  },
+  {
+    "taskPath": "q2",
+    "questionId": 2,
+    "taskLabel": null,
+    "topic": "Solar System, Gravity & Space",
+    "original_path": "/images/papers/physics-may-2018/q2-ski-slopes.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: two side-by-side illustrative panels. Left: outdoor real snow slope with pine trees on the ridge and a skier descending. Right: indoor floodlit ski slope (dark ceiling, overhead lamps, ski-lift pylon, distant skiers, foreground pine).",
+    "generated_path": "/images/papers/physics-may-2018/q2-ski-slopes.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q2.tasks[c]",
+    "questionId": 2,
+    "taskLabel": "c",
+    "topic": "Solar System, Gravity & Space",
+    "original_path": "/images/papers/physics-may-2018/q2c-slope-diagram.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: ski-slope ramp diagram with vertical height marked 50 m and slope length marked 205 m (red dimension arrows), plus a skier silhouette holding skis labelled 'Mass of skier 52 kg'.",
+    "generated_path": "/images/papers/physics-may-2018/q2c-slope-diagram.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q2.tasks[e]",
+    "questionId": 2,
+    "taskLabel": "e",
+    "topic": "Solar System, Gravity & Space",
+    "original_path": "/images/papers/physics-may-2018/q2d-comparison.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: two ski-slope ramps side by side, labelled 'A: Real snow slope' and 'B: Indoor ski slope', each a snow-covered ramp with a start hut at the top.",
+    "generated_path": "/images/papers/physics-may-2018/q2d-comparison.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q6.tasks[a]",
+    "questionId": 6,
+    "taskLabel": "a",
+    "topic": "Kinematics & Motion Graphs",
+    "original_path": "/images/papers/physics-may-2018/q6a-simulation.png",
+    "image_type": "code_rendered",
+    "render_component": "RateSim",
+    "render_data": {
+      "title": "Water-clock simulation — time to empty each tube",
+      "source": "MYP physics-may-2018",
+      "mode": "bars",
+      "variable": "Initial height of water in the tube",
+      "metric": "Time to empty the tube / s",
+      "task": "Press Water release to start the tubes draining; read the stopwatch for the 8 cm tube. Answer: 12.8 s.",
+      "bars": [
+        { "label": "2 cm", "time_s": 6.4 },
+        { "label": "4 cm", "time_s": 9.0 },
+        { "label": "6 cm", "time_s": 11.1 },
+        { "label": "8 cm", "time_s": 12.8 },
+        { "label": "10 cm", "time_s": 14.3 }
+      ],
+      "answer": "8 cm tube: 12.8 s",
+      "trend": "Time to empty increases with initial height, but not in proportion (a square-root-like relationship)."
+    },
+    "image_prompt": "SVG: water-clock simulation panel. Tabs 'Water simulation' / 'Final time 8 cm'. 'Water release' Start button. Row of five small analog stopwatches (all reading zero). Five water tubes with taps, water heights labelled 6 cm, 10 cm, 2 cm, 8 cm, 4 cm. Brace connecting to five answer boxes reading 0.0 s, 0.0 s, 0.0 s, ? (highlighted), 0.0 s.",
+    "generated_path": "/images/papers/physics-may-2018/q6a-simulation.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q6.tasks[a]",
+    "questionId": 6,
+    "taskLabel": "a",
+    "topic": "Kinematics & Motion Graphs",
+    "original_path": "/images/papers/physics-may-2018/q6a-stopwatch.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: large analog stopwatch, 60-second dial (labels 60/5/10/15/.../55), red hand reading 12.8 s (between 10 and 15), title 'Final time 8 cm'.",
+    "generated_path": "/images/papers/physics-may-2018/q6a-stopwatch.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q7.tasks[e]",
+    "questionId": 7,
+    "taskLabel": "e",
+    "topic": "Solar System, Gravity & Space",
+    "original_path": "/images/papers/physics-may-2018/q7e-hydro-diagram.png",
+    "image_type": "code_rendered",
+    "render_component": "DragSort",
+    "render_data": {
+      "mode": "order",
+      "title": "Energy transformations in a hydroelectric power plant",
+      "source": "MYP physics-may-2018",
+      "prompt": "Drag the forms of energy into the correct order of transformation that takes place in a hydroelectric power plant.",
+      "items": [
+        "Gravitational potential energy",
+        "Kinetic energy",
+        "Electrical energy"
+      ],
+      "correctOrder": [
+        "Gravitational potential energy",
+        "Kinetic energy",
+        "Electrical energy"
+      ]
+    },
+    "image_prompt": "SVG: cross-section of a hydroelectric facility. Right: Reservoir behind a Dam. Penstock pipe carries water (flow arrow) down to a Turbine, connected by a shaft to a Generator, then a Transformer, then Power output to the left. Tailrace river outflow at bottom-left with flow arrow.",
+    "generated_path": "/images/papers/physics-may-2018/q7e-hydro-diagram.svg",
+    "needs_review": true,
+    "approved": false
+  }
+]

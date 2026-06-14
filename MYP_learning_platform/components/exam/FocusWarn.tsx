@@ -14,9 +14,9 @@ export default function FocusWarn() {
   return (
     <div
       className="fixed inset-0 z-[9999] flex items-center justify-center"
-      style={{ background: 'rgba(180, 0, 0, 0.95)' }}
+      style={{ background: 'color-mix(in srgb, var(--danger) 95%, transparent)' }}
     >
-      <div className="text-center text-white max-w-md px-6">
+      <div className="text-center max-w-md px-6" style={{ color: 'var(--text-on-accent)' }}>
         {/* Warning icon */}
         <div className="text-6xl mb-4">⚠️</div>
 
@@ -33,8 +33,11 @@ export default function FocusWarn() {
           {[0, 1, 2].map((i) => (
             <div
               key={i}
-              className="w-5 h-5 rounded-full border-2 border-white transition-all"
-              style={{ background: i < strikes ? '#ffffff' : 'transparent' }}
+              className="w-5 h-5 rounded-full border-2 transition-all"
+              style={{
+                borderColor: 'var(--text-on-accent)',
+                background: i < strikes ? 'var(--text-on-accent)' : 'transparent',
+              }}
               title={i < strikes ? 'Violation used' : 'Remaining'}
             />
           ))}
@@ -58,8 +61,8 @@ export default function FocusWarn() {
           onClick={dismissStrike}
           className="px-8 py-3 rounded-xl font-bold text-lg transition hover:scale-105 active:scale-95"
           style={{
-            background: '#ffffff',
-            color: '#b40000',
+            background: 'var(--surface-elevated)',
+            color: 'var(--danger)',
           }}
         >
           {maxReached ? 'Submit Exam' : 'Return to Exam'}

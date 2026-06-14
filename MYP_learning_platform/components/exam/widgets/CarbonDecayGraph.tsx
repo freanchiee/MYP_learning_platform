@@ -60,8 +60,8 @@ export default function CarbonDecayGraph() {
   const handleMouseLeave = useCallback(() => setHover(null), [])
 
   return (
-    <div className="w-full overflow-x-auto">
-      <div className="text-center text-xs text-gray-500 font-medium mb-1">
+    <div className="figure-surface w-full overflow-x-auto p-2">
+      <div className="text-center text-xs text-ink-subtle font-medium mb-1">
         Carbon-14 Decay Curve — hover to read values
       </div>
       <svg

@@ -1,0 +1,273 @@
+[
+  {
+    "taskPath": "q3.tasks[g]",
+    "questionId": 3,
+    "taskLabel": "g",
+    "topic": "Rate of biodegradation",
+    "original_path": "/images/papers/chemistry-nov-2020/page-11.png",
+    "image_type": "code_rendered",
+    "render_component": "RateSim",
+    "render_data": {
+      "title": "Biodegradation of three plastic samples vs time",
+      "source": "MYP chemistry-nov-2020",
+      "mode": "saturating",
+      "xAxis": { "label": "Time / days", "min": 0, "max": 50, "tick": 10 },
+      "yAxis": { "label": "Biodegradation / %", "min": 0, "max": 60, "tick": 10 },
+      "variable": "particle size (surface area)",
+      "series": [
+        { "label": "A", "plateau": 55, "shape": "saturating", "particleSize": "smallest" },
+        { "label": "C", "plateau": 46, "shape": "saturating", "particleSize": "medium" },
+        { "label": "B", "plateau": 39, "shape": "saturating", "particleSize": "largest" }
+      ],
+      "answer": "Increasing particle size: A < C < B — A biodegrades fastest (smallest particles = largest surface area), B slowest.",
+      "note": "Smaller particle size gives larger surface area, so a faster rate of biodegradation."
+    },
+    "image_prompt": "SVG: line graph of biodegradation (%) versus time (days) for three plastic samples A, B and C with different particle sizes. x-axis 'Time / days' 0–50 (ticks every 10); y-axis 'Biodegradation / %' 0–60 (ticks every 10). Three saturating-growth curves all starting at the origin: A rises fastest and plateaus near 55–56%, C is intermediate plateauing near 46%, B rises slowest plateauing near 39%. Series labelled A, C, B top-to-bottom at the right ends.",
+    "generated_path": "/images/papers/chemistry-nov-2020/q3-biodegradation-curves.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q4.tasks[f]",
+    "questionId": 4,
+    "taskLabel": "f",
+    "topic": "Reaction rate vs temperature",
+    "original_path": "/images/papers/chemistry-nov-2020/page-17.png",
+    "image_type": "code_rendered",
+    "render_component": "RateSim",
+    "render_data": {
+      "title": "Average time taken for the glow stick to stop glowing",
+      "source": "MYP chemistry-nov-2020",
+      "mode": "scatter",
+      "xAxis": { "label": "Temperature of water / °C", "min": 0, "max": 70, "tick": 10 },
+      "yAxis": { "label": "Time the glow stick glows / min", "min": 0, "max": 600, "tick": 100 },
+      "variable": "temperature",
+      "lineOfBestFit": true,
+      "points": [
+        [5, 540],
+        [10, 420],
+        [20, 260],
+        [25, 195],
+        [30, 150],
+        [35, 120],
+        [50, 70],
+        [65, 60]
+      ],
+      "answer": "Reading the best-fit curve at 15 °C gives approximately 330 minutes (320–340 min).",
+      "note": "Scrub to 15 °C and read off the curve: ≈ 330 min. Higher temperature → faster reaction → shorter glow time."
+    },
+    "image_prompt": "SVG: scatter graph with best-fit decay curve titled 'Average time taken for the glow stick to stop glowing'. x-axis 'Temperature of water / °C' 0–70 (ticks every 10); y-axis 'Time the glow stick glows / min' 0–600 (ticks every 100). Data points approximately (5,540), (10,420), (20,260), (25,195), (30,150), (35,120), (50,70), (65,60) with a smooth exponential-decay best-fit curve through them; curve passes near 330 min at 15 °C and 250 min at 20 °C.",
+    "generated_path": "/images/papers/chemistry-nov-2020/q4-glowstick-time-temp.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q1",
+    "questionId": 1,
+    "taskLabel": null,
+    "topic": "Volcanoes and SiO₂ in lava",
+    "original_path": "/images/papers/chemistry-nov-2020/page-01.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: two-panel volcano scene replacing IB photos — left panel a black crusted lava field with bright molten orange-yellow lava rivers flowing across it; right panel a night-time volcanic crater erupting with a glowing lava fountain, spatter and smoke. Original composition and palette, copyright-safe.",
+    "generated_path": "/images/papers/chemistry-nov-2020/q1-volcano-lava.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q2.tasks[b]",
+    "questionId": 2,
+    "taskLabel": "b",
+    "topic": "Lewis structure of H₂S",
+    "original_path": "/images/papers/chemistry-nov-2020/page-03.png",
+    "image_type": "code_rendered",
+    "render_component": "DragSort",
+    "render_data": {
+      "mode": "select",
+      "title": "Lewis (dot-and-cross) structure of H₂S",
+      "source": "MYP chemistry-nov-2020",
+      "prompt": "Select the correct Lewis (dot-and-cross) structure of H₂S, then press Check.",
+      "options": [
+        { "id": "A", "label": "A", "correct": true },
+        { "id": "B", "label": "B" },
+        { "id": "C", "label": "C" },
+        { "id": "D", "label": "D" }
+      ],
+      "correct": "A"
+    },
+    "image_prompt": "SVG: four Lewis (dot-and-cross) structure options A–D for H₂S, each H–S–H with two bonding pairs and two lone pairs on sulfur. Option A is the correct structure (two bonding pairs as a dot+cross, two lone pairs as crosses top and bottom of S); B, C, D are distractors with mis-placed electrons. Radio-button circle above each. Dots in dark blue, crosses in dark red.",
+    "generated_path": "/images/papers/chemistry-nov-2020/q2-h2s-lewis.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q2",
+    "questionId": 2,
+    "taskLabel": null,
+    "topic": "Volcanic gases and noble gases",
+    "original_path": "/images/papers/chemistry-nov-2020/page-04.png",
+    "image_type": "text_only",
+    "image_prompt": "Mis-crop: page-04 is question text only (Q2c period of argon, Q2d isotopes of neon) with answer boxes — no diagram. Marked text_only.",
+    "generated_path": null,
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q3.tasks[a]",
+    "questionId": 3,
+    "taskLabel": "a",
+    "topic": "Alkenes A (ethene) and B (propene)",
+    "original_path": "/images/papers/chemistry-nov-2020/page-07.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: two displayed organic structures labelled A and B. A is ethene H₂C=CH₂ (two carbons joined by a double bond, two H on each carbon). B is propene CH₃–CH=CH₂ drawn as a bent skeleton (methyl-bearing carbon top-left, central CH, terminal =CH₂ on the right with the C=C double bond). Dark teal bonds and atom labels.",
+    "generated_path": "/images/papers/chemistry-nov-2020/q3-alkenes-AB.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q3.tasks[c]",
+    "questionId": 3,
+    "taskLabel": "c",
+    "topic": "Thermovalorization waste-to-energy",
+    "original_path": "/images/papers/chemistry-nov-2020/page-08.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: waste-to-energy (thermovalorization) process diagram with four numbered stages on a sky/ground scene — 1 Waste (dump truck tipping waste onto a burning pile with flames), 2 Water (a boiler/vessel of water producing steam piped onward), 3 Turbine (a bladed wheel turned by the steam), 4 Electricity (output arrow). Title 'A large machine that produces power by using hot gas to turn a wheel'.",
+    "generated_path": "/images/papers/chemistry-nov-2020/q3-waste-to-energy.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q4.tasks[b]",
+    "questionId": 4,
+    "taskLabel": "b",
+    "topic": "Phenyl oxalate molecule and reaction",
+    "original_path": "/images/papers/chemistry-nov-2020/page-13.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: skeletal structure of phenyl oxalate — two phenyl (benzene) rings each linked through an oxygen to a central oxalate unit –O–C(=O)–C(=O)–O–, with the ester linkage region highlighted by a soft dashed box. To the right: '+ H₂O₂' then a reaction arrow labelled 'catalyst' to 'products + light'. Caption 'Phenyl oxalate'.",
+    "generated_path": "/images/papers/chemistry-nov-2020/q4-phenyl-oxalate.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q4.tasks[c]",
+    "questionId": 4,
+    "taskLabel": "c",
+    "topic": "Glow-stick beakers with thermometers",
+    "original_path": "/images/papers/chemistry-nov-2020/page-14.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: five identical glass beakers of blue water, each holding a diagonal green glow stick and a red-liquid thermometer dipping in. Pink temperature-label boxes below read 5, 10, 15, 20, 25 °C. 'Diagram not to scale' top-right.",
+    "generated_path": "/images/papers/chemistry-nov-2020/q4-glowstick-beakers.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q4",
+    "questionId": 4,
+    "taskLabel": null,
+    "topic": "Glow-stick beakers (continuation, missing temperature)",
+    "original_path": "/images/papers/chemistry-nov-2020/page-15.png",
+    "image_type": "code_rendered",
+    "render_component": "ThermalSim",
+    "render_data": {
+      "title": "Glow-stick beakers — read the missing temperature",
+      "source": "MYP chemistry-nov-2020",
+      "mode": "thermometer",
+      "tempUnit": "C",
+      "thermometers": [
+        { "label": "30", "units": "C" },
+        { "label": "35", "units": "C" },
+        { "label": "50", "units": "C" },
+        { "label": "?", "units": "C", "answer": 65 }
+      ]
+    },
+    "image_prompt": "SVG: continuation of the glow-stick beaker apparatus — four beakers of blue water with green glow sticks and red thermometers at increasing column heights. Pink label boxes read 30, 35, 50 °C and one BLANK box (the temperature to be measured). A magnifier with 'Click' sits over the fourth thermometer.",
+    "generated_path": "/images/papers/chemistry-nov-2020/q4-glowstick-beakers-2.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q5",
+    "questionId": 5,
+    "taskLabel": null,
+    "topic": "UV-reactive beads under UV light",
+    "original_path": "/images/papers/chemistry-nov-2020/page-19.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: scene of two petri dishes on a wooden bench under purple UV-light cones with a digital timer reading 0:20:00. Left dish 'UV beads exposed to UV light after 20 minutes' has beads that have changed colour (green); right dish 'Beads protected by sunscreen' has beads that stayed white. 'UV light' labels with downward arrows over each cone.",
+    "generated_path": "/images/papers/chemistry-nov-2020/q5-uv-beads.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q5.tasks[a]",
+    "questionId": 5,
+    "taskLabel": "a",
+    "topic": "Three sunscreen bottles and results table",
+    "original_path": "/images/papers/chemistry-nov-2020/page-20.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: three sunscreen bottles — Hi-Sun (blue, ingredients Avobenzone/Homosalate/Octisalate/Octocrylene/Oxybenzone), Solar Flex (cream-orange, Homosalate/Octisalate/Octinoxate/Titanium dioxide), Aurum (light blue, Octinoxate/Octisalate/Octocylene/Zinc Oxide). Below, a results table 'Percentage of beads that changed colour after 20 minutes in UV light' with values 100, 28, 10.",
+    "generated_path": "/images/papers/chemistry-nov-2020/q5-sunscreens.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q5.tasks[b]",
+    "questionId": 5,
+    "taskLabel": "b",
+    "topic": "Electromagnetic spectrum and light sources",
+    "original_path": "/images/papers/chemistry-nov-2020/page-21.png",
+    "image_type": "code_rendered",
+    "render_component": "SpectrumSim",
+    "render_data": {
+      "title": "Electromagnetic spectrum — light sources",
+      "source": "MYP chemistry-nov-2020",
+      "mode": "sources",
+      "bands": ["IR", "Visible", "UVA", "UVB", "UVC"],
+      "energyAxis": "Energy increases left → right",
+      "sources": [
+        { "name": "Heat lamp", "covers": ["IR"] },
+        { "name": "Light bulb", "covers": ["IR", "Visible"] },
+        { "name": "UV lamp", "covers": ["UVA"] },
+        { "name": "Sunlight", "covers": ["IR", "Visible", "UVA", "UVB", "UVC"] }
+      ]
+    },
+    "image_prompt": "SVG: 'Energy increases' arrow above a horizontal electromagnetic-spectrum bar running IR → visible colours → UVA | UVB | UVC (dashed sub-band dividers). Below the bar, labelled emission-range arrows for 'Heat lamp' (IR/low energy), 'Light bulb' (IR through visible), 'UV lamp' (UVA region) and a dashed full-width 'Sunlight' range.",
+    "generated_path": "/images/papers/chemistry-nov-2020/q5-em-spectrum.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q6",
+    "questionId": 6,
+    "taskLabel": null,
+    "topic": "Myporium absorbance research question (text)",
+    "original_path": "/images/papers/chemistry-nov-2020/page-22.png",
+    "image_type": "text_only",
+    "image_prompt": "Mis-crop: page-22 is question text only (Q6a Solar Flex composition and the research question 'Is titanium dioxide the best blocker of UV light?') with an answer box — no diagram. Marked text_only.",
+    "generated_path": null,
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q6.tasks[c]",
+    "questionId": 6,
+    "taskLabel": "c",
+    "topic": "Absorbance measuring apparatus",
+    "original_path": "/images/papers/chemistry-nov-2020/page-23.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: absorbance/colorimeter apparatus on a bench — a light source emitting a beam ('Light' arrow) through a cuvette of purple sample held in a metal stand ('Sample'), into a detector ('Light meter') connected by a wavy cable to a yellow handheld meter showing '1.50' labelled 'Light absorbance'.",
+    "generated_path": "/images/papers/chemistry-nov-2020/q6-absorbance-apparatus.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q6.tasks[c]",
+    "questionId": 6,
+    "taskLabel": "c",
+    "topic": "Myporium absorbance data table and blank grid",
+    "original_path": "/images/papers/chemistry-nov-2020/page-24.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: results data table (Concentration of myporium / µmol dm⁻³: 0, 10, 30, 50, 70, 90, 100; Absorbance / AU: 0.00, 0.15, 0.40, 0.65, 0.60, 1.40, 1.50) above a blank plotting grid with minor and major gridlines, x-axis 'Concentration of myporium / µmol dm⁻³' 0–100 and y-axis 'Absorbance / AU' 0–1.50, for the student to plot points and a line of best fit.",
+    "generated_path": "/images/papers/chemistry-nov-2020/q6-absorbance-table-grid.svg",
+    "needs_review": true,
+    "approved": false
+  }
+]

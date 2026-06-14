@@ -1,0 +1,26 @@
+[
+  {
+    "taskPath": "q1.figImages[0]",
+    "questionId": 1,
+    "taskLabel": null,
+    "topic": "Sparkling mineral water — sealed bottle CO₂ dissolved",
+    "original_path": "/images/papers/chemistry-nov-2023/page-02.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: sealed sparkling mineral water bottle showing CO₂ gas under high pressure dissolving into water; arrow down from gas space into water; bubbles in liquid; green label 'SPARKLING MINERAL WATER'.",
+    "generated_path": "/images/papers/chemistry-nov-2023-v1/page-02.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q1.figImages[1]",
+    "questionId": 1,
+    "taskLabel": null,
+    "topic": "Sparkling mineral water — opened bottle CO₂ escapes",
+    "original_path": "/images/papers/chemistry-nov-2023/page-03.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: same sparkling water bottle but opened, cap removed and to the side; CO₂ cloud above neck; up arrow from liquid surface to CO₂ cloud; rapidly rising bubbles; caption 'Pressure drops → CO₂ comes out of solution'.",
+    "generated_path": "/images/papers/chemistry-nov-2023-v1/page-03.svg",
+    "needs_review": true,
+    "approved": false
+  }
+]

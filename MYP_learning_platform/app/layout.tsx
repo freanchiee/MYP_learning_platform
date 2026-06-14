@@ -1,7 +1,10 @@
 import type { Metadata } from 'next'
 import { Source_Sans_3, JetBrains_Mono } from 'next/font/google'
 import { Toaster } from 'react-hot-toast'
+import './themes.css'
 import './globals.css'
+import { ThemeProvider } from '@/components/theme/ThemeProvider'
+import { THEME_BOOTSTRAP_SCRIPT } from '@/lib/theme'
 
 const sourceSans3 = Source_Sans_3({
   subsets: ['latin'],
@@ -29,34 +32,32 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${sourceSans3.variable} ${jetbrainsMono.variable}`}>
-      <body className="bg-gray-50 font-sans antialiased">
-        {children}
-        <Toaster
-          position="top-right"
-          toastOptions={{
-            duration: 4000,
-            style: {
-              background: '#fff',
-              color: '#111827',
-              border: '1px solid #e5e7eb',
-              borderRadius: '0.75rem',
-              fontSize: '0.875rem',
-            },
-            success: {
-              iconTheme: {
-                primary: '#3daa35',
-                secondary: '#fff',
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={`${sourceSans3.variable} ${jetbrainsMono.variable}`}
+    >
+      <body className="font-sans antialiased">
+        {/* No-flash theme bootstrap — runs synchronously before paint */}
+        <script dangerouslySetInnerHTML={{ __html: THEME_BOOTSTRAP_SCRIPT }} />
+        <ThemeProvider>
+          {children}
+          <Toaster
+            position="top-right"
+            toastOptions={{
+              duration: 4000,
+              style: {
+                background: 'var(--surface-elevated)',
+                color: 'var(--text)',
+                border: '1px solid var(--border)',
+                borderRadius: 'var(--radius-panel)',
+                fontSize: '0.875rem',
               },
-            },
-            error: {
-              iconTheme: {
-                primary: '#c0392b',
-                secondary: '#fff',
-              },
-            },
-          }}
-        />
+              success: { iconTheme: { primary: 'var(--success)', secondary: 'var(--surface)' } },
+              error: { iconTheme: { primary: 'var(--danger)', secondary: 'var(--surface)' } },
+            }}
+          />
+        </ThemeProvider>
       </body>
     </html>
   )

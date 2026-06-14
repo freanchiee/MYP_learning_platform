@@ -1,0 +1,315 @@
+[
+  {
+    "taskPath": "q1",
+    "questionId": 1,
+    "taskLabel": null,
+    "topic": "Work, Energy & Power",
+    "original_path": "/images/papers/physics-may-2023/q1-horses.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: two draft horses pulling a plough on a hillside, farmer guiding it.",
+    "generated_path": "/images/papers/physics-may-2023/q1-horses.svg",
+    "needs_review": false,
+    "approved": true,
+    "regenerated_at": "2026-06-12T10:10:40.055Z"
+  },
+  {
+    "taskPath": "q2.tasks[a]",
+    "questionId": 2,
+    "taskLabel": "a",
+    "topic": "Dispersion of light",
+    "original_path": "/images/papers/physics-may-2023/q2-prism.png",
+    "image_type": "code_rendered",
+    "image_prompt": "SVG: white light through a triangular prism dispersing into the visible spectrum, red at the top.",
+    "generated_path": "/images/papers/physics-may-2023/q2-prism.svg",
+    "needs_review": true,
+    "approved": false,
+    "render_component": "SpectrumSim",
+    "render_data": {
+      "title": "Dispersion of white light through a prism",
+      "source": "MYP physics-may-2023",
+      "mode": "scrub",
+      "axis": "wavelength decreases left → right (red → violet)",
+      "bands": [
+        "red 680nm",
+        "orange 620nm",
+        "yellow 580nm",
+        "green 530nm",
+        "blue 470nm",
+        "indigo 445nm",
+        "violet 400nm"
+      ],
+      "target": "red 680nm",
+      "wavelengthRange": [
+        "680 nm",
+        "400 nm"
+      ],
+      "visibleRange": [
+        "700 nm",
+        "400 nm"
+      ]
+    }
+  },
+  {
+    "taskPath": "q3",
+    "questionId": 3,
+    "taskLabel": null,
+    "topic": "Carbon-14 atom",
+    "original_path": "/images/papers/physics-may-2023/q3-carbon14-atom.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: Bohr model of carbon-14 — nucleus of 6 protons + 8 neutrons, electron shells 2 and 4.",
+    "generated_path": "/images/papers/physics-may-2023/q3-carbon14-atom.svg",
+    "needs_review": false,
+    "approved": true
+  },
+  {
+    "taskPath": "q3.tasks[c]",
+    "questionId": 3,
+    "taskLabel": "c",
+    "topic": "Gamma vs X-ray origin",
+    "original_path": "/images/papers/physics-may-2023/q3c-radiation-atom.png",
+    "image_type": "code_rendered",
+    "image_prompt": "SVG: atom emitting a gamma ray (purple) from the nucleus and an X-ray (red) from the inner electron orbit, with a key and draggable items (Gamma ray, X-ray, Cosmic ray, Ultrasound wave).",
+    "generated_path": "/images/papers/physics-may-2023/q3c-radiation-atom.svg",
+    "needs_review": true,
+    "approved": false,
+    "render_component": "DragSort",
+    "render_data": {
+      "title": "Where is each type of radiation produced?",
+      "source": "MYP physics-may-2023",
+      "mode": "bins",
+      "prompt": "Drag each type of radiation to where it is produced.",
+      "items": [
+        "Gamma ray",
+        "X-ray",
+        "Cosmic ray",
+        "Ultrasound wave"
+      ],
+      "bins": [
+        "Produced from nucleus",
+        "Produced from inner electron orbit",
+        "Neither (tray)"
+      ],
+      "correct": {
+        "Gamma ray": "Produced from nucleus",
+        "X-ray": "Produced from inner electron orbit",
+        "Cosmic ray": "Neither (tray)",
+        "Ultrasound wave": "Neither (tray)"
+      }
+    }
+  },
+  {
+    "taskPath": "q4",
+    "questionId": 4,
+    "taskLabel": null,
+    "topic": "Syringe gas compression",
+    "original_path": "/images/papers/physics-may-2023/q4-syringe.png",
+    "image_type": "code_rendered",
+    "image_prompt": "SVG: vertical syringe with masses on the plunger compressing a sealed air column, downward force arrow.",
+    "generated_path": "/images/papers/physics-may-2023/q4-syringe.svg",
+    "needs_review": true,
+    "approved": false,
+    "render_component": "GasLawSim",
+    "render_data": {
+      "title": "Compressing air in a sealed syringe (Boyle's law)",
+      "source": "MYP physics-may-2023",
+      "vessel": "vertical sealed syringe",
+      "plungerArea": 0.00082,
+      "atmPressure": 101300,
+      "g": 9.81,
+      "massSlider_kg": [
+        0,
+        0.5,
+        1.0,
+        1.4,
+        2.0
+      ],
+      "coupling": "P = P_atm + mg/A; at constant T, P·V = constant (Boyle's law). At m = 1.4 kg, P ≈ 118048 Pa.",
+      "constantPV_kPa_cm3": 11000,
+      "pvUnit": "kPa·cm³"
+    }
+  },
+  {
+    "taskPath": "q4.tasks[e]",
+    "questionId": 4,
+    "taskLabel": "e",
+    "topic": "Boyle's law graphs",
+    "original_path": "/images/papers/physics-may-2023/q4e-graphs.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: two graphs — Volume vs Pressure (inverse curve) and 1/V ×10⁻³ vs Pressure (straight line through origin).",
+    "generated_path": "/images/papers/physics-may-2023/q4e-graphs.svg",
+    "needs_review": false,
+    "approved": true
+  },
+  {
+    "taskPath": "q4.tasks[f]",
+    "questionId": 4,
+    "taskLabel": "f",
+    "topic": "pV constant graph",
+    "original_path": "/images/papers/physics-may-2023/q4f-pv-graph.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: pV / kPa cm³ vs Pressure / kPa, approximately horizontal line at ~11000 with scattered points.",
+    "generated_path": "/images/papers/physics-may-2023/q4f-pv-graph.svg",
+    "needs_review": false,
+    "approved": true
+  },
+  {
+    "taskPath": "q5",
+    "questionId": 5,
+    "taskLabel": null,
+    "topic": "Balloon circumference",
+    "original_path": "/images/papers/physics-may-2023/q5-balloon.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: orange balloon with a tape measure around its circumference; labels Balloon and Circumference.",
+    "generated_path": "/images/papers/physics-may-2023/q5-balloon.svg",
+    "needs_review": false,
+    "approved": true,
+    "regenerated_at": "2026-06-12T10:23:42.681Z"
+  },
+  {
+    "taskPath": "q6",
+    "questionId": 6,
+    "taskLabel": null,
+    "topic": "Balloon rocket",
+    "original_path": "/images/papers/physics-may-2023/q6-balloon-rocket.png",
+    "image_type": "code_rendered",
+    "image_prompt": "SVG: balloon rocket on a string between two stands, straw threaded on string, escaping-air arrow.",
+    "generated_path": "/images/papers/physics-may-2023/q6-balloon-rocket.svg",
+    "needs_review": true,
+    "approved": false,
+    "render_component": "ProjectileSim",
+    "render_data": {
+      "title": "Balloon rocket — escaping-air thrust along a string (Newton's 3rd law)",
+      "source": "MYP physics-may-2023",
+      "mode": "launch",
+      "g": 9.81,
+      "readout": "distance travelled / m",
+      "launch": {
+        "angleDeg": 6,
+        "speed": 9.9,
+        "angleMin": 0,
+        "angleMax": 20,
+        "speedMin": 4,
+        "speedMax": 11,
+        "g": 9.81
+      }
+    }
+  },
+  {
+    "taskPath": "q6.tasks[e]",
+    "questionId": 6,
+    "taskLabel": "e",
+    "topic": "Hypothesis graphs",
+    "original_path": "/images/papers/physics-may-2023/q6e-hypothesis-graphs.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: three graphs of Distance vs Circumference, Circumference cubed (straight line through origin), and 1/circumference.",
+    "generated_path": "/images/papers/physics-may-2023/q6e-hypothesis-graphs.svg",
+    "needs_review": false,
+    "approved": true
+  },
+  {
+    "taskPath": "q7.tasks[a]",
+    "questionId": 7,
+    "taskLabel": "a",
+    "topic": "Waveform frequency",
+    "original_path": "/images/papers/physics-may-2023/q7a-waveform.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: sine waveform, Position / cm (-1.5 to 1.5) vs Time / s, ~3 cycles.",
+    "generated_path": "/images/papers/physics-may-2023/q7a-waveform.svg",
+    "needs_review": false,
+    "approved": true,
+    "regenerated_at": "2026-06-12T10:33:50.244Z"
+  },
+  {
+    "taskPath": "q7.tasks[b]",
+    "questionId": 7,
+    "taskLabel": "b",
+    "topic": "Matching waveform (answer C)",
+    "original_path": "/images/papers/physics-may-2023/q7b-waveforms.png",
+    "image_type": "code_rendered",
+    "image_prompt": "SVG: four waveform options A–D of different frequencies; C matches the frequency in part (a).",
+    "generated_path": "/images/papers/physics-may-2023/q7b-waveforms.svg",
+    "needs_review": true,
+    "approved": false,
+    "regenerated_at": "2026-06-12T11:00:35.062Z",
+    "render_component": "WaveSim",
+    "render_data": {
+      "title": "Select the waveform with the same frequency as part (a)",
+      "source": "MYP physics-may-2023",
+      "mode": "match",
+      "task": "Select the option whose waveform has the same frequency (period) as the reference waveform in part (a).",
+      "windowSeconds": 9,
+      "amplitudeGridUnits": 3,
+      "target": {
+        "id": "ref",
+        "label": "Part (a)",
+        "period_s": 1.8,
+        "frequency_Hz": 0.56,
+        "amplitude_cm": 1.5
+      },
+      "options": {
+        "A": {
+          "id": "A",
+          "period_s": 0.9,
+          "frequency_Hz": 1.11,
+          "amplitude_cm": 1.5
+        },
+        "B": {
+          "id": "B",
+          "period_s": 3.6,
+          "frequency_Hz": 0.28,
+          "amplitude_cm": 1.0
+        },
+        "C": {
+          "id": "C",
+          "period_s": 1.8,
+          "frequency_Hz": 0.56,
+          "amplitude_cm": 1.0
+        },
+        "D": {
+          "id": "D",
+          "period_s": 1.2,
+          "frequency_Hz": 0.83,
+          "amplitude_cm": 1.5
+        }
+      },
+      "correct": "C"
+    }
+  },
+  {
+    "taskPath": "q7.tasks[c]",
+    "questionId": 7,
+    "taskLabel": "c",
+    "topic": "Mobile phone network",
+    "original_path": "/images/papers/physics-may-2023/q7-phone-network.png",
+    "image_type": "code_rendered",
+    "image_prompt": "SVG: mobile phone network — Pedro and Natasha with phones, Cell Tower A and Cell Tower B, radio-wave links and a wired/fibre link between towers.",
+    "generated_path": "/images/papers/physics-may-2023/q7-phone-network.svg",
+    "needs_review": true,
+    "approved": false,
+    "render_component": "DragSort",
+    "render_data": {
+      "title": "Order the steps of the mobile phone network",
+      "source": "MYP physics-may-2023",
+      "mode": "order",
+      "prompt": "Put the statements in order to outline the process shown in the animation.",
+      "items": [
+        "Pedro's phone converts his voice into an electrical signal, then into a radio wave",
+        "The radio wave is transmitted from Pedro's phone to Tower A",
+        "Tower A sends the signal through wires / fibre-optic cables to Tower B",
+        "Natasha's phone receives the radio wave and converts it back into sound"
+      ],
+      "slots": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctOrder": [
+        "Pedro's phone converts his voice into an electrical signal, then into a radio wave",
+        "The radio wave is transmitted from Pedro's phone to Tower A",
+        "Tower A sends the signal through wires / fibre-optic cables to Tower B",
+        "Natasha's phone receives the radio wave and converts it back into sound"
+      ]
+    }
+  }
+]

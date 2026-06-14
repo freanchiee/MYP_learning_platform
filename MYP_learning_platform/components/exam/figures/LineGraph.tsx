@@ -72,6 +72,7 @@ export default function LineGraph({ data }: { data: LineGraphData }) {
   const yAxisLabel = data.yUnit ? `${data.yLabel} (${data.yUnit})` : data.yLabel
 
   return (
+    <div className="figure-surface inline-block p-2">
     <svg
       viewBox={`0 0 ${W} ${H}`}
       width={W}
@@ -157,5 +158,6 @@ export default function LineGraph({ data }: { data: LineGraphData }) {
         <circle key={i} cx={sx(p.x)} cy={sy(p.y)} r={4} fill="#2563eb" />
       ))}
     </svg>
+    </div>
   )
 }

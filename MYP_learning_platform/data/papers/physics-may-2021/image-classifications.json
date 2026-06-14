@@ -1,0 +1,233 @@
+[
+  {
+    "taskPath": "q2.tasks[c]",
+    "questionId": 2,
+    "taskLabel": "c",
+    "topic": "Radioactive half-life",
+    "original_path": "/images/papers/physics-may-2021/q2c-halflife.png",
+    "image_type": "code_rendered",
+    "image_prompt": "SVG: radioactive decay curve of copper-67. X-axis Time / h, 0 to 300, ticks every 50. Y-axis Mass of copper-67 / g, 0 to 100, ticks every 10. Smooth exponential decay starting at 100 g at t=0, passing through 50 g at ~62 h (half-life), ~25 g at ~124 h, falling to ~3-4 g at 300 h.",
+    "generated_path": "/images/papers/physics-may-2021/q2c-halflife.svg",
+    "render_component": "DecaySim",
+    "render_data": {
+      "title": "Decay of copper-67",
+      "source": "MYP physics-may-2021",
+      "isotope": "Cu-67",
+      "decayMode": "beta and gamma",
+      "halfLife": 62,
+      "units": "h",
+      "initialMass": 100,
+      "massUnits": "g",
+      "axisMax": 300,
+      "axis": {
+        "x": "Time / h",
+        "y": "Mass of copper-67 / g"
+      }
+    },
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q4.tasks[d]",
+    "questionId": 4,
+    "taskLabel": "d",
+    "topic": "Motion graphs (s vs t²)",
+    "original_path": "/images/papers/physics-may-2021/q4d-graphs.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: four small qualitative graphs labelled A-D, each with y-axis 's' and x-axis 't²', no numeric ticks. A: straight line with positive y-intercept (not through origin). B: straight line through the origin (correct answer for s = ½at²). C: concave-down curve rising then flattening (square-root shape). D: straight line decreasing from upper-left to lower-right.",
+    "generated_path": "/images/papers/physics-may-2021/q4d-graphs.svg",
+    "needs_review": false,
+    "approved": true
+  },
+  {
+    "taskPath": "q6.tasks[e]",
+    "questionId": 6,
+    "taskLabel": "e",
+    "topic": "Lens focal length (1/dᵢ vs 1/dₒ)",
+    "original_path": "/images/papers/physics-may-2021/q6e-graphs.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: four scatter graphs labelled A-D, all with the same six data points and both axes 0 to 6 in m⁻¹ (x = 1/dₒ, y = 1/dᵢ). Data points: (1.43,4.35), (1.67,3.67 anomalous), (2.00,3.87), (2.50,3.33), (3.33,2.63), (5.00,0.95). A: kinked/jagged line through points (not straight), y-intercept ~4.7. B: straight best-fit line through all points including the anomaly, y-intercept ~5.5. C (correct): straight best-fit line ignoring the anomalous point, y-intercept ~5.8. D: concave-down curved line, y-intercept ~4.4.",
+    "generated_path": "/images/papers/physics-may-2021/q6e-graphs.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q1",
+    "questionId": 1,
+    "taskLabel": null,
+    "topic": "Radio communication (Marconi)",
+    "original_path": "/images/papers/physics-may-2021/q1-radio.png",
+    "image_type": "text_only",
+    "image_prompt": "Mis-crop: the source PNG is a screenshot of the Question 1 stem and the 1a dropdown menus (Select / faster than / slower than... and wavelength options) — no diagram present. Marked text_only so nothing is rendered. Re-crop or drop.",
+    "generated_path": null,
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q2.tasks[b]",
+    "questionId": 2,
+    "taskLabel": "b",
+    "topic": "Beta deflection in electric field",
+    "original_path": "/images/papers/physics-may-2021/q2b-beta-field.png",
+    "image_type": "code_rendered",
+    "image_prompt": "SVG: three panels A, B, C, each a dark cell with a positive plate (top, +) and negative plate (bottom, −) of a parallel-plate field, and a copper-67 nucleus at left emitting a beta particle. A: dashed path travels straight through (no deflection). B: dashed path curves downward toward the negative plate. C (correct): dashed path curves upward toward the positive plate — beta is negative so it is attracted to +.",
+    "generated_path": "/images/papers/physics-may-2021/q2b-beta-field.svg",
+    "render_component": "FieldSim",
+    "render_data": {
+      "title": "Beta radiation in an electric field",
+      "source": "MYP physics-may-2021",
+      "field": "E",
+      "plates": {
+        "top": "+",
+        "bottom": "−"
+      },
+      "particles": [
+        { "name": "alpha (+)", "charge": 1 },
+        { "name": "beta (−)", "charge": -1 },
+        { "name": "gamma (0)", "charge": 0 }
+      ],
+      "particle": "beta",
+      "expected": "Beta particles are electrons (negative), so they are attracted to and deflect upward toward the positive (top) plate — this is image C."
+    },
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q3.tasks[d]",
+    "questionId": 3,
+    "taskLabel": "d",
+    "topic": "Energy transformation chain (regenerative braking)",
+    "original_path": "/images/papers/physics-may-2021/q3d-energy-diagram.png",
+    "image_type": "code_rendered",
+    "image_prompt": "SVG: energy-transformation flow diagram with a draggable label bank (Sound energy, Chemical potential energy, Kinetic energy, Gravitational potential energy). An empty input box branches with two blue arrows to an 'Electrical energy' box and a 'Thermal energy' box; the Electrical energy box arrows on to an empty output box. Student drags Kinetic energy into the input and Chemical potential energy into the output.",
+    "generated_path": "/images/papers/physics-may-2021/q3d-energy-diagram.svg",
+    "render_component": "DragSort",
+    "render_data": {
+      "mode": "slots",
+      "title": "Regenerative braking energy chain",
+      "source": "MYP physics-may-2021",
+      "prompt": "Fill the two blanks in the regenerative-braking energy chain: Kinetic energy → [blank 1] → Electrical energy → [blank 2] → Thermal energy.",
+      "items": [
+        "Kinetic energy",
+        "Chemical potential energy",
+        "Sound energy",
+        "Gravitational potential energy"
+      ],
+      "slots": [
+        "Kinetic energy → [ ? ] → Electrical energy",
+        "Electrical energy → [ ? ] → Thermal energy"
+      ],
+      "correct": {
+        "Kinetic energy → [ ? ] → Electrical energy": "Kinetic energy",
+        "Electrical energy → [ ? ] → Thermal energy": "Chemical potential energy"
+      }
+    },
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q4",
+    "questionId": 4,
+    "taskLabel": null,
+    "topic": "Variables selection table (Galileo ramp)",
+    "original_path": "/images/papers/physics-may-2021/q4-galileo.png",
+    "image_type": "code_rendered",
+    "image_prompt": "SVG: clean ruled variables-selection table. Rows: Mass of the ball, Time taken, Size of the ball, Distance travelled by the ball, Angle of the slope. Columns: Independent variable, Dependent variable, Control variable, each cell an empty checkbox for the student to tick. Shaded header row.",
+    "generated_path": "/images/papers/physics-may-2021/q4-galileo.svg",
+    "render_component": "DragSort",
+    "render_data": {
+      "mode": "bins",
+      "title": "Galileo's ramp — classify the variables",
+      "source": "MYP physics-may-2021",
+      "prompt": "Place each quantity into the correct column: Independent, Dependent, or Control variable.",
+      "items": [
+        "Mass of the ball",
+        "Time taken",
+        "Size of the ball",
+        "Distance travelled by the ball",
+        "Angle of the slope"
+      ],
+      "bins": [
+        "Independent variable",
+        "Dependent variable",
+        "Control variable"
+      ],
+      "correct": {
+        "Independent variable": ["Distance travelled by the ball"],
+        "Dependent variable": ["Time taken"],
+        "Control variable": ["Mass of the ball", "Size of the ball", "Angle of the slope"]
+      }
+    },
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q4.tasks[e]",
+    "questionId": 4,
+    "taskLabel": "e",
+    "topic": "Distance / time / (Time)² data table",
+    "original_path": "/images/papers/physics-may-2021/q4e-table.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: three-column data table. Headers: Distance / m, Time / s, (Time)² / (unit blank for student to label). Rows: 0.25,1.02,1.04 | 0.50,1.39,1.93 | 0.75,1.75,3.06 | 1.00,1.98,3.92 | 1.25,2.19,(blank). The last (Time)² cell is left empty for the student to calculate.",
+    "generated_path": "/images/papers/physics-may-2021/q4e-table.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q5",
+    "questionId": 5,
+    "taskLabel": null,
+    "topic": "Model parachute method (5 steps)",
+    "original_path": "/images/papers/physics-may-2021/q5-parachute.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: five labelled panels showing the parachute-drop method. Step 1: cut a square of fabric (scissors, dashed cut guide). Step 2: attach strings to the four corners of the canopy. Step 3: tie the strings to a load (mass). Step 4: a student releases the parachute from a fixed height on a raised platform with a railing. Step 5: two parachutes of different canopy sizes descend while the student times the fall.",
+    "generated_path": "/images/papers/physics-may-2021/q5-parachute.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q6",
+    "questionId": 6,
+    "taskLabel": null,
+    "topic": "Convex lens optical bench setup",
+    "original_path": "/images/papers/physics-may-2021/q6-lens-setup.png",
+    "image_type": "code_rendered",
+    "image_prompt": "SVG: optical bench along a horizontal axis. A lit candle (object) at left, a convex (biconvex) lens in the middle, a movable screen (image) at right. Distance dₒ marked between candle and lens, distance dᵢ marked between lens and screen, with double-headed dimension arrows and the labels Candle (object), Convex lens, Movable screen (image).",
+    "generated_path": "/images/papers/physics-may-2021/q6-lens-setup.svg",
+    "render_component": "OpticsSim",
+    "render_data": {
+      "title": "Convex lens optical bench",
+      "source": "MYP physics-may-2021",
+      "mode": "lens",
+      "focalLength": 8.97,
+      "objectDistance": 30,
+      "unit": "cm"
+    },
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q7",
+    "questionId": 7,
+    "taskLabel": null,
+    "topic": "Quadcopter force diagrams (thrust vs weight)",
+    "original_path": "/images/papers/physics-may-2021/q7-drone.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: three panels A, B, C of a quadcopter with thrust T (up) and weight W (down) force arrows. A: T much longer than W (upward, taking off — net upward force). B: drone tilted with T at an angle and W vertically down. C: T and W equal in length (balanced, hovering at constant velocity).",
+    "generated_path": "/images/papers/physics-may-2021/q7-drone.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q8",
+    "questionId": 8,
+    "taskLabel": null,
+    "topic": "Drone uses (video/script)",
+    "original_path": "/images/papers/physics-may-2021/q8-drone-uses.png",
+    "image_type": "text_only",
+    "image_prompt": "Mis-crop: the source PNG is a screenshot of the Question 8 stem with the Video/Script tabs and the surveillance script paragraphs — no diagram present. Marked text_only so nothing is rendered. Re-crop or drop.",
+    "generated_path": null,
+    "needs_review": true,
+    "approved": false
+  }
+]

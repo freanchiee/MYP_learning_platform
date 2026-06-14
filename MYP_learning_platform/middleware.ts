@@ -1,10 +1,17 @@
 import { createServerClient } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
+import { DEV_NO_AUTH } from '@/lib/dev-auth'
 
 const PROTECTED_ROUTES = ['/dashboard', '/exam', '/results', '/papers']
 const AUTH_ROUTES = ['/login', '/signup']
 
 export async function middleware(request: NextRequest) {
+  // Dev-only: skip the login gate entirely so the platform is browsable
+  // without a session. Always OFF in production builds. See lib/dev-auth.ts.
+  if (DEV_NO_AUTH) {
+    return NextResponse.next({ request })
+  }
+
   let supabaseResponse = NextResponse.next({
     request,
   })

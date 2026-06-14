@@ -35,22 +35,22 @@ export default function XPBar({ xp, level }: XPBarProps) {
   return (
     <div className="flex items-center gap-2 select-none">
       {/* Level badge */}
-      <div className="flex-shrink-0 w-7 h-7 rounded-full bg-[var(--ib-blue)] text-white flex items-center justify-center text-xs font-bold shadow">
+      <div className="flex-shrink-0 w-7 h-7 rounded-full bg-[var(--ib-blue)] text-on-accent flex items-center justify-center text-xs font-bold shadow">
         {level}
       </div>
 
       {/* Bar + labels */}
       <div className="flex-1 min-w-0">
         <div className="flex items-center justify-between mb-0.5">
-          <span className="text-[10px] text-gray-500 font-medium flex items-center gap-0.5">
+          <span className="text-[10px] text-ink-subtle font-medium flex items-center gap-0.5">
             <Zap size={10} className="text-[var(--ib-teal)]" />
             XP
           </span>
-          <span className="text-[10px] text-gray-500 font-mono">
+          <span className="text-[10px] text-ink-subtle font-mono">
             {currentInLevel}/{needed}
           </span>
         </div>
-        <div className="h-1.5 bg-gray-200 rounded-full overflow-hidden">
+        <div className="h-1.5 bg-surface-3 rounded-full overflow-hidden">
           <motion.div
             className="h-full bg-[var(--ib-teal)] rounded-full"
             animate={{ width: `${pct}%` }}

@@ -165,10 +165,10 @@ function ZoneOverlay({ zone, placedItem, isFlashing, isDragging, onDrop }: ZoneO
       <div style={{
         ...base,
         background: 'rgba(255,255,255,0.88)',
-        border: '2px solid #10b981',
+        border: '2px solid var(--success)',
         backdropFilter: 'blur(2px)',
       }}>
-        <span style={{ fontSize: 12, fontWeight: 700, color: '#065f46', textAlign: 'center' }}>
+        <span style={{ fontSize: 12, fontWeight: 700, color: 'var(--success)', textAlign: 'center' }}>
           ✓ {placedItem}
         </span>
       </div>
@@ -178,8 +178,8 @@ function ZoneOverlay({ zone, placedItem, isFlashing, isDragging, onDrop }: ZoneO
   // ── Wrong-drop flash ──
   if (isFlashing) {
     return (
-      <div style={{ ...base, background: '#fee2e2', border: '2px solid #ef4444' }}>
-        <span style={{ fontSize: 10, fontWeight: 600, color: '#b91c1c' }}>✗</span>
+      <div style={{ ...base, background: 'var(--danger-surface)', border: '2px solid var(--danger)' }}>
+        <span style={{ fontSize: 10, fontWeight: 600, color: 'var(--danger)' }}>✗</span>
       </div>
     )
   }
@@ -189,14 +189,14 @@ function ZoneOverlay({ zone, placedItem, isFlashing, isDragging, onDrop }: ZoneO
       style={{
         ...base,
         background: isOver
-          ? 'rgba(99,102,241,0.12)'
+          ? 'var(--accent-soft)'
           : isDragging
             ? 'rgba(255,255,255,0.55)'
             : 'transparent',
         border: `2px dashed ${
-          isOver    ? '#6366f1' :
-          isDragging ? '#9ca3af' :
-                       '#cbd5e1'
+          isOver    ? 'var(--accent)' :
+          isDragging ? 'var(--border-strong)' :
+                       'var(--border)'
         }`,
         backdropFilter: isOver ? 'blur(1px)' : 'none',
         transform: isOver ? 'scale(1.04)' : 'scale(1)',
@@ -274,13 +274,13 @@ export default function RefractionLabelDragDrop({
   return (
     <div className="my-3 space-y-3">
       {/* Diagram card */}
-      <div className="border border-gray-200 rounded-xl overflow-hidden bg-white shadow-sm">
-        <div className="px-3 py-2 bg-gray-50 border-b border-gray-200">
-          <p className="text-xs font-semibold text-gray-600 uppercase tracking-wide">
+      <div className="chrome-card border border-line rounded-xl overflow-hidden">
+        <div className="px-3 py-2 bg-surface-2 border-b border-line">
+          <p className="text-xs font-semibold text-ink-muted uppercase tracking-wide">
             Drag each material to its correct layer
           </p>
         </div>
-        <div className="relative mx-3 my-3" style={{ aspectRatio: `${SVG_W}/${SVG_H}` }}>
+        <div className="figure-surface relative mx-3 my-3" style={{ aspectRatio: `${SVG_W}/${SVG_H}` }}>
           {/* SVG diagram fills the container */}
           <div className="absolute inset-0">
             <RefractionSVG />
@@ -301,7 +301,7 @@ export default function RefractionLabelDragDrop({
 
       {/* Label tray */}
       <div className="flex flex-wrap items-center gap-2 px-1">
-        <span className="text-[11px] font-semibold uppercase tracking-widest text-gray-400 mr-1 shrink-0">
+        <span className="text-[11px] font-semibold uppercase tracking-widest text-ink-subtle mr-1 shrink-0">
           Drag labels:
         </span>
 
@@ -314,15 +314,15 @@ export default function RefractionLabelDragDrop({
             style={{ opacity: dragging === item ? 0.4 : 1 }}
             className="px-3 py-1.5 rounded-lg text-sm font-bold cursor-grab active:cursor-grabbing
                        select-none transition-all hover:scale-105 hover:shadow-md
-                       bg-blue-50 border-2 border-blue-300 text-blue-700"
+                       bg-accent-soft border-2 border-accent text-accent"
           >
             {item}
           </div>
         ))}
 
         {allPlaced && (
-          <span className="text-xs font-semibold text-green-700 bg-green-50 px-2.5 py-1
-                           rounded-full border border-green-200 flex items-center gap-1">
+          <span className="text-xs font-semibold text-success bg-success-surface px-2.5 py-1
+                           rounded-full border border-success flex items-center gap-1">
             <span>✓</span> All materials placed!
           </span>
         )}
@@ -330,7 +330,7 @@ export default function RefractionLabelDragDrop({
         {Object.keys(placed).length > 0 && (
           <button
             onClick={() => { setPlaced({}); onAnswer('') }}
-            className="ml-auto text-[11px] text-gray-400 hover:text-red-500 underline shrink-0"
+            className="ml-auto text-[11px] text-ink-subtle hover:text-danger underline shrink-0"
           >
             Reset
           </button>

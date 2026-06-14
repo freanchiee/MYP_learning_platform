@@ -1,0 +1,225 @@
+[
+  {
+    "taskPath": "q4.tasks[b]",
+    "questionId": 4,
+    "taskLabel": "b",
+    "topic": "States of matter / melting point",
+    "original_path": "/images/papers/chemistry-nov-2021/page-09.png",
+    "image_type": "code_rendered",
+    "image_prompt": "SVG scatter graph titled 'Change in temperature over time': x-axis Time / min (0 to 9, ticks every 1), y-axis Temperature / °C (27 to 33, ticks every 1). Eight cross markers at (1,28.0),(2,29.0),(3,29.5),(4,29.7),(5,29.7),(6,29.7),(7,30.0),(8,32.0) showing a plateau near 29.7 °C then a rise.",
+    "generated_path": "/images/papers/chemistry-nov-2021/q4b-temperature-time.svg",
+    "render_component": "ThermalSim",
+    "render_data": {
+      "title": "Change in temperature over time",
+      "source": "MYP chemistry-nov-2021",
+      "mode": "heat",
+      "substance": "Gallium",
+      "timeMin": 0,
+      "totalTime": 9,
+      "timeUnit": "min",
+      "tempUnit": "°C",
+      "yMinC": 27,
+      "yMaxC": 33,
+      "yTicksC": [27, 28, 29, 30, 31, 32, 33],
+      "seriesLabel": "Student B (temperature probe)",
+      "series": [
+        [1, 28.0],
+        [2, 29.0],
+        [3, 29.5],
+        [4, 29.7],
+        [5, 29.7],
+        [6, 29.7],
+        [7, 30.0],
+        [8, 32.0]
+      ],
+      "plateaus": [
+        { "atC": 29.7, "label": "melting", "fromTime": 4, "toTime": 6 }
+      ],
+      "markers": [
+        { "id": "mp", "time": 5, "tempC": 29.7, "state": "melting point" }
+      ]
+    },
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q6.tasks[a]",
+    "questionId": 6,
+    "taskLabel": "a",
+    "topic": "Melting point / heating curve",
+    "original_path": "/images/papers/chemistry-nov-2021/page-16.png",
+    "image_type": "code_rendered",
+    "image_prompt": "SVG line graph titled 'Chocolate sample A' (axis labels intentionally omitted, as in original): x-axis 0 to 150 with ticks at 0,50,100,150 (Time / s), y-axis 0 to 50 with ticks every 10 (Temperature / °C). Line with cross markers through (0,22),(15,25),(30,34),(45,35),(60,36),(75,38),(90,40),(105,40),(120,41),(135,44),(150,45).",
+    "generated_path": "/images/papers/chemistry-nov-2021/q6a-chocolate-sample-a.svg",
+    "render_component": "ThermalSim",
+    "render_data": {
+      "title": "Temperature of chocolate sample vs time",
+      "source": "MYP chemistry-nov-2021",
+      "mode": "heat",
+      "substance": "Chocolate (tempering, Form V)",
+      "timeMin": 0,
+      "totalTime": 150,
+      "timeUnit": "s",
+      "tempUnit": "°C",
+      "yMinC": 0,
+      "yMaxC": 50,
+      "yTicksC": [0, 10, 20, 30, 40, 50],
+      "seriesLabel": "Sample A",
+      "series": [
+        [0, 22],
+        [15, 25],
+        [30, 34],
+        [45, 35],
+        [60, 36],
+        [75, 38],
+        [90, 40],
+        [105, 40],
+        [120, 41],
+        [135, 44],
+        [150, 45]
+      ],
+      "seriesBLabel": "Sample B (Form V)",
+      "seriesB": [
+        [0, 21],
+        [15, 25],
+        [30, 27],
+        [45, 31],
+        [60, 34],
+        [75, 35],
+        [90, 35],
+        [105, 35],
+        [120, 39],
+        [135, 42],
+        [150, 44]
+      ],
+      "plateaus": [
+        { "atC": 35, "label": "Form V melting", "fromTime": 75, "toTime": 105 }
+      ],
+      "markers": [
+        { "id": "formV", "time": 90, "tempC": 35, "state": "Form V plateau" }
+      ]
+    },
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q1.tasks[d]",
+    "questionId": 1,
+    "taskLabel": "d",
+    "topic": "Bohr model — sodium and lithium atoms",
+    "original_path": "/images/papers/chemistry-nov-2021/page-02.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG Bohr model diagrams of a sodium atom (electron arrangement 2, 8, 1) and a lithium atom (2, 1), each with a labelled nucleus and concentric electron shells, outer valence electron highlighted.",
+    "generated_path": "/images/papers/chemistry-nov-2021/q1d-bohr-na-li.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q2",
+    "questionId": 2,
+    "taskLabel": null,
+    "topic": "Teeth whitening — before/after smile and Lewis structures",
+    "original_path": "/images/papers/chemistry-nov-2021/page-03.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG before/after smile illustration (stained yellow teeth on the left, whitened teeth on the right) above four Lewis (dot-cross) structure options A–D for hydrogen peroxide: A H–O–O–H single bonds no lone pairs, B H–O=O–H double bond, C H–O–O–H with two lone pairs on each oxygen (correct answer), D incomplete lone pairs.",
+    "generated_path": "/images/papers/chemistry-nov-2021/q2-teeth-lewis.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q2.tasks[b]",
+    "questionId": 2,
+    "taskLabel": "b",
+    "topic": "Lewis structure of hydrogen peroxide (MCQ)",
+    "original_path": "/images/papers/chemistry-nov-2021/page-03.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG four Lewis (dot-cross) structure options A–D for hydrogen peroxide; option C (H–O–O–H with two lone pairs on each oxygen, single O–O bond) is correct.",
+    "generated_path": "/images/papers/chemistry-nov-2021/q2-teeth-lewis.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q2.tasks[d]",
+    "questionId": 2,
+    "taskLabel": "d",
+    "topic": "Hazard symbol of hydrogen peroxide (MCQ)",
+    "original_path": "/images/papers/chemistry-nov-2021/page-04.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG four GHS hazard pictograms (red diamond border, white fill) labelled A–D: A corrosive, B toxic (skull and crossbones), C explosive (bursting bomb), D oxidising (flame over circle, correct answer).",
+    "generated_path": "/images/papers/chemistry-nov-2021/q2d-hazard-symbols.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q3.tasks[a]",
+    "questionId": 3,
+    "taskLabel": "a",
+    "topic": "Composition of the atmosphere (pie chart)",
+    "original_path": "/images/papers/chemistry-nov-2021/page-05.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG pie chart 'Composition of the atmosphere': Nitrogen 78 %, Oxygen 20.9 %, Argon gases 0.90 %, Other gases 0.17 %, Carbon dioxide 0.03 %, each slice leader-labelled.",
+    "generated_path": "/images/papers/chemistry-nov-2021/q3a-atmosphere-pie.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q3.tasks[d]",
+    "questionId": 3,
+    "taskLabel": "d",
+    "topic": "Structural formula of Freon (trichlorotrifluoroethane)",
+    "original_path": "/images/papers/chemistry-nov-2021/page-07.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG full structural formula of Freon (trichlorotrifluoroethane, C2Cl3F3): two bonded carbons; left C bonded to Cl (top), Cl (left), F (bottom); right C bonded to Cl (top), F (right), F (bottom).",
+    "generated_path": "/images/papers/chemistry-nov-2021/q3d-freon-structure.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q4",
+    "questionId": 4,
+    "taskLabel": null,
+    "topic": "Gallium melting-point apparatus (boiling tubes in water baths)",
+    "original_path": "/images/papers/chemistry-nov-2021/page-08.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG apparatus diagram: Student A — thermometer in a boiling tube containing a gallium sample, standing in a beaker of water; Student B — temperature probe in an identical boiling tube/water bath, connected to a digital meter reading 27.0 °C. Labels: Thermometer, Temperature probe, Boiling tube, Water, Ga, Student A, Student B.",
+    "generated_path": "/images/papers/chemistry-nov-2021/q4-gallium-apparatus.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q4.tasks[e]",
+    "questionId": 4,
+    "taskLabel": "e",
+    "topic": "Brass alloy data table",
+    "original_path": "/images/papers/chemistry-nov-2021/page-09.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG data table of brass alloys (types A–D): columns Type of brass, Percentage of Cu / %, Percentage of Zn / %, Melting point / °C, Density / g cm⁻³, Uses. A: 95,5,1066,8.86,Pre-1983 coins; B: 88,12,1035,8.78,Jewellery; C: 85,15,1027,8.75,Electrical sockets; D: 70,30,954,8.47,Radiators.",
+    "generated_path": "/images/papers/chemistry-nov-2021/q4d-brass-table.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q6.tasks[c]",
+    "questionId": 6,
+    "taskLabel": "c",
+    "topic": "Cocoa melting-point data table",
+    "original_path": "/images/papers/chemistry-nov-2021/page-18.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG data table: columns Percentage of cocoa / %, Melting point / °C (three readings), Average melting point / °C. Rows — 30: 69.0,68.0,70.0,69.0; 37: 50.0,51.0,51.0,51.0; 60: 37.0,36.0,37.0,(blank for student to calculate); 70: 32.4,31.6,32.0,32.0; 85: 28.0,27.7,27.8,27.8.",
+    "generated_path": "/images/papers/chemistry-nov-2021/q6c-cocoa-table.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q6.tasks[a].graphboxes",
+    "questionId": 6,
+    "taskLabel": "a",
+    "topic": "Graph title/axis input boxes (mis-crop)",
+    "original_path": "/images/papers/chemistry-nov-2021/page-17.png",
+    "image_type": "text_only",
+    "image_prompt": "Mis-crop: the source page shows only empty 'Title', 'x axis label', 'y axis label' text-entry boxes (the student's blank plotting template), not a figure. No diagram to recreate.",
+    "generated_path": null,
+    "needs_review": true,
+    "approved": false
+  }
+]

@@ -1,0 +1,448 @@
+[
+  {
+    "taskPath": "q1",
+    "questionId": 1,
+    "taskLabel": null,
+    "topic": "States of Matter & Particle Theory",
+    "original_path": "/images/papers/chemistry-nov-2024/page-01.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: alchemist's distillation still — round-bottom flask of blue liquid (X) heated over a flame, sloping delivery tube carrying vapour (Y), and a receiver flask collecting the distillate (Z). Labels X, Y, Z in white boxes.",
+    "generated_path": "/images/papers/chemistry-nov-2024/page-01.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q1.tasks[c]",
+    "questionId": 1,
+    "taskLabel": "c",
+    "topic": "States of Matter & Particle Theory",
+    "original_path": "/images/papers/chemistry-nov-2024/page-01.png",
+    "image_type": "code_rendered",
+    "image_prompt": "SVG: alchemist's distillation still — round-bottom flask of blue liquid (X) heated over a flame, sloping delivery tube carrying vapour (Y), and a receiver flask collecting the distillate (Z). Labels X, Y, Z in white boxes.",
+    "generated_path": "/images/papers/chemistry-nov-2024/page-01.svg",
+    "render_component": "ParticleSim",
+    "render_data": {
+      "title": "Distillation — particle model of state changes (X → Y → Z)",
+      "source": "MYP chemistry-nov-2024",
+      "mode": "states",
+      "substance": "ethanol/water mixture",
+      "heatSlider": true,
+      "stages": [
+        {
+          "label": "X — liquid in flask",
+          "state": "liquid",
+          "particles": "close together, randomly arranged, sliding past one another"
+        },
+        {
+          "label": "Y — vapour in delivery tube",
+          "state": "gas",
+          "particles": "far apart, fast, random ballistic motion"
+        },
+        {
+          "label": "Z — distillate in receiver",
+          "state": "liquid",
+          "particles": "re-condensed, close together, sliding"
+        }
+      ],
+      "states": [
+        "X — liquid in flask",
+        "Y — vapour in delivery tube",
+        "Z — distillate in receiver"
+      ]
+    },
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q1.tasks[d]",
+    "questionId": 1,
+    "taskLabel": "d",
+    "topic": "Organic Chemistry",
+    "original_path": "/images/papers/chemistry-nov-2024/page-02.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: four displayed organic structures A–D for an ethanol MCQ. A = CH3-CHO-type with C=O and OH; B = CH3CH2OH ethanol (correct); C = CH3CH3 ethane; D = CH3CHO aldehyde. Atoms C, H, O with single/double bonds.",
+    "generated_path": "/images/papers/chemistry-nov-2024/page-02.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q2",
+    "questionId": 2,
+    "taskLabel": null,
+    "topic": "Moles & Stoichiometry",
+    "original_path": "/images/papers/chemistry-nov-2024/page-03.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: dry ice (solid CO2) subliming in a container, with billowing white fog and a 'CO2 vapour' label.",
+    "generated_path": "/images/papers/chemistry-nov-2024/page-03.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q2.tasks[b]",
+    "questionId": 2,
+    "taskLabel": "b",
+    "topic": "Moles & Stoichiometry",
+    "original_path": "/images/papers/chemistry-nov-2024/page-04.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: a champagne bottle opening on a blue background — cork flying off, spray of liquid and gas bursting from the neck. Labels: Cork, Champagne, Bottle.",
+    "generated_path": "/images/papers/chemistry-nov-2024/page-04.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q2.tasks[c]",
+    "questionId": 2,
+    "taskLabel": "c",
+    "topic": "Moles & Stoichiometry",
+    "original_path": "/images/papers/chemistry-nov-2024/page-04.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: a champagne bottle opening on a blue background — cork flying off, spray of liquid and gas bursting from the neck. Labels: Cork, Champagne, Bottle.",
+    "generated_path": "/images/papers/chemistry-nov-2024/page-04.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q3",
+    "questionId": 3,
+    "taskLabel": null,
+    "topic": "Periodic Table & Atomic Structure",
+    "original_path": "/images/papers/chemistry-nov-2024/page-05.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: four-step process of packaging sliced apples — 1. apples sliced, 2. dropped in hot water, 3. bag filled with apples, 4. flushed with nitrogen gas (N2 cylinder) and sealed, with a conveyor belt.",
+    "generated_path": "/images/papers/chemistry-nov-2024/page-05.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q3.tasks[a]",
+    "questionId": 3,
+    "taskLabel": "a",
+    "topic": "Periodic Table & Atomic Structure",
+    "original_path": "/images/papers/chemistry-nov-2024/page-05.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: four-step process of packaging sliced apples — 1. apples sliced, 2. dropped in hot water, 3. bag filled with apples, 4. flushed with nitrogen gas (N2 cylinder) and sealed, with a conveyor belt.",
+    "generated_path": "/images/papers/chemistry-nov-2024/page-05.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q3.tasks[d]",
+    "questionId": 3,
+    "taskLabel": "d",
+    "topic": "Periodic Table & Atomic Structure",
+    "original_path": "/images/papers/chemistry-nov-2024/page-06.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: top panel — incandescent light bulb Before (intact, glowing, 'Metal filament' label) vs After (shattered glass, flame and smoke from the filament). Bottom panel — four tooth-filling materials (Amalgam, Composite, Gold, Ceramic) shown as labelled molars.",
+    "generated_path": "/images/papers/chemistry-nov-2024/page-06.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q4",
+    "questionId": 4,
+    "taskLabel": null,
+    "topic": "Bonding & Molecular Structure",
+    "original_path": "/images/papers/chemistry-nov-2024/page-06.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: top panel — incandescent light bulb Before (intact, glowing, 'Metal filament' label) vs After (shattered glass, flame and smoke from the filament). Bottom panel — four tooth-filling materials (Amalgam, Composite, Gold, Ceramic) shown as labelled molars.",
+    "generated_path": "/images/papers/chemistry-nov-2024/page-06.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q4",
+    "questionId": 4,
+    "taskLabel": null,
+    "topic": "Bonding & Molecular Structure",
+    "original_path": "/images/papers/chemistry-nov-2024/page-07.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: conductivity-meter investigation Before/After — two beakers of fluoride ion solution each with a tooth-filling sample and a probe, connected to handheld conductivity meters reading 550 (Before) and 450 (After) mg dm⁻³. Labels: Conductivity meter, Fluoride ion solution, Tooth filling material.",
+    "generated_path": "/images/papers/chemistry-nov-2024/page-07.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q4.tasks[b]",
+    "questionId": 4,
+    "taskLabel": "b",
+    "topic": "Bonding & Molecular Structure",
+    "original_path": "/images/papers/chemistry-nov-2024/page-07.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: conductivity-meter investigation Before/After — two beakers of fluoride ion solution each with a tooth-filling sample and a probe, connected to handheld conductivity meters reading 550 (Before) and 450 (After) mg dm⁻³. Labels: Conductivity meter, Fluoride ion solution, Tooth filling material.",
+    "generated_path": "/images/papers/chemistry-nov-2024/page-07.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q4.tasks[c]",
+    "questionId": 4,
+    "taskLabel": "c",
+    "topic": "Bonding & Molecular Structure",
+    "original_path": "/images/papers/chemistry-nov-2024/page-08.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: simplified investigation set-up using a single conductivity meter — one handheld meter (display '###' mg dm⁻³) connected by cable to a probe in one beaker of fluoride ion solution with a tooth-filling sample. Labels: Conductivity meter, Fluoride ion solution, Tooth filling material.",
+    "generated_path": "/images/papers/chemistry-nov-2024/page-08.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q4.tasks[d]",
+    "questionId": 4,
+    "taskLabel": "d",
+    "topic": "Bonding & Molecular Structure",
+    "original_path": "/images/papers/chemistry-nov-2024/page-08.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: simplified investigation set-up using a single conductivity meter — one handheld meter (display '###' mg dm⁻³) connected by cable to a probe in one beaker of fluoride ion solution with a tooth-filling sample. Labels: Conductivity meter, Fluoride ion solution, Tooth filling material.",
+    "generated_path": "/images/papers/chemistry-nov-2024/page-08.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q4.tasks[e]",
+    "questionId": 4,
+    "taskLabel": "e",
+    "topic": "Bonding & Molecular Structure",
+    "original_path": "/images/papers/chemistry-nov-2024/page-09.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: four coloured mouthwash bottles (Brand A magenta, B teal, C green, D pink) on a shelf, above a ruled data table of conductivity (mg dm⁻³): Initial and Trial 1/2/3 for Brands A–D. A=165/150/153/157, B=110/103/105/30, C=220/212/211/209, D=198/179/176/175.",
+    "generated_path": "/images/papers/chemistry-nov-2024/page-09.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q4.tasks[f]",
+    "questionId": 4,
+    "taskLabel": "f",
+    "topic": "Bonding & Molecular Structure",
+    "original_path": "/images/papers/chemistry-nov-2024/page-09.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: four coloured mouthwash bottles (Brand A magenta, B teal, C green, D pink) on a shelf, above a ruled data table of conductivity (mg dm⁻³): Initial and Trial 1/2/3 for Brands A–D. A=165/150/153/157, B=110/103/105/30, C=220/212/211/209, D=198/179/176/175.",
+    "generated_path": "/images/papers/chemistry-nov-2024/page-09.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q4.tasks[g]",
+    "questionId": 4,
+    "taskLabel": "g",
+    "topic": "Bonding & Molecular Structure",
+    "original_path": "/images/papers/chemistry-nov-2024/page-09.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: four coloured mouthwash bottles (Brand A magenta, B teal, C green, D pink) on a shelf, above a ruled data table of conductivity (mg dm⁻³): Initial and Trial 1/2/3 for Brands A–D. A=165/150/153/157, B=110/103/105/30, C=220/212/211/209, D=198/179/176/175.",
+    "generated_path": "/images/papers/chemistry-nov-2024/page-09.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q4.tasks[h]",
+    "questionId": 4,
+    "taskLabel": "h",
+    "topic": "Bonding & Molecular Structure",
+    "original_path": "/images/papers/chemistry-nov-2024/page-10.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: ruled table 'Recommended mass of toothpaste by age' with a toothbrush illustration for each row — Under 3 / 0.25 g (smear), 3–6 years / 0.50 g (pea), 7+ years / 1.00 g (full strip).",
+    "generated_path": "/images/papers/chemistry-nov-2024/page-10.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q5",
+    "questionId": 5,
+    "taskLabel": null,
+    "topic": "Acids, Bases & Salts",
+    "original_path": "/images/papers/chemistry-nov-2024/page-10.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: ruled table 'Recommended mass of toothpaste by age' with a toothbrush illustration for each row — Under 3 / 0.25 g (smear), 3–6 years / 0.50 g (pea), 7+ years / 1.00 g (full strip).",
+    "generated_path": "/images/papers/chemistry-nov-2024/page-10.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q5",
+    "questionId": 5,
+    "taskLabel": null,
+    "topic": "Acids, Bases & Salts",
+    "original_path": "/images/papers/chemistry-nov-2024/page-11.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: recycled steel roofing in acid — Initial (clean grey metal) vs Final (heavily rusted orange-brown), captioned to show that a colour change indicates a chemical reaction.",
+    "generated_path": "/images/papers/chemistry-nov-2024/page-11.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q5.tasks[a]",
+    "questionId": 5,
+    "taskLabel": "a",
+    "topic": "Acids, Bases & Salts",
+    "original_path": "/images/papers/chemistry-nov-2024/page-11.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: recycled steel roofing in acid — Initial (clean grey metal) vs Final (heavily rusted orange-brown), captioned to show that a colour change indicates a chemical reaction.",
+    "generated_path": "/images/papers/chemistry-nov-2024/page-11.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q5.tasks[b]",
+    "questionId": 5,
+    "taskLabel": "b",
+    "topic": "Acids, Bases & Salts",
+    "original_path": "/images/papers/chemistry-nov-2024/page-12.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: five labelled roofing-material samples (10 cm × 10 cm) shown in perspective — Asphalt (black granular), Clay (orange curved tiles), Rubber (dark grey), Steel (light corrugated), Slate (blue-grey rectangular tiles).",
+    "generated_path": "/images/papers/chemistry-nov-2024/page-12.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q6",
+    "questionId": 6,
+    "taskLabel": null,
+    "topic": "Electrochemistry & Redox",
+    "original_path": "/images/papers/chemistry-nov-2024/page-13.png",
+    "image_type": "code_rendered",
+    "image_prompt": "SVG: five test tubes each holding a zinc-plated iron nail in NaCl solution (0.0, 0.1, 0.3, 0.5, 0.8 mol dm⁻³), a ruled data table of mass lost in 7 days / mg (Trial 1/2/3 and Average) and a blank gridded axes box for the student to plot concentration vs average mass lost.",
+    "generated_path": "/images/papers/chemistry-nov-2024/page-13.svg",
+    "render_component": "RateSim",
+    "render_data": {
+      "title": "Corrosion of zinc-plated iron nails — NaCl concentration vs average mass lost",
+      "source": "MYP chemistry-nov-2024",
+      "mode": "scatter",
+      "variable": "NaCl concentration",
+      "unit": "mol dm⁻³",
+      "metric": "average mass lost after 7 days",
+      "xLabel": "NaCl concentration / mol dm⁻³",
+      "yLabel": "Average mass lost / mg",
+      "xAxis": { "label": "NaCl concentration / mol dm⁻³", "min": 0, "max": 0.8, "tick": 0.1 },
+      "yAxis": { "label": "Average mass lost / mg", "min": 0, "max": 90, "tick": 10 },
+      "lineOfBestFit": true,
+      "scatterPoints": [
+        { "x": 0.0, "y": 10 },
+        { "x": 0.1, "y": 18 },
+        { "x": 0.3, "y": 43 },
+        { "x": 0.5, "y": 57 },
+        { "x": 0.8, "y": 86 }
+      ],
+      "trend": "Positive correlation: as NaCl concentration increases, average mass lost increases."
+    },
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q6.tasks[a]",
+    "questionId": 6,
+    "taskLabel": "a",
+    "topic": "Electrochemistry & Redox",
+    "original_path": "/images/papers/chemistry-nov-2024/page-13.png",
+    "image_type": "code_rendered",
+    "image_prompt": "SVG: five test tubes each holding a zinc-plated iron nail in NaCl solution (0.0, 0.1, 0.3, 0.5, 0.8 mol dm⁻³), a ruled data table of mass lost in 7 days / mg (Trial 1/2/3 and Average) and a blank gridded axes box for the student to plot concentration vs average mass lost.",
+    "generated_path": "/images/papers/chemistry-nov-2024/page-13.svg",
+    "render_component": "RateSim",
+    "render_data": {
+      "title": "Plot: NaCl concentration vs average mass lost (with line of best fit)",
+      "source": "MYP chemistry-nov-2024",
+      "mode": "scatter",
+      "variable": "NaCl concentration",
+      "unit": "mol dm⁻³",
+      "metric": "average mass lost after 7 days",
+      "task": "Plot a graph of concentration and average mass lost, and draw a line of best fit.",
+      "xLabel": "NaCl concentration / mol dm⁻³",
+      "yLabel": "Average mass lost / mg",
+      "xAxis": { "label": "NaCl concentration / mol dm⁻³", "min": 0, "max": 0.8, "tick": 0.1 },
+      "yAxis": { "label": "Average mass lost / mg", "min": 0, "max": 90, "tick": 10 },
+      "lineOfBestFit": true,
+      "scatterPoints": [
+        { "x": 0.0, "y": 10 },
+        { "x": 0.1, "y": 18 },
+        { "x": 0.3, "y": 43 },
+        { "x": 0.5, "y": 57 },
+        { "x": 0.8, "y": 86 }
+      ],
+      "trend": "Positive correlation: as NaCl concentration increases, average mass lost increases."
+    },
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q7",
+    "questionId": 7,
+    "taskLabel": null,
+    "topic": "Nuclear Chemistry & Radioactivity",
+    "original_path": "/images/papers/chemistry-nov-2024/page-14.png",
+    "image_type": "text_only",
+    "image_prompt": "",
+    "generated_path": null,
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q7.tasks[b]",
+    "questionId": 7,
+    "taskLabel": "b",
+    "topic": "Nuclear Chemistry & Radioactivity",
+    "original_path": "/images/papers/chemistry-nov-2024/page-15.png",
+    "image_type": "code_rendered",
+    "image_prompt": "SVG: nuclear fission on a dark background — an incoming neutron strikes a nucleus (cluster of red protons and grey neutrons), which splits releasing several neutrons and an energy burst. Labels: Neutron, Nucleus, energy released; legend for proton/neutron.",
+    "generated_path": "/images/papers/chemistry-nov-2024/page-15.svg",
+    "render_component": "ParticleSim",
+    "render_data": {
+      "title": "Nuclear fission chain reaction of uranium-235",
+      "source": "MYP chemistry-nov-2024",
+      "mode": "states",
+      "substance": "uranium-235",
+      "stages": [
+        {
+          "label": "1 — Neutron collides",
+          "state": "gas",
+          "particles": "A free neutron strikes a uranium-235 nucleus"
+        },
+        {
+          "label": "2 — Unstable nucleus",
+          "state": "liquid",
+          "particles": "U-235 absorbs the neutron and becomes unstable"
+        },
+        {
+          "label": "3 — Nucleus splits",
+          "state": "gas",
+          "particles": "Splits into barium-141 + krypton-92, releasing energy and 2–3 neutrons"
+        },
+        {
+          "label": "4 — Chain reaction",
+          "state": "gas",
+          "particles": "Released neutrons strike further U-235 nuclei, sustaining the chain reaction"
+        }
+      ],
+      "states": [
+        "1 — Neutron collides",
+        "2 — Unstable nucleus",
+        "3 — Nucleus splits",
+        "4 — Chain reaction"
+      ]
+    },
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q7.tasks[c]",
+    "questionId": 7,
+    "taskLabel": "c",
+    "topic": "Nuclear Chemistry & Radioactivity",
+    "original_path": "/images/papers/chemistry-nov-2024/page-16.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: 'SEA DUMPING' — sealed radioactive-waste drums (steel barrels with yellow hazard bands and trefoil symbol) resting on the sea floor underwater, bubbles rising, faint light rays from the surface.",
+    "generated_path": "/images/papers/chemistry-nov-2024/page-16.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q8",
+    "questionId": 8,
+    "taskLabel": null,
+    "topic": "Nuclear Chemistry & Radioactivity",
+    "original_path": "/images/papers/chemistry-nov-2024/page-17.png",
+    "image_type": "text_only",
+    "image_prompt": "",
+    "generated_path": null,
+    "needs_review": true,
+    "approved": false
+  }
+]

@@ -50,11 +50,11 @@ export default function MatchDragDropWidget({ items, targets, savedAnswer, onAns
   }
 
   return (
-    <div className="rounded-lg overflow-hidden" style={{ border: '1px solid rgba(31,54,116,0.12)' }}>
+    <div className="rounded-lg overflow-hidden" style={{ border: '1px solid var(--border)' }}>
       <div className="grid grid-cols-2">
         {/* ── Left: draggable items ── */}
-        <div className="p-4" style={{ background: '#f5edcc', borderRight: '1px solid rgba(31,54,116,0.1)' }}>
-          <p className="text-[9px] font-black tracking-[0.2em] mb-3" style={{ color: 'rgba(31,54,116,0.4)' }}>
+        <div className="p-4" style={{ background: 'var(--surface-2)', borderRight: '1px solid var(--border)' }}>
+          <p className="text-[9px] font-black tracking-[0.2em] mb-3" style={{ color: 'var(--text-subtle)' }}>
             DRAG ITEMS
           </p>
           <div className="space-y-2">
@@ -70,9 +70,9 @@ export default function MatchDragDropWidget({ items, targets, savedAnswer, onAns
                   onDragEnd={() => { setDragging(null); setHovering(null) }}
                   className="px-3 py-2 rounded text-sm font-semibold cursor-grab active:cursor-grabbing select-none transition-all"
                   style={{
-                    background: isMatched ? 'rgba(31,54,116,0.06)' : '#fff',
-                    border: `2px solid ${isMatched ? 'rgba(31,54,116,0.15)' : '#1f3674'}`,
-                    color: isMatched ? 'rgba(31,54,116,0.35)' : '#1f3674',
+                    background: isMatched ? 'var(--accent-soft)' : 'var(--surface)',
+                    border: `2px solid ${isMatched ? 'var(--border)' : 'var(--accent)'}`,
+                    color: isMatched ? 'var(--text-subtle)' : 'var(--accent)',
                     opacity: isDraggingThis ? 0.4 : 1,
                     textDecoration: isMatched ? 'line-through' : 'none',
                   }}
@@ -81,7 +81,7 @@ export default function MatchDragDropWidget({ items, targets, savedAnswer, onAns
                 >
                   {item}
                   {isMatched && (
-                    <span className="ml-2 text-[10px]" style={{ color: '#adf1c4', background: '#1f3674', padding: '1px 5px', borderRadius: 3 }}>
+                    <span className="ml-2 text-[10px]" style={{ color: 'var(--accent-fg)', background: 'var(--accent)', padding: '1px 5px', borderRadius: 3 }}>
                       ✓
                     </span>
                   )}
@@ -92,8 +92,8 @@ export default function MatchDragDropWidget({ items, targets, savedAnswer, onAns
         </div>
 
         {/* ── Right: drop targets ── */}
-        <div className="p-4" style={{ background: '#fff' }}>
-          <p className="text-[9px] font-black tracking-[0.2em] mb-3" style={{ color: 'rgba(31,54,116,0.4)' }}>
+        <div className="p-4" style={{ background: 'var(--surface)' }}>
+          <p className="text-[9px] font-black tracking-[0.2em] mb-3" style={{ color: 'var(--text-subtle)' }}>
             DROP HERE
           </p>
           <div className="space-y-2">
@@ -108,12 +108,12 @@ export default function MatchDragDropWidget({ items, targets, savedAnswer, onAns
                   onDrop={() => handleDrop(target)}
                   className="min-h-[42px] px-3 py-2 rounded text-sm transition-all"
                   style={{
-                    border: `2px dashed ${isHovered ? '#547ca4' : occupant ? '#1f3674' : 'rgba(31,54,116,0.2)'}`,
-                    background: isHovered ? 'rgba(84,124,164,0.06)' : occupant ? 'rgba(31,54,116,0.04)' : 'transparent',
+                    border: `2px dashed ${isHovered ? 'var(--accent-2)' : occupant ? 'var(--accent)' : 'var(--border-strong)'}`,
+                    background: isHovered ? 'var(--accent-soft)' : occupant ? 'var(--accent-soft)' : 'transparent',
                   }}
                 >
                   <div className="flex items-center justify-between gap-2">
-                    <span className="font-medium" style={{ color: '#1f3674' }}>{target}</span>
+                    <span className="font-medium" style={{ color: 'var(--accent)' }}>{target}</span>
                     <AnimatePresence mode="wait">
                       {occupant ? (
                         <motion.div
@@ -125,14 +125,14 @@ export default function MatchDragDropWidget({ items, targets, savedAnswer, onAns
                         >
                           <span
                             className="text-xs font-bold px-2 py-0.5 rounded"
-                            style={{ background: '#1f3674', color: '#adf1c4' }}
+                            style={{ background: 'var(--accent)', color: 'var(--accent-fg)' }}
                           >
                             {occupant}
                           </span>
                           <button
                             onClick={() => removeMatch(occupant)}
                             className="text-xs font-black transition-opacity hover:opacity-70"
-                            style={{ color: '#c3282d' }}
+                            style={{ color: 'var(--danger)' }}
                             title="Remove match"
                           >
                             ✕
@@ -144,7 +144,7 @@ export default function MatchDragDropWidget({ items, targets, savedAnswer, onAns
                           initial={{ opacity: 0 }}
                           animate={{ opacity: 1 }}
                           className="text-xs"
-                          style={{ color: 'rgba(31,54,116,0.25)' }}
+                          style={{ color: 'var(--text-subtle)' }}
                         >
                           {isHovered ? 'Drop here' : '—'}
                         </motion.span>
@@ -161,16 +161,16 @@ export default function MatchDragDropWidget({ items, targets, savedAnswer, onAns
       {/* Progress bar */}
       <div
         className="px-4 py-2 flex items-center justify-between text-xs"
-        style={{ background: 'rgba(31,54,116,0.04)', borderTop: '1px solid rgba(31,54,116,0.08)' }}
+        style={{ background: 'var(--surface-2)', borderTop: '1px solid var(--border)' }}
       >
-        <span style={{ color: 'rgba(31,54,116,0.5)' }}>
+        <span style={{ color: 'var(--text-muted)' }}>
           {matchedItems.size} of {items.length} matched
         </span>
         {matchedItems.size > 0 && (
           <button
             onClick={() => commit({})}
             className="text-xs font-semibold transition-opacity hover:opacity-70"
-            style={{ color: '#c3282d' }}
+            style={{ color: 'var(--danger)' }}
           >
             Reset all
           </button>

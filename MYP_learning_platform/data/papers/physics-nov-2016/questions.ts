@@ -46,7 +46,7 @@ export const questions: Question[] = [
         marks: 1,
         widget: 'radio_select',
         widgetOptions: ['Diagram 1', 'Diagram 2', 'Diagram 3', 'Diagram 4'],
-        figImages: [`${P}vtgraph-q1.png`, `${P}forcediagrams-q1c.png`],
+        figImages: ['/images/papers/physics-nov-2016/vtgraph-q1.svg', `${P}forcediagrams-q1c.png`],
         ph: 'Select Diagram 1, 2, 3, or 4',
       },
       {
@@ -90,28 +90,28 @@ export const questions: Question[] = [
         label: 'b',
         text: 'Sound waves can be represented on a computer. The image shows waves recorded on a computer from four different sources (A, B, C and D). The time axis shows 1 second total.\n\n**Calculate** the frequency of wave A.',
         marks: 1,
-        figImages: [`${P}oscilloscope-q2.png`],
+        figImages: ['/images/papers/physics-nov-2016/oscilloscope-q2.svg'],
         ph: 'Frequency = number of complete cycles per second\nCount cycles of wave A in 1 second: ...\nf = ... Hz',
       },
       {
         label: 'c',
         text: 'Looking at the four waves A, B, C and D shown on the computer display, **identify** which two waves have the same frequency.',
         marks: 1,
-        figImages: [`${P}oscilloscope-q2.png`],
+        figImages: ['/images/papers/physics-nov-2016/oscilloscope-q2.svg'],
         ph: 'The two waves with the same frequency are ... and ...',
       },
       {
         label: 'd',
         text: 'The speed of sound in air is 330 m s⁻¹.\n\n**Calculate** the wavelength of wave C. Show your working and include the unit.',
         marks: 2,
-        figImages: [`${P}oscilloscope-q2.png`],
+        figImages: ['/images/papers/physics-nov-2016/oscilloscope-q2.svg'],
         ph: 'First find frequency of wave C from the graph: f = ... Hz\nThen use v = fλ → λ = v/f = 330 / ... = ... m',
       },
       {
         label: 'e',
         text: 'Infrasound waves have a frequency of less than 20 Hz. Use your answers above to **identify** which wave (A, B, C or D) does **not** show infrasound.',
         marks: 1,
-        figImages: [`${P}oscilloscope-q2.png`],
+        figImages: ['/images/papers/physics-nov-2016/oscilloscope-q2.svg'],
         ph: 'Wave ... does not show infrasound because its frequency is ... Hz, which is [above/below] 20 Hz.',
       },
       {
@@ -353,7 +353,7 @@ export const questions: Question[] = [
     topicGroup: 'Nuclear & Atomic Physics',
     tags: { unit: 'atomic-physics', topics: ['radioactive decay', 'half-life', 'half-life calculations'], level: 'developing' },
     stem: 'A simulation shows the radioactive decay of strontium-90. In the simulation, the percentage of the original nucleus remaining can be recorded at different times. Some of the data is also shown on a graph of caesium-137 decay (% of original nucleus remaining vs. time in years). The Fukushima Daiichi nuclear disaster released several radioactive isotopes into the environment, including caesium-134 and caesium-137.',
-    figImages: [`${P}page-53.png`, `${P}page-55.png`, `${P}page-56.png`],
+    figImages: [`${P}page-53.png`, '/images/papers/physics-nov-2016/decay-q8.svg', '/images/papers/physics-nov-2016/decay-line-q8b.svg'],
     tasks: [
       {
         label: 'a',

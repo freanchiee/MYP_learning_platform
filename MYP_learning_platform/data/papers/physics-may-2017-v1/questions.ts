@@ -23,7 +23,7 @@ export const questions: Question[] = [
     topicCanonical: 'Solar System, Gravity & Space',
     topicGroup: 'Space & Astrophysics',
     stem: 'Blue hypergiant stars are extremely massive and hot. Red dwarf stars are small, cool, and very long-lived. The colour of a star is related to its surface temperature: hotter stars emit more blue light, while cooler stars emit more red light.',
-    figImages: [`${P}q1-stars.png`],
+    figImages: ['/images/papers/physics-may-2017-v1/q1-stars.svg'],
     tags: { unit: 'astrophysics', topics: ['star temperature', 'colour', 'EM spectrum', 'light properties'], level: 'developing' },
     tasks: [
       {
@@ -350,7 +350,7 @@ export const questions: Question[] = [
     topicCanonical: "Newton's Laws & Momentum",
     topicGroup: 'Forces & Motion',
     stem: 'The student analyses their stopping distance data further by plotting four graphs: Graph 1 (stopping distance vs width W), Graph 2 (stopping distance vs W²), Graph 3 (stopping distance vs 1/W), Graph 4 (stopping distance vs 1/W²).',
-    figImages: [`${P}q7e-graph1.png`, `${P}q7g-graph4.png`],
+    figImages: ['/images/papers/physics-may-2017-v1/q7g-graph4.svg', `${P}q7g-graph4.png`],
     tags: { unit: 'forces-interactions', topics: ['data processing', 'proportionality', 'inverse relationship', 'drag'], level: 'advanced' },
     tasks: [
       {

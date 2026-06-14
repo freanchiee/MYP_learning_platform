@@ -14,9 +14,13 @@ CREATE TABLE IF NOT EXISTS public.profiles (
   level          integer     NOT NULL DEFAULT 1,
   streak_days    integer     NOT NULL DEFAULT 0,
   last_active    date,
+  theme          text,        -- Atlas UI theme: classic|spatial|minimalist-academic|glassmorphic|bento (NULL = use device default)
   created_at     timestamptz NOT NULL DEFAULT now(),
   updated_at     timestamptz NOT NULL DEFAULT now()
 );
+
+-- Idempotent add for existing databases (re-running this file is safe)
+ALTER TABLE public.profiles ADD COLUMN IF NOT EXISTS theme text;
 
 -- ----------------------------------------------------------------
 -- 2. PAPERS

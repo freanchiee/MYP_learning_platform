@@ -3,18 +3,28 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { useExamStore } from '@/store/examStore'
 
-const CRITERION_META: Record<string, { bg: string; label: string }> = {
-  A: { bg: '#1f3674', label: 'Knowing & Understanding' },
-  B: { bg: '#547ca4', label: 'Inquiring & Designing' },
-  C: { bg: '#c3282d', label: 'Processing & Evaluating' },
-  D: { bg: '#274e68', label: 'Reflecting' },
+// Criterion labels differ by subject group. Sciences use the MYP Sciences objectives;
+// Individuals & Societies (humanities / geography / history) use the I&S objectives.
+const CRIT_LABELS_SCI: Record<string, string> = {
+  A: 'Knowing & Understanding', B: 'Inquiring & Designing', C: 'Processing & Evaluating', D: 'Reflecting',
 }
+const CRIT_LABELS_INS: Record<string, string> = {
+  A: 'Knowing & Understanding', B: 'Investigating', C: 'Communicating', D: 'Thinking Critically',
+}
+const CRIT_BG: Record<string, string> = { A: 'var(--cA)', B: 'var(--cB)', C: 'var(--cC)', D: 'var(--cD)' }
 
-// Derive subject name and theme colour from paperId
-function subjectFromPaperId(paperId: string): { name: string; accent: string; gradient: string } {
-  if (paperId.startsWith('biology'))   return { name: 'Biology',   accent: '#2d7a4f', gradient: 'linear-gradient(135deg, #1a4a2e, #2d7a4f)' }
-  if (paperId.startsWith('chemistry')) return { name: 'Chemistry', accent: '#274e68', gradient: 'linear-gradient(135deg, #0d1a2e, #274e68)' }
-  return                                      { name: 'Physics',   accent: '#1f3674', gradient: 'linear-gradient(135deg, #1f3674, #274e68)' }
+// Derive subject name, group, theme colour and duration from paperId.
+function subjectFromPaperId(paperId: string): {
+  name: string; group: string; accent: string; gradient: string; isInS: boolean; durationMin: number
+} {
+  const slug = paperId.split('-')[0]
+  if (slug === 'biology')   return { name: 'Biology',   group: 'Sciences', accent: '#2d7a4f', gradient: 'linear-gradient(135deg, #1a4a2e, #2d7a4f)', isInS: false, durationMin: 90 }
+  if (slug === 'chemistry') return { name: 'Chemistry', group: 'Sciences', accent: '#274e68', gradient: 'linear-gradient(135deg, #0d1a2e, #274e68)', isInS: false, durationMin: 90 }
+  if (slug === 'physics')   return { name: 'Physics',   group: 'Sciences', accent: '#1f3674', gradient: 'linear-gradient(135deg, #1f3674, #274e68)', isInS: false, durationMin: 90 }
+  if (slug === 'geography') return { name: 'Geography', group: 'Individuals & Societies', accent: '#0b7285', gradient: 'linear-gradient(135deg, #0a3d4a, #0b7285)', isInS: true, durationMin: 120 }
+  if (slug === 'history')   return { name: 'History',   group: 'Individuals & Societies', accent: '#9a6a2f', gradient: 'linear-gradient(135deg, #5a3d1a, #9a6a2f)', isInS: true, durationMin: 120 }
+  if (slug === 'humanities') return { name: 'Integrated Humanities', group: 'Individuals & Societies', accent: '#0b7285', gradient: 'linear-gradient(135deg, #0a3d4a, #0b7285)', isInS: true, durationMin: 120 }
+  return { name: 'Physics', group: 'Sciences', accent: '#1f3674', gradient: 'linear-gradient(135deg, #1f3674, #274e68)', isInS: false, durationMin: 90 }
 }
 
 export default function LockScreen() {
@@ -28,7 +38,8 @@ export default function LockScreen() {
   const [nameErr,   setNameErr]   = useState(false)
   const [schoolErr, setSchoolErr] = useState(false)
 
-  const { name: subjectName, accent, gradient } = subjectFromPaperId(paperId)
+  const { name: subjectName, group, accent, gradient, isInS, durationMin } = subjectFromPaperId(paperId)
+  const critLabels = isInS ? CRIT_LABELS_INS : CRIT_LABELS_SCI
 
   const handleBegin = () => {
     let valid = true
@@ -46,13 +57,13 @@ export default function LockScreen() {
   return (
     <div
       className="min-h-screen flex items-center justify-center px-4 py-10 relative overflow-hidden"
-      style={{ background: paperId.startsWith('biology') ? 'linear-gradient(145deg, #071a12 0%, #1a3d2e 55%, #0e2818 100%)' : 'linear-gradient(145deg, #274e68 0%, #1f3674 55%, #0e1f45 100%)' }}
+      style={{ background: 'var(--bg)', backgroundImage: 'var(--bg-image)' }}
     >
       {/* Dot grid */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          backgroundImage: 'radial-gradient(circle, rgba(173,241,196,0.07) 1px, transparent 1px)',
+          backgroundImage: 'radial-gradient(circle, var(--accent-soft) 1px, transparent 1px)',
           backgroundSize: '40px 40px',
         }}
         aria-hidden
@@ -63,10 +74,10 @@ export default function LockScreen() {
         animate={{ opacity: 1, y: 0,  scale: 1 }}
         transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
         className="relative z-10 rounded-2xl shadow-2xl max-w-lg w-full overflow-hidden"
-        style={{ background: 'rgba(245,237,204,0.97)', border: '1px solid rgba(173,241,196,0.2)' }}
+        style={{ background: 'var(--surface-elevated)', border: '1px solid var(--border)' }}
       >
         {/* Top accent gradient bar */}
-        <div style={{ height: 4, background: 'linear-gradient(90deg, #1f3674, #547ca4, #adf1c4)' }} />
+        <div style={{ height: 4, background: 'var(--gradient-brand)' }} />
 
         <div className="p-8">
           {/* Logo */}
@@ -75,15 +86,15 @@ export default function LockScreen() {
               className="w-16 h-16 rounded-2xl flex items-center justify-center font-extrabold text-xl shadow-lg"
               style={{
                 background: gradient,
-                border: '2px solid rgba(173,241,196,0.3)',
+                border: '2px solid var(--border)',
               }}
             >
-              <span style={{ color: '#adf1c4' }}>MYP</span>
+              <span style={{ color: 'var(--accent-fg)' }}>MYP</span>
             </div>
           </div>
 
-          <h1 className="text-center text-2xl font-extrabold mb-0.5" style={{ color: '#1f3674' }}>
-            IB MYP Sciences
+          <h1 className="text-center text-2xl font-extrabold mb-0.5" style={{ color: 'var(--text)' }}>
+            IB MYP {group}
           </h1>
           <p className="text-center text-sm font-semibold mb-6" style={{ color: accent }}>
             {subjectName} Examination
@@ -94,18 +105,18 @@ export default function LockScreen() {
             {[
               { label: 'Subject',     value: subjectName },
               { label: 'Total Marks', value: String(totalMarks) },
-              { label: 'Duration',    value: '90 min' },
+              { label: 'Duration',    value: `${durationMin} min` },
               { label: 'Questions',   value: String(questions.length) },
             ].map(({ label, value }) => (
               <div
                 key={label}
                 className="rounded-xl p-3 text-center"
-                style={{ background: 'rgba(31,54,116,0.06)', border: '1px solid rgba(31,54,116,0.1)' }}
+                style={{ background: 'var(--surface-2)', border: '1px solid var(--border)' }}
               >
-                <div className="text-xs font-bold uppercase tracking-wider mb-1" style={{ color: '#547ca4' }}>
+                <div className="text-xs font-bold uppercase tracking-wider mb-1" style={{ color: 'var(--accent-2)' }}>
                   {label}
                 </div>
-                <div className="text-lg font-extrabold" style={{ color: '#1f3674' }}>{value}</div>
+                <div className="text-lg font-extrabold" style={{ color: 'var(--text)' }}>{value}</div>
               </div>
             ))}
           </div>
@@ -115,11 +126,11 @@ export default function LockScreen() {
             {(['A', 'B', 'C', 'D'] as const).map((crit) => (
               <span
                 key={crit}
-                className="text-white text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1.5"
-                style={{ background: CRITERION_META[crit].bg }}
+                className="text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1.5"
+                style={{ background: CRIT_BG[crit], color: 'var(--criterion-fg)' }}
               >
                 <span>Crit {crit}</span>
-                <span style={{ opacity: 0.7 }}>· {CRITERION_META[crit].label}</span>
+                <span style={{ opacity: 0.7 }}>· {critLabels[crit]}</span>
               </span>
             ))}
           </div>
@@ -127,10 +138,10 @@ export default function LockScreen() {
           {/* Warning box */}
           <div
             className="rounded-xl p-4 mb-6 flex gap-3"
-            style={{ background: 'rgba(195,40,45,0.08)', border: '1px solid rgba(195,40,45,0.22)' }}
+            style={{ background: 'var(--danger-surface)', border: '1px solid var(--danger)' }}
           >
             <span className="text-lg flex-shrink-0">⚠️</span>
-            <p className="text-sm" style={{ color: '#c3282d' }}>
+            <p className="text-sm" style={{ color: 'var(--danger)' }}>
               <strong>Focus detection is active.</strong> Leaving the window 3&nbsp;times will
               auto-submit your exam.
             </p>
@@ -153,7 +164,7 @@ export default function LockScreen() {
               },
             ].map(({ id, label, placeholder, value, onChange, err, errMsg }) => (
               <div key={id}>
-                <label className="block text-sm font-bold mb-1" style={{ color: '#1f3674' }}>{label}</label>
+                <label className="block text-sm font-bold mb-1" style={{ color: 'var(--text)' }}>{label}</label>
                 <input
                   type="text"
                   value={value}
@@ -161,12 +172,12 @@ export default function LockScreen() {
                   placeholder={placeholder}
                   className="w-full rounded-xl px-4 py-2.5 text-sm outline-none transition-all"
                   style={{
-                    border: `2px solid ${err ? '#c3282d' : 'rgba(31,54,116,0.2)'}`,
-                    background: err ? 'rgba(195,40,45,0.04)' : '#fff',
-                    color: '#1f3674',
+                    border: `2px solid ${err ? 'var(--danger)' : 'var(--border-strong)'}`,
+                    background: err ? 'var(--danger-surface)' : 'var(--surface-inset)',
+                    color: 'var(--text)',
                   }}
                 />
-                {err && <p className="text-xs mt-1" style={{ color: '#c3282d' }}>{errMsg}</p>}
+                {err && <p className="text-xs mt-1" style={{ color: 'var(--danger)' }}>{errMsg}</p>}
               </div>
             ))}
           </div>
@@ -176,13 +187,13 @@ export default function LockScreen() {
             onClick={handleBegin}
             whileHover={{ scale: 1.015 }}
             whileTap={{ scale: 0.97 }}
-            className="w-full py-3.5 rounded-xl text-white font-extrabold text-base shadow-lg"
-            style={{ background: gradient }}
+            className="w-full py-3.5 rounded-xl font-extrabold text-base shadow-lg"
+            style={{ background: gradient, color: 'var(--text-on-accent)' }}
           >
             Begin Examination →
           </motion.button>
 
-          <p className="text-center text-xs mt-4" style={{ color: 'rgba(31,54,116,0.4)' }}>
+          <p className="text-center text-xs mt-4" style={{ color: 'var(--text-subtle)' }}>
             By starting, you agree to IB academic integrity policies.
           </p>
         </div>

@@ -1,0 +1,202 @@
+[
+  {
+    "taskPath": "q3.tasks[b]",
+    "questionId": 3,
+    "taskLabel": "b",
+    "topic": "Doppler effect / red-shift waveforms",
+    "original_path": "/images/papers/physics-nov-2021/q3b-waves.png",
+    "image_type": "code_rendered",
+    "render_component": "WaveSim",
+    "render_data": {
+      "title": "How does the wave change if the source moves away?",
+      "source": "MYP physics-nov-2021",
+      "mode": "match",
+      "windowSeconds": 2,
+      "amplitudeGridUnits": 3,
+      "stationary": {
+        "id": "stationary",
+        "label": "stationary source",
+        "cycles": 2
+      },
+      "options": [
+        { "id": "A", "cycles": 4, "note": "Higher frequency / shorter wavelength — this is blue-shift, not red-shift." },
+        { "id": "B", "cycles": 1, "note": "Stretched out / longest wavelength / lowest frequency — CORRECT: a source moving away red-shifts the light." },
+        { "id": "C", "cycles": 2, "phase": 0, "note": "Same frequency as the stationary source (peak first) — no shift." },
+        { "id": "D", "cycles": 2, "phase": 3.141592653589793, "note": "Same frequency, inverted phase (trough first) — no change in wavelength." }
+      ],
+      "answer": "B",
+      "concept": "A source moving away stretches the wavelength and lowers the frequency (Doppler red-shift); the correct graph shows the most spread-out wave."
+    },
+    "generated_path": "/images/papers/physics-nov-2021/q3b-waves.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q3.tasks[d]",
+    "questionId": 3,
+    "taskLabel": "d",
+    "topic": "Hubble's law (velocity vs distance)",
+    "original_path": "/images/papers/physics-nov-2021/q3d-hubble.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: scatter graph, x-axis Distance / Mpc (0, 50, 100), y-axis Velocity / km s⁻¹ (0, 5000, 10⁴). Dense grey fan-shaped cloud proportional through the origin (gradient ~90 km/s/Mpc), plus a small magenta cluster of 'Galaxies observed in 1930' near the origin. Key/legend on the right: red = observed in 1930, grey = observed today. Shows direct proportionality (Hubble's law); later parts read off the gradient/age.",
+    "generated_path": "/images/papers/physics-nov-2021/q3d-hubble.svg",
+    "needs_review": false,
+    "approved": true
+  },
+  {
+    "taskPath": "q5.tasks[b]",
+    "questionId": 5,
+    "taskLabel": "b",
+    "topic": "Resistance vs length of a wire",
+    "original_path": "/images/papers/physics-nov-2021/q5b-resistance-graph.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG titled 'A graph of resistance against length for a conducting wire'. x-axis Length / m (0.00 to 1.20 step 0.20), y-axis Resistance / Ω (0.00 to 0.06 step 0.01). Five data points at (0.20,0.015), (0.40,0.027), (0.60,0.033), (0.80,0.045), (1.00,0.056), with a best-fit straight line of gradient ~0.045 Ω/m and a NON-ZERO y-intercept of ~0.0075 Ω (evidence of systematic error). Later parts compute the gradient and discuss the intercept.",
+    "generated_path": "/images/papers/physics-nov-2021/q5b-resistance-graph.svg",
+    "needs_review": false,
+    "approved": true
+  },
+  {
+    "taskPath": "q2.tasks[b]",
+    "questionId": 2,
+    "taskLabel": "b",
+    "topic": "Sankey diagram (slide energy transformations)",
+    "original_path": "/images/papers/physics-nov-2021/q2b-sankey.png",
+    "image_type": "code_rendered",
+    "render_component": "SankeySim",
+    "render_data": {
+      "title": "Energy transformations as the child slides down",
+      "source": "MYP physics-nov-2021",
+      "units": "J",
+      "inputJ": 750,
+      "branches": [
+        { "form": "Kinetic energy", "valueJ": 672, "direction": "straight" },
+        { "form": "Gravitational potential energy", "blank": true, "direction": "down" },
+        { "form": "Sound energy", "valueJ": 10, "direction": "down" }
+      ],
+      "missingForm": "Gravitational potential energy",
+      "missingValueJ": 80,
+      "conservation": "Total input 750 J = kinetic 672 J + sound 10 J + the missing form. The unlabelled band is gravitational potential energy = 80 J."
+    },
+    "generated_path": "/images/papers/physics-nov-2021/q2b-sankey.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q4",
+    "questionId": 4,
+    "taskLabel": null,
+    "topic": "Component X lab notebook (raw I-V readings)",
+    "original_path": "/images/papers/physics-nov-2021/q4-component-x.png",
+    "image_type": "code_rendered",
+    "render_component": "CircuitSim",
+    "render_data": {
+      "title": "Component X — measure the current at each voltage",
+      "source": "MYP physics-nov-2021",
+      "mode": "iv",
+      "component": "X",
+      "ivPairs": [
+        { "V": 0.5, "I": 0.1 },
+        { "V": 1.0, "I": 0.2 },
+        { "V": 1.5, "I": 0.3 },
+        { "V": 2.0, "I": 0.6, "readFromAmmeter": "601 mA" },
+        { "V": 2.5, "I": 0.41 }
+      ],
+      "task": "Set the supply to 2.0 V and read the ammeter (601 mA = 0.60 A) to complete the notebook. Sweep the slider to see the ammeter and voltmeter update and R = V / I for each trial."
+    },
+    "generated_path": "/images/papers/physics-nov-2021/q4-component-x.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q4.tasks[c]",
+    "questionId": 4,
+    "taskLabel": "c",
+    "topic": "Component Y current-voltage graph (non-ohmic)",
+    "original_path": "/images/papers/physics-nov-2021/q4c-component-y.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG graph titled 'A graph of current against voltage for component Y'. x-axis Voltage / V (0.0 to 10.0, major every 2.0, minor 0.5); y-axis Current / A (0.00 to 0.50, major every 0.05, minor 0.025). Smooth concave-down curve (non-ohmic) through (0,0),(1.0,0.20),(2.0,0.28),(3.0,0.33),(4.0,0.36),(5.0,0.38),(6.0,0.40),(7.0,0.42),(8.0,0.44) with cross markers. Read-offs used later: at V=1.0 ⇒ I=0.20 (R=5.0 Ω); at I=0.40 ⇒ V≈6.0 (R=15 Ω).",
+    "generated_path": "/images/papers/physics-nov-2021/q4c-component-y.svg",
+    "needs_review": false,
+    "approved": false
+  },
+  {
+    "taskPath": "q6",
+    "questionId": 6,
+    "taskLabel": null,
+    "topic": "Decorative lights scene + started series circuit",
+    "original_path": "/images/papers/physics-nov-2021/q6-lights.png",
+    "image_type": "code_rendered",
+    "render_component": "DragSort",
+    "render_data": {
+      "title": "Build a series circuit to measure the current through two bulbs",
+      "source": "MYP physics-nov-2021",
+      "mode": "order",
+      "prompt": "The battery is already placed. Arrange the remaining components around the loop so two bulbs and the ammeter are all in series.",
+      "items": ["Battery (placed)", "Lamp", "Lamp", "Ammeter (in series)"],
+      "correctOrder": ["Battery (placed)", "Lamp", "Lamp", "Ammeter (in series)"]
+    },
+    "generated_path": "/images/papers/physics-nov-2021/q6-lights.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q7",
+    "questionId": 7,
+    "taskLabel": null,
+    "topic": "Carbon-neutral energy sources infographic",
+    "original_path": "/images/papers/physics-nov-2021/q7-energy.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG infographic, three colour-coded panels each with an original illustration plus Description and Advantages text. (1) Wood burning biomass — trees + power station with steam; quick-growing trees farmed and burned for heat in a conventional station, woodland space; carbon neutral, cheap, easy to harness. (2) Geothermal power — pipework + borehole into hot rocks; water pumped down, heated by hot rocks, returned as steam to turn a turbine, earthquakes possible; carbon neutral, stable continuous supply, long-term planning, no polluting gases. (3) Tidal power — barrage with turbines in the sea + waves; tides captured through turbines, high up-front cost from tax-payer investment; carbon neutral, predictable, long-lasting, low maintenance.",
+    "generated_path": "/images/papers/physics-nov-2021/q7-energy.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q8",
+    "questionId": 8,
+    "taskLabel": null,
+    "topic": "Malta energy options infographic (data table)",
+    "original_path": "/images/papers/physics-nov-2021/q8-malta.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG infographic on a dark sea panel: stylised Malta islands with a nuclear plant icon, three offshore wind turbines, and a dashed high-voltage cable running to a 'North Africa (solar farm)' point. Three data tables with EXACT values. Solar cable: Power 250 MW, Area 1 km², Cost/kWh €0.05, Construction €3.9 billion, Lifetime 25 yr, Decommission €1 million. Offshore wind: 250 MW, 73 km², €0.15, €1.6 billion, 15 yr, €30 million. Nuclear: 250 MW, 0.1 km², €0.02, €2.2 billion, 40 yr, €1000 million.",
+    "generated_path": "/images/papers/physics-nov-2021/q8-malta.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q1",
+    "questionId": 1,
+    "taskLabel": null,
+    "topic": "Brownian motion (mis-crop)",
+    "original_path": "/images/papers/physics-nov-2021/q1-brownian.png",
+    "image_type": "text_only",
+    "image_prompt": "Source crop is a blank answer box / page chrome with no diagram — flagged as text_only; no SVG generated. Re-crop needed if a Brownian-motion figure is required.",
+    "generated_path": null,
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q2.tasks[a]",
+    "questionId": 2,
+    "taskLabel": "a",
+    "topic": "E = mc² SI units table (mis-crop)",
+    "original_path": "/images/papers/physics-nov-2021/q2a-units.png",
+    "image_type": "text_only",
+    "image_prompt": "Source crop is the SI-units answer table (text only, e.g. 'metre per second'), not a diagram — flagged as text_only; no SVG generated.",
+    "generated_path": null,
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q2.tasks[d]",
+    "questionId": 2,
+    "taskLabel": "d",
+    "topic": "Electron/positron mass table (mis-crop)",
+    "original_path": "/images/papers/physics-nov-2021/q2d-particles.png",
+    "image_type": "text_only",
+    "image_prompt": "Source crop is the electron/positron mass table and surrounding question text, not a diagram — flagged as text_only; no SVG generated.",
+    "generated_path": null,
+    "needs_review": true,
+    "approved": false
+  }
+]

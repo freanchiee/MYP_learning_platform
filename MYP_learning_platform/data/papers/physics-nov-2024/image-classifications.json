@@ -1,0 +1,227 @@
+[
+  {
+    "taskPath": "q1.tasks[a]",
+    "original_path": "/images/papers/physics-nov-2024/page-02-crop.png",
+    "image_type": "code_rendered",
+    "render_component": "ProjectileSim",
+    "render_data": {
+      "title": "Wrecking ball released from 12.5 m",
+      "source": "MYP physics-nov-2024",
+      "mode": "drop",
+      "dropHeight_m": 12.5,
+      "scaleMarks_m": [0, 4.5, 8, 12.5],
+      "g": 9.81,
+      "planets": [
+        { "name": "Earth (g = 9.81)", "g": 9.81 }
+      ],
+      "readout": "Fall time / s"
+    },
+    "image_prompt": "SVG: demolition crane with wrecking ball swinging from A (12.5 m) to B (4.5 m), 2000 kg, modern glass building.",
+    "generated_path": "/images/papers/physics-nov-2024/page-02.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q2",
+    "original_path": "/images/papers/physics-nov-2024/page-03-crop.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: ceiling-mounted smoke alarm with rising smoke columns.",
+    "generated_path": "/images/papers/physics-nov-2024/page-03.svg",
+    "needs_review": false,
+    "approved": true
+  },
+  {
+    "taskPath": "q2.tasks[a]",
+    "original_path": "/images/papers/physics-nov-2024/page-04-crop.png",
+    "image_type": "code_rendered",
+    "render_component": "DecaySim",
+    "render_data": {
+      "title": "Decay of americium-241",
+      "source": "MYP physics-nov-2024",
+      "isotope": "Am-241",
+      "daughter": "Np-237",
+      "decayMode": "alpha",
+      "halfLife": 420,
+      "units": "years",
+      "initialCount": 10000,
+      "axisMax": 2100,
+      "xAxis": "time / years",
+      "yAxis": "number of nuclei"
+    },
+    "image_prompt": "SVG: exponential decay graph, number of americium-241 nuclei vs time / years.",
+    "generated_path": "/images/papers/physics-nov-2024/page-04.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q3",
+    "original_path": "/images/papers/physics-nov-2024/page-05-crop.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: ohmmeter reading 12.2 Ω connected to a conducting-material cylinder.",
+    "generated_path": "/images/papers/physics-nov-2024/page-05.svg",
+    "needs_review": false,
+    "approved": true
+  },
+  {
+    "taskPath": "q3.tasks[a]",
+    "original_path": "/images/papers/physics-nov-2024/page-07-crop.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: four trend-line graphs (A-D) of resistance vs diameter, same data points.",
+    "generated_path": "/images/papers/physics-nov-2024/page-07.svg",
+    "needs_review": false,
+    "approved": true,
+    "regenerated_at": "2026-06-11T16:00:18.259Z"
+  },
+  {
+    "taskPath": "q4.tasks[a]",
+    "original_path": "/images/papers/physics-nov-2024/page-08-crop.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: lamp shining on an LDR, ohmmeter reading 400 Ω.",
+    "generated_path": "/images/papers/physics-nov-2024/page-08.svg",
+    "needs_review": false,
+    "approved": true
+  },
+  {
+    "taskPath": "q5",
+    "original_path": "/images/papers/physics-nov-2024/page-09-crop.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: circuit with power supply, ammeter, voltmeter and a resistor in a heated bead bath.",
+    "generated_path": "/images/papers/physics-nov-2024/page-09.svg",
+    "needs_review": false,
+    "approved": true,
+    "regenerated_at": "2026-06-11T16:06:00.117Z"
+  },
+  {
+    "taskPath": "q5.tasks[a]",
+    "original_path": "/images/papers/physics-nov-2024/page-11b-crop.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: data table temperature / current / resistance, missing resistance value at 50 °C.",
+    "generated_path": "/images/papers/physics-nov-2024/page-11b.svg",
+    "needs_review": false,
+    "approved": true
+  },
+  {
+    "taskPath": "q6",
+    "original_path": "/images/papers/physics-nov-2024/page-13-crop.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: elevated water tower (tank on a concrete column).",
+    "generated_path": "/images/papers/physics-nov-2024/page-13.svg",
+    "needs_review": false,
+    "approved": true
+  },
+  {
+    "taskPath": "q7.tasks[a]",
+    "original_path": "/images/papers/physics-nov-2024/page-15-crop.png",
+    "image_type": "code_rendered",
+    "render_component": "SpectrumSim",
+    "render_data": {
+      "title": "Electromagnetic spectrum — locate UV",
+      "source": "MYP physics-nov-2024",
+      "mode": "scrub",
+      "bands": ["Radio", "Microwave", "Infrared", "Visible", "Ultraviolet", "X-ray", "Gamma"],
+      "target": "Ultraviolet",
+      "axis": "frequency / energy increases left → right",
+      "wavelengthRange": ["1 m", "1 pm"],
+      "visibleRange": ["700 nm", "400 nm"]
+    },
+    "image_prompt": "SVG: electromagnetic spectrum with numbered blanks and visible-light enlargement.",
+    "generated_path": "/images/papers/physics-nov-2024/page-15.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q1.tasks[a]",
+    "original_path": "/images/papers/physics-nov-2024/page-01-crop.png",
+    "image_type": "code_rendered",
+    "render_component": "OrbitSim",
+    "render_data": {
+      "title": "Periodic motion — Earth orbiting the Sun",
+      "source": "MYP physics-nov-2024",
+      "mode": "orbit",
+      "central": "Sun",
+      "bodies": [
+        { "name": "Sun", "role": "center", "fixed": true, "radius": 14, "colour": "#f5a524" },
+        { "name": "Earth", "role": "orbiter", "orbitalPeriod": 365, "orbitRadius": 110, "radius": 7, "colour": "#3b82f6" }
+      ],
+      "showForce": true,
+      "caption": "Earth's orbit repeats every 365 days — periodic motion. Compare with a one-off basketball arc (option C), which does NOT repeat and is therefore not periodic. Correct answer: C."
+    },
+    "image_prompt": "SVG: four labelled panels A-D for a 'which does NOT show periodic motion' MCQ. A: Earth orbiting the Sun (periodic). B: analogue clock face (periodic). C: basketball shot following a one-off parabolic arc into a hoop (NOT periodic). D: child on an A-frame swing (periodic).",
+    "generated_path": "/images/papers/physics-nov-2024/periodic-motion-options.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q3.tasks[b]",
+    "original_path": "/images/papers/physics-nov-2024/page-05b-crop.png",
+    "image_type": "code_rendered",
+    "render_component": "DragSort",
+    "render_data": {
+      "title": "Select the cylinders to collect appropriate data",
+      "source": "MYP physics-nov-2024",
+      "mode": "bins",
+      "prompt": "Vary diameter only — keep material AND length constant. Sort each available cylinder into the correct group.",
+      "bins": ["Use in investigation", "Do not use"],
+      "items": [
+        { "id": "A1", "label": "Material A · 12 mm diameter · 50 mm length", "correctBin": "Use in investigation" },
+        { "id": "A2", "label": "Material A · 17 mm diameter · 50 mm length", "correctBin": "Use in investigation" },
+        { "id": "A3", "label": "Material A · 20 mm diameter · 50 mm length", "correctBin": "Use in investigation" },
+        { "id": "A4", "label": "Material A · 23 mm diameter · 50 mm length", "correctBin": "Use in investigation" },
+        { "id": "B1", "label": "Material B · 15 mm diameter · 60 mm length", "correctBin": "Do not use" },
+        { "id": "C1", "label": "Material C · 18 mm diameter · 40 mm length", "correctBin": "Do not use" }
+      ],
+      "correct": {
+        "Use in investigation": ["A1", "A2", "A3", "A4"],
+        "Do not use": ["B1", "C1"]
+      }
+    },
+    "image_prompt": "SVG: isometric tray of 'Available cylinders' of three materials (A orange, B silver, C black) at varying diameters and lengths, an empty Collection table below, and a Key mapping each colour to Material A/B/C.",
+    "generated_path": "/images/papers/physics-nov-2024/available-cylinders.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q3.tasks[d]",
+    "original_path": "/images/papers/physics-nov-2024/page-06-crop.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: spiral notepad with pencil on a wooden desk, showing five handwritten raw-data records: '27 mm diameter, 12 Ω resistance', '12 millimetres, 56.2 ohms', '17 mm, 27 Ω', '20 millimetres, 20 Ω', '23 mm diameter and 16 Ω resistance'.",
+    "generated_path": "/images/papers/physics-nov-2024/notebook-raw-data.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q5.tasks[a]",
+    "original_path": "/images/papers/physics-nov-2024/page-09b-crop.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: digital bead bath with a thermometer standing in the beads, plus a circular magnifier enlarging the thermometer scale (30-40 °C, minor ticks every degree) reading about 38 °C.",
+    "generated_path": "/images/papers/physics-nov-2024/bead-bath-thermometer.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q5.tasks[e]",
+    "original_path": "/images/papers/physics-nov-2024/page-11-crop.png",
+    "image_type": "code_rendered",
+    "render_component": "CircuitSim",
+    "render_data": {
+      "title": "Current vs temperature (supply 30 V)",
+      "source": "MYP physics-nov-2024",
+      "mode": "iv",
+      "component": "resistor",
+      "emf": 30,
+      "task": "Sweep the temperature trials; the ammeter and R = V / I update live. Check whether I × T stays constant (it does not), so the relationship is not inversely proportional.",
+      "ivPairs": [
+        { "label": "16 °C", "V": 30, "I": 0.437, "readFromAmmeter": "437 mA" },
+        { "label": "35 °C", "V": 30, "I": 0.393, "readFromAmmeter": "393 mA" },
+        { "label": "50 °C", "V": 30, "I": 0.36, "readFromAmmeter": "360 mA" },
+        { "label": "65 °C", "V": 30, "I": 0.332, "readFromAmmeter": "332 mA" },
+        { "label": "80 °C", "V": 30, "I": 0.31, "readFromAmmeter": "310 mA" },
+        { "label": "100 °C", "V": 30, "I": 0.285, "readFromAmmeter": "285 mA" }
+      ]
+    },
+    "image_prompt": "SVG graph: Current / mA (0-450) vs Temperature / °C (0-120), smooth decreasing curve through points (16,437)(35,393)(50,360)(65,332)(80,310)(100,285) with cross markers and minor gridlines.",
+    "generated_path": "/images/papers/physics-nov-2024/current-vs-temperature.svg",
+    "needs_review": true,
+    "approved": false
+  }
+]

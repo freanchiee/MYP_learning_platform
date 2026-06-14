@@ -1,0 +1,299 @@
+[
+  {
+    "taskPath": "q1.tasks[c]",
+    "questionId": 1,
+    "taskLabel": "c",
+    "topic": "Velocity-time graph",
+    "original_path": "/images/papers/physics-nov-2016/vtgraph-q1.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: velocity-time graph of a migrating bird. x-axis Time / s (0 to 600, ticks every 100), y-axis Velocity / m s⁻¹ (0 to 35, ticks every 5). Trapezoidal motion through vertices A(0,0), B(100,30), C(450,30), D(550,0); teal line with × markers, vertices labelled A B C D.",
+    "generated_path": "/images/papers/physics-nov-2016/vtgraph-q1.svg",
+    "needs_review": false,
+    "approved": true
+  },
+  {
+    "taskPath": "q2.tasks[b]",
+    "questionId": 2,
+    "taskLabel": "b",
+    "topic": "Oscilloscope waveforms",
+    "original_path": "/images/papers/physics-nov-2016/oscilloscope-q2.png",
+    "image_type": "code_rendered",
+    "image_prompt": "SVG: four oscilloscope sine traces A, B, C, D stacked, common x-axis Time / s (0 to 1, gridlines at 0, 0.5, 1). Cycle counts in 1 s: A=10 Hz, B=12 Hz, C=6 Hz (largest amplitude), D=24 Hz (densest). Teal traces on white, panel letters A-D.",
+    "generated_path": "/images/papers/physics-nov-2016/oscilloscope-q2.svg",
+    "needs_review": true,
+    "approved": false,
+    "render_component": "WaveSim",
+    "render_data": {
+      "title": "Sound waves recorded from four sources A, B, C, D (1 second window)",
+      "source": "MYP physics-nov-2016",
+      "mode": "match",
+      "windowSeconds": 1,
+      "amplitudeGridUnits": 2,
+      "concept": "Reading frequency from an oscilloscope display: frequency = complete cycles per second (Hz).",
+      "task": "Count cycles in 1 s to find each frequency (A=10 Hz, B=12 Hz, C=6 Hz, D=24 Hz). v=fλ with v=330 m/s gives wavelength of C = 330/6 = 55 m.",
+      "traces": [
+        {
+          "id": "A",
+          "label": "A",
+          "frequency": 10,
+          "cycles": 10,
+          "amplitude": 1.0
+        },
+        {
+          "id": "B",
+          "label": "B",
+          "frequency": 12,
+          "cycles": 12,
+          "amplitude": 1.0
+        },
+        {
+          "id": "C",
+          "label": "C",
+          "frequency": 6,
+          "cycles": 6,
+          "amplitude": 1.6
+        },
+        {
+          "id": "D",
+          "label": "D",
+          "frequency": 24,
+          "cycles": 24,
+          "amplitude": 0.7
+        }
+      ]
+    }
+  },
+  {
+    "taskPath": "q8",
+    "questionId": 8,
+    "taskLabel": null,
+    "topic": "Radioactive decay curve",
+    "original_path": "/images/papers/physics-nov-2016/page-55.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: radioactive decay scatter. x-axis Time / years (0 to 300, ticks every 20), y-axis Average percentage of radioactive nuclei remaining / % (0 to 100, ticks every 20). Noisy exponential decay from 100% at t=0 down to ~0% by t=300 (half-life ≈ 38 yr); teal × markers.",
+    "generated_path": "/images/papers/physics-nov-2016/decay-q8.svg",
+    "needs_review": false,
+    "approved": true
+  },
+  {
+    "taskPath": "q8.tasks[b]",
+    "questionId": 8,
+    "taskLabel": "b",
+    "topic": "Radioactive decay (point-to-point)",
+    "original_path": "/images/papers/physics-nov-2016/page-56.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: same radioactive decay data as the Q8 stem, shown as a point-to-point joined line. x-axis Time / years (0 to 300, ticks every 20), y-axis Average percentage of radioactive nuclei remaining / % (0 to 100, ticks every 20). Teal line through × markers, exponential decay from 100% to ~0%.",
+    "generated_path": "/images/papers/physics-nov-2016/decay-line-q8b.svg",
+    "needs_review": false,
+    "approved": true
+  },
+  {
+    "taskPath": "q1",
+    "questionId": 1,
+    "taskLabel": null,
+    "topic": "Bird Migration & Motion",
+    "original_path": "/images/papers/physics-nov-2016/q1-godwit.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: clean textbook illustration of a bar-tailed godwit wading bird in profile on grassland — long slightly upturned bill, speckled chestnut/brown plumage, pale supercilium stripe, standing on thin legs. Soft sky-to-grassland gradient, distinct palette from the IB photo.",
+    "generated_path": "/images/papers/physics-nov-2016/q1-godwit.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q1.tasks[c]",
+    "questionId": 1,
+    "taskLabel": "c",
+    "topic": "Kinematics & Motion Graphs",
+    "original_path": "/images/papers/physics-nov-2016/forcediagrams-q1c.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: four free-body force diagrams (Diagram 1-4) of a flying bird, each with Lift (up, green), Weight (down, brown), Drag (left, blue), Thrust (right, red) arrows. Diagram 1 = all forces balanced (correct for constant velocity B–C); Diagram 2 thrust>drag; Diagram 3 lift>weight; Diagram 4 drag>thrust and weight>lift. Coloured arrowheads, labels, panel titles.",
+    "generated_path": "/images/papers/physics-nov-2016/forcediagrams-q1c.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q2.tasks[f]",
+    "questionId": 2,
+    "taskLabel": "f",
+    "topic": "Waves, Sound & Frequency",
+    "original_path": "/images/papers/physics-nov-2016/page-18.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: infrasound waves diffracting over a hill at dusk. Source elephant on the right emits radiating wavefronts/arrows; curved wavefronts bend over the dark hill silhouette and reach a group of elephants and acacia trees on the far (left) side. Sunset gradient sky, black silhouettes, white wavefront arcs, dark direction arrows.",
+    "generated_path": "/images/papers/physics-nov-2016/infrasound-hill-q2f.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q3",
+    "questionId": 3,
+    "taskLabel": null,
+    "topic": "Light, Reflection & Refraction",
+    "original_path": "/images/papers/physics-nov-2016/page-21.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: refraction of a light ray through three stacked transparent layers (top / middle / bottom). Ray travels upward, bending towards the dashed normal entering the denser middle layer and away from the normal entering the top layer. Dark backdrop, amber ray with arrowheads, dashed vertical normals, layer labels.",
+    "generated_path": "/images/papers/physics-nov-2016/refraction-layers-q3.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q4",
+    "questionId": 4,
+    "taskLabel": null,
+    "topic": "Static Electricity",
+    "original_path": "/images/papers/physics-nov-2016/page-22.png",
+    "image_type": "code_rendered",
+    "image_prompt": "SVG: a blue plastic rod shown as a 3D cylinder carrying a net positive charge — several red '+' charges and a couple of remaining green '−' charges on its surface, with a colour key. Distinct palette from the IB original.",
+    "generated_path": "/images/papers/physics-nov-2016/charged-rod-q4.svg",
+    "needs_review": true,
+    "approved": false,
+    "render_component": "ParticleSim",
+    "render_data": {
+      "title": "Charging a plastic rod by rubbing it with a cloth",
+      "source": "MYP physics-nov-2016",
+      "mode": "freeze",
+      "substance": "charged particles on the plastic rod surface",
+      "states": [
+        "Before rubbing (neutral rod)",
+        "After rubbing (rod positive)"
+      ],
+      "particleCount": 12,
+      "before": "Before rubbing: the rod is electrically neutral — 6 positive charges (protons, fixed in the nuclei) and 6 negative charges (electrons), so net charge = 0.",
+      "after": "After rubbing with the cloth: electrons are the only mobile charges, so the rod loses 2 electrons to the cloth. It is left with 6 positive and 4 negative charges, giving a net charge of +2 (positively charged)."
+    }
+  },
+  {
+    "taskPath": "q4.tasks[c]",
+    "questionId": 4,
+    "taskLabel": "c",
+    "topic": "Static Electricity",
+    "original_path": "/images/papers/physics-nov-2016/page-25.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: a grey cat (Harry) curled on the floor, its fur dusted with white polystyrene pellets clinging to it by electrostatic attraction; an open cardboard box of pellets beside it with pellets spilling onto the floor.",
+    "generated_path": "/images/papers/physics-nov-2016/cat-pellets-q4c.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q5",
+    "questionId": 5,
+    "taskLabel": null,
+    "topic": "Heat Transfer",
+    "original_path": "/images/papers/physics-nov-2016/page-27.png",
+    "image_type": "text_only",
+    "image_prompt": "Mis-crop: full-page screenshot of Question 5b prose (ice-cream insulation investigation) with no diagram. Marked text_only — renders nothing."
+  },
+  {
+    "taskPath": "q6",
+    "questionId": 6,
+    "taskLabel": null,
+    "topic": "Heat Transfer",
+    "original_path": "/images/papers/physics-nov-2016/page-33.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: five coffee cups of different wall thicknesses lined up against a vertical centimetre scale (0–20 cm on both left and right). Cups: ribbed cardboard cup, speckled ceramic mug, tall blue mug, stainless-steel tumbler, red mug. Clean 3D shading, distinct palette.",
+    "generated_path": "/images/papers/physics-nov-2016/coffee-cups-q6.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q6.tasks[a]",
+    "questionId": 6,
+    "taskLabel": "a",
+    "topic": "Heat Transfer",
+    "original_path": "/images/papers/physics-nov-2016/page-34.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: clean ruled data table. Columns 'Thickness of coffee cup / mm' and 'Time taken to cool from 75 °C to 50 °C / min'. Rows: 1→18, 2→25, 3→8, 3→16, 4→10. Shaded header row, alternating row tint.",
+    "generated_path": "/images/papers/physics-nov-2016/cooling-table-q6.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q8",
+    "questionId": 8,
+    "taskLabel": null,
+    "topic": "Atomic Structure & Radioactivity",
+    "original_path": "/images/papers/physics-nov-2016/page-53.png",
+    "image_type": "code_rendered",
+    "image_prompt": "SVG: strontium-90 radioactive-decay simulation panel. Field of purple nuclei (some decayed to grey daughters), a 'Year 0' readout, a 0–100 progress bar, a slider at the start, playback controls (skip-back, step-back, pause, play, skip-forward), and a Key showing ⁹⁰Sr nucleus (red/blue nucleons), ⁹⁰Y grey daughter nucleus, and a beta particle.",
+    "generated_path": "/images/papers/physics-nov-2016/decay-sim-q8.svg",
+    "needs_review": true,
+    "approved": false,
+    "render_component": "DecaySim",
+    "render_data": {
+      "title": "Strontium-90 radioactive decay simulation",
+      "source": "MYP physics-nov-2016",
+      "isotope": "Sr-90",
+      "daughter": "Y-90",
+      "decayMode": "beta",
+      "halfLife": 29,
+      "units": "years",
+      "initialCount": 400,
+      "timeRange": {
+        "min": 0,
+        "max": 100,
+        "units": "years"
+      },
+      "xAxis": "Time / years",
+      "yAxis": "Percentage of original nuclei remaining / %"
+    }
+  },
+  {
+    "taskPath": "q9",
+    "questionId": 9,
+    "taskLabel": null,
+    "topic": "Electromagnetic Induction & Motors",
+    "original_path": "/images/papers/physics-nov-2016/page-61.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: electricity generation and transmission scene — coal/nuclear power station with cooling towers and steam on the left, a step-up transformer, a line of pylons carrying high-voltage wires (catenary droop), a step-down transformer, and a utility pole feeding a house on the right. Labels: Power station, Transformer (×2), High voltage wires. Blue sky, green ground.",
+    "generated_path": "/images/papers/physics-nov-2016/transmission-q9.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q9.tasks[c]",
+    "questionId": 9,
+    "taskLabel": "c",
+    "topic": "Electromagnetic Induction & Motors",
+    "original_path": "/images/papers/physics-nov-2016/page-66.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: transformer diagram — laminated iron core drawn as a 3D square loop, red primary coil on the left limb, blue secondary coil (more turns) on the right limb, dashed green magnetic-flux loop arrow around the core. Labels: Primary (input), Primary voltage, Secondary (output), Secondary voltage, Transformer core.",
+    "generated_path": "/images/papers/physics-nov-2016/transformer-q9c.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q10",
+    "questionId": 10,
+    "taskLabel": null,
+    "topic": "Energy Sources",
+    "original_path": "/images/papers/physics-nov-2016/page-73.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: stylised circular city map labelled 'Map of city — 06:00 morning' for a load-shedding scenario. Quadrants shaded dark ('power off') and tan ('power on') with a key, red road network, green park patches and a blue river. Distinct palette.",
+    "generated_path": "/images/papers/physics-nov-2016/city-map-q10.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q10b",
+    "questionId": 10,
+    "taskLabel": null,
+    "topic": "Energy Sources",
+    "original_path": "/images/papers/physics-nov-2016/page-74.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: isometric view of a busy crossroads / traffic intersection with several coloured cars and a pickup truck queued, traffic lights at the corners, yellow lane markings and white dashed centre lines, green verges. Flat-design illustration, distinct palette.",
+    "generated_path": "/images/papers/physics-nov-2016/traffic-intersection-q10.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q10c",
+    "questionId": 10,
+    "taskLabel": null,
+    "topic": "Energy Sources",
+    "original_path": "/images/papers/physics-nov-2016/page-75.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: a solar panel mounted on a traffic-light pole, tilted to catch sun rays, with a cable running down to a grey battery-station box at the base. Labels 'Solar panel' and 'Battery station'. A couple of vehicles nearby, pavement and grass verges.",
+    "generated_path": "/images/papers/physics-nov-2016/solar-battery-q10.svg",
+    "needs_review": true,
+    "approved": false
+  }
+]

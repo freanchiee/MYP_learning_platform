@@ -1,0 +1,122 @@
+[
+  {
+    "taskPath": "q3.tasks[c]",
+    "questionId": 3,
+    "taskLabel": "c",
+    "topic": "Bacteria removal — cleaning kinetics",
+    "original_path": "/images/papers/chemistry-may-2022/page-11.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: line graph of % bacteria remaining on lens (y, 0-100, ticks every 10) vs Time / hours (x, 0-9). Two series — one-step (teal, near-flat: 100 at 0h falling to ~95% by 2h and staying ~95% to 8h) and two-step (orange, steep: 100 at 0h, 95 at 1h, 80 at 2h, 20 at 4h, 5 at 6h, 2 at 8h). Cross markers, legend keyed one step / two step.",
+    "generated_path": "/images/papers/chemistry-may-2022/q3-bacteria-cleaning-graph.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q2.tasks[f]",
+    "questionId": 2,
+    "taskLabel": "f",
+    "topic": "HF dissolving in water — temperature change",
+    "original_path": "/images/papers/chemistry-may-2022/page-07.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: Before/After diagram of a beaker of water with a thermometer, each with a magnified circular gauge. Before reads 25°C (red column between the 20 and 30 marks); After reads 39°C (red column just below the 40 mark). Centre dashed divider, 'Before' in teal, 'After' in red. Clean lab apparatus.",
+    "generated_path": "/images/papers/chemistry-may-2022/q2f-thermometer-before-after.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q4.tasks[c]",
+    "questionId": 4,
+    "taskLabel": "c",
+    "topic": "Rocket-engine catalyst apparatus",
+    "original_path": "/images/papers/chemistry-may-2022/page-13.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: four-stage sequence (red arrows between) of a lidded vessel modelled on a rocket engine. Stage 1 labelled String, Fuel source, Catalyst (small tube on string), H₂O₂; stage 2 tube lowered into liquid; stage 3 reaction bubbles with a glowing splint at the mouth; stage 4 tall blue Flame and escaping O₂(g). Ground band beneath.",
+    "generated_path": "/images/papers/chemistry-may-2022/q4c-rocket-catalyst-apparatus.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q4.tasks[e]",
+    "questionId": 4,
+    "taskLabel": "e",
+    "topic": "Eudiometer apparatus for collecting O₂",
+    "original_path": "/images/papers/chemistry-may-2022/page-15.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: eudiometer experimental set-up — graduated inverted eudiometer tube (scale 10..50) clamped on a retort stand over a beaker of Water, delivery tube to a conical Catalyst container with a Stopper holding H₂O₂, and a digital Stopwatch. Clean labelled chemistry apparatus.",
+    "generated_path": "/images/papers/chemistry-may-2022/q4e-eudiometer-apparatus.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q4.tasks[f]",
+    "questionId": 4,
+    "taskLabel": "f",
+    "topic": "Eudiometer fourth trial — unsealed stopper",
+    "original_path": "/images/papers/chemistry-may-2022/page-16.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: same eudiometer set-up (eudiometer, Water beaker, Stopper, Catalyst container, H₂O₂, Stopwatch reading 0:30) with a magnifier-circle inset highlighting the stopper/tubing not seated on the flask neck, gas escaping through the gap, caption 'Stopper not sealed — gas escapes'. Explains the inconsistent 50 cm³ result.",
+    "generated_path": "/images/papers/chemistry-may-2022/q4f-eudiometer-fourth-trial.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q5",
+    "questionId": 5,
+    "taskLabel": null,
+    "topic": "Eudiometer method for comparing catalysts",
+    "original_path": "/images/papers/chemistry-may-2022/page-16.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: eudiometer experimental set-up — graduated inverted eudiometer tube (scale 10..50) clamped on a retort stand over a beaker of Water, delivery tube to a conical Catalyst container with a Stopper holding H₂O₂, and a digital Stopwatch. Clean labelled chemistry apparatus.",
+    "generated_path": "/images/papers/chemistry-may-2022/q5-eudiometer-apparatus.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q6",
+    "questionId": 6,
+    "taskLabel": null,
+    "topic": "H₂O₂ hair bleaching swatches & concentration bottles",
+    "original_path": "/images/papers/chemistry-may-2022/page-18.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: top — ruled 'Time / min' vs 'Colour' table with rows 0, 30, 60, 90 and five hair-colour swatch columns that lighten progressively down each column (black→blonde range). Bottom — row of five H₂O₂ bottles labelled 3% (10 VOL), 6% (20 VOL), 9% (30 VOL), 10.5% (35 VOL), 12% (40 VOL).",
+    "generated_path": "/images/papers/chemistry-may-2022/q6-hair-bleaching-h2o2.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q7.tasks[d]",
+    "questionId": 7,
+    "taskLabel": "d",
+    "topic": "Papyrus vs acid-free paper infographic",
+    "original_path": "/images/papers/chemistry-may-2022/page-22.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: open-notebook infographic, two pages. Left 'Made from papyrus plant' (reeds, scroll) with notes: grows in aquatic areas/full sun; lasts several thousand years; fibres change light to darker yellow; high mould resistance; stable in dry conditions; difficult to fold, loses flexibility. Right 'Made from wood' (tree, acid-free paper sheet) with notes: trees grow in most climates; wood fibres react with air to yellow; lasts 500–1000 years; fibres weakened by light/heat; sunlight causes brittleness; moisture causes mould; made in different thicknesses; flexible/easily folded; contains a base that reacts with CO₂ in air to stop yellowing.",
+    "generated_path": "/images/papers/chemistry-may-2022/q7d-papyrus-vs-acidfree-infographic.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q8",
+    "questionId": 8,
+    "taskLabel": null,
+    "topic": "Tree-to-paper and paper-to-paper process infographic",
+    "original_path": "/images/papers/chemistry-may-2022/page-23.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: two process-flow panels. 'From tree to paper' (warm) with 5 steps: 1 trees broken down to pulp; 2 chemical pulping cooked under heat/pressure with chemicals; 3 pulp washed/decontaminated; 4 chemically treated to white paper (chlorine, oxygen, or H₂O₂); 5 water removed and pressed into paper. 'From paper to paper' (green recycling loop) with 5 steps: 1 used paper collected/sorted; 2 mixed with water, chopped/blended to pulp; 3 filtered to remove dirt/plastic/metals; 4 ink removed with detergents; 5 water removed and pressed into paper.",
+    "generated_path": "/images/papers/chemistry-may-2022/q8-tree-to-paper-infographic.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q9",
+    "questionId": 9,
+    "taskLabel": null,
+    "topic": "Paper vs electronic information storage",
+    "original_path": "/images/papers/chemistry-may-2022/page-24.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: original two-column icon grid (replacing a copyrighted photo collage) contrasting 'Paper & physical archives' (framed art, library books, open book, museum globe, historic scroll) with 'Electronic & cloud storage' (smartphone/QR, CDs/DVDs, floppy disks, VR headset, laptop, tablet/e-reader, cloud). Warm vs cool palettes, summary captions on durability/portability.",
+    "generated_path": "/images/papers/chemistry-may-2022/q9-paper-vs-electronic-storage.svg",
+    "needs_review": true,
+    "approved": false
+  }
+]

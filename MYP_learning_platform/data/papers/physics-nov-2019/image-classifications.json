@@ -1,0 +1,264 @@
+[
+  {
+    "taskPath": "q4.tasks[d]",
+    "questionId": 4,
+    "taskLabel": "d",
+    "topic": "Plane mirrors — images vs angle",
+    "original_path": "/images/papers/physics-nov-2019/q4d-graph.png",
+    "image_type": "code_rendered",
+    "render_component": "OpticsSim",
+    "render_data": {
+      "title": "Number of images vs angle between two mirrors",
+      "source": "MYP physics-nov-2019",
+      "mode": "mirror",
+      "mirror": {
+        "kaleidoscope": true,
+        "imagesFormula": "N = 360/θ − 1",
+        "min": 36,
+        "max": 180,
+        "step": 12,
+        "angle": 90,
+        "readoutTarget": "Find the angle that gives 3 images (≈ 60°)"
+      }
+    },
+    "image_prompt": "SVG: line graph, Number of images (y, 0-8) vs Angle between the mirrors in degrees (x, 0-180); decreasing inverse-style curve through points (60,7), (90,5), (120,2), (180,1).",
+    "generated_path": "/images/papers/physics-nov-2019/q4d-graph.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q4.tasks[f]",
+    "questionId": 4,
+    "taskLabel": "f",
+    "topic": "Plane mirrors — images vs angle (bar chart)",
+    "original_path": "/images/papers/physics-nov-2019/q4f-barchart.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: bar chart, Number of images (y, 0-8) vs Angle between the mirrors in degrees (x categories 45, 60, 120, 180); bars of height 7, 5, 2, 1.",
+    "generated_path": "/images/papers/physics-nov-2019/q4f-barchart.svg",
+    "needs_review": false,
+    "approved": true
+  },
+  {
+    "taskPath": "q5.tasks[e]",
+    "questionId": 5,
+    "taskLabel": "e",
+    "topic": "Sound echoes — distance-time graph",
+    "original_path": "/images/papers/physics-nov-2019/q5e-graph.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: distance-time graph for sound echoes, Distance / m (y, 0-600 step 100) vs Time / s (x, 0.0-1.6 step 0.2); scatter points (0.2,100), (0.6,200), (0.8,300), (1.0,400), (1.6,500) with best-fit straight line through the origin (gradient ~330 m/s).",
+    "generated_path": "/images/papers/physics-nov-2019/q5e-graph.svg",
+    "needs_review": false,
+    "approved": true
+  },
+  {
+    "taskPath": "q2",
+    "questionId": 2,
+    "taskLabel": null,
+    "topic": "Smog over a city",
+    "original_path": "/images/papers/physics-nov-2019/q2-smog.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: stylized hazy city skyline shrouded in smog, distant grey towers fading into a tan haze blanket, forested green hills and a temple cluster in the foreground; caption 'Smog over a city'.",
+    "generated_path": "/images/papers/physics-nov-2019/q2-smog.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q2",
+    "questionId": 2,
+    "taskLabel": null,
+    "topic": "Smog filter — ionization chamber",
+    "original_path": "/images/papers/physics-nov-2019/q2-ionization.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: ionization chamber diagram — dirty air with dust enters from the left through inflow arrows, two glowing positive ionizing electrodes emit electron streams that charge the dust, the now-charged dust drifts to four long horizontal 'collection' plates (marked − at the left end, + at the right end) and sticks to the positive ends; clean air exits via green arrows on the right.",
+    "generated_path": "/images/papers/physics-nov-2019/q2-ionization.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q3",
+    "questionId": 3,
+    "taskLabel": null,
+    "topic": "Electromagnetic spectrum number line",
+    "original_path": "/images/papers/physics-nov-2019/q3a-spectrum.png",
+    "image_type": "code_rendered",
+    "render_component": "SpectrumSim",
+    "render_data": {
+      "title": "Classify the missing sections of the electromagnetic spectrum",
+      "source": "MYP physics-nov-2019",
+      "mode": "label",
+      "axis": "frequency (low → high)",
+      "bands": [
+        "Radio",
+        "Microwave",
+        "Infra-red",
+        "Visible",
+        "Ultraviolet",
+        "X-rays",
+        "Gamma ray"
+      ],
+      "fixedLabels": [
+        "Microwave",
+        "Visible",
+        "Gamma ray"
+      ],
+      "gaps": [
+        { "slot": "between Microwave and Visible", "correct": "Infra-red" },
+        { "slot": "between Visible and X-rays", "correct": "Ultraviolet" }
+      ],
+      "draggableTray": [
+        "X-rays",
+        "Infra-red",
+        "Radio"
+      ]
+    },
+    "image_prompt": "SVG: electromagnetic spectrum drawn as a horizontal frequency axis (increasing frequency to the right) with division ticks; printed labels Microwave, Visible (with a small dispersion prism band), Ultraviolet, Gamma ray; three dashed empty answer slots marked '?' where the student drags the labels Radio (far left), Infra-red (before Visible) and X-rays (after Ultraviolet); a draggable tray at the top holds the boxes X-rays, Infra-red, Radio.",
+    "generated_path": "/images/papers/physics-nov-2019/q3a-spectrum.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q3",
+    "questionId": 3,
+    "taskLabel": null,
+    "topic": "RFID implant in a cat (X-ray)",
+    "original_path": "/images/papers/physics-nov-2019/q3b-rfid-cat.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: stylized X-ray of a cat in side profile (skull, arched spine of vertebrae, curved rib cage, leg and tail bones over a faint soft-tissue silhouette on a dark blue-green background); a small bright capsule between the shoulder blades is circled in yellow and labelled 'RFID'.",
+    "generated_path": "/images/papers/physics-nov-2019/q3b-rfid-cat.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q3",
+    "questionId": 3,
+    "taskLabel": null,
+    "topic": "RFID internal structure",
+    "original_path": "/images/papers/physics-nov-2019/q3-rfid-structure.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: RFID internal structure — fingertips pinching a tiny glass-capsule RFID (labelled 'RFID') on the left; on the right a grain of rice for scale and an enlarged cutaway of the capsule spanning a 11.5 millimetres dimension line, with internal components labelled Microchip, Radio transmitter and Coil of wire (copper windings on a ferrite core).",
+    "generated_path": "/images/papers/physics-nov-2019/q3-rfid-structure.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q4",
+    "questionId": 4,
+    "taskLabel": null,
+    "topic": "Plane mirror reflection ray diagram",
+    "original_path": "/images/papers/physics-nov-2019/q4-mirrors.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: ray diagram of reflection at a plane mirror — an upright 'Object' on the left, a hatched vertical mirror, two incident rays striking the mirror and reflecting back, two horizontal dashed 'Normal' lines at the reflection points, equal angle-of-incidence/angle-of-reflection arcs, and a faint dashed 'virtual image' behind the mirror.",
+    "generated_path": "/images/papers/physics-nov-2019/q4-mirrors.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q5",
+    "questionId": 5,
+    "taskLabel": null,
+    "topic": "Speed of sound via echo — scene",
+    "original_path": "/images/papers/physics-nov-2019/q5-echo.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: outdoor scene — two students clap two wooden blocks together (clap burst) on the left, dashed sound rays travel out to a wall on the right and reflect back; a dimensioned arrow labelled 'Distance = 110 m' spans the ground between them and the wall; 'Wall' and 'Diagram not to scale' labels.",
+    "generated_path": "/images/papers/physics-nov-2019/q5-echo.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q5.tasks[d]",
+    "questionId": 5,
+    "taskLabel": "d",
+    "topic": "Echo results data table",
+    "original_path": "/images/papers/physics-nov-2019/q5d-table.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: clean ruled data table titled 'Distance travelled and time for echo results' with columns Distance (m) and Time (s); rows 400/1.18, 200/0.601, 300/0.88, 500/1.46 (values exactly as recorded in the notebook).",
+    "generated_path": "/images/papers/physics-nov-2019/q5d-table.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q6",
+    "questionId": 6,
+    "taskLabel": null,
+    "topic": "Mass-on-spring oscillation apparatus",
+    "original_path": "/images/papers/physics-nov-2019/q6-spring.png",
+    "image_type": "code_rendered",
+    "render_component": "OscillatorSim",
+    "render_data": {
+      "title": "Mass on a spring — effect of mass on time period",
+      "source": "MYP physics-nov-2019",
+      "type": "spring",
+      "springConstant": 20,
+      "massSlider": { "min": 100, "max": 500, "step": 100, "unit": "g" },
+      "periodFormula": "T = 2π√(m/k)"
+    },
+    "image_prompt": "SVG: oscillation apparatus — a stopwatch reading 00:00 on the left; a vertical ruler held in a clamp stand; a helical spring suspended from a G-clamp on a table edge with a mass hanging from it; a red dashed 'Equilibrium' line and a 'Displaced distance' marker; labels Ruler, Spring, Equilibrium, Displaced distance.",
+    "generated_path": "/images/papers/physics-nov-2019/q6-spring.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q7",
+    "questionId": 7,
+    "taskLabel": null,
+    "topic": "Stopping distance scene",
+    "original_path": "/images/papers/physics-nov-2019/q7-stopping.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: stopping-distance scene — a red car travelling at 20 m s⁻¹ on the left, three dashed marker posts labelled 'Hazard detected', 'Braking begins' and 'The car stops', a deer on the right; dimension brackets for 'Thinking distance 28 m', 'Braking distance 39 m' and an overall 'Stopping distance'; rolling green hills and clouds.",
+    "generated_path": "/images/papers/physics-nov-2019/q7-stopping.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q7.tasks[b]",
+    "questionId": 7,
+    "taskLabel": "b",
+    "topic": "Stopping-distance factors grid",
+    "original_path": "/images/papers/physics-nov-2019/q7b-factors.png",
+    "image_type": "code_rendered",
+    "render_component": "DragSort",
+    "render_data": {
+      "mode": "bins",
+      "title": "Classify the factors affecting stopping distance",
+      "source": "MYP physics-nov-2019",
+      "prompt": "Drag each factor into the correct category: environmental, driver, or car factor.",
+      "bins": [
+        "Environmental factor",
+        "Driver factor",
+        "Car factor"
+      ],
+      "items": [
+        "Using a cell phone",
+        "Heavy rain",
+        "Worn out tyre tread",
+        "Faulty brakes",
+        "Drinking alcohol",
+        "Poor road surface"
+      ],
+      "correct": {
+        "Using a cell phone": "Driver factor",
+        "Heavy rain": "Environmental factor",
+        "Worn out tyre tread": "Car factor",
+        "Faulty brakes": "Car factor",
+        "Drinking alcohol": "Driver factor",
+        "Poor road surface": "Environmental factor"
+      }
+    },
+    "image_prompt": "SVG: 2x3 grid of illustrated tiles each with a caption and a 'Select ▾' dropdown — Using a cell phone (driver looking at phone), Heavy rain, Worn out tyre tread (bald tyre), Faulty brakes (hot smoking brake), Drinking alcohol (wine glass and bottle), Poor road surface (cracked road).",
+    "generated_path": "/images/papers/physics-nov-2019/q7b-factors.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q8",
+    "questionId": 8,
+    "taskLabel": null,
+    "topic": "Driverless cars — question text (mis-crop)",
+    "original_path": "/images/papers/physics-nov-2019/q8-driverless.png",
+    "image_type": "text_only",
+    "image_prompt": "Crop is question prose only (two paragraphs of driverless-cars text), no diagram to recreate.",
+    "generated_path": null,
+    "needs_review": true,
+    "approved": false
+  }
+]

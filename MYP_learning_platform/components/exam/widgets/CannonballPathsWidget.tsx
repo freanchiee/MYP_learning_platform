@@ -63,7 +63,7 @@ export default function CannonballPathsWidget({
 
   return (
     <div className="space-y-3 my-2">
-      <p className="text-[12px] text-gray-500 font-medium uppercase tracking-wide">
+      <p className="text-[12px] text-ink-subtle font-medium uppercase tracking-wide">
         Match each path to its launch speed
       </p>
 
@@ -71,8 +71,8 @@ export default function CannonballPathsWidget({
         {PATHS.map((path) => (
           <div
             key={path}
-            className={`flex items-center gap-3 rounded-xl border px-3 py-2.5 transition-colors ${
-              selections[path] ? PATH_COLORS[path] : 'bg-gray-50 border-gray-200'
+            className={`flex items-center gap-3 rounded-card border px-3 py-2.5 transition-colors ${
+              selections[path] ? PATH_COLORS[path] : 'bg-surface-2 border-line'
             }`}
           >
             {/* Path label badge */}
@@ -83,7 +83,7 @@ export default function CannonballPathsWidget({
             </span>
 
             {/* Description */}
-            <span className="flex-1 text-[12px] text-gray-600 hidden sm:block">
+            <span className="flex-1 text-[12px] text-ink-muted hidden sm:block">
               {PATH_DESCRIPTIONS[path]}
             </span>
 
@@ -91,10 +91,10 @@ export default function CannonballPathsWidget({
             <select
               value={selections[path]}
               onChange={(e) => handleChange(path, e.target.value)}
-              className={`text-[13px] rounded-lg border px-2 py-1.5 font-medium cursor-pointer focus:outline-none focus:ring-2 focus:ring-[var(--ib-teal)] transition-all ${
+              className={`text-[13px] rounded-control border px-2 py-1.5 font-medium cursor-pointer focus:outline-none focus:ring-2 focus:ring-[var(--accent)] transition-all ${
                 selections[path]
-                  ? 'border-current bg-white/70'
-                  : 'border-gray-300 bg-white text-gray-500'
+                  ? 'border-current bg-surface/70'
+                  : 'border-line-strong bg-surface text-ink-subtle'
               }`}
             >
               <option value="">Select speed…</option>
@@ -111,7 +111,7 @@ export default function CannonballPathsWidget({
       {/* Completion indicator */}
       {allSelected && (
         <div className="flex items-center gap-1.5 text-[12px] text-[var(--ib-teal)] font-medium pt-1">
-          <span className="w-4 h-4 rounded-full bg-[var(--ib-teal)] flex items-center justify-center text-white text-[9px] font-bold flex-shrink-0">
+          <span className="w-4 h-4 rounded-full bg-[var(--ib-teal)] flex items-center justify-center text-on-accent text-[9px] font-bold flex-shrink-0">
             ✓
           </span>
           All paths assigned — your answer has been recorded.

@@ -1,0 +1,369 @@
+[
+  {
+    "taskPath": "q4.tasks[a]",
+    "questionId": 4,
+    "taskLabel": "a",
+    "topic": "Air speed vs weight graph",
+    "original_path": "/images/papers/physics-may-2019/q4a-graph.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: line graph, x-axis Weight / N (0 to 1200, ticks every 200), y-axis Air speed / km h⁻¹ (0 to 160, ticks every 20); single increasing square-root-shaped curve from (100,40) through (600,~100) to (1100,~135).",
+    "generated_path": "/images/papers/physics-may-2019/q4a-graph.svg",
+    "needs_review": false,
+    "approved": true
+  },
+  {
+    "taskPath": "q5.tasks[d]",
+    "questionId": 5,
+    "taskLabel": "d",
+    "topic": "CSA vs air speed relationship graphs",
+    "original_path": "/images/papers/physics-may-2019/q5d-graphs.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: three scatter panels. Graph A: CSA / cm² (0-60) vs Air speed / ms⁻¹ (0-30) inverse-decay trend; Graph B: CSA / cm² (0-60) vs 1/air speed / m⁻¹ s (0-0.08) increasing best-fit line; Graph C: CSA / cm² (0-60) vs 1/(air speed)² / m⁻² s² (0-0.006) straight best-fit line (most linear).",
+    "generated_path": "/images/papers/physics-may-2019/q5d-graphs.svg",
+    "needs_review": false,
+    "approved": true
+  },
+  {
+    "taskPath": "q1",
+    "questionId": 1,
+    "taskLabel": "a",
+    "topic": "Heat transfer — campfire",
+    "original_path": "/images/papers/physics-may-2019/q1a-heattransfer.png",
+    "image_type": "code_rendered",
+    "image_prompt": "SVG: campfire heat-transfer scene with draggable labels (Convection, Radiation, Conduction) and three blank answer boxes. A hand holds a metal rod whose far end sits in the fire with a blue arrow tracking heat back along the rod to the hand (conduction); dotted brown arrows rise above the flames (convection); wavy red arrows radiate horizontally from the fire to a pair of warming hands at lower-left (radiation); a second person reaches a hand toward the fire at the right.",
+    "generated_path": "/images/papers/physics-may-2019/q1a-heattransfer.svg",
+    "needs_review": true,
+    "approved": false,
+    "render_component": "DragSort",
+    "render_data": {
+      "mode": "bins",
+      "title": "Heat transfer from a campfire",
+      "source": "MYP physics-may-2019",
+      "prompt": "Select the heat-transfer process for each situation shown.",
+      "items": [
+        "Conduction",
+        "Convection",
+        "Radiation"
+      ],
+      "bins": [
+        "Metal rod carrying heat from the fire to the hand",
+        "Hot air rising above the flames",
+        "Warmth felt by hands held beside the fire"
+      ],
+      "correct": {
+        "Conduction": "Metal rod carrying heat from the fire to the hand",
+        "Convection": "Hot air rising above the flames",
+        "Radiation": "Warmth felt by hands held beside the fire"
+      }
+    }
+  },
+  {
+    "taskPath": "q1.tasks[c]",
+    "questionId": 1,
+    "taskLabel": "c",
+    "topic": "Dewar (vacuum) flask",
+    "original_path": "/images/papers/physics-may-2019/q1c-dewar.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: labelled cross-section of a Dewar flask containing ice cubes. Leader-line labels: Plastic stopper, Double-walled metal container, Ice, Vacuum, Silvered-surface double-walled glass, Insulated support.",
+    "generated_path": "/images/papers/physics-may-2019/q1c-dewar.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q2.tasks[a]",
+    "questionId": 2,
+    "taskLabel": "a",
+    "topic": "Atom drawing canvas",
+    "original_path": "/images/papers/physics-may-2019/q2a-atom.png",
+    "image_type": "code_rendered",
+    "image_prompt": "SVG: blank atom-building canvas (dark) with a dashed inner nucleus circle and a dashed outer electron-shell circle, plus a draggable-items panel showing a red + (proton), white 0 (neutron) and blue − (electron). Student draws the helium structure.",
+    "generated_path": "/images/papers/physics-may-2019/q2a-atom.svg",
+    "needs_review": true,
+    "approved": false,
+    "render_component": "DragSort",
+    "render_data": {
+      "mode": "bins",
+      "title": "Structure of a helium atom",
+      "source": "MYP physics-may-2019",
+      "prompt": "Place each particle in the correct part of the helium atom (2 protons, 2 neutrons, 2 electrons).",
+      "items": [
+        {
+          "id": "p1",
+          "label": "proton (+)"
+        },
+        {
+          "id": "p2",
+          "label": "proton (+) "
+        },
+        {
+          "id": "n1",
+          "label": "neutron (0)"
+        },
+        {
+          "id": "n2",
+          "label": "neutron (0) "
+        },
+        {
+          "id": "e1",
+          "label": "electron (−)"
+        },
+        {
+          "id": "e2",
+          "label": "electron (−) "
+        }
+      ],
+      "bins": [
+        "Nucleus",
+        "Electron shell"
+      ],
+      "correct": {
+        "p1": "Nucleus",
+        "p2": "Nucleus",
+        "n1": "Nucleus",
+        "n2": "Nucleus",
+        "e1": "Electron shell",
+        "e2": "Electron shell"
+      }
+    }
+  },
+  {
+    "taskPath": "q2.tasks[d]",
+    "questionId": 2,
+    "taskLabel": "d",
+    "topic": "Charged ink particle and paper",
+    "original_path": "/images/papers/physics-may-2019/q2d-inkparticle.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: a positively charged paper (row of red + charges on a bar) above a single negatively charged blue − ink particle, with a grey photosensitive surface below. Labels: Positively charged paper, Negatively charged ink particle, Photosensitive surface. Student draws force arrows on the ink particle.",
+    "generated_path": "/images/papers/physics-may-2019/q2d-inkparticle.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q3",
+    "questionId": 3,
+    "taskLabel": "a",
+    "topic": "Solar system",
+    "original_path": "/images/papers/physics-may-2019/q3a-solarsystem.png",
+    "image_type": "code_rendered",
+    "image_prompt": "SVG: solar system on a dark starfield — Sun at left, the eight planets in order along curved orbit arcs, an asteroid belt band of dots between Mars and Jupiter (Saturn shown with rings). Red arrows point up at each planet/feature and draggable labels (Asteroid belt, Mercury, Saturn) sit in a strip for the student to place.",
+    "generated_path": "/images/papers/physics-may-2019/q3a-solarsystem.svg",
+    "needs_review": true,
+    "approved": false,
+    "render_component": "DragSort",
+    "render_data": {
+      "mode": "bins",
+      "title": "Labelling the solar system",
+      "source": "MYP physics-may-2019",
+      "prompt": "Label the diagram: place each name on the correct feature.",
+      "items": [
+        "Mercury",
+        "Saturn",
+        "Asteroid belt"
+      ],
+      "bins": [
+        "Innermost planet (1st from the Sun)",
+        "Sixth planet from the Sun (with prominent rings)",
+        "Band of rocky objects between Mars and Jupiter"
+      ],
+      "correct": {
+        "Mercury": "Innermost planet (1st from the Sun)",
+        "Saturn": "Sixth planet from the Sun (with prominent rings)",
+        "Asteroid belt": "Band of rocky objects between Mars and Jupiter"
+      }
+    }
+  },
+  {
+    "taskPath": "q3.tasks[c]",
+    "questionId": 3,
+    "taskLabel": "c",
+    "topic": "Oumuamua trajectory",
+    "original_path": "/images/papers/physics-may-2019/q3c-trajectory.png",
+    "image_type": "code_rendered",
+    "image_prompt": "SVG: hyperbolic flyby trajectory of Oumuamua on a dark starfield — orange path entering top-left, swinging beneath the Sun and exiting lower-right with an arrowhead. Position A marked far from the Sun (upper-left) and position B marked closer to the Sun (lower). Student draws gravitational-force arrows at A and B.",
+    "generated_path": "/images/papers/physics-may-2019/q3c-trajectory.svg",
+    "needs_review": true,
+    "approved": false,
+    "render_component": "OrbitSim",
+    "render_data": {
+      "mode": "orbit",
+      "title": "Gravitational force on Oumuamua",
+      "source": "MYP physics-may-2019",
+      "central": "Sun",
+      "showForce": true,
+      "bodies": [
+        {
+          "name": "Sun",
+          "role": "center",
+          "fixed": true,
+          "colour": "#f6c343"
+        },
+        {
+          "name": "Oumuamua",
+          "role": "orbiter",
+          "orbitRadius": 110,
+          "orbitalPeriod": 200,
+          "colour": "#e8590c"
+        }
+      ],
+      "caption": "The Sun's gravitational pull on Oumuamua always points toward the Sun and is greater at B (closer, 1.5×10¹¹ m, g = 0.1 N kg⁻¹) than at A (farther). F = m × g = 5.62×10⁸ kg × 0.1 N kg⁻¹ = 5.62×10⁷ N at closest approach.",
+      "seed": 19
+    }
+  },
+  {
+    "taskPath": "q4",
+    "questionId": 4,
+    "taskLabel": null,
+    "topic": "Body flying — air flow",
+    "original_path": "/images/papers/physics-may-2019/q4-bodyflying.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG illustration: a person in a horizontal face-down body-flying posture (arms and legs spread, helmet) floating above the ground, supported by columns of upward blue air-flow arrows on both sides, each side labelled 'Air flow'.",
+    "generated_path": "/images/papers/physics-may-2019/q4-bodyflying.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q4.tasks[b]",
+    "questionId": 4,
+    "taskLabel": "b",
+    "topic": "Variable classification table",
+    "original_path": "/images/papers/physics-may-2019/q4b-variables.png",
+    "image_type": "code_rendered",
+    "image_prompt": "SVG: clean ruled table with a shaded header row. Columns: Quantity | Independent variable | Dependent variable | Control variable. Rows: Air speed, CSA, Shape, Weight — each with empty checkboxes in the three variable columns for the student to tick.",
+    "generated_path": "/images/papers/physics-may-2019/q4b-variables.svg",
+    "needs_review": true,
+    "approved": false,
+    "render_component": "DragSort",
+    "render_data": {
+      "mode": "bins",
+      "title": "Classifying the variables",
+      "source": "MYP physics-may-2019",
+      "prompt": "Place each quantity under the variable type that best describes it.",
+      "items": [
+        "Weight",
+        "Air speed",
+        "CSA",
+        "Mass",
+        "Volume"
+      ],
+      "bins": [
+        "Independent variable",
+        "Dependent variable",
+        "Control variable"
+      ],
+      "correct": {
+        "Independent variable": [
+          "Weight"
+        ],
+        "Dependent variable": [
+          "Air speed"
+        ],
+        "Control variable": [
+          "CSA",
+          "Mass",
+          "Volume"
+        ]
+      }
+    }
+  },
+  {
+    "taskPath": "q4.tasks[d]",
+    "questionId": 4,
+    "taskLabel": "d",
+    "topic": "Box of balls — CSA selection",
+    "original_path": "/images/papers/physics-may-2019/q4d-balls.png",
+    "image_type": "code_rendered",
+    "image_prompt": "SVG: a brown 'Available box' holding ten red balls each labelled with a weight and CSA (0.80N/10cm², 0.40N/12cm², 0.60N/9cm², 0.60N/12cm², 1.20N/12cm², 1.20N/12cm², 1.00N/12cm², 1.00N/11cm², 0.80N/12cm², 0.40N/8cm²), an empty blue 'Equipment box' with ten holes, and a key (Weight / CSA). Student selects balls to drag into the equipment box.",
+    "generated_path": "/images/papers/physics-may-2019/q4d-balls.svg",
+    "needs_review": true,
+    "approved": false,
+    "render_component": "DragSort",
+    "render_data": {
+      "mode": "bins",
+      "title": "Selecting balls for the experiment",
+      "source": "MYP physics-may-2019",
+      "prompt": "Choose balls of the SAME CSA spanning the widest weight range (at least 5 balls). Place each ball in the correct box.",
+      "items": [
+        {
+          "id": "b1",
+          "label": "0.80 N / 10 cm²"
+        },
+        {
+          "id": "b2",
+          "label": "0.40 N / 12 cm²"
+        },
+        {
+          "id": "b3",
+          "label": "0.60 N / 9 cm²"
+        },
+        {
+          "id": "b4",
+          "label": "0.60 N / 12 cm²"
+        },
+        {
+          "id": "b5",
+          "label": "1.20 N / 12 cm²"
+        },
+        {
+          "id": "b6",
+          "label": "1.20 N / 12 cm² "
+        },
+        {
+          "id": "b7",
+          "label": "1.00 N / 12 cm²"
+        },
+        {
+          "id": "b8",
+          "label": "1.00 N / 11 cm²"
+        },
+        {
+          "id": "b9",
+          "label": "0.80 N / 12 cm²"
+        },
+        {
+          "id": "b10",
+          "label": "0.40 N / 8 cm²"
+        }
+      ],
+      "bins": [
+        "Leave in available box",
+        "Use in experiment (12 cm²)"
+      ],
+      "correct": {
+        "b1": "Leave in available box",
+        "b2": "Use in experiment (12 cm²)",
+        "b3": "Leave in available box",
+        "b4": "Use in experiment (12 cm²)",
+        "b5": "Use in experiment (12 cm²)",
+        "b6": "Leave in available box",
+        "b7": "Use in experiment (12 cm²)",
+        "b8": "Leave in available box",
+        "b9": "Use in experiment (12 cm²)",
+        "b10": "Leave in available box"
+      }
+    }
+  },
+  {
+    "taskPath": "q5",
+    "questionId": 5,
+    "taskLabel": null,
+    "topic": "CSA investigation raw data",
+    "original_path": "/images/papers/physics-may-2019/q5-csadata.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: student's recorded raw data shown as a column of red balls, each annotated with its size and measured air speed: Radius = 3.5 cm → Speed = 14 m s⁻¹; Area = 13 cm² → 25; Area = 20 cm² → 22; Area = 24 cm² → 19; Area = 16 cm² → 23; Area = 28 cm² → 17; Area = 33 cm² → 16 m s⁻¹.",
+    "generated_path": "/images/papers/physics-may-2019/q5-csadata.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q6",
+    "questionId": 6,
+    "taskLabel": null,
+    "topic": "Boat floating data",
+    "original_path": "/images/papers/physics-may-2019/q6-shipdata.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: two side panels of a model boat floating in water — lightly loaded sitting high, heavily loaded sitting low — captioned 'The ship sinks lower in the water as boxes are added', above a clean ruled results table. Table columns: Weight of the boat / N | Volume of the boat below the water / cm³; rows 0.5→50, 1.1→110, 2.0→200, 4.2→420.",
+    "generated_path": "/images/papers/physics-may-2019/q6-shipdata.svg",
+    "needs_review": true,
+    "approved": false
+  }
+]

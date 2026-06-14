@@ -115,13 +115,13 @@ export default function FoodWebDrag() {
             </motion.button>
           ))}
           {removed.length === ORGANISMS.length && (
-            <span className="text-xs text-gray-400 italic">All organisms placed</span>
+            <span className="text-xs text-ink-subtle italic">All organisms placed</span>
           )}
         </div>
       </div>
 
       {/* Food Web Canvas */}
-      <div className="p-3 rounded-xl relative" style={{ background: '#fafaf7', border: '1.5px solid rgba(31,54,116,0.12)', minHeight: 260 }}>
+      <div className="figure-surface p-3 rounded-card relative" style={{ minHeight: 260 }}>
         <p className="text-xs font-bold mb-3" style={{ color: '#1f3674' }}>
           Food Web — {draggingFrom ? `Drawing arrow from ${orgById(draggingFrom).name}…` : 'Click organism to draw energy arrow'}
         </p>

@@ -53,13 +53,13 @@ function StatTile({ stat, delay, index }: { stat: Stat; delay: number; index: nu
       transition={{ duration: 0.5, delay, ease: [0.25, 0.46, 0.45, 0.94] }}
       className="relative flex flex-col py-8 px-6"
       style={{
-        borderRight: index < 3 ? '1px solid rgba(31,54,116,0.1)' : 'none',
+        borderRight: index < 3 ? '1px solid var(--border)' : 'none',
       }}
     >
       {/* Small label — top */}
       <div
         className="text-[9px] font-black uppercase tracking-[0.3em] mb-5"
-        style={{ color: 'rgba(31,54,116,0.35)' }}
+        style={{ color: 'var(--text-subtle)' }}
       >
         {stat.label}
       </div>
@@ -69,7 +69,7 @@ function StatTile({ stat, delay, index }: { stat: Stat; delay: number; index: nu
         className="font-extrabold leading-none"
         style={{
           fontSize: 'clamp(52px, 6vw, 88px)',
-          color: '#1f3674',
+          color: 'var(--text)',
           letterSpacing: '-3px',
           fontVariantNumeric: 'tabular-nums',
         }}
@@ -80,7 +80,7 @@ function StatTile({ stat, delay, index }: { stat: Stat; delay: number; index: nu
       {/* Sub label */}
       <div
         className="mt-3 text-xs font-semibold"
-        style={{ color: 'rgba(84,124,164,0.7)' }}
+        style={{ color: 'var(--text-muted)' }}
       >
         {stat.sub}
       </div>
@@ -113,17 +113,17 @@ export function XPBar({ pct, level, xpInLevel, xpNeeded }: XPBarProps) {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.3 }}
       className="flex items-center gap-10 py-8 px-6"
-      style={{ borderTop: '1px solid rgba(31,54,116,0.1)' }}
+      style={{ borderTop: '1px solid var(--border)' }}
     >
       {/* Left: label block */}
       <div className="flex-shrink-0 w-48">
         <div
           className="text-[9px] font-black uppercase tracking-[0.3em] mb-1"
-          style={{ color: 'rgba(31,54,116,0.35)' }}
+          style={{ color: 'var(--text-subtle)' }}
         >
           Level {level} Progress
         </div>
-        <div className="text-xs" style={{ color: 'rgba(84,124,164,0.6)' }}>
+        <div className="text-xs" style={{ color: 'var(--text-muted)' }}>
           {xpInLevel.toLocaleString()} / {xpNeeded.toLocaleString()} XP
         </div>
       </div>
@@ -132,7 +132,7 @@ export function XPBar({ pct, level, xpInLevel, xpNeeded }: XPBarProps) {
       <div className="flex-1">
         <div
           className="relative h-px overflow-visible"
-          style={{ background: 'rgba(31,54,116,0.12)' }}
+          style={{ background: 'var(--border)' }}
         >
           <div
             className="absolute top-0 left-0 h-full xp-bar-fill"
@@ -144,7 +144,7 @@ export function XPBar({ pct, level, xpInLevel, xpNeeded }: XPBarProps) {
       {/* Right: percent */}
       <div
         className="flex-shrink-0 text-2xl font-extrabold tabular-nums"
-        style={{ color: '#1f3674', letterSpacing: '-1px' }}
+        style={{ color: 'var(--text)', letterSpacing: '-1px' }}
       >
         {pct}%
       </div>
@@ -157,7 +157,7 @@ export default function DashboardStats({ stats }: { stats: Stat[] }) {
   return (
     <div
       className="grid grid-cols-2 md:grid-cols-4"
-      style={{ borderTop: '1px solid rgba(31,54,116,0.1)', borderBottom: '1px solid rgba(31,54,116,0.1)' }}
+      style={{ borderTop: '1px solid var(--border)', borderBottom: '1px solid var(--border)' }}
     >
       {stats.map((stat, i) => (
         <StatTile key={stat.label} stat={stat} delay={i * 0.07} index={i} />

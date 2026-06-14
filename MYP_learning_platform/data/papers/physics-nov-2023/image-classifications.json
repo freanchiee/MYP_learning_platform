@@ -1,0 +1,317 @@
+[
+  {
+    "taskPath": "q5",
+    "questionId": 5,
+    "taskLabel": null,
+    "topic": "Coefficient of Restitution",
+    "original_path": "/images/papers/physics-nov-2023/page-17.png",
+    "image_type": "text_only",
+    "image_prompt": "Mis-crop: Question 4h answer box and Question 5 intro text plus a 'Video / Script' tab transcript about the coefficient of restitution. Pure text and UI chrome, no diagram.",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q5",
+    "questionId": 5,
+    "taskLabel": null,
+    "topic": "Coefficient of Restitution",
+    "original_path": "/images/papers/physics-nov-2023/page-18.png",
+    "image_type": "text_only",
+    "image_prompt": "Mis-crop: video 'Script' transcript continuation and Question 5a with the e = sqrt(h2/h1) formula and an empty rich-text answer box. Pure text/formula and UI, no diagram.",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q5.tasks[c]",
+    "questionId": 5,
+    "taskLabel": "c",
+    "topic": "Coefficient of Restitution",
+    "original_path": "/images/papers/physics-nov-2023/page-19.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG data table titled 'Student's table of processed data' with columns Drop height (h1) | Average height of first bounce (h2) / m | Coefficient of restitution (e). Rows: 50.0 cm | 0.34 | 0.82; 2.50 m | 1.44 | 0.76; 1.50 m | 0.94 | 0.74; 2.00 m | 1.21 | (blank for student to calculate); 1.00 m | 0.65 | 0.806. Inconsistent units and the missing e cell are reproduced exactly because the task asks the student to spot the errors and compute e for 2.00 m.",
+    "generated_path": "/images/papers/physics-nov-2023/q5c-restitution-table.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q5.tasks[d]",
+    "questionId": 5,
+    "taskLabel": "d",
+    "topic": "Coefficient of Restitution",
+    "original_path": "/images/papers/physics-nov-2023/page-20.png",
+    "image_type": "text_only",
+    "image_prompt": "Mis-crop: 'Create New Table' / Reset UI, Question 5d hypothesis box and Question 5e statement box with the e = (speed after)/(speed before) = v2/v1 formula. Pure text/formula and UI, no diagram.",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q6",
+    "questionId": 6,
+    "taskLabel": null,
+    "topic": "Experimental Design — Table Tennis",
+    "original_path": "/images/papers/physics-nov-2023/page-21.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: textbook illustration of a table tennis racket with a ball, showing the layered construction. Labels: 'Layer of wood' (wooden blade core), 'Rubber' (red top surface with pimple texture), 'Sponge' (cushioning layer between wood and rubber), 'Handle'. An exposed edge reveals the rubber / sponge / wood layers in cross-section.",
+    "generated_path": "/images/papers/physics-nov-2023/q6-racket-cross-section.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q6.tasks[b]",
+    "questionId": 6,
+    "taskLabel": "b",
+    "topic": "Experimental Design — Table Tennis",
+    "original_path": "/images/papers/physics-nov-2023/page-22.png",
+    "image_type": "text_only",
+    "image_prompt": "Mis-crop: Question 6b text and 'Research question / Independent variable / Dependent variable (Height of the first bounce)' empty answer boxes. Pure text and form fields, no diagram.",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q7",
+    "questionId": 7,
+    "taskLabel": null,
+    "topic": "Passive Housing & Heat Transfer",
+    "original_path": "/images/papers/physics-nov-2023/page-23.png",
+    "image_type": "text_only",
+    "image_prompt": "Mis-crop: 'Control variable 1 / Control variable 2' empty boxes (end of Q6b) and Question 7 intro text with a 'Video / Script' transcript about passively heated houses. Pure text and form fields, no diagram.",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q7",
+    "questionId": 7,
+    "taskLabel": null,
+    "topic": "Passive Housing & Heat Transfer",
+    "original_path": "/images/papers/physics-nov-2023/page-24.png",
+    "image_type": "code_rendered",
+    "render_component": "DragSort",
+    "render_data": {
+      "mode": "bins",
+      "title": "Passive house — match each feature to how it reduces heat loss",
+      "source": "MYP physics-nov-2023",
+      "prompt": "A passively heated house uses six key features to stay warm with less energy. Match each feature to the physics it relies on.",
+      "items": [
+        "Airtightness",
+        "Heat recirculation",
+        "Thermal insulation of walls and roof",
+        "Insulated floor slab",
+        "Direction of windows",
+        "Windows with three layers of glass"
+      ],
+      "bins": [
+        "Prevents air moving between inside and outside (reduces convection)",
+        "Mechanical ventilation circulates warm air",
+        "Does not easily transfer heat (reduces conduction)",
+        "Minimizes thermal contact with the ground",
+        "Positioned to maximize solar heat entering",
+        "Sealed, coated panes let sunlight in but prevent radiation leaving"
+      ],
+      "correct": {
+        "Airtightness": "Prevents air moving between inside and outside (reduces convection)",
+        "Heat recirculation": "Mechanical ventilation circulates warm air",
+        "Thermal insulation of walls and roof": "Does not easily transfer heat (reduces conduction)",
+        "Insulated floor slab": "Minimizes thermal contact with the ground",
+        "Direction of windows": "Positioned to maximize solar heat entering",
+        "Windows with three layers of glass": "Sealed, coated panes let sunlight in but prevent radiation leaving"
+      }
+    },
+    "generated_path": "/images/papers/physics-nov-2023/q7-passive-house.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q7",
+    "questionId": 7,
+    "taskLabel": null,
+    "topic": "Passive Housing & Heat Transfer",
+    "original_path": "/images/papers/physics-nov-2023/page-25.png",
+    "image_type": "code_rendered",
+    "render_component": "DragSort",
+    "render_data": {
+      "mode": "bins",
+      "title": "Passive house — match each feature to how it reduces heat loss",
+      "source": "MYP physics-nov-2023",
+      "prompt": "A passively heated house uses six key features to stay warm with less energy. Match each feature to the physics it relies on.",
+      "items": [
+        "Airtightness",
+        "Heat recirculation",
+        "Thermal insulation of walls and roof",
+        "Insulated floor slab",
+        "Direction of windows",
+        "Windows with three layers of glass"
+      ],
+      "bins": [
+        "Prevents air moving between inside and outside (reduces convection)",
+        "Mechanical ventilation circulates warm air",
+        "Does not easily transfer heat (reduces conduction)",
+        "Minimizes thermal contact with the ground",
+        "Positioned to maximize solar heat entering",
+        "Sealed, coated panes let sunlight in but prevent radiation leaving"
+      ],
+      "correct": {
+        "Airtightness": "Prevents air moving between inside and outside (reduces convection)",
+        "Heat recirculation": "Mechanical ventilation circulates warm air",
+        "Thermal insulation of walls and roof": "Does not easily transfer heat (reduces conduction)",
+        "Insulated floor slab": "Minimizes thermal contact with the ground",
+        "Direction of windows": "Positioned to maximize solar heat entering",
+        "Windows with three layers of glass": "Sealed, coated panes let sunlight in but prevent radiation leaving"
+      }
+    },
+    "generated_path": "/images/papers/physics-nov-2023/q7-passive-house.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q7",
+    "questionId": 7,
+    "taskLabel": null,
+    "topic": "Passive Housing & Heat Transfer",
+    "original_path": "/images/papers/physics-nov-2023/page-26.png",
+    "image_type": "code_rendered",
+    "render_component": "DragSort",
+    "render_data": {
+      "mode": "bins",
+      "title": "Passive house — match each feature to how it reduces heat loss",
+      "source": "MYP physics-nov-2023",
+      "prompt": "A passively heated house uses six key features to stay warm with less energy. Match each feature to the physics it relies on.",
+      "items": [
+        "Airtightness",
+        "Heat recirculation",
+        "Thermal insulation of walls and roof",
+        "Insulated floor slab",
+        "Direction of windows",
+        "Windows with three layers of glass"
+      ],
+      "bins": [
+        "Prevents air moving between inside and outside (reduces convection)",
+        "Mechanical ventilation circulates warm air",
+        "Does not easily transfer heat (reduces conduction)",
+        "Minimizes thermal contact with the ground",
+        "Positioned to maximize solar heat entering",
+        "Sealed, coated panes let sunlight in but prevent radiation leaving"
+      ],
+      "correct": {
+        "Airtightness": "Prevents air moving between inside and outside (reduces convection)",
+        "Heat recirculation": "Mechanical ventilation circulates warm air",
+        "Thermal insulation of walls and roof": "Does not easily transfer heat (reduces conduction)",
+        "Insulated floor slab": "Minimizes thermal contact with the ground",
+        "Direction of windows": "Positioned to maximize solar heat entering",
+        "Windows with three layers of glass": "Sealed, coated panes let sunlight in but prevent radiation leaving"
+      }
+    },
+    "generated_path": "/images/papers/physics-nov-2023/q7-passive-house.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q7",
+    "questionId": 7,
+    "taskLabel": null,
+    "topic": "Passive Housing & Heat Transfer",
+    "original_path": "/images/papers/physics-nov-2023/page-27.png",
+    "image_type": "code_rendered",
+    "render_component": "DragSort",
+    "render_data": {
+      "mode": "bins",
+      "title": "Passive house — match each feature to how it reduces heat loss",
+      "source": "MYP physics-nov-2023",
+      "prompt": "A passively heated house uses six key features to stay warm with less energy. Match each feature to the physics it relies on.",
+      "items": [
+        "Airtightness",
+        "Heat recirculation",
+        "Thermal insulation of walls and roof",
+        "Insulated floor slab",
+        "Direction of windows",
+        "Windows with three layers of glass"
+      ],
+      "bins": [
+        "Prevents air moving between inside and outside (reduces convection)",
+        "Mechanical ventilation circulates warm air",
+        "Does not easily transfer heat (reduces conduction)",
+        "Minimizes thermal contact with the ground",
+        "Positioned to maximize solar heat entering",
+        "Sealed, coated panes let sunlight in but prevent radiation leaving"
+      ],
+      "correct": {
+        "Airtightness": "Prevents air moving between inside and outside (reduces convection)",
+        "Heat recirculation": "Mechanical ventilation circulates warm air",
+        "Thermal insulation of walls and roof": "Does not easily transfer heat (reduces conduction)",
+        "Insulated floor slab": "Minimizes thermal contact with the ground",
+        "Direction of windows": "Positioned to maximize solar heat entering",
+        "Windows with three layers of glass": "Sealed, coated panes let sunlight in but prevent radiation leaving"
+      }
+    },
+    "generated_path": "/images/papers/physics-nov-2023/q7-passive-house.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q7.tasks[b]",
+    "questionId": 7,
+    "taskLabel": "b",
+    "topic": "Passive Housing & Heat Transfer",
+    "original_path": "/images/papers/physics-nov-2023/page-28.png",
+    "image_type": "text_only",
+    "image_prompt": "Mis-crop: Question 7a and 7b prompts with empty rich-text answer boxes. Pure text and UI, no diagram.",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q7.tasks[d]",
+    "questionId": 7,
+    "taskLabel": "d",
+    "topic": "Passive Housing & Heat Transfer",
+    "original_path": "/images/papers/physics-nov-2023/page-29.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG stacked bar chart 'Household energy consumption for heating by energy', y-axis Percentage / % 0-100 (ticks every 10), single stacked bar of sources of energy used for heating. Segments bottom-to-top: Coal ~2%, Electricity ~5% (2-7), Heat ~8% (7-15), Wood ~22% (15-37), Oil ~15% (37-52), Gas ~48% (52-100). Used to read off the percentage of households using oil (~15%). This page shows the partial top of the same chart; replaced by the full chart SVG.",
+    "generated_path": "/images/papers/physics-nov-2023/q7d-energy-stacked-bar.svg",
+    "needs_review": false,
+    "approved": true
+  },
+  {
+    "taskPath": "q7.tasks[d]",
+    "questionId": 7,
+    "taskLabel": "d",
+    "topic": "Passive Housing & Heat Transfer",
+    "original_path": "/images/papers/physics-nov-2023/page-30.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG stacked bar chart 'Household energy consumption for heating by energy', y-axis Percentage / % 0-100 (ticks every 10), single stacked bar of sources of energy used for heating. Segments bottom-to-top: Coal ~2%, Electricity ~5% (2-7), Heat ~8% (7-15), Wood ~22% (15-37), Oil ~15% (37-52), Gas ~48% (52-100). The student reads the percentage of households using oil (~15%) off this chart.",
+    "generated_path": "/images/papers/physics-nov-2023/q7d-energy-stacked-bar.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q8",
+    "questionId": 8,
+    "taskLabel": null,
+    "topic": "Science, Society & Environment",
+    "original_path": "/images/papers/physics-nov-2023/page-31.png",
+    "image_type": "text_only",
+    "image_prompt": "Infographic slide 'Cost comparison of actively heated and passively heated buildings' — bulleted text with a money-bag clip-art. All numeric content (€180,000 / €195,000 build, 90% / €822 saving, €15,000 upgrade) is already in the question stem; the figure is decorative text.",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q8",
+    "questionId": 8,
+    "taskLabel": null,
+    "topic": "Science, Society & Environment",
+    "original_path": "/images/papers/physics-nov-2023/page-32.png",
+    "image_type": "text_only",
+    "image_prompt": "Infographic slides 'Regulating the passive house standard' (clipboard clip-art) and 'Paying for heat' (gauge clip-art) — bulleted text already captured in the question stem; decorative.",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q8",
+    "questionId": 8,
+    "taskLabel": null,
+    "topic": "Science, Society & Environment",
+    "original_path": "/images/papers/physics-nov-2023/page-33.png",
+    "image_type": "text_only",
+    "image_prompt": "Infographic slide 'Air quality in passively heated houses' (smog cloud clip-art) plus the Question 8 discuss/evaluate prompt and empty answer box. Bulleted text already captured in the question stem; decorative.",
+    "needs_review": true,
+    "approved": false
+  }
+]

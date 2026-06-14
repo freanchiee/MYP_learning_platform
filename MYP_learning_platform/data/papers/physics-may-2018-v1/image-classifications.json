@@ -1,0 +1,152 @@
+[
+  {
+    "taskPath": "q1.tasks[a]",
+    "questionId": 1,
+    "taskLabel": "a",
+    "topic": "Electromagnetic Induction & Motors",
+    "original_path": "/images/papers/physics-may-2018-v1/q1a-field-diagrams.svg",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: four multiple-choice bar-magnet field-line diagrams A-D. B is correct (loops from N to S, arrows away from N).",
+    "generated_path": "/images/papers/physics-may-2018-v1/q1a-field-diagrams.svg",
+    "needs_review": false,
+    "approved": true
+  },
+  {
+    "taskPath": "q1.tasks[d]",
+    "questionId": 1,
+    "taskLabel": "d",
+    "topic": "Electromagnetic Induction & Motors",
+    "original_path": "/images/papers/physics-may-2018-v1/q1d-transformer.svg",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: step-up transformer on toroidal iron core. Primary 5 turns connected to AC supply 220 V, secondary 10 turns to voltmeter. Labels P and S on core.",
+    "generated_path": "/images/papers/physics-may-2018-v1/q1d-transformer.svg",
+    "needs_review": false,
+    "approved": true
+  },
+  {
+    "taskPath": "q1.tasks[e]",
+    "questionId": 1,
+    "taskLabel": "e",
+    "topic": "Electromagnetic Induction & Motors",
+    "original_path": "/images/papers/physics-may-2018-v1/q1e-table.svg",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG data table: Primary/Secondary columns. Voltage 230 V / 110 V. Current 1.20 A / 2.30 A. Teal header.",
+    "generated_path": "/images/papers/physics-may-2018-v1/q1e-table.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q2",
+    "questionId": 2,
+    "taskLabel": null,
+    "topic": "Solar System, Gravity & Space",
+    "original_path": "/images/papers/physics-may-2018-v1/q2-ski-slopes.svg",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: two illustrative panels of water-park slides. Left: outdoor open slide with palm trees and splash pool. Right: indoor enclosed (tube) water slide with ceiling lights.",
+    "generated_path": "/images/papers/physics-may-2018-v1/q2-ski-slopes.svg",
+    "needs_review": false,
+    "approved": true
+  },
+  {
+    "taskPath": "q2.tasks[c]",
+    "questionId": 2,
+    "taskLabel": "c",
+    "topic": "Solar System, Gravity & Space",
+    "original_path": "/images/papers/physics-may-2018-v1/q2c-slope-diagram.svg",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: water-slide ramp with vertical height 30 m marked in red. Rider silhouette labelled 'Mass of rider 65 kg'.",
+    "generated_path": "/images/papers/physics-may-2018-v1/q2c-slope-diagram.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q2.tasks[e]",
+    "questionId": 2,
+    "taskLabel": "e",
+    "topic": "Solar System, Gravity & Space",
+    "original_path": "/images/papers/physics-may-2018-v1/q2d-comparison.svg",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: two side-by-side water-slide ramps labelled A: Outdoor open slide and B: Indoor enclosed slide.",
+    "generated_path": "/images/papers/physics-may-2018-v1/q2d-comparison.svg",
+    "needs_review": false,
+    "approved": true
+  },
+  {
+    "taskPath": "q6.tasks[a]",
+    "questionId": 6,
+    "taskLabel": "a",
+    "topic": "Kinematics & Motion Graphs",
+    "original_path": "/images/papers/physics-may-2018-v1/q6a-simulation.svg",
+    "image_type": "code_rendered",
+    "render_component": "RateSim",
+    "render_data": {
+      "title": "Sand timer: emptying time vs depth of sand",
+      "source": "MYP physics-may-2018-v1",
+      "mode": "scatter",
+      "lineOfBestFit": true,
+      "variable": "Depth of sand",
+      "xAxis": { "label": "Depth of sand / cm", "min": 0, "max": 12, "tick": 2 },
+      "yAxis": { "label": "Time taken to empty / s", "min": 0, "max": 14, "tick": 2 },
+      "points": [
+        [2, 5.8],
+        [4, 8.2],
+        [6, 10.0],
+        [8, 11.5],
+        [10, 12.9]
+      ],
+      "prompt": "Five sand timers were emptied with different depths of sand. Drag the cursor to read off the time. The 8 cm timer was not recorded — its stopwatch reads 11.5 s.",
+      "note": "Data: 2 cm → 5.8 s; 4 cm → 8.2 s; 6 cm → 10.0 s; 8 cm → 11.5 s; 10 cm → 12.9 s.",
+      "answer": "8 cm → 11.5 s (accept 11.4–11.6 s)"
+    },
+    "image_prompt": "SVG: sand-timer simulation panel. Five hourglasses with sand depths 6, 10, 2, 8, 4 cm. Row of stopwatches above (all at zero). Answer boxes below with the 8 cm slot highlighted '?'.",
+    "generated_path": "/images/papers/physics-may-2018-v1/q6a-simulation.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q6.tasks[a]",
+    "questionId": 6,
+    "taskLabel": "a",
+    "topic": "Kinematics & Motion Graphs",
+    "original_path": "/images/papers/physics-may-2018-v1/q6a-stopwatch.svg",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: large analog stopwatch, 60-second dial, red hand reading 11.5 s (between 10 and 15), title 'Final time 8 cm' for the sand timer.",
+    "generated_path": "/images/papers/physics-may-2018-v1/q6a-stopwatch.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q7.tasks[e]",
+    "questionId": 7,
+    "taskLabel": "e",
+    "topic": "Solar System, Gravity & Space",
+    "original_path": "/images/papers/physics-may-2018-v1/q7e-hydro-diagram.svg",
+    "image_type": "code_rendered",
+    "render_component": "DragSort",
+    "render_data": {
+      "title": "Energy transformations in a tidal power station",
+      "source": "MYP physics-may-2018-v1",
+      "mode": "order",
+      "prompt": "Place the forms of energy in the correct order to show the main energy transformations in a tidal power station.",
+      "items": [
+        "Gravitational potential energy",
+        "Kinetic energy",
+        "Electrical energy"
+      ],
+      "slots": [
+        "1st form (tidal water at height)",
+        "2nd form (water flowing through turbine)",
+        "3rd form (generator output)"
+      ],
+      "correctOrder": [
+        "Gravitational potential energy",
+        "Kinetic energy",
+        "Electrical energy"
+      ]
+    },
+    "image_prompt": "SVG: cross-section of a tidal barrage. Ocean (high tide) on the left, lagoon (lower level) on the right. Sea wall contains a turbine, shaft to generator, transformer, and power output.",
+    "generated_path": "/images/papers/physics-may-2018-v1/q7e-hydro-diagram.svg",
+    "needs_review": true,
+    "approved": false
+  }
+]

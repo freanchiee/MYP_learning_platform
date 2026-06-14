@@ -42,7 +42,8 @@ export function Modal({ isOpen, onClose, title, children, className }: ModalProp
     >
       {/* Backdrop */}
       <div
-        className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+        className="absolute inset-0 backdrop-blur-sm"
+        style={{ background: 'var(--scrim)' }}
         onClick={onClose}
         aria-hidden="true"
       />
@@ -50,17 +51,22 @@ export function Modal({ isOpen, onClose, title, children, className }: ModalProp
       {/* Card */}
       <div
         className={cn(
-          'relative z-10 w-full max-w-lg bg-white rounded-2xl shadow-2xl',
+          'relative z-10 w-full max-w-lg',
           'max-h-[90vh] flex flex-col',
           className
         )}
+        style={{
+          background: 'var(--surface-elevated)',
+          borderRadius: 'var(--radius-card)',
+          boxShadow: 'var(--shadow-elevated)',
+        }}
       >
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100 shrink-0">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-divider shrink-0">
           {title && (
             <h2
               id="modal-title"
-              className="text-lg font-semibold text-gray-900"
+              className="text-lg font-semibold text-ink"
             >
               {title}
             </h2>
@@ -68,7 +74,7 @@ export function Modal({ isOpen, onClose, title, children, className }: ModalProp
           <button
             onClick={onClose}
             className={cn(
-              'p-1.5 rounded-lg text-gray-400 hover:text-gray-700 hover:bg-gray-100 transition-colors',
+              'p-1.5 rounded-control text-ink-subtle hover:text-ink-muted hover:bg-surface-3 transition-colors',
               !title && 'ml-auto'
             )}
             aria-label="Close modal"

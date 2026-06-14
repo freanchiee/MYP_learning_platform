@@ -31,7 +31,7 @@ export default function RadioSelectWidget({
             className={`flex items-center gap-3 px-4 py-2.5 rounded-xl border cursor-pointer select-none transition-all
               ${isSelected
                 ? 'bg-[var(--ib-teal)]/10 border-[var(--ib-teal)] text-[var(--ib-teal)] font-semibold'
-                : 'bg-white border-gray-200 text-gray-700 hover:border-gray-400 hover:bg-gray-50'
+                : 'bg-surface border-line text-ink-muted hover:border-line-strong hover:bg-surface-2'
               }`}
           >
             {/* Custom radio circle */}
@@ -39,11 +39,11 @@ export default function RadioSelectWidget({
               className={`flex-shrink-0 w-5 h-5 rounded-full border-2 flex items-center justify-center transition-all
                 ${isSelected
                   ? 'border-[var(--ib-teal)] bg-[var(--ib-teal)]'
-                  : 'border-gray-300 bg-white'
+                  : 'border-line-strong bg-surface'
                 }`}
             >
               {isSelected && (
-                <span className="w-2 h-2 rounded-full bg-white block" />
+                <span className="w-2 h-2 rounded-full bg-on-accent block" />
               )}
             </span>
             <span className="text-[14px] font-medium">{opt}</span>

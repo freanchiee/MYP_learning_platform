@@ -3,14 +3,17 @@ import { memo, useCallback } from 'react'
 import { useExamStore } from '@/store/examStore'
 import type { Question, Criterion } from '@/lib/types'
 
-const CRIT_META: Record<Criterion, { color: string; label: string }> = {
-  A: { color: '#1f3674', label: 'Criterion A' },
-  B: { color: '#547ca4', label: 'Criterion B' },
-  C: { color: '#c3282d', label: 'Criterion C' },
-  D: { color: '#274e68', label: 'Criterion D' },
+const CRIT_META: Record<Criterion, { token: string; label: string }> = {
+  A: { token: 'var(--cA)', label: 'Criterion A' },
+  B: { token: 'var(--cB)', label: 'Criterion B' },
+  C: { token: 'var(--cC)', label: 'Criterion C' },
+  D: { token: 'var(--cD)', label: 'Criterion D' },
 }
 
 const CRITERIA_ORDER: Criterion[] = ['A', 'B', 'C', 'D']
+
+/** color-mix helper for tinting a criterion token at a given alpha % */
+const tint = (c: string, pct: number) => `color-mix(in srgb, ${c} ${pct}%, transparent)`
 
 function isAnswered(q: Question): boolean {
   if (q.type === 'mcq') return q.ans !== null && q.ans !== undefined
@@ -34,18 +37,18 @@ interface DotProps {
 const QuestionDot = memo(function QuestionDot({
   displayIdx, isCurrent, answered, flagged, critColor, topic, onClick,
 }: DotProps) {
-  let bgColor = '#ffffff'
-  let textColor = '#374151'
-  let borderColor = critColor + '44'
+  let bgColor = 'var(--surface)'
+  let textColor = 'var(--text-muted)'
+  let borderColor = tint(critColor, 27)
 
   if (isCurrent) {
-    bgColor = '#1f3674'
-    textColor = '#adf1c4'
-    borderColor = '#1f3674'
+    bgColor = 'var(--accent)'
+    textColor = 'var(--accent-fg)'
+    borderColor = 'var(--accent)'
   } else if (answered) {
-    bgColor = '#e0edf7'
-    textColor = '#1f3674'
-    borderColor = '#547ca4'
+    bgColor = 'var(--surface-tint)'
+    textColor = 'var(--accent)'
+    borderColor = 'var(--accent-2)'
   }
 
   return (
@@ -66,8 +69,8 @@ const QuestionDot = memo(function QuestionDot({
       </button>
       {flagged && (
         <div
-          className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full border border-white"
-          style={{ background: '#f5a623' }}
+          className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full"
+          style={{ background: 'var(--warning)', border: '1px solid var(--surface)' }}
         />
       )}
     </div>
@@ -91,12 +94,12 @@ export default function ExamSidebar() {
   return (
     <aside
       className="flex flex-col flex-shrink-0 overflow-y-auto"
-      style={{ width: 200, background: '#edf1f7', borderRight: '1px solid rgba(31,54,116,0.14)' }}
+      style={{ width: 200, background: 'var(--rail-bg)', borderRight: '1px solid var(--border)' }}
     >
       {/* Header */}
       <div
-        className="px-3 py-2 text-xs font-bold tracking-widest text-white uppercase flex-shrink-0"
-        style={{ background: '#1f3674' }}
+        className="px-3 py-2 text-xs font-bold tracking-widest uppercase flex-shrink-0"
+        style={{ background: 'var(--accent)', color: 'var(--text-on-accent)' }}
       >
         Questions
       </div>
@@ -111,16 +114,16 @@ export default function ExamSidebar() {
           return (
             <div key={crit} className="mb-1">
               <div
-                className="flex items-center gap-2 px-3 py-1.5 text-xs font-semibold text-white"
-                style={{ background: meta.color + '22', borderLeft: `3px solid ${meta.color}` }}
+                className="flex items-center gap-2 px-3 py-1.5 text-xs font-semibold"
+                style={{ background: tint(meta.token, 13), borderLeft: `3px solid ${meta.token}` }}
               >
                 <span
-                  className="w-4 h-4 rounded text-white flex items-center justify-center font-bold flex-shrink-0"
-                  style={{ background: meta.color, fontSize: 10 }}
+                  className="w-4 h-4 rounded flex items-center justify-center font-bold flex-shrink-0"
+                  style={{ background: meta.token, color: 'var(--criterion-fg)', fontSize: 10 }}
                 >
                   {crit}
                 </span>
-                <span className="text-gray-700 font-semibold" style={{ fontSize: 11 }}>
+                <span className="font-semibold" style={{ fontSize: 11, color: 'var(--text-muted)' }}>
                   {meta.label}
                 </span>
               </div>
@@ -136,7 +139,7 @@ export default function ExamSidebar() {
                       isCurrent={idx === currentIdx}
                       answered={isAnswered(q)}
                       flagged={q.flagged ?? false}
-                      critColor={meta.color}
+                      critColor={meta.token}
                       topic={q.topic}
                       onClick={makeClickHandler(idx)}
                     />
@@ -149,37 +152,37 @@ export default function ExamSidebar() {
       </div>
 
       {/* Progress bar */}
-      <div className="flex-shrink-0 px-3 py-3 border-t border-gray-300">
-        <div className="flex justify-between text-xs text-gray-500 mb-1">
+      <div className="flex-shrink-0 px-3 py-3" style={{ borderTop: '1px solid var(--border)' }}>
+        <div className="flex justify-between text-xs mb-1" style={{ color: 'var(--text-subtle)' }}>
           <span>Progress</span>
-          <span className="font-semibold text-gray-700">
+          <span className="font-semibold" style={{ color: 'var(--text-muted)' }}>
             {answeredCount}/{questions.length}
           </span>
         </div>
-        <div className="h-2 rounded-full bg-gray-300 overflow-hidden">
+        <div className="h-2 rounded-full overflow-hidden" style={{ background: 'var(--surface-3)' }}>
           <div
             className="h-full rounded-full transition-all duration-500"
             style={{
               width: `${questions.length > 0 ? (answeredCount / questions.length) * 100 : 0}%`,
-              background: '#547ca4',
+              background: 'var(--accent-2)',
             }}
           />
         </div>
       </div>
 
       {/* Legend */}
-      <div className="flex-shrink-0 px-3 py-2 border-t border-gray-300 space-y-1" style={{ fontSize: 10 }}>
+      <div className="flex-shrink-0 px-3 py-2 space-y-1" style={{ fontSize: 10, borderTop: '1px solid var(--border)' }}>
         {[
-          { color: '#ffffff', border: 'rgba(31,54,116,0.3)', label: 'Unanswered' },
-          { color: '#e0edf7', border: '#547ca4',             label: 'Answered' },
-          { color: '#f5edcc', border: '#c3282d',             label: 'Flagged', dot: true },
-          { color: '#1f3674', border: '#1f3674',             label: 'Current' },
+          { color: 'var(--surface)',      border: tint('var(--accent)', 30), label: 'Unanswered' },
+          { color: 'var(--surface-tint)', border: 'var(--accent-2)',         label: 'Answered' },
+          { color: 'var(--surface-inset)',border: 'var(--accent-action)',    label: 'Flagged', dot: true },
+          { color: 'var(--accent)',       border: 'var(--accent)',           label: 'Current' },
         ].map(({ color, border, label, dot }) => (
-          <div key={label} className="flex items-center gap-2 text-gray-600">
+          <div key={label} className="flex items-center gap-2" style={{ color: 'var(--text-muted)' }}>
             <div className="relative flex-shrink-0">
               <div className="w-3 h-3 rounded-sm" style={{ background: color, border: `1.5px solid ${border}` }} />
               {dot && (
-                <div className="absolute -top-0.5 -right-0.5 w-1.5 h-1.5 rounded-full" style={{ background: '#f5a623' }} />
+                <div className="absolute -top-0.5 -right-0.5 w-1.5 h-1.5 rounded-full" style={{ background: 'var(--warning)' }} />
               )}
             </div>
             <span>{label}</span>

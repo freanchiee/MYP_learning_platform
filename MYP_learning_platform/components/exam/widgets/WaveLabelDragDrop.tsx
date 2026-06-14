@@ -208,13 +208,13 @@ interface DiagramProps {
 
 function WaveDiagram({ title, svgContent, zones, placed, wrongFlash, dragging, onDrop, aspectRatio }: DiagramProps) {
   return (
-    <div className="flex-1 border border-gray-200 rounded-xl overflow-hidden bg-white shadow-sm">
-      <div className="px-3 py-2 bg-gray-50 border-b border-gray-200">
-        <p className="text-xs font-semibold text-gray-600">{title}</p>
+    <div className="chrome-card flex-1 border border-line rounded-xl overflow-hidden">
+      <div className="px-3 py-2 bg-surface-2 border-b border-line">
+        <p className="text-xs font-semibold text-ink-muted">{title}</p>
       </div>
 
       {/* Diagram area: SVG + overlaid drop zones */}
-      <div className="relative mx-3 my-3" style={{ aspectRatio }}>
+      <div className="figure-surface relative mx-3 my-3" style={{ aspectRatio }}>
         {/* SVG fills the container */}
         <div className="absolute inset-0">
           {svgContent}
@@ -290,10 +290,10 @@ function ZoneOverlay({ zone, isPlaced, isFlashing, isDraggingCompatible, onDrop 
     return (
       <div style={{
         ...base,
-        background: '#fee2e2',
-        border: '2px solid #ef4444',
+        background: 'var(--danger-surface)',
+        border: '2px solid var(--danger)',
       }}>
-        <span style={{ color: '#b91c1c', fontSize: 10, fontWeight: 600 }}>✗ wrong</span>
+        <span style={{ color: 'var(--danger)', fontSize: 10, fontWeight: 600 }}>✗ wrong</span>
       </div>
     )
   }
@@ -304,7 +304,7 @@ function ZoneOverlay({ zone, isPlaced, isFlashing, isDraggingCompatible, onDrop 
       style={{
         ...base,
         background: isOver ? s.light : 'rgba(255,255,255,0.55)',
-        border: `2px dashed ${isOver ? s.border : isDraggingCompatible ? '#9ca3af' : '#d1d5db'}`,
+        border: `2px dashed ${isOver ? s.border : isDraggingCompatible ? 'var(--border-strong)' : 'var(--border)'}`,
         backdropFilter: 'blur(1px)',
         transform: isOver ? 'scale(1.03)' : 'scale(1)',
       }}
@@ -394,7 +394,7 @@ export default function WaveLabelDragDrop({ onAnswer, initialValue = '' }: WaveL
 
       {/* ── Label tray ── */}
       <div className="flex flex-wrap items-center gap-2 px-1">
-        <span className="text-[11px] font-semibold uppercase tracking-widest text-gray-400 mr-1 shrink-0">
+        <span className="text-[11px] font-semibold uppercase tracking-widest text-ink-subtle mr-1 shrink-0">
           Drag labels:
         </span>
 
@@ -423,8 +423,8 @@ export default function WaveLabelDragDrop({ onAnswer, initialValue = '' }: WaveL
         })}
 
         {allPlaced && (
-          <span className="text-xs font-semibold text-green-700 bg-green-50 px-2.5 py-1
-                           rounded-full border border-green-200 flex items-center gap-1">
+          <span className="text-xs font-semibold text-success bg-success-surface px-2.5 py-1
+                           rounded-full border border-success flex items-center gap-1">
             <span>✓</span> All four labels placed correctly!
           </span>
         )}
@@ -432,7 +432,7 @@ export default function WaveLabelDragDrop({ onAnswer, initialValue = '' }: WaveL
         {Object.keys(placed).length > 0 && (
           <button
             onClick={() => { setPlaced({}); onAnswer('') }}
-            className="ml-auto text-[11px] text-gray-400 hover:text-red-500 underline shrink-0"
+            className="ml-auto text-[11px] text-ink-subtle hover:text-danger underline shrink-0"
           >
             Reset
           </button>

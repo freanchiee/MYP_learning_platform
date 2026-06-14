@@ -1,0 +1,118 @@
+[
+  {
+    "taskPath": "q8",
+    "questionId": 8,
+    "taskLabel": null,
+    "topic": "Inverse relationship (stopping distance vs cone radius)",
+    "original_path": "/images/papers/physics-may-2017-v2/q7e-graph1.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG scatter graph 'Stopping distance against cone radius'. X-axis R / m from 0 to 0.2 (ticks 0, 0.05, 0.10, 0.15, 0.20), no minor gridlines; Y-axis Stopping distance / m from 0 to 25 (ticks 0,5,10,15,20,25). Smooth inverse-decay best-fit curve (d = k/R, k = 2.1) through teal × markers descending from (0.10, 21) to (0.19, 11). Domain stops at the data — does not extend to the origin.",
+    "generated_path": "/images/papers/physics-may-2017-v2/q7e-graph1.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q8",
+    "questionId": 8,
+    "taskLabel": null,
+    "topic": "Linearisation test (stopping distance vs 1/R squared)",
+    "original_path": "/images/papers/physics-may-2017-v2/q7g-graph4.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG scatter graph 'Stopping distance against inverse of cone radius squared'. X-axis R⁻² / m⁻² from 0 to 120 (ticks 0,20,40,60,80,100,120), no minor gridlines; Y-axis Stopping distance / m from 0 to 25 (ticks 0,5,10,15,20,25). Because the true relationship is d ∝ 1/R (not 1/R²), the plot against 1/R² is a concave-down rising curve (d = 2.1·√x), NOT a straight line through the origin. Teal × markers from (27.7, 11) to (100, 21); curve drawn only across the data domain 27.7 to 100.",
+    "generated_path": "/images/papers/physics-may-2017-v2/q7g-graph4.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q1",
+    "questionId": 1,
+    "taskLabel": null,
+    "topic": "Mu Cephei red supergiant vs hot blue star",
+    "original_path": "/images/papers/physics-may-2017-v2/q1-stars.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: two side-by-side space panels. Left: a huge cool red supergiant labelled 'Mu Cephei — red supergiant (cool)' with surface flares. Right: a hot blue star with corona streaks labelled 'Hot blue star (e.g. 25,000 °C)'.",
+    "generated_path": "/images/papers/physics-may-2017-v2/q1-stars.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q4",
+    "questionId": 4,
+    "taskLabel": null,
+    "topic": "Kepler space telescope detecting an exoplanet by transit",
+    "original_path": "/images/papers/physics-may-2017-v2/q4-kepler.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: deep-space scene titled 'Kepler space telescope — transit detection of an exoplanet'. A stylised Kepler telescope (cylindrical body, sunshield, solar panel, antenna) on the left aims a dashed yellow sightline at a glowing Sun-like host star on the right. A dark exoplanet transits in front of the star; an inner planet at 0.05 AU (too hot, red) is also shown. Dashed elliptical orbital path and a dashed green habitable-zone band. Inset 'Brightness vs time' light-curve panel shows a dip during transit.",
+    "generated_path": "/images/papers/physics-may-2017-v2/q4-kepler.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q5",
+    "questionId": 5,
+    "taskLabel": null,
+    "topic": "Ramp investigation apparatus — toy car",
+    "original_path": "/images/papers/physics-may-2017-v2/q5-ramp-setup.png",
+    "image_type": "code_rendered",
+    "image_prompt": "SVG: ramp on a clamp stand sloping steeply down to a flat bench. An orange toy car (mass 0.20 kg) sits part-way down the ramp aligned with the slope; label 'Toy car — 0.20 kg'. Ramp height marked 80 cm ('Ramp height / cm'), ramp length marked 80 cm ('Ramp length / cm'). A teal double-arrow below the flat surface shows 'distance travelled on flat surface'.",
+    "generated_path": "/images/papers/physics-may-2017-v2/q5-ramp-setup.svg",
+    "render_component": "ProjectileSim",
+    "render_data": {
+      "title": "Ramp investigation — toy car (0.20 kg) released from the ramp",
+      "source": "MYP physics-may-2017-v2",
+      "mode": "launch",
+      "g": 10,
+      "launch": {
+        "g": 10,
+        "speed": 4.0,
+        "speedMin": 0,
+        "speedMax": 6,
+        "angleDeg": 0,
+        "angleMin": 0,
+        "angleMax": 45
+      }
+    },
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q7",
+    "questionId": 7,
+    "taskLabel": null,
+    "topic": "Dynamic trolley with cone drag device",
+    "original_path": "/images/papers/physics-may-2017-v2/q7-trolley.png",
+    "image_type": "code_rendered",
+    "image_prompt": "SVG: 'Dynamic trolley experiment — cone drag device' — wooden toy trolley with red wheels and a backward-facing dark blue CONE drag device of base-radius R mounted on a mast. Yellow arrow indicates R from the cone axis to the base rim. Ruler scale below labelled 0.0 to 25 m; 'Click to push down release mechanism' callout at the launcher.",
+    "generated_path": "/images/papers/physics-may-2017-v2/q7-trolley.svg",
+    "render_component": "ProjectileSim",
+    "render_data": {
+      "title": "Dynamic trolley with cone drag — launch along the 0–25 m ruler",
+      "source": "MYP physics-may-2017-v2",
+      "mode": "launch",
+      "g": 10,
+      "launch": {
+        "g": 10,
+        "speed": 12.1,
+        "speedMin": 0,
+        "speedMax": 16,
+        "angleDeg": 50,
+        "angleMin": 0,
+        "angleMax": 80
+      }
+    },
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q9",
+    "questionId": 9,
+    "taskLabel": null,
+    "topic": "Prosthetic materials data table — Nylon / Bone / Stainless steel / Carbon fibre",
+    "original_path": "/images/papers/physics-may-2017-v2/q8-materials-table.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG data table with columns Material, E / GPa, Density / g cm^-3 and rows: Material Q (Nylon) 3.0 1.15; Bone 15 1.75; Stainless steel 200 7.90; Carbon fibre 40 1.60.",
+    "generated_path": "/images/papers/physics-may-2017-v2/q8-materials-table.svg",
+    "needs_review": true,
+    "approved": false
+  }
+]

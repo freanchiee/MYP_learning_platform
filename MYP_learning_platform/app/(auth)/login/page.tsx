@@ -57,15 +57,15 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="bg-white rounded-2xl shadow-2xl p-8">
-      <h2 className="text-2xl font-bold mb-1" style={{ color: '#003b5c' }}>
+    <div className="rounded-2xl shadow-2xl p-8" style={{ background: 'var(--surface)' }}>
+      <h2 className="text-2xl font-bold mb-1" style={{ color: 'var(--accent)' }}>
         Welcome back
       </h2>
-      <p className="text-gray-500 text-sm mb-6">Sign in to your account to continue</p>
+      <p className="text-sm mb-6" style={{ color: 'var(--text-subtle)' }}>Sign in to your account to continue</p>
 
       {/* Error banner */}
       {error && (
-        <div className="flex items-start gap-2 bg-red-50 border border-red-200 text-red-700 rounded-lg px-4 py-3 mb-5 text-sm">
+        <div className="flex items-start gap-2 rounded-lg px-4 py-3 mb-5 text-sm" style={{ background: 'var(--danger-surface)', border: '1px solid var(--danger)', color: 'var(--danger)' }}>
           <AlertCircle className="w-4 h-4 mt-0.5 shrink-0" />
           <span>{error}</span>
         </div>
@@ -76,7 +76,8 @@ export default function LoginPage() {
         type="button"
         onClick={handleGoogleLogin}
         disabled={googleLoading || loading}
-        className="w-full flex items-center justify-center gap-3 border border-gray-300 rounded-lg py-2.5 px-4 text-gray-700 text-sm font-medium hover:bg-gray-50 transition-colors mb-5 disabled:opacity-60 disabled:cursor-not-allowed"
+        className="w-full flex items-center justify-center gap-3 rounded-lg py-2.5 px-4 text-sm font-medium transition-colors mb-5 disabled:opacity-60 disabled:cursor-not-allowed hover:bg-surface-2"
+        style={{ border: '1px solid var(--border-strong)', color: 'var(--text-muted)' }}
       >
         {googleLoading ? (
           <Loader2 className="w-4 h-4 animate-spin" />
@@ -106,21 +107,21 @@ export default function LoginPage() {
 
       <div className="relative mb-5">
         <div className="absolute inset-0 flex items-center">
-          <div className="w-full border-t border-gray-200" />
+          <div className="w-full border-t" style={{ borderColor: 'var(--border)' }} />
         </div>
-        <div className="relative flex justify-center text-xs text-gray-400 uppercase">
-          <span className="bg-white px-3">or sign in with email</span>
+        <div className="relative flex justify-center text-xs uppercase" style={{ color: 'var(--text-subtle)' }}>
+          <span className="px-3" style={{ background: 'var(--surface)' }}>or sign in with email</span>
         </div>
       </div>
 
       {/* Email / Password form */}
       <form onSubmit={handleLogin} className="space-y-4">
         <div>
-          <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="email" className="block text-sm font-medium mb-1" style={{ color: 'var(--text-muted)' }}>
             Email address
           </label>
           <div className="relative">
-            <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+            <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4" style={{ color: 'var(--text-subtle)' }} />
             <input
               id="email"
               type="email"
@@ -129,18 +130,18 @@ export default function LoginPage() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="you@school.edu"
-              className="w-full pl-9 pr-4 py-2.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:border-transparent transition"
-              style={{ '--tw-ring-color': '#0079a8' } as React.CSSProperties}
+              className="w-full pl-9 pr-4 py-2.5 rounded-lg text-sm focus:outline-none focus:ring-2 focus:border-transparent transition"
+              style={{ background: 'var(--surface-inset)', border: '1px solid var(--border-strong)', color: 'var(--text)', '--tw-ring-color': 'var(--accent)' } as React.CSSProperties}
             />
           </div>
         </div>
 
         <div>
-          <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="password" className="block text-sm font-medium mb-1" style={{ color: 'var(--text-muted)' }}>
             Password
           </label>
           <div className="relative">
-            <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+            <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4" style={{ color: 'var(--text-subtle)' }} />
             <input
               id="password"
               type="password"
@@ -149,8 +150,8 @@ export default function LoginPage() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="••••••••"
-              className="w-full pl-9 pr-4 py-2.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:border-transparent transition"
-              style={{ '--tw-ring-color': '#0079a8' } as React.CSSProperties}
+              className="w-full pl-9 pr-4 py-2.5 rounded-lg text-sm focus:outline-none focus:ring-2 focus:border-transparent transition"
+              style={{ background: 'var(--surface-inset)', border: '1px solid var(--border-strong)', color: 'var(--text)', '--tw-ring-color': 'var(--accent)' } as React.CSSProperties}
             />
           </div>
         </div>
@@ -158,20 +159,20 @@ export default function LoginPage() {
         <button
           type="submit"
           disabled={loading || googleLoading}
-          className="w-full flex items-center justify-center gap-2 py-2.5 rounded-lg text-white text-sm font-semibold transition-opacity disabled:opacity-60 disabled:cursor-not-allowed"
-          style={{ backgroundColor: '#003b5c' }}
+          className="w-full flex items-center justify-center gap-2 py-2.5 rounded-lg text-sm font-semibold transition-opacity disabled:opacity-60 disabled:cursor-not-allowed"
+          style={{ background: 'var(--gradient-cta)', color: 'var(--text-on-accent)' }}
         >
           {loading && <Loader2 className="w-4 h-4 animate-spin" />}
           Sign in
         </button>
       </form>
 
-      <p className="text-center text-sm text-gray-500 mt-6">
+      <p className="text-center text-sm mt-6" style={{ color: 'var(--text-subtle)' }}>
         Don&apos;t have an account?{' '}
         <Link
           href="/signup"
           className="font-medium hover:underline"
-          style={{ color: '#0079a8' }}
+          style={{ color: 'var(--accent)' }}
         >
           Create one
         </Link>

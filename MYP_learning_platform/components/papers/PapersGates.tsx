@@ -31,6 +31,7 @@ const BG: Record<string, { from: string; via: string; to: string }> = {
   Physics:   { from: '#0a0f2e', via: '#1f3674', to: '#274e68' },
   Chemistry: { from: '#1a1000', via: '#332200', to: '#664400' },
   Biology:   { from: '#0d2e1a', via: '#1e6640', to: '#2d9e5f' },
+  Geography: { from: '#072a20', via: '#0c6e54', to: '#16a37a' },
   Combined:  { from: '#1a0a0a', via: '#3d1515', to: '#c3282d' },
 }
 const DEFAULT_BG = { from: '#0a0f2e', via: '#1f3674', to: '#274e68' }
@@ -39,9 +40,17 @@ const ACCENT: Record<string, string> = {
   Physics:   '#7aadcf',
   Chemistry: '#facc15',
   Biology:   '#adf1c4',
+  Geography: '#86efac',
   Combined:  '#ff7b7b',
 }
 const DEFAULT_ACCENT = '#adf1c4'
+
+// Per-subject "action" colour for the START button + its glow. Most subjects use the global
+// red action token; Geography (I&S) uses its own light-green theme so the whole gate is green.
+const ACTION: Record<string, { bg: string; glow: string; ink: string }> = {
+  Geography: { bg: '#34d399', glow: '0 0 40px rgba(16,185,129,0.45)', ink: '#06251c' },
+}
+const DEFAULT_ACTION = { bg: 'var(--accent-action)', glow: '0 0 40px rgba(195,40,45,0.4)', ink: '#ffffff' }
 
 function sessionFull(s: string) {
   const l = s.toLowerCase()
@@ -134,6 +143,7 @@ function Gate({
   const { base, variants } = group
   const bg     = BG[base.subject]     ?? DEFAULT_BG
   const accent = ACCENT[base.subject] ?? DEFAULT_ACCENT
+  const action = ACTION[base.subject] ?? DEFAULT_ACTION
   const gateNum = String(index + 1).padStart(2, '0')
   const sess = sessionFull(base.session)
   const isCompleted  = completedPapers.has(base.id)
@@ -209,12 +219,13 @@ function Gate({
 
             <Link
               href={`/exam/${base.id}`}
-              className="mt-10 inline-block font-black text-sm tracking-[0.2em] text-white transition-all hover:opacity-80"
+              className="mt-10 inline-block font-black text-sm tracking-[0.2em] transition-all hover:opacity-80"
               style={{
-                background: isCompleted ? 'rgba(173,241,196,0.15)' : '#c3282d',
+                background: isCompleted ? 'rgba(173,241,196,0.15)' : action.bg,
+                color: isCompleted ? '#ffffff' : action.ink,
                 border: isCompleted ? '1px solid rgba(173,241,196,0.3)' : 'none',
                 padding: '16px 48px',
-                boxShadow: isCompleted ? 'none' : '0 0 40px rgba(195,40,45,0.4)',
+                boxShadow: isCompleted ? 'none' : action.glow,
               }}
             >
               {isCompleted ? 'PRACTICE AGAIN' : isInProg ? 'CONTINUE PAPER' : 'START PAPER'}
@@ -345,12 +356,12 @@ export default function PapersGates({ papers, completedPapers, inProgressPapers 
   if (groups.length === 0) {
     return (
       <div
-        className="flex items-center justify-center text-white"
-        style={{ height: `calc(100vh - ${NAV_H}px)`, background: '#0a0f2e' }}
+        className="flex items-center justify-center"
+        style={{ height: `calc(100vh - ${NAV_H}px)`, background: 'var(--bg)', backgroundImage: 'var(--bg-image)', color: 'var(--text)' }}
       >
         <div className="text-center">
           <div className="text-6xl mb-4">📋</div>
-          <p className="text-sm font-bold tracking-widest" style={{ color: 'rgba(255,255,255,0.4)' }}>
+          <p className="text-sm font-bold tracking-widest" style={{ color: 'var(--text-subtle)' }}>
             NO PAPERS PUBLISHED YET
           </p>
         </div>
@@ -367,6 +378,8 @@ export default function PapersGates({ papers, completedPapers, inProgressPapers 
           overflowY: 'scroll',
           scrollSnapType: 'y mandatory',
           scrollBehavior: 'smooth',
+          background: 'var(--bg)',
+          backgroundImage: 'var(--bg-image)',
         }}
       >
         {groups.map((group, idx) => (

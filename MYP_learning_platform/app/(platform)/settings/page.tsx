@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import type { AIProvider } from '@/lib/ai-grading'
+import ThemeSwitcher from '@/components/theme/ThemeSwitcher'
 
 const PROVIDERS: { id: AIProvider; label: string; placeholder: string; docsUrl: string; defaultModel: string; models: string[] }[] = [
   {
@@ -77,40 +78,40 @@ export default function SettingsPage() {
   }
 
   return (
-    <div style={{ background: '#f5edcc', minHeight: '100vh' }}>
+    <div style={{ background: 'var(--bg)', backgroundImage: 'var(--bg-image)', minHeight: '100vh' }}>
       <div className="max-w-2xl mx-auto px-6 py-14">
 
         {/* Header */}
         <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
-          <p className="text-[9px] font-black tracking-[0.3em] mb-2" style={{ color: 'rgba(31,54,116,0.4)' }}>
+          <p className="text-[9px] font-black tracking-[0.3em] mb-2" style={{ color: 'var(--text-subtle)' }}>
             SETTINGS
           </p>
-          <h1 className="text-3xl font-extrabold mb-1" style={{ color: '#1f3674', letterSpacing: '-0.5px' }}>
+          <h1 className="text-3xl font-extrabold mb-1" style={{ color: 'var(--text)', letterSpacing: '-0.5px' }}>
             AI Grading
           </h1>
-          <p className="text-sm" style={{ color: 'rgba(31,54,116,0.55)' }}>
+          <p className="text-sm" style={{ color: 'var(--text-muted)' }}>
             Connect your own AI key to get intelligent grading on open-ended extended responses.
             Structured questions (MCQ, drag-drop, fill-blank) always use the keyword engine — free and instant.
           </p>
         </motion.div>
 
-        <div className="h-px my-8" style={{ background: 'rgba(31,54,116,0.1)' }} />
+        <div className="h-px my-8" style={{ background: 'var(--divider)' }} />
 
         {/* Status banner */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          className="flex items-center gap-3 rounded-lg px-4 py-3 mb-8"
+          className="flex items-center gap-3 rounded-control px-4 py-3 mb-8"
           style={{
-            background: hasKey ? 'rgba(173,241,196,0.2)' : 'rgba(31,54,116,0.06)',
-            border: `1px solid ${hasKey ? 'rgba(173,241,196,0.4)' : 'rgba(31,54,116,0.12)'}`,
+            background: hasKey ? 'var(--success-surface)' : 'var(--surface-2)',
+            border: `1px solid ${hasKey ? 'var(--success)' : 'var(--border)'}`,
           }}
         >
           <div
             className="w-2 h-2 rounded-full flex-shrink-0"
-            style={{ background: hasKey ? '#adf1c4' : 'rgba(31,54,116,0.2)' }}
+            style={{ background: hasKey ? 'var(--success)' : 'var(--text-subtle)' }}
           />
-          <span className="text-sm font-semibold" style={{ color: '#1f3674' }}>
+          <span className="text-sm font-semibold" style={{ color: 'var(--text)' }}>
             {hasKey
               ? `AI grading active — ${PROVIDERS.find(p => p.id === (localStorage.getItem('myp_ai_provider') ?? provider))?.label ?? provider}`
               : 'AI grading off — using keyword engine'}
@@ -119,7 +120,7 @@ export default function SettingsPage() {
 
         {/* Provider selector */}
         <div className="mb-6">
-          <label className="text-[9px] font-black tracking-[0.25em] block mb-3" style={{ color: 'rgba(31,54,116,0.4)' }}>
+          <label className="text-[9px] font-black tracking-[0.25em] block mb-3" style={{ color: 'var(--text-subtle)' }}>
             PROVIDER
           </label>
           <div className="grid grid-cols-3 gap-3">
@@ -127,11 +128,11 @@ export default function SettingsPage() {
               <button
                 key={p.id}
                 onClick={() => { setProvider(p.id); setModel('') }}
-                className="px-4 py-3 text-sm font-bold rounded-lg transition-all text-left"
+                className="px-4 py-3 text-sm font-bold rounded-control transition-all text-left"
                 style={{
-                  background: provider === p.id ? '#1f3674' : '#fff',
-                  color: provider === p.id ? '#adf1c4' : '#1f3674',
-                  border: `2px solid ${provider === p.id ? '#1f3674' : 'rgba(31,54,116,0.15)'}`,
+                  background: provider === p.id ? 'var(--accent)' : 'var(--surface)',
+                  color: provider === p.id ? 'var(--accent-fg)' : 'var(--text)',
+                  border: `2px solid ${provider === p.id ? 'var(--accent)' : 'var(--border)'}`,
                 }}
               >
                 {p.label}
@@ -143,7 +144,7 @@ export default function SettingsPage() {
         {/* API Key input */}
         <div className="mb-6">
           <div className="flex items-center justify-between mb-2">
-            <label className="text-[9px] font-black tracking-[0.25em]" style={{ color: 'rgba(31,54,116,0.4)' }}>
+            <label className="text-[9px] font-black tracking-[0.25em]" style={{ color: 'var(--text-subtle)' }}>
               API KEY
             </label>
             <a
@@ -151,7 +152,7 @@ export default function SettingsPage() {
               target="_blank"
               rel="noopener noreferrer"
               className="text-xs font-semibold transition-opacity hover:opacity-70"
-              style={{ color: '#547ca4' }}
+              style={{ color: 'var(--accent-2)' }}
             >
               Get key →
             </a>
@@ -162,42 +163,42 @@ export default function SettingsPage() {
               value={apiKey}
               onChange={(e) => setApiKey(e.target.value)}
               placeholder={current.placeholder}
-              className="w-full px-4 py-3 rounded-lg text-sm font-mono outline-none transition-all"
+              className="w-full px-4 py-3 rounded-control text-sm font-mono outline-none transition-all"
               style={{
-                background: '#fff',
-                border: '1.5px solid rgba(31,54,116,0.2)',
-                color: '#1f3674',
+                background: 'var(--surface-inset)',
+                border: '1.5px solid var(--border-strong)',
+                color: 'var(--text)',
               }}
-              onFocus={(e) => { e.target.style.borderColor = '#547ca4' }}
-              onBlur={(e) => { e.target.style.borderColor = 'rgba(31,54,116,0.2)' }}
+              onFocus={(e) => { e.target.style.borderColor = 'var(--accent)' }}
+              onBlur={(e) => { e.target.style.borderColor = 'var(--border-strong)' }}
             />
             <button
               type="button"
               onClick={() => setShowKey((v) => !v)}
               className="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-bold transition-opacity hover:opacity-70"
-              style={{ color: 'rgba(31,54,116,0.4)' }}
+              style={{ color: 'var(--text-subtle)' }}
             >
               {showKey ? 'HIDE' : 'SHOW'}
             </button>
           </div>
-          <p className="text-xs mt-1.5" style={{ color: 'rgba(31,54,116,0.35)' }}>
+          <p className="text-xs mt-1.5" style={{ color: 'var(--text-subtle)' }}>
             Stored only in your browser. Never sent to our servers.
           </p>
         </div>
 
         {/* Model selector */}
         <div className="mb-8">
-          <label className="text-[9px] font-black tracking-[0.25em] block mb-2" style={{ color: 'rgba(31,54,116,0.4)' }}>
-            MODEL <span style={{ color: 'rgba(31,54,116,0.25)' }}>(OPTIONAL)</span>
+          <label className="text-[9px] font-black tracking-[0.25em] block mb-2" style={{ color: 'var(--text-subtle)' }}>
+            MODEL <span style={{ color: 'var(--text-subtle)' }}>(OPTIONAL)</span>
           </label>
           <select
             value={model || current.defaultModel}
             onChange={(e) => setModel(e.target.value)}
-            className="w-full px-4 py-3 rounded-lg text-sm font-medium outline-none"
+            className="w-full px-4 py-3 rounded-control text-sm font-medium outline-none"
             style={{
-              background: '#fff',
-              border: '1.5px solid rgba(31,54,116,0.2)',
-              color: '#1f3674',
+              background: 'var(--surface-inset)',
+              border: '1.5px solid var(--border-strong)',
+              color: 'var(--text)',
             }}
           >
             {current.models.map((m) => (
@@ -211,8 +212,8 @@ export default function SettingsPage() {
           <motion.button
             onClick={handleSave}
             whileTap={{ scale: 0.97 }}
-            className="inline-block font-black text-sm tracking-[0.15em] text-white transition-opacity hover:opacity-80"
-            style={{ background: '#1f3674', padding: '12px 32px' }}
+            className="inline-block font-black text-sm tracking-[0.15em] transition-opacity hover:opacity-80 rounded-control"
+            style={{ background: 'var(--gradient-cta)', color: 'var(--text-on-accent)', padding: '12px 32px' }}
           >
             {saved ? '✓ SAVED' : 'SAVE KEY'}
           </motion.button>
@@ -220,29 +221,50 @@ export default function SettingsPage() {
             <button
               onClick={handleClear}
               className="text-sm font-semibold transition-opacity hover:opacity-70"
-              style={{ color: '#c3282d' }}
+              style={{ color: 'var(--danger)' }}
             >
               Clear key
             </button>
           )}
         </div>
 
-        <div className="h-px my-10" style={{ background: 'rgba(31,54,116,0.08)' }} />
+        <div className="h-px my-10" style={{ background: 'var(--divider)' }} />
 
         {/* Info box */}
-        <div className="rounded-lg p-5" style={{ background: 'rgba(31,54,116,0.04)', border: '1px solid rgba(31,54,116,0.1)' }}>
-          <h3 className="text-xs font-black tracking-[0.2em] mb-3" style={{ color: '#1f3674' }}>HOW GRADING WORKS</h3>
-          <div className="space-y-2 text-sm" style={{ color: 'rgba(31,54,116,0.6)' }}>
+        <div className="rounded-control p-5" style={{ background: 'var(--surface-2)', border: '1px solid var(--border)' }}>
+          <h3 className="text-xs font-black tracking-[0.2em] mb-3" style={{ color: 'var(--text)' }}>HOW GRADING WORKS</h3>
+          <div className="space-y-2 text-sm" style={{ color: 'var(--text-muted)' }}>
             {[
               ['MCQ, drag-drop, fill-blank, radio select', 'Keyword engine (always)'],
               ['Open-ended prose (Criteria C & D)', 'AI provider if key set, else keyword engine'],
               ['No key configured', 'Keyword engine for everything'],
             ].map(([task, method]) => (
               <div key={task} className="flex items-start gap-3">
-                <span className="w-2 h-2 rounded-full flex-shrink-0 mt-1.5" style={{ background: '#547ca4' }} />
-                <span><strong style={{ color: '#1f3674' }}>{task}</strong> — {method}</span>
+                <span className="w-2 h-2 rounded-full flex-shrink-0 mt-1.5" style={{ background: 'var(--accent-2)' }} />
+                <span><strong style={{ color: 'var(--text)' }}>{task}</strong> — {method}</span>
               </div>
             ))}
+          </div>
+        </div>
+
+        <div className="h-px my-10" style={{ background: 'var(--divider)' }} />
+
+        {/* Appearance / Theme */}
+        <div>
+          <p className="text-[9px] font-black tracking-[0.3em] mb-2" style={{ color: 'var(--text-subtle)' }}>
+            APPEARANCE
+          </p>
+          <h2 className="text-2xl font-extrabold mb-1" style={{ color: 'var(--text)', letterSpacing: '-0.4px' }}>
+            Theme
+          </h2>
+          <p className="text-sm mb-5" style={{ color: 'var(--text-muted)' }}>
+            Choose how the platform looks. Your choice applies everywhere and is remembered on this device.
+          </p>
+          <div
+            className="rounded-card p-5"
+            style={{ background: 'var(--surface)', border: '1px solid var(--border)', boxShadow: 'var(--shadow-card)' }}
+          >
+            <ThemeSwitcher variant="panel" />
           </div>
         </div>
 

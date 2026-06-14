@@ -25,7 +25,7 @@ export const questions: Question[] = [
     tags: { unit: 'electricity-circuits', topics: ['electric charge', 'electrical power', 'potential difference (voltage)'], level: 'proficient' },
     stem: 'Defibrillators are used to apply an electric current to the heart. Defibrillators are made from two metal plates. During a charging process, one of the plates becomes positively charged and the other becomes negatively charged.',
     figImages: [
-      '/images/papers/physics-may-2025/page-01-crop.png',
+      '/images/papers/physics-may-2025/page-01.svg?t=1781197047922',
     ],
     tasks: [
       {
@@ -51,7 +51,7 @@ export const questions: Question[] = [
         text: 'One type of defibrillator uses charged plates which are stuck to the body of the patient with adhesive pads. Another type has plates that can be placed against the body of the patient by a doctor, who holds onto the plates using insulating grip handles. **Suggest** an advantage of each type of defibrillator.\n\nAdhesive pads advantage:\n\nInsulating handles advantage:',
         marks: 2,
         figImages: [
-          '/images/papers/physics-may-2025/page-05-crop.png',
+          '/images/papers/physics-may-2025/page-05.svg?t=1781197140673',
         ],
         ph: 'Adhesive pads: ...\n\nInsulating handles: ...',
       },
@@ -72,7 +72,7 @@ export const questions: Question[] = [
     tags: { unit: 'light-optics', topics: ['refraction', 'refractive index', "Snell's law"], level: 'proficient' },
     stem: 'Refraction of light can help people to see more clearly but it can also cause optical illusions, as shown in the image of a straw in a glass of water.',
     figImages: [
-      '/images/papers/physics-may-2025/page-06-crop.png',
+      '/images/papers/physics-may-2025/page-06.svg?t=1781197422471',
     ],
     tasks: [
       {
@@ -92,7 +92,7 @@ export const questions: Question[] = [
         text: 'Light travels as waves. Refraction of light changes some of the characteristics of light. The diagram shows a light ray passing from air into water.\n\n**Select** one quantity that remains constant when light is refracted through transparent materials.\n\nOptions: Direction | Frequency | Speed | Wavelength',
         marks: 1,
         figImages: [
-          '/images/papers/physics-may-2025/page-09-crop.png',
+          '/images/papers/physics-may-2025/page-09.svg',
         ],
         ph: 'Write your chosen quantity...',
       },
@@ -101,7 +101,7 @@ export const questions: Question[] = [
         text: 'Refraction can make us believe that objects are in a location different to reality. Using the diagram showing a person on a cliff looking at a fish underwater, **explain** why the person believes the fish is in a different location to where it really is.',
         marks: 3,
         figImages: [
-          '/images/papers/physics-may-2025/page-11-crop.png',
+          '/images/papers/physics-may-2025/page-11.svg?t=1781197505755',
         ],
         ph: 'Explain the path of light and how the brain interprets it...',
       },
@@ -110,7 +110,7 @@ export const questions: Question[] = [
         text: 'One use of refraction is to correct short-sightedness, which happens when light rays meet in front of the retina. **Outline** how the use of a diverging lens helps to correct short-sightedness.',
         marks: 2,
         figImages: [
-          '/images/papers/physics-may-2025/page-13-crop.png',
+          '/images/papers/physics-may-2025/page-13.svg?t=1781197574405',
         ],
         ph: 'Describe what the lens does to the light rays and how this shifts the focal point...',
       },
@@ -184,7 +184,7 @@ export const questions: Question[] = [
     tags: { unit: 'measurement-motion', topics: ['speed and velocity', 'acceleration', 'distance-time graphs'], level: 'proficient' },
     stem: 'An MYP student investigates the motion of a simple model car made from a cotton reel. The car is powered by a wound elastic (rubber) band. The student uses video analysis to track the car\'s position at regular time intervals.',
     figImages: [
-      '/images/papers/physics-may-2025/page-20-crop.png',
+      '/images/papers/physics-may-2025/page-20.svg',
     ],
     tasks: [
       {
@@ -198,7 +198,7 @@ export const questions: Question[] = [
         text: 'Using the data table shown, read the velocity of the cotton reel car at t = 0.35 s.',
         marks: 1,
         figImages: [
-          '/images/papers/physics-may-2025/page-21-crop.png',
+          '/images/papers/physics-may-2025/page-21.svg?t=1781197769525',
         ],
         ph: 'Velocity at t = 0.35 s = ... cm s⁻¹',
       },
@@ -207,7 +207,7 @@ export const questions: Question[] = [
         text: 'The student processed the data and drew a velocity-time graph (shown below). **Calculate** the gradient of the line of best fit between t = 0.05 s and t = 0.35 s. Give the unit and **state** the quantity that the gradient represents.',
         marks: 3,
         figImages: [
-          '/images/papers/physics-may-2025/page-36-crop.png',
+          '/images/papers/physics-may-2025/page-36.svg',
         ],
         ph: 'Gradient = Δv / Δt = ... / ... = ... (unit)\nQuantity: ...',
       },
@@ -245,7 +245,7 @@ export const questions: Question[] = [
         text: '**Design** a method to investigate the effect of changing the number of turns of the elastic band on the time taken for a model car to travel a fixed distance.\n\nIn your plan, you must include:\n• the independent variable, dependent variable, and one control variable\n• a hypothesis\n• details of any additional measuring equipment you will need to perform the experiment\n• a detailed method for how you will collect the data\n• details of how you will collect sufficient data',
         marks: 16,
         figImages: [
-          '/images/papers/physics-may-2025/page-40-crop.png',
+          '/images/papers/physics-may-2025/page-40.svg',
         ],
         ph: 'VARIABLES:\nIndependent variable:\nDependent variable:\nControl variable (+ justification):\n\nHYPOTHESIS:\nIf ... then ... because ...\n\nEQUIPMENT:\n•\n•\n\nMETHOD:\n1.\n2.\n...\n\nSUFFICIENT DATA:\n• Number of different IV values:\n• Number of repeats per value:',
       },
@@ -272,7 +272,7 @@ export const questions: Question[] = [
     tags: { unit: 'work-energy', topics: ['energy efficiency', 'power', 'energy transfer mechanisms'], level: 'proficient' },
     stem: 'A student has a kit that uses the Seebeck effect. The kit contains a thermoelectric generator (TEG) which comprises two wires made of different metals and two water tanks (hot and cold). When there is a temperature difference (ΔT) between the hot and cold sides of the TEG, a voltage (V) is produced. The student investigates the relationship between voltage produced and temperature difference.',
     figImages: [
-      '/images/papers/physics-may-2025/page-44-crop.png',
+      '/images/papers/physics-may-2025/page-44.svg',
     ],
     tasks: [
       {
@@ -292,7 +292,7 @@ export const questions: Question[] = [
         text: 'The data table was collected from the experiment. One temperature difference value is missing from the table.\n\n**Calculate** the missing temperature difference and state your value.',
         marks: 1,
         figImages: [
-          '/images/papers/physics-may-2025/page-47-crop.png',
+          '/images/papers/physics-may-2025/page-47.svg',
         ],
         ph: 'ΔT = T_hot − T_cold = ... − ... = ... °C',
       },
@@ -363,7 +363,7 @@ export const questions: Question[] = [
     tags: { unit: 'astrophysics', topics: ['satellites and orbital mechanics', 'gravitational fields', "Newton's law of gravitation"], level: 'proficient' },
     stem: 'In 1728, Isaac Newton conducted a thought experiment often referred to as "Newton\'s cannonball". In this thought experiment, a cannonball is fired from a cannon placed at the top of a very tall mountain. If the only force experienced by the cannonball is the gravitational force, then the path followed by the cannonball would depend on its initial horizontal speed.',
     figImages: [
-      '/images/papers/physics-may-2025/page-62-crop.png',
+      '/images/papers/physics-may-2025/page-62.svg?t=1781197894136',
     ],
     tasks: [
       {
@@ -371,7 +371,7 @@ export const questions: Question[] = [
         text: 'The diagram shows four paths (A, B, C, D) a cannonball could follow depending on its initial horizontal speed. **Identify** the correct path for each speed by matching each path label to one of the speeds below.\n\nAll four must be correct to gain the mark.',
         marks: 1,
         figImages: [
-          '/images/papers/physics-may-2025/page-65-crop.png',
+          '/images/papers/physics-may-2025/page-65.svg?t=1781198165146',
         ],
         widget: 'cannonball_paths',
         ph: 'A = ... m s⁻¹  |  B = ... m s⁻¹  |  C = ... m s⁻¹  |  D = ... m s⁻¹',
@@ -381,8 +381,8 @@ export const questions: Question[] = [
         text: '**Identify** the free-body force diagram (A, B, C, or D from the image) that correctly shows the force(s) acting on Newton\'s cannonball when it is in a circular orbit around Earth.',
         marks: 1,
         figImages: [
-          '/images/papers/physics-may-2025/page-66-crop.png',
-          '/images/papers/physics-may-2025/page-67-crop.png',
+          '/images/papers/physics-may-2025/page-66.svg',
+          '/images/papers/physics-may-2025/page-67.svg',
         ],
         widget: 'radio_select',
         widgetOptions: ['A', 'B', 'C', 'D'],

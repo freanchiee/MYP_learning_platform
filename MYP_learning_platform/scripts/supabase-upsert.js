@@ -44,7 +44,13 @@ function parseMeta(paperId) {
   if (!fs.existsSync(file)) {
     throw new Error(`questions.ts not found for ${paperId}`)
   }
-  const src = fs.readFileSync(file, 'utf8')
+  const fullSrc = fs.readFileSync(file, 'utf8')
+
+  // Read values from the `paperMeta` object literal only — not from any inline
+  // `interface PaperMeta { subject: string; ... }` that precedes it (I&S papers
+  // declare the interface inline, which would otherwise be matched first).
+  const metaIdx = fullSrc.search(/(export\s+)?const\s+paperMeta\b/)
+  const src = metaIdx >= 0 ? fullSrc.slice(metaIdx) : fullSrc
 
   const get = (key) => {
     const m = src.match(new RegExp(`${key}\\s*:\\s*([^,\\n]+)`))

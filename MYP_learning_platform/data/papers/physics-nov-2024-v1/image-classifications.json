@@ -1,0 +1,116 @@
+[
+  {
+    "taskPath": "q2.tasks[e]",
+    "questionId": 2,
+    "taskLabel": "e",
+    "topic": "Atomic Structure & Radioactivity",
+    "original_path": "/images/papers/physics-nov-2024/page-04-crop.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: smooth exponential decay graph, number of americium-241 nuclei (y-axis 0 to 10 000, major every 1000, minor every 500) vs time / years (x-axis 0 to 2000, major every 200, minor every 50). Curve starts at (0, 10 000) and follows N(t) = 10000 x 0.5^(t/420), giving a half-life of 420 years: passes through (420, 5000), (840, 2500), (1260, 1250), (1680, 625). Teal smooth line, fine gridlines.",
+    "generated_path": "/images/papers/physics-nov-2024-v1/page-04.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q3.tasks[f]",
+    "questionId": 3,
+    "taskLabel": "f",
+    "topic": "Circuits, Resistance & Power",
+    "original_path": "/images/papers/physics-nov-2024/page-07-crop.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: four trend-line graphs (A, B, C, D) of resistance / ohm (y-axis 0 to 90, major every 10, minor every 2) vs diameter / mm (x-axis 10 to 30, major every 5, minor every 1). All four panels plot the same five data points (10, 82), (15, 36), (18, 22), (22, 16), (25, 12) as teal crosses. A: straight dot-to-dot segments (jagged). B: a single straight best-fit line through the cloud. C: a smooth curve that under-fits and misses the points. D: a smooth inverse curve passing through every point (the correct trend line).",
+    "generated_path": "/images/papers/physics-nov-2024-v1/page-07.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q1.tasks[a]",
+    "questionId": 1,
+    "taskLabel": "a",
+    "topic": "Periodic motion options A-D",
+    "original_path": "/images/papers/physics-nov-2024/page-01-crop.png",
+    "image_type": "code_rendered",
+    "image_prompt": "SVG: four labelled panels A-D for \"which does NOT show periodic motion\" MCQ. A: Earth orbiting Sun. B: analogue clock face. C: basketball shot following one-off parabolic arc into hoop (NOT periodic). D: child on A-frame swing.",
+    "generated_path": "/images/papers/physics-nov-2024-v1/periodic-motion-options.svg",
+    "render_component": "OrbitSim",
+    "render_data": {
+      "mode": "orbit",
+      "title": "Periodic motion — planets orbiting the Sun",
+      "source": "MYP physics-nov-2024-v1",
+      "central": "Sun",
+      "showForce": true,
+      "caption": "An orbit is periodic motion: each planet retraces the same path at a fixed period. (Of the four options A–D, only the basketball's one-off parabolic arc, option C, is NOT periodic.)",
+      "seed": 7,
+      "bodies": [
+        { "name": "Sun", "role": "center", "fixed": true, "colour": "#f6c343" },
+        { "name": "Earth", "role": "orbiter", "orbitalPeriod": 365, "orbitRadius": 70, "colour": "#3b82f6" },
+        { "name": "Mars", "role": "orbiter", "orbitalPeriod": 687, "orbitRadius": 110, "colour": "#e2683c" }
+      ]
+    },
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q3.tasks[b]",
+    "questionId": 3,
+    "taskLabel": "b",
+    "topic": "Available cylinders tray (Materials A, B, C, various diameters)",
+    "original_path": "/images/papers/physics-nov-2024/page-05b-crop.png",
+    "image_type": "code_rendered",
+    "image_prompt": "SVG: isometric tray labelled \"Available cylinders\" with assorted cylinders of three materials (A=orange, B=silver, C=black) at various diameters and lengths. Empty collection table below. Key on right.",
+    "generated_path": "/images/papers/physics-nov-2024-v1/available-cylinders.svg",
+    "render_component": "DragSort",
+    "render_data": {
+      "mode": "bins",
+      "title": "Available cylinders — choose the ones to test the research question",
+      "source": "MYP physics-nov-2024-v1",
+      "prompt": "RQ: \"What is the relationship between the diameter of a cylinder and its resistance?\" Place each available cylinder into \"Use these\" or \"Leave out\". A correct selection keeps material and length constant while varying only the diameter — choose Material A in five different diameters (10, 15, 18, 22, 25 mm), all 50 mm long.",
+      "bins": [
+        { "id": "use", "label": "Use these (collect data)" },
+        { "id": "leave", "label": "Leave out" }
+      ],
+      "items": [
+        { "id": "a10", "label": "Material A · 10 mm · 50 mm long" },
+        { "id": "a15", "label": "Material A · 15 mm · 50 mm long" },
+        { "id": "a18", "label": "Material A · 18 mm · 50 mm long" },
+        { "id": "a22", "label": "Material A · 22 mm · 50 mm long" },
+        { "id": "a25", "label": "Material A · 25 mm · 50 mm long" },
+        { "id": "a15b", "label": "Material A · 15 mm · 80 mm long" },
+        { "id": "b15", "label": "Material B · 15 mm · 50 mm long" },
+        { "id": "b22", "label": "Material B · 22 mm · 50 mm long" },
+        { "id": "c18", "label": "Material C · 18 mm · 50 mm long" },
+        { "id": "c25", "label": "Material C · 25 mm · 50 mm long" }
+      ],
+      "correct": {
+        "use": [
+          "Material A · 10 mm · 50 mm long",
+          "Material A · 15 mm · 50 mm long",
+          "Material A · 18 mm · 50 mm long",
+          "Material A · 22 mm · 50 mm long",
+          "Material A · 25 mm · 50 mm long"
+        ],
+        "leave": [
+          "Material A · 15 mm · 80 mm long",
+          "Material B · 15 mm · 50 mm long",
+          "Material B · 22 mm · 50 mm long",
+          "Material C · 18 mm · 50 mm long",
+          "Material C · 25 mm · 50 mm long"
+        ]
+      }
+    },
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q3.tasks[d]",
+    "questionId": 3,
+    "taskLabel": "d",
+    "topic": "Student notebook raw data (cylinder diameter and resistance)",
+    "original_path": "/images/papers/physics-nov-2024/page-06-crop.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: lined notepad on wooden desk with handwritten data entries in mixed phrasing: 18 mm/22 Ω, 10 mm/82 Ω, 25 mm/12 Ω, 15 mm/36 Ω, 22 mm/16 Ω.",
+    "generated_path": "/images/papers/physics-nov-2024-v1/notebook-raw-data.svg",
+    "needs_review": false,
+    "approved": true
+  }
+]

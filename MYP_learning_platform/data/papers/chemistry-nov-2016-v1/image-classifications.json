@@ -1,0 +1,63 @@
+[
+  {
+    "taskPath": "q2.tasks[c]",
+    "questionId": 2,
+    "taskLabel": "c",
+    "topic": "Aluminium–vanadium alloy: yield strength",
+    "original_path": "/images/papers/chemistry-nov-2016/page-06.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: grouped bar chart, Yield strength / MPa (y, 0-700, ticks every 100, no gridlines) vs Alloy type (x, 1-5), two bars per alloy (Pure Al teal, Al–V alloy orange) with legend; alloy bar always higher, yield strength rising across alloys 1-5.",
+    "generated_path": "/images/papers/chemistry-nov-2016-v1/q2c-yield-strength-bar.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q9",
+    "questionId": 9,
+    "taskLabel": null,
+    "topic": "NiMH battery charge vs storage temperature",
+    "original_path": "/images/papers/chemistry-nov-2016/page-27.png",
+    "image_type": "code_rendered",
+    "image_prompt": "SVG: scatter graph, Percentage charge / % (y, 0-100, ticks every 20) vs Temperature / °C (x, ticks at 0,15,30,45,60,80), no gridlines; 6 points (0,99),(15,97),(30,92),(45,82),(60,65),(75,35) showing charge falling as temperature rises (≈85% at 40°C; ≈10% extrapolated at 90°C).",
+    "generated_path": "/images/papers/chemistry-nov-2016-v1/q9-charge-vs-temperature-scatter.svg",
+    "render_component": "GraphSim",
+    "render_data": {
+      "title": "NiMH battery: charge remaining vs storage temperature",
+      "source": "MYP chemistry-nov-2016-v1",
+      "mode": "readoff",
+      "xLabel": "Temperature / °C",
+      "yLabel": "Percentage charge / %",
+      "xRange": [0, 90],
+      "yRange": [0, 100],
+      "minor": 15,
+      "points": [
+        [0, 99],
+        [15, 97],
+        [30, 92],
+        [45, 82],
+        [60, 65],
+        [75, 35]
+      ],
+      "dataMaxX": 75,
+      "readouts": [
+        { "x": 40, "note": "40 °C (interpolation — within data)", "expected": "≈ 85 % (accept 80–90 %)" },
+        { "x": 90, "note": "90 °C (extrapolation — beyond data)", "expected": "≈ 10 % (accept 5–15 %)" }
+      ],
+      "task": "Drag the crosshair to read off the percentage charge at 40 °C (valid) and 90 °C (extrapolated)."
+    },
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q12",
+    "questionId": 12,
+    "taskLabel": "",
+    "topic": "Sustainability in aluminium production",
+    "original_path": "/images/papers/chemistry-nov-2016/page-35.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: two smooth line panels vs Year (1970-2010), no gridlines. Left: Energy used in Al production / % (0-100) falling from 100 in 1975 to ~55 by 2005 with a small plateau near 1985-1990 (teal). Right: Aluminium recycling rate / % (0-60) rising from ~15 in 1978 to ~50 by 2005 (orange).",
+    "generated_path": "/images/papers/chemistry-nov-2016-v1/q12-steel-sustainability-graphs.svg",
+    "needs_review": true,
+    "approved": false
+  }
+]

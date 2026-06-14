@@ -1,0 +1,343 @@
+[
+  {
+    "taskPath": "q4",
+    "questionId": 4,
+    "taskLabel": null,
+    "topic": "CO₂ volume vs CaCO₃ mass",
+    "original_path": "/images/papers/chemistry-may-2018/page-13.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: scatter graph, x-axis Mass of CaCO₃ / g (1.00 to 3.00, major ticks every 0.50, minor every 0.10), y-axis Volume of CO₂ produced / cm³ (200 to 700, ticks every 100, minor every 20). ~17 points rising near-linearly from (1.4,313) to (3.0,670) with anomalies at 1.9 g (~540, high) and 2.5 g (~480, low).",
+    "generated_path": "/images/papers/chemistry-may-2018/q4-caco3-graph.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q5.tasks[d]",
+    "questionId": 5,
+    "taskLabel": "d",
+    "topic": "CO₂ volume vs time (limestone vs oyster)",
+    "original_path": "/images/papers/chemistry-may-2018/page-18.png",
+    "image_type": "code_rendered",
+    "render_component": "RateSim",
+    "render_data": {
+      "title": "Volume of CO₂ produced vs time — limestone vs crushed oyster shell",
+      "source": "MYP chemistry-may-2018",
+      "mode": "gasVolume",
+      "variable": "particle size of CaCO₃ supplement",
+      "xAxis": { "label": "Time / s", "min": 0, "max": 80, "tick": 10 },
+      "yAxis": { "label": "Volume of carbon dioxide / cm³", "min": 0, "max": 100, "tick": 10 },
+      "options": [
+        {
+          "label": "Limestone chips",
+          "color": "teal",
+          "ratePerSec": 1.33,
+          "plateauVolume": 106
+        },
+        {
+          "label": "Crushed oyster shell",
+          "color": "orange",
+          "ratePerSec": 0.28,
+          "plateauVolume": 22
+        }
+      ],
+      "note": "Average rate = total volume of gas ÷ total time. Read the total volume at t = 60 s and divide by 60: limestone ≈ 1.33 cm³ s⁻¹, crushed oyster shell ≈ 0.28 cm³ s⁻¹."
+    },
+    "generated_path": "/images/papers/chemistry-may-2018/q5d-co2-time-graph.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q5",
+    "questionId": 5,
+    "taskLabel": null,
+    "topic": "Time in digestive system bar charts",
+    "original_path": "/images/papers/chemistry-may-2018/page-20.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: two bar-chart panels. Panel 'All data' (y-axis Time in digestive system / h, 0–12) grouped bars per Trial one/two/three — Limestone (teal) 5,3,6 and Crushed oyster shell (orange) 11.1,10.6,11.1, with key. Panel 'Limestone graph' (y-axis 0–8) Limestone bars 5,3,6.",
+    "generated_path": "/images/papers/chemistry-may-2018/q5-digestion-bars.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q5",
+    "questionId": 5,
+    "taskLabel": null,
+    "topic": "Oyster shell digestion-time bar chart",
+    "original_path": "/images/papers/chemistry-may-2018/page-21.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: single bar chart 'Crushed oyster shell graph', y-axis Time in digestive system / h (0–12), Crushed oyster shell (orange) bars for Trial one/two/three at 11.1, 10.6, 11.1, with key.",
+    "generated_path": "/images/papers/chemistry-may-2018/q5-oyster-bar.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q2",
+    "questionId": 2,
+    "taskLabel": null,
+    "topic": "Solubility of Ca²⁺ and Mg²⁺ salts (data table)",
+    "original_path": "/images/papers/chemistry-may-2018/page-05.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG data table: 'Solubility in water at 25 °C of Ca²⁺ and Mg²⁺ ions'. Columns Anion / Mg²⁺ / Ca²⁺. Rows: Cl⁻,Br⁻,I⁻ = soluble, soluble; SO₄²⁻ = soluble, insoluble; OH⁻ = insoluble, insoluble; CO₃²⁻,PO₄³⁻ = insoluble, insoluble. Teal shaded header, ruled grid.",
+    "generated_path": "/images/papers/chemistry-may-2018/q2-solubility-table.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q3",
+    "questionId": 3,
+    "taskLabel": null,
+    "topic": "Percentage by mass of calcium carbonate (data table)",
+    "original_path": "/images/papers/chemistry-may-2018/page-09.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG data table: Animal vs 'Percentage by mass of calcium carbonate / %' split into Teeth and Bone. Rows: Elephant 20.93/22.58; Horse 28.80/24.70; Human 29.82/23.10; Monkey 29.93/23.12; Dolphin 22.12/15.16. Teal header, ruled grid.",
+    "generated_path": "/images/papers/chemistry-may-2018/q3-caco3-percent-table.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q3.tasks[d]",
+    "questionId": 3,
+    "taskLabel": "d",
+    "topic": "Gas syringe + conical flask apparatus",
+    "original_path": "/images/papers/chemistry-may-2018/page-12.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG apparatus: horizontal gas syringe (graduated barrel + plunger) connected by delivery tubing through a bung into a conical flask containing a reaction mixture with effervescence and solid chips. Labels: Gas syringe, Conical flask, Reaction mixture.",
+    "generated_path": "/images/papers/chemistry-may-2018/q3d-gas-syringe-apparatus.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q4",
+    "questionId": 4,
+    "taskLabel": null,
+    "topic": "Percentage by mass of calcium carbonate (data table, repeated in Q4)",
+    "original_path": "/images/papers/chemistry-may-2018/page-14.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG data table: Animal vs 'Percentage by mass of calcium carbonate / %' split into Teeth and Bone. Rows: Elephant 20.93/22.58; Horse 28.80/24.70; Human 29.82/23.10; Monkey 29.93/23.12; Dolphin 22.12/15.16. Teal header, ruled grid.",
+    "generated_path": "/images/papers/chemistry-may-2018/q3-caco3-percent-table.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q5",
+    "questionId": 5,
+    "taskLabel": null,
+    "topic": "Limestone vs crushed oyster shell particle size",
+    "original_path": "/images/papers/chemistry-may-2018/page-15.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG diagram comparing dietary supplements: left a single large limestone chip (~7 mm diameter) magnified in a callout with a pile beneath, labelled Limestone; right a fine powder of crushed oyster shell (~0.5 mm particles) magnified with a powder pile, labelled Crushed oyster shell. Note '*approximate diameter'.",
+    "generated_path": "/images/papers/chemistry-may-2018/q5-supplement-particles.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q5.tasks[a]",
+    "questionId": 5,
+    "taskLabel": "a",
+    "topic": "Hazard symbols (corrosive, flammable, toxic)",
+    "original_path": "/images/papers/chemistry-may-2018/page-16.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: three reagent bottles each bearing a red-bordered GHS hazard diamond. Image 1 = corrosive (acid pouring onto surface and hand); Image 2 = flammable (flame); Image 3 = toxic (skull and crossbones). Labelled Image 1, Image 2, Image 3.",
+    "generated_path": "/images/papers/chemistry-may-2018/q5a-hazard-symbols.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q5.tasks[c]",
+    "questionId": 5,
+    "taskLabel": "c",
+    "topic": "Limestone reaction results (Trial 1 data table)",
+    "original_path": "/images/papers/chemistry-may-2018/page-17.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG data table 'Trial 1': columns Time / s, Volume of CO₂ produced from limestone samples / cm³ (Trial 1, Trial 2, Trial 3), Average volume of gas produced / cm³ (Average). Rows by time 0..70: (0,0,0,0,0),(10,17,16,15,16),(20,33,30,31,32),(30,46,48,44,46),(40,57,67,55,BLANK),(50,70,70,70,70),(60,81,83,82,82),(70,93,91,92,92). The 40 s Average cell is left blank for the student.",
+    "generated_path": "/images/papers/chemistry-may-2018/q5c-limestone-results-table.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q6",
+    "questionId": 6,
+    "taskLabel": null,
+    "topic": "Fractional distillation column",
+    "original_path": "/images/papers/chemistry-may-2018/page-23.png",
+    "image_type": "code_rendered",
+    "render_component": "ThermalSim",
+    "render_data": {
+      "title": "Fractional distillation of crude oil",
+      "source": "MYP chemistry-may-2018",
+      "mode": "distill",
+      "column": {
+        "topC": 40,
+        "bottomC": 350,
+        "fractions": [
+          { "name": "Petroleum gas", "boilC": "<40", "use": "gas", "chainLength": "shortest" },
+          { "name": "Petrol", "boilC": 40, "use": "fuel for cars" },
+          { "name": "Naphtha", "boilC": 110, "use": "making chemicals" },
+          { "name": "Kerosene", "boilC": 180, "use": "aircraft fuel" },
+          { "name": "Diesel", "boilC": 250, "use": "fuel for lorries" },
+          { "name": "Lubricants", "boilC": 350, "use": "factories" },
+          { "name": "Bitumen", "boilC": ">350", "use": "surfacing roads", "chainLength": "longest" }
+        ]
+      }
+    },
+    "generated_path": "/images/papers/chemistry-may-2018/q6-fractional-distillation.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q6.tasks[a]",
+    "questionId": 6,
+    "taskLabel": "a",
+    "topic": "Hydrocarbon chain length MCQ (A/B/C)",
+    "original_path": "/images/papers/chemistry-may-2018/page-23.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: three ball-and-stick hydrocarbon molecules labelled A, B, C. A = methane (1 carbon, 4 hydrogens); B = medium chain (~8 carbons); C = long chain (~12 carbons). Carbon = dark grey larger spheres, Hydrogen = white small spheres, with a Key. Answer A (shortest) is distilled with petroleum gases.",
+    "generated_path": "/images/papers/chemistry-may-2018/q6a-hydrocarbon-chains.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q6.tasks[c]",
+    "questionId": 6,
+    "taskLabel": "c",
+    "topic": "Oil spill cleanup methods",
+    "original_path": "/images/papers/chemistry-may-2018/page-24.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG sea scene showing three oil-spill cleanup methods: (1) Oil collected from surface water — inflated boom corrals slick towards a skimmer ship; (2) Burning — oil contained by a fire-retardant boom and set alight; (3) Dispersion — aeroplane sprays chemicals that break down the oil. Labels for each method.",
+    "generated_path": "/images/papers/chemistry-may-2018/q6c-oil-spill-cleanup.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q7",
+    "questionId": 7,
+    "taskLabel": null,
+    "topic": "Country X map (crude oil transport)",
+    "original_path": "/images/papers/chemistry-may-2018/page-26.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG stylised map of Country X: two islands (North Island with an oil field, South Island with the capital) in a blue sea, connected by a bridge and ferry. Markers for Refinery, Port, Capital (star), Oil field, plus roads and railway lines, a fishing zone, coral reefs and a protected area. Compass rose and a legend.",
+    "generated_path": "/images/papers/chemistry-may-2018/q7-country-x-map.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q1",
+    "questionId": 1,
+    "taskLabel": null,
+    "topic": "Text-only crop (formic acid question text / answer boxes)",
+    "original_path": "/images/papers/chemistry-may-2018/page-02.png",
+    "image_type": "text_only",
+    "image_prompt": "Mis-crop: question text and answer entry boxes only — no diagram to recreate.",
+    "generated_path": null,
+    "needs_review": false,
+    "approved": true
+  },
+  {
+    "taskPath": "q1",
+    "questionId": 1,
+    "taskLabel": null,
+    "topic": "Text-only crop (dropdown widgets / Lewis draggable items)",
+    "original_path": "/images/papers/chemistry-may-2018/page-03.png",
+    "image_type": "text_only",
+    "image_prompt": "Mis-crop: dropdown selects and draggable C/H/O symbols, no recreatable diagram.",
+    "generated_path": null,
+    "needs_review": false,
+    "approved": true
+  },
+  {
+    "taskPath": "q1",
+    "questionId": 1,
+    "taskLabel": null,
+    "topic": "Text-only crop (equilibrium / neutralization answer boxes)",
+    "original_path": "/images/papers/chemistry-may-2018/page-04.png",
+    "image_type": "text_only",
+    "image_prompt": "Mis-crop: answer text boxes only, no diagram.",
+    "generated_path": null,
+    "needs_review": false,
+    "approved": true
+  },
+  {
+    "taskPath": "q2",
+    "questionId": 2,
+    "taskLabel": null,
+    "topic": "Text-only crop (Q2a–2c answer boxes)",
+    "original_path": "/images/papers/chemistry-may-2018/page-06.png",
+    "image_type": "text_only",
+    "image_prompt": "Mis-crop: question text and answer boxes only, no diagram.",
+    "generated_path": null,
+    "needs_review": false,
+    "approved": true
+  },
+  {
+    "taskPath": "q3",
+    "questionId": 3,
+    "taskLabel": null,
+    "topic": "Text-only crop (Q3a dropdown / Q3b variables boxes)",
+    "original_path": "/images/papers/chemistry-may-2018/page-10.png",
+    "image_type": "text_only",
+    "image_prompt": "Mis-crop: dropdown and answer boxes only, no diagram.",
+    "generated_path": null,
+    "needs_review": false,
+    "approved": true
+  },
+  {
+    "taskPath": "q3",
+    "questionId": 3,
+    "taskLabel": null,
+    "topic": "Text-only crop (control variable boxes / table-builder widget)",
+    "original_path": "/images/papers/chemistry-may-2018/page-11.png",
+    "image_type": "text_only",
+    "image_prompt": "Mis-crop: answer boxes and a 'Create New Table' UI widget, no recreatable diagram.",
+    "generated_path": null,
+    "needs_review": false,
+    "approved": true
+  },
+  {
+    "taskPath": "q5",
+    "questionId": 5,
+    "taskLabel": null,
+    "topic": "Text-only crop (Q5e answer box / digestive-system intro text)",
+    "original_path": "/images/papers/chemistry-may-2018/page-19.png",
+    "image_type": "text_only",
+    "image_prompt": "Mis-crop: answer text box and prose only, no diagram.",
+    "generated_path": null,
+    "needs_review": false,
+    "approved": true
+  },
+  {
+    "taskPath": "q5",
+    "questionId": 5,
+    "taskLabel": null,
+    "topic": "Text-only crop (Q5g/5h answer boxes / Q6 intro)",
+    "original_path": "/images/papers/chemistry-may-2018/page-22.png",
+    "image_type": "text_only",
+    "image_prompt": "Mis-crop: answer boxes and fractional-distillation intro text, no diagram on this page.",
+    "generated_path": null,
+    "needs_review": false,
+    "approved": true
+  },
+  {
+    "taskPath": "q7",
+    "questionId": 7,
+    "taskLabel": null,
+    "topic": "Text-only crop (Q6 evaluate box / Q7 video placeholder)",
+    "original_path": "/images/papers/chemistry-may-2018/page-25.png",
+    "image_type": "text_only",
+    "image_prompt": "Mis-crop: answer box and an inactive video player placeholder, no recreatable diagram.",
+    "generated_path": null,
+    "needs_review": false,
+    "approved": true
+  },
+  {
+    "taskPath": "q7",
+    "questionId": 7,
+    "taskLabel": null,
+    "topic": "Text-only crop (Q7 transport-method answer box)",
+    "original_path": "/images/papers/chemistry-may-2018/page-27.png",
+    "image_type": "text_only",
+    "image_prompt": "Mis-crop: question prose and answer box only, no diagram.",
+    "generated_path": null,
+    "needs_review": false,
+    "approved": true
+  }
+]

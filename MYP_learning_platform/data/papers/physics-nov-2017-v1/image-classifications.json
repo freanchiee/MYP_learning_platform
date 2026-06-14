@@ -1,0 +1,138 @@
+[
+  {
+    "taskPath": "q2.tasks[f]",
+    "questionId": 2,
+    "taskLabel": "f",
+    "topic": "Terminal velocity vs radius",
+    "original_path": "/images/papers/physics-nov-2017/q2f-terminal-vel-graph.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG scatter graph (no best-fit), Terminal velocity / m s⁻¹ (y, 0–25, ticks every 5, minor 1) vs Radius of snowflake / m (x, 0.000–0.012, ticks every 0.002, minor 0.0005); 10 points rising and curving concave-down from (0.001,6.5) to (0.010,20.7). Variant v1 noun: snowflake.",
+    "generated_path": "/images/papers/physics-nov-2017-v1/q2f-terminal-vel-graph.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q2.tasks[g]",
+    "questionId": 2,
+    "taskLabel": "g",
+    "topic": "Terminal velocity squared vs radius",
+    "original_path": "/images/papers/physics-nov-2017/q2g-hailstones-graph.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG scatter + straight best-fit line through origin, Terminal velocity squared / m² s⁻² (y, 0–1000, ticks every 200, minor 50) vs Radius of ice pellets / m (x, 0–0.025, ticks every 0.005, minor 0.001); 11 points on a line of gradient ≈39200 from (0,0) to (0.020,784). Variant v1 noun: ice pellets.",
+    "generated_path": "/images/papers/physics-nov-2017-v1/q2g-hailstones-graph.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q3.tasks[e]",
+    "questionId": 3,
+    "taskLabel": "e",
+    "topic": "Bulb cost vs time",
+    "original_path": "/images/papers/physics-nov-2017/q3e-bulb-cost-graph.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG multi-line graph Cost / GBP (y, 0–30, ticks every 10, minor 2) vs Time / hours (x, ticks 0/5000/15 000/25 000/35 000, minor 2500); four straight lines + legend — Halogen 18 W (green, 5.3→15.3), LED 4 W (orange, nearly flat 10→14), Fluorescent 10 W (teal, 8→26.5), Filament 25 W (magenta, steepest 1.5→27). Colours teal/orange/magenta/green, never IB red.",
+    "generated_path": "/images/papers/physics-nov-2017-v1/q3e-bulb-cost-graph.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q4.tasks[f]",
+    "questionId": 4,
+    "taskLabel": "f",
+    "topic": "Mass evaporated vs area",
+    "original_path": "/images/papers/physics-nov-2017/q4f-evap-graph.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG scatter + straight best-fit line through origin, Mass of water evaporated after one hour / g (y, 0.00–10.00, ticks every 2.00, minor 0.5) vs Area of dish / cm² (x, 0–350, ticks every 50, minor 10); 7 points on a line of gradient k=0.0200 g cm⁻² from (25,0.5) to (325,6.5). Variant v1 gradient 0.0200.",
+    "generated_path": "/images/papers/physics-nov-2017-v1/q4f-evap-graph.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q6.tasks[c]",
+    "questionId": 6,
+    "taskLabel": "c",
+    "topic": "Boiling point vs altitude (anomaly)",
+    "original_path": "/images/papers/physics-nov-2017/q6c-anomalous-graph.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG line graph Boiling point / °C (y, 50–100, ticks every 10, minor 2) vs Altitude / m (x, 0–7000, ticks every 1000, minor 250); points decreasing linearly along a best-fit line through (0,100) and the known (2700,91.5), with the (1600 m) point drawn clearly ABOVE the line as the anomaly (magenta ×, labelled). Reconstructed from the q6a results table. Variant v1 anomaly altitude 1600 m.",
+    "generated_path": "/images/papers/physics-nov-2017-v1/q6c-anomalous-graph.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q2.tasks[b]",
+    "questionId": 2,
+    "taskLabel": "b",
+    "topic": "Free-body diagram options (snowflake terminal velocity)",
+    "original_path": "/images/papers/physics-nov-2017/q2b-fbd-options.png",
+    "image_type": "ai_generated",
+    "image_prompt": "Four labelled FBD options for a falling snowflake. Reusable snowflake symbol (blue six-arm crystal) at the centre of each, arrows A (up) and B (down) drawn with markers; equal arrows = option 1 (correct, terminal velocity), short up/long down = 2, long up/short down = 3, only up = 4.",
+    "generated_path": "/images/papers/physics-nov-2017-v1/q2b-fbd-options.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q3.stem",
+    "questionId": 3,
+    "taskLabel": "stem",
+    "topic": "Simple circuit (cell, bulb, ammeter, voltmeter)",
+    "original_path": "/images/papers/physics-nov-2017/q3-circuit.png",
+    "image_type": "ai_generated",
+    "image_prompt": "Series circuit with two-cell battery, bulb (circle with X), ammeter (A) and voltmeter (V) across bulb. Digital readouts 0.3 A and 9 V for variant v1.",
+    "generated_path": "/images/papers/physics-nov-2017-v1/q3-circuit.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q3.tasks[d]",
+    "questionId": 3,
+    "taskLabel": "d",
+    "topic": "Circuit with variable resistor added in series",
+    "original_path": "/images/papers/physics-nov-2017/q3d-var-resistor.png",
+    "image_type": "code_rendered",
+    "render_component": "CircuitSim",
+    "render_data": {
+      "title": "Variable resistor in series with the bulb",
+      "source": "MYP physics-nov-2017-v1",
+      "mode": "iv",
+      "component": "bulb",
+      "emf": 9,
+      "task": "The variable resistor is in series with the bulb. Sweep its resistance: as R_var increases, the total resistance increases so the current (I = V / R) decreases, the bulb draws less power and gets dimmer.",
+      "variableResistor": { "min": 0, "max": 90, "step": 10, "label": "Variable resistor" },
+      "ivPairs": [
+        { "Rvar": 0, "Vbulb": 9, "I": 0.3, "brightness": "full" },
+        { "Rvar": 10, "Vbulb": 6.75, "I": 0.225, "brightness": "bright" },
+        { "Rvar": 30, "Vbulb": 4.5, "I": 0.15, "brightness": "dim" },
+        { "Rvar": 60, "Vbulb": 3, "I": 0.1, "brightness": "very dim" },
+        { "Rvar": 90, "Vbulb": 2.25, "I": 0.075, "brightness": "very dim" }
+      ]
+    },
+    "generated_path": "/images/papers/physics-nov-2017-v1/q3d-var-resistor.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q6.stem",
+    "questionId": 6,
+    "taskLabel": "stem",
+    "topic": "Mount Fuji results scene with thermometer (91.5°C at 2700 m)",
+    "original_path": "/images/papers/physics-nov-2017/q6-kilimanjaro.png",
+    "image_type": "ai_generated",
+    "image_prompt": "Mount Fuji panorama (symmetric snow-capped peak, pinkish sky) with a thermometer reading 91.5°C in the foreground and a labelled altitude/temperature results panel listing 11 altitudes (0–3700 m) and the boiling points; 2700 m row blank; 1600 m row anomalous (97.0°C above the trend).",
+    "generated_path": "/images/papers/physics-nov-2017-v1/q6-kilimanjaro.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q6.tasks[a]",
+    "questionId": 6,
+    "taskLabel": "a",
+    "topic": "Mount Fuji results data table (heading row blank, one row blank)",
+    "original_path": "/images/papers/physics-nov-2017/q6a-data-table.png",
+    "image_type": "ai_generated",
+    "image_prompt": "Two-column data table with placeholder 'Heading 1' / 'Heading 2'. Rows: altitudes 0–3700 m vs boiling point in °C from variant v1 dataset; the 2700 m row is intentionally blank for the student to fill from the thermometer reading.",
+    "generated_path": "/images/papers/physics-nov-2017-v1/q6a-data-table.svg",
+    "needs_review": true,
+    "approved": false
+  }
+]

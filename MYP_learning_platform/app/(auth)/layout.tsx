@@ -23,7 +23,7 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
   return (
     <div
       className="min-h-screen flex items-center justify-center px-4 relative overflow-hidden"
-      style={{ background: 'linear-gradient(145deg, #274e68 0%, #1f3674 55%, #0e1f45 100%)' }}
+      style={{ background: 'var(--bg)', backgroundImage: 'var(--bg-image)' }}
     >
       {/* Floating physics symbols */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden>
@@ -48,7 +48,7 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
         className="absolute inset-0 pointer-events-none"
         style={{
           backgroundImage:
-            'radial-gradient(circle, rgba(173,241,196,0.07) 1px, transparent 1px)',
+            'radial-gradient(circle, var(--accent-soft) 1px, transparent 1px)',
           backgroundSize: '40px 40px',
         }}
         aria-hidden
@@ -63,16 +63,16 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
           <div
             className="w-20 h-20 rounded-2xl flex items-center justify-center mb-4 shadow-2xl"
             style={{
-              background: 'linear-gradient(135deg, #1f3674 0%, #547ca4 100%)',
-              border: '2px solid rgba(173,241,196,0.3)',
+              background: 'linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%)',
+              border: '2px solid var(--accent-fg)',
             }}
           >
-            <span className="text-3xl font-extrabold tracking-tighter" style={{ color: '#adf1c4' }}>
+            <span className="text-3xl font-extrabold tracking-tighter" style={{ color: 'var(--accent-fg)' }}>
               MYP
             </span>
           </div>
-          <h1 className="text-white text-2xl font-bold tracking-wide">MYP Sciences</h1>
-          <p className="text-sm mt-1" style={{ color: 'rgba(173,241,196,0.7)' }}>
+          <h1 className="text-2xl font-bold tracking-wide" style={{ color: 'var(--text)' }}>MYP Sciences</h1>
+          <p className="text-sm mt-1" style={{ color: 'var(--text-muted)' }}>
             e-Assessment Platform
           </p>
         </div>
@@ -82,8 +82,8 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
           className="fade-up rounded-2xl shadow-2xl overflow-hidden"
           style={{
             animationDelay: '0.15s',
-            background: 'rgba(245, 237, 204, 0.97)',
-            border: '1px solid rgba(173,241,196,0.2)',
+            background: 'var(--surface-elevated)',
+            border: '1px solid var(--border)',
           }}
         >
           {children}
@@ -91,7 +91,7 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
 
         <p
           className="text-center text-xs mt-6 fade-up"
-          style={{ color: 'rgba(255,255,255,0.35)', animationDelay: '0.3s' }}
+          style={{ color: 'var(--text-subtle)', animationDelay: '0.3s' }}
         >
           IB MYP Sciences · AI-Powered Grading
         </p>

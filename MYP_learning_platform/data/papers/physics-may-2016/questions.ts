@@ -23,7 +23,7 @@ export const questions: Question[] = [
     topicCanonical: 'Solar System, Gravity & Space',
     topicGroup: 'Space & Astrophysics',
     stem: 'The following table contains information that can be used to describe mass or weight.',
-    figImages: [`${P}q1-table.png`],
+    figImages: ['/images/papers/physics-may-2016/q1-mass-weight-table.svg'],
     tags: { unit: 'forces-interactions', topics: ['mass', 'weight', 'gravitational field strength', 'solar system'], level: 'developing' },
     tasks: [
       {
@@ -57,7 +57,7 @@ export const questions: Question[] = [
     topicCanonical: 'Solar System, Gravity & Space',
     topicGroup: 'Space & Astrophysics',
     stem: 'While passing close by each planet, the probe drops a test object from a height of 100.0 m. The shape of the object ensures that any frictional forces are negligible over a fall of this distance. All of the test object\'s gravitational potential energy (E_p) transforms to kinetic energy before hitting the surface of the moons.',
-    figImages: [`${P}q2-probe.png`],
+    figImages: ['/images/papers/physics-may-2016/q2-probe-scene.svg'],
     tags: { unit: 'forces-interactions', topics: ['gravitational field strength', 'density', 'gravitational potential energy', 'kinetic energy', 'velocity'], level: 'proficient' },
     tasks: [
       {
@@ -185,7 +185,7 @@ export const questions: Question[] = [
     topicCanonical: 'Circuits, Resistance & Power',
     topicGroup: 'Electricity & Magnetism',
     stem: 'A student is planning to investigate how the voltage (potential difference) across a bulb affects the current through it.',
-    figImages: [`${P}q6a-circuits.png`],
+    figImages: ['/images/papers/physics-may-2016/q6a-circuits.svg'],
     tags: { unit: 'electricity-circuits', topics: ['voltage', 'current', 'experimental design', 'ammeter', 'circuit'], level: 'developing' },
     tasks: [
       {
@@ -384,7 +384,7 @@ export const questions: Question[] = [
         label: 'd',
         text: 'The table shows the absorption of ultraviolet, X-ray, and gamma radiation by different body tissues (skin, bone, soft tissue).\n\n**Explain** why X-rays are used rather than ultraviolet or gamma rays when doctors wish to make images of a person\'s bones.',
         marks: 3,
-        figImages: [`${P}q11d-xray-table.png`],
+        figImages: ['/images/papers/physics-may-2016/q11d-absorption-table.svg'],
         ph: 'UV is blocked/absorbed by all materials (absorbed by skin) → cannot penetrate to bones. Gamma rays pass through all materials → no contrast between bone and soft tissue in the image. Only X-rays give contrast between bone and soft tissue/skin → bones absorb more X-rays than soft tissue → shadow image shows bone structure clearly.',
       },
     ],

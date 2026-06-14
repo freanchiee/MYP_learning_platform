@@ -11,10 +11,10 @@ interface QuestionAccordionProps {
 }
 
 const CRITERION_COLORS: Record<string, string> = {
-  A: 'bg-[#0079a8] text-white',
-  B: 'bg-[#3daa35] text-white',
-  C: 'bg-[#f5a623] text-gray-900',
-  D: 'bg-[#7b2d8b] text-white',
+  A: 'bg-cA text-[color:var(--criterion-fg)]',
+  B: 'bg-cB text-[color:var(--criterion-fg)]',
+  C: 'bg-cC text-[color:var(--criterion-fg)]',
+  D: 'bg-cD text-[color:var(--criterion-fg)]',
 }
 
 function StarRating({ awarded, max }: { awarded: number; max: number }) {
@@ -25,7 +25,7 @@ function StarRating({ awarded, max }: { awarded: number; max: number }) {
       {[1, 2, 3].map((s) => (
         <span
           key={s}
-          className={s <= stars ? 'text-amber-400' : 'text-gray-300'}
+          className={s <= stars ? 'text-warning' : 'text-ink-subtle'}
         >
           ⭐
         </span>
@@ -38,10 +38,10 @@ function ConceptChip({ label, hit }: { label: string; hit: boolean }) {
   return (
     <span
       className={cn(
-        'inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium',
+        'inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium border',
         hit
-          ? 'bg-green-100 text-green-800 border border-green-200'
-          : 'bg-red-100 text-red-800 border border-red-200'
+          ? 'bg-success-surface text-success border-[color:var(--success)]/30'
+          : 'bg-danger-surface text-danger border-[color:var(--danger)]/30'
       )}
     >
       <span>{hit ? '✓' : '✗'}</span>
@@ -63,26 +63,26 @@ export function QuestionAccordion({
 
   const scoreColor =
     percent >= 80
-      ? 'text-green-600'
+      ? 'text-success'
       : percent >= 50
-      ? 'text-amber-600'
-      : 'text-red-600'
+      ? 'text-warning'
+      : 'text-danger'
 
   return (
-    <div className="bg-white/5 border border-white/10 rounded-xl overflow-hidden">
+    <div className="bg-surface border border-line rounded-card overflow-hidden shadow-card">
       {/* Accordion Header */}
       <button
         onClick={() => setIsOpen((o) => !o)}
-        className="w-full flex items-center gap-3 px-5 py-4 text-left hover:bg-white/5 transition-colors"
+        className="w-full flex items-center gap-3 px-5 py-4 text-left hover:bg-surface-2 transition-colors"
         aria-expanded={isOpen}
       >
         {/* Question number */}
-        <span className="shrink-0 w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-sm font-bold text-white">
+        <span className="shrink-0 w-8 h-8 rounded-full bg-surface-3 flex items-center justify-center text-sm font-bold text-ink">
           {questionIndex + 1}
         </span>
 
         {/* Topic */}
-        <span className="flex-1 text-sm font-medium text-gray-200 truncate">
+        <span className="flex-1 text-sm font-medium text-ink-muted truncate">
           {question.topic || `Question ${questionIndex + 1}`}
         </span>
 
@@ -90,7 +90,7 @@ export function QuestionAccordion({
         <span
           className={cn(
             'shrink-0 px-2 py-0.5 rounded text-xs font-bold',
-            CRITERION_COLORS[question.crit] || 'bg-gray-600 text-white'
+            CRITERION_COLORS[question.crit] || 'bg-surface-3 text-ink'
           )}
         >
           {question.crit}
@@ -108,7 +108,7 @@ export function QuestionAccordion({
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className={cn(
-            'h-4 w-4 text-gray-400 shrink-0 transition-transform duration-200',
+            'h-4 w-4 text-ink-subtle shrink-0 transition-transform duration-200',
             isOpen && 'rotate-180'
           )}
           viewBox="0 0 20 20"
@@ -124,22 +124,22 @@ export function QuestionAccordion({
 
       {/* Expanded content */}
       {isOpen && (
-        <div className="border-t border-white/10 px-5 py-4 space-y-4">
+        <div className="border-t border-divider px-5 py-4 space-y-4">
           {tasks.map((task, ti) => (
             <div key={ti} className="space-y-3">
               {/* Task label + marks */}
               <div className="flex items-center justify-between">
-                <span className="text-xs font-semibold text-gray-400 uppercase tracking-wider">
+                <span className="text-xs font-semibold text-ink-subtle uppercase tracking-wider">
                   Task {task.label}
                 </span>
                 <span
                   className={cn(
                     'text-sm font-bold',
                     task.marksAwarded === task.maxMarks
-                      ? 'text-green-400'
+                      ? 'text-success'
                       : task.marksAwarded > 0
-                      ? 'text-amber-400'
-                      : 'text-red-400'
+                      ? 'text-warning'
+                      : 'text-danger'
                   )}
                 >
                   {task.marksAwarded}/{task.maxMarks} marks
@@ -148,23 +148,23 @@ export function QuestionAccordion({
 
               {/* Student answer vs exemplar */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <div className="rounded-lg bg-white/5 border border-white/10 p-3">
-                  <p className="text-xs font-semibold text-gray-400 mb-1.5">
+                <div className="rounded-control bg-surface-2 border border-line p-3">
+                  <p className="text-xs font-semibold text-ink-subtle mb-1.5">
                     Your Answer
                   </p>
-                  <p className="text-sm text-gray-200 whitespace-pre-wrap leading-relaxed">
+                  <p className="text-sm text-ink whitespace-pre-wrap leading-relaxed">
                     {task.studentAnswer || (
-                      <span className="italic text-gray-500">No answer given</span>
+                      <span className="italic text-ink-subtle">No answer given</span>
                     )}
                   </p>
                 </div>
-                <div className="rounded-lg bg-green-900/20 border border-green-500/20 p-3">
-                  <p className="text-xs font-semibold text-green-400 mb-1.5">
+                <div className="rounded-control bg-success-surface border border-[color:var(--success)]/20 p-3">
+                  <p className="text-xs font-semibold text-success mb-1.5">
                     Model Answer
                   </p>
-                  <p className="text-sm text-gray-200 whitespace-pre-wrap leading-relaxed">
+                  <p className="text-sm text-ink whitespace-pre-wrap leading-relaxed">
                     {task.exemplar || (
-                      <span className="italic text-gray-500">No exemplar available</span>
+                      <span className="italic text-ink-subtle">No exemplar available</span>
                     )}
                   </p>
                 </div>
@@ -184,11 +184,11 @@ export function QuestionAccordion({
 
               {/* Feedback */}
               {task.feedback && (
-                <div className="rounded-lg bg-[#0079a8]/10 border border-[#0079a8]/30 px-4 py-3">
-                  <p className="text-xs font-semibold text-[#0079a8] mb-1">
+                <div className="rounded-control bg-info-surface border border-info px-4 py-3">
+                  <p className="text-xs font-semibold text-info mb-1">
                     Feedback
                   </p>
-                  <p className="text-sm text-gray-300 leading-relaxed">
+                  <p className="text-sm text-ink-muted leading-relaxed">
                     {task.feedback}
                   </p>
                 </div>
@@ -196,13 +196,13 @@ export function QuestionAccordion({
 
               {/* Divider between tasks */}
               {ti < tasks.length - 1 && (
-                <hr className="border-white/10" />
+                <hr className="border-divider" />
               )}
             </div>
           ))}
 
           {tasks.length === 0 && (
-            <p className="text-sm text-gray-500 italic">
+            <p className="text-sm text-ink-subtle italic">
               No detailed breakdown available for this question.
             </p>
           )}

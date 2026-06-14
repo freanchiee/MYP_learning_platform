@@ -1,0 +1,150 @@
+[
+  {
+    "taskPath": "q1.tasks[a]",
+    "questionId": 1,
+    "taskLabel": "a",
+    "topic": "Electromagnetic Induction & Motors",
+    "original_path": "/images/papers/physics-may-2018-v2/q1a-field-diagrams.svg",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: four multiple-choice bar-magnet field-line diagrams A-D. B is correct.",
+    "generated_path": "/images/papers/physics-may-2018-v2/q1a-field-diagrams.svg",
+    "needs_review": false,
+    "approved": true
+  },
+  {
+    "taskPath": "q1.tasks[d]",
+    "questionId": 1,
+    "taskLabel": "d",
+    "topic": "Electromagnetic Induction & Motors",
+    "original_path": "/images/papers/physics-may-2018-v2/q1d-transformer.svg",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: step-down transformer on toroidal iron core for an e-bike charger. Primary 8 turns connected to AC mains 240 V; secondary 4 turns to voltmeter. Labels P and S on core.",
+    "generated_path": "/images/papers/physics-may-2018-v2/q1d-transformer.svg",
+    "needs_review": false,
+    "approved": true
+  },
+  {
+    "taskPath": "q1.tasks[e]",
+    "questionId": 1,
+    "taskLabel": "e",
+    "topic": "Electromagnetic Induction & Motors",
+    "original_path": "/images/papers/physics-may-2018-v2/q1e-table.svg",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG data table: Primary/Secondary columns. Voltage 12 V / 5 V. Current 5.0 A / 10.8 A. Teal header.",
+    "generated_path": "/images/papers/physics-may-2018-v2/q1e-table.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q2",
+    "questionId": 2,
+    "taskLabel": null,
+    "topic": "Solar System, Gravity & Space",
+    "original_path": "/images/papers/physics-may-2018-v2/q2-ski-slopes.svg",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: two illustrative panels of a roller coaster — lift hill with descending track and a three-car train cresting the first hill with passengers raising hands.",
+    "generated_path": "/images/papers/physics-may-2018-v2/q2-ski-slopes.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q2.tasks[c]",
+    "questionId": 2,
+    "taskLabel": "c",
+    "topic": "Solar System, Gravity & Space",
+    "original_path": "/images/papers/physics-may-2018-v2/q2c-slope-diagram.svg",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: roller coaster lift hill with vertical drop height 40 m marked. Coaster car at top labelled 'Total mass (car + riders) 75 kg'.",
+    "generated_path": "/images/papers/physics-may-2018-v2/q2c-slope-diagram.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q2.tasks[e]",
+    "questionId": 2,
+    "taskLabel": "e",
+    "topic": "Solar System, Gravity & Space",
+    "original_path": "/images/papers/physics-may-2018-v2/q2d-comparison.svg",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: two side-by-side coaster panels A: Steel coaster (steep drop) and B: Wooden coaster (gentle drop).",
+    "generated_path": "/images/papers/physics-may-2018-v2/q2d-comparison.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q6.tasks[a]",
+    "questionId": 6,
+    "taskLabel": "a",
+    "topic": "Kinematics & Motion Graphs",
+    "original_path": "/images/papers/physics-may-2018-v2/q6a-simulation.svg",
+    "image_type": "code_rendered",
+    "image_prompt": "SVG: drip-nozzle simulation panel. Five outflow containers with liquid heights 6, 10, 2, 8, 4 cm. Stopwatches above (zero). Answer boxes below with 8 cm slot highlighted '?'.",
+    "generated_path": "/images/papers/physics-may-2018-v2/q6a-simulation.svg",
+    "render_component": "RateSim",
+    "render_data": {
+      "title": "Outflow container drain test: emptying time vs initial liquid height",
+      "source": "MYP physics-may-2018-v2",
+      "mode": "scatter",
+      "variable": "Time to empty",
+      "xLabel": "Height of liquid / cm",
+      "yLabel": "Time taken to empty / s",
+      "xAxis": { "label": "Height of liquid / cm", "min": 0, "max": 10, "tick": 2 },
+      "yAxis": { "label": "Time taken to empty / s", "min": 0, "max": 16, "tick": 2 },
+      "lineOfBestFit": true,
+      "scatterPoints": [
+        { "x": 2, "y": 6.6 },
+        { "x": 4, "y": 9.3 },
+        { "x": 6, "y": 11.4 },
+        { "x": 8, "y": 13.2 },
+        { "x": 10, "y": 14.8 }
+      ],
+      "note": "The 8 cm container empties in 13.2 s (read from the stopwatch). The line of best fit cuts the time axis at about 4.5 s, not at the origin — so the relationship is not proportional.",
+      "answer": "8 cm → 13.2 s; y-intercept ≈ 4.5 s (not through origin)"
+    },
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q6.tasks[a]",
+    "questionId": 6,
+    "taskLabel": "a",
+    "topic": "Kinematics & Motion Graphs",
+    "original_path": "/images/papers/physics-may-2018-v2/q6a-stopwatch.svg",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: large analog stopwatch, 60-second dial, red hand reading 13.2 s (between 10 and 15, closer to 15) for the 8 cm drip container.",
+    "generated_path": "/images/papers/physics-may-2018-v2/q6a-stopwatch.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q7.tasks[e]",
+    "questionId": 7,
+    "taskLabel": "e",
+    "topic": "Solar System, Gravity & Space",
+    "original_path": "/images/papers/physics-may-2018-v2/q7e-hydro-diagram.svg",
+    "image_type": "code_rendered",
+    "image_prompt": "SVG: wind turbine on grass, three blades, nacelle housing generator, tower, wind arrows on the left, cable to transformer and power-output pylon. Energy chain box: KE wind → KE rotor → Electrical.",
+    "generated_path": "/images/papers/physics-may-2018-v2/q7e-hydro-diagram.svg",
+    "render_component": "DragSort",
+    "render_data": {
+      "mode": "order",
+      "title": "Wind turbine energy chain",
+      "source": "MYP physics-may-2018-v2",
+      "prompt": "Place the forms of energy in order to outline the main energy transformations that take place in a wind turbine.",
+      "items": [
+        "Kinetic energy (wind)",
+        "Kinetic energy (rotor)",
+        "Electrical energy",
+        "Chemical energy"
+      ],
+      "slots": ["Stage 1", "Stage 2", "Stage 3"],
+      "correctOrder": [
+        "Kinetic energy (wind)",
+        "Kinetic energy (rotor)",
+        "Electrical energy"
+      ]
+    },
+    "needs_review": true,
+    "approved": false
+  }
+]

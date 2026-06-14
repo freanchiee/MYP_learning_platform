@@ -1,0 +1,38 @@
+[
+  {
+    "taskPath": "q3.tasks[h]",
+    "questionId": 3,
+    "taskLabel": "h",
+    "topic": "Atmospheric temperature profile",
+    "original_path": "/images/papers/chemistry-may-2025/page-19.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: atmospheric temperature profile (Diagram B). x-axis Temperature / \u00b0C from -200 to 1600 (ticks every 200, linear); y-axis Height / km with a non-linear scale (ticks 0,20,40,60,80,100 then 200,400,600,800 compressed above). Teal curve starts ~15\u00b0C at 0 km, dips to ~-60\u00b0C at 12 km (troposphere), rises to ~0\u00b0C at 50 km (stratopause), falls to ~-90\u00b0C at 90 km (mesopause), then rises steeply through the thermosphere to a ~1520\u00b0C plateau above 500 km and turns near-vertical in the exosphere. White dashed layer boundaries at 12, 50, 90, 700 km with labels Troposphere, Stratosphere, Mesosphere, Thermosphere, Exosphere over a blue gradient background. Variant graph data identical to source (real atmospheric physics; question h tests which layer has highest kinetic energy \u2192 Exosphere, highest temperature).",
+    "generated_path": "/images/papers/chemistry-may-2025-v2/q3-temperature-profile.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q3.tasks[i]",
+    "questionId": 3,
+    "taskLabel": "i",
+    "topic": "Atmospheric composition by height",
+    "original_path": "/images/papers/chemistry-may-2025/page-18.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: stacked-area chart 'Composition of the Earth's atmosphere by height' (Diagram A). x-axis Height / km from 0 to 1000 (ticks every 100); y-axis Percentage / % from 0 to 100 (ticks every 10). Five stacked gas bands summing to 100%: Nitrogen (blue, ~77% at surface falling sharply to ~0 by 1000 km), Oxygen (salmon, ~21% rising to dominate the mid-altitude region then falling), Helium (dark navy, ~0 low down growing to dominate high up), Hydrogen (grey, thin top band growing slightly with height), and Argon (purple sliver only near the surface). Key/legend to the right. Variant graph data identical to source (real atmospheric composition; question i tests where most oxygen is found \u2192 Thermosphere).",
+    "generated_path": "/images/papers/chemistry-may-2025-v2/q3-atmosphere-composition.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q5.tasks[a]",
+    "questionId": 5,
+    "taskLabel": "a",
+    "topic": "Corrosive hazard symbol",
+    "original_path": "/images/papers/chemistry-may-2025/page-39.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: GHS corrosive hazard pictogram \u2014 red-bordered white diamond containing two test tubes pouring corrosive liquid, one onto a flat surface (corroding it) and one onto a hand (corroding the skin). Standard corrosive symbol layout.",
+    "generated_path": "/images/papers/chemistry-may-2025-v2/q5-corrosive-hazard.svg",
+    "needs_review": true,
+    "approved": false
+  }
+]

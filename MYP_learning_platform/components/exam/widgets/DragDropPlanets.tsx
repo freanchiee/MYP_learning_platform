@@ -90,11 +90,11 @@ export default function DragDropPlanets({ onAnswer }: DragDropPlanetsProps) {
             >
               ☀
             </div>
-            <span className="text-[10px] text-gray-500 font-medium">Sun</span>
+            <span className="text-[10px] text-ink-subtle font-medium">Sun</span>
           </div>
 
           {/* Arrow */}
-          <div className="text-gray-300 text-lg select-none">→</div>
+          <div className="text-ink-subtle text-lg select-none">→</div>
 
           {PLANET_SLOTS.map((slot, i) => {
             const filledWith = slot.blankId === 1 ? blank1 : slot.blankId === 2 ? blank2 : null
@@ -110,17 +110,17 @@ export default function DragDropPlanets({ onAnswer }: DragDropPlanetsProps) {
                     onDragLeave={handleDragLeave}
                     className="w-10 h-10 rounded-full flex items-center justify-center text-xs font-bold transition-all"
                     style={{
-                      border: isOver ? '2px solid #3cb563' : '2px dashed #9ca3af',
-                      background: isOver ? '#f0fdf4' : '#f9fafb',
+                      border: isOver ? '2px solid var(--success)' : '2px dashed var(--border-strong)',
+                      background: isOver ? 'var(--success-surface)' : 'var(--surface-2)',
                       minWidth: filledWith ? undefined : '40px',
                     }}
                   >
                     {filledWith ? (
-                      <span className="text-[9px] font-bold text-center leading-tight px-0.5" style={{ color: correct ? '#166534' : '#991b1b' }}>
+                      <span className="text-[9px] font-bold text-center leading-tight px-0.5" style={{ color: correct ? 'var(--success)' : 'var(--danger)' }}>
                         {filledWith.slice(0, 3)}
                       </span>
                     ) : (
-                      <span className="text-gray-400 text-sm">?</span>
+                      <span className="text-ink-subtle text-sm">?</span>
                     )}
                   </div>
                 ) : (
@@ -134,11 +134,11 @@ export default function DragDropPlanets({ onAnswer }: DragDropPlanetsProps) {
 
                 {slot.isBlank && filledWith ? (
                   <div className="flex items-center gap-0.5">
-                    <span className="text-[9px] text-gray-600 font-medium">{filledWith.slice(0, 5)}</span>
+                    <span className="text-[9px] text-ink-muted font-medium">{filledWith.slice(0, 5)}</span>
                     <span className="text-xs">{correct ? '✓' : '✗'}</span>
                   </div>
                 ) : (
-                  <span className="text-[10px] text-gray-500 font-medium">
+                  <span className="text-[10px] text-ink-subtle font-medium">
                     {slot.isBlank ? `Blank ${slot.blankId}` : slot.name}
                   </span>
                 )}
@@ -150,7 +150,7 @@ export default function DragDropPlanets({ onAnswer }: DragDropPlanetsProps) {
 
       {/* Draggable chips */}
       <div className="flex flex-wrap gap-2 px-2">
-        <span className="text-xs text-gray-500 font-medium self-center">Drag to fill blanks:</span>
+        <span className="text-xs text-ink-subtle font-medium self-center">Drag to fill blanks:</span>
         {CHIPS.map(chip => {
           const used = usedChips.has(chip)
           return (
@@ -158,11 +158,11 @@ export default function DragDropPlanets({ onAnswer }: DragDropPlanetsProps) {
               key={chip}
               draggable={!used}
               onDragStart={() => handleDragStart(chip)}
-              className="px-3 py-1 rounded-full text-xs font-semibold cursor-grab select-none transition-all"
+              className="px-3 py-1 rounded-pill text-xs font-semibold cursor-grab select-none transition-all"
               style={{
-                background: used ? '#e5e7eb' : '#dcfce7',
-                color: used ? '#9ca3af' : '#166534',
-                border: used ? '1px solid #d1d5db' : '1px solid #86efac',
+                background: used ? 'var(--surface-3)' : 'var(--success-surface)',
+                color: used ? 'var(--text-subtle)' : 'var(--success)',
+                border: used ? '1px solid var(--border-strong)' : '1px solid var(--success)',
                 opacity: used ? 0.5 : 1,
                 cursor: used ? 'not-allowed' : 'grab',
               }}
@@ -175,7 +175,7 @@ export default function DragDropPlanets({ onAnswer }: DragDropPlanetsProps) {
 
       {/* Success message */}
       {bothCorrect && (
-        <div className="mx-2 rounded-xl bg-green-50 border border-green-200 px-4 py-3 text-sm text-green-800 font-medium flex items-center gap-2">
+        <div className="mx-2 rounded-card bg-success-surface border border-success px-4 py-3 text-sm text-success font-medium flex items-center gap-2">
           <span className="text-lg">🎉</span>
           Correct! Jupiter is 5th from the Sun (between Mars and Saturn). Pluto (or Ceres) comes after Neptune.
         </div>
@@ -183,7 +183,7 @@ export default function DragDropPlanets({ onAnswer }: DragDropPlanetsProps) {
 
       {/* Partial wrong feedback */}
       {(blank1 || blank2) && !bothCorrect && (
-        <div className="mx-2 rounded-xl bg-amber-50 border border-amber-200 px-4 py-2 text-xs text-amber-700">
+        <div className="mx-2 rounded-card bg-warning-surface border border-warning px-4 py-2 text-xs text-warning">
           {blank1 && !isCorrect(1, blank1) && <p>Blank 1: "{blank1}" is not correct — the 5th planet from the Sun is the largest planet.</p>}
           {blank2 && !isCorrect(2, blank2) && <p>Blank 2: "{blank2}" is not a recognised object for that position — try Pluto or Ceres.</p>}
         </div>

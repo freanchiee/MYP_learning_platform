@@ -1,0 +1,229 @@
+[
+  {
+    "taskPath": "q1",
+    "questionId": 1,
+    "taskLabel": null,
+    "topic": "Thermal power station",
+    "original_path": "/images/papers/physics-may-2024/q1-power-station.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: coal-burning thermal power station schematic — furnace, boiler tubes, turbine+generator, cooling tower, water circulation.",
+    "generated_path": "/images/papers/physics-may-2024/q1-power-station.svg",
+    "needs_review": false,
+    "approved": true,
+    "regenerated_at": "2026-06-11T17:28:42.007Z"
+  },
+  {
+    "taskPath": "q1.tasks[f]",
+    "questionId": 1,
+    "taskLabel": "f",
+    "topic": "Greenhouse effect",
+    "original_path": "/images/papers/physics-may-2024/q1f-greenhouse.png",
+    "image_type": "code_rendered",
+    "image_prompt": "SVG: energy flow through Earth's atmosphere — Sun, solar energy 340, reflected 100, escape 239, greenhouse gas re-emission, heat from ground.",
+    "generated_path": "/images/papers/physics-may-2024/q1f-greenhouse.svg",
+    "render_component": "SankeySim",
+    "render_data": {
+      "title": "Energy flow through Earth's atmosphere",
+      "source": "MYP physics-may-2024",
+      "units": "W/m²",
+      "flows": [
+        { "label": "Solar energy from the Sun", "value": 340, "units": "W/m²", "kind": "in" },
+        { "label": "Energy reflected by top of clouds", "value": 100, "units": "W/m²", "kind": "loss" },
+        { "label": "Energy escaping to space", "value": 239, "units": "W/m²", "kind": "out" },
+        { "label": "Heat energy from the ground", "value": 398, "units": "W/m²", "kind": "out" },
+        { "label": "Heat energy absorbed and re-emitted by greenhouse gases", "value": 342, "units": "W/m²", "kind": "out", "highlight": true }
+      ],
+      "selectTarget": "Heat energy absorbed and re-emitted by greenhouse gases",
+      "options": [
+        "Solar energy from the Sun",
+        "Energy reflected by top of clouds",
+        "Heat energy from the ground",
+        "Heat energy absorbed and re-emitted by greenhouse gases"
+      ]
+    },
+    "needs_review": true,
+    "approved": false,
+    "regenerated_at": "2026-06-12T06:21:43.162Z"
+  },
+  {
+    "taskPath": "q2",
+    "questionId": 2,
+    "taskLabel": null,
+    "topic": "Nuclear fission",
+    "original_path": "/images/papers/physics-may-2024/q2-fission.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: U-235 fission — neutron strikes U-235, producing Cs-140, Rb-94, 2 neutrons, and energy burst.",
+    "generated_path": "/images/papers/physics-may-2024/q2-fission.svg",
+    "needs_review": false,
+    "approved": true
+  },
+  {
+    "taskPath": "q2.tasks[e]",
+    "questionId": 2,
+    "taskLabel": "e",
+    "topic": "Radioactive decay graph",
+    "original_path": "/images/papers/physics-may-2024/q2e-decay-graph.png",
+    "image_type": "code_rendered",
+    "image_prompt": "SVG: exponential decay graph — Percentage of uranium-235 nuclei remaining (0–100) vs Time / millions of years (0–4000).",
+    "generated_path": "/images/papers/physics-may-2024/q2e-decay-graph.svg",
+    "render_component": "DecaySim",
+    "render_data": {
+      "title": "Radioactive decay of uranium-235",
+      "source": "MYP physics-may-2024",
+      "isotope": "U-235",
+      "decayMode": "alpha",
+      "halfLife": 704,
+      "units": "millions of years",
+      "initialCount": 100,
+      "axisMax": 4000,
+      "timeRange": { "min": 0, "max": 4000, "units": "millions of years" },
+      "xAxis": "Time / millions of years",
+      "yAxis": "Percentage of uranium-235 nuclei remaining"
+    },
+    "needs_review": true,
+    "approved": false,
+    "regenerated_at": "2026-06-11T17:29:13.189Z"
+  },
+  {
+    "taskPath": "q3.tasks[e]",
+    "questionId": 3,
+    "taskLabel": "e",
+    "topic": "Circuit for measuring resistance",
+    "original_path": "/images/papers/physics-may-2024/q3e-circuit.png",
+    "image_type": "code_rendered",
+    "image_prompt": "SVG: circuit with battery, wire (coil), and two empty positions for placing ammeter/voltmeter.",
+    "generated_path": "/images/papers/physics-may-2024/q3e-circuit.svg",
+    "render_component": "CircuitSim",
+    "render_data": {
+      "title": "Build the circuit to measure the resistance of the wire",
+      "source": "MYP physics-may-2024",
+      "mode": "place",
+      "component": "nichrome wire (100 cm)",
+      "battery": "cell",
+      "slots": [
+        { "id": "voltmeter", "correct": "parallel with wire" },
+        { "id": "ammeter", "correct": "series with wire" }
+      ],
+      "knownTrial": { "V": 1.5, "I": 0.24, "R": 6.25 },
+      "task": "Place the voltmeter in parallel with the wire and the ammeter in series with the wire, then read V and I to compute R = V / I."
+    },
+    "needs_review": true,
+    "approved": false,
+    "regenerated_at": "2026-06-11T17:31:23.724Z"
+  },
+  {
+    "taskPath": "q3.tasks[g]",
+    "questionId": 3,
+    "taskLabel": "g",
+    "topic": "Resistance vs length graph",
+    "original_path": "/images/papers/physics-may-2024/q3g-graph.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: scatter plot Resistance/Ω (0–8) vs Length/cm (0–130) with 4 data points at (40,2.3), (60,4.1), (80,5.3), (120,7.5). Student must plot (100, R) and draw best-fit line.",
+    "generated_path": "/images/papers/physics-may-2024/q3g-graph.svg",
+    "needs_review": false,
+    "approved": true
+  },
+  {
+    "taskPath": "q4",
+    "questionId": 4,
+    "taskLabel": null,
+    "topic": "Ball, magnet & forces",
+    "original_path": "/images/papers/physics-may-2024/q4b-forces-diagram.png",
+    "image_type": "code_rendered",
+    "image_prompt": "SVG: iron sphere rolling on flat surface toward a ferrite magnet (N/S) with two stationary spheres attached.",
+    "generated_path": "/images/papers/physics-may-2024/q4b-forces-diagram.svg",
+    "render_component": "ProjectileSim",
+    "render_data": {
+      "title": "Magnetic launcher — exit sphere reaches the same height (h₂) it started from (h₁)",
+      "source": "MYP physics-may-2024",
+      "mode": "bounce",
+      "g": 9.8,
+      "bounce": {
+        "reboundFraction": 0.99,
+        "dropHeight_m": 0.15,
+        "dropHeightMin_m": 0.05,
+        "dropHeightMax_m": 0.25
+      }
+    },
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q4.tasks[d]",
+    "questionId": 4,
+    "taskLabel": "d",
+    "topic": "Magnetic field diagrams",
+    "original_path": "/images/papers/physics-may-2024/q4d-magnetic-fields.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: four magnetic field diagrams A–D around bar magnets. A: correct (N-to-S loops), B: reversed arrows, C: radial straight lines, D: concentric circles.",
+    "generated_path": "/images/papers/physics-may-2024/q4d-magnetic-fields.svg",
+    "needs_review": false,
+    "approved": true,
+    "regenerated_at": "2026-06-11T17:32:22.357Z"
+  },
+  {
+    "taskPath": "q4.tasks[f]",
+    "questionId": 4,
+    "taskLabel": "f",
+    "topic": "Ball & magnet experiment setup",
+    "original_path": "/images/papers/physics-may-2024/q4f-setup.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: two-panel diagram (Initially/Finally) — wooden ramp, incoming sphere at h1, magnet with stationary spheres, exiting sphere reaches h2 on ramp.",
+    "generated_path": "/images/papers/physics-may-2024/q4f-setup.svg",
+    "needs_review": false,
+    "approved": true,
+    "regenerated_at": "2026-06-11T17:35:47.468Z"
+  },
+  {
+    "taskPath": "q5",
+    "questionId": 5,
+    "taskLabel": null,
+    "topic": "Motor effect setup",
+    "original_path": "/images/papers/physics-may-2024/q5-motor-setup.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: conducting rod between two rows of magnets on wood surface, power supply, switch, stopwatch, ruler (0–20 cm).",
+    "generated_path": "/images/papers/physics-may-2024/q5-motor-setup.svg",
+    "needs_review": false,
+    "approved": true,
+    "regenerated_at": "2026-06-11T17:37:00.387Z"
+  },
+  {
+    "taskPath": "q5.tasks[e]",
+    "questionId": 5,
+    "taskLabel": "e",
+    "topic": "Force vs current graph",
+    "original_path": "/images/papers/physics-may-2024/q5e-force-graph.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: Force/mN (-2 to 6) vs Current/A (0–12), scatter with line of best fit crossing x-axis at ~4 A, y-intercept ~-2.6 mN.",
+    "generated_path": "/images/papers/physics-may-2024/q5e-force-graph.svg",
+    "needs_review": false,
+    "approved": true,
+    "regenerated_at": "2026-06-12T06:21:27.052Z"
+  },
+  {
+    "taskPath": "q6.tasks[b]",
+    "questionId": 6,
+    "taskLabel": "b",
+    "topic": "Reflecting telescope",
+    "original_path": "/images/papers/physics-may-2024/q6b-reflecting-telescope.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: reflecting telescope cross-section — tube, curved primary mirror (right), small flat secondary mirror (angled 45°), eyepiece opening (top), light ray paths shown.",
+    "generated_path": "/images/papers/physics-may-2024/q6b-reflecting-telescope.svg",
+    "needs_review": false,
+    "approved": true,
+    "regenerated_at": "2026-06-12T06:21:07.524Z"
+  },
+  {
+    "taskPath": "q6.tasks[c]",
+    "questionId": 6,
+    "taskLabel": "c",
+    "topic": "Hooker telescope",
+    "original_path": "/images/papers/physics-may-2024/q6c-hooker-telescope.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: Hooker telescope — tilted tube on mount, primary mirror, secondary mirror, eyepiece, light ray paths with multiple reflections.",
+    "generated_path": "/images/papers/physics-may-2024/q6c-hooker-telescope.svg",
+    "needs_review": false,
+    "approved": true,
+    "regenerated_at": "2026-06-12T08:19:49.742Z"
+  }
+]

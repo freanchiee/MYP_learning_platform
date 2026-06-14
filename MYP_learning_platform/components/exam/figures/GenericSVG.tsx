@@ -11,7 +11,7 @@ function sanitizeSvg(svg: string): string {
 export default function GenericSVG({ data }: { data: GenericSVGData }) {
   return (
     <div
-      className="w-full overflow-auto"
+      className="figure-surface w-full overflow-auto p-2"
       // eslint-disable-next-line react/no-danger
       dangerouslySetInnerHTML={{ __html: sanitizeSvg(data.svg) }}
     />

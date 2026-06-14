@@ -5,6 +5,7 @@ import type { Attempt, QuestionGradeResult } from '@/lib/types'
 import { formatTime } from '@/lib/utils'
 import { QuestionAccordion } from '@/components/results/QuestionAccordion'
 import LocalResultsPage from '@/components/results/LocalResultsPage'
+import { DEV_NO_AUTH } from '@/lib/dev-auth'
 
 // ── Badge definitions ─────────────────────────────────────────────────────────
 const BADGE_DEFS: Record<string, { name: string; icon: string; rarity: string }> = {
@@ -39,10 +40,10 @@ const CRITERION_META: Record<
   string,
   { label: string; color: string; bg: string; bar: string }
 > = {
-  A: { label: 'Criterion A — Knowing & Understanding',    color: '#0079a8', bg: 'rgba(0,121,168,0.12)', bar: '#0079a8' },
-  B: { label: 'Criterion B — Inquiring & Designing',      color: '#3daa35', bg: 'rgba(61,170,53,0.12)', bar: '#3daa35' },
-  C: { label: 'Criterion C — Processing & Evaluating',    color: '#f5a623', bg: 'rgba(245,166,35,0.12)', bar: '#f5a623' },
-  D: { label: 'Criterion D — Reflecting on the Impacts',  color: '#7b2d8b', bg: 'rgba(123,45,139,0.12)', bar: '#7b2d8b' },
+  A: { label: 'Criterion A — Knowing & Understanding',    color: 'var(--cA)', bg: 'color-mix(in srgb, var(--cA) 12%, transparent)', bar: 'var(--cA)' },
+  B: { label: 'Criterion B — Inquiring & Designing',      color: 'var(--cB)', bg: 'color-mix(in srgb, var(--cB) 12%, transparent)', bar: 'var(--cB)' },
+  C: { label: 'Criterion C — Processing & Evaluating',    color: 'var(--cC)', bg: 'color-mix(in srgb, var(--cC) 12%, transparent)', bar: 'var(--cC)' },
+  D: { label: 'Criterion D — Reflecting on the Impacts',  color: 'var(--cD)', bg: 'color-mix(in srgb, var(--cD) 12%, transparent)', bar: 'var(--cD)' },
 }
 
 // ── Attempt type fetched from DB ──────────────────────────────────────────────
@@ -74,7 +75,8 @@ export default async function ResultsPage({
   const {
     data: { session },
   } = await supabase.auth.getSession()
-  if (!session) redirect('/login')
+  if (!session && !DEV_NO_AUTH) redirect('/login')
+  const userId = session?.user?.id ?? ''
 
   // Practice sessions that failed Supabase submit — render client-side from sessionStorage
   if (params.attemptId.startsWith('local-')) {
@@ -87,7 +89,7 @@ export default async function ResultsPage({
       'id, user_id, paper_id, scores, total_score, max_score, myp_grade, criterion_scores, time_taken, xp_earned, badges_earned, status, completed_at'
     )
     .eq('id', params.attemptId)
-    .eq('user_id', session.user.id)
+    .eq('user_id', userId)
     .single<AttemptRow>()
 
   if (!attempt) notFound()
@@ -96,10 +98,10 @@ export default async function ResultsPage({
   const { data: profile } = await supabase
     .from('profiles')
     .select('name, school')
-    .eq('id', session.user.id)
+    .eq('id', userId)
     .single<{ name: string; school: string }>()
 
-  const candidateName = profile?.name || session.user.email?.split('@')[0] || 'Student'
+  const candidateName = profile?.name || session?.user?.email?.split('@')[0] || 'Student'
   const candidateSchool = profile?.school || ''
 
   // Parse scores (JSONB) — shape: Record<questionId, QuestionGradeResult>
@@ -117,6 +119,13 @@ export default async function ResultsPage({
     .split('-')
     .map((w: string) => w.charAt(0).toUpperCase() + w.slice(1))
     .join(' ')
+
+  // Criterion labels differ by subject group: I&S (geography/history/humanities) vs Sciences.
+  const critLabelsByCrit: Record<string, string> = ['geography', 'history', 'humanities'].includes(
+    (attempt.paper_id ?? '').split('-')[0],
+  )
+    ? { A: 'Knowing & Understanding', B: 'Investigating', C: 'Communicating', D: 'Thinking Critically' }
+    : { A: 'Knowing & Understanding', B: 'Inquiring & Designing', C: 'Processing & Evaluating', D: 'Reflecting on the Impacts' }
 
   // Date
   const completedDate = attempt.completed_at
@@ -136,24 +145,24 @@ export default async function ResultsPage({
   return (
     <div
       className="min-h-screen py-8 px-4"
-      style={{ background: '#0d1b2a', color: '#e2e8f0' }}
+      style={{ background: 'var(--bg)', backgroundImage: 'var(--bg-image)', color: 'var(--text)' }}
     >
       <div className="max-w-4xl mx-auto space-y-6">
 
         {/* ── Top bar ── */}
         <div className="flex flex-wrap items-center gap-3 justify-between">
           <div>
-            <h1 className="text-xl font-bold text-white">
+            <h1 className="text-xl font-bold text-ink">
               Results — {paperTitle}
             </h1>
-            <p className="text-sm text-gray-400 mt-0.5">
+            <p className="text-sm text-ink-subtle mt-0.5">
               {attempt.status === 'completed' ? 'Completed' : 'In Progress'}
             </p>
           </div>
           <div className="flex items-center gap-2">
             <button
               onClick={undefined}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold border border-white/20 text-gray-300 hover:bg-white/10 transition-colors"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-control text-xs font-semibold border border-line text-ink-muted hover:bg-surface-2 transition-colors"
             >
               <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
@@ -162,7 +171,7 @@ export default async function ResultsPage({
             </button>
             <button
               onClick={undefined}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold border border-white/20 text-gray-300 hover:bg-white/10 transition-colors"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-control text-xs font-semibold border border-line text-ink-muted hover:bg-surface-2 transition-colors"
             >
               <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
@@ -171,7 +180,7 @@ export default async function ResultsPage({
             </button>
             <Link
               href="/dashboard"
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-white/10 hover:bg-white/20 text-gray-200 transition-colors"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-control text-xs font-semibold bg-surface-2 hover:bg-surface-3 text-ink-muted transition-colors border border-line"
             >
               ← Dashboard
             </Link>
@@ -179,19 +188,19 @@ export default async function ResultsPage({
         </div>
 
         {/* ── Candidate info ── */}
-        <div className="rounded-xl bg-white/5 border border-white/10 px-6 py-4 flex flex-wrap gap-4 items-center">
+        <div className="rounded-card bg-surface border border-line px-6 py-4 flex flex-wrap gap-4 items-center shadow-card">
           <div>
-            <p className="text-xs text-gray-400 uppercase tracking-wide font-semibold">Candidate</p>
-            <p className="text-white font-semibold">{candidateName}</p>
-            {candidateSchool && <p className="text-gray-400 text-xs">{candidateSchool}</p>}
+            <p className="text-xs text-ink-subtle uppercase tracking-wide font-semibold">Candidate</p>
+            <p className="text-ink font-semibold">{candidateName}</p>
+            {candidateSchool && <p className="text-ink-subtle text-xs">{candidateSchool}</p>}
           </div>
-          <div className="border-l border-white/10 pl-4">
-            <p className="text-xs text-gray-400 uppercase tracking-wide font-semibold">Date</p>
-            <p className="text-white font-semibold">{completedDate}</p>
+          <div className="border-l border-divider pl-4">
+            <p className="text-xs text-ink-subtle uppercase tracking-wide font-semibold">Date</p>
+            <p className="text-ink font-semibold">{completedDate}</p>
           </div>
-          <div className="border-l border-white/10 pl-4">
-            <p className="text-xs text-gray-400 uppercase tracking-wide font-semibold">Time Taken</p>
-            <p className="text-white font-semibold">
+          <div className="border-l border-divider pl-4">
+            <p className="text-xs text-ink-subtle uppercase tracking-wide font-semibold">Time Taken</p>
+            <p className="text-ink font-semibold">
               {attempt.time_taken != null ? formatTime(attempt.time_taken) : '—'}
             </p>
           </div>
@@ -200,22 +209,22 @@ export default async function ResultsPage({
         {/* ── Summary row ── */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
           {/* Total score */}
-          <div className="bg-white/5 border border-white/10 rounded-xl p-4 flex flex-col items-center text-center">
-            <span className="text-xs text-gray-400 uppercase tracking-wide font-semibold mb-1">
+          <div className="bg-surface border border-line rounded-card p-4 flex flex-col items-center text-center shadow-card">
+            <span className="text-xs text-ink-subtle uppercase tracking-wide font-semibold mb-1">
               Total Score
             </span>
-            <span className="text-3xl font-extrabold text-white">
+            <span className="text-3xl font-extrabold text-ink">
               {attempt.total_score ?? '—'}
-              <span className="text-lg text-gray-400">/{attempt.max_score ?? '—'}</span>
+              <span className="text-lg text-ink-subtle">/{attempt.max_score ?? '—'}</span>
             </span>
             {totalPct !== null && (
-              <span className="text-sm font-medium text-gray-300 mt-1">{totalPct}%</span>
+              <span className="text-sm font-medium text-ink-muted mt-1">{totalPct}%</span>
             )}
           </div>
 
           {/* MYP Grade */}
-          <div className="bg-white/5 border border-white/10 rounded-xl p-4 flex flex-col items-center text-center">
-            <span className="text-xs text-gray-400 uppercase tracking-wide font-semibold mb-1">
+          <div className="bg-surface border border-line rounded-card p-4 flex flex-col items-center text-center shadow-card">
+            <span className="text-xs text-ink-subtle uppercase tracking-wide font-semibold mb-1">
               MYP Grade
             </span>
             <span
@@ -226,22 +235,22 @@ export default async function ResultsPage({
           </div>
 
           {/* XP Earned */}
-          <div className="bg-white/5 border border-white/10 rounded-xl p-4 flex flex-col items-center text-center">
-            <span className="text-xs text-gray-400 uppercase tracking-wide font-semibold mb-1">
+          <div className="bg-surface border border-line rounded-card p-4 flex flex-col items-center text-center shadow-card">
+            <span className="text-xs text-ink-subtle uppercase tracking-wide font-semibold mb-1">
               XP Earned
             </span>
-            <span className="text-3xl font-extrabold text-[#3daa35]">
+            <span className="text-3xl font-extrabold text-success">
               +{attempt.xp_earned}
             </span>
-            <span className="text-xs text-gray-400 mt-1">experience points</span>
+            <span className="text-xs text-ink-subtle mt-1">experience points</span>
           </div>
 
           {/* Time taken */}
-          <div className="bg-white/5 border border-white/10 rounded-xl p-4 flex flex-col items-center text-center">
-            <span className="text-xs text-gray-400 uppercase tracking-wide font-semibold mb-1">
+          <div className="bg-surface border border-line rounded-card p-4 flex flex-col items-center text-center shadow-card">
+            <span className="text-xs text-ink-subtle uppercase tracking-wide font-semibold mb-1">
               Time Taken
             </span>
-            <span className="text-3xl font-extrabold text-[#0079a8]">
+            <span className="text-3xl font-extrabold text-accent-2">
               {attempt.time_taken != null ? formatTime(attempt.time_taken) : '—'}
             </span>
           </div>
@@ -249,7 +258,7 @@ export default async function ResultsPage({
 
         {/* ── Criterion score cards ── */}
         <div>
-          <h2 className="text-base font-bold text-white mb-3">Criterion Breakdown</h2>
+          <h2 className="text-base font-bold text-ink mb-3">Criterion Breakdown</h2>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
             {(['A', 'B', 'C', 'D'] as const).map((crit) => {
               const meta = CRITERION_META[crit]
@@ -263,18 +272,18 @@ export default async function ResultsPage({
               return (
                 <div
                   key={crit}
-                  className="rounded-xl p-4 border border-white/10"
+                  className="rounded-card p-4 border border-line"
                   style={{ background: meta.bg }}
                 >
                   <div className="flex items-center gap-2 mb-3">
                     <span
-                      className="w-7 h-7 rounded-lg flex items-center justify-center text-sm font-extrabold text-white"
-                      style={{ background: meta.color }}
+                      className="w-7 h-7 rounded-control flex items-center justify-center text-sm font-extrabold"
+                      style={{ background: meta.color, color: 'var(--criterion-fg)' }}
                     >
                       {crit}
                     </span>
-                    <span className="text-xs text-gray-300 leading-tight">
-                      {meta.label.split(' — ')[1]}
+                    <span className="text-xs text-ink-muted leading-tight">
+                      {critLabelsByCrit[crit]}
                     </span>
                   </div>
 
@@ -286,12 +295,12 @@ export default async function ResultsPage({
                       {score ?? '—'}
                     </span>
                     {max != null && (
-                      <span className="text-sm text-gray-400 mb-0.5">/{max}</span>
+                      <span className="text-sm text-ink-subtle mb-0.5">/{max}</span>
                     )}
                   </div>
 
                   {/* Percentage bar */}
-                  <div className="w-full h-2 bg-white/10 rounded-full overflow-hidden">
+                  <div className="w-full h-2 rounded-full overflow-hidden" style={{ background: 'var(--surface-3)' }}>
                     <div
                       className="h-full rounded-full transition-all duration-700"
                       style={{
@@ -301,7 +310,7 @@ export default async function ResultsPage({
                     />
                   </div>
                   {pct !== null && (
-                    <p className="text-xs text-gray-400 mt-1 text-right">{pct}%</p>
+                    <p className="text-xs text-ink-subtle mt-1 text-right">{pct}%</p>
                   )}
                 </div>
               )
@@ -312,7 +321,7 @@ export default async function ResultsPage({
         {/* ── Badges earned ── */}
         {badgesEarned.length > 0 && (
           <div>
-            <h2 className="text-base font-bold text-white mb-3">
+            <h2 className="text-base font-bold text-ink mb-3">
               🎉 Badges Earned This Attempt
             </h2>
             <div className="flex flex-wrap gap-4">
@@ -322,10 +331,10 @@ export default async function ResultsPage({
                 return (
                   <div
                     key={badgeId}
-                    className="flex flex-col items-center gap-1.5 px-4 py-3 rounded-xl bg-white/5 border border-white/10 animate-pulse-once"
+                    className="flex flex-col items-center gap-1.5 px-4 py-3 rounded-card bg-surface border border-line shadow-card animate-pulse-once"
                   >
                     <span className="text-3xl">{def.icon}</span>
-                    <span className="text-xs font-semibold text-gray-200">{def.name}</span>
+                    <span className="text-xs font-semibold text-ink-muted">{def.name}</span>
                     <span
                       className={`text-[10px] font-bold uppercase tracking-wide px-2 py-0.5 rounded-full ${
                         def.rarity === 'legendary'
@@ -348,10 +357,10 @@ export default async function ResultsPage({
 
         {/* ── Per-question breakdown ── */}
         <div>
-          <h2 className="text-base font-bold text-white mb-3">Question Breakdown</h2>
+          <h2 className="text-base font-bold text-ink mb-3">Question Breakdown</h2>
           <div className="space-y-2">
             {scoreEntries.length === 0 ? (
-              <div className="rounded-xl bg-white/5 border border-white/10 px-6 py-8 text-center text-gray-400 text-sm">
+              <div className="rounded-card bg-surface border border-line shadow-card px-6 py-8 text-center text-ink-subtle text-sm">
                 No question breakdown available.
               </div>
             ) : (
@@ -384,8 +393,8 @@ export default async function ResultsPage({
         <div className="flex justify-center py-4">
           <Link
             href="/papers"
-            className="inline-flex items-center gap-2 px-8 py-3 rounded-xl text-sm font-semibold text-white transition-opacity hover:opacity-90"
-            style={{ background: 'linear-gradient(135deg, #003b5c, #0079a8)' }}
+            className="inline-flex items-center gap-2 px-8 py-3 rounded-card text-sm font-semibold transition-opacity hover:opacity-90"
+            style={{ background: 'var(--gradient-cta)', color: 'var(--text-on-accent)' }}
           >
             <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />

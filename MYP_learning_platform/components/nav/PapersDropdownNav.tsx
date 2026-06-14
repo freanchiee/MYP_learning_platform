@@ -8,6 +8,8 @@ const SUBJECTS = [
   { label: '⚛ Physics',   href: '/physics-papers', available: true  },
   { label: '🌿 Biology',   href: '/bio-papers',     available: true  },
   { label: '⚗ Chemistry', href: '/chem-papers',    available: true  },
+  { label: '🌍 Humanities (I&S)', href: '/humanities-papers', available: true },
+  { label: '🗺 Geography', href: '/geography-papers', available: true },
 ]
 
 export default function PapersDropdownNav() {
@@ -20,8 +22,7 @@ export default function PapersDropdownNav() {
       onMouseLeave={() => setOpen(false)}
     >
       <button
-        className="flex items-center gap-1 px-4 py-1.5 rounded-lg text-sm font-semibold transition-all hover:bg-white/10 hover:text-white"
-        style={{ color: 'rgba(255,255,255,0.75)' }}
+        className="nav-link flex items-center gap-1 px-4 py-1.5 rounded-lg text-sm font-semibold transition-all"
       >
         Papers
         <motion.span
@@ -40,11 +41,12 @@ export default function PapersDropdownNav() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 6, scale: 0.97 }}
             transition={{ duration: 0.14 }}
-            className="absolute top-full left-1/2 -translate-x-1/2 mt-1.5 w-48 rounded-xl overflow-hidden z-50"
+            className="absolute top-full left-1/2 -translate-x-1/2 mt-1.5 w-48 overflow-hidden z-50"
             style={{
-              background: 'rgba(15,25,60,0.97)',
-              border: '1px solid rgba(173,241,196,0.15)',
-              boxShadow: '0 8px 32px rgba(0,0,0,0.35)',
+              background: 'var(--surface-elevated)',
+              border: '1px solid var(--border)',
+              borderRadius: 'var(--radius-panel)',
+              boxShadow: 'var(--shadow-elevated)',
               backdropFilter: 'blur(16px)',
             }}
           >
@@ -54,8 +56,8 @@ export default function PapersDropdownNav() {
                   key={s.href}
                   href={s.href}
                   className="flex items-center gap-2.5 px-4 py-3 text-[13px] font-semibold transition-all duration-150"
-                  style={{ color: 'rgba(255,255,255,0.8)' }}
-                  onMouseEnter={e => (e.currentTarget.style.background = 'rgba(173,241,196,0.08)')}
+                  style={{ color: 'var(--text)' }}
+                  onMouseEnter={e => (e.currentTarget.style.background = 'var(--surface-2)')}
                   onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}
                 >
                   {s.label}
@@ -64,12 +66,12 @@ export default function PapersDropdownNav() {
                 <div
                   key={s.href}
                   className="flex items-center justify-between gap-2.5 px-4 py-3 text-[13px] font-semibold"
-                  style={{ color: 'rgba(255,255,255,0.3)', cursor: 'default' }}
+                  style={{ color: 'var(--text-subtle)', cursor: 'default' }}
                 >
                   <span>{s.label}</span>
                   <span
                     className="text-[9px] font-black tracking-widest px-1.5 py-0.5 rounded"
-                    style={{ background: 'rgba(255,255,255,0.06)', color: 'rgba(255,255,255,0.3)' }}
+                    style={{ background: 'var(--surface-3)', color: 'var(--text-subtle)' }}
                   >
                     SOON
                   </span>

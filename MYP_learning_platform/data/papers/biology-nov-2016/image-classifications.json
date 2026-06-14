@@ -1,0 +1,98 @@
+[
+  {
+    "taskPath": "q1.tasks[b]",
+    "questionId": 1,
+    "taskLabel": "b",
+    "topic": "Plant vs animal cells (three cells)",
+    "original_path": "/images/papers/biology-nov-2016/page-02.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: three cell diagrams side by side — Cell 1 plant cell with cell wall, peripheral chloroplasts, large central vacuole and nucleus; Cell 2 plant tissue (two cell-wall boxes with vacuoles + nuclei) topped with a cluster of brown spores/pollen on a green stem; Cell 3 animal cell with no wall, nucleus, mitochondria, Golgi apparatus, lysosomes, ER and ribosomes.",
+    "generated_path": "/images/papers/biology-nov-2016/page-02.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q2.tasks[a]",
+    "questionId": 2,
+    "taskLabel": "a",
+    "topic": "Organism complexity sequence (heart, RBC, paramecium, pug, RBC cluster)",
+    "original_path": "/images/papers/biology-nov-2016/page-03.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: five labelled image panels A–E for a complexity ordering task — A heart (organ) with aorta and coronary arteries; B single biconcave red blood cell; C paramecium (slipper-shape with macronucleus, contractile vacuoles, oral groove and cilia); D pug dog (whole organism); E cluster of red blood cells (tissue). Dashed guide line below with 'least complex' / 'most complex' labels.",
+    "generated_path": "/images/papers/biology-nov-2016/page-03.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q3",
+    "questionId": 3,
+    "taskLabel": null,
+    "topic": "Gill disease oxygen uptake (page-04 mis-crop)",
+    "original_path": "/images/papers/biology-nov-2016/page-04.png",
+    "image_type": "text_only",
+    "image_prompt": "Mis-crop: page-04 is mostly the Q3 stem text plus a small preview of the page-05 graph (which is its own classified figure). No standalone diagram to recreate.",
+    "generated_path": "/images/papers/biology-nov-2016/page-04.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q3",
+    "questionId": 3,
+    "taskLabel": null,
+    "topic": "Gill disease oxygen uptake",
+    "original_path": "/images/papers/biology-nov-2016/page-05.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: scatter graph of oxygen uptake / cm³ h⁻¹ (y-axis 0–0.35, ticks every 0.05) vs percentage of gill affected / % (x-axis 0–100, ticks every 20), with a negative best-fit straight line from (0, 0.29) down to about (95, 0.10).",
+    "generated_path": "/images/papers/biology-nov-2016/page-05.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q3.tasks[c]",
+    "questionId": 3,
+    "taskLabel": "c",
+    "topic": "Fish gill anatomy (filaments + whole fish + lamellae)",
+    "original_path": "/images/papers/biology-nov-2016/page-06.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: three-panel fish gill diagram — (left) three stacked gill arches packed with red filaments with a blood-vessel arrow labelled 'blood vessels' and 'oxygen-poor blood' / 'oxygen-rich blood'; (right) side view of a green fish with mouth open, gill cavity exposed showing red gill arches, eye, scales, fins and arrows labelled 'water flows in through the mouth' / 'water flows out through the gills'; (bottom centre) close-up of two stacked ridged lamellae with thin capillary lines labelled 'the gills are made up of thin sheets called lamellae'.",
+    "generated_path": "/images/papers/biology-nov-2016/page-06.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q4.tasks[b]",
+    "questionId": 4,
+    "taskLabel": "b",
+    "topic": "Oxygen consumption vs exercise intensity",
+    "original_path": "/images/papers/biology-nov-2016/page-08.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: line graph of Average O₂ consumption / cm³ kg⁻¹ min⁻¹ (y-axis 0–60, ticks every 10) vs Exercise intensity / % (x-axis 0–90, ticks every 10); points rise approximately linearly from (10, 6) to (45, 36) then plateau flat at 36 through (80, 36), with the plateau onset labelled 'VO₂ max, point A'.",
+    "generated_path": "/images/papers/biology-nov-2016/page-08.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q5",
+    "questionId": 5,
+    "taskLabel": null,
+    "topic": "GM maize study (page-09 mis-crop)",
+    "original_path": "/images/papers/biology-nov-2016/page-09.png",
+    "image_type": "text_only",
+    "image_prompt": "Mis-crop: page-09 is pure question text (Q5 intro, 5a stem and 5b multiple-choice options). No diagram to recreate.",
+    "generated_path": "/images/papers/biology-nov-2016/page-09.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q5.tasks[c]",
+    "questionId": 5,
+    "taskLabel": "c",
+    "topic": "GM vs traditional maize plots + blank data table",
+    "original_path": "/images/papers/biology-nov-2016/page-10.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: composite figure for Q5c — (left) blank 10-row × 3-column data-collection table with shaded header row and a row-number column; (right top) panel labelled 'GM maize without fertilizer after 10 weeks of growth' with a 0–2 metres y-axis and ten green maize plants of varying heights around 1.4–1.6 m; (right bottom) panel labelled 'Traditional maize with fertilizer after 10 weeks of growth' showing ten similar-height maize plants for comparison.",
+    "generated_path": "/images/papers/biology-nov-2016/page-10.svg",
+    "needs_review": true,
+    "approved": false
+  }
+]

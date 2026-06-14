@@ -288,6 +288,8 @@ export default function TopicPicker({ subjectSlug, topics, backHref }: TopicPick
           overflowY: 'scroll',
           scrollSnapType: 'y mandatory',
           scrollBehavior: 'smooth',
+          background: 'var(--bg)',
+          backgroundImage: 'var(--bg-image)',
         }}
       >
         {topics.map((entry, idx) => (

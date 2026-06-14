@@ -1,0 +1,271 @@
+[
+  {
+    "taskPath": "q4.tasks[c]",
+    "questionId": 4,
+    "taskLabel": "c",
+    "topic": "Solubility line of best fit",
+    "original_path": "/images/papers/chemistry-nov-2023/page-10.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: four scatter-plot options A-D of Mass of sugar / g (y 0-600, ticks 100) vs Temperature / °C (x 0-120, ticks 20). Same six data points (0,190)(20,205)(40,245)(60,355)(80,365)(100,490). A and B join the points with straight segments (dot-to-dot); C draws a smooth concave-up best-fit curve through the points; D draws a straight best-fit line (intercept ~190, gradient ~3.0). Used to select the most appropriate line of best fit.",
+    "generated_path": "/images/papers/chemistry-nov-2023/q4c-best-fit-options.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q7",
+    "questionId": 7,
+    "taskLabel": null,
+    "topic": "Diet environmental impact (stacked bars)",
+    "original_path": "/images/papers/chemistry-nov-2023/page-23.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: three stacked bar charts for three diets (Average US, Vegetarian, Vegan) with five food segments (Dairy, Fats/oils/sugars, Grains, Fruit & vegetables, Proteins). Panel 1 Carbon footprint / kg CO₂e person⁻¹ year⁻¹ (y 0-2000, ticks 500): US 2000 (Proteins ~1000), Vegetarian 1400, Vegan 700. Panel 2 Volume of H₂O / m³ person⁻¹ year⁻¹ (y 0-300, ticks 100): US ~295, Vegetarian ~90, Vegan ~70. Panel 3 Area of farmland / person⁻¹ year⁻¹ (y 0-4000, ticks 1000): US ~4000, Vegetarian ~1300, Vegan ~550. Shared colour key below.",
+    "generated_path": "/images/papers/chemistry-nov-2023/q7-diet-impact-graphs.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q8",
+    "questionId": 8,
+    "taskLabel": null,
+    "topic": "Beef vs cultured meat impact (bar chart)",
+    "original_path": "/images/papers/chemistry-nov-2023/page-28.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: grouped bar chart 'Environmental impact', Percentage / % (y 0-100, ticks 20) across four categories: Energy use, Greenhouse gas emissions, Land use, Water use. Beef = 100% in every category; Cultured meat = 55%, 9%, 3%, 6% respectively. Two bars per category with a Beef / Cultured meat key.",
+    "generated_path": "/images/papers/chemistry-nov-2023/q8-environmental-impact.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q1",
+    "questionId": 1,
+    "taskLabel": null,
+    "topic": "Cola CO₂ equilibrium",
+    "original_path": "/images/papers/chemistry-nov-2023/page-02.png",
+    "image_type": "code_rendered",
+    "render_component": "DragSort",
+    "render_data": {
+      "mode": "slots",
+      "title": "Build the CO₂ equilibrium equation",
+      "source": "MYP chemistry-nov-2023",
+      "prompt": "Select the symbols to form the equation showing the equilibrium between dissolved carbon dioxide and the carbon dioxide gas above the drink:  ___  ⇌  ___",
+      "items": ["CO₂(aq)", "CO₂(g)", "CO₂(l)", "CO₂(s)"],
+      "slots": [
+        { "id": "left", "label": "Left of ⇌ (dissolved)" },
+        { "id": "right", "label": "Right of ⇌ (gas above drink)" }
+      ],
+      "correct": { "left": "CO₂(aq)", "right": "CO₂(g)" }
+    },
+    "image_prompt": "SVG: cut-through of a fizzy cola can/glass, dark drink with rising CO₂ bubbles, green side labels (own palette, not IB red). A downward arrow labelled CO₂ (gas dissolving) and an upward arrow labelled CO₂ (gas escaping) crossing the liquid surface, showing equilibrium between dissolved and gaseous carbon dioxide.",
+    "generated_path": "/images/papers/chemistry-nov-2023/q1-cola-co2.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q2.tasks[c]",
+    "questionId": 2,
+    "taskLabel": "c",
+    "topic": "Xylitol 3D molecular model",
+    "original_path": "/images/papers/chemistry-nov-2023/page-04.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: ball-and-stick 3D model of xylitol (C₅H₁₂O₅) — a five-carbon zig-zag backbone (black C atoms) each bearing an OH group (red O + grey/white H) and terminal CH₂OH groups, with C–H hydrogens. Key: C (black), O (red), H (grey/white). Title 'Xylitol'.",
+    "generated_path": "/images/papers/chemistry-nov-2023/q2c-xylitol-model.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q2.tasks[d]",
+    "questionId": 2,
+    "taskLabel": "d",
+    "topic": "Aspartame structural formula",
+    "original_path": "/images/papers/chemistry-nov-2023/page-05.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: skeletal structural formula of aspartame — aspartic acid residue (HOOC–CH₂–CH(NH₂)–C(=O)–) joined by a peptide N–H bond to a phenylalanine methyl ester (–CH(CH₂C₆H₅)–C(=O)–OCH₃). Labels: O (three carbonyls), OH, NH₂, N–H, OCH₃, benzene ring. Blue line style on white.",
+    "generated_path": "/images/papers/chemistry-nov-2023/q2d-aspartame.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q3",
+    "questionId": 3,
+    "taskLabel": null,
+    "topic": "Tin-plated steel vs aluminium can",
+    "original_path": "/images/papers/chemistry-nov-2023/page-06.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: two food cans side by side — a tin-plated steel can (silver body with a gold/bronze inner rim) labelled 'Tin-plated steel can', and a plain silver aluminium can labelled 'Aluminium can'. Both with horizontal ridges and subtle metallic shading.",
+    "generated_path": "/images/papers/chemistry-nov-2023/q3a-cans.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q4.tasks[a]",
+    "questionId": 4,
+    "taskLabel": "a",
+    "topic": "Handwritten raw solubility data",
+    "original_path": "/images/papers/chemistry-nov-2023/page-08.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: a spiral notepad on a wooden desk with a pencil, showing handwritten raw data: 100°C–480.00 g, 0.00°C–200.00 g, 40°C–250.00 g, 60°C–365.00 g, 20°C–210.00 g, 80°C–370.00 g.",
+    "generated_path": "/images/papers/chemistry-nov-2023/q4a-raw-data.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q4.tasks[e]",
+    "questionId": 4,
+    "taskLabel": "e",
+    "topic": "Candy floss machine apparatus",
+    "original_path": "/images/papers/chemistry-nov-2023/page-11.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: labelled cross-section of a candy-floss machine — central spinning container with holes (red sugar granules inside), spin arrows above, flames (Heat) beneath, molten sugar threads escaping sideways (red out-arrows) into a wide collection bowl, mounted on a motor base. Leader labels: Sugar, Collection bowl, Spinning container with holes, Heat, Melting sugar threads, Motor.",
+    "generated_path": "/images/papers/chemistry-nov-2023/q4e-candy-floss.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q5",
+    "questionId": 5,
+    "taskLabel": null,
+    "topic": "Boiled eggs cut open by cooking time",
+    "original_path": "/images/papers/chemistry-nov-2023/page-14.png",
+    "image_type": "code_rendered",
+    "render_component": "ThermalSim",
+    "render_data": {
+      "mode": "state",
+      "title": "Boiled eggs by cooking time",
+      "source": "MYP chemistry-nov-2023",
+      "variable": "Boiling time",
+      "timeUnit": "min",
+      "stateMin": 0,
+      "stateMax": 15,
+      "stops": [
+        { "time": 0, "primary": "Yolk: flat, runny orange", "secondary": "White: not yet set" },
+        { "time": 1, "primary": "Yolk: runny", "secondary": "White: starting to set" },
+        { "time": 2, "primary": "Yolk: runny, slightly thickening", "secondary": "White: mostly set" },
+        { "time": 3, "primary": "Yolk: soft, just beginning to set", "secondary": "White: set" },
+        { "time": 5, "primary": "Yolk: soft set", "secondary": "White: set" },
+        { "time": 7, "primary": "Yolk: setting, still creamy centre", "secondary": "White: set" },
+        { "time": 9, "primary": "Yolk: mostly set", "secondary": "White: set" },
+        { "time": 11, "primary": "Yolk: firm yellow", "secondary": "White: set" },
+        { "time": 13, "primary": "Yolk: firm, pale yellow", "secondary": "White: set" },
+        { "time": 15, "primary": "Yolk: pale, fully set with grey edge", "secondary": "White: set" }
+      ]
+    },
+    "image_prompt": "SVG: dark egg tray holding ten halved boiled eggs in two rows, labelled by boiling time — top row 0,1,2,3,5 min; bottom row 7,9,11,13,15 min. Yolks progress from a flat runny orange yolk (0 min) through firmer set yolks to a pale, fully-set yolk with a greyish edge (15 min); whites set throughout.",
+    "generated_path": "/images/papers/chemistry-nov-2023/q5a-egg-cooking.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q5.tasks[c]",
+    "questionId": 5,
+    "taskLabel": "c",
+    "topic": "Maillard reaction concept map",
+    "original_path": "/images/papers/chemistry-nov-2023/page-16.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: concept map — boxes 'Sugars' and 'Proteins' with arrows converging into 'Maillard reaction (heat)', which then arrows out to 'New flavours' and 'Colour change'.",
+    "generated_path": "/images/papers/chemistry-nov-2023/q5c-maillard-map.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q5.tasks[c]",
+    "questionId": 5,
+    "taskLabel": "c",
+    "topic": "Toast browning (Maillard)",
+    "original_path": "/images/papers/chemistry-nov-2023/page-17.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: two slices of browned toast popping up from a pale toaster with a lever and ventilation slots; the toast shows Maillard browning speckles. Caption: 'Bread browned in a toaster (the Maillard reaction)'.",
+    "generated_path": "/images/papers/chemistry-nov-2023/q5c-toast.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q6.tasks[a]",
+    "questionId": 6,
+    "taskLabel": "a",
+    "topic": "Meat-fibre breaking-force rig",
+    "original_path": "/images/papers/chemistry-nov-2023/page-18.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: two clamp rigs with threaded posts and a digital force meter on the crossbar, each stretching a meat fibre clamped below — left meter reads 80 N, right reads 315 N. Labels 'Meat fibre'. Apparatus used to measure the force needed to break meat fibres in newtons.",
+    "generated_path": "/images/papers/chemistry-nov-2023/q6a-meat-force-rig.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q6",
+    "questionId": 6,
+    "taskLabel": null,
+    "topic": "MY-P juice cooking sequence",
+    "original_path": "/images/papers/chemistry-nov-2023/page-19.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: three-panel cooking sequence for a lab meat-substitute (MY-P) cooked in citrus juice — Panel 1: 'Meat substitute strips' packet, pink raw strips and a yellow 'Lemon sachet'; Panel 2: timer 00:00, juice squeezed from a sachet onto pale raw strips on a plate; Panel 3: timer 15:00, cooked opaque orange strips on the plate.",
+    "generated_path": "/images/papers/chemistry-nov-2023/q6b-myp-cooking.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q7.tasks[b]",
+    "questionId": 7,
+    "taskLabel": "b",
+    "topic": "Plant-based vs meat-based burger",
+    "original_path": "/images/papers/chemistry-nov-2023/page-24.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: two burgers side by side — 'Plant-based burger' with a lighter brown patty and 'Meat-based burger' with a dark patty and melted cheese; both with sesame buns, tomato and lettuce.",
+    "generated_path": "/images/papers/chemistry-nov-2023/q7b-burgers.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q7.tasks[b]",
+    "questionId": 7,
+    "taskLabel": "b",
+    "topic": "Burger nutrition comparison table",
+    "original_path": "/images/papers/chemistry-nov-2023/page-25.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: ruled data table comparing 'Plant-based burger (patty only)' vs 'Beef burger (patty only)'. Rows: Energy content/kJ 1000/1000; Total fat/g 14/13; Carbs/g 9/0; Protein/g 19/29; Fibre/g 3/0; Added sugar/g 'Less than 1'/0; Sodium/% recommended daily value 16/1; Vitamin B12/% recommended daily value 130/48. Shaded header row.",
+    "generated_path": "/images/papers/chemistry-nov-2023/q7b-nutrition-table.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q8",
+    "questionId": 8,
+    "taskLabel": null,
+    "topic": "Lab-grown meat factors infographic",
+    "original_path": "/images/papers/chemistry-nov-2023/page-27.png",
+    "image_type": "code_rendered",
+    "render_component": "DragSort",
+    "render_data": {
+      "mode": "bins",
+      "title": "Lab-grown meat: sort each factor by perspective",
+      "source": "MYP chemistry-nov-2023",
+      "prompt": "Drag each fact about lab-grown meat into the perspective it belongs to, then evaluate its use from environmental, ethical, social, economic and health perspectives.",
+      "items": [
+        "Less land and water required",
+        "Fewer greenhouse gas emissions; large farms no longer needed",
+        "Cells taken from a live animal — no slaughter",
+        "Cells checked for animal-borne disease",
+        "Cost reduced to $10 per burger in 2020",
+        "80,000 burgers per tissue sample vs 1,250 per cow",
+        "Factory-farming jobs may be lost / re-training needed"
+      ],
+      "bins": [
+        { "id": "env", "label": "Environmental factors" },
+        { "id": "eth", "label": "Ethical and health factors" },
+        { "id": "soc", "label": "Social and economic factors" }
+      ],
+      "correct": {
+        "Less land and water required": "Environmental factors",
+        "Fewer greenhouse gas emissions; large farms no longer needed": "Environmental factors",
+        "Cells taken from a live animal — no slaughter": "Ethical and health factors",
+        "Cells checked for animal-borne disease": "Ethical and health factors",
+        "Cost reduced to $10 per burger in 2020": "Social and economic factors",
+        "80,000 burgers per tissue sample vs 1,250 per cow": "Social and economic factors",
+        "Factory-farming jobs may be lost / re-training needed": "Social and economic factors"
+      }
+    },
+    "image_prompt": "SVG: interactive-style infographic of a black-and-white dairy cow with three labelled circular bubbles connected by lines — green 'Environmental factors', blue 'Social and economic factors', purple 'Ethical and health factors' — each with a small info (i) badge.",
+    "generated_path": "/images/papers/chemistry-nov-2023/q8-cow-factors.svg",
+    "needs_review": true,
+    "approved": false
+  }
+]

@@ -1,0 +1,258 @@
+[
+  {
+    "taskPath": "q3",
+    "questionId": 3,
+    "taskLabel": null,
+    "topic": "Conductometric titration",
+    "original_path": "/images/papers/chemistry-may-2017/page-12.png",
+    "image_type": "code_rendered",
+    "render_component": "RateSim",
+    "render_data": {
+      "title": "Conductivity due to silver ions",
+      "source": "MYP chemistry-may-2017",
+      "mode": "titration",
+      "reaction": "Ag⁺ + Cl⁻ → AgCl(s)",
+      "xAxis": { "label": "Volume of NaCl / cm³", "min": 0, "max": 40, "tick": 5 },
+      "yAxis": { "label": "E / mV", "min": -10, "max": 340, "tick": 50 },
+      "plateauHigh": 317,
+      "plateauLow": 5,
+      "equivalenceVolume": 24,
+      "variable": "Volume of NaCl added",
+      "unit": "cm³",
+      "prompt": "Add NaCl from the burette: conductivity stays high (many Ag⁺ ions) then drops sharply between 20–25 cm³ as Ag⁺ is removed as AgCl precipitate, reaching a low plateau.",
+      "answer": "Sharp drop in conductivity between 20–25 cm³ as Ag⁺ ions react with Cl⁻ to form AgCl precipitate."
+    },
+    "generated_path": "/images/papers/chemistry-may-2017/q3-conductivity-titration.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q5",
+    "questionId": 5,
+    "taskLabel": null,
+    "topic": "Acid–base titration curves",
+    "original_path": "/images/papers/chemistry-may-2017/page-19.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: two-panel pH titration curves (First titration and Second titration). Each panel y-axis pH with ticks 0,7,14; x-axis 0–30 with shared caption 'Volume of chemical X / cm³'. Curve starts high (~13) and plunges sharply through the equivalence point; dashed vertical line marks the equivalence volume — 22.75 cm³ (First) and 27.25 cm³ (Second).",
+    "generated_path": "/images/papers/chemistry-may-2017/q5-titration-curves.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q5.tasks[b]",
+    "questionId": 5,
+    "taskLabel": "b",
+    "topic": "Mass of CO₂ vs volume",
+    "original_path": "/images/papers/chemistry-may-2017/page-21.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: scatter graph, Mass of CO₂ produced / g (y, 0.00–2.00 ticks every 0.20) vs Volume of chemical X / cm³ (x, 0–45 ticks every 5). Points from (18,1.80) declining roughly linearly to (40,1.31) with a best-fit straight line. Teal × markers.",
+    "generated_path": "/images/papers/chemistry-may-2017/q5b-co2-mass-vs-volume.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q6.tasks[b]",
+    "questionId": 6,
+    "taskLabel": "b",
+    "topic": "Graph selection (CO₂ vs time)",
+    "original_path": "/images/papers/chemistry-may-2017/page-23.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: four candidate option graphs of the same Volume CO₂ vs Time data (10–150 s; volumes 13.0–21.3 cm³, anomaly low value 20.1 at 110 s). Graph 1 line (Volume y 0–25 vs Time x 0–160); Graph 2 bar (Volume y 10–22 vs Time); Graph 3 bar with axes swapped (Time y 0–160 vs Volume x); Graph 4 scatter (Time y vs Volume x). Teal lines/bars and × markers.",
+    "generated_path": "/images/papers/chemistry-may-2017/q6b-graph-options.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q7",
+    "questionId": 7,
+    "taskLabel": null,
+    "topic": "Blood lead levels over time",
+    "original_path": "/images/papers/chemistry-may-2017/page-27.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: line graph 'Graph 1' — Blood lead levels / mg dm⁻³ (y, 0–18 every 2) vs Year (x, 1974–2000 every 2). Starts ~16 mg dm⁻³ in 1976, sharp fall after 1979 to ~9.5 by 1980, then gradual decline to ~2 by 1999. Teal line with × markers.",
+    "generated_path": "/images/papers/chemistry-may-2017/q7-blood-lead-vs-year.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q7",
+    "questionId": 7,
+    "taskLabel": null,
+    "topic": "Learning difficulty vs blood lead",
+    "original_path": "/images/papers/chemistry-may-2017/page-27.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: grouped bar chart 'Graph 2' — Percentage of children with learning difficulties / % (y, 0–100 every 10) vs Blood lead level / µg dm⁻³ categories (1–4, 5–9, 10–14, 15–19, 20–44, 45–60, 60+). Two series: 'No learning difficulties' (teal) falling 90→65 %, and 'Learning difficulties' (orange) rising 10→36 % across the categories. Legend included.",
+    "generated_path": "/images/papers/chemistry-may-2017/q7-learning-difficulty-bars.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q1.tasks[f]",
+    "questionId": 1,
+    "taskLabel": "f",
+    "topic": "Van Gogh sunflowers (oil paint)",
+    "original_path": "/images/papers/chemistry-may-2017/page-04.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: original oil-paint still life of a vase of sunflowers (evocative of Van Gogh, not a copy), warm yellow palette, framed, vase labelled 'Vincent'. Copyright-safe recreation replacing the IB painting photo.",
+    "generated_path": "/images/papers/chemistry-may-2017/q1f-sunflowers-painting.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q2.tasks[a]",
+    "questionId": 2,
+    "taskLabel": "a",
+    "topic": "Ball-and-stick molecule builder",
+    "original_path": "/images/papers/chemistry-may-2017/page-05.png",
+    "image_type": "code_rendered",
+    "render_component": "DragSort",
+    "render_data": {
+      "mode": "select",
+      "title": "Structural formula of ethanoic acid",
+      "source": "MYP chemistry-may-2017",
+      "prompt": "Build ethanoic acid (CH₃COOH): select the structure with a methyl group bonded to a carboxyl group (–COOH, i.e. C=O and O–H). Name the functional group.",
+      "options": [
+        { "id": "A", "label": "CH₃–C(=O)–OH  (methyl + carboxyl –COOH)", "correct": true },
+        { "id": "B", "label": "CH₃–CH₂–OH  (hydroxyl / alcohol)", "correct": false },
+        { "id": "C", "label": "CH₃–C(=O)–H  (carbonyl / aldehyde)", "correct": false },
+        { "id": "D", "label": "CH₃–O–CH₃  (ether)", "correct": false }
+      ],
+      "correct": "A",
+      "answer": "Ethanoic acid is CH₃–C(=O)–OH; the functional group is the carboxyl (carboxylic acid, –COOH) group."
+    },
+    "generated_path": "/images/papers/chemistry-may-2017/q2a-molecule-builder.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q3.tasks[a]",
+    "questionId": 3,
+    "taskLabel": "a",
+    "topic": "Solar still apparatus",
+    "original_path": "/images/papers/chemistry-may-2017/page-08.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: cross-section of a solar still in a pit — plastic sheet draped into a V over contaminated water, evaporation arrows rising, condensation dripping to a central container, rock weight at the low point. Labels: Drinking tube, Plastic sheet, Leaves, Dirt or sand holding down the sheet, Rock weight, Container.",
+    "generated_path": "/images/papers/chemistry-may-2017/q3a-solar-still.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q3.tasks[c]",
+    "questionId": 3,
+    "taskLabel": "c",
+    "topic": "Contaminated river water bottle",
+    "original_path": "/images/papers/chemistry-may-2017/page-09.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: glass bottle of murky river water with layered contents and leader labels — Mud and smaller particles (top), Sticks, Leaves, Stones (bottom).",
+    "generated_path": "/images/papers/chemistry-may-2017/q3c-water-bottle.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q3.tasks[c]",
+    "questionId": 3,
+    "taskLabel": "c",
+    "topic": "Filtration equipment tray",
+    "original_path": "/images/papers/chemistry-may-2017/page-10.png",
+    "image_type": "code_rendered",
+    "render_component": "DragSort",
+    "render_data": {
+      "mode": "bins",
+      "title": "Select the equipment for filtration",
+      "source": "MYP chemistry-may-2017",
+      "prompt": "Drag the equipment needed to carry out filtration into the set-up; leave the equipment that is not needed in the tray. Correct set-up: filter paper inside a funnel, with a beaker below to collect the filtrate.",
+      "items": [
+        "filter funnel",
+        "filter-paper cone",
+        "beaker",
+        "test tube",
+        "thermometer",
+        "measuring cylinder"
+      ],
+      "bins": [
+        { "id": "setup", "label": "Filtration set-up" },
+        { "id": "tray", "label": "Not needed (tray)" }
+      ],
+      "correct": {
+        "setup": ["filter funnel", "filter-paper cone", "beaker"],
+        "tray": ["test tube", "thermometer", "measuring cylinder"]
+      },
+      "answer": "Filtration needs a filter funnel, a filter-paper cone (inside the funnel) and a beaker below to collect the filtrate."
+    },
+    "generated_path": "/images/papers/chemistry-may-2017/q3c-equipment-tray.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q3.tasks[d]",
+    "questionId": 3,
+    "taskLabel": "d",
+    "topic": "Conductometric titration apparatus",
+    "original_path": "/images/papers/chemistry-may-2017/page-11.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: titration set-up — burette of NaCl in a clamp stand, gloved hand holding a pipette, conductivity meter and probe dipping into a conical flask. Labels: Burette containing NaCl, Pipette, Clamp stand, Conductivity meter and probe, Conical flask.",
+    "generated_path": "/images/papers/chemistry-may-2017/q3d-titration-apparatus.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q3.tasks[f]",
+    "questionId": 3,
+    "taskLabel": "f",
+    "topic": "Conductivity purity comparison",
+    "original_path": "/images/papers/chemistry-may-2017/page-14.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: conductivity meter reading 2700 mV with probe in a conical flask of untreated water, beside two bottles labelled 'Treated with carbon filter' and 'Treated with silver filter'.",
+    "generated_path": "/images/papers/chemistry-may-2017/q3f-conductivity-comparison.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q4.tasks[a]",
+    "questionId": 4,
+    "taskLabel": "a",
+    "topic": "Nepal fuel types and usage table",
+    "original_path": "/images/papers/chemistry-may-2017/page-16.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: row of illustrated fuel icons (Wood, Dung, LPG, Biogas, Crop waste, Kerosene, Charcoal, Electricity) above a data table of percentage fuel use in urban vs rural areas; LPG-urban and Dung-rural cells left blank for the student to fill.",
+    "generated_path": "/images/papers/chemistry-may-2017/q4a-fuels-table.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q4.tasks[c]",
+    "questionId": 4,
+    "taskLabel": "c",
+    "topic": "Combustion gas-collection apparatus",
+    "original_path": "/images/papers/chemistry-may-2017/page-18.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: conical flask with burning fuel inside, bung and delivery tube leading to a gas syringe that collects the CO₂ produced. Labels: Burning fuel in flask, Delivery tube, Gas syringe.",
+    "generated_path": "/images/papers/chemistry-may-2017/q4c-combustion-apparatus.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q6",
+    "questionId": 6,
+    "taskLabel": null,
+    "topic": "Acid-rain statue and rate data tables",
+    "original_path": "/images/papers/chemistry-may-2017/page-22.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: original illustration of an acid-rain-weathered calcium-carbonate statue (pitted surface), the equation CaCO₃ + 2HCl → CaCl₂ + H₂O + CO₂, and two student data tables of Time vs Volume CO₂ (mixed cm³/dm³ units) reproduced exactly.",
+    "generated_path": "/images/papers/chemistry-may-2017/q6-statue-data.svg",
+    "needs_review": true,
+    "approved": false
+  },
+  {
+    "taskPath": "q9",
+    "questionId": 9,
+    "taskLabel": null,
+    "topic": "Mobile phone battery comparison table",
+    "original_path": "/images/papers/chemistry-may-2017/page-28.png",
+    "image_type": "ai_generated",
+    "image_prompt": "SVG: illustrated comparison table of four rechargeable phone batteries (Li-Poly, Li-ion, NiCd, NiMH) with drawn battery icons and rows for technology, weight, memory effect, environmental impact, cost, recharge cycles and charge time.",
+    "generated_path": "/images/papers/chemistry-may-2017/q9-battery-table.svg",
+    "needs_review": true,
+    "approved": false
+  }
+]
