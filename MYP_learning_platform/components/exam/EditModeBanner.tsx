@@ -14,11 +14,13 @@ export default function EditModeBanner() {
   const imageOverrides = useExamStore(s => s.imageOverrides)
   const deletedImages  = useExamStore(s => s.deletedImages)
   const textOverrides  = useExamStore(s => s.textOverrides)
+  const artefactOverrides = useExamStore(s => s.artefactOverrides)
 
   const imgReplaced = Object.keys(imageOverrides).length
   const imgDeleted  = Object.keys(deletedImages).length
   const textsEdited = Object.keys(textOverrides).length
-  const totalChanges = imgReplaced + imgDeleted + textsEdited
+  const figsEdited  = Object.keys(artefactOverrides).length
+  const totalChanges = imgReplaced + imgDeleted + textsEdited + figsEdited
 
   return (
     <div
@@ -31,7 +33,7 @@ export default function EditModeBanner() {
           ✏ Edit Mode
         </span>
         <span className="hidden sm:inline" style={{ color: 'var(--warning-fg)' }}>
-          Hover any image for crop / upload / delete · Hover any text for inline editing
+          Hover any image for crop / upload / delete · Hover any text for inline editing · Hover any figure to edit / swap
         </span>
       </div>
 
@@ -46,6 +48,9 @@ export default function EditModeBanner() {
           )}
           {textsEdited > 0 && (
             <Chip color="blue" label={`${textsEdited} text${textsEdited > 1 ? 's' : ''} edited`} />
+          )}
+          {figsEdited > 0 && (
+            <Chip color="blue" label={`${figsEdited} figure${figsEdited > 1 ? 's' : ''} edited`} />
           )}
         </div>
       )}

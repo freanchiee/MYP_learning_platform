@@ -1,6 +1,6 @@
 'use client'
 import { create } from 'zustand'
-import type { Question, ExamPhase, GraphPoint } from '@/lib/types'
+import type { Question, ExamPhase, GraphPoint, ArtefactSpec } from '@/lib/types'
 
 // ---------------------------------------------------------------------------
 // Convenience re-export for components that used the old CandidateInfo type
@@ -62,6 +62,8 @@ interface ExamStore {
   deletedImages: Record<string, true>
   /** Text overrides: maps key (e.g. "q1:stem", "q1:task:a:text") → replacement string */
   textOverrides: Record<string, string>
+  /** Artefact overrides: maps key (e.g. "q1:artefact", "q1:task:a:artefact") → replacement {component,data,caption} */
+  artefactOverrides: Record<string, ArtefactSpec>
 
   // Legacy compat — kept so existing components don't break
   candidate: CandidateInfo
@@ -128,6 +130,9 @@ interface ExamStore {
   /** Store a text override for a key like "q1:stem" or "q2:task:a:text". Pass empty string to clear. */
   setTextOverride: (key: string, text: string) => void
 
+  /** Store an artefact override for a key like "q1:artefact". Pass null to clear (revert to original). */
+  setArtefactOverride: (key: string, spec: ArtefactSpec | null) => void
+
   /** Append a graph data point to a question's graph canvas. */
   addGraphPoint: (qId: number, point: GraphPoint) => void
 
@@ -192,6 +197,7 @@ const initialState = {
   imageOverrides: {} as Record<string, string>,
   deletedImages: {} as Record<string, true>,
   textOverrides: {} as Record<string, string>,
+  artefactOverrides: {} as Record<string, ArtefactSpec>,
   // Legacy compat
   candidate: { name: '', school: '' } as CandidateInfo,
   attemptId: null as string | null,
@@ -381,6 +387,13 @@ export const useExamStore = create<ExamStore>((set, get) => ({
       const next = { ...state.textOverrides }
       if (text === '') { delete next[key] } else { next[key] = text }
       return { textOverrides: next }
+    }),
+
+  setArtefactOverride: (key, spec) =>
+    set(state => {
+      const next = { ...state.artefactOverrides }
+      if (spec === null) { delete next[key] } else { next[key] = spec }
+      return { artefactOverrides: next }
     }),
 
   // ---- Graph canvas --------------------------------------------------------

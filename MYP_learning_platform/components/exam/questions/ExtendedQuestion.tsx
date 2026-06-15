@@ -21,6 +21,7 @@ import RadiationQ7Widget from '@/components/exam/widgets/RadiationQ7Widget'
 import ChoroplethWorld from '@/components/exam/figures/ChoroplethWorld'
 import EditableImage from '@/components/exam/EditableImage'
 import QuestionImage from '@/components/exam/QuestionImage'
+import EditableArtefact from '@/components/exam/EditableArtefact'
 import EditableText from '@/components/exam/EditableText'
 import WaveLabelDragDrop from '@/components/exam/widgets/WaveLabelDragDrop'
 import InlineDropdownSelect from '@/components/exam/widgets/InlineDropdownSelect'
@@ -291,19 +292,9 @@ export default function ExtendedQuestion({ q, qIdx }: ExtendedQuestionProps) {
             {/* Native content or fallback figImages */}
             <NativeContent q={q} qIdx={qIdx} setTaskAnswer={setTaskAnswer} />
 
-            {/* Data-driven interactive artefact (I&S stimulus) */}
+            {/* Data-driven interactive artefact (I&S stimulus / science figure) — editable in edit mode */}
             {q.artefact && (
-              <div className="mt-4">
-                <QuestionImage
-                  image_type="code_rendered"
-                  render_component={q.artefact.component}
-                  render_data={q.artefact.data}
-                  alt={q.artefact.caption ?? 'Interactive source'}
-                />
-                {q.artefact.caption && (
-                  <p className="mt-1.5 text-xs" style={{ color: 'var(--text-subtle)' }}>{q.artefact.caption}</p>
-                )}
-              </div>
+              <EditableArtefact artefactKey={`q${q.id}:artefact`} artefact={q.artefact} />
             )}
 
             {/* Legacy figCaption */}
@@ -367,19 +358,9 @@ export default function ExtendedQuestion({ q, qIdx }: ExtendedQuestionProps) {
 
                 {/* Task body */}
                 <div className="p-4 space-y-3">
-                  {/* Per-task interactive artefact — shown above the answer box */}
+                  {/* Per-task interactive artefact — shown above the answer box; editable in edit mode */}
                   {task.artefact && (
-                    <div className="mb-1">
-                      <QuestionImage
-                        image_type="code_rendered"
-                        render_component={task.artefact.component}
-                        render_data={task.artefact.data}
-                        alt={task.artefact.caption ?? `Interactive source for part (${task.label})`}
-                      />
-                      {task.artefact.caption && (
-                        <p className="mt-1.5 text-xs" style={{ color: 'var(--text-subtle)' }}>{task.artefact.caption}</p>
-                      )}
-                    </div>
+                    <EditableArtefact artefactKey={`q${q.id}:task:${task.label}:artefact`} artefact={task.artefact} />
                   )}
 
                   {/* Per-task figure images — shown above the answer box; suppressed when an artefact supersedes them */}
