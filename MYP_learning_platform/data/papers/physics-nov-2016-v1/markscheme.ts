@@ -1,6 +1,6 @@
 import 'server-only'
 
-type MSEntry = {
+export type MSEntry = {
   marks: number
   exemplar: string
   keyConcepts: string[]
@@ -9,396 +9,395 @@ type MSEntry = {
   feedbackMiss: string
 }
 
-type MCQEntry = {
+export type MCQEntry = {
   type: 'mcq'
   correct: number
 }
 
-type MSRecord = MSEntry | MCQEntry
+export type MSRecord = MSEntry | MCQEntry
 
 export const MS: Record<string, MSRecord> = {
 
-  // ─── Q1 Arctic Tern Migration ─────────────────────────────────
+  // ─── Q1 Arctic Tern Migration & Motion ────────────────────────
   'q1_a': {
     marks: 1,
-    exemplar: 'Speed = distance / time = 960 km ÷ 24 h = 40 km h⁻¹.',
-    keyConcepts: ['speed = distance/time', '40 km/h', 'unit required'],
-    keywords: ['40', 'km/h', 'speed', 'distance', 'time', '960', '24'],
-    feedbackHit: 'Correct — speed = 960 ÷ 24 = 40 km h⁻¹.',
-    feedbackMiss: 'Speed = distance ÷ time. Use 960 km and 24 hours (1 day = 24 hours). Speed = 960 ÷ 24 = 40 km h⁻¹.',
+    exemplar: 'Speed = distance / time = 840 km ÷ 24 h = 35 km h⁻¹.',
+    keyConcepts: ['speed = distance/time', '35 km/h', 'unit required'],
+    keywords: ['35', 'km/h', 'speed', 'distance', 'time', '840', '24'],
+    feedbackHit: 'Correct — speed = 840 ÷ 24 = 35 km h⁻¹.',
+    feedbackMiss: 'Speed = distance ÷ time. Use 840 km and 24 hours (1 day = 24 hours). Speed = 840 ÷ 24 = 35 km h⁻¹.',
   },
 
   'q1_b': {
     marks: 2,
-    exemplar: 'Any two of: headwind / wind resistance reducing speed; adverse weather conditions such as storms or rain; fatigue over a long journey; having to navigate around obstacles; changes in altitude; formation flying effects.',
+    exemplar: 'Any two of: headwind / wind resistance reducing speed; weather conditions such as storms or rain; fatigue over a very long journey; navigating around obstacles or stopping to feed; changes in altitude; ocean crosswinds pushing the bird off course.',
     keyConcepts: ['external resistive forces', 'environmental factors', 'biological factors'],
-    keywords: ['headwind', 'wind', 'air resistance', 'fatigue', 'weather', 'storm', 'navigate', 'altitude'],
-    feedbackHit: 'Good — two valid factors affecting average speed identified.',
-    feedbackMiss: 'Think about physical factors opposing motion (headwind, rain) or the bird\'s condition (fatigue). The geolocator measured 48 km/h average, which may differ from maximum speed due to such factors.',
+    keywords: ['headwind', 'wind', 'air resistance', 'fatigue', 'weather', 'storm', 'navigate', 'altitude', 'feeding'],
+    feedbackHit: 'Good — two valid factors affecting the average speed of the Arctic tern identified.',
+    feedbackMiss: 'Think about physical factors opposing motion (e.g. headwind, rain) or the bird\'s condition (e.g. fatigue, stopping to feed). The measured 44 km/h average may differ from maximum speed due to such factors.',
   },
 
   'q1_c': { type: 'mcq', correct: 3 },
 
   'q1_d': {
     marks: 4,
-    exemplar: 'Force: Between C and D, a net retarding/braking force acts backwards on the bird (opposing motion). Velocity: The velocity decreases from the maximum value at C to zero at D. Acceleration: The bird has a negative acceleration (deceleration) — it is slowing down. Newton\'s law: Newton\'s Second Law (F = ma) — the net force causes deceleration; a larger net force produces a greater deceleration.',
+    exemplar: 'Force: Between C and D a net retarding/braking force acts backwards on the bird (opposing its motion). Velocity: The velocity decreases from the constant value at C to zero at D. Acceleration: The bird has a negative acceleration (deceleration) — it is slowing down. Newton\'s law: Newton\'s Second Law (F = ma) — the net force causes the deceleration; a larger net force produces a greater deceleration (a is negative).',
     keyConcepts: ['retarding force opposes motion', 'velocity decreases to zero', 'deceleration = negative acceleration', 'Newton Second Law F=ma'],
     keywords: ['retarding', 'force', 'decreasing', 'zero', 'deceleration', 'negative', 'Newton', 'F=ma', 'net force'],
     feedbackHit: 'Excellent — all four aspects (force, velocity, acceleration, Newton\'s law) correctly addressed.',
-    feedbackMiss: 'Between C and D: (1) A net retarding force acts backwards. (2) Velocity decreases to zero. (3) Acceleration is negative (deceleration). (4) Newton\'s 2nd Law: F = ma — net force causes deceleration.',
+    feedbackMiss: 'Between C and D: (1) a net retarding force acts backwards; (2) velocity decreases to zero; (3) acceleration is negative (deceleration); (4) Newton\'s 2nd Law applies: F = ma — the net force causes the deceleration.',
   },
 
   'q1_e': {
     marks: 2,
-    exemplar: 'Distance = area under the velocity–time graph between C and D. For a triangle: Distance = ½ × (time interval CD) × (velocity at C). One mark for correct method (area of triangle), one mark for correct calculation with unit.',
-    keyConcepts: ['area under v-t graph = distance', 'triangle area = ½ × base × height', 'unit required'],
-    keywords: ['area', 'triangle', 'distance', 'velocity', 'time', 'half', 'base', 'height'],
-    feedbackHit: 'Correct — distance found from the area under the v-t graph.',
-    feedbackMiss: 'Distance = area under the v–t graph between C and D. Shape is a triangle: area = ½ × base × height = ½ × (time for CD) × (velocity at C). Include a unit.',
+    exemplar: 'Distance = area under the velocity–time graph between C and D (a triangle). Area = ½ × base × height = ½ × 2 h × 50 km h⁻¹ = 50 km. One mark for the correct method (area of triangle), one mark for the correct value with unit.',
+    keyConcepts: ['area under v-t graph = distance', 'triangle area = ½ × base × height', '50 km', 'unit required'],
+    keywords: ['area', 'triangle', 'distance', '50', 'km', 'half', 'base', 'height', '2'],
+    feedbackHit: 'Correct — distance = ½ × 2 × 50 = 50 km from the area under the velocity–time graph.',
+    feedbackMiss: 'Distance = area under the v–t graph between C and D. The shape is a triangle: area = ½ × base × height = ½ × 2 h × 50 km h⁻¹ = 50 km. Include a unit.',
   },
 
   // ─── Q2 Wave Properties ───────────────────────────────────────
   'q2_a': {
     marks: 2,
-    exemplar: 'Wavelength: the distance between two successive peaks (or troughs, or compressions); Amplitude: maximum displacement from equilibrium; Compression: region of high pressure / high particle density in the longitudinal wave; Rarefaction: region of low pressure / low particle density. Award 1 mark per two correct identifications.',
+    exemplar: 'Wavelength: the distance between two successive peaks (or troughs, or compressions); Amplitude: maximum displacement from the equilibrium/rest position; Compression: a region of high pressure / high particle density in the longitudinal wave; Rarefaction: a region of low pressure / low particle density. Award 1 mark per two correct identifications (up to 2 marks).',
     keyConcepts: ['wavelength = distance between repeating points', 'amplitude = maximum displacement', 'compression = high pressure region', 'rarefaction = low pressure region'],
     keywords: ['wavelength', 'amplitude', 'compression', 'rarefaction', 'pressure', 'displacement', 'density', 'peaks', 'troughs'],
-    feedbackHit: 'Correct — all four wave features correctly identified.',
-    feedbackMiss: 'Wavelength: distance between identical points on successive waves. Amplitude: max displacement from equilibrium. Compression: dense region. Rarefaction: spread-out region.',
+    feedbackHit: 'Correct — all four wave features correctly identified on the diagrams.',
+    feedbackMiss: 'Wavelength: distance between two identical points on successive waves. Amplitude: maximum displacement from equilibrium. Compression: dense/high-pressure region. Rarefaction: spread-out/low-pressure region.',
   },
 
   'q2_b': {
     marks: 1,
-    exemplar: 'Count the number of complete cycles of wave A in 1 second from the display. Frequency = cycles per second (Hz). Accept the value read with correct unit.',
-    keyConcepts: ['frequency = cycles per second', 'unit Hz'],
-    keywords: ['frequency', 'cycles', 'Hz', 'per second', 'count', 'wave A'],
-    feedbackHit: 'Correct — frequency of wave A correctly read from the display.',
-    feedbackMiss: 'Count complete cycles wave A makes in 1 second. That count = frequency in Hz.',
+    exemplar: 'Count the number of complete cycles of wave A in 1 second from the display. Wave A completes 25 cycles in 1 s, so f = 25 Hz.',
+    keyConcepts: ['frequency = cycles per second', 'reading from display', '25 Hz'],
+    keywords: ['frequency', 'cycles', '25', 'Hz', 'per second', 'count', 'wave A'],
+    feedbackHit: 'Correct — wave A completes 25 cycles in 1 second, so f = 25 Hz.',
+    feedbackMiss: 'Count the number of complete cycles wave A makes in 1 second (the full time axis). Wave A shows 25 cycles, so f = 25 Hz.',
   },
 
   'q2_c': {
     marks: 1,
-    exemplar: 'Accept any two waves with the same number of cycles in 1 second. E.g. waves A and C, or B and D (depends on the display). Award mark for correct identification of any pair with matching cycle count.',
-    keyConcepts: ['same frequency = same number of cycles per second'],
-    keywords: ['same frequency', 'equal cycles', 'frequency'],
-    feedbackHit: 'Correct — two waves with the same frequency correctly identified.',
-    feedbackMiss: 'Frequency = number of complete cycles per second. Find two waves that complete the same number of full oscillations in 1 second.',
+    exemplar: 'Waves B and D have the same frequency — each completes 8 cycles in 1 second (8 Hz). They differ only in amplitude, not frequency.',
+    keyConcepts: ['same frequency = same number of cycles per second', 'frequency is independent of amplitude', 'B and D'],
+    keywords: ['B', 'D', 'same frequency', 'equal cycles', '8', 'Hz'],
+    feedbackHit: 'Correct — waves B and D both have a frequency of 8 Hz.',
+    feedbackMiss: 'Frequency = number of complete cycles per second. Waves B and D both complete 8 cycles in the 1-second window (8 Hz); they differ only in amplitude.',
   },
 
   'q2_d': {
     marks: 2,
-    exemplar: 'Step 1: Read frequency of wave C from the graph (f = cycles per second). Step 2: Use v = fλ → λ = v/f = 330 / f. Award 1 mark for correct equation and substitution, 1 mark for correct answer with unit (m).',
-    keyConcepts: ['wave equation v = fλ', 'rearranging to λ = v/f', 'unit metres'],
-    keywords: ['v=fλ', 'wavelength', 'frequency', '330', 'm/s', 'speed', 'unit', 'metres'],
-    feedbackHit: 'Correct — wavelength calculated using v = fλ with correct unit.',
-    feedbackMiss: 'Use v = fλ. Rearrange: λ = v/f. Substitute v = 330 m/s and frequency of wave C from graph. Include unit (metres).',
+    exemplar: 'Wave C completes 5 cycles in 1 s, so f = 5 Hz. Use v = fλ → λ = v/f = 330 / 5 = 66 m. Award 1 mark for correct use of v = fλ with substitution, 1 mark for the correct value with unit (m).',
+    keyConcepts: ['wave equation v = fλ', 'rearranging to λ = v/f', 'f(C) = 5 Hz', '66 m'],
+    keywords: ['v=fλ', 'wavelength', '5', 'frequency', '330', '66', 'm', 'metres', 'speed'],
+    feedbackHit: 'Correct — wavelength of wave C = 330 / 5 = 66 m.',
+    feedbackMiss: 'Wave C shows 5 cycles in 1 s, so f = 5 Hz. Use v = fλ → λ = v/f = 330 / 5 = 66 m. Include the unit (metres).',
   },
 
   'q2_e': {
     marks: 1,
-    exemplar: 'The wave with the highest frequency (most cycles per second) does NOT show infrasound, because infrasound has frequency < 20 Hz. Accept any wave correctly identified as having frequency > 20 Hz.',
-    keyConcepts: ['infrasound frequency < 20 Hz', 'highest frequency wave is not infrasound'],
-    keywords: ['infrasound', 'frequency', '20 Hz', 'highest', 'not infrasound'],
-    feedbackHit: 'Correct — the wave with frequency above 20 Hz identified as not infrasound.',
-    feedbackMiss: 'Infrasound has frequency less than 20 Hz. Identify the wave with the highest frequency — that one (>20 Hz) is not infrasound.',
+    exemplar: 'Wave A does NOT show infrasound, because it has a frequency of 25 Hz, which is above 20 Hz (infrasound is below 20 Hz).',
+    keyConcepts: ['infrasound frequency < 20 Hz', 'wave A is 25 Hz > 20 Hz'],
+    keywords: ['A', 'infrasound', 'frequency', '25', '20 Hz', 'above', 'not infrasound'],
+    feedbackHit: 'Correct — wave A (25 Hz) is above 20 Hz, so it is not infrasound.',
+    feedbackMiss: 'Infrasound has a frequency below 20 Hz. Wave A has the highest frequency (25 Hz), which is above 20 Hz, so wave A is not infrasound.',
   },
 
   'q2_f': {
     marks: 3,
-    exemplar: '(1) Infrasound undergoes diffraction — waves spread out as they pass around the obstacle (the rocky ridge). (2) Diffraction is most effective when the wavelength is comparable to or larger than the size of the obstacle. (3) Infrasound has a very long wavelength (low frequency, v = 330 m s⁻¹) and diffracts significantly around the ridge, allowing waves to reach rhinoceroses on the other side.',
-    keyConcepts: ['diffraction around obstacle', 'long wavelength causes large diffraction', 'low frequency = long wavelength'],
+    exemplar: '(1) The infrasound undergoes diffraction — the waves spread out as they pass around the obstacle (the rocky ridge). (2) Diffraction is most effective when the wavelength is comparable to, or larger than, the size of the obstacle. Infrasound has a very long wavelength because it has a low frequency and travels at 330 m/s. (3) The long-wavelength infrasound diffracts significantly around the ridge, reaching the rhinoceroses on the far side.',
+    keyConcepts: ['diffraction around ridge', 'long wavelength causes large diffraction', 'infrasound low frequency = long wavelength'],
     keywords: ['diffraction', 'spreading', 'wavelength', 'ridge', 'obstacle', 'low frequency', 'long wavelength', 'around'],
-    feedbackHit: 'Excellent — diffraction named, mechanism explained, long wavelength linked to large diffraction.',
-    feedbackMiss: 'Infrasound diffracts around the ridge because its wavelength is very long. Maximum diffraction occurs when wavelength ≥ obstacle size. Long wavelength infrasound diffracts around large obstacles.',
+    feedbackHit: 'Excellent — diffraction named, mechanism explained, and long wavelength linked to large diffraction.',
+    feedbackMiss: 'Infrasound diffracts (spreads out) around the rocky ridge because its wavelength is very long (low frequency). Maximum diffraction occurs when the wavelength is similar to or larger than the obstacle, so long-wavelength infrasound diffracts strongly around large obstacles.',
   },
 
   // ─── Q3 Refraction of Light ────────────────────────────────────
   'q3_a': {
     marks: 2,
-    exemplar: 'Using refractive index and the diagram: top layer = air (n=1.00, least dense); middle layer = water (n=1.33, intermediate); bottom layer = glass (n=1.50, most dense). Award 1 mark per correctly labelled layer.',
-    keyConcepts: ['air top layer lowest refractive index', 'water middle', 'glass bottom highest refractive index'],
-    keywords: ['air', 'water', 'glass', 'refractive index', 'top', 'middle', 'bottom'],
-    feedbackHit: 'Correct — all three layers correctly identified.',
-    feedbackMiss: 'Air (n=1.00) is least dense — fastest light. Glass (n=1.50) most dense — slowest light, bends most towards normal. Water (n=1.33) intermediate.',
+    exemplar: 'Using the refractive index table and the diagram: the ray bends towards the normal when it enters a denser medium. The top layer is air (n=1.00, least dense), the middle layer is glass (n=1.50, most dense — strongest bending towards the normal), the bottom layer is water (n=1.33, intermediate). Award 1 mark per correctly labelled layer (any 2 of 3 correct = 2 marks).',
+    keyConcepts: ['air top layer lowest refractive index', 'glass middle layer highest refractive index', 'water bottom layer intermediate'],
+    keywords: ['air', 'glass', 'water', 'refractive index', 'top', 'middle', 'bottom', 'layer'],
+    feedbackHit: 'Correct — all three layers correctly identified using the refractive index data.',
+    feedbackMiss: 'Compare the refractive indices: Air (1.00) is least dense — light travels fastest and bends least. Glass (1.50) is most dense — light slows most and bends most towards the normal. Water (1.33) is intermediate. Match the amount of bending at each boundary to these values.',
   },
 
   'q3_b': {
     marks: 3,
-    exemplar: '(1) Light travels at different speeds in different media — it slows down in denser materials. (2) When entering a denser medium, light slows down. (3) Slowing down causes it to bend towards the normal. Greater refractive index difference = greater bending.',
-    keyConcepts: ['speed changes at boundary', 'slower in denser medium', 'bends towards normal in denser medium'],
-    keywords: ['speed', 'slows', 'normal', 'denser', 'bends towards', 'refractive index', 'boundary'],
-    feedbackHit: 'Well done — speed change, direction of bending, and refractive index link all correct.',
-    feedbackMiss: 'Light slows in denser medium → bends towards normal. Bigger refractive index difference → more bending.',
+    exemplar: '(1) Light travels at different speeds in different media — it slows down in a denser material (higher refractive index). (2) When light passes from a less dense medium (e.g. air) into a denser medium (e.g. glass or water), it slows down and bends towards the normal; passing into a less dense medium it speeds up and bends away from the normal. (3) The greater the refractive index, the slower the light and the greater the bending towards the normal.',
+    keyConcepts: ['speed changes at boundary', 'slower in denser medium', 'bends towards normal in denser medium', 'greater refractive index = greater bending'],
+    keywords: ['speed', 'slows', 'normal', 'denser', 'bends towards', 'refractive index', 'change direction', 'boundary'],
+    feedbackHit: 'Well done — speed change at the boundary, direction of bending, and link to refractive index all correctly explained.',
+    feedbackMiss: 'Light slows down when it enters a denser medium (higher n) and bends towards the normal. The bigger the refractive index, the slower the light and the more the ray bends. This is refraction.',
   },
 
   // ─── Q4 Static Electricity ────────────────────────────────────
   'q4_a': {
     marks: 1,
-    exemplar: 'Electron: −1; Proton: +1; Neutron: 0. Award 1 mark for all three correct.',
+    exemplar: 'Electron: −1 (negative charge); Proton: +1 (positive charge); Neutron: 0 (no charge / neutral). Award 1 mark for all three correct.',
     keyConcepts: ['electron negative charge', 'proton positive charge', 'neutron neutral'],
     keywords: ['electron', '-1', 'negative', 'proton', '+1', 'positive', 'neutron', '0', 'neutral'],
-    feedbackHit: 'Correct — all three particle charges correctly stated.',
-    feedbackMiss: 'Electron = −1; Proton = +1; Neutron = 0.',
+    feedbackHit: 'Correct — all three subatomic particle charges correctly stated.',
+    feedbackMiss: 'Electron = −1 (negative); Proton = +1 (positive); Neutron = 0 (neutral). These are the basic units of electric charge.',
   },
 
   'q4_b': {
     marks: 3,
-    exemplar: '(1) Electrons are the mobile charged particles. (2) When the wool cloth rubs the perspex rod, electrons are transferred from the cloth to the rod. (3) The rod gains electrons, so it has more negative charges than positive, giving it a net negative charge.',
-    keyConcepts: ['electrons are mobile', 'electron transfer from cloth to rod', 'gain of electrons = negative charge'],
-    keywords: ['electrons', 'mobile', 'transferred', 'rubbing', 'cloth', 'gains', 'negative', 'more electrons'],
-    feedbackHit: 'Excellent — electron mobility, transfer direction, and resulting negative charge correct.',
-    feedbackMiss: 'Only electrons can move. Rubbing transfers electrons from cloth to rod. Gaining electrons → rod has more negative charges → net negative charge.',
+    exemplar: '(1) Electrons are the mobile charged particles — protons and neutrons are fixed in the nucleus and cannot move. (2) When the wool cloth rubs the perspex rod, electrons are transferred from the cloth onto the rod. (3) The rod gains electrons, so it now has more negative charges than positive charges, giving it a net negative charge.',
+    keyConcepts: ['electrons are mobile particles', 'electron transfer by friction', 'gain of electrons = negative charge'],
+    keywords: ['electrons', 'mobile', 'transferred', 'rubbing', 'cloth', 'gains', 'negative', 'more electrons', 'nucleus', 'fixed'],
+    feedbackHit: 'Excellent — electron mobility, transfer direction, and resulting negative charge correctly explained.',
+    feedbackMiss: 'Only electrons can move (protons are fixed in the nucleus). Rubbing transfers electrons from the wool cloth onto the perspex rod. Gaining electrons leaves the rod with more electrons than protons → net negative charge.',
   },
 
   'q4_c': {
     marks: 4,
-    exemplar: '(1) Bruno becomes charged by friction as he walks on the carpet — electrons are transferred between carpet and fur. (2) The cereal pieces are initially uncharged/neutral. (3) Bruno\'s charge induces a redistribution of charge in the cereal (induction): the side nearest Bruno develops the opposite charge, the far side develops the same charge. (4) The opposite charges on the nearest side are attracted to Bruno\'s charge — electrostatic attraction causes the cereal to stick.',
-    keyConcepts: ['charging by friction', 'induction causes charge redistribution', 'opposite charges attract'],
-    keywords: ['friction', 'carpet', 'induction', 'redistribution', 'opposite', 'attract', 'neutral', 'electrons'],
-    feedbackHit: 'Excellent — friction charging, induction, redistribution, and attraction all correct.',
-    feedbackMiss: 'Sequence: (1) Bruno charges by friction; (2) cereal is neutral but induction redistributes charge; (3) nearest side gets opposite charge; (4) opposite charges attract → cereal sticks.',
+    exemplar: '(1) Bruno becomes charged by friction as he walks on the nylon carpet — electrons are transferred between the carpet and his fur. (2) The cereal pieces are initially uncharged/neutral. (3) Bruno\'s charge induces a redistribution of charge in each cereal piece (charge induction): the side nearest Bruno develops the opposite charge, while the far side develops the same charge. (4) The opposite charge on the near side is attracted to Bruno\'s charge — this electrostatic attraction makes the cereal pieces stick to Bruno.',
+    keyConcepts: ['charging by friction (walking on carpet)', 'induction causes charge redistribution in neutral cereal', 'opposite charges attract'],
+    keywords: ['friction', 'carpet', 'induction', 'redistribution', 'opposite', 'attract', 'neutral', 'electrons', 'charged'],
+    feedbackHit: 'Excellent — friction charging, induction, redistribution of charge, and attraction all correctly described.',
+    feedbackMiss: 'Sequence: (1) Bruno charges by friction on the carpet; (2) the cereal is neutral but induction redistributes its charge; (3) the side nearest Bruno gains the opposite charge; (4) opposite charges attract → cereal sticks.',
   },
 
-  // ─── Q5 Thermal Insulation Investigation ──────────────────────
+  // ─── Q5 Thermal Insulation Investigation (bubble wrap) ────────
   'q5_a': {
     marks: 3,
-    exemplar: '(1) Conduction — heat through direct contact (vibration of particles in solids); (2) Convection — heat by movement of fluid (liquid or gas); (3) Radiation — heat by infrared electromagnetic waves (no medium needed).',
+    exemplar: 'The three methods of heat transfer are: (1) Conduction — heat transferred through direct contact (vibration of particles in solids); (2) Convection — heat transferred by movement of a fluid (liquid or gas); (3) Radiation — heat transferred by infrared electromagnetic waves (no medium needed). Award 1 mark each.',
     keyConcepts: ['conduction', 'convection', 'radiation'],
     keywords: ['conduction', 'convection', 'radiation'],
     feedbackHit: 'All three methods of heat transfer correctly listed.',
-    feedbackMiss: 'Conduction (through solids), convection (through fluids), radiation (infrared waves — no medium).',
+    feedbackMiss: 'The three methods of heat transfer are: conduction (through solids by particle vibration), convection (through fluids by bulk movement), and radiation (infrared waves — no medium required).',
   },
 
   'q5_b': {
     marks: 2,
-    exemplar: 'Examples: Balance — to measure initial and final mass so mass melted can be calculated; Thermometer — to monitor room temperature as a control variable; Stopwatch — to ensure equal time per trial. 1 mark: suitable equipment. 1 mark: valid justification.',
-    keyConcepts: ['equipment linked to measurement purpose', 'justification linked to experiment'],
-    keywords: ['balance', 'timer', 'stopwatch', 'thermometer', 'mass', 'time', 'measure'],
-    feedbackHit: 'Good — valid equipment with linked justification.',
-    feedbackMiss: 'Name one piece of equipment and explain why needed. A balance measures mass (initial − final = melted). A stopwatch ensures equal time per trial.',
+    exemplar: 'Any one piece of equipment with justification. Examples: (1) Balance / mass scale — to measure the initial and final mass of the ice block so the mass melted can be calculated; (2) Stopwatch/timer — to ensure each trial runs for the same length of time; (3) Thermometer — to monitor the room temperature as a control variable. Award 1 mark for suitable equipment, 1 mark for a valid justification linked to the experiment.',
+    keyConcepts: ['equipment linked to measurement purpose', 'justification connects to experimental method'],
+    keywords: ['balance', 'timer', 'stopwatch', 'thermometer', 'mass', 'time', 'measure', 'justify'],
+    feedbackHit: 'Good — one valid piece of equipment identified with a linked justification.',
+    feedbackMiss: 'Name one piece of equipment and explain why it is specifically needed. A balance measures mass (so mass melted = initial − final). A stopwatch ensures an equal time for each trial.',
   },
 
   'q5_c': {
     marks: 2,
-    exemplar: 'Hypothesis: As the number of layers of bubble wrap increases, the mass of ice melted will decrease. Justification: More layers of bubble wrap provide more insulation, reducing heat transfer (conduction, convection, radiation) from surroundings to the ice.',
-    keyConcepts: ['more insulation = less ice melted', 'bubble wrap reduces heat transfer'],
-    keywords: ['increases', 'decreases', 'insulation', 'heat transfer', 'bubble wrap', 'less heat'],
-    feedbackHit: 'Correct hypothesis with sound justification.',
-    feedbackMiss: 'More layers → more insulation → less heat transfer → less mass melted. State direction clearly and link to mechanism.',
+    exemplar: 'Hypothesis: As the number of layers of bubble wrap increases, the mass of ice melted will decrease. Justification: More layers of bubble wrap provide more insulation (trapped air), reducing the rate of heat transfer (conduction, convection and radiation) from the surroundings to the ice, so less ice melts in the same time. Award 1 mark for a directional hypothesis, 1 mark for a valid scientific justification.',
+    keyConcepts: ['more bubble wrap = less ice melted', 'insulation reduces heat transfer', 'scientific justification'],
+    keywords: ['increases', 'decreases', 'insulation', 'heat transfer', 'layers', 'trapped air', 'less heat'],
+    feedbackHit: 'Correct hypothesis with a sound scientific justification linking bubble-wrap layers to reduced heat transfer.',
+    feedbackMiss: 'More bubble wrap = more insulation (trapped air) = less heat reaches the ice = less mass melted. State the direction clearly and link it to the physical mechanism (insulation reduces heat transfer).',
   },
 
   'q5_d': {
     marks: 3,
-    exemplar: 'Example: Room temperature. How: measure with thermometer, conduct in same room at same time of day. Why: varying room temperature changes heat transfer rate, making comparisons invalid (unfair test). 1 mark: variable named. 1 mark: how to control. 1 mark: why.',
-    keyConcepts: ['named control variable', 'method to control', 'justification for fairness'],
-    keywords: ['temperature', 'ice mass', 'time', 'room temperature', 'control', 'fair test', 'constant'],
-    feedbackHit: 'Excellent — control variable named, practical method, and scientific justification.',
-    feedbackMiss: 'Name a specific variable (e.g. room temperature, initial ice mass, time). Describe how to keep it constant. Explain why it would affect results.',
+    exemplar: 'Example: Room temperature. How: measure it with a thermometer throughout and carry out the experiment in the same room at the same time of day. Why: if the room temperature varies between trials, the rate of heat transfer to the ice will differ, making comparisons between different numbers of bubble-wrap layers invalid (an unfair test). Award 1 mark for naming a variable, 1 mark for how to control it, 1 mark for why.',
+    keyConcepts: ['named control variable', 'practical method to control it', 'justification linking to fairness'],
+    keywords: ['temperature', 'ice mass', 'time', 'room temperature', 'control', 'fair test', 'constant', 'variable', 'justify'],
+    feedbackHit: 'Excellent — specific control variable named, practical control method described, and scientific justification provided.',
+    feedbackMiss: 'Name a specific variable (e.g. room temperature, initial mass of ice, time of exposure). Describe how to keep it constant, then explain why variation in it would make the test unfair.',
   },
 
   'q5_e': {
     marks: 3,
-    exemplar: '(1) Record initial and final mass of ice; mass melted = initial − final. (2) Test at least five different numbers of bubble wrap layers (e.g. 0, 1, 2, 3, 4) to identify trends. (3) Repeat each condition at least three times and calculate mean to reduce random error and improve reliability.',
-    keyConcepts: ['measure initial and final mass', '≥5 IV values', 'repeat and average for reliability'],
-    keywords: ['initial mass', 'final mass', 'mass melted', 'five values', 'range', 'repeat', 'average', 'reliable'],
-    feedbackHit: 'Well done — measurement, range of values, and reason for repeating all correct.',
-    feedbackMiss: 'Describe: (1) what to measure; (2) how many IV values (≥5); (3) repeat each 3+ times and average.',
+    exemplar: '(1) Yuki should record the initial mass of the ice block and the final mass after a set time; mass melted = initial − final. (2) She should test a range of at least five different numbers of bubble-wrap layers (e.g. 0, 2, 4, 6, 8) to identify a pattern or trend. (3) She should repeat each condition at least three times and calculate a mean, to reduce the effect of random error and improve reliability. Award 1 mark per correct point.',
+    keyConcepts: ['measure initial and final mass', 'range of five or more IV values', 'repeat and average for reliability'],
+    keywords: ['initial mass', 'final mass', 'mass melted', 'five values', 'range', 'repeat', 'average', 'reliable', 'random error'],
+    feedbackHit: 'Well done — the measurements required, range of values, and reason for repeating all correctly described.',
+    feedbackMiss: 'Describe: (1) what to measure (initial and final ice mass to find mass melted); (2) how many IV values (≥5 different layer numbers); (3) repeat each 3+ times and average (reduces random error, improves reliability).',
   },
 
-  // ─── Q6 Cup Cooling Investigation ─────────────────────────────
+  // ─── Q6 Cup Cooling Investigation (hot chocolate) ─────────────
   'q6_a': {
     marks: 1,
-    exemplar: 'The results do NOT support the hypothesis. The data shows no consistent trend — cooling time does not increase with cup thickness. For example, the 6 mm cup cooled faster (8 min) than the 2 mm cup (12 min), and the 4 mm cup cooled faster than the 2 mm cup. The data is also inconsistent (two different results for 6 mm: 8 and 11 min → 3 min difference).',
-    keyConcepts: ['results do not support hypothesis', 'no consistent trend', 'specific data cited'],
-    keywords: ['not supported', 'no trend', 'inconsistent', '6mm', '8 minutes', '2mm', '12 minutes', 'anomaly'],
-    feedbackHit: 'Correct — conclusion not supported with specific data evidence.',
-    feedbackMiss: 'Does cooling time consistently increase with thickness? The data shows no clear trend. State "not supported" and cite specific data.',
+    exemplar: 'The results do NOT support the hypothesis. The data shows no consistent trend — cooling time does not increase with thickness. The 4 mm cup cooled fastest (8 min), faster than the 2 mm cup (12 min), and the two 6 mm trials gave very different times (20 and 11 min), showing the data is inconsistent.',
+    keyConcepts: ['results do not support hypothesis', 'no consistent trend', 'specific data cited as evidence'],
+    keywords: ['not supported', 'no trend', 'inconsistent', '4mm', '8 minutes', '6mm', '20', '11', 'anomaly'],
+    feedbackHit: 'Correct — conclusion not supported, with specific data evidence cited.',
+    feedbackMiss: 'Look at the data: does cooling time consistently increase with thickness? No (e.g. the 4 mm cup gave 8 min — faster than 2 mm at 12 min, and the two 6 mm trials disagree). State "not supported" and quote specific data.',
   },
 
   'q6_b': {
     marks: 8,
-    exemplar: 'Any four weaknesses (2 marks each: 1 weakness + 1 scientific explanation):\n(1) Cups made from different materials — different thermal conductivities mean results reflect material, not just thickness.\n(2) Cups have different colours — darker cups emit/absorb more radiation, affecting cooling rate.\n(3) Different surface areas — cups of different thickness may have different surface areas, affecting convection and radiation loss.\n(4) No repeats — cannot check for random error or anomalies.\n(5) Room temperature not controlled — ambient changes affect heat transfer.\n(6) Different cup shapes — surface-area-to-volume ratio differs, affecting cooling rate.',
-    keyConcepts: ['material conductivity', 'colour radiation effect', 'surface area convection', 'no repeats', 'uncontrolled variables'],
-    keywords: ['material', 'conductivity', 'colour', 'radiation', 'surface area', 'no repeats', 'room temperature', 'reliability', 'fair test'],
-    feedbackHit: 'Excellent — four weaknesses each with valid scientific explanation.',
-    feedbackMiss: 'For each weakness: state the specific problem AND explain why it affects results. Consider: materials (different conductivities), colours (radiation differs), surface areas, no repeats, room temperature.',
+    exemplar: 'Any four weaknesses, each with a scientific explanation (2 marks each: 1 weakness + 1 explanation). Examples:\n(1) Cups made from different materials — different materials have different thermal conductivities, so the results reflect material differences, not thickness alone.\n(2) Cups have different colours — darker cups emit more thermal radiation, affecting cooling rate independently of thickness.\n(3) Different surface areas — cups of different thickness may have different surface areas, affecting heat loss by convection and radiation.\n(4) No repeats for most thicknesses — without repeats it is impossible to identify anomalies or check reliability (the two 6 mm values disagree).\n(5) Room temperature not controlled — changes in ambient temperature alter the rate of heat transfer.\n(6) Starting temperature / volume of drink not controlled — affects how long cooling takes.',
+    keyConcepts: ['different materials affect conductivity', 'different colours affect radiation', 'different surface areas affect convection and radiation', 'no repeats means no reliability check', 'uncontrolled room temperature', 'uncontrolled volume'],
+    keywords: ['material', 'conductivity', 'colour', 'radiation', 'surface area', 'no repeats', 'room temperature', 'volume', 'reliability', 'fair test', 'control'],
+    feedbackHit: 'Excellent evaluation — four weaknesses each with a valid scientific explanation of the effect on the investigation.',
+    feedbackMiss: 'For each weakness, state the problem AND explain scientifically why it affects results. Consider: different materials (conductivity), different colours (radiation), different surface areas/volumes, no repeats, uncontrolled room temperature.',
   },
 
-  // ─── Q7 Radiation Investigation ───────────────────────────────
+  // ─── Q7 Radiation Investigation (paper-mill beta gauge) ───────
   'q7_a': {
     marks: 2,
-    exemplar: 'IV: the thickness of the paper (in mm or cm). DV: the count rate of beta radiation detected by the Geiger–Müller tube (in counts per second or per minute).',
+    exemplar: 'Independent variable (IV): the thickness of the paper sheet (in mm, or number of sheets). Dependent variable (DV): the count rate of beta radiation detected by the Geiger–Müller tube (counts per second or per minute).',
     keyConcepts: ['IV is paper thickness', 'DV is beta radiation count rate'],
-    keywords: ['independent', 'paper', 'thickness', 'dependent', 'count rate', 'Geiger', 'beta'],
-    feedbackHit: 'Correct — IV and DV clearly identified.',
-    feedbackMiss: 'IV = what you change = thickness of paper. DV = what you measure = count rate from Geiger tube.',
+    keywords: ['independent', 'paper', 'thickness', 'dependent', 'count rate', 'Geiger', 'beta radiation'],
+    feedbackHit: 'Correct — IV and DV clearly and specifically identified.',
+    feedbackMiss: 'IV = what you change = thickness of the paper. DV = what you measure = count rate detected by the Geiger tube.',
   },
 
   'q7_b': {
     marks: 2,
-    exemplar: 'A beta particle is a high-energy, fast-moving electron emitted from the nucleus when a neutron decays into a proton. It has negative charge and travels at high speed (close to speed of light).',
+    exemplar: 'A beta particle is a high-energy, fast-moving electron. It is emitted from the nucleus when a neutron decays into a proton + electron. It has a negative charge, moderate penetrating power (stopped by a few mm of aluminium), and travels at high speed (close to the speed of light).',
     keyConcepts: ['beta particle is an electron', 'high energy fast moving'],
-    keywords: ['electron', 'high energy', 'fast', 'negative', 'nucleus', 'speed'],
-    feedbackHit: 'Correct — beta particle identified as high-energy electron with motion property.',
-    feedbackMiss: 'Beta particle = electron from nucleus. High energy, moves near speed of light, negative charge.',
+    keywords: ['electron', 'high energy', 'fast', 'negative', 'nucleus', 'speed', 'penetrating'],
+    feedbackHit: 'Correct — beta particle identified as a high-energy electron with a property of its motion.',
+    feedbackMiss: 'A beta particle is an electron emitted from the nucleus. It is high-energy and moves at high speed (close to the speed of light). It has negative charge and moderate penetrating power.',
   },
 
   'q7_c': {
     marks: 2,
-    exemplar: 'As the thickness of the paper increases, the intensity (count rate) of beta radiation detected will decrease, because thicker paper absorbs more beta particles, reducing the number reaching the detector.',
-    keyConcepts: ['thickness increases → intensity decreases', 'paper absorbs beta particles'],
-    keywords: ['thickness', 'increases', 'count rate', 'decreases', 'absorbed', 'paper'],
-    feedbackHit: 'Correct — direction of relationship and scientific reason stated.',
-    feedbackMiss: 'As paper thickness increases, beta count rate decreases because paper absorbs beta particles.',
+    exemplar: 'As the thickness of the paper increases, the intensity (count rate) of beta radiation detected will decrease. This is because thicker paper absorbs more beta particles, so fewer reach the detector.',
+    keyConcepts: ['as thickness increases intensity decreases', 'paper absorbs beta particles'],
+    keywords: ['thickness', 'increases', 'intensity', 'count rate', 'decreases', 'absorbed', 'paper'],
+    feedbackHit: 'Correct hypothesis — direction of relationship and scientific reason stated.',
+    feedbackMiss: 'As paper thickness increases, the beta count rate decreases because the paper absorbs beta particles. Thicker paper absorbs more, so fewer beta particles reach the detector.',
   },
 
   'q7_d': {
     marks: 6,
-    exemplar: '(1) Test ≥5 different paper thicknesses (e.g. 0, 10, 20, 30, 40 sheets). (2) Repeat each measurement ≥3 times; calculate mean to reduce random error. (3) Measure count rate with zero paper as baseline. (4) Add paper sheets one at a time. (5) Keep distance from source to Geiger tube constant (control variable). (6) Use same radioactive source throughout.',
-    keyConcepts: ['≥5 IV values', '≥3 repeats and average', 'zero paper baseline', 'constant source-detector distance', 'same source'],
-    keywords: ['five', 'thickness values', 'repeat', 'three', 'average', 'zero', 'baseline', 'distance', 'constant', 'same source'],
-    feedbackHit: 'Excellent — range, repeats, baseline, increasing sheets, control variable, same source all addressed.',
-    feedbackMiss: 'Valid method: ≥5 thickness values; ≥3 repeats with mean; baseline at zero; add sheets one at a time; keep source-detector distance constant; same source.',
+    exemplar: '(1) Test at least five different paper thicknesses (e.g. 0, 2, 4, 6, 8, 10 sheets). (2) Repeat each measurement at least three times and calculate the mean count rate to reduce random error. (3) Measure the count rate with no paper present as a baseline. (4) Add paper sheets one at a time, recording the count rate for each thickness. (5) Keep the distance from the source to the Geiger tube constant throughout (control variable). (6) Use the same beta source throughout to ensure a consistent activity level.',
+    keyConcepts: ['≥5 IV values', '≥3 repeats and average', 'zero-paper baseline', 'increasing paper sheets', 'constant source-detector distance', 'same source throughout'],
+    keywords: ['five', 'thickness values', 'repeat', 'three', 'average', 'no paper', 'baseline', 'one at a time', 'distance', 'constant', 'same source'],
+    feedbackHit: 'Excellent method — range of values, repeats, baseline, increasing sheets, control variable, and same source all addressed.',
+    feedbackMiss: 'A valid method needs: ≥5 paper thickness values; ≥3 repeats with a mean; a baseline reading with no paper; add sheets one at a time; keep the source-to-detector distance constant; use the same source throughout.',
   },
 
   'q7_e': {
     marks: 1,
-    exemplar: 'Any one of: cosmic rays from space; radioactive materials in rocks/soil (e.g. radon gas); fallout from past nuclear weapons testing; radioactive materials in building materials.',
+    exemplar: 'Any one of: cosmic rays from space; naturally occurring radioactive materials in rocks/soil (e.g. radon gas); fallout from past nuclear weapons testing; radioactive materials in building materials.',
     keyConcepts: ['sources of natural background radiation'],
-    keywords: ['cosmic rays', 'rocks', 'radon', 'soil', 'nuclear', 'fallout', 'natural'],
-    feedbackHit: 'Correct — valid source of background radiation stated.',
-    feedbackMiss: 'Background radiation: cosmic rays, radioactive rocks/radon, weapons fallout, or building materials.',
+    keywords: ['cosmic rays', 'rocks', 'radon', 'soil', 'nuclear', 'fallout', 'natural', 'building materials'],
+    feedbackHit: 'Correct — a valid source of background radiation stated.',
+    feedbackMiss: 'Background radiation sources: cosmic rays from space, radioactive rocks/radon gas in soil, nuclear weapons fallout, or radioactive materials in building materials.',
   },
 
   'q7_f': {
     marks: 2,
-    exemplar: 'Measure background count rate with the radioactive source removed. This background count rate is then subtracted from every experimental reading to give the net count rate due to the beta source.',
-    keyConcepts: ['measure background without source', 'subtract background from all readings'],
-    keywords: ['background', 'without source', 'removed', 'subtract', 'count rate', 'net'],
-    feedbackHit: 'Correct — background measured without source, subtracted from all results.',
-    feedbackMiss: 'Remove the source and measure count rate — this is background. Subtract this from every experimental reading.',
+    exemplar: 'Measure the background count rate with the beta source removed (or shielded). This background count rate is then subtracted from every experimental reading to give the net count rate due to the beta source alone.',
+    keyConcepts: ['measure background without source present', 'subtract background from all readings'],
+    keywords: ['background', 'without source', 'removed', 'subtract', 'deduct', 'count rate', 'net'],
+    feedbackHit: 'Correct — background measured without the source and subtracted from all results.',
+    feedbackMiss: 'Remove the beta source (or shield it) and measure the count rate — this is the background. Subtract this background from every experimental reading to isolate the count due to beta radiation alone.',
   },
 
   'q7_g': {
     marks: 4,
-    exemplar: '(1) Minimise time near source — less exposure time = less radiation dose.\n(2) Maximise distance from source — radiation intensity decreases with distance.\n(3) Use shielding (lead screen) — absorbs beta and gamma.\n(4) Never point source at people / keep in lead container when not in use — prevents direct exposure.',
-    keyConcepts: ['minimise exposure time', 'maximise distance', 'use shielding', 'never point at body'],
-    keywords: ['time', 'distance', 'shielding', 'lead', 'exposure', 'dose', 'container'],
-    feedbackHit: 'Excellent — four precautions each with valid reason.',
-    feedbackMiss: '(1) Minimise time; (2) maximise distance; (3) use lead shielding; (4) keep in container. Each reduces radiation dose.',
+    exemplar: 'Four precautions with reasons (1 mark each):\n(1) Minimise the time near the source — less exposure time means a smaller radiation dose absorbed.\n(2) Maximise the distance from the source — radiation intensity decreases with distance (inverse-square law).\n(3) Use shielding / handle the source with tongs behind a screen — the shielding absorbs beta radiation, reducing exposure.\n(4) Keep the source in a lead-lined container when not in use / never point it at the body — prevents unnecessary direct exposure.',
+    keyConcepts: ['minimise exposure time', 'maximise distance', 'use shielding / tongs', 'store / never point at body'],
+    keywords: ['time', 'distance', 'shielding', 'tongs', 'lead', 'exposure', 'dose', 'container', 'protective', 'point'],
+    feedbackHit: 'Excellent — four precautions each with a valid reason about reducing radiation dose.',
+    feedbackMiss: 'Key precautions: (1) minimise time near the source; (2) maximise distance; (3) use shielding / tongs; (4) store in a lead container / never point at the body. Each reduces the radiation dose received.',
   },
 
   'q7_h': {
     marks: 2,
-    exemplar: 'With an alpha source, count rate would drop to near background even without any paper — alpha particles are stopped by just a few cm of air. Beta particles penetrate more material. Alpha is less penetrating because it consists of helium nuclei (charge +2, larger mass) that interact more strongly with matter.',
-    keyConcepts: ['alpha stopped by air/paper', 'alpha less penetrating than beta', 'alpha has greater mass and charge'],
-    keywords: ['alpha', 'stopped', 'air', 'less penetrating', 'mass', 'charge', 'helium nucleus'],
-    feedbackHit: 'Correct — alpha stopped by air/paper (not paper sheets), reason explained.',
-    feedbackMiss: 'Alpha particles are stopped by a few cm of air — they never reach the paper. Alpha (helium nuclei, +2 charge) interact far more strongly with matter than beta (electrons).',
+    exemplar: 'With an alpha source the count rate would drop to (near) the background level even with no paper present — alpha particles are stopped by just a few centimetres of air or a thin sheet of paper. Beta particles can penetrate several sheets of paper. Alpha particles are stopped more easily because they are larger (helium nuclei) and carry more charge (+2), so they interact more strongly with matter and lose energy much faster.',
+    keyConcepts: ['alpha stopped before reaching detector', 'alpha less penetrating than beta', 'alpha has greater mass and charge'],
+    keywords: ['alpha', 'stopped', 'paper', 'air', 'less penetrating', 'mass', 'charge', 'interact', 'beta', 'helium nucleus'],
+    feedbackHit: 'Correct — alpha stopped by air/paper, compared to beta, explained by mass and charge.',
+    feedbackMiss: 'Alpha particles are stopped by a few cm of air or a thin sheet of paper — they barely reach the detector even with no paper. This is because alpha particles (helium nuclei, charge +2) are much larger and more highly charged than beta particles (electrons), so they interact strongly with matter and lose energy quickly.',
   },
 
-  // ─── Q8 Radioactive Decay & Half-Life ─────────────────────────
+  // ─── Q8 Radioactive Decay & Half-Life (iodine-131 / Chernobyl) ─
   'q8_a': {
     marks: 6,
-    exemplar: 'Marks for complete correct table:\n(1) Six appropriate time values (1 mark)\n(2) All three trial values recorded, showing a decrease (1 mark)\n(3) Values decrease consistently (1 mark)\n(4) Both missing averages calculated: average = (T1 + T2 + T3) / 3 (2 marks)\n(5) Averages to appropriate significant figures (1 mark)',
-    keyConcepts: ['six time values', 'decreasing values', 'average = sum/3', 'significant figures'],
+    exemplar: 'Marks for a complete and correct table:\n(1) Six appropriate time values identified (1 mark)\n(2) All three trial values recorded for each time, showing a decrease (1 mark)\n(3) Values decrease consistently and lie within a plausible range (1 mark)\n(4) Averages calculated correctly: average = (Trial 1 + Trial 2 + Trial 3) / 3 (2 marks)\n(5) All averages given to an appropriate number of significant figures (1 mark)',
+    keyConcepts: ['six time values', 'decreasing values across trials', 'average = sum / 3', 'significant figures'],
     keywords: ['six times', 'trial', 'average', 'sum', 'divide by 3', 'decreasing', 'significant figures'],
-    feedbackHit: 'Excellent — table with correct time values, decreasing data, and accurate averages.',
-    feedbackMiss: 'Choose 6 evenly spaced time values. Record % remaining from 3 trials. Average = (T1+T2+T3)/3. Values must consistently decrease.',
+    feedbackHit: 'Excellent — table completed with correct time values, decreasing data, and accurately calculated averages.',
+    feedbackMiss: 'Choose 6 evenly spaced time values. For each, record the % remaining from three trials. Average = (T1 + T2 + T3) / 3. Ensure the values consistently decrease and averages are given to an appropriate number of s.f.',
   },
 
   'q8_b': { type: 'mcq', correct: 2 },
 
   'q8_c': {
     marks: 3,
-    exemplar: 'From the strontium-90 decay graph: (1) Find where % = 50 → first half-life reading ≈29 years. (2) Find where % = 25 → second half-life reading ≈29 years. (3) Find where % = 12.5 → third reading ≈29 years. Average ≈ 29 years. Award 1 mark per valid half-life reading from graph.',
-    keyConcepts: ['read half-life at 50% remaining', 'three readings', 'calculate average'],
-    keywords: ['50%', '25%', '12.5%', 'graph', 'half-life', 'average', 'three', 'strontium-90'],
-    feedbackHit: 'Correct — three half-life readings and average calculated.',
-    feedbackMiss: 'Read time when % = 50 (1st half-life), 25 (2nd), 12.5 (3rd). Average the three time intervals.',
+    exemplar: 'From the strontium-90 decay graph: (1) Find where % = 50 → t ≈ 29 years (first half-life). (2) Find where % = 25 → t ≈ 58 years; second half-life ≈ 58 − 29 = 29 years. (3) Find where % = 12.5 → t ≈ 87 years; third half-life ≈ 87 − 58 = 29 years. Average half-life ≈ (29 + 29 + 29) / 3 ≈ 29 years (the accepted half-life of strontium-90 is about 29 years). Award 1 mark per valid half-life reading from the graph, up to 3 marks.',
+    keyConcepts: ['read time at 50% remaining', 'three half-life readings', 'calculate average half-life ≈ 29 years'],
+    keywords: ['50%', '25%', '12.5%', 'graph', 'reading', 'half-life', 'average', '29', 'three', 'strontium-90'],
+    feedbackHit: 'Correct — three half-life readings from the graph give an average of about 29 years.',
+    feedbackMiss: 'Read the time when % remaining = 50 (≈29 yr), then 25% (≈58 yr) and 12.5% (≈87 yr). Each successive interval is ~29 years. Average the three intervals → ≈29 years (strontium-90).',
   },
 
   'q8_d': {
     marks: 2,
     exemplar: '640 000 → 320 000 → 160 000 → 80 000 → 40 000 = 4 half-lives. Total time = 4 × 8 days = 32 days.',
-    keyConcepts: ['4 half-lives to reach 40 000 from 640 000', 'total time = 4 × 8 = 32 days'],
-    keywords: ['4', 'half-lives', '32', 'days', '640000', '40000'],
-    feedbackHit: 'Correct — 4 half-lives = 32 days.',
-    feedbackMiss: 'Halve repeatedly: 640 000 → 320 000 → 160 000 → 80 000 → 40 000 = 4 steps. Time = 4 × 8 days = 32 days.',
+    keyConcepts: ['4 half-lives to reach 40 000 from 640 000', 'total time = 4 × half-life = 32 days'],
+    keywords: ['4', 'half-lives', '32', 'days', '640000', '40000', '8', 'calculation'],
+    feedbackHit: 'Correct — 4 half-lives identified and total time of 32 days calculated.',
+    feedbackMiss: 'Halve repeatedly: 640 000 → 320 000 → 160 000 → 80 000 → 40 000 = 4 halving steps. Total time = 4 × 8 days = 32 days.',
   },
 
-  // ─── Q9 Power Stations & Electricity Transmission ─────────────
+  // ─── Q9 Power Stations & Electricity Transmission (oil) ───────
   'q9_a': {
     marks: 2,
-    exemplar: 'Any two of: air/smoke pollution from combustion causing health problems; visual impact (unsightly); noise from operations and tanker deliveries; heavy vehicle traffic causing congestion; risk of oil spills affecting local environment.',
-    keyConcepts: ['pollution health effects', 'visual impact', 'noise', 'traffic'],
-    keywords: ['pollution', 'smoke', 'health', 'noise', 'traffic', 'tankers', 'ugly', 'visual'],
-    feedbackHit: 'Two valid reasons correctly identified.',
-    feedbackMiss: 'Consider air pollution, noise, tanker traffic, visual impact, or oil spill risk.',
+    exemplar: 'Any two of: air/smoke pollution causing health problems for residents; visual impact (unsightly chimneys/buildings); noise pollution from machinery and oil deliveries; heavy tanker traffic delivering oil causing congestion and road damage; land required for oil storage tanks; risk of oil spills.',
+    keyConcepts: ['pollution health effects', 'visual impact', 'noise', 'traffic congestion'],
+    keywords: ['pollution', 'smoke', 'health', 'noise', 'traffic', 'tankers', 'ugly', 'visual', 'unsightly', 'spill'],
+    feedbackHit: 'Two valid reasons why residents would not want an oil power station nearby correctly identified.',
+    feedbackMiss: 'Think about air pollution and health, noise from operations, heavy tanker traffic for oil delivery, visual impact, or land needed for storage.',
   },
 
   'q9_b': {
     marks: 1,
-    exemplar: 'Water is needed to produce steam to drive the turbines, and to cool/condense the steam back to water after it passes through the turbines.',
-    keyConcepts: ['water to produce steam for turbines', 'water for cooling'],
-    keywords: ['steam', 'turbines', 'cooling', 'condenser', 'condensed'],
-    feedbackHit: 'Correct — water use for steam or cooling stated.',
-    feedbackMiss: 'Water produces steam for turbines, and condenses steam back to water.',
+    exemplar: 'Water is needed to produce steam (to drive the turbines) and to cool/condense the steam back to water after it passes through the turbines (in the condenser).',
+    keyConcepts: ['water to produce steam for turbines', 'water for cooling in condenser'],
+    keywords: ['steam', 'turbines', 'cooling', 'condenser', 'boiler', 'condensed'],
+    feedbackHit: 'Correct — water use for steam production or cooling/condensing stated.',
+    feedbackMiss: 'Large amounts of water are needed to produce steam to drive the turbines, and to cool (condense) the steam back to water after it leaves the turbines.',
   },
 
   'q9_c': {
     marks: 1,
-    exemplar: 'The secondary current halves. By P = IV, if voltage doubles then current must halve to keep power constant.',
+    exemplar: 'The secondary current halves (is halved). By conservation of energy (P = IV), if the voltage doubles then the current must halve to keep the power constant.',
     keyConcepts: ['secondary current halves when voltage doubles', 'P = IV conservation'],
-    keywords: ['halves', 'current', 'secondary', 'doubles', 'voltage', 'P=IV'],
-    feedbackHit: 'Correct — secondary current halves.',
-    feedbackMiss: 'P = IV. If V doubles, I must halve to keep P the same.',
+    keywords: ['halves', 'half', 'current', 'secondary', 'doubles', 'voltage', 'P=IV'],
+    feedbackHit: 'Correct — the secondary current halves when the voltage doubles.',
+    feedbackMiss: 'P = IV. If the voltage doubles (×2), the current must halve (÷2) to keep the power P the same. Secondary current = halved.',
   },
 
   'q9_d': {
     marks: 3,
-    exemplar: '(1) Power loss = I²R — proportional to current squared. (2) Higher transmission voltage → lower current needed (P = IV). (3) Lower current → much less heat in cables (I²R decreases), less energy wasted.',
-    keyConcepts: ['P_loss = I²R', 'higher voltage → lower current', 'lower current → less heat loss'],
-    keywords: ['I²R', 'current', 'voltage', 'heat', 'loss', 'P=IV', 'reduces'],
-    feedbackHit: 'Excellent — I²R, effect on current, and reduced loss all correct.',
-    feedbackMiss: 'Loss = I²R. Higher V → lower I. Lower I → much less heat loss (loss ∝ I²).',
+    exemplar: '(1) Power loss in the cables is given by P = I²R — it is proportional to the square of the current. (2) A higher transmission voltage means a lower current is needed to deliver the same power (P = IV: if V increases, I decreases). (3) A lower current means much less heat generated in the cables (I²R decreases), so much less energy is wasted as heat.',
+    keyConcepts: ['P_loss = I²R proportional to current squared', 'higher voltage → lower current', 'lower current → less heat loss'],
+    keywords: ['I²R', 'current', 'voltage', 'heat', 'loss', 'proportional', 'P=IV', 'reduces'],
+    feedbackHit: 'Excellent — I²R relationship, effect of voltage on current, and reduced heat loss all correctly explained.',
+    feedbackMiss: 'Power loss = I²R. Higher voltage → lower current (P=IV). Lower current → much less heat loss (loss ∝ I²). This is why electricity is transmitted at very high voltage.',
   },
 
   'q9_e': {
     marks: 6,
-    exemplar: 'Water vapour (H₂O): greenhouse gas; traps infrared radiation; contributes to enhanced greenhouse effect and global warming.\nCarbon dioxide (CO₂): major greenhouse gas; same mechanism; long atmospheric residence; primary driver of climate change from fossil fuels.\nSulfur dioxide (SO₂): causes acid rain; reacts with atmospheric water → H₂SO₃/H₂SO₄; damages forests, lakes, buildings.\nAward 2 marks per gas: 1 for impact type, 1 for mechanism.',
-    keyConcepts: ['H2O and CO2 are greenhouse gases', 'infrared absorption causes warming', 'SO2 causes acid rain'],
-    keywords: ['greenhouse gas', 'infrared', 'climate change', 'global warming', 'acid rain', 'sulfuric acid', 'reacts with water'],
-    feedbackHit: 'Excellent — impacts of all three gases with mechanisms.',
-    feedbackMiss: 'H₂O and CO₂ are greenhouse gases (trap infrared → global warming). SO₂ causes acid rain (reacts with water → sulfuric acid → damages ecosystems and buildings).',
+    exemplar: 'Water vapour (H₂O): a greenhouse gas; traps infrared radiation re-emitted from Earth\'s surface; contributes to the enhanced greenhouse effect and global warming.\nCarbon dioxide (CO₂): a major greenhouse gas; same trapping mechanism; long atmospheric residence time; the main driver of climate change from burning fossil fuels.\nSulfur dioxide (SO₂): causes acid rain; reacts with water in the atmosphere (SO₂ + H₂O → sulfurous/sulfuric acid); acid rain damages forests, kills aquatic life in lakes, and corrodes stone buildings and metals.\nAward 2 marks per gas: 1 for the impact type, 1 for the mechanism/consequence.',
+    keyConcepts: ['H2O and CO2 are greenhouse gases', 'greenhouse gas traps infrared radiation', 'SO2 causes acid rain via reaction with water', 'acid rain damages ecosystems and buildings'],
+    keywords: ['greenhouse gas', 'infrared', 'climate change', 'global warming', 'acid rain', 'sulfuric acid', 'reacts with water', 'damages', 'CO2', 'SO2', 'water vapour'],
+    feedbackHit: 'Excellent — environmental impacts of all three gases described with mechanisms.',
+    feedbackMiss: 'H₂O and CO₂ are greenhouse gases — they absorb and re-emit infrared radiation, trapping heat (climate change). SO₂ causes acid rain: it reacts with atmospheric water to form acid, damaging forests, lakes and buildings.',
   },
 
   'q9_f': {
     marks: 3,
-    exemplar: '(1) Demand much lower at night. (2) Electrical energy cannot be stored economically at large scale — excess generation is wasted. (3) Cheaper night rates encourage consumers to shift usage to night, using surplus electricity that would otherwise be wasted.',
-    keyConcepts: ['lower demand at night', 'cannot store electrical energy', 'shift usage to prevent waste'],
-    keywords: ['demand', 'lower', 'night', 'storage', 'wasted', 'cheaper', 'encourage', 'off-peak'],
-    feedbackHit: 'Correct — lower demand, inability to store, and incentive all addressed.',
-    feedbackMiss: 'Night: lower demand; can\'t store electricity; cheaper rates encourage night use of surplus.',
+    exemplar: '(1) Demand for electricity is much lower at night (fewer people awake; most businesses/factories closed). (2) Electrical energy cannot be stored economically on a large scale, so excess generation is wasted. (3) By charging less at night, companies encourage consumers to shift usage to night-time (e.g. running washing machines, charging devices), using electricity that would otherwise be wasted and letting power stations run efficiently.',
+    keyConcepts: ['lower demand at night', 'electrical energy cannot be stored at large scale', 'cheaper tariff encourages night use to prevent waste'],
+    keywords: ['demand', 'lower', 'night', 'storage', 'cannot store', 'excess', 'wasted', 'cheaper', 'encourage', 'off-peak'],
+    feedbackHit: 'Correct — lower demand, inability to store electricity, and the shift incentive all addressed.',
+    feedbackMiss: 'Night-time demand is lower; electrical energy cannot be stored economically; cheaper night rates encourage consumers to use the otherwise-wasted surplus generation.',
   },
 
   // ─── Q10 Wind Power & Traffic Management ──────────────────────
   'q10_a': {
     marks: 1,
-    exemplar: 'Any application requiring constant uninterrupted supply: hospitals; water treatment plants; data centres; airports; railway signalling; refrigeration for food/medicine; street lighting.',
-    keyConcepts: ['application requiring constant electricity'],
-    keywords: ['hospital', 'water treatment', 'data centre', 'airport', 'refrigeration', 'constant'],
-    feedbackHit: 'Correct — valid application requiring constant supply identified.',
-    feedbackMiss: 'Think of applications where power loss would be dangerous: hospitals, water treatment, data centres.',
+    exemplar: 'Any application that genuinely requires a constant uninterrupted electricity supply: hospitals / intensive care units; water treatment / pumping stations; data centres / internet servers; airports; railway signalling; refrigeration for food or medicine; street lighting.',
+    keyConcepts: ['application requiring constant electricity supply'],
+    keywords: ['hospital', 'water treatment', 'data centre', 'server', 'airport', 'refrigeration', 'constant', 'uninterrupted'],
+    feedbackHit: 'Correct — a valid application requiring a continuous electricity supply identified.',
+    feedbackMiss: 'Think of applications where a power cut would be dangerous or seriously disruptive: hospitals, water treatment plants, data centres, airports, or refrigeration all need constant electricity.',
   },
 
   'q10_b': {
     marks: 15,
-    exemplar: 'Top-band response addresses all five bullet points:\n• Why constant supply matters: link to specific consequence of failure for chosen application.\n• Advantage of wind: independent of grid (unaffected by load shedding); renewable/free fuel; low running cost; low emissions.\n• Disadvantage: intermittent (no wind at all times); battery needed for storage; high upfront cost; noise from turbine; limited power output.\n• Economic: high capital cost vs low running cost; payback period; savings during load shedding; local job creation.\n• Social: improved safety; energy independence; reduced disruption; positive environmental image; community acceptance of wind technology.',
-    keyConcepts: ['constant supply linked to application', 'wind advantage: grid-independent renewable', 'wind disadvantage: intermittent battery-dependent', 'economic: high capital low running cost', 'social: safety independence community'],
-    keywords: ['constant', 'advantage', 'disadvantage', 'wind', 'renewable', 'intermittent', 'battery', 'cost', 'economic', 'social', 'safety', 'load shedding'],
-    feedbackHit: 'Strong response — all five criteria with developed reasoning and balanced evaluation.',
-    feedbackMiss: 'Address all five: (1) why constant supply matters; (2) advantage of wind; (3) disadvantage; (4) economic; (5) social.',
+    exemplar: 'A high-scoring response (13–15 marks) addresses all five bullet points with developed reasoning:\n\n• Why constant electricity matters for the chosen application (link to a specific consequence of power failure — e.g. patient safety in a hospital, data loss, water supply failure).\n\n• Advantage of a small-scale wind supply: independent of the grid (unaffected by load shedding); renewable/free fuel (wind); low running cost; low emissions during operation; can be deployed where grid infrastructure is poor.\n\n• Disadvantage: intermittent generation (wind is variable / may not blow); battery storage adds cost and complexity; high initial installation cost; limited battery lifespan; lower/variable power output than the grid; noise and visual impact of turbines.\n\n• Economic factors: high upfront capital cost vs. low running cost; payback period (years to recoup the investment through savings); cost savings during load shedding; potential for local jobs in installation and maintenance.\n\n• Social factors: improved safety (traffic lights / hospitals / water supply keep working during load shedding); energy independence for communities; reduced disruption to daily life; positive environmental impact (renewable = less fossil fuel); public acceptance of wind technology, though some object to turbine noise/appearance.',
+    keyConcepts: ['constant supply linked to chosen application', 'wind advantage: grid-independent renewable low-emission', 'wind disadvantage: intermittent battery-dependent costly upfront', 'economic: high capital low running cost payback', 'social: improved safety energy independence community benefit'],
+    keywords: ['constant', 'advantage', 'disadvantage', 'wind', 'renewable', 'intermittent', 'battery', 'cost', 'economic', 'social', 'safety', 'load shedding', 'independent', 'payback'],
+    feedbackHit: 'Strong extended response — all five criteria addressed with developed points and a balanced evaluation of the wind supply solution.',
+    feedbackMiss: 'Address all five bullet points: (1) why constant supply matters for your chosen use; (2) advantage of wind (e.g. grid-independent, renewable); (3) disadvantage (e.g. intermittent, battery needed, cost); (4) economic factors (high setup cost, low running cost, payback period); (5) social factors (safety, energy access, community benefit).',
   },
-
 }

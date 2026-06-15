@@ -1,14 +1,17 @@
 import type { ConceptEntry } from '@/data/papers/physics-nov-2023/conceptsPublic'
 
+// Client-safe concept data — Physics November 2018 · VARIANT 1.
+// keyConcepts + keywords ONLY (no exemplars/feedback). Key format: `q{id}_{label}`.
+
 export const CONCEPTS_PUBLIC_NOV2018_V1: Record<string, ConceptEntry> = {
 
   q1_b: {
     keyConcepts: ['Speed of Sound', 'Distance-Speed-Time'],
-    keywords: ['speed of sound', 'time delay', 'distance = speed × time', '330 ms⁻¹'],
+    keywords: ['speed of sound', 'time delay', 'distance = speed × time', '330 ms⁻¹', 'fireworks'],
   },
   q1_c: {
     keyConcepts: ['Distance-Time Graphs', 'Constant Speed'],
-    keywords: ['constant speed', 'approach', 'recession', 'distance-time graph'],
+    keywords: ['constant speed', 'approach', 'recession', 'distance-time graph', 'barge'],
   },
   q1_d: {
     keyConcepts: ['Speed Calculation', 'Unit Conversion'],
@@ -17,15 +20,15 @@ export const CONCEPTS_PUBLIC_NOV2018_V1: Record<string, ConceptEntry> = {
 
   q2_b: {
     keyConcepts: ["Ohm's Law", 'Resistance'],
-    keywords: ['R = V/I', 'resistance', 'volt', 'ampere', '25 Ω'],
+    keywords: ['R = V/I', 'resistance', 'volt', 'ampere', '0.25 Ω', 'arc'],
   },
   q2_c: {
     keyConcepts: ['Charge and Current', 'Q = It'],
-    keywords: ['charge', 'Q = It', 'coulomb', 'microseconds', '0.80 C'],
+    keywords: ['charge', 'Q = It', 'coulomb', '800 C', 'welding current'],
   },
   q2_d: {
     keyConcepts: ['Conductors', 'Earthing', 'Path of Least Resistance'],
-    keywords: ['conductor', 'earth', 'resistance', 'path of least resistance', 'electrostatic discharge'],
+    keywords: ['conductor', 'earth', 'resistance', 'path of least resistance', 'earthing cable', 'shock'],
   },
 
   q3_a: {
@@ -42,7 +45,7 @@ export const CONCEPTS_PUBLIC_NOV2018_V1: Record<string, ConceptEntry> = {
   },
   q3_d: {
     keyConcepts: ['Carbon-14 Dating', 'Half-life'],
-    keywords: ['carbon-14', 'half-life', '5700 years', 'organic material', 'radiometric dating'],
+    keywords: ['carbon-14', 'half-life', '5700 years', 'organic material', 'radiometric dating', 'wood'],
   },
 
   q4_a: {
@@ -51,11 +54,11 @@ export const CONCEPTS_PUBLIC_NOV2018_V1: Record<string, ConceptEntry> = {
   },
   q4_c: {
     keyConcepts: ['Laboratory Safety'],
-    keywords: ['safety', 'justification', 'over-pressure', 'precaution'],
+    keywords: ['safety', 'justification', 'over-pressure', 'precaution', 'burst'],
   },
   q4_d: {
     keyConcepts: ['Pressure Measurement', 'Gauge Reading'],
-    keywords: ['pressure gauge', 'kPa', 'measurement', 'reading'],
+    keywords: ['pressure gauge', 'kPa', 'measurement', 'reading', '56'],
   },
   q4_e: {
     keyConcepts: ['Line of Best Fit', 'Graph Skills'],
@@ -63,11 +66,11 @@ export const CONCEPTS_PUBLIC_NOV2018_V1: Record<string, ConceptEntry> = {
   },
   q4_f: {
     keyConcepts: ['Graph Interpolation'],
-    keywords: ['interpolation', 'LOBF', 'read value', '45 kPa'],
+    keywords: ['interpolation', 'LOBF', 'read value', '38 kPa', '0.58 m'],
   },
   q4_g: {
     keyConcepts: ['Graph Interpretation', 'Y-Intercept'],
-    keywords: ['y-intercept', 'physically impossible', 'deflated ball', '0 kPa'],
+    keywords: ['y-intercept', 'physically impossible', 'deflated ball', '0 kPa', '0.38 m'],
   },
   q4_h: {
     keyConcepts: ['Proportionality', 'Hypothesis Evaluation'],
@@ -80,7 +83,7 @@ export const CONCEPTS_PUBLIC_NOV2018_V1: Record<string, ConceptEntry> = {
   },
   q5_b: {
     keyConcepts: ['Unit Conversion', 'Mean Value'],
-    keywords: ['mean', 'average', 'mm to m', 'conversion', '0.63 m'],
+    keywords: ['mean', 'average', 'cm to m', 'conversion', '0.50 m'],
   },
   q5_c: {
     keyConcepts: ['Data Tables', 'Presenting Data'],
@@ -114,7 +117,7 @@ export const CONCEPTS_PUBLIC_NOV2018_V1: Record<string, ConceptEntry> = {
   },
   q7_e: {
     keyConcepts: ['Climate Technology', 'Renewable Energy'],
-    keywords: ['technology', 'CO₂ reduction', 'strength', 'limitation', 'renewable'],
+    keywords: ['technology', 'CO₂ reduction', 'strength', 'limitation', 'electric aircraft'],
   },
 
   q8_a: {

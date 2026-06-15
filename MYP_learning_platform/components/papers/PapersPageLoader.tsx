@@ -73,6 +73,8 @@ const LOCAL_PAPER_META: Record<string, Partial<Paper>> = {
   'physics-nov-2024':    { total_marks: 100, duration_minutes: 90 },
   'physics-nov-2024-v1': { total_marks: 100, duration_minutes: 90 },
   'physics-nov-2024-v2': { total_marks: 100, duration_minutes: 90 },
+  'physics-nov-2023-v1': { total_marks: 100, duration_minutes: 90 },
+  'physics-nov-2023-v2': { total_marks: 100, duration_minutes: 90 },
   'physics-practice-v1': { total_marks:  85, duration_minutes: 90 },
   'biology-may-2025':    { total_marks: 100, duration_minutes: 90 },
   'biology-may-2025-v1': { total_marks: 100, duration_minutes: 90 },

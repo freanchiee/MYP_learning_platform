@@ -1,157 +1,164 @@
+/**
+ * CLIENT-SAFE concept data for Physics November 2021 — Variant 2.
+ * keyConcepts and keywords ONLY — no exemplar answers, no feedbackHit/Miss.
+ * Used by LiveKeywordTracker on the client side.
+ *
+ * Key format: `q{id}_{label}`  e.g. 'q1_b', 'q4_e'
+ */
 import type { ConceptEntry } from '@/data/papers/physics-nov-2023/conceptsPublic'
 
 export const CONCEPTS_PUBLIC_NOV2021_V2: Record<string, ConceptEntry> = {
 
-  // Q1 — Kinetic Theory & Brownian Motion (fat droplets in milk, 15°C to 85°C)
+  // ── Q1: Kinetic Theory & Brownian Motion (smoke cell + car tyre) ──
   q1_a: {
-    keyConcepts: ['Brownian motion', 'particle model', 'visible vs invisible'],
-    keywords: ['fat droplet', 'milk molecule', 'microscope', 'particle size'],
+    keyConcepts: ['smoke particles are visible under a microscope', 'air molecules are too small to see but constantly move'],
+    keywords: ['smoke particle', 'air molecule', 'visible', 'microscope', 'Brownian motion'],
   },
   q1_b: {
-    keyConcepts: ['kinetic energy', 'temperature', 'particle speed'],
-    keywords: ['higher temperature', 'particle motion', 'kinetic theory', 'energy'],
+    keyConcepts: ['higher temperature → particles have greater kinetic energy → move faster', 'faster particles collide more forcefully with the container walls'],
+    keywords: ['temperature', 'kinetic energy', 'faster', 'collisions', 'particles'],
   },
   q1_c: {
-    keyConcepts: ['gas pressure', 'kinetic theory', 'temperature–pressure relationship'],
-    keywords: ['15°C to 85°C', 'sealed container', 'collision frequency', 'force per unit area'],
+    keyConcepts: ['heating gas → greater kinetic energy → faster particles', 'more frequent and harder wall collisions → greater pressure'],
+    keywords: ['kinetic energy', 'faster particles', 'collisions', 'frequency', 'force', 'pressure', '15°C', '65°C'],
   },
   q1_d: {
-    keyConcepts: ['Brownian motion', 'random collision', 'particle model'],
-    keywords: ['milk molecules', 'fat droplets', 'random motion', 'unequal collisions'],
+    keyConcepts: ['air molecules constantly move despite being invisible', 'collisions with larger smoke particles cause random motion'],
+    keywords: ['air molecules', 'random motion', 'collide', 'smoke particles', 'invisible', 'kinetic theory'],
   },
 
-  // Q2 — Energy Transformations & E = mc²
+  // ── Q2: Energy & E = mc² (zip-line rider + muon–antimuon) ──
   q2_a: {
-    keyConcepts: ['SI units', 'E = mc²', 'mass–energy equivalence'],
-    keywords: ['joule', 'kilogram', 'metre per second', 'Einstein'],
+    keyConcepts: ['E = mc²: E in joules, m in kilograms, c in m s⁻¹', 'SI units must be stated correctly'],
+    keywords: ['joule', 'kilogram', 'metre per second', 'SI unit', 'E = mc²'],
   },
   q2_b: {
-    keyConcepts: ['conservation of energy', 'Sankey diagram', 'energy transformation'],
-    keywords: ['kinetic energy', 'thermal energy', 'sound energy', '550 J', '490 J', '50 J'],
+    keyConcepts: ['conservation of energy: total input = sum of all outputs', 'Sankey diagram: arrow width represents energy value', 'remaining energy lost as heat to friction'],
+    keywords: ['Sankey diagram', 'heat', 'friction', 'conservation of energy', '85 J', 'energy transformation'],
   },
   q2_c: {
-    keyConcepts: ['kinetic energy', 'velocity calculation', 'KE = ½mv²'],
-    keywords: ['20 kg', '490 J', '7.0 m s⁻¹', 'significant figures'],
+    keyConcepts: ['KE = ½mv²', 'rearrange: v = √(2KE/m)', 'give answer to 2 significant figures'],
+    keywords: ['KE = ½mv²', 'velocity', '2 significant figures', '6.7 m/s', '900 J', '40 kg'],
   },
   q2_d: {
-    keyConcepts: ['E = mc²', 'antimatter', 'mass–energy conversion'],
-    keywords: ['electron', 'positron', '9.11 × 10⁻³¹ kg', '3.0 × 10⁸ m s⁻¹', '1.64 × 10⁻¹³ J'],
+    keyConcepts: ['E = mc²: total mass converts to energy', 'annihilation: muon + antimuon → energy only', 'total mass = sum of both particle masses'],
+    keywords: ['E = mc²', 'annihilation', 'muon', 'antimuon', 'total mass', 'speed of light', '3.4 × 10⁻¹¹ J'],
   },
 
-  // Q3 — Red-shift & Hubble's Law
+  // ── Q3: Red-Shift & Hubble's Law (receding galaxy clusters / supernovae) ──
   q3_a: {
-    keyConcepts: ['electromagnetic waves', 'transverse waves', 'microwaves'],
-    keywords: ['transverse', 'electromagnetic', 'no medium', 'wave type'],
+    keyConcepts: ['light is a transverse electromagnetic wave', 'not mechanical — travels through a vacuum'],
+    keywords: ['transverse', 'electromagnetic', 'light wave', 'not mechanical'],
   },
   q3_b: {
-    keyConcepts: ['red-shift', 'Doppler effect', 'wavelength change'],
-    keywords: ['moving away', 'wavelength increase', 'frequency decrease', 'graph selection'],
+    keyConcepts: ['Doppler effect: source moving away → wavelength increases', 'longer wavelength = red-shift', 'frequency decreases when wavelength increases'],
+    keywords: ['wavelength stretched', 'source moving away', 'Doppler effect', 'longer wavelength', 'red-shift', 'Graph B'],
   },
   q3_c: {
-    keyConcepts: ['red-shift', 'electromagnetic spectrum', 'visible light'],
-    keywords: ['wavelength', 'red end', 'spectrum', 'receding star'],
+    keyConcepts: ['red-shift = increase in wavelength of light from distant galaxy clusters', 'red light has the longest wavelength in the visible spectrum', 'clusters moving away appear redder'],
+    keywords: ['wavelength increased', 'red end', 'spectrum', 'moving away', 'red-shift', 'redder'],
   },
   q3_d: {
-    keyConcepts: ['Hubble\'s law', 'line of best fit', 'graphing'],
-    keywords: ['scatter graph', 'best fit', 'distance', 'velocity'],
+    keyConcepts: ['line of best fit: straight line through origin with equal points above/below', 'Hubble\'s law graph passes through the origin (v ∝ d)'],
+    keywords: ['line of best fit', 'origin', 'LOBF', 'scatter graph', 'equal distribution'],
   },
   q3_e: {
-    keyConcepts: ['proportional relationship', 'Hubble\'s law', 'graph analysis'],
-    keywords: ['direct proportion', 'distance', 'recession velocity', 'straight line through origin'],
+    keyConcepts: ['Hubble\'s law: velocity ∝ distance', 'proportional relationship → straight line through the origin'],
+    keywords: ['distance increases', 'velocity increases', 'proportional', 'straight line', 'origin'],
   },
   q3_f: {
-    keyConcepts: ['Big Bang theory', 'expanding universe', 'Hubble\'s law'],
-    keywords: ['galaxies receding', 'single origin', 'Big Bang', 'expanding universe'],
+    keyConcepts: ['origin of Hubble graph → all matter once at the same point (Big Bang)', 'galaxies moving apart → universe is expanding'],
+    keywords: ['Big Bang', 'origin', 'expanding universe', 'same point', 'galaxies moving apart'],
   },
   q3_g: {
-    keyConcepts: ['data reliability', 'sample size', 'scientific estimation'],
-    keywords: ['more data', 'accurate gradient', 'age of universe', '13.8 billion years'],
+    keyConcepts: ['more data → more accurate line of best fit → more reliable gradient → better age estimate'],
+    keywords: ['more data', 'reliable', 'estimate', 'gradient', 'Hubble constant', 'age of universe'],
   },
 
-  // Q4 — Ohm's Law & Non-Ohmic Conductors
+  // ── Q4: Ohm's Law & Non-Ohmic Conductors (carbon resistor X vs thermistor Y) ──
   q4_a: {
-    keyConcepts: ['data organisation', 'raw data table', 'unit conversion'],
-    keywords: ['voltage', 'current', 'mA to A', '504 mA', '0.50 A', 'significant figures'],
+    keyConcepts: ['data table: headers with quantity and unit', 'units in headers only', 'ascending order of IV', '320 mA = 0.320 A', 'consistent decimal places'],
+    keywords: ['Voltage / V', 'Current / A', 'ascending order', 'mA to A', '0.32 A', 'headers', 'units'],
   },
   q4_b: {
-    keyConcepts: ['Ohm\'s law', 'ohmic conductor', 'hypothesis testing'],
-    keywords: ['proportional', 'doubles', 'anomalous', '2.0 V', 'hypothesis support'],
+    keyConcepts: ['test hypothesis: doubling V should double I for an ohmic conductor', 'calculate V/I ratios to verify proportionality', 'identify anomalous values'],
+    keywords: ['double voltage', 'double current', 'proportional', 'hypothesis', 'calculation', 'anomaly', '6.25 ohm'],
   },
   q4_c: {
-    keyConcepts: ['non-ohmic conductor', 'current–voltage graph', 'linearity'],
-    keywords: ['curved graph', 'non-linear', 'component Y', 'non-ohmic'],
+    keyConcepts: ['ohmic conductor: straight I-V graph', 'non-ohmic conductor: curved/non-linear I-V graph', 'non-constant gradient = non-proportional'],
+    keywords: ['non-linear', 'curved', 'non-ohmic', 'gradient not constant', 'Ohm\'s law', 'thermistor'],
   },
   q4_d: {
-    keyConcepts: ['data presentation', 'graph vs table', 'visual analysis'],
-    keywords: ['visual trend', 'linear', 'non-linear', 'graph advantage'],
+    keyConcepts: ['graphs show relationships more clearly than tables', 'easier to identify linear vs non-linear patterns visually'],
+    keywords: ['visual representation', 'easier', 'graph', 'relationship', 'linear', 'pattern'],
   },
   q4_e: {
-    keyConcepts: ['resistance calculation', 'R = V/I', 'graph reading'],
-    keywords: ['5.0 Ω', '15 Ω', '1.0 V', '0.40 A', 'Ohm\'s law'],
+    keyConcepts: ['R = V/I', 'read V or I from the graph for the given condition', 'non-ohmic: resistance varies with current'],
+    keywords: ['R = V/I', 'resistance', 'ohms', 'graph reading', '5.0 Ω', 'thermistor'],
   },
   q4_f: {
-    keyConcepts: ['circuit diagram', 'series circuit', 'LED', 'ammeter'],
-    keywords: ['LEDs in series', 'ammeter in series', 'circuit symbol'],
+    keyConcepts: ['ammeter in series measures current', 'series circuit: one current path through all components', 'circuit diagram symbols'],
+    keywords: ['series circuit', 'ammeter', 'circuit diagram', 'bulbs', 'current'],
   },
 
-  // Q5 — Wire Resistance
+  // ── Q5: Resistance of a Wire (undersea telecom copper conductor) ──
   q5_a: {
-    keyConcepts: ['resistivity', 'gradient interpretation', 'R = ρl/A'],
-    keywords: ['gradient', 'ρ/A', 'resistance vs length', 'graph interpretation'],
+    keyConcepts: ['R = ρl/A → gradient of R vs l graph = ρ/A', 'slope = resistivity ÷ area when area is constant'],
+    keywords: ['gradient', 'ρ/A', 'resistivity', 'area', 'R = ρl/A'],
   },
   q5_b: {
-    keyConcepts: ['gradient calculation', 'resistance graph', 'units'],
-    keywords: ['0.035 Ω m⁻¹', 'ΔR/Δl', 'best-fit line', 'Ω m⁻¹'],
+    keyConcepts: ['gradient = ΔR/Δl', 'use points on the LOBF, far apart', 'units of ρ/A = Ω m⁻¹'],
+    keywords: ['gradient', 'Ω m⁻¹', 'LOBF', 'calculation', 'ΔR/Δl', '0.045'],
   },
   q5_c: {
-    keyConcepts: ['systematic error', 'y-intercept', 'graph evidence'],
-    keywords: ['y-intercept', 'non-zero', 'systematic error', 'R = 0 at l = 0'],
+    keyConcepts: ['systematic error: constant offset added to all readings', 'R = 0 when l = 0 (theoretical)', 'non-zero y-intercept is evidence of a systematic error'],
+    keywords: ['systematic error', 'y-intercept', 'zero resistance', 'zero length', 'origin', 'constant offset'],
   },
   q5_d: {
-    keyConcepts: ['gradient validity', 'systematic error', 'constant offset'],
-    keywords: ['constant cancels', 'differences', 'gradient unaffected', 'invalid statement'],
+    keyConcepts: ['systematic error cancels in the gradient calculation (constant offset subtracts out)', 'gradient = ΔR/Δl — differences eliminate the constant offset', 'statement is invalid'],
+    keywords: ['constant offset', 'cancels', 'gradient', 'differences', 'invalid', 'accurate gradient'],
   },
   q5_e: {
-    keyConcepts: ['error source', 'systematic error', 'measuring instruments'],
-    keywords: ['zero error', 'calibration', 'connecting wires', 'crocodile clips'],
+    keyConcepts: ['systematic errors: zero error, calibration error, extra circuit resistance'],
+    keywords: ['zero error', 'calibration error', 'connecting lead resistance', 'crocodile clips'],
   },
   q5_f: {
-    keyConcepts: ['resistance vs area', 'electron pathways', 'hypothesis formulation'],
-    keywords: ['R ∝ 1/A', 'inversely proportional', 'charge carriers', 'electron pathways'],
+    keyConcepts: ['R ∝ 1/A (inversely proportional from R = ρl/A)', 'larger area → more pathways for electrons → less resistance', 'model of moving charge carriers (electrons)'],
+    keywords: ['inversely proportional', 'R ∝ 1/A', 'electrons', 'pathways', 'charge carriers', 'area increases', 'resistance decreases'],
   },
 
-  // Q6 — LED Series Circuit Investigation
+  // ── Q6: Series Circuit Investigation (model-railway signal bulbs) ──
   q6_a: {
-    keyConcepts: ['circuit diagram', 'series connection', 'LED', 'ammeter'],
-    keywords: ['LEDs in series', 'ammeter in series', 'circuit symbol'],
+    keyConcepts: ['series circuit diagram: two bulbs and an ammeter in one loop', 'ammeter in series measures total current', 'no extra series components'],
+    keywords: ['series', 'ammeter', 'circuit diagram', 'bulbs', 'correct symbols'],
   },
   q6_b: {
-    keyConcepts: ['investigation design', 'Criterion B', 'series circuit', 'current vs LEDs'],
-    keywords: ['research question', 'hypothesis', 'IV', 'DV', 'CV', 'method', 'sufficient data'],
+    keyConcepts: ['more bulbs in series → more resistance → less current (I = V/R)', 'IV = number of bulbs, DV = current, CV = supply voltage', 'need 5+ values, repeats, data table'],
+    keywords: ['research question', 'hypothesis', 'IV', 'DV', 'control variable', 'voltage', 'current decreases', 'resistance increases', 'method'],
   },
 
-  // Q7 — Renewable Energy Sources
+  // ── Q7: Renewable Energy (tidal-stream / geothermal / biomass) ──
   q7_a: {
-    keyConcepts: ['renewable energy', 'disadvantages', 'energy classification'],
-    keywords: ['geothermal', 'biomass', 'tidal', 'geologically active', 'biodiversity', 'saltwater corrosion'],
+    keyConcepts: ['tidal disadvantages: only with the tide, marine disruption', 'geothermal disadvantages: needs geological activity, high start-up cost', 'biomass disadvantages: land use, time delay'],
+    keywords: ['tidal', 'geothermal', 'biomass', 'disadvantage', 'tide', 'marine life', 'geological', 'crops'],
   },
   q7_b: {
-    keyConcepts: ['energy transfer', 'energy chain', 'biomass power station'],
-    keywords: ['chemical potential', 'thermal', 'kinetic', 'electrical', 'energy chain'],
+    keyConcepts: ['biomass energy flow: chemical potential → thermal → kinetic → electrical', 'burning releases chemical energy as thermal energy; steam drives a turbine; generator produces electricity'],
+    keywords: ['chemical potential', 'thermal', 'kinetic', 'electrical', 'energy chain', 'biomass'],
   },
   q7_c: {
-    keyConcepts: ['energy evaluation', 'Criterion D', 'renewable energy decision'],
-    keywords: ['advantages', 'disadvantages', 'recommendation', 'country specific'],
+    keyConcepts: ['renewable energy advantages: no CO₂, no fuel cost, sustainable', 'link advantages/disadvantages to a specific country context'],
+    keywords: ['advantage', 'disadvantage', 'country-specific', 'renewable', 'CO₂', 'cost', 'justified'],
   },
 
-  // Q8 — Malta Energy Options
+  // ── Q8: Pacific-atoll Island Energy Options ──
   q8_a: {
-    keyConcepts: ['non-renewable energy', 'nuclear fuel', 'uranium'],
-    keywords: ['nuclear', 'uranium', 'finite', 'non-renewable', 'option 3'],
+    keyConcepts: ['nuclear fuel (uranium) is non-renewable — finite resource', 'solar and wind are renewable — continuously replenished'],
+    keywords: ['nuclear', 'SMR', 'uranium', 'non-renewable', 'finite', 'limited', 'not replenished'],
   },
   q8_b: {
-    keyConcepts: ['energy policy', 'evaluation', 'Criterion D', 'political and economic factors'],
-    keywords: ['Malta', 'solar', 'wind', 'nuclear', 'political', 'economic', 'recommendation'],
+    keyConcepts: ['evaluate using data from the infographic (cost, cable, lifetime)', 'political: sovereignty, international agreements, public opposition', 'economic: compare costs per kWh and construction costs', 'conclude with a justified recommendation'],
+    keywords: ['advantages', 'political implications', 'economic implications', 'data', 'recommendation', 'atoll', 'justified conclusion'],
   },
 
 }

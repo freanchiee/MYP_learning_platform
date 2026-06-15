@@ -210,13 +210,14 @@ function ParticleDeflect({ data }: { data: FieldSimData }) {
     return out
   }, [decoSeed])
 
-  // Deflection direction label.
+  // Deflection direction label. Generic phrasing so it never duplicates words from
+  // a descriptive plate label (the plates are labelled on the diagram itself).
   const deflectLabel =
     bendDir === 0
       ? 'no deflection — travels straight through'
       : bendDir < 0
-        ? `deflects up toward ${topLabel} plate`
-        : `deflects down toward ${botLabel} plate`
+        ? 'deflects upward — toward the top plate'
+        : 'deflects downward — toward the bottom plate'
 
   const reset = () => {
     setPlaying(false)
@@ -273,10 +274,12 @@ function ParticleDeflect({ data }: { data: FieldSimData }) {
           {/* ---- Plates ---- */}
           <line x1={PLATE_X0} y1={TOP_Y} x2={PLATE_X1} y2={TOP_Y} stroke={PALETTE[1]} strokeWidth={6} strokeLinecap="round" />
           <line x1={PLATE_X0} y1={BOT_Y} x2={PLATE_X1} y2={BOT_Y} stroke={PALETTE[4]} strokeWidth={6} strokeLinecap="round" />
-          <text x={PLATE_X0 - 14} y={TOP_Y + 5} textAnchor="end" fontSize={18} fontWeight={800} fill={PALETTE[1]}>
+          {/* Plate labels sit just above / below their plate, left-aligned inside the
+              field, so a descriptive label of any length can't clip off the left edge. */}
+          <text x={PLATE_X0} y={TOP_Y - 9} textAnchor="start" fontSize={14} fontWeight={800} fill={PALETTE[1]}>
             {topLabel}
           </text>
-          <text x={PLATE_X0 - 14} y={BOT_Y + 6} textAnchor="end" fontSize={18} fontWeight={800} fill={PALETTE[4]}>
+          <text x={PLATE_X0} y={BOT_Y + 22} textAnchor="start" fontSize={14} fontWeight={800} fill={PALETTE[4]}>
             {botLabel}
           </text>
           {fieldType === 'B' && (

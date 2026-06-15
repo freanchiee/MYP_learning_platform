@@ -1,36 +1,36 @@
 import type { ConceptEntry } from '@/data/papers/physics-nov-2023/conceptsPublic'
 
 export const CONCEPTS_PUBLIC_NOV2020_V2: Record<string, ConceptEntry> = {
-  // Q1 — Thermoregulation (Musk ox)
+  // Q1 — Thermoregulation (walrus / jackrabbit / Arctic hare / horse)
   q1_a: {
-    keyConcepts: ['thick shaggy fur', 'insulation', 'musk ox', 'cold adaptation'],
-    keywords: ['thick', 'shaggy', 'fur', 'insulate', 'cold', 'musk ox'],
+    keyConcepts: ['thick blubber layer', 'insulation', 'walrus', 'cold adaptation'],
+    keywords: ['walrus', 'blubber', 'fat', 'insulate', 'cold', 'thick'],
   },
   q1_b: {
-    keyConcepts: ['blubber is poor conductor', 'fat insulates', 'prevents heat loss to cold water'],
-    keywords: ['blubber', 'fat', 'conductor', 'insulator', 'heat loss', 'prevent', 'cold', 'water'],
+    keyConcepts: ['blubber is a poor conductor', 'good insulator', 'reduces conduction', 'less heat lost'],
+    keywords: ['blubber', 'fat', 'insulator', 'conductor', 'poor', 'heat loss', 'conduction'],
   },
   q1_c: {
-    keyConcepts: ['white fur reduces infrared radiation', 'large ears increase heat loss', 'surface area', 'conduction', 'convection'],
-    keywords: ['white', 'fur', 'radiation', 'infrared', 'large', 'ears', 'surface area', 'conduction', 'convection', 'heat loss'],
+    keyConcepts: ['large ears increase heat loss', 'large surface area', 'white fur reduces radiation', 'conduction', 'convection'],
+    keywords: ['large', 'ears', 'surface area', 'white', 'fur', 'radiation', 'conduction', 'convection', 'heat loss'],
   },
   q1_d: {
     keyConcepts: ['evaporation removes heat', 'high energy particles escape', 'lower average energy', 'cooling effect'],
     keywords: ['evaporation', 'heat', 'high energy', 'fast', 'escape', 'surface', 'lower energy', 'cool'],
   },
 
-  // Q2 — Energy / La Marmotte
+  // Q2 — Energy / Tower crane
   q2_a: {
-    keyConcepts: ['Sankey diagram', 'chemical energy', 'useful energy output', 'heat losses', 'frictional losses'],
-    keywords: ['Sankey', 'chemical', 'useful', 'heat', 'friction', 'energy', '25%', '70%', '5%'],
+    keyConcepts: ['Sankey diagram', 'input energy', 'useful energy output', 'heat losses', 'frictional losses'],
+    keywords: ['Sankey', 'input', 'useful', 'heat', 'friction', 'energy', '25%', '70%', '5%'],
   },
   q2_b: {
-    keyConcepts: ['gravitational potential energy', 'Ep = mgh', 'change in height 1800 m', 'mass 600 kg', 'g = 10'],
-    keywords: ['GPE', 'gravitational', 'potential', 'mgh', '1800', 'height', 'altitude', 'joules', 'MJ', '600'],
+    keyConcepts: ['gravitational potential energy', 'Ep = mgh', 'height 75 m', 'mass 1500 kg', 'g = 10'],
+    keywords: ['GPE', 'gravitational', 'potential', 'mgh', '75', 'height', '1500', 'joules', 'MJ'],
   },
   q2_c: {
-    keyConcepts: ['power = energy / time', 'watts', 'rate of energy transfer', 'P = 18 kW'],
-    keywords: ['power', 'energy', 'time', 'P = E/t', 'watts', 'W', 'kW', '18000', '450'],
+    keyConcepts: ['power = energy / time', 'watts', 'rate of energy transfer', 'P = 20 kW'],
+    keywords: ['power', 'energy', 'time', 'P = E/t', 'watts', 'W', 'kW', '20000', '120'],
   },
 
   // Q3 — Light and space
@@ -43,8 +43,8 @@ export const CONCEPTS_PUBLIC_NOV2020_V2: Record<string, ConceptEntry> = {
     keywords: ['geostationary', '24 hours', 'period', 'orbit', 'stationary', 'same'],
   },
   q3_c: {
-    keyConcepts: ['satellite phone', 'weather forecasting', 'TV relay', 'satellite applications'],
-    keywords: ['weather', 'TV', 'telephone', 'phone', 'relay', 'satellite', 'application'],
+    keyConcepts: ['television broadcasting', 'satellite applications', 'GPS', 'satellite phones', 'navigation'],
+    keywords: ['television', 'TV', 'GPS', 'navigation', 'phone', 'satellite', 'application'],
   },
   q3_d: {
     keyConcepts: ['speed of light', 'distance = speed × time', 't = d/c', 'unit conversion km to m', 'two-way 0.24 s'],
@@ -55,7 +55,7 @@ export const CONCEPTS_PUBLIC_NOV2020_V2: Record<string, ConceptEntry> = {
     keywords: ['Big Bang', 'galaxies', 'apart', 'expanding', 'evidence', 'origin', 'universe'],
   },
 
-  // Q4 — Kibble balance / electromagnet
+  // Q4 — Security door-lock electromagnet
   q4_a: {
     keyConcepts: ['research question', 'current as IV', 'electromagnet strength as DV'],
     keywords: ['research question', 'current', 'electromagnet', 'strength', 'IV', 'DV', 'affect'],
@@ -77,18 +77,18 @@ export const CONCEPTS_PUBLIC_NOV2020_V2: Record<string, ConceptEntry> = {
     keywords: ['range', 'balance', 'greatest', 'scale', 'measure', 'appropriate'],
   },
 
-  // Q5 — Metal staple investigation
+  // Q5 — Iron nail investigation
   q5_a: {
-    keyConcepts: ['raw data table', 'headings with units', 'ascending order', 'coil length vs staples'],
-    keywords: ['table', 'headings', 'units', 'length', 'staples', 'raw data', 'ascending'],
+    keyConcepts: ['raw data table', 'headings with units', 'ascending order', 'coil length vs nails'],
+    keywords: ['table', 'headings', 'units', 'length', 'nails', 'raw data', 'ascending'],
   },
   q5_b: {
-    keyConcepts: ['turns per centimetre', 'processed data', 'weight = staples × 0.5 N', 'calculated values'],
-    keywords: ['turns per cm', 'calculate', 'weight', 'processed', 'cm⁻¹', '0.5 N', 'multiply'],
+    keyConcepts: ['turns per centimetre', 'processed data', 'weight = nails × 0.25', 'calculated values'],
+    keywords: ['turns per cm', 'calculate', 'weight', 'processed', 'cm⁻¹', '0.25 N', 'multiply'],
   },
   q5_c: {
     keyConcepts: ['small increments', 'more precise', 'accurate measurement', 'smaller weight per pin'],
-    keywords: ['precise', 'accurate', 'small', 'increment', '0.02 N', 'better', 'measurement'],
+    keywords: ['precise', 'accurate', 'small', 'increment', '0.01 N', 'better', 'measurement'],
   },
   q5_d: {
     keyConcepts: ['straight line through origin', 'proportional relationship', 'graph supports relationship'],
@@ -101,32 +101,32 @@ export const CONCEPTS_PUBLIC_NOV2020_V2: Record<string, ConceptEntry> = {
 
   // Q6 — Capillary action
   q6_a: {
-    keyConcepts: ['measure height', 'read from diagram', '7 mm', 'complete table', '1/diameter 0.25'],
-    keywords: ['measure', 'height', '7', 'read', 'table', 'diameter', '4.0', '0.25', 'capillary'],
+    keyConcepts: ['measure height', 'read from diagram', '20 mm', 'complete table', '1/diameter 0.63'],
+    keywords: ['measure', 'height', '20', 'read', 'table', 'diameter', '1.6', '0.63', 'capillary'],
   },
   q6_b: {
-    keyConcepts: ['plot point (0.25, 7.0)', 'line of best fit', 'axis labels', '1/diameter x-axis', 'height y-axis'],
-    keywords: ['plot', 'graph', 'line of best fit', 'axis', 'label', 'units', 'point', '0.25', '7.0'],
+    keyConcepts: ['plot point (0.63, 20.0)', 'line of best fit', 'axis labels', '1/diameter x-axis', 'height y-axis'],
+    keywords: ['plot', 'graph', 'line of best fit', 'axis', 'label', 'units', 'point', '0.63', '20.0'],
   },
   q6_c: {
-    keyConcepts: ['gradient calculation', 'capillary constant ≈ 28', 'Δy/Δx', 'two points on line'],
-    keywords: ['gradient', 'calculate', 'Δy', 'Δx', 'capillary constant', 'slope', '28'],
+    keyConcepts: ['gradient calculation', 'capillary constant ≈ 32', 'Δy/Δx', 'two points on line'],
+    keywords: ['gradient', 'calculate', 'Δy', 'Δx', 'capillary constant', 'slope', '32'],
   },
   q6_d: {
-    keyConcepts: ['inversely proportional', 'small tube diameter', 'tree height 115 m', 'unrealistically small'],
-    keywords: ['inversely proportional', 'small diameter', 'tree', '115', 'height', 'unrealistic', 'capillary alone'],
+    keyConcepts: ['inversely proportional', 'small tube diameter', 'tree height 100 m', 'unrealistically small'],
+    keywords: ['inversely proportional', 'small diameter', 'tree', '100', 'height', 'unrealistic', 'capillary alone'],
   },
 
   // Q7 — Design investigation (detergent concentration)
   q7_a: {
     keyConcepts: ['research question detergent concentration', 'IV = detergent concentration', 'DV = height', 'control tube diameter', 'at least 5 increments', 'three trials', 'mean'],
-    keywords: ['detergent', 'concentration', 'height', 'IV', 'DV', 'control', 'pipette', 'capillary', 'ruler', 'method', 'repeat', 'mean', 'trials'],
+    keywords: ['concentration', 'detergent', 'surfactant', 'height', 'IV', 'DV', 'control', 'cylinder', 'pipette', 'capillary', 'ruler', 'method', 'repeat', 'mean', 'trials'],
   },
 
   // Q8 — Maglev trains
   q8_a: {
-    keyConcepts: ['iron is magnetic', 'ferromagnetic metal', 'attracted to magnet'],
-    keywords: ['iron', 'magnetic', 'ferromagnetic', 'attracted'],
+    keyConcepts: ['cobalt is magnetic', 'ferromagnetic metal', 'attracted to magnet'],
+    keywords: ['cobalt', 'magnetic', 'ferromagnetic', 'attracted'],
   },
   q8_b: {
     keyConcepts: ['levitation = upward', 'guidance = sideways', 'propulsion = forward', 'force identification'],

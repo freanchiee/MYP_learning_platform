@@ -1,161 +1,163 @@
 import type { ConceptEntry } from '@/data/papers/physics-nov-2023/conceptsPublic'
 
 export const CONCEPTS_PUBLIC_NOV2017_V2: Record<string, ConceptEntry> = {
-
   // Q1 — Atoms & Static Electricity
   q1_a: {
     keyConcepts: ['proton: nucleus, mass 1, charge +1', 'neutron: nucleus, mass 1, charge 0', 'electron: orbitals, mass 0, charge −1'],
     keywords: ['nucleus', 'orbitals', 'proton', 'neutron', 'electron', 'mass 1', 'charge +1', 'charge 0', 'charge -1'],
   },
   q1_b: {
-    keyConcepts: ['electrons transferred from silk cloth to PVC pipe', 'charge transfer via electron movement'],
-    keywords: ['electrons', 'transferred', 'silk', 'cloth', 'PVC', 'pipe'],
+    keyConcepts: ['electrons transferred from hair to balloon', 'charge transfer via electron movement'],
+    keywords: ['electrons', 'transferred', 'hair', 'balloon'],
   },
   q1_c: {
-    keyConcepts: ['like charges repel', 'both pipes same negative charge'],
+    keyConcepts: ['like charges repel', 'both balloons same negative charge'],
     keywords: ['repulsion', 'repel', 'same charge'],
   },
   q1_d: {
-    keyConcepts: ['no charge transfer between same-charge objects', 'nothing happens'],
+    keyConcepts: ['no transfer between same charges', 'nothing happens'],
     keywords: ['nothing', 'same charge', 'no exchange'],
   },
 
-  // Q2 — Hailstones & Terminal Velocity
+  // Q2 — Volcanic Ash / Terminal Velocity
   q2_a: {
-    keyConcepts: ['v² = u² + 2as', 'v = √6400 = 80 ms⁻¹ for h = 320 m'],
-    keywords: ['v² = u² + 2as', '80', 'ms⁻¹', 'free fall', 'kinematics'],
+    keyConcepts: ['v² = u² + 2as or mgh = ½mv²', 'v = √(2gh) = 90 ms⁻¹'],
+    keywords: ['v² = u² + 2as', '90', 'ms⁻¹', 'v = √2gh'],
+  },
+  q2_b: {
+    keyConcepts: ['terminal velocity: balanced forces (equal A and B arrows)', 'diagram 1 shows equal forces'],
+    keywords: ['terminal velocity', 'balanced', 'equal forces', 'diagram 1'],
   },
   q2_c: {
-    keyConcepts: ['air resistance upward', 'weight downward'],
-    keywords: ['air resistance', 'drag', 'weight', 'upward', 'downward'],
+    keyConcepts: ['Force A (up) = air resistance / drag', 'Force B (down) = weight / gravitational force'],
+    keywords: ['air resistance', 'drag', 'weight', 'gravitational force'],
   },
   q2_d: {
-    keyConcepts: ['4.0 × 10⁻⁵ kg = 0.04 g', 'unit conversion × 1000'],
-    keywords: ['unit conversion', '0.04 g', '4.0 × 10⁻² g'],
+    keyConcepts: ['2.0 × 10⁻⁵ kg = 2.0 × 10⁻² g = 0.020 g'],
+    keywords: ['0.020 g', '2.0 × 10⁻²', 'grams', 'conversion'],
   },
   q2_e: {
-    keyConcepts: ['p = mv = 4.0×10⁻⁵ × 80 = 3.2×10⁻³ kgms⁻¹'],
-    keywords: ['p = mv', 'momentum', '3.2 × 10⁻³', 'kgms⁻¹'],
+    keyConcepts: ['p = mv = 2.0×10⁻⁵ × 90 = 1.8×10⁻³ kgms⁻¹'],
+    keywords: ['momentum', 'p = mv', '1.8 × 10⁻³', 'kgms⁻¹'],
   },
   q2_f: {
-    keyConcepts: ['proportional = straight line through origin', 'evaluate hypothesis against graph'],
-    keywords: ['straight line', 'origin', 'proportional', 'hypothesis', 'not supported'],
+    keyConcepts: ['proportional requires straight line through origin', 'graph not straight line → hypothesis incorrect'],
+    keywords: ['straight line', 'origin', 'proportional', 'hypothesis incorrect'],
   },
   q2_g: {
-    keyConcepts: ['straight line through origin → v² directly proportional to r'],
-    keywords: ['straight line', 'origin', 'v² ∝ r', 'directly proportional'],
+    keyConcepts: ['v² vs r: straight line through origin → v² ∝ r'],
+    keywords: ['v² ∝ r', 'proportional', 'straight line', 'origin'],
   },
 
-  // Q3 — Electricity & Light Bulbs
+  // Q3 — Electricity & Camping Lantern
   q3_a: {
-    keyConcepts: ['chemical → electrical → light energy chain'],
+    keyConcepts: ['chemical → electrical → light (energy chain in battery + bulb circuit)'],
     keywords: ['chemical', 'electrical', 'light'],
   },
   q3_b: {
-    keyConcepts: ['P = VI = 15 × 0.6 = 9.0 W'],
-    keywords: ['P = VI', '9.0 W', 'power', 'watts'],
+    keyConcepts: ['P = VI = 12 × 0.4 = 4.8 W'],
+    keywords: ['4.8 W', 'watts', 'P = VI'],
   },
   q3_c: {
-    keyConcepts: ['Q = It = 0.6 × 80 = 48 C'],
-    keywords: ['Q = It', '48 C', 'charge', 'coulombs'],
+    keyConcepts: ['Q = It = 0.4 × 120 = 48 C'],
+    keywords: ['48 C', 'coulombs', 'Q = It'],
   },
   q3_d: {
-    keyConcepts: ['increasing R reduces I (fixed V)', 'less I → less P → dimmer bulb'],
-    keywords: ['resistance', 'current', 'I = V/R', 'power', 'brightness', 'decreases'],
+    keyConcepts: ['variable resistor increases total R', 'I = V/R decreases (V fixed)', 'less current → less power → dimmer bulb'],
+    keywords: ['resistance', 'increases', 'current', 'decreases', 'brightness', 'voltage drops'],
   },
   q3_e: {
-    keyConcepts: ['gradient = running cost per hour', 'y-intercept = purchase price', 'intersection = break-even'],
-    keywords: ['gradient', 'y-intercept', 'intersection', 'LED', 'running cost'],
+    keyConcepts: ['gradient = running cost rate (LED shallowest = cheapest to run)', 'y-intercept = purchase price', 'intersection shows break-even point', 'LED 4W = lowest energy use'],
+    keywords: ['gradient', 'y-intercept', 'intersection', 'LED', '4W', 'running cost', 'economical'],
   },
   q3_f: {
-    keyConcepts: ['bulb lifespan needed for full cost comparison'],
-    keywords: ['life span', 'lifespan', 'replacement'],
+    keyConcepts: ['life span of bulb needed for full comparison'],
+    keywords: ['life span', 'lifespan', 'how long lasts'],
   },
 
-  // Q4 — Evaporation Surface Area Investigation
+  // Q4 — Evaporation Investigation
   q4_a: {
-    keyConcepts: ['question: surface area (IV) → mass evaporated (DV)'],
-    keywords: ['surface area', 'mass evaporated', 'investigation question'],
+    keyConcepts: ['question: how does surface area affect mass evaporated?'],
+    keywords: ['surface area', 'mass evaporated', 'affect'],
   },
   q4_b: {
-    keyConcepts: ['rate = 0.48/16 × 60 = 1.80 g h⁻¹'],
-    keywords: ['rate', '1.80 g h⁻¹', 'convert', 'mass', 'time'],
+    keyConcepts: ['rate = mass/time = 0.36/12 min × 60 = 1.80 g h⁻¹'],
+    keywords: ['1.80', 'g h⁻¹', 'rate', 'convert minutes to hours'],
   },
   q4_c: {
-    keyConcepts: ['larger area → more molecules escape → higher rate', 'particle-level reason required'],
-    keywords: ['surface area', 'rate', 'particles', 'escape', 'proportional'],
+    keyConcepts: ['larger area → more particles escape → more evaporation', 'proportional relationship predicted'],
+    keywords: ['surface area', 'particles', 'escape', 'evaporation increases', 'proportional'],
   },
   q4_d: {
-    keyConcepts: ['IV = surface area', 'DV = mass evaporated', 'CVs: time, temperature, liquid type, air movement'],
+    keyConcepts: ['IV = surface area', 'DV = mass evaporated', 'CV = time, temperature, liquid type'],
     keywords: ['surface area', 'independent', 'mass', 'dependent', 'control', 'time', 'temperature'],
   },
   q4_e: {
-    keyConcepts: ['≥5 IV values', '≥3 repeats', 'calculate mean'],
-    keywords: ['5 increments', '3 repeats', 'mean', 'surface area'],
+    keyConcepts: ['5 different areas', 'measure mass AND area', '3 repeats per area'],
+    keywords: ['5 increments', '3 repeats', 'area', 'mass'],
   },
   q4_f: {
-    keyConcepts: ['mass proportional to area', 'linear through origin'],
-    keywords: ['proportional', 'linear', 'area', 'mass', 'origin'],
+    keyConcepts: ['mass ∝ area', 'linear relationship through origin'],
+    keywords: ['proportional', 'linear', 'origin', 'increases with area'],
   },
   q4_g: {
-    keyConcepts: ['k = gradient ≈ 0.0350 g cm⁻²'],
-    keywords: ['gradient', 'constant', '0.0350', 'g cm⁻²'],
+    keyConcepts: ['k = gradient = 12/400 = 0.0300 g cm⁻²'],
+    keywords: ['0.0300', 'gradient', 'g cm⁻²'],
   },
   q4_h: {
-    keyConcepts: ['mass = 0.0350 × 80 000 = 2800 g = 2.8 kg'],
-    keywords: ['mass = k × area', '80000', '2.8 kg'],
+    keyConcepts: ['mass = k × area = 0.0300 × 80000 ≈ 2.4 kg'],
+    keywords: ['2.4 kg', '2400 g', '80000 cm²', 'mass = k × area'],
   },
 
   // Q5 — Temperature & Evaporation
   q5_a: {
-    keyConcepts: ['question links temperature to evaporation rate'],
-    keywords: ['temperature', 'rate of evaporation'],
+    keyConcepts: ['how does temperature affect rate of evaporation?'],
+    keywords: ['temperature', 'evaporation rate', 'affect'],
   },
   q5_b: {
-    keyConcepts: ['higher T → more KE → more molecules escape → faster evaporation'],
-    keywords: ['temperature', 'kinetic energy', 'particles', 'escape'],
+    keyConcepts: ['temperature increases → evaporation rate increases', 'particles have more KE at higher temperature → escape more easily'],
+    keywords: ['temperature', 'rate increases', 'kinetic energy', 'particles escape'],
   },
   q5_c: {
-    keyConcepts: ['IV = temperature', 'CVs: surface area, liquid type, air speed'],
-    keywords: ['temperature', 'independent', 'control'],
+    keyConcepts: ['IV = temperature', 'CV = type of liquid, surface area, air speed'],
+    keywords: ['temperature', 'independent', 'control', 'surface area', 'liquid'],
   },
 
-  // Q6 — Mont Blanc Boiling Point vs Altitude
+  // Q6 — Aconcagua Boiling Point
   q6_a: {
-    keyConcepts: ['headings: altitude (m) and boiling point (°C)', 'thermometer read = 90.5°C at 3100 m'],
-    keywords: ['altitude', 'boiling point', '°C', '90.5'],
+    keyConcepts: ['Heading 1 = altitude/height (m)', 'Heading 2 = boiling point/temperature (°C)', '5400 m reading = 82.0°C'],
+    keywords: ['altitude', 'm', 'temperature', '°C', '82.0'],
   },
   q6_b: {
-    keyConcepts: ['line graph for continuous data'],
-    keywords: ['line graph', 'continuous'],
+    keyConcepts: ['line graph for continuous data', 'bar chart for discrete data', 'line graph allows LOBF'],
+    keywords: ['line graph', 'continuous', 'bar chart', 'line of best fit'],
   },
   q6_c: {
-    keyConcepts: ['anomalous = not on line of best fit', '2200 m identified'],
-    keywords: ['anomalous', 'line of best fit', '2200 m'],
+    keyConcepts: ['3300 m = anomalous (95.0°C)', 'does not lie on line of best fit'],
+    keywords: ['3300', 'anomalous', '95.0', 'line of best fit'],
   },
   q6_d: {
-    keyConcepts: ['altitude increases → boiling point decreases', 'linear'],
-    keywords: ['altitude', 'boiling point', 'decreases', 'linear'],
+    keyConcepts: ['as altitude increases boiling point decreases', 'linear relationship'],
+    keywords: ['altitude', 'increases', 'boiling point', 'decreases', 'linear'],
   },
   q6_e: {
-    keyConcepts: ['lower pressure at altitude → less energy needed → lower boiling point'],
-    keywords: ['pressure', 'lower', 'energy', 'particles', 'boiling point'],
+    keyConcepts: ['lower pressure at altitude', 'less energy needed for particles to escape', 'lower boiling point'],
+    keywords: ['pressure', 'lower', 'particles escape', 'less energy', 'boiling point'],
   },
 
-  // Q7 — Boiling Point Investigation Design
+  // Q7 — Design Investigation
   q7_a: {
-    keyConcepts: ['IV = pressure (vacuum pump)', 'DV = boiling point', '2 justified CVs', 'equipment named', 'complete method', '5 values × 3 repeats'],
-    keywords: ['pressure', 'boiling point', 'vacuum pump', 'thermometer', '5 values', '3 repeats', 'mean'],
+    keyConcepts: ['IV = pressure/altitude', 'DV = boiling point', '2 justified CVs', '5 pressure values, 3 repeats'],
+    keywords: ['pressure', 'boiling point', 'control variables', 'method', '5 values', '3 repeats'],
   },
 
-  // Q8 — Rammed-Earth Housing & Indoor Ponds
+  // Q8 — Fibre-Optic Daylighting & Courtyard Fountain
   q8_a: {
-    keyConcepts: ['advantages: natural daylight no electricity', 'disadvantages: daytime only orientation maintenance'],
-    keywords: ['natural light', 'no electricity', 'daytime', 'orientation', 'maintenance'],
+    keyConcepts: ['advantages: free daylight, no electricity', 'disadvantages: daytime only, intensity falls over distance'],
+    keywords: ['free light', 'daylight', 'no electricity', 'daytime', 'intensity', 'maintenance'],
   },
   q8_b: {
-    keyConcepts: ['evaluate indoor pond: strengths, limitations, environmental, economic, recommendation'],
-    keywords: ['strengths', 'limitations', 'humidity', 'CO₂', 'water', 'economic', 'recommendation'],
+    keyConcepts: ['strengths: natural evaporative cooling, no electricity', 'limitations: water supply, humidity', 'environmental: less CO₂ but uses water', 'economic cost-benefit', 'justified recommendation'],
+    keywords: ['natural cooling', 'evaporation', 'humidity', 'water supply', 'CO₂', 'economic', 'recommend'],
   },
-
 }

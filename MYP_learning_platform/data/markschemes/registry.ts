@@ -10,25 +10,59 @@ export type { MSRecord }
 
 import { MS as MS_physics_nov_2023 } from '@/data/papers/physics-nov-2023/markscheme'
 import { MS as MS_biology_may_2016 } from '@/data/papers/biology-may-2016/markscheme'
+import { MS as MS_biology_may_2016_v1 } from '@/data/papers/biology-may-2016-v1/markscheme'
+import { MS as MS_biology_may_2016_v2 } from '@/data/papers/biology-may-2016-v2/markscheme'
 import { MS as MS_biology_may_2017 } from '@/data/papers/biology-may-2017/markscheme'
+import { MS as MS_biology_may_2017_v1 } from '@/data/papers/biology-may-2017-v1/markscheme'
+import { MS as MS_biology_may_2017_v2 } from '@/data/papers/biology-may-2017-v2/markscheme'
 import { MS as MS_biology_may_2018 } from '@/data/papers/biology-may-2018/markscheme'
+import { MS as MS_biology_may_2018_v1 } from '@/data/papers/biology-may-2018-v1/markscheme'
+import { MS as MS_biology_may_2018_v2 } from '@/data/papers/biology-may-2018-v2/markscheme'
 import { MS as MS_biology_may_2019 } from '@/data/papers/biology-may-2019/markscheme'
+import { MS as MS_biology_may_2019_v1 } from '@/data/papers/biology-may-2019-v1/markscheme'
+import { MS as MS_biology_may_2019_v2 } from '@/data/papers/biology-may-2019-v2/markscheme'
 import { MS as MS_biology_may_2021 } from '@/data/papers/biology-may-2021/markscheme'
+import { MS as MS_biology_may_2021_v1 } from '@/data/papers/biology-may-2021-v1/markscheme'
+import { MS as MS_biology_may_2021_v2 } from '@/data/papers/biology-may-2021-v2/markscheme'
 import { MS as MS_biology_may_2022 } from '@/data/papers/biology-may-2022/markscheme'
+import { MS as MS_biology_may_2022_v1 } from '@/data/papers/biology-may-2022-v1/markscheme'
+import { MS as MS_biology_may_2022_v2 } from '@/data/papers/biology-may-2022-v2/markscheme'
 import { MS as MS_biology_may_2023 } from '@/data/papers/biology-may-2023/markscheme'
+import { MS as MS_biology_may_2023_v1 } from '@/data/papers/biology-may-2023-v1/markscheme'
+import { MS as MS_biology_may_2023_v2 } from '@/data/papers/biology-may-2023-v2/markscheme'
 import { MS as MS_biology_may_2024 } from '@/data/papers/biology-may-2024/markscheme'
+import { MS as MS_biology_may_2024_v1 } from '@/data/papers/biology-may-2024-v1/markscheme'
+import { MS as MS_biology_may_2024_v2 } from '@/data/papers/biology-may-2024-v2/markscheme'
 import { MS as MS_biology_may_2025 } from '@/data/papers/biology-may-2025/markscheme'
 import { MS as MS_biology_may_2025_v1 } from '@/data/papers/biology-may-2025-v1/markscheme'
 import { MS as MS_biology_may_2025_v2 } from '@/data/papers/biology-may-2025-v2/markscheme'
 import { MS as MS_biology_nov_2016 } from '@/data/papers/biology-nov-2016/markscheme'
+import { MS as MS_biology_nov_2016_v1 } from '@/data/papers/biology-nov-2016-v1/markscheme'
+import { MS as MS_biology_nov_2016_v2 } from '@/data/papers/biology-nov-2016-v2/markscheme'
 import { MS as MS_biology_nov_2017 } from '@/data/papers/biology-nov-2017/markscheme'
+import { MS as MS_biology_nov_2017_v1 } from '@/data/papers/biology-nov-2017-v1/markscheme'
+import { MS as MS_biology_nov_2017_v2 } from '@/data/papers/biology-nov-2017-v2/markscheme'
 import { MS as MS_biology_nov_2018 } from '@/data/papers/biology-nov-2018/markscheme'
+import { MS as MS_biology_nov_2018_v1 } from '@/data/papers/biology-nov-2018-v1/markscheme'
+import { MS as MS_biology_nov_2018_v2 } from '@/data/papers/biology-nov-2018-v2/markscheme'
 import { MS as MS_biology_nov_2019 } from '@/data/papers/biology-nov-2019/markscheme'
+import { MS as MS_biology_nov_2019_v1 } from '@/data/papers/biology-nov-2019-v1/markscheme'
+import { MS as MS_biology_nov_2019_v2 } from '@/data/papers/biology-nov-2019-v2/markscheme'
 import { MS as MS_biology_nov_2020 } from '@/data/papers/biology-nov-2020/markscheme'
+import { MS as MS_biology_nov_2020_v1 } from '@/data/papers/biology-nov-2020-v1/markscheme'
+import { MS as MS_biology_nov_2020_v2 } from '@/data/papers/biology-nov-2020-v2/markscheme'
 import { MS as MS_biology_nov_2021 } from '@/data/papers/biology-nov-2021/markscheme'
+import { MS as MS_biology_nov_2021_v1 } from '@/data/papers/biology-nov-2021-v1/markscheme'
+import { MS as MS_biology_nov_2021_v2 } from '@/data/papers/biology-nov-2021-v2/markscheme'
 import { MS as MS_biology_nov_2022 } from '@/data/papers/biology-nov-2022/markscheme'
+import { MS as MS_biology_nov_2022_v1 } from '@/data/papers/biology-nov-2022-v1/markscheme'
+import { MS as MS_biology_nov_2022_v2 } from '@/data/papers/biology-nov-2022-v2/markscheme'
 import { MS as MS_biology_nov_2023 } from '@/data/papers/biology-nov-2023/markscheme'
+import { MS as MS_biology_nov_2023_v1 } from '@/data/papers/biology-nov-2023-v1/markscheme'
+import { MS as MS_biology_nov_2023_v2 } from '@/data/papers/biology-nov-2023-v2/markscheme'
 import { MS as MS_biology_nov_2024 } from '@/data/papers/biology-nov-2024/markscheme'
+import { MS as MS_biology_nov_2024_v1 } from '@/data/papers/biology-nov-2024-v1/markscheme'
+import { MS as MS_biology_nov_2024_v2 } from '@/data/papers/biology-nov-2024-v2/markscheme'
 import { MS as MS_chemistry_may_2016 } from '@/data/papers/chemistry-may-2016/markscheme'
 import { MS as MS_chemistry_may_2016_v1 } from '@/data/papers/chemistry-may-2016-v1/markscheme'
 import { MS as MS_chemistry_may_2016_v2 } from '@/data/papers/chemistry-may-2016-v2/markscheme'
@@ -182,6 +216,8 @@ import { MS as MS_physics_nov_2021_v2 } from '@/data/papers/physics-nov-2021-v2/
 import { MS as MS_physics_nov_2022 } from '@/data/papers/physics-nov-2022/markscheme'
 import { MS as MS_physics_nov_2022_v1 } from '@/data/papers/physics-nov-2022-v1/markscheme'
 import { MS as MS_physics_nov_2022_v2 } from '@/data/papers/physics-nov-2022-v2/markscheme'
+import { MS as MS_physics_nov_2023_v1 } from '@/data/papers/physics-nov-2023-v1/markscheme'
+import { MS as MS_physics_nov_2023_v2 } from '@/data/papers/physics-nov-2023-v2/markscheme'
 import { MS as MS_physics_nov_2024 } from '@/data/papers/physics-nov-2024/markscheme'
 import { MS as MS_physics_nov_2024_v1 } from '@/data/papers/physics-nov-2024-v1/markscheme'
 import { MS as MS_physics_nov_2024_v2 } from '@/data/papers/physics-nov-2024-v2/markscheme'
@@ -189,25 +225,59 @@ import { MS as MS_physics_nov_2024_v2 } from '@/data/papers/physics-nov-2024-v2/
 const _registry: Record<string, Record<string, MSRecord>> = {
   'physics-nov-2023': MS_physics_nov_2023,
   'biology-may-2016': MS_biology_may_2016,
+  'biology-may-2016-v1': MS_biology_may_2016_v1,
+  'biology-may-2016-v2': MS_biology_may_2016_v2,
   'biology-may-2017': MS_biology_may_2017,
+  'biology-may-2017-v1': MS_biology_may_2017_v1,
+  'biology-may-2017-v2': MS_biology_may_2017_v2,
   'biology-may-2018': MS_biology_may_2018,
+  'biology-may-2018-v1': MS_biology_may_2018_v1,
+  'biology-may-2018-v2': MS_biology_may_2018_v2,
   'biology-may-2019': MS_biology_may_2019,
+  'biology-may-2019-v1': MS_biology_may_2019_v1,
+  'biology-may-2019-v2': MS_biology_may_2019_v2,
   'biology-may-2021': MS_biology_may_2021,
+  'biology-may-2021-v1': MS_biology_may_2021_v1,
+  'biology-may-2021-v2': MS_biology_may_2021_v2,
   'biology-may-2022': MS_biology_may_2022,
+  'biology-may-2022-v1': MS_biology_may_2022_v1,
+  'biology-may-2022-v2': MS_biology_may_2022_v2,
   'biology-may-2023': MS_biology_may_2023,
+  'biology-may-2023-v1': MS_biology_may_2023_v1,
+  'biology-may-2023-v2': MS_biology_may_2023_v2,
   'biology-may-2024': MS_biology_may_2024,
+  'biology-may-2024-v1': MS_biology_may_2024_v1,
+  'biology-may-2024-v2': MS_biology_may_2024_v2,
   'biology-may-2025': MS_biology_may_2025,
   'biology-may-2025-v1': MS_biology_may_2025_v1,
   'biology-may-2025-v2': MS_biology_may_2025_v2,
   'biology-nov-2016': MS_biology_nov_2016,
+  'biology-nov-2016-v1': MS_biology_nov_2016_v1,
+  'biology-nov-2016-v2': MS_biology_nov_2016_v2,
   'biology-nov-2017': MS_biology_nov_2017,
+  'biology-nov-2017-v1': MS_biology_nov_2017_v1,
+  'biology-nov-2017-v2': MS_biology_nov_2017_v2,
   'biology-nov-2018': MS_biology_nov_2018,
+  'biology-nov-2018-v1': MS_biology_nov_2018_v1,
+  'biology-nov-2018-v2': MS_biology_nov_2018_v2,
   'biology-nov-2019': MS_biology_nov_2019,
+  'biology-nov-2019-v1': MS_biology_nov_2019_v1,
+  'biology-nov-2019-v2': MS_biology_nov_2019_v2,
   'biology-nov-2020': MS_biology_nov_2020,
+  'biology-nov-2020-v1': MS_biology_nov_2020_v1,
+  'biology-nov-2020-v2': MS_biology_nov_2020_v2,
   'biology-nov-2021': MS_biology_nov_2021,
+  'biology-nov-2021-v1': MS_biology_nov_2021_v1,
+  'biology-nov-2021-v2': MS_biology_nov_2021_v2,
   'biology-nov-2022': MS_biology_nov_2022,
+  'biology-nov-2022-v1': MS_biology_nov_2022_v1,
+  'biology-nov-2022-v2': MS_biology_nov_2022_v2,
   'biology-nov-2023': MS_biology_nov_2023,
+  'biology-nov-2023-v1': MS_biology_nov_2023_v1,
+  'biology-nov-2023-v2': MS_biology_nov_2023_v2,
   'biology-nov-2024': MS_biology_nov_2024,
+  'biology-nov-2024-v1': MS_biology_nov_2024_v1,
+  'biology-nov-2024-v2': MS_biology_nov_2024_v2,
   'chemistry-may-2016': MS_chemistry_may_2016,
   'chemistry-may-2016-v1': MS_chemistry_may_2016_v1,
   'chemistry-may-2016-v2': MS_chemistry_may_2016_v2,
@@ -361,6 +431,8 @@ const _registry: Record<string, Record<string, MSRecord>> = {
   'physics-nov-2022': MS_physics_nov_2022,
   'physics-nov-2022-v1': MS_physics_nov_2022_v1,
   'physics-nov-2022-v2': MS_physics_nov_2022_v2,
+  'physics-nov-2023-v1': MS_physics_nov_2023_v1,
+  'physics-nov-2023-v2': MS_physics_nov_2023_v2,
   'physics-nov-2024': MS_physics_nov_2024,
   'physics-nov-2024-v1': MS_physics_nov_2024_v1,
   'physics-nov-2024-v2': MS_physics_nov_2024_v2,

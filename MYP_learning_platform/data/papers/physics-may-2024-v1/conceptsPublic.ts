@@ -1,5 +1,5 @@
 /**
- * CLIENT-SAFE concept data for Physics May 2024 V1.
+ * CLIENT-SAFE concept data for Physics May 2024 — Variant 1.
  * keyConcepts and keywords ONLY — no exemplar answers, no feedbackHit/Miss.
  * Used by LiveKeywordTracker on the client side.
  *
@@ -9,10 +9,10 @@ import type { ConceptEntry } from '@/data/papers/physics-nov-2023/conceptsPublic
 
 export const CONCEPTS_PUBLIC_MAY2024_V1: Record<string, ConceptEntry> = {
 
-  // ── Q1: Natural Gas Power Station ─────────────────────────────
+  // ── Q1: Biomass Power Station ──────────────────────────────────
   q1_a: {
-    keyConcepts: ['states of matter: solid/liquid/gas', 'natural gas = gaseous fuel', 'water = liquid', 'steam = gas'],
-    keywords: ['water', 'steam', 'natural gas', 'liquid', 'gas', 'boiler', 'cooling tower', 'combustion'],
+    keyConcepts: ['states of matter: solid/liquid/gas', 'wood pellets = solid fuel', 'water = liquid', 'steam = gas'],
+    keywords: ['water', 'steam', 'wood pellets', 'solid', 'liquid', 'gas', 'boiler', 'cooling tower', 'furnace'],
   },
   q1_b: {
     keyConcepts: ['kinetic energy of molecules', 'temperature = average KE', 'heat increases molecular speed'],
@@ -23,12 +23,12 @@ export const CONCEPTS_PUBLIC_MAY2024_V1: Record<string, ConceptEntry> = {
     keywords: ['bonds', 'latent heat', 'potential energy', 'arrangement', 'disorder', 'break', 'separate', 'intermolecular'],
   },
   q1_d: {
-    keyConcepts: ['energy = energy/kg × mass', 'powers of 10', '9.9 × 10¹² J'],
-    keywords: ['9.9', '10¹²', 'multiply', '5.5', '1.8', 'energy', 'joules'],
+    keyConcepts: ['energy = energy/kg × mass', 'powers of 10', '1.3 × 10¹³ J'],
+    keywords: ['1.3', '10¹³', 'multiply', '3.1', '4.2', 'energy', 'joules'],
   },
   q1_e: {
-    keyConcepts: ['efficiency formula', 'useful power = total × efficiency', '9000 MW'],
-    keywords: ['efficiency', 'useful', 'power', '0.25', '25%', '9000', '36000', 'MW'],
+    keyConcepts: ['efficiency formula', 'useful power = total × efficiency', '8640 MW'],
+    keywords: ['efficiency', 'useful', 'power', '0.30', '30%', '8640', '8600', 'MW'],
   },
   q1_f: {
     keyConcepts: ['greenhouse gas arrow', 'heat energy absorbed and re-emitted'],
@@ -39,14 +39,14 @@ export const CONCEPTS_PUBLIC_MAY2024_V1: Record<string, ConceptEntry> = {
     keywords: ['temperature', 'evaporation', 'convection', 'storm', 'flood', 'drought', 'kinetic energy', 'atmosphere', 'extreme'],
   },
 
-  // ── Q2: Nuclear Fission (La-142 + Br-93 + n) ──────────────────
+  // ── Q2: Plutonium-239 Fission ──────────────────────────────────
   q2_a: {
-    keyConcepts: ['protons = atomic number = 92', 'neutrons = mass number − atomic number = 143'],
-    keywords: ['protons', 'neutrons', '92', '143', 'atomic number', 'mass number'],
+    keyConcepts: ['protons = atomic number = 94', 'neutrons = mass number − atomic number = 145'],
+    keywords: ['protons', 'neutrons', '94', '145', 'atomic number', 'mass number'],
   },
   q2_b: {
-    keyConcepts: ['nucleons divided between daughter nuclei', 'conservation of nucleons', 'one free neutron released'],
-    keywords: ['divided', 'daughter', 'La-142', 'Br-93', 'neutrons', 'conservation', 'total same'],
+    keyConcepts: ['nucleons divided between daughter nuclei', 'conservation of nucleons', 'two free neutrons released'],
+    keywords: ['divided', 'daughter', 'Xe-134', 'Zr-103', 'neutrons', 'conservation', 'total same'],
   },
   q2_c: {
     keyConcepts: ['chain reaction: one reaction causes another', 'released neutrons trigger further fissions'],
@@ -57,18 +57,18 @@ export const CONCEPTS_PUBLIC_MAY2024_V1: Record<string, ConceptEntry> = {
     keywords: ['uncontrolled', 'exponential', 'meltdown', 'explosion', 'radioactive', 'fallout', 'harmful', 'environment'],
   },
   q2_e: {
-    keyConcepts: ['50% decayed = 1 half-life', 'read from graph', '~700 million years'],
-    keywords: ['50%', 'graph', '700', 'million years', 'half-life', 'remaining'],
+    keyConcepts: ['75% decayed = 25% remaining', 'read from graph', '~48 thousand years (2 half-lives)'],
+    keywords: ['25%', 'graph', '48', 'thousand years', 'remaining', 'half-life'],
   },
   q2_f: {
-    keyConcepts: ['U-235 half-life ~700 million years', 'very long storage required', 'radiation hazard persists'],
-    keywords: ['long time', 'stored safely', 'millions', 'radioactive', 'securely', 'health', 'environment', 'disposal'],
+    keyConcepts: ['Pu-239 half-life ~24 000 years', 'very long storage required', 'radiation hazard persists'],
+    keywords: ['long time', 'stored safely', 'thousands', 'radioactive', 'securely', 'health', 'environment', 'disposal'],
   },
 
-  // ── Q3: Constantan Wire Resistance Investigation ───────────────
+  // ── Q3: Manganin Wire Resistance Investigation ─────────────────
   q3_a: {
     keyConcepts: ['research question format: How does IV affect DV?', 'length (IV) and resistance (DV)'],
-    keywords: ['length', 'resistance', 'affect', 'how does', 'relationship', 'constantan wire'],
+    keywords: ['length', 'resistance', 'affect', 'how does', 'relationship', 'manganin wire'],
   },
   q3_b: {
     keyConcepts: ['If-Then-Because hypothesis', 'longer wire = more electron collisions', 'R ∝ L', 'R = ρL/A'],
@@ -76,7 +76,7 @@ export const CONCEPTS_PUBLIC_MAY2024_V1: Record<string, ConceptEntry> = {
   },
   q3_c: {
     keyConcepts: ['select wires of same material and cross-sectional area but different lengths', '5 data points minimum'],
-    keywords: ['constantan', '2.5', 'different lengths', '40', '60', '80', '100', '120', 'same material'],
+    keywords: ['manganin', '2.5', 'different lengths', '40', '60', '80', '100', '120', 'same material'],
   },
   q3_d: {
     keyConcepts: ['fair test: only IV (length) changes', 'material and cross-sectional area are CVs'],
@@ -87,8 +87,8 @@ export const CONCEPTS_PUBLIC_MAY2024_V1: Record<string, ConceptEntry> = {
     keywords: ['voltmeter', 'parallel', 'ammeter', 'series', 'circuit', 'measure', 'current', 'voltage'],
   },
   q3_f: {
-    keyConcepts: ["Ohm's law R = V/I", 'R = 1.80/0.30 = 6.0 Ω'],
-    keywords: ['R = V/I', '6.0', 'ohm', '1.80', '0.30', 'resistance'],
+    keyConcepts: ["Ohm's law R = V/I", 'R = 1.8/0.30 = 6.0 Ω'],
+    keywords: ['R = V/I', '6.0', 'ohm', '1.8', '0.30', 'resistance'],
   },
   q3_g: {
     keyConcepts: ['plot (100, 6.0)', 'best fit line through/near origin', 'proportional relationship'],
@@ -99,7 +99,7 @@ export const CONCEPTS_PUBLIC_MAY2024_V1: Record<string, ConceptEntry> = {
     keywords: ['heats up', 'temperature', 'inaccurate', 'measurement', 'fluctuate', 'contact resistance', 'higher'],
   },
 
-  // ── Q4: Ball & Magnet ─────────────────────────────────────────
+  // ── Q4: Gauss accelerator (ball-bearings & magnet) ─────────────
   q4_a: {
     keyConcepts: ['law of conservation of energy'],
     keywords: ['conservation', 'energy', 'law'],
@@ -109,7 +109,7 @@ export const CONCEPTS_PUBLIC_MAY2024_V1: Record<string, ConceptEntry> = {
     keywords: ['magnetic force', 'normal force', 'weight', 'right', 'upward', 'downward', 'horizontal'],
   },
   q4_c: {
-    keyConcepts: ['magnetic force ∝ 1/r²', 'force increases as sphere approaches', 'F=ma → acceleration increases'],
+    keyConcepts: ['magnetic force ∝ 1/r²', 'force increases as ball-bearing approaches', 'F=ma → acceleration increases'],
     keywords: ['magnetic force increases', 'closer', 'stronger', 'F = ma', 'acceleration increases', 'non-constant'],
   },
   q4_d: {
@@ -117,7 +117,7 @@ export const CONCEPTS_PUBLIC_MAY2024_V1: Record<string, ConceptEntry> = {
     keywords: ['N pole', 'S pole', 'field lines', 'loop', 'curve', 'exit', 'enter'],
   },
   q4_e: {
-    keyConcepts: ['magnetic potential energy released → kinetic energy of exiting sphere'],
+    keyConcepts: ['magnetic potential energy released → kinetic energy of exiting ball-bearing'],
     keywords: ['magnetic energy', 'released', 'kinetic energy', 'stored', 'transfer'],
   },
   q4_f: {
@@ -129,14 +129,14 @@ export const CONCEPTS_PUBLIC_MAY2024_V1: Record<string, ConceptEntry> = {
     keywords: ['initial height', 'maximum height', 'trial', 'mean', 'average', 'units', 'cm', 'table'],
   },
 
-  // ── Q5: Motor Effect (15 cm) ──────────────────────────────────
+  // ── Q5: Linear motor (rod on copper rails) ─────────────────────
   q5_a: {
-    keyConcepts: ['interpolate between data points', 'time at 10 A ≈ 2.24 s'],
-    keywords: ['2.24', '2.20', '2.30', 'seconds', 'interpolate', '10 A'],
+    keyConcepts: ['interpolate between data points', 'time at 10 A ≈ 1.70 s'],
+    keywords: ['1.70', '1.68', '1.74', 'seconds', 'interpolate', '10 A'],
   },
   q5_b: {
-    keyConcepts: ['s = ½at²', 'a = 2s/t²', 'a = 0.075 m s⁻²', 'convert cm to m'],
-    keywords: ['s = ½at²', '0.075', 'm s⁻²', 'acceleration', '0.15', '2.00', '2s/t²'],
+    keyConcepts: ['s = ½at²', 'a = 2s/t²', 'a ≈ 0.16 m s⁻²', 'convert cm to m'],
+    keywords: ['s = ½at²', '0.16', 'm s⁻²', 'acceleration', '0.18', '1.50', '2s/t²'],
   },
   q5_c: {
     keyConcepts: ['F = ma requires mass (kg)', 'mass ≠ weight'],
@@ -159,17 +159,17 @@ export const CONCEPTS_PUBLIC_MAY2024_V1: Record<string, ConceptEntry> = {
     keywords: ['2.6', '2.7', '2.8', 'mN', 'y-intercept', 'friction'],
   },
 
-  // ── Q6: Hale Telescope (Palomar) ──────────────────────────────
+  // ── Q6: Newtonian Reflector ────────────────────────────────────
   q6_a: {
     keyConcepts: ['white light = multiple wavelengths', 'different wavelengths have different refractive indices', 'colours separate (dispersion)'],
     keywords: ['wavelengths', 'frequencies', 'refractive index', 'refract differently', 'dispersion', 'separate', 'chromatic'],
   },
   q6_b: {
-    keyConcepts: ['primary mirror = large curved at far end', 'secondary mirror = small flat near top', 'eyepiece at opening'],
+    keyConcepts: ['primary mirror = large curved at far end', 'secondary mirror = small flat 45° near top', 'eyepiece at side'],
     keywords: ['primary mirror', 'secondary mirror', 'eyepiece', 'curved', 'flat', 'large', 'small'],
   },
   q6_c: {
-    keyConcepts: ['Hale reflecting telescope: 2 reflections (primary + secondary)'],
+    keyConcepts: ['Newtonian reflector: 2 reflections (primary + secondary)'],
     keywords: ['2', 'two', 'reflections'],
   },
   q6_d: {
@@ -181,13 +181,13 @@ export const CONCEPTS_PUBLIC_MAY2024_V1: Record<string, ConceptEntry> = {
     keywords: ['atmosphere', 'scattering', 'refraction', 'absorption', 'light pollution', 'weather', 'vacuum'],
   },
 
-  // ── Q7: Hubble Space Telescope ────────────────────────────────
+  // ── Q7: Hubble Space Telescope ─────────────────────────────────
   q7_a: {
-    keyConcepts: ['HST mirror flaw repaired 1993', 'Deep Field image iconic', '$16 billion cost vs impact', 'MYP D rubric: discuss & evaluate'],
-    keywords: ['mirror', 'repair', 'challenge', 'Deep Field', 'cultural', 'cost', 'billion', 'benefit', 'evaluate', 'launch', 'social'],
+    keyConcepts: ['HST mirror flaw blurred early images', 'low-Earth orbit servicing by Space Shuttle', 'Hubble Deep Field iconic', 'multi-billion-dollar cost vs military budget'],
+    keywords: ['mirror', 'orbit', 'challenge', 'Deep Field', 'images', 'cultural', 'cost', 'billion', 'benefit', 'evaluate', 'launch', 'social'],
   },
   q7_b: {
-    keyConcepts: ['biosignatures: water vapour, ozone, methane', 'limitation: large transiting exoplanets only', 'false positives possible'],
-    keywords: ['biosignatures', 'exoplanet', 'limitation', 'benefit', 'water', 'ozone', 'methane', 'transiting', 'bright star', 'large'],
+    keyConcepts: ['biosignatures: water vapour, oxygen, ozone, methane', 'limitation: transit method only', 'large thick-atmosphere planets only'],
+    keywords: ['biosignatures', 'exoplanet', 'transit', 'limitation', 'benefit', 'water vapour', 'oxygen', 'ozone', 'methane', 'large'],
   },
 }

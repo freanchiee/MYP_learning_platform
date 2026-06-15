@@ -1,185 +1,191 @@
+/**
+ * CLIENT-SAFE concept data for Physics November 2016 — Variant 2.
+ * keyConcepts and keywords ONLY — no exemplar answers, no feedbackHit/Miss.
+ * Used by LiveKeywordTracker on the client side.
+ *
+ * Key format: `q{id}_{label}`  e.g. 'q1_b', 'q8_d'
+ */
 import type { ConceptEntry } from '@/data/papers/physics-nov-2023/conceptsPublic'
 
 export const CONCEPTS_PUBLIC_NOV2016_V2: Record<string, ConceptEntry> = {
 
-  // ─── Q1 Peregrine Falcon Migration ────────────────────────────
+  // ─── Q1 Monarch Butterfly Migration & Motion ───────────────────
   'q1_b': {
     keyConcepts: ['average speed vs instantaneous speed', 'factors affecting animal migration speed'],
-    keywords: ['headwind', 'air resistance', 'fatigue', 'weather', 'navigate'],
+    keywords: ['headwind', 'air resistance', 'tired', 'energy', 'weather', 'feeding'],
   },
   'q1_d': {
-    keyConcepts: ['net force causes deceleration', 'Newton\'s Second Law F=ma', 'velocity changes under net force'],
+    keyConcepts: ['net force causes deceleration', 'Newton\'s Second Law F=ma', 'velocity changes under a net force'],
     keywords: ['retarding force', 'velocity', 'deceleration', 'Newton', 'F=ma'],
   },
   'q1_e': {
-    keyConcepts: ['area under velocity-time graph equals distance', 'triangle area = ½ × base × height'],
-    keywords: ['area', 'v-t graph', 'triangle', 'distance', 'displacement'],
+    keyConcepts: ['area under velocity–time graph equals distance', 'triangle area = ½ × base × height', '60 km'],
+    keywords: ['area', 'v-t graph', 'triangle', 'distance', '60', 'km'],
   },
 
   // ─── Q2 Wave Properties ────────────────────────────────────────
   'q2_a': {
-    keyConcepts: ['wavelength', 'amplitude', 'compression', 'rarefaction', 'wave features'],
+    keyConcepts: ['wavelength', 'amplitude', 'compression', 'rarefaction', 'transverse vs longitudinal wave features'],
     keywords: ['wavelength', 'amplitude', 'compression', 'rarefaction', 'distance', 'displacement'],
   },
   'q2_b': {
-    keyConcepts: ['frequency = number of complete cycles per second', 'unit hertz (Hz)'],
-    keywords: ['frequency', 'cycles', 'Hz', 'per second'],
+    keyConcepts: ['frequency = number of complete cycles per second', 'wave A = 30 Hz', 'unit hertz (Hz)'],
+    keywords: ['frequency', 'cycles', '30', 'Hz', 'per second'],
   },
   'q2_c': {
-    keyConcepts: ['waves with equal frequency complete same cycles per second'],
-    keywords: ['same frequency', 'equal cycles'],
+    keyConcepts: ['waves with equal frequency complete same cycles per second', 'B and D both 6 Hz'],
+    keywords: ['B', 'D', 'same frequency', 'equal cycles', '6'],
   },
   'q2_d': {
-    keyConcepts: ['wave equation v = fλ', 'λ = v/f', 'speed of sound in water 1480 m/s'],
-    keywords: ['v=fλ', 'wavelength', 'frequency', '1480 m/s', 'ocean', 'wave equation'],
+    keyConcepts: ['wave equation v = fλ', 'rearranging to λ = v/f', 'f(C) = 4 Hz → λ = 82.5 m'],
+    keywords: ['v=fλ', 'wavelength', '4', '330', '82.5', 'wave equation'],
   },
   'q2_e': {
-    keyConcepts: ['infrasound has frequency below 20 Hz', 'human hearing range 20-20000 Hz'],
-    keywords: ['infrasound', '20 Hz', 'frequency'],
+    keyConcepts: ['infrasound has frequency below 20 Hz', 'wave A (30 Hz) is not infrasound'],
+    keywords: ['A', 'infrasound', '20 Hz', '30', 'frequency'],
   },
   'q2_f': {
-    keyConcepts: ['diffraction allows waves to spread around obstacles underwater', 'diffraction greatest when wavelength ≥ obstacle size', 'infrasound long wavelength in water'],
-    keywords: ['diffraction', 'spreading', 'wavelength', 'underwater ridge', 'low frequency'],
+    keyConcepts: ['diffraction allows waves to spread around obstacles', 'diffraction greatest when wavelength ≥ obstacle size', 'infrasound has long wavelength'],
+    keywords: ['diffraction', 'spreading', 'wavelength', 'seamount', 'obstacle', 'low frequency'],
   },
 
   // ─── Q3 Refraction of Light ────────────────────────────────────
   'q3_a': {
-    keyConcepts: ['refractive index indicates optical density', 'higher n = slower light'],
-    keywords: ['air', 'water', 'glass', 'refractive index', 'optical density'],
+    keyConcepts: ['refractive index indicates optical density', 'higher n = slower light = more bending'],
+    keywords: ['air', 'glass', 'water', 'refractive index', 'optical density'],
   },
   'q3_b': {
-    keyConcepts: ['light slows in denser medium', 'bends towards normal when entering denser medium'],
+    keyConcepts: ['light slows in a denser medium', 'bends towards the normal when entering a denser medium', 'refraction mechanism'],
     keywords: ['speed', 'slows', 'normal', 'bends towards', 'denser', 'refractive index'],
   },
 
   // ─── Q4 Static Electricity ─────────────────────────────────────
   'q4_a': {
-    keyConcepts: ['electron −1, proton +1, neutron 0'],
+    keyConcepts: ['electron has charge −1', 'proton has charge +1', 'neutron is neutral (0)'],
     keywords: ['electron', 'proton', 'neutron', 'charge', '-1', '+1', '0'],
   },
   'q4_b': {
-    keyConcepts: ['only electrons are mobile in solids', 'friction transfers electrons', 'gaining electrons = negative charge'],
-    keywords: ['electrons', 'mobile', 'friction', 'fur', 'transfer', 'negative charge'],
+    keyConcepts: ['only electrons are mobile in solids', 'friction transfers electrons between surfaces', 'gaining electrons produces a negative charge'],
+    keywords: ['electrons', 'mobile', 'friction', 'rubbing', 'transfer', 'negative charge'],
   },
   'q4_c': {
-    keyConcepts: ['charging by friction', 'electrostatic induction', 'opposite charges attract'],
-    keywords: ['friction', 'induction', 'redistribution', 'opposite charges', 'attract', 'balloon'],
+    keyConcepts: ['charging by friction', 'electrostatic induction', 'induced charge redistribution', 'opposite charges attract'],
+    keywords: ['friction', 'induction', 'redistribution', 'opposite charges', 'attract', 'electrostatic'],
   },
 
-  // ─── Q5 Aluminium Foil Insulation Investigation ─────────────────
+  // ─── Q5 Polystyrene-Foam Insulation Investigation ──────────────
   'q5_a': {
-    keyConcepts: ['conduction', 'convection', 'radiation'],
+    keyConcepts: ['conduction through direct contact', 'convection through fluid movement', 'radiation via infrared waves'],
     keywords: ['conduction', 'convection', 'radiation'],
   },
   'q5_b': {
-    keyConcepts: ['selecting appropriate measuring equipment and justification'],
-    keywords: ['balance', 'mass', 'thermometer', 'stopwatch', 'equipment'],
+    keyConcepts: ['selecting appropriate measuring equipment for the experiment', 'equipment justification'],
+    keywords: ['balance', 'mass', 'thermometer', 'stopwatch', 'timer', 'equipment'],
   },
   'q5_c': {
-    keyConcepts: ['aluminium foil reflects infrared radiation reducing heat transfer', 'more foil = less melting'],
-    keywords: ['foil', 'reflect', 'radiation', 'insulation', 'layers', 'decreases'],
+    keyConcepts: ['more insulation reduces heat transfer', 'hypothesis states the direction of change with justification'],
+    keywords: ['sheets', 'insulation', 'heat transfer', 'mass melted', 'decreases'],
   },
   'q5_d': {
-    keyConcepts: ['control variables ensure fair test', 'named variable + method + reason'],
+    keyConcepts: ['control variables ensure a fair test', 'named variable + method + reason'],
     keywords: ['control variable', 'fair test', 'constant', 'room temperature'],
   },
   'q5_e': {
-    keyConcepts: ['measure initial and final mass', '≥5 IV values', 'repeat and average'],
+    keyConcepts: ['measure initial and final mass', '≥5 IV values for a trend', 'repeat and average to reduce random error'],
     keywords: ['initial mass', 'final mass', 'five values', 'repeat', 'average', 'reliable'],
   },
 
   // ─── Q6 Cup Cooling Investigation ──────────────────────────────
   'q6_a': {
-    keyConcepts: ['evaluate data against hypothesis', 'no trend = not supported', 'cite specific data'],
+    keyConcepts: ['evaluate data against the hypothesis', 'identify trend or lack thereof', 'cite specific data as evidence'],
     keywords: ['not supported', 'no trend', 'inconsistent', 'data evidence'],
   },
   'q6_b': {
-    keyConcepts: ['experimental weaknesses', 'uncontrolled variables reduce validity', 'no repeats reduces reliability'],
-    keywords: ['weakness', 'material', 'surface area', 'no repeats', 'uncontrolled'],
+    keyConcepts: ['experimental design weaknesses', 'uncontrolled variables affect validity', 'no repeats reduces reliability'],
+    keywords: ['weakness', 'material', 'surface area', 'no repeats', 'uncontrolled', 'fair test'],
   },
 
-  // ─── Q7 Radiation Investigation ────────────────────────────────
+  // ─── Q7 Radiation Investigation (steel-mill plastic-sheet gauge) ─
   'q7_a': {
-    keyConcepts: ['IV = glass thickness', 'DV = beta count rate'],
-    keywords: ['independent variable', 'glass thickness', 'dependent variable', 'count rate'],
+    keyConcepts: ['independent variable is what is deliberately changed', 'dependent variable is what is measured'],
+    keywords: ['independent variable', 'plastic thickness', 'dependent variable', 'count rate'],
   },
   'q7_b': {
-    keyConcepts: ['beta particle is a high-energy electron from nucleus', 'negative charge'],
-    keywords: ['beta particle', 'electron', 'high energy', 'negative', 'nucleus'],
+    keyConcepts: ['beta particle is a high-energy electron emitted from the nucleus', 'beta has a negative charge'],
+    keywords: ['beta particle', 'electron', 'high energy', 'negative charge', 'nucleus'],
   },
   'q7_c': {
-    keyConcepts: ['glass absorbs beta radiation', 'thicker glass = lower count rate'],
-    keywords: ['glass thickness', 'count rate', 'absorbed', 'decreases'],
+    keyConcepts: ['beta radiation is absorbed by plastic', 'thicker material = lower count rate'],
+    keywords: ['thickness', 'count rate', 'absorbed', 'decreases'],
   },
   'q7_d': {
-    keyConcepts: ['radiation experiment design', '≥5 thickness values', 'repeat and average', 'constant distance'],
-    keywords: ['five values', 'repeat', 'baseline', 'zero', 'distance', 'constant', 'same source'],
+    keyConcepts: ['experimental design for a radiation investigation', 'range of IV values', 'baseline measurement', 'controlled source–detector distance'],
+    keywords: ['five values', 'repeat', 'baseline', 'no plastic', 'distance', 'constant', 'same source'],
   },
   'q7_e': {
-    keyConcepts: ['background radiation from natural sources'],
-    keywords: ['background radiation', 'cosmic rays', 'rocks', 'radon'],
+    keyConcepts: ['background radiation from natural sources', 'cosmic rays and radioactive rocks'],
+    keywords: ['background radiation', 'cosmic rays', 'rocks', 'radon', 'natural'],
   },
   'q7_f': {
-    keyConcepts: ['measure background without source', 'subtract from all readings'],
-    keywords: ['background', 'subtract', 'net count rate', 'source removed'],
+    keyConcepts: ['background radiation must be subtracted from experimental readings', 'net count rate'],
+    keywords: ['background', 'subtract', 'net', 'count rate', 'source removed'],
   },
   'q7_g': {
-    keyConcepts: ['time, distance, shielding reduce radiation dose'],
-    keywords: ['time', 'distance', 'shielding', 'lead', 'dose'],
+    keyConcepts: ['radiation safety: time, distance, shielding', 'reduce exposure dose'],
+    keywords: ['time', 'distance', 'shielding', 'lead', 'exposure', 'dose'],
   },
   'q7_h': {
-    keyConcepts: ['alpha stopped by air — won\'t penetrate glass', 'alpha less penetrating due to greater mass and charge'],
-    keywords: ['alpha', 'stopped by air', 'less penetrating', 'helium nucleus'],
+    keyConcepts: ['alpha particles stopped by a few cm of air or paper', 'alpha less penetrating than beta', 'alpha has greater mass and charge'],
+    keywords: ['alpha', 'stopped by air', 'less penetrating', 'helium nucleus', 'mass', 'charge'],
   },
 
-  // ─── Q8 Radioactive Decay ──────────────────────────────────────
+  // ─── Q8 Radioactive Decay & Half-Life (cobalt-60) ──────────────
   'q8_a': {
-    keyConcepts: ['constructing results table with multiple trials', 'mean = sum/3', 'appropriate significant figures'],
-    keywords: ['table', 'trials', 'average', 'mean', 'significant figures'],
+    keyConcepts: ['constructing a results table with multiple trials', 'calculating mean from repeated values', 'appropriate significant figures'],
+    keywords: ['table', 'trials', 'average', 'mean', 'significant figures', 'decreasing'],
   },
   'q8_c': {
-    keyConcepts: ['read half-life from graph at 50%', 'average three readings', 'krypton-85'],
-    keywords: ['half-life', '50%', '25%', '12.5%', 'graph', 'krypton-85', 'average'],
+    keyConcepts: ['half-life from graph: read time at 50% remaining', 'average three half-life readings', 'strontium-90 ≈ 29 years'],
+    keywords: ['half-life', '50%', '25%', '12.5%', 'graph', 'average', '29'],
   },
   'q8_d': {
-    keyConcepts: ['counting half-lives: 800000 → 50000 = 4 half-lives', 'Ba-140 half-life 12 days', '4 × 12 = 48 days'],
-    keywords: ['half-lives', 'barium-140', '12 days', '48 days', '800000', '50000'],
+    keyConcepts: ['counting half-lives to find elapsed time', 'cobalt-60 half-life 5 years', '4 half-lives × 5 = 20 years'],
+    keywords: ['half-lives', 'cobalt-60', '5 years', '20 years', '1280000', '80000'],
   },
 
   // ─── Q9 Gas-Fired Power Station ────────────────────────────────
   'q9_a': {
-    keyConcepts: ['social and environmental impacts of gas power stations'],
-    keywords: ['pollution', 'noise', 'traffic', 'health', 'visual', 'explosion risk'],
+    keyConcepts: ['social and environmental impacts of power stations', 'air pollution and gas-leak risk'],
+    keywords: ['pollution', 'noise', 'gas leak', 'explosion', 'health', 'visual'],
   },
   'q9_b': {
-    keyConcepts: ['water used to produce steam and for cooling in power stations'],
-    keywords: ['steam', 'turbines', 'cooling', 'condenser'],
+    keyConcepts: ['water used for steam generation and cooling in power stations'],
+    keywords: ['steam', 'turbines', 'cooling', 'condenser', 'water'],
   },
   'q9_c': {
-    keyConcepts: ['P = IV: voltage doubles → current halves in transformer'],
-    keywords: ['current', 'halves', 'voltage', 'doubles', 'P=IV'],
+    keyConcepts: ['transformer: P = IV; if V doubles, I halves', 'power conservation in an ideal transformer'],
+    keywords: ['current', 'halves', 'voltage', 'doubles', 'P=IV', 'transformer'],
   },
   'q9_d': {
-    keyConcepts: ['I²R power loss', 'step-up transformer reduces current', 'lower I = less heat loss'],
-    keywords: ['I²R', 'heat loss', 'current', 'voltage', 'reduces'],
+    keyConcepts: ['power-line heat loss = I²R', 'step-up transformer reduces current for transmission', 'lower current reduces I²R losses'],
+    keywords: ['I²R', 'heat loss', 'current', 'voltage', 'transmission', 'reduces'],
   },
   'q9_e': {
-    keyConcepts: ['H₂O and CO₂ cause greenhouse warming', 'NOₓ causes acid rain and smog via nitric acid'],
-    keywords: ['greenhouse gas', 'global warming', 'NOx', 'acid rain', 'smog', 'nitric acid'],
+    keyConcepts: ['H₂O and CO₂ are greenhouse gases causing global warming', 'NOₓ causes acid rain and smog'],
+    keywords: ['greenhouse gas', 'infrared', 'global warming', 'acid rain', 'NOx', 'smog', 'H₂O', 'CO₂'],
   },
   'q9_f': {
-    keyConcepts: ['lower night demand', 'cannot store electricity at large scale', 'off-peak pricing reduces waste'],
-    keywords: ['demand', 'night', 'lower', 'cannot store', 'off-peak', 'surplus'],
+    keyConcepts: ['electricity demand is lower at night', 'electricity cannot be economically stored at large scale', 'off-peak pricing reduces waste'],
+    keywords: ['demand', 'night', 'lower', 'cannot store', 'off-peak', 'surplus', 'wasted'],
   },
 
-  // ─── Q10 Small-Scale Hydroelectric Power ──────────────────────
+  // ─── Q10 Micro-Hydro Turbine & Battery Storage ─────────────────
   'q10_a': {
-    keyConcepts: ['applications requiring constant uninterrupted electricity supply'],
-    keywords: ['hospital', 'water treatment', 'data centre', 'constant supply'],
+    keyConcepts: ['applications requiring a constant uninterrupted electricity supply'],
+    keywords: ['hospital', 'water treatment', 'data centre', 'constant supply', 'critical'],
   },
   'q10_b': {
-    keyConcepts: ['evaluate hydroelectric microgeneration system', 'constant supply with battery storage', 'hydro: renewable consistent but geography-dependent', 'economic: high capital low running cost', 'social: safety, independence, ecological impact'],
-    keywords: ['constant', 'renewable', 'consistent', 'geography', 'ecology', 'capital cost', 'running cost', 'social', 'safety'],
+    keyConcepts: ['evaluate a micro-hydro microgeneration system against all criteria', 'constant-supply advantage of battery storage', 'micro-hydro: renewable and reliable but depends on water flow', 'economic: high capital, low running cost', 'social: safety and community impacts'],
+    keywords: ['constant supply', 'renewable', 'water flow', 'battery', 'capital cost', 'running cost', 'economic', 'social', 'safety'],
   },
-
 }

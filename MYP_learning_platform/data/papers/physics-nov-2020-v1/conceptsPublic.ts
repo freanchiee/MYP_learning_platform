@@ -1,36 +1,36 @@
 import type { ConceptEntry } from '@/data/papers/physics-nov-2023/conceptsPublic'
 
 export const CONCEPTS_PUBLIC_NOV2020_V1: Record<string, ConceptEntry> = {
-  // Q1 — Thermoregulation (Arctic hare)
+  // Q1 — Thermoregulation (penguin / foxes / dog)
   q1_a: {
-    keyConcepts: ['dense white fur', 'insulation', 'Arctic hare', 'cold adaptation'],
-    keywords: ['dense', 'white', 'fur', 'insulate', 'cold', 'Arctic hare'],
+    keyConcepts: ['dense feathers and fat layer', 'insulation', 'emperor penguin', 'cold adaptation'],
+    keywords: ['penguin', 'feathers', 'fat', 'blubber', 'insulate', 'cold'],
   },
   q1_b: {
-    keyConcepts: ['dense undercoat traps air', 'air is a poor conductor', 'insulator', 'convection reduced'],
-    keywords: ['dense', 'undercoat', 'air', 'trap', 'insulator', 'conductor', 'convection'],
+    keyConcepts: ['fat layer is a poor conductor', 'good insulator', 'reduces conduction', 'less heat lost'],
+    keywords: ['fat', 'blubber', 'insulator', 'conductor', 'poor', 'heat loss', 'conduction'],
   },
   q1_c: {
-    keyConcepts: ['white feathers reduce radiation', 'silver hairs reflect solar radiation', 'thermoregulation'],
-    keywords: ['white', 'feathers', 'radiation', 'silver', 'reflect', 'solar', 'heat loss', 'absorb'],
+    keyConcepts: ['large ears increase heat loss', 'large surface area', 'white fur reduces radiation', 'conduction', 'convection'],
+    keywords: ['large', 'ears', 'surface area', 'white', 'fur', 'radiation', 'conduction', 'convection', 'heat loss'],
   },
   q1_d: {
     keyConcepts: ['evaporation removes heat', 'high energy particles escape', 'lower average energy', 'cooling effect'],
     keywords: ['evaporation', 'heat', 'high energy', 'fast', 'escape', 'surface', 'lower energy', 'cool'],
   },
 
-  // Q2 — Energy / Stelvio Pass
+  // Q2 — Energy / Pumped-storage hydro
   q2_a: {
-    keyConcepts: ['Sankey diagram', 'chemical energy', 'useful energy output', 'heat losses', 'frictional losses'],
-    keywords: ['Sankey', 'chemical', 'useful', 'heat', 'friction', 'energy', '25%', '70%', '5%'],
+    keyConcepts: ['Sankey diagram', 'input energy', 'useful electrical output', 'heat losses', 'frictional losses'],
+    keywords: ['Sankey', 'input', 'useful', 'electrical', 'heat', 'friction', 'energy', '25%', '70%', '5%'],
   },
   q2_b: {
-    keyConcepts: ['gravitational potential energy', 'Ep = mgh', 'change in height 1600 m', 'mass 720 kg', 'g = 10'],
-    keywords: ['GPE', 'gravitational', 'potential', 'mgh', '1600', 'height', 'altitude', 'joules', 'MJ', '720'],
+    keyConcepts: ['gravitational potential energy', 'Ep = mgh', 'change in height 450 m', 'mass 920 kg', 'g = 10'],
+    keywords: ['GPE', 'gravitational', 'potential', 'mgh', '450', 'height', '920', 'joules', 'MJ'],
   },
   q2_c: {
     keyConcepts: ['power = energy / time', 'watts', 'rate of energy transfer', 'P = 20 kW'],
-    keywords: ['power', 'energy', 'time', 'P = E/t', 'watts', 'W', 'kW', '20000', '480'],
+    keywords: ['power', 'energy', 'time', 'P = E/t', 'watts', 'W', 'kW', '20000', '460'],
   },
 
   // Q3 — Light and space
@@ -43,7 +43,7 @@ export const CONCEPTS_PUBLIC_NOV2020_V1: Record<string, ConceptEntry> = {
     keywords: ['geostationary', '24 hours', 'period', 'orbit', 'stationary', 'same'],
   },
   q3_c: {
-    keyConcepts: ['satellite phone', 'weather forecasting', 'satellite applications', 'GPS', 'navigation'],
+    keyConcepts: ['weather forecasting', 'satellite applications', 'GPS', 'satellite phones', 'navigation'],
     keywords: ['weather', 'GPS', 'navigation', 'phone', 'satellite', 'application'],
   },
   q3_d: {
@@ -55,7 +55,7 @@ export const CONCEPTS_PUBLIC_NOV2020_V1: Record<string, ConceptEntry> = {
     keywords: ['Big Bang', 'galaxies', 'apart', 'expanding', 'evidence', 'origin', 'universe'],
   },
 
-  // Q4 — Kibble balance / electromagnet
+  // Q4 — Scrap-metal lifting electromagnet
   q4_a: {
     keyConcepts: ['research question', 'current as IV', 'electromagnet strength as DV'],
     keywords: ['research question', 'current', 'electromagnet', 'strength', 'IV', 'DV', 'affect'],
@@ -83,11 +83,11 @@ export const CONCEPTS_PUBLIC_NOV2020_V1: Record<string, ConceptEntry> = {
     keywords: ['table', 'headings', 'units', 'length', 'washers', 'raw data', 'ascending'],
   },
   q5_b: {
-    keyConcepts: ['turns per centimetre', 'processed data', 'weight = washers × 0.3 N', 'calculated values'],
+    keyConcepts: ['turns per centimetre', 'processed data', 'weight = washers × 0.3', 'calculated values'],
     keywords: ['turns per cm', 'calculate', 'weight', 'processed', 'cm⁻¹', '0.3 N', 'multiply'],
   },
   q5_c: {
-    keyConcepts: ['small increments', 'more precise', 'accurate measurement', 'smaller weight per pin'],
+    keyConcepts: ['small increments', 'more precise', 'accurate measurement', 'smaller weight per tack'],
     keywords: ['precise', 'accurate', 'small', 'increment', '0.01 N', 'better', 'measurement'],
   },
   q5_d: {
@@ -113,8 +113,8 @@ export const CONCEPTS_PUBLIC_NOV2020_V1: Record<string, ConceptEntry> = {
     keywords: ['gradient', 'calculate', 'Δy', 'Δx', 'capillary constant', 'slope', '28'],
   },
   q6_d: {
-    keyConcepts: ['inversely proportional', 'small tube diameter', 'tree height 115 m', 'unrealistically small'],
-    keywords: ['inversely proportional', 'small diameter', 'tree', '115', 'height', 'unrealistic', 'capillary alone'],
+    keyConcepts: ['inversely proportional', 'small tube diameter', 'tree height 100 m', 'unrealistically small'],
+    keywords: ['inversely proportional', 'small diameter', 'tree', '100', 'height', 'unrealistic', 'capillary alone'],
   },
 
   // Q7 — Design investigation (salt concentration)
@@ -125,8 +125,8 @@ export const CONCEPTS_PUBLIC_NOV2020_V1: Record<string, ConceptEntry> = {
 
   // Q8 — Maglev trains
   q8_a: {
-    keyConcepts: ['iron is magnetic', 'ferromagnetic metal', 'attracted to magnet'],
-    keywords: ['iron', 'magnetic', 'ferromagnetic', 'attracted'],
+    keyConcepts: ['steel is magnetic', 'ferromagnetic metal', 'attracted to magnet'],
+    keywords: ['steel', 'magnetic', 'ferromagnetic', 'attracted'],
   },
   q8_b: {
     keyConcepts: ['levitation = upward', 'guidance = sideways', 'propulsion = forward', 'force identification'],

@@ -1,363 +1,332 @@
 import 'server-only'
 
-type MSEntry = {
+export type MSEntry = {
   marks: number
   exemplar: string
   keyConcepts: string[]
   keywords: string[]
   feedbackHit: string
   feedbackMiss: string
-  blankAnswers?: string[]
 }
 
-type MCQEntry = {
+export type MCQEntry = {
   type: 'mcq'
   correct: number
 }
 
-type MSRecord = MSEntry | MCQEntry
+export type MSRecord = MSEntry | MCQEntry
 
 export const MS: Record<string, MSRecord> = {
 
-  // ── Q1 Defibrillators ────────────────────────────────────────────
+  // ── Q1 Electrostatic precipitator ────────────────────────────────
   'q1_a': {
     marks: 1,
     exemplar: 'Electrons',
-    keyConcepts: ['electric charge', 'current'],
-    keywords: ['electrons', 'charge', 'current'],
-    feedbackHit: 'Correct — free electrons are the charge carriers in a metal conductor.',
-    feedbackMiss: 'Electrons are the mobile charge carriers in metals. Protons are fixed in the nucleus; atoms and neutrons carry no net charge.',
+    keyConcepts: ['electrons move', 'free electrons', 'negative charge carriers'],
+    keywords: ['electrons', 'electron'],
+    feedbackHit: 'Correct — electrons are the charge carriers that move to charge the soot particles.',
+    feedbackMiss: 'Electrons are the particles that move in a conductor to transfer charge. Protons, atoms and neutrons do not move freely.',
   },
-
   'q1_b': {
     marks: 3,
-    exemplar: 'E = V × I × t\nRearranging: I = E / (V × t)\nI = 120 / (400 × 0.050)\nI = 120 / 20\nI = 6.0 A',
-    keyConcepts: ['electrical energy', 'current', 'potential difference'],
-    keywords: ['current', 'energy', 'voltage', 'time'],
-    feedbackHit: 'Excellent — correct formula, unit conversion (50 ms → 0.050 s), and clean division.',
-    feedbackMiss: 'Start with E = VIt and rearrange for I. Remember to convert 50 ms to 0.050 s before substituting.',
+    exemplar: 'Convert: 40 ms = 0.040 s. Use E = VIt → I = E/(V×t) = 180/(450 × 0.040) = 10 A. Award 3 marks for a correctly rounded value (10 A). Conversion of ms to s may be seen or implied. Method may alternatively use P = E/t = 4500 W then I = P/V = 10 A.',
+    keyConcepts: ['convert milliseconds to seconds', 'E = VIt', 'current calculation', '10 A'],
+    keywords: ['0.04', '0.040', '10', 'current', 'E = VIt', 'P = IV', '4500', 'charge', 'ampere'],
+    feedbackHit: 'Correct — the current is 10 A. Good working shown.',
+    feedbackMiss: 'Use E = VIt rearranged to I = E/(V×t). Convert 40 ms = 0.040 s. I = 180/(450 × 0.040) = 10 A.',
   },
-
   'q1_c': {
     marks: 1,
-    exemplar: 'The gel reduces the electrical resistance / improves electrical contact between the plates and skin, allowing more current to flow through the patient.',
-    keyConcepts: ['resistance', 'electrical contact'],
-    keywords: ['resistance', 'contact', 'current', 'gel'],
-    feedbackHit: 'Good — linking gel to reduced resistance / better contact earns the mark.',
-    feedbackMiss: 'Think about what high skin resistance would do to the current. Gel lowers resistance so more current reaches the heart.',
+    exemplar: 'The particles must be charged so that they experience an electric force and are attracted to the oppositely (positively) charged collecting plates, which pulls them out of the gas stream. Accept: only charged particles are attracted/deflected by the field. Do not accept vague "so they stick" without reference to charge/attraction.',
+    keyConcepts: ['charged particles attracted to opposite plate', 'electric force / attraction', 'removed from gas onto plate'],
+    keywords: ['charge', 'attract', 'opposite', 'plate', 'force', 'field', 'collect', 'pull'],
+    feedbackHit: 'Good — a charged particle is attracted to the oppositely charged collecting plate.',
+    feedbackMiss: 'Only a charged particle feels a force in the field. The negatively charged soot is attracted to the positive collecting plate, removing it from the gas.',
   },
-
   'q1_d': {
     marks: 2,
-    exemplar: 'Adhesive pads: Can be applied in advance so the defibrillator can be used immediately / hands-free operation allows CPR to continue / pads stay in place automatically.\nInsulating handles: The doctor is protected from electric shock as handles prevent current flowing through their body.',
-    keyConcepts: ['electrical safety', 'insulation'],
-    keywords: ['adhesive', 'hands-free', 'insulating', 'protection', 'electric shock'],
-    feedbackHit: 'Well done — one distinct advantage identified for each type.',
-    feedbackMiss: 'For adhesive pads think about convenience/speed; for insulating handles think about electrical safety for the operator.',
+    exemplar: 'Plate-type (any ONE of): large collecting-plate area collects more particles; can handle very large volumes / high flow rates of waste gas; suited to big power-station chimneys.\n\nTubular (any ONE of): the field around the central wire is stronger / more uniform so charging is more effective; particles cannot escape sideways past the plates; good for smaller gas flows; easier to clean by rapping the tube. Do NOT accept points common to both types.',
+    keyConcepts: ['plate-type large area / high flow', 'tubular stronger or uniform field', 'no sideways escape', 'handles large volume'],
+    keywords: ['area', 'large', 'volume', 'flow', 'uniform', 'stronger', 'field', 'escape', 'central', 'wire', 'clean'],
+    feedbackHit: 'Good — a valid advantage for each precipitator design was identified.',
+    feedbackMiss: 'Plate-type: e.g. large plate area handles a high gas-flow volume. Tubular: e.g. stronger/uniform field around the central wire, and particles can\'t escape sideways.',
   },
 
-  // ── Q2 Refraction of Light ───────────────────────────────────────
+  // ── Q2 Refraction ────────────────────────────────────────────────
   'q2_a': {
     marks: 3,
-    exemplar: 'f = v / λ\nλ = 530 nm = 530 × 10⁻⁹ m = 5.30 × 10⁻⁷ m\nf = 3.0 × 10⁸ / 5.30 × 10⁻⁷\nf = 5.66 × 10¹⁴ Hz ≈ 5.7 × 10¹⁴ Hz',
-    keyConcepts: ['wave speed', 'frequency', 'wavelength'],
-    keywords: ['frequency', 'wavelength', 'speed of light'],
-    feedbackHit: 'Correct — formula, nm → m conversion, and answer to 2 s.f. with unit.',
-    feedbackMiss: 'Use f = v/λ. Convert 530 nm to metres (× 10⁻⁹) first. Express answer in Hz to 2 s.f.',
+    exemplar: 'Use f = v/λ. Convert 525 nm = 525 × 10⁻⁹ m. f = (3.0 × 10⁸)/(525 × 10⁻⁹) = 5.71 × 10¹⁴ Hz ≈ 5.7 × 10¹⁴ Hz. Award 3 marks for a correctly rounded answer to 2 significant figures.',
+    keyConcepts: ['f = v/λ', 'convert nm to m', 'frequency calculation', '5.7 × 10¹⁴', 'two significant figures'],
+    keywords: ['5.7', '5.71', '10¹⁴', 'Hz', 'frequency', 'wavelength', 'speed of light', 'f = v'],
+    feedbackHit: 'Correct — the frequency of green light is approximately 5.7 × 10¹⁴ Hz.',
+    feedbackMiss: 'Use f = v/λ. Convert 525 nm = 525 × 10⁻⁹ m. f = (3.0 × 10⁸)/(525 × 10⁻⁹) = 5.71 × 10¹⁴ Hz ≈ 5.7 × 10¹⁴ Hz.',
   },
-
   'q2_b': {
     marks: 1,
-    exemplar: 'Red / orange / yellow (any colour with wavelength > 530 nm)',
-    keyConcepts: ['visible spectrum', 'wavelength'],
-    keywords: ['wavelength', 'red', 'orange', 'yellow'],
-    feedbackHit: 'Correct — red, orange, or yellow all have longer wavelengths than green (530 nm).',
-    feedbackMiss: 'In the visible spectrum, red has the longest wavelength (~700 nm) and violet the shortest. Any colour redder than green is correct.',
+    exemplar: 'Yellow, orange or red (any colour with a longer wavelength than green — towards the red end of the visible spectrum).',
+    keyConcepts: ['longer wavelength than green', 'yellow orange red', 'visible spectrum order'],
+    keywords: ['yellow', 'orange', 'red'],
+    feedbackHit: 'Correct — yellow, orange and red have longer wavelengths than green light.',
+    feedbackMiss: 'Colours with longer wavelengths than green are yellow, orange and red (ROYGBIV — red has the longest wavelength).',
   },
-
   'q2_c': {
     marks: 1,
-    exemplar: 'Frequency',
-    keyConcepts: ['refraction', 'wave properties'],
-    keywords: ['frequency', 'constant', 'refraction'],
-    feedbackHit: 'Correct — frequency is determined by the source and remains constant regardless of the medium.',
-    feedbackMiss: 'When light crosses a boundary, its speed and wavelength change, but the frequency (set by the source) remains unchanged.',
+    exemplar: 'Frequency. When light refracts, its speed and wavelength change but its frequency remains constant.',
+    keyConcepts: ['frequency constant', 'frequency unchanged during refraction'],
+    keywords: ['frequency'],
+    feedbackHit: 'Correct — frequency is the quantity that remains constant when light refracts.',
+    feedbackMiss: 'When light refracts, its speed and wavelength change, but its frequency remains constant. Direction, speed and wavelength all change.',
   },
-
   'q2_d': {
     marks: 3,
-    exemplar: 'Light from the coin travels from water into air at an angle to the normal. At the boundary, the light bends away from the normal (it speeds up). The person\'s brain assumes light travels in a straight line, so it traces the refracted ray back to an apparent position that is closer to the surface than the actual coin / the coin appears shallower than it really is.',
-    keyConcepts: ['refraction', 'apparent depth', 'normal'],
-    keywords: ['refraction', 'bending', 'apparent position', 'normal', 'interface'],
-    feedbackHit: 'Excellent — direction of bending, reason (speed change), and apparent position all addressed.',
-    feedbackMiss: 'Describe: (1) light bends away from normal at water→air boundary; (2) brain assumes straight-line travel; (3) apparent position differs from real position.',
+    exemplar: 'Light travels from the fish to the angler\'s eye (from water to air). Light refracts / bends away from the normal as it passes from the denser medium (water) into the less dense medium (air). The eye/brain assumes light has travelled in a straight line, so the fish appears raised / closer to the surface / in a different position from reality.',
+    keyConcepts: ['light travels fish to eye', 'refraction at water-air boundary', 'bends away from normal', 'brain assumes straight line', 'apparent position different'],
+    keywords: ['refract', 'bend', 'normal', 'water', 'air', 'straight line', 'brain', 'eye', 'apparent', 'position', 'raised', 'denser'],
+    feedbackHit: 'Good — refraction at the water surface and the straight-line assumption are both explained.',
+    feedbackMiss: 'Light from the fish refracts (bends away from the normal) as it leaves the water into the air. The brain assumes a straight-line path, so the fish appears higher/shallower than it really is.',
   },
-
   'q2_e': {
     marks: 2,
-    exemplar: 'A diverging lens spreads the incoming light rays outward before they enter the eye. This moves the focal point back / further from the lens, so the image forms on the retina rather than in front of it.',
-    keyConcepts: ['diverging lens', 'focal point', 'short-sightedness'],
-    keywords: ['diverging', 'focal point', 'retina', 'spread'],
-    feedbackHit: 'Good — diverging action and shift of focal point onto retina explained.',
-    feedbackMiss: 'Explain that the diverging lens makes rays less convergent, shifting the focal point posteriorly onto the retina.',
+    exemplar: 'A diverging (concave) lens spreads the light rays out (diverges them) before they enter the eye. This moves the focal point further back so that the rays now meet on the retina rather than in front of it, correcting short-sightedness. Award 1 mark for diverging/spreading the rays; 1 mark for shifting the focus onto the retina.',
+    keyConcepts: ['diverging lens spreads rays', 'concave', 'shifts focal point back', 'image forms on retina'],
+    keywords: ['diverge', 'spread', 'concave', 'focal point', 'retina', 'back', 'short-sighted'],
+    feedbackHit: 'Good — the diverging lens spreads the rays so they focus on the retina.',
+    feedbackMiss: 'A diverging (concave) lens spreads the rays out before they reach the eye, moving the focal point back onto the retina instead of in front of it.',
   },
 
   // ── Q3 Nuclear Fission ───────────────────────────────────────────
   'q3_a': {
     marks: 1,
-    exemplar: 'Burning fossil fuels releases carbon dioxide / greenhouse gases, contributing to global warming / climate change. OR Fossil fuels are a non-renewable resource that will eventually run out.',
-    keyConcepts: ['fossil fuels', 'climate change', 'non-renewable resources'],
-    keywords: ['carbon dioxide', 'greenhouse gas', 'non-renewable', 'climate change'],
-    feedbackHit: 'Correct — either environmental or resource-depletion argument gains the mark.',
-    feedbackMiss: 'State one specific problem: CO₂ emissions → global warming, or finite supply → energy security.',
+    exemplar: 'Any one of: burning fossil fuels releases CO₂ / greenhouse gases causing climate change; they are non-renewable / finite; cause air pollution.',
+    keyConcepts: ['greenhouse gases', 'non-renewable', 'air pollution', 'climate change'],
+    keywords: ['CO2', 'carbon dioxide', 'greenhouse', 'pollution', 'finite', 'non-renewable', 'climate', 'warming'],
+    feedbackHit: 'Correct — a valid problem with fossil fuels was given.',
+    feedbackMiss: 'E.g. burning fossil fuels releases CO₂ (a greenhouse gas) causing climate change, and fossil fuels are non-renewable.',
   },
-
   'q3_b': {
     marks: 1,
-    exemplar: 'U-236 has one more neutron than U-235 (both have 92 protons).',
-    keyConcepts: ['atomic structure', 'isotopes', 'nucleon number'],
-    keywords: ['neutron', 'isotope', 'nucleon number'],
-    feedbackHit: 'Correct — isotopes differ only in neutron number.',
-    feedbackMiss: 'Both U-235 and U-236 have 92 protons. The difference is that U-236 has one extra neutron (143 vs 142).',
+    exemplar: 'U-236 has one more neutron than U-235 (both have the same number of protons — they are isotopes).',
+    keyConcepts: ['one more neutron', 'same protons', 'isotope'],
+    keywords: ['neutron', 'proton', 'mass number', 'isotope', 'one more', 'extra'],
+    feedbackHit: 'Correct — U-236 has one extra neutron compared with U-235.',
+    feedbackMiss: 'U-236 has one more neutron than U-235. The number of protons is the same, so they are isotopes of uranium.',
   },
-
   'q3_c': {
     marks: 1,
-    exemplar: '4 neutrons\n(Check: 135 + 97 + 4 = 236 ✓; protons 52 + 40 = 92 ✓)',
-    keyConcepts: ['conservation of mass number', 'conservation of atomic number', 'nuclear equations'],
-    keywords: ['neutrons', 'mass number', 'atomic number', 'conservation'],
-    feedbackHit: 'Correct — balancing both mass number (236) and atomic number (92) gives 4 neutrons.',
-    feedbackMiss: 'Balance the equation: mass numbers 136 + 97 + ? = 236, so ? = 4. Also check proton numbers sum to 92.',
+    exemplar: '3 neutrons. (Mass numbers: 236 = 141 + 92 + 3, so 3 neutrons are released.)',
+    keyConcepts: ['mass numbers balance', '236 = 141 + 92 + 3', '3 neutrons'],
+    keywords: ['3', 'three', 'neutron', '236', '141', '92', 'balance'],
+    feedbackHit: 'Correct — 3 neutrons balance the equation.',
+    feedbackMiss: 'Balance the mass numbers: 236 = 141 + 92 + (number of neutrons). 236 − 233 = 3 neutrons.',
   },
-
   'q3_d': {
     marks: 2,
-    exemplar: 'E = mc²\nm = E / c²\nm = 2.4 × 10⁻¹¹ / (3.0 × 10⁸)²\nm = 2.4 × 10⁻¹¹ / 9.0 × 10¹⁶\nm = 2.67 × 10⁻²⁸ kg ≈ 2.7 × 10⁻²⁸ kg',
-    keyConcepts: ['mass-energy equivalence', 'nuclear energy'],
-    keywords: ['mass defect', 'E=mc²', 'energy', 'mass'],
-    feedbackHit: 'Excellent — formula rearranged correctly, c² computed, and answer in kg to 2 s.f.',
-    feedbackMiss: 'Rearrange E = mc² to give m = E/c². Substitute E = 2.4 × 10⁻¹¹ J and c = 3.0 × 10⁸ m s⁻¹.',
+    exemplar: 'Rearrange E = mc² → m = E/c². m = (3.2 × 10⁻¹¹)/(3.0 × 10⁸)² = (3.2 × 10⁻¹¹)/(9.0 × 10¹⁶) = 3.56 × 10⁻²⁸ kg ≈ 3.6 × 10⁻²⁸ kg. Award 1 mark for rearrangement/substitution and 1 mark for the correct value with unit.',
+    keyConcepts: ['m = E/c²', '3.6 × 10⁻²⁸ kg', 'mass-energy equivalence', 'unit kg'],
+    keywords: ['m=E/c2', '3.6', '3.56', '10⁻²⁸', 'kg', 'rearrange', 'divide', '9'],
+    feedbackHit: 'Correct — the mass difference is about 3.6 × 10⁻²⁸ kg.',
+    feedbackMiss: 'm = E/c² = (3.2 × 10⁻¹¹)/(3.0 × 10⁸)² = (3.2 × 10⁻¹¹)/(9.0 × 10¹⁶) = 3.6 × 10⁻²⁸ kg.',
   },
-
   'q3_e': {
     marks: 2,
-    exemplar: 'n = total energy / energy per fission\nn = 12.3 × 10⁹ J / 2.4 × 10⁻¹¹ J\nn = 12.3/2.4 × 10²⁰\nn = 5.125 × 10²⁰ ≈ 5.1 × 10²⁰ fissions',
-    keyConcepts: ['energy calculations', 'nuclear energy'],
-    keywords: ['fission', 'number of reactions', 'energy per fission'],
-    feedbackHit: 'Well done — correct division with proper powers of ten.',
-    feedbackMiss: 'Convert 12.3 GJ to 12.3 × 10⁹ J, then divide by 2.4 × 10⁻¹¹ J per fission.',
+    exemplar: 'Convert 11.5 GJ = 11.5 × 10⁹ J. Number of fissions = total energy / energy per fission = (11.5 × 10⁹)/(3.2 × 10⁻¹¹) = 3.59 × 10²⁰ ≈ 3.6 × 10²⁰ reactions.',
+    keyConcepts: ['convert GJ to J', 'number = total energy / energy per fission', '3.6 × 10²⁰'],
+    keywords: ['divide', 'gigajoule', '10⁹', '3.6', '3.59', '10²⁰', 'fission', 'reactions'],
+    feedbackHit: 'Correct — about 3.6 × 10²⁰ fission reactions are required.',
+    feedbackMiss: 'Convert 11.5 GJ = 11.5 × 10⁹ J, then divide by the energy per fission: (11.5 × 10⁹)/(3.2 × 10⁻¹¹) = 3.6 × 10²⁰.',
   },
-
   'q3_f': {
     marks: 2,
-    exemplar: 'efficiency = useful power output / total power input\n0.40 = 2.0 × 10⁹ / P_total\nP_total = 2.0 × 10⁹ / 0.40\nP_total = 5.0 × 10⁹ W',
-    keyConcepts: ['energy efficiency', 'power'],
-    keywords: ['efficiency', 'total power', 'useful power'],
-    feedbackHit: 'Correct — rearrangement and clean answer of 5.0 × 10⁹ W.',
-    feedbackMiss: 'efficiency = P_useful / P_total, so P_total = P_useful / efficiency = 2.0 × 10⁹ / 0.40.',
+    exemplar: 'efficiency = useful power / total power → total power = useful/efficiency = (1.4 × 10⁹)/0.32 = 4.375 × 10⁹ ≈ 4.4 × 10⁹ W. Award 1 mark for rearrangement and 1 mark for the value with unit.',
+    keyConcepts: ['efficiency = useful / total', 'total = useful / efficiency', '4.4 × 10⁹ W'],
+    keywords: ['efficiency', 'useful', 'total', 'divide', '0.32', '32%', '4.4', '4.375', 'watt', 'power'],
+    feedbackHit: 'Correct — the total power released is about 4.4 × 10⁹ W.',
+    feedbackMiss: 'total power = useful power / efficiency = (1.4 × 10⁹)/0.32 = 4.4 × 10⁹ W.',
   },
 
-  // ── Q4 Rubber Band Car ───────────────────────────────────────────
+  // ── Q4 Balloon car / Motion ──────────────────────────────────────
   'q4_a': {
     marks: 2,
-    exemplar: 'f = 1 / T\nf = 1 / 0.050\nf = 20 Hz',
-    keyConcepts: ['frequency', 'period'],
-    keywords: ['frequency', 'period', 'Hz'],
-    feedbackHit: 'Correct — f = 1/T used correctly with unit Hz.',
-    feedbackMiss: 'Use f = 1/T. T = 0.050 s (the time interval between measurements). f = 1/0.050 = 20 Hz.',
+    exemplar: 'f = 1/T = 1/0.08 = 12.5 Hz. Award 1 mark for the method (f = 1/T) and 1 mark for the value with unit (Hz).',
+    keyConcepts: ['f = 1/T', '12.5 Hz', 'unit hertz'],
+    keywords: ['1/T', '12.5', 'Hz', 'hertz', 'frequency', '0.08'],
+    feedbackHit: 'Correct — the recording frequency is 12.5 Hz.',
+    feedbackMiss: 'Frequency f = 1/T = 1/0.08 = 12.5 Hz.',
   },
-
   'q4_b': {
     marks: 1,
-    exemplar: 'Approximately 4.2 cm s⁻¹ (accept 4.0–4.5 cm s⁻¹)',
-    keyConcepts: ['reading data tables', 'velocity'],
-    keywords: ['velocity', 'reading', 'data table'],
-    feedbackHit: 'Correct reading from the data table at t = 0.30 s.',
-    feedbackMiss: 'Read the velocity column at the row corresponding to t = 0.30 s.',
+    exemplar: '36 cm s⁻¹ (read directly from the table at t = 0.24 s).',
+    keyConcepts: ['read value from table', '36 cm/s at t = 0.24 s'],
+    keywords: ['36', 'cm', 'velocity'],
+    feedbackHit: 'Correct — the velocity at t = 0.24 s is 36 cm s⁻¹.',
+    feedbackMiss: 'Read the velocity directly from the table at t = 0.24 s: 36 cm s⁻¹.',
   },
-
   'q4_c': {
     marks: 3,
-    exemplar: 'Gradient = Δv / Δt = (4.2 − 0) / (0.30 − 0.05) ≈ 4.2 / 0.25 ≈ 16.8 cm s⁻² → scaled to graph ≈ 84 cm s⁻²\nUnit: cm s⁻² (or m s⁻²)\nQuantity: acceleration',
-    keyConcepts: ['gradient of v-t graph', 'acceleration'],
-    keywords: ['gradient', 'acceleration', 'velocity-time graph'],
-    feedbackHit: 'Well done — gradient calculated with two clear points, unit stated, and "acceleration" identified.',
-    feedbackMiss: 'Select two widely-spaced points on the line. Gradient = Δv/Δt. The quantity is acceleration.',
+    exemplar: 'Gradient = Δv/Δt = (60 − 12)/(0.40 − 0.08) = 48/0.32 = 150 cm s⁻² (= 1.5 m s⁻²). The gradient represents the acceleration of the car. Award 1 mark for reading two points, 1 mark for the value (150 cm s⁻² or 1.5 m s⁻²), 1 mark for stating the quantity is acceleration.',
+    keyConcepts: ['gradient = Δv/Δt', '150 cm/s² or 1.5 m/s²', 'gradient = acceleration', 'unit'],
+    keywords: ['gradient', '150', '1.5', 'cm/s²', 'm/s²', 'acceleration', 'Δv', 'Δt', '48', '0.32'],
+    feedbackHit: 'Correct — gradient = 150 cm s⁻² (1.5 m s⁻²), which represents acceleration.',
+    feedbackMiss: 'Gradient = Δv/Δt = (60 − 12)/(0.40 − 0.08) = 48/0.32 = 150 cm s⁻² (= 1.5 m s⁻²). This represents the acceleration.',
   },
-
   'q4_d': {
     marks: 2,
-    exemplar: 'Prediction: The gradient (acceleration) would be steeper / greater.\nJustification: More turns store more elastic potential energy in the band; the band exerts a larger force on the car, resulting in a greater acceleration (F = ma).',
-    keyConcepts: ['elastic potential energy', 'Newton\'s second law', 'force'],
-    keywords: ['gradient', 'acceleration', 'force', 'elastic energy', 'turns'],
-    feedbackHit: 'Good — steeper gradient predicted with a force/energy justification.',
-    feedbackMiss: 'More turns → more stored energy → greater force → greater acceleration. Gradient on v-t graph = acceleration.',
+    exemplar: 'Prediction: the line of best fit would be steeper (a larger gradient) / reach a higher velocity. Justification: a larger balloon holds more air, so it provides a greater driving force (and more energy) over the run, producing a greater acceleration (F = ma). Award 1 mark for the prediction, 1 mark for a justification linking to force/energy.',
+    keyConcepts: ['steeper line / larger gradient', 'greater acceleration', 'more air = more force/energy', 'F = ma'],
+    keywords: ['steeper', 'gradient', 'greater', 'acceleration', 'force', 'energy', 'more air', 'thrust', 'F = ma'],
+    feedbackHit: 'Good — a steeper line justified by greater force/energy from the larger balloon.',
+    feedbackMiss: 'Prediction: a steeper line (greater gradient). Justification: more air gives a greater driving force/energy, so greater acceleration (F = ma).',
   },
-
   'q4_e': {
     marks: 2,
-    exemplar: 'Limitation 1: Human reaction time introduces random error in timing measurements, making the data less precise / repeatable.\nLimitation 2: Difficult to measure distance accurately with a ruler while the car is moving; can only measure one interval at a time (not a continuous record).',
-    keyConcepts: ['experimental limitations', 'measurement uncertainty'],
-    keywords: ['reaction time', 'precision', 'random error', 'continuous'],
-    feedbackHit: 'Two distinct limitations identified — well done.',
-    feedbackMiss: 'Think about (1) timing errors (human reaction time vs automated frame rate) and (2) position resolution (one point vs continuous tracking).',
+    exemplar: 'Any TWO of: human reaction-time error when starting/stopping the stopwatch; difficult to read the exact position at a precise instant (parallax); cannot easily capture many closely-spaced positions / instantaneous velocity; lower resolution/precision than frame-by-frame video. Award 1 mark per valid limitation (max 2).',
+    keyConcepts: ['reaction-time error', 'parallax / reading position', 'fewer data points / no frame-by-frame', 'lower precision'],
+    keywords: ['reaction', 'time', 'parallax', 'precise', 'instant', 'frames', 'data points', 'precision', 'error', 'human'],
+    feedbackHit: 'Good — two valid limitations of ruler-and-stopwatch data identified.',
+    feedbackMiss: 'E.g. (1) human reaction-time error when timing; (2) hard to capture many positions / instantaneous velocity, unlike frame-by-frame video.',
   },
 
-  // ── Q5 Investigation Design ──────────────────────────────────────
+  // ── Q5 Balloon-car investigation design (Crit B) ─────────────────
   'q5_a': {
     marks: 16,
-    exemplar: 'VARIABLES:\n• IV: Number of turns of the rubber band (e.g. 5, 10, 15, 20, 25 turns)\n• DV: Time taken for the car to travel a fixed distance (e.g. 1.00 m)\n• CV: Mass of car, surface/incline (kept horizontal), fixed distance\n• CV justification: mass affects inertia; surface affects friction; distance must be fixed so time comparisons are valid\n\nHYPOTHESIS:\nIf the number of turns of the rubber band is increased, then the time taken to travel the fixed distance will decrease, because more turns store more elastic potential energy, which is converted to kinetic energy, giving the car a greater speed.\n\nEQUIPMENT:\n• Ruler or tape measure (measure fixed distance)\n• Stopwatch / electronic timer (measure time)\n• Model car with rubber band, flat surface, start and finish markers\n\nMETHOD:\n1. Set up flat track with start and finish markers 1.00 m apart.\n2. Wind the rubber band 5 turns and place the car at the start line.\n3. Release the car and use a stopwatch to measure the time for the front of the car to cross the finish line.\n4. Repeat step 3 two more times (three trials) and calculate mean time.\n5. Repeat steps 2–4 for 10, 15, 20, and 25 turns.\n6. Record results in a table: IV | trial 1 | trial 2 | trial 3 | mean time.\n\nSUFFICIENT DATA:\n• 5 different values of IV ensures a trend can be identified.\n• 3 repeats per IV allows outliers to be detected and mean to be calculated.',
-    keyConcepts: ['experimental design', 'variables', 'hypothesis', 'method', 'sufficient data'],
-    keywords: ['independent variable', 'dependent variable', 'control variable', 'hypothesis', 'repeat', 'mean', 'reliability'],
-    feedbackHit: 'Full marks require: IV/DV/CV with justification, testable hypothesis (If/Then/Because), clear method with repeats, sufficient data range. Apply MYP Crit B rubric.',
-    feedbackMiss: 'Check: (1) CV justified scientifically; (2) hypothesis uses "If...then...because"; (3) method is step-by-step and reproducible; (4) ≥5 IV values and ≥3 repeats stated.',
+    exemplar: 'A full-mark plan includes:\nVARIABLES (up to 3): IV = number of breaths of air used to inflate the balloon; DV = time taken to travel a fixed distance; a sensible control variable (e.g. same distance, same car/mass, same surface) with justification.\nHYPOTHESIS (up to 3): a testable "If…then…because…" statement, e.g. "If more breaths of air are used, then the time to travel the fixed distance will decrease, because more air gives a greater thrust force and acceleration."\nEQUIPMENT (up to 3): balloon car, metre rule / measured track, stopwatch (or light gates), marker for fixed distance; a method to standardise inflation (e.g. count breaths or measure balloon circumference).\nMETHOD (up to 4): inflate with the set number of breaths; release from the start line; time over the fixed distance; repeat; change the IV and repeat; logically ordered and replicable.\nSUFFICIENT DATA (up to 3): at least 5 different IV values, each repeated 3+ times, with means; controlled conditions. Award by the standard Crit B rubric bands.',
+    keyConcepts: ['IV breaths of air', 'DV time over fixed distance', 'control variable justified', 'testable hypothesis', 'appropriate equipment', 'replicable method', 'repeats and range for sufficient data'],
+    keywords: ['independent', 'dependent', 'control', 'hypothesis', 'method', 'repeat', 'range', 'fair test', 'stopwatch', 'distance', 'breaths', 'inflate'],
+    feedbackHit: 'Strong investigation plan — variables, hypothesis, equipment, method and sufficient-data strategy all addressed.',
+    feedbackMiss: 'Include: IV (breaths of air), DV (time over a fixed distance), a justified control variable; a testable If…then…because hypothesis; an equipment list; a clear replicable method; and a sufficient-data plan (≥5 IV values, ≥3 repeats each).',
   },
-
   'q5_b': {
     marks: 1,
-    exemplar: 'How does the mass added to the model car affect the maximum speed it reaches? / How does the surface type affect the distance the car travels?',
-    keyConcepts: ['research question formulation'],
-    keywords: ['research question', 'variable'],
-    feedbackHit: 'Any valid research question involving a different IV or DV for a model car earns the mark.',
-    feedbackMiss: 'The RQ must change either the IV or DV from the original. E.g. investigate mass or surface type instead of number of turns.',
+    exemplar: 'Any sensible alternative research question using the balloon car, e.g. "How does the mass added to the balloon car affect the distance it travels?" or "How does the surface type affect the time to travel a fixed distance?"',
+    keyConcepts: ['alternative IV', 'measurable DV', 'about the balloon car'],
+    keywords: ['how does', 'affect', 'mass', 'surface', 'distance', 'balloon car'],
+    feedbackHit: 'Good — a valid alternative research question was suggested.',
+    feedbackMiss: 'E.g. "How does the mass added to the balloon car affect the distance it travels before stopping?"',
   },
 
-  // ── Q6 Seebeck Effect / TEG ──────────────────────────────────────
+  // ── Q6 Solar (photovoltaic) cell ─────────────────────────────────
   'q6_a': {
     marks: 1,
-    exemplar: 'How does the temperature difference (ΔT) between the hot and cold sides of the TEG affect the voltage (V) produced?',
-    keyConcepts: ['research question', 'Seebeck effect'],
-    keywords: ['temperature difference', 'voltage', 'TEG', 'research question'],
-    feedbackHit: 'Any RQ that clearly identifies ΔT as IV and V as DV earns the mark.',
-    feedbackMiss: 'Make sure the RQ identifies both IV (temperature difference) and DV (voltage) clearly.',
+    exemplar: 'How does the light intensity affect the voltage produced by the solar cell? (Must name a sensible IV and DV.)',
+    keyConcepts: ['research question links IV and DV', 'light intensity', 'voltage'],
+    keywords: ['how does', 'intensity', 'light', 'voltage', 'affect', 'solar'],
+    feedbackHit: 'Good — a clear research question linking light intensity to voltage.',
+    feedbackMiss: 'A research question should link the IV and DV, e.g. "How does the light intensity affect the voltage produced by the solar cell?"',
   },
-
   'q6_b': {
     marks: 2,
-    exemplar: 'Thermometer (to measure temperature of hot and cold water tanks) and voltmeter (to measure voltage output of TEG).',
-    keyConcepts: ['measurement', 'instruments'],
-    keywords: ['thermometer', 'voltmeter', 'temperature', 'voltage'],
-    feedbackHit: 'Two correct instruments identified — one for temperature, one for voltage.',
-    feedbackMiss: 'You need to measure two quantities: temperature → thermometer; voltage → voltmeter.',
+    exemplar: 'A voltmeter (to measure the voltage) and a light meter / lux meter (to measure the light intensity). Award 1 mark each.',
+    keyConcepts: ['voltmeter', 'light meter / lux meter'],
+    keywords: ['voltmeter', 'light meter', 'lux', 'meter', 'voltage', 'intensity'],
+    feedbackHit: 'Correct — a voltmeter and a light meter are needed.',
+    feedbackMiss: 'You need a voltmeter (for voltage) and a light meter / lux meter (for light intensity).',
   },
-
   'q6_c': {
     marks: 1,
-    exemplar: 'ΔT = T_hot − T_cold = 65.0 − 50.0 = 15.0 °C',
-    keyConcepts: ['temperature difference', 'data processing'],
-    keywords: ['temperature difference', 'calculation'],
-    feedbackHit: 'Correct — ΔT = 15.0 °C.',
-    feedbackMiss: 'Subtract cold temperature from hot temperature to find ΔT.',
+    exemplar: 'Corrected intensity = meter reading − zero error = 6.0 − 0.2 = 5.8 klux.',
+    keyConcepts: ['subtract zero error', '6.0 − 0.2', '5.8 klux'],
+    keywords: ['5.8', '6.0', '0.2', 'klux', 'zero error', 'subtract'],
+    feedbackHit: 'Correct — the corrected intensity is 5.8 klux.',
+    feedbackMiss: 'Subtract the zero error from the reading: 6.0 − 0.2 = 5.8 klux.',
   },
-
   'q6_d': {
     marks: 4,
-    exemplar: 'Graph: x-axis = Temperature difference ΔT (°C), y-axis = Voltage V (mV or V).\nAll data points plotted correctly (±½ small square).\nLine of best fit: straight line through/near origin, does not connect dots.\nAxes labelled with units.',
-    keyConcepts: ['graph plotting', 'line of best fit'],
-    keywords: ['axes', 'units', 'data points', 'line of best fit'],
-    feedbackHit: 'Full marks for correct axes with units, all points, and a single smooth LOBF.',
-    feedbackMiss: 'Check: (1) axes correct with units; (2) all points plotted; (3) straight LOBF (not dot-to-dot); (4) LOBF passes near origin.',
+    exemplar: 'A correct graph has: X-axis = light intensity / klux, Y-axis = voltage / V, both labelled with units (1); a sensible scale using more than half the grid (1); all five points plotted correctly, including (5.8, 0.46) (1); a suitable single line/curve of best fit (1).',
+    keyConcepts: ['labelled axes with units', 'sensible scale', 'points plotted correctly', 'line of best fit'],
+    keywords: ['axes', 'label', 'units', 'scale', 'plot', 'points', 'line of best fit', 'intensity', 'voltage'],
+    feedbackHit: 'Good graph — axes, scale, points and line of best fit all correct.',
+    feedbackMiss: 'Label both axes with units (intensity/klux on x, voltage/V on y), use a sensible scale, plot all five points, and draw a single best-fit line/curve.',
   },
-
   'q6_e': {
     marks: 2,
-    exemplar: 'The claim is NOT valid. A directly proportional relationship requires the graph to pass through the origin. The line of best fit does not pass through the origin (there is a positive y-intercept), so the relationship is linear but not directly proportional.',
-    keyConcepts: ['direct proportion', 'validity'],
-    keywords: ['directly proportional', 'origin', 'valid', 'intercept'],
-    feedbackHit: 'Correct — identifies not valid, references intercept/origin, earns both marks.',
-    feedbackMiss: 'Direct proportion requires passing through (0,0). Check whether your LOBF extrapolates to the origin.',
+    exemplar: 'The claim is NOT fully valid. Although the line passes close to the origin, the ratio V/intensity is not constant — it decreases as intensity increases (e.g. 0.18/2.0 = 0.090 but 0.66/10.0 = 0.066), so the graph curves and the voltage rises less steeply at higher intensities. The voltage is therefore only approximately proportional at low intensity and saturates at higher intensity. Award 1 mark for the judgement, 1 mark for justification using the data.',
+    keyConcepts: ['not directly proportional', 'ratio V/intensity not constant', 'curve / saturates', 'evidence from data'],
+    keywords: ['not', 'proportional', 'ratio', 'constant', 'curve', 'saturate', 'origin', '0.090', '0.066', 'decrease'],
+    feedbackHit: 'Good — you judged validity and supported it with the changing V/intensity ratio.',
+    feedbackMiss: 'Test V/intensity for each row: it falls from 0.090 to 0.066, so it is not constant. The line curves/saturates, so V is not directly proportional to intensity.',
   },
-
   'q6_f': {
     marks: 2,
-    exemplar: 'Calculate the gradient of the line of best fit: choose two widely-separated points on the line and compute gradient = ΔV / ΔΔT. The Seebeck coefficient S = −gradient (the negative sign indicates voltage opposes temperature gradient, but the magnitude equals the gradient).',
-    keyConcepts: ['Seebeck coefficient', 'gradient'],
-    keywords: ['gradient', 'Seebeck coefficient', 'slope'],
-    feedbackHit: 'Good — gradient method described and linked to S via S = −ΔV/ΔT.',
-    feedbackMiss: 'Find the gradient of V vs ΔT graph using rise/run. S = magnitude of gradient (V per °C or V K⁻¹).',
+    exemplar: 'Draw the line of best fit, then choose two points far apart on the line and read their coordinates. The increase in voltage per klux is the gradient = ΔV/Δintensity (rise ÷ run). Award 1 mark for "find the gradient of the line", 1 mark for ΔV/Δintensity using two points on the line (not raw data points).',
+    keyConcepts: ['gradient of line of best fit', 'ΔV/Δintensity', 'two points far apart on the line'],
+    keywords: ['gradient', 'ΔV', 'Δintensity', 'rise', 'run', 'two points', 'line of best fit', 'slope'],
+    feedbackHit: 'Correct — the value is the gradient ΔV/Δintensity of the line of best fit.',
+    feedbackMiss: 'Take two points far apart on the line of best fit and calculate the gradient = ΔV/Δintensity (rise ÷ run).',
   },
-
   'q6_g': {
     marks: 2,
-    exemplar: 'P = V × I\nP = 0.600 × 0.080\nP = 0.048 W (48 mW)',
-    keyConcepts: ['electrical power'],
-    keywords: ['power', 'voltage', 'current'],
-    feedbackHit: 'Correct — P = VI = 0.048 W with unit.',
-    feedbackMiss: 'Use P = VI. Substitute V = 0.600 V and I = 0.080 A.',
+    exemplar: 'P = VI = 0.42 × 0.13 = 0.0546 W ≈ 0.055 W (or 54.6 mW). Award 1 mark for P = VI substitution, 1 mark for the value with unit (W).',
+    keyConcepts: ['P = VI', '0.055 W', 'unit watt'],
+    keywords: ['P = VI', '0.42', '0.13', '0.055', '0.0546', 'W', 'watt', 'power'],
+    feedbackHit: 'Correct — the motor power is about 0.055 W.',
+    feedbackMiss: 'Use P = VI = 0.42 × 0.13 = 0.055 W (≈ 55 mW).',
   },
-
   'q6_h': {
     marks: 2,
-    exemplar: 'Improvement: Use a larger or lighter propeller / reduce the mass of the car frame / increase the temperature difference to generate a higher voltage and current.\nJustification: Increasing the force from the propeller (or reducing mass of car) increases net force, which by Newton\'s second law (F = ma) gives greater acceleration.',
-    keyConcepts: ['Newton\'s second law', 'force', 'acceleration'],
-    keywords: ['force', 'mass', 'acceleration', 'Newton', 'propeller'],
-    feedbackHit: 'Any valid improvement with a force/energy/Newton\'s 2nd law justification earns both marks.',
-    feedbackMiss: 'Think about F = ma: either increase the driving force (larger propeller, more voltage) or decrease mass.',
+    exemplar: 'A valid improvement with justification, e.g.: reduce the mass of the car / reduce friction in the wheels / use a lighter, more efficient propeller — because a smaller resistive force (or smaller mass) gives a larger resultant force and hence greater acceleration (F = ma). Award 1 mark for the improvement, 1 mark for the scientific justification.',
+    keyConcepts: ['reduce mass or friction', 'greater resultant force', 'F = ma', 'increase acceleration'],
+    keywords: ['mass', 'friction', 'lighter', 'resistive', 'force', 'F = ma', 'acceleration', 'resultant', 'efficient'],
+    feedbackHit: 'Good — a sensible improvement justified with F = ma / reduced resistive force.',
+    feedbackMiss: 'E.g. reduce the car\'s mass or friction so the resultant force produces a greater acceleration (F = ma).',
   },
-
   'q6_i': {
     marks: 1,
-    exemplar: 'Electrical (energy)\nFull chain: Thermal (Heat) → Electrical → Kinetic',
-    keyConcepts: ['energy transfer', 'energy chain'],
-    keywords: ['electrical energy', 'thermal energy', 'kinetic energy', 'energy chain'],
-    feedbackHit: 'Correct — the missing term is "Electrical".',
-    feedbackMiss: 'The TEG converts thermal energy to electrical energy, which the motor converts to kinetic energy. The missing link is electrical energy.',
+    exemplar: 'Electrical. The useful energy chain for the solar propeller car is: Light → Electrical → Kinetic.',
+    keyConcepts: ['light to electrical to kinetic', 'electrical energy in chain'],
+    keywords: ['electrical', 'electric'],
+    feedbackHit: 'Correct — Light → Electrical → Kinetic.',
+    feedbackMiss: 'The solar cell converts light into electrical energy, which powers the motor to produce kinetic energy. The chain is: Light → Electrical → Kinetic.',
   },
-
   'q6_j': {
     marks: 4,
-    exemplar: 'Possible variables for a new investigation:\n• IV: Temperature difference ΔT (°C) between hot and cold sides OR mass added to car\n• DV: Speed/velocity of car (cm s⁻¹) OR distance travelled in fixed time\n• CV1: Fixed distance of travel\n• CV2: Surface type (must be kept the same to control friction)\nAward 1 mark each for a scientifically valid IV, DV, and two CVs.',
-    keyConcepts: ['variables', 'experimental design'],
-    keywords: ['independent variable', 'dependent variable', 'control variable'],
-    feedbackHit: 'Award 1 mark each for IV, DV, CV1, and CV2 if each is scientifically valid and distinct.',
-    feedbackMiss: 'Each variable must be measurable and distinct. CV must be something that would affect the DV if not controlled.',
+    exemplar: 'Award 1 mark each for: (1) a valid IV (e.g. length of propeller blades / light intensity on the cell / mass of car / angle of slope). Do NOT accept voltage, current or power of the motor as IVs. (2) a valid DV (e.g. time to travel a set distance / distance in a set time / speed of car). (3+4) two valid CVs consistent with the chosen IV and DV (e.g. if IV = propeller length, CVs could be light intensity, mass of car, surface type).',
+    keyConcepts: ['valid IV not voltage/current/power', 'valid DV about car motion', 'two CVs consistent with IV/DV'],
+    keywords: ['independent', 'dependent', 'control', 'propeller', 'intensity', 'distance', 'time', 'speed', 'mass', 'consistent'],
+    feedbackHit: 'Good variable identification — IV, DV and two consistent CVs all correct.',
+    feedbackMiss: 'IV: e.g. propeller length (not voltage/current/power). DV: e.g. time to travel a fixed distance. CVs: variables kept constant that could affect the result (e.g. light intensity, mass, surface).',
   },
-
   'q6_k': {
     marks: 2,
-    exemplar: 'If the temperature difference (ΔT) between the hot and cold sides of the TEG is increased, then the speed of the propeller-driven car will increase, because a greater ΔT produces a higher voltage (Seebeck effect), which drives a larger current through the motor, generating more force on the propeller.',
-    keyConcepts: ['hypothesis', 'Seebeck effect', 'prediction'],
-    keywords: ['if', 'then', 'because', 'temperature', 'voltage', 'speed'],
-    feedbackHit: 'Award 1 mark for a testable If/Then prediction, 1 mark for a scientific justification.',
-    feedbackMiss: 'Structure: "If [IV] increases/decreases, then [DV] increases/decreases, because [link to physics]."',
+    exemplar: 'A hypothesis linking the chosen IV to the DV from part (j) with a scientific reason, e.g.: "If the propeller blades are longer, then the distance travelled in a fixed time will increase, because longer blades push against more air, giving a greater thrust force on the car." Award 1 mark for linking IV and DV, 1 mark for the scientific justification.',
+    keyConcepts: ['hypothesis links IV to DV', 'if-then-because format', 'scientific explanation'],
+    keywords: ['if', 'then', 'because', 'increases', 'decreases', 'force', 'thrust', 'air', 'scientific'],
+    feedbackHit: 'Good hypothesis — IV, DV and scientific reasoning clearly linked.',
+    feedbackMiss: 'Format: "If [IV changes], then [DV changes], because [scientific reason]." Refer to force, energy or another physical principle.',
   },
 
-  // ── Q7 Newton's Cannonball & Satellites ──────────────────────────
+  // ── Q7 Newton\'s Cannonball / Satellite Navigation ────────────────
   'q7_a': {
     marks: 1,
-    exemplar: 'A = 4700 m s⁻¹ (falls back to Earth)\nB = 7800 m s⁻¹ (circular orbit)\nC = 0 m s⁻¹ (drops straight down)\nD = 14 200 m s⁻¹ (escapes Earth)\nAll four must be correct.',
-    keyConcepts: ['orbital speed', 'escape velocity', 'Newton\'s cannonball'],
-    keywords: ['orbital speed', 'escape velocity', 'path', 'gravity'],
-    feedbackHit: 'Correct — all four speed-to-path matches correct.',
-    feedbackMiss: 'No speed → falls straight down; ~4700 → parabolic fall; ~7800 → circular orbit; ~14200 → escape. All four must be correct.',
+    exemplar: 'All four must be correct: C = 0 m s⁻¹ (falls straight down); A = 4700 m s⁻¹ (falls back to Earth in a curved arc); B = 7800 m s⁻¹ (circular orbit); D = 14 200 m s⁻¹ (escape trajectory). All four correct for 1 mark.',
+    keyConcepts: ['C = 0 falls straight', 'A = 4700 curved arc', 'B = 7800 circular orbit', 'D = 14200 escape'],
+    keywords: ['0', '4700', '7800', '14200', 'orbit', 'escape', 'circular'],
+    feedbackHit: 'Correct — all four speed-to-path matchings are correct.',
+    feedbackMiss: 'C (0 m s⁻¹): straight down. A (4700): curves back to Earth. B (7800): circular orbit. D (14 200): escape velocity.',
   },
-
   'q7_b': {
     marks: 1,
-    exemplar: 'B — only gravity acts on the cannonball in circular orbit (one arrow pointing toward centre of Earth). No drag in space, no perpendicular force needed for circular motion at this level.',
-    keyConcepts: ['free-body diagram', 'circular orbit', 'gravity'],
-    keywords: ['gravity', 'centripetal', 'free-body diagram', 'orbit'],
-    feedbackHit: 'Correct — diagram B shows only a single gravitational force directed toward Earth\'s centre.',
-    feedbackMiss: 'In circular orbit above the atmosphere, the only force is gravity directed toward the centre. No air resistance, no "centrifugal force".',
+    exemplar: 'A. The cannonball in circular orbit has only ONE force acting on it — gravity, directed towards the centre of the Earth. Diagram A shows a single downward (inward) arrow representing the gravitational force only.',
+    keyConcepts: ['only gravity acts on orbiting cannonball', 'force towards Earth centre', 'diagram A single inward arrow'],
+    keywords: ['A', 'gravity', 'gravitational', 'centre', 'one force', 'inward', 'single'],
+    feedbackHit: 'Correct — in orbit only gravity acts, directed towards Earth\'s centre (diagram A).',
+    feedbackMiss: 'In orbit the only force is gravity, towards Earth\'s centre — a single inward arrow (diagram A). There is no thrust or outward force.',
   },
-
   'q7_c': {
     marks: 14,
-    exemplar: 'SCIENTIFIC & TECHNOLOGICAL CHALLENGES:\n• Reaching 36 000 km requires enormous rocket fuel and engineering precision\n• Maintaining stable geostationary orbit requires exact speed and altitude\n• Satellites must withstand radiation, microgravity, thermal cycling\n• Collision avoidance and space debris management\n\nPOLITICAL IMPLICATIONS:\n• ITU allocation of orbital slots creates geopolitical tensions (developing vs developed nations)\n• Clarke Belt is shared global commons — no single country owns it; requires international law\n• Military satellites raise security concerns; espionage capabilities blur civilian/military boundaries\n• Small nations risk losing communication sovereignty if they cannot afford orbital slots\n\nECONOMIC IMPLICATIONS (SpaceX/private control):\nPositive: Private investment drives innovation, reduces launch costs (reusable rockets), increases access\nNegative: Monopolistic control by one company could limit access for smaller nations/operators, drive up costs for rivals, raise concerns about data privacy\n\nCONCLUSION:\nThe development of satellite communication has transformed global connectivity; however, the concentration of orbital slots and infrastructure in private hands risks creating a two-tier global communication system. International governance must balance innovation with equitable access.',
-    keyConcepts: ['satellite technology', 'geostationary orbit', 'international governance', 'economics'],
-    keywords: ['geostationary', 'Clarke belt', 'ITU', 'SpaceX', 'orbital slot', 'political', 'economic'],
-    feedbackHit: 'Apply MYP Crit A rubric. Top band requires: all four strands addressed, evidence from passage used, balanced evaluation, clear conclusion.',
-    feedbackMiss: 'Check: (1) scientific challenges cited; (2) political implications for governments; (3) BOTH positive and negative economic points on private control; (4) concluding appraisal.',
+    exemplar: 'Full marks (14) require all four aspects at the highest level:\n\nSCIENTIFIC & TECHNOLOGICAL CHALLENGES (up to 4): high thrust needed to overcome gravity and reach ~20 000 km orbit; extremely accurate atomic clocks and relativity corrections; precise orbital placement so several satellites are always in view; avoiding collisions with other satellites/debris; weak signals vulnerable to jamming/spoofing.\n\nPOLITICAL IMPLICATIONS (up to 4): national security risk in depending on another country\'s system (e.g. the US can degrade GPS); motivation for the EU (Galileo) and China (BeiDou) to build independent systems; control over positioning gives strategic/military advantage.\n\nECONOMIC IMPLICATIONS — positive AND negative (up to 4): Positive: huge global market; underpins aviation, shipping, farming, finance; stimulates innovation and jobs. Negative: over-reliance on a few providers; cost of building/maintaining a constellation; disruption (jamming) could cause large economic damage.\n\nCONCLUDING APPRAISAL (up to 2): a balanced, justified conclusion linked to the points above.',
+    keyConcepts: ['thrust to reach orbit', 'atomic clocks / relativity', 'orbital placement', 'debris / jamming', 'national security dependence', 'independent systems', 'global market and jobs', 'over-reliance', 'concluding appraisal justified'],
+    keywords: ['gravity', 'thrust', 'orbit', 'atomic clock', 'relativity', 'debris', 'jamming', 'security', 'national', 'galileo', 'beidou', 'market', 'reliance', 'innovation', 'conclude', 'appraisal'],
+    feedbackHit: 'Excellent discussion — scientific challenges, political and economic implications all evaluated with evidence.',
+    feedbackMiss: 'Address all four: (1) scientific/tech challenges (reaching orbit, atomic clocks, debris, jamming); (2) political (dependence/national security, independent systems); (3) economic (+ and −: market/jobs vs over-reliance/cost); (4) a justified concluding appraisal.',
   },
 
-  // ── Q8 Space Elevator ────────────────────────────────────────────
+  // ── Q8 Fusion Power Plant ────────────────────────────────────────
   'q8_': {
     marks: 8,
-    exemplar: 'BENEFITS:\n• Massive reduction in cost per kg to orbit compared with rockets (no fuel needed for ascent)\n• Enables large-scale space manufacturing, tourism, and colonisation\n• Reusable system reduces space debris from spent rockets\n• Could accelerate development of asteroid mining and space resources\n• Stimulates domestic technology sector (carbon nanotube research, robotics)\n\nLIMITATIONS:\n• No material currently has sufficient tensile strength — technology may not be feasible for decades\n• Enormous upfront cost (estimated trillions of dollars)\n• Single point of failure: if the cable breaks, debris could cause catastrophic orbital strikes\n• Geopolitical sensitivity — anchor point must be on equator, restricting which countries can build it\n• Ongoing maintenance and weather/lightning vulnerability near equator\n\nCONCLUSION:\nThe potential long-term benefits are transformative, but the technological readiness level is too low to justify current government spending; investment should first focus on materials research (carbon nanotubes) and international cooperation before committing to full construction.',
-    keyConcepts: ['science and society', 'space technology', 'cost-benefit analysis'],
-    keywords: ['space elevator', 'tensile strength', 'cost', 'benefits', 'limitations', 'cable', 'orbit'],
-    feedbackHit: 'Apply MYP Crit D rubric. Top band: multiple benefits AND limitations, evidence-based, balanced conclusion that responds to the "government spending" framing.',
-    feedbackMiss: 'Ensure both benefits and limitations are given and the conclusion explicitly states whether government should fund construction.',
+    exemplar: 'Full marks (8) require:\n\nBENEFITS (up to 3): clean energy with no greenhouse gases; almost limitless fuel (hydrogen from water); very little long-lived radioactive waste compared with fission; opportunity to be a world leader in energy technology; energy security.\n\nLIMITATIONS (up to 3): requires temperatures over 100 million °C that are extremely hard to sustain; no reactor has yet produced sustained net energy gain; enormous cost (tens of billions); long time before any commercial return; risk the project never succeeds.\n\nCONCLUSION (up to 2): a clear, justified opinion (should or should not fund) that balances both sides.',
+    keyConcepts: ['clean / no greenhouse gases', 'limitless fuel', 'little long-lived waste', 'extreme temperature challenge', 'no net energy gain yet', 'huge cost', 'conclusion with justification'],
+    keywords: ['clean', 'greenhouse', 'limitless', 'fuel', 'hydrogen', 'waste', 'temperature', 'net energy', 'cost', 'expensive', 'conclusion', 'justify', 'benefit', 'limitation'],
+    feedbackHit: 'Well-structured response with valid benefits, limitations and a justified conclusion.',
+    feedbackMiss: 'BENEFITS (e.g. clean, limitless fuel, little waste). LIMITATIONS (e.g. 100-million-°C challenge, no net gain yet, extreme cost). CONCLUSION: a balanced, justified opinion.',
   },
-
 }

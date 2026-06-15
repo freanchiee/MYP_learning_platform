@@ -154,10 +154,8 @@ export const questions: Question[] = [
       },
       {
         label: 'b',
-        text: 'Below is a list of variables for this experiment. **Select** the appropriate description for each of the variables.\n\n| Variable | Independent | Dependent | Control |\n|----------|-------------|-----------|--------|\n| The object used | | | |\n| The position of the object | | | |\n| The number of images observed | | | |\n| The size of the mirrors used | | | |\n| The angle between the mirrors | | | |\n| The shape of the mirrors used | | | |',
+        text: 'Below is a list of variables for this experiment. For each variable, **State** whether it is the independent variable, the dependent variable, or a control variable.\n\n| Variable | Independent / Dependent / Control |\n|----------|-----------------------------------|\n| The object used | |\n| The position of the object | |\n| The number of images observed | |\n| The size of the mirrors used | |\n| The angle between the mirrors | |\n| The shape of the mirrors used | |',
         marks: 3,
-        widget: 'variable_classify',
-        widgetOptions: ['The object used', 'The position of the object', 'The number of images observed', 'The size of the mirrors used', 'The angle between the mirrors', 'The shape of the mirrors used'],
         ph: 'IV = angle between mirrors; DV = number of images observed; Controls = object used, position of object, size of mirrors, shape of mirrors.',
       },
       {

@@ -1,48 +1,51 @@
 import type { ConceptEntry } from '@/data/papers/physics-nov-2023/conceptsPublic'
 
+// Client-safe concept data — Physics November 2018 · VARIANT 2.
+// keyConcepts + keywords ONLY (no exemplars/feedback). Key format: `q{id}_{label}`.
+
 export const CONCEPTS_PUBLIC_NOV2018_V2: Record<string, ConceptEntry> = {
 
   q1_b: {
     keyConcepts: ['Speed of Sound', 'Distance-Speed-Time'],
-    keywords: ['speed of sound', 'time delay', 'distance = speed × time', '330 ms⁻¹', 'fireworks'],
+    keywords: ['speed of sound', 'time delay', 'distance = speed × time', '330 ms⁻¹', 'starting pistol'],
   },
   q1_c: {
     keyConcepts: ['Distance-Time Graphs', 'Constant Speed'],
-    keywords: ['constant speed', 'approach', 'recession', 'closest point'],
+    keywords: ['constant speed', 'approach', 'recession', 'distance-time graph', 'vehicle'],
   },
   q1_d: {
     keyConcepts: ['Speed Calculation', 'Unit Conversion'],
-    keywords: ['speed = distance/time', 'km h⁻¹', '24 km h⁻¹', 'graph reading'],
+    keywords: ['speed = distance/time', 'km h⁻¹', 'graph reading', '24 km h⁻¹'],
   },
 
   q2_b: {
     keyConcepts: ["Ohm's Law", 'Resistance'],
-    keywords: ['R = V/I', 'resistance', '30 Ω', '600 000 V', '20 000 A'],
+    keywords: ['R = V/I', 'resistance', 'volt', 'ampere', '25 Ω', 'spark'],
   },
   q2_c: {
     keyConcepts: ['Charge and Current', 'Q = It'],
-    keywords: ['charge', 'Q = It', '0.50 C', '25 μs', 'coulomb'],
+    keywords: ['charge', 'Q = It', 'coulomb', 'microseconds', '0.20 C'],
   },
   q2_d: {
     keyConcepts: ['Conductors', 'Earthing', 'Path of Least Resistance'],
-    keywords: ['surge protector', 'lower resistance', 'earth', 'path of least resistance'],
+    keywords: ['conductor', 'earth', 'resistance', 'path of least resistance', 'earthing wire', 'shock'],
   },
 
   q3_a: {
     keyConcepts: ['Alpha and Beta Decay', 'Decay Equations'],
-    keywords: ['alpha', 'beta', 'decay equation', 'mass number', 'atomic number'],
+    keywords: ['alpha particle', 'beta particle', 'decay equation', 'mass number', 'atomic number'],
   },
   q3_b: {
     keyConcepts: ['Alpha Decay', 'Periodic Table'],
-    keywords: ['alpha decay', 'Oganesson', 'Livermorium', 'atomic number 116', 'mass 290'],
+    keywords: ['alpha decay', 'Oganesson', 'Livermorium', 'atomic number', 'mass number', '116', '290'],
   },
   q3_c: {
     keyConcepts: ['Gamma Radiation', 'Electromagnetic Waves'],
-    keywords: ['gamma', 'electromagnetic wave', 'high frequency', 'photon', 'not a particle'],
+    keywords: ['gamma', 'electromagnetic wave', 'photon', 'high frequency', 'not a particle'],
   },
   q3_d: {
     keyConcepts: ['Carbon-14 Dating', 'Half-life'],
-    keywords: ['carbon-14', 'half-life', '5700 years', 'Iron Age', 'organic material'],
+    keywords: ['carbon-14', 'half-life', '5700 years', 'organic material', 'radiometric dating', 'charcoal'],
   },
 
   q4_a: {
@@ -51,11 +54,11 @@ export const CONCEPTS_PUBLIC_NOV2018_V2: Record<string, ConceptEntry> = {
   },
   q4_c: {
     keyConcepts: ['Laboratory Safety'],
-    keywords: ['safety', 'over-pressurize', 'burst', 'justification'],
+    keywords: ['safety', 'justification', 'over-pressure', 'precaution', 'burst'],
   },
   q4_d: {
     keyConcepts: ['Pressure Measurement', 'Gauge Reading'],
-    keywords: ['pressure gauge', 'kPa', '75 kPa', 'measurement'],
+    keywords: ['pressure gauge', 'kPa', 'measurement', 'reading', '38'],
   },
   q4_e: {
     keyConcepts: ['Line of Best Fit', 'Graph Skills'],
@@ -63,11 +66,11 @@ export const CONCEPTS_PUBLIC_NOV2018_V2: Record<string, ConceptEntry> = {
   },
   q4_f: {
     keyConcepts: ['Graph Interpolation'],
-    keywords: ['interpolation', 'LOBF', '55 kPa', 'read value'],
+    keywords: ['interpolation', 'LOBF', 'read value', '38 kPa', '0.52 m'],
   },
   q4_g: {
     keyConcepts: ['Graph Interpretation', 'Y-Intercept'],
-    keywords: ['y-intercept', 'deflated', 'physically impossible', '0 kPa'],
+    keywords: ['y-intercept', 'physically impossible', 'deflated ball', '0 kPa', '0.30 m'],
   },
   q4_h: {
     keyConcepts: ['Proportionality', 'Hypothesis Evaluation'],
@@ -76,11 +79,11 @@ export const CONCEPTS_PUBLIC_NOV2018_V2: Record<string, ConceptEntry> = {
 
   q5_a: {
     keyConcepts: ['Validity of Method', 'Experiment Evaluation'],
-    keywords: ['validity', 'ruler angle', 'consistent height', 'improvement'],
+    keywords: ['validity', 'ruler', 'consistent', 'improvement', 'method'],
   },
   q5_b: {
     keyConcepts: ['Unit Conversion', 'Mean Value'],
-    keywords: ['mean', 'mm to m', 'conversion', '0.53 m', '5.1 × 10² mm'],
+    keywords: ['mean', 'average', 'cm to m', 'conversion', '0.44 m'],
   },
   q5_c: {
     keyConcepts: ['Data Tables', 'Presenting Data'],
@@ -88,37 +91,37 @@ export const CONCEPTS_PUBLIC_NOV2018_V2: Record<string, ConceptEntry> = {
   },
   q5_d: {
     keyConcepts: ['Graph Axes', 'Plotting Data'],
-    keywords: ['drop height / m', 'bounce height / m', 'data point', '(1.6, 0.53)'],
+    keywords: ['x-axis', 'y-axis', 'units', 'data point', 'drop height', 'bounce height'],
   },
 
   q6_a: {
     keyConcepts: ['Experimental Variables'],
-    keywords: ['dependent variable', 'control variables', 'bounce height', 'temperature', 'rubber'],
+    keywords: ['dependent variable', 'control variables', 'bounce height', 'temperature'],
   },
   q6_b: {
     keyConcepts: ['Experiment Design', 'Hypothesis', 'Data Sufficiency', 'Safety'],
-    keywords: ['hypothesis', 'temperature', 'bounce height', 'repeats', 'safety', 'racquetball', 'elastic'],
+    keywords: ['hypothesis', 'method', 'temperature', 'bounce height', 'repeats', 'safety', 'rubber', 'elastic'],
   },
 
   q7_b: {
     keyConcepts: ['Climate Change Evidence', 'Correlation'],
-    keywords: ['Arctic ice', 'global temperature', 'negative correlation', 'graph evidence'],
+    keywords: ['CO₂', 'global temperature', 'correlation', 'greenhouse effect', 'graph evidence'],
   },
   q7_c: {
     keyConcepts: ['Causes of Climate Change'],
-    keywords: ['industrialization', 'fossil fuels', 'CO₂', 'power stations', 'vehicles'],
+    keywords: ['fossil fuels', 'industrialization', 'CO₂ emissions', 'burning'],
   },
   q7_d: {
     keyConcepts: ['Consequences of Climate Change'],
-    keywords: ['sea level rise', 'habitat loss', 'biodiversity', 'Arctic species', 'flooding'],
+    keywords: ['sea level', 'flooding', 'drought', 'food security', 'climate impact'],
   },
   q7_e: {
     keyConcepts: ['Climate Technology', 'Renewable Energy'],
-    keywords: ['wind farm', 'offshore', 'CO₂ reduction', 'strength', 'limitation'],
+    keywords: ['technology', 'CO₂ reduction', 'strength', 'limitation', 'wind-assisted ship'],
   },
 
   q8_a: {
     keyConcepts: ['Transport Evaluation', 'Health', 'Economics', 'Society'],
-    keywords: ['transport', 'health', 'well-being', 'economic', 'social', 'recommendation', '10 km'],
+    keywords: ['transport', 'health', 'well-being', 'economic', 'social', 'recommendation', 'comparison'],
   },
 }

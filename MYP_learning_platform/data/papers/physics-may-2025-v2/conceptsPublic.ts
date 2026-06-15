@@ -1,165 +1,122 @@
+/**
+ * CLIENT-SAFE concept data for Physics May 2025 — Variant 2.
+ * keyConcepts and keywords ONLY — no exemplar answers, no feedbackHit/Miss.
+ * Used by LiveKeywordTracker on the client side.
+ *
+ * Key format: `q{id}_{label}`  e.g. 'q1_b', 'q6_e'
+ */
 import type { ConceptEntry } from '@/data/papers/physics-nov-2023/conceptsPublic'
 
 export const CONCEPTS_PUBLIC_MAY2025_V2: Record<string, ConceptEntry> = {
-
-  // ── Q1 Defibrillators ────────────────────────────────────────────
-  'q1_b': {
-    keyConcepts: ['electrical energy', 'current', 'potential difference'],
-    keywords: ['E = VIt', 'current', 'energy', 'voltage', 'time', 'milliseconds'],
+  // Q1 — Electrostatic paint spraying
+  q1_b: {
+    keyConcepts: ['E = VIt', 'current formula', 'time conversion', '8 A'],
+    keywords: ['energy', 'voltage', 'current', 'time', 'milliseconds', '0.05', 'E=VIt', 'ampere'],
   },
-  'q1_c': {
-    keyConcepts: ['resistance', 'electrical contact'],
-    keywords: ['gel', 'resistance', 'current', 'contact'],
+  q1_c: {
+    keyConcepts: ['charged droplet attracted to panel', 'electric force', 'even coat'],
+    keywords: ['charge', 'attract', 'opposite', 'panel', 'force', 'field', 'even', 'coat'],
   },
-  'q1_d': {
-    keyConcepts: ['electrical safety', 'insulation'],
-    keywords: ['adhesive', 'hands-free', 'insulating', 'protection', 'electric shock'],
-  },
-
-  // ── Q2 Refraction of Light ───────────────────────────────────────
-  'q2_a': {
-    keyConcepts: ['wave speed', 'frequency', 'wavelength'],
-    keywords: ['f = v/λ', 'frequency', 'wavelength', 'nanometres', 'speed of light'],
-  },
-  'q2_b': {
-    keyConcepts: ['visible spectrum', 'wavelength'],
-    keywords: ['wavelength', 'spectrum', 'red', 'visible light'],
-  },
-  'q2_c': {
-    keyConcepts: ['refraction', 'wave properties'],
-    keywords: ['frequency', 'constant', 'refraction', 'medium'],
-  },
-  'q2_d': {
-    keyConcepts: ['refraction', 'apparent depth', 'normal'],
-    keywords: ['bending', 'apparent position', 'normal', 'interface', 'straight line'],
-  },
-  'q2_e': {
-    keyConcepts: ['diverging lens', 'focal point', 'short-sightedness'],
-    keywords: ['diverging', 'focal point', 'retina', 'short-sightedness', 'spread'],
+  q1_d: {
+    keyConcepts: ['corona simple/strong charge', 'bell fine even atomisation'],
+    keywords: ['simple', 'sharp', 'electrode', 'spin', 'atomise', 'fine', 'area', 'waste'],
   },
 
-  // ── Q3 Nuclear Fission ───────────────────────────────────────────
-  'q3_a': {
-    keyConcepts: ['fossil fuels', 'climate change', 'non-renewable resources'],
-    keywords: ['carbon dioxide', 'greenhouse gas', 'non-renewable', 'climate change'],
+  // Q2 — Refraction
+  q2_a: {
+    keyConcepts: ['f = v / λ', 'convert nm to m', '6.7 × 10¹⁴ Hz'],
+    keywords: ['frequency', 'wavelength', 'speed', 'nanometre', '10⁻⁹', '450', '3×10⁸', 'Hz'],
   },
-  'q3_b': {
-    keyConcepts: ['atomic structure', 'isotopes'],
-    keywords: ['neutron', 'isotope', 'nucleon number', 'U-235', 'U-236'],
+  q2_d: {
+    keyConcepts: ['refraction at boundary', 'bends away from normal', 'apparent position', 'brain assumes straight line'],
+    keywords: ['refract', 'bend', 'normal', 'boundary', 'water', 'air', 'straight line', 'apparent', 'shallower', 'brain', 'eye'],
   },
-  'q3_c': {
-    keyConcepts: ['conservation of mass number', 'nuclear equations'],
-    keywords: ['neutrons', 'mass number', 'atomic number', 'balance'],
-  },
-  'q3_d': {
-    keyConcepts: ['mass-energy equivalence'],
-    keywords: ['E = mc²', 'mass defect', 'energy', 'mass'],
-  },
-  'q3_e': {
-    keyConcepts: ['energy calculations', 'nuclear energy'],
-    keywords: ['fission reactions', 'energy per fission', 'gigajoules'],
-  },
-  'q3_f': {
-    keyConcepts: ['energy efficiency', 'power'],
-    keywords: ['efficiency', 'total power', 'useful power', 'percentage'],
+  q2_e: {
+    keyConcepts: ['diverging lens', 'spreads rays', 'shifts focal point', 'meets retina'],
+    keywords: ['diverge', 'spread', 'concave', 'focal point', 'retina', 'short-sighted'],
   },
 
-  // ── Q4 Windup Spring Model Car ───────────────────────────────────
-  'q4_a': {
-    keyConcepts: ['frequency', 'period'],
-    keywords: ['f = 1/T', 'frequency', 'period', 'Hz', 'video analysis'],
+  // Q3 — Nuclear Fission
+  q3_a: {
+    keyConcepts: ['greenhouse gases', 'non-renewable', 'air pollution', 'climate change'],
+    keywords: ['CO2', 'carbon dioxide', 'greenhouse', 'pollution', 'finite', 'non-renewable', 'climate'],
   },
-  'q4_b': {
-    keyConcepts: ['velocity', 'data reading'],
-    keywords: ['velocity', 'data table', 'reading'],
+  q3_b: {
+    keyConcepts: ['one more neutron', 'same protons', 'isotope'],
+    keywords: ['neutron', 'proton', 'mass number', 'isotope', 'one more', 'extra'],
   },
-  'q4_c': {
-    keyConcepts: ['gradient of v-t graph', 'acceleration'],
-    keywords: ['gradient', 'acceleration', 'velocity-time graph', 'slope'],
+  q3_d: {
+    keyConcepts: ['m = E / c²', '3.2 × 10⁻²⁸ kg', 'mass-energy equivalence'],
+    keywords: ['E=mc2', 'mass defect', 'c squared', 'kg', 'rearrange', 'divide'],
   },
-  'q4_d': {
-    keyConcepts: ['elastic potential energy', "Newton's second law"],
-    keywords: ['gradient', 'acceleration', 'force', 'elastic energy', 'turns', 'prediction'],
+  q3_e: {
+    keyConcepts: ['number = total energy / energy per fission', '3.6 × 10²⁰'],
+    keywords: ['divide', 'gigajoule', '10⁹', 'fission', 'reactions', 'number'],
   },
-  'q4_e': {
-    keyConcepts: ['experimental limitations', 'measurement uncertainty'],
-    keywords: ['reaction time', 'precision', 'random error', 'video analysis', 'continuous'],
-  },
-
-  // ── Q5 Investigation Design ──────────────────────────────────────
-  'q5_a': {
-    keyConcepts: ['experimental design', 'variables', 'hypothesis', 'method'],
-    keywords: ['independent variable', 'dependent variable', 'control variable', 'hypothesis', 'method', 'repeats'],
-  },
-  'q5_b': {
-    keyConcepts: ['research question'],
-    keywords: ['research question', 'alternative', 'variable'],
+  q3_f: {
+    keyConcepts: ['efficiency = useful / total', 'total power = useful / efficiency', '4.2 × 10⁹ W'],
+    keywords: ['efficiency', 'useful', 'total', 'divide', '0.38', '38%', 'watt', 'power'],
   },
 
-  // ── Q6 Seebeck Effect / TEG ──────────────────────────────────────
-  'q6_a': {
-    keyConcepts: ['research question', 'Seebeck effect'],
-    keywords: ['temperature difference', 'voltage', 'TEG', 'research question'],
+  // Q4 — Wind-up car / Motion
+  q4_a: {
+    keyConcepts: ['f = 1/T', '20 Hz'],
+    keywords: ['frequency', 'period', '1/T', '0.05', '20', 'Hz'],
   },
-  'q6_b': {
-    keyConcepts: ['measurement instruments'],
-    keywords: ['thermometer', 'voltmeter', 'temperature', 'voltage'],
+  q4_c: {
+    keyConcepts: ['gradient = Δv/Δt', 'acceleration', '160 cm/s²'],
+    keywords: ['gradient', 'acceleration', 'Δv', 'Δt', '160', '1.6', 'slope'],
   },
-  'q6_c': {
-    keyConcepts: ['temperature difference', 'data processing'],
-    keywords: ['ΔT', 'temperature difference', 'hot', 'cold'],
+  q4_d: {
+    keyConcepts: ['steeper line', 'greater acceleration', 'more elastic energy/force', 'F = ma'],
+    keywords: ['steeper', 'gradient', 'acceleration', 'force', 'energy', 'spring', 'more turns'],
   },
-  'q6_d': {
-    keyConcepts: ['graph plotting', 'line of best fit'],
-    keywords: ['axes', 'units', 'data points', 'line of best fit', 'graph'],
-  },
-  'q6_e': {
-    keyConcepts: ['direct proportion', 'validity'],
-    keywords: ['directly proportional', 'origin', 'valid', 'intercept', 'linear'],
-  },
-  'q6_f': {
-    keyConcepts: ['Seebeck coefficient', 'gradient'],
-    keywords: ['gradient', 'Seebeck coefficient', 'slope', 'ΔV/ΔT'],
-  },
-  'q6_g': {
-    keyConcepts: ['electrical power'],
-    keywords: ['P = VI', 'power', 'voltage', 'current', 'watts'],
-  },
-  'q6_h': {
-    keyConcepts: ["Newton's second law", 'force', 'acceleration'],
-    keywords: ['force', 'mass', 'acceleration', 'propeller', 'improvement'],
-  },
-  'q6_i': {
-    keyConcepts: ['energy transfer', 'energy chain'],
-    keywords: ['electrical energy', 'thermal energy', 'kinetic energy', 'energy chain'],
-  },
-  'q6_j': {
-    keyConcepts: ['variables', 'experimental design'],
-    keywords: ['independent variable', 'dependent variable', 'control variable'],
-  },
-  'q6_k': {
-    keyConcepts: ['hypothesis', 'scientific prediction'],
-    keywords: ['if', 'then', 'because', 'hypothesis', 'Seebeck', 'voltage', 'speed'],
+  q4_e: {
+    keyConcepts: ['reaction-time error', 'fewer data points', 'lower precision'],
+    keywords: ['reaction', 'time', 'parallax', 'precise', 'frames', 'precision', 'error'],
   },
 
-  // ── Q7 Newton's Cannonball & Satellites ──────────────────────────
-  'q7_a': {
-    keyConcepts: ['orbital speed', 'escape velocity'],
-    keywords: ['orbital speed', 'escape velocity', 'cannonball', 'gravity', 'path'],
-  },
-  'q7_b': {
-    keyConcepts: ['free-body diagram', 'circular orbit', 'gravity'],
-    keywords: ['gravity', 'free-body diagram', 'orbit', 'centripetal'],
-  },
-  'q7_c': {
-    keyConcepts: ['satellite technology', 'geostationary orbit', 'international governance'],
-    keywords: ['geostationary', 'Clarke belt', 'ITU', 'SpaceX', 'Starlink', 'orbit', 'political', 'economic'],
+  // Q5 — Wind-up car investigation design
+  q5_a: {
+    keyConcepts: ['IV/DV/control', 'hypothesis', 'method', 'sufficient data'],
+    keywords: ['independent', 'dependent', 'control', 'hypothesis', 'method', 'repeat', 'range', 'turns'],
   },
 
-  // ── Q8 Space Elevator ────────────────────────────────────────────
-  'q8_': {
-    keyConcepts: ['science and society', 'space technology', 'cost-benefit analysis'],
-    keywords: ['space elevator', 'tensile strength', 'cost', 'benefits', 'limitations', 'orbit'],
+  // Q6 — Wind-turbine generator
+  q6_c: {
+    keyConcepts: ['subtract calibration error', '4.6 m/s'],
+    keywords: ['calibration error', 'subtract', '5.0', '0.4', '4.6', 'm/s'],
+  },
+  q6_e: {
+    keyConcepts: ['not directly proportional', 'ratio not constant', 'curve / levels off'],
+    keywords: ['proportional', 'ratio', 'constant', 'curve', 'level off', 'origin', 'decrease'],
+  },
+  q6_f: {
+    keyConcepts: ['gradient of line of best fit', 'ΔV/Δwind speed'],
+    keywords: ['gradient', 'rise', 'run', 'two points', 'line of best fit', 'slope'],
+  },
+  q6_g: {
+    keyConcepts: ['P = VI', '0.072 W'],
+    keywords: ['P=VI', '0.48', '0.15', '0.072', 'watt', 'power'],
+  },
+  q6_h: {
+    keyConcepts: ['reduce mass/friction', 'greater resultant force', 'F = ma'],
+    keywords: ['mass', 'friction', 'force', 'F=ma', 'acceleration', 'resultant'],
+  },
+  q6_k: {
+    keyConcepts: ['hypothesis links IV to DV', 'if-then-because', 'scientific reason'],
+    keywords: ['if', 'then', 'because', 'force', 'thrust', 'scientific'],
   },
 
+  // Q7 — Satellites / Starlink mega-constellation
+  q7_c: {
+    keyConcepts: ['scientific challenges', 'political implications', 'economic implications', 'concluding appraisal'],
+    keywords: ['gravity', 'thrust', 'orbit', 'leo', 'debris', 'security', 'monopoly', 'reliance', 'conclude'],
+  },
+
+  // Q8 — Crewed Mars base
+  q8_: {
+    keyConcepts: ['benefits science/leadership', 'limitations cost/risk', 'justified conclusion'],
+    keywords: ['science', 'technology', 'leader', 'cost', 'radiation', 'risk', 'conclusion', 'justify'],
+  },
 }

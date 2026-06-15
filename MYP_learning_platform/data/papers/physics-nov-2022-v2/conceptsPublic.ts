@@ -2,7 +2,7 @@ import type { ConceptEntry } from '@/data/papers/physics-nov-2023/conceptsPublic
 
 export const CONCEPTS_PUBLIC_NOV2022_V2: Record<string, ConceptEntry> = {
 
-  // ── Q1: Nuclear Fission & Radioactive Decay (1945 nuclear power) ─
+  // ── Q1: Nuclear Fission & Radioactive Decay (submarine; Ba-139) ─
   q1_a: {
     keyConcepts: ['isotopes have the same atomic number but different mass numbers', 'atomic number = number of protons', 'neutron number differs between isotopes'],
     keywords: ['isotope', 'atomic number', 'neutron', 'proton', 'uranium'],
@@ -13,65 +13,65 @@ export const CONCEPTS_PUBLIC_NOV2022_V2: Record<string, ConceptEntry> = {
   },
   q1_c: {
     keyConcepts: ['half-life is the time for activity to decrease to half its initial value', 'reading half-life from an activity-time graph'],
-    keywords: ['half-life', 'radioactive decay', 'activity', 'graph reading', 'barium-141'],
+    keywords: ['half-life', 'radioactive decay', 'activity', 'graph reading', 'barium-139', '83'],
   },
   q1_d: {
     keyConcepts: ['converting units between MJ and J', 'dividing energy requirement by energy per gram to find mass'],
-    keywords: ['energy calculation', 'unit conversion', 'fission', 'mass of uranium', '1.05 × 10¹⁰ J', '0.128 g'],
+    keywords: ['energy calculation', 'unit conversion', 'fission', 'mass of uranium', '9.4 × 10⁹ J', '0.12 g'],
   },
   q1_e: {
     keyConcepts: ['collaboration in science combines different expertise', 'interdisciplinary science solves complex problems'],
     keywords: ['collaboration', 'different skills', 'teamwork', 'physics', 'chemistry', 'engineering'],
   },
 
-  // ── Q2: Thermal Energy & States of Matter ───────────────────────
+  // ── Q2: Thermal Energy & States of Matter (coolants) ────────
   q2_a: {
-    keyConcepts: ['melting and boiling require heat energy input (endothermic)', 'freezing and condensing release heat energy (exothermic)'],
-    keywords: ['melting', 'boiling', 'freezing', 'condensing', 'state change', 'heat energy'],
+    keyConcepts: ['independent variable is deliberately changed', 'dependent variable is measured', 'control variables are kept constant for a fair test'],
+    keywords: ['independent', 'dependent', 'control', 'drop height', 'bounce', 'fair test'],
   },
   q2_b: {
     keyConcepts: ['evaporation and boiling are both vaporisation (liquid to gas)', 'evaporation occurs at any temperature from the surface; boiling occurs at a fixed temperature throughout the liquid'],
     keywords: ['evaporation', 'boiling', 'vaporisation', 'surface', 'temperature', 'bubbles'],
   },
   q2_c: {
-    keyConcepts: ['greater evaporation causes greater cooling effect', 'cooking oil does not evaporate readily; ethanol evaporates readily'],
-    keywords: ['cooling effect', 'evaporation rate', 'ethanol', 'cooking oil', 'graph analysis'],
+    keyConcepts: ['greater evaporation causes greater cooling effect', 'glycerol does not evaporate readily; acetone evaporates readily'],
+    keywords: ['cooling effect', 'evaporation rate', 'acetone', 'glycerol', 'graph analysis'],
   },
   q2_d: {
-    keyConcepts: ['a non-evaporating reference liquid maintains ambient (laboratory) temperature'],
-    keywords: ['laboratory temperature', 'ambient', 'reference', 'cooking oil', 'steady state'],
+    keyConcepts: ['a non-evaporating reference liquid maintains ambient (workshop) temperature'],
+    keywords: ['workshop temperature', 'ambient', 'reference', 'glycerol', 'steady state', '23'],
   },
   q2_e: {
     keyConcepts: ['greater cooling effect indicates greater latent heat of vaporisation', 'linking experimental evidence to a claim about energy requirements'],
     keywords: ['latent heat', 'latent heat of vaporisation', 'cooling effect', 'justification', 'evidence'],
   },
 
-  // ── Q3: Astrophysics (Triton / Voyager 2 1989) ──────────────────
+  // ── Q3: Astrophysics (Huygens / Titan) ──────────────────────
   q3_a: {
     keyConcepts: ['moons orbit planets and do not emit their own light', 'stars emit light via nuclear fusion and are not in orbit around planets'],
     keywords: ['moon', 'star', 'orbit', 'light emission', 'nuclear fusion', 'reflection'],
   },
   q3_b: {
-    keyConcepts: ['geocentric model states everything orbits Earth', 'moons of Jupiter orbiting a different planet disproves geocentrism'],
-    keywords: ['geocentric', 'heliocentric', 'orbit', 'evidence', 'Jupiter', 'Galileo'],
+    keyConcepts: ['geocentric model states everything orbits Earth', 'moons orbiting a different planet disproves geocentrism'],
+    keywords: ['geocentric', 'heliocentric', 'orbit', 'evidence', 'Saturn', 'Titan'],
   },
   q3_c: {
     keyConcepts: ['liquid water is a prerequisite for life as we know it', 'astrobiology searches for habitable conditions'],
-    keywords: ['liquid water', 'life', 'habitability', 'astrobiology', 'Triton', 'Neptune'],
+    keywords: ['liquid water', 'life', 'habitability', 'astrobiology', 'Titan'],
   },
   q3_d: {
     keyConcepts: ['all EM waves travel at 3 × 10⁸ m/s in vacuum', 'all EM waves are transverse waves and can travel through a vacuum'],
     keywords: ['electromagnetic spectrum', 'transverse wave', 'speed of light', 'vacuum', 'c = 3 × 10⁸ m/s'],
   },
 
-  // ── Q4: Motor Investigation Planning (building site bucket) ─────
+  // ── Q4: Lift Motor Investigation Planning ───────────────────
   q4_a: {
     keyConcepts: ['electric motors produce waste heat due to resistance and mechanical friction', 'sound is also a form of wasted energy'],
     keywords: ['wasted energy', 'heat', 'sound', 'motor', 'resistance', 'friction'],
   },
   q4_b: {
     keyConcepts: ['a research question links an independent variable to a dependent variable (efficiency)'],
-    keywords: ['research question', 'independent variable', 'dependent variable', 'efficiency', 'motor'],
+    keywords: ['research question', 'independent variable', 'dependent variable', 'efficiency', 'lift'],
   },
   q4_c: {
     keyConcepts: ['gravitational potential energy ΔEp = mgh', 'varying height gives different useful energy outputs'],
@@ -86,16 +86,16 @@ export const CONCEPTS_PUBLIC_NOV2022_V2: Record<string, ConceptEntry> = {
     keywords: ['time', 'total energy', 'E = Pt', 'E = VIt', 'power', 'energy calculation'],
   },
 
-  // ── Q5: Investigation Design (bucket of sand hoist) ─────────────
+  // ── Q5: Investigation Design (lift voltage) ─────────────────
   q5_a: {
     keyConcepts: ['investigation design requires IV, DV, justified control variables, detailed method, data processing plan', 'efficiency = (useful energy ÷ total energy) × 100', 'control variables isolate the effect of the independent variable'],
     keywords: ['investigation design', 'independent variable', 'control variable', 'efficiency', 'mgh', 'VIt', 'method', 'validity'],
   },
 
-  // ── Q6: Data Processing (masses 15/30/45/60/75 g; q6a: 45 g) ───
+  // ── Q6: Data Processing (masses; q6a 0.040 kg → 0.31 J) ─────
   q6_a: {
-    keyConcepts: ['gravitational potential energy ΔEp = mgh', 'convert mass to kg and height to metres before substituting'],
-    keywords: ['ΔEp', 'mgh', '9.81', 'unit conversion', 'kg', 'metres', '0.045 kg', '0.42 J'],
+    keyConcepts: ['gravitational potential energy ΔEp = mgh', 'convert height to metres before substituting'],
+    keywords: ['ΔEp', 'mgh', '9.81', 'unit conversion', 'kg', 'metres', '0.040 kg', '0.31 J'],
   },
   q6_b: {
     keyConcepts: ['keeping voltage constant ensures validity by isolating the independent variable (mass)', 'changing the IV alone allows a fair comparison'],
@@ -107,10 +107,10 @@ export const CONCEPTS_PUBLIC_NOV2022_V2: Record<string, ConceptEntry> = {
   },
   q6_d: {
     keyConcepts: ['total energy input = V × I × t', 'efficiency = (useful energy ÷ total energy) × 100'],
-    keywords: ['VIt', 'total energy', 'efficiency', 'calculation', '75 g', '0.22 A', '5.90 s', '26.9%'],
+    keywords: ['VIt', 'total energy', 'efficiency', '50 g', '0.18 A', '5.21 s', '16.7%'],
   },
 
-  // ── Q7: Projectile Motion (spring-loaded marble launcher) ────────
+  // ── Q7: Projectile Motion (toy catapult) ────────────────────
   q7_a: {
     keyConcepts: ['a line of best fit minimises the total distance of data points above and below the line', 'outliers lie significantly away from the LOBF'],
     keywords: ['line of best fit', 'LOBF', 'outlier', 'scatter graph', 'Graph D'],
@@ -125,7 +125,7 @@ export const CONCEPTS_PUBLIC_NOV2022_V2: Record<string, ConceptEntry> = {
   },
   q7_d: {
     keyConcepts: ['measuring height of a moving ball is a major source of random error', 'angle is set before release so is less prone to error'],
-    keywords: ['source of error', 'random error', 'height measurement', 'moving marble', 'ruler'],
+    keywords: ['source of error', 'random error', 'height measurement', 'moving ball', 'ruler'],
   },
   q7_e: {
     keyConcepts: ['repeated trials reduce the impact of random errors and identify outliers', 'mean of repeated trials is more reliable'],
@@ -141,13 +141,13 @@ export const CONCEPTS_PUBLIC_NOV2022_V2: Record<string, ConceptEntry> = {
   },
   q7_h: {
     keyConcepts: ['time of flight and horizontal range are measurable dependent variables in projectile motion', 'launch speed and object mass are key control variables'],
-    keywords: ['time of flight', 'horizontal range', 'dependent variable', 'control variable', 'spring compression', 'marble'],
+    keywords: ['time of flight', 'horizontal range', 'dependent variable', 'control variable', 'elastic band', 'mass'],
   },
 
-  // ── Q8: Ultrasound (speed=1620 m/s, t=0.8×10⁻⁴ s → 6.5 cm) ───
+  // ── Q8: Ultrasound & X-rays (limb/joint imaging) ────────────
   q8_a: {
     keyConcepts: ['distance = speed × time', 'ultrasound echo travels to the target and back, so halve the total distance'],
-    keywords: ['d = vt', 'echo', 'ultrasound', 'one-way distance', 'reflection', '1620 m/s', '6.5 cm'],
+    keywords: ['d = vt', 'echo', 'ultrasound', 'one-way distance', 'reflection', '1580 m/s', '7.11 cm'],
   },
   q8_b: {
     keyConcepts: ['ultrasound uses reflection of sound to create images; x-rays use differential absorption of EM waves', 'ionising radiation (x-rays) carries health risks; ultrasound is believed to be harmless', 'economic and ethical trade-offs guide medical decisions'],
