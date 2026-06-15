@@ -243,7 +243,7 @@ export const questions: Question[] = [
         dataPoints: [{ x: 0, y: 0 }, { x: 2, y: 0.40 }, { x: 4, y: 0.80 }, { x: 6, y: 1.20 }, { x: 8, y: 1.60 }, { x: 10, y: 1.88 }],
         xMin: 0, xMax: 12, yMin: 0, yMax: 2, xStep: 2, yStep: 0.4,
       },
-      caption: 'Current through the nichrome wire against voltage. The line is straight through the origin (R = 5.0 \u03a9) and begins to curve slightly above about 8 V as the wire heats up.',
+      caption: 'Current through the nichrome wire against voltage. The line is straight through the origin (R = 5.0 \u03a9). Resistance remains approximately constant across the range, showing the nichrome wire is Ohmic.',
     },
     tags: { unit: 'electricity-circuits', topics: ['resistance', 'V-I characteristic', 'proportionality', 'data processing'], level: 'proficient' },
     tasks: [
