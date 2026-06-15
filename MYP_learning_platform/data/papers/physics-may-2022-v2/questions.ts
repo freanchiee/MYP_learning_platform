@@ -1,7 +1,5 @@
 import type { Question } from '@/lib/types'
 
-const P = '/images/papers/physics-may-2022-v2/'
-
 export const paperMeta = {
   id: 'physics-may-2022-v2',
   subject: 'Physics',
@@ -29,7 +27,13 @@ export const questions: Question[] = [
     topicGroup: 'Forces & Motion',
     tags: { unit: 'forces-interactions', topics: ['forces', 'balanced forces', 'speed and velocity', 'drag'], level: 'proficient' },
     stem: 'Engineers studied the skin texture of sharks to redesign the hull of a high-speed underwater vehicle. The tiny V-shaped ridges (denticles) on shark skin reduce drag by disrupting turbulent water flow. The diagrams below show the vehicle and the shark that inspired its design.',
-    figImages: [`${P}q1-shark-vehicle.png`],
+    artefact: {
+      component: 'GenericSVG',
+      data: {
+        svg: '<svg viewBox="0 0 620 340" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><defs><linearGradient id="seaG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d6eef2"/><stop offset="1" stop-color="#a8d8e0"/></linearGradient><marker id="arrR" markerWidth="9" markerHeight="9" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#0b7285"/></marker></defs><rect width="620" height="340" fill="url(#seaG)"/><text x="310" y="26" text-anchor="middle" font-size="15" font-weight="700" fill="#1f3a44">Shark-skin inspired underwater vehicle</text><g><text x="150" y="58" text-anchor="middle" font-size="12" font-weight="700" fill="#0b7285">High-speed vehicle</text><ellipse cx="150" cy="110" rx="110" ry="30" fill="#37708a" stroke="#1f3a44" stroke-width="2"/><path d="M40,110 Q15,98 8,110 Q15,122 40,110 Z" fill="#2a5567" stroke="#1f3a44"/><path d="M250,96 q24,-22 38,-8 q-10,12 -38,22 Z" fill="#2a5567" stroke="#1f3a44"/><circle cx="225" cy="104" r="7" fill="#cfe9ef" stroke="#1f3a44"/><g stroke="#9ad0dc" stroke-width="1.4"><line x1="90" y1="100" x2="120" y2="100"/><line x1="90" y1="110" x2="120" y2="110"/><line x1="90" y1="120" x2="120" y2="120"/><line x1="140" y1="98" x2="170" y2="98"/><line x1="140" y1="110" x2="170" y2="110"/><line x1="140" y1="122" x2="170" y2="122"/></g><text x="150" y="160" text-anchor="middle" font-size="9" fill="#1f3a44">micro-ridged (denticle) hull</text></g><g><text x="460" y="58" text-anchor="middle" font-size="12" font-weight="700" fill="#0b7285">Shark that inspired the design</text><path d="M360,110 Q430,78 540,108 Q560,112 575,100 Q566,118 558,116 Q566,126 575,138 Q556,128 540,116 Q430,142 360,110 Z" fill="#5b7e8c" stroke="#1f3a44" stroke-width="2"/><path d="M452,84 L470,58 L478,86 Z" fill="#4a6d7a" stroke="#1f3a44"/><path d="M430,126 L440,150 L456,128 Z" fill="#4a6d7a" stroke="#1f3a44"/><circle cx="386" cy="106" r="4" fill="#1f3a44"/><g stroke="#3a5662" stroke-width="0.9"><line x1="420" y1="104" x2="438" y2="100"/><line x1="430" y1="112" x2="448" y2="108"/><line x1="445" y1="100" x2="463" y2="96"/><line x1="455" y1="112" x2="473" y2="108"/></g><text x="460" y="168" text-anchor="middle" font-size="9" fill="#1f3a44">V-shaped denticles reduce turbulence</text></g><g font-size="11" fill="#0b7285"><text x="300" y="215" text-anchor="middle" font-weight="700">water flow direction</text><line x1="120" y1="240" x2="500" y2="240" stroke="#0b7285" stroke-width="2.5" marker-end="url(#arrR)"/><line x1="120" y1="268" x2="500" y2="268" stroke="#0b7285" stroke-width="2.5" marker-end="url(#arrR)"/><line x1="120" y1="296" x2="500" y2="296" stroke="#0b7285" stroke-width="2.5" marker-end="url(#arrR)"/></g><text x="310" y="324" text-anchor="middle" font-size="10" fill="#3a5662">Smooth streamlined flow past the textured hull</text></svg>',
+      },
+      caption: 'A high-speed underwater vehicle with a micro-ridged hull modelled on shark denticles.',
+    },
     tasks: [
       {
         label: 'a',
@@ -56,7 +60,18 @@ export const questions: Question[] = [
         label: 'd',
         text: 'The vehicle enters a water pipe and decelerates while travelling through it. The velocity–time graph shows the motion through the pipe.\n\nThe vehicle enters at **80 m s⁻¹** and exits at **60 m s⁻¹** after **20 seconds**.\n\n**Calculate** the length of the pipe section. Show your working.',
         marks: 3,
-        figImages: [`${P}q1d-speed-graph.png`],
+        artefact: {
+          component: 'GraphSim',
+          data: {
+            mode: 'readoff',
+            xLabel: 'time / s',
+            yLabel: 'velocity / m s⁻¹',
+            points: [[0, 80], [5, 75], [10, 70], [15, 65], [20, 60]],
+            readouts: [{ x: 0, note: 'entry speed' }, { x: 20, note: 'exit speed after 20 s' }],
+            dataMaxX: 20,
+          },
+          caption: 'Velocity–time graph for the vehicle in the pipe (80 m s⁻¹ → 60 m s⁻¹ over 20 s). Area under the line = length of pipe.',
+        },
         ph: 'Length = area under v–t graph (trapezoid)\n= (v₁ + v₂)/2 × t\n= (80 + 60)/2 × 20\n= 70 × 20\n= **1400 m**',
         level: 'proficient',
       },
@@ -64,7 +79,18 @@ export const questions: Question[] = [
         label: 'e',
         text: 'The graph from part (d) shows the original vehicle entering the pipe at the same speed.\n\nThe redesigned shark-skin vehicle enters the **same pipe** at the **same initial speed** but exits at a **higher speed** (less drag).\n\n**Draw** a line on the graph to represent the motion of the redesigned vehicle through the pipe.',
         marks: 2,
-        figImages: [`${P}q1d-speed-graph.png`],
+        artefact: {
+          component: 'GraphSim',
+          data: {
+            mode: 'readoff',
+            xLabel: 'time / s',
+            yLabel: 'velocity / m s⁻¹',
+            points: [[0, 80], [5, 75], [10, 70], [15, 65], [20, 60]],
+            readouts: [{ x: 0, note: 'same entry speed = 80 m s⁻¹' }, { x: 20, note: 'original exit = 60 m s⁻¹' }],
+            dataMaxX: 20,
+          },
+          caption: 'Original vehicle motion. The redesigned (less-drag) vehicle starts at the same 80 m s⁻¹ but stays above this line, exiting above 60 m s⁻¹.',
+        },
         ph: 'Draw a line starting at v = 80 m/s at the same start time as the original. The new line lies above the original throughout — it decelerates less steeply (less drag) and exits at a speed higher than 60 m/s.',
         level: 'proficient',
       },
@@ -86,7 +112,13 @@ export const questions: Question[] = [
     topicGroup: 'Electricity & Magnetism',
     tags: { unit: 'electricity-circuits', topics: ['transformers', 'power', 'voltage', 'current'], level: 'proficient' },
     stem: 'Wind farms generate electricity at a relatively low voltage. A step-up transformer is used to increase the voltage before electricity is fed into the national grid. The diagram below shows the transformer connecting a wind turbine to the high-voltage transmission line.',
-    figImages: [`${P}q2-transformer.png`],
+    artefact: {
+      component: 'GenericSVG',
+      data: {
+        svg: '<svg viewBox="0 0 640 320" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><rect width="640" height="320" fill="#ffffff"/><text x="320" y="26" text-anchor="middle" font-size="15" font-weight="700" fill="#1f3a44">Step-up transformer: wind turbine to national grid</text><g><line x1="70" y1="250" x2="70" y2="120" stroke="#5b6b78" stroke-width="6"/><circle cx="70" cy="116" r="6" fill="#0b7285"/><g stroke="#0b7285" stroke-width="4" fill="none"><path d="M70,116 L70,72"/><path d="M70,116 L108,138"/><path d="M70,116 L32,138"/></g><text x="70" y="272" text-anchor="middle" font-size="10" fill="#3a5662">wind turbine</text><text x="70" y="286" text-anchor="middle" font-size="9" fill="#3a5662">(low voltage)</text></g><g stroke="#1f3a44" stroke-width="2.5" fill="none"><line x1="100" y1="150" x2="220" y2="150"/><line x1="100" y1="210" x2="220" y2="210"/></g><g><rect x="280" y="120" width="34" height="120" fill="#b0bec5" stroke="#5b6b78" stroke-width="2"/><rect x="326" y="120" width="34" height="120" fill="#b0bec5" stroke="#5b6b78" stroke-width="2"/><text x="320" y="110" text-anchor="middle" font-size="10" fill="#3a5662">iron core</text><g stroke="#0b7285" stroke-width="3" fill="none"><path d="M280,140 q-22,0 -22,12 q0,12 22,12"/><path d="M280,166 q-22,0 -22,12 q0,12 22,12"/><path d="M280,192 q-22,0 -22,12 q0,12 22,12"/></g><line x1="258" y1="152" x2="220" y2="150" stroke="#0b7285" stroke-width="2.5"/><line x1="258" y1="216" x2="220" y2="210" stroke="#0b7285" stroke-width="2.5"/><text x="232" y="100" text-anchor="middle" font-size="11" font-weight="700" fill="#0b7285">Primary</text><text x="232" y="266" text-anchor="middle" font-size="11" fill="#0b7285">Nₚ = 450 turns</text><g stroke="#f08c00" stroke-width="3" fill="none"><path d="M360,134 q22,0 22,10 q0,10 -22,10"/><path d="M360,156 q22,0 22,10 q0,10 -22,10"/><path d="M360,178 q22,0 22,10 q0,10 -22,10"/><path d="M360,200 q22,0 22,10 q0,10 -22,10"/></g><line x1="382" y1="144" x2="430" y2="150" stroke="#f08c00" stroke-width="2.5"/><line x1="382" y1="214" x2="430" y2="210" stroke="#f08c00" stroke-width="2.5"/><text x="408" y="100" text-anchor="middle" font-size="11" font-weight="700" fill="#f08c00">Secondary</text><text x="408" y="266" text-anchor="middle" font-size="11" fill="#f08c00">Nₛ = 9000 turns</text></g><g stroke="#f08c00" stroke-width="2.5" fill="none"><line x1="430" y1="150" x2="540" y2="150"/><line x1="430" y1="210" x2="540" y2="210"/></g><g><line x1="560" y1="250" x2="560" y2="120" stroke="#5b6b78" stroke-width="5"/><line x1="546" y1="130" x2="574" y2="130" stroke="#5b6b78" stroke-width="3"/><line x1="548" y1="150" x2="572" y2="150" stroke="#5b6b78" stroke-width="3"/><line x1="540" y1="150" x2="548" y2="150" stroke="#f08c00" stroke-width="2.5"/><line x1="540" y1="210" x2="560" y2="210" stroke="#f08c00" stroke-width="2.5"/><text x="560" y="272" text-anchor="middle" font-size="10" fill="#3a5662">transmission line</text><text x="560" y="286" text-anchor="middle" font-size="9" fill="#f08c00" font-weight="700">Vₛ = 6600 V</text></g></svg>',
+      },
+      caption: 'Step-up transformer: 450-turn primary (turbine side) and 9000-turn secondary (grid side), output 6600 V.',
+    },
     tasks: [
       {
         label: 'a',
@@ -133,7 +165,13 @@ export const questions: Question[] = [
     topicGroup: 'Thermal Physics',
     tags: { unit: 'thermal-physics', topics: ['heat transfer', 'conduction', 'convection', 'density'], level: 'proficient' },
     stem: 'A student compares how fast an ice cube melts when placed in a cup of fresh water versus a cup of concentrated sugar syrup. Both liquids are at the same initial temperature. Concentrated sugar syrup is significantly denser than fresh water.',
-    figImages: [`${P}q3-ice-cups.png`],
+    artefact: {
+      component: 'GenericSVG',
+      data: {
+        svg: '<svg viewBox="0 0 560 320" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><rect width="560" height="320" fill="#ffffff"/><text x="280" y="26" text-anchor="middle" font-size="15" font-weight="700" fill="#1f3a44">Ice melting: fresh water vs sugar syrup</text><g><text x="150" y="54" text-anchor="middle" font-size="12" font-weight="700" fill="#0b7285">Cup A — fresh water</text><path d="M86,80 L214,80 L204,260 L96,260 Z" fill="none" stroke="#5b6b78" stroke-width="3"/><path d="M92,118 L208,118 L200,254 L100,254 Z" fill="#cdeaf4" stroke="none"/><rect x="128" y="96" width="44" height="40" rx="5" fill="#ffffff" stroke="#7fb6c8" stroke-width="2" opacity="0.92"/><text x="150" y="121" text-anchor="middle" font-size="10" fill="#3a5662">ice</text><g stroke="#7fb6c8" stroke-width="1.4" fill="none"><path d="M150,138 q-6,16 0,30"/><path d="M150,138 q6,16 0,30"/></g><circle cx="78" cy="150" r="3" fill="#9ad0dc"/><circle cx="80" cy="172" r="3" fill="#9ad0dc"/><circle cx="76" cy="194" r="3" fill="#9ad0dc"/><text x="150" y="282" text-anchor="middle" font-size="10" fill="#3a5662">meltwater sinks → strong convection</text><text x="150" y="296" text-anchor="middle" font-size="10" font-weight="700" fill="#0b7285">ice melts faster</text></g><g><text x="410" y="54" text-anchor="middle" font-size="12" font-weight="700" fill="#f08c00">Cup B — sugar syrup</text><path d="M346,80 L474,80 L464,260 L356,260 Z" fill="none" stroke="#5b6b78" stroke-width="3"/><path d="M352,118 L468,118 L460,254 L360,254 Z" fill="#f3d59b" stroke="none"/><rect x="388" y="96" width="44" height="40" rx="5" fill="#ffffff" stroke="#7fb6c8" stroke-width="2" opacity="0.92"/><text x="410" y="121" text-anchor="middle" font-size="10" fill="#3a5662">ice</text><path d="M388,138 L432,138 L432,160 L388,160 Z" fill="#cdeaf4" opacity="0.85"/><text x="410" y="178" text-anchor="middle" font-size="8" fill="#0b7285">cold meltwater trapped (less dense)</text><circle cx="338" cy="150" r="3" fill="#d8a24a"/><circle cx="340" cy="172" r="3" fill="#d8a24a"/><circle cx="336" cy="194" r="3" fill="#d8a24a"/><text x="410" y="282" text-anchor="middle" font-size="10" fill="#3a5662">meltwater cannot sink → convection suppressed</text><text x="410" y="296" text-anchor="middle" font-size="10" font-weight="700" fill="#f08c00">ice melts slower</text></g><line x1="280" y1="70" x2="280" y2="300" stroke="#dde5ea" stroke-width="1.5" stroke-dasharray="4 4"/></svg>',
+      },
+      caption: 'An ice cube in fresh water (Cup A) and in denser concentrated sugar syrup (Cup B), both at the same starting temperature.',
+    },
     tasks: [
       {
         label: 'a',
@@ -199,7 +237,13 @@ export const questions: Question[] = [
     topicGroup: 'Waves & Sound',
     tags: { unit: 'sound-waves', topics: ['sound', 'frequency', 'wavelength', 'inverse proportion'], level: 'proficient' },
     stem: 'A student investigates how the length of air column inside a glass bottle affects the frequency of the sound produced when air is blown across the bottle\'s opening. The student\'s hypothesis is: "As the length of the air column increases, the frequency of the sound produced decreases (inverse proportion)."',
-    figImages: [`${P}q4-bottles-setup.png`],
+    artefact: {
+      component: 'GenericSVG',
+      data: {
+        svg: '<svg viewBox="0 0 620 300" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><rect width="620" height="300" fill="#ffffff"/><text x="310" y="26" text-anchor="middle" font-size="15" font-weight="700" fill="#1f3a44">Blowing across bottles with different air-column lengths</text><g><g transform="translate(30,60)"><path d="M14,0 h12 v18 q14 6 14 24 v118 h-40 v-118 q0 -18 14 -24 Z" fill="none" stroke="#0b7285" stroke-width="2.5"/><path d="M0,128 h40 v32 h-40 Z" fill="#cdeaf4"/><text x="20" y="178" text-anchor="middle" font-size="10" fill="#0b7285">20 cm</text></g><g transform="translate(140,60)"><path d="M14,0 h12 v18 q14 6 14 24 v118 h-40 v-118 q0 -18 14 -24 Z" fill="none" stroke="#0b7285" stroke-width="2.5"/><path d="M0,116 h40 v44 h-40 Z" fill="#cdeaf4"/><text x="20" y="178" text-anchor="middle" font-size="10" fill="#0b7285">25 cm</text></g><g transform="translate(250,60)"><path d="M14,0 h12 v18 q14 6 14 24 v118 h-40 v-118 q0 -18 14 -24 Z" fill="none" stroke="#0b7285" stroke-width="2.5"/><path d="M0,104 h40 v56 h-40 Z" fill="#cdeaf4"/><text x="20" y="178" text-anchor="middle" font-size="10" fill="#0b7285">30 cm</text></g><g transform="translate(360,60)"><path d="M14,0 h12 v18 q14 6 14 24 v118 h-40 v-118 q0 -18 14 -24 Z" fill="none" stroke="#0b7285" stroke-width="2.5"/><path d="M0,84 h40 v76 h-40 Z" fill="#cdeaf4"/><text x="20" y="178" text-anchor="middle" font-size="10" fill="#0b7285">40 cm</text></g><g transform="translate(470,60)"><path d="M14,0 h12 v18 q14 6 14 24 v118 h-40 v-118 q0 -18 14 -24 Z" fill="none" stroke="#0b7285" stroke-width="2.5"/><path d="M0,68 h40 v92 h-40 Z" fill="#cdeaf4"/><text x="20" y="178" text-anchor="middle" font-size="10" fill="#0b7285">50 cm</text></g></g><g><path d="M52,48 q14,-14 28,0" fill="none" stroke="#f08c00" stroke-width="2.5"/><path d="M76,42 l8,2 l-5,6 Z" fill="#f08c00"/><text x="78" y="38" font-size="9" fill="#f08c00">blow across opening</text></g><g><rect x="250" y="250" width="120" height="40" rx="6" fill="#1f3a44"/><text x="310" y="268" text-anchor="middle" font-size="11" fill="#3ad36a" font-family="monospace">1800 Hz</text><text x="310" y="284" text-anchor="middle" font-size="9" fill="#9ad0dc">frequency meter</text></g><text x="120" y="248" text-anchor="middle" font-size="10" fill="#3a5662">air column = height of air above the water line</text></svg>',
+      },
+      caption: 'Five identical glass bottles with air-column lengths of 20, 25, 30, 40 and 50 cm, blown across the opening; frequency read on a meter.',
+    },
     tasks: [
       {
         label: 'a',
@@ -226,7 +270,14 @@ export const questions: Question[] = [
         label: 'd',
         text: 'The student produces a graph of **frequency (Hz)** against **air column length (m)**.\n\n**Use** two data points from the graph to determine whether the data supports the hypothesis. **State** your conclusion.',
         marks: 3,
-        figImages: [`${P}q4d-data-table.png`],
+        artefact: {
+          component: 'DataTable',
+          data: {
+            headers: ['Air column length / m', 'Frequency / Hz'],
+            rows: [['0.20', '1800'], ['0.25', '1440'], ['0.30', '1200'], ['0.40', '900'], ['0.50', '720']],
+          },
+          caption: 'Frequency of the sound produced for each air-column length.',
+        },
         ph: 'Choose two data points, e.g. (0.20 m, 1800 Hz) and (0.40 m, 900 Hz).\nFor inverse proportion: L × f = constant.\n0.20 × 1800 = 360\n0.40 × 900 = 360\nProducts are equal → confirms inverse proportion.\nConclusion: Data supports the hypothesis.',
         level: 'proficient',
       },
@@ -241,7 +292,17 @@ export const questions: Question[] = [
         label: 'f',
         text: 'The student plots a graph of **frequency (Hz)** on the y-axis against **1/Length (m⁻¹)** on the x-axis.\n\n**Plot** the data point for the bottle of length 0.40 m on the graph, and **draw** a line of best fit through all points.',
         marks: 2,
-        figImages: [`${P}q4f-graph.png`],
+        artefact: {
+          component: 'GraphSim',
+          data: {
+            mode: 'plot',
+            xAxis: { label: '1/Length / m⁻¹', min: 0, max: 5, tick: 1 },
+            yAxis: { label: 'Frequency / Hz', min: 0, max: 2000, tick: 200 },
+            dataTable: [{ x: 2.0, y: 720 }, { x: 3.3, y: 1200 }, { x: 4.0, y: 1440 }, { x: 5.0, y: 1800 }],
+            plotMissing: [2.5, 900],
+          },
+          caption: 'Frequency against 1/Length. Plot the missing point for the 0.40 m bottle (1/L = 2.5 m⁻¹) and draw a line of best fit through the origin.',
+        },
         ph: 'Plot the point (2.5, 900) on the graph.\nDraw a straight line of best fit through the origin, with roughly equal numbers of data points above and below.',
         level: 'developing',
       },
@@ -258,7 +319,18 @@ export const questions: Question[] = [
         label: 'h',
         text: '**Calculate** the speed of sound in air using the gradient of your line of best fit from part (f).\n\nShow your working and give appropriate units.',
         marks: 3,
-        figImages: [`${P}q4f-graph.png`],
+        artefact: {
+          component: 'GraphSim',
+          data: {
+            mode: 'readoff',
+            xLabel: '1/Length / m⁻¹',
+            yLabel: 'Frequency / Hz',
+            points: [[0, 0], [2.0, 720], [2.5, 900], [3.3, 1200], [4.0, 1440], [5.0, 1800]],
+            readouts: [{ x: 0, note: 'line passes through origin' }, { x: 5.0, note: 'f = 1800 Hz at 1/L = 5.0' }],
+            dataMaxX: 5.0,
+          },
+          caption: 'Line of best fit (through the origin) for frequency against 1/Length. Gradient = Δf / Δ(1/L) = speed of sound.',
+        },
         ph: 'Choose two points on the line of best fit.\nGradient = Δfrequency / Δ(1/length)\n= (1800 − 0) / (5.0 − 0) = **360 m s⁻¹**\n(Accept values 354–366 m s⁻¹)',
         level: 'proficient',
       },
@@ -279,7 +351,13 @@ export const questions: Question[] = [
     topicGroup: 'Waves & Sound',
     tags: { unit: 'sound-waves', topics: ['frequency', 'tension', 'sound', 'investigation design'], level: 'proficient' },
     stem: 'A student investigates how the tension in a guitar string affects the frequency of the note produced. They attach different masses to one end of the wire, which is clamped at both ends, to change the tension.',
-    figImages: [`${P}q5-guitar-setup.png`],
+    artefact: {
+      component: 'GenericSVG',
+      data: {
+        svg: '<svg viewBox="0 0 600 300" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><defs><marker id="arrG" markerWidth="9" markerHeight="9" refX="4" refY="8" orient="auto"><path d="M0,0 L8,0 L4,8 Z" fill="#0b7285"/></marker></defs><rect width="600" height="300" fill="#ffffff"/><text x="300" y="26" text-anchor="middle" font-size="15" font-weight="700" fill="#1f3a44">Wire under tension from a hanging mass</text><rect x="40" y="70" width="40" height="150" fill="#9aa7b0" stroke="#5b6b78" stroke-width="2"/><text x="60" y="240" text-anchor="middle" font-size="9" fill="#3a5662">bench / clamp</text><rect x="80" y="96" width="22" height="20" rx="3" fill="#37708a" stroke="#1f3a44"/><text x="60" y="92" font-size="9" fill="#0b7285">fixed clamp</text><line x1="102" y1="106" x2="470" y2="106" stroke="#1f3a44" stroke-width="2.5"/><g><rect x="170" y="92" width="16" height="28" rx="3" fill="#f08c00" stroke="#a8531a"/><rect x="380" y="92" width="16" height="28" rx="3" fill="#f08c00" stroke="#a8531a"/><text x="283" y="86" text-anchor="middle" font-size="9" fill="#f08c00">two bridges set the vibrating length</text></g><circle cx="478" cy="106" r="12" fill="none" stroke="#5b6b78" stroke-width="3"/><circle cx="478" cy="106" r="2.5" fill="#5b6b78"/><text x="478" y="88" text-anchor="middle" font-size="9" fill="#3a5662">pulley</text><line x1="478" y1="118" x2="478" y2="180" stroke="#1f3a44" stroke-width="2.5"/><rect x="462" y="180" width="32" height="40" rx="4" fill="#37708a" stroke="#1f3a44" stroke-width="2"/><text x="478" y="204" text-anchor="middle" font-size="10" fill="#ffffff">0.60</text><text x="478" y="216" text-anchor="middle" font-size="8" fill="#cfe9ef">kg</text><line x1="478" y1="225" x2="478" y2="258" stroke="#0b7285" stroke-width="2" marker-end="url(#arrG)"/><text x="500" y="248" font-size="10" fill="#0b7285">weight = mg</text><text x="500" y="262" font-size="10" fill="#0b7285">→ tension T</text><text x="283" y="138" text-anchor="middle" font-size="10" fill="#3a5662">pluck the wire between the bridges</text></svg>',
+      },
+      caption: 'A wire clamped over two bridges with a 0.60 kg mass hung over a pulley; the hanging weight sets the tension.',
+    },
     tasks: [
       {
         label: 'a',
@@ -342,7 +420,13 @@ export const questions: Question[] = [
     topicGroup: 'Waves & Sound',
     tags: { unit: 'sound-waves', topics: ['sound intensity', 'investigation design', 'data analysis'], level: 'proficient' },
     stem: 'A student investigates how layers of bubble wrap affect the sound intensity level measured on the other side of the barrier. They use a sound level meter placed a fixed distance from a speaker, with bubble wrap layers placed between them.',
-    figImages: [`${P}q6-sound-bubblewrap.png`],
+    artefact: {
+      component: 'GenericSVG',
+      data: {
+        svg: '<svg viewBox="0 0 620 280" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><rect width="620" height="280" fill="#ffffff"/><text x="310" y="26" text-anchor="middle" font-size="15" font-weight="700" fill="#1f3a44">Sound intensity through layers of bubble wrap</text><line x1="40" y1="220" x2="580" y2="220" stroke="#5b6b78" stroke-width="2"/><g><path d="M60,120 L90,120 L120,96 L120,176 L90,152 L60,152 Z" fill="#37708a" stroke="#1f3a44" stroke-width="2"/><circle cx="92" cy="136" r="10" fill="#1f3a44"/><text x="92" y="200" text-anchor="middle" font-size="10" fill="#3a5662">speaker</text></g><g><line x1="124" y1="110" x2="172" y2="98" stroke="#f08c00" stroke-width="2"/><line x1="124" y1="136" x2="178" y2="136" stroke="#f08c00" stroke-width="2"/><line x1="124" y1="162" x2="172" y2="174" stroke="#f08c00" stroke-width="2"/><text x="150" y="86" text-anchor="middle" font-size="9" fill="#f08c00">sound waves</text></g><g><rect x="270" y="86" width="9" height="100" rx="3" fill="#bfe3ec" stroke="#7fb6c8"/><rect x="282" y="86" width="9" height="100" rx="3" fill="#bfe3ec" stroke="#7fb6c8"/><rect x="294" y="86" width="9" height="100" rx="3" fill="#bfe3ec" stroke="#7fb6c8"/><rect x="306" y="86" width="9" height="100" rx="3" fill="#bfe3ec" stroke="#7fb6c8"/><g fill="#7fb6c8"><circle cx="274" cy="100" r="2"/><circle cx="274" cy="130" r="2"/><circle cx="274" cy="160" r="2"/><circle cx="298" cy="100" r="2"/><circle cx="298" cy="130" r="2"/><circle cx="298" cy="160" r="2"/></g><text x="288" y="206" text-anchor="middle" font-size="10" fill="#3a5662">bubble wrap layers</text></g><g><rect x="450" y="96" width="60" height="100" rx="8" fill="#1f3a44" stroke="#0b2530" stroke-width="2"/><rect x="460" y="108" width="40" height="34" rx="3" fill="#0b1f28"/><text x="480" y="130" text-anchor="middle" font-size="13" fill="#3ad36a" font-family="monospace">115</text><text x="480" y="160" text-anchor="middle" font-size="9" fill="#9ad0dc">dB</text><circle cx="480" cy="180" r="6" fill="#5b6b78"/><text x="480" y="212" text-anchor="middle" font-size="10" fill="#3a5662">sound level meter</text></g><line x1="120" y1="244" x2="450" y2="244" stroke="#0b7285" stroke-width="1.5"/><line x1="120" y1="238" x2="120" y2="250" stroke="#0b7285"/><line x1="450" y1="238" x2="450" y2="250" stroke="#0b7285"/><text x="285" y="262" text-anchor="middle" font-size="10" fill="#0b7285">fixed distance speaker → meter</text></svg>',
+      },
+      caption: 'A speaker and a sound level meter a fixed distance apart, with layers of bubble wrap placed between them.',
+    },
     tasks: [
       {
         label: 'a',
@@ -369,7 +453,13 @@ export const questions: Question[] = [
         label: 'd',
         text: 'The student wants to design a **new investigation** using the available equipment. The investigation will test how the **number of layers of bubble wrap** affects the **sound intensity level** measured through it.\n\n**Design** a full investigation. In your answer, include:\n- The independent variable, dependent variable, and at least **two** control variables with justification\n- A **hypothesis** with a scientific explanation\n- A **method** that could be followed by another student\n- How you would **collect sufficient data** to draw a valid conclusion',
         marks: 13,
-        figImages: [`${P}q6d-wall-model.png`],
+        artefact: {
+          component: 'GenericSVG',
+          data: {
+            svg: '<svg viewBox="0 0 600 260" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><rect width="600" height="260" fill="#ffffff"/><text x="300" y="26" text-anchor="middle" font-size="15" font-weight="700" fill="#1f3a44">Layered-barrier model: sound energy absorbed per layer</text><g><rect x="40" y="70" width="60" height="120" rx="6" fill="#37708a" stroke="#1f3a44" stroke-width="2"/><text x="70" y="206" text-anchor="middle" font-size="10" fill="#3a5662">source</text><text x="70" y="134" text-anchor="middle" font-size="11" fill="#ffffff" font-weight="700">120 dB</text></g><g><rect x="200" y="56" width="14" height="148" rx="3" fill="#cfe9ef" stroke="#7fb6c8" stroke-width="1.5"/><rect x="220" y="56" width="14" height="148" rx="3" fill="#bfe0ea" stroke="#7fb6c8" stroke-width="1.5"/><rect x="240" y="56" width="14" height="148" rx="3" fill="#aad6e3" stroke="#7fb6c8" stroke-width="1.5"/><rect x="260" y="56" width="14" height="148" rx="3" fill="#94ccdc" stroke="#7fb6c8" stroke-width="1.5"/><rect x="280" y="56" width="14" height="148" rx="3" fill="#7fc1d4" stroke="#7fb6c8" stroke-width="1.5"/><text x="247" y="224" text-anchor="middle" font-size="10" fill="#3a5662">each layer traps air and absorbs sound energy</text></g><g><line x1="106" y1="90" x2="196" y2="90" stroke="#f08c00" stroke-width="4"/><line x1="300" y1="90" x2="430" y2="90" stroke="#f08c00" stroke-width="2" stroke-dasharray="6 4"/><line x1="106" y1="130" x2="196" y2="130" stroke="#f08c00" stroke-width="4"/><line x1="300" y1="130" x2="430" y2="130" stroke="#f08c00" stroke-width="1.5" stroke-dasharray="6 4"/><text x="150" y="78" text-anchor="middle" font-size="9" fill="#f08c00">strong</text><text x="365" y="78" text-anchor="middle" font-size="9" fill="#f08c00">weaker</text></g><g><rect x="450" y="70" width="60" height="120" rx="8" fill="#1f3a44" stroke="#0b2530" stroke-width="2"/><rect x="460" y="84" width="40" height="34" rx="3" fill="#0b1f28"/><text x="480" y="107" text-anchor="middle" font-size="13" fill="#3ad36a" font-family="monospace">97</text><text x="480" y="200" text-anchor="middle" font-size="10" fill="#3a5662">meter</text></g></svg>',
+          },
+          caption: 'Layered-barrier model: sound passes through successive layers, each absorbing energy, so the level measured at the meter falls as layers are added.',
+        },
         ph: 'Variables:\n- IV: number of bubble wrap layers\n- DV: sound intensity level (dB)\n- CV1: distance speaker to meter (changing distance changes intensity)\n- CV2: type/thickness of bubble wrap (different wrap → different properties)\n- CV3: sound frequency/volume of speaker\n\nHypothesis:\nIf number of bubble wrap layers increases, sound intensity level will decrease, because each layer traps air (poor conductor) and absorbs more sound energy.\n\nMethod:\n1. Place speaker and meter 50 cm apart; record baseline (0 layers)\n2. Place 2 layers between them; record 3 measurements\n3. Repeat for 4, 6, 8, 10 layers\n4. Calculate mean for each\n\nData: ≥5 values, 3 repeats, plot dB vs layers.',
         level: 'advanced',
       },
@@ -390,7 +480,19 @@ export const questions: Question[] = [
     topicGroup: 'Space & Astrophysics',
     tags: { unit: 'astrophysics', topics: ['retrograde motion', 'speed of light', 'heliocentric model'], level: 'proficient' },
     stem: 'Ancient astronomers noticed that the apparent position of Mars in the night sky appeared to move backwards relative to the stars at certain times of the year. This phenomenon is called retrograde motion.',
-    figImages: [`${P}q7-mars.png`],
+    artefact: {
+      component: 'OrbitSim',
+      data: {
+        mode: 'orbit',
+        central: 'Sun',
+        bodies: [
+          { name: 'Sun', role: 'center', radius: 16, colour: '#f08c00', fixed: true },
+          { name: 'Earth', role: 'orbiter', orbitalPeriod: 365, orbitRadius: 70, radius: 7, colour: '#0b7285' },
+          { name: 'Mars', role: 'orbiter', orbitalPeriod: 687, orbitRadius: 110, radius: 6, colour: '#c0552f' },
+        ],
+      },
+      caption: 'Heliocentric model: Earth (faster, inner orbit) overtakes Mars (slower, outer orbit). When Earth passes Mars, Mars appears to move backwards against the stars — retrograde motion.',
+    },
     tasks: [
       {
         label: 'a',
@@ -430,7 +532,19 @@ export const questions: Question[] = [
     topicGroup: 'Space & Astrophysics',
     tags: { unit: 'astrophysics', topics: ['space exploration', 'evaluation', 'evidence', 'stakeholders'], level: 'proficient' },
     stem: 'Several space agencies are debating whether to send robotic or crewed missions to Mars. The table below presents data on proposed missions from different agencies.',
-    figImages: [`${P}q8-mars-missions.png`],
+    artefact: {
+      component: 'DataTable',
+      data: {
+        headers: ['Proposed mission', 'Type', 'Estimated cost / billion US$', 'Crew', 'Main objective'],
+        rows: [
+          ['Agency A — "Ares"', 'Crewed', '480', '4 astronauts', 'Surface sample return + human research'],
+          ['Agency B — "Pathfinder II"', 'Robotic', '6', '0 (rover)', 'Soil and atmosphere analysis'],
+          ['Agency C — "Helios"', 'Crewed', '520', '6 astronauts', 'Build first permanent base'],
+          ['Agency D — "Swarm"', 'Robotic', '9', '0 (3 rovers)', 'Map water-ice deposits'],
+        ],
+      },
+      caption: 'Proposed crewed and robotic Mars missions from four agencies, with estimated cost, crew and objective.',
+    },
     tasks: [
       {
         label: 'a',

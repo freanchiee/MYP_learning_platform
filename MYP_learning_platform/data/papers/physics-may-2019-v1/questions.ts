@@ -21,6 +21,13 @@ export const questions: Question[] = [
     topicGroup: 'Thermal Physics',
     stem: 'Heat and temperature are different quantities associated with the study of thermal physics. Heat transfer takes place through three processes: conduction, convection and radiation.',
     tags: { unit: 'thermal-physics', topics: ['heat transfer', 'conduction', 'convection', 'radiation', 'insulation'], level: 'developing' },
+    artefact: {
+      component: 'GenericSVG',
+      data: {
+        svg: '<svg viewBox="0 0 560 360" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><rect width="560" height="360" fill="#ffffff"/><defs><marker id="ah" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#f08c00"/></marker><marker id="ahr" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#c92a2a"/></marker><marker id="ahb" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#0b7285"/></marker></defs><rect x="0" y="300" width="560" height="60" fill="#f1f3f5"/><line x1="0" y1="300" x2="560" y2="300" stroke="#adb5bd" stroke-width="1.5"/><rect x="60" y="170" width="150" height="130" rx="6" fill="#e9ecef" stroke="#868e96" stroke-width="2"/><g stroke="#fa5252" stroke-width="6" stroke-linecap="round"><line x1="78" y1="180" x2="78" y2="290"/><line x1="98" y1="180" x2="98" y2="290"/><line x1="118" y1="180" x2="118" y2="290"/><line x1="138" y1="180" x2="138" y2="290"/><line x1="158" y1="180" x2="158" y2="290"/><line x1="178" y1="180" x2="178" y2="290"/><line x1="198" y1="180" x2="198" y2="290"/></g><rect x="58" y="166" width="154" height="10" rx="4" fill="#868e96"/><text x="135" y="318" font-size="13" fill="#222" text-anchor="middle" font-weight="bold">Hot radiator</text><g stroke="#0b7285" stroke-width="2.5" fill="none"><path d="M90,165 q-8,-22 4,-40 q10,-18 0,-36" marker-end="url(#ahb)"/><path d="M135,165 q8,-22 -4,-40 q-10,-18 0,-36" marker-end="url(#ahb)"/><path d="M180,165 q-8,-22 4,-40 q10,-18 0,-36" marker-end="url(#ahb)"/></g><text x="135" y="44" font-size="12" fill="#0b7285" text-anchor="middle" font-weight="bold">Warm air rising (convection)</text><g stroke="#c92a2a" stroke-width="2.5" fill="none"><path d="M214,210 q40,-6 80,0" marker-end="url(#ahr)"/><path d="M214,235 q40,-6 80,0" marker-end="url(#ahr)"/><path d="M214,260 q40,-6 80,0" marker-end="url(#ahr)"/></g><circle cx="360" cy="235" r="26" fill="#ffd8a8" stroke="#e8590c" stroke-width="2"/><rect x="350" y="261" width="20" height="38" fill="#495057"/><text x="360" y="200" font-size="12" fill="#c92a2a" text-anchor="middle" font-weight="bold">Heat felt across the room (radiation)</text><rect x="430" y="172" width="14" height="128" fill="#adb5bd" stroke="#495057" stroke-width="1.5"/><text x="437" y="160" font-size="11" fill="#495057" text-anchor="middle">metal bracket</text><line x1="437" y1="300" x2="437" y2="330" stroke="#f08c00" stroke-width="3" marker-end="url(#ah)"/><text x="495" y="320" font-size="12" fill="#f08c00" text-anchor="middle" font-weight="bold">heat through bracket (conduction)</text></svg>',
+      },
+      caption: 'Heat transfer from a hot radiator: warm air rising (convection), heat felt across the room (radiation), and heat spreading through the metal mounting bracket (conduction).',
+    },
     tasks: [
       {
         label: 'a',
@@ -38,6 +45,13 @@ export const questions: Question[] = [
         label: 'c',
         text: 'A cyclist fills a thermos flask with hot coffee and goes for a long ride. Three hours later she opens the flask and finds the coffee is still hot. **Explain** why the coffee has stayed hot. In your answer, you should refer to two features of the flask and use your knowledge and understanding of heat transfer.',
         marks: 4,
+        artefact: {
+          component: 'GenericSVG',
+          data: {
+            svg: '<svg viewBox="0 0 460 360" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><rect width="460" height="360" fill="#ffffff"/><rect x="150" y="20" width="120" height="26" rx="6" fill="#495057"/><text x="210" y="38" font-size="11" fill="#fff" text-anchor="middle">screw stopper</text><path d="M150 46 L150 330 Q150 348 168 348 L252 348 Q270 348 270 330 L270 46 Z" fill="#dee2e6" stroke="#868e96" stroke-width="3"/><path d="M168 46 L168 322 Q168 334 180 334 L240 334 Q252 334 252 322 L252 46 Z" fill="#f8f9fa" stroke="#0b7285" stroke-width="2.5"/><path d="M182 60 L182 318 Q182 322 186 322 L234 322 Q238 322 238 318 L238 60 Z" fill="#a5d8ff" stroke="#1971c2" stroke-width="2"/><text x="210" y="200" font-size="13" fill="#1864ab" text-anchor="middle" font-weight="bold">hot</text><text x="210" y="218" font-size="13" fill="#1864ab" text-anchor="middle" font-weight="bold">coffee</text><rect x="168" y="46" width="14" height="288" fill="#ced4da" opacity="0.6"/><rect x="238" y="46" width="14" height="288" fill="#ced4da" opacity="0.6"/><line x1="300" y1="120" x2="246" y2="120" stroke="#333" stroke-width="1"/><text x="305" y="124" font-size="12" fill="#0b7285" font-weight="bold">silvered surfaces</text><text x="305" y="140" font-size="11" fill="#555">reflect infrared radiation</text><line x1="300" y1="220" x2="174" y2="220" stroke="#333" stroke-width="1"/><text x="305" y="216" font-size="12" fill="#e8590c" font-weight="bold">vacuum</text><text x="305" y="232" font-size="11" fill="#555">between double walls —</text><text x="305" y="246" font-size="11" fill="#555">no conduction or convection</text><line x1="120" y1="120" x2="166" y2="120" stroke="#333" stroke-width="1"/><text x="115" y="124" font-size="11" fill="#555" text-anchor="end">double-walled</text><line x1="120" y1="300" x2="160" y2="320" stroke="#333" stroke-width="1"/><text x="115" y="312" font-size="11" fill="#555" text-anchor="end">insulated support</text></svg>',
+          },
+          caption: 'Cross-section of a vacuum (thermos) flask: a vacuum between double walls stops conduction and convection; silvered surfaces reflect infrared radiation back into the coffee.',
+        },
         ph: 'Feature 1 of flask: ...\nFeature 2 of flask: ...\nExplanation of how these prevent heat transfer: ...',
       },
     ],
@@ -58,6 +72,13 @@ export const questions: Question[] = [
         label: 'a',
         text: 'A helium atom has 2 protons, 2 neutrons and 2 electrons. **Draw** a diagram to show the structure of an atom of helium.',
         marks: 1,
+        artefact: {
+          component: 'GenericSVG',
+          data: {
+            svg: '<svg viewBox="0 0 440 300" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><rect width="440" height="300" fill="#ffffff"/><rect x="8" y="8" width="280" height="284" rx="8" fill="#f8f9fa" stroke="#adb5bd" stroke-width="1.5"/><circle cx="148" cy="150" r="110" fill="none" stroke="#ced4da" stroke-width="1.5" stroke-dasharray="5 5"/><circle cx="148" cy="150" r="34" fill="none" stroke="#868e96" stroke-width="1.5" stroke-dasharray="4 4"/><text x="148" y="154" font-size="11" fill="#adb5bd" text-anchor="middle">nucleus</text><text x="148" y="46" font-size="11" fill="#adb5bd" text-anchor="middle">electron shell</text><text x="148" y="284" font-size="11" fill="#868e96" text-anchor="middle" font-style="italic">drawing area</text><rect x="304" y="8" width="128" height="284" rx="8" fill="#ffffff" stroke="#adb5bd" stroke-width="1.5"/><text x="368" y="30" font-size="12" fill="#333" text-anchor="middle" font-weight="bold">Key</text><circle cx="328" cy="70" r="14" fill="#fa5252" stroke="#c92a2a" stroke-width="1.5"/><text x="328" y="75" font-size="14" fill="#fff" text-anchor="middle" font-weight="bold">+</text><text x="350" y="75" font-size="12" fill="#333">proton</text><circle cx="328" cy="130" r="14" fill="#e9ecef" stroke="#868e96" stroke-width="1.5"/><text x="328" y="135" font-size="13" fill="#495057" text-anchor="middle" font-weight="bold">0</text><text x="350" y="135" font-size="12" fill="#333">neutron</text><circle cx="328" cy="190" r="11" fill="#1971c2" stroke="#1864ab" stroke-width="1.5"/><text x="328" y="195" font-size="14" fill="#fff" text-anchor="middle" font-weight="bold">−</text><text x="350" y="195" font-size="12" fill="#333">electron</text></svg>',
+          },
+          caption: 'Blank atom canvas: place 2 protons and 2 neutrons in the nucleus, and 2 electrons in the surrounding shell.',
+        },
         ph: 'Nucleus contains 2 protons and 2 neutrons; 2 electrons orbit/surround the nucleus.',
       },
       {
@@ -78,6 +99,13 @@ export const questions: Question[] = [
         label: 'd',
         text: 'The diagram below shows a negatively charged toner particle and the positively charged drum surface. **Draw** arrows to represent the forces acting on the toner particle. Use the text tool to label your arrows.',
         marks: 3,
+        artefact: {
+          component: 'GenericSVG',
+          data: {
+            svg: '<svg viewBox="0 0 440 300" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><rect width="440" height="300" fill="#ffffff"/><path d="M40 70 Q220 40 400 70" fill="none" stroke="#0b7285" stroke-width="14" stroke-linecap="round"/><g fill="#fff" font-size="14" font-weight="bold" text-anchor="middle"><text x="80" y="66">+</text><text x="130" y="62">+</text><text x="180" y="59">+</text><text x="230" y="58">+</text><text x="280" y="59">+</text><text x="330" y="62">+</text><text x="380" y="66">+</text></g><text x="220" y="32" font-size="13" fill="#0b7285" text-anchor="middle" font-weight="bold">Positively charged drum surface</text><circle cx="220" cy="200" r="24" fill="#1971c2" stroke="#1864ab" stroke-width="2"/><text x="220" y="206" font-size="20" fill="#fff" text-anchor="middle" font-weight="bold">−</text><text x="220" y="252" font-size="13" fill="#1864ab" text-anchor="middle" font-weight="bold">Negatively charged toner particle</text><line x1="40" y1="285" x2="400" y2="285" stroke="#adb5bd" stroke-width="2"/></svg>',
+          },
+          caption: 'A negatively charged toner particle below the positively charged drum. Draw and label the forces acting on the particle.',
+        },
         ph: 'Arrow 1: pointing upward toward positive drum surface — label: electrostatic (attractive) force\nArrow 2: pointing downward — label: weight/gravitational force\n(Arrows must touch/start from the particle surface)',
       },
       {
@@ -99,6 +127,13 @@ export const questions: Question[] = [
     topicGroup: 'Space & Astrophysics',
     stem: 'The movement of planets and asteroids in the solar system can be determined by our understanding of the action of gravitational attraction.',
     tags: { unit: 'forces-interactions', topics: ['gravity', 'solar system', 'gravitational field strength', 'mass calculation', 'force'], level: 'developing' },
+    artefact: {
+      component: 'GenericSVG',
+      data: {
+        svg: '<svg viewBox="0 0 720 240" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><rect width="720" height="240" fill="#0b1026"/><circle cx="30" cy="120" r="44" fill="#ffd43b"/><circle cx="30" cy="120" r="44" fill="none" stroke="#ffe066" stroke-width="3" opacity="0.5"/><text x="30" y="124" font-size="11" fill="#7a5c00" text-anchor="middle" font-weight="bold">Sun</text><g fill="#fff" font-size="10" text-anchor="middle"><circle cx="120" cy="120" r="6" fill="#adb5bd"/><text x="120" y="148">?</text><circle cx="170" cy="120" r="9" fill="#e8a87c"/><text x="170" y="156" fill="#cfd4dc">Venus</text><circle cx="225" cy="120" r="10" fill="#4dabf7"/><text x="225" y="158" fill="#cfd4dc">Earth</text><circle cx="280" cy="120" r="8" fill="#fa5252"/><text x="280" y="154" fill="#cfd4dc">Mars</text></g><g fill="#ced4da"><circle cx="330" cy="108" r="1.6"/><circle cx="345" cy="128" r="1.6"/><circle cx="338" cy="118" r="1.4"/><circle cx="352" cy="112" r="1.5"/><circle cx="360" cy="130" r="1.6"/><circle cx="333" cy="135" r="1.4"/><circle cx="356" cy="122" r="1.3"/><circle cx="368" cy="116" r="1.5"/></g><text x="348" y="170" font-size="10" fill="#cfd4dc" text-anchor="middle">?</text><g fill="#fff" font-size="10" text-anchor="middle"><circle cx="430" cy="120" r="20" fill="#e8b96f"/><text x="430" y="156" fill="#cfd4dc">Jupiter</text><g><ellipse cx="540" cy="120" rx="28" ry="9" fill="none" stroke="#d8c08a" stroke-width="3"/><circle cx="540" cy="120" r="15" fill="#dcc790"/></g><text x="540" y="156" fill="#cfd4dc">?</text><circle cx="620" cy="120" r="12" fill="#74c0fc"/><text x="620" y="150" fill="#cfd4dc">Uranus</text><circle cx="685" cy="120" r="12" fill="#4263eb"/><text x="685" y="150" fill="#cfd4dc">Neptune</text></g><text x="360" y="24" font-size="13" fill="#ffe066" text-anchor="middle" font-weight="bold">The Solar System (not to scale)</text><text x="360" y="216" font-size="11" fill="#adb5bd" text-anchor="middle">Three features are marked with "?" — label the asteroid belt, Mercury and Saturn.</text></svg>',
+      },
+      caption: 'The Sun and planets in order (not to scale). Three features are marked with "?": the innermost planet, the band of rocky objects between Mars and Jupiter, and the ringed planet.',
+    },
     tasks: [
       {
         label: 'a',
@@ -116,6 +151,21 @@ export const questions: Question[] = [
         label: 'c',
         text: 'Asteroid Apophis will make a close approach to Earth in 2029. **Draw** arrows to represent the force of attraction that the Sun exerts on Apophis at positions A and B shown in the diagram.',
         marks: 3,
+        artefact: {
+          component: 'OrbitSim',
+          data: {
+            mode: 'orbit',
+            title: 'Gravitational force on Apophis',
+            central: 'Sun',
+            showForce: true,
+            bodies: [
+              { name: 'Sun', role: 'center', fixed: true, colour: '#f6c343' },
+              { name: 'Apophis', role: 'orbiter', orbitRadius: 110, orbitalPeriod: 320, colour: '#e8590c' },
+            ],
+            seed: 29,
+          },
+          caption: 'The Sun\'s gravitational pull on Apophis always points toward the Sun and is larger at B (closer, 3.8×10¹⁰ m) than at A (farther). At closest approach F = m × g = 1.4×10⁷ kg × 0.42 N kg⁻¹ = 5.88×10⁶ N.',
+        },
         ph: 'Arrow at A (farther from Sun): pointing toward the Sun, shorter/smaller length.\nArrow at B (closer to Sun): pointing toward the Sun, longer/larger length.\nBoth arrows must point directly toward the Sun.',
       },
       {
@@ -143,11 +193,25 @@ export const questions: Question[] = [
     topicGroup: 'Forces & Motion',
     stem: 'Parachute testing simulates conditions experienced by skydivers. Air flowing past an open parachute creates a drag force large enough to balance the weight of the skydiver. The relationship between weight and air speed can be modelled using parachute models of different sizes in a controlled stream of air in a wind tunnel.\n\nThe relationship can be summarised in the following equation:\n**Weight of parachutist = constant × CSA × air speed²**\n(where CSA is cross-sectional area of the parachute canopy)',
     tags: { unit: 'forces-interactions', topics: ['drag force', 'weight', 'experiment design', 'variables', 'hypothesis', 'CSA'], level: 'developing' },
+    artefact: {
+      component: 'GenericSVG',
+      data: {
+        svg: '<svg viewBox="0 0 480 340" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><rect width="480" height="340" fill="#ffffff"/><defs><marker id="up" markerWidth="9" markerHeight="9" refX="3" refY="1" orient="auto"><path d="M0,6 L3,0 L6,6 Z" fill="#1c7ed6"/></marker></defs><rect x="0" y="310" width="480" height="30" fill="#e9ecef"/><line x1="0" y1="310" x2="480" y2="310" stroke="#adb5bd" stroke-width="1.5"/><path d="M120 110 Q240 30 360 110 Q300 96 240 100 Q180 96 120 110 Z" fill="#fa5252" stroke="#c92a2a" stroke-width="2"/><path d="M120 110 L160 110 M200 100 L210 110 M270 100 L280 110 M360 110 L320 110" stroke="#c92a2a" stroke-width="0" /><g stroke="#868e96" stroke-width="1.5"><line x1="130" y1="110" x2="232" y2="200"/><line x1="200" y1="102" x2="240" y2="198"/><line x1="280" y1="102" x2="248" y2="198"/><line x1="350" y1="110" x2="256" y2="200"/></g><circle cx="244" cy="214" r="12" fill="#495057"/><rect x="238" y="224" width="12" height="34" rx="4" fill="#1971c2"/><g stroke="#1c7ed6" stroke-width="3"><line x1="150" y1="300" x2="150" y2="250" marker-end="url(#up)"/><line x1="195" y1="300" x2="195" y2="240" marker-end="url(#up)"/><line x1="290" y1="300" x2="290" y2="240" marker-end="url(#up)"/><line x1="335" y1="300" x2="335" y2="250" marker-end="url(#up)"/></g><text x="120" y="300" font-size="11" fill="#1c7ed6" text-anchor="middle" font-weight="bold">Air flow</text><text x="370" y="300" font-size="11" fill="#1c7ed6" text-anchor="middle" font-weight="bold">Air flow</text><text x="240" y="20" font-size="13" fill="#222" text-anchor="middle" font-weight="bold">Parachute model in a wind-tunnel air stream</text></svg>',
+      },
+      caption: 'A parachute canopy held in an upward stream of fast-moving air. The drag force from the airflow balances the weight hanging below.',
+    },
     tasks: [
       {
         label: 'a',
         text: 'The graph below shows the air speed needed for people with different body weights to be safely supported by a parachute. Using the graph, **state** the air speed needed for a 600 N person to descend safely.',
         marks: 2,
+        artefact: {
+          component: 'GenericSVG',
+          data: {
+            svg: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 324" font-family="Arial, Helvetica, sans-serif"><rect width="384" height="324" fill="#ffffff"/><g transform="translate(12,12)"><line x1="58.0" y1="18.0" x2="58.0" y2="254.0" stroke="#e6e6e6" stroke-width="0.7"/><line x1="105.3" y1="18.0" x2="105.3" y2="254.0" stroke="#e6e6e6" stroke-width="0.7"/><line x1="152.7" y1="18.0" x2="152.7" y2="254.0" stroke="#e6e6e6" stroke-width="0.7"/><line x1="200.0" y1="18.0" x2="200.0" y2="254.0" stroke="#e6e6e6" stroke-width="0.7"/><line x1="247.3" y1="18.0" x2="247.3" y2="254.0" stroke="#e6e6e6" stroke-width="0.7"/><line x1="294.7" y1="18.0" x2="294.7" y2="254.0" stroke="#e6e6e6" stroke-width="0.7"/><line x1="342.0" y1="18.0" x2="342.0" y2="254.0" stroke="#e6e6e6" stroke-width="0.7"/><line x1="58.0" y1="254.0" x2="342.0" y2="254.0" stroke="#e6e6e6" stroke-width="0.7"/><line x1="58.0" y1="195.0" x2="342.0" y2="195.0" stroke="#e6e6e6" stroke-width="0.7"/><line x1="58.0" y1="136.0" x2="342.0" y2="136.0" stroke="#e6e6e6" stroke-width="0.7"/><line x1="58.0" y1="77.0" x2="342.0" y2="77.0" stroke="#e6e6e6" stroke-width="0.7"/><line x1="58.0" y1="18.0" x2="342.0" y2="18.0" stroke="#e6e6e6" stroke-width="0.7"/><line x1="58.0" y1="18.0" x2="58.0" y2="254.0" stroke="#333" stroke-width="1.5"/><line x1="58.0" y1="254.0" x2="342.0" y2="254.0" stroke="#333" stroke-width="1.5"/><line x1="58.0" y1="254.0" x2="58.0" y2="258.0" stroke="#333" stroke-width="1"/><text x="58.0" y="270.0" font-size="10" fill="#333" text-anchor="middle">0</text><line x1="105.3" y1="254.0" x2="105.3" y2="258.0" stroke="#333" stroke-width="1"/><text x="105.3" y="270.0" font-size="10" fill="#333" text-anchor="middle">200</text><line x1="152.7" y1="254.0" x2="152.7" y2="258.0" stroke="#333" stroke-width="1"/><text x="152.7" y="270.0" font-size="10" fill="#333" text-anchor="middle">400</text><line x1="200.0" y1="254.0" x2="200.0" y2="258.0" stroke="#333" stroke-width="1"/><text x="200.0" y="270.0" font-size="10" fill="#333" text-anchor="middle">600</text><line x1="247.3" y1="254.0" x2="247.3" y2="258.0" stroke="#333" stroke-width="1"/><text x="247.3" y="270.0" font-size="10" fill="#333" text-anchor="middle">800</text><line x1="294.7" y1="254.0" x2="294.7" y2="258.0" stroke="#333" stroke-width="1"/><text x="294.7" y="270.0" font-size="10" fill="#333" text-anchor="middle">1000</text><line x1="342.0" y1="254.0" x2="342.0" y2="258.0" stroke="#333" stroke-width="1"/><text x="342.0" y="270.0" font-size="10" fill="#333" text-anchor="middle">1200</text><line x1="54.0" y1="254.0" x2="58.0" y2="254.0" stroke="#333" stroke-width="1"/><text x="51.0" y="257.5" font-size="10" fill="#333" text-anchor="end">0</text><line x1="54.0" y1="195.0" x2="58.0" y2="195.0" stroke="#333" stroke-width="1"/><text x="51.0" y="198.5" font-size="10" fill="#333" text-anchor="end">40</text><line x1="54.0" y1="136.0" x2="58.0" y2="136.0" stroke="#333" stroke-width="1"/><text x="51.0" y="139.5" font-size="10" fill="#333" text-anchor="end">80</text><line x1="54.0" y1="77.0" x2="58.0" y2="77.0" stroke="#333" stroke-width="1"/><text x="51.0" y="80.5" font-size="10" fill="#333" text-anchor="end">120</text><line x1="54.0" y1="18.0" x2="58.0" y2="18.0" stroke="#333" stroke-width="1"/><text x="51.0" y="21.5" font-size="10" fill="#333" text-anchor="end">160</text><text x="200.0" y="294.0" font-size="11" fill="#222" text-anchor="middle">Weight / N</text><text x="14" y="136.0" font-size="11" fill="#222" text-anchor="middle" transform="rotate(-90 14 136.0)">Air speed / km h⁻¹</text><path d="M81.7,193.2 C110,170 150,140 200,106.5 C250,82 300,62 318,52" fill="none" stroke="#0b7285" stroke-width="2.0"/><line x1="200.0" y1="254.0" x2="200.0" y2="106.5" stroke="#f08c00" stroke-width="1" stroke-dasharray="4 3"/><line x1="58.0" y1="106.5" x2="200.0" y2="106.5" stroke="#f08c00" stroke-width="1" stroke-dasharray="4 3"/><circle cx="200.0" cy="106.5" r="3.5" fill="#f08c00"/></g></svg>',
+          },
+          caption: 'Air speed needed against parachutist weight. Reading across from 600 N gives an air speed of about 100 km h⁻¹.',
+        },
         ph: 'Read from graph at weight = 600 N: approximately 100 km/h',
       },
       {
@@ -168,6 +232,13 @@ export const questions: Question[] = [
         label: 'd',
         text: 'You have a box of parachute models of different CSAs. **Select** the models you will use for this experiment and place them in the equipment box.',
         marks: 3,
+        artefact: {
+          component: 'GenericSVG',
+          data: {
+            svg: '<svg viewBox="0 0 560 320" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><rect width="560" height="320" fill="#ffffff"/><rect x="20" y="40" width="320" height="260" rx="10" fill="#f8f1e4" stroke="#b08968" stroke-width="3"/><text x="180" y="30" font-size="13" fill="#6f4518" text-anchor="middle" font-weight="bold">Available box of parachute models</text><g font-size="10" text-anchor="middle"><g><path d="M50 80 q24 -26 48 0 Z" fill="#e8590c" stroke="#c92a2a"/><text x="74" y="108" fill="#333">5.0 N</text><text x="74" y="120" fill="#0b7285">10 cm²</text></g><g><path d="M150 80 q30 -32 60 0 Z" fill="#e8590c" stroke="#c92a2a"/><text x="180" y="108" fill="#333">5.0 N</text><text x="180" y="120" fill="#0b7285">15 cm²</text></g><g><path d="M250 80 q22 -24 44 0 Z" fill="#e8590c" stroke="#c92a2a"/><text x="272" y="108" fill="#333">3.0 N</text><text x="272" y="120" fill="#0b7285">12 cm²</text></g><g><path d="M50 160 q34 -36 68 0 Z" fill="#e8590c" stroke="#c92a2a"/><text x="84" y="190" fill="#333">5.0 N</text><text x="84" y="202" fill="#0b7285">20 cm²</text></g><g><path d="M155 160 q40 -42 80 0 Z" fill="#e8590c" stroke="#c92a2a"/><text x="195" y="190" fill="#333">5.0 N</text><text x="195" y="202" fill="#0b7285">25 cm²</text></g><g><path d="M270 160 q20 -22 40 0 Z" fill="#e8590c" stroke="#c92a2a"/><text x="290" y="190" fill="#333">7.0 N</text><text x="290" y="202" fill="#0b7285">9 cm²</text></g><g><path d="M50 240 q44 -46 88 0 Z" fill="#e8590c" stroke="#c92a2a"/><text x="94" y="270" fill="#333">5.0 N</text><text x="94" y="282" fill="#0b7285">30 cm²</text></g><g><path d="M170 240 q26 -28 52 0 Z" fill="#e8590c" stroke="#c92a2a"/><text x="196" y="270" fill="#333">4.0 N</text><text x="196" y="282" fill="#0b7285">18 cm²</text></g></g><rect x="360" y="40" width="180" height="200" rx="10" fill="#e7f5ff" stroke="#1c7ed6" stroke-width="3" stroke-dasharray="6 4"/><text x="450" y="30" font-size="13" fill="#1864ab" text-anchor="middle" font-weight="bold">Equipment box</text><g fill="none" stroke="#74c0fc" stroke-width="1.5"><circle cx="395" cy="80" r="16"/><circle cx="450" cy="80" r="16"/><circle cx="505" cy="80" r="16"/><circle cx="395" cy="140" r="16"/><circle cx="450" cy="140" r="16"/><circle cx="505" cy="140" r="16"/><circle cx="422" cy="200" r="16"/><circle cx="478" cy="200" r="16"/></g><text x="450" y="262" font-size="10" fill="#1864ab" text-anchor="middle">drag your chosen models here</text></svg>',
+          },
+          caption: 'A box of parachute models, each labelled with the weight it supports and its canopy CSA. Choose models that share the same weight and span the widest CSA range.',
+        },
         ph: 'Select models that: (1) all support the same weight/cargo (to control weight), (2) cover the greatest possible range of CSAs, (3) at least 5 models with regular CSA intervals.',
       },
       {
@@ -195,6 +266,22 @@ export const questions: Question[] = [
     topicGroup: 'Forces & Motion',
     stem: 'A student investigates the effect that the CSA of the parachute canopy has on the air speed needed to keep the parachutist model floating. He proposes the following hypothesis:\n\n"According to my research I know that the CSA of the parachute is inversely proportional to the square of the air speed flowing past it. I can write this as: CSA ∝ 1/air speed². This means that as the CSA of the parachute increases, the air speed needed for the model to float can be reduced."\n\nThe student collects one set of data.',
     tags: { unit: 'forces-interactions', topics: ['data analysis', 'graphs', 'hypothesis testing', 'CSA', 'processing data', 'line of best fit'], level: 'developing' },
+    artefact: {
+      component: 'DataTable',
+      data: {
+        headers: ['Parachute canopy size', 'Air speed / m s⁻¹'],
+        rows: [
+          ['radius = 2.0 cm', '28'],
+          ['area = 13 cm²', '25'],
+          ['area = 20 cm²', '22'],
+          ['area = 24 cm²', '19'],
+          ['area = 28 cm²', '17'],
+          ['area = 33 cm²', '16'],
+          ['area = 40 cm²', '14'],
+        ],
+      },
+      caption: 'The student\'s recorded raw data. The first canopy was recorded as a radius (2.0 cm) rather than an area — its CSA must be converted to an area in part (b), giving 50 cm² for the results table.',
+    },
     tasks: [
       {
         label: 'a',
@@ -222,6 +309,13 @@ export const questions: Question[] = [
         marks: 3,
         widget: 'radio_select',
         widgetOptions: ['Graph A', 'Graph B', 'Graph C'],
+        artefact: {
+          component: 'GenericSVG',
+          data: {
+            svg: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 948 264" font-family="Arial, Helvetica, sans-serif"><rect width="948" height="264" fill="#ffffff"/><g transform="translate(12,12)"><line x1="58.0" y1="18.0" x2="58.0" y2="194.0" stroke="#d7dce0" stroke-width="0.8"/><line x1="58.0" y1="194.0" x2="282.0" y2="194.0" stroke="#d7dce0" stroke-width="0.8"/><line x1="58.0" y1="18.0" x2="58.0" y2="194.0" stroke="#333" stroke-width="1.5"/><line x1="58.0" y1="194.0" x2="282.0" y2="194.0" stroke="#333" stroke-width="1.5"/><text x="170.0" y="234.0" font-size="11" fill="#222" text-anchor="middle">Air speed / m s⁻¹</text><text x="14" y="106.0" font-size="11" fill="#222" text-anchor="middle" transform="rotate(-90 14 106.0)">CSA / cm²</text><text x="170.0" y="13" font-size="12" font-weight="bold" fill="#222" text-anchor="middle">Graph A</text><g fill="#0b7285"><circle cx="92" cy="48" r="3"/><circle cx="104" cy="70" r="3"/><circle cx="122" cy="96" r="3"/><circle cx="146" cy="118" r="3"/><circle cx="178" cy="140" r="3"/><circle cx="216" cy="158" r="3"/><circle cx="252" cy="170" r="3"/></g><path d="M88,44 C120,70 150,118 190,142 C220,158 245,168 256,172" fill="none" stroke="#0b7285" stroke-width="2.0"/></g><g transform="translate(324,12)"><line x1="58.0" y1="18.0" x2="58.0" y2="194.0" stroke="#333" stroke-width="1.5"/><line x1="58.0" y1="194.0" x2="282.0" y2="194.0" stroke="#333" stroke-width="1.5"/><text x="170.0" y="234.0" font-size="11" fill="#222" text-anchor="middle">1 / air speed / m⁻¹ s</text><text x="14" y="106.0" font-size="11" fill="#222" text-anchor="middle" transform="rotate(-90 14 106.0)">CSA / cm²</text><text x="170.0" y="13" font-size="12" font-weight="bold" fill="#222" text-anchor="middle">Graph B</text><g fill="#0b7285"><circle cx="86" cy="166" r="3"/><circle cx="100" cy="150" r="3"/><circle cx="124" cy="132" r="3"/><circle cx="158" cy="108" r="3"/><circle cx="196" cy="86" r="3"/><circle cx="234" cy="64" r="3"/><circle cx="262" cy="40" r="3"/></g><path d="M84,168 C110,150 150,118 196,90 C230,66 256,46 264,40" fill="none" stroke="#0b7285" stroke-width="2.0"/></g><g transform="translate(636,12)"><line x1="58.0" y1="18.0" x2="58.0" y2="194.0" stroke="#333" stroke-width="1.5"/><line x1="58.0" y1="194.0" x2="282.0" y2="194.0" stroke="#333" stroke-width="1.5"/><text x="170.0" y="234.0" font-size="11" fill="#222" text-anchor="middle">1 / (air speed)² / m⁻² s²</text><text x="14" y="106.0" font-size="11" fill="#222" text-anchor="middle" transform="rotate(-90 14 106.0)">CSA / cm²</text><text x="170.0" y="13" font-size="12" font-weight="bold" fill="#222" text-anchor="middle">Graph C</text><g fill="#0b7285"><circle cx="70" cy="176" r="3"/><circle cx="92" cy="158" r="3"/><circle cx="120" cy="136" r="3"/><circle cx="152" cy="112" r="3"/><circle cx="190" cy="86" r="3"/><circle cx="226" cy="62" r="3"/><circle cx="258" cy="40" r="3"/></g><line x1="64" y1="180" x2="262" y2="38" stroke="#0b7285" stroke-width="2.0"/></g></svg>',
+          },
+          caption: 'Three ways of plotting the same data. Graph A (CSA vs air speed) curves; Graph B (CSA vs 1/air speed) curves; Graph C (CSA vs 1/(air speed)²) is the straight line through the origin.',
+        },
         ph: 'Graph C — it plots 1/v² against CSA, which gives a straight line if the hypothesis CSA ∝ 1/v² is correct. A straight-line graph through the origin confirms direct proportionality.',
       },
       {
@@ -249,6 +343,19 @@ export const questions: Question[] = [
     topicGroup: 'Pressure & Fluids',
     stem: 'A second student models how logs float in water to investigate the logging industry. She knows that the weight of the log floating and the volume of the log below the water are linked by:\n\n**Weight of the log = volume of log below water × gravitational field strength × density of liquid**\n\nHer hypothesis is: "As the weight of the log increases, the volume of the log below the water will increase proportionally. This means that as the weight of the log doubles the volume of the log under the water will also double."\n\nThe student collects one set of data shown in the table.',
     tags: { unit: 'forces-interactions', topics: ['buoyancy', 'density', 'experiment design', 'graphing', 'Archimedes'], level: 'developing' },
+    artefact: {
+      component: 'DataTable',
+      data: {
+        headers: ['Weight of the log / N', 'Volume of log below the water / cm³'],
+        rows: [
+          ['0.5', '50'],
+          ['1.1', '110'],
+          ['2.0', '200'],
+          ['4.2', '420'],
+        ],
+      },
+      caption: 'The student\'s results: as the weight of the log increases, the volume of the log below the water increases in proportion.',
+    },
     tasks: [
       {
         label: 'a',

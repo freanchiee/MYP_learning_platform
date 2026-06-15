@@ -29,6 +29,13 @@ export const questions: Question[] = [
         marks: 1,
         widget: 'radio_select',
         widgetOptions: ['A', 'B', 'C', 'D'],
+        artefact: {
+          component: 'GenericSVG',
+          data: {
+            svg: '<svg viewBox="0 0 640 360" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><defs><marker id="fa" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#0b7285"/></marker></defs><rect width="640" height="360" fill="#ffffff"/><text x="160" y="22" font-size="14" font-weight="700" text-anchor="middle" fill="#1f2d3a">A</text><g transform="translate(70,40)"><rect x="40" y="55" width="100" height="34" fill="#c0392b"/><rect x="40" y="55" width="50" height="34" fill="#2b6cb0"/><text x="65" y="78" font-size="13" font-weight="700" fill="#fff" text-anchor="middle">N</text><text x="115" y="78" font-size="13" font-weight="700" fill="#fff" text-anchor="middle">S</text><path d="M55,55 C30,5 150,5 125,55" fill="none" stroke="#0b7285" stroke-width="1.6" marker-end="url(#fa)"/><path d="M48,55 C5,-5 175,-5 132,55" fill="none" stroke="#0b7285" stroke-width="1.6" marker-end="url(#fa)"/><path d="M55,89 C30,139 150,139 125,89" fill="none" stroke="#0b7285" stroke-width="1.6" marker-end="url(#fa)"/><path d="M48,89 C5,149 175,149 132,89" fill="none" stroke="#0b7285" stroke-width="1.6" marker-end="url(#fa)"/></g><text x="480" y="22" font-size="14" font-weight="700" text-anchor="middle" fill="#1f2d3a">B</text><g transform="translate(390,40)"><rect x="40" y="55" width="100" height="34" fill="#c0392b"/><rect x="40" y="55" width="50" height="34" fill="#2b6cb0"/><text x="65" y="78" font-size="13" font-weight="700" fill="#fff" text-anchor="middle">N</text><text x="115" y="78" font-size="13" font-weight="700" fill="#fff" text-anchor="middle">S</text><line x1="20" y1="72" x2="160" y2="72" stroke="#0b7285" stroke-width="1.6" marker-end="url(#fa)"/><line x1="20" y1="50" x2="160" y2="50" stroke="#0b7285" stroke-width="1.6" marker-end="url(#fa)"/><line x1="20" y1="94" x2="160" y2="94" stroke="#0b7285" stroke-width="1.6" marker-end="url(#fa)"/></g><text x="160" y="200" font-size="14" font-weight="700" text-anchor="middle" fill="#1f2d3a">C</text><g transform="translate(70,218)"><rect x="40" y="55" width="100" height="34" fill="#c0392b"/><rect x="40" y="55" width="50" height="34" fill="#2b6cb0"/><text x="65" y="78" font-size="13" font-weight="700" fill="#fff" text-anchor="middle">N</text><text x="115" y="78" font-size="13" font-weight="700" fill="#fff" text-anchor="middle">S</text><circle cx="90" cy="72" r="22" fill="none" stroke="#0b7285" stroke-width="1.6"/><circle cx="90" cy="72" r="42" fill="none" stroke="#0b7285" stroke-width="1.6"/><circle cx="90" cy="72" r="62" fill="none" stroke="#0b7285" stroke-width="1.6"/></g><text x="480" y="200" font-size="14" font-weight="700" text-anchor="middle" fill="#1f2d3a">D</text><g transform="translate(390,218)"><rect x="40" y="55" width="100" height="34" fill="#c0392b"/><rect x="40" y="55" width="50" height="34" fill="#2b6cb0"/><text x="65" y="78" font-size="13" font-weight="700" fill="#fff" text-anchor="middle">N</text><text x="115" y="78" font-size="13" font-weight="700" fill="#fff" text-anchor="middle">S</text><path d="M125,55 C150,5 30,5 55,55" fill="none" stroke="#0b7285" stroke-width="1.6" marker-end="url(#fa)"/><path d="M125,89 C150,139 30,139 55,89" fill="none" stroke="#0b7285" stroke-width="1.6" marker-end="url(#fa)"/></g></svg>',
+          },
+          caption: 'Four candidate field-line patterns around a bar magnet (A, B, C, D).',
+        },
         ph: 'Select A, B, C, or D',
       },
       {
@@ -47,6 +54,13 @@ export const questions: Question[] = [
         label: 'd',
         text: 'A step-up transformer in a wind farm has a primary coil of **5 turns** connected to a **220 V** supply. The secondary coil has **10 turns**. **Calculate** the output voltage of the secondary coil. Show your working.',
         marks: 2,
+        artefact: {
+          component: 'GenericSVG',
+          data: {
+            svg: '<svg viewBox="0 0 560 280" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><rect width="560" height="280" fill="#ffffff"/><rect x="250" y="40" width="60" height="200" fill="#d9dde1" stroke="#5b6b78" stroke-width="2"/><rect x="266" y="56" width="28" height="168" fill="#ffffff" stroke="#5b6b78" stroke-width="1.5"/><text x="280" y="30" font-size="12" text-anchor="middle" fill="#5b6b78">soft iron core</text><g stroke="#0b7285" stroke-width="3" fill="none"><path d="M250,70 h-40 a10,10 0 0 0 0,20 h40"/><path d="M250,100 h-40 a10,10 0 0 0 0,20 h40"/><path d="M250,130 h-40 a10,10 0 0 0 0,20 h40"/></g><g stroke="#f08c00" stroke-width="3" fill="none"><path d="M310,62 h40 a10,10 0 0 1 0,20 h-40"/><path d="M310,92 h40 a10,10 0 0 1 0,20 h-40"/><path d="M310,122 h40 a10,10 0 0 1 0,20 h-40"/><path d="M310,152 h40 a10,10 0 0 1 0,20 h-40"/><path d="M310,182 h40 a10,10 0 0 1 0,20 h-40"/></g><line x1="210" y1="70" x2="120" y2="70" stroke="#0b7285" stroke-width="2"/><line x1="210" y1="150" x2="120" y2="150" stroke="#0b7285" stroke-width="2"/><line x1="120" y1="70" x2="120" y2="150" stroke="#0b7285" stroke-width="2"/><circle cx="120" cy="110" r="20" fill="none" stroke="#0b7285" stroke-width="2"/><text x="120" y="115" font-size="13" text-anchor="middle" fill="#0b7285">~</text><text x="92" y="170" font-size="13" text-anchor="middle" fill="#0b7285">220 V</text><text x="150" y="60" font-size="12" text-anchor="middle" fill="#0b7285">primary</text><text x="150" y="190" font-size="12" text-anchor="middle" fill="#0b7285">5 turns</text><line x1="350" y1="82" x2="450" y2="82" stroke="#f08c00" stroke-width="2"/><line x1="350" y1="202" x2="450" y2="202" stroke="#f08c00" stroke-width="2"/><line x1="450" y1="82" x2="450" y2="202" stroke="#f08c00" stroke-width="2"/><circle cx="450" cy="142" r="20" fill="none" stroke="#f08c00" stroke-width="2"/><text x="450" y="147" font-size="12" text-anchor="middle" fill="#f08c00">V?</text><text x="410" y="72" font-size="12" text-anchor="middle" fill="#f08c00">secondary</text><text x="410" y="222" font-size="12" text-anchor="middle" fill="#f08c00">10 turns</text></svg>',
+          },
+          caption: 'Step-up transformer: 5-turn primary at 220 V, 10-turn secondary.',
+        },
         ph: 'V_s / V_p = N_s / N_p → V_s = 220 × 10/5 = 440 V',
       },
       {
@@ -200,12 +214,61 @@ export const questions: Question[] = [
         label: 'f',
         text: 'The student carries out the experiment and plots two graphs. **Write a title** for Graph 1 that links the independent and dependent variables.',
         marks: 1,
+        artefact: {
+          component: 'LineGraph',
+          data: {
+            title: 'Graph 1',
+            xLabel: 'Diameter of aperture',
+            xUnit: 'cm',
+            yLabel: 'Time to empty',
+            yUnit: 's',
+            dataPoints: [
+              { x: 0.5, y: 24 },
+              { x: 0.67, y: 18 },
+              { x: 1.0, y: 12 },
+              { x: 1.5, y: 8 },
+              { x: 2.0, y: 6 },
+            ],
+            xMin: 0,
+            xMax: 2.5,
+            yMin: 0,
+            yMax: 30,
+            xStep: 0.5,
+            yStep: 5,
+          },
+          caption: 'Graph 1 — empty time falls as aperture diameter increases (inverse relationship).',
+        },
         ph: 'Variation of empty time with aperture diameter / How the aperture diameter affects the time to empty the sand timer',
       },
       {
         label: 'g',
         text: 'Using Graph 2, **describe the relationship** between the empty time and the inverse of the diameter shown in the second graph.',
         marks: 2,
+        artefact: {
+          component: 'LineGraph',
+          data: {
+            title: 'Graph 2',
+            xLabel: '1 / diameter',
+            xUnit: 'cm⁻¹',
+            yLabel: 'Time to empty',
+            yUnit: 's',
+            dataPoints: [
+              { x: 0.5, y: 6 },
+              { x: 1.0, y: 12 },
+              { x: 1.5, y: 18 },
+              { x: 2.0, y: 24 },
+              { x: 2.5, y: 30 },
+            ],
+            lobf: true,
+            xMin: 0,
+            xMax: 3,
+            yMin: 0,
+            yMax: 36,
+            xStep: 0.5,
+            yStep: 6,
+          },
+          caption: 'Graph 2 — empty time against the inverse of the diameter: a straight line through the origin (gradient ≈ 12 s·cm).',
+        },
         ph: 'As the inverse of the diameter increases, the empty time increases proportionally / The empty time is directly proportional to the inverse of the diameter (straight line through origin)...',
       },
       {
@@ -260,6 +323,13 @@ export const questions: Question[] = [
         label: 'a',
         text: 'The time for the sand timer with **8 cm** depth of sand was not recorded by the student. **Measure the time** shown in the stopwatch picture. Include the unit in your answer.',
         marks: 2,
+        artefact: {
+          component: 'GenericSVG',
+          data: {
+            svg: '<svg viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><rect width="320" height="320" fill="#ffffff"/><rect x="148" y="18" width="24" height="22" rx="4" fill="#5b6b78"/><line x1="160" y1="18" x2="160" y2="6" stroke="#5b6b78" stroke-width="6"/><circle cx="160" cy="172" r="120" fill="#f3f4f5" stroke="#1f2d3a" stroke-width="6"/><circle cx="160" cy="172" r="110" fill="#ffffff" stroke="#b6c4cf" stroke-width="2"/><g stroke="#1f2d3a" stroke-width="2"><line x1="160" y1="66" x2="160" y2="80"/><line x1="254" y1="172" x2="240" y2="172"/><line x1="160" y1="278" x2="160" y2="264"/><line x1="66" y1="172" x2="80" y2="172"/></g><text x="160" y="60" font-size="13" text-anchor="middle" fill="#5b6b78">0</text><text x="266" y="177" font-size="13" text-anchor="middle" fill="#5b6b78">15</text><text x="160" y="298" font-size="13" text-anchor="middle" fill="#5b6b78">30</text><text x="54" y="177" font-size="13" text-anchor="middle" fill="#5b6b78">45</text><circle cx="160" cy="172" r="6" fill="#0b7285"/><line x1="160" y1="172" x2="232" y2="118" stroke="#0b7285" stroke-width="4" stroke-linecap="round"/><rect x="104" y="196" width="112" height="40" rx="6" fill="#0b7285"/><text x="160" y="224" font-size="26" font-weight="700" text-anchor="middle" fill="#ffffff" font-family="Courier New, monospace">11.5 s</text></svg>',
+          },
+          caption: 'Stopwatch display for the 8 cm sand timer.',
+        },
         ph: '11.5 s (accept 11.4–11.6 seconds)',
       },
       {
@@ -274,18 +344,57 @@ export const questions: Question[] = [
         marks: 1,
         widget: 'radio_select',
         widgetOptions: ['A', 'B', 'C', 'D'],
+        artefact: {
+          component: 'GenericSVG',
+          data: {
+            svg: '<svg viewBox="0 0 600 360" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><rect width="600" height="360" fill="#ffffff"/><g transform="translate(40,30)"><text x="90" y="-6" font-size="13" font-weight="700" text-anchor="middle" fill="#1f2d3a">A</text><line x1="20" y1="20" x2="20" y2="130" stroke="#1f2d3a" stroke-width="2"/><line x1="20" y1="130" x2="160" y2="130" stroke="#1f2d3a" stroke-width="2"/><line x1="20" y1="130" x2="150" y2="35" stroke="#0b7285" stroke-width="2.5"/><text x="90" y="150" font-size="11" text-anchor="middle" fill="#5b6b78">depth</text></g><g transform="translate(330,30)"><text x="90" y="-6" font-size="13" font-weight="700" text-anchor="middle" fill="#1f2d3a">B</text><line x1="20" y1="20" x2="20" y2="130" stroke="#1f2d3a" stroke-width="2"/><line x1="20" y1="130" x2="160" y2="130" stroke="#1f2d3a" stroke-width="2"/><path d="M20,130 Q60,60 150,40" fill="none" stroke="#0b7285" stroke-width="2.5"/><text x="90" y="150" font-size="11" text-anchor="middle" fill="#5b6b78">depth</text></g><g transform="translate(40,200)"><text x="90" y="-6" font-size="13" font-weight="700" text-anchor="middle" fill="#1f2d3a">C</text><line x1="20" y1="20" x2="20" y2="130" stroke="#1f2d3a" stroke-width="2"/><line x1="20" y1="130" x2="160" y2="130" stroke="#1f2d3a" stroke-width="2"/><line x1="20" y1="95" x2="150" y2="35" stroke="#0b7285" stroke-width="2.5"/><circle cx="20" cy="95" r="3" fill="#c0392b"/><text x="90" y="150" font-size="11" text-anchor="middle" fill="#5b6b78">depth</text></g><g transform="translate(330,200)"><text x="90" y="-6" font-size="13" font-weight="700" text-anchor="middle" fill="#1f2d3a">D</text><line x1="20" y1="20" x2="20" y2="130" stroke="#1f2d3a" stroke-width="2"/><line x1="20" y1="130" x2="160" y2="130" stroke="#1f2d3a" stroke-width="2"/><line x1="20" y1="75" x2="150" y2="75" stroke="#0b7285" stroke-width="2.5"/><text x="90" y="150" font-size="11" text-anchor="middle" fill="#5b6b78">depth</text></g><text x="14" y="20" font-size="11" fill="#5b6b78" transform="rotate(-90 14 95)">time</text></svg>',
+          },
+          caption: 'Four candidate graphs of empty time against depth of sand (A, B, C, D).',
+        },
         ph: 'Select A, B, C, or D',
       },
       {
         label: 'd',
         text: 'Once the experiment is completed, the results produce the graph shown. The student declares that her results **support** the hypothesis. **Use the graph to outline one reason** why the student is incorrect.',
         marks: 2,
+        artefact: {
+          component: 'LineGraph',
+          data: {
+            title: 'Empty time vs depth of sand',
+            xLabel: 'Depth of sand',
+            xUnit: 'cm',
+            yLabel: 'Time to empty',
+            yUnit: 's',
+            dataPoints: [
+              { x: 2, y: 5.8 },
+              { x: 4, y: 8.2 },
+              { x: 6, y: 10.0 },
+              { x: 8, y: 11.5 },
+              { x: 10, y: 12.9 },
+            ],
+            lobf: true,
+            xMin: 0,
+            xMax: 12,
+            yMin: 0,
+            yMax: 16,
+            xStep: 2,
+            yStep: 2,
+          },
+          caption: 'The line of best fit cuts the time axis at about 4.0 s — it does not pass through the origin.',
+        },
         ph: 'For proportionality the line must pass through (0,0), but the line of best fit intersects the y-axis at approximately 4.0 s (not zero), so the relationship is not proportional / OR the curve fit is better than a straight line...',
       },
       {
         label: 'e',
         text: 'Three more students completed the experiment. The data is shown in the graphs below. **Evaluate the method** with the greatest validity and explain why the other methods are less valid.',
         marks: 3,
+        artefact: {
+          component: 'GenericSVG',
+          data: {
+            svg: '<svg viewBox="0 0 600 360" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><rect width="600" height="360" fill="#ffffff"/><g transform="translate(40,30)"><text x="90" y="-6" font-size="13" font-weight="700" text-anchor="middle" fill="#1f2d3a">Student A (1–4 cm)</text><line x1="20" y1="20" x2="20" y2="130" stroke="#1f2d3a" stroke-width="2"/><line x1="20" y1="130" x2="160" y2="130" stroke="#1f2d3a" stroke-width="2"/><line x1="30" y1="118" x2="80" y2="92" stroke="#0b7285" stroke-width="2.5"/><circle cx="30" cy="118" r="3" fill="#0b7285"/><circle cx="47" cy="110" r="3" fill="#0b7285"/><circle cx="63" cy="101" r="3" fill="#0b7285"/><circle cx="80" cy="92" r="3" fill="#0b7285"/></g><g transform="translate(330,30)"><text x="90" y="-6" font-size="13" font-weight="700" text-anchor="middle" fill="#1f2d3a">Student B (5–8 cm)</text><line x1="20" y1="20" x2="20" y2="130" stroke="#1f2d3a" stroke-width="2"/><line x1="20" y1="130" x2="160" y2="130" stroke="#1f2d3a" stroke-width="2"/><line x1="70" y1="90" x2="125" y2="70" stroke="#0b7285" stroke-width="2.5"/><circle cx="70" cy="90" r="3" fill="#0b7285"/><circle cx="88" cy="83" r="3" fill="#0b7285"/><circle cx="107" cy="77" r="3" fill="#0b7285"/><circle cx="125" cy="70" r="3" fill="#0b7285"/></g><g transform="translate(40,200)"><text x="90" y="-6" font-size="13" font-weight="700" text-anchor="middle" fill="#1f2d3a">Student C (8–12 cm)</text><line x1="20" y1="20" x2="20" y2="130" stroke="#1f2d3a" stroke-width="2"/><line x1="20" y1="130" x2="160" y2="130" stroke="#1f2d3a" stroke-width="2"/><line x1="95" y1="70" x2="150" y2="58" stroke="#0b7285" stroke-width="2.5"/><circle cx="95" cy="70" r="3" fill="#0b7285"/><circle cx="113" cy="65" r="3" fill="#0b7285"/><circle cx="132" cy="61" r="3" fill="#0b7285"/><circle cx="150" cy="58" r="3" fill="#0b7285"/></g><g transform="translate(330,200)"><text x="90" y="-6" font-size="13" font-weight="700" text-anchor="middle" fill="#c0392b">Student D (1–12 cm)</text><line x1="20" y1="20" x2="20" y2="130" stroke="#1f2d3a" stroke-width="2"/><line x1="20" y1="130" x2="160" y2="130" stroke="#1f2d3a" stroke-width="2"/><path d="M28,122 Q70,72 150,52" fill="none" stroke="#0b7285" stroke-width="2.5"/><circle cx="28" cy="122" r="3" fill="#0b7285"/><circle cx="52" cy="98" r="3" fill="#0b7285"/><circle cx="84" cy="78" r="3" fill="#0b7285"/><circle cx="118" cy="62" r="3" fill="#0b7285"/><circle cx="150" cy="52" r="3" fill="#0b7285"/></g></svg>',
+          },
+          caption: 'Four students used different ranges of sand depth. Only Student D (1–12 cm) reveals the curved relationship.',
+        },
         ph: 'Student D has the most valid method because their range of data most clearly reveals the true curved relationship. Other students used too narrow a data range and their data appears linear...',
       },
       {
@@ -314,6 +423,13 @@ export const questions: Question[] = [
     topicGroup: 'Space & Astrophysics',
     stem: 'The graph above shows the electrical energy consumption in kWh per person in India compared to the world average for the years 1975 to 2005.',
     tags: { unit: 'work-energy', topics: ['energy resources', 'tidal power', 'data interpretation'], level: 'developing' },
+    artefact: {
+      component: 'GenericSVG',
+      data: {
+        svg: '<svg viewBox="0 0 560 360" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><rect width="560" height="360" fill="#ffffff"/><text x="280" y="24" font-size="14" font-weight="700" text-anchor="middle" fill="#1f2d3a">Electrical energy consumption per person, 1975–2005</text><g stroke="#1f2d3a" stroke-width="1.5"><line x1="80" y1="50" x2="80" y2="300"/><line x1="80" y1="300" x2="520" y2="300"/></g><g font-size="11" fill="#5b6b78"><text x="80" y="318" text-anchor="middle">1975</text><text x="190" y="318" text-anchor="middle">1985</text><text x="300" y="318" text-anchor="middle">1995</text><text x="410" y="318" text-anchor="middle">2005</text><text x="72" y="304" text-anchor="end">0</text><text x="72" y="254" text-anchor="end">500</text><text x="72" y="204" text-anchor="end">1000</text><text x="72" y="154" text-anchor="end">1500</text><text x="72" y="104" text-anchor="end">2000</text><text x="72" y="54" text-anchor="end">2500</text></g><g stroke="#e5e7eb" stroke-width="0.7"><line x1="80" y1="250" x2="520" y2="250"/><line x1="80" y1="200" x2="520" y2="200"/><line x1="80" y1="150" x2="520" y2="150"/><line x1="80" y1="100" x2="520" y2="100"/><line x1="80" y1="50" x2="520" y2="50"/></g><text x="30" y="180" font-size="12" fill="#374151" transform="rotate(-90 30 180)" text-anchor="middle">Consumption / kWh per person</text><polyline points="80,220 190,170 300,125 410,80" fill="none" stroke="#f08c00" stroke-width="2.5"/><circle cx="80" cy="220" r="3.5" fill="#f08c00"/><circle cx="190" cy="170" r="3.5" fill="#f08c00"/><circle cx="300" cy="125" r="3.5" fill="#f08c00"/><circle cx="410" cy="80" r="3.5" fill="#f08c00"/><text x="424" y="80" font-size="12" fill="#f08c00">World average</text><polyline points="80,290 190,280 300,264 410,240" fill="none" stroke="#0b7285" stroke-width="2.5"/><circle cx="80" cy="290" r="3.5" fill="#0b7285"/><circle cx="190" cy="280" r="3.5" fill="#0b7285"/><circle cx="300" cy="264" r="3.5" fill="#0b7285"/><circle cx="410" cy="240" r="3.5" fill="#0b7285"/><text x="424" y="240" font-size="12" fill="#0b7285">India</text></svg>',
+      },
+      caption: 'India\'s consumption per person (lower line) rises from ~100 to ~600 kWh, staying below the world average (upper line).',
+    },
     tasks: [
       {
         label: 'a',
@@ -331,6 +447,28 @@ export const questions: Question[] = [
         label: 'c',
         text: 'The total number of units of electrical energy consumed in India in 1975 was **2.40 × 10¹¹ kWh**. Using appropriate data from the graphs, **calculate the total electrical energy consumed** in India in 2005. Show your working clearly. Give your answer in kWh.',
         marks: 2,
+        artefact: {
+          component: 'LineGraph',
+          data: {
+            title: 'Population of India, 1975–2005',
+            xLabel: 'Year',
+            yLabel: 'Population',
+            yUnit: '× 10⁸',
+            dataPoints: [
+              { x: 1975, y: 6.2 },
+              { x: 1985, y: 7.8 },
+              { x: 1995, y: 9.6 },
+              { x: 2005, y: 11.0 },
+            ],
+            xMin: 1975,
+            xMax: 2005,
+            yMin: 0,
+            yMax: 12,
+            xStep: 5,
+            yStep: 2,
+          },
+          caption: 'India\'s population reaches about 11.0 × 10⁸ (1.10 × 10⁹) people in 2005.',
+        },
         ph: 'From graph: India 2005 ≈ 600 kWh/person. Population 2005 ≈ 1.10 × 10⁹. Total = 600 × 1.10 × 10⁹ = 6.60 × 10¹¹ kWh',
       },
       {
@@ -343,6 +481,13 @@ export const questions: Question[] = [
         label: 'e',
         text: 'One alternative method for the generation of electricity is tidal power. The diagram shows a tidal barrage.\n\n**Drag and drop** the correct forms of energy to outline the main energy transformations that take place in a tidal power station, in the correct order.',
         marks: 2,
+        artefact: {
+          component: 'GenericSVG',
+          data: {
+            svg: '<svg viewBox="0 0 600 320" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><defs><linearGradient id="sea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#bfe3f2"/><stop offset="1" stop-color="#6cb6d6"/></linearGradient><marker id="fl" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#0b7285"/></marker></defs><rect width="600" height="320" fill="#ffffff"/><rect x="0" y="120" width="270" height="160" fill="url(#sea)"/><rect x="330" y="180" width="270" height="100" fill="url(#sea)"/><text x="120" y="150" font-size="12" fill="#2c5468">high tide (sea side)</text><text x="430" y="210" font-size="12" fill="#2c5468">low tide (basin side)</text><rect x="270" y="60" width="60" height="220" fill="#9aa6ad" stroke="#5b6b78" stroke-width="2"/><text x="300" y="50" font-size="12" text-anchor="middle" fill="#5b6b78">barrage (sea wall)</text><rect x="270" y="190" width="60" height="46" fill="#c9d2d8" stroke="#5b6b78" stroke-width="1.5"/><circle cx="300" cy="213" r="16" fill="#ffffff" stroke="#0b7285" stroke-width="2"/><g stroke="#0b7285" stroke-width="2"><line x1="300" y1="213" x2="312" y2="205"/><line x1="300" y1="213" x2="288" y2="221"/><line x1="300" y1="213" x2="308" y2="225"/><line x1="300" y1="213" x2="292" y2="201"/></g><text x="300" y="258" font-size="11" text-anchor="middle" fill="#0b7285">turbine + generator</text><path d="M250,200 L290,210" stroke="#0b7285" stroke-width="2.5" marker-end="url(#fl)"/><path d="M312,213 L352,213" stroke="#0b7285" stroke-width="2.5" marker-end="url(#fl)"/><rect x="360" y="90" width="36" height="36" fill="#f6c453" stroke="#c98a3c" stroke-width="2"/><path d="M378,90 v-14 M378,126 v14 M360,108 h-14 M396,108 h14" stroke="#c98a3c" stroke-width="2"/><text x="378" y="146" font-size="11" text-anchor="middle" fill="#c98a3c">to grid</text><line x1="316" y1="200" x2="362" y2="120" stroke="#1f2d3a" stroke-width="1.5" stroke-dasharray="3 3"/></svg>',
+          },
+          caption: 'A tidal barrage: trapped water (GPE) flows through a turbine (KE) that drives a generator (electrical energy).',
+        },
         ph: 'Gravitational potential energy → Kinetic energy → Electrical energy',
       },
     ],
