@@ -167,11 +167,11 @@ export const MS: Record<string, MSRecord> = {
   '5b': { type: 'mcq', correct: 2 },
   '5c': {
     marks: 4,
-    exemplar: 'Table: "CSA / cm²" and "Air speed / m s⁻¹" headers. Units in headers only. Ordered data. Consistent dp. 76 cm² included.',
-    keyConcepts: ['headers with units in headers', 'ordered data', 'consistent dp', '76 cm² included'],
-    keywords: ['CSA / cm²', 'Air speed / m s⁻¹', 'ordered', 'decimal places', '76'],
-    feedbackHit: 'Correct headers, units, ordered, 76 cm² included.',
-    feedbackMiss: 'Headers: CSA / cm² and Air speed / m s⁻¹. Units in headers only. Order. Include 76 cm².',
+    exemplar: 'Table: "CSA / cm²" and "Air speed / m s⁻¹" headers. Units in headers only. Ordered data. Consistent dp. 75 cm² included.',
+    keyConcepts: ['headers with units in headers', 'ordered data', 'consistent dp', '75 cm² included'],
+    keywords: ['CSA / cm²', 'Air speed / m s⁻¹', 'ordered', 'decimal places', '75'],
+    feedbackHit: 'Correct headers, units, ordered, 75 cm² included.',
+    feedbackMiss: 'Headers: CSA / cm² and Air speed / m s⁻¹. Units in headers only. Order. Include 75 cm².',
   },
   '5d': { type: 'mcq', correct: 2 },
   '5e': {

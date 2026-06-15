@@ -325,7 +325,7 @@ export const questions: Question[] = [
         label: 'f',
         text: 'The crew that collected this data set thought that a mistake had been made when measuring one of the times during the survey. **Suggest** which measurement was performed incorrectly by referring to the graph. **State** whether the actual time should be higher or lower than the value recorded.',
         marks: 2,
-        ph: 'Identify the anomalous data point (at 1000 m / time ≈ 0.80 s). State: the time is too low — it should be higher to follow the trend and be closer to the line of best fit.',
+        ph: 'Identify the anomalous data point (at 1000 m / time ≈ 0.80 s). State: the time is too high — it should be lower to follow the trend and be closer to the line of best fit.',
       },
       {
         label: 'g',

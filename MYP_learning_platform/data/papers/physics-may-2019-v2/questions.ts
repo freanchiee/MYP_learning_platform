@@ -152,19 +152,11 @@ export const questions: Question[] = [
         text: 'Comet Halley follows an elliptical orbit around the Sun. **Draw** arrows to represent the force of attraction that the Sun exerts on Comet Halley at positions A and B shown in the diagram.',
         marks: 3,
         artefact: {
-          component: 'OrbitSim',
+          component: 'GenericSVG',
           data: {
-            mode: 'orbit',
-            title: 'Gravitational force on Comet Halley',
-            central: 'Sun',
-            showForce: true,
-            bodies: [
-              { name: 'Sun', role: 'center', fixed: true, colour: '#f6c343' },
-              { name: 'Comet Halley', role: 'orbiter', orbitRadius: 120, orbitalPeriod: 400, colour: '#37b24d' },
-            ],
-            seed: 19,
+            svg: '<svg viewBox="0 0 560 320" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><rect width="560" height="320" fill="#0b1026"/><ellipse cx="310" cy="160" rx="225" ry="95" fill="none" stroke="#74809a" stroke-width="1.5" stroke-dasharray="6 5"/><circle cx="106" cy="160" r="26" fill="#ffd43b"/><circle cx="106" cy="160" r="26" fill="none" stroke="#ffe066" stroke-width="3" opacity="0.5"/><text x="106" y="164" font-size="11" fill="#7a5c00" text-anchor="middle" font-weight="bold">Sun</text><g><circle cx="535" cy="160" r="7" fill="#37b24d" stroke="#d3f9d8" stroke-width="1.5"/><path d="M535,160 L552,152 M535,160 L552,168 M535,160 L549,160" stroke="#69db7c" stroke-width="1.5"/></g><text x="535" y="138" font-size="15" fill="#d3f9d8" text-anchor="middle" font-weight="bold">A</text><text x="528" y="190" font-size="10" fill="#cfd4dc" text-anchor="middle">(farther from Sun)</text><g><circle cx="85" cy="160" r="7" fill="#37b24d" stroke="#d3f9d8" stroke-width="1.5"/><path d="M85,160 L68,152 M85,160 L68,168 M85,160 L71,160" stroke="#69db7c" stroke-width="1.5"/></g><text x="74" y="138" font-size="15" fill="#d3f9d8" text-anchor="middle" font-weight="bold">B</text><text x="74" y="190" font-size="10" fill="#cfd4dc" text-anchor="middle">(closer to Sun)</text><text x="300" y="24" font-size="13" fill="#ffe066" text-anchor="middle" font-weight="bold">Elliptical orbit of Comet Halley around the Sun (not to scale)</text><text x="300" y="300" font-size="11" fill="#adb5bd" text-anchor="middle">Comet Halley is shown at positions A and B. Draw a force arrow at each position.</text></svg>',
           },
-          caption: 'The Sun\'s gravitational pull on Comet Halley always points toward the Sun and is larger at B (closer, 8.9×10¹⁰ m) than at A (farther). At closest approach F = m × g = 4.15×10⁸ kg × 0.025 N kg⁻¹ = 1.04×10⁷ N.',
+          caption: 'Comet Halley at positions A (farther from the Sun) and B (closer to the Sun) on its elliptical orbit. Draw an arrow at each position to represent the Sun\'s gravitational pull: both point toward the Sun, and the arrow at B is longer because the force is larger there (B is closer, 8.9×10¹⁰ m, where g = 0.025 N kg⁻¹). At closest approach F = m × g = 4.15×10⁸ kg × 0.025 N kg⁻¹ = 1.04×10⁷ N.',
         },
         ph: 'Arrow at A (farther from Sun): pointing toward Sun, shorter length.\nArrow at B (closer to Sun): pointing toward Sun, longer/larger length.\nBoth arrows must point directly toward the Sun.',
       },
@@ -271,7 +263,7 @@ export const questions: Question[] = [
       data: {
         headers: ['Balloon canopy size', 'Air speed / m s⁻¹'],
         rows: [
-          ['radius = 3.5 cm', '12'],
+          ['radius = 4.9 cm', '12'],
           ['area = 50 cm²', '15'],
           ['area = 60 cm²', '14'],
           ['area = 85 cm²', '11'],
@@ -280,7 +272,7 @@ export const questions: Question[] = [
           ['area = 150 cm²', '8'],
         ],
       },
-      caption: 'The student\'s recorded raw data. The first canopy was recorded as a radius (3.5 cm) rather than an area — its CSA must be converted to an area in part (b), giving 76 cm² for the results table.',
+      caption: 'The student\'s recorded raw data. The first canopy was recorded as a radius (4.9 cm) rather than an area — its CSA must be converted to an area in part (b): πr² = π × 4.9² ≈ 75 cm² for the results table.',
     },
     tasks: [
       {
@@ -294,14 +286,14 @@ export const questions: Question[] = [
         text: 'The student has recorded the first value as radius rather than area. The student uses **area = πr²** to calculate the CSA. **Select** which of the following values would be most appropriate to present the CSA in a results table.',
         marks: 1,
         widget: 'radio_select',
-        widgetOptions: ['3.5 cm (radius)', '22.0 cm (circumference)', '38.5 cm² (area from πr²)', '76 cm² (area — correct value)'],
+        widgetOptions: ['4.9 cm (radius)', '30.8 cm (circumference)', '75 cm² (area from πr²)', '15.4 cm² (πr, radius not squared)'],
         ph: 'Select the most appropriate CSA value.',
       },
       {
         label: 'c',
         text: '**Organise** and present the data into a table. In your answer you should include the result from part (b).',
         marks: 4,
-        ph: 'Table with:\n- Column heading: CSA / cm² (unit in header only)\n- Column heading: Air speed / m s⁻¹ (unit in header only)\n- Data in ascending or descending order\n- Consistent decimal places\n- Include 76 cm² from part (b)',
+        ph: 'Table with:\n- Column heading: CSA / cm² (unit in header only)\n- Column heading: Air speed / m s⁻¹ (unit in header only)\n- Data in ascending or descending order\n- Consistent decimal places\n- Include 75 cm² from part (b)',
       },
       {
         label: 'd',

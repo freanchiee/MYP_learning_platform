@@ -108,8 +108,8 @@ export const CONCEPTS_PUBLIC_NOV2019_V1: Record<string, ConceptEntry> = {
     keywords: ['gradient', 'LOBF', 'speed', '1500', '1480', '1520'],
   },
   q5_f: {
-    keyConcepts: ['identify anomalous point', 'time too low', 'should be higher'],
-    keywords: ['anomalous', '1000 m', 'too low', 'higher', 'outlier', 'LOBF'],
+    keyConcepts: ['identify anomalous point', 'time too high', 'should be lower'],
+    keywords: ['anomalous', '1000 m', 'too high', 'lower', 'outlier', 'LOBF'],
   },
   q5_g: {
     keyConcepts: ['higher temperature → faster sound', 'kinetic energy of particles', 'faster collisions'],

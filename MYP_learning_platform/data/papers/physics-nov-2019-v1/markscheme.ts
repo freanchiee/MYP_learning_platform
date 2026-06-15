@@ -227,20 +227,20 @@ export const MS: Record<string, MSRecord> = {
 
   q5e: {
     marks: 2,
-    exemplar: 'Correct gradient of LOBF seen or implied [1]. Speed = 1480 to 1520 m s⁻¹ [1].',
-    keyConcepts: ['gradient = speed', 'read gradient from LOBF', '1480–1520 m s⁻¹'],
-    keywords: ['gradient', 'line of best fit', 'speed', '1500', '1480', '1520', 'Δd/Δt'],
+    exemplar: 'Correct gradient of LOBF seen or implied — line drawn through the four points that lie on the trend, ignoring the anomalous point at (0.80 s, 1000 m) [1]. Speed = 1480 to 1520 m s⁻¹ [1].',
+    keyConcepts: ['gradient = speed', 'read gradient from LOBF', 'ignore the anomalous point', '1480–1520 m s⁻¹'],
+    keywords: ['gradient', 'line of best fit', 'speed', '1500', '1480', '1520', 'Δd/Δt', 'ignore outlier'],
     feedbackHit: 'Correctly calculated the speed of sound from the gradient of the line of best fit.',
-    feedbackMiss: 'Speed = gradient of the distance-time graph = Δdistance / Δtime. Use two points on the line of best fit (not data points). Answer should be in the range 1480–1520 m s⁻¹.',
+    feedbackMiss: 'Speed = gradient of the distance-time graph = Δdistance / Δtime. Draw the line of best fit through the four on-trend points and ignore the anomalous point at (0.80 s, 1000 m). Read the gradient from two points on the line (not from data points). Answer should be in the range 1480–1520 m s⁻¹.',
   } as MSEntry,
 
   q5f: {
     marks: 2,
-    exemplar: 'Identification of the data point at 1000 m / time ≈ 0.80 s [1]. Time is too low — should be greater to follow the trend and be closer to the line of best fit [1].',
-    keyConcepts: ['identify anomalous point', 'time too low', 'should be higher to match LOBF'],
-    keywords: ['anomalous', '1000 m', '0.80 s', 'too low', 'higher', 'line of best fit', 'outlier'],
-    feedbackHit: 'Correctly identified the anomalous point and stated the time should be higher.',
-    feedbackMiss: 'The anomalous point is at 1000 m / time ≈ 0.80 s — it lies above the line of best fit (a 1000 m distance should take more time). The actual time should be higher (greater) than the recorded value to be consistent with the trend.',
+    exemplar: 'Identification of the data point at 1000 m / time ≈ 0.80 s [1]. Time is too high — should be lower to follow the trend and be closer to the line of best fit [1].',
+    keyConcepts: ['identify anomalous point', 'time too high', 'should be lower to match LOBF'],
+    keywords: ['anomalous', '1000 m', '0.80 s', 'too high', 'lower', 'line of best fit', 'outlier'],
+    feedbackHit: 'Correctly identified the anomalous point and stated the time should be lower.',
+    feedbackMiss: 'The anomalous point is at 1000 m / time ≈ 0.80 s — it lies below the line of best fit (a 1000 m distance should take less time). The actual time should be lower than the recorded value to be consistent with the trend.',
   } as MSEntry,
 
   q5g: {

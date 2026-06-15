@@ -91,12 +91,12 @@ export const CONCEPTS_PUBLIC_MAY2019_V2: Record<string, ConceptEntry> = {
     keywords: ['CSA', 'air speed', 'affect', 'research question'],
   },
   q5_b: {
-    keyConcepts: ['CSA = πr² = π × (4.9)² ≈ 76 cm²'],
-    keywords: ['CSA', 'πr²', '4.9 cm', '76 cm²', 'area'],
+    keyConcepts: ['CSA = πr² = π × (4.9)² ≈ 75 cm²'],
+    keywords: ['CSA', 'πr²', '4.9 cm', '75 cm²', 'area'],
   },
   q5_c: {
-    keyConcepts: ['table: CSA / cm² and Air speed / m s⁻¹ headers, units in headers, ordered data, 76 cm² included'],
-    keywords: ['CSA / cm²', 'Air speed / m s⁻¹', 'table', 'ordered', '76'],
+    keyConcepts: ['table: CSA / cm² and Air speed / m s⁻¹ headers, units in headers, ordered data, 75 cm² included'],
+    keywords: ['CSA / cm²', 'Air speed / m s⁻¹', 'table', 'ordered', '75'],
   },
   q5_d: {
     keyConcepts: ['Graph C (1/v² vs CSA) gives straight line through origin if CSA ∝ 1/v²'],

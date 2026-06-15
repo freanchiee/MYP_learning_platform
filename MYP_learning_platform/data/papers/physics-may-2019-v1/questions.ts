@@ -152,19 +152,11 @@ export const questions: Question[] = [
         text: 'Asteroid Apophis will make a close approach to Earth in 2029. **Draw** arrows to represent the force of attraction that the Sun exerts on Apophis at positions A and B shown in the diagram.',
         marks: 3,
         artefact: {
-          component: 'OrbitSim',
+          component: 'GenericSVG',
           data: {
-            mode: 'orbit',
-            title: 'Gravitational force on Apophis',
-            central: 'Sun',
-            showForce: true,
-            bodies: [
-              { name: 'Sun', role: 'center', fixed: true, colour: '#f6c343' },
-              { name: 'Apophis', role: 'orbiter', orbitRadius: 110, orbitalPeriod: 320, colour: '#e8590c' },
-            ],
-            seed: 29,
+            svg: '<svg viewBox="0 0 560 320" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><rect width="560" height="320" fill="#0b1026"/><ellipse cx="300" cy="160" rx="210" ry="110" fill="none" stroke="#74809a" stroke-width="1.5" stroke-dasharray="6 5"/><circle cx="121" cy="160" r="26" fill="#ffd43b"/><circle cx="121" cy="160" r="26" fill="none" stroke="#ffe066" stroke-width="3" opacity="0.5"/><text x="121" y="164" font-size="11" fill="#7a5c00" text-anchor="middle" font-weight="bold">Sun</text><circle cx="510" cy="160" r="8" fill="#e8590c" stroke="#ffd8a8" stroke-width="1.5"/><text x="510" y="138" font-size="15" fill="#ffd8a8" text-anchor="middle" font-weight="bold">A</text><text x="510" y="190" font-size="10" fill="#cfd4dc" text-anchor="middle">(farther from Sun)</text><circle cx="90" cy="160" r="8" fill="#e8590c" stroke="#ffd8a8" stroke-width="1.5"/><text x="78" y="138" font-size="15" fill="#ffd8a8" text-anchor="middle" font-weight="bold">B</text><text x="78" y="190" font-size="10" fill="#cfd4dc" text-anchor="middle">(closer to Sun)</text><text x="300" y="24" font-size="13" fill="#ffe066" text-anchor="middle" font-weight="bold">Orbit of asteroid Apophis around the Sun (not to scale)</text><text x="300" y="300" font-size="11" fill="#adb5bd" text-anchor="middle">Apophis is shown at positions A and B. Draw a force arrow at each position.</text></svg>',
           },
-          caption: 'The Sun\'s gravitational pull on Apophis always points toward the Sun and is larger at B (closer, 3.8×10¹⁰ m) than at A (farther). At closest approach F = m × g = 1.4×10⁷ kg × 0.42 N kg⁻¹ = 5.88×10⁶ N.',
+          caption: 'Asteroid Apophis at positions A (farther from the Sun) and B (closer to the Sun) on its orbit. Draw an arrow at each position to represent the Sun\'s gravitational pull: both point toward the Sun, and the arrow at B is longer because the force is larger there (B is closer, 3.8×10¹⁰ m, where g = 0.42 N kg⁻¹). At closest approach F = m × g = 1.4×10⁷ kg × 0.42 N kg⁻¹ = 5.88×10⁶ N.',
         },
         ph: 'Arrow at A (farther from Sun): pointing toward the Sun, shorter/smaller length.\nArrow at B (closer to Sun): pointing toward the Sun, longer/larger length.\nBoth arrows must point directly toward the Sun.',
       },
@@ -271,7 +263,7 @@ export const questions: Question[] = [
       data: {
         headers: ['Parachute canopy size', 'Air speed / m s⁻¹'],
         rows: [
-          ['radius = 2.0 cm', '28'],
+          ['radius = 4.0 cm', '28'],
           ['area = 13 cm²', '25'],
           ['area = 20 cm²', '22'],
           ['area = 24 cm²', '19'],
@@ -280,7 +272,7 @@ export const questions: Question[] = [
           ['area = 40 cm²', '14'],
         ],
       },
-      caption: 'The student\'s recorded raw data. The first canopy was recorded as a radius (2.0 cm) rather than an area — its CSA must be converted to an area in part (b), giving 50 cm² for the results table.',
+      caption: 'The student\'s recorded raw data. The first canopy was recorded as a radius (4.0 cm) rather than an area — its CSA must be converted to an area in part (b): πr² = π × 4.0² ≈ 50 cm² for the results table.',
     },
     tasks: [
       {
@@ -294,7 +286,7 @@ export const questions: Question[] = [
         text: 'The student has recorded the first value as radius rather than area. The student uses **area = πr²** to calculate the CSA. **Select** which of the following values would be most appropriate to present the CSA in a results table.',
         marks: 1,
         widget: 'radio_select',
-        widgetOptions: ['2.0 cm (radius)', '12.6 cm (circumference)', '12.6 cm² (area from πr²)', '50 cm² (area — correct value)'],
+        widgetOptions: ['4.0 cm (radius)', '25.1 cm (circumference)', '50 cm² (area from πr²)', '12.6 cm² (πr, radius not squared)'],
         ph: 'Select the most appropriate CSA value.',
       },
       {
