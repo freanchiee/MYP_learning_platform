@@ -2,32 +2,55 @@
 
 import { useState, type FormEvent } from 'react'
 import { useRouter } from 'next/navigation'
-import Link from 'next/link'
 import { createClient } from '@/lib/supabase/client'
-import { Loader2, Mail, Lock, AlertCircle } from 'lucide-react'
+import { Loader2, Mail, KeyRound, AlertCircle, ArrowLeft } from 'lucide-react'
 
 export default function LoginPage() {
   const router = useRouter()
   const supabase = createClient()
 
+  const [step, setStep] = useState<'email' | 'code'>('email')
   const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const [code, setCode] = useState('')
   const [loading, setLoading] = useState(false)
   const [googleLoading, setGoogleLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
-  async function handleLogin(e: FormEvent) {
+  // Step 1: email -> send a 6-digit OTP. shouldCreateUser handles new + returning users.
+  async function handleSendCode(e: FormEvent) {
     e.preventDefault()
     setError(null)
     setLoading(true)
 
-    const { error: signInError } = await supabase.auth.signInWithPassword({
+    const { error: otpError } = await supabase.auth.signInWithOtp({
       email: email.trim(),
-      password,
+      options: { shouldCreateUser: true },
     })
 
-    if (signInError) {
-      setError(signInError.message)
+    if (otpError) {
+      setError(otpError.message)
+      setLoading(false)
+      return
+    }
+
+    setStep('code')
+    setLoading(false)
+  }
+
+  // Step 2: 6-digit code -> verify and start the session.
+  async function handleVerifyCode(e: FormEvent) {
+    e.preventDefault()
+    setError(null)
+    setLoading(true)
+
+    const { error: verifyError } = await supabase.auth.verifyOtp({
+      email: email.trim(),
+      token: code.trim(),
+      type: 'email',
+    })
+
+    if (verifyError) {
+      setError(verifyError.message)
       setLoading(false)
       return
     }
@@ -59,9 +82,13 @@ export default function LoginPage() {
   return (
     <div className="rounded-2xl shadow-2xl p-8" style={{ background: 'var(--surface)' }}>
       <h2 className="text-2xl font-bold mb-1" style={{ color: 'var(--accent)' }}>
-        Welcome back
+        Sign in
       </h2>
-      <p className="text-sm mb-6" style={{ color: 'var(--text-subtle)' }}>Sign in to your account to continue</p>
+      <p className="text-sm mb-6" style={{ color: 'var(--text-subtle)' }}>
+        {step === 'email'
+          ? 'Enter your email and we’ll send you a sign-in code'
+          : `We sent a 6-digit code to ${email}`}
+      </p>
 
       {/* Error banner */}
       {error && (
@@ -114,69 +141,92 @@ export default function LoginPage() {
         </div>
       </div>
 
-      {/* Email / Password form */}
-      <form onSubmit={handleLogin} className="space-y-4">
-        <div>
-          <label htmlFor="email" className="block text-sm font-medium mb-1" style={{ color: 'var(--text-muted)' }}>
-            Email address
-          </label>
-          <div className="relative">
-            <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4" style={{ color: 'var(--text-subtle)' }} />
-            <input
-              id="email"
-              type="email"
-              autoComplete="email"
-              required
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="you@school.edu"
-              className="w-full pl-9 pr-4 py-2.5 rounded-lg text-sm focus:outline-none focus:ring-2 focus:border-transparent transition"
-              style={{ background: 'var(--surface-inset)', border: '1px solid var(--border-strong)', color: 'var(--text)', '--tw-ring-color': 'var(--accent)' } as React.CSSProperties}
-            />
+      {step === 'email' ? (
+        /* Step 1: email */
+        <form onSubmit={handleSendCode} className="space-y-4">
+          <div>
+            <label htmlFor="email" className="block text-sm font-medium mb-1" style={{ color: 'var(--text-muted)' }}>
+              Email address
+            </label>
+            <div className="relative">
+              <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4" style={{ color: 'var(--text-subtle)' }} />
+              <input
+                id="email"
+                type="email"
+                autoComplete="email"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="you@school.edu"
+                className="w-full pl-9 pr-4 py-2.5 rounded-lg text-sm focus:outline-none focus:ring-2 focus:border-transparent transition"
+                style={{ background: 'var(--surface-inset)', border: '1px solid var(--border-strong)', color: 'var(--text)', '--tw-ring-color': 'var(--accent)' } as React.CSSProperties}
+              />
+            </div>
           </div>
-        </div>
 
-        <div>
-          <label htmlFor="password" className="block text-sm font-medium mb-1" style={{ color: 'var(--text-muted)' }}>
-            Password
-          </label>
-          <div className="relative">
-            <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4" style={{ color: 'var(--text-subtle)' }} />
-            <input
-              id="password"
-              type="password"
-              autoComplete="current-password"
-              required
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="••••••••"
-              className="w-full pl-9 pr-4 py-2.5 rounded-lg text-sm focus:outline-none focus:ring-2 focus:border-transparent transition"
-              style={{ background: 'var(--surface-inset)', border: '1px solid var(--border-strong)', color: 'var(--text)', '--tw-ring-color': 'var(--accent)' } as React.CSSProperties}
-            />
+          <button
+            type="submit"
+            disabled={loading || googleLoading}
+            className="w-full flex items-center justify-center gap-2 py-2.5 rounded-lg text-sm font-semibold transition-opacity disabled:opacity-60 disabled:cursor-not-allowed"
+            style={{ background: 'var(--gradient-cta)', color: 'var(--text-on-accent)' }}
+          >
+            {loading && <Loader2 className="w-4 h-4 animate-spin" />}
+            Send code
+          </button>
+        </form>
+      ) : (
+        /* Step 2: 6-digit code */
+        <form onSubmit={handleVerifyCode} className="space-y-4">
+          <div>
+            <label htmlFor="code" className="block text-sm font-medium mb-1" style={{ color: 'var(--text-muted)' }}>
+              6-digit code
+            </label>
+            <div className="relative">
+              <KeyRound className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4" style={{ color: 'var(--text-subtle)' }} />
+              <input
+                id="code"
+                type="text"
+                inputMode="numeric"
+                autoComplete="one-time-code"
+                pattern="[0-9]*"
+                maxLength={6}
+                required
+                autoFocus
+                value={code}
+                onChange={(e) => setCode(e.target.value.replace(/\D/g, ''))}
+                placeholder="123456"
+                className="w-full pl-9 pr-4 py-2.5 rounded-lg text-sm tracking-[0.4em] focus:outline-none focus:ring-2 focus:border-transparent transition"
+                style={{ background: 'var(--surface-inset)', border: '1px solid var(--border-strong)', color: 'var(--text)', '--tw-ring-color': 'var(--accent)' } as React.CSSProperties}
+              />
+            </div>
           </div>
-        </div>
 
-        <button
-          type="submit"
-          disabled={loading || googleLoading}
-          className="w-full flex items-center justify-center gap-2 py-2.5 rounded-lg text-sm font-semibold transition-opacity disabled:opacity-60 disabled:cursor-not-allowed"
-          style={{ background: 'var(--gradient-cta)', color: 'var(--text-on-accent)' }}
-        >
-          {loading && <Loader2 className="w-4 h-4 animate-spin" />}
-          Sign in
-        </button>
-      </form>
+          <button
+            type="submit"
+            disabled={loading || googleLoading}
+            className="w-full flex items-center justify-center gap-2 py-2.5 rounded-lg text-sm font-semibold transition-opacity disabled:opacity-60 disabled:cursor-not-allowed"
+            style={{ background: 'var(--gradient-cta)', color: 'var(--text-on-accent)' }}
+          >
+            {loading && <Loader2 className="w-4 h-4 animate-spin" />}
+            Verify
+          </button>
 
-      <p className="text-center text-sm mt-6" style={{ color: 'var(--text-subtle)' }}>
-        Don&apos;t have an account?{' '}
-        <Link
-          href="/signup"
-          className="font-medium hover:underline"
-          style={{ color: 'var(--accent)' }}
-        >
-          Create one
-        </Link>
-      </p>
+          <button
+            type="button"
+            onClick={() => {
+              setStep('email')
+              setCode('')
+              setError(null)
+            }}
+            disabled={loading}
+            className="w-full flex items-center justify-center gap-1.5 text-sm font-medium hover:underline disabled:opacity-60"
+            style={{ color: 'var(--text-subtle)' }}
+          >
+            <ArrowLeft className="w-3.5 h-3.5" />
+            Use a different email
+          </button>
+        </form>
+      )}
     </div>
   )
 }
