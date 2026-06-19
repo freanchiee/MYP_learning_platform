@@ -79,10 +79,19 @@ function groupPapers(papers: Paper[]): PaperGroup[] {
     }
   }
 
-  return Array.from(baseMap.entries()).map(([baseId, base]) => ({
-    base,
-    variants: variantMap.get(baseId) ?? [],
-  }))
+  // Every base id that appears becomes a group — even when the BASE paper itself
+  // isn't launched (e.g. it still has screenshots so it's gated). In that case promote
+  // the first variant to be the group head so its variants still show.
+  const baseIds = new Set<string>(Array.from(baseMap.keys()).concat(Array.from(variantMap.keys())))
+  return Array.from(baseIds)
+    .map((baseId) => {
+      const base = baseMap.get(baseId)
+      if (base) return { base, variants: variantMap.get(baseId) ?? [] }
+      const [head, ...rest] = variantMap.get(baseId) ?? []
+      return head ? { base: head, variants: rest } : null
+    })
+    .filter((g): g is PaperGroup => g !== null)
+    .sort((a, b) => b.base.year - a.base.year)
 }
 
 function GateBackground({ index }: { index: number }) {
