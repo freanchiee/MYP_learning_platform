@@ -46,6 +46,8 @@ import { questions as chemistry_may_2022_v1Questions, paperMeta as chemistry_may
 import { questions as chemistry_may_2022_v2Questions, paperMeta as chemistry_may_2022_v2Meta } from '@/data/papers/chemistry-may-2022-v2/questions'
 import { questions as chemistry_may_2024_v1Questions, paperMeta as chemistry_may_2024_v1Meta } from '@/data/papers/chemistry-may-2024-v1/questions'
 import { questions as chemistry_may_2024_v2Questions, paperMeta as chemistry_may_2024_v2Meta } from '@/data/papers/chemistry-may-2024-v2/questions'
+import { questions as chemistry_nov_2017_v1Questions, paperMeta as chemistry_nov_2017_v1Meta } from '@/data/papers/chemistry-nov-2017-v1/questions'
+import { questions as chemistry_nov_2017_v2Questions, paperMeta as chemistry_nov_2017_v2Meta } from '@/data/papers/chemistry-nov-2017-v2/questions'
 import { questions as chemistry_nov_2021_v1Questions, paperMeta as chemistry_nov_2021_v1Meta } from '@/data/papers/chemistry-nov-2021-v1/questions'
 import { questions as chemistry_nov_2021_v2Questions, paperMeta as chemistry_nov_2021_v2Meta } from '@/data/papers/chemistry-nov-2021-v2/questions'
 import { questions as chemistry_nov_2022_v1Questions, paperMeta as chemistry_nov_2022_v1Meta } from '@/data/papers/chemistry-nov-2022-v1/questions'
@@ -103,6 +105,7 @@ import { questions as humanities_nov_2024_v1Questions, paperMeta as humanities_n
 import { questions as humanities_nov_2024_v2Questions, paperMeta as humanities_nov_2024_v2Meta } from '@/data/papers/humanities-nov-2024-v2/questions'
 import { questions as physics_may_2016_v1Questions, paperMeta as physics_may_2016_v1Meta } from '@/data/papers/physics-may-2016-v1/questions'
 import { questions as physics_may_2016_v2Questions, paperMeta as physics_may_2016_v2Meta } from '@/data/papers/physics-may-2016-v2/questions'
+import { questions as physics_may_2017Questions, paperMeta as physics_may_2017Meta } from '@/data/papers/physics-may-2017/questions'
 import { questions as physics_may_2017_v1Questions, paperMeta as physics_may_2017_v1Meta } from '@/data/papers/physics-may-2017-v1/questions'
 import { questions as physics_may_2017_v2Questions, paperMeta as physics_may_2017_v2Meta } from '@/data/papers/physics-may-2017-v2/questions'
 import { questions as physics_may_2018_v1Questions, paperMeta as physics_may_2018_v1Meta } from '@/data/papers/physics-may-2018-v1/questions'
@@ -201,6 +204,8 @@ const PAPERS: Record<string, { questions: Question[]; meta: PaperMeta }> = {
   'chemistry-may-2022-v2': { questions: chemistry_may_2022_v2Questions, meta: chemistry_may_2022_v2Meta },
   'chemistry-may-2024-v1': { questions: chemistry_may_2024_v1Questions, meta: chemistry_may_2024_v1Meta },
   'chemistry-may-2024-v2': { questions: chemistry_may_2024_v2Questions, meta: chemistry_may_2024_v2Meta },
+  'chemistry-nov-2017-v1': { questions: chemistry_nov_2017_v1Questions, meta: chemistry_nov_2017_v1Meta },
+  'chemistry-nov-2017-v2': { questions: chemistry_nov_2017_v2Questions, meta: chemistry_nov_2017_v2Meta },
   'chemistry-nov-2021-v1': { questions: chemistry_nov_2021_v1Questions, meta: chemistry_nov_2021_v1Meta },
   'chemistry-nov-2021-v2': { questions: chemistry_nov_2021_v2Questions, meta: chemistry_nov_2021_v2Meta },
   'chemistry-nov-2022-v1': { questions: chemistry_nov_2022_v1Questions, meta: chemistry_nov_2022_v1Meta },
@@ -258,6 +263,7 @@ const PAPERS: Record<string, { questions: Question[]; meta: PaperMeta }> = {
   'humanities-nov-2024-v2': { questions: humanities_nov_2024_v2Questions, meta: humanities_nov_2024_v2Meta },
   'physics-may-2016-v1': { questions: physics_may_2016_v1Questions, meta: physics_may_2016_v1Meta },
   'physics-may-2016-v2': { questions: physics_may_2016_v2Questions, meta: physics_may_2016_v2Meta },
+  'physics-may-2017': { questions: physics_may_2017Questions, meta: physics_may_2017Meta },
   'physics-may-2017-v1': { questions: physics_may_2017_v1Questions, meta: physics_may_2017_v1Meta },
   'physics-may-2017-v2': { questions: physics_may_2017_v2Questions, meta: physics_may_2017_v2Meta },
   'physics-may-2018-v1': { questions: physics_may_2018_v1Questions, meta: physics_may_2018_v1Meta },

@@ -30,7 +30,13 @@ export const questions: Question[] = [
         label: 'a',
         text: '**Select** the correct options to complete the comparisons between red and blue light.\n\nThe speed of red light is **[greater than / equal to / less than]** the speed of blue light.\n\nThe wavelength of red light is **[greater than / equal to / less than]** the wavelength of blue light.\n\nThe frequency of red light is **[greater than / equal to / less than]** the frequency of blue light.',
         marks: 2,
-        figImages: [`${P}q1a-inline.png`],
+        artefact: {
+          component: 'GenericSVG',
+          data: {
+            svg: '<svg viewBox="0 0 560 240" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><rect width="560" height="240" fill="#ffffff"/><text x="280" y="24" font-size="14" font-weight="700" text-anchor="middle" fill="#1f2d3a">Two waves of visible light travelling at the same speed</text><line x1="40" y1="90" x2="540" y2="90" stroke="#cbd5e0" stroke-width="1" stroke-dasharray="3 3"/><line x1="40" y1="180" x2="540" y2="180" stroke="#cbd5e0" stroke-width="1" stroke-dasharray="3 3"/><path d="M40,90 C70,40 130,40 160,90 C190,140 250,140 280,90 C310,40 370,40 400,90 C430,140 490,140 520,90" fill="none" stroke="#d6336c" stroke-width="3"/><path d="M40,180 C55,150 85,150 100,180 C115,210 145,210 160,180 C175,150 205,150 220,180 C235,210 265,210 280,180 C295,150 325,150 340,180 C355,210 385,210 400,180 C415,150 445,150 460,180 C475,210 505,210 520,180" fill="none" stroke="#1c7ed6" stroke-width="3"/><line x1="40" y1="64" x2="160" y2="64" stroke="#d6336c" stroke-width="1.5"/><line x1="40" y1="64" x2="40" y2="90" stroke="#d6336c" stroke-width="1"/><line x1="160" y1="64" x2="160" y2="90" stroke="#d6336c" stroke-width="1"/><text x="100" y="58" font-size="12" text-anchor="middle" fill="#d6336c">long wavelength</text><text x="468" y="120" font-size="14" font-weight="700" fill="#d6336c">RED light</text><line x1="40" y1="206" x2="100" y2="206" stroke="#1c7ed6" stroke-width="1.5"/><line x1="40" y1="180" x2="40" y2="206" stroke="#1c7ed6" stroke-width="1"/><line x1="100" y1="180" x2="100" y2="206" stroke="#1c7ed6" stroke-width="1"/><text x="70" y="226" font-size="12" text-anchor="middle" fill="#1c7ed6">short wavelength</text><text x="455" y="210" font-size="14" font-weight="700" fill="#1c7ed6">BLUE light</text></svg>',
+          },
+          caption: 'Red light has a longer wavelength and lower frequency than blue light; both travel at the same speed (c) in a vacuum.',
+        },
         ph: 'Speed: equal to (all visible light travels at c in vacuum). Wavelength: greater than (red has longer wavelength). Frequency: less than (red has lower frequency). Award 2 marks for all three correct; 1 mark for any one correct.',
       },
       {
@@ -188,7 +194,13 @@ export const questions: Question[] = [
     topicCanonical: "Newton's Laws & Momentum",
     topicGroup: 'Forces & Motion',
     stem: 'The simulation shows a ramp with a wooden block (mass 0.25 kg) that slides down the ramp onto a flat surface. The ramp length is 80 cm. The height of the ramp and the distance the block slides along the flat surface can both be measured.',
-    figImages: [`${P}q5-ramp-setup.png`],
+    artefact: {
+      component: 'GenericSVG',
+      data: {
+        svg: '<svg viewBox="0 0 620 360" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><defs><linearGradient id="flr17" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d9c4a3"/><stop offset="1" stop-color="#b89a72"/></linearGradient><linearGradient id="rmp17" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9aa7b1"/><stop offset="1" stop-color="#6c7a86"/></linearGradient><marker id="dimL17" markerWidth="10" markerHeight="10" refX="2" refY="4" orient="auto"><path d="M8,0 L0,4 L8,8 Z" fill="#c0392b"/></marker><marker id="dimR17" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#c0392b"/></marker></defs><rect width="620" height="360" fill="#ffffff"/><rect x="0" y="250" width="620" height="110" fill="url(#flr17)"/><line x1="0" y1="250" x2="620" y2="250" stroke="#8a6f4a" stroke-width="2"/><rect x="108" y="92" width="6" height="158" fill="#5b6b78"/><rect x="78" y="246" width="66" height="8" rx="2" fill="#5b6b78"/><rect x="104" y="120" width="34" height="6" rx="2" fill="#8a99a6"/><polygon points="120,128 470,238 470,250 120,142" fill="url(#rmp17)" stroke="#4a5660" stroke-width="1.5"/><g transform="translate(150,116) rotate(17.4)"><rect x="0" y="-22" width="40" height="24" rx="3" fill="#a87b46" stroke="#6e4f29" stroke-width="1.5"/><rect x="6" y="-16" width="6" height="6" rx="1" fill="#6e4f29"/><rect x="28" y="-16" width="6" height="6" rx="1" fill="#6e4f29"/></g><rect x="470" y="226" width="78" height="20" rx="3" fill="#f08c00" stroke="#b56a00"/><text x="509" y="240" font-size="12" font-weight="700" text-anchor="middle" fill="#ffffff">0.25 kg</text><text x="170" y="108" font-size="12" fill="#6e4f29">wooden block</text><line x1="80" y1="128" x2="80" y2="250" stroke="#c0392b" stroke-width="1.5" marker-start="url(#dimL17)" marker-end="url(#dimR17)"/><text x="74" y="194" font-size="12" text-anchor="end" fill="#c0392b">ramp</text><text x="74" y="208" font-size="12" text-anchor="end" fill="#c0392b">height / cm</text><line x1="120" y1="290" x2="470" y2="290" stroke="#c0392b" stroke-width="1.5" marker-start="url(#dimL17)" marker-end="url(#dimR17)"/><text x="295" y="284" font-size="13" font-weight="700" text-anchor="middle" fill="#c0392b">80 cm</text><text x="295" y="308" font-size="11" text-anchor="middle" fill="#c0392b">ramp length</text><line x1="470" y1="320" x2="600" y2="320" stroke="#2b8a3e" stroke-width="1.5" marker-start="url(#dimL17)" marker-end="url(#dimR17)"/><text x="535" y="338" font-size="11" text-anchor="middle" fill="#2b8a3e">distance block slides</text></svg>',
+      },
+      caption: 'A 0.25 kg wooden block slides from a height down an 80 cm ramp onto a flat surface; the ramp height and the sliding distance are both measured.',
+    },
     tags: { unit: 'forces-interactions', topics: ['gravitational potential energy', 'kinetic energy', 'friction', 'variables', 'data processing'], level: 'proficient' },
     tasks: [
       {
@@ -317,7 +329,13 @@ export const questions: Question[] = [
     topicCanonical: "Newton's Laws & Momentum",
     topicGroup: 'Forces & Motion',
     stem: 'A student investigates how the radius of a circular sail attached to a toy trolley affects the stopping distance of the trolley. The trolley is launched with the same force each time.',
-    figImages: [`${P}q7-trolley.png`],
+    artefact: {
+      component: 'GenericSVG',
+      data: {
+        svg: '<svg viewBox="0 0 660 300" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><defs><linearGradient id="bench17" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e7d3ad"/><stop offset="1" stop-color="#caa46f"/></linearGradient><linearGradient id="sail17" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#3b3f46"/><stop offset="1" stop-color="#11151a"/></linearGradient></defs><rect width="660" height="300" fill="#ffffff"/><rect x="0" y="40" width="660" height="120" fill="url(#bench17)"/><line x1="0" y1="160" x2="660" y2="160" stroke="#9c7b4a" stroke-width="2"/><text x="640" y="32" font-size="13" font-weight="700" text-anchor="end" fill="#1f2d3a">Dynamic trolley experiment</text><rect x="40" y="178" width="600" height="34" fill="#f5d76e" stroke="#b8932f" stroke-width="1.5"/><g stroke="#5b4a14" stroke-width="1"><line x1="40" y1="178" x2="40" y2="200"/><line x1="100" y1="178" x2="100" y2="200"/><line x1="160" y1="178" x2="160" y2="200"/><line x1="220" y1="178" x2="220" y2="200"/><line x1="280" y1="178" x2="280" y2="200"/><line x1="340" y1="178" x2="340" y2="200"/><line x1="400" y1="178" x2="400" y2="200"/><line x1="460" y1="178" x2="460" y2="200"/><line x1="520" y1="178" x2="520" y2="200"/><line x1="580" y1="178" x2="580" y2="200"/><line x1="640" y1="178" x2="640" y2="200"/></g><g stroke="#7a6320" stroke-width="0.7"><line x1="70" y1="178" x2="70" y2="190"/><line x1="130" y1="178" x2="130" y2="190"/><line x1="190" y1="178" x2="190" y2="190"/><line x1="250" y1="178" x2="250" y2="190"/><line x1="310" y1="178" x2="310" y2="190"/><line x1="370" y1="178" x2="370" y2="190"/><line x1="430" y1="178" x2="430" y2="190"/><line x1="490" y1="178" x2="490" y2="190"/><line x1="550" y1="178" x2="550" y2="190"/><line x1="610" y1="178" x2="610" y2="190"/></g><g font-size="11" fill="#5b4a14" text-anchor="middle"><text x="40" y="225">0</text><text x="160" y="225">2</text><text x="280" y="225">4</text><text x="400" y="225">6</text><text x="520" y="225">8</text><text x="640" y="225">10</text></g><text x="340" y="245" font-size="11" text-anchor="middle" fill="#5b4a14">Distance along bench / m</text><g opacity="0.45"><rect x="40" y="138" width="46" height="20" rx="3" fill="#c0392b"/><rect x="50" y="120" width="3" height="20" fill="#7a8088"/><circle cx="51" cy="118" r="9" fill="none" stroke="#7a8088" stroke-width="3"/><circle cx="52" cy="155" r="6" fill="#2b2f36"/><circle cx="76" cy="155" r="6" fill="#2b2f36"/></g><text x="63" y="108" font-size="10" text-anchor="middle" fill="#c0392b">start (release)</text><line x1="40" y1="160" x2="40" y2="170" stroke="#c0392b" stroke-width="2"/><g transform="translate(366,0)"><rect x="0" y="138" width="46" height="20" rx="3" fill="#c0392b" stroke="#7a1e12" stroke-width="1.5"/><rect x="10" y="108" width="4" height="32" fill="#7a8088"/><path d="M14,108 L14,140 L40,140 Z" fill="url(#sail17)" stroke="#0a0d11" stroke-width="1"/><circle cx="11" cy="155" r="6" fill="#2b2f36"/><circle cx="36" cy="155" r="6" fill="#2b2f36"/></g><line x1="406" y1="160" x2="406" y2="172" stroke="#1f6f3f" stroke-width="2"/><text x="406" y="105" font-size="11" text-anchor="middle" fill="#1f6f3f" font-weight="700">trolley stops here</text><line x1="40" y1="270" x2="406" y2="270" stroke="#1f6f3f" stroke-width="1.5"/><line x1="40" y1="264" x2="40" y2="276" stroke="#1f6f3f" stroke-width="1.5"/><line x1="406" y1="264" x2="406" y2="276" stroke="#1f6f3f" stroke-width="1.5"/><text x="223" y="288" font-size="12" font-weight="700" text-anchor="middle" fill="#1f6f3f">stopping distance = read from the ruler</text></svg>',
+      },
+      caption: 'A trolley with a circular sail is released at 0 m and coasts to rest. Read its final position on the ruler to find the stopping distance.',
+    },
     tags: { unit: 'forces-interactions', topics: ['drag', 'friction', 'stopping distance', 'data processing', 'proportionality'], level: 'proficient' },
     tasks: [
       {
@@ -352,7 +370,7 @@ export const questions: Question[] = [
     topicCanonical: "Newton's Laws & Momentum",
     topicGroup: 'Forces & Motion',
     stem: 'The student analyses their stopping distance data further by plotting four graphs: Graph 1 (stopping distance vs radius R), Graph 2 (stopping distance vs R²), Graph 3 (stopping distance vs 1/R), Graph 4 (stopping distance vs 1/R²).',
-    figImages: ['/images/papers/physics-may-2017/q7e-graph1.svg', `${P}q7g-graph4.png`],
+    figImages: ['/images/papers/physics-may-2017/q7e-graph1.svg'],
     tags: { unit: 'forces-interactions', topics: ['data processing', 'proportionality', 'inverse relationship', 'drag'], level: 'advanced' },
     tasks: [
       {
@@ -377,6 +395,28 @@ export const questions: Question[] = [
         label: 'g',
         text: 'Graph 4 shows stopping distance against 1/R². **Evaluate** the validity of the hypothesis that stopping distance is inversely proportional to R.',
         marks: 2,
+        artefact: {
+          component: 'GraphSim',
+          data: {
+            mode: 'readoff',
+            title: 'Graph 4 — stopping distance against 1/R²',
+            xLabel: '1 / R²  (m⁻²)',
+            yLabel: 'Stopping distance (m)',
+            xAxis: { label: '1 / R²  (m⁻²)', min: 0, max: 120, tick: 20 },
+            yAxis: { label: 'Stopping distance (m)', min: 0, max: 8, tick: 1 },
+            points: [
+              [11.1, 2.0],
+              [25.0, 3.0],
+              [44.4, 4.0],
+              [69.4, 5.0],
+              [100.0, 6.0],
+            ],
+            dataMaxX: 100,
+            readouts: [{ x: 0, note: 'A straight line that fitted the points would NOT pass through the origin — the points curve.' }],
+            bestFit: 'The points form a curve, not a straight line through the origin — so d is NOT proportional to 1/R².',
+          },
+          caption: 'Graph 4 plots stopping distance against 1/R². The points lie on a curve (concave to the x-axis), not a straight line through the origin — unlike Graph 3 (vs 1/R), which is straight through the origin.',
+        },
         ph: 'Graph 4 (stopping distance vs 1/R²) is NOT a straight line through the origin; Graph 3 (vs 1/R) IS a straight line through the origin. Therefore stopping distance is inversely proportional to R (not R²). The hypothesis (stopping distance decreases with increasing R) is supported, but the "hypothesis" was about direction only — the actual relationship is d ∝ 1/R, not d ∝ 1/R².',
       },
     ],

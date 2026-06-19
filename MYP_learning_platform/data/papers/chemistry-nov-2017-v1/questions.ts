@@ -1,6 +1,21 @@
 import type { PaperMeta } from '@/data/papers/biology-may-2024/questions'
 import type { Question } from '@/lib/types'
 
+// ════════════════════════════════════════════════════════════════════════════
+// CHEMISTRY — November 2017 · VARIANT 1  (isomorphic to chemistry-nov-2017)
+// Every question re-tests the SAME construct (crit, command term, marks, task
+// structure, widget type/counts, tags) in a NEW real-world context, with
+// self-contained data-driven artefacts (no external image files). Answers
+// recomputed throughout.
+//   Q1 Periodic/extraction/isotopes:  Lead+Arsenic → Tin (cassiterite)+Antimony
+//   Q2 Esters/VOC/equilibrium:        methanoate esters → ethanoate esters (nail-polish remover)
+//   Q3 Reactivity investigation:      copper sulfate → silver nitrate displacement
+//   Q4 Coin composition / gas rate:   US penny → UK 1p/2p coin (bronze → copper-plated steel)
+//   Q5 Gold purity / aqua regia:      gold nugget → platinum sponge (catalytic converter recovery)
+//   Q6 Carbon cycle / climate:        generic carbon cycle → forest/biofuel carbon balance
+//   Q7 Evaluate (Crit D):             car types → domestic home-heating systems
+// ════════════════════════════════════════════════════════════════════════════
+
 export const paperMeta: PaperMeta = {
   id: 'chemistry-nov-2017-v1',
   subject: 'Chemistry',
@@ -18,8 +33,17 @@ export const questions: Question[] = [
     crit: 'A',
     type: 'extended',
     topic: 'Tin and Antimony — periodic table, extraction, properties, isotopes',
+    topicCanonical: 'Periodic Table & Atomic Structure',
+    topicGroup: 'Atomic Structure & Periodic Table',
     marks: 16,
-    stem: 'Throughout history, tin has been used to make bronze, pewter, and food-grade solder because of its low toxicity and resistance to corrosion. Tin ores such as cassiterite (SnS) are found in the Earth\'s crust. Tin is extracted by heating the ore to produce tin oxide. The tin oxide is then reduced using carbon to produce tin metal. The equations are not balanced. Antimony is a metalloid found in the same region of the periodic table.',
+    stem: 'For thousands of years tin has been alloyed with copper to make bronze for tools, bells and statues. Tin is found in the Earth\'s crust as the ore cassiterite, which is tin sulfide (SnS). Tin is extracted by first roasting the ore in air to produce tin oxide. The tin oxide is then reduced using carbon to produce tin metal. The equations below are not balanced. Antimony, used to harden the lead in old printing type, is found in the same region of the periodic table as tin.',
+    artefact: {
+      component: 'GenericSVG',
+      data: {
+        svg: '<svg viewBox="0 0 560 200" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><rect width="560" height="200" fill="#ffffff"/><text x="280" y="22" font-size="14" font-weight="700" text-anchor="middle" fill="#1f2d3a">Part of the periodic table</text><g><rect x="60" y="44" width="60" height="46" fill="#eef4f7" stroke="#5b6b78"/><text x="90" y="60" font-size="9" text-anchor="middle" fill="#64748b">Group 14</text><text x="90" y="76" font-size="16" font-weight="700" text-anchor="middle" fill="#0b7285">Sn</text><text x="90" y="88" font-size="8" text-anchor="middle" fill="#64748b">tin · 50</text></g><g><rect x="180" y="44" width="60" height="46" fill="#fff7ed" stroke="#5b6b78"/><text x="210" y="60" font-size="9" text-anchor="middle" fill="#64748b">Group 15</text><text x="210" y="76" font-size="16" font-weight="700" text-anchor="middle" fill="#e8590c">Sb</text><text x="210" y="88" font-size="8" text-anchor="middle" fill="#64748b">antimony · 51</text></g><line x1="120" y1="67" x2="180" y2="67" stroke="#94a3ad" stroke-width="1.5" stroke-dasharray="3 3"/><text x="60" y="118" font-size="11" fill="#475569">Sn is a metal (Group 14, Period 5).</text><text x="60" y="136" font-size="11" fill="#475569">Sb is a metalloid (Group 15, Period 5).</text><text x="60" y="160" font-size="10" fill="#94a3ad">Period number = number of occupied electron shells.</text><text x="60" y="176" font-size="10" fill="#94a3ad">Group number (main groups) = number of outer-shell electrons.</text></svg>',
+      },
+      caption: 'Tin (Sn) and antimony (Sb) sit next to each other in Period 5.',
+    },
     tasks: [
       {
         label: 'a',
@@ -43,100 +67,138 @@ export const questions: Question[] = [
         label: 'd',
         text: 'Tin is a metal whilst antimony is a metalloid. **State** two properties of tin as a metal.',
         marks: 2,
-        ph: 'Two from: electrical conductivity, thermal conductivity, malleability, metallic lustre',
+        ph: 'Two from: electrical conductivity, thermal conductivity, malleability, metallic appearance',
       },
       {
         label: 'e',
         text: '**Justify** whether the properties of tin you gave in part (d) would differ from those of antimony.',
         marks: 2,
-        ph: 'Antimony is metalloid — different atomic structure gives different properties',
+        ph: 'Antimony is a metalloid/semi-metal — different structure gives different properties',
       },
       {
         label: 'f',
-        text: 'Antimony has two stable isotopes, Sb-121 and Sb-123. **State** the missing values in the table: Sb-121 has atomic number 51, atomic mass 121, protons 51, electrons ?, neutrons ?; Sb-123 has atomic number 51, atomic mass 123, protons ?, electrons 51, neutrons ?.',
+        text: 'Tin has ten stable isotopes — more than any other element. **State** the missing values in the table for Sn-112 and Sn-124: Sn-112 has atomic number 50, atomic mass 112, protons 50, electrons ?, neutrons ?; Sn-124 has atomic number 50, atomic mass 124, protons ?, electrons 50, neutrons ?.',
         marks: 2,
-        ph: 'Sb-121: electrons=51, neutrons=70; Sb-123: protons=51, neutrons=72',
+        ph: 'Sn-112: electrons=50, neutrons=62; Sn-124: protons=50, neutrons=74',
       },
       {
         label: 'g',
-        text: 'Antimony reacts with oxygen in the air to form antimony oxide. **Suggest** whether or not all the isotopes of antimony react in the same way.',
+        text: 'Tin reacts with oxygen in the air to form tin oxide. **Suggest** whether or not all the isotopes of tin react in the same way.',
         marks: 2,
         ph: 'Same electron configuration — all isotopes react the same way',
       },
     ],
   },
 
-  // ─── Q2: Food Flavouring Esters (Crit B/A, 15 marks) ───────────────────────
+  // ─── Q2: Ethanoate Esters and Volatility (Crit B/A, 15 marks) ───────────────
   {
     id: 2,
     crit: 'B',
     type: 'extended',
-    topic: 'Esters — food flavourings, volatility, hydrolysis, structural formulae',
+    topic: 'Esters — VOCs, volatility, hydrolysis, structural formulae',
+    topicCanonical: 'Organic Chemistry & Fuels',
+    topicGroup: 'Organic Chemistry',
     marks: 15,
-    stem: 'Food manufacturers use esters as artificial flavourings because they are volatile organic compounds (VOCs) that evaporate easily and reach our smell receptors. Shorter-chain esters tend to evaporate more quickly, creating a stronger initial burst of aroma, while longer-chain esters last longer on food surfaces. Pentyl ethanoate (apple), hexyl ethanoate (pear), and heptyl ethanoate (rose apple) are common examples. After a few hours the ester molecules evaporate completely from the food surface.',
-    figImages: ['/images/papers/chemistry-nov-2017/page-07.png'],
+    stem: 'Many nail-varnish removers and solvent-based glues are scented with esters, which are classified as volatile organic compounds (VOCs). VOCs evaporate easily to become vapours, which is why you can smell them from across a room. A family of ethanoate esters — methyl ethanoate, ethyl ethanoate, propyl ethanoate, butyl ethanoate and pentyl ethanoate — have different volatilities, so the scent fades over different times once a drop is left on a watch-glass.',
+    artefact: {
+      component: 'RateSim',
+      data: {
+        title: 'Evaporation time of ethanoate esters',
+        mode: 'bars',
+        variable: 'Ester (increasing carbon-chain length →)',
+        metric: 'Time for a 0.20 cm³ drop to fully evaporate / s',
+        bars: [
+          { label: 'methyl', value: 95 },
+          { label: 'ethyl', value: 165 },
+          { label: 'propyl', value: 250 },
+          { label: 'butyl', value: 360 },
+          { label: 'pentyl', value: 520 },
+        ],
+        note: 'Longer carbon chains evaporate more slowly — they are less volatile.',
+      },
+      caption: 'As the carbon chain lengthens, the ester takes longer to evaporate (lower volatility).',
+    },
     tasks: [
       {
         label: 'a',
-        text: '**State** a research question for an investigation that could test the volatility of these food-flavouring esters.',
+        text: '**State** a research question for an investigation that could test the volatility of these esters.',
         marks: 1,
-        ph: 'How does volatility of flavouring esters depend on hydrocarbon chain length?',
+        ph: 'How does volatility of esters depend on length of hydrocarbon chain?',
       },
       {
         label: 'b',
         text: '**Formulate** a hypothesis for the investigation in part (a).',
         marks: 3,
-        ph: 'As chain length increases volatility decreases because intermolecular forces are stronger',
+        ph: 'As carbon chain length increases volatility decreases because intermolecular forces are stronger',
       },
       {
         label: 'c',
-        text: 'The volatility of three food flavouring esters was investigated by measuring the time taken for a sample of the ester to completely evaporate from filter paper. **Identify** the variables in this experiment: independent variable, dependent variable, and at least two control variables.',
+        text: 'The volatility of three esters was investigated by measuring the time taken for a sample of the ester to completely evaporate. **Identify** the variables in this experiment: independent variable, dependent variable, and at least two control variables.',
         marks: 4,
-        ph: 'IV: ester/chain length; DV: time to evaporate; CV: temperature, surface area, volume, mass',
+        ph: 'IV: ester/chain length; DV: time to evaporate; CV: temperature, surface area, container, volume, air flow',
       },
       {
         label: 'd',
-        text: 'Flavouring esters are formed by the reversible reaction of a carboxylic acid and an alcohol. Ester hydrolysis can spoil the flavour of food. **Explain** why flavouring concentrates are ideally stored in sealed containers kept in cold and dry conditions.',
+        text: 'Scented products contain complex mixtures of esters. The reaction of an alcohol and a carboxylic acid produces an ester and water. This is a reversible reaction. **Explain** why opened bottles of scented nail-varnish remover are ideally stored in cold and dry conditions.',
         marks: 4,
-        ph: 'Cold: no heat so equilibrium stays right, no breakdown; dry: no water so no hydrolysis',
+        ph: 'Cold: no heat so no ester breakdown; dry: no water so equilibrium stays right',
       },
       {
         label: 'e',
-        text: 'Pentyl ethanoate gives an apple aroma and is added to fruit-flavoured drinks. **Select** the structural formula of pentyl ethanoate from the options A–D, and **state** the names of the carboxylic acid and the alcohol used to form this ester.',
+        text: 'Propyl ethanoate is added to products to give a pear-drop smell. **Select** the structural formula of propyl ethanoate from the options A–D, and **state** the names of the carboxylic acid and the alcohol used to form this ester.',
         marks: 3,
-        ph: 'A — pentyl ethanoate; ethanoic acid; pentan-1-ol (pentanol)',
+        ph: 'A — propyl ethanoate; ethanoic acid; propanol',
         widget: 'radio_select',
         widgetOptions: [
-          'A — pentyl ethanoate (CH₃COO–C₅H₁₁)',
-          'B — butyl ethanoate (CH₃COO–C₄H₉)',
-          'C — propyl ethanoate (CH₃COO–C₃H₇)',
-          'D — methyl ethanoate (CH₃COO–CH₃)',
+          'A — propyl ethanoate (CH₃COO–C₃H₇)',
+          'B — ethyl ethanoate (CH₃COO–C₂H₅)',
+          'C — methyl ethanoate (CH₃COO–CH₃)',
+          'D — butyl ethanoate (CH₃COO–C₄H₉)',
         ],
       },
     ],
   },
 
-  // ─── Q3: Reactivity with Silver Nitrate (Crit B/C, 28 marks) ───────────────
+  // ─── Q3: Metals Reactivity Investigation (Crit B/C, 28 marks) ──────────────
   {
     id: 3,
     crit: 'B',
     type: 'extended',
     topic: 'Reactivity series — silver nitrate investigation, data presentation',
+    topicCanonical: 'Electrochemistry & Redox',
+    topicGroup: 'Electrochemistry',
     marks: 28,
-    stem: 'A more reactive metal can displace a less reactive metal from its compound in solution. Metal A + Metal B Compound → Metal A Compound + Metal B. When 1 mol dm⁻³ silver nitrate solution (AgNO₃) is added to metal powder a temperature change can be measured as silver ions are displaced from solution.',
-    figImages: ['/images/papers/chemistry-nov-2017/page-13.png'],
+    stem: 'The position of a metal in the reactivity series is related to that metal\'s ability to displace a different metal from its compound. Metal A + Metal B compound → Metal A compound + Metal B. When 0.5 mol dm⁻³ silver nitrate solution is added to a metal powder, the more reactive metal displaces silver and a temperature change can be measured.',
+    artefact: {
+      component: 'EchemCellSim',
+      data: {
+        title: 'Displacement of silver from silver nitrate',
+        fixedAnode: 'Magnesium',
+        cathodeChoices: ['Magnesium', 'Aluminium', 'Zinc', 'Iron', 'Tin', 'Silver'],
+        voltages: {
+          'Mg-Al': 0.71,
+          'Mg-Zn': 1.61,
+          'Mg-Fe': 1.92,
+          'Mg-Sn': 2.23,
+          'Mg-Ag': 3.17,
+        },
+        units: 'V',
+        voltmeter: true,
+      },
+      caption: 'The bigger the gap between two metals in the reactivity series, the larger the cell voltage — and the larger the temperature rise on displacement.',
+    },
     tasks: [
       {
         label: 'a',
-        text: 'Silver nitrate is oxidising. **Select** the hazard symbol that is used for silver nitrate.',
+        text: 'Silver nitrate is toxic and an irritant. **Select** the hazard symbol that is used for silver nitrate.',
         marks: 1,
-        ph: 'Option A — oxidising (flame on circle symbol)',
+        ph: 'Option C — harmful/irritant symbol',
         widget: 'radio_select',
         widgetOptions: [
           'A — oxidising (flame on circle)',
           'B — flammable (flame)',
           'C — harmful / irritant (exclamation mark)',
-          'D — toxic (skull and crossbones)',
+          'D — corrosive (corrosion symbol)',
         ],
       },
       {
@@ -154,23 +216,23 @@ export const questions: Question[] = [
       },
       {
         label: 'c',
-        text: '**Design** a method which would allow you to collect sufficient data to place these metals in order of reactivity. The metals you will use are zinc, iron, magnesium, copper, and aluminium. Your answer should include: a list of equipment you will use, the method you will follow, and how you will make sure your data is sufficient, valid, and safe.',
+        text: '**Design** a method which would allow you to collect sufficient data to place these metals in order of reactivity. The metals you will use are zinc, iron, magnesium, tin, and aluminium. Your answer should include: a list of equipment you will use, the method you will follow, and how you will make sure your data is sufficient, valid, and safe.',
         marks: 15,
-        ph: 'Equipment, variables, stepwise method, repeats, safety with silver nitrate (oxidising/stains skin)',
+        ph: 'Equipment, variables, stepwise method, repeats, safety with silver nitrate',
       },
       {
         label: 'd',
         text: 'Here are some results from a similar investigation. Use the data in the table to **determine** the order of reactivity of these five metals by arranging them from least reactive (left) to most reactive (right).',
         marks: 1,
-        ph: 'Copper → Iron → Zinc → Aluminium → Magnesium (least to most reactive)',
+        ph: 'Tin → Iron → Zinc → Aluminium → Magnesium (least to most reactive)',
         widget: 'match_drag_drop',
-        widgetItems: ['Aluminium', 'Copper', 'Iron', 'Magnesium', 'Zinc'],
+        widgetItems: ['Aluminium', 'Iron', 'Magnesium', 'Tin', 'Zinc'],
       },
       {
         label: 'e',
         text: '**Justify** your answer using scientific reasoning.',
         marks: 2,
-        ph: 'Larger temperature rise means more reactive; temp change measures reactivity',
+        ph: 'Larger temperature rise means more reactive; temperature change is the measure of reactivity',
       },
       {
         label: 'f',
@@ -187,7 +249,7 @@ export const questions: Question[] = [
       },
       {
         label: 'g',
-        text: '**Present** the data in the graph. You need to give your graph an appropriate title, label the x axis, and add the correct unit to the y axis. Data: Aluminium 38°C, Copper 6°C, Iron 15°C, Magnesium 49°C, Zinc 31°C.',
+        text: '**Present** the data in the graph. You need to give your graph an appropriate title, label the x axis, and add the correct unit to the y axis. Data: Aluminium 35°C, Iron 14°C, Tin 9°C, Magnesium 42°C, Zinc 28°C.',
         marks: 5,
         ph: 'Title + x-axis metal labels + y-axis "Temperature change / °C" + all 5 bars correct',
       },
@@ -200,117 +262,168 @@ export const questions: Question[] = [
     ],
   },
 
-  // ─── Q4: US Penny + Sulfuric Acid (Crit C, 17 marks) ───────────────────────
+  // ─── Q4: UK Penny Coins + Acid (Crit C, 17 marks) ─────────────────────────
   {
     id: 4,
     crit: 'C',
     type: 'extended',
-    topic: 'Metal reactivity — US penny composition, sulfuric acid investigation',
+    topic: 'Metal reactivity — UK 1p coin composition, acid rate investigation',
+    topicCanonical: 'Electrochemistry & Redox',
+    topicGroup: 'Electrochemistry',
     marks: 17,
-    stem: 'A scientist is studying the composition of US pennies using dilute sulfuric acid instead of nitric acid. When a coin is placed in sulfuric acid, a gas is produced. The rate of gas production depends on the metal composition of the coin. Using the same composition table as the original US penny study, the scientist can determine when each coin was minted.',
-    figImages: ['/images/papers/chemistry-nov-2017/page-17.png', '/images/papers/chemistry-nov-2017/page-21.png'],
+    stem: 'Coins have been made from metal throughout history, and as the availability and price of metals change, the composition of coins also changes. The UK one-penny and two-penny coins were made from bronze (copper, tin and zinc) until 1992, when the rising price of copper forced a change to copper-plated steel. Copper has traditionally been chosen for coins because it is one of the least reactive, inexpensive and widely available metals. The steel core is much more reactive than copper. A scientist has decided that the date of the coin can be estimated by measuring the rate of gas production when it reacts with acid.',
+    artefact: {
+      component: 'RateSim',
+      data: {
+        title: 'Gas produced when penny coins react with dilute acid',
+        xLabel: 'Time / s',
+        yLabel: 'Volume of hydrogen gas / cm³',
+        xAxis: { label: 'Time / s', min: 0, max: 120, tick: 20 },
+        yAxis: { label: 'Volume of gas / cm³', min: 0, max: 60, tick: 10 },
+        options: [
+          { label: 'Coin 1 (≈ 90 s to finish)', color: 'teal', ratePerSec: 0.5, plateauVolume: 45 },
+          { label: 'Coin 2 (≈ 110 s to finish)', color: 'orange', ratePerSec: 0.36, plateauVolume: 40 },
+          { label: 'Coin 3 (≈ 60 s to finish)', color: 'purple', ratePerSec: 0.9, plateauVolume: 54 },
+        ],
+        reaction: 'steel core + acid → iron salt + hydrogen',
+        note: 'A faster reaction (steeper line) means more exposed steel — a newer, copper-plated coin.',
+      },
+      caption: 'Each coin gives a different reaction curve; read the finishing time to compare the coins.',
+    },
     tasks: [
       {
         label: 'a',
-        text: 'The coins are placed in sulfuric acid and a gas is produced. The scientist has suggested that the reaction is: metal + sulfuric acid → metal sulfate + hydrogen. **State** the test for hydrogen gas.',
+        text: 'The coins are placed in dilute hydrochloric acid and a gas is produced. The scientist suggests the reaction is: metal + hydrochloric acid → metal chloride + hydrogen. **State** the test for hydrogen gas.',
         marks: 2,
-        ph: 'Lit splint/stick; squeaky pop — gas burns with pop sound',
+        ph: 'Lit splint/stick; squeaky pop — gas burns with a pop sound',
       },
       {
         label: 'b',
-        text: 'Copper is one of the least reactive metals used in US pennies, while zinc is more reactive than copper. The scientist measures the rate of gas production to identify coin composition. **Formulate** a testable hypothesis about which coin will produce the slowest reaction.',
+        text: 'Copper has traditionally been chosen for coins as it is one of the least reactive metals, while the steel core of newer coins is much more reactive. The scientist decided that the date of the coin can be determined by measuring the rate of gas production. **Formulate** a testable hypothesis about which coin will produce the slowest reaction.',
         marks: 3,
-        ph: 'If coin is 100% copper it will react slowest because Cu is least reactive of metals used',
+        ph: 'If coin is solid bronze (mostly copper) it will react slowest because Cu is least reactive',
       },
       {
         label: 'c',
         text: '**State** the independent, dependent and control variables in this investigation.',
         marks: 4,
-        ph: 'IV: composition/date of coin; DV: volume of gas in fixed time; CV: temperature, acid concentration',
+        ph: 'IV: composition/date of coin; DV: volume of gas in fixed time; CV: temperature, concentration of acid',
       },
       {
         label: 'd',
-        text: 'The simulation shows the investigation being carried out. Using the graph, **determine** the year of manufacture of each coin tested.',
+        text: 'The simulation shows the investigation being carried out. Using the graph, **determine** the type of each coin tested.',
         marks: 3,
-        ph: 'Cross-reference reaction time with bar chart composition, then with year-composition table',
+        ph: 'Cross-reference reaction time with composition, then with the date-composition table',
         widget: 'inline_dropdown_select',
-        widgetItems: ['Coin 1 (≈ 55 s)', 'Coin 2 (≈ 25 s)', 'Coin 3 (≈ 90 s)'],
+        widgetItems: ['Coin 1 (≈ 90 s)', 'Coin 2 (≈ 110 s)', 'Coin 3 (≈ 60 s)'],
         widgetOptions: [
-          '1793–1849',
-          '1849–1857',
-          '1857–1865',
-          '1865–1943',
-          '1943–1962',
-          '1962–1982',
-          '1982–present',
+          'Before 1860 (pure copper)',
+          '1860–1971 (bronze, high copper)',
+          '1971–1992 (bronze, decimal)',
+          '1992–1998 (copper-plated steel)',
+          '1998–2008 (copper-plated steel)',
+          '2008–2011 (copper-plated steel)',
+          '2011–present (copper-plated steel)',
         ],
       },
       {
         label: 'e',
         text: '**Discuss** why the results that you obtained are not exactly the same as those produced in the graph.',
         marks: 3,
-        ph: 'Coins not exact percentages; calibration from averages; no repeats; gas collection inaccurate',
+        ph: 'Coin plating thickness varies; calibration graph uses averages; no repeats; gas collection inaccurate',
       },
       {
         label: 'f',
         text: '**Outline** the disadvantage of using this method for determining the age of the coins.',
         marks: 2,
-        ph: 'Destructive method — cannot keep coin or repeat results',
+        ph: 'Destructive method — cannot keep the coin or repeat results',
       },
     ],
   },
 
-  // ─── Q5: Welcome Stranger Nugget (Crit C, 11 marks) ────────────────────────
+  // ─── Q5: Platinum Recovery and the Acid Test (Crit C, 11 marks) ───────────
   {
     id: 5,
     crit: 'C',
     type: 'extended',
-    topic: 'Gold purity — scientific notation, aqua regia method, percentage calculation',
+    topic: 'Precious-metal purity — scientific notation, aqua regia test, percentage calculation',
+    topicCanonical: 'Acids, Bases & Salts',
+    topicGroup: 'Chemical Reactions',
     marks: 11,
-    stem: 'Gold remains one of the most prized metals because of its chemical unreactivity. In 1869, two gold prospectors in Victoria, Australia discovered the largest gold nugget ever found — the "Welcome Stranger". The nugget was so large it had to be broken up to be weighed on a jeweller\'s scale. Its mass was recorded as 71 019 g. Gold does not react with most acids but dissolves in aqua regia (a mixture of concentrated nitric and hydrochloric acids). Aqua regia solutions of different concentrations are used to test the purity of gold.',
+    stem: 'Platinum is a very unreactive precious metal used in jewellery and in the catalytic converters of cars. Like gold, platinum does not react with most acids, but it does react with aqua regia ("royal water"), a mixture of concentrated nitric acid and concentrated hydrochloric acid. A recycling plant recovers platinum sponge from scrapped catalytic converters. One large batch of recovered platinum sponge has a mass of 18 642.7 g.',
+    artefact: {
+      component: 'DataTable',
+      data: {
+        headers: ['Platinum purity tested', 'Weak aqua regia (1:4)', 'Medium aqua regia (1:3)', 'Strong aqua regia (1:2)'],
+        rows: [
+          ['999 (99.9% pure)', 'no reaction', 'slow reaction', 'reacts'],
+          ['950 (95.0% pure)', 'no reaction', 'reacts', 'reacts'],
+          ['900 (90.0% pure)', 'slow reaction', 'reacts', 'reacts'],
+          ['850 (85.0% pure)', 'reacts', 'reacts', 'reacts'],
+        ],
+      },
+      caption: 'Acid-test kit results: which strength of aqua regia makes platinum of a given purity react.',
+    },
     tasks: [
       {
         label: 'a',
-        text: '**State** the mass of the Welcome Stranger nugget in grams using scientific notation.',
+        text: '**State** the mass of the recovered platinum sponge in grams using scientific notation.',
         marks: 2,
-        ph: '7.10 × 10⁴ g (accept 7.102 × 10⁴)',
+        ph: '1.86427 × 10⁴ g (accept 1.86 × 10⁴)',
       },
       {
         label: 'b',
-        text: 'A scientist tests a suspicious golden artefact using aqua regia solutions of different concentrations (24K, 18K, 16K, 10K). Using the table showing which solutions dissolve the artefact, **discuss** the method and **comment** on the validity of the result.',
+        text: 'Platinum testing kits contain aqua regia solutions of different concentrations. A raid was carried out on a suspected illegal precious-metal trader. Using the table showing which solutions make platinum of 999, 950, 900 and 850 purity react, **discuss** the method and **comment** on the validity of the result.',
         marks: 4,
-        ph: 'Destructive method; no safety precaution; no repeats; validity: inconclusive or object could be less than 24K',
+        ph: 'Method: destructive; no safety precaution; no repeats; validity: result inconclusive or purity could be lower',
       },
       {
         label: 'c',
-        text: 'Before testing, a scientist proposed the hypothesis: "The purer the gold, the weaker the aqua regia solution needed, because gold is resistant to acids." Use the data in the table to **evaluate** this hypothesis.',
+        text: 'The hypothesis was: "The purer the platinum, the stronger the aqua regia solution will need to be because pure platinum is quick to dissolve." Use the data in the table to **evaluate** this hypothesis.',
         marks: 2,
-        ph: '"Weaker" is wrong (purer gold needs stronger/more concentrated acid); gold IS resistant; IV/DV relationship is inverted',
+        ph: '"react" not "dissolve"; "concentrated" not "stronger"; relationship IV/DV correct; platinum is slow/unreactive',
       },
       {
         label: 'd',
-        text: 'The American Gold Eagle is a 1 troy-ounce gold coin with a total mass of 33.93 g. It is 22-karat gold and contains 31.1035 g of gold. **State** the mass of gold in the coin to 3 significant figures.',
+        text: 'A platinum investment bar has a mass of 31.10 g and contains 31.06845 g of platinum. A purity of 999.9 is stated as effectively 100% platinum. **State** the mass of platinum in the investment bar to 3 significant figures.',
         marks: 2,
         ph: '31.1 g',
       },
       {
         label: 'e',
-        text: '**Calculate** the percentage of gold contained within the American Gold Eagle.',
+        text: '**Calculate** the percentage of platinum contained within the investment bar.',
         marks: 1,
-        ph: '31.1035 / 33.93 × 100 = 91.7%',
+        ph: '31.1 / 31.10 × 100 = 99.9%',
       },
     ],
   },
 
-  // ─── Q6: Carbon Cycle and Climate Change V1 (Crit D, 16 marks) ─────────────
+  // ─── Q6: Forest Carbon Balance and Climate Change (Crit D, 16 marks) ──────
   {
     id: 6,
     crit: 'D',
     type: 'extended',
-    topic: 'Carbon cycle — greenhouse gases, temperature anomaly, carbon footprint',
+    topic: 'Carbon cycle — combustion, respiration, photosynthesis, temperature, carbon footprint',
+    topicCanonical: 'Environmental Impact & Sustainability',
+    topicGroup: 'Environmental Chemistry',
     marks: 16,
-    stem: 'The burning of fossil fuels has significantly altered the Earth\'s carbon cycle. Carbon dioxide concentrations in the atmosphere have increased dramatically since the industrial revolution, leading to measurable increases in global temperatures. Scientists monitor the Global Land–Ocean Temperature Index to track the effect of rising CO₂ on climate.',
-    figImages: ['/images/papers/chemistry-nov-2017/page-28.png', '/images/papers/chemistry-nov-2017/page-29.png'],
+    stem: 'A managed forest absorbs carbon dioxide as the trees grow and releases it again through respiration, decay and — if the timber is burned as fuel — combustion. Scientists study these flows to understand how forests can help slow climate change, because recent warming is largely caused by human activities, especially the release of greenhouse gases from burning fossil fuels.',
+    artefact: {
+      component: 'SankeySim',
+      data: {
+        title: 'Carbon flows in and out of a managed forest (arbitrary units per year)',
+        units: 'units',
+        flows: [
+          { label: 'Photosynthesis (CO₂ absorbed)', value: 100, kind: 'in' },
+          { label: 'Respiration of trees (CO₂ released)', value: 35, kind: 'out' },
+          { label: 'Decay of leaf litter (CO₂ released)', value: 25, kind: 'out' },
+          { label: 'Combustion of timber fuel (CO₂ released)', value: 20, kind: 'loss' },
+          { label: 'Carbon locked into new wood', value: 20, kind: 'out' },
+        ],
+        conservation: 'CO₂ in (100) = CO₂ out (35 + 25 + 20) + carbon stored in wood (20).',
+      },
+      caption: 'Grey = combustion, red = respiration/decay, green = photosynthesis: the forest absorbs and releases CO₂.',
+    },
     tasks: [
       {
         label: 'a',
@@ -326,33 +439,79 @@ export const questions: Question[] = [
       },
       {
         label: 'b',
-        text: 'The Global Land–Ocean Temperature Index shows changes in temperature since the pre-industrial era. Use the graph to **calculate** the temperature increase from 1985 to 2015.',
+        text: 'Carbon dioxide (CO₂) is the primary greenhouse gas emitted through human activities and traps heat in the atmosphere. Use the Global Land–Ocean Temperature Index graph to **calculate** the temperature increase from 1975 to 2015.',
         marks: 2,
-        ph: '0.52°C (1985 ≈ +0.08°C; 2015 ≈ +0.60°C; increase = 0.52°C)',
+        ph: '0.62°C (read from graph: ≈ -0.01°C at 1975, ≈ +0.61°C at 2015)',
+        artefact: {
+          component: 'LineGraph',
+          data: {
+            title: 'Global Land–Ocean Temperature Index',
+            xLabel: 'Year',
+            yLabel: 'Temperature anomaly',
+            yUnit: '°C',
+            xMin: 1960,
+            xMax: 2020,
+            yMin: -0.2,
+            yMax: 0.8,
+            xStep: 10,
+            yStep: 0.2,
+            dataPoints: [
+              { x: 1960, y: -0.03 },
+              { x: 1965, y: -0.09 },
+              { x: 1970, y: 0.02 },
+              { x: 1975, y: -0.01 },
+              { x: 1980, y: 0.18 },
+              { x: 1985, y: 0.11 },
+              { x: 1990, y: 0.32 },
+              { x: 1995, y: 0.38 },
+              { x: 2000, y: 0.39 },
+              { x: 2005, y: 0.54 },
+              { x: 2010, y: 0.62 },
+              { x: 2015, y: 0.61 },
+              { x: 2020, y: 0.74 },
+            ],
+          },
+          caption: 'Temperature anomaly relative to the 20th-century average. Read the value at 1975 and at 2015.',
+        },
       },
       {
         label: 'c',
-        text: 'Human dependence on fossil fuels is altering the natural balance of the carbon cycle. Carbon footprint is the total mass of greenhouse gases produced by an individual or group through fossil fuel consumption. **Discuss** how society can respond to climate change by altering human behaviour to reduce the carbon footprint. In your answer you should refer to both individuals and larger groups and include: an outline of activities that increase the carbon footprint, an explanation of how these activities increase the carbon footprint, an outline of activities that would decrease the carbon footprint, and a justification of how these activities would affect the carbon cycle.',
+        text: 'Human dependence on fossil fuels is altering the natural balance of the carbon cycle. Carbon footprint is the term used to describe the mass of greenhouse gases (carbon dioxide and other carbon compounds) produced by the activities of a particular individual or group. **Discuss** how society can respond to climate change by altering human behaviour to reduce the carbon footprint. In your answer you should refer to both individuals and larger groups and include: an outline of activities that increase the carbon footprint, an explanation of how these activities increase the carbon footprint, an outline of activities that would decrease the carbon footprint, and a justification of how these activities would affect the carbon cycle.',
         marks: 12,
-        ph: 'Activities increasing/decreasing footprint; individual and societal scale; scientific explanation; carbon cycle effect',
+        ph: 'Activities increasing/decreasing footprint with scientific explanation; individual and societal level; justification',
       },
     ],
   },
 
-  // ─── Q7: Evaluate Domestic Heating Systems (Crit D, 17 marks) ───────────────
+  // ─── Q7: Evaluate Home-Heating Systems (Crit D, 17 marks) ─────────────────
   {
     id: 7,
     crit: 'D',
     type: 'extended',
-    topic: 'Environmental sustainability — evaluating domestic heating systems',
+    topic: 'Environmental sustainability — evaluating domestic heating systems and fuels',
+    topicCanonical: 'Environmental Impact & Sustainability',
+    topicGroup: 'Environmental Chemistry',
     marks: 17,
-    stem: 'Rising fuel bills and concerns about greenhouse gas emissions have led homeowners and governments to consider alternatives to traditional gas boilers. Two main options for domestic heating are natural gas boilers and air-source heat pumps. A gas boiler burns natural gas to produce heat; an air-source heat pump uses electricity to move heat from outside air into the home. Emission and cost data for both systems are available for comparison.',
+    stem: 'Heating homes is one of the largest sources of household carbon dioxide emissions. To reduce pollution, manufacturers now sell several alternatives to the traditional gas boiler, including electric heat pumps, wood-pellet (biomass) boilers and solar thermal systems. A government report compares the carbon dioxide emissions, running costs and fuel sustainability of each option.',
+    artefact: {
+      component: 'DataTable',
+      data: {
+        headers: ['Heating system', 'CO₂ emitted / kg per year', 'Running cost / £ per year', 'Fuel source'],
+        rows: [
+          ['Gas boiler', '2400', '900', 'natural gas (finite)'],
+          ['Electric heat pump', '600', '750', 'grid electricity (mixed)'],
+          ['Wood-pellet (biomass) boiler', '300', '850', 'wood pellets (renewable)'],
+          ['Solar thermal + backup', '450', '500', 'sunlight (renewable)'],
+        ],
+      },
+      caption: 'Comparison of four domestic heating systems. Use the data to evaluate any two of them.',
+    },
     tasks: [
       {
         label: '',
-        text: '**Select** two different heating systems to compare from: gas boiler, air-source heat pump, oil boiler, hydrogen boiler. Using all of the information and your experience from your wider MYP studies, **discuss** and **evaluate** the impact of using these heating systems. In your answer you should consider: the environmental impact of the different systems, the costs of running each system, the sustainability of the fuel, and the usefulness of the systems.',
+        text: '**Select** two different types of home-heating systems to compare from: gas boiler, electric heat pump, wood-pellet (biomass) boiler, solar thermal. Using all of the information and your experience from your wider MYP studies, **discuss** and **evaluate** the impact of installing these types of heating systems. In your answer you should consider: the environmental impact of the different systems, the costs of running the system, the sustainability of the fuel, and the usefulness of the systems.',
         marks: 17,
-        ph: 'Environmental impact, running costs, fuel sustainability, usefulness — both systems with data and justification',
+        ph: 'Environmental impact, running costs, fuel sustainability, usefulness — for both systems with justification',
       },
     ],
   },
