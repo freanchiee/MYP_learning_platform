@@ -1,9 +1,18 @@
 import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
-import { createAdminClient } from '@/lib/supabase/admin'
 import PapersGates from '@/components/papers/PapersGates'
 import { DEV_NO_AUTH } from '@/lib/dev-auth'
-import { isLaunched } from '@/data/launched-papers'
+import { LAUNCHED_PAPERS } from '@/data/launched-papers'
+
+// paperId prefix → display subject (matches the subject prop each subject page passes).
+const SUBJECT_OF: Record<string, string> = {
+  physics: 'Physics',
+  chemistry: 'Chemistry',
+  biology: 'Biology',
+  geography: 'Geography',
+  humanities: 'Integrated Humanities',
+}
+const cap = (s: string) => (s ? s.charAt(0).toUpperCase() + s.slice(1) : '')
 
 interface Paper {
   id: string
@@ -216,30 +225,26 @@ export default async function PapersPageLoader({ subject }: Props) {
   if (!session && !DEV_NO_AUTH) redirect('/login')
   const userId = session?.user?.id
 
-  // RLS blocks anon reads of `papers`; in dev-bypass (no session) read via the
-  // service-role admin client so the gate is browsable. Production always has a session.
-  const papersClient = !session && DEV_NO_AUTH ? createAdminClient() : supabase
+  const attemptsRes = await (userId
+    ? supabase.from('attempts').select('paper_id, status').eq('user_id', userId)
+    : Promise.resolve({ data: [] as AttemptRow[] }))
 
-  const [papersRes, attemptsRes] = await Promise.all([
-    papersClient
-      .from('papers')
-      .select('id, subject, session, year, total_marks, duration_minutes, is_published')
-      .eq('is_published', true)
-      .order('year', { ascending: false }),
-
-    userId
-      ? supabase.from('attempts').select('paper_id, status').eq('user_id', userId)
-      : Promise.resolve({ data: [] as AttemptRow[] }),
-  ])
-
-  let papers: Paper[] = papersRes.data ?? []
-
-  // Launch gate: hide any paper still carrying an IB screenshot (.png). Single
-  // source of truth = data/launched-papers.ts (regenerated as papers are recreated).
-  papers = papers.filter(p => isLaunched(p.id))
-
-  // Apply local metadata overrides
-  papers = papers.map(p => ({ ...p, ...(LOCAL_PAPER_META[p.id] ?? {}) }))
+  // Code-driven catalog: the source of truth is data/launched-papers.ts (auto-generated
+  // from the actual data/papers folders), NOT the Supabase `papers` table — which is often
+  // out of sync with the code (missing variants). Metadata comes from LOCAL_PAPER_META.
+  let papers: Paper[] = LAUNCHED_PAPERS.map((id) => {
+    const parts = id.split('-')
+    const meta = LOCAL_PAPER_META[id] ?? {}
+    return {
+      id,
+      subject: SUBJECT_OF[parts[0]] ?? cap(parts[0]),
+      session: cap(parts[1]),
+      year: parseInt(parts[2] ?? '0', 10) || 0,
+      total_marks: meta.total_marks ?? 100,
+      duration_minutes: meta.duration_minutes ?? 90,
+      is_published: true,
+    }
+  }).sort((a, b) => b.year - a.year)
 
   // Filter by subject if specified
   if (subject) {
