@@ -64,6 +64,8 @@ interface ExamStore {
   textOverrides: Record<string, string>
   /** Artefact overrides: maps key (e.g. "q1:artefact", "q1:task:a:artefact") → replacement {component,data,caption} */
   artefactOverrides: Record<string, ArtefactSpec>
+  /** True while publishing overrides to Supabase. */
+  overridesSaving: boolean
 
   // Legacy compat — kept so existing components don't break
   candidate: CandidateInfo
@@ -133,6 +135,17 @@ interface ExamStore {
   /** Store an artefact override for a key like "q1:artefact". Pass null to clear (revert to original). */
   setArtefactOverride: (key: string, spec: ArtefactSpec | null) => void
 
+  /** Bulk-load published overrides for the current paper (from Supabase). */
+  loadOverrides: (payload: {
+    imageOverrides?: Record<string, string>
+    deletedImages?: Record<string, true>
+    textOverrides?: Record<string, string>
+    artefactOverrides?: Record<string, ArtefactSpec>
+  }) => void
+
+  /** Persist the current paper's overrides to Supabase (editors only). Returns true on success. */
+  saveOverrides: () => Promise<boolean>
+
   /** Append a graph data point to a question's graph canvas. */
   addGraphPoint: (qId: number, point: GraphPoint) => void
 
@@ -197,6 +210,7 @@ const initialState = {
   imageOverrides: {} as Record<string, string>,
   deletedImages: {} as Record<string, true>,
   textOverrides: {} as Record<string, string>,
+  overridesSaving: false,
   artefactOverrides: {} as Record<string, ArtefactSpec>,
   // Legacy compat
   candidate: { name: '', school: '' } as CandidateInfo,
@@ -395,6 +409,32 @@ export const useExamStore = create<ExamStore>((set, get) => ({
       if (spec === null) { delete next[key] } else { next[key] = spec }
       return { artefactOverrides: next }
     }),
+
+  loadOverrides: (payload) =>
+    set({
+      imageOverrides: payload.imageOverrides ?? {},
+      deletedImages: payload.deletedImages ?? {},
+      textOverrides: payload.textOverrides ?? {},
+      artefactOverrides: payload.artefactOverrides ?? {},
+    }),
+
+  saveOverrides: async () => {
+    const { paperId, imageOverrides, deletedImages, textOverrides, artefactOverrides } = get()
+    if (!paperId) return false
+    set({ overridesSaving: true })
+    try {
+      const res = await fetch(`/api/overrides/${encodeURIComponent(paperId)}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ imageOverrides, deletedImages, textOverrides, artefactOverrides }),
+      })
+      return res.ok
+    } catch {
+      return false
+    } finally {
+      set({ overridesSaving: false })
+    }
+  },
 
   // ---- Graph canvas --------------------------------------------------------
 

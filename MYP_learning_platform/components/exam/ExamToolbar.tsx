@@ -1,5 +1,5 @@
 'use client'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useExamStore } from '@/store/examStore'
 import { formatTime } from '@/lib/utils'
 import EditModeBanner from '@/components/exam/EditModeBanner'
@@ -25,6 +25,16 @@ export default function ExamToolbar() {
   const setEditMode = useExamStore((s) => s.setEditMode)
   const paperId = useExamStore((s) => s.paperId)
   const practiceMode = useExamStore((s) => s.practiceMode)
+  const saveOverrides = useExamStore((s) => s.saveOverrides)
+  const overridesSaving = useExamStore((s) => s.overridesSaving)
+  const [saved, setSaved] = useState(false)
+
+  async function handleSave() {
+    const ok = await saveOverrides()
+    setSaved(ok)
+    setTimeout(() => setSaved(false), 2500)
+    if (!ok) alert('Could not save — you must be signed in as an editor.')
+  }
 
   // Parse paperId → "Physics — May 2024"
   const paperLabel = (() => {
@@ -127,6 +137,23 @@ export default function ExamToolbar() {
         >
           {editMode ? '✏ EDIT' : '✏ Edit'}
         </button>
+
+        {/* Save published overrides (edit mode only) */}
+        {editMode && (
+          <button
+            onClick={handleSave}
+            disabled={overridesSaving}
+            title="Publish your edits (images, text, figures) so all viewers see them"
+            className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[11px] font-bold transition-all border disabled:opacity-60"
+            style={{
+              background: saved ? 'var(--success)' : 'var(--accent)',
+              color: 'var(--text-on-accent)',
+              border: '1px solid transparent',
+            }}
+          >
+            {overridesSaving ? '⏳ Saving…' : saved ? '✓ Saved' : '💾 Save'}
+          </button>
+        )}
 
         {/* Strike dots — hidden in practice and edit mode */}
         {!editMode && !practiceMode && (

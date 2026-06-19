@@ -36,13 +36,20 @@ import {
   SURFACE,
 } from './_figureKit'
 
-type Mode = 'lens' | 'mirror'
+type Mode = 'lens' | 'mirror' | 'refraction' | 'vision'
 
 export interface OpticsSimData {
   title?: string
   source?: string
   /** Which simulator to render. Defaults to 'lens'. */
   mode?: Mode
+  /** Refraction mode: refractive indices + media labels (n2 > n1 ⇒ bends toward normal). */
+  n1?: number
+  n2?: number
+  medium1?: string
+  medium2?: string
+  /** Refraction mode: initial angle of incidence from the normal, degrees. */
+  incidenceAngle?: number
   /** Focal length of the convex lens, in the same length unit as distances (default cm). */
   focalLength?: number
   /** Object (or candle) distance from the lens, same unit. */
@@ -461,9 +468,195 @@ function MirrorKaleidoscope({ data }: { data: OpticsSimData }) {
   )
 }
 
+/* ──────────────────────────── REFRACTION MODE ──────────────────────────── */
+/* Flat boundary between two media. The refracted ray is computed from Snell's law
+ * (n1 sinθ1 = n2 sinθ2), so the bend direction is correct by construction: into the
+ * denser medium (n2 > n1) it bends TOWARD the normal. Arrows point along the
+ * direction of travel (down into medium 2). */
+function RefractionMode({ data }: { data: OpticsSimData }) {
+  const n1 = data.n1 && data.n1 > 0 ? data.n1 : 1.0
+  const n2 = data.n2 && data.n2 > 0 ? data.n2 : 1.33
+  const m1 = data.medium1 ?? 'Air'
+  const m2 = data.medium2 ?? 'Water'
+  const [theta1, setTheta1] = useState<number>(() => Math.max(5, Math.min(85, data.incidenceAngle ?? 45)))
+
+  const boundaryY = 168
+  const hitX = W / 2
+  const RAY = 132
+  const sinR2 = (n1 / n2) * Math.sin((theta1 * Math.PI) / 180)
+  const tir = sinR2 > 1 // total internal reflection (only possible when n1 > n2)
+  const theta2 = tir ? 90 : (Math.asin(sinR2) * 180) / Math.PI
+  const r1 = (theta1 * Math.PI) / 180
+  const r2 = (theta2 * Math.PI) / 180
+
+  // incident ray comes from the upper-left and travels DOWN to the hit point
+  const incX = hitX - Math.sin(r1) * RAY
+  const incY = boundaryY - Math.cos(r1) * RAY
+  // refracted ray continues down-right into medium 2, bent toward the normal
+  const refX = hitX + Math.sin(r2) * RAY
+  const refY = boundaryY + Math.cos(r2) * RAY
+
+  return (
+    <div>
+      <svg viewBox={`0 0 ${W} ${H}`} className="block h-auto w-full" style={{ background: SURFACE, borderRadius: 10 }}>
+        <defs>
+          <marker id="rfArrow" markerWidth="11" markerHeight="11" refX="7" refY="3.5" orient="auto">
+            <path d="M0,0 L7,3.5 L0,7 Z" fill={PALETTE[0]} />
+          </marker>
+        </defs>
+        {/* two media */}
+        <rect x={0} y={0} width={W} height={boundaryY} fill="#eef4ff" />
+        <rect x={0} y={boundaryY} width={W} height={H - boundaryY} fill="#cfe0f3" />
+        <line x1={0} y1={boundaryY} x2={W} y2={boundaryY} stroke={INK} strokeWidth={2} />
+        {/* normal */}
+        <line x1={hitX} y1={boundaryY - 122} x2={hitX} y2={boundaryY + 122} stroke={SUB} strokeWidth={1.5} strokeDasharray="6 5" />
+        <text x={hitX + 7} y={boundaryY - 108} fontSize={11} fill={SUB}>normal</text>
+        {/* angle arcs */}
+        <path d={`M ${hitX} ${boundaryY - 42} A 42 42 0 0 0 ${hitX - Math.sin(r1) * 42} ${boundaryY - Math.cos(r1) * 42}`} fill="none" stroke={PALETTE[1]} strokeWidth={1.4} />
+        {!tir && <path d={`M ${hitX} ${boundaryY + 42} A 42 42 0 0 1 ${hitX + Math.sin(r2) * 42} ${boundaryY + Math.cos(r2) * 42}`} fill="none" stroke={PALETTE[3]} strokeWidth={1.4} />}
+        {/* incident ray → hit point (arrow points into the boundary) */}
+        <line x1={incX} y1={incY} x2={hitX} y2={boundaryY} stroke={PALETTE[0]} strokeWidth={3} markerEnd="url(#rfArrow)" />
+        {/* refracted ray into medium 2 */}
+        {!tir && <line x1={hitX} y1={boundaryY} x2={refX} y2={refY} stroke={PALETTE[0]} strokeWidth={3} markerEnd="url(#rfArrow)" />}
+        {/* labels */}
+        <text x={22} y={28} fontSize={14} fontWeight={700} fill="#33507a">{m1}  (n = {n1.toFixed(2)})</text>
+        <text x={22} y={H - 16} fontSize={14} fontWeight={700} fill="#33507a">{m2}  (n = {n2.toFixed(2)})</text>
+        <text x={hitX - 86} y={boundaryY - 50} fontSize={12} fill={PALETTE[1]} fontWeight={700}>θ₁ = {Math.round(theta1)}°</text>
+        {!tir && <text x={hitX + 20} y={boundaryY + 62} fontSize={12} fill={PALETTE[3]} fontWeight={700}>θ₂ = {Math.round(theta2)}°</text>}
+        <text x={(incX + hitX) / 2 - 40} y={(incY + boundaryY) / 2} fontSize={11} fill={PALETTE[0]} fontWeight={600}>incident ray</text>
+        {!tir && <text x={(refX + hitX) / 2 + 6} y={(refY + boundaryY) / 2 + 4} fontSize={11} fill={PALETTE[0]} fontWeight={600}>refracted ray</text>}
+        {tir && <text x={hitX} y={26} textAnchor="middle" fontSize={12} fontWeight={800} fill={PALETTE[3]}>total internal reflection</text>}
+      </svg>
+
+      <div className="mt-3 flex flex-wrap items-end gap-3">
+        <div className="min-w-[240px] flex-1">
+          <Slider label="Angle of incidence θ₁" min={5} max={85} step={1} value={theta1} onChange={(v) => setTheta1(Math.round(v))} unit="°" color={PALETTE[0]} />
+        </div>
+        <Readout label="incidence θ₁" value={Math.round(theta1)} unit="°" color={PALETTE[1]} />
+        <Readout label="refraction θ₂" value={tir ? '—' : Math.round(theta2)} unit="°" color={PALETTE[3]} />
+      </div>
+      <p className="mt-2 text-[11px]" style={{ color: SUB }}>
+        Snell&apos;s law: n₁ sin θ₁ = n₂ sin θ₂. Entering the denser medium (n₂ &gt; n₁) the ray bends <strong>towards</strong> the normal. The frequency stays constant; speed and wavelength decrease.
+      </p>
+    </div>
+  )
+}
+
+/* ──────────────────────────── VISION MODE ──────────────────────────── */
+/* Short-sightedness (myopia) and its correction with a DIVERGING (biconcave) lens.
+ * Toggle between the uncorrected eye (parallel rays focus IN FRONT of the retina) and
+ * the corrected eye (a biconcave lens diverges the rays first, so the eye focuses them
+ * exactly ON the retina). */
+function VisionMode({ data }: { data: OpticsSimData }) {
+  const [corrected, setCorrected] = useState(false)
+
+  const EX = 470 // eye centre x
+  const EY = 165 // optical axis y
+  const R = 84 // eyeball radius
+  const eyeLensX = EX - R + 6 // the eye's own converging lens (front of eye)
+  const retinaX = EX + R - 10 // back inner wall
+  const dlX = 250 // diverging correction lens x
+  const offsets = [-40, 0, 40] // parallel incoming-ray heights
+
+  // Uncorrected: the eye over-converges → focus lands short of the retina.
+  const focusX = corrected ? retinaX : EX + 18
+
+  return (
+    <div>
+      <svg viewBox="0 0 760 320" className="block h-auto w-full" style={{ background: SURFACE, borderRadius: 10 }}>
+        {/* optical axis */}
+        <line x1={40} y1={EY} x2={720} y2={EY} stroke="#cbd5e1" strokeWidth={1} strokeDasharray="3 6" />
+
+        {/* eyeball */}
+        <circle cx={EX} cy={EY} r={R} fill="#fdf3e0" stroke={INK} strokeWidth={2} />
+        {/* eye lens (front, converging) */}
+        <ellipse cx={eyeLensX} cy={EY} rx={9} ry={34} fill={`${PALETTE[4]}33`} stroke={PALETTE[4]} strokeWidth={2} />
+        {/* retina (back wall) */}
+        <path d={`M ${retinaX} ${EY - 54} A 60 60 0 0 1 ${retinaX} ${EY + 54}`} fill="none" stroke={PALETTE[3]} strokeWidth={3} />
+        <text x={EX + 42} y={EY - 60} fontSize={11} fill={PALETTE[3]} fontWeight={700}>retina</text>
+
+        {/* diverging correction lens (biconcave: thin middle, thick edges) — only when corrected */}
+        {corrected && (
+          <g>
+            <path
+              d={`M ${dlX - 7} ${EY - 50} Q ${dlX + 7} ${EY} ${dlX - 7} ${EY + 50} L ${dlX + 7} ${EY + 50} Q ${dlX - 7} ${EY} ${dlX + 7} ${EY - 50} Z`}
+              fill={`${PALETTE[1]}22`}
+              stroke={PALETTE[1]}
+              strokeWidth={2}
+            />
+            <text x={dlX} y={EY + 72} textAnchor="middle" fontSize={11} fill={PALETTE[1]} fontWeight={700}>diverging lens</text>
+          </g>
+        )}
+
+        {/* rays */}
+        {offsets.map((off, i) => {
+          // parallel incoming rays from the left
+          const startX = 60
+          const yIn = EY + off
+          // point where the ray meets the eye's front lens
+          const lensHitY = corrected ? EY + off * 1.32 : yIn // diverging lens spreads them before the eye
+          const segs: string[] = []
+          if (corrected) {
+            // in to diverging lens, then diverge, then to eye lens, then converge to retina
+            segs.push(`M ${startX} ${yIn} L ${dlX} ${yIn}`)
+            segs.push(`M ${dlX} ${yIn} L ${eyeLensX} ${lensHitY}`)
+            segs.push(`M ${eyeLensX} ${lensHitY} L ${focusX} ${EY}`)
+          } else {
+            // straight in to eye lens, then over-converge to a focus short of the retina
+            segs.push(`M ${startX} ${yIn} L ${eyeLensX} ${yIn}`)
+            segs.push(`M ${eyeLensX} ${yIn} L ${focusX} ${EY}`)
+            // after the early focus the rays cross and spread onto the retina (blur)
+            segs.push(`M ${focusX} ${EY} L ${retinaX} ${EY - off * 0.5}`)
+          }
+          return <path key={i} d={segs.join(' ')} fill="none" stroke={PALETTE[0]} strokeWidth={1.6} opacity={0.9} />
+        })}
+
+        {/* focus marker */}
+        <circle cx={focusX} cy={EY} r={3.5} fill={corrected ? PALETTE[3] : '#d33'} />
+        <text x={focusX} y={EY - 12} textAnchor="middle" fontSize={10} fill={corrected ? PALETTE[3] : '#d33'} fontWeight={700}>
+          {corrected ? 'focus on retina ✓' : 'focus in front of retina'}
+        </text>
+
+        <text x={60} y={EY - 64} fontSize={11} fill={PALETTE[0]} fontWeight={600}>parallel rays (distant object)</text>
+      </svg>
+
+      <div className="mt-3 flex items-center gap-3">
+        <Segmented<'uncorrected' | 'corrected'>
+          options={[
+            { value: 'uncorrected', label: 'Short-sighted eye' },
+            { value: 'corrected', label: 'With diverging lens' },
+          ]}
+          value={corrected ? 'corrected' : 'uncorrected'}
+          onChange={(v) => setCorrected(v === 'corrected')}
+        />
+        <FeedbackChip state={corrected ? 'correct' : 'idle'} />
+      </div>
+      <p className="mt-2 text-[11px]" style={{ color: SUB }}>
+        A short-sighted eye focuses light <strong>in front of</strong> the retina. A diverging (concave) lens spreads the rays out first, so the eye then brings them to a focus exactly <strong>on</strong> the retina.
+      </p>
+    </div>
+  )
+}
+
 /* ──────────────────────────── ROOT ──────────────────────────── */
 
 export default function OpticsSim({ data }: { data: OpticsSimData }) {
+  // Single-purpose modes render on their own (no lens/mirror tabs).
+  if (data.mode === 'refraction') {
+    return (
+      <FigureCard title={data.title} source={data.source} hint="Drag the slider to change the angle of incidence and watch the ray bend at the boundary.">
+        <RefractionMode data={data} />
+      </FigureCard>
+    )
+  }
+  if (data.mode === 'vision') {
+    return (
+      <FigureCard title={data.title} source={data.source} hint="Toggle the diverging lens to see how it moves the focus onto the retina.">
+        <VisionMode data={data} />
+      </FigureCard>
+    )
+  }
+
   const mode: Mode = data.mode === 'mirror' ? 'mirror' : 'lens'
   const [tab, setTab] = useState<Mode>(mode)
 

@@ -191,14 +191,22 @@ export default function QuestionImage({
   }
   // 4. original → EditableImage (preserves edit-mode toolbar)
   else if (image_type === 'original' && src) {
-    imageElement = (
-      <EditableImage
-        src={resolveAssetUrl(src)}
-        alt={alt ?? 'Question figure'}
-        className={className}
-        style={style}
-      />
-    )
+    // ponytail: launch-safety guard — never serve a raw `.png` "original" (an
+    // un-recreated IB screenshot) in production. The launched-papers allow-list
+    // already hides such papers; this catches strays. Dev still shows it so the
+    // recreation workflow can use it as a reference.
+    if (process.env.NODE_ENV === 'production' && /\.png(\?|#|$)/i.test(src)) {
+      imageElement = <Placeholder />
+    } else {
+      imageElement = (
+        <EditableImage
+          src={resolveAssetUrl(src)}
+          alt={alt ?? 'Question figure'}
+          className={className}
+          style={style}
+        />
+      )
+    }
   }
   // 5. pending / missing / no src → placeholder
   else {

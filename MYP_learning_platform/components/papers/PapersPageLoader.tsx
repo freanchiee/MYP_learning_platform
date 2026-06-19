@@ -3,6 +3,7 @@ import { createClient } from '@/lib/supabase/server'
 import { createAdminClient } from '@/lib/supabase/admin'
 import PapersGates from '@/components/papers/PapersGates'
 import { DEV_NO_AUTH } from '@/lib/dev-auth'
+import { isLaunched } from '@/data/launched-papers'
 
 interface Paper {
   id: string
@@ -232,6 +233,10 @@ export default async function PapersPageLoader({ subject }: Props) {
   ])
 
   let papers: Paper[] = papersRes.data ?? []
+
+  // Launch gate: hide any paper still carrying an IB screenshot (.png). Single
+  // source of truth = data/launched-papers.ts (regenerated as papers are recreated).
+  papers = papers.filter(p => isLaunched(p.id))
 
   // Apply local metadata overrides
   papers = papers.map(p => ({ ...p, ...(LOCAL_PAPER_META[p.id] ?? {}) }))

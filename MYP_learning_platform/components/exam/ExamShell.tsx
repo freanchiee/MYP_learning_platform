@@ -30,6 +30,7 @@ export default function ExamShell({ questions, paperId }: ExamShellProps) {
   const phase = useExamStore((s) => s.phase)
   const setAttemptId = useExamStore((s) => s.setAttemptId)
   const attemptId = useExamStore((s) => s.attemptId)
+  const loadOverrides = useExamStore((s) => s.loadOverrides)
   const initialized = useRef(false)
 
   useEffect(() => {
@@ -38,6 +39,16 @@ export default function ExamShell({ questions, paperId }: ExamShellProps) {
       initExam(questions, paperId)
     }
   }, [questions, paperId, initExam])
+
+  // Load any published editor overrides for this paper (images / text / figures).
+  useEffect(() => {
+    let cancelled = false
+    fetch(`/api/overrides/${encodeURIComponent(paperId)}`)
+      .then((r) => (r.ok ? r.json() : null))
+      .then((data) => { if (data && !cancelled) loadOverrides(data) })
+      .catch(() => {})
+    return () => { cancelled = true }
+  }, [paperId, loadOverrides])
 
   useEffect(() => {
     if (phase === 'results' && attemptId) {
