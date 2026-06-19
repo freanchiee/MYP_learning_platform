@@ -62,11 +62,12 @@ function parseInlineMd(text: string): React.ReactNode[] {
   })
 }
 
-/** Renders task text, turning \n•-prefixed lines into proper list items, and **bold** into <strong> */
+/** Renders task text: •-lists, **bold**, and markdown pipe tables → styled <table> */
 function renderTaskText(text: string) {
   const lines = text.split('\n')
   const out: React.ReactNode[] = []
   let bullets: string[] = []
+  let tableLines: string[] = []
 
   function flushBullets() {
     if (bullets.length === 0) return
@@ -82,8 +83,25 @@ function renderTaskText(text: string) {
     bullets = []
   }
 
+  function flushTable() {
+    if (tableLines.length >= 3) {
+      out.push(<div key={`tbl-${out.length}`}>{renderMarkdownTable(tableLines)}</div>)
+    } else {
+      tableLines.forEach(l => {
+        if (l.trim()) out.push(
+          <p key={`p-${out.length}`} className="text-sm leading-relaxed" style={{ fontFamily: SERIF, color: 'var(--text)' }}>
+            {parseInlineMd(l.trim())}
+          </p>
+        )
+      })
+    }
+    tableLines = []
+  }
+
   for (const raw of lines) {
     const line = raw.trim()
+    if (line.startsWith('|')) { flushBullets(); tableLines.push(line); continue }
+    if (tableLines.length > 0) flushTable()
     if (!line) { flushBullets(); continue }
     if (line.startsWith('•')) {
       bullets.push(line.slice(1).trim())
@@ -97,6 +115,7 @@ function renderTaskText(text: string) {
     }
   }
   flushBullets()
+  if (tableLines.length > 0) flushTable()
   return <div className="space-y-1.5">{out}</div>
 }
 
@@ -113,11 +132,11 @@ function renderMarkdownTable(lines: string[]): React.ReactNode {
 
   return (
     <div className="my-3 overflow-x-auto rounded-control" style={{ border: '1px solid var(--border)', boxShadow: 'var(--shadow-card)' }}>
-      <table className="min-w-full text-sm" style={{ fontFamily: SERIF, color: 'var(--text)' }}>
+      <table className="w-full border-collapse text-sm" style={{ fontFamily: SERIF, color: 'var(--text)' }}>
         <thead>
           <tr style={{ background: 'var(--surface-2)', borderBottom: '1px solid var(--border)' }}>
             {headers.map((h, i) => (
-              <th key={i} className="px-4 py-2 text-left text-xs font-semibold uppercase tracking-wide whitespace-nowrap" style={{ color: 'var(--text-muted)' }}>
+              <th key={i} className="px-3 py-2 text-left text-[11px] font-semibold uppercase tracking-wide align-bottom whitespace-normal break-words" style={{ color: 'var(--text-muted)' }}>
                 {parseInlineMd(h)}
               </th>
             ))}
@@ -127,7 +146,7 @@ function renderMarkdownTable(lines: string[]): React.ReactNode {
           {rows.map((row, ri) => (
             <tr key={ri} style={{ background: ri % 2 === 0 ? 'var(--surface)' : 'var(--surface-2)' }}>
               {row.map((cell, ci) => (
-                <td key={ci} className="px-4 py-2" style={{ color: 'var(--text)', borderTop: '1px solid var(--divider)' }}>
+                <td key={ci} className="px-3 py-2 align-top whitespace-normal break-words" style={{ color: 'var(--text)', borderTop: '1px solid var(--divider)' }}>
                   {parseInlineMd(cell)}
                 </td>
               ))}
