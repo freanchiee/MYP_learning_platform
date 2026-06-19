@@ -1,6 +1,22 @@
 import type { PaperMeta } from '@/data/papers/biology-may-2024/questions'
 import type { Question } from '@/lib/types'
 
+// ════════════════════════════════════════════════════════════════════════════
+// CHEMISTRY — November 2018 · VARIANT 2  (isomorphic to chemistry-nov-2018)
+// Every question re-tests the SAME construct (crit, command term, marks, task
+// structure, widget type/counts, tags) in a NEW industrial / environmental
+// context, with a self-contained data-driven INTERACTIVE artefact in each
+// question's context slot (no external image files). Every answer recomputed.
+// Distinct from v1 in BOTH scenario AND data.
+//   Q1 transition-metal periodic/structure:  Cobalt → Chromium (chrome plating / pigments)
+//   Q2 separation + moles + giant covalent:  glass recycling → e-waste screen-glass recycling (TiO₂)
+//   Q3 acid pH investigation (Crit B):        fruit juices → fizzy soft drinks
+//   Q4 organic data + structure (Crit C):     capsaicin/chillies → theobromine/chocolate
+//   Q5 neutralisation design (Crit B):        antacid remedies → swimming-pool acid neutralisers
+//   Q6 carbon footprint (Crit D):             meal types → building-material choice (wall)
+//   Q7 methane combustion + evaluate (Crit D): cow methane → landfill-gas capture for energy
+// ════════════════════════════════════════════════════════════════════════════
+
 export const paperMeta: PaperMeta = {
   id: 'chemistry-nov-2018-v2',
   subject: 'Chemistry',
@@ -12,18 +28,27 @@ export const paperMeta: PaperMeta = {
 }
 
 export const questions: Question[] = [
-  // ─── Q1: Manganese (Crit A, 11 marks) ─────────────────────────────────────
+  // ─── Q1: Chromium (Crit A, 11 marks) ────────────────────────────────────────
   {
     id: 1,
     crit: 'A',
     type: 'extended',
-    topic: 'Manganese — periodic table, atomic structure, bonding, compound nomenclature',
+    topic: 'Chromium — periodic table, atomic structure, bonding, compound nomenclature',
+    topicCanonical: 'Periodic Table & Atomic Structure',
+    topicGroup: 'Atomic Structure & Periodic Table',
     marks: 11,
-    stem: 'Manganese (Mn) has the atomic number 25 and the mass number 55. It is one of the transition metals and is widely used in steel production, dry-cell batteries, and as a pigment in ancient cave paintings. The main compounds used in industrial processes are MnO₂ (manganese(IV) oxide), MnO and MnCO₃. The permanganate ion MnO₄⁻ gives a distinctive purple colour to solutions of potassium permanganate.',
+    stem: 'Chromium (Cr) has the atomic number 24 and the mass number 52. It is one of the transition metals and gives the shiny, hard-wearing "chrome" plating on taps, tools and car parts, as well as the green of stained glass and the orange-red of artists\' pigments. Common chromium compounds include CrO, CrCO₃ and Cr₂O₃ (chrome green). Chromium(II) chloride forms a blue solution used in some metal-finishing baths.',
+    artefact: {
+      component: 'GenericSVG',
+      data: {
+        svg: '<svg viewBox="0 0 560 210" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><rect width="560" height="210" fill="#ffffff"/><text x="280" y="22" font-size="14" font-weight="700" text-anchor="middle" fill="#1f2d3a">Part of the periodic table — Period 4 transition metals</text><g><rect x="120" y="46" width="58" height="48" fill="#fff7ed" stroke="#5b6b78"/><text x="149" y="62" font-size="9" text-anchor="middle" fill="#64748b">Group 5</text><text x="149" y="80" font-size="16" font-weight="700" text-anchor="middle" fill="#e8590c">V</text><text x="149" y="91" font-size="8" text-anchor="middle" fill="#64748b">vanadium · 23</text></g><g><rect x="182" y="46" width="58" height="48" fill="#eef4f7" stroke="#5b6b78" stroke-width="2"/><text x="211" y="62" font-size="9" text-anchor="middle" fill="#64748b">Group 6</text><text x="211" y="80" font-size="16" font-weight="700" text-anchor="middle" fill="#0b7285">Cr</text><text x="211" y="91" font-size="8" text-anchor="middle" fill="#64748b">chromium · 24</text></g><g><rect x="244" y="46" width="58" height="48" fill="#fff7ed" stroke="#5b6b78"/><text x="273" y="62" font-size="9" text-anchor="middle" fill="#64748b">Group 7</text><text x="273" y="80" font-size="16" font-weight="700" text-anchor="middle" fill="#e8590c">Mn</text><text x="273" y="91" font-size="8" text-anchor="middle" fill="#64748b">manganese · 25</text></g><g><rect x="306" y="46" width="58" height="48" fill="#fff7ed" stroke="#5b6b78"/><text x="335" y="62" font-size="9" text-anchor="middle" fill="#64748b">Group 8</text><text x="335" y="80" font-size="16" font-weight="700" text-anchor="middle" fill="#e8590c">Fe</text><text x="335" y="91" font-size="8" text-anchor="middle" fill="#64748b">iron · 26</text></g><text x="60" y="124" font-size="11" fill="#475569">Cr-52 nucleus:  24 protons + 28 neutrons (mass number 52).</text><text x="60" y="142" font-size="11" fill="#475569">Chromium is a transition metal in the d-block (Period 4).</text><text x="60" y="166" font-size="10" fill="#94a3ad">Period number = number of occupied electron shells.</text><text x="60" y="184" font-size="10" fill="#94a3ad">Transition metals share variable oxidation states and form coloured compounds.</text></svg>',
+      },
+      caption: 'Chromium (Cr) sits among the Period 4 transition metals, between vanadium and manganese.',
+    },
     tasks: [
       {
         label: 'a',
-        text: 'Use the periodic table to **state** which period manganese is in.',
+        text: 'Use the periodic table to **state** which period chromium is in.',
         marks: 1,
         ph: 'Period 4',
         widget: 'radio_select',
@@ -31,7 +56,7 @@ export const questions: Question[] = [
       },
       {
         label: 'b',
-        text: '**Select** the block of the periodic table in which manganese appears.',
+        text: '**Select** the block of the periodic table in which chromium appears.',
         marks: 1,
         ph: 'Transition metals',
         widget: 'radio_select',
@@ -39,59 +64,72 @@ export const questions: Question[] = [
       },
       {
         label: 'c',
-        text: '**Identify** two properties that manganese shares with other elements in the same block of the periodic table.',
+        text: '**Identify** two properties that chromium shares with other elements in the same block of the periodic table.',
         marks: 2,
         ph: 'Variable oxidation state; forms coloured compounds; any metallic property',
       },
       {
         label: 'd',
-        text: 'Manganese can form Mn²⁺ ions. **State** the number of protons, neutrons and electrons in a Mn²⁺ ion formed from manganese-55.',
+        text: 'Chromium can form Cr²⁺ ions. **State** the number of protons, neutrons and electrons in a Cr²⁺ ion.',
         marks: 3,
-        ph: 'Protons 25; Neutrons 30; Electrons 23',
+        ph: 'Protons 24; Neutrons 28; Electrons 22',
       },
       {
         label: 'e',
-        text: 'Manganese(II) chloride is used in the preparation of other manganese compounds. **State** the formula for manganese(II) chloride and **state** the type of bonding found in this compound.',
+        text: 'Chromium(II) chloride is used in some metal-finishing baths. **State** the formula for chromium(II) chloride and **state** the type of bonding found in this compound.',
         marks: 2,
-        ph: 'MnCl₂; ionic bonding',
+        ph: 'CrCl₂; ionic bonding',
         widget: 'radio_select',
         widgetOptions: ['ionic', 'covalent', 'metallic', 'hydrogen'],
       },
       {
         label: 'f',
-        text: '**State** the names for the compounds MnO and MnCO₃.',
+        text: '**State** the names for the compounds CrO and CrCO₃.',
         marks: 2,
-        ph: 'MnO: manganese(II) oxide; MnCO₃: manganese(II) carbonate',
+        ph: 'CrO: chromium(II) oxide; CrCO₃: chromium(II) carbonate',
       },
     ],
   },
 
-  // ─── Q2: Glass Recycling — TiO₂ in Byzantine mosaic glass (Crit A, 17 marks) ─
+  // ─── Q2: E-waste Screen Glass Recycling (Crit A, 17 marks) ──────────────────
   {
     id: 2,
     crit: 'A',
     type: 'extended',
-    topic: 'Glass recycling — separation, TiO₂ formula, molar mass, moles, SiO₂ bonding',
+    topic: 'E-waste recycling — separation, TiO₂ formula, molar mass, moles, SiO₂ bonding',
+    topicCanonical: 'Moles & Stoichiometry',
+    topicGroup: 'Quantitative Chemistry',
     marks: 17,
-    stem: 'Glass recycling plants receive mixed waste containing glass bottles, steel lids, and plastic labels. Before the glass is recycled it has to be processed to remove unwanted components. Chemists analyse ancient glass to trace its historical origins. The following table compares the percentage chemical composition by mass of four types of glass: Laboratory glass, Venetian glass, Optical crystal glass, and Ancient Byzantine mosaic glass. A compound called TiO₂ (titania) appears only in ancient Byzantine mosaic glass. Silicon oxide is the major component in sand and glass.',
-    figImages: [
-      '/images/papers/chemistry-nov-2018/page-05.png',
-      '/images/papers/chemistry-nov-2018/page-06.png',
-      '/images/papers/chemistry-nov-2018/page-07.png',
-    ],
+    stem: 'An electronics recycling plant recovers the glass from old phone and tablet screens. Each cracked screen module has a frame held together with small steel fixing screws and a flexible plastic backing film bonded to the glass. Before the glass can be re-melted into new screen glass, the steel screws and the plastic film must be separated out. The table in the figure gives the percentage composition by mass of the metal-oxide additives and the silica (SiO₂) base in four types of display glass — a basic soda-lime glass, an aluminosilicate phone glass, a borosilicate camera-lens glass and an anti-glare coated screen glass. Silicon dioxide (silica) is the major component of all of them.',
+    artefact: {
+      component: 'DataTable',
+      data: {
+        headers: ['Component', 'Soda-lime / %', 'Aluminosilicate / %', 'Borosilicate / %', 'Anti-glare coated / %'],
+        rows: [
+          ['SiO₂ (silica)', '72.0', '63.0', '80.0', '60.0'],
+          ['Al₂O₃ (alumina)', '1.5', '17.0', '2.0', '14.0'],
+          ['Na₂O (soda)', '14.0', '13.0', '4.0', '11.0'],
+          ['CaO (lime)', '9.0', '4.0', '0.0', '5.0'],
+          ['B₂O₃ (boron oxide)', '0.0', '0.0', '13.0', '0.0'],
+          ['MgO (magnesia)', '3.5', '3.0', '1.0', '5.0'],
+          ['TiO₂ (titanium dioxide)', '0.0', '0.0', '0.0', '5.0'],
+        ],
+      },
+      caption: 'Percentage composition by mass of four display glasses. TiO₂ forms the anti-glare optical coating.',
+    },
     tasks: [
       {
         label: 'a',
-        text: 'Before the glass is recycled it has to be processed to remove unwanted components. **Select** which property could be used to separate each component.',
+        text: 'Before the screen glass is re-melted it has to be processed to remove unwanted components. **Select** which property could be used to separate each component.',
         marks: 3,
-        ph: 'Plastic: dissolves in organic solvent; Steel: magnetic; Glass: sinks in water',
+        ph: 'Plastic backing film: dissolves in organic solvent; Steel screws in frame: magnetic; Glass screen: sinks in water',
         widget: 'inline_dropdown_select',
-        widgetItems: ['Plastic label', 'Steel lid', 'Glass bottle'],
+        widgetItems: ['Plastic backing film', 'Steel screws in frame', 'Glass screen'],
         widgetOptions: ['dissolves in water', 'magnetic', 'dissolves in organic solvent', 'sinks in water'],
       },
       {
         label: 'b',
-        text: 'Using the data in the table, **identify** the chemical formula of the compound which is only present in ancient Byzantine mosaic glass.',
+        text: 'Using the data in the table, **identify** the chemical formula of the additive compound which is only present in the anti-glare coated glass.',
         marks: 1,
         ph: 'TiO₂',
       },
@@ -103,226 +141,297 @@ export const questions: Question[] = [
       },
       {
         label: 'd',
-        text: 'An ancient Byzantine glass mosaic tile has a mass of 500 g. The tile contains 0.6% by mass of the compound from part (b). **Calculate** the number of moles of that compound in the tile. Give your answer to three significant figures.',
+        text: 'A sample of crushed anti-glare coated glass has a mass of 250 g. **Calculate** the number of moles of the compound from part (b) that are present in the sample. Give your answer to three significant figures.',
         marks: 3,
-        ph: 'mass = 0.6/100 × 500 = 3.0 g; n = 3.0/80 = 0.0375 mol = 3.75 × 10⁻² mol',
+        ph: 'n = 12.5/80 = 0.156 mol (5% of 250 g = 12.5 g)',
       },
       {
         label: 'e',
-        text: 'Silicon oxide is the major component in sand and glass and has the structure shown in the diagram. **State** the type of bonding found in silicon oxide and **outline** how the bond is formed.',
+        text: 'Silicon dioxide is the major component of the glass and has a giant structure. **State** the type of bonding found in silicon dioxide and **outline** how the bond is formed.',
         marks: 2,
         ph: 'Covalent; electrons shared between silicon and oxygen atoms',
-        figImages: ['/images/papers/chemistry-nov-2018/page-07.png'],
         widget: 'radio_select',
         widgetOptions: ['Covalent', 'Ionic', 'Metallic', 'Hydrogen'],
       },
       {
         label: 'f',
-        text: '**State** if silicon oxide is soluble in water. **Justify** your answer.',
+        text: '**State** if silicon dioxide is soluble in water. **Justify** your answer.',
         marks: 2,
         ph: 'Insoluble; giant covalent structure — strong bonds throughout will not dissolve',
       },
       {
         label: 'g',
-        text: 'Glass bottles can be recycled to make sand, which can replace eroded beaches, and plastic bottles recycled to make pellets for road construction. **Suggest** why recycling glass and plastics would be better for the environment than burying used bottles as waste.',
+        text: 'Recovered screen glass can be re-melted into new glass and the aluminium frames can be re-smelted, instead of dumping the whole module in electronic-waste landfill. **Suggest** why recycling the glass and metal would be better for the environment than burying old screens as e-waste.',
         marks: 3,
-        ph: 'Saves beaches; preserves biodiversity; conserves raw materials; improves sustainability',
+        ph: 'Conserves sand/ore raw materials; avoids toxic e-waste leaching; saves smelting energy; improves sustainability',
       },
     ],
   },
 
-  // ─── Q3: Carbonated Drink pH Investigation (Crit B, 21 marks) ─────────────
+  // ─── Q3: Fizzy Soft Drink Acidity Investigation (Crit B→C, 21 marks) ────────
   {
     id: 3,
     crit: 'B',
     type: 'extended',
-    topic: 'Carbonated drink acidity — variables, research question, pH data analysis, indicator colours',
+    topic: 'Soft drink acidity — variables, research question, pH data analysis, indicator colours',
+    topicCanonical: 'Acids, Bases & Salts',
+    topicGroup: 'Chemical Reactions',
     marks: 21,
-    stem: 'The increase in global travel has an impact on the health and well-being of individuals. Michelle, Yuri and Pedro have recently moved to a new country and enjoy carbonated drinks. Carbonated drinks are acidic due to dissolved carbon dioxide and added acids. Carbonated drinks can increase the acidity in the stomach, causing heartburn and tooth enamel erosion. The friends investigated which carbonated drink is most acidic. Using each of the following drinks — cola, lemon-lime soda, ginger beer, tonic water, sparkling water — they poured 100 cm³ into a 250 cm³ beaker, then used a pH probe to measure the pH. The pH readings were: cola 2.5, lemon-lime soda 2.7, ginger beer 2.9, tonic water 3.0, sparkling water 4.2.',
-    figImages: [
-      '/images/papers/chemistry-nov-2018/page-09.png',
-      '/images/papers/chemistry-nov-2018/page-10.png',
-      '/images/papers/chemistry-nov-2018/page-11.png',
-      '/images/papers/chemistry-nov-2018/page-12.png',
-    ],
+    stem: 'Fizzy soft drinks are acidic because they contain dissolved carbon dioxide (carbonic acid) and added phosphoric or citric acid. The lower the pH of a drink, the more it can erode tooth enamel over time. A dentist asks Nadia, Tom and Priya to compare five chilled fizzy drinks from a vending machine — cola, lemonade, orange soda, an energy drink and tonic water — to find out which is the most acidic. They used the following method: pour 50 cm³ of each freshly opened drink into a clean 100 cm³ beaker, let the bubbles settle for 1 minute at room temperature, then dip a calibrated pH probe into each and record the reading. The pH readings were: cola 2.5, lemonade 3.0, orange soda 3.3, energy drink 2.8, tonic water 3.9.',
+    artefact: {
+      component: 'DataTable',
+      data: {
+        headers: ['Fizzy drink', 'pH reading'],
+        rows: [
+          ['Cola', '2.5'],
+          ['Lemonade', '3.0'],
+          ['Orange soda', '3.3'],
+          ['Energy drink', '2.8'],
+          ['Tonic water', '3.9'],
+        ],
+      },
+      caption: 'pH of five chilled fizzy drinks measured with a calibrated pH probe at room temperature.',
+    },
     tasks: [
       {
         label: 'a',
         text: '**State** the variables in this experiment: independent variable, dependent variable, and at least two control variables.',
         marks: 4,
-        ph: 'IV: type of carbonated drink; DV: pH; CV: volume of drink, probe calibration, temperature',
+        ph: 'IV: type of drink; DV: pH; CV: volume of drink, temperature, settling time, same probe',
       },
       {
         label: 'b',
         text: '**State** the research question that this experiment would investigate.',
         marks: 1,
-        ph: 'How does the type of carbonated drink affect the pH of the drink?',
+        ph: 'How does the type of fizzy drink affect the pH of the drink?',
       },
       {
         label: 'c',
-        text: 'Using data in the table, **identify** the carbonated drink and pH that could cause the most severe heartburn. **Justify** your answer using scientific reasoning.',
+        text: 'Using data in the table, **identify** the drink and pH that would be most damaging to tooth enamel. **Justify** your answer using scientific reasoning.',
         marks: 3,
-        ph: 'Cola pH 2.5; lowest pH / highest acidity; lower pH = more [H⁺] ions in stomach',
-        figImages: ['/images/papers/chemistry-nov-2018/page-13.png'],
+        ph: 'Cola pH 2.5; lowest pH / highest acidity; lower pH = more acid attacking enamel',
       },
       {
         label: 'd',
         text: '**Present** the data in a graph. You need to give your graph an appropriate title and label the axes.',
         marks: 5,
-        ph: 'Bar chart; title links DV with IV; x-axis type of carbonated drink; y-axis pH',
+        ph: 'Bar chart; title links DV with IV; x-axis type of drink; y-axis pH',
       },
       {
         label: 'e',
         text: '**Suggest** an extension for this investigation.',
         marks: 1,
-        ph: 'Test flat vs carbonated versions of same drink / different temperatures / different brands',
+        ph: 'Test sugar-free versions / effect of letting the drink go flat / effect of temperature on pH',
       },
       {
         label: 'f',
-        text: 'The data in the table is from one trial for each drink. **Outline** the benefits of carrying out more than one trial for each experiment.',
+        text: 'The data in the table is from one reading for each drink. **Outline** the benefits of carrying out more than one trial for each experiment.',
         marks: 2,
-        ph: 'Calculate the mean; reduces experimental errors; increases accuracy and reliability',
+        ph: 'Calculate the mean; reduces experimental errors; increases reliability',
       },
       {
         label: 'g',
-        text: 'Instead of using a pH probe, indicators can be used to identify the pH of solutions. Cherry juice can be used as an indicator — its colour changes for different pH values as shown in the scale. Cherry juice was added to four beakers containing different clear, odourless liquids. Use information from the scale to **select** the colour that would be seen in each beaker.',
+        text: 'Instead of using a pH probe, indicators can be used to identify the pH of solutions. Beetroot extract can be used as an indicator — it turns bright red in strong acid, magenta in weak acid, purple when neutral, and yellow-brown in alkali, as shown on the scale. Beetroot extract was added to four beakers containing different clear, odourless liquids. Use information from the scale to **select** the colour that would be seen in each beaker.',
         marks: 4,
-        ph: 'pH 2.8=Red; pH 9.0=Green; pH 6.0=Purple; pH 4.5=Orange',
-        figImages: [
-          '/images/papers/chemistry-nov-2018/page-15.png',
-          '/images/papers/chemistry-nov-2018/page-16.png',
-        ],
+        ph: 'pH 1.5=Red; pH 9.0=Yellow; pH 7.0=Purple; pH 4.0=Magenta',
+        artefact: {
+          component: 'GenericSVG',
+          data: {
+            svg: '<svg viewBox="0 0 560 122" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><rect width="560" height="122" fill="#ffffff"/><text x="280" y="20" font-size="13" font-weight="700" text-anchor="middle" fill="#1f2d3a">Beetroot indicator colour scale</text><g><rect x="40" y="34" width="120" height="30" fill="#dc2626"/><rect x="160" y="34" width="120" height="30" fill="#db2777"/><rect x="280" y="34" width="120" height="30" fill="#7c3aed"/><rect x="400" y="34" width="120" height="30" fill="#ca8a04"/></g><g font-size="9" fill="#ffffff" text-anchor="middle" font-weight="700"><text x="100" y="53">Red</text><text x="220" y="53">Magenta</text><text x="340" y="53">Purple</text><text x="460" y="53">Yellow</text></g><g font-size="9" fill="#475569" text-anchor="middle"><text x="100" y="80">pH 1–3</text><text x="220" y="80">pH 4–5</text><text x="340" y="80">pH 6–7</text><text x="460" y="80">pH 8–12</text></g><g font-size="9" fill="#64748b" text-anchor="middle"><text x="100" y="98">strong acid</text><text x="220" y="98">weak acid</text><text x="340" y="98">neutral</text><text x="460" y="98">alkaline</text></g></svg>',
+          },
+          caption: 'Beetroot indicator: red (pH 1–3), magenta (pH 4–5), purple (pH 6–7), yellow (pH 8–12).',
+        },
         widget: 'inline_dropdown_select',
-        widgetItems: ['Beaker pH 2.8', 'Beaker pH 9.0', 'Beaker pH 6.0', 'Beaker pH 4.5'],
-        widgetOptions: ['Red', 'Orange', 'Purple', 'Green'],
+        widgetItems: ['Beaker pH 1.5', 'Beaker pH 9.0', 'Beaker pH 7.0', 'Beaker pH 4.0'],
+        widgetOptions: ['Red', 'Magenta', 'Purple', 'Yellow'],
       },
       {
         label: 'h',
-        text: '**State** why cherry juice cannot be used to determine the exact pH of carbonated drinks.',
+        text: '**State** why beetroot extract cannot be used to determine the exact pH of a soft drink.',
         marks: 1,
-        ph: 'Indicator gives a range of pH / colour change would not be visible in dark carbonated drinks',
+        ph: 'Indicator gives a range of pH / colour change would not be visible in a coloured drink (e.g. cola)',
       },
     ],
   },
 
-  // ─── Q4: Capsaicin — V2 variants (Crit C, 9 marks) ────────────────────────
+  // ─── Q4: Theobromine in Chocolate (Crit C, 9 marks) ────────────────────────
   {
     id: 4,
     crit: 'C',
     type: 'extended',
-    topic: 'Capsaicin — data analysis, hypothesis validity, molecular structures, hypothesis formulation',
+    topic: 'Theobromine — data analysis, hypothesis validity, molecular structures, hypothesis formulation',
+    topicCanonical: 'Organic Chemistry & Fuels',
+    topicGroup: 'Organic Chemistry',
     marks: 9,
-    stem: 'A compound called capsaicin gives the spicy flavour to chilli peppers. Scientists say there may be some evidence that capsaicin triggers stomach acid production. Chromatography was used to measure the capsaicin content in four different chilli peppers. Michelle, Yuri and Pedro want to find out which of the following is the spiciest: Trinidad Moruga Scorpion, Habanero pepper, Cayenne pepper, Pasilla pepper. Before getting the results, Michelle predicted: "The Cayenne pepper will have the most capsaicin as it is the most commonly used pepper in hot sauce."',
-    figImages: [
-      '/images/papers/chemistry-nov-2018/page-17.png',
-      '/images/papers/chemistry-nov-2018/page-18.png',
-    ],
+    stem: 'Theobromine is the bitter stimulant compound in chocolate; the more cocoa solids a chocolate contains, the more theobromine it has. Theobromine is mildly stimulating to people but toxic to dogs. High-performance liquid chromatography (HPLC) was used to measure the theobromine content of four chocolate products: white chocolate, milk chocolate, dark chocolate and pure cocoa nibs. Nadia, Tom and Priya want to find out which product contains the most theobromine. Before the laboratory results came back, Tom predicted: "Milk chocolate will contain the most theobromine because it is the most popular and the sweetest of all the products."',
+    artefact: {
+      component: 'RateSim',
+      data: {
+        title: 'Theobromine content measured by HPLC',
+        mode: 'bars',
+        variable: 'Chocolate product (per 50 g)',
+        metric: 'Theobromine content / mg per 50 g',
+        bars: [
+          { label: 'white', value: 5 },
+          { label: 'milk', value: 75 },
+          { label: 'dark', value: 280 },
+          { label: 'cocoa nibs', value: 540 },
+        ],
+        note: 'Cocoa nibs have the highest theobromine content; white chocolate the lowest.',
+      },
+      caption: 'Theobromine content of four chocolate products (mg per 50 g) measured by HPLC.',
+    },
     tasks: [
       {
         label: 'a',
-        text: '**Analyse** the graph and put the chilli peppers in order of how spicy they are, from most spicy (top) to least spicy (bottom).',
+        text: '**Analyse** the graph and put the chocolate products in order of how much theobromine they contain, from most (top) to least (bottom).',
         marks: 2,
-        ph: 'Most→Least: Trinidad Moruga Scorpion, Habanero, Cayenne, Pasilla',
+        ph: 'Most→Least: Cocoa nibs, Dark, Milk, White (based on theobromine content)',
         widget: 'match_drag_drop',
-        widgetItems: ['Cayenne pepper', 'Habanero pepper', 'Pasilla pepper', 'Trinidad Moruga Scorpion'],
+        widgetItems: ['Cocoa nibs', 'Dark chocolate', 'Milk chocolate', 'White chocolate'],
       },
       {
         label: 'b',
-        text: 'Use the data from the graph to **comment** on the validity of Michelle\'s prediction. **Justify** your answer.',
+        text: 'Use the data from the graph to **comment** on the validity of Tom\'s prediction. **Justify** your answer.',
         marks: 2,
-        ph: 'Data shows Trinidad Moruga Scorpion has most capsaicin; prediction NOT valid — Cayenne is third',
-        figImages: ['/images/papers/chemistry-nov-2018/page-19.png'],
+        ph: 'Data shows cocoa nibs have most theobromine; prediction (milk chocolate) is NOT valid',
       },
       {
         label: 'c',
-        text: 'The Scoville scale is a measurement of the spiciness of foods. The following structures show two commonly occurring members of the capsaicin family. The first structure has a Scoville heat unit of 16 000 000 and the second has 9 100 000. **Identify** two differences in the structures that cause this difference in Scoville heat measurement.',
+        text: 'Theobromine belongs to a family of compounds called methylxanthines. The two structures shown below are members of this family found in chocolate. The first has a stimulant strength rating of 100 and the second a rating of 30. **Identify** two differences in the structures that cause this difference in stimulant strength.',
         marks: 2,
-        ph: 'C=C double bond (alkene) in compound 1; longer carbon chain in compound 1',
-        figImages: ['/images/papers/chemistry-nov-2018/page-19.png'],
+        ph: 'Compound 1 has an extra methyl (–CH₃) group; compound 1 has one more N–CH₃ substitution on the ring',
+        artefact: {
+          component: 'GenericSVG',
+          data: {
+            svg: '<svg viewBox="0 0 560 180" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><rect width="560" height="180" fill="#ffffff"/><text x="140" y="22" font-size="12" font-weight="700" text-anchor="middle" fill="#1f2d3a">Compound 1 (rating 100)</text><text x="420" y="22" font-size="12" font-weight="700" text-anchor="middle" fill="#1f2d3a">Compound 2 (rating 30)</text><g stroke="#334155" stroke-width="1.5" fill="none"><polygon points="90,70 130,50 170,70 170,110 130,130 90,110" /><polygon points="170,70 210,55 245,80 230,120 190,125 170,110" /></g><g stroke="#334155" stroke-width="1.5" fill="none"><polygon points="370,70 410,50 450,70 450,110 410,130 370,110" /><polygon points="450,70 490,55 525,80 510,120 470,125 450,110" /></g><g font-size="11" fill="#0b7285" font-weight="700"><text x="60" y="58">CH₃</text><text x="60" y="120">N</text><text x="128" y="150">CH₃</text><text x="250" y="70">CH₃</text></g><g font-size="11" fill="#94a3ad" font-weight="700"><text x="345" y="120">N</text><text x="408" y="150">CH₃</text><text x="530" y="70">CH₃</text></g><line x1="78" y1="62" x2="92" y2="70" stroke="#0b7285" stroke-width="1.5"/><text x="130" y="170" font-size="9" fill="#475569" text-anchor="middle">three –CH₃ groups (extra N–CH₃ on the left ring)</text><text x="420" y="170" font-size="9" fill="#475569" text-anchor="middle">two –CH₃ groups (one N–H instead of N–CH₃)</text></svg>',
+          },
+          caption: 'Two methylxanthines: compound 1 carries an extra N–CH₃ (methyl) group compared with compound 2.',
+        },
       },
       {
         label: 'd',
-        text: 'Capsaicin has a melting point of 65 °C and a boiling point of 210 °C. In the liquid state, capsaicin evaporates easily. Capsaicin can be found in Habanero peppers. There are several ways in which Habanero peppers can be added to food: raw; simmered in a sauce at 90 °C; stir-fried in oil (oil reaches temperatures above 210 °C). **Formulate** a hypothesis to identify which method of food preparation will produce food with the highest spiciness when using the same mass of Habanero pepper.',
+        text: 'Theobromine has a melting point of 357 °C and dissolves more readily into hotter water. Hot chocolate can be made from the same mass of cocoa powder using: cold milk (about 5 °C); warm milk (about 50 °C); freshly boiled milk (about 90 °C). **Formulate** a hypothesis to identify which method will produce the drink with the highest theobromine content when using the same mass of cocoa powder.',
         marks: 3,
-        ph: 'If raw (lowest temperature) → highest spiciness; capsaicin will not evaporate or be destroyed',
+        ph: 'If milk temperature is high (90 °C) → highest theobromine; more theobromine dissolves at higher temperature',
       },
     ],
   },
 
-  // ─── Q5: Heartburn Remedy Design — V2 variants (Crit B, 19 marks) ──────────
+  // ─── Q5: Swimming-Pool Acid Neutraliser Design (Crit B, 19 marks) ──────────
   {
     id: 5,
     crit: 'B',
     type: 'extended',
-    topic: 'Heartburn remedies — Crit B investigation design, neutralisation of antacids',
+    topic: 'Pool acid neutralisers — Crit B investigation design, neutralisation of metal carbonates',
+    topicCanonical: 'Acids, Bases & Salts',
+    topicGroup: 'Chemical Reactions',
     marks: 19,
-    stem: 'There are many treatments that can be used to stop the pain of heartburn. Some of these treatments contain metal hydroxides and carbonates which neutralise the stomach acid. The reaction of metal carbonates with acids is: metal carbonate + acid → salt + water + carbon dioxide. The following heartburn remedies are available: Milk of magnesia (magnesium hydroxide, Mg(OH)₂), Calcium carbonate tablets (CaCO₃), Alka-Seltzer tablets (sodium bicarbonate + citric acid), Dolomite powder (calcium magnesium carbonate). Michelle, Yuri and Pedro are interested to find out which heartburn remedy will neutralise the acid most quickly. You are provided with: 250 cm³ of 0.1 mol dm⁻³ aqueous hydrochloric acid; 50 cm³ beakers; milk of magnesia; calcium carbonate tablets; Alka-Seltzer tablets; dolomite powder; 25 cm³ 0.1 mol dm⁻³ HCl (aq).',
-    figImages: [
-      '/images/papers/chemistry-nov-2018/page-20.png',
-      '/images/papers/chemistry-nov-2018/page-21.png',
-    ],
+    stem: 'When the water in a swimming pool becomes too acidic it irritates swimmers\' eyes and corrodes the metal pipework, so pool operators add an alkaline "pH increaser" to neutralise the acid. Many of these products are metal carbonates, which neutralise acid by the reaction: metal carbonate + acid → salt + water + carbon dioxide. Common choices are sodium carbonate (soda ash), calcium carbonate (ground limestone) and sodium hydrogen carbonate (bicarbonate of soda). Nadia, Tom and Priya want to find out which carbonate neutralises the acidic pool water the most quickly. You are provided with: 250 cm³ of dilute sulfuric acid at the pool\'s acidity (0.05 mol dm⁻³); 50 cm³ beakers; a balance; a stopwatch; a pH probe; samples of each carbonate; safety goggles and gloves.',
+    artefact: {
+      component: 'RateSim',
+      data: {
+        title: 'Carbon dioxide released as carbonates neutralise the acidic water',
+        xLabel: 'Time / s',
+        yLabel: 'Volume of CO₂ gas / cm³',
+        xAxis: { label: 'Time / s', min: 0, max: 120, tick: 20 },
+        yAxis: { label: 'Volume of CO₂ / cm³', min: 0, max: 60, tick: 10 },
+        reaction: 'metal carbonate + acid → salt + H₂O + CO₂',
+        options: [
+          { label: 'Sodium carbonate', color: 'teal', ratePerSec: 0.85, plateauVolume: 50 },
+          { label: 'Sodium bicarbonate', color: 'orange', ratePerSec: 0.5, plateauVolume: 50 },
+          { label: 'Calcium carbonate', color: 'purple', ratePerSec: 0.25, plateauVolume: 50 },
+        ],
+        note: 'A steeper curve means a faster neutralisation. The carbonate whose fizzing finishes first neutralises the acid quickest.',
+      },
+      caption: 'Each carbonate gives a different reaction curve; the steeper the line, the faster the acid is neutralised.',
+    },
     tasks: [
       {
         label: '',
-        text: '**Design** an investigation to find out which heartburn remedy will neutralise the acid the most quickly. In your answer, you should include: an identification of the variables; a list of any additional equipment you will need; the method you will follow; details of how you will use your data to decide which treatment will neutralise the acid most quickly; a statement of any assumptions you have made; how you will ensure that your method is safe.',
+        text: '**Design** an investigation to find out which carbonate will neutralise the acidic water the most quickly. In your answer, you should include: an identification of the variables; a list of any additional equipment you will need; the method you will follow; details of how you will use your data to decide which carbonate neutralises the acid most quickly; a statement of any assumptions you have made; how you will ensure that your method is safe.',
         marks: 19,
-        ph: 'Variables, equipment, method, repeats, safety with HCl, plan to compare neutralisation times',
+        ph: 'Variables, equipment, method, repeats, safety with acid, plan to compare neutralisation times',
       },
     ],
   },
 
-  // ─── Q6: Food Choices and Carbon Footprint — chicken meal (Crit D, 7 marks) ─
+  // ─── Q6: Building Materials and Carbon Footprint (Crit D, 7 marks) ─────────
   {
     id: 6,
     crit: 'D',
     type: 'extended',
-    topic: 'Carbon footprint — food supply chain, chicken vs vegetable-based diet comparison',
+    topic: 'Carbon footprint — building-material choice for a wall compared',
+    topicCanonical: 'Environmental Impact & Sustainability',
+    topicGroup: 'Environmental Chemistry',
     marks: 7,
-    stem: 'A video gives some information about food choices, including information about vegetable-based and meat-based diets. Different foods have different carbon footprints. The table shows the carbon footprint for producing 1 kg of food or 4.2 kJ of food energy. A vegetable-based meal has an energy content of approximately 3000 kJ. A chicken-based meal has an energy content of approximately 3000 kJ. The poultry farming industry provides affordable protein to billions of people worldwide but contributes to greenhouse gas emissions through feed production and waste.',
-    figImages: [
-      '/images/papers/chemistry-nov-2018/page-22.png',
-      '/images/papers/chemistry-nov-2018/page-23.png',
-      '/images/papers/chemistry-nov-2018/page-24.png',
-      '/images/papers/chemistry-nov-2018/page-25.png',
-      '/images/papers/chemistry-nov-2018/page-26.png',
-    ],
+    stem: 'An architect must choose the material for the load-bearing walls of a new school building. The carbon footprint of a wall depends on the "embodied carbon" of the material — the CO₂ released to make it — and the mass of material needed. The table in the figure shows the embodied carbon for producing 1 kg of each material. Two equally strong walls are compared: one built from reinforced concrete needs 4000 kg of material, while one built from cross-laminated timber needs 1500 kg of material. Concrete is cheap, strong and fire-resistant, but cement production alone is responsible for about 8% of global CO₂ emissions.',
+    artefact: {
+      component: 'DataTable',
+      data: {
+        headers: ['Wall material', 'Embodied carbon / kgCO₂e per kg', 'Mass needed / kg', 'Carbon footprint / kgCO₂e'],
+        rows: [
+          ['Reinforced concrete', '0.16', '4000', '?'],
+          ['Cross-laminated timber', '0.30', '1500', '450'],
+          ['Fired-clay brick', '0.24', '3500', '840'],
+          ['Structural steel', '1.50', '900', '1350'],
+        ],
+      },
+      caption: 'Embodied carbon per kg for each wall material. Complete the missing value for reinforced concrete using the table.',
+    },
     tasks: [
       {
         label: 'a',
-        text: 'Complete the table using information from the bar chart. **Calculate** the carbon footprint for the chicken-based meal to two significant figures.\n\n| Ingredient | Mass (kg) | Carbon footprint (kgCO₂e per kg) | Carbon footprint (kgCO₂e) |\n|---|---|---|---|\n| Chicken | Read from chart | 6.9 | |\n| Rice | 0.2 | 2.7 | 0.54 |\n| Tomato | 0.2 | 1.1 | 0.22 |\n| **Total** | | | |',
+        text: 'Complete the table using information from the table. **Calculate** the carbon footprint for the reinforced-concrete wall to two significant figures.',
         marks: 4,
-        ph: 'Chicken mass ~0.6 kg from chart; CF chicken = 0.6 × 6.9 = 4.14; total = 4.90 ≈ 4.9 kgCO₂e',
+        ph: 'Concrete: 0.16 kgCO₂e/kg × 4000 kg = 640 kgCO₂e (2 sig figs ≈ 640 kgCO₂e)',
       },
       {
         label: 'b',
-        text: '**Outline** the environmental impact of the two meals. Use data from the tables to support your answer.',
+        text: '**Outline** the environmental impact of the two walls (reinforced concrete versus cross-laminated timber). Use data from the table to support your answer.',
         marks: 3,
-        ph: 'Chicken-based ~2.6× higher CF than veg-based (~1.9 kgCO₂e); meat contributes more to climate change',
+        ph: 'Concrete 640 vs timber 450 kgCO₂e; concrete has higher footprint; timber also stores carbon; data comparison',
       },
     ],
   },
 
-  // ─── Q7: Ethanol Combustion + Biomass Burning Crit D Essay (Crit D, 16 marks) ─
+  // ─── Q7: Landfill Gas Combustion + Crit D Essay (Crit D/A, 16 marks) ───────
   {
     id: 7,
     crit: 'D',
     type: 'extended',
-    topic: 'Ethanol combustion — balancing equation, biomass burning for energy, ethical and environmental evaluation',
+    topic: 'Landfill methane — balancing combustion equation, landfill-gas-to-energy, ethical and environmental evaluation',
+    topicCanonical: 'Environmental Impact & Sustainability',
+    topicGroup: 'Environmental Chemistry',
     marks: 16,
-    stem: 'Ethanol (C₂H₅OH) is a renewable fuel produced by fermenting sugars from crops such as sugarcane and maize. Burning wood pellets and other biomass materials (such as crop residues) for household heating is increasingly promoted as a low-carbon alternative to fossil fuels. This method of energy production has advantages and disadvantages. The economic impacts, environmental impacts, and ethical aspects of biomass burning need to be considered.',
-    figImages: ['/images/papers/chemistry-nov-2018/page-27.png'],
+    stem: 'Buried rubbish in a landfill site rots without oxygen and slowly releases landfill gas, which is about half methane (CH₄) — a powerful greenhouse gas that would otherwise leak into the air. Many modern landfills now drill wells to collect this gas and pipe it to an engine that burns it to generate electricity. The equation for the combustion of methane is shown below. Select numbers to balance the chemical equation: [_]CH₄(g) + [_]O₂(g) → [_]CO₂(g) + [_]H₂O(g). Capturing landfill methane for energy has advantages and disadvantages. The economic impacts, environmental impacts and ethical aspects of landfill-gas-to-energy schemes need to be considered.',
+    artefact: {
+      component: 'SankeySim',
+      data: {
+        title: 'Landfill-gas-to-energy — where the captured methane goes (arbitrary units)',
+        units: 'units',
+        flows: [
+          { label: 'Methane captured from wells (input)', value: 100, kind: 'in' },
+          { label: 'Burned in engine → CO₂ + electricity', value: 80, kind: 'loss' },
+          { label: 'Flared off safely → CO₂', value: 12, kind: 'out' },
+          { label: 'Leaks escaping as CH₄', value: 8, kind: 'out' },
+        ],
+        conservation: 'Methane in (100) = burned for power (80) + flared (12) + leaked unburned (8).',
+      },
+      caption: 'A landfill-gas system burns captured methane for electricity instead of letting the powerful greenhouse gas escape — though some still leaks.',
+    },
     tasks: [
       {
         label: 'a',
-        text: '**Select** numbers to balance the chemical equation for the complete combustion of ethanol:\n\n[_] C₂H₅OH(l) + [_] O₂(g) → [_] CO₂(g) + [_] H₂O(g)',
+        text: '**Select** numbers to balance the chemical equation for the combustion of methane: CH₄(g) + O₂(g) → CO₂(g) + H₂O(g)',
         marks: 2,
-        ph: 'C₂H₅OH + 3O₂ → 2CO₂ + 3H₂O; reactants correct (1,3); products correct (2,3)',
+        ph: 'CH₄ + 2O₂ → CO₂ + 2H₂O; reactants correct (2 before O₂); products correct (2 before H₂O)',
       },
       {
         label: 'b',
-        text: '**Discuss** and **evaluate** the benefits of burning biomass (such as wood pellets and crop residues) for household heating instead of using fossil fuels. In your answer you should include: the advantages and disadvantages of intensive biomass farming; the economic impacts of biomass energy; the environmental advantages and disadvantages of burning biomass; the ethical aspects of using farmland for energy crops instead of food; a concluding appraisal.',
+        text: '**Discuss** and **evaluate** the benefits of capturing methane from landfill sites to generate energy. In your answer you should include: the advantages and disadvantages of running landfill sites; the economic impacts of building landfill-gas-to-energy schemes; the environmental advantages and disadvantages of using methane collected from landfill as a source of energy; the ethical aspects of relying on landfill gas as a source of energy; a concluding appraisal.',
         marks: 14,
-        ph: 'Balanced coverage: advantages (carbon neutral claim, renewable, energy security), disadvantages (land use, deforestation, air pollution), economic/environmental/ethical + appraisal',
+        ph: 'Balanced coverage of advantages, disadvantages, economic, environmental, ethical + appraisal',
       },
     ],
   },

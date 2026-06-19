@@ -1,120 +1,33 @@
 type ConceptEntry = { keyConcepts: string[]; keywords: string[] }
 
 export const CONCEPTS_PUBLIC_CHEMISTRY_MAY2019_V1: Record<string, ConceptEntry> = {
-  q1_a: {
-    keyConcepts: ['Mendeleev\'s periodic table', 'Elements absent from original table'],
-    keywords: ['noble gas', 'lanthanide', 'actinide', 'Mendeleev', 'Rg', 'roentgenium'],
-  },
-  q1_b: {
-    keyConcepts: ['Missing groups in Mendeleev\'s table', 'Discovery of elements'],
-    keywords: ['lanthanide', 'actinide', 'unreactive', 'noble gas', 'not naturally occurring'],
-  },
-  q1_c: {
-    keyConcepts: ['Nuclear fusion', 'Atomic number', 'Mass number', 'Protons and neutrons'],
-    keywords: ['27 protons', '35 neutrons', 'Ni', 'nickel', 'mass number', 'atomic number', '²⁰⁹Bi', '²⁶⁷Rg'],
-  },
-  q1_d: {
-    keyConcepts: ['Element identification', 'Periodic table'],
-    keywords: ['nickel', 'Ni', 'element 28', 'atomic number'],
-  },
-  q2_a: {
-    keyConcepts: ['Lewis structures', 'Electron dot diagrams', 'NH₃'],
-    keywords: ['Lewis structure', 'ammonia', 'NH₃', 'lone pair', 'bonding pair'],
-  },
-  q2_b: {
-    keyConcepts: ['Balancing chemical equations', 'Sulfur dioxide oxidation'],
-    keywords: ['2SO₂', 'O₂', 'H₂O', 'H₂SO₄', 'balancing', 'coefficients', 'sulfuric acid'],
-  },
-  q2_c: {
-    keyConcepts: ['Acid-base chemistry', 'Acidic smog', 'pH indicators'],
-    keywords: ['acidic', 'acid', 'low pH', 'universal indicator', 'Beijing smog'],
-  },
-  q2_d: {
-    keyConcepts: ['Periodic table', 'Groups and periods', 'Carbon'],
-    keywords: ['Group 4', 'Period 2', 'carbon', 'C', 'periodic table'],
-  },
-  q2_e: {
-    keyConcepts: ['Molar mass', 'Relative formula mass', 'HNO₃'],
-    keywords: ['molar mass', '63 g/mol', 'HNO₃', 'nitric acid', 'relative formula mass'],
-  },
-  q2_f: {
-    keyConcepts: ['Organic compound classes', 'VOCs', 'Functional groups'],
-    keywords: ['ester', 'methyl propanoate', 'alkane', 'hexane', 'alcohol', 'ethanol', 'carboxylic acid', 'butanoic acid'],
-  },
-  q3_a: {
-    keyConcepts: ['Physical properties of metals', 'Baking trays'],
-    keywords: ['thermal conductivity', 'malleable', 'high melting point', 'lightweight', 'rigid'],
-  },
-  q3_b: {
-    keyConcepts: ['Oxidation states', 'Ionic charge', 'Copper', 'Redox'],
-    keywords: ['Cu²⁺', '+2', 'oxidised', 'electrons lost', 'copper', 'charge'],
-  },
-  q3_c: {
-    keyConcepts: ['Ionic bonding', 'Metallic bonding', 'Non-stick coating'],
-    keywords: ['ionic', 'metallic', 'non-stick', 'coating', 'insoluble', 'heat resistant'],
-  },
-  q4_a: {
-    keyConcepts: ['Control variables', 'Fair test', 'Coffee diffusion'],
-    keywords: ['control variable', 'volume of coffee', 'type of container', 'volume of water'],
-  },
-  q4_b: {
-    keyConcepts: ['Hypothesis', 'Kinetic theory', 'Diffusion', 'Temperature'],
-    keywords: ['decreases', 'kinetic energy', 'temperature', 'diffuse', 'faster', 'coffee'],
-  },
-  q4_c: {
-    keyConcepts: ['Graph reading', 'Prediction', 'Data interpolation'],
-    keywords: ['480 seconds', 'graph', 'predict', '40°C', 'read'],
-  },
-  q4_d: {
-    keyConcepts: ['Improving experimental design', 'Non-linear relationships'],
-    keywords: ['more temperatures', 'more trials', 'average', 'non-linear', 'improvements'],
-  },
-  q5_a: {
-    keyConcepts: ['Laboratory equipment', 'Precise measurement', 'Pipette'],
-    keywords: ['pipette', '1 cm³', 'measuring cylinder', 'syringe', 'equipment'],
-  },
-  q5_b: {
-    keyConcepts: ['Mean calculation', 'Data processing', 'Soap film'],
-    keywords: ['mean', 'average', '9.2 s', 'lifespan', 'soap film mixture 3'],
-  },
-  q5_c: {
-    keyConcepts: ['Graph construction', 'Bar chart', 'Data presentation'],
-    keywords: ['bar chart', 'scale', 'lifespan', 'soap film mixture', 'title', 'units'],
-  },
-  q5_d: {
-    keyConcepts: ['Independent and dependent variables', 'Experimental design'],
-    keywords: ['independent variable', 'dependent variable', 'volume of corn syrup', 'lifespan of soap film'],
-  },
-  q5_e: {
-    keyConcepts: ['Reliability', 'Reproducibility', 'Method comparison'],
-    keywords: ['shaking', 'reliable', 'reproducible', 'variable', 'blowing', 'method'],
-  },
-  q5_f: {
-    keyConcepts: ['Mean calculation', 'Time unit conversion'],
-    keywords: ['112 seconds', 'vinegar', 'mean', '1 min 45 s', '1 min 51 s', '2 min'],
-  },
-  q5_g: {
-    keyConcepts: ['Hypothesis validity', 'Data interpretation', 'Scientific conclusion'],
-    keywords: ['not valid', 'different trends', 'vinegar', 'corn syrup', 'hypothesis'],
-  },
-  q6_: {
-    keyConcepts: ['Criterion B design', 'Scientific inquiry', 'Soap film investigation'],
-    keywords: ['independent variable', 'dependent variable', 'control variable', 'equipment', 'method', 'trials', 'corn syrup', 'glycerine'],
-  },
-  q6_b: {
-    keyConcepts: ['Graph selection', 'Data type', 'Continuous vs categorical'],
-    keywords: ['scatter graph', 'bar chart', 'graph type', 'IV', 'DV', 'data type'],
-  },
-  q7_a: {
-    keyConcepts: ['Green chemistry', 'Paper recycling', 'Life cycle assessment'],
-    keywords: ['landfill', 'recycling', 'raw materials', 'waste prevention', 'forest', 'energy', 'sustainable'],
-  },
-  q7_b: {
-    keyConcepts: ['Sustainability', 'Paper recycling economics'],
-    keywords: ['recycling', 'sustainability', 'raw materials', 'forest preservation', 'cost'],
-  },
-  q8_: {
-    keyConcepts: ['Mercury water treatment', 'Green chemistry evaluation', 'Precipitation', 'Adsorption'],
-    keywords: ['efficiency', 'environmental', 'economic', 'green chemistry', 'mercury', 'precipitation', 'adsorption', 'gold mining'],
-  },
+  q1_a: { keyConcepts: ['Mendeleev\'s periodic table', 'Historical chemistry'], keywords: ['noble gas', 'lanthanide', 'actinide', 'Mendeleev', 'periodic table', 'element not in original'] },
+  q1_b: { keyConcepts: ['Lanthanides and actinides', 'Periodic table history'], keywords: ['lanthanide', 'actinide', 'unreactive', 'not naturally occurring', 'noble gas', 'isolate', 'missing group'] },
+  q1_c: { keyConcepts: ['Atomic structure', 'Nuclear fusion', 'Protons and neutrons'], keywords: ['protons', 'neutrons', 'mass number', 'atomic number', 'nuclear fusion', '²⁴⁸Cm', '²⁹²Lv', 'livermorium', 'calcium'] },
+  q1_d: { keyConcepts: ['Element identification', 'Atomic number'], keywords: ['calcium', 'Ca', 'element 20', 'atomic number'] },
+  q2_a: { keyConcepts: ['Lewis structures', 'Water molecule'], keywords: ['Lewis structure', 'dot cross', 'water', 'H₂O', 'lone pairs', 'correct structure', 'bonding'] },
+  q2_b: { keyConcepts: ['Balancing chemical equations', 'Acid rain formation'], keywords: ['4NO₂', 'O₂', '2H₂O', '4HNO₃', 'balancing', 'nitric acid', 'nitrogen dioxide', 'coefficients'] },
+  q2_c: { keyConcepts: ['Acid-base indicators', 'Acidic solutions'], keywords: ['acidic', 'low pH', 'universal indicator', 'red colour', 'vog', 'volcanic smog'] },
+  q2_d: { keyConcepts: ['Periodic table', 'Groups and periods', 'Sulfur'], keywords: ['Group 6', 'Period 3', 'sulfur', 'S', 'periodic table position'] },
+  q2_e: { keyConcepts: ['Molar mass', 'Relative formula mass'], keywords: ['molar mass', '82 g/mol', 'H₂SO₃', 'sulfurous acid', 'Mr', 'calculation'] },
+  q2_f: { keyConcepts: ['Organic compound classes', 'Functional groups', 'VOCs'], keywords: ['alcohol', 'methanol', 'alkane', 'propane', 'carboxylic acid', 'ethanoic acid', 'ester', 'methyl methanoate', 'VOC', 'ball-and-stick'] },
+  q3_a: { keyConcepts: ['Physical properties of metals', 'Metallic bonding'], keywords: ['malleable', 'high melting point', 'strong', 'rigid', 'thermal conductivity', 'bicycle frames', 'physical properties'] },
+  q3_b: { keyConcepts: ['Oxidation states', 'Ionic charge', 'Redox reactions'], keywords: ['Al³⁺', '+3', 'oxidised', 'electrons lost', 'oxidation state', 'increases', 'half equation', 'aluminium'] },
+  q3_c: { keyConcepts: ['Ionic bonding', 'Metallic bonding', 'Anodising'], keywords: ['ionic', 'metallic', 'aluminium oxide', 'protective coating', 'insoluble', 'unreactive', 'corrosion', 'advantages'] },
+  q4_a: { keyConcepts: ['Control variables', 'Fair test', 'Experimental design'], keywords: ['control variable', 'volume of water', 'food colouring', 'glass', 'fair test'] },
+  q4_b: { keyConcepts: ['Hypothesis formulation', 'Kinetic theory', 'Diffusion'], keywords: ['decreases', 'kinetic energy', 'temperature', 'diffusion', 'particles', 'faster', 'hypothesis'] },
+  q4_c: { keyConcepts: ['Graph reading', 'Prediction from data'], keywords: ['400 seconds', 'graph', 'predict', '50°C', 'diffusion time', 'read'] },
+  q4_d: { keyConcepts: ['Improving experimental method', 'Non-linear relationships'], keywords: ['intermediate temperatures', 'more trials', 'average', 'non-linear', 'repeat', 'improve'] },
+  q5_a: { keyConcepts: ['Laboratory equipment', 'Volume measurement'], keywords: ['measuring cylinder', '50 cm³', 'accurate', 'volume', 'equipment selection'] },
+  q5_b: { keyConcepts: ['Mean calculation', 'Data processing'], keywords: ['mean', 'average', '58.0', 'dissolving time', 'cold water', 'calculation', 'decimal place'] },
+  q5_c: { keyConcepts: ['Graph construction', 'Bar charts', 'Axis labelling'], keywords: ['bar chart', 'scale', 'x-axis', 'y-axis', 'dissolving time', 'liquid', 'title', 'units', 'plotting'] },
+  q5_d: { keyConcepts: ['Independent and dependent variables'], keywords: ['independent variable', 'dependent variable', 'temperature of water', 'dissolving time of tablet'] },
+  q5_e: { keyConcepts: ['Reliability', 'Reproducibility', 'Surface area'], keywords: ['whole tablet', 'reliable', 'reproducible', 'crushed', 'powder', 'surface area'] },
+  q5_f: { keyConcepts: ['Mean calculation', 'Unit conversion'], keywords: ['34 seconds', 'lemon juice', 'mean', 'minutes to seconds', 'conversion'] },
+  q5_g: { keyConcepts: ['Hypothesis validity', 'Data interpretation'], keywords: ['partly valid', 'acidic', 'lemon juice', 'cola', 'temperature', 'rate', 'hypothesis', 'validity'] },
+  q6_: { keyConcepts: ['Criterion B design', 'Scientific investigation', 'Variables'], keywords: ['independent variable', 'dependent variable', 'control variable', 'equipment', 'method', 'trials', 'dips', 'browning', 'timer', 'lemon juice'] },
+  q6_b: { keyConcepts: ['Graph selection', 'Bar charts', 'Discrete data'], keywords: ['Graph C', 'bar chart', 'discrete data', 'lemon juice', 'time before browning', 'graph type'] },
+  q7_a: { keyConcepts: ['Green chemistry principles', 'Waste prevention', 'Pollution monitoring'], keywords: ['waste oil', 'biodiesel', 'drains', 'pollution', 'by-products', 'glycerol', 'raw materials', 'recycled', 'prevention of waste', 'green chemistry'] },
+  q7_b: { keyConcepts: ['Life cycle assessment', 'Sustainability', 'Aluminium recycling'], keywords: ['recycled', 'less energy', 'bauxite', 'mining waste', 'economic', 'life cycle', 'aluminium can'] },
+  q8_: { keyConcepts: ['Water treatment evaluation', 'Green chemistry', 'Nitrate removal from water'], keywords: ['efficiency', 'environmental impact', 'economic impact', 'green chemistry', 'complexity', 'constructed wetland', 'ion exchange', 'reverse osmosis', 'denitrifying bioreactor', 'nitrate ions', 'eutrophication', 'evaluate'] },
 }

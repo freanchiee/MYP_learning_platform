@@ -20,20 +20,20 @@ type MSRecord = Record<string, MSEntry | MCQEntry>
 export type { MSRecord }
 
 export const MS: MSRecord = {
-  // Q1 — Iceland geothermal springs and SiO₂ classification
+  // Q1 — Martian rock silica content
   q1_a: {
     type: 'mcq',
-    correct: 1,
+    correct: 0,
   } as MCQEntry,
 
   q1_b: {
     marks: 2,
-    exemplar: 'Row 1: Oxide = potassium oxide (do not accept potassium monoxide); Row 2: Formula = Al₂O₃. One mark each.',
+    exemplar: 'Row 1: Oxide = silicon dioxide (do not accept silicon oxide); Row 2: Formula = CaO. One mark each.',
     keyConcepts: ['Naming compounds', 'Chemical formulae'],
-    keywords: ['potassium oxide', 'K₂O', 'Al₂O₃', 'aluminium oxide'],
-    feedbackHit: 'Correct — potassium oxide (K₂O) and aluminium oxide (Al₂O₃) are the correct IUPAC names and formulae.',
-    feedbackMiss: 'Potassium forms K⁺ ions (two K⁺ per O²⁻ → K₂O). Aluminium forms Al³⁺ ions (two Al³⁺ balance three O²⁻ → Al₂O₃).',
-    blankAnswers: ['potassium oxide', 'Al₂O₃'],
+    keywords: ['silicon dioxide', 'SiO₂', 'CaO', 'calcium oxide'],
+    feedbackHit: 'Correct — silicon dioxide (SiO₂) and calcium oxide (CaO) are the standard IUPAC names/formulae.',
+    feedbackMiss: 'Take care: "silicon oxide" is not accepted — use "silicon dioxide" (Si is +4, so it forms a dioxide). Calcium oxide is CaO (Ca²⁺ with O²⁻).',
+    blankAnswers: ['silicon dioxide', 'CaO'],
   } as MSEntry,
 
   q1_c: {
@@ -43,11 +43,11 @@ export const MS: MSRecord = {
 
   q1_d: {
     marks: 2,
-    exemplar: 'mass SiO₂ / mass sample × 100 = 1.14 / 2.00 × 100 = 57.0% SiO₂. Award 1 mark for correct method (seen or implied), 1 mark for 57.0% (accept 57%).',
+    exemplar: 'mass SiO₂ / mass sample × 100 = 1.07 / 2.00 × 100 = 53.5 % SiO₂. Award 1 mark for correct method (seen or implied), 1 mark for 53.5% (accept 53.5).',
     keyConcepts: ['Percentage by mass calculation', 'Criterion C'],
-    keywords: ['1.14', '2.00', '100', '57.0', 'percentage', 'SiO₂'],
-    feedbackHit: 'Correct — (1.14 ÷ 2.00) × 100 = 57.0% SiO₂.',
-    feedbackMiss: 'Use: % = (mass of component / total mass) × 100. Substitute: (1.14 / 2.00) × 100.',
+    keywords: ['1.07', '2.00', '100', '53.5', 'percentage', 'SiO₂'],
+    feedbackHit: 'Correct — (1.07 ÷ 2.00) × 100 = 53.5% SiO₂.',
+    feedbackMiss: 'Use: % = (mass of component / total mass) × 100. Substitute: (1.07 / 2.00) × 100.',
   } as MSEntry,
 
   q1_e: {
@@ -55,14 +55,14 @@ export const MS: MSRecord = {
     correct: 1,
   } as MCQEntry,
 
-  // Q2 — Karst cave dissolved gases and noble gas isotopes
+  // Q2 — Martian atmosphere gases and noble gases
   q2_a: {
     marks: 2,
-    exemplar: 'The dissolved gases (H₂S, CO₂, HCl) dissolve in the groundwater to form acids [1m]. These acids lower the pH of the spring water significantly [1m]. Accept: CO₂ + H₂O ⇌ H₂CO₃ (carbonic acid); H₂S dissociates to form H⁺ ions.',
-    keyConcepts: ['Acid formation from dissolved gases', 'pH scale'],
-    keywords: ['dissolve', 'water', 'acid', 'H₂S', 'CO₂', 'HCl', 'low pH', 'karst spring'],
-    feedbackHit: 'Correct — dissolved acidic gases lower the pH of the spring water.',
-    feedbackMiss: 'Think about what happens when H₂S, CO₂, or HCl dissolve in water — they form weak or strong acids, releasing H⁺ ions and lowering pH.',
+    exemplar: 'The acidic gases (SO₂, H₂S) dissolve in the rain water to form acids. These acids lower the pH to approximately 1.0 (highly acidic).',
+    keyConcepts: ['Acid formation from non-metal oxides', 'pH scale'],
+    keywords: ['dissolve', 'water', 'acid', 'SO₂', 'H₂S', 'low pH', '1.0'],
+    feedbackHit: 'Correct — acidic volcanic gases dissolve in water to form acids, lowering the pH.',
+    feedbackMiss: 'Think about what happens when gases like SO₂ or H₂S dissolve in water — they form acidic solutions, which lowers the pH.',
   } as MSEntry,
 
   q2_b: {
@@ -72,32 +72,32 @@ export const MS: MSRecord = {
 
   q2_c: {
     marks: 1,
-    exemplar: 'Period 5.',
+    exemplar: 'Period 3.',
     keyConcepts: ['Periodic table', 'Periods'],
-    keywords: ['xenon', 'period 5', 'noble gas', 'group 18'],
-    feedbackHit: 'Correct — xenon (Xe, atomic number 54) is in Period 5 of the periodic table.',
-    feedbackMiss: 'Xenon has atomic number 54. Count the periods down the periodic table — it sits in the 5th row (Period 5).',
+    keywords: ['argon', 'period 3', 'noble gas', 'group 18'],
+    feedbackHit: 'Correct — argon (Ar, atomic number 18) is in Period 3 of the periodic table.',
+    feedbackMiss: 'Argon has atomic number 18. Count the periods down the periodic table — it sits in the 3rd row (Period 3).',
   } as MSEntry,
 
   q2_d: {
     marks: 3,
-    exemplar: 'For ¹³¹Xe: Protons = 54 (atomic number of xenon); Neutrons = 131 − 54 = 77; Electrons = 54 (neutral atom). One mark per correct value.',
+    exemplar: 'For ⁴⁰Ar: Protons = 18 (atomic number of argon); Neutrons = 40 − 18 = 22; Electrons = 18 (neutral atom). One mark per correct value.',
     keyConcepts: ['Atomic structure', 'Isotopes', 'Subatomic particles'],
-    keywords: ['protons 54', 'neutrons 77', 'electrons 54', 'mass number 131', 'atomic number 54'],
-    feedbackHit: 'Correct — protons = atomic number = 54; neutrons = 131 − 54 = 77; electrons = 54 for neutral atom.',
-    feedbackMiss: 'For ¹³¹Xe: the top number (131) is the mass number; atomic number of xenon = 54 (= protons = electrons); neutrons = 131 − 54 = 77.',
+    keywords: ['protons 18', 'neutrons 22', 'electrons 18', 'mass number 40', 'atomic number 18'],
+    feedbackHit: 'Correct — protons = atomic number = 18; neutrons = mass number − atomic number = 40 − 18 = 22; electrons = protons = 18.',
+    feedbackMiss: 'For ⁴⁰Ar: the mass number (40) = protons + neutrons; the atomic number (18) = protons = electrons for a neutral atom. So neutrons = 40 − 18 = 22.',
   } as MSEntry,
 
   q2_e: {
     marks: 2,
-    exemplar: 'Sulfur has electron configuration 2.8.6: 2 electrons in the first shell, 8 in the second shell, and 6 in the third (outer) shell. Award 1 mark for correct inner shells (2, 8) and 1 mark for correct outer shell (6).',
+    exemplar: 'Neon (atomic number 10) has electron configuration 2.8: 2 electrons in the first shell and 8 electrons in the outer shell. Award 1 mark for 2 in the first shell and 1 mark for 8 in the outer shell.',
     keyConcepts: ['Electron configuration', 'Electron shells'],
-    keywords: ['2 electrons first shell', '8 electrons second', '6 electrons outer', 'sulfur', 'three shells'],
-    feedbackHit: 'Correct — sulfur (atomic number 16) has electron configuration 2, 8, 6.',
-    feedbackMiss: 'Sulfur has 16 electrons. First shell: 2; second shell: 8; third shell: 16 − 2 − 8 = 6. Configuration: 2, 8, 6.',
+    keywords: ['2 electrons first shell', '8 electrons outer', 'neon', 'filled outer shell', '2.8'],
+    feedbackHit: 'Correct — neon (10 electrons) has configuration 2.8: 2 in the first shell and 8 in the outer shell.',
+    feedbackMiss: 'Neon has 10 electrons. The first shell holds a maximum of 2; the second (outer) shell holds up to 8. So 2 inner, 8 outer.',
   } as MSEntry,
 
-  // Q3 — Biofuel monomers and industrial processing
+  // Q3 — Recycling spacecraft plastics
   q3_a: {
     type: 'mcq',
     correct: 0,
@@ -105,201 +105,201 @@ export const MS: MSRecord = {
 
   q3_b: {
     marks: 2,
-    exemplar: 'A = pent-1-ene (accept pentene); B = hex-1-ene (accept hexene). One mark each.',
+    exemplar: 'A = propene (also accept prop-1-ene); B = ethene (also accept eth-1-ene). One mark each.',
     keyConcepts: ['Alkene nomenclature', 'Organic chemistry'],
-    keywords: ['pent-1-ene', 'hex-1-ene', 'alkene', 'C=C double bond', 'five carbons', 'six carbons'],
-    feedbackHit: 'Correct — A (C₅H₁₀) is pent-1-ene and B (C₆H₁₂) is hex-1-ene.',
-    feedbackMiss: 'Count the carbon atoms: A has 5 carbons (pent-) and B has 6 carbons (hex-). Both have a C=C double bond so they are alkenes (-ene suffix).',
-    blankAnswers: ['pent-1-ene', 'hex-1-ene'],
+    keywords: ['propene', 'ethene', 'alkene', 'C=C double bond'],
+    feedbackHit: 'Correct — A (CH₂=CHCH₃) is propene and B (CH₂=CH₂) is ethene.',
+    feedbackMiss: 'Count the carbon atoms: A has 3 carbons (prop-) and B has 2 carbons (eth-). Both have a C=C double bond, so they are alkenes (-ene suffix).',
+    blankAnswers: ['propene', 'ethene'],
   } as MSEntry,
 
   q3_c: {
     marks: 1,
-    exemplar: 'C₄H₁₀. From C₁₅H₃₂ → C₅H₁₀ + C₆H₁₂ + X: C: 15 − 5 − 6 = 4; H: 32 − 10 − 12 = 10. Do not accept butane or the structural formula.',
+    exemplar: 'C₅H₁₂. From C₁₀H₂₂ → C₃H₆ + C₂H₄ + X: C: 10 − 3 − 2 = 5; H: 22 − 6 − 4 = 12. Do not accept pentane / a structural formula.',
     keyConcepts: ['Cracking of hydrocarbons', 'Molecular formula', 'Conservation of atoms'],
-    keywords: ['C₄H₁₀', 'cracking', 'pentadecane', 'C₁₅H₃₂', 'balance atoms'],
-    feedbackHit: 'Correct — subtracting C₅H₁₀ and C₆H₁₂ from C₁₅H₃₂ gives C₄H₁₀.',
-    feedbackMiss: 'Subtract the carbons: 15 − 5 − 6 = 4. Subtract the hydrogens: 32 − 10 − 12 = 10. So X = C₄H₁₀.',
+    keywords: ['C₅H₁₂', 'cracking', 'decane', 'C₁₀H₂₂', 'balance atoms', 'pentane'],
+    feedbackHit: 'Correct — subtracting C₃H₆ and C₂H₄ from C₁₀H₂₂ gives C₅H₁₂.',
+    feedbackMiss: 'Subtract the carbons: 10 − 3 − 2 = 5. Subtract the hydrogens: 22 − 6 − 4 = 12. So X = C₅H₁₂.',
   } as MSEntry,
 
   q3_d: {
     marks: 1,
-    exemplar: 'Calcium hydroxide neutralises the acidic gases produced during incineration (e.g. HCl, SO₂). Accept: removes toxic acidic gases / acts as a base.',
+    exemplar: 'Calcium hydroxide neutralises the acidic gases produced during incineration (e.g. HCl, SO₂). Accept: removes acidic/toxic gases.',
     keyConcepts: ['Acid–base reactions', 'Neutralisation', 'Air pollution control'],
-    keywords: ['neutralise', 'acidic gases', 'calcium hydroxide', 'Ca(OH)₂'],
-    feedbackHit: 'Correct — Ca(OH)₂ is a base that neutralises acidic combustion gases.',
-    feedbackMiss: 'Ca(OH)₂ is an alkali (base). It is added to neutralise acidic gases such as HCl and SO₂ produced during incineration.',
+    keywords: ['neutralise', 'acidic gases', 'calcium hydroxide', 'Ca(OH)₂', 'HCl', 'SO₂'],
+    feedbackHit: 'Correct — Ca(OH)₂ is a base that neutralises acidic gases such as HCl and SO₂ produced when plastics are burned.',
+    feedbackMiss: 'Think about what type of substance Ca(OH)₂ is (a base/alkali) and what gases from burning plastics need to be removed (acidic gases).',
   } as MSEntry,
 
   q3_e: {
     marks: 1,
-    exemplar: 'Boiling. Accept: vaporisation at the boiling point. Do not accept just "evaporation".',
+    exemplar: 'Boiling. Accept: water turning into steam. Do not accept evaporation.',
     keyConcepts: ['Physical changes', 'States of matter', 'Boiling'],
-    keywords: ['boiling', 'liquid to gas', 'hex-1-ene', 'vaporisation'],
-    feedbackHit: 'Correct — the physical change from liquid hex-1-ene to gas is boiling.',
-    feedbackMiss: 'When a liquid is heated to its boiling point and becomes a gas, the physical change is boiling.',
+    keywords: ['boiling', 'water to steam', 'liquid to gas', 'boiler'],
+    feedbackHit: 'Correct — the physical change from liquid water to steam (gas) in the boiler is boiling.',
+    feedbackMiss: 'The boiler heats liquid water until it turns to high-pressure steam. The change of liquid to gas at a fixed temperature is boiling (not evaporation).',
   } as MSEntry,
 
   q3_f: {
     marks: 1,
-    exemplar: 'Any one reasonable environmental regulation, e.g.: emissions must pass through scrubbers/filters before release; minimum combustion temperature must be maintained; waste must not contain halogenated compounds; regular air-quality monitoring must be conducted.',
+    exemplar: 'Any one reasonable requirement, e.g.: waste should not contain materials that could produce hazardous/toxic substances on burning; exhaust emissions should be filtered/scrubbed before release into the habitat; the combustion temperature must reach a minimum level.',
     keyConcepts: ['Environmental regulations', 'Incineration'],
-    keywords: ['scrubbers', 'filters', 'emissions controlled', 'hazardous', 'monitoring'],
-    feedbackHit: 'Correct — a valid environmental regulation for industrial incineration.',
-    feedbackMiss: 'Think about harmful outputs from incineration (dioxins, acid gases) and how a regulation could limit them (scrubbers, temperature minimums, restrictions on materials).',
+    keywords: ['hazardous', 'toxic', 'emissions controlled', 'filters', 'scrubbers', 'requirement'],
+    feedbackHit: 'Correct — a valid requirement to reduce the environmental impact of incineration.',
+    feedbackMiss: 'Think about what harmful outputs come from incineration (toxic emissions, particulates) and how a requirement could limit them.',
   } as MSEntry,
 
   q3_g: {
     marks: 3,
-    exemplar: 'Order (increasing particle size): B — C — A. [1m] B had the fastest rate of biodegradation. [1m] Rate of reaction increases with decreasing particle size (or: smaller particles → higher surface area → faster reaction). [1m]',
+    exemplar: 'Order (increasing particle size): A — C — B. [1m] A had the fastest rate of breakdown. [1m] Rate of reaction increases with decreasing particle size (smaller particles → higher surface area → faster reaction). [1m] Accept correct decreasing order only if explained in words.',
     keyConcepts: ['Surface area and reaction rate', 'Biodegradation', 'Data interpretation'],
-    keywords: ['B < C < A', 'surface area', 'particle size', 'biodegradation rate', 'faster reaction'],
-    feedbackHit: 'Correct — B has the smallest particles (fastest biodegradation); A has the largest particles (slowest).',
-    feedbackMiss: 'From the graph, B biodegrades fastest and A slowest. Smaller particles have more surface area, so B must have the smallest particles.',
+    keywords: ['A < C < B', 'surface area', 'particle size', 'breakdown rate', 'faster reaction'],
+    feedbackHit: 'Correct — A has the smallest particles (highest surface area, fastest breakdown); B has the largest particles (slowest).',
+    feedbackMiss: 'From the graph, A breaks down fastest and B slowest. Smaller particles have more surface area for microbes, so A must have the smallest particles.',
   } as MSEntry,
 
-  // Q4 — Deep-sea bioluminescent bacteria investigation
+  // Q4 — Chemical hand-warmer
   q4_a: {
     marks: 2,
-    exemplar: 'Bacterial luciferase is a catalyst that speeds up the rate of the bioluminescent reaction [1m] without itself being used up/consumed [1m]. OR: it lowers the activation energy of the oxidation reaction.',
+    exemplar: 'The salt catalyst speeds up the rate of the reaction (1m) without itself being used up/consumed (1m). OR: it lowers the activation energy of the reaction without being permanently changed.',
     keyConcepts: ['Catalysts', 'Activation energy', 'Reaction rate'],
-    keywords: ['speeds up', 'rate of reaction', 'not used up', 'activation energy', 'enzyme catalyst'],
-    feedbackHit: 'Correct — the enzyme catalyst increases reaction rate by lowering activation energy and is not consumed.',
-    feedbackMiss: 'A catalyst: (1) increases the rate / lowers activation energy, AND (2) is not used up. Both points required for full marks.',
+    keywords: ['speeds up', 'rate of reaction', 'not used up', 'activation energy', 'salt catalyst'],
+    feedbackHit: 'Correct — a catalyst increases reaction rate by lowering activation energy and is not consumed.',
+    feedbackMiss: 'A catalyst does two things: (1) increases rate / lowers activation energy, and (2) is not used up. You need both points for full marks.',
   } as MSEntry,
 
   q4_b: {
     type: 'mcq',
-    correct: 1,
+    correct: 3,
   } as MCQEntry,
 
   q4_c: {
     marks: 1,
-    exemplar: '55°C. Accept 55 ± 2°C.',
+    exemplar: '35°C. Accept 35 ± 2°C.',
     keyConcepts: ['Reading measuring instruments', 'Temperature measurement'],
-    keywords: ['55', '55°C', 'thermometer reading', 'temperature'],
-    feedbackHit: 'Correct — the thermometer reads 55°C.',
-    feedbackMiss: 'Read the scale carefully. The adjacent thermometers show 40°C and 70°C — count the divisions to find the missing temperature.',
+    keywords: ['35', '35°C', 'thermometer reading', 'temperature'],
+    feedbackHit: 'Correct — the thermometer reads 35°C (halfway between the 30 and 40 gridlines).',
+    feedbackMiss: 'Read the scale carefully — the liquid sits halfway between the 30°C and 40°C gridlines, so the reading is 35°C.',
   } as MSEntry,
 
   q4_d: {
     marks: 4,
-    exemplar: 'IV: temperature (of the water bath / culture) [1m]; DV: time taken for the bacterial glow to stop [1m]; CV1: species / strain of bioluminescent bacteria [1m]; CV2: volume of bacterial culture [1m]. Award any two reasonable CVs.',
+    exemplar: 'IV: surrounding temperature [1m]; DV: time the hand-warmer stays hot [1m]; CV1: type/mass of hand-warmer [1m]; CV2: mass of iron powder / amount of air available [1m]. Do not accept "amount of iron" without specifying mass. Award any two reasonable CVs.',
     keyConcepts: ['Variables', 'Fair test', 'Criterion B'],
-    keywords: ['IV temperature', 'DV glow duration', 'CV bacteria species', 'CV volume culture', 'controlled variables'],
-    feedbackHit: 'Correct — temperature is varied (IV), glow duration is measured (DV), and species/volume are kept constant (CVs).',
-    feedbackMiss: 'IV = what you change; DV = what you measure; CVs = what you keep the same to make it a fair test.',
+    keywords: ['IV temperature', 'DV time hot', 'CV type of hand-warmer', 'CV mass of iron', 'controlled variables', 'independent', 'dependent'],
+    feedbackHit: 'Correct — surrounding temperature is varied (IV), time staying hot is measured (DV), and type of warmer and mass of iron are kept constant (CVs).',
+    feedbackMiss: 'IV = what you change (temperature); DV = what you measure (time staying hot); CVs = what you keep the same to make it a fair test.',
   } as MSEntry,
 
   q4_e: {
     marks: 3,
-    exemplar: 'If the temperature increases, [1m] then the duration of the bacterial glow will decrease, [1m] because the rate of the bioluminescent reaction increases (at higher temperatures molecules have more kinetic energy and collide more frequently). [1m]',
+    exemplar: 'If the surrounding temperature increases, [1m] then the time the hand-warmer stays hot will decrease, [1m] because the rate of the iron–oxygen reaction increases (particles have more energy and collide more frequently/successfully at higher temperature). [1m]',
     keyConcepts: ['Hypothesis formulation', 'Effect of temperature on reaction rate', 'Criterion B'],
-    keywords: ['if temperature increases', 'then glow duration decreases', 'because reaction rate', 'collision theory'],
-    feedbackHit: 'Correct — a valid If/Then/Because hypothesis with scientific reasoning about temperature and reaction rate.',
-    feedbackMiss: 'Structure: If [change in IV] then [expected change in DV] because [scientific reasoning linking temperature to reaction rate].',
+    keywords: ['if temperature increases', 'then time hot decreases', 'because reaction rate', 'collision theory'],
+    feedbackHit: 'Correct — a valid If/Then/Because hypothesis linking temperature to reaction rate.',
+    feedbackMiss: 'Structure: If [change in IV] then [expected change in DV] because [scientific reasoning]. The Because must link higher temperature to a faster reaction.',
   } as MSEntry,
 
   q4_f: {
     marks: 2,
-    exemplar: '220 ± 20 minutes (accept any value in the range 200–240 min). Award 1 mark for correct reading from graph, 1 mark for units (minutes or min).',
-    keyConcepts: ['Graph reading', 'Interpolation', 'Criterion C'],
-    keywords: ['220', 'minutes', '25°C', 'graph reading', 'interpolation'],
-    feedbackHit: 'Correct — reading from the curve at 25°C gives approximately 220 minutes.',
-    feedbackMiss: 'Trace a vertical line from 25°C on the x-axis until it meets the curve, then read horizontally to the y-axis. The value should be around 220 minutes.',
+    exemplar: 'Approximately 395 minutes (accept any value in the range 380–410 min). Award 1 mark for a sensible extrapolation of the curve below 10°C, 1 mark for units (minutes / min).',
+    keyConcepts: ['Graph reading', 'Extrapolation', 'Criterion C'],
+    keywords: ['395', 'minutes', '5°C', 'extrapolation', 'graph reading'],
+    feedbackHit: 'Correct — extending the curve below 10°C gives roughly 395 minutes at 5°C.',
+    feedbackMiss: 'The curve rises as temperature falls. Extend it past 10°C (350 min) down to 5°C — the time should be a little under 400 minutes.',
   } as MSEntry,
 
   q4_g: {
     marks: 4,
-    exemplar: 'Rate = number of molecules / time = 7.56 × 10⁵ / 180 = 4200 molecules min⁻¹. OR: 4200 / 60 = 70 molecules s⁻¹. Award: 1m for formula; 1m for correct substitution; 1m for 4200 (or 70 if s⁻¹); 1m for correct unit.',
-    keyConcepts: ['Rate of reaction', 'Calculation', 'Units', 'Criterion C'],
-    keywords: ['4200', '7.56×10⁵', '180', 'molecules per minute', 'rate formula', '70 per second'],
-    feedbackHit: 'Correct — 7.56 × 10⁵ ÷ 180 = 4200 molecules min⁻¹.',
-    feedbackMiss: 'Rate = total molecules / total time = 7.56 × 10⁵ ÷ 180. Calculate and give the unit (molecules min⁻¹).',
+    exemplar: 'Rate = number of sites / time = 5.46 × 10⁵ / 210 = 2600 sites min⁻¹ (accept 2600 ± 5). OR 2600 / 60 ≈ 43.3 sites s⁻¹. Award: 1m for formula (rate = sites/time, seen or implied); 1m for correct substitution; 1m for 2600 (or 43.3); 1m for correct unit (sites min⁻¹ or sites s⁻¹).',
+    keyConcepts: ['Rate of reaction', 'Calculation with large numbers', 'Units', 'Criterion C'],
+    keywords: ['2600', '5.46×10⁵', '210', 'sites per minute', 'rate formula', '43.3 per second'],
+    feedbackHit: 'Correct — 5.46 × 10⁵ ÷ 210 = 2600 sites min⁻¹.',
+    feedbackMiss: 'Rate = total sites / total time = 5.46 × 10⁵ ÷ 210. Calculate this and give the unit (sites min⁻¹).',
   } as MSEntry,
 
-  // Q5 — Mineral sunscreen investigation
+  // Q5 — Radiation-shielding coating design
   q5_a: {
     marks: 1,
-    exemplar: 'UltraGuard. (UltraGuard had only 8% of beads change colour = least UV passed through = most effective protection.)',
-    keyConcepts: ['Data interpretation', 'Effectiveness of sunscreen'],
-    keywords: ['UltraGuard', '8%', 'fewest beads changed', 'most effective', 'best blocker'],
-    feedbackHit: 'Correct — UltraGuard allowed only 8% of beads to change colour, indicating it blocked the most UV light.',
-    feedbackMiss: 'The most effective sunscreen is the one where the FEWEST beads change colour. UltraGuard = 8% changed (fewest).',
+    exemplar: 'Cosmo-Shield. (Cosmo-Shield let only 8% of the film dots darken = best shielding.)',
+    keyConcepts: ['Data interpretation', 'Effectiveness of coating'],
+    keywords: ['Cosmo-Shield', '8%', 'fewest dots darkened', 'most effective', 'best shield'],
+    feedbackHit: 'Correct — Cosmo-Shield let only 8% of dots darken, so it blocked the most radiation.',
+    feedbackMiss: 'The most effective coating is the one where the FEWEST dots darken (fewer darkened = more radiation blocked). Cosmo-Shield = 8% darkened.',
   } as MSEntry,
 
   q5_b: {
     marks: 2,
-    exemplar: 'Sunlight consists of all different wavelengths/frequencies of light (visible, IR, UV, etc.) [1m]; whereas the UV fluorescent lamp only emits UV light in a narrow band [1m]. WTTE.',
-    keyConcepts: ['Electromagnetic spectrum', 'UV radiation', 'Modelling limitations'],
-    keywords: ['sunlight all wavelengths', 'UV lamp narrow band', 'electromagnetic spectrum', 'not complete model'],
-    feedbackHit: 'Correct — sunlight contains all wavelengths; the UV lamp only produces a narrow UV range.',
-    feedbackMiss: 'Sunlight contains visible, IR, UV-A, UV-B, UV-C; a UV fluorescent lamp only produces UV light, so it is not a complete model of solar radiation.',
+    exemplar: 'Real cosmic radiation contains many types of particle (protons, heavy ions, gamma rays) over a wide range of energies [1m]; whereas the laboratory source gives only one type of radiation at one energy [1m], so it cannot represent the full range a spacecraft really meets. WTTE.',
+    keyConcepts: ['Modelling limitations', 'Types of radiation', 'Validity'],
+    keywords: ['cosmic radiation many particles energies', 'lab source one type', 'narrow energy', 'not realistic model'],
+    feedbackHit: 'Correct — a single lab source of one type/energy does not reproduce the many particle types and energies of real cosmic radiation.',
+    feedbackMiss: 'Compare the model to reality: cosmic radiation has many particle types over a wide energy range; a single laboratory source gives only one type at one energy.',
   } as MSEntry,
 
   q5_c: {
     marks: 17,
-    exemplar: 'Criterion B rubric (max 17): V (Variables, 0-4): IV = type of mineral sunscreen ingredient in SunSmart; DV = number/% of UV beads that changed colour; two CVs identified. E (Equipment, 0-3): suitable equipment listed. M (Method, 0-5): complete, repeatable method described. D (Data, 0-3): plans at least 3 repeats per ingredient to calculate a mean. S (Safety, 0-2): safety consideration linked to a specific hazard (e.g. UV exposure to eyes/skin).',
+    exemplar: 'Criterion B rubric (max 17): V (Variables, 0-4): IV = the individual active compound being tested (boron carbide / hydrogen-rich polymer / tungsten powder); DV = % of radiation-sensitive film dots that darken after a fixed time; two CVs identified (exposure time, panel thickness, source distance, source type). E (Equipment, 0-3): suitable equipment named (radiation source, identical panels of each compound, film dot detectors, ruler, timer). M (Method, 0-5): full reproducible method — make panels of equal thickness from each compound, expose them at the same distance from the same source for the same time, then count % dots darkened. D (Data, 0-3): at least 3 panels per compound and a calculated mean. S (Safety, 0-2): a specific hazard addressed (radiation exposure — use shielding/distance/lead apron, minimise exposure time).',
     keyConcepts: ['Criterion B', 'Investigation design', 'Variables', 'Fair test', 'Safety'],
-    keywords: ['IV mineral ingredient', 'DV beads changed', 'CVs concentration time', 'equipment UV lamp', 'safety UV exposure', 'repeats mean'],
-    feedbackHit: 'Well-designed investigation with all variables identified, clear method, data collection plan, and safety consideration.',
-    feedbackMiss: 'Ensure you: (1) identify IV, DV, and at least 2 CVs; (2) list equipment; (3) give a step-by-step method; (4) plan at least 3 repeats; (5) identify a specific safety hazard.',
+    keywords: ['IV active compound', 'DV % dots darkened', 'CVs time thickness distance', 'equipment panels source detector', 'safety radiation shielding distance', 'repeats mean'],
+    feedbackHit: 'Well-designed investigation: all variables identified, clear reproducible method, repeats with a mean, and a specific safety consideration.',
+    feedbackMiss: 'Ensure you: (1) identify IV (active compound), DV (% dots darkened) and ≥2 CVs; (2) list equipment; (3) give a step-by-step method; (4) plan ≥3 repeats and a mean; (5) state a specific hazard (radiation exposure).',
   } as MSEntry,
 
-  // Q6 — UV absorbance: octinoxate
+  // Q6 — Stellarine data analysis
   q6_a: {
     marks: 2,
-    exemplar: 'Compare the number of beads that have changed colour after exposure for each ingredient in SunSmart. [1m] If zinc oxide has the lowest number of beads that have changed colour, then the research question is supported. [1m]',
+    exemplar: 'Compare the percentage of film dots that darkened for each individual ingredient. [1m] If boron carbide gives the lowest % of darkened dots, then the research question is supported. [1m]',
     keyConcepts: ['Data interpretation', 'Supporting a research question', 'Criterion C'],
-    keywords: ['compare beads changed', 'lowest number', 'zinc oxide', 'research question supported'],
-    feedbackHit: 'Correct — compare data per ingredient; if ZnO gives fewest changed beads, the RQ is supported.',
-    feedbackMiss: 'Rank the ingredients by number of beads changed; state the condition under which the RQ would be supported (ZnO = lowest).',
+    keywords: ['compare % dots darkened', 'lowest darkened', 'boron carbide', 'research question supported'],
+    feedbackHit: 'Correct — compare data per ingredient; if boron carbide gives the fewest darkened dots, it is the best blocker and the RQ is supported.',
+    feedbackMiss: 'Outline a comparison: rank the ingredients by % darkened dots, then state the condition under which the RQ is supported (boron carbide = lowest).',
   } as MSEntry,
 
   q6_b: {
     marks: 1,
-    exemplar: 'Any one reasonable extension, e.g.: testing combinations of ingredients; different lengths of UV exposure; using real sunlight; testing different concentrations of each compound.',
+    exemplar: 'Any one reasonable extension, e.g.: test combinations of ingredients; test different panel thicknesses; use a different radiation source / longer exposure; test different concentrations of each compound. Do not accept simply repeating the same experiment.',
     keyConcepts: ['Extending investigations', 'Experimental design'],
-    keywords: ['combinations', 'different exposure time', 'sunlight', 'different concentration', 'new variable'],
-    feedbackHit: 'Correct — a valid extension that introduces a new variable or condition.',
-    feedbackMiss: 'An extension introduces a new variable or condition — simply repeating the same experiment is not an extension.',
+    keywords: ['combinations', 'different thickness', 'different source', 'longer time', 'new variable'],
+    feedbackHit: 'Correct — a valid extension that goes beyond the original investigation.',
+    feedbackMiss: 'An extension changes something new — a new variable (thickness, combinations) or a new condition (different source). Simply repeating is not an extension.',
   } as MSEntry,
 
   q6_c: {
     marks: 6,
-    exemplar: 'Title: a title linking absorbance and concentration of octinoxate. [1m] Plot two data points correctly. [1m] Plot all data points correctly. [1m] Line of best fit: starts at (0,0) and goes through all points except the anomalous point at 40 μmol dm⁻³. [1m] Axis labels: concentration of octinoxate on x-axis and absorbance on y-axis. [1m] Unit: μmol dm⁻³ on x-axis. [1m]',
+    exemplar: 'Title: a title that links absorbance and concentration of stellarine. [1m] Plot two data points correctly. [1m] Plot all data points correctly. [1m] Line of best fit: starts at (0,0) and goes through all points except the anomalous point at 70 μmol dm⁻³. [1m] Axis labels: concentration of stellarine on the x-axis and absorbance on the y-axis. [1m] Unit of concentration: μmol dm⁻³. [1m] Ignore any unit of absorbance.',
     keyConcepts: ['Graph plotting', 'Line of best fit', 'Axis labels', 'Anomalous data', 'Criterion C'],
-    keywords: ['title absorbance concentration', 'LOBF from origin', 'anomalous 40', 'x-axis concentration μmol dm⁻³', 'y-axis absorbance', 'octinoxate'],
-    feedbackHit: 'Excellent graph — title, all points plotted, best-fit line through origin excluding anomalous point, correctly labelled axes with units.',
-    feedbackMiss: 'Check: (1) title links absorbance and concentration; (2) all points plotted (note 40 μmol dm⁻³ = anomalous); (3) LOBF starts at origin and misses the 40 μmol dm⁻³ point; (4) x-axis = concentration (μmol dm⁻³); (5) y-axis = absorbance.',
+    keywords: ['title absorbance concentration', 'LOBF from origin', 'anomalous 70', 'x-axis concentration μmol dm⁻³', 'y-axis absorbance'],
+    feedbackHit: 'Excellent graph — title, all points plotted, best-fit line from the origin excluding the anomalous point, and correctly labelled axes with units.',
+    feedbackMiss: 'Check: (1) title links absorbance and concentration; (2) all points plotted (70 μmol dm⁻³ = anomalous); (3) LOBF from origin missing the 70 point; (4) x-axis = concentration (μmol dm⁻³); (5) y-axis = absorbance.',
   } as MSEntry,
 
   q6_d: {
     marks: 1,
-    exemplar: 'There is an anomalous data point at 40 μmol dm⁻³ (absorbance of 0.62, which is lower than expected based on the trend). OR: only one trial / averages are not shown, reducing reliability.',
+    exemplar: 'There is an anomalous data point at 70 μmol dm⁻³ (absorbance 0.50, lower than the trend predicts). OR: there is only one trial / no averages are plotted, which reduces reliability. No ecf from incorrect plotting in part (c).',
     keyConcepts: ['Reliability', 'Anomalous data', 'Criterion C'],
-    keywords: ['anomalous', '40 μmol dm⁻³', 'one trial', 'no repeats', 'unreliable', 'outlier'],
-    feedbackHit: 'Correct — the data point at 40 μmol dm⁻³ is anomalous (lower than the trend), reducing reliability.',
-    feedbackMiss: 'Look for the data point that does not fit the trend (40 μmol dm⁻³ at 0.62 AU). Also consider whether repeats were performed.',
+    keywords: ['anomalous', '70 μmol dm⁻³', 'one trial', 'no repeats', 'unreliable', 'outlier'],
+    feedbackHit: 'Correct — the point at 70 μmol dm⁻³ is anomalous (below the trend), reducing reliability.',
+    feedbackMiss: 'Look for the point that does not fit the trend (70 μmol dm⁻³ at 0.50 AU). Also consider whether repeats were carried out.',
   } as MSEntry,
 
-  // Q7 — Climate change and Zn-based CO₂ capture
+  // Q7 — Calcium in-situ resource carbonation
   q7_a: {
     marks: 2,
-    exemplar: 'Any one reasonable suggestion, e.g.: loss of habitat for local wildlife; reduction in food crops; increased flooding (fewer tree roots); increased CO₂ / reduced O₂ for local populations. [1m] Justification: fewer trees → less photosynthesis → less glucose and oxygen produced / more CO₂ remains in atmosphere. [1m]',
-    keyConcepts: ['Deforestation impacts', 'Photosynthesis', 'Criterion D'],
-    keywords: ['deforestation', 'fewer trees', 'less photosynthesis', 'less oxygen', 'habitat loss', 'CO₂ increases'],
-    feedbackHit: 'Correct — a valid community impact with justification linked to reduced photosynthesis.',
-    feedbackMiss: 'State one impact (e.g. habitat loss, food shortage) then justify: fewer plants → less photosynthesis → less oxygen / more CO₂.',
+    exemplar: 'Any one reasonable impact, e.g.: the crew would run short of food; oxygen levels would fall; CO₂ would build up in the habitat. [1m] Justification: (because) without the crops less photosynthesis takes place, so less glucose and oxygen are produced and less CO₂ is removed from the air. [1m]',
+    keyConcepts: ['Crop/plant loss', 'Photosynthesis', 'Criterion D', 'Community impact'],
+    keywords: ['greenhouse crops destroyed', 'fewer plants', 'less photosynthesis', 'less glucose oxygen', 'food shortage', 'CO₂ increases'],
+    feedbackHit: 'Correct — a valid crew impact justified using photosynthesis.',
+    feedbackMiss: 'State one impact (e.g. food/oxygen shortage, CO₂ build-up) then justify using the photosynthesis equation: fewer plants → less photosynthesis → less glucose/oxygen and less CO₂ removed.',
   } as MSEntry,
 
   q7_b: {
     marks: 2,
-    exemplar: 'Zn(s) + CO₂(g) + H₂O(l) → ZnCO₃(s) + H₂(g). At 25°C: zinc is a solid, CO₂ is a gas, water is a liquid. Award 1m for one correct state symbol, 2m for all three correct.',
+    exemplar: 'Ca(s) + CO₂(g) + H₂O(l) → CaCO₃(s) + H₂(g). At 25°C: calcium is a solid, CO₂ is a gas, water is a liquid. Award 1m for one correct state symbol, 2m for all three correct. Do not accept H₂O(aq).',
     keyConcepts: ['State symbols', 'Physical states', 'Equations'],
-    keywords: ['Zn(s)', 'CO₂(g)', 'H₂O(l)', 'state symbols', '25°C'],
-    feedbackHit: 'Correct — Zn(s), CO₂(g), H₂O(l) at 25°C.',
-    feedbackMiss: 'At 25°C: zinc is a solid (s), CO₂ is a gas (g), and water is a liquid (l).',
+    keywords: ['Ca(s)', 'CO₂(g)', 'H₂O(l)', 'state symbols', '25°C', 'solid gas liquid'],
+    feedbackHit: 'Correct — Ca(s), CO₂(g), H₂O(l) at 25°C.',
+    feedbackMiss: 'At 25°C: calcium is a solid (s), CO₂ is a gas (g) and water is a liquid (l) — not (aq), which means dissolved in water.',
     blankAnswers: ['(s)', '(g)', '(l)'],
   } as MSEntry,
 
@@ -310,39 +310,39 @@ export const MS: MSRecord = {
 
   q7_d: {
     marks: 3,
-    exemplar: 'The oxidation number of zinc has increased (from 0 to +2) [1m]. Zinc has lost electrons [1m]. So zinc has been oxidised [1m].',
+    exemplar: 'The oxidation number of calcium increases (from 0 to +2) [1m]. Calcium loses electrons (2 electrons) [1m]. So calcium has been oxidised [1m].',
     keyConcepts: ['Redox chemistry', 'Oxidation', 'Oxidation numbers', 'Electron transfer'],
-    keywords: ['oxidation number increases', '0 to +2', 'loses electrons', 'oxidised', 'zinc Zn'],
-    feedbackHit: 'Correct — zinc goes from 0 (in Zn metal) to +2 (in ZnCO₃), losing electrons, so it is oxidised.',
-    feedbackMiss: 'In Zn metal, oxidation number = 0. In ZnCO₃, Zn is +2 (since CO₃²⁻ has charge −2). Increase in oxidation number = loss of electrons = oxidation.',
+    keywords: ['oxidation number increases', '0 to +2', 'loses electrons', 'oxidised', 'calcium Ca'],
+    feedbackHit: 'Correct — Ca goes from 0 (in Ca metal) to +2 (in CaCO₃), losing electrons, so it is oxidised.',
+    feedbackMiss: 'In Ca metal, calcium has oxidation number 0. In CaCO₃ it is +2 (since CO₃²⁻ has charge −2). Increase in oxidation number = loss of electrons = oxidation.',
   } as MSEntry,
 
   q7_e: {
     marks: 2,
-    exemplar: '2H₂O₂ → 2H₂O + O₂. Reactant (2H₂O₂) correct [1m]; products (2H₂O + O₂) correct [1m].',
-    keyConcepts: ['Balancing equations', 'Decomposition of hydrogen peroxide'],
-    keywords: ['2H₂O₂', '2H₂O', 'O₂', 'balanced equation', 'hydrogen peroxide decomposition'],
-    feedbackHit: 'Correct — 2H₂O₂ → 2H₂O + O₂ is the balanced decomposition equation for hydrogen peroxide.',
-    feedbackMiss: 'Count atoms: 2 O on left in H₂O₂ × 2 molecules = 4 O total. Right side: 2×H₂O gives 2O, plus O₂ gives 2O → 4O total ✓. H: 2×2 = 4 on left = 2×2 on right ✓. Balanced: 2H₂O₂ → 2H₂O + O₂.',
-    blankAnswers: ['2', '2', '1'],
+    exemplar: '2H₂ + O₂ → 2H₂O. Reactants correct (2H₂ + O₂) [1m]; product correct (2H₂O) [1m]. O₂ has an implied coefficient of 1.',
+    keyConcepts: ['Balancing equations', 'Combustion of hydrogen'],
+    keywords: ['2H₂', 'O₂', '2H₂O', 'balanced equation', 'hydrogen combustion'],
+    feedbackHit: 'Correct — 2H₂ + O₂ → 2H₂O is the balanced equation for hydrogen combustion.',
+    feedbackMiss: 'Count atoms: 4 H on the left (2×H₂) needs 4 H on the right (2×H₂O). That gives 2 O on the right, so O₂ = 1. Balanced: 2H₂ + O₂ → 2H₂O.',
+    blankAnswers: ['2', '1', '2'],
   } as MSEntry,
 
   q7_f: {
     marks: 2,
-    exemplar: 'The only product of hydrogen combustion is water (no CO₂, no NOx, no SOx produced) [1m]; water is non-toxic and not an atmospheric pollutant / does not contribute to the greenhouse effect [1m]. ORA: petrol combustion produces CO₂, NOx, and SOx which are greenhouse gases / pollutants.',
+    exemplar: 'The only product of hydrogen combustion is water (no CO₂, no NOx, no SOx) [1m]; water is non-toxic / will not pollute the sealed habitat air [1m]. ORA: kerosene combustion produces CO₂/NOx/SOx which are toxic pollutants — accept for the second mark.',
     keyConcepts: ['Environmental chemistry', 'Combustion products', 'Criterion D'],
-    keywords: ['only product water', 'no CO₂', 'no NOx', 'no SOx', 'non-toxic', 'not pollutant'],
-    feedbackHit: 'Correct — hydrogen combustion only produces water, which is non-toxic and not an atmospheric pollutant.',
-    feedbackMiss: 'Compare products: petrol → CO₂ + H₂O + NOx + SOx (pollutants/greenhouse gases). Hydrogen → only H₂O (not a pollutant).',
+    keywords: ['only product water', 'no CO₂', 'no NOx', 'no SOx', 'non-toxic', 'sealed habitat'],
+    feedbackHit: 'Correct — hydrogen combustion only produces water, which is non-toxic and safe in a sealed habitat.',
+    feedbackMiss: 'Compare products: kerosene combustion → CO₂ + H₂O + NOx + SOx (toxic pollutants). Hydrogen combustion → only H₂O (not a pollutant).',
   } as MSEntry,
 
-  // Q8 — Ocean acidification solutions essay
+  // Q8 — Carbon-utilisation systems essay
   q8_: {
     marks: 15,
-    exemplar: 'Criterion D rubric (15 marks): Need — Why addressing ocean acidification matters (1-4): 1=attempt; 2=statement about CO₂/carbonic acid; 3=supported by science (e.g. coral bleaching, effects on marine organisms). Eco — Economic impact (1-4): 1=implied for one system; 2=stated for one; 3=stated for both. Soc — Social impact (1-4): 1=implied; 2=stated for one; 3=stated for both. Sci — Scientific advantages/disadvantages (1-4): 1=attempt; 2=advantage or disadvantage of one system; 3=both advantage and disadvantage of one, or A/D for both; 4=advantage AND disadvantage of both. Con — Concluding appraisal (1-4): 1=concluding statement; 2=justified conclusion naming the best system. Maximum total = 15 marks.',
-    keyConcepts: ['Criterion D', 'Ocean acidification', 'Carbon chemistry', 'Scientific appraisal', 'Economic and social impact'],
-    keywords: ['ocean liming USD18', 'seagrass USD7', 'shipping controls USD12', 'carbonic acid CO₂', 'coral marine impact', 'economic cost', 'social fishing communities', 'scientific advantage disadvantage', 'concluding appraisal'],
-    feedbackHit: 'Excellent essay — clear explanation of why ocean acidification needs to be addressed, economic and social impacts of both chosen systems, balanced scientific evaluation, and justified conclusion.',
-    feedbackMiss: 'Structure: (1) why ocean acidification is a problem (CO₂ → carbonic acid → pH drop → harm to marine life); (2) economic impact of each system (costs given); (3) social impact (fishing, employment); (4) scientific advantages AND disadvantages; (5) conclude which system is best and why.',
+    exemplar: 'Criterion D rubric (15 marks): Need — Why capturing CO₂ is needed (1-4): 1=attempt; 2=statement about need; 3=statement supported by science (greenhouse effect; making fuel/resources off-Earth). Eco — Economic impact (1-4): 1=implied for one system; 2=stated for one; 3=stated for both (using the USD costs given). Soc — Social impact (1-4): 1=implied; 2=stated for one; 3=stated for both (food, fuel security, energy demand). Sci — Scientific advantages/disadvantages (1-4): 1=attempt; 2=advantage or disadvantage of one; 3=for both / both an advantage and disadvantage of one; 4=advantage AND disadvantage of both systems. Con — Concluding appraisal (1-4): 1=concluding statement; 2=justified concluding choice. Maximum total = 15 marks.',
+    keyConcepts: ['Criterion D', 'CO₂ capture and utilisation', 'Climate change', 'Scientific appraisal', 'Economic and social impact'],
+    keywords: ['CO₂ utilisation', 'greenhouse effect', 'Sabatier reactor methane', 'mineralisation carbonate', 'algae bioreactor', 'economic cost USD', 'social impact', 'scientific advantage', 'concluding appraisal'],
+    feedbackHit: 'Excellent essay — clear need for CO₂ capture, economic and social impacts of both chosen systems, balanced scientific evaluation, and a justified conclusion.',
+    feedbackMiss: 'Structure your essay: (1) why CO₂ capture is needed; (2) economic impact of each system (use the USD costs); (3) social impact of each; (4) scientific advantages AND disadvantages of each; (5) conclude which system is best and why.',
   } as MSEntry,
 }

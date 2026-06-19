@@ -1,5 +1,8 @@
 import 'server-only'
 
+// NOTE: Variant 1 of chemistry-nov-2024. Original content — every answer is
+// recomputed for the new scenario. No official IB mark scheme is reproduced.
+
 export interface MSEntry {
   marks: number
   exemplar: string
@@ -18,349 +21,238 @@ export interface MCQEntry {
 type MSRecord = Record<string, MSEntry | MCQEntry>
 
 export const MS: MSRecord = {
-
-  // ─── Q1: Silver / distillation / propan-1-ol / FeCl₂ ────────────────────
-  q1_a: {
-    type: 'mcq',
-    correct: 1,
-  },
-
-  q1_b: {
-    type: 'mcq',
-    correct: 1,
-  },
-
+  // ── Q1: Lavender distillation / propan-1-ol / copper sulfate ───────────────
+  q1_a: { type: 'mcq', correct: 1 },   // Transition metals (index 1)
+  q1_b: { type: 'mcq', correct: 1 },   // Different boiling points (index 1)
   q1_c: {
     marks: 4,
-    exemplar:
-      'X→Y: liquid evaporates/boils; particles gain kinetic energy; overcome intermolecular forces; escape as gas/vapour. (2 marks)\n' +
-      'Y→Z: gas condenses; particles lose kinetic energy; intermolecular forces pull particles together; form liquid. (2 marks)',
-    keyConcepts: ['States of matter', 'Particle theory', 'State changes'],
-    keywords: ['evaporation', 'condensation', 'kinetic energy', 'intermolecular forces'],
-    feedbackHit: 'Correctly described both state changes with particle-level reasoning.',
-    feedbackMiss: 'Remember: X→Y is evaporation (liquid→gas); Y→Z is condensation (gas→liquid). Use particle theory.',
+    exemplar: 'X to Y: The liquid is heated; the particles gain kinetic energy; the particles at the surface escape the liquid and become a gas (evaporation/vaporisation).\nY to Z: The vapour passes into the cooler condenser; the particles lose kinetic energy; they slow down and move closer together; the gas condenses back to a liquid (condensation).',
+    keyConcepts: ['States of matter', 'Particle theory', 'Evaporation and condensation'],
+    keywords: ['particles gain energy evaporate', 'particles lose energy condense', 'liquid to gas', 'gas to liquid', 'distillation state changes'],
+    feedbackHit: 'Correct — particles gain energy at X→Y (evaporation); lose energy at Y→Z (condensation).',
+    feedbackMiss: '4 marks: X→Y: (1) particles gain energy; (2) liquid becomes gas (evaporation). Y→Z: (3) particles lose energy; (4) gas becomes liquid (condensation).',
   },
-
-  q1_d: {
-    type: 'mcq',
-    correct: 1,
-  },
-
+  q1_d: { type: 'mcq', correct: 2 },   // C = propan-1-ol (CH₃CH₂CH₂OH, index 2)
   q1_e: {
     marks: 2,
-    exemplar: 'Mr(FeCl₂) = 56 + 2(35.5) = 56 + 71 = 127',
-    keyConcepts: ['Formula mass', 'Relative atomic mass'],
-    keywords: ['formula mass', 'Mr', 'FeCl₂', '127'],
-    feedbackHit: 'Correct formula mass of 127 g/mol for FeCl₂.',
-    feedbackMiss: 'Mr(FeCl₂) = Ar(Fe) + 2 × Ar(Cl) = 56 + 2(35.5) = 127.',
-    blankAnswers: ['127'],
+    exemplar: 'Mr(CuSO₄) = 64 + 32 + 4(16) = 64 + 32 + 64 = 160 g mol⁻¹',
+    keyConcepts: ['Relative formula mass', 'Molar mass calculation'],
+    keywords: ['CuSO4 molar mass', '160', 'Cu=64 S=32 O=16', 'formula mass'],
+    feedbackHit: 'Correct — Mr(CuSO₄) = 160 g mol⁻¹.',
+    feedbackMiss: 'Mr = Cu + S + 4×O = 64 + 32 + 64 = 160 g mol⁻¹. Award 1 mark for method (adding atomic masses), 1 for correct answer 160 with unit.',
+    blankAnswers: ['160'],
   },
 
-  // ─── Q2: CO₂ / sparkling water / methane synthesis ───────────────────────
-  q2_a: {
-    type: 'mcq',
-    correct: 1,
-  },
-
+  // ── Q2: SO₂ / sparkling water / contact process / catalyst ─────────────────
+  q2_a: { type: 'mcq', correct: 1 },   // Covalent bonding (index 1)
   q2_b: {
     marks: 3,
-    exemplar:
-      'When bottle is opened, pressure decreases/drops. (1)\n' +
-      'CO₂ becomes less soluble at lower pressure / comes out of solution. (1)\n' +
-      'CO₂ escaping forms hissing sound / rapid gas release causes sound. (1)',
-    keyConcepts: ['Gas solubility', 'Pressure', 'Henry\'s Law'],
-    keywords: ['pressure', 'solubility', 'CO₂', 'hissing', 'bubbles'],
-    feedbackHit: 'Correctly linked pressure drop to CO₂ coming out of solution and sound.',
-    feedbackMiss: 'Pressure drops when bottle opens → CO₂ less soluble → bubbles form → escaping gas makes hissing sound.',
+    exemplar: 'The gas (SO₂ or CO₂) is dissolved in the drink under high pressure. When the bottle is opened, the pressure above the liquid drops. The dissolved gas comes out of solution as bubbles (dissolved gas → gas). The rapidly expanding gas pushes the liquid out, so the drink fizzes and sprays.',
+    keyConcepts: ['Gas solubility', 'Pressure and equilibrium', 'Gas in solution'],
+    keywords: ['gas dissolved under pressure', 'opening reduces pressure', 'gas comes out of solution', 'gas expands pushes spray'],
+    feedbackHit: 'Correct — gas dissolved under pressure; opening drops pressure; gas escapes as bubbles; expands and sprays out.',
+    feedbackMiss: '3 marks: (1) gas dissolved under high pressure; (2) opening bottle → pressure drops → gas escapes from solution; (3) gas expands rapidly and pushes spray/liquid out.',
   },
-
   q2_c: {
     marks: 4,
-    exemplar:
-      'CO₂ + 4H₂ → CH₄ + 2H₂O\n' +
-      'n(CO₂) = 528 / 44 = 12 mol\n' +
-      'n(CH₄) = 12 mol (1:1 ratio)\n' +
-      'm(CH₄) = 12 × 16 = 192 g = 1.92 × 10² g',
-    keyConcepts: ['Moles', 'Stoichiometry', 'Standard form'],
-    keywords: ['moles', 'stoichiometry', 'methane', '192', '1.92 × 10²'],
-    feedbackHit: 'Correct calculation: 12 mol CO₂ → 12 mol CH₄ → 192 g = 1.92 × 10² g.',
-    feedbackMiss: 'n = mass/Mr → n(CO₂)=528/44=12; 1:1 ratio → 12 mol CH₄; m=12×16=192g=1.92×10²g.',
-    blankAnswers: ['1.92 × 10²'],
+    exemplar: 'Mr(SO₂) = 32 + 2(16) = 64; Mr(SO₃) = 32 + 3(16) = 80.\nn(SO₂) = 384 ÷ 64 = 6.00 mol.\nMole ratio SO₂ : SO₃ = 2 : 2 = 1 : 1, so n(SO₃) = 6.00 mol.\nm(SO₃) = 6.00 × 80 = 480 g = 4.80 × 10² g.',
+    keyConcepts: ['Stoichiometry', 'Moles calculation', 'Standard form'],
+    keywords: ['n=m/Mr', '384/64', '6.00 mol', '6.00×80=480', '4.80×10² g', 'standard form'],
+    feedbackHit: 'Correct — n(SO₂)=6.00mol; n(SO₃)=6.00mol; m=480g=4.80×10² g.',
+    feedbackMiss: '4 marks: (1) Mr(SO₂)=64 used; (2) n(SO₂)=6.00 mol; (3) 1:1 mole ratio applied; (4) m=480g in standard form 4.80×10².',
+    blankAnswers: ['4.80 × 10²'],
   },
-
   q2_d: {
     marks: 3,
-    exemplar:
-      'Catalyst provides alternative reaction pathway. (1)\n' +
-      'This pathway has a lower activation energy. (1)\n' +
-      'More reactant particles have energy ≥ activation energy; more successful collisions per unit time; rate increases. (1)',
-    keyConcepts: ['Catalysis', 'Activation energy', 'Collision theory'],
-    keywords: ['catalyst', 'activation energy', 'alternative pathway', 'collision', 'rate'],
-    feedbackHit: 'Correctly explained lower activation energy leading to more successful collisions.',
-    feedbackMiss: 'Catalyst → lower activation energy → more particles can react → increased rate. It is NOT consumed.',
+    exemplar: 'A catalyst (vanadium(V) oxide) provides an alternative reaction pathway with a lower activation energy. More reactant particles have enough energy to overcome the lower activation energy. Therefore more successful collisions occur per second and the rate of sulfur trioxide production increases.',
+    keyConcepts: ['Catalysis', 'Activation energy', 'Reaction rate'],
+    keywords: ['alternative pathway lower activation energy', 'more particles sufficient energy', 'more successful collisions', 'rate increases'],
+    feedbackHit: 'Correct — lower activation energy → more particles with sufficient energy → more collisions → faster rate.',
+    feedbackMiss: '3 marks: (1) provides alternative pathway / lower activation energy; (2) more particles have sufficient energy; (3) more successful collisions → rate increases.',
   },
 
-  // ─── Q3: Noble gases / krypton ───────────────────────────────────────────
-  q3_a: {
-    type: 'mcq',
-    correct: 1,
-  },
-
+  // ── Q3: Diving gases / helium balloon / periodicity ───────────────────────
+  q3_a: { type: 'mcq', correct: 1 },   // Oxygen (index 1)
   q3_b: {
     marks: 2,
-    exemplar: 'Nitrogen: Group 15. Krypton: Period 4.',
-    keyConcepts: ['Periodic Table', 'Groups and Periods'],
-    keywords: ['Group 15', 'Period 4', 'nitrogen', 'krypton'],
-    feedbackHit: 'Correct: nitrogen Group 15, krypton Period 4.',
-    feedbackMiss: 'Nitrogen has 5 outer electrons → Group 15. Krypton has 4 electron shells → Period 4.',
-    blankAnswers: ['15', '4'],
+    exemplar: 'Helium: Group 18 (accept Group 0). Neon: Period 2.',
+    keyConcepts: ['Periodic table', 'Groups and periods'],
+    keywords: ['helium group 18', 'neon period 2', 'group period noble gases'],
+    feedbackHit: 'Correct — helium Group 18, neon Period 2.',
+    feedbackMiss: 'Helium (He): 2 electrons, config 2 → Group 18 (or 0). Neon (Ne): 10 electrons, config 2.8 → Period 2.',
+    blankAnswers: ['18', '2'],
   },
-
   q3_c: {
     marks: 3,
-    exemplar:
-      'Krypton electron configuration: 2.8.18.8. (1)\n' +
-      'Outer shell is full / has 8 electrons. (1)\n' +
-      'No tendency to gain, lose, or share electrons; does not form bonds with other atoms. (1)',
-    keyConcepts: ['Noble gases', 'Electronic configuration', 'Chemical reactivity'],
-    keywords: ['2.8.18.8', 'full outer shell', 'stable', 'no bonding', 'inert'],
-    feedbackHit: 'Correctly used 2.8.18.8 configuration to explain krypton\'s inertness.',
-    feedbackMiss: 'Krypton = 2.8.18.8; full outer shell (8e⁻) → no tendency to gain/lose/share electrons → no compound formation.',
+    exemplar: 'Helium has the electron configuration 2. The first (outer) shell is FULL with 2 electrons. A full outer shell is chemically stable/inert — there is no tendency for helium to gain, lose or share electrons. As bonding requires the transfer or sharing of electrons, helium cannot form bonds and therefore does not form compounds.',
+    keyConcepts: ['Noble gas stability', 'Electron configuration', 'Chemical bonding'],
+    keywords: ['helium config 2 full outer shell', 'stable configuration', 'no tendency to share electrons', 'cannot form bonds'],
+    feedbackHit: 'Correct — full outer shell (2) → stable → no tendency to react → no compounds formed.',
+    feedbackMiss: '3 marks: (1) helium has 2 electrons filling its outer shell (config 2); (2) full outer shell is stable; (3) no tendency to gain/lose/share electrons so no compounds formed.',
   },
-
   q3_d: {
     marks: 2,
-    exemplar:
-      'Oxygen in air reacts with hot metal inside laser tube. (1)\n' +
-      'Exothermic reaction causes rapid gas expansion / pressure increase; tube cannot withstand pressure and ruptures. (1)',
-    keyConcepts: ['Chemical reactions', 'Oxidation', 'Gas pressure'],
-    keywords: ['oxygen', 'oxidation', 'exothermic', 'expansion', 'pressure', 'rupture'],
-    feedbackHit: 'Correctly identified oxygen reacting with hot metal causing pressure build-up and rupture.',
-    feedbackMiss: 'O₂ in air reacts with hot filament/metal → exothermic → rapid gas expansion → pressure increase → rupture.',
+    exemplar: 'Hydrogen is flammable and reactive: near a flame it reacts rapidly with oxygen in the air in an exothermic reaction, producing a sudden expansion of hot gas that bursts the balloon (explosion). Helium is a noble gas — it is unreactive and does not burn, so a helium balloon does not explode.',
+    keyConcepts: ['Reactivity of gases', 'Combustion', 'Noble gas inertness'],
+    keywords: ['hydrogen flammable reacts with oxygen', 'exothermic explosion', 'rapid gas expansion', 'helium inert does not burn'],
+    feedbackHit: 'Correct — hydrogen burns/reacts with oxygen exothermically → rapid expansion → explosion; helium is inert.',
+    feedbackMiss: '2 marks: (1) hydrogen is flammable and reacts with oxygen near a flame (exothermic); (2) rapid gas expansion bursts the balloon, while helium is inert and does not react.',
   },
 
-  // ─── Q4: Fluoride / dental fillings / Crit B ─────────────────────────────
+  // ── Q4: Hard-water scale / ion-exchange resin investigation ───────────────
   q4_a: {
     marks: 1,
-    exemplar: 'What is the effect of the type of dental filling material on the concentration of F⁻ ions after 10 minutes?',
-    keyConcepts: ['Research question', 'Independent variable', 'Dependent variable'],
-    keywords: ['filling material', 'F⁻ concentration', 'conductivity', 'research question'],
-    feedbackHit: 'Research question includes both IV and DV.',
-    feedbackMiss: 'A research question must include what you change (IV = filling material) and what you measure (DV = F⁻ concentration).',
+    exemplar: '"What is the effect of the type of softening resin on the conductivity (Ca²⁺ ion concentration) of hard water after 10 minutes?"',
+    keyConcepts: ['Research question', 'Criterion B'],
+    keywords: ['effect of softening resin', 'conductivity Ca²⁺ ions', 'research question'],
+    feedbackHit: 'Correct — research question states IV (type of resin) and a measurable DV (conductivity/Ca²⁺ concentration).',
+    feedbackMiss: 'Must state IV (type of softening resin) and a measurable DV (conductivity/Ca²⁺ concentration). E.g. "What is the effect of resin type on the conductivity of hard water after 10 minutes?"',
   },
-
   q4_b: {
     marks: 4,
-    exemplar:
-      'IV: type of filling material\n' +
-      'DV: conductivity / concentration of F⁻ ions\n' +
-      'CV1: time (10 minutes)\n' +
-      'CV2: initial volume of F⁻ solution',
-    keyConcepts: ['Variables', 'Scientific investigation'],
-    keywords: ['independent variable', 'dependent variable', 'control variable', 'filling material', 'conductivity'],
-    feedbackHit: 'All four variables correctly identified.',
-    feedbackMiss: 'IV = what you change (filling material); DV = what you measure (F⁻ conductivity); CVs = what you keep same (time, volume).',
-    blankAnswers: [
-      'Type of filling material',
-      'Conductivity / concentration of F⁻ ions',
-      'Time (10 minutes)',
-      'Initial volume of F⁻ ion solution',
-    ],
+    exemplar: 'IV = Type of softening resin.\nDV = Conductivity / concentration of Ca²⁺ ions (mg dm⁻³).\nCV1 = Time (10 minutes).\nCV2 = Initial concentration (or volume) of the hard water sample.',
+    keyConcepts: ['Variables', 'Scientific investigation', 'Criterion B'],
+    keywords: ['IV type softening resin', 'DV conductivity Ca²⁺ concentration', 'CV time 10 min', 'CV initial concentration volume'],
+    feedbackHit: 'Correct — IV=type of resin; DV=conductivity/Ca²⁺; two valid CVs.',
+    feedbackMiss: 'IV = type of softening resin. DV = conductivity / Ca²⁺ concentration. CV = time AND volume/initial concentration of hard water.',
+    blankAnswers: ['Type of softening resin', 'Conductivity / concentration of Ca²⁺ ions', 'Time (10 minutes)', 'Initial volume/concentration of hard water'],
   },
-
   q4_c: {
     marks: 2,
-    exemplar:
-      'Method is less valid because without a "before" reading the student cannot determine the change in F⁻ concentration. (1)\n' +
-      'Without a baseline, it is impossible to know how much F⁻ was absorbed or released by the filling material. (1)',
-    keyConcepts: ['Validity', 'Baseline measurement', 'Scientific method'],
-    keywords: ['validity', 'baseline', 'initial reading', 'before', 'comparison'],
-    feedbackHit: 'Correctly identified the missing baseline as the reason for reduced validity.',
-    feedbackMiss: 'Without measuring conductivity BEFORE the filling material, you cannot calculate the CHANGE in F⁻ concentration.',
+    exemplar: 'The second student\'s method is less valid. The first student measures conductivity BEFORE and AFTER to determine the change. The second setup lacks an initial reading, so it cannot measure how the conductivity (Ca²⁺ concentration) changes. Without a baseline, no conclusion about how much calcium each resin removed can be drawn.',
+    keyConcepts: ['Experimental validity', 'Control measurements'],
+    keywords: ['no before reading', 'cannot measure change', 'less valid', 'no baseline'],
+    feedbackHit: 'Correct — second method less valid; cannot measure change (no initial reading).',
+    feedbackMiss: '2 marks: (1) second method less valid; (2) because it lacks an initial reading so cannot determine change in Ca²⁺ concentration.',
   },
-
   q4_d: {
     marks: 3,
-    exemplar:
-      'If fluoride mouthwash is used after brushing with toothpaste,\n' +
-      'then the concentration of F⁻ ions in the mouth will be higher than with toothpaste alone,\n' +
-      'because mouthwash delivers an additional dose of fluoride ions beyond what toothpaste alone provides.',
-    keyConcepts: ['Hypothesis', 'Fluoride', 'Scientific prediction'],
-    keywords: ['If', 'Then', 'Because', 'fluoride', 'mouthwash', 'concentration'],
-    feedbackHit: 'Hypothesis correctly formatted as If/Then/Because with a mechanistic explanation.',
-    feedbackMiss: 'Use If/Then/Because structure. Explain WHY mouthwash would increase F⁻ (additional source of fluoride ions).',
+    exemplar: 'If the hard water is boiled before a resin is added,\nthen the final conductivity will be lower than using the resin alone,\nbecause boiling precipitates some Ca²⁺ ions out as limescale, leaving fewer ions in solution for the resin to remove, so more total calcium is removed.',
+    keyConcepts: ['Hypothesis', 'If–Then–Because', 'Hard-water softening'],
+    keywords: ['if boiled before resin', 'then lower conductivity', 'because boiling precipitates calcium'],
+    feedbackHit: 'Correct If/Then/Because with logical reasoning about boiling and calcium removal.',
+    feedbackMiss: 'IF boiled before adding resin → THEN lower final conductivity → BECAUSE boiling precipitates some Ca²⁺ as scale so fewer ions remain.',
   },
-
   q4_e: {
     marks: 2,
-    exemplar:
-      'Identify: the data point that is furthest from the other trials for the same brand (anomalous result). (1)\n' +
-      'Reason: possible experimental error such as contamination of the F⁻ solution, air bubble in the conductivity probe, or temperature variation during trial. (1)',
+    exemplar: 'Anomalous result: Resin C, Trial 2 = 155 mg dm⁻³ — far higher than its other trials (54 and 57 mg dm⁻³). Experimental reason: the hard water for that trial may have been contaminated, the resin may not have been added (or was exhausted/old), the sample may not have been left the full 10 minutes, or the meter was misread/recorded incorrectly.',
     keyConcepts: ['Anomalous results', 'Experimental error'],
-    keywords: ['anomalous', 'outlier', 'contamination', 'error', 'conductivity probe'],
-    feedbackHit: 'Anomalous result identified and a plausible experimental reason given.',
-    feedbackMiss: 'Look for the value that does not fit the pattern for that brand. Suggest a measurement/experimental error as the cause.',
+    keywords: ['Resin C Trial 2 155 anomalous', 'contamination resin not added', 'measurement error', 'outlier'],
+    feedbackHit: 'Correct — Resin C Trial 2 (155) identified as anomalous; valid experimental reason given.',
+    feedbackMiss: '2 marks: (1) identify Resin C Trial 2 (155 mg dm⁻³) as the outlier; (2) suggest a valid experimental reason (contamination, resin not added, short timing, misreading).',
   },
-
   q4_f: {
     marks: 2,
-    exemplar: 'Sum valid Brand D trials ÷ number of valid trials; express to 3 significant figures; include units (mg dm⁻³ or µS cm⁻¹).',
-    keyConcepts: ['Average', 'Significant figures', 'Units'],
-    keywords: ['average', 'mean', 'Brand D', 'significant figures', 'mg dm⁻³'],
-    feedbackHit: 'Average calculated correctly with appropriate significant figures and units.',
-    feedbackMiss: 'Add valid Brand D values, divide by number of trials (exclude anomaly if identified), give units.',
+    exemplar: 'Exclude the anomalous value (155). Average of the remaining two trials = (54 + 57) ÷ 2 = 55.5 ≈ 56 mg dm⁻³ (2 s.f.).',
+    keyConcepts: ['Mean calculation', 'Significant figures', 'Excluding anomalies'],
+    keywords: ['exclude 155 anomaly', '(54+57)/2', '55.5', '56 mg dm⁻³', 'significant figures'],
+    feedbackHit: 'Correct — anomaly excluded; mean = (54+57)/2 = 55.5 ≈ 56 mg dm⁻³.',
+    feedbackMiss: '2 marks: (1) exclude the anomaly (155) and average the remaining two: (54+57)/2 = 55.5; (2) round to appropriate sig figs (≈56) AND include unit mg dm⁻³.',
+    blankAnswers: ['56 mg dm⁻³'],
   },
-
   q4_g: {
     marks: 1,
-    exemplar: 'The brand with the highest conductivity reading has the highest F⁻ concentration and therefore provides the best fluoride protection.',
-    keyConcepts: ['Data interpretation', 'Fluoride protection'],
-    keywords: ['highest conductivity', 'most F⁻', 'best protection'],
-    feedbackHit: 'Correctly linked highest conductivity to best fluoride delivery.',
-    feedbackMiss: 'Higher conductivity = more F⁻ ions in solution = more fluoride available to protect teeth.',
+    exemplar: 'Resin D is the best choice. It gives the LOWEST conductivity after 10 minutes (≈41 mg dm⁻³), which means the fewest Ca²⁺ ions remain — so it removed the most calcium and softened the water most effectively.',
+    keyConcepts: ['Data interpretation', 'Water softening'],
+    keywords: ['Resin D lowest conductivity', 'fewest Ca²⁺ ions remaining', 'most effective softening'],
+    feedbackHit: 'Correct — Resin D (lowest conductivity ≈41) justified as best choice (most Ca²⁺ removed).',
+    feedbackMiss: 'Identify the resin with the lowest conductivity (Resin D ≈41 mg dm⁻³) and state it removed the most Ca²⁺ = most effective.',
   },
-
   q4_h: {
     marks: 1,
-    exemplar: 'Children have more teeth / larger teeth as they grow, so greater surface area to protect. Also, higher body mass allows proportionally more fluoride within safe limits.',
-    keyConcepts: ['Tooth development', 'Fluoride dosage'],
-    keywords: ['more teeth', 'surface area', 'body mass', 'fluoride dose'],
-    feedbackHit: 'Correctly suggested more/larger teeth or higher body mass.',
-    feedbackMiss: 'Think about why older children might need more fluoride: more teeth, larger teeth, greater body mass.',
+    exemplar: 'A larger washing machine holds a larger volume of hard water, which contains a greater total number of Ca²⁺ ions. More resin is therefore needed to exchange/remove all of those extra ions.',
+    keyConcepts: ['Proportional dosing', 'Ion exchange'],
+    keywords: ['larger machine more water', 'more total Ca²⁺ ions', 'more resin needed'],
+    feedbackHit: 'Correct — larger machine = more water = more total Ca²⁺ ions = more resin needed.',
+    feedbackMiss: 'A larger machine holds more water with more total Ca²⁺ ions, so a larger dose of resin is needed to remove them all.',
   },
 
-  // ─── Q5: Acid rain / building materials / Crit B design ─────────────────
-  q5_a: {
-    type: 'mcq',
-    correct: 0,
-  },
-
+  // ── Q5: Sea-wall blocks / sulfuric acid / Crit B design ───────────────────
+  q5_a: { type: 'mcq', correct: 0 },   // Bubbles of gas given off (index 0)
   q5_b: {
     marks: 18,
-    exemplar:
-      '**0 marks**: No relevant information.\n\n' +
-      '**1–2 marks**: Identifies some variables or mentions measuring mass change. Little or no method detail.\n\n' +
-      '**3–6 marks**: States IV (type of building material) and DV (mass lost / gas produced). Lists some equipment. Method is incomplete; safety mention vague.\n\n' +
-      '**7–10 marks**: States IV, DV, and two CVs. Equipment list largely complete. Method describes the procedure step-by-step with repeats. Data table planned. Safety briefly addressed.\n\n' +
-      '**11–14 marks**: Clear variables. Full equipment list. Detailed stepwise method (measure/record initial mass; add to 50 cm³ of 1 mol dm⁻³ HCl; record mass/gas volume at intervals; repeat 3×). Data table with columns for material, replicate, initial mass, final mass, mass lost. Safety: HCl is corrosive — gloves, goggles, fume cupboard if needed.\n\n' +
-      '**15–18 marks**: As above plus: standardised sample surface area (10 × 10 cm); use of a gas syringe to measure CO₂ volume as alternative DV; rate calculated (mass lost / time or initial rate from graph); discussion of why mass change or gas volume is better; explicit control of temperature; comparative graph planned; justification of choice of acid concentration; reliability improved by repeats.',
-    keyConcepts: ['Experimental design', 'Variables', 'Safety', 'Data collection'],
-    keywords: ['IV', 'DV', 'CV', 'mass lost', 'equipment', 'method', 'safety', 'corrosive', 'repeats'],
-    feedbackHit: 'Full Crit B design with variables, equipment, stepwise method, data table, and safety.',
-    feedbackMiss: 'Crit B design must include: IV/DV/2 CVs, equipment list, step-by-step method, data to collect, and safety precautions.',
+    exemplar: 'Crit B design rubric:\n\nBand 4 criteria:\n• IV = type of building material (limestone/concrete/granite/recycled brick/sandstone) STATED\n• DV = rate of reaction / mass lost / volume of gas produced / time to react STATED AND measured\n• 2 CVs: volume of sulfuric acid (e.g. 50 cm³) AND temperature of acid (e.g. 20°C) STATED\n• Equipment: balance (±0.01g), measuring cylinder (50 cm³), beaker, 1 mol dm⁻³ sulfuric acid, gas syringe or electronic balance, stopwatch\n• Method: cut each material to equal 10×10 cm size, weigh, place in 50 cm³ of 1 mol dm⁻³ sulfuric acid at 20°C for 10 minutes, measure mass lost OR collect gas per minute, repeat 3+ times, calculate mean for each material\n• Data collection: record initial and final mass (mass loss) OR gas volume at set intervals; repeat ≥3 times per material\n• Safety: sulfuric acid is corrosive — wear gloves, goggles and lab coat; work in a well-ventilated area; avoid skin/eye contact\n\nExample method: Cut each material into equal 10×10 cm pieces. Weigh each using an electronic balance (±0.01g). Place each separately into a 250 cm³ beaker with 50 cm³ of 1 mol dm⁻³ sulfuric acid at 20°C. Leave 10 minutes. Remove, dry and re-weigh. Mass lost = initial − final. Repeat 3 times per material and calculate the mean. Safety: corrosive acid — wear goggles, gloves and a lab coat.',
+    keyConcepts: ['Criterion B', 'Experimental design', 'Chemical reactions', 'Safety'],
+    keywords: ['IV material type', 'DV mass lost rate reaction', 'CV volume acid temperature', 'equipment balance beaker', '3 repeats mean', 'corrosive sulfuric acid safety'],
+    feedbackHit: 'Strong Crit B — IV/DV/CVs stated, equipment listed, clear method, safety linked to corrosive acid.',
+    feedbackMiss: 'Bands: (1) IV or DV stated; (2) IV AND DV stated; (3) measurements collected for multiple materials + CVs; (4) full method with equipment + safety.',
   },
-
   q5_c: {
     marks: 1,
-    exemplar: 'Temperature of the acid / UV irradiance / frequency of acid rain events / concentration of acid.',
+    exemplar: 'Temperature of the acid (to model warmer vs cooler coasts) OR salt concentration of the spray (to model exposure to seawater) OR concentration of the acid (to model more vs less polluted air) OR number of wetting/drying or freeze-thaw cycles.',
     keyConcepts: ['Variables', 'Climate factors'],
-    keywords: ['temperature', 'UV', 'concentration', 'climate'],
-    feedbackHit: 'Suggested a valid climate-linked independent variable.',
-    feedbackMiss: 'Think of climate factors that affect corrosion: temperature, UV, acid concentration, rainfall frequency.',
+    keywords: ['temperature of acid', 'salt concentration spray', 'acid concentration', 'freeze-thaw cycles', 'climate IV'],
+    feedbackHit: 'Correct — valid IV linked to climate (temperature/salinity/acid concentration/freeze-thaw).',
+    feedbackMiss: 'Suggest a measurable IV linked to climate: e.g. temperature of acid, salt concentration of spray, acid concentration, or freeze-thaw cycles.',
   },
 
-  // ─── Q6: Electroplated pans / NaCl corrosion data / Crit C ───────────────
+  // ── Q6: Ship-hull sacrificial anode / seawater salinity ───────────────────
   q6_a: {
     marks: 6,
-    exemplar:
-      'Graph: x-axis "Concentration / mol dm⁻³" (0 to 0.8); y-axis "Average mass lost / mg" (0 to 90).\n' +
-      'Points: (0.0, 8), (0.1, 14), (0.3, 36), (0.5, 51), (0.8, 75).\n' +
-      'Smooth line of best fit through points.\n' +
-      'Both axes labelled with units. Even scale. Points plotted accurately.',
-    keyConcepts: ['Graph plotting', 'Line of best fit', 'Axes'],
-    keywords: ['x-axis', 'y-axis', 'line of best fit', 'concentration', 'mass lost', 'units'],
-    feedbackHit: 'Graph correctly drawn with labelled axes, accurate points, and line of best fit.',
-    feedbackMiss: 'Label both axes with units. Plot all 5 points. Draw a smooth line of best fit (not dot-to-dot).',
+    exemplar: 'Scatter graph: x-axis = Salinity / g dm⁻³ (0–35); y-axis = Average mass lost / mg (0–90); plot 5 points: (0,8), (5,20), (15,44), (25,60), (35,84); draw a straight line of best fit; both axes labelled with quantity and unit; appropriate scale used (majority of the grid).',
+    keyConcepts: ['Graph plotting', 'Line of best fit', 'Data presentation'],
+    keywords: ['x salinity g dm⁻³', 'y average mass lost mg', '5 data points plotted', 'line of best fit', 'axes labelled units'],
+    feedbackHit: 'Correct — x-axis salinity, y-axis mass lost, 5 points plotted, line of best fit, axes labelled with units.',
+    feedbackMiss: '6 marks: (1) x-axis label + unit; (2) y-axis label + unit; (3) appropriate scale; (4) 3+ points correct; (5) all 5 points correct; (6) straight line of best fit.',
   },
-
   q6_b: {
     marks: 3,
-    exemplar:
-      'As NaCl concentration increases, the average mass lost increases (positive correlation). (1)\n' +
-      'The relationship appears linear / directly proportional. (1)\n' +
-      'The 0.00 mol dm⁻³ trial is a control — shows the mass lost due to factors other than NaCl (baseline corrosion). (1)',
-    keyConcepts: ['Trend description', 'Correlation', 'Control experiment'],
-    keywords: ['increases', 'positive correlation', 'control', 'baseline', '0.00'],
-    feedbackHit: 'Trend described and control correctly identified.',
-    feedbackMiss: 'State the trend (more NaCl → more mass lost). The 0.0 trial is the control/baseline.',
+    exemplar: 'Trend: As the salinity of the water increases, the average mass lost by the zinc anode increases (positive/directly proportional relationship). At higher salinity, more mass is lost due to faster corrosion.\n\nPurpose of the 0 g dm⁻³ trial: It acts as a control / baseline / reference. It shows how much mass is lost in salt-free water, so the extra corrosion caused specifically by the salt can be compared against it.',
+    keyConcepts: ['Trend analysis', 'Control experiment'],
+    keywords: ['as salinity increases mass lost increases', 'positive relationship', '0 g dm⁻³ control baseline', 'comparison without salt'],
+    feedbackHit: 'Correct — positive trend stated + 0 g dm⁻³ = control/baseline/comparison.',
+    feedbackMiss: '3 marks: (1) as salinity increases, mass lost increases; (2) positive/direct relationship; (3) 0 g dm⁻³ = control (corrosion in salt-free water / baseline).',
   },
-
   q6_c: {
     marks: 3,
-    exemplar:
-      'The hypothesis is invalid. (1)\n' +
-      'The data shows that as NaCl concentration increases, MORE mass is lost, not less. (1)\n' +
-      'This contradicts the hypothesis that higher NaCl concentration prevents corrosion. (1)',
-    keyConcepts: ['Hypothesis evaluation', 'Data interpretation'],
-    keywords: ['invalid', 'contradicts', 'more mass lost', 'increases', 'corrosion'],
-    feedbackHit: 'Correctly evaluated hypothesis as invalid and referenced the data.',
-    feedbackMiss: 'Data shows MORE mass lost at higher NaCl → hypothesis is invalid (the opposite of what it predicted).',
+    exemplar: 'The hypothesis is INVALID. The data shows that as salinity increases, MORE mass is lost — not less. This is the OPPOSITE of the prediction. The reasoning is also incorrect: higher salinity means MORE dissolved ions, not fewer, so charge is carried more easily and corrosion is faster, increasing the mass lost.',
+    keyConcepts: ['Hypothesis evaluation', 'Data interpretation', 'Validity'],
+    keywords: ['hypothesis invalid', 'data shows more mass lost at higher salinity', 'opposite prediction', 'reasoning incorrect more ions'],
+    feedbackHit: 'Correct — hypothesis invalid; data shows more mass lost as salinity increases (opposite to prediction); reasoning about ions is incorrect.',
+    feedbackMiss: '3 marks: (1) hypothesis is invalid/not supported; (2) data shows INCREASE in mass lost as salinity rises (opposite to hypothesis); (3) the reasoning (fewer ions) is wrong — more salt means more ions and faster corrosion.',
   },
-
   q6_d: {
     marks: 1,
-    exemplar: 'Nails provide a uniform/standardised shape, size, and surface area, making it easier to control variables and compare mass lost accurately.',
-    keyConcepts: ['Fair test', 'Standardisation'],
-    keywords: ['uniform', 'standardised', 'shape', 'size', 'surface area', 'control'],
-    feedbackHit: 'Correctly identified standardisation/uniform shape as reason for using nails.',
-    feedbackMiss: 'Nails are used because they are uniform in shape and size — easier to standardise the experiment.',
+    exemplar: 'Nails are standardised (same shape and size), making it easier to compare results. They are made of iron/steel — the same base metal as a ship hull — so they corrode in the same way. Nails are also cheaper and easier to weigh accurately than a real hull section.',
+    keyConcepts: ['Experimental design', 'Model validity'],
+    keywords: ['standardised size shape', 'same metal iron steel hull', 'easier weigh handle', 'cheaper model'],
+    feedbackHit: 'Correct — nails are standardised/same metal as the hull/easier to handle.',
+    feedbackMiss: 'Any valid reason: (1) standardised size/shape; (2) same metal (iron/steel) as the hull; (3) easier to weigh/handle; (4) cheaper.',
   },
 
-  // ─── Q7: Nuclear fission / transport / Crit D ────────────────────────────
+  // ── Q7: Fusion / tritium fuel transport ───────────────────────────────────
   q7_a: {
     marks: 1,
-    exemplar:
-      'Solar produces no radioactive/hazardous waste; nuclear produces long-lived radioactive waste.\n' +
-      'OR: Solar energy is effectively inexhaustible; nuclear fuel (uranium) will eventually run out.\n' +
-      'OR: Solar has negligible fuel cost; nuclear has high fuel extraction and processing costs.',
-    keyConcepts: ['Renewable energy', 'Nuclear energy', 'Waste comparison'],
-    keywords: ['radioactive waste', 'inexhaustible', 'uranium', 'fuel cost', 'solar'],
-    feedbackHit: 'Valid additional difference beyond renewable/non-renewable.',
-    feedbackMiss: 'Think beyond renewable/non-renewable: waste produced, fuel availability, running costs.',
+    exemplar: 'Renewable sources (e.g. solar, wind) do not produce carbon dioxide / greenhouse gases when generating electricity, whereas non-renewable sources (fossil fuels) release CO₂ and other pollutants when burned. Accept: renewable sources are effectively inexhaustible while non-renewable sources will run out.',
+    keyConcepts: ['Renewable vs non-renewable energy', 'Environmental impact'],
+    keywords: ['CO₂ greenhouse gases fossil fuels', 'renewable do not produce CO₂', 'non-renewable pollutants', 'will run out'],
+    feedbackHit: 'Correct — one valid difference beyond renewable/non-renewable (CO₂/pollution/inexhaustible/running out).',
+    feedbackMiss: 'Give ONE difference beyond the renewable/non-renewable label: e.g. fossil fuels produce CO₂ but renewables do not; or fossil fuels will run out but solar/wind will not.',
   },
-
   q7_b: {
     marks: 3,
-    exemplar:
-      'A neutron strikes a uranium-235 nucleus, causing it to become unstable. (1)\n' +
-      'The nucleus splits into two smaller (daughter) nuclei, releasing energy and 2–3 neutrons. (1)\n' +
-      'These neutrons strike further uranium nuclei, causing more fission events — a self-sustaining chain reaction. (1)',
-    keyConcepts: ['Nuclear fission', 'Chain reaction', 'Neutrons'],
-    keywords: ['neutron', 'unstable', 'fission', 'daughter nuclei', 'energy', 'chain reaction'],
-    feedbackHit: 'Chain reaction correctly described in sequence: neutron → unstable → splits + neutrons → further fission.',
-    feedbackMiss: 'Steps: neutron hits U-235 → unstable → splits + 2-3 neutrons + energy → neutrons hit more U-235 → chain reaction.',
+    exemplar: 'For the nuclei to join, the gas must be heated to an extremely high temperature so the nuclei move fast enough to overcome their electrostatic repulsion and collide. When deuterium and tritium fuse, they form a helium nucleus and release a fast neutron and a large amount of energy. Energy is released because a small amount of mass is converted to energy as the new, more stable nucleus forms.',
+    keyConcepts: ['Nuclear fusion', 'Energy release'],
+    keywords: ['high temperature overcome repulsion collide', 'deuterium tritium fuse to helium + neutron', 'releases energy', 'mass converted to energy'],
+    feedbackHit: 'Correct — high temperature → nuclei collide → fuse to helium + neutron → energy released.',
+    feedbackMiss: '3 marks: (1) very high temperature/speed needed so nuclei overcome repulsion and collide; (2) form helium + a neutron; (3) a large amount of energy is released (mass converted to energy).',
   },
-
   q7_c: {
     marks: 6,
-    exemplar:
-      '**Risks**: radiation leak if container is damaged in accident; contamination of environment/people. (1)\n\n' +
-      '**Road**: risk of traffic collision; precautions include armoured containers, police escort, restricted routes. (1)\n' +
-      '**Train**: low risk of derailment; precautions include dedicated carriages, locked containers, rail inspections. (1)\n' +
-      '**River barge**: risk of sinking; precautions include watertight containers, shallow routes, emergency response vessels. (1)\n' +
-      '**Air**: catastrophic if crash; risk to large population below; NOT recommended. (1)\n\n' +
-      '**Conclusion**: Train is safest — low derailment risk, controlled routes, purpose-built shielded containers, away from populated areas. (1)',
-    keyConcepts: ['Risk assessment', 'Transport methods', 'Radioactive waste'],
-    keywords: ['radiation', 'risk', 'road', 'train', 'river', 'air', 'precautions', 'conclusion', 'safest'],
-    feedbackHit: 'Full discussion of risks and precautions per transport method with a justified conclusion.',
-    feedbackMiss: 'For each transport method: state the risk AND the precaution. Conclude with the safest method and justify why.',
+    exemplar: 'Risks: Tritium is radioactive and emits beta radiation; if a container leaks, tritium gas can be inhaled or contaminate water, soil and air, increasing cancer risk. An accident in transit (crash, derailment, sinking, plane crash) could release it.\n\nPrecautions:\n• Road: armoured, double-sealed containers; trained drivers; escort; remote routes; travel at quiet times.\n• Rail: purpose-built sealed flasks; fixed monitored routes; emergency teams on standby.\n• River/ship: double-hulled vessels; routes away from populated coasts; decontamination kit aboard.\n• Air: generally avoided — a crash would scatter material widely; only very small, well-shielded quantities.\n\nConclusion: Rail is the safest method for routine tritium delivery. Trains run on fixed, controlled routes that can be pre-cleared and monitored; derailments are rarer than road accidents; sealed flasks can be purpose-built for the freight wagon; and rail avoids the water-contamination risk of sea transport.',
+    keyConcepts: ['Criterion D', 'Radioactive material', 'Risk assessment', 'Transport safety'],
+    keywords: ['tritium radiation risk inhaled contamination', 'sealed containers', 'precautions each method', 'rail safest controlled route', 'justified conclusion'],
+    feedbackHit: 'Strong Crit D — risks stated, precautions per method, justified conclusion (rail/road).',
+    feedbackMiss: '(1) risk stated (radiation/leak/inhalation); (2) precaution for ≥2 methods; (3) precautions for all methods; (4) conclusion with justification; (5-6) quality of evaluation with evidence.',
   },
 
-  // ─── Q8: Radioactive waste disposal / Crit D essay ───────────────────────
+  // ── Q8: Space disposal vs deep-borehole storage — Crit D essay ────────────
   q8_: {
     marks: 13,
-    exemplar:
-      '**0 marks**: No relevant information.\n\n' +
-      '**1–2 marks**: Identifies one method; vague reference to effects. No evaluation.\n\n' +
-      '**3–5 marks**: Describes one method with some effect on living things or an economic point. Limited evaluation.\n\n' +
-      '**6–8 marks**: Describes effects of chosen method on living things (e.g. ocean disposal: food chain contamination, bioaccumulation; or geological: no surface contamination). Economic impact mentioned. Partial evaluation.\n\n' +
-      '**9–11 marks**: Thorough description of effects on living things with specific examples. Economic impact quantified or compared (cheap vs. costly). Evaluation states which is better with a reason.\n\n' +
-      '**12–13 marks**: Ocean disposal: radiation enters marine food chain → bioaccumulation in fish → human health risk via consumption; international ban justified by long-term risk; low short-term cost but enormous potential long-term cost. Geological: high construction/engineering cost; isolates waste from biosphere for 100,000+ years; no ecosystem contamination if engineered correctly. Justified conclusion: geological disposal is better despite cost because it protects living things reliably; cost is a one-time investment against irreversible environmental damage. Conclusion consistent with evidence presented.',
-    keyConcepts: ['Radioactive waste', 'Environmental impact', 'Economic analysis', 'Ethical evaluation'],
-    keywords: ['ocean disposal', 'geological disposal', 'food chain', 'bioaccumulation', 'cost', 'living things', 'justified'],
-    feedbackHit: 'Thorough Crit D essay: living things, economic impact, justified conclusion.',
-    feedbackMiss: 'Must cover: (1) effects on living things, (2) economic impact, (3) justified conclusion. Use evidence from the stem.',
+    exemplar: 'Crit D evaluation rubric:\n\nEffects on living things (Band 4):\nSpace disposal: if every launch succeeds there is no effect on Earth\'s organisms; but rockets fail in a small percentage of launches, and a failure on or after lift-off would scatter radioactive waste through the atmosphere and across land and sea, exposing many living things to radiation over a wide area.\nDeep-borehole storage: waste sealed 3000–5000 m down in stable rock is isolated from surface life; the main risk is slow groundwater contamination if a container corrodes, but the depth and clay/cement seals make this very unlikely.\n\nEconomic impact (Band 4):\nSpace disposal: extremely expensive — each rocket launch costs an enormous amount and can carry only a small mass of waste, so the cost per tonne is huge; a failed launch also wastes the rocket.\nDeep-borehole storage: expensive to drill and seal the boreholes and to monitor them, but far cheaper than repeated rocket launches and reusable for many containers.\n\nConclusion (Band 4): Deep-borehole storage is the better method. Although drilling is costly, it is far cheaper and far safer than firing waste into space, where even a small launch-failure rate would risk a catastrophic, wide-area release. Sealing waste deep in stable rock protects living things for thousands of years, so the cost is justified.',
+    keyConcepts: ['Criterion D', 'Radioactive waste disposal', 'Environmental ethics', 'Economic evaluation'],
+    keywords: ['space disposal launch failure scatters waste', 'deep borehole sealed safe long term', 'economic cost rockets very expensive', 'groundwater contamination risk', 'justified conclusion borehole better'],
+    feedbackHit: 'Strong Crit D — effects on living things (both methods), economic impact (both methods), justified conclusion.',
+    feedbackMiss: 'Must include: (1) effect on living things for ONE method; (2) effect on living things for BOTH methods; (3) economic impact ONE method; (4) economic BOTH methods + justified conclusion.',
   },
 }
-
-export type { MSRecord }

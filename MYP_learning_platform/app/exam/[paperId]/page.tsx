@@ -42,16 +42,38 @@ import { questions as chemistry_may_2016_v1Questions, paperMeta as chemistry_may
 import { questions as chemistry_may_2016_v2Questions, paperMeta as chemistry_may_2016_v2Meta } from '@/data/papers/chemistry-may-2016-v2/questions'
 import { questions as chemistry_may_2017_v1Questions, paperMeta as chemistry_may_2017_v1Meta } from '@/data/papers/chemistry-may-2017-v1/questions'
 import { questions as chemistry_may_2017_v2Questions, paperMeta as chemistry_may_2017_v2Meta } from '@/data/papers/chemistry-may-2017-v2/questions'
+import { questions as chemistry_may_2018_v1Questions, paperMeta as chemistry_may_2018_v1Meta } from '@/data/papers/chemistry-may-2018-v1/questions'
+import { questions as chemistry_may_2018_v2Questions, paperMeta as chemistry_may_2018_v2Meta } from '@/data/papers/chemistry-may-2018-v2/questions'
+import { questions as chemistry_may_2019_v1Questions, paperMeta as chemistry_may_2019_v1Meta } from '@/data/papers/chemistry-may-2019-v1/questions'
+import { questions as chemistry_may_2019_v2Questions, paperMeta as chemistry_may_2019_v2Meta } from '@/data/papers/chemistry-may-2019-v2/questions'
+import { questions as chemistry_may_2021_v1Questions, paperMeta as chemistry_may_2021_v1Meta } from '@/data/papers/chemistry-may-2021-v1/questions'
+import { questions as chemistry_may_2021_v2Questions, paperMeta as chemistry_may_2021_v2Meta } from '@/data/papers/chemistry-may-2021-v2/questions'
 import { questions as chemistry_may_2022_v1Questions, paperMeta as chemistry_may_2022_v1Meta } from '@/data/papers/chemistry-may-2022-v1/questions'
 import { questions as chemistry_may_2022_v2Questions, paperMeta as chemistry_may_2022_v2Meta } from '@/data/papers/chemistry-may-2022-v2/questions'
+import { questions as chemistry_may_2023_v1Questions, paperMeta as chemistry_may_2023_v1Meta } from '@/data/papers/chemistry-may-2023-v1/questions'
+import { questions as chemistry_may_2023_v2Questions, paperMeta as chemistry_may_2023_v2Meta } from '@/data/papers/chemistry-may-2023-v2/questions'
 import { questions as chemistry_may_2024_v1Questions, paperMeta as chemistry_may_2024_v1Meta } from '@/data/papers/chemistry-may-2024-v1/questions'
 import { questions as chemistry_may_2024_v2Questions, paperMeta as chemistry_may_2024_v2Meta } from '@/data/papers/chemistry-may-2024-v2/questions'
+import { questions as chemistry_may_2025_v1Questions, paperMeta as chemistry_may_2025_v1Meta } from '@/data/papers/chemistry-may-2025-v1/questions'
+import { questions as chemistry_may_2025_v2Questions, paperMeta as chemistry_may_2025_v2Meta } from '@/data/papers/chemistry-may-2025-v2/questions'
+import { questions as chemistry_nov_2016_v1Questions, paperMeta as chemistry_nov_2016_v1Meta } from '@/data/papers/chemistry-nov-2016-v1/questions'
+import { questions as chemistry_nov_2016_v2Questions, paperMeta as chemistry_nov_2016_v2Meta } from '@/data/papers/chemistry-nov-2016-v2/questions'
 import { questions as chemistry_nov_2017_v1Questions, paperMeta as chemistry_nov_2017_v1Meta } from '@/data/papers/chemistry-nov-2017-v1/questions'
 import { questions as chemistry_nov_2017_v2Questions, paperMeta as chemistry_nov_2017_v2Meta } from '@/data/papers/chemistry-nov-2017-v2/questions'
+import { questions as chemistry_nov_2018_v1Questions, paperMeta as chemistry_nov_2018_v1Meta } from '@/data/papers/chemistry-nov-2018-v1/questions'
+import { questions as chemistry_nov_2018_v2Questions, paperMeta as chemistry_nov_2018_v2Meta } from '@/data/papers/chemistry-nov-2018-v2/questions'
+import { questions as chemistry_nov_2019_v1Questions, paperMeta as chemistry_nov_2019_v1Meta } from '@/data/papers/chemistry-nov-2019-v1/questions'
+import { questions as chemistry_nov_2019_v2Questions, paperMeta as chemistry_nov_2019_v2Meta } from '@/data/papers/chemistry-nov-2019-v2/questions'
+import { questions as chemistry_nov_2020_v1Questions, paperMeta as chemistry_nov_2020_v1Meta } from '@/data/papers/chemistry-nov-2020-v1/questions'
+import { questions as chemistry_nov_2020_v2Questions, paperMeta as chemistry_nov_2020_v2Meta } from '@/data/papers/chemistry-nov-2020-v2/questions'
 import { questions as chemistry_nov_2021_v1Questions, paperMeta as chemistry_nov_2021_v1Meta } from '@/data/papers/chemistry-nov-2021-v1/questions'
 import { questions as chemistry_nov_2021_v2Questions, paperMeta as chemistry_nov_2021_v2Meta } from '@/data/papers/chemistry-nov-2021-v2/questions'
 import { questions as chemistry_nov_2022_v1Questions, paperMeta as chemistry_nov_2022_v1Meta } from '@/data/papers/chemistry-nov-2022-v1/questions'
 import { questions as chemistry_nov_2022_v2Questions, paperMeta as chemistry_nov_2022_v2Meta } from '@/data/papers/chemistry-nov-2022-v2/questions'
+import { questions as chemistry_nov_2023_v1Questions, paperMeta as chemistry_nov_2023_v1Meta } from '@/data/papers/chemistry-nov-2023-v1/questions'
+import { questions as chemistry_nov_2023_v2Questions, paperMeta as chemistry_nov_2023_v2Meta } from '@/data/papers/chemistry-nov-2023-v2/questions'
+import { questions as chemistry_nov_2024_v1Questions, paperMeta as chemistry_nov_2024_v1Meta } from '@/data/papers/chemistry-nov-2024-v1/questions'
+import { questions as chemistry_nov_2024_v2Questions, paperMeta as chemistry_nov_2024_v2Meta } from '@/data/papers/chemistry-nov-2024-v2/questions'
 import { questions as geography_may_2021Questions, paperMeta as geography_may_2021Meta } from '@/data/papers/geography-may-2021/questions'
 import { questions as geography_may_2021_v1Questions, paperMeta as geography_may_2021_v1Meta } from '@/data/papers/geography-may-2021-v1/questions'
 import { questions as geography_may_2021_v2Questions, paperMeta as geography_may_2021_v2Meta } from '@/data/papers/geography-may-2021-v2/questions'
@@ -200,16 +222,38 @@ const PAPERS: Record<string, { questions: Question[]; meta: PaperMeta }> = {
   'chemistry-may-2016-v2': { questions: chemistry_may_2016_v2Questions, meta: chemistry_may_2016_v2Meta },
   'chemistry-may-2017-v1': { questions: chemistry_may_2017_v1Questions, meta: chemistry_may_2017_v1Meta },
   'chemistry-may-2017-v2': { questions: chemistry_may_2017_v2Questions, meta: chemistry_may_2017_v2Meta },
+  'chemistry-may-2018-v1': { questions: chemistry_may_2018_v1Questions, meta: chemistry_may_2018_v1Meta },
+  'chemistry-may-2018-v2': { questions: chemistry_may_2018_v2Questions, meta: chemistry_may_2018_v2Meta },
+  'chemistry-may-2019-v1': { questions: chemistry_may_2019_v1Questions, meta: chemistry_may_2019_v1Meta },
+  'chemistry-may-2019-v2': { questions: chemistry_may_2019_v2Questions, meta: chemistry_may_2019_v2Meta },
+  'chemistry-may-2021-v1': { questions: chemistry_may_2021_v1Questions, meta: chemistry_may_2021_v1Meta },
+  'chemistry-may-2021-v2': { questions: chemistry_may_2021_v2Questions, meta: chemistry_may_2021_v2Meta },
   'chemistry-may-2022-v1': { questions: chemistry_may_2022_v1Questions, meta: chemistry_may_2022_v1Meta },
   'chemistry-may-2022-v2': { questions: chemistry_may_2022_v2Questions, meta: chemistry_may_2022_v2Meta },
+  'chemistry-may-2023-v1': { questions: chemistry_may_2023_v1Questions, meta: chemistry_may_2023_v1Meta },
+  'chemistry-may-2023-v2': { questions: chemistry_may_2023_v2Questions, meta: chemistry_may_2023_v2Meta },
   'chemistry-may-2024-v1': { questions: chemistry_may_2024_v1Questions, meta: chemistry_may_2024_v1Meta },
   'chemistry-may-2024-v2': { questions: chemistry_may_2024_v2Questions, meta: chemistry_may_2024_v2Meta },
+  'chemistry-may-2025-v1': { questions: chemistry_may_2025_v1Questions, meta: chemistry_may_2025_v1Meta },
+  'chemistry-may-2025-v2': { questions: chemistry_may_2025_v2Questions, meta: chemistry_may_2025_v2Meta },
+  'chemistry-nov-2016-v1': { questions: chemistry_nov_2016_v1Questions, meta: chemistry_nov_2016_v1Meta },
+  'chemistry-nov-2016-v2': { questions: chemistry_nov_2016_v2Questions, meta: chemistry_nov_2016_v2Meta },
   'chemistry-nov-2017-v1': { questions: chemistry_nov_2017_v1Questions, meta: chemistry_nov_2017_v1Meta },
   'chemistry-nov-2017-v2': { questions: chemistry_nov_2017_v2Questions, meta: chemistry_nov_2017_v2Meta },
+  'chemistry-nov-2018-v1': { questions: chemistry_nov_2018_v1Questions, meta: chemistry_nov_2018_v1Meta },
+  'chemistry-nov-2018-v2': { questions: chemistry_nov_2018_v2Questions, meta: chemistry_nov_2018_v2Meta },
+  'chemistry-nov-2019-v1': { questions: chemistry_nov_2019_v1Questions, meta: chemistry_nov_2019_v1Meta },
+  'chemistry-nov-2019-v2': { questions: chemistry_nov_2019_v2Questions, meta: chemistry_nov_2019_v2Meta },
+  'chemistry-nov-2020-v1': { questions: chemistry_nov_2020_v1Questions, meta: chemistry_nov_2020_v1Meta },
+  'chemistry-nov-2020-v2': { questions: chemistry_nov_2020_v2Questions, meta: chemistry_nov_2020_v2Meta },
   'chemistry-nov-2021-v1': { questions: chemistry_nov_2021_v1Questions, meta: chemistry_nov_2021_v1Meta },
   'chemistry-nov-2021-v2': { questions: chemistry_nov_2021_v2Questions, meta: chemistry_nov_2021_v2Meta },
   'chemistry-nov-2022-v1': { questions: chemistry_nov_2022_v1Questions, meta: chemistry_nov_2022_v1Meta },
   'chemistry-nov-2022-v2': { questions: chemistry_nov_2022_v2Questions, meta: chemistry_nov_2022_v2Meta },
+  'chemistry-nov-2023-v1': { questions: chemistry_nov_2023_v1Questions, meta: chemistry_nov_2023_v1Meta },
+  'chemistry-nov-2023-v2': { questions: chemistry_nov_2023_v2Questions, meta: chemistry_nov_2023_v2Meta },
+  'chemistry-nov-2024-v1': { questions: chemistry_nov_2024_v1Questions, meta: chemistry_nov_2024_v1Meta },
+  'chemistry-nov-2024-v2': { questions: chemistry_nov_2024_v2Questions, meta: chemistry_nov_2024_v2Meta },
   'geography-may-2021': { questions: geography_may_2021Questions, meta: geography_may_2021Meta },
   'geography-may-2021-v1': { questions: geography_may_2021_v1Questions, meta: geography_may_2021_v1Meta },
   'geography-may-2021-v2': { questions: geography_may_2021_v2Questions, meta: geography_may_2021_v2Meta },
