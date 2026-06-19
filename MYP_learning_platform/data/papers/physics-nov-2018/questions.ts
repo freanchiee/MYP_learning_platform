@@ -1,7 +1,5 @@
 import type { Question } from '@/lib/types'
 
-const P = '/images/papers/physics-nov-2018/'
-
 export const paperMeta = {
   id: 'physics-nov-2018',
   subject: 'Physics',
@@ -22,7 +20,13 @@ export const questions: Question[] = [
     topicCanonical: 'Waves, Sound & Frequency',
     topicGroup: 'Waves & Sound',
     stem: 'This question is about light and sound waves and the different speeds at which they move through the air.',
-    figImages: [`${P}q1-lightning.png`],
+    artefact: {
+      component: 'GenericSVG',
+      data: {
+        svg: '<svg viewBox="0 0 600 300" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><defs><linearGradient id="sky1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1b2a4a"/><stop offset="1" stop-color="#3a4f7a"/></linearGradient><marker id="ahL" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#f5d76e"/></marker><marker id="ahS" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#8fb8d6"/></marker></defs><rect width="600" height="300" fill="url(#sky1)"/><rect x="0" y="250" width="600" height="50" fill="#16324f"/><line x1="0" y1="250" x2="600" y2="250" stroke="#0d2237" stroke-width="2"/><text x="60" y="244" font-size="11" fill="#9fc0db">sea</text><polygon points="150,40 138,120 158,116 142,200 175,100 152,104 168,40" fill="#eef4ff" stroke="#cdd9ee"/><text x="100" y="40" font-size="12" font-weight="700" fill="#eef4ff">lightning strike</text><circle cx="500" cy="120" r="13" fill="#f1c27d" stroke="#c98a3c"/><rect x="490" y="133" width="20" height="42" rx="6" fill="#3a6ea5"/><text x="470" y="120" font-size="11" fill="#dfe9f5">observer</text><line x1="170" y1="100" x2="478" y2="118" stroke="#f5d76e" stroke-width="2.5" marker-end="url(#ahL)"/><text x="300" y="100" font-size="11" fill="#f5d76e">light — fast (≈ 3 × 10⁸ m s⁻¹): seen almost instantly</text><path d="M165,150 Q330,180 480,150" stroke="#8fb8d6" stroke-width="2.5" stroke-dasharray="6 5" fill="none" marker-end="url(#ahS)"/><text x="260" y="200" font-size="11" fill="#8fb8d6">sound — slow (≈ 330 m s⁻¹): thunder heard later</text></svg>',
+      },
+      caption: 'Light from a lightning strike reaches the observer almost instantly, but the sound of thunder travels far more slowly — so it arrives several seconds later.',
+    },
     tasks: [
       {
         label: 'a',
@@ -30,7 +34,7 @@ export const questions: Question[] = [
         marks: 1,
         widget: 'radio_select',
         widgetOptions: ['330 ms⁻¹ and 300 000 000 ms⁻¹', '300 000 000 ms⁻¹ and 330 ms⁻¹', '55 000 ms⁻¹ and 300 000 000 ms⁻¹', '330 ms⁻¹ and 55 000 ms⁻¹'],
-        ph: 'Select the correct pair of speeds.',
+        ph: 'Correct: "330 ms⁻¹ and 300 000 000 ms⁻¹".\nThe speed of sound in air is about 330 m s⁻¹ and the speed of light in air is about 3 × 10⁸ m s⁻¹ (300 000 000 m s⁻¹).',
       },
       {
         label: 'b',
@@ -42,13 +46,38 @@ export const questions: Question[] = [
         label: 'c',
         text: 'A student is watching a storm. He calculates the distance to the storm every five minutes and draws the following graph of his results. Use the graph to **describe** the journey of the storm as it passes the student.',
         marks: 2,
-        figImages: ['/images/papers/physics-nov-2018/q1c-graph.svg'],
+        artefact: {
+          component: 'GraphSim',
+          data: {
+            mode: 'readoff',
+            title: 'Distance to the storm during the morning',
+            xAxis: { label: 'time (minutes after 08:00)', min: 0, max: 40, tick: 10 },
+            yAxis: { label: 'distance to storm / km', min: 0, max: 5, tick: 1 },
+            points: [[0, 4], [10, 2], [15, 1], [20, 1], [25, 2], [40, 4]],
+            readouts: [{ x: 0, note: '08:00' }, { x: 10, note: '08:10' }],
+            dataMaxX: 40,
+          },
+          caption: 'Distance to the storm, measured every five minutes from 08:00. Drag the crosshair to read values off the graph.',
+        },
         ph: 'The storm is moving with constant/unchanging speed (not accelerating). It moves toward the student AND then away from the student. It passes at a distance of about 1 km and passes overhead.',
       },
       {
         label: 'd',
         text: 'Use information from the graph to **calculate** the speed of the storm between 08:00 and 08:10. Give your answer in km h⁻¹.',
         marks: 2,
+        artefact: {
+          component: 'GraphSim',
+          data: {
+            mode: 'readoff',
+            title: 'Distance to the storm during the morning',
+            xAxis: { label: 'time (minutes after 08:00)', min: 0, max: 40, tick: 10 },
+            yAxis: { label: 'distance to storm / km', min: 0, max: 5, tick: 1 },
+            points: [[0, 4], [10, 2], [15, 1], [20, 1], [25, 2], [40, 4]],
+            readouts: [{ x: 0, note: 'read distance at 08:00' }, { x: 10, note: 'read distance at 08:10' }],
+            dataMaxX: 40,
+          },
+          caption: 'Read the distance at 08:00 and at 08:10 to find the distance moved in 10 minutes.',
+        },
         ph: 'Read values from graph: distance at 08:00 ≈ 4 km, distance at 08:10 ≈ 2 km\nDistance covered = 2 km in 10 min = 1/6 hour\nSpeed = 2 ÷ (1/6) = 12 km h⁻¹',
       },
     ],
@@ -64,6 +93,13 @@ export const questions: Question[] = [
     topicCanonical: 'Circuits, Resistance & Power',
     topicGroup: 'Electricity & Magnetism',
     stem: 'This question is about lightning and electricity.',
+    artefact: {
+      component: 'GenericSVG',
+      data: {
+        svg: '<svg viewBox="0 0 600 320" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><defs><linearGradient id="cloud2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6b7790"/><stop offset="1" stop-color="#3a4357"/></linearGradient><marker id="ahU" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#4a90d9"/></marker></defs><rect width="600" height="320" fill="#eef2f7"/><path d="M120,70 Q120,30 180,40 Q210,10 270,40 Q360,15 410,55 Q470,45 470,90 Q500,95 480,140 L120,140 Q90,110 120,70 Z" fill="url(#cloud2)" stroke="#2b3346"/><text x="150" y="60" font-size="13" font-weight="700" fill="#fff">storm cloud</text><g font-size="14" font-weight="700" fill="#d64545"><text x="180" y="80">+</text><text x="240" y="72">+</text><text x="320" y="78">+</text><text x="400" y="82">+</text></g><text x="160" y="100" font-size="10" fill="#ffd9d9">top: small ice crystals rise (become positive)</text><g font-size="14" font-weight="700" fill="#4a90d9"><text x="200" y="132">−</text><text x="280" y="132">−</text><text x="360" y="132">−</text></g><text x="160" y="156" font-size="10" fill="#1f4a6b">base: heavy water drops fall (become negative)</text><line x1="300" y1="95" x2="300" y2="125" stroke="#4a90d9" stroke-width="2" marker-end="url(#ahU)"/><text x="306" y="116" font-size="10" fill="#4a90d9">e⁻ transfer</text><rect x="0" y="280" width="600" height="40" fill="#5b6b78"/><text x="40" y="305" font-size="11" fill="#fff">ground (positively charged below the cloud)</text><g font-size="13" font-weight="700" fill="#d64545"><text x="120" y="276">+</text><text x="300" y="276">+</text><text x="480" y="276">+</text></g></svg>',
+      },
+      caption: 'Inside a thundercloud, rising ice crystals and falling water drops exchange electrons, leaving the cloud base negatively charged and the cloud top positive.',
+    },
     tasks: [
       {
         label: 'a',
@@ -76,13 +112,24 @@ export const questions: Question[] = [
           'Protons are transferred from the small upward moving crystals to the water drops.',
           'Neutrons are transferred from the water drops to the small upward moving crystals.',
         ],
-        ph: 'Select the correct charge transfer process.',
+        ph: 'Correct: "Electrons are transferred from the small upward moving crystals to the water drops."\nThe crystals lose electrons (become positive at the cloud top) and the water drops gain electrons (become negative at the cloud base). Only electrons transfer in charging by friction/contact — protons and neutrons stay in the nuclei.',
       },
       {
         label: 'b',
         text: 'A build-up of charge in a thunderstorm may discharge with a huge spark of lightning between the bottom of a cloud and the ground. When lightning strikes, the air is heated to a plasma (super high temperature gas) which has a low resistance so that a current can flow. Using information from the picture, **calculate** the resistance of the plasma during the lightning strike.',
         marks: 3,
-        figImages: [`${P}q2b-circuit.png`],
+        artefact: {
+          component: 'CircuitSim',
+          data: {
+            title: 'The lightning strike as a circuit: cloud → plasma channel → ground',
+            mode: 'iv',
+            component: 'plasma channel',
+            ivPairs: [{ V: 500000, I: 20000 }],
+            knownTrial: { V: 500000, I: 20000 },
+            task: 'The cloud sits at 500 000 V above the ground and a current of 20 000 A flows through the heated air (plasma). Read V and I, then use R = V / I.',
+          },
+          caption: 'During the strike the potential difference between cloud and ground is 500 000 V and the current is 20 000 A.',
+        },
         ph: 'R = V/I\n= 500 000 / 20 000\n= 25 Ω',
       },
       {
@@ -95,7 +142,13 @@ export const questions: Question[] = [
         label: 'd',
         text: 'Tall buildings are often struck by lightning. To prevent them from being damaged, metal lightning conductors are attached to buildings. **Explain** how lightning conductors prevent buildings from being damaged.',
         marks: 3,
-        figImages: [`${P}q2d-conductor.png`],
+        artefact: {
+          component: 'GenericSVG',
+          data: {
+            svg: '<svg viewBox="0 0 480 320" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><defs><marker id="ahC" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#c0392b"/></marker></defs><rect width="480" height="320" fill="#dbeafe"/><rect x="0" y="280" width="480" height="40" fill="#6b5232"/><text x="40" y="305" font-size="11" fill="#fff">earth / ground</text><rect x="180" y="120" width="120" height="160" fill="#cdb28a" stroke="#8a7350"/><polygon points="165,120 240,70 315,120" fill="#b04a3a" stroke="#7a3026"/><g fill="#9a8568"><rect x="200" y="150" width="22" height="26"/><rect x="258" y="150" width="22" height="26"/><rect x="200" y="210" width="22" height="26"/><rect x="258" y="210" width="22" height="26"/></g><line x1="240" y1="70" x2="240" y2="30" stroke="#7a7f88" stroke-width="3"/><circle cx="240" cy="30" r="4" fill="#7a7f88"/><text x="250" y="34" font-size="11" fill="#3a3f48">metal spike</text><line x1="240" y1="70" x2="318" y2="120" stroke="#7a7f88" stroke-width="4"/><line x1="318" y1="120" x2="318" y2="290" stroke="#7a7f88" stroke-width="4"/><text x="324" y="210" font-size="11" font-weight="700" fill="#3a3f48">thick metal</text><text x="324" y="224" font-size="11" font-weight="700" fill="#3a3f48">conductor</text><polygon points="240,0 230,30 246,26 236,52 248,30 240,30" fill="#f4d03f" stroke="#c9a516"/><path d="M240,30 L255,70 L300,118 L318,124" stroke="#c0392b" stroke-width="2.5" fill="none" stroke-dasharray="2 3" marker-end="url(#ahC)"/><text x="330" y="270" font-size="10" fill="#c0392b">current to earth</text></svg>',
+          },
+          caption: 'A metal lightning conductor offers a low-resistance path that carries the charge safely down the outside of the building to earth.',
+        },
         ph: 'Metal is a better conductor / has lower resistance than building materials. Current/charge from the lightning will flow through the conductor (path of least resistance). Current/charge passes to earth (without passing through the building), preventing damage.',
       },
     ],
@@ -111,12 +164,33 @@ export const questions: Question[] = [
     topicCanonical: 'Atomic Structure & Radioactivity',
     topicGroup: 'Nuclear & Atomic Physics',
     stem: 'This question is about decay and half-life.',
+    artefact: {
+      component: 'DecaySim',
+      data: {
+        title: 'Radioactive decay and half-life',
+        isotope: 'parent nuclei',
+        daughter: 'daughter nuclei',
+        halfLife: 5700,
+        units: 'years',
+        initialCount: 144,
+        axisMax: 22800,
+        xAxis: 'time / years',
+        yAxis: 'number of undecayed nuclei',
+      },
+      caption: 'Unstable (parent) nuclei decay into daughter nuclei. Scrub the time slider: after each half-life, half of the remaining parent nuclei have decayed.',
+    },
     tasks: [
       {
         label: 'a',
         text: 'When unstable isotopes decay, they may release an alpha or a beta particle. For each of the decay equations below, **select** the particle released during decay.',
         marks: 1,
-        figImages: [`${P}q3a-decay.png`],
+        artefact: {
+          component: 'GenericSVG',
+          data: {
+            svg: '<svg viewBox="0 0 560 220" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><rect width="560" height="220" fill="#ffffff"/><text x="20" y="28" font-size="13" font-weight="700" fill="#1f2d3a">Decay equations</text><g font-size="17" fill="#1f2d3a"><text x="30" y="74"><tspan font-size="11" dy="-8">241</tspan><tspan dy="8">Am </tspan><tspan font-size="11" dy="8" dx="-26">95</tspan><tspan dy="-8" dx="6">→ </tspan><tspan font-size="11" dy="-8" dx="4">237</tspan><tspan dy="8">Np </tspan><tspan font-size="11" dy="8" dx="-24">93</tspan><tspan dy="-8" dx="6">+ </tspan><tspan font-size="11" dy="-8" dx="4">4</tspan><tspan dy="8">α </tspan><tspan font-size="11" dy="8" dx="-12">2</tspan></text></g><g font-size="17" fill="#1f2d3a"><text x="30" y="134"><tspan font-size="11" dy="-8">210</tspan><tspan dy="8">Po </tspan><tspan font-size="11" dy="8" dx="-26">84</tspan><tspan dy="-8" dx="6">→ </tspan><tspan font-size="11" dy="-8" dx="4">206</tspan><tspan dy="8">Pb </tspan><tspan font-size="11" dy="8" dx="-24">82</tspan><tspan dy="-8" dx="6">+ </tspan><tspan font-size="11" dy="-8" dx="4">4</tspan><tspan dy="8">α </tspan><tspan font-size="11" dy="8" dx="-12">2</tspan></text></g><g font-size="17" fill="#1f2d3a"><text x="30" y="194"><tspan font-size="11" dy="-8">240</tspan><tspan dy="8">Np </tspan><tspan font-size="11" dy="8" dx="-26">93</tspan><tspan dy="-8" dx="6">→ </tspan><tspan font-size="11" dy="-8" dx="4">240</tspan><tspan dy="8">Pu </tspan><tspan font-size="11" dy="8" dx="-26">94</tspan><tspan dy="-8" dx="6">+ </tspan><tspan font-size="11" dy="-8" dx="4">0</tspan><tspan dy="8">β </tspan><tspan font-size="11" dy="8" dx="-12">−1</tspan></text></g><rect x="380" y="44" width="150" height="150" fill="#f1f5f9" stroke="#94a3ad" rx="6"/><text x="455" y="66" font-size="11" font-weight="700" text-anchor="middle" fill="#475569">Particles</text><rect x="400" y="80" width="110" height="40" fill="#e0f2fe" stroke="#0b7285" rx="4"/><text x="455" y="105" font-size="14" font-weight="700" text-anchor="middle" fill="#0b7285">⁴₂α  (alpha)</text><rect x="400" y="135" width="110" height="40" fill="#fef3c7" stroke="#b45309" rx="4"/><text x="455" y="160" font-size="14" font-weight="700" text-anchor="middle" fill="#b45309">⁰₋₁β  (beta)</text></svg>',
+          },
+          caption: 'Three nuclear decay equations. Compare the mass and atomic numbers on each side to decide whether an alpha or a beta particle is released.',
+        },
         ph: '²⁴¹Am(95) → ²³⁷Np(93) + ⁴α(2): alpha particle\n²¹⁰Po(84) → ²⁰⁶Pb(82) + ⁴α(2): alpha particle\n²⁴⁰Np(93) → ²⁴⁰Pu(94) + ⁰β(−1): beta particle\n(Award 1 mark for all three correct)',
       },
       {
@@ -135,7 +209,19 @@ export const questions: Question[] = [
         label: 'd',
         text: 'The following table lists some unstable isotopes, their half-lives and some additional information regarding the elements. **Evaluate** the information in the table to determine which of the isotopes listed above would best assist us in dating an ancient artifact used by early humans, suspected to be 10 000 years old.',
         marks: 3,
-        figImages: [`${P}q3d-isotopes.png`],
+        artefact: {
+          component: 'DataTable',
+          data: {
+            headers: ['Isotope', 'Half-life / years', 'Additional information'],
+            rows: [
+              ['Curium-242', '4 730', 'Artificially produced isotope, not found in nature'],
+              ['Carbon-14', '5 700', 'Alongside carbon-12, this isotope is found in organic materials'],
+              ['Potassium-40', '1 300 000 000', 'Found in sedimentary rocks, particularly those rocks formed by the dust from volcanoes'],
+              ['Uranium-238', '4 500 000 000', 'Found in many areas around the Earth, often as an ore bonded to other elements'],
+            ],
+          },
+          caption: 'Four unstable isotopes with their half-lives and where each is found. Compare each half-life with the 10 000-year age of the artifact.',
+        },
         ph: 'Carbon-14 is most appropriate. Reasons: (1) its half-life of 5 700 years means after 10 000 years the change in abundance will be noticeable; (2) the half-life is appropriate to the timescale (similar order of magnitude); (3) it exists in nature (found in organic materials used by humans).',
       },
     ],
@@ -151,12 +237,25 @@ export const questions: Question[] = [
     topicCanonical: 'Pressure, Density & Buoyancy',
     topicGroup: 'Pressure & Fluids',
     stem: 'A change in the characteristics of a football (soccer) ball may impact the ball\'s performance. FIFA has a global standard to guarantee that every game will be played with balls with identical characteristics.\n\nThe bounciness of the ball is an important factor that can affect its performance. Your class is studying factors that affect the performance of the ball. You decide that you are going to study one factor: the effect of the ball\'s internal air pressure.\n\nYou plan to drop the ball from a measured height towards a horizontal surface and determine the height of the first bounce. Your hypothesis for the experiment is:\n\n*Bounce height is proportional to internal air pressure because higher pressure reduces the energy loss due to deformation when the ball bounces.*',
+    artefact: {
+      component: 'GenericSVG',
+      data: {
+        svg: '<svg viewBox="0 0 480 280" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><defs><marker id="ahB" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#475569"/></marker></defs><rect width="480" height="280" fill="#ffffff"/><rect x="0" y="250" width="480" height="30" fill="#9a8568"/><line x1="0" y1="250" x2="480" y2="250" stroke="#6b5232" stroke-width="2"/><text x="20" y="270" font-size="11" fill="#fff">horizontal surface</text><line x1="90" y1="40" x2="90" y2="250" stroke="#94a3ad" stroke-width="1" stroke-dasharray="4 4"/><line x1="90" y1="40" x2="78" y2="40" stroke="#475569"/><line x1="90" y1="250" x2="78" y2="250" stroke="#475569"/><line x1="84" y1="44" x2="84" y2="246" stroke="#475569" stroke-width="1" marker-start="url(#ahB)" marker-end="url(#ahB)"/><text x="30" y="150" font-size="11" fill="#475569">drop</text><text x="30" y="164" font-size="11" fill="#475569">height</text><circle cx="140" cy="55" r="20" fill="#e8772e" stroke="#a8531a"/><path d="M122,55 a18,9 0 0 1 36,0" fill="none" stroke="#a8531a" stroke-width="1"/><text x="166" y="50" font-size="10" fill="#a8531a">ball released</text><path d="M140,78 Q150,200 230,250" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3 3" fill="none"/><path d="M230,250 Q280,140 330,250" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3 3" fill="none"/><circle cx="280" cy="170" r="18" fill="#e8772e" stroke="#a8531a" opacity="0.85"/><line x1="380" y1="170" x2="380" y2="250" stroke="#0b7285" stroke-width="1" stroke-dasharray="4 4"/><line x1="376" y1="174" x2="376" y2="246" stroke="#0b7285" stroke-width="1" marker-start="url(#ahB)" marker-end="url(#ahB)"/><text x="388" y="205" font-size="11" fill="#0b7285">bounce</text><text x="388" y="219" font-size="11" fill="#0b7285">height</text></svg>',
+      },
+      caption: 'The ball is dropped from a measured drop height; the height of its first bounce is recorded. The internal air pressure of the ball is varied.',
+    },
     tasks: [
       {
         label: 'a',
         text: '**Select** the following variables.',
         marks: 4,
-        figImages: [`${P}q4a-variables.png`],
+        artefact: {
+          component: 'GenericSVG',
+          data: {
+            svg: '<svg viewBox="0 0 460 230" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><rect width="460" height="230" fill="#ffffff"/><text x="20" y="26" font-size="12" font-weight="700" fill="#1f2d3a">Quantities in the bounce experiment</text><g font-size="12" fill="#334155"><rect x="20" y="42" width="420" height="26" fill="#f1f5f9" stroke="#cbd5e1"/><text x="34" y="59">Drop height</text><rect x="20" y="72" width="420" height="26" fill="#f8fafc" stroke="#cbd5e1"/><text x="34" y="89">Internal air pressure</text><rect x="20" y="102" width="420" height="26" fill="#f1f5f9" stroke="#cbd5e1"/><text x="34" y="119">Bounce height</text><rect x="20" y="132" width="420" height="26" fill="#f8fafc" stroke="#cbd5e1"/><text x="34" y="149">Size of ball</text><rect x="20" y="162" width="420" height="26" fill="#f1f5f9" stroke="#cbd5e1"/><text x="34" y="179">Bouncing surface</text><rect x="20" y="192" width="420" height="26" fill="#f8fafc" stroke="#cbd5e1"/><text x="34" y="209">Material of the ball</text></g></svg>',
+          },
+          caption: 'Classify each quantity as the independent variable, the dependent variable, or a control variable.',
+        },
         widget: 'variable_classify',
         widgetItems: ['Drop height', 'Internal air pressure', 'Bounce height', 'Size of ball', 'Bouncing surface', 'Material of the ball'],
         ph: 'Internal air pressure → Independent variable\nBounce height → Dependent variable\nDrop height → Control variable\nSize of ball → Control variable\nBouncing surface → Control variable\nMaterial of the ball → Control variable',
@@ -183,32 +282,137 @@ export const questions: Question[] = [
         label: 'd',
         text: 'The following is an image of the pressure gauge meter that you will use. **Measure** the pressure of the ball shown in the image above using an appropriate unit.',
         marks: 2,
-        figImages: [`${P}q4d-gauge.png`],
-        ph: '83 ± 0.5 kPa\n(Also accept 12.5 PSI if that unit is also stated alongside the kPa reading)',
+        artefact: {
+          component: 'GenericSVG',
+          data: {
+            svg: '<svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><rect width="300" height="300" fill="#ffffff"/><circle cx="150" cy="150" r="118" fill="#f8fafc" stroke="#334155" stroke-width="4"/><circle cx="150" cy="150" r="118" fill="none" stroke="#94a3ad" stroke-width="1"/><text x="150" y="58" font-size="12" font-weight="700" text-anchor="middle" fill="#334155">kPa</text><g stroke="#334155" stroke-width="2" font-size="11" fill="#334155" text-anchor="middle"><line x1="150" y1="42" x2="150" y2="58"/><text x="150" y="80">0</text><line x1="261" y1="150" x2="245" y2="150"/><text x="226" y="154">100</text><line x1="150" y1="258" x2="150" y2="242"/><text x="150" y="232">200</text><line x1="39" y1="150" x2="55" y2="150"/><text x="74" y="154">300</text></g><g stroke="#cbd5e1" stroke-width="1"><line x1="221" y1="79" x2="210" y2="90"/><line x1="221" y1="221" x2="210" y2="210"/><line x1="79" y1="221" x2="90" y2="210"/><line x1="79" y1="79" x2="90" y2="90"/></g><text x="186" y="100" font-size="9" fill="#94a3ad">50</text><text x="186" y="208" font-size="9" fill="#94a3ad">150</text><text x="96" y="208" font-size="9" fill="#94a3ad">250</text><line x1="150" y1="150" x2="231" y2="129" stroke="#c0392b" stroke-width="4" stroke-linecap="round"/><circle cx="150" cy="150" r="9" fill="#334155"/><text x="150" y="288" font-size="11" text-anchor="middle" fill="#64748b">needle points between the 50 and 100 kPa marks</text></svg>',
+          },
+          caption: 'Pressure gauge for the ball. Each numbered division is 50 kPa; read the value indicated by the needle.',
+        },
+        ph: '83 ± 2 kPa (the needle sits between the 50 and 100 kPa marks, closer to 100)\nA unit must be stated for the mark; kPa is the unit shown on the gauge.',
       },
       {
         label: 'e',
         text: 'Some of the results from another student who performed a similar experiment are shown in the graph below. **Draw** a line of best fit on the graph.',
         marks: 1,
-        figImages: ['/images/papers/physics-nov-2018/q4e-graph.svg'],
+        artefact: {
+          component: 'LineGraph',
+          data: {
+            title: 'Bounce height against internal air pressure',
+            xLabel: 'Internal air pressure',
+            xUnit: 'kPa',
+            yLabel: 'Bounce height',
+            yUnit: 'm',
+            xMin: 0,
+            xMax: 120,
+            yMin: 0,
+            yMax: 1.2,
+            xStep: 20,
+            yStep: 0.2,
+            lobf: true,
+            dataPoints: [
+              { x: 20, y: 0.53 },
+              { x: 40, y: 0.66 },
+              { x: 60, y: 0.78 },
+              { x: 80, y: 0.89 },
+              { x: 100, y: 1.03 },
+            ],
+          },
+          caption: 'Results from another student. The dashed red line is a line of best fit through the data points.',
+        },
         ph: 'A straight line of best fit that passes through all (or as close as possible to all) the data points.',
       },
       {
         label: 'f',
         text: 'Use your line of best fit to **estimate** the bounce height for a pressure of 38 kPa.',
         marks: 1,
+        artefact: {
+          component: 'LineGraph',
+          data: {
+            title: 'Bounce height against internal air pressure',
+            xLabel: 'Internal air pressure',
+            xUnit: 'kPa',
+            yLabel: 'Bounce height',
+            yUnit: 'm',
+            xMin: 0,
+            xMax: 120,
+            yMin: 0,
+            yMax: 1.2,
+            xStep: 20,
+            yStep: 0.2,
+            lobf: true,
+            dataPoints: [
+              { x: 20, y: 0.53 },
+              { x: 40, y: 0.66 },
+              { x: 60, y: 0.78 },
+              { x: 80, y: 0.89 },
+              { x: 100, y: 1.03 },
+            ],
+          },
+          caption: 'Read the bounce height off the line of best fit at a pressure of 38 kPa.',
+        },
         ph: 'Read from LOBF at 38 kPa: approximately 0.63–0.65 m',
       },
       {
         label: 'g',
         text: 'Use the graph to **explain** why the y-intercept of the line of best fit has no significance.',
         marks: 3,
-        ph: 'The y-intercept corresponds to a bounce height of approximately 0.40 m when pressure = 0 kPa. However, when the ball is deflated (pressure = 0 kPa), it will not bounce at all — so in reality it will not bounce at all. The y-intercept is physically meaningless.',
+        artefact: {
+          component: 'LineGraph',
+          data: {
+            title: 'Bounce height against internal air pressure',
+            xLabel: 'Internal air pressure',
+            xUnit: 'kPa',
+            yLabel: 'Bounce height',
+            yUnit: 'm',
+            xMin: 0,
+            xMax: 120,
+            yMin: 0,
+            yMax: 1.2,
+            xStep: 20,
+            yStep: 0.2,
+            lobf: true,
+            dataPoints: [
+              { x: 20, y: 0.53 },
+              { x: 40, y: 0.66 },
+              { x: 60, y: 0.78 },
+              { x: 80, y: 0.89 },
+              { x: 100, y: 1.03 },
+            ],
+          },
+          caption: 'Extend the line of best fit back to where it crosses the y-axis (pressure = 0 kPa) to find the y-intercept.',
+        },
+        ph: 'The y-intercept corresponds to a bounce height of approximately 0.40 m at a pressure of 0 kPa. However, a ball at 0 kPa is completely deflated and would not bounce at all (bounce height should be 0 m). The non-zero intercept is an artefact of extrapolating the straight line beyond the measured data, so it has no physical significance.',
       },
       {
         label: 'h',
         text: 'The hypothesis proposed at the start of the investigation was: *Bounce height is proportional to internal air pressure because higher pressure reduces the energy loss due to deformation when the ball bounces.* Use the graph of the results of the experiment to **evaluate** the validity of this hypothesis.',
         marks: 2,
+        artefact: {
+          component: 'LineGraph',
+          data: {
+            title: 'Bounce height against internal air pressure',
+            xLabel: 'Internal air pressure',
+            xUnit: 'kPa',
+            yLabel: 'Bounce height',
+            yUnit: 'm',
+            xMin: 0,
+            xMax: 120,
+            yMin: 0,
+            yMax: 1.2,
+            xStep: 20,
+            yStep: 0.2,
+            lobf: true,
+            dataPoints: [
+              { x: 20, y: 0.53 },
+              { x: 40, y: 0.66 },
+              { x: 60, y: 0.78 },
+              { x: 80, y: 0.89 },
+              { x: 100, y: 1.03 },
+            ],
+          },
+          caption: 'For a proportional relationship the line of best fit would pass through the origin (0, 0). Check whether it does.',
+        },
         ph: 'If the relationship was proportional, the line of best fit would go through the origin of the graph. The line does not go through the origin — therefore the relationship is NOT proportional and the hypothesis is not fully supported.',
       },
     ],
@@ -224,7 +428,13 @@ export const questions: Question[] = [
     topicCanonical: 'Kinematics & Motion Graphs',
     topicGroup: 'Forces & Motion',
     stem: 'Another student decided to do a similar experiment using a basketball and a tennis ball.',
-    figImages: [`${P}q5-basketball.png`],
+    artefact: {
+      component: 'GenericSVG',
+      data: {
+        svg: '<svg viewBox="0 0 520 300" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><defs><marker id="ah5b" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#475569"/></marker></defs><rect width="520" height="300" fill="#ffffff"/><rect x="0" y="262" width="520" height="38" fill="#9a8568"/><line x1="0" y1="262" x2="520" y2="262" stroke="#6b5232" stroke-width="2"/><line x1="60" y1="40" x2="60" y2="262" stroke="#94a3ad" stroke-width="2"/><g font-size="10" fill="#475569"><line x1="55" y1="40" x2="65" y2="40"/><text x="14" y="44">2.0 m</text><line x1="55" y1="114" x2="65" y2="114"/><text x="14" y="118">1.5 m</text><line x1="55" y1="188" x2="65" y2="188"/><text x="14" y="192">1.0 m</text><line x1="55" y1="262" x2="65" y2="262"/><text x="20" y="258">0</text></g><circle cx="180" cy="40" r="22" fill="#e8772e" stroke="#a8531a"/><path d="M158,40 a22,11 0 0 1 44,0" fill="none" stroke="#a8531a"/><text x="150" y="22" font-size="11" font-weight="700" fill="#a8531a">basketball</text><path d="M180,62 Q200,230 250,262" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3 3" fill="none"/><path d="M250,262 Q300,150 350,262" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3 3" fill="none"/><circle cx="300" cy="172" r="20" fill="#e8772e" stroke="#a8531a" opacity="0.8"/><circle cx="420" cy="40" r="11" fill="#d6e63a" stroke="#94a51a"/><text x="396" y="22" font-size="11" font-weight="700" fill="#7a8615">tennis ball</text><path d="M420,51 Q435,210 460,262" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3 3" fill="none"/><text x="150" y="290" font-size="11" fill="#64748b">each ball is dropped from 2.0 m, 1.5 m and 1.0 m and the bounce height measured</text></svg>',
+      },
+      caption: 'A basketball and a tennis ball are each dropped from three measured heights (2.0 m, 1.5 m, 1.0 m) and the bounce height is read off a ruler.',
+    },
     tasks: [
       {
         label: 'a',
@@ -234,23 +444,59 @@ export const questions: Question[] = [
       },
       {
         label: 'b',
-        text: 'The following are the bounce height values for 3 repetitions at a height of 1.8 m: 0.52 m, 0.47 m and 5.5 × 10² cm. **Calculate** the average value of bounce height for the drop height of 1.8 m. Give your answer in metres.',
+        text: 'The following are the bounce height values for 3 repetitions at a drop height of 1.8 m: 0.52 m, 47 cm and 5.5 × 10² mm. **Calculate** the average value of bounce height for the drop height of 1.8 m. Give your answer in metres.',
         marks: 2,
-        figImages: [`${P}q5bc-data.png`],
-        ph: 'Convert 5.5 × 10² cm = 550 cm → Note: this appears to be 55 cm = 0.55 m (student unit error)\nAverage = (0.52 + 0.47 + 0.55) / 3 = 0.51(33) m ≈ 0.51 m',
+        artefact: {
+          component: 'DataTable',
+          data: {
+            headers: ['Repetition (drop height 1.8 m)', 'Bounce height (as recorded by student)'],
+            rows: [
+              ['Trial 1', '0.52 m'],
+              ['Trial 2', '47 cm'],
+              ['Trial 3', '5.5 × 10² mm'],
+            ],
+          },
+          caption: 'The student\'s three recorded bounce-height values at a 1.8 m drop height — note the mixed units (m, cm, mm) that must all be converted to metres before averaging.',
+        },
+        ph: 'Convert all values to metres:\n0.52 m = 0.52 m\n47 cm = 0.47 m\n5.5 × 10² mm = 550 mm = 0.55 m\nAverage = (0.52 + 0.47 + 0.55) / 3 = 0.513 m ≈ 0.51 m',
       },
       {
         label: 'c',
         text: 'The student\'s data is shown below. **Organise** and **present** this data in a table. You should include the answer from part (b) in your table.',
         marks: 5,
-        figImages: [`${P}q5c-rawdata.png`],
+        artefact: {
+          component: 'DataTable',
+          data: {
+            headers: ['Drop height (as recorded)', 'Bounce height (as recorded)'],
+            rows: [
+              ['3 m', '0.82 m'],
+              ['3.4 m', '0.89 m'],
+              ['2.2 m', '0.63 m'],
+              ['1 × 10² cm', '18 cm'],
+              ['140 cm', '40 cm'],
+            ],
+          },
+          caption: 'The student\'s raw, unorganised data, recorded in mixed units. Reorganise it into a clear table with consistent units and order.',
+        },
         ph: 'Table with:\nColumn 1 header: Drop height / m (or metres)\nColumn 2 header: Bounce height / m (or metres)\nData in ascending or descending order of drop height\nAll values to consistent decimal places\nInclude 0.51 m from part (b) at 1.8 m drop height',
       },
       {
         label: 'd',
         text: 'The mean data from the experiment is shown below. **State** the labels for the x and y axes and plot your calculated data point from part (b).',
         marks: 2,
-        figImages: ['/images/papers/physics-nov-2018/q5d-graph.svg'],
+        artefact: {
+          component: 'GraphSim',
+          data: {
+            mode: 'readoff',
+            title: 'Mean bounce height against drop height',
+            xAxis: { label: 'drop height / m', min: 0, max: 3.5, tick: 0.5 },
+            yAxis: { label: 'bounce height / m', min: 0, max: 1.0, tick: 0.2 },
+            points: [[1.0, 0.18], [1.4, 0.40], [2.2, 0.63], [3.0, 0.82], [3.4, 0.89]],
+            readouts: [{ x: 1.8, note: 'plot your point from part (b): (1.8, 0.51)' }],
+            dataMaxX: 3.4,
+          },
+          caption: 'Mean bounce height against drop height. The crosshair marks where your calculated point from part (b), (1.8 m, 0.51 m), should be plotted.',
+        },
         ph: 'X axis: Drop height / m\nY axis: Bounce height / m\nPlot point at (1.8, 0.51) — ECF from part (b)',
       },
     ],
@@ -266,7 +512,13 @@ export const questions: Question[] = [
     topicCanonical: 'States of Matter & Kinetic Theory',
     topicGroup: 'Thermal Physics',
     stem: 'Squash is a sport played by two players in a four-walled court. A small, hollow, rubber ball is hit by the players onto the playing surfaces of the four walls of the court.\n\nBefore a game begins, the players must warm the ball to improve the way it bounces when it hits the playing surface.\n\nIn this question you will design an investigation to determine how the temperature of the ball affects its bounce height. You will place the ball into a water bath, as shown in the diagram, and slowly increase the temperature of the water bath, determining how the ball\'s bounce is affected by the temperature.',
-    figImages: [`${P}q6-squash.png`, `${P}q6-setup.png`],
+    artefact: {
+      component: 'GenericSVG',
+      data: {
+        svg: '<svg viewBox="0 0 480 320" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><defs><linearGradient id="wat6" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#cfe9f6"/><stop offset="1" stop-color="#7fc0e0"/></linearGradient></defs><rect width="480" height="320" fill="#ffffff"/><rect x="150" y="70" width="160" height="150" rx="6" fill="url(#wat6)" stroke="#3f7e98" stroke-width="2"/><path d="M150,70 q-6,-12 14,-12 l132,0 q20,0 14,12" fill="none" stroke="#3f7e98" stroke-width="2"/><rect x="150" y="80" width="160" height="10" fill="#bfe3f2" opacity="0.7"/><text x="318" y="100" font-size="11" fill="#2c5468">warm water</text><circle cx="230" cy="170" r="20" fill="#2c3e50"/><text x="120" y="174" font-size="11" fill="#1f2d3a" text-anchor="end">squash ball</text><line x1="250" y1="170" x2="118" y2="170" stroke="#94a3ad" stroke-width="1"/><rect x="120" y="230" width="220" height="34" rx="4" fill="#e2e8f0" stroke="#94a3ad"/><circle cx="150" cy="247" r="6" fill="#c0392b"/><ellipse cx="300" cy="247" rx="22" ry="7" fill="#64748b"/><text x="350" y="251" font-size="11" fill="#334155">electronic heater</text><line x1="340" y1="247" x2="322" y2="247" stroke="#94a3ad"/><rect x="350" y="90" width="14" height="110" rx="7" fill="#f1f5f9" stroke="#64748b"/><rect x="350" y="150" width="14" height="50" rx="7" fill="#c0392b"/><circle cx="357" cy="205" r="9" fill="#c0392b"/><text x="372" y="120" font-size="10" fill="#64748b">thermometer</text></svg>',
+      },
+      caption: 'The squash ball sits in a water bath heated by an electronic heater. A thermometer monitors the water temperature, which is raised slowly while the ball\'s bounce is tested.',
+    },
     tasks: [
       {
         label: 'a',
@@ -293,6 +545,13 @@ export const questions: Question[] = [
     topicCanonical: 'Electromagnetic Spectrum',
     topicGroup: 'Electromagnetic Waves & Optics',
     stem: 'This question is about how individual lifestyle choices can have a global impact.\n\nThe climate has been changing significantly over the past 100 years. Scientific evidence shows that significant climate change is caused by changes in the atmosphere as a consequence of human activity. Individual travel choices can have an impact on a global scale.',
+    artefact: {
+      component: 'GenericSVG',
+      data: {
+        svg: '<svg viewBox="0 0 520 280" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><defs><radialGradient id="sun7" cx="0.5" cy="0.5"><stop offset="0" stop-color="#fff3b0"/><stop offset="1" stop-color="#f0c419"/></radialGradient><marker id="ah7g" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#e08a1e"/></marker><marker id="ah7r" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#c0392b"/></marker></defs><rect width="520" height="280" fill="#eaf4fb"/><rect x="0" y="225" width="520" height="55" fill="#5b9a4a"/><line x1="0" y1="225" x2="520" y2="225" stroke="#3d6b32" stroke-width="2"/><text x="20" y="252" font-size="11" fill="#fff">Earth\'s surface</text><circle cx="70" cy="55" r="26" fill="url(#sun7)" stroke="#c79a10"/><text x="70" y="98" font-size="10" text-anchor="middle" fill="#9a7d0f">Sun</text><path d="M118,200 Q140,140 270,90" stroke="#94a3ad" stroke-width="2" stroke-dasharray="4 4" fill="none"/><line x1="100" y1="78" x2="240" y2="200" stroke="#e08a1e" stroke-width="2" marker-end="url(#ah7g)"/><text x="120" y="120" font-size="10" fill="#e08a1e">sunlight in</text><line x1="300" y1="222" x2="360" y2="120" stroke="#c0392b" stroke-width="2" marker-end="url(#ah7r)"/><line x1="360" y1="120" x2="320" y2="210" stroke="#c0392b" stroke-width="2" marker-end="url(#ah7r)"/><text x="368" y="120" font-size="10" fill="#c0392b">heat trapped</text><g font-size="11" font-weight="700" fill="#6b5a2a"><text x="150" y="70">CO₂</text><text x="250" y="55">CO₂</text><text x="350" y="75">CO₂</text><text x="430" y="60">CO₂</text></g><text x="430" y="40" font-size="11" font-weight="700" text-anchor="middle" fill="#475569">greenhouse gases</text></svg>',
+      },
+      caption: 'Greenhouse gases such as CO₂ let sunlight through but trap the heat radiated back from the Earth\'s surface, warming the planet.',
+    },
     tasks: [
       {
         label: 'a',
@@ -300,14 +559,40 @@ export const questions: Question[] = [
         marks: 1,
         widget: 'radio_select',
         widgetOptions: ['Coal', 'Uranium', 'Wind', 'Natural gas'],
-        ph: 'Select the renewable energy source.',
+        ph: 'Correct: "Wind".\nWind is a renewable resource (it is naturally replenished). Coal and natural gas are fossil fuels and uranium is a nuclear fuel — all three are finite / non-renewable.',
       },
       {
         label: 'b',
-        text: 'Scientists have measured or calculated both the amount of carbon dioxide in the atmosphere over the last thousand years and the average global temperature. **Outline** how the graph supports this statement.',
+        text: 'Scientists state that the amount of carbon dioxide in the atmosphere has increased significantly as a consequence of human activity. The graph shows atmospheric CO₂ over the last 1000 years. **Outline** how the graph supports this statement.',
         marks: 2,
-        figImages: ['/images/papers/physics-nov-2018/q7b-co2graph.svg'],
-        ph: 'Both global temperature AND the amount of CO₂ increase together (positive correlation). As CO₂ levels rise (especially after 1800), global temperature also rises. The graph shows both variables increasing from around 1900 onwards.',
+        artefact: {
+          component: 'LineGraph',
+          data: {
+            title: 'Atmospheric CO₂ over the last 1000 years',
+            xLabel: 'Year',
+            yLabel: 'Atmospheric CO₂',
+            yUnit: 'ppm',
+            xMin: 1000,
+            xMax: 2000,
+            yMin: 250,
+            yMax: 400,
+            xStep: 200,
+            yStep: 25,
+            dataPoints: [
+              { x: 1000, y: 280 },
+              { x: 1200, y: 282 },
+              { x: 1400, y: 279 },
+              { x: 1600, y: 281 },
+              { x: 1800, y: 285 },
+              { x: 1850, y: 288 },
+              { x: 1900, y: 296 },
+              { x: 1950, y: 311 },
+              { x: 2000, y: 369 },
+            ],
+          },
+          caption: 'Atmospheric CO₂ stays near 280 ppm for centuries, then rises sharply after about 1800, reaching roughly 369 ppm by 2000.',
+        },
+        ph: 'The graph shows CO₂ was roughly constant (about 280 ppm) for centuries up to ~1800, then increased sharply, reaching about 369 ppm by 2000. The steep rise coincides with the period of large-scale human industrial activity, supporting the statement that CO₂ has increased as a consequence of human activity.',
       },
       {
         label: 'c',
@@ -340,7 +625,20 @@ export const questions: Question[] = [
     topicCanonical: 'Kinematics & Motion Graphs',
     topicGroup: 'Forces & Motion',
     stem: 'Fenna is a student at a school in a city with a range of transport options. She lives 8 km away from her school. These are the options for her journey to school.',
-    figImages: [`${P}q8-transport.png`],
+    artefact: {
+      component: 'DataTable',
+      data: {
+        headers: ['Method of transport', 'Journey time for the 8 km trip'],
+        rows: [
+          ['Car', '10 minutes'],
+          ['Bus', '15 minutes'],
+          ['Bicycle', '20 minutes'],
+          ['Tram', '30 minutes'],
+          ['Walking', '70 minutes'],
+        ],
+      },
+      caption: 'Fenna\'s transport options for the 8 km journey to school and the time each one takes.',
+    },
     tasks: [
       {
         label: 'a',

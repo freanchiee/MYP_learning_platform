@@ -22,9 +22,7 @@ export const questions: Question[] = [
     marks: 18,
     stem: 'In Lascaux, France, some of the oldest cave paintings in the world have been discovered, dating back 10 000 years. Pigments used included those containing iron(III) oxide (Fe₂O₃) and manganese dioxide (MnO₂). To produce the pigment, these compounds were ground to a powder and then mixed with water or animal fat/oils to produce paint.\n\nThe main types of paint used today are watercolour and oil-based paint.',
     figImages: [
-      '/images/papers/chemistry-may-2017/page-02.png',
-      '/images/papers/chemistry-may-2017/page-03.png',
-      '/images/papers/chemistry-may-2017/page-04.png',
+      '/images/papers/chemistry-may-2017/q1f-sunflowers-painting.svg',
     ],
     tasks: [
       {
@@ -83,9 +81,7 @@ export const questions: Question[] = [
     marks: 9,
     stem: 'Silver chloride (AgCl) is used in photography. The photographic process involves a fixer and a developer. The fixer is ethanoic acid (CH₃COOH). The developer is hydroquinone (C₆H₆O₂), a chemical that reduces silver bromide to silver:\n\n2AgBr(aq) + C₆H₆O₂(aq) → 2Ag(s) + 2Br⁻(aq) + C₆H₄O₂(aq)',
     figImages: [
-      '/images/papers/chemistry-may-2017/page-05.png',
-      '/images/papers/chemistry-may-2017/page-06.png',
-      '/images/papers/chemistry-may-2017/page-07.png',
+      '/images/papers/chemistry-may-2017/q2a-molecule-builder.svg',
     ],
     tasks: [
       {
@@ -124,14 +120,12 @@ export const questions: Question[] = [
     marks: 27,
     stem: 'After a natural disaster, water supplies can become contaminated. Scientists are working on ways to provide safe drinking water in disaster zones.\n\nOne solution is to use a solar still. In a solar still, contaminated water is heated by sunlight inside a sealed container; the vapour rises and condenses on a cold surface, producing cleaner water.\n\nAnother approach uses various types of filter — sand filters, activated carbon filters, and ceramic filters — to remove contaminants. A silver nitrate solution can be used as an indicator of water purity because it reacts with chloride ions to form a precipitate.',
     figImages: [
-      '/images/papers/chemistry-may-2017/page-08.png',
-      '/images/papers/chemistry-may-2017/page-09.png',
-      '/images/papers/chemistry-may-2017/page-10.png',
-      '/images/papers/chemistry-may-2017/page-11.png',
-      '/images/papers/chemistry-may-2017/page-12.png',
-      '/images/papers/chemistry-may-2017/page-13.png',
-      '/images/papers/chemistry-may-2017/page-14.png',
-      '/images/papers/chemistry-may-2017/page-15.png',
+      '/images/papers/chemistry-may-2017/q3a-solar-still.svg',
+      '/images/papers/chemistry-may-2017/q3c-water-bottle.svg',
+      '/images/papers/chemistry-may-2017/q3c-equipment-tray.svg',
+      '/images/papers/chemistry-may-2017/q3d-titration-apparatus.svg',
+      '/images/papers/chemistry-may-2017/q3-conductivity-titration.svg',
+      '/images/papers/chemistry-may-2017/q3f-conductivity-comparison.svg',
     ],
     tasks: [
       {
@@ -193,11 +187,8 @@ export const questions: Question[] = [
     marks: 21,
     stem: 'In Nepal, earthquake damage in 2015 affected energy supplies in both urban and rural areas. The table shows the percentage use of different types of fuel in urban and rural areas of Nepal.',
     figImages: [
-      '/images/papers/chemistry-may-2017/page-15.png',
-      '/images/papers/chemistry-may-2017/page-16.png',
-      '/images/papers/chemistry-may-2017/page-17.png',
-      '/images/papers/chemistry-may-2017/page-18.png',
-      '/images/papers/chemistry-may-2017/page-19.png',
+      '/images/papers/chemistry-may-2017/q4a-fuels-table.svg',
+      '/images/papers/chemistry-may-2017/q4c-combustion-apparatus.svg',
     ],
     tasks: [
       {
@@ -248,9 +239,8 @@ export const questions: Question[] = [
     marks: 8,
     stem: 'A student collects ash from burning wood in a kiln. The ash contains calcium carbonate (CaCO₃). The student adds hydrochloric acid (chemical X) to the ash and measures the mass of CO₂ produced:\n\nCaCO₃(s) + 2HCl(aq) → CaCl₂(aq) + H₂O(l) + CO₂(g)\n\nThe results for two titration trials are recorded in the table.',
     figImages: [
-      '/images/papers/chemistry-may-2017/page-19.png',
-      '/images/papers/chemistry-may-2017/page-20.png',
-      '/images/papers/chemistry-may-2017/page-21.png',
+      '/images/papers/chemistry-may-2017/q5-titration-curves.svg',
+      '/images/papers/chemistry-may-2017/q5b-co2-mass-vs-volume.svg',
     ],
     tasks: [
       {
@@ -283,9 +273,8 @@ export const questions: Question[] = [
     marks: 7,
     stem: 'Acid rain reacts with calcium carbonate (CaCO₃) in building materials. A class of students measured the volume of CO₂ gas produced over time when marble chips (CaCO₃) were reacted with dilute acid.\n\nThe students recorded their results in different units and used different time intervals.',
     figImages: [
-      '/images/papers/chemistry-may-2017/page-22.png',
-      '/images/papers/chemistry-may-2017/page-23.png',
-      '/images/papers/chemistry-may-2017/page-24.png',
+      '/images/papers/chemistry-may-2017/q6-statue-data.svg',
+      '/images/papers/chemistry-may-2017/q6b-graph-options.svg',
     ],
     tasks: [
       {
@@ -325,10 +314,6 @@ export const questions: Question[] = [
     topicGroup: 'Atomic Structure & Periodic Table',
     marks: 6,
     stem: 'Lead is a very useful metal. Lead has been used since Roman times — ancient Roman water pipes were made from lead, and many have survived intact to the present day. Lead was also widely used in paint and other manufacturing processes.',
-    figImages: [
-      '/images/papers/chemistry-may-2017/page-25.png',
-      '/images/papers/chemistry-may-2017/page-26.png',
-    ],
     tasks: [
       {
         label: 'a',
@@ -368,8 +353,8 @@ export const questions: Question[] = [
     marks: 14,
     stem: 'Lead was banned from paint and manufacturing in many countries during the late 20th century. The first graph shows blood lead levels in the US population from 1976 to 1999. The second graph shows the percentage of children with learning difficulties compared to their blood lead level.',
     figImages: [
-      '/images/papers/chemistry-may-2017/page-26.png',
-      '/images/papers/chemistry-may-2017/page-27.png',
+      '/images/papers/chemistry-may-2017/q7-blood-lead-vs-year.svg',
+      '/images/papers/chemistry-may-2017/q7-learning-difficulty-bars.svg',
     ],
     tasks: [
       {
@@ -390,8 +375,7 @@ export const questions: Question[] = [
     marks: 10,
     stem: 'Batteries are used in the home in a wide variety of appliances. Almost everyone uses rechargeable batteries in mobile (cell) phones. The earliest rechargeable batteries often used lead but today lead has been replaced by different metals. As technology has developed, battery types have evolved to meet consumers\' needs, taking into account environmental and economic factors.\n\nSeveral types of batteries used in mobile phones and their specifications are shown in the table below:\n\n| Type | Voltage (V) | Capacity (mAh) | Cycle life | Weight (g) | Cost ($) | Environmental impact |\n|---|---|---|---|---|---|---|\n| Lithium polymer (LiPoly) | 3.7 | 1000 | 500 | 20 | 15 | Low |\n| Lithium ion (Li-ion) | 3.6 | 1200 | 600 | 25 | 12 | Low |\n| Nickel cadmium (NiCd) | 1.2 | 600 | 1000 | 35 | 8 | High |\n| Nickel metal hydride (NiMH) | 1.2 | 900 | 500 | 30 | 10 | Medium |',
     figImages: [
-      '/images/papers/chemistry-may-2017/page-28.png',
-      '/images/papers/chemistry-may-2017/page-29.png',
+      '/images/papers/chemistry-may-2017/q9-battery-table.svg',
     ],
     tasks: [
       {

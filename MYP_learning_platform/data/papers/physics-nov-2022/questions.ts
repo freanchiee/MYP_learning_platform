@@ -1,7 +1,5 @@
 import type { Question } from '@/lib/types'
 
-const P = '/images/papers/physics-nov-2022/'
-
 export const paperMeta = {
   id: 'physics-nov-2022',
   subject: 'Physics',
@@ -29,7 +27,13 @@ export const questions: Question[] = [
     topicGroup: 'Nuclear & Atomic Physics',
     tags: { unit: 'atomic-physics', topics: ['isotopes', 'nuclear fission', 'radioactive decay', 'half-life'], level: 'proficient' },
     stem: 'In 1938, an experiment took place that led to important developments in the fields of science and technology. The first step in this experiment used neutrons to bombard a sample of uranium.\n\nSome atoms of uranium-235 (²³⁵₉₂U) changed into atoms of uranium-236 (²³⁶₉₂U).',
-    figImages: [`${P}q1-fission.png`],
+    artefact: {
+      component: 'GenericSVG',
+      data: {
+        svg: '<svg viewBox="0 0 600 230" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><defs><radialGradient id="nu1n" cx="0.4" cy="0.35"><stop offset="0" stop-color="#7fb2c9"/><stop offset="1" stop-color="#2c6c86"/></radialGradient><marker id="a1n" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#444"/></marker></defs><rect width="600" height="230" fill="#ffffff"/><circle cx="46" cy="115" r="7" fill="#c0392b"/><text x="30" y="140" font-size="10" fill="#c0392b">neutron</text><line x1="56" y1="115" x2="146" y2="115" stroke="#444" stroke-width="1.5" marker-end="url(#a1n)"/><circle cx="182" cy="115" r="34" fill="url(#nu1n)" stroke="#1f4a5c"/><text x="182" y="119" font-size="12" font-weight="700" text-anchor="middle" fill="#fff">236U</text><line x1="222" y1="115" x2="284" y2="115" stroke="#444" stroke-width="1.5"/><circle cx="345" cy="62" r="26" fill="#e3a93c" stroke="#a8721a"/><text x="345" y="66" font-size="11" font-weight="700" text-anchor="middle" fill="#fff">141Ba</text><circle cx="345" cy="168" r="22" fill="#5b9a6b" stroke="#356b44"/><text x="345" y="172" font-size="11" font-weight="700" text-anchor="middle" fill="#fff">92Kr</text><line x1="380" y1="56" x2="470" y2="34" stroke="#c0392b" stroke-width="1.5" marker-end="url(#a1n)"/><line x1="385" y1="115" x2="475" y2="115" stroke="#c0392b" stroke-width="1.5" marker-end="url(#a1n)"/><line x1="380" y1="174" x2="470" y2="196" stroke="#c0392b" stroke-width="1.5" marker-end="url(#a1n)"/><text x="498" y="118" font-size="11" fill="#c0392b">3 neutrons + energy</text></svg>',
+      },
+      caption: 'Neutrons bombard uranium-235, forming uranium-236, which splits into two fission fragments and releases more neutrons and energy.',
+    },
     tasks: [
       {
         label: 'a',
@@ -54,7 +58,20 @@ export const questions: Question[] = [
         label: 'c',
         text: 'The products of the fission reaction are radioactive. The graph shows how the activity of barium-141 changes with time.\n\n**Using the graph, determine** the half-life of barium-141.',
         marks: 2,
-        figImages: ['/images/papers/physics-nov-2022/q1c-decay-graph.svg'],
+        artefact: {
+          component: 'DecaySim',
+          data: {
+            isotope: 'barium-141',
+            daughter: 'lanthanum-141',
+            decayMode: 'beta',
+            halfLife: 18,
+            units: 'minutes',
+            initialActivity: 1000,
+            activityUnits: 'Bq',
+            axisMax: 90,
+          },
+          caption: 'Activity of barium-141 against time (drag the time marker to read the activity).',
+        },
         ph: 'Half-life = ... minutes\nWorking: initial activity ≈ 1000 Bq; half of 1000 = 500 Bq; read time at 500 Bq from graph...',
         level: 'proficient',
       },
@@ -90,6 +107,13 @@ export const questions: Question[] = [
     topicGroup: 'Thermal Physics',
     tags: { unit: 'thermal-physics', topics: ['states of matter', 'evaporation', 'latent heat', 'cooling effect'], level: 'proficient' },
     stem: 'Thermal energy is also known as heat energy. The addition or removal of heat energy can cause changes in temperature and in state.',
+    artefact: {
+      component: 'GenericSVG',
+      data: {
+        svg: '<svg viewBox="0 0 600 250" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><defs><marker id="ahA" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#c0392b"/></marker><marker id="ahB" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#1971c2"/></marker></defs><rect width="600" height="250" fill="#ffffff"/><rect x="40" y="100" width="110" height="56" rx="8" fill="#dbe7ef" stroke="#5b6b78"/><text x="95" y="133" font-size="14" font-weight="700" text-anchor="middle" fill="#1f2d3a">SOLID</text><rect x="245" y="100" width="110" height="56" rx="8" fill="#bfe3f2" stroke="#3f7e98"/><text x="300" y="133" font-size="14" font-weight="700" text-anchor="middle" fill="#1f2d3a">LIQUID</text><rect x="450" y="100" width="110" height="56" rx="8" fill="#f0e2d0" stroke="#b08a5b"/><text x="505" y="133" font-size="14" font-weight="700" text-anchor="middle" fill="#1f2d3a">GAS</text><path d="M150,118 L245,118" stroke="#c0392b" stroke-width="2" marker-end="url(#ahA)"/><text x="197" y="110" font-size="11" text-anchor="middle" fill="#c0392b">melting</text><path d="M355,138 L450,138" stroke="#c0392b" stroke-width="2" marker-end="url(#ahA)"/><text x="402" y="130" font-size="11" text-anchor="middle" fill="#c0392b">boiling</text><path d="M245,150 L150,150" stroke="#1971c2" stroke-width="2" marker-end="url(#ahB)"/><text x="197" y="170" font-size="11" text-anchor="middle" fill="#1971c2">freezing</text><path d="M450,168 L355,168" stroke="#1971c2" stroke-width="2" marker-end="url(#ahB)"/><text x="402" y="186" font-size="11" text-anchor="middle" fill="#1971c2">condensing</text><circle cx="60" cy="218" r="6" fill="#c0392b"/><text x="74" y="222" font-size="11" fill="#c0392b">heat energy added</text><circle cx="320" cy="218" r="6" fill="#1971c2"/><text x="334" y="222" font-size="11" fill="#1971c2">heat energy removed</text></svg>',
+      },
+      caption: 'Changes of state. Red arrows (melting, boiling) require heat energy added; blue arrows (freezing, condensing) require heat energy removed.',
+    },
     tasks: [
       {
         label: 'a',
@@ -112,7 +136,22 @@ export const questions: Question[] = [
         label: 'c',
         text: 'The evaporation of liquid sweat from the surface of the skin helps to remove heat from the human body and keep it cool. A student models this relationship using temperature probes placed in three different liquids: cooking oil, pure water, and ethanol. The probes are then removed and temperature measured over time. The graph shows the temperature change.\n\n**Using the graph, select** the liquid that caused no cooling effect and the liquid that caused the greatest cooling effect.',
         marks: 2,
-        figImages: ['/images/papers/physics-nov-2022/q2c-cooling-graph.svg'],
+        artefact: {
+          component: 'ThermalSim',
+          data: {
+            mode: 'cool',
+            totalTime: 60,
+            timeUnit: 's',
+            tempUnit: '°C',
+            labTempC: 21.2,
+            probes: [
+              { liquid: 'cooking oil', startTempC: 21.2, endTempC: 21.2, minTempC: 21.2, behaviour: 'flat', color: '#f08c00' },
+              { liquid: 'water', startTempC: 21.2, endTempC: 16.0, minTempC: 16.0, behaviour: 'decay', color: '#0b7285' },
+              { liquid: 'ethanol', startTempC: 21.2, endTempC: 10.5, minTempC: 10.5, behaviour: 'decay', color: '#5b9a6b' },
+            ],
+          },
+          caption: 'Temperature of three probes against time as each liquid evaporates (drag the time marker to read values).',
+        },
         widget: 'inline_dropdown_select',
         widgetItems: ['No cooling effect', 'Greatest cooling effect'],
         widgetOptions: ['cooking oil', 'water', 'ethanol'],
@@ -150,7 +189,21 @@ export const questions: Question[] = [
     topicGroup: 'Space & Astrophysics',
     tags: { unit: 'astrophysics', topics: ['moons and planets', 'geocentric vs heliocentric models', 'electromagnetic spectrum'], level: 'proficient' },
     stem: 'In 1610, the astronomer Galileo Galilei used his telescope to observe the planet Jupiter. He noticed four small objects that appeared to be distant stars. However, he later realised that they were in fact moons.',
-    figImages: [`${P}q3-jupiters-moons.png`],
+    artefact: {
+      component: 'OrbitSim',
+      data: {
+        mode: 'moons',
+        central: 'Jupiter',
+        bodies: [
+          { name: 'Jupiter', role: 'center', radius: 28, colour: '#d8a657', fixed: true },
+          { name: 'Io', role: 'orbiter', orbitalPeriod: 1.8, orbitRadius: 64, radius: 6, colour: '#e3c16f' },
+          { name: 'Europa', role: 'orbiter', orbitalPeriod: 3.6, orbitRadius: 92, radius: 6, colour: '#cfe8f2' },
+          { name: 'Ganymede', role: 'orbiter', orbitalPeriod: 7.2, orbitRadius: 124, radius: 8, colour: '#b8c4cc' },
+          { name: 'Callisto', role: 'orbiter', orbitalPeriod: 16.7, orbitRadius: 156, radius: 7, colour: '#8a8276' },
+        ],
+      },
+      caption: "Jupiter and its four largest moons — Io, Europa, Ganymede and Callisto — first seen by Galileo in 1610.",
+    },
     tasks: [
       {
         label: 'a',
@@ -170,7 +223,13 @@ export const questions: Question[] = [
         label: 'c',
         text: 'It has been known for a long time that the surface of the moon Europa is covered with ice because of how it reflects light. There is additional evidence that beneath the ice there could be liquid water and possibly an ocean.\n\n**Suggest** why the presence of liquid water on the moon Europa would be of particular interest to scientists.',
         marks: 1,
-        figImages: [`${P}q3c-europa.png`],
+        artefact: {
+          component: 'GenericSVG',
+          data: {
+            svg: '<svg viewBox="0 0 560 280" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><defs><linearGradient id="ocnE" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a78b8"/><stop offset="1" stop-color="#0a2a4a"/></linearGradient><linearGradient id="iceE" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#dff3fb"/><stop offset="1" stop-color="#a9dcef"/></linearGradient></defs><rect width="560" height="280" fill="#04101f"/><path d="M120,120 L440,120 L400,260 L160,260 Z" fill="url(#ocnE)"/><path d="M120,120 L440,120 L432,150 L128,150 Z" fill="url(#iceE)" stroke="#7fc4e0"/><path d="M120,118 q40,-8 80,0 q40,8 80,0 q40,-8 80,0 q40,8 80,0" fill="none" stroke="#dff3fb" stroke-width="2"/><g stroke="#eaf6fc" stroke-width="2" opacity="0.85"><line x1="210" y1="118" x2="200" y2="40"/><line x1="250" y1="118" x2="258" y2="28"/><line x1="300" y1="118" x2="296" y2="56"/></g><g fill="#eaf6fc" opacity="0.8"><circle cx="200" cy="40" r="2"/><circle cx="258" cy="28" r="2"/><circle cx="296" cy="56" r="2"/><circle cx="232" cy="64" r="1.5"/><circle cx="276" cy="70" r="1.5"/></g><text x="60" y="138" font-size="13" fill="#dff3fb">Ice shell</text><line x1="118" y1="135" x2="150" y2="135" stroke="#dff3fb"/><text x="60" y="200" font-size="13" fill="#bfe0f5">Ocean</text><line x1="108" y1="196" x2="190" y2="196" stroke="#bfe0f5"/><text x="280" y="20" font-size="12" text-anchor="middle" fill="#eaf6fc">water vapour plumes</text></svg>',
+          },
+          caption: "Cross-section of Europa: a deep liquid-water ocean beneath the icy crust, with plumes of water vapour escaping into space.",
+        },
         ph: 'Liquid water could support life / indicate conditions necessary for life...',
         level: 'proficient',
       },
@@ -178,7 +237,18 @@ export const questions: Question[] = [
         label: 'd',
         text: 'In 2019, water vapour was detected for the first time above Europa\'s surface. The technique used to detect it involved the analysis of infrared waves. Infrared waves are part of the electromagnetic spectrum shown below.\n\n**State** two properties that are shared by **all** waves in the electromagnetic spectrum.',
         marks: 2,
-        figImages: [`${P}q3d-em-spectrum.png`],
+        artefact: {
+          component: 'SpectrumSim',
+          data: {
+            mode: 'scrub',
+            bands: ['Gamma rays', 'X-rays', 'UV', 'Visible', 'IR', 'Microwave', 'Radio waves'],
+            axis: 'wavelength increases left → right',
+            target: 'IR',
+            wavelengthRange: ['10⁻¹⁶ m', '10⁸ m'],
+            visibleRange: ['400 nm', '700 nm'],
+          },
+          caption: 'The electromagnetic spectrum. Infrared (IR) was used to detect water vapour above Europa.',
+        },
         ph: '1. All electromagnetic waves travel at the same speed in a vacuum (3 × 10⁸ m/s)\n2. All electromagnetic waves are transverse waves',
         level: 'developing',
       },
@@ -199,7 +269,13 @@ export const questions: Question[] = [
     topicGroup: 'Electricity & Magnetism',
     tags: { unit: 'work-energy', topics: ['energy efficiency', 'gravitational potential energy', 'electrical power', 'scientific methodology'], level: 'proficient' },
     stem: 'All modern technologies rely on changing energy from one form into another. The efficiency of any energy conversion is found using the formula:\n\n**efficiency = (useful energy out ÷ total energy in) × 100**\n\nNo device is 100% efficient in converting energy. Improving the efficiency of energy conversion is an important goal for scientists and engineers who want to reduce the environmental impact of new technologies.\n\nA student decides to test the efficiency of a simple electric motor lifting a mass with a pulley.',
-    figImages: [`${P}q4-motor-setup.png`],
+    artefact: {
+      component: 'GenericSVG',
+      data: {
+        svg: '<svg viewBox="0 0 560 320" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><defs><linearGradient id="bnch4" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d8a657"/><stop offset="1" stop-color="#b07e33"/></linearGradient></defs><rect width="560" height="320" fill="#ffffff"/><text x="280" y="24" font-size="11" text-anchor="middle" fill="#94a3ad">Diagram not to scale</text><rect x="40" y="280" width="480" height="18" fill="url(#bnch4)" stroke="#8a5e22"/><rect x="430" y="60" width="10" height="220" fill="#9aa6ad" stroke="#5b6b78"/><rect x="350" y="92" width="92" height="10" fill="#9aa6ad" stroke="#5b6b78"/><circle cx="372" cy="120" r="18" fill="#cdd7df" stroke="#5b6b78"/><circle cx="372" cy="120" r="4" fill="#5b6b78"/><text x="312" y="116" font-size="11" text-anchor="end" fill="#1f2d3a">Pulley</text><line x1="316" y1="118" x2="354" y2="120" stroke="#5b6b78"/><path d="M372,138 L372,200" stroke="#444" stroke-width="2"/><rect x="358" y="200" width="28" height="24" rx="3" fill="#2c3e50"/><text x="430" y="216" font-size="11" fill="#1f2d3a">Mass</text><line x1="388" y1="212" x2="424" y2="212" stroke="#5b6b78"/><path d="M150,260 L356,128" stroke="#444" stroke-width="2"/><circle cx="150" cy="262" r="22" fill="#2f6fb0" stroke="#1c4a78"/><text x="150" y="266" font-size="12" font-weight="700" text-anchor="middle" fill="#fff">M</text><text x="222" y="266" font-size="11" fill="#1f2d3a">Motor</text><line x1="172" y1="262" x2="216" y2="262" stroke="#5b6b78"/><rect x="48" y="248" width="56" height="30" rx="3" fill="#3a3a3a" stroke="#000"/><circle cx="62" cy="263" r="4" fill="#c0392b"/><circle cx="90" cy="263" r="4" fill="#222"/><text x="40" y="240" font-size="11" text-anchor="start" fill="#1f2d3a">Power supply</text><circle cx="150" cy="150" r="26" fill="#f3f4f6" stroke="#5b6b78" stroke-width="2"/><text x="150" y="148" font-size="10" font-family="monospace" text-anchor="middle" fill="#222">0.00</text><text x="150" y="160" font-size="7" text-anchor="middle" fill="#5b6b78">s</text><text x="150" y="190" font-size="11" text-anchor="middle" fill="#1f2d3a">Stopwatch</text></svg>',
+      },
+      caption: 'A simple electric motor turns a pulley to lift a mass; a stopwatch times the lift and a power supply drives the motor.',
+    },
     tasks: [
       {
         label: 'a',
@@ -226,6 +302,18 @@ export const questions: Question[] = [
         label: 'd',
         text: 'To measure efficiency, the student must also determine the total energy used by the motor while lifting the mass. They must determine the power output of the motor by measuring the current flowing through the motor and the voltage across it.\n\n**Draw** a circuit to measure the power output of a motor. The power supply has been started for you.\n\nDraggable circuit components: ammeter (A), voltmeter (V), motor (M), resistor, switch, wire.',
         marks: 3,
+        artefact: {
+          component: 'CircuitDiagram',
+          data: {
+            topology: 'series',
+            components: [
+              { type: 'battery', label: 'power supply' },
+              { type: 'switch', label: 'switch' },
+              { type: 'ammeter', label: 'A' },
+            ],
+          },
+          caption: 'The power supply, switch and ammeter are already in series. Add the motor (in series) and a voltmeter (in parallel across the motor).',
+        },
         ph: 'Circuit should include: motor in series with ammeter; voltmeter connected in parallel across the motor; connected to power supply.',
         level: 'proficient',
       },
@@ -253,7 +341,13 @@ export const questions: Question[] = [
     topicGroup: 'Electricity & Magnetism',
     tags: { unit: 'work-energy', topics: ['energy efficiency', 'electrical power', 'gravitational potential energy', 'experimental design'], level: 'advanced' },
     stem: 'A second student decides to investigate how changing the voltage supplied to the motor affects the time taken to lift a mass. They will use this to calculate the efficiency of the motor.',
-    figImages: [`${P}q4-motor-setup.png`],
+    artefact: {
+      component: 'GenericSVG',
+      data: {
+        svg: '<svg viewBox="0 0 560 320" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><defs><linearGradient id="bnch5" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d8a657"/><stop offset="1" stop-color="#b07e33"/></linearGradient></defs><rect width="560" height="320" fill="#ffffff"/><text x="280" y="24" font-size="11" text-anchor="middle" fill="#94a3ad">Diagram not to scale</text><rect x="40" y="280" width="480" height="18" fill="url(#bnch5)" stroke="#8a5e22"/><rect x="430" y="60" width="10" height="220" fill="#9aa6ad" stroke="#5b6b78"/><rect x="350" y="92" width="92" height="10" fill="#9aa6ad" stroke="#5b6b78"/><circle cx="372" cy="120" r="18" fill="#cdd7df" stroke="#5b6b78"/><circle cx="372" cy="120" r="4" fill="#5b6b78"/><text x="312" y="116" font-size="11" text-anchor="end" fill="#1f2d3a">Pulley</text><line x1="316" y1="118" x2="354" y2="120" stroke="#5b6b78"/><path d="M372,138 L372,200" stroke="#444" stroke-width="2"/><rect x="358" y="200" width="28" height="24" rx="3" fill="#2c3e50"/><text x="430" y="216" font-size="11" fill="#1f2d3a">Mass</text><line x1="388" y1="212" x2="424" y2="212" stroke="#5b6b78"/><path d="M150,260 L356,128" stroke="#444" stroke-width="2"/><circle cx="150" cy="262" r="22" fill="#2f6fb0" stroke="#1c4a78"/><text x="150" y="266" font-size="12" font-weight="700" text-anchor="middle" fill="#fff">M</text><text x="222" y="266" font-size="11" fill="#1f2d3a">Motor</text><line x1="172" y1="262" x2="216" y2="262" stroke="#5b6b78"/><rect x="44" y="232" width="78" height="42" rx="4" fill="#222" stroke="#000"/><text x="83" y="252" font-size="13" font-family="monospace" text-anchor="middle" fill="#3ad36a">V = ?</text><text x="83" y="267" font-size="8" text-anchor="middle" fill="#9bb9cf" font-family="monospace">variable supply</text><text x="83" y="224" font-size="11" text-anchor="middle" fill="#1f2d3a">Power supply</text></svg>',
+      },
+      caption: 'The voltage supplied to the motor is varied while it lifts the same mass through the same height.',
+    },
     tasks: [
       {
         label: 'a',
@@ -280,7 +374,13 @@ export const questions: Question[] = [
     topicGroup: 'Electricity & Magnetism',
     tags: { unit: 'work-energy', topics: ['gravitational potential energy', 'energy efficiency', 'data processing', 'significant figures'], level: 'proficient' },
     stem: 'Another student has decided to change the mass lifted to see if this affects the motor\'s efficiency.\n\nIn each trial of their experiment, they use the motor to lift different masses from the surface of a table to a height of 95.0 cm.',
-    figImages: [`${P}q6-motor-setup.png`],
+    artefact: {
+      component: 'GenericSVG',
+      data: {
+        svg: '<svg viewBox="0 0 560 320" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><defs><linearGradient id="bnch6" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d8a657"/><stop offset="1" stop-color="#b07e33"/></linearGradient></defs><rect width="560" height="320" fill="#ffffff"/><text x="280" y="24" font-size="11" text-anchor="middle" fill="#94a3ad">Diagram not to scale</text><rect x="40" y="284" width="480" height="16" fill="url(#bnch6)" stroke="#8a5e22"/><rect x="430" y="56" width="10" height="228" fill="#9aa6ad" stroke="#5b6b78"/><rect x="350" y="88" width="92" height="10" fill="#9aa6ad" stroke="#5b6b78"/><circle cx="372" cy="116" r="18" fill="#cdd7df" stroke="#5b6b78"/><circle cx="372" cy="116" r="4" fill="#5b6b78"/><text x="312" y="112" font-size="11" text-anchor="end" fill="#1f2d3a">Pulley</text><line x1="316" y1="114" x2="354" y2="116" stroke="#5b6b78"/><path d="M372,134 L372,250" stroke="#444" stroke-width="2"/><rect x="356" y="250" width="32" height="26" rx="3" fill="#2c3e50"/><text x="432" y="266" font-size="11" fill="#1f2d3a">mass</text><line x1="390" y1="262" x2="426" y2="262" stroke="#5b6b78"/><path d="M150,266 L356,124" stroke="#444" stroke-width="2"/><circle cx="150" cy="268" r="20" fill="#2f6fb0" stroke="#1c4a78"/><text x="150" y="272" font-size="12" font-weight="700" text-anchor="middle" fill="#fff">M</text><text x="214" y="272" font-size="11" fill="#1f2d3a">Motor</text><line x1="170" y1="268" x2="208" y2="268" stroke="#5b6b78"/><line x1="92" y1="284" x2="92" y2="252" stroke="#94a3ad" stroke-dasharray="3 3"/><line x1="84" y1="252" x2="100" y2="252" stroke="#94a3ad"/><line x1="84" y1="284" x2="100" y2="284" stroke="#94a3ad"/><text x="106" y="272" font-size="11" fill="#94a3ad">95.0 cm</text></svg>',
+      },
+      caption: 'In each trial the motor lifts a different mass through the same height of 95.0 cm.',
+    },
     tasks: [
       {
         label: 'a',
@@ -328,13 +428,33 @@ export const questions: Question[] = [
     topicGroup: 'Forces & Motion',
     tags: { unit: 'measurement-motion', topics: ['projectile motion', 'data analysis', 'air resistance', 'experimental error'], level: 'advanced' },
     stem: 'An MYP student is interested in the motion of a ball when it is launched into the air. The student uses a simple device to launch a ball using a compressed spring. Then they measured the maximum height that the ball reached.\n\nThey performed one trial for different launch angles, starting from a launch directed vertically upwards which was labelled as zero degrees.',
-    figImages: [`${P}q7-launcher.png`],
+    artefact: {
+      component: 'ProjectileSim',
+      data: {
+        mode: 'launch',
+        launch: { angleDeg: 20, speed: 10, g: 9.8, angleMin: 0, angleMax: 80, speedMin: 6, speedMax: 14 },
+        g: 9.8,
+      },
+      caption: 'A spring launcher fires a ball into the air. The launch angle is measured from the vertical (0°).',
+    },
     tasks: [
       {
         label: 'a',
         text: 'The student plotted this data on a graph and found a line of best fit. This helped the student to identify an outlier in their data when the launch angle was 30 degrees.\n\n**Select** the graph that best represents the student\'s data and **justify** your choice.',
         marks: 2,
-        figImages: ['/images/papers/physics-nov-2022/q7a-graphs.svg'],
+        artefact: {
+          component: 'GraphSim',
+          data: {
+            mode: 'readoff',
+            xLabel: 'launch angle / degrees',
+            yLabel: 'maximum height / m',
+            points: [[0, 5.1], [15, 4.3], [30, 4.5], [45, 2.8], [60, 1.9], [75, 0.6]],
+            bestFit: 'line of best fit shows height decreasing with angle; the 30° point lies above the line (outlier)',
+            readouts: [{ x: 0, note: 'read the height at 0° (y-intercept)' }],
+            dataMaxX: 75,
+          },
+          caption: 'Maximum height of the ball against launch angle (the 30° point is an outlier above the line of best fit).',
+        },
         widget: 'radio_select',
         widgetOptions: ['Graph A', 'Graph B', 'Graph C', 'Graph D'],
         ph: 'Graph D\nJustification: The line of best fit intersects the most data points with points both above and below the line, and the point at 30° is clearly an outlier above the LOBF.',
@@ -411,7 +531,21 @@ export const questions: Question[] = [
     topicGroup: 'Waves & Sound',
     tags: { unit: 'sound-waves', topics: ['ultrasound', 'electromagnetic spectrum', 'wave speed calculations', 'science and society'], level: 'advanced' },
     stem: 'Ultrasound waves can be defined as sound waves with a frequency greater than 20 kHz, which is beyond the range of human hearing. A major use of ultrasound waves is in medical imaging systems.\n\nA kidney stone is a hard mass formed in the kidneys that can stop them functioning correctly.',
-    figImages: [`${P}q8-comparison-table.png`],
+    artefact: {
+      component: 'DataTable',
+      data: {
+        headers: ['Feature', 'Ultrasound scan', 'X-ray image'],
+        rows: [
+          ['Type of wave', 'Sound waves', 'High-energy electromagnetic waves'],
+          ['Best for imaging', 'Organs, muscles, soft tissue, blood flow', 'Bones; soft tissue with limited detail'],
+          ['Impact on health', 'Believed to be harmless', 'Ionising — raises later cancer risk (highest in children)'],
+          ['Limitation', 'Images can be hard to interpret; risk of misdiagnosis', 'Shielding needed; small risk per image'],
+          ['Cost per use', '$500 per scan', '$150 per image'],
+          ['Cost per machine', '$40 000', '$30 000'],
+        ],
+      },
+      caption: 'Comparison of ultrasound and x-ray medical imaging techniques.',
+    },
     tasks: [
       {
         label: 'a',
@@ -432,7 +566,20 @@ export const questions: Question[] = [
         label: 'c',
         text: 'Since the 1960s medical imaging has become much more widespread. Medical imaging has given information about the development of unborn babies, their growth, the functioning of their organs and identification of their sex. Data from the United Nations (UN) has shown a change in the sex ratio at birth since the 1970s. The sex ratio at birth is the number of boys born for every 100 girls born. The expected biological sex ratio is 105 males per 100 females. There is the concern that identification of sex from medical imaging might be selectively used to terminate pregnancies, changing the sex ratio.\n\n**Discuss** why there would be a concern to the government of a country which has a large change to the sex ratio at birth and **suggest** an ethical action the government could take to prevent further imbalance in sex ratio at birth.',
         marks: 5,
-        figImages: ['/images/papers/physics-nov-2022/q8c-sex-ratio-graph.svg'],
+        artefact: {
+          component: 'LineGraph',
+          data: {
+            title: 'Sex ratio at birth since 1970',
+            xLabel: 'Year',
+            yLabel: 'Boys per 100 girls',
+            dataPoints: [
+              { x: 1970, y: 105 }, { x: 1980, y: 107 }, { x: 1990, y: 112 },
+              { x: 2000, y: 117 }, { x: 2010, y: 119 }, { x: 2020, y: 114 },
+            ],
+            xMin: 1970, xMax: 2020, yMin: 100, yMax: 125, xStep: 10, yStep: 5,
+          },
+          caption: 'Reported sex ratio at birth rising above the expected biological value of 105 boys per 100 girls.',
+        },
         ph: 'Concern: A significantly imbalanced sex ratio leads to social problems including workforce imbalance, difficulty finding partners, population decline, and breakdown of family structures. The graph shows the ratio rising above 105, suggesting selective terminations.\n\nEthical action: The government could introduce legislation preventing medical staff from revealing the sex of a foetus to parents before birth, or run public education campaigns about the ethical implications of sex-selective terminations.',
         level: 'advanced',
       },

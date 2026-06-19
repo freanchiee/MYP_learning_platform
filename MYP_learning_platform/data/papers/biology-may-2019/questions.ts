@@ -25,7 +25,25 @@ export const questions: Question[] = [
     topicsAlso: ['Tissues, Organs & Systems'],
     marks: 8,
     stem: 'This question is about the levels of organisation in living things and the structure of cells.',
-    figImages: ['/images/papers/biology-may-2019/page-02.png'],
+    artefact: {
+      component: 'VennOverlap',
+      data: {
+        title: 'Comparing a plant cell and an animal cell',
+        setA: {
+          label: 'Plant cell only',
+          color: '#2f9e44',
+          items: ['Cell wall', 'Chloroplast', 'Large central vacuole'],
+        },
+        setB: {
+          label: 'Animal cell only',
+          color: '#e8590c',
+          items: ['Small vacuole'],
+        },
+        overlapLabel: 'Both: cell membrane, nucleus, mitochondria',
+        caption: 'Drag each structure into the region where it belongs. Structures inside the overlap are found in both plant and animal cells.',
+      },
+      caption: 'Venn diagram of the parts found in plant cells, animal cells, or both.',
+    },
     tasks: [
       {
         label: 'a',
@@ -49,6 +67,13 @@ export const questions: Question[] = [
         label: 'c',
         text: 'Organelles are the specialised parts of cells that have a specific function. Using scientific language, **outline** the function of mitochondria.',
         marks: 3,
+        artefact: {
+          component: 'GenericSVG',
+          data: {
+            svg: '<svg viewBox="0 0 560 280" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><defs><radialGradient id="mito" cx="0.45" cy="0.4"><stop offset="0" stop-color="#f3c6dd"/><stop offset="1" stop-color="#c64f93"/></radialGradient></defs><rect width="560" height="280" fill="#ffffff"/><text x="280" y="26" font-size="15" font-weight="700" text-anchor="middle" fill="#1f2d3a">Structure of a mitochondrion</text><ellipse cx="250" cy="150" rx="180" ry="92" fill="url(#mito)" stroke="#9c2e6e" stroke-width="3"/><ellipse cx="250" cy="150" rx="180" ry="92" fill="none" stroke="#ffffff" stroke-width="1.5" stroke-dasharray="3 4"/><path d="M120,150 q22,-46 44,0 q22,46 44,0 q22,-46 44,0 q22,46 44,0 q22,-46 44,0 q22,46 44,0" fill="none" stroke="#7a1f55" stroke-width="3"/><line x1="80" y1="92" x2="150" y2="120" stroke="#475569" stroke-width="1"/><text x="20" y="90" font-size="12" fill="#475569">outer membrane</text><line x1="80" y1="150" x2="150" y2="150" stroke="#475569" stroke-width="1"/><text x="20" y="154" font-size="12" fill="#475569">inner membrane</text><line x1="250" y1="232" x2="210" y2="160" stroke="#475569" stroke-width="1"/><text x="170" y="252" font-size="12" fill="#7a1f55" font-weight="700">folds (cristae)</text><line x1="430" y1="120" x2="360" y2="140" stroke="#475569" stroke-width="1"/><text x="438" y="124" font-size="12" fill="#475569">matrix</text></svg>',
+          },
+          caption: 'A mitochondrion. The inner membrane is highly folded into cristae, greatly increasing its surface area for respiration.',
+        },
         ph: 'Mitochondria convert / produce energy (ATP) from a source of energy such as glucose through the process of respiration...',
       },
       {
@@ -72,8 +97,21 @@ export const questions: Question[] = [
     topicGroup: 'Evolution',
     topicsAlso: ['Inheritance & Variation'],
     marks: 7,
-    stem: 'In mitosis, two identical cells are produced from a parent cell. Mitosis is needed for many life functions.',
-    figImages: ['/images/papers/biology-may-2019/page-05.png'],
+    stem: 'In mitosis, two identical cells are produced from a parent cell. Mitosis is needed for many life functions. Meiosis is a different type of cell division that produces gametes (sex cells).',
+    artefact: {
+      component: 'DataTable',
+      data: {
+        headers: ['Feature', 'Mitosis', 'Meiosis'],
+        rows: [
+          ['Number of daughter cells', '2', '4'],
+          ['Chromosome number of daughter cells', 'Diploid (46 in humans)', 'Haploid (23 in humans)'],
+          ['Daughter cells genetically...', 'Identical to parent', 'Non-identical (varied)'],
+          ['Type of cell produced', 'Body (somatic) cells', 'Gametes (sex cells)'],
+          ['Main roles', 'Growth, repair, asexual reproduction', 'Sexual reproduction'],
+        ],
+      },
+      caption: 'A comparison of the two types of cell division. Mitosis makes two identical diploid body cells; meiosis makes four non-identical haploid gametes.',
+    },
     tasks: [
       {
         label: 'a',
@@ -116,7 +154,20 @@ export const questions: Question[] = [
     topicsAlso: ['Speciation & Extinction'],
     marks: 10,
     stem: 'Catastrophic, global events or widespread, rapid environmental change can cause mass extinctions. The image shows five mass extinction events including the End of Ordovician period (rapid global cooling, falling ocean levels), End of Devonian period (rapid global cooling, asteroid impact), End of Permian period (volcanic activity, rapid global warming), End of Triassic period (rapid global warming, desertification of land), and End of Cretaceous period (asteroid impact, falling ocean levels).',
-    figImages: ['/images/papers/biology-may-2019/page-07.png'],
+    artefact: {
+      component: 'DataTable',
+      data: {
+        headers: ['Mass extinction event', 'Causes'],
+        rows: [
+          ['End of Ordovician period', 'Rapid global cooling, falling ocean levels'],
+          ['End of Devonian period', 'Rapid global cooling, asteroid impact'],
+          ['End of Permian period', 'Volcanic activity, rapid global warming'],
+          ['End of Triassic period', 'Rapid global warming, desertification of land'],
+          ['End of Cretaceous period', 'Asteroid impact, falling ocean levels'],
+        ],
+      },
+      caption: 'Five mass extinction events and the catastrophic environmental changes thought to have caused each one.',
+    },
     tasks: [
       {
         label: 'a',
@@ -140,6 +191,13 @@ export const questions: Question[] = [
         label: 'd',
         text: 'Rabbits are an example of a species that has different colours of fur. In a population of mountain rabbits, rabbits with white fur are far more common in the snowy upper areas of the mountain. Rabbits with darker fur are far more common at lower levels. Mixed-coloured rabbits are found in height ranges overlapping the others.\n\nUse the theory of natural selection to **explain** this distribution of rabbits with different coloured fur.',
         marks: 4,
+        artefact: {
+          component: 'GenericSVG',
+          data: {
+            svg: '<svg viewBox="0 0 480 320" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><defs><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#cfe8f5"/><stop offset="1" stop-color="#eaf6fb"/></linearGradient></defs><rect width="480" height="320" fill="url(#sky)"/><polygon points="240,40 400,300 80,300" fill="#7c8a96"/><polygon points="240,40 300,140 180,140" fill="#f4f8fb"/><polygon points="180,140 300,140 340,210 140,210" fill="#9fb0bb"/><polygon points="140,210 340,210 400,300 80,300" fill="#5b7a4b"/><text x="240" y="30" font-size="13" font-weight="700" text-anchor="middle" fill="#1f2d3a">Mountain rabbit distribution</text><circle cx="225" cy="105" r="8" fill="#ffffff" stroke="#94a3ad"/><circle cx="255" cy="120" r="8" fill="#ffffff" stroke="#94a3ad"/><text x="312" y="100" font-size="11" fill="#475569">snowy peak: white fur</text><circle cx="200" cy="185" r="8" fill="#cdbba0" stroke="#8a7a5c"/><circle cx="285" cy="180" r="8" fill="#cdbba0" stroke="#8a7a5c"/><text x="350" y="183" font-size="11" fill="#475569">mid-slope: mixed</text><circle cx="170" cy="265" r="8" fill="#5a4632" stroke="#33271b"/><circle cx="300" cy="270" r="8" fill="#5a4632" stroke="#33271b"/><text x="330" y="268" font-size="11" fill="#475569">lower slope: dark fur</text></svg>',
+          },
+          caption: 'White rabbits dominate the snowy upper slopes, dark rabbits the green lower slopes, with mixed-fur rabbits in the overlapping mid-range.',
+        },
         ph: 'Rabbits with fur colour matching their location are less visible to predators, so they are more likely to survive. Longer survival means a greater chance of reproduction. Concentration of fur types by location means similar types breed together more often. Offspring are more likely to inherit advantageous fur colour...',
       },
     ],
@@ -157,11 +215,19 @@ export const questions: Question[] = [
     topicGroup: 'Processes',
     topicsAlso: ['Habitats & Ecosystems'],
     marks: 11,
-    stem: 'Changes in population size of living organisms are dependent on biotic and abiotic factors. For plants, this includes sunlight, temperature and the availability of nutrients.\n\nStudents learned that nitrogen is an essential nutrient for plants. They conducted a laboratory experiment using fertilizer containing nitrogen to grow pea plants. Their hypothesis: *"If fertilizer containing nitrogen is added to the soil, then the pea plants will grow taller because there is more nitrogen which is an essential nutrient."*\n\nAfter two weeks, the students recorded the height and leaf colour of the plants:\n\n| Trial | Fertilizer added (mm) | No fertilizer (mm) |\n|---|---|---|\n| 1 | 310 | 196 |\n| 2 | 347 | 228 |\n| 3 | 332 | 222 |',
-    figImages: [
-      '/images/papers/biology-may-2019/page-09.png',
-      '/images/papers/biology-may-2019/page-10.png',
-    ],
+    stem: 'Changes in population size of living organisms are dependent on biotic and abiotic factors. For plants, this includes sunlight, temperature and the availability of nutrients.\n\nStudents learned that nitrogen is an essential nutrient for plants. They conducted a laboratory experiment using fertilizer containing nitrogen to grow pea plants. Their hypothesis: *"If fertilizer containing nitrogen is added to the soil, then the pea plants will grow taller because there is more nitrogen which is an essential nutrient."*\n\nAfter two weeks, the students recorded the height and leaf colour of the plants.',
+    artefact: {
+      component: 'DataTable',
+      data: {
+        headers: ['Trial', 'Height — fertilizer added / mm', 'Leaf colour (fertilizer)', 'Height — no fertilizer / mm', 'Leaf colour (no fertilizer)'],
+        rows: [
+          ['1', '310', 'Dark green, broad leaves', '196', 'Yellow-green, thin leaves'],
+          ['2', '347', 'Dark green, broad leaves', '228', 'Brownish-yellow leaves'],
+          ['3', '332', 'Dark green, broad leaves', '222', 'Light green, brown edges'],
+        ],
+      },
+      caption: 'Pea-plant height (quantitative) and leaf colour (qualitative) after two weeks, with and without nitrogen fertilizer.',
+    },
     tasks: [
       {
         label: 'a',
@@ -225,7 +291,13 @@ export const questions: Question[] = [
     topicsAlso: ['Habitats & Ecosystems'],
     marks: 14,
     stem: 'While on a field trip, students noticed two ponds of approximately the same size. One pond had very few duckweed plants and was surrounded by trees that were shading the pond. The other pond was mostly covered in duckweed and was in full sun.\n\nThe students decided to investigate if light was a factor in the growth of the duckweed plants. They chose the dependent variable to be the final number of duckweed plants. They planned to calculate the change in number of duckweed plants.',
-    figImages: ['/images/papers/biology-may-2019/page-12.png'],
+    artefact: {
+      component: 'GenericSVG',
+      data: {
+        svg: '<svg viewBox="0 0 560 280" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><defs><radialGradient id="sun5" cx="0.5" cy="0.5"><stop offset="0" stop-color="#fff3b0"/><stop offset="1" stop-color="#f0c419"/></radialGradient><linearGradient id="pond5" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#bfe3f2"/><stop offset="1" stop-color="#6cb6d6"/></linearGradient></defs><rect width="560" height="280" fill="#ffffff"/><text x="280" y="26" font-size="14" font-weight="700" text-anchor="middle" fill="#1f2d3a">Two ponds of similar size on the field trip</text><text x="150" y="52" font-size="12" font-weight="700" text-anchor="middle" fill="#2c5468">Shaded pond</text><ellipse cx="150" cy="170" rx="115" ry="70" fill="url(#pond5)" stroke="#3f7e98"/><g fill="#3a7d44"><ellipse cx="60" cy="120" rx="34" ry="40"/><ellipse cx="110" cy="100" rx="36" ry="44"/><ellipse cx="230" cy="118" rx="32" ry="38"/></g><g fill="#2f9e44" opacity="0.85"><circle cx="150" cy="178" r="6"/><circle cx="172" cy="190" r="6"/></g><text x="150" y="262" font-size="11" text-anchor="middle" fill="#475569">few duckweed · shaded by trees</text><circle cx="430" cy="55" r="22" fill="url(#sun5)" stroke="#c79a10"/><g stroke="#f0c419" stroke-width="3" stroke-linecap="round"><line x1="430" y1="20" x2="430" y2="6"/><line x1="460" y1="45" x2="474" y2="38"/><line x1="400" y1="45" x2="386" y2="38"/></g><text x="410" y="92" font-size="12" font-weight="700" text-anchor="middle" fill="#9a7d0f">Sunny pond</text><ellipse cx="410" cy="180" rx="115" ry="70" fill="url(#pond5)" stroke="#3f7e98"/><g fill="#2f9e44"><circle cx="350" cy="170" r="7"/><circle cx="372" cy="158" r="7"/><circle cx="394" cy="172" r="7"/><circle cx="416" cy="160" r="7"/><circle cx="438" cy="174" r="7"/><circle cx="460" cy="162" r="7"/><circle cx="360" cy="192" r="7"/><circle cx="384" cy="200" r="7"/><circle cx="408" cy="192" r="7"/><circle cx="432" cy="200" r="7"/><circle cx="456" cy="192" r="7"/></g><text x="410" y="270" font-size="11" text-anchor="middle" fill="#475569">mostly covered in duckweed · full sun</text></svg>',
+      },
+      caption: 'The shaded pond (left) has very few duckweed plants; the sunny pond (right) is mostly covered. The students investigate whether light affects duckweed growth.',
+    },
     tasks: [
       {
         label: '',
@@ -249,7 +321,32 @@ export const questions: Question[] = [
     topicsAlso: ['Habitats & Ecosystems'],
     marks: 18,
     stem: 'The students analysed their results and wondered if instead of the amount of sunlight, it was actually the difference in temperature due to shading that was affecting the growth of the duckweed. They set up an experiment to ensure the duckweed plants received the same amount of light, but at different temperatures. The duckweed was placed in water baths to maintain the water at constant temperature.\n\nThe method steps were:\n1. Collect duckweed plants from pond\n2. ___\n3. Label beakers\n4. Measure water from pond into each 500 cm³ beaker\n5. Count initial duckweed plants and place 10 duckweed plants into each of 24 beakers\n6. Set the temperature of each water bath\n7. Add thermometer to water bath\n8. ___\n9. Place three beakers with samples into each water bath\n10. Wait two weeks\n11. ___',
-    figImages: ['/images/papers/biology-may-2019/page-13.png'],
+    artefact: {
+      component: 'LineGraph',
+      data: {
+        title: 'Mean number of duckweed plants vs temperature',
+        xLabel: 'Temperature',
+        yLabel: 'Mean number of plants',
+        xUnit: '°C',
+        xMin: 0,
+        xMax: 40,
+        yMin: 0,
+        yMax: 90,
+        xStep: 5,
+        yStep: 10,
+        dataPoints: [
+          { x: 7.5, y: 20 },
+          { x: 10.0, y: 28 },
+          { x: 12.5, y: 40 },
+          { x: 15.0, y: 50 },
+          { x: 20.0, y: 70 },
+          { x: 27.5, y: 80 },
+          { x: 30.0, y: 70 },
+          { x: 37.5, y: 18 },
+        ],
+      },
+      caption: 'The students\' mean results. Growth rises to a peak at 27.5 °C, then falls sharply as enzymes denature at higher temperatures.',
+    },
     tasks: [
       {
         label: 'a',
@@ -299,8 +396,21 @@ export const questions: Question[] = [
     topicGroup: 'Human Interactions with Environments',
     topicsAlso: ['Mitigation of Adverse Effects'],
     marks: 8,
-    stem: 'Waste water contains nitrogen and phosphorus from human waste, food and other contaminants such as heavy metals, soaps and detergents. Some students wanted to investigate if a plant called water hyacinth could be used to treat waste water.\n\n**Water hyacinth:** 60–80% nitrogen removal; rapid growth rate up to 5 m per day; good uptake of heavy metals (lead, copper, cadmium, mercury); ideal temperature range 21–30°C; highly invasive when outside its native area.\n\n**Research question:** "Does adding water hyacinth to waste water help to remove contaminants?"',
-    figImages: ['/images/papers/biology-may-2019/page-15.png'],
+    stem: 'Waste water contains nitrogen and phosphorus from human waste, food and other contaminants such as heavy metals, soaps and detergents. Some students wanted to investigate if a plant called water hyacinth could be used to treat waste water.\n\n**Research question:** "Does adding water hyacinth to waste water help to remove contaminants?"',
+    artefact: {
+      component: 'DataTable',
+      data: {
+        headers: ['Water hyacinth — property', 'Value'],
+        rows: [
+          ['Nitrogen removal', '60–80%'],
+          ['Growth rate', 'Rapid, up to 5 m per day'],
+          ['Heavy-metal uptake', 'Good (lead, copper, cadmium, mercury)'],
+          ['Ideal temperature range', '21–30 °C'],
+          ['Behaviour outside native area', 'Highly invasive'],
+        ],
+      },
+      caption: 'Fact card for water hyacinth — the plant the students want to use to treat waste water.',
+    },
     tasks: [
       {
         label: 'a',
@@ -341,16 +451,63 @@ export const questions: Question[] = [
     topicGroup: 'Human Interactions with Environments',
     topicsAlso: ['Food Chains & Webs'],
     marks: 8,
-    stem: 'Fish are an important part of many diets around the world. As the human population is increasing, the amount of fish eaten per person is also increasing. This increase in demand for fish has led to unsustainable fishing practices. Decreasing fish populations are a world-wide problem threatening food supplies.\n\nThe tuna food web shows: Algae → Plankton → Krill and small fish → Tuna, Mahi mahi, Marlin, Shark (Tuna → Shark, Mahi mahi; Krill and small fish → Mahi mahi, Marlin, Tuna, Shark). Bacteria is also shown.',
-    figImages: [
-      '/images/papers/biology-may-2019/page-17.png',
-      '/images/papers/biology-may-2019/page-18.png',
-    ],
+    stem: 'Fish are an important part of many diets around the world. As the human population is increasing, the amount of fish eaten per person is also increasing. This increase in demand for fish has led to unsustainable fishing practices. Decreasing fish populations are a world-wide problem threatening food supplies.',
+    artefact: {
+      component: 'NetworkGraph',
+      data: {
+        title: 'The tuna food web',
+        nodes: [
+          { id: 'algae', label: 'Algae', color: '#2f9e44', detail: 'Producer — makes food by photosynthesis.' },
+          { id: 'plankton', label: 'Plankton', color: '#74b816', detail: 'Primary consumer that feeds on algae.' },
+          { id: 'krill', label: 'Krill & small fish', color: '#1098ad', detail: 'Eaten by tuna, mahi mahi, marlin and shark.' },
+          { id: 'tuna', label: 'Tuna', color: '#1971c2', detail: 'Prey of shark; predator of krill and small fish. Eaten by mahi mahi predators too.' },
+          { id: 'mahi', label: 'Mahi mahi', color: '#e8590c', detail: 'Eats tuna and krill/small fish.' },
+          { id: 'marlin', label: 'Marlin', color: '#9c36b5', detail: 'Top predator feeding on krill and small fish.' },
+          { id: 'shark', label: 'Shark', color: '#495057', detail: 'Top predator feeding on tuna and krill/small fish.' },
+          { id: 'bacteria', label: 'Bacteria', color: '#7a4f1d', detail: 'Decomposers that recycle nutrients.' },
+        ],
+        edges: [
+          { from: 'algae', to: 'plankton', label: 'eaten by' },
+          { from: 'plankton', to: 'krill', label: 'eaten by' },
+          { from: 'krill', to: 'tuna', label: 'eaten by' },
+          { from: 'krill', to: 'mahi', label: 'eaten by' },
+          { from: 'krill', to: 'marlin', label: 'eaten by' },
+          { from: 'krill', to: 'shark', label: 'eaten by' },
+          { from: 'tuna', to: 'shark', label: 'eaten by' },
+          { from: 'tuna', to: 'mahi', label: 'eaten by' },
+        ],
+      },
+      caption: 'Tuna food web. Each link points from prey to predator — hover a species to see what it eats and what eats it.',
+    },
     tasks: [
       {
         label: 'a',
         text: 'Use the interactive graphic to **state** one reason for a decrease in the total number of wild fish since 1950.',
         marks: 1,
+        artefact: {
+          component: 'LineGraph',
+          data: {
+            title: 'Total number of wild fish caught (index)',
+            xLabel: 'Year',
+            yLabel: 'Relative catch / index',
+            xMin: 1950,
+            xMax: 2010,
+            yMin: 0,
+            yMax: 100,
+            xStep: 10,
+            yStep: 20,
+            dataPoints: [
+              { x: 1950, y: 20 },
+              { x: 1960, y: 38 },
+              { x: 1970, y: 60 },
+              { x: 1980, y: 78 },
+              { x: 1990, y: 95 },
+              { x: 2000, y: 80 },
+              { x: 2010, y: 62 },
+            ],
+          },
+          caption: 'Wild fish catch rose steeply from 1950 as fishing technology improved, then fell after about 1990 as populations were overfished.',
+        },
         ph: 'One reason for a decrease in wild fish is...',
       },
       {
@@ -380,8 +537,18 @@ export const questions: Question[] = [
     topicGroup: 'Biotechnology',
     topicsAlso: ['Ethical Implications'],
     marks: 16,
-    stem: 'Scientists have developed a genetically modified salmon that can grow faster than a traditional salmon. This GM salmon is currently being raised in fish farms. A genetically modified farmed salmon at 18 months: length = 60 cm, mass = 3.0 kg. A regular farmed salmon at 18 months: length = 33 cm, mass = 1.3 kg.',
-    figImages: ['/images/papers/biology-may-2019/page-19.png'],
+    stem: 'Scientists have developed a genetically modified salmon that can grow faster than a traditional salmon. This GM salmon is currently being raised in fish farms.',
+    artefact: {
+      component: 'DataTable',
+      data: {
+        headers: ['Farmed salmon at 18 months', 'Length / cm', 'Mass / kg'],
+        rows: [
+          ['Genetically modified salmon', '60', '3.0'],
+          ['Regular salmon', '33', '1.3'],
+        ],
+      },
+      caption: 'At 18 months the genetically modified salmon is almost twice as long and more than twice the mass of a regular farmed salmon.',
+    },
     tasks: [
       {
         label: 'a',

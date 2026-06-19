@@ -25,6 +25,26 @@ export const questions: Question[] = [
     tags: { unit: 'astrophysics', topics: ['solar system structure', 'Big Bang theory', 'stars and stellar evolution'], level: 'developing' },
     stem: 'This question is about astronomy, astrophysics and units. The diagram below shows the solar system (not to scale). The planets are arranged in order from the Sun, but some labels are missing.',
     nativeContent: 'solar_system',
+    artefact: {
+      component: 'OrbitSim',
+      data: {
+        title: 'The solar system (planets orbiting the Sun, not to scale)',
+        mode: 'orbit',
+        central: 'Sun',
+        bodies: [
+          { name: 'Sun', role: 'center', radius: 12, colour: '#f6b73c' },
+          { name: 'Mercury', orbitalPeriod: 88, orbitRadius: 1, radius: 3, colour: '#b08d57' },
+          { name: 'Venus', orbitalPeriod: 225, orbitRadius: 1.6, radius: 4, colour: '#d9a066' },
+          { name: 'Earth', orbitalPeriod: 365, orbitRadius: 2.2, radius: 4, colour: '#3a6ea5' },
+          { name: 'Mars', orbitalPeriod: 687, orbitRadius: 2.8, radius: 3.5, colour: '#c0392b' },
+          { name: 'Jupiter', orbitalPeriod: 4333, orbitRadius: 3.6, radius: 8, colour: '#caa472' },
+          { name: 'Saturn', orbitalPeriod: 10759, orbitRadius: 4.3, radius: 7, colour: '#d8c38a' },
+          { name: 'Uranus', orbitalPeriod: 30687, orbitRadius: 5.0, radius: 5.5, colour: '#7fd6d6' },
+          { name: 'Neptune', orbitalPeriod: 60190, orbitRadius: 5.6, radius: 5.5, colour: '#3b6fd6' },
+        ],
+      },
+      caption: 'The eight planets orbit the Sun. The two missing labels in the drag-and-drop diagram are Jupiter (between Mars and Saturn) and Neptune (beyond Uranus). Play to watch the inner planets orbit faster than the outer ones.',
+    },
     tasks: [
       {
         label: 'a',
@@ -73,7 +93,22 @@ export const questions: Question[] = [
     topicGroup: 'Nuclear & Atomic Physics',
     tags: { unit: 'atomic-physics', topics: ['radioactive decay', 'half-life', 'atomic structure'], level: 'proficient' },
     stem: 'This question is about using carbon dating to identify the age of organic matter. An atom of carbon-14 is represented as: ¹⁴₆C (mass number 14, atomic number 6).',
-    nativeContent: 'carbon_decay',
+    artefact: {
+      component: 'DecaySim',
+      data: {
+        title: 'Decay of carbon-14 (percentage of carbon-14 atoms remaining vs time)',
+        isotope: 'carbon-14',
+        daughter: 'nitrogen-14',
+        decayMode: 'beta',
+        halfLife: 5730,
+        units: 'years',
+        initialCount: 100,
+        axisMax: 40000,
+        xAxis: 'Time / years',
+        yAxis: 'Carbon-14 atoms / %',
+      },
+      caption: 'The curve starts at 100% and halves every half-life. Play or drag the time marker: the half-life readout (~5730 years) is what part (c) asks for, and scrubbing to 20% remaining gives the sample age used in part (d).',
+    },
     tasks: [
       {
         label: 'a',
@@ -121,7 +156,19 @@ export const questions: Question[] = [
     topicGroup: 'Electricity & Magnetism',
     tags: { unit: 'electricity-circuits', topics: ['electrical power', "Ohm's law", 'energy efficiency'], level: 'proficient' },
     stem: 'A student decides to compare the efficiency of modern lightbulbs using Light Emitting Diodes (LEDs) to older filament lightbulbs.',
-    nativeContent: 'sankey_q3',
+    artefact: {
+      component: 'DataTable',
+      data: {
+        headers: ['Property', 'Filament bulb', 'LED'],
+        rows: [
+          ['Total energy / power input', '100 J of electrical energy', '0.05 W (current 0.05 A at 1 V)'],
+          ['Useful light output', '5 J', '0.02 W'],
+          ['Wasted output form', 'thermal energy (heat)', 'thermal energy (heat)'],
+          ['How light is produced', 'heating a thin wire (filament) until it glows', 'electrons crossing a semiconductor junction'],
+        ],
+      },
+      caption: 'A comparison of the two bulbs the student investigates. The filament figures feed the Sankey-diagram task (a); the LED figures feed the power calculation in (c) and the efficiency comparison in (d).',
+    },
     tasks: [
       {
         label: 'a',
@@ -234,7 +281,20 @@ export const questions: Question[] = [
     topicGroup: 'Forces & Motion',
     tags: { unit: 'work-energy', topics: ['kinetic energy', 'conservation of energy', 'energy efficiency'], level: 'proficient' },
     stem: 'Another student is doing a similar investigation on bouncing balls. They research the coefficient of restitution (e).\n\nWhen two objects collide, their velocities change. For a bouncing ball, e is calculated by dividing the speed after the collision by the speed before the collision.\n\nFor bouncing balls, this can be written using heights:\n\n  e = √(height of first bounce / drop height) = √(h₂/h₁)\n\nWhen e = 1, the ball has the same speed after the collision as before (perfectly elastic). The quantity e has no units.',
-    figImages: ['/images/papers/physics-nov-2023/page-17.png', '/images/papers/physics-nov-2023/page-18.png', '/images/papers/physics-nov-2023/page-19.png', '/images/papers/physics-nov-2023/page-20.png'],
+    artefact: {
+      component: 'DataTable',
+      data: {
+        headers: ['Drop height (h₁)', 'Avg height of first bounce (h₂) / m', 'Coefficient of restitution (e)'],
+        rows: [
+          ['50.0 cm', '0.34', '0.82'],
+          ['2.50 m', '1.44', '0.76'],
+          ['1.50 m', '0.94', '0.74'],
+          ['2.00 m', '1.21', '—'],
+          ['1.00 m', '0.65', '0.806'],
+        ],
+      },
+      caption: 'The student\'s table of processed data, exactly as they presented it. Note the inconsistent units (cm vs m), the missing e value for the 2.00 m drop, and the e values quoted to different numbers of significant figures — these are the presentation errors you must correct in part (c).',
+    },
     tasks: [
       {
         label: 'a',
@@ -283,7 +343,13 @@ export const questions: Question[] = [
     topicGroup: 'Forces & Motion',
     tags: { unit: 'work-energy', topics: ['kinetic energy', 'conservation of energy'], level: 'proficient' },
     stem: 'The game of table tennis involves hitting a plastic ball with a wooden racket. The racket is usually made from wood covered with a layer of sponge and rubber on top. The thickness of the sponge layer depends on the choice of the player — it can vary from no sponge to around 2.5 mm. A student is interested in how the bounce of a table tennis ball is affected by the thickness of the sponge layer on the racket. They decide to put a table tennis racket on the floor, drop table tennis balls onto the racket and measure the height of the first bounce.',
-    figImages: ['/images/papers/physics-nov-2023/page-21.png', '/images/papers/physics-nov-2023/page-22.png', '/images/papers/physics-nov-2023/page-23.png'],
+    artefact: {
+      component: 'GenericSVG',
+      data: {
+        svg: '<svg viewBox="0 0 600 320" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><defs><linearGradient id="woodG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#caa472"/><stop offset="1" stop-color="#9c7b4a"/></linearGradient><radialGradient id="ballG" cx="0.35" cy="0.32"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#e8772e"/></radialGradient></defs><rect width="600" height="320" fill="#ffffff"/><text x="300" y="26" font-size="15" font-weight="700" text-anchor="middle" fill="#1f2d3a">Cross-section of a table tennis racket (not to scale)</text><line x1="40" y1="232" x2="560" y2="232" stroke="#94a3ad" stroke-width="1" stroke-dasharray="4 4"/><text x="46" y="248" font-size="10" fill="#94a3ad">floor</text><g><rect x="120" y="170" width="300" height="34" rx="4" fill="url(#woodG)" stroke="#7a5e36"/><rect x="120" y="150" width="300" height="20" fill="#f4c84a" stroke="#caa028"/><rect x="120" y="134" width="300" height="16" fill="#c0392b" stroke="#8a2a20"/></g><rect x="408" y="180" width="120" height="14" rx="7" fill="url(#woodG)" stroke="#7a5e36"/><text x="492" y="190" font-size="11" text-anchor="middle" fill="#5b3f1e">handle</text><circle cx="270" cy="104" r="22" fill="url(#ballG)" stroke="#a8531a"/><text x="270" y="78" font-size="11" text-anchor="middle" fill="#a8531a">plastic ball (dropped)</text><line x1="445" y1="143" x2="525" y2="120" stroke="#5b6b78" stroke-width="1"/><text x="528" y="122" font-size="11" fill="#8a2a20">rubber (top surface)</text><line x1="445" y1="160" x2="525" y2="158" stroke="#5b6b78" stroke-width="1"/><text x="528" y="161" font-size="11" fill="#b8860b">sponge layer</text><line x1="445" y1="187" x2="525" y2="200" stroke="#5b6b78" stroke-width="1"/><text x="528" y="203" font-size="11" fill="#7a5e36">layer of wood</text><g stroke="#2c5468" stroke-width="1"><line x1="100" y1="150" x2="100" y2="170"/><line x1="96" y1="150" x2="104" y2="150"/><line x1="96" y1="170" x2="104" y2="170"/></g><text x="92" y="164" font-size="10" text-anchor="end" fill="#2c5468">sponge</text><text x="74" y="176" font-size="9" text-anchor="end" fill="#2c5468">0–2.5 mm</text></svg>',
+      },
+      caption: 'The racket is wood topped by a sponge layer (0 to about 2.5 mm thick) and a rubber surface. The student investigates how the sponge-layer thickness changes the height of the first bounce of the plastic ball.',
+    },
     tasks: [
       {
         label: 'a',
@@ -313,7 +379,13 @@ export const questions: Question[] = [
     topicGroup: 'Thermal Physics',
     tags: { unit: 'thermal-physics', topics: ['conduction', 'convection', 'radiation (thermal)'], level: 'advanced' },
     stem: 'Houses in cold climates are usually heated to provide a comfortable living environment. Passively heated houses are designed to lower the energy required for heating. In passively heated houses, the amount of heat lost to the surroundings is greatly reduced compared to houses which are actively heated.\n\nKey features of passive houses include:\n• Airtightness — prevents air moving between inside and outside\n• Heat recirculation — mechanical ventilation system circulates warm air\n• Thermal insulation of walls and roof — does not easily transfer heat\n• Insulated floor slab — minimizes thermal contact with ground\n• Direction of windows — positioned to maximize solar heat entering\n• Windows with three layers of glass — sealed, coated to allow sunlight in but prevent radiation leaving',
-    figImages: ['/images/papers/physics-nov-2023/page-23.png', '/images/papers/physics-nov-2023/page-24.png', '/images/papers/physics-nov-2023/page-25.png', '/images/papers/physics-nov-2023/page-26.png', '/images/papers/physics-nov-2023/page-27.png', '/images/papers/physics-nov-2023/page-28.png', '/images/papers/physics-nov-2023/q7d-energy-stacked-bar.svg', '/images/papers/physics-nov-2023/page-30.png'],
+    artefact: {
+      component: 'GenericSVG',
+      data: {
+        svg: '<svg viewBox="0 0 620 420" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><defs><linearGradient id="wallG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f3e7cf"/><stop offset="1" stop-color="#e6d3ad"/></linearGradient><linearGradient id="roofG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#a8531a"/><stop offset="1" stop-color="#7a3d12"/></linearGradient><radialGradient id="sunG" cx="0.5" cy="0.5"><stop offset="0" stop-color="#fff3b0"/><stop offset="1" stop-color="#f0c419"/></radialGradient></defs><rect width="620" height="420" fill="#ffffff"/><rect x="0" y="350" width="620" height="70" fill="#c9b98a"/><text x="310" y="24" font-size="15" font-weight="700" text-anchor="middle" fill="#1f2d3a">Cross-section of a passively heated house</text><circle cx="556" cy="78" r="30" fill="url(#sunG)" stroke="#c79a10"/><g stroke="#f0c419" stroke-width="3" stroke-linecap="round"><line x1="520" y1="98" x2="470" y2="128"/><line x1="524" y1="110" x2="476" y2="140"/><line x1="528" y1="122" x2="482" y2="152"/></g><polygon points="200,130 340,130 270,70" fill="url(#roofG)" stroke="#5a2c0d"/><rect x="200" y="130" width="140" height="220" fill="url(#wallG)" stroke="#b89b66" stroke-width="6"/><rect x="225" y="160" width="42" height="52" fill="#bfe3f2" stroke="#3a6ea5" stroke-width="3"/><rect x="231" y="160" width="6" height="52" fill="#9fcfe6"/><rect x="243" y="160" width="6" height="52" fill="#9fcfe6"/><rect x="273" y="160" width="42" height="52" fill="#bfe3f2" stroke="#3a6ea5" stroke-width="3"/><rect x="225" y="250" width="42" height="80" fill="#bfe3f2" stroke="#3a6ea5" stroke-width="3"/><rect x="200" y="344" width="140" height="10" fill="#7a8a6a" stroke="#566448"/><path d="M285,250 q30,-30 0,-60 q-30,-30 0,-60" fill="none" stroke="#c0392b" stroke-width="2.5" stroke-dasharray="5 4"/><path d="M295,330 q34,-40 0,-80 q-34,-40 0,-80" fill="none" stroke="#3a6ea5" stroke-width="2.5" stroke-dasharray="5 4"/><g font-size="11" fill="#1f2d3a"><line x1="200" y1="100" x2="120" y2="100" stroke="#5b6b78" stroke-width="1"/><text x="116" y="103" text-anchor="end">thermal insulation of walls &amp; roof</text><line x1="200" y1="240" x2="120" y2="250" stroke="#5b6b78" stroke-width="1"/><text x="116" y="253" text-anchor="end">airtightness (no air leaks)</text><line x1="200" y1="349" x2="120" y2="360" stroke="#5b6b78" stroke-width="1"/><text x="116" y="363" text-anchor="end">insulated floor slab</text><line x1="315" y1="186" x2="430" y2="170" stroke="#5b6b78" stroke-width="1"/><text x="434" y="173" text-anchor="start">triple-glazed windows facing the Sun</text><line x1="320" y1="290" x2="430" y2="300" stroke="#5b6b78" stroke-width="1"/><text x="434" y="303" text-anchor="start">heat recirculation (warm air re-used)</text></g></svg>',
+      },
+      caption: 'A passive house combines roof and wall insulation, an airtight sealed envelope, an insulated floor slab, triple-glazed windows facing the Sun, and a ventilation system that recirculates warm air — together these greatly reduce the heat energy needed to keep the house warm.',
+    },
     tasks: [
       {
         label: 'a',
@@ -337,6 +409,23 @@ export const questions: Question[] = [
         label: 'd',
         text: 'The passively heated house concept was developed in Germany. A stacked bar chart shows household energy consumption for heating by energy source in Germany. The sources shown are: Gas (~50%), Oil (~15%), Wood (~20%), Heat (~8%), Electricity (~5%), Coal (~2%). State the percentage of households using oil as a source of energy for heating.',
         marks: 1,
+        artefact: {
+          component: 'PieChart',
+          data: {
+            kind: 'doughnut',
+            title: 'Household energy consumption for heating, by energy source (Germany)',
+            unit: '%',
+            series: [
+              { name: 'Gas', value: 50, color: '#e8772e' },
+              { name: 'Wood', value: 20, color: '#2f9e44' },
+              { name: 'Oil', value: 15, color: '#495057' },
+              { name: 'Heat (district)', value: 8, color: '#1971c2' },
+              { name: 'Electricity', value: 5, color: '#f0c419' },
+              { name: 'Coal', value: 2, color: '#5b3f1e' },
+            ],
+          },
+          caption: 'Share of German households using each source of energy for heating. Read off the share that use oil.',
+        },
         ph: 'Percentage using oil = ...%',
       },
       {
@@ -361,7 +450,21 @@ export const questions: Question[] = [
     topicGroup: 'Thermal Physics',
     tags: { unit: 'work-energy', topics: ['energy sources (renewable vs non-renewable)', 'energy efficiency'], level: 'advanced' },
     stem: 'The government of a country in a cold climate is considering giving money to people to upgrade their houses to meet the standards for passively heated houses.\n\nKey information from the infographic:\n\nCOST COMPARISON:\n• Active house: €180,000 to build; Passive house: €195,000 to build\n• Passive houses save 90% on heating costs (≈ €822/year saving)\n• Upgrade cost: €15,000 per house\n• Upgrade costs are decreasing with increasing demand\n\nREGULATION:\n• Governments determine building regulations and urban planning\n• Developing passive house standards is slow and costly\n• Legal standards guarantee safety, quality and performance\n\nPAYING FOR HEAT:\n• Heating costs are a large part of family expenditure\n• "Fuel poverty" — households choose between heating and food/clothing\n• Fuel poverty linked to adverse physical and mental health effects\n• Most common in low-income areas with poor housing quality\n\nAIR QUALITY:\n• Outdoor pollutants cannot enter (airtight)\n• Need well-maintained filter systems\n• If maintained, higher air quality than actively heated houses\n• Indoor pollutants from printers, copiers, fossil-fuel heaters',
-    figImages: ['/images/papers/physics-nov-2023/page-31.png', '/images/papers/physics-nov-2023/page-32.png', '/images/papers/physics-nov-2023/page-33.png'],
+    artefact: {
+      component: 'DataTable',
+      data: {
+        headers: ['Factor', 'Actively heated house', 'Passively heated house'],
+        rows: [
+          ['Cost to build', '€180 000', '€195 000'],
+          ['Heating cost saving', '—', '≈ 90% (≈ €822 / year)'],
+          ['Cost to upgrade an existing house', '—', '€15 000 (falling with demand)'],
+          ['Building regulation', 'established standards', 'slow & costly to develop'],
+          ['Fuel poverty risk', 'higher (more heating cost)', 'lower (much less heating cost)'],
+          ['Air quality (if filters maintained)', 'lower', 'higher (airtight + filtered)'],
+        ],
+      },
+      caption: 'Key figures from the passive-house infographic: cost comparison, heating-cost savings, upgrade cost, regulation, fuel poverty and air quality. Use these to weigh the social and economic implications discussed below.',
+    },
     tasks: [
       {
         label: '',

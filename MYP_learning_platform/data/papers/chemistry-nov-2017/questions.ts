@@ -22,7 +22,13 @@ export const questions: Question[] = [
     topicGroup: 'Atomic Structure & Periodic Table',
     marks: 16,
     stem: 'Throughout history, make-up has been used for cosmetic purposes and to indicate social status. Coloured ores of copper and iron were some of the first substances used. Lead and arsenic are also elements found in ores. Lead is normally found as an ore in the Earth\'s crust. The most common lead ore is galena or lead sulphide (PbS). Lead is extracted by heating the ore to produce lead oxide. The lead oxide is reduced using carbon to produce lead metal. The equations are not balanced.',
-    figImages: ['/images/papers/chemistry-nov-2017/page-02.png', '/images/papers/chemistry-nov-2017/page-03.png'],
+    artefact: {
+      component: 'GenericSVG',
+      data: {
+        svg: '<svg viewBox="0 0 560 210" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><rect width="560" height="210" fill="#ffffff"/><text x="280" y="22" font-size="14" font-weight="700" text-anchor="middle" fill="#1f2d3a">Part of the periodic table</text><g><rect x="60" y="44" width="64" height="48" fill="#eef4f7" stroke="#5b6b78"/><text x="92" y="60" font-size="9" text-anchor="middle" fill="#64748b">Group 14</text><text x="92" y="78" font-size="16" font-weight="700" text-anchor="middle" fill="#0b7285">Pb</text><text x="92" y="90" font-size="8" text-anchor="middle" fill="#64748b">lead · 82 · Period 6</text></g><g><rect x="184" y="44" width="64" height="48" fill="#fff7ed" stroke="#5b6b78"/><text x="216" y="60" font-size="9" text-anchor="middle" fill="#64748b">Group 15</text><text x="216" y="78" font-size="16" font-weight="700" text-anchor="middle" fill="#e8590c">As</text><text x="216" y="90" font-size="8" text-anchor="middle" fill="#64748b">arsenic · 33 · Period 4</text></g><line x1="124" y1="68" x2="184" y2="68" stroke="#94a3ad" stroke-width="1.5" stroke-dasharray="3 3"/><text x="60" y="120" font-size="11" fill="#475569">Lead (Pb) is a metal: Group 14, Period 6.</text><text x="60" y="138" font-size="11" fill="#475569">Arsenic (As) is a metalloid: Group 15, Period 4.</text><text x="60" y="164" font-size="10" fill="#94a3ad">Period number = number of occupied electron shells.</text><text x="60" y="180" font-size="10" fill="#94a3ad">Main-group number = number of outer-shell electrons.</text><text x="60" y="198" font-size="10" fill="#94a3ad">Atomic number Pb = 82 · As = 33 (protons = electrons in a neutral atom).</text></svg>',
+      },
+      caption: 'Lead (Pb) and arsenic (As) on the periodic table — a static, labelled reference diagram (no read-off animation needed) for locating group, period and atomic number.',
+    },
     tasks: [
       {
         label: 'a',
@@ -79,7 +85,24 @@ export const questions: Question[] = [
     topicGroup: 'Organic Chemistry',
     marks: 15,
     stem: 'Esters can be classified as volatile organic compounds or VOCs. VOCs are compounds which evaporate easily to become vapours or gases. Esters are described as being volatile substances. All the molecules have left the surface of the skin after approximately 4 hours. Some esters with different volatilities include methyl methanoate, ethyl methanoate, propyl methanoate, butyl methanoate, and pentyl methanoate.',
-    figImages: ['/images/papers/chemistry-nov-2017/page-07.png', '/images/papers/chemistry-nov-2017/page-09.png'],
+    artefact: {
+      component: 'RateSim',
+      data: {
+        title: 'Evaporation time of the methanoate esters',
+        mode: 'bars',
+        variable: 'Ester (increasing carbon-chain length →)',
+        metric: 'Time for a 0.20 cm³ drop to fully evaporate / s',
+        bars: [
+          { label: 'methyl', value: 90 },
+          { label: 'ethyl', value: 160 },
+          { label: 'propyl', value: 245 },
+          { label: 'butyl', value: 355 },
+          { label: 'pentyl', value: 510 },
+        ],
+        note: 'Longer carbon chains have stronger intermolecular forces, so they evaporate more slowly — they are less volatile.',
+      },
+      caption: 'The five methanoate esters compared: the longer the carbon chain, the longer it takes to evaporate (the lower its volatility).',
+    },
     tasks: [
       {
         label: 'a',
@@ -131,7 +154,24 @@ export const questions: Question[] = [
     topicGroup: 'Electrochemistry',
     marks: 28,
     stem: 'The position of a metal in the reactivity series is related to that metal\'s ability to displace a different metal from its compound. Metal A + Metal B Compound → Metal A Compound + Metal B. When 1 mol dm⁻³ copper sulfate solution is added to metal powder a temperature change can be measured.',
-    figImages: ['/images/papers/chemistry-nov-2017/page-13.png'],
+    artefact: {
+      component: 'EchemCellSim',
+      data: {
+        title: 'Displacement of copper from copper sulfate solution',
+        fixedAnode: 'Magnesium',
+        cathodeChoices: ['Magnesium', 'Aluminium', 'Zinc', 'Iron', 'Lead', 'Copper'],
+        voltages: {
+          'Mg-Al': 0.71,
+          'Mg-Zn': 1.61,
+          'Mg-Fe': 1.92,
+          'Mg-Pb': 2.24,
+          'Mg-Cu': 2.71,
+        },
+        units: 'V',
+        voltmeter: true,
+      },
+      caption: 'Pair magnesium against each metal: the bigger the gap in the reactivity series, the larger the cell voltage — and the larger the temperature rise when that metal displaces copper from copper sulfate.',
+    },
     tasks: [
       {
         label: 'a',
@@ -217,7 +257,22 @@ export const questions: Question[] = [
     topicGroup: 'Electrochemistry',
     marks: 17,
     stem: 'Coins have been made from metal throughout history. As the availability of metals changes, the composition of coins may also have to change. The composition of the US penny or 1 cent coin has changed several times since its introduction in 1793. Copper has traditionally been chosen for making coins as it is one of the least reactive, inexpensive metals and is readily available. Zinc is not normally reactive; Zinc is also more reactive than copper. A scientist has decided that the date of the coin can be determined by measuring the rate of gas production.',
-    figImages: ['/images/papers/chemistry-nov-2017/page-17.png', '/images/papers/chemistry-nov-2017/page-21.png'],
+    artefact: {
+      component: 'DataTable',
+      data: {
+        headers: ['Year', 'Copper / %', 'Nickel / %', 'Zinc / %', 'Tin / %'],
+        rows: [
+          ['1793 – 1849', '100.0', '0.0', '0.0', '0.0'],
+          ['1849 – 1857', '95.0', '0.0', '0.0', '5.0'],
+          ['1857 – 1865', '88.0', '12.0', '0.0', '0.0'],
+          ['1865 – 1943', '95.0', '0.0', '2.5', '2.5'],
+          ['1943 – 1962', '100.0', '0.0', '0.0', '0.0'],
+          ['1962 – 1982', '95.0', '0.0', '5.0', '0.0'],
+          ['1982 – present', '2.5', '0.0', '97.5', '0.0'],
+        ],
+      },
+      caption: 'Composition of the US 1-cent coin over time. Cross-reference the reaction time in the simulation with this table to date each coin.',
+    },
     tasks: [
       {
         label: 'a',
@@ -242,6 +297,24 @@ export const questions: Question[] = [
         text: 'The simulation shows the investigation being carried out. Using the graph, **determine** the year of manufacture of each coin tested.',
         marks: 3,
         ph: 'Cross-reference reaction time with bar chart composition, then with year-composition table',
+        artefact: {
+          component: 'RateSim',
+          data: {
+            title: 'Gas produced when each coin reacts with nitric acid',
+            xLabel: 'Time / s',
+            yLabel: 'Volume of gas / cm³',
+            xAxis: { label: 'Time / s', min: 0, max: 120, tick: 20 },
+            yAxis: { label: 'Volume of gas / cm³', min: 0, max: 60, tick: 10 },
+            options: [
+              { label: 'Coin 1 (finishes ≈ 80 s)', color: 'teal', ratePerSec: 0.625, plateauVolume: 50 },
+              { label: 'Coin 2 (finishes ≈ 100 s)', color: 'orange', ratePerSec: 0.5, plateauVolume: 50 },
+              { label: 'Coin 3 (finishes ≈ 70 s)', color: 'purple', ratePerSec: 0.71, plateauVolume: 50 },
+            ],
+            reaction: 'metal + nitric acid → metal nitrate + hydrogen',
+            note: 'A faster reaction (steeper line, shorter finishing time) means a higher proportion of the more reactive metal (zinc). Read each coin\'s finishing time, match it to a composition, then to a year.',
+          },
+          caption: 'Drag the cursor along each curve to read its finishing time, then use the composition table to date the coin.',
+        },
         widget: 'inline_dropdown_select',
         widgetItems: ['Coin 1 (≈ 80 s)', 'Coin 2 (≈ 100 s)', 'Coin 3 (≈ 70 s)'],
         widgetOptions: [
@@ -279,7 +352,19 @@ export const questions: Question[] = [
     topicGroup: 'Chemical Reactions',
     marks: 11,
     stem: 'Throughout history gold has been used for making masks, jewellery and even coins because it is very unreactive. Gold does not react with most acids, however it does react with aqua regia (sometimes called "royal water"), which is a mixture of concentrated nitric acid and concentrated hydrochloric acid. Aqua regia is used in the touchstone method to test the purity of gold. The world\'s second largest gold nugget is called the Perth Mint nugget. The mass of the nugget is 23 218.3 g.',
-    figImages: ['/images/papers/chemistry-nov-2017/page-23.png'],
+    artefact: {
+      component: 'DataTable',
+      data: {
+        headers: ['Gold purity tested', 'Weak aqua regia (1:4)', 'Medium aqua regia (1:3)', 'Strong aqua regia (1:2)'],
+        rows: [
+          ['24K (100% gold)', 'no reaction', 'no reaction', 'reacts'],
+          ['18K (75% gold)', 'no reaction', 'reacts', 'reacts'],
+          ['16K (67% gold)', 'slow reaction', 'reacts', 'reacts'],
+          ['10K (42% gold)', 'reacts', 'reacts', 'reacts'],
+        ],
+      },
+      caption: 'Touchstone testing-kit results: which strength of aqua regia makes gold of a given carat react. Use this table for parts (b) and (c).',
+    },
     tasks: [
       {
         label: 'a',
@@ -324,7 +409,21 @@ export const questions: Question[] = [
     topicGroup: 'Environmental Chemistry',
     marks: 16,
     stem: 'Science has made enormous progress towards understanding climate change and its effects on the Earth\'s ecosystem. Scientists have strong evidence that recent warming is largely caused by human activities, especially the release of greenhouse gases through the burning of fossil fuels.',
-    figImages: ['/images/papers/chemistry-nov-2017/page-28.png', '/images/papers/chemistry-nov-2017/page-29.png'],
+    artefact: {
+      component: 'SankeySim',
+      data: {
+        title: 'The carbon cycle: how carbon moves between the air, living things and fuels',
+        units: 'units',
+        flows: [
+          { label: 'Photosynthesis: CO₂ + water → glucose + oxygen (green arrow, CO₂ removed)', value: 100, kind: 'in' },
+          { label: 'Respiration: glucose + oxygen → CO₂ + water (red arrow, CO₂ released)', value: 40, kind: 'out' },
+          { label: 'Combustion of fuel: fuel + oxygen → CO₂ + water (grey arrow, CO₂ released)', value: 45, kind: 'loss' },
+          { label: 'Carbon stored in plants and soil', value: 15, kind: 'out' },
+        ],
+        conservation: 'CO₂ removed by photosynthesis (100) = CO₂ returned by respiration (40) + combustion (45) + carbon stored (15).',
+      },
+      caption: 'Grey = combustion (fuel + O₂ → CO₂ + H₂O), red = respiration (glucose + O₂ → CO₂ + H₂O), green = photosynthesis (CO₂ + H₂O → glucose + O₂). Burning extra fossil fuel adds to the grey flow and unbalances the cycle.',
+    },
     tasks: [
       {
         label: 'a',
@@ -343,6 +442,37 @@ export const questions: Question[] = [
         text: 'Carbon dioxide (CO₂) is the primary greenhouse gas emitted through human activities. In 2013, CO₂ accounted for about 82% of all US greenhouse gas emissions from human activities. Use the Global Land–Ocean Temperature Index graph to **calculate** the temperature increase from 1980 to 2010.',
         marks: 2,
         ph: '0.44°C (read from graph: ~0.00°C at 1980, ~0.44°C at 2010)',
+        artefact: {
+          component: 'LineGraph',
+          data: {
+            title: 'Global Land–Ocean Temperature Index',
+            xLabel: 'Year',
+            yLabel: 'Temperature anomaly',
+            yUnit: '°C',
+            xMin: 1960,
+            xMax: 2020,
+            yMin: -0.5,
+            yMax: 1.0,
+            xStep: 10,
+            yStep: 0.5,
+            dataPoints: [
+              { x: 1960, y: -0.02 },
+              { x: 1965, y: -0.10 },
+              { x: 1970, y: 0.03 },
+              { x: 1975, y: -0.01 },
+              { x: 1980, y: 0.00 },
+              { x: 1985, y: 0.09 },
+              { x: 1990, y: 0.25 },
+              { x: 1995, y: 0.28 },
+              { x: 2000, y: 0.32 },
+              { x: 2005, y: 0.47 },
+              { x: 2010, y: 0.44 },
+              { x: 2015, y: 0.62 },
+              { x: 2020, y: 0.78 },
+            ],
+          },
+          caption: 'Temperature anomaly relative to the 20th-century average. Read the value at 1980 (≈ 0.00 °C) and at 2010 (≈ 0.44 °C) and subtract.',
+        },
       },
       {
         label: 'c',
@@ -363,7 +493,19 @@ export const questions: Question[] = [
     topicGroup: 'Environmental Chemistry',
     marks: 17,
     stem: 'The car industry has produced electric cars and hybrid cars to reduce the emission of pollutants, including carbon dioxide. A car manufacturer announced that their scientists have developed a new type of plug-in hybrid car. The emission comparison graph shows the emissions from petrol, electric, hybrid, and plug-in hybrid cars.',
-    figImages: ['/images/papers/chemistry-nov-2017/page-32.png', '/images/papers/chemistry-nov-2017/page-34.png'],
+    artefact: {
+      component: 'DataTable',
+      data: {
+        headers: ['Type of car', 'CO₂ from fuel used / arbitrary units', 'Fuel source', 'Sustainability of fuel', 'Typical usefulness (range)'],
+        rows: [
+          ['Petrol', '4.8', 'petrol (refined crude oil)', 'finite / non-renewable', 'long range, refuels quickly'],
+          ['Electric', '0.2', 'grid electricity (battery)', 'depends on the grid mix', 'shorter range, slow recharge'],
+          ['Hybrid', '3.3', 'petrol + small battery', 'mostly finite (petrol)', 'long range, no plug needed'],
+          ['Plug-in hybrid', '3.0', 'petrol + larger rechargeable battery', 'partly renewable if charged from clean grid', 'long range, can drive short trips on battery only'],
+        ],
+      },
+      caption: 'Emission-comparison data for the four car types (the CO₂ bar values are on an arbitrary scale, as in the original graph). Choose any two car types and use this data to evaluate them.',
+    },
     tasks: [
       {
         label: '',

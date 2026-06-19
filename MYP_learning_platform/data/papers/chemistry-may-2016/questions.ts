@@ -21,7 +21,26 @@ export const questions: Question[] = [
     topicGroup: 'Quantitative Chemistry',
     marks: 8,
     stem: 'The main role of clothing is protection against the weather. In cold countries natural materials such as wool and fur have traditionally been used but today man-made fibres can be used to trap body heat. Extra warmth can be provided by chemical reactions.\n\nHand warmers contain iron powder which releases energy when exposed to oxygen in the presence of a catalyst.\n\nThe equation for the reaction is:\n\n4Fe + 3O₂ → 2Fe₂O₃',
-    figImages: ['/images/papers/chemistry-may-2016/page-01.png'],
+    artefact: {
+      component: 'ThermalSim',
+      data: {
+        title: 'Temperature of an iron hand warmer after the air seal is opened',
+        mode: 'heat',
+        substance: 'hand warmer',
+        timeUnit: 'min',
+        tempUnit: '°C',
+        startTempC: 5,
+        endTempC: 58,
+        totalTime: 20,
+        yTicksC: [0, 10, 20, 30, 40, 50, 60],
+        series: [
+          [0, 5], [1, 14], [2, 26], [3, 38], [4, 47], [5, 53], [6, 56],
+          [8, 58], [10, 58], [12, 57], [14, 56], [16, 54], [18, 52], [20, 50],
+        ],
+        markers: [{ id: 'air admitted', time: 0, tempC: 5, state: 'reaction starts' }],
+      },
+      caption: 'Once oxygen reaches the iron powder, the exothermic reaction 4Fe + 3O₂ → 2Fe₂O₃ releases heat and the temperature climbs, then slowly falls as the iron is used up.',
+    },
     tasks: [
       {
         label: 'a',
@@ -66,7 +85,13 @@ export const questions: Question[] = [
     topicGroup: 'Chemical Reactions',
     marks: 10,
     stem: 'Reusable hand warmers do not use iron but contain a saturated aqueous solution of sodium ethanoate (CH₃COONa) that releases heat when it undergoes the reversible process of crystallization.\n\nsodium ethanoate + water ⇌ sodium ethanoate crystals + heat',
-    figImages: ['/images/papers/chemistry-may-2016/page-04.png'],
+    artefact: {
+      component: 'GenericSVG',
+      data: {
+        svg: '<svg viewBox="0 0 540 220" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><rect width="540" height="220" fill="#ffffff"/><text x="270" y="24" font-size="14" font-weight="700" text-anchor="middle" fill="#1f2d3a">Sodium ethanoate (CH₃COONa)</text><line x1="120" y1="120" x2="170" y2="120" stroke="#334155" stroke-width="2"/><line x1="170" y1="120" x2="210" y2="92" stroke="#334155" stroke-width="2"/><line x1="170" y1="120" x2="210" y2="148" stroke="#334155" stroke-width="2"/><line x1="172" y1="116" x2="208" y2="91" stroke="#334155" stroke-width="2"/><text x="104" y="125" font-size="16" font-weight="700" text-anchor="end" fill="#0b3d5c">H₃C</text><text x="170" y="125" font-size="16" font-weight="700" text-anchor="middle" fill="#334155">C</text><text x="222" y="90" font-size="16" font-weight="700" text-anchor="start" fill="#b3261e">O</text><text x="222" y="156" font-size="16" font-weight="700" text-anchor="start" fill="#b3261e">O</text><text x="250" y="148" font-size="13" font-weight="700" text-anchor="start" fill="#b3261e">⁻</text><circle cx="330" cy="120" r="22" fill="#fff3bf" stroke="#e8a90c" stroke-width="2"/><text x="330" y="126" font-size="16" font-weight="700" text-anchor="middle" fill="#a06a00">Na⁺</text><text x="290" y="124" font-size="20" text-anchor="middle" fill="#94a3b8">·</text><text x="120" y="200" font-size="11" text-anchor="middle" fill="#64748b">methyl group</text><text x="200" y="200" font-size="11" text-anchor="middle" fill="#64748b">carboxylate (ethanoate) ion CH₃COO⁻</text><text x="330" y="170" font-size="11" text-anchor="middle" fill="#64748b">sodium ion</text></svg>',
+      },
+      caption: 'Sodium ethanoate is an ionic salt: a sodium ion (Na⁺) and an ethanoate ion (CH₃COO⁻). The dissolved ions re-assemble into a crystal lattice when it crystallizes, releasing heat.',
+    },
     tasks: [
       {
         label: 'a',
@@ -103,7 +128,13 @@ export const questions: Question[] = [
     topicGroup: 'Environmental Chemistry',
     marks: 11,
     stem: 'Fossil fuels and factory emissions are some of the main causes of environmental pollution. Unfortunately the damaging effects of pollution spread beyond industrialized areas and can be worsened by extreme climates. The ground in some countries is covered in heavy snow in the winter. When the snow melts in the spring, for a short time, the rivers and lakes will become more acidic.\n\nChemists have created catalytic clothing that combines functionality with fashion. Catalytic clothing technology uses nano-sized titanium dioxide (TiO₂) particles that act as photocatalysts. The photocatalysts help reduce pollutant gases such as nitrogen oxides and sulfur oxides. Pollutant gases have a negative effect on ecosystems and present a risk to humans. The catalysts are woven into clothes and help to remove pollutants by converting them into soluble compounds that are removed by washing.',
-    figImages: ['/images/papers/chemistry-may-2016/page-07.png'],
+    artefact: {
+      component: 'GenericSVG',
+      data: {
+        svg: '<svg viewBox="0 0 560 320" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><rect width="560" height="320" fill="#ffffff"/><text x="280" y="22" font-size="14" font-weight="700" text-anchor="middle" fill="#1f2d3a">Energy profile: catalysed vs uncatalysed reaction</text><line x1="70" y1="40" x2="70" y2="270" stroke="#111" stroke-width="1.5"/><line x1="70" y1="270" x2="520" y2="270" stroke="#111" stroke-width="1.5"/><text x="24" y="160" font-size="12" font-weight="600" fill="#374151" transform="rotate(-90 24 160)">Energy</text><text x="295" y="296" font-size="12" font-weight="600" text-anchor="middle" fill="#374151">Progress of reaction</text><path d="M90,150 C170,150 180,70 240,70 C300,70 320,210 430,210 C480,210 500,210 510,210" fill="none" stroke="#1971c2" stroke-width="2.5"/><path d="M90,150 C170,150 184,110 240,110 C300,110 320,210 430,210 C480,210 500,210 510,210" fill="none" stroke="#2f9e44" stroke-width="2.5" stroke-dasharray="6 4"/><line x1="240" y1="70" x2="240" y2="150" stroke="#1971c2" stroke-width="1" stroke-dasharray="3 3"/><line x1="240" y1="110" x2="240" y2="150" stroke="#2f9e44" stroke-width="1" stroke-dasharray="3 3"/><text x="248" y="100" font-size="11" font-weight="700" fill="#1971c2">Eₐ (uncatalysed)</text><text x="248" y="132" font-size="11" font-weight="700" fill="#2f9e44">Eₐ (catalysed) — lower</text><text x="92" y="143" font-size="11" fill="#475569">reactants</text><text x="470" y="204" font-size="11" fill="#475569">products</text><line x1="90" y1="150" x2="90" y2="210" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3 3"/><line x1="510" y1="210" x2="90" y2="210" stroke="#94a3b8" stroke-width="0.5" stroke-dasharray="2 4"/><rect x="320" y="40" width="14" height="3" fill="#1971c2"/><text x="340" y="46" font-size="10" fill="#475569">uncatalysed</text><rect x="320" y="56" width="14" height="3" fill="#2f9e44"/><text x="340" y="62" font-size="10" fill="#475569">catalysed (lower activation energy)</text></svg>',
+      },
+      caption: 'The catalyst (green, dashed) provides an alternative pathway with a lower activation energy (Eₐ). Reactants and products keep the same energy, so the overall energy change is unchanged.',
+    },
     tasks: [
       {
         label: 'a',
@@ -134,7 +165,13 @@ export const questions: Question[] = [
     topicGroup: 'Organic Chemistry',
     marks: 3,
     stem: 'The aroma of fruits comes from characteristic chemicals. For example, the aroma of an apple is mainly caused by molecules of C₄H₉COOCH₃ (methyl butanoate) and the aroma of pears by molecules of CH₃COO(C₅H₁₁) (pentyl ethanoate).\n\nIn a futuristic clothing project, two students suggest using methyl butanoate and pentyl ethanoate to form new aromatic fabrics. Pentyl ethanoate is formed in a reaction between an acid and an alcohol.',
-    figImages: ['/images/papers/chemistry-may-2016/page-08.png', '/images/papers/chemistry-may-2016/page-09.png'],
+    artefact: {
+      component: 'GenericSVG',
+      data: {
+        svg: '<svg viewBox="0 0 560 270" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><rect width="560" height="270" fill="#ffffff"/><text x="280" y="22" font-size="14" font-weight="700" text-anchor="middle" fill="#1f2d3a">Esterification — forming pentyl ethanoate (pear aroma)</text><rect x="20" y="44" width="150" height="54" rx="6" fill="#eef6fb" stroke="#1971c2"/><text x="95" y="66" font-size="12" font-weight="700" text-anchor="middle" fill="#0b3d5c">ethanoic acid</text><text x="95" y="86" font-size="12" text-anchor="middle" fill="#334155">CH₃COOH</text><text x="185" y="76" font-size="20" text-anchor="middle" fill="#334155">+</text><rect x="200" y="44" width="150" height="54" rx="6" fill="#fff4e6" stroke="#e8590c"/><text x="275" y="66" font-size="12" font-weight="700" text-anchor="middle" fill="#8a3b00">pentan-1-ol (alcohol)</text><text x="275" y="86" font-size="12" text-anchor="middle" fill="#334155">C₅H₁₁OH</text><text x="280" y="130" font-size="22" text-anchor="middle" fill="#334155">↓</text><text x="360" y="128" font-size="11" text-anchor="start" fill="#64748b">concentrated acid catalyst</text><rect x="120" y="150" width="180" height="54" rx="6" fill="#ebfbee" stroke="#2f9e44"/><text x="210" y="172" font-size="12" font-weight="700" text-anchor="middle" fill="#216e39">pentyl ethanoate (ester)</text><text x="210" y="192" font-size="12" text-anchor="middle" fill="#334155">CH₃COOC₅H₁₁</text><text x="315" y="184" font-size="20" text-anchor="middle" fill="#334155">+</text><rect x="335" y="150" width="120" height="54" rx="6" fill="#e7f5ff" stroke="#1098ad"/><text x="395" y="172" font-size="12" font-weight="700" text-anchor="middle" fill="#0b7285">water</text><text x="395" y="192" font-size="12" text-anchor="middle" fill="#334155">H₂O</text><text x="280" y="240" font-size="11" text-anchor="middle" fill="#64748b">An acid + an alcohol → an ester + water. The small molecule lost is water.</text></svg>',
+      },
+      caption: 'Esters such as pentyl ethanoate form when a carboxylic acid reacts with an alcohol; a molecule of water is released.',
+    },
     tasks: [
       {
         label: 'a',
@@ -164,17 +201,59 @@ export const questions: Question[] = [
     topicCanonical: 'States of Matter & Particle Theory',
     topicGroup: 'States of Matter',
     marks: 10,
-    stem: 'The diagram below shows the state changes for a pure substance which is a solid at 30 °C.',
-    figImages: ['/images/papers/chemistry-may-2016/page-10.png', '/images/papers/chemistry-may-2016/page-11.png'],
+    stem: 'The heating curve below shows the state changes for a pure substance which is a solid at 30 °C. Energy is supplied at a constant rate, so the curve runs A → B → C → D → E. The flat sections (plateaus) are where the substance changes state.',
+    artefact: {
+      component: 'ThermalSim',
+      data: {
+        title: 'Heating curve of a pure substance (stages A–E)',
+        mode: 'heat',
+        substance: 'pure substance',
+        timeUnit: 'min',
+        tempUnit: '°C',
+        startTempC: 30,
+        endTempC: 170,
+        totalTime: 24,
+        yTicksC: [0, 30, 60, 90, 120, 150, 180],
+        // A→B: warming the solid; B→C: melting plateau (80 °C); C→D: warming the
+        // liquid; D→E: boiling plateau (140 °C); beyond E the gas warms further.
+        series: [
+          [0, 30], [2, 55], [4, 80],
+          [4, 80], [6, 80], [8, 80],
+          [8, 80], [10, 105], [12, 130], [13, 140],
+          [13, 140], [16, 140], [19, 140],
+          [19, 140], [21.5, 155], [24, 170],
+        ],
+        markers: [
+          { id: 'A', time: 0, tempC: 30, state: 'solid' },
+          { id: 'B', time: 4, tempC: 80, state: 'melting begins' },
+          { id: 'C', time: 8, tempC: 80, state: 'all liquid' },
+          { id: 'D', time: 13, tempC: 140, state: 'boiling begins' },
+          { id: 'E', time: 19, tempC: 140, state: 'all gas' },
+        ],
+      },
+      caption: 'A→B warms the solid; the plateau B→C is melting at 80 °C; C→D warms the liquid; the plateau D→E is boiling at 140 °C; beyond E the gas keeps warming. A plateau (flat) means a change of state; a slope means heating with no change of state.',
+    },
     tasks: [
       {
         label: 'a',
-        text: '**Label** the three states of matter shown in the diagrams.',
+        text: '**Label** the three states of matter shown in the particle diagrams below.',
         marks: 1,
         ph: 'Select solid, liquid, or gas for each container diagram',
         widget: 'inline_dropdown_select',
         widgetItems: ['Container 1 (left)', 'Container 2 (middle)', 'Container 3 (right)'],
         widgetOptions: ['Solid', 'Liquid', 'Gas'],
+        artefact: {
+          component: 'ParticleSim',
+          data: {
+            title: 'Three states of matter — particle model',
+            mode: 'states',
+            substance: 'pure substance',
+            containers: ['Container 1 (left)', 'Container 2 (middle)', 'Container 3 (right)'],
+            options: ['Solid', 'Liquid', 'Gas'],
+            particleCount: 36,
+          },
+          caption: 'Each sealed container shows the particles of the same pure substance in a different state. Compare their arrangement and motion to label each as solid, liquid or gas.',
+        },
       },
       {
         label: 'b',
@@ -205,12 +284,30 @@ export const questions: Question[] = [
     topicGroup: 'States of Matter',
     marks: 27,
     stem: 'Water is a compound made from two different elements bonded together.\n\nThe boiling temperature of water at standard pressure is 100 °C. The table shows the boiling temperature of water measured at different IB schools. IB schools are located at different heights above sea level. The height above sea level is known as altitude and it can be measured in metres.',
-    figImages: [
-      '/images/papers/chemistry-may-2016/page-11.png',
-      '/images/papers/chemistry-may-2016/page-12.png',
-      '/images/papers/chemistry-may-2016/page-13.png',
-      '/images/papers/chemistry-may-2016/page-14.png',
-    ],
+    artefact: {
+      component: 'GraphSim',
+      data: {
+        title: 'Boiling temperature of water against altitude',
+        mode: 'readoff',
+        xAxis: { label: 'Altitude / m', min: 0, max: 4000, tick: 1000 },
+        yAxis: { label: 'Boiling temperature of water / °C', min: 95, max: 100, tick: 1 },
+        points: [
+          [1, 100.0],
+          [210, 99.8],
+          [1400, 98.6],
+          [2625, 97.2],
+          [3640, 96.1],
+          [4000, 95.7],
+        ],
+        dataMaxX: 4000,
+        readouts: [
+          { x: 605, note: 'Canberra', expected: '≈ 99.4 °C' },
+          { x: 1138, note: 'Tehran', expected: '≈ 98.8 °C' },
+        ],
+        bestFit: 'Boiling temperature falls by about 1 °C for every ~950 m of altitude.',
+      },
+      caption: 'Drag the crosshair to read the boiling temperature at any altitude — use it to find the missing values in the table.',
+    },
     tasks: [
       {
         label: 'a',
@@ -229,6 +326,24 @@ export const questions: Question[] = [
         text: 'Using the graph, **write down** values to complete the table.',
         marks: 3,
         ph: 'Read missing altitude or temperature values for each city from the graph',
+        artefact: {
+          component: 'DataTable',
+          data: {
+            headers: ['Location', 'Altitude / m', 'Boiling temperature of water / °C'],
+            rows: [
+              ['Bangkok', '1', '100.0'],
+              ['Belgrade', '?', '99.8'],
+              ['Bogota', '2625', '97.2'],
+              ['Canberra', '605', '?'],
+              ['Kathmandu', '1400', '98.6'],
+              ['La Paz', '3640', '96.1'],
+              ['Nairobi', '?', '98.0'],
+              ['New Delhi', '210', '99.8'],
+              ['Tehran', '1138', '?'],
+            ],
+          },
+          caption: 'Use the boiling-temperature-against-altitude graph above to read off the missing (?) values.',
+        },
       },
       {
         label: 'd',
@@ -259,11 +374,23 @@ export const questions: Question[] = [
     topicGroup: 'Chemical Reactions',
     marks: 14,
     stem: 'Use the simulation to collect samples of gas from each of the required parts of the atmosphere in the table below. Record the percentage of oxygen obtained at each level.',
-    figImages: [
-      '/images/papers/chemistry-may-2016/page-15.png',
-      '/images/papers/chemistry-may-2016/page-16.png',
-      '/images/papers/chemistry-may-2016/page-17.png',
-    ],
+    artefact: {
+      component: 'DataTable',
+      data: {
+        headers: ['Altitude / km', 'Oxygen / %'],
+        rows: [
+          ['10', '21.0'],
+          ['50', '18.0'],
+          ['120', '16.0'],
+          ['200', '15.5'],
+          ['300', '15.0'],
+          ['400', '15.0'],
+          ['500', '18.0'],
+          ['600', '15.0'],
+        ],
+      },
+      caption: 'Oxygen percentage collected at each altitude by the atmosphere-sampling simulation. Plot these results — notice that one reading does not fit the trend.',
+    },
     tasks: [
       {
         label: 'a',
@@ -312,7 +439,22 @@ export const questions: Question[] = [
     topicGroup: 'Chemical Reactions',
     marks: 5,
     stem: 'In July 2014, NASA announced that they will be sending a new rover to Mars. One of the experiments is called MOXIE (Mars OXygen In-situ resource utilization Experiment). MOXIE will convert the Martian atmosphere, which is approximately 96% carbon dioxide, into oxygen.\n\nThe word equation for the chemical reaction that will take place is:\n\ncarbon dioxide → oxygen + carbon monoxide',
-    figImages: ['/images/papers/chemistry-may-2016/page-17.png', '/images/papers/chemistry-may-2016/page-18.png'],
+    artefact: {
+      component: 'PieChart',
+      data: {
+        kind: 'doughnut',
+        title: 'Composition of the Martian atmosphere',
+        unit: '%',
+        series: [
+          { name: 'Carbon dioxide (CO₂)', value: 96.0 },
+          { name: 'Nitrogen (N₂)', value: 1.9 },
+          { name: 'Argon (Ar)', value: 1.9 },
+          { name: 'Oxygen (O₂)', value: 0.15 },
+          { name: 'Other gases', value: 0.05 },
+        ],
+      },
+      caption: 'The Martian atmosphere is about 96% carbon dioxide and only ~0.15% oxygen, so astronauts cannot breathe it — MOXIE must make oxygen on Mars.',
+    },
     tasks: [
       {
         label: 'a',
@@ -337,7 +479,20 @@ export const questions: Question[] = [
     topicGroup: 'Atomic Structure & Periodic Table',
     marks: 7,
     stem: 'Common salt, NaCl, is used in cooking but many other salts also have important uses in food. The table shows a list of salts used as food additives, their taste and their other uses.\n\n| Salt | Taste | Other uses |\n|---|---|---|\n| Ammonium chloride | Salty and quite bitter | In licorice and in baking to give cookies a very crisp texture |\n| Calcium chloride | Salty and bitter | Maintains crispness and firmness of fruits and vegetables |\n| Magnesium chloride | Salty and bitter | In tofu as a thickener |\n| Potassium chloride | Salty and slightly bitter | A substitute for sodium chloride |\n| Sodium chloride | Salty | A flavouring and a preservative |\n\nUsing information from the table, a student hypothesized: "The salty taste of salts is caused by the presence of a group one ion."',
-    figImages: ['/images/papers/chemistry-may-2016/page-19.png', '/images/papers/chemistry-may-2016/page-20.png'],
+    artefact: {
+      component: 'DataTable',
+      data: {
+        headers: ['Stable isotope of calcium', 'Mass number', 'Protons', 'Neutrons (= mass number − 20)'],
+        rows: [
+          ['⁴⁰Ca', '40', '20', '20'],
+          ['⁴²Ca', '42', '20', '22'],
+          ['⁴³Ca', '43', '20', '23'],
+          ['⁴⁴Ca', '44', '20', '24'],
+          ['⁴⁶Ca', '46', '20', '26'],
+        ],
+      },
+      caption: 'The five stable isotopes of calcium (atomic number 20). Each has 20 protons; the neutron number is the mass number minus 20. Use these neutron counts to find the average.',
+    },
     tasks: [
       {
         label: 'a',
@@ -368,7 +523,13 @@ export const questions: Question[] = [
     topicGroup: 'Environmental Chemistry',
     marks: 9,
     stem: 'Sodium hydrogen carbonate is used in cooking as a raising agent. The thermal decomposition of baking soda is an endothermic reaction:\n\n2NaHCO₃(s) + heat → Na₂CO₃(s) + H₂O(l) + CO₂(g)\n\nThe thermal decomposition of NaHCO₃ is used in some fire extinguishers. These extinguishers are very effective in controlling oil, grease and electrical fires.\n\nSodium hydrogen carbonate is an amphoteric salt which means that it can react with both strong acids and strong bases. Many bad odours are caused by acidic substances — for instance sour milk and rotting fish.\n\nThe hydrogen carbonate ion is in equilibrium with water as shown in the following equation:\n\nHCO₃⁻(aq) + H₂O(l) ⇌ H₂CO₃(aq) + OH⁻(aq)',
-    figImages: ['/images/papers/chemistry-may-2016/page-21.png', '/images/papers/chemistry-may-2016/page-22.png'],
+    artefact: {
+      component: 'GenericSVG',
+      data: {
+        svg: '<svg viewBox="0 0 560 240" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><rect width="560" height="240" fill="#ffffff"/><text x="280" y="24" font-size="14" font-weight="700" text-anchor="middle" fill="#1f2d3a">Adding acid shifts the equilibrium</text><rect x="20" y="60" width="230" height="60" rx="8" fill="#eef6fb" stroke="#1971c2"/><text x="135" y="86" font-size="13" font-weight="700" text-anchor="middle" fill="#0b3d5c">HCO₃⁻(aq) + H₂O(l)</text><text x="135" y="106" font-size="11" text-anchor="middle" fill="#475569">left side</text><text x="280" y="86" font-size="22" font-weight="700" text-anchor="middle" fill="#2f9e44">⇌</text><rect x="310" y="60" width="230" height="60" rx="8" fill="#ebfbee" stroke="#2f9e44"/><text x="425" y="86" font-size="13" font-weight="700" text-anchor="middle" fill="#216e39">H₂CO₃(aq) + OH⁻(aq)</text><text x="425" y="106" font-size="11" text-anchor="middle" fill="#475569">right side</text><path d="M240,150 L330,150" stroke="#e8590c" stroke-width="3" marker-end="url(#arr)"/><defs><marker id="arr" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#e8590c"/></marker></defs><text x="285" y="142" font-size="11" font-weight="700" text-anchor="middle" fill="#e8590c">shifts right</text><rect x="20" y="175" width="520" height="48" rx="8" fill="#fff4e6" stroke="#e8590c"/><text x="280" y="195" font-size="11" text-anchor="middle" fill="#8a3b00">Added H⁺ removes OH⁻ (H⁺ + OH⁻ → H₂O). By Le Chatelier the system shifts right to replace OH⁻,</text><text x="280" y="212" font-size="11" text-anchor="middle" fill="#8a3b00">so more H₂CO₃ forms and the amount of HCO₃⁻ decreases.</text></svg>',
+      },
+      caption: 'When acid (H⁺) is added, it reacts with OH⁻. By Le Chatelier\'s principle the equilibrium shifts to the right, using up HCO₃⁻ and forming more H₂CO₃.',
+    },
     tasks: [
       {
         label: 'a',
@@ -399,11 +560,21 @@ export const questions: Question[] = [
     topicGroup: 'Environmental Chemistry',
     marks: 16,
     stem: 'The dessert known as JELL-O® gelatin dessert was created in the 19th century in the United States. When JELL-O® is manufactured, gelatine is dissolved in hot water with sugar, citric acid, artificial flavour and colouring. Once cooled below 15 °C the JELL-O® slowly forms a gelatine network which holds a liquid such as water or juice.\n\nIngredients (% mass): Powdered gelatine 7.8%, Sugar 96.8%, Citric acid 7.1%, Artificial stabilizer 0.8%, Artificial colourings 0.7%, Artificial flavouring 0.8%',
-    figImages: [
-      '/images/papers/chemistry-may-2016/page-23.png',
-      '/images/papers/chemistry-may-2016/page-24.png',
-      '/images/papers/chemistry-may-2016/page-25.png',
-    ],
+    artefact: {
+      component: 'DataTable',
+      data: {
+        headers: ['Ingredient', '% mass', 'Job in the product'],
+        rows: [
+          ['Powdered gelatine', '7.8', 'forms the set network / gel'],
+          ['Sugar', '96.8', 'sweet taste'],
+          ['Citric acid', '7.1', 'sour / tart taste'],
+          ['Artificial stabilizer', '0.8', 'keeps the mixture stable'],
+          ['Artificial colourings', '0.7', 'gives the colour'],
+          ['Artificial flavouring', '0.8', 'gives the flavour (e.g. lemon, orange)'],
+        ],
+      },
+      caption: 'The ingredients of JELL-O® and what each one does. Use it to decide which ingredients are needed to make a lemon-flavoured drink that tastes of oranges.',
+    },
     tasks: [
       {
         label: 'a',

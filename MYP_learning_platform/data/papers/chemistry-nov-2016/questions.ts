@@ -20,8 +20,23 @@ export const questions: Question[] = [
     topicCanonical: 'Organic Chemistry & Fuels',
     topicGroup: 'Organic Chemistry',
     marks: 11,
-    stem: 'Many countries use butane (C₄H₁₀) or ethanol (C₂H₅OH) as cooking fuels. A student compared the two fuels by burning each in a spirit burner and measuring the heat energy transferred to a beaker of water. The data collected by the student are shown in the figure.',
-    figImages: ['/images/papers/chemistry-nov-2016/page-02.png'],
+    stem: 'Many countries use butane (C₄H₁₀) or ethanol (C₂H₅OH) as cooking fuels. A student compared the two fuels by burning each in a spirit burner and measuring the heat energy transferred to a beaker of water. The energy released on combustion can be calculated using q = mcΔT, where q is the energy released, m is the mass of water heated and ΔT is the temperature change. The data collected by the student are shown in the table.',
+    artefact: {
+      component: 'DataTable',
+      data: {
+        headers: ['Quantity', 'Butane (C₄H₁₀)', 'Ethanol (C₂H₅OH)'],
+        rows: [
+          ['Molar mass / g mol⁻¹', '58', '46'],
+          ['Energy released per mole / kJ mol⁻¹', '2877', '1367'],
+          ['Energy released per gram / kJ g⁻¹', '49.6', '29.7'],
+          ['Mass of water heated / g', '400', '400'],
+          ['Starting water temperature / °C', '10.0', '10.0'],
+          ['Final water temperature / °C', '96.0', '96.0'],
+          ['Specific heat capacity of water / J g⁻¹ °C⁻¹', '4.19', '4.19'],
+        ],
+      },
+      caption: 'Combustion data for the two cooking fuels. Use q = mcΔT and these values in the calculations.',
+    },
     tasks: [
       {
         label: 'a',
@@ -37,9 +52,9 @@ export const questions: Question[] = [
       },
       {
         label: 'c',
-        text: 'The student calculated that 30.0 kJ of heat energy was transferred to the water when ethanol was burned. The specific heat capacity of water is 4.19 J g⁻¹°C⁻¹. Using the data in the figure, **calculate** the mass of ethanol burned to produce this energy. Give your answer to three significant figures and state the unit.',
+        text: 'When the ethanol was burned, the water heated from 10.0°C to 96.0°C. The specific heat capacity of water is 4.19 J g⁻¹°C⁻¹. Using q = mcΔT and the data in the figure, **calculate** the heat energy transferred to the water and then the mass of ethanol burned to produce this energy. Give your answer to three significant figures and state the unit.',
         marks: 5,
-        ph: 'mass = energy ÷ energy per gram; show q=mcΔT working; answer ≈ 4.92 g',
+        ph: 'q = mcΔT = 400 × 4.19 × 86.0 = 144 kJ; mass = q ÷ energy per gram (29.7 kJ g⁻¹) ≈ 4.85 g (accept 4.8–4.9 g)',
       },
       {
         label: 'd',
@@ -58,10 +73,28 @@ export const questions: Question[] = [
     topicGroup: 'Bonding & Structure',
     marks: 7,
     stem: 'Mountain bike frames can be manufactured from aluminium (Al), carbon fibre (C) or scandium (Sc). The data cards below give information about the properties of each element.',
-    figImages: [
-      '/images/papers/chemistry-nov-2016/page-03.png',
-      '/images/papers/chemistry-nov-2016/page-04.png',
-    ],
+    artefact: {
+      component: 'DataTable',
+      data: {
+        headers: ['Property', 'Aluminium (Al)', 'Carbon (C)', 'Scandium (Sc)'],
+        rows: [
+          ['Atomic number', '13', '6', '21'],
+          ['Atomic mass', '27', '12', '45'],
+          ['Melting point / °C', '660', '3500', '1539'],
+          ['Protons / electrons', '13', '6', '21'],
+          ['Neutrons', '14', '6', '24'],
+          ['Type of bonding', 'metallic', 'covalent', 'metallic'],
+          ['Density / g cm⁻³', '2.70 (low)', '2.62 (low)', '2.99 (low)'],
+          [
+            'Characteristics',
+            'silvery-white, malleable, ductile, soft, corrosion resistant, good conductor',
+            'black, high strength-to-weight ratio, high heat tolerance, does not react easily, poor conductor',
+            'silvery-white, burns easily in air and with water, good conductor',
+          ],
+        ],
+      },
+      caption: 'Data cards for the three candidate elements for a bicycle frame.',
+    },
     tasks: [
       {
         label: 'a',
@@ -80,7 +113,30 @@ export const questions: Question[] = [
         text: 'Using the graph, **state** the effect of adding increasing amounts of scandium on the yield strength of the aluminium–scandium alloy.',
         marks: 2,
         ph: 'Adding Sc increases yield strength; state direction clearly',
-        figImages: ['/images/papers/chemistry-nov-2016/page-06.png'],
+        artefact: {
+          component: 'LineGraph',
+          data: {
+            title: 'Yield strength of aluminium alloys with added scandium',
+            xLabel: 'Scandium added',
+            xUnit: '% by mass',
+            yLabel: 'Yield strength',
+            yUnit: 'MPa',
+            xMin: 0,
+            xMax: 0.4,
+            yMin: 0,
+            yMax: 700,
+            xStep: 0.1,
+            yStep: 100,
+            dataPoints: [
+              { x: 0, y: 200 },
+              { x: 0.1, y: 360 },
+              { x: 0.2, y: 480 },
+              { x: 0.3, y: 560 },
+              { x: 0.4, y: 630 },
+            ],
+          },
+          caption: 'Yield strength of the aluminium alloy rises as more scandium is added (alloys with no scandium sit lower, around 60–580 MPa).',
+        },
       },
     ],
   },
@@ -92,8 +148,21 @@ export const questions: Question[] = [
     topicCanonical: 'Periodic Table & Atomic Structure',
     topicGroup: 'Atomic Structure & Periodic Table',
     marks: 6,
-    stem: 'Firework colours are produced when metal salts are heated and the metal ions emit characteristic colours of light. The table shows the colours produced by several salts:\n\n| Metal salt | Colour produced |\n|---|---|\n| Copper(II) chloride | Blue-green |\n| Calcium | Orange-red |\n| Iron | Red-brown |\n| Strontium | Bright red |\n| Barium | Green |',
-    figImages: ['/images/papers/chemistry-nov-2016/page-07.png'],
+    stem: 'Firework colours are produced when metal salts are heated and the metal ions emit characteristic colours of light. The table shows the colours produced by several salts.',
+    artefact: {
+      component: 'DataTable',
+      data: {
+        headers: ['Metal salt', 'Colour produced'],
+        rows: [
+          ['Copper(II) chloride', 'Blue-green'],
+          ['Calcium chloride', 'Orange-red'],
+          ['Iron chloride', 'Red-brown'],
+          ['Strontium chloride', 'Bright red'],
+          ['Barium chloride', 'Green'],
+        ],
+      },
+      caption: 'Flame colours produced when each metal salt is heated in a firework.',
+    },
     tasks: [
       {
         label: 'a',
@@ -136,7 +205,19 @@ export const questions: Question[] = [
     topicGroup: 'States of Matter',
     marks: 9,
     stem: 'Balloons filled with helium gas and balloons filled with air are used at celebrations. Hot air balloons are used for leisure flights. The behaviour of gases can be explained using kinetic particle theory.',
-    figImages: ['/images/papers/chemistry-nov-2016/page-08.png'],
+    artefact: {
+      component: 'ParticleSim',
+      data: {
+        title: 'Kinetic particle theory of gases',
+        mode: 'diffusion',
+        substance: 'gas particles',
+        containers: ['Helium (light particles)', 'Air — N₂ and O₂ (heavier particles)'],
+        heatSlider: true,
+        before: 'At the same temperature the lighter helium particles move faster, so they spread out and escape through the balloon wall more quickly.',
+        after: 'Heating the gas gives the particles more kinetic energy; they move faster and spread further apart, so the same mass of gas takes up a larger volume and becomes less dense.',
+      },
+      caption: 'Press play and raise the temperature: particles gain kinetic energy and move faster. Lighter particles (helium) move faster than heavier air particles at the same temperature.',
+    },
     tasks: [
       {
         label: 'a',
@@ -166,11 +247,22 @@ export const questions: Question[] = [
     topicCanonical: 'Acids, Bases & Salts',
     topicGroup: 'Chemical Reactions',
     marks: 23,
-    stem: 'A company manufactures battery cases and needs to determine which metal is most resistant to attack by sulfuric acid (H₂SO₄). Six metals are available for testing: iron, zinc, lead, copper, tin and chromium.',
-    figImages: [
-      '/images/papers/chemistry-nov-2016/page-12.png',
-      '/images/papers/chemistry-nov-2016/page-13.png',
-    ],
+    stem: 'A company manufactures battery cases and needs to determine which metal is most resistant to attack by sulfuric acid (H₂SO₄). Six metals are available for testing: iron, zinc, lead, copper, tin and chromium. The table lists the six candidate metals and their relative position in the reactivity series — the more reactive a metal is, the faster it is attacked by acid.',
+    artefact: {
+      component: 'DataTable',
+      data: {
+        headers: ['Metal', 'Symbol', 'Relative position in reactivity series', 'Expected reaction with dilute H₂SO₄'],
+        rows: [
+          ['Zinc', 'Zn', 'most reactive of the six', 'reacts readily, steady stream of gas'],
+          ['Chromium', 'Cr', 'reactive (protective oxide layer)', 'reacts slowly once oxide layer removed'],
+          ['Iron', 'Fe', 'moderately reactive', 'reacts steadily, gas bubbles'],
+          ['Tin', 'Sn', 'low reactivity', 'reacts very slowly'],
+          ['Lead', 'Pb', 'low reactivity', 'reacts very slowly / surface coating forms'],
+          ['Copper', 'Cu', 'least reactive of the six', 'no observable reaction'],
+        ],
+      },
+      caption: 'The six candidate metals for the battery case. Use the reactivity-series positions to plan and justify your investigation and hypothesis.',
+    },
     tasks: [
       {
         label: 'a',
@@ -194,8 +286,21 @@ export const questions: Question[] = [
     topicCanonical: 'Electrochemistry & Redox',
     topicGroup: 'Electrochemistry',
     marks: 3,
-    stem: 'Alessandro Volta constructed the first electric battery in 1799. It consisted of pairs of zinc and copper discs separated by pieces of cardboard soaked in a saltwater electrolyte.',
-    figImages: ['/images/papers/chemistry-nov-2016/page-16.png'],
+    stem: 'Alessandro Volta constructed the first electric battery in 1799. It consisted of pairs of zinc and copper discs separated by pieces of cardboard soaked in a saltwater electrolyte. A single zinc–copper cell behaves like the simulation below: ions move through the electrolyte and electrons flow through the external wire.',
+    artefact: {
+      component: 'EchemCellSim',
+      data: {
+        title: 'A single zinc–copper cell (a "pile" element)',
+        fixedAnode: 'Zinc',
+        cathodeChoices: ['Copper', 'Zinc'],
+        voltages: {
+          'Zn-Cu': 1.1,
+        },
+        units: 'V',
+        voltmeter: true,
+      },
+      caption: 'Charged ions carry the current through the saltwater electrolyte; electrons flow from the zinc anode to the copper cathode through the wire. If the electrolyte is missing, the ions cannot move and the cell stops working.',
+    },
     tasks: [
       {
         label: 'a',
@@ -220,10 +325,23 @@ export const questions: Question[] = [
     topicGroup: 'Electrochemistry',
     marks: 17,
     stem: 'A student used a computer simulation to investigate electrochemical cells. In the simulation, magnesium (Mg) was always used as the anode (negative electrode) and was kept constant. Different metals were placed in the positive electrode (cathode) half-cell. The student recorded the cell potential (voltage) produced for each combination.',
-    figImages: [
-      '/images/papers/chemistry-nov-2016/page-17.png',
-      '/images/papers/chemistry-nov-2016/page-18.png',
-    ],
+    artefact: {
+      component: 'EchemCellSim',
+      data: {
+        title: 'Electrochemical cell simulation (magnesium anode kept constant)',
+        fixedAnode: 'Magnesium',
+        cathodeChoices: ['Copper', 'Lead', 'Magnesium', 'Silver', 'Zinc'],
+        voltages: {
+          'Mg-Zn': 1.607,
+          'Mg-Pb': 2.227,
+          'Mg-Cu': 2.707,
+          'Mg-Ag': 3.155,
+        },
+        units: 'V',
+        voltmeter: true,
+      },
+      caption: 'Choose the metal in the cathode half-cell to read the cell potential. Magnesium is always the anode. The bigger the difference in reactivity between the two metals, the larger the cell voltage.',
+    },
     tasks: [
       {
         label: 'a',
@@ -279,8 +397,21 @@ export const questions: Question[] = [
     topicCanonical: 'Electrochemistry & Redox',
     topicGroup: 'Electrochemistry',
     marks: 9,
-    stem: 'A student investigated the effect of changing the concentration of ion solutions on the cell potential of a copper–silver electrochemical cell. The cell consists of a copper electrode in copper sulfate solution and a silver electrode in silver nitrate solution.',
-    figImages: ['/images/papers/chemistry-nov-2016/page-24.png'],
+    stem: 'A student investigated the effect of changing the concentration of ion solutions on the cell potential of a copper–silver electrochemical cell. The cell consists of a copper electrode in copper sulfate solution and a silver electrode in silver nitrate solution. The half-cell reactions are shown below.',
+    artefact: {
+      component: 'EchemCellSim',
+      data: {
+        title: 'Copper–silver electrochemical cell',
+        fixedAnode: 'Copper',
+        cathodeChoices: ['Silver', 'Copper'],
+        voltages: {
+          'Cu-Ag': 0.46,
+        },
+        units: 'V',
+        voltmeter: true,
+      },
+      caption: 'Copper is the anode (oxidised: Cu(s) → Cu²⁺(aq) + 2e⁻) and silver is the cathode (reduced: Ag⁺(aq) + e⁻ → Ag(s)). Diluting the copper sulfate raises the cell potential; diluting the silver nitrate lowers it.',
+    },
     tasks: [
       {
         label: 'a',
@@ -316,8 +447,31 @@ export const questions: Question[] = [
     topicCanonical: 'Electrochemistry & Redox',
     topicGroup: 'Electrochemistry',
     marks: 6,
-    stem: 'A battery manufacturer recommends storing lithium-ion batteries at low temperatures to maintain their charge. A student designed an experiment to test this recommendation by storing fully charged batteries at different temperatures and measuring the percentage charge remaining after six months.',
-    figImages: ['/images/papers/chemistry-nov-2016/page-27.png'],
+    stem: 'A battery manufacturer recommends storing lithium-ion batteries at low temperatures to maintain their charge. A student designed an experiment to test this recommendation by storing fully charged batteries at different temperatures and measuring the percentage charge remaining after six months. The results are shown in the scatter graph.',
+    artefact: {
+      component: 'LineGraph',
+      data: {
+        title: 'Percentage charge remaining after six months vs storage temperature',
+        xLabel: 'Temperature',
+        xUnit: '°C',
+        yLabel: 'Percentage charge',
+        yUnit: '%',
+        xMin: 0,
+        xMax: 80,
+        yMin: 0,
+        yMax: 100,
+        xStep: 15,
+        yStep: 20,
+        dataPoints: [
+          { x: 0, y: 97 },
+          { x: 15, y: 94 },
+          { x: 30, y: 91 },
+          { x: 45, y: 83 },
+          { x: 60, y: 61 },
+        ],
+      },
+      caption: 'Charge remaining falls as storage temperature rises. The measured data run from 0°C to 60°C — read off 50°C (interpolation) and estimate 80°C (extrapolation beyond the data).',
+    },
     tasks: [
       {
         label: 'a',
@@ -361,11 +515,39 @@ export const questions: Question[] = [
     topicCanonical: 'Environmental Impact & Sustainability',
     topicGroup: 'Environmental Chemistry',
     marks: 8,
-    stem: 'The 2016 Summer Olympic Games were held in Rio de Janeiro, Brazil. Aquatic sports events took place in Guanabara Bay, which suffers from water pollution. Iron ore mining operations in the surrounding region discharge iron oxide particles into rivers that flow into the bay. The map shows which countries have hosted the Summer Olympic Games.',
-    figImages: [
-      '/images/papers/chemistry-nov-2016/page-29.png',
-      '/images/papers/chemistry-nov-2016/page-30.png',
-    ],
+    stem: 'The 2016 Summer Olympic Games were held in Rio de Janeiro, Brazil. Aquatic sports events took place in Guanabara Bay, which suffers from water pollution. Iron ore mining operations in the surrounding region discharge iron oxide particles into rivers that flow into the bay. The map highlights the countries that have hosted the Summer Olympic Games.',
+    artefact: {
+      component: 'ChoroplethWorld',
+      data: {
+        mode: 'highlight',
+        title: 'Countries that have hosted the Summer Olympic Games',
+        source: 'International Olympic Committee',
+        highlight: [
+          'United States of America',
+          'United Kingdom',
+          'Germany',
+          'Australia',
+          'France',
+          'Greece',
+          'Sweden',
+          'Belgium',
+          'Netherlands',
+          'Finland',
+          'Italy',
+          'Japan',
+          'Mexico',
+          'Canada',
+          'Russia',
+          'South Korea',
+          'Spain',
+          'China',
+          'Brazil',
+        ],
+        highlightLabel: 'Has hosted the Summer Olympics',
+        baseLabel: 'Has not yet hosted',
+        caption: 'Host nations are concentrated in the northern hemisphere and in wealthier, developed economies. Hover a country to read its status; click the key to spotlight the host nations.',
+      },
+    },
     tasks: [
       {
         label: 'a',
@@ -395,11 +577,23 @@ export const questions: Question[] = [
     topicCanonical: 'Environmental Impact & Sustainability',
     topicGroup: 'Environmental Chemistry',
     marks: 17,
-    stem: 'The Carajás mine in the Amazon rainforest, Brazil, is the world\'s largest open-pit iron ore mine. It produces over 100 million tonnes of iron ore per year. The images and data show the industrial processes and the impacts of the mine on the surrounding environment and local communities.',
-    figImages: [
-      '/images/papers/chemistry-nov-2016/page-33.png',
-      '/images/papers/chemistry-nov-2016/page-34.png',
-    ],
+    stem: 'The Carajás mine in the Amazon rainforest, Brazil, is the world\'s largest open-pit iron ore mine. Terraced layers of red earth reveal the ore, which is removed from the surface one layer at a time. Open-pit mining operations use heavy bulldozers to break the rocky soil and trucks to carry the ore away, producing a lot of dust which causes pollution. The data below summarise the industrial processes and the impacts of the mine on the surrounding environment and local communities.',
+    artefact: {
+      component: 'DataTable',
+      data: {
+        headers: ['Feature of the Carajás mine', 'Value / description'],
+        rows: [
+          ['Iron ore mined in 2007', '296 million metric tonnes'],
+          ['Estimated iron ore reserve', 'about 18 billion tonnes'],
+          ['Other metals present', 'gold, manganese, copper and nickel'],
+          ['Mining method', 'open-pit; terraced layers removed one at a time'],
+          ['Equipment used', 'heavy bulldozers and trucks'],
+          ['Main pollutant from operations', 'dust raised by digging and transport'],
+          ['Location', 'remote Amazon rainforest, surrounded by untouched forest'],
+        ],
+      },
+      caption: 'Production figures and impacts of the open-pit iron ore mine. Use these data to support your evaluation.',
+    },
     tasks: [
       {
         label: '',
@@ -417,8 +611,32 @@ export const questions: Question[] = [
     topicCanonical: 'Environmental Impact & Sustainability',
     topicGroup: 'Environmental Chemistry',
     marks: 4,
-    stem: 'Steel is produced from iron ore by smelting with coke in a blast furnace. The production of steel has significant environmental consequences. The graphs show data about steel recycling rates and associated environmental impacts.',
-    figImages: ['/images/papers/chemistry-nov-2016/page-35.png'],
+    stem: 'Steel is produced from iron ore by smelting with coke in a blast furnace. The production of steel has significant environmental consequences. Over recent decades the steel industry has worked to use less energy and fewer raw materials. The graph shows how the energy used in steelmaking has fallen since 1975 (North America, Japan and Europe), and the table also gives the falling mass of raw materials needed to produce 100 kg of steel.',
+    artefact: {
+      component: 'LineGraph',
+      data: {
+        title: 'Energy used in steelmaking compared to 1975',
+        xLabel: 'Year',
+        yLabel: 'Energy used in steelmaking',
+        yUnit: '% of 1975 value',
+        xMin: 1975,
+        xMax: 2005,
+        yMin: 0,
+        yMax: 100,
+        xStep: 5,
+        yStep: 20,
+        dataPoints: [
+          { x: 1975, y: 100 },
+          { x: 1980, y: 78 },
+          { x: 1985, y: 66 },
+          { x: 1990, y: 61 },
+          { x: 1995, y: 62 },
+          { x: 2000, y: 60 },
+          { x: 2005, y: 55 },
+        ],
+      },
+      caption: 'Energy used per tonne of steel has fallen to about 55% of its 1975 value. Over the same period the raw material needed per 100 kg of steel fell from about 144 kg (1975) to about 115 kg (2005) — both trends show steelmaking has become more sustainable.',
+    },
     tasks: [
       {
         label: '',

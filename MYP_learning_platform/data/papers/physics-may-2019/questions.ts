@@ -1,7 +1,5 @@
 import type { Question } from '@/lib/types'
 
-const P = '/images/papers/physics-may-2019/'
-
 export const paperMeta = {
   id: 'physics-may-2019',
   subject: 'Physics',
@@ -22,7 +20,13 @@ export const questions: Question[] = [
     topicCanonical: 'Heat Transfer',
     topicGroup: 'Thermal Physics',
     stem: 'Heat and temperature are different quantities associated with the study of thermal physics. Heat transfer takes place through three processes: conduction, convection and radiation.',
-    figImages: [`${P}q1a-heattransfer.png`],
+    artefact: {
+      component: 'GenericSVG',
+      data: {
+        svg: '<svg viewBox="0 0 620 320" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><rect width="620" height="320" fill="#ffffff"/><text x="310" y="24" font-size="14" font-weight="700" text-anchor="middle" fill="#1f2d3a">Heat transfer from a campfire</text><g><ellipse cx="310" cy="290" rx="70" ry="14" fill="#6b4a2b" opacity="0.4"/><rect x="262" y="278" width="96" height="12" rx="3" fill="#7a5230"/><rect x="278" y="270" width="64" height="12" rx="3" fill="#915f34" transform="rotate(18 310 276)"/><path d="M310,278 C288,250 300,236 296,212 C320,232 332,250 326,278 Z" fill="#e8772e"/><path d="M310,278 C300,256 306,244 304,224 C318,242 322,256 320,278 Z" fill="#f5b942"/><path d="M310,272 C304,258 308,250 307,238 C315,250 316,260 315,272 Z" fill="#fde68a"/></g><g stroke="#c0392b" stroke-width="3" stroke-linecap="round"><line x1="250" y1="250" x2="170" y2="230"/><line x1="250" y1="262" x2="170" y2="262"/><line x1="250" y1="274" x2="170" y2="294"/></g><text x="120" y="246" font-size="12" font-weight="700" fill="#c0392b" text-anchor="middle">RADIATION</text><text x="120" y="262" font-size="10" fill="#7a3d12" text-anchor="middle">hands beside</text><text x="120" y="276" font-size="10" fill="#7a3d12" text-anchor="middle">the fire</text><g stroke="#e8590c" stroke-width="2.5" stroke-linecap="round" fill="none"><path d="M340,250 q8,-22 0,-44 q-8,-22 0,-44" marker-end="url(#up1)"/><path d="M364,254 q8,-22 0,-44 q-8,-22 0,-44" marker-end="url(#up1)"/></g><defs><marker id="up1" markerWidth="9" markerHeight="9" refX="3" refY="6" orient="auto"><path d="M0,6 L3,0 L6,6 Z" fill="#e8590c"/></marker></defs><rect x="328" y="116" width="64" height="26" rx="8" fill="#f1c8a6" stroke="#c98a5a"/><text x="455" y="150" font-size="12" font-weight="700" fill="#e8590c" text-anchor="middle">CONVECTION</text><text x="455" y="166" font-size="10" fill="#7a3d12" text-anchor="middle">hands above</text><text x="455" y="180" font-size="10" fill="#7a3d12" text-anchor="middle">the fire</text><rect x="118" y="194" width="150" height="14" rx="7" fill="#9aa7b1" stroke="#5b6b78"/><rect x="92" y="186" width="34" height="30" rx="8" fill="#a87d52" stroke="#7a5230"/><g stroke="#e8590c" stroke-width="2"><line x1="270" y1="201" x2="230" y2="201"/><line x1="230" y1="201" x2="190" y2="201"/></g><circle cx="250" cy="201" r="3" fill="#c0392b"/><circle cx="210" cy="201" r="3" fill="#e8772e"/><text x="150" y="180" font-size="12" font-weight="700" fill="#0b7285" text-anchor="middle">CONDUCTION</text><text x="150" y="234" font-size="10" fill="#0b7285" text-anchor="middle">metal poker heats along its length</text></svg>',
+      },
+      caption: 'Three ways heat travels from a campfire: conduction along a metal poker, convection in the rising hot air, radiation across the gap to nearby hands.',
+    },
     tasks: [
       {
         label: 'a',
@@ -40,7 +44,13 @@ export const questions: Question[] = [
         label: 'c',
         text: 'A student places a mix of ice and water into a Dewar flask and leaves it in the sunshine. Four hours later she returns and finds the ice has not melted. **Explain** why the ice has not melted. In your answer, you should refer to two features of the flask and use your knowledge and understanding of heat transfer.',
         marks: 4,
-        figImages: [`${P}q1c-dewar.png`],
+        artefact: {
+          component: 'GenericSVG',
+          data: {
+            svg: '<svg viewBox="0 0 460 360" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><rect width="460" height="360" fill="#ffffff"/><text x="230" y="24" font-size="14" font-weight="700" text-anchor="middle" fill="#1f2d3a">Dewar (vacuum) flask</text><rect x="170" y="46" width="56" height="26" rx="4" fill="#3a3f44"/><rect x="160" y="70" width="76" height="14" rx="4" fill="#52595f"/><path d="M165,84 L165,300 Q165,330 198,330 Q231,330 231,300 L231,84 Z" fill="#cfd8de" stroke="#5b6b78" stroke-width="2"/><path d="M178,90 L178,296 Q178,318 198,318 Q218,318 218,296 L218,90 Z" fill="#eef4f7" stroke="#9aa7b1" stroke-width="1.5"/><path d="M186,96 L186,292 Q186,308 198,308 Q210,308 210,292 L210,96 Z" fill="#ffffff" stroke="#b9c4cc"/><g fill="#bfe3f2" stroke="#6cb6d6"><rect x="190" y="250" width="11" height="11" rx="2"/><rect x="200" y="244" width="11" height="11" rx="2"/><rect x="193" y="262" width="11" height="11" rx="2"/><rect x="203" y="258" width="9" height="9" rx="2"/><rect x="189" y="240" width="9" height="9" rx="2"/></g><text x="198" y="290" font-size="9" text-anchor="middle" fill="#2c5468">ice + water</text><g stroke="#5b6b78" stroke-width="1"><line x1="226" y1="60" x2="300" y2="60"/><line x1="172" y1="150" x2="120" y2="150"/><line x1="222" y1="180" x2="300" y2="180"/><line x1="218" y1="120" x2="300" y2="120"/><line x1="200" y1="330" x2="200" y2="348"/></g><text x="304" y="64" font-size="11" fill="#1f2d3a">plastic stopper</text><text x="116" y="153" font-size="11" text-anchor="end" fill="#0b7285">vacuum (between walls)</text><text x="304" y="124" font-size="11" fill="#1f2d3a">double-walled metal case</text><text x="304" y="184" font-size="11" fill="#1f2d3a">silvered glass walls</text><text x="200" y="357" font-size="10" text-anchor="middle" fill="#5b6b78">insulated support</text></svg>',
+          },
+          caption: 'A vacuum flask: silvered walls reflect radiation, the vacuum stops conduction and convection, and the stopper blocks the escape of warm air.',
+        },
         ph: 'Feature 1 of flask: ...\nFeature 2 of flask: ...\nExplanation of how these prevent heat transfer: ...',
       },
     ],
@@ -56,12 +66,18 @@ export const questions: Question[] = [
     topicCanonical: 'Atomic Structure & Radioactivity',
     topicGroup: 'Nuclear & Atomic Physics',
     stem: 'For centuries, atoms were believed to be solid spheres with no internal components. However, as experimental procedures improved, it was found that they contain protons, neutrons and electrons.',
+    artefact: {
+      component: 'GenericSVG',
+      data: {
+        svg: '<svg viewBox="0 0 440 300" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><rect width="440" height="300" fill="#0d1b2a"/><text x="220" y="26" font-size="14" font-weight="700" text-anchor="middle" fill="#e6edf3">Structure of a helium atom</text><ellipse cx="220" cy="160" rx="150" ry="100" fill="none" stroke="#5b76d6" stroke-width="1.5" stroke-dasharray="5 4"/><g><circle cx="206" cy="148" r="13" fill="#e8772e" stroke="#a8531a"/><text x="206" y="153" font-size="13" font-weight="700" text-anchor="middle" fill="#fff">+</text><circle cx="234" cy="148" r="13" fill="#e8772e" stroke="#a8531a"/><text x="234" y="153" font-size="13" font-weight="700" text-anchor="middle" fill="#fff">+</text><circle cx="206" cy="174" r="13" fill="#9aa7b1" stroke="#5b6b78"/><text x="206" y="179" font-size="12" font-weight="700" text-anchor="middle" fill="#1f2d3a">0</text><circle cx="234" cy="174" r="13" fill="#9aa7b1" stroke="#5b6b78"/><text x="234" y="179" font-size="12" font-weight="700" text-anchor="middle" fill="#1f2d3a">0</text></g><circle cx="70" cy="160" r="10" fill="#4d96ff" stroke="#2c6ed6"/><text x="70" y="165" font-size="13" font-weight="700" text-anchor="middle" fill="#fff">−</text><circle cx="370" cy="160" r="10" fill="#4d96ff" stroke="#2c6ed6"/><text x="370" y="165" font-size="13" font-weight="700" text-anchor="middle" fill="#fff">−</text><g font-size="11" fill="#cbd5e1"><circle cx="318" cy="262" r="6" fill="#e8772e"/><text x="330" y="266">proton (+)</text><circle cx="318" cy="282" r="6" fill="#9aa7b1"/><text x="330" y="286">neutron (0)</text><circle cx="60" cy="262" r="6" fill="#4d96ff"/><text x="72" y="266">electron (−)</text></g><text x="220" y="118" font-size="10" fill="#5b76d6" text-anchor="middle">electrons orbit the nucleus</text></svg>',
+      },
+      caption: 'A helium atom: a nucleus of 2 protons and 2 neutrons, surrounded by 2 orbiting electrons.',
+    },
     tasks: [
       {
         label: 'a',
         text: 'A helium atom has 2 protons, 2 neutrons and 2 electrons. **Draw** a diagram to show the structure of an atom of helium.',
         marks: 1,
-        figImages: [`${P}q2a-atom.png`],
         ph: 'Describe your diagram: nucleus contains 2 protons and 2 neutrons; 2 electrons orbit/surround the nucleus.',
       },
       {
@@ -82,7 +98,13 @@ export const questions: Question[] = [
         label: 'd',
         text: 'The diagram below shows a negatively charged ink particle and the positively charged paper. **Draw** arrows to represent the forces acting on the ink particle. Use the text tool to label your arrows.',
         marks: 3,
-        figImages: [`${P}q2d-inkparticle.png`],
+        artefact: {
+          component: 'GenericSVG',
+          data: {
+            svg: '<svg viewBox="0 0 460 300" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><rect width="460" height="300" fill="#ffffff"/><text x="230" y="22" font-size="13" font-weight="700" text-anchor="middle" fill="#1f2d3a">Positively charged paper</text><rect x="100" y="34" width="260" height="14" fill="#e6edf3" stroke="#9aa7b1"/><g><circle cx="124" cy="41" r="13" fill="#c0392b"/><text x="124" y="46" font-size="13" font-weight="700" text-anchor="middle" fill="#fff">+</text><circle cx="160" cy="41" r="13" fill="#c0392b"/><text x="160" y="46" font-size="13" font-weight="700" text-anchor="middle" fill="#fff">+</text><circle cx="196" cy="41" r="13" fill="#c0392b"/><text x="196" y="46" font-size="13" font-weight="700" text-anchor="middle" fill="#fff">+</text><circle cx="232" cy="41" r="13" fill="#c0392b"/><text x="232" y="46" font-size="13" font-weight="700" text-anchor="middle" fill="#fff">+</text><circle cx="268" cy="41" r="13" fill="#c0392b"/><text x="268" y="46" font-size="13" font-weight="700" text-anchor="middle" fill="#fff">+</text><circle cx="304" cy="41" r="13" fill="#c0392b"/><text x="304" y="46" font-size="13" font-weight="700" text-anchor="middle" fill="#fff">+</text><circle cx="340" cy="41" r="13" fill="#c0392b"/><text x="340" y="46" font-size="13" font-weight="700" text-anchor="middle" fill="#fff">+</text></g><circle cx="230" cy="160" r="18" fill="#2c6ed6" stroke="#1b4a8a"/><text x="230" y="166" font-size="16" font-weight="700" text-anchor="middle" fill="#fff">−</text><text x="258" y="160" font-size="11" fill="#1b4a8a">negatively charged</text><text x="258" y="174" font-size="11" fill="#1b4a8a">ink particle</text><rect x="90" y="250" width="280" height="34" fill="#b9c4cc" stroke="#5b6b78"/><text x="230" y="271" font-size="11" text-anchor="middle" fill="#37424c">photosensitive surface</text></svg>',
+          },
+          caption: 'A negatively charged ink particle between the positively charged paper above and the photosensitive surface below.',
+        },
         ph: 'Arrow 1: pointing upward toward positive photosensitive surface — label: electrostatic (attractive) force\nArrow 2: pointing downward — label: weight/gravitational force\n(Arrows must touch/start from the particle surface)',
       },
       {
@@ -104,7 +126,26 @@ export const questions: Question[] = [
     topicCanonical: 'Solar System, Gravity & Space',
     topicGroup: 'Space & Astrophysics',
     stem: 'The movement of planets and asteroids in the solar system can be determined by our understanding of the action of gravitational attraction.',
-    figImages: [`${P}q3a-solarsystem.png`],
+    artefact: {
+      component: 'OrbitSim',
+      data: {
+        mode: 'orbit',
+        title: 'The solar system (inner planets to Saturn)',
+        central: 'Sun',
+        bodies: [
+          { name: 'Sun', role: 'center', radius: 16, colour: '#f5a623' },
+          { name: 'Mercury', orbitalPeriod: 88, orbitRadius: 40, radius: 4, colour: '#b08d57' },
+          { name: 'Venus', orbitalPeriod: 225, orbitRadius: 52, radius: 6, colour: '#e3b04b' },
+          { name: 'Earth', orbitalPeriod: 365, orbitRadius: 64, radius: 6, colour: '#4d96ff' },
+          { name: 'Mars', orbitalPeriod: 687, orbitRadius: 76, radius: 5, colour: '#c1440e' },
+          { name: 'asteroid belt', orbitalPeriod: 1600, orbitRadius: 90, radius: 2, colour: '#9aa7b1' },
+          { name: 'Jupiter', orbitalPeriod: 4333, orbitRadius: 108, radius: 11, colour: '#d8a368' },
+          { name: 'Saturn', orbitalPeriod: 10759, orbitRadius: 128, radius: 10, colour: '#e3c891' },
+        ],
+        seed: 19,
+      },
+      caption: 'The Sun with the planets out to Saturn. The asteroid belt lies between Mars and Jupiter. Press play to watch the closer planets orbit faster.',
+    },
     tasks: [
       {
         label: 'a',
@@ -122,7 +163,13 @@ export const questions: Question[] = [
         label: 'c',
         text: 'Not all objects observed in our solar system move around the Sun as planets do. In 2017, scientists discovered an object that would visit our solar system only once. The scientists named the object Oumuamua. **Draw** arrows to represent the force of attraction that the Sun exerts on Oumuamua at positions A and B shown in the diagram.',
         marks: 3,
-        figImages: [`${P}q3c-trajectory.png`],
+        artefact: {
+          component: 'GenericSVG',
+          data: {
+            svg: '<svg viewBox="0 0 480 320" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><defs><radialGradient id="sun3" cx="0.5" cy="0.5"><stop offset="0" stop-color="#ffd96b"/><stop offset="1" stop-color="#e8772e"/></radialGradient><marker id="ahA" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#e8772e"/></marker></defs><rect width="480" height="320" fill="#0d1b2a"/><text x="240" y="24" font-size="13" font-weight="700" text-anchor="middle" fill="#e6edf3">Trajectory of ʻOumuamua past the Sun</text><circle cx="250" cy="190" r="20" fill="url(#sun3)"/><text x="250" y="194" font-size="11" font-weight="700" text-anchor="middle" fill="#5a2d0c">Sun</text><path d="M90,90 Q160,210 250,250 Q330,283 430,250" fill="none" stroke="#e8772e" stroke-width="2.5" marker-end="url(#ahA)"/><circle cx="90" cy="90" r="6" fill="#7fd1a3" stroke="#2c6c4a"/><text x="74" y="84" font-size="13" font-weight="700" fill="#7fd1a3">A</text><circle cx="250" cy="250" r="6" fill="#7fd1a3" stroke="#2c6c4a"/><text x="244" y="278" font-size="13" font-weight="700" text-anchor="middle" fill="#7fd1a3">B</text><line x1="118" y1="105" x2="210" y2="170" stroke="#94a3ad" stroke-width="1" stroke-dasharray="3 3"/><text x="150" y="128" font-size="10" fill="#94a3ad">A is far from the Sun</text><text x="270" y="300" font-size="10" fill="#94a3ad">B is closest to the Sun</text></svg>',
+          },
+          caption: 'The hyperbolic path of ʻOumuamua. At A it is far from the Sun; at B it is at its closest approach.',
+        },
         ph: 'Arrow at A: pointing toward the Sun, shorter length (A is farther from Sun).\nArrow at B: pointing toward the Sun, longer/larger length (B is closer so greater gravitational force).\nBoth arrows must point directly toward the Sun.',
       },
       {
@@ -150,20 +197,60 @@ export const questions: Question[] = [
     topicCanonical: "Newton's Laws & Momentum",
     topicGroup: 'Forces & Motion',
     stem: 'Body flying is a way for people to experience the adventure of sky diving, without jumping out of a plane. Air is blown through large tubes at high speed and this allows people to float above the ground. Rather than falling fast through the air, fast air travels past the person. The drag force this creates must be large enough to balance the weight of the person.\n\nTo determine this relationship between air speed and weight we can model body flying using balls of different weights in a controlled stream of air in the lab.\n\nThe relationship can be summarised in the following equation:\n**Weight of ball = constant × CSA × air speed²**\n(where CSA is cross-sectional area of the ball)',
-    figImages: [`${P}q4-bodyflying.png`],
+    artefact: {
+      component: 'GenericSVG',
+      data: {
+        svg: '<svg viewBox="0 0 460 320" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><defs><linearGradient id="tube4" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#dbeefa"/><stop offset="1" stop-color="#bcdcf0"/></linearGradient><marker id="up4" markerWidth="9" markerHeight="9" refX="3" refY="0" orient="auto"><path d="M0,9 L3,0 L6,9 Z" fill="#3a8fd6"/></marker></defs><rect width="460" height="320" fill="#ffffff"/><text x="230" y="24" font-size="14" font-weight="700" text-anchor="middle" fill="#1f2d3a">Body flying in a vertical wind tunnel</text><rect x="110" y="44" width="240" height="246" rx="8" fill="url(#tube4)" stroke="#7fb0d6" stroke-width="2"/><rect x="100" y="284" width="260" height="14" rx="4" fill="#9aa7b1" stroke="#5b6b78"/><g stroke="#3a8fd6" stroke-width="3" marker-end="url(#up4)"><line x1="140" y1="284" x2="140" y2="234"/><line x1="180" y1="284" x2="180" y2="234"/><line x1="280" y1="284" x2="280" y2="234"/><line x1="320" y1="284" x2="320" y2="234"/></g><g><ellipse cx="230" cy="150" rx="58" ry="20" fill="#3a6ea5"/><circle cx="172" cy="150" r="12" fill="#f1c27d" stroke="#c98a3c"/><line x1="288" y1="150" x2="306" y2="138" stroke="#3a6ea5" stroke-width="7" stroke-linecap="round"/><line x1="200" y1="166" x2="186" y2="186" stroke="#3a6ea5" stroke-width="7" stroke-linecap="round"/><line x1="250" y1="166" x2="266" y2="186" stroke="#3a6ea5" stroke-width="7" stroke-linecap="round"/></g><line x1="230" y1="98" x2="230" y2="128" stroke="#2e7d32" stroke-width="3" marker-end="url(#up4b)"/><defs><marker id="up4b" markerWidth="9" markerHeight="9" refX="3" refY="0" orient="auto"><path d="M0,9 L3,0 L6,9 Z" fill="#2e7d32"/></marker></defs><text x="240" y="112" font-size="11" fill="#2e7d32">drag (air pushes up)</text><line x1="230" y1="200" x2="230" y2="232" stroke="#c0392b" stroke-width="3" marker-end="url(#dn4)"/><defs><marker id="dn4" markerWidth="9" markerHeight="9" refX="3" refY="9" orient="auto"><path d="M0,0 L3,9 L6,0 Z" fill="#c0392b"/></marker></defs><text x="240" y="222" font-size="11" fill="#c0392b">weight (down)</text><text x="230" y="312" font-size="11" text-anchor="middle" fill="#3a8fd6">fast air blown upward</text></svg>',
+      },
+      caption: 'Fast-moving air pushes up on the flyer. When the drag force equals the flyer\'s weight, they float in place.',
+    },
     tasks: [
       {
         label: 'a',
         text: 'The graph below shows the air speed needed for people with different body weights to float above the ground. Using the graph, **state** the air speed needed for a 600 N person to float above the ground.',
         marks: 2,
-        figImages: ['/images/papers/physics-may-2019/q4a-graph.svg'],
+        artefact: {
+          component: 'LineGraph',
+          data: {
+            title: 'Air speed needed to float vs body weight',
+            xLabel: 'Body weight',
+            xUnit: 'N',
+            yLabel: 'Air speed',
+            yUnit: 'km/h',
+            dataPoints: [
+              { x: 200, y: 58 },
+              { x: 400, y: 82 },
+              { x: 600, y: 100 },
+              { x: 800, y: 115 },
+              { x: 1000, y: 129 },
+            ],
+            xMax: 1000,
+            xStep: 200,
+            yMax: 140,
+            yStep: 20,
+          },
+          caption: 'Air speed needed for people of different body weights to float (read the value at 600 N).',
+        },
         ph: 'Read from graph at weight = 600 N: approximately 100 km/h',
       },
       {
         label: 'b',
         text: 'A list of variables that are important in this experiment is provided below. **Select** the description that best describes each variable.',
         marks: 3,
-        figImages: [`${P}q4b-variables.png`],
+        artefact: {
+          component: 'DataTable',
+          data: {
+            headers: ['Variable', 'Quantity it represents'],
+            rows: [
+              ['Weight', 'How heavy the ball is (the force pulling it down)'],
+              ['Air speed', 'How fast the air streams past the ball'],
+              ['CSA', 'Cross-sectional area facing the air flow'],
+              ['Mass', 'Amount of matter in the ball'],
+              ['Volume', 'Space taken up by the ball'],
+            ],
+          },
+          caption: 'Variables that matter in the body-flying model. Classify each as independent, dependent or control.',
+        },
         widget: 'variable_classify',
         widgetItems: ['Weight', 'Air speed', 'CSA', 'Mass', 'Volume'],
         ph: 'Weight → Independent variable (IV)\nAir speed → Dependent variable (DV)\nCSA → Control variable\nMass → Control variable\nVolume → Control variable',
@@ -178,7 +265,24 @@ export const questions: Question[] = [
         label: 'd',
         text: 'You have a box of balls which contains a variety of different CSAs. **Select** the balls you will use for this experiment and place them in the equipment box.',
         marks: 3,
-        figImages: [`${P}q4d-balls.png`],
+        artefact: {
+          component: 'DataTable',
+          data: {
+            headers: ['Ball', 'Weight / N', 'CSA / cm²'],
+            rows: [
+              ['1', '0.40', '12'],
+              ['2', '0.60', '9'],
+              ['3', '0.60', '12'],
+              ['4', '0.80', '10'],
+              ['5', '0.80', '12'],
+              ['6', '1.00', '11'],
+              ['7', '1.00', '12'],
+              ['8', '1.20', '12'],
+              ['9', '1.20', '8'],
+            ],
+          },
+          caption: 'The "available box" of balls. Each ball has a weight and a cross-sectional area (CSA). Choose the balls to place in the equipment box.',
+        },
         ph: 'Select balls that: (1) all have the same CSA (to control this variable), (2) cover the greatest possible range of weights, (3) at least 5 balls with regular weight intervals (e.g. 0.40 N increments).',
       },
       {
@@ -206,7 +310,22 @@ export const questions: Question[] = [
     topicCanonical: "Newton's Laws & Momentum",
     topicGroup: 'Forces & Motion',
     stem: 'A student chooses to investigate the effect that the CSA of the ball has on the air speed needed to keep it floating. He proposes the following hypothesis:\n\n"According to my research I know that the CSA of the ball is inversely proportional to the square of the air speed flowing past it. I can write this as: CSA ∝ 1/air speed². This means that as the CSA of the ball increases, the air speed needed for the ball to float can be reduced."\n\nThe student collects one set of data. His results are shown below.',
-    figImages: [`${P}q5-csadata.png`],
+    artefact: {
+      component: 'DataTable',
+      data: {
+        headers: ['Ball size', 'Air speed / m s⁻¹'],
+        rows: [
+          ['radius = 3.5 cm', '14'],
+          ['area = 13 cm²', '25'],
+          ['area = 16 cm²', '23'],
+          ['area = 20 cm²', '22'],
+          ['area = 24 cm²', '19'],
+          ['area = 28 cm²', '17'],
+          ['area = 33 cm²', '16'],
+        ],
+      },
+      caption: 'The student\'s raw results. Note the first ball is recorded as a radius, not an area — it must be converted using area = πr² before it can be tabulated with the rest.',
+    },
     tasks: [
       {
         label: 'a',
@@ -219,7 +338,7 @@ export const questions: Question[] = [
         text: 'The student has recorded the first value as radius rather than area. The student used the equation **area = πr²** to calculate the CSA. **Select** which of the following values would be most appropriate to present the CSA in a results table.',
         marks: 1,
         widget: 'radio_select',
-        widgetOptions: ['2.5 cm (radius)', '7.85 cm (circumference)', '19.6 cm² (area from πr²)', '38 cm² (area — correct value)'],
+        widgetOptions: ['3.5 cm (the raw radius)', '22 cm (circumference = 2πr)', '11 cm² (π × r, forgot to square r)', '38 cm² (area = πr², correct value)'],
         ph: 'Select the most appropriate CSA value.',
       },
       {
@@ -232,7 +351,13 @@ export const questions: Question[] = [
         label: 'd',
         text: 'The student draws three graphs of the data he has collected. **Select** the most appropriate graph to determine the relationship between CSA and air speed. **Justify** your choice.',
         marks: 3,
-        figImages: ['/images/papers/physics-may-2019/q5d-graphs.svg'],
+        artefact: {
+          component: 'GenericSVG',
+          data: {
+            svg: '<svg viewBox="0 0 600 230" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><rect width="600" height="230" fill="#ffffff"/><g><text x="100" y="22" font-size="13" font-weight="700" text-anchor="middle" fill="#1f2d3a">Graph A</text><line x1="40" y1="180" x2="40" y2="40" stroke="#111" stroke-width="1.5"/><line x1="40" y1="180" x2="170" y2="180" stroke="#111" stroke-width="1.5"/><path d="M48,60 Q70,150 162,168" fill="none" stroke="#2563eb" stroke-width="2"/><circle cx="56" cy="74" r="2.5" fill="#2563eb"/><circle cx="78" cy="120" r="2.5" fill="#2563eb"/><circle cx="110" cy="150" r="2.5" fill="#2563eb"/><circle cx="150" cy="166" r="2.5" fill="#2563eb"/><text x="105" y="200" font-size="10" text-anchor="middle" fill="#374151">CSA</text><text x="22" y="115" font-size="10" text-anchor="middle" fill="#374151" transform="rotate(-90 22 115)">air speed v</text></g><g><text x="300" y="22" font-size="13" font-weight="700" text-anchor="middle" fill="#1f2d3a">Graph B</text><line x1="240" y1="180" x2="240" y2="40" stroke="#111" stroke-width="1.5"/><line x1="240" y1="180" x2="370" y2="180" stroke="#111" stroke-width="1.5"/><path d="M248,56 Q270,150 362,170" fill="none" stroke="#2563eb" stroke-width="2"/><circle cx="256" cy="70" r="2.5" fill="#2563eb"/><circle cx="280" cy="124" r="2.5" fill="#2563eb"/><circle cx="312" cy="152" r="2.5" fill="#2563eb"/><circle cx="352" cy="168" r="2.5" fill="#2563eb"/><text x="305" y="200" font-size="10" text-anchor="middle" fill="#374151">CSA</text><text x="222" y="115" font-size="10" text-anchor="middle" fill="#374151" transform="rotate(-90 222 115)">air speed² v²</text></g><g><text x="500" y="22" font-size="13" font-weight="700" text-anchor="middle" fill="#1f2d3a">Graph C</text><line x1="440" y1="180" x2="440" y2="40" stroke="#111" stroke-width="1.5"/><line x1="440" y1="180" x2="570" y2="180" stroke="#111" stroke-width="1.5"/><line x1="440" y1="180" x2="560" y2="56" stroke="#2563eb" stroke-width="2"/><circle cx="464" cy="155" r="2.5" fill="#2563eb"/><circle cx="492" cy="126" r="2.5" fill="#2563eb"/><circle cx="524" cy="92" r="2.5" fill="#2563eb"/><circle cx="552" cy="64" r="2.5" fill="#2563eb"/><text x="505" y="200" font-size="10" text-anchor="middle" fill="#374151">CSA</text><text x="422" y="115" font-size="10" text-anchor="middle" fill="#374151" transform="rotate(-90 422 115)">1 / air speed²</text></g></svg>',
+          },
+          caption: 'Three ways of plotting the same data. Only one produces a straight line through the origin, which would confirm an inverse relationship.',
+        },
         widget: 'radio_select',
         widgetOptions: ['Graph A', 'Graph B', 'Graph C'],
         ph: 'Graph C — it plots 1/v² against CSA, which allows a straight-line relationship to be identified (if hypothesis is correct). Graph C is most appropriate to determine an inversely proportional relationship.',
@@ -262,7 +387,19 @@ export const questions: Question[] = [
     topicCanonical: 'Pressure, Density & Buoyancy',
     topicGroup: 'Pressure & Fluids',
     stem: 'A second student decides to perform a different experiment. She chooses to model how boats float in water. She knows that the weight of the boat floating in a liquid and the volume of the boat below the water will be linked by the following equation:\n\n**Weight of the boat = volume of the boat below water × gravitational field strength × density of liquid**\n\nHer hypothesis is: "As the weight of the boat increases, the volume of the boat below the water will increase proportionally. I can write this as: weight of boat ∝ volume of boat below the water. This means that as the weight of the boat doubles the volume of the boat under the water will also double."\n\nThe student collects one set of data shown in the table.',
-    figImages: [`${P}q6-shipdata.png`],
+    artefact: {
+      component: 'DataTable',
+      data: {
+        headers: ['Weight of boat / N', 'Volume of boat below water / cm³'],
+        rows: [
+          ['0.5', '50'],
+          ['1.1', '110'],
+          ['2.0', '200'],
+          ['4.2', '420'],
+        ],
+      },
+      caption: 'As boxes are added the boat sinks lower, so more of it sits below the waterline. The student\'s results relating the boat\'s weight to the volume submerged.',
+    },
     tasks: [
       {
         label: 'a',
@@ -301,6 +438,22 @@ export const questions: Question[] = [
     topicCanonical: 'Atomic Structure & Radioactivity',
     topicGroup: 'Nuclear & Atomic Physics',
     stem: 'Over 10 000 hospitals around the world use radioisotopes. About 80% of this use is in helping to diagnose disease. The most common radioactive isotope used in helping to make diagnostic images is Tc-99 (Technetium-99). Tc-99 is produced in nuclear reactors from Mo-99. Tc-99 emits gamma rays which have enough energy to be detected by a gamma camera. Tc-99 has a half-life of about 6 hours. When injected into the human body, the Tc-99 allows for medically useful images to be produced.',
+    artefact: {
+      component: 'DecaySim',
+      data: {
+        title: 'Decay of technetium-99 (Tc-99)',
+        isotope: 'Tc-99',
+        decayMode: 'gamma',
+        halfLife: 6,
+        units: 'h',
+        initialActivity: 800,
+        activityUnits: 'MBq',
+        axisMax: 36,
+        xAxis: 'time / hours',
+        yAxis: 'activity / MBq',
+      },
+      caption: 'Tc-99 emits gamma rays and has a half-life of about 6 hours. Drag the time marker to see how the activity injected into a patient falls by half every 6 hours.',
+    },
     tasks: [
       {
         label: 'a',
@@ -333,6 +486,13 @@ export const questions: Question[] = [
     topicCanonical: 'Atomic Structure & Radioactivity',
     topicGroup: 'Nuclear & Atomic Physics',
     stem: 'In 1987, a forgotten radiotherapy source was stolen from an abandoned hospital in Brazil. By the time the authorities had been notified, 249 people who had been in contact with the stolen source were found to have very high levels of radioactive matter in or on their bodies. Four people died from exposure to the radioactive isotope. Houses that had been contaminated had to be demolished and the topsoil had to be removed due to contamination. The International Atomic Energy Agency called it "one of the world\'s worst radiological incidents".\n\nUsing radioactive materials for diagnoses and treatment helps many patients but there are also risks attached to its use.',
+    artefact: {
+      component: 'GenericSVG',
+      data: {
+        svg: '<svg viewBox="0 0 600 300" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><rect width="600" height="300" fill="#ffffff"/><text x="300" y="26" font-size="14" font-weight="700" text-anchor="middle" fill="#1f2d3a">Radioactive materials in medicine: weighing benefits and risks</text><line x1="300" y1="44" x2="300" y2="280" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="4 4"/><g><rect x="30" y="56" width="240" height="30" rx="6" fill="#e6f4ea"/><text x="150" y="76" font-size="13" font-weight="700" text-anchor="middle" fill="#2e7d32">BENEFITS</text><text x="44" y="112" font-size="11" fill="#3a7d44">• Diagnostic imaging of organs</text><text x="44" y="134" font-size="11" fill="#3a7d44">• Treatment of cancer (radiotherapy)</text><text x="44" y="156" font-size="11" fill="#3a7d44">• Fast, often non-invasive diagnosis</text><text x="44" y="178" font-size="11" fill="#3a7d44">• Saves and extends many lives</text></g><g><rect x="330" y="56" width="240" height="30" rx="6" fill="#fdeaea"/><text x="450" y="76" font-size="13" font-weight="700" text-anchor="middle" fill="#c0392b">RISKS</text><text x="344" y="112" font-size="11" fill="#a83232">• Exposure can damage healthy cells</text><text x="344" y="134" font-size="11" fill="#a83232">• Contamination of people and homes</text><text x="344" y="156" font-size="11" fill="#a83232">• Radioactive waste needs disposal</text><text x="344" y="178" font-size="11" fill="#a83232">• Accidents (e.g. Goiânia, Brazil 1987)</text></g><g transform="translate(300 240)"><circle r="30" fill="#fff7d6" stroke="#e0a800" stroke-width="2"/><g stroke="#000" stroke-width="0"><circle cx="0" cy="0" r="4.5" fill="#222"/><path d="M0,-3 L9,-19 A22,22 0 0 1 22,5 L4.5,2 A4.5,4.5 0 0 0 0,-3 Z" fill="#e0a800" transform="rotate(0)"/><path d="M0,-3 L9,-19 A22,22 0 0 1 22,5 L4.5,2 A4.5,4.5 0 0 0 0,-3 Z" fill="#e0a800" transform="rotate(120)"/><path d="M0,-3 L9,-19 A22,22 0 0 1 22,5 L4.5,2 A4.5,4.5 0 0 0 0,-3 Z" fill="#e0a800" transform="rotate(240)"/></g></g><text x="300" y="292" font-size="10" text-anchor="middle" fill="#5b6b78">radiation hazard — benefits must be weighed against political and environmental risks</text></svg>',
+      },
+      caption: 'Radioactive materials bring major medical benefits but also serious risks, as the 1987 Goiânia incident showed. Governments must regulate their use, storage and disposal.',
+    },
     tasks: [
       {
         label: 'a',
