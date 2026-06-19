@@ -163,6 +163,51 @@ export const questions: Question[] = [
       'You will now plan an investigation into sustainable management strategies for a biome.\n\n' +
       'Use the following statement of inquiry to formulate a clear and focused research question for an investigation into a biome impacted by humans.\n\n' +
       '**Statement of inquiry:** Technological innovation can allow natural environments to become more sustainable.',
+    artefact: {
+      component: 'InfoGraphicPanel',
+      caption:
+        'Planning scaffold for your investigation — the five stages map to the parts of this question. Hover a stage to spotlight it; click to pin the one you are answering.',
+      data: {
+        title: 'Planning an investigation into a managed biome',
+        source: 'MYP investigation planner',
+        layout: 'flow',
+        intro:
+          'Use these stages to plan an investigation linked to the statement of inquiry. A worked example for one biome — the Sundarbans mangrove forest (Bangladesh/India), where replanting and sensor technology are used to manage a coastal biome impacted by humans — is shown in italics.',
+        blocks: [
+          {
+            heading: 'Research question',
+            items: [
+              'Clear AND focused: name a place and a technology/product.',
+              'Connect it to the statement of inquiry.',
+            ],
+            note: 'e.g. “How effective is drone-assisted replanting at restoring the Sundarbans mangroves?”',
+          },
+          {
+            heading: 'Justify',
+            items: [
+              'Why is this question worthy of investigation?',
+              'Give at least one factor in detail, with reasoning.',
+            ],
+            note: 'e.g. mangroves protect millions from storm surge and store “blue carbon”.',
+          },
+          {
+            heading: 'Challenge',
+            items: ['Outline one challenge you might face.', 'Add a single impact of that challenge.'],
+            note: 'e.g. collecting primary data across a large, remote, tidal area.',
+          },
+          {
+            heading: 'Primary source',
+            items: ['One primary source (not interviews).', 'Say how it answers the RQ.'],
+            note: 'e.g. measure water salinity in a replanted vs an unprotected stretch.',
+          },
+          {
+            heading: 'Secondary source',
+            items: ['One secondary source.', 'Say how it answers the RQ.'],
+            note: 'e.g. journal articles on mangrove-restoration technology.',
+          },
+        ],
+      },
+    },
     tasks: [
       {
         label: 'a',
@@ -205,6 +250,30 @@ export const questions: Question[] = [
     stem:
       'Protecting natural biomes can play a part in reducing the causes of global climate change.\n\n' +
       'Select **one** biome from the list below: Aquatic biome · Desert biome · Forest biome · Grassland biome · Arctic/tundra biome.',
+    artefact: {
+      component: 'InteractiveChart',
+      caption:
+        'Carbon stored in each biome — use it to support your choice of biome and your reasoning about climate change. Hover a bar for its exact value.',
+      data: {
+        kind: 'bar',
+        title: 'Carbon stored per area, by biome',
+        source: 'Carbon-stock estimates (recreated, indicative)',
+        x: {
+          label: 'Biome',
+          categories: ['Aquatic (mangrove/seagrass)', 'Forest', 'Grassland', 'Arctic/tundra', 'Desert'],
+        },
+        y: { label: 'Carbon stored', unit: 't/ha', min: 0, max: 1200, ticks: [0, 200, 400, 600, 800, 1000, 1200] },
+        series: [
+          {
+            name: 'Carbon stored (t/ha)',
+            color: '#0b7285',
+            // Coastal "blue carbon" biomes lock the most carbon per hectare (mostly in waterlogged sediment),
+            // followed by forest and the carbon-rich frozen tundra; grassland and desert store the least.
+            points: [1000, 300, 190, 500, 60],
+          },
+        ],
+      },
+    },
     tasks: [
       {
         label: '',
@@ -359,6 +428,49 @@ export const questions: Question[] = [
     stem:
       'Source B and Source C above are repeated here for information.\n\n' +
       'Consider who is responsible for reducing the impact of electronic waste on people and the environment.',
+    artefact: {
+      component: 'NetworkGraph',
+      caption:
+        'The actors who could share responsibility for reducing e-waste. This question focuses on the INDIVIDUAL spoke — hover or tap a node to read what each actor could do.',
+      data: {
+        title: 'Who is responsible for reducing the impact of e-waste?',
+        source: 'MYP responsibility map',
+        center: {
+          label: 'Reducing the impact of e-waste',
+          detail: 'Responsibility could be shared between several actors. This task argues the case for the individual.',
+          color: '#1e293b',
+        },
+        nodes: [
+          {
+            id: 'individual',
+            label: 'Individual',
+            color: '#2f9e44',
+            detail:
+              'Can repair, reuse or keep devices for longer, recycle e-waste correctly, and buy fewer or refurbished products — lowering demand for new electronics and the waste exported and burned.',
+          },
+          {
+            id: 'manufacturers',
+            label: 'Manufacturers',
+            detail: 'Can design longer-lasting, repairable, recyclable devices and run take-back schemes.',
+          },
+          {
+            id: 'governments',
+            label: 'Governments',
+            detail: 'Can legislate “right to repair”, ban informal e-waste exports and fund safe recycling.',
+          },
+          {
+            id: 'retailers',
+            label: 'Retailers',
+            detail: 'Can offer trade-in and recycling points and stop pushing constant upgrades.',
+          },
+          {
+            id: 'importers',
+            label: 'Importing countries',
+            detail: 'Can enforce import controls so broken devices are not dumped at sites such as Agbogbloshie.',
+          },
+        ],
+      },
+    },
     tasks: [
       {
         label: '',
@@ -378,6 +490,28 @@ export const questions: Question[] = [
     stem:
       'Source B and Source C above are repeated here for information.\n\n' +
       'In a well-structured essay, respond to the following question.',
+    artefact: {
+      component: 'VennOverlap',
+      caption:
+        'A planning frame for your essay: the two dimensions of sustainability the question asks you to weigh, and where trade can satisfy both at once.',
+      data: {
+        title: 'Is trade sustainable? Two dimensions to weigh',
+        source: 'essay planner',
+        setA: {
+          label: 'Environmentally sustainable',
+          color: '#2f9e44',
+          items: ['Low emissions', 'Less waste', 'Resources conserved'],
+        },
+        setB: {
+          label: 'Socially sustainable',
+          color: '#1971c2',
+          items: ['Fair wages', 'Safe work', 'Local benefit'],
+        },
+        overlapLabel: 'Trade that is fair AND clean',
+        caption:
+          'Use both circles to consider different perspectives — e.g. the e-waste trade (Sources B & C) can create income yet harm health and the environment. Argue “to what extent” trade sits in the overlap.',
+      },
+    },
     tasks: [
       {
         label: '',

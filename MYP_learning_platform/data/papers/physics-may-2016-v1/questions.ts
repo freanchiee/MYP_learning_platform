@@ -104,6 +104,20 @@ export const questions: Question[] = [
     topicCanonical: "Newton's Laws & Momentum",
     topicGroup: 'Forces & Motion',
     stem: 'A student is going to investigate how the **diameter of a sphere** affects the **terminal velocity** of the sphere falling through oil.',
+    artefact: {
+      component: 'DataTable',
+      data: {
+        headers: ['Sphere diameter (mm)', 'Repeat 1 — fall time (s)', 'Repeat 2 — fall time (s)', 'Repeat 3 — fall time (s)', 'Mean terminal velocity (cm s⁻¹)'],
+        rows: [
+          ['5.0', '0.62', '0.60', '0.61', '49.2'],
+          ['10.0', '0.85', '0.83', '0.84', '35.7'],
+          ['15.0', '1.04', '1.06', '1.05', '28.6'],
+          ['20.0', '1.27', '1.25', '1.26', '23.8'],
+          ['25.0', '1.49', '1.51', '1.50', '20.0'],
+        ],
+      },
+      caption: 'Planned results table: spheres of the same material but different diameters dropped through a 30 cm column of oil. Each diameter is timed three times and a mean terminal velocity calculated.',
+    },
     tags: { unit: 'forces-interactions', topics: ['terminal velocity', 'drag', 'experimental design', 'variables'], level: 'developing' },
     tasks: [
       {
@@ -175,6 +189,23 @@ export const questions: Question[] = [
     topicCanonical: 'Solar System, Gravity & Space',
     topicGroup: 'Space & Astrophysics',
     stem: 'For many centuries, astronomers believed in the geocentric model — that the Earth was at the centre of the universe and that the Sun and planets orbited the Earth. This was later replaced by the heliocentric model, in which the Sun is at the centre of the solar system.',
+    artefact: {
+      component: 'OrbitSim',
+      data: {
+        title: 'The heliocentric model — planets orbit the Sun',
+        mode: 'orbit',
+        central: 'Sun',
+        showForce: true,
+        bodies: [
+          { name: 'Sun', role: 'center', fixed: true, color: '#f6c343' },
+          { name: 'Venus', role: 'orbiter', orbitalPeriod: 225, orbitRadius: 46, radius: 5, color: '#d9a066' },
+          { name: 'Earth', role: 'orbiter', orbitalPeriod: 365, orbitRadius: 78, radius: 6, color: '#60a5fa' },
+          { name: 'Mars', role: 'orbiter', orbitalPeriod: 687, orbitRadius: 112, radius: 5, color: '#e06848' },
+        ],
+        caption: 'In the Sun-centred (heliocentric) model the planets move on orbits of different periods around the Sun. The force arrow on each planet always points to the Sun.',
+      },
+      caption: 'The heliocentric model: Venus, Earth and Mars orbit the Sun with periods that increase with orbital radius.',
+    },
     tags: { unit: 'astrophysics', topics: ['heliocentric model', 'evidence', 'solar system'], level: 'developing' },
     tasks: [
       {
@@ -240,7 +271,7 @@ export const questions: Question[] = [
         title: 'V\u2013I characteristic of a nichrome resistance wire',
         xLabel: 'Voltage', xUnit: 'V',
         yLabel: 'Current', yUnit: 'A',
-        dataPoints: [{ x: 0, y: 0 }, { x: 2, y: 0.40 }, { x: 4, y: 0.80 }, { x: 6, y: 1.20 }, { x: 8, y: 1.60 }, { x: 10, y: 1.88 }],
+        dataPoints: [{ x: 0, y: 0 }, { x: 2, y: 0.40 }, { x: 4, y: 0.80 }, { x: 6, y: 1.20 }, { x: 8, y: 1.60 }, { x: 10, y: 2.00 }],
         xMin: 0, xMax: 12, yMin: 0, yMax: 2, xStep: 2, yStep: 0.4,
       },
       caption: 'Current through the nichrome wire against voltage. The line is straight through the origin (R = 5.0 \u03a9). Resistance remains approximately constant across the range, showing the nichrome wire is Ohmic.',
@@ -284,6 +315,24 @@ export const questions: Question[] = [
     topicCanonical: 'Circuits, Resistance & Power',
     topicGroup: 'Electricity & Magnetism',
     stem: 'Resistance (R) is defined as R = V/I. The V-I characteristic of a nichrome wire is being investigated across a range of temperatures.',
+    artefact: {
+      component: 'GraphSim',
+      data: {
+        title: 'Resistance of the nichrome wire as voltage (and temperature) rises',
+        mode: 'readoff',
+        xAxis: { label: 'Voltage / V', min: 0, max: 12, tick: 2 },
+        yAxis: { label: 'Resistance  R = V/I  / Ω', min: 0, max: 9, tick: 1 },
+        points: [
+          [0, 5.0], [2, 5.0], [4, 5.0], [6, 5.1], [8, 5.3], [10, 6.4], [11, 7.4], [12, 8.5],
+        ],
+        dataMaxX: 12,
+        readouts: [
+          { x: 8, note: 'resistance starts to rise noticeably above its room-temperature value (~5.0 Ω)' },
+        ],
+        task: 'Drag the cursor along the curve: resistance is flat (~5.0 Ω, Ohmic) up to about 8 V, then climbs steeply as the wire heats and glows.',
+      },
+      caption: 'Resistance R = V/I against voltage for the nichrome wire. Flat at ~5.0 Ω up to ~8 V, then rising sharply as the wire heats — the wire stops being Ohmic at high temperature.',
+    },
     tags: { unit: 'electricity-circuits', topics: ['resistance', 'temperature', 'Ohm\'s law', 'EM spectrum'], level: 'proficient' },
     tasks: [
       {
@@ -323,6 +372,19 @@ export const questions: Question[] = [
     topicCanonical: 'Solar System, Gravity & Space',
     topicGroup: 'Space & Astrophysics',
     stem: 'A student investigates how the distance to a reflecting object affects the time for a radar signal to travel to the object and back.',
+    artefact: {
+      component: 'LineGraph',
+      data: {
+        title: 'Radar return time vs distance to the object',
+        xLabel: 'Distance to object', xUnit: 'km',
+        yLabel: 'Signal return time', yUnit: 'µs',
+        dataPoints: [
+          { x: 0, y: 0 }, { x: 30, y: 200 }, { x: 60, y: 400 }, { x: 90, y: 600 }, { x: 120, y: 800 }, { x: 150, y: 1000 },
+        ],
+        xMin: 0, xMax: 150, yMin: 0, yMax: 1000, xStep: 30, yStep: 200,
+      },
+      caption: 'Return time of the radar pulse against distance. The line is straight through the origin: the signal travels to the object and back (2 × distance) at the speed of light, so return time is directly proportional to distance.',
+    },
     tags: { unit: 'astrophysics', topics: ['radar', 'signal transmission', 'variables', 'hypothesis'], level: 'developing' },
     tasks: [
       {
@@ -364,6 +426,22 @@ export const questions: Question[] = [
     topicCanonical: 'Solar System, Gravity & Space',
     topicGroup: 'Space & Astrophysics',
     stem: 'Drone delivery technology can provide medical supplies, vaccines, and other essential items to remote communities that are not connected by reliable road infrastructure.',
+    artefact: {
+      component: 'DataTable',
+      data: {
+        headers: ['Factor', 'Delivery drone', 'Road vehicle'],
+        rows: [
+          ['Maximum payload', '2 kg', '1000 kg'],
+          ['Typical range on one charge / tank', '40 km', '600 km'],
+          ['Average delivery time to remote village', '18 min', '5 h'],
+          ['Affected by poor / no roads', 'No', 'Yes'],
+          ['Affected by strong wind or rain', 'Yes', 'Less so'],
+          ['Cost per delivery (medical kit)', 'US$15', 'US$60'],
+          ['Up-front cost of equipment / infrastructure', 'High (drones + charging)', 'High (vehicles + roads)'],
+        ],
+      },
+      caption: 'Comparison of drone delivery and road delivery for reaching remote communities — payload, range, speed, dependence on roads and weather, and cost.',
+    },
     tags: { unit: 'astrophysics', topics: ['drone technology', 'evaluation', 'technology', 'economics'], level: 'advanced' },
     tasks: [
       {
@@ -385,6 +463,17 @@ export const questions: Question[] = [
     topicCanonical: 'Atomic Structure & Radioactivity',
     topicGroup: 'Nuclear & Atomic Physics',
     stem: 'Ionising radiation can affect the human body. Radiotherapy uses controlled doses of ionising radiation to target and destroy cancer cells in the human body.',
+    artefact: {
+      component: 'SpectrumSim',
+      data: {
+        title: 'The high-energy end of the electromagnetic spectrum',
+        mode: 'scrub',
+        axis: 'photon energy increases left → right (penetrating power increases)',
+        bands: ['radio', 'microwave', 'infrared', 'visible', 'ultraviolet', 'X-ray', 'gamma ray'],
+        target: 'gamma ray',
+      },
+      caption: 'The electromagnetic spectrum from radio to gamma. Photon energy — and penetrating power — increase from left to right, so ultraviolet < X-ray < gamma ray. The ionising, deeply penetrating gamma rays at the far right are used in radiotherapy.',
+    },
     tags: { unit: 'atomic-physics', topics: ['ionisation', 'DNA damage', 'gamma rays', 'radiotherapy', 'medical imaging'], level: 'proficient' },
     tasks: [
       {
@@ -429,6 +518,11 @@ export const questions: Question[] = [
     topicCanonical: 'Atomic Structure & Radioactivity',
     topicGroup: 'Nuclear & Atomic Physics',
     stem: 'X-rays are used to inspect metal welds in aircraft wings without cutting or removing any material. An X-ray image of a weld is formed by projecting X-rays through the metal and detecting the pattern on the other side.',
+    artefact: {
+      component: 'GenericSVG',
+      data: { svg: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 320" font-family="Arial, Helvetica, sans-serif"><defs><linearGradient id="plate" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6b7178"/><stop offset="1" stop-color="#3c4147"/></linearGradient><linearGradient id="bead" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9aa1a8"/><stop offset="0.5" stop-color="#7c828a"/><stop offset="1" stop-color="#565b61"/></linearGradient><radialGradient id="void1" cx="0.5" cy="0.45" r="0.6"><stop offset="0" stop-color="#0b0d10"/><stop offset="1" stop-color="#1d2227"/></radialGradient></defs><rect x="0" y="0" width="720" height="320" fill="#11151a"/><text x="360" y="34" text-anchor="middle" font-size="18" font-weight="bold" fill="#e7edf2">X-ray image of an aircraft-wing weld</text><rect x="60" y="120" width="280" height="90" fill="url(#plate)" stroke="#2a2e33" stroke-width="2"/><rect x="380" y="120" width="280" height="90" fill="url(#plate)" stroke="#2a2e33" stroke-width="2"/><path d="M340,118 q20,-14 40,0 l0,94 q-20,14 -40,0 Z" fill="url(#bead)" stroke="#23272c" stroke-width="2"/><g stroke="#aab1b8" stroke-width="1" opacity="0.35"><line x1="345" y1="128" x2="375" y2="128"/><line x1="343" y1="148" x2="377" y2="148"/><line x1="345" y1="168" x2="375" y2="168"/><line x1="343" y1="188" x2="377" y2="188"/><line x1="345" y1="202" x2="375" y2="202"/></g><ellipse cx="360" cy="150" rx="13" ry="10" fill="url(#void1)" stroke="#000000" stroke-width="0.5"/><path d="M352,182 q8,6 4,16 q-3,7 6,10" fill="none" stroke="#0b0d10" stroke-width="3.2" stroke-linecap="round"/><g fill="#cfd6dc" font-size="13"><line x1="360" y1="150" x2="470" y2="78" stroke="#e0a93b" stroke-width="1.5"/><circle cx="470" cy="78" r="3" fill="#e0a93b"/><text x="478" y="74" fill="#f0d28a">dark spot — gas pore (void)</text><text x="478" y="92" fill="#aab1b8" font-size="11">less metal → more X-rays pass → darker</text><line x1="358" y1="200" x2="470" y2="250" stroke="#e0a93b" stroke-width="1.5"/><circle cx="470" cy="250" r="3" fill="#e0a93b"/><text x="478" y="246" fill="#f0d28a">dark thread — internal crack</text><line x1="200" y1="165" x2="200" y2="250" stroke="#7f8a93" stroke-width="1.2"/><text x="150" y="268" fill="#aab1b8" font-size="12">solid metal plate (light grey)</text></g><text x="360" y="300" text-anchor="middle" font-size="12" fill="#8b949c">Defects (pore + crack) show as dark regions because less metal absorbs the X-rays there.</text></svg>' },
+      caption: 'X-ray radiograph of the weld joining two wing plates. The weld bead runs down the centre; a gas pore and a hairline crack inside it show up as darker regions where less metal absorbs the X-rays.',
+    },
     tags: { unit: 'atomic-physics', topics: ['X-rays', 'industrial inspection', 'interpretation'], level: 'developing' },
     tasks: [
       {
@@ -450,6 +544,11 @@ export const questions: Question[] = [
     topicCanonical: 'Atomic Structure & Radioactivity',
     topicGroup: 'Nuclear & Atomic Physics',
     stem: 'Computed Tomography (CT scanning) is a medical imaging technique that takes many X-ray images from different angles around a patient and uses a computer to reconstruct a three-dimensional image of the internal structure.',
+    artefact: {
+      component: 'GenericSVG',
+      data: { svg: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 300" font-family="Arial, Helvetica, sans-serif"><defs><linearGradient id="film" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1a1f26"/><stop offset="1" stop-color="#0c0f13"/></linearGradient><radialGradient id="slice" cx="0.5" cy="0.5" r="0.6"><stop offset="0" stop-color="#3a4350"/><stop offset="1" stop-color="#10141a"/></radialGradient><linearGradient id="recon" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#243244"/><stop offset="1" stop-color="#0e151f"/></linearGradient></defs><rect x="0" y="0" width="760" height="300" fill="#ffffff"/><g><rect x="20" y="40" width="220" height="220" rx="6" fill="url(#film)" stroke="#444b54" stroke-width="1.5"/><text x="130" y="30" text-anchor="middle" font-size="14" font-weight="bold" fill="#1d2d33">Image A</text><text x="130" y="282" text-anchor="middle" font-size="12" fill="#5b6b78">conventional X-ray (flat shadow)</text><g opacity="0.85"><path d="M130,70 Q108,72 104,100 Q100,140 116,190 L144,190 Q160,140 156,100 Q152,72 130,70 Z" fill="#cdd6de" opacity="0.45"/><g stroke="#e8eef3" stroke-width="6" stroke-linecap="round" opacity="0.7"><line x1="116" y1="120" x2="116" y2="200"/><line x1="130" y1="118" x2="130" y2="205"/><line x1="144" y1="120" x2="144" y2="200"/></g><path d="M104,108 Q130,118 156,108" fill="none" stroke="#e8eef3" stroke-width="5" opacity="0.6"/></g></g><g><rect x="270" y="40" width="220" height="220" rx="6" fill="#0c0f13" stroke="#444b54" stroke-width="1.5"/><text x="380" y="30" text-anchor="middle" font-size="14" font-weight="bold" fill="#1d2d33">Image B</text><text x="380" y="282" text-anchor="middle" font-size="12" fill="#5b6b78">CT cross-section (one slice)</text><circle cx="380" cy="150" r="92" fill="url(#slice)" stroke="#5a6470" stroke-width="1.5"/><circle cx="380" cy="150" r="92" fill="none" stroke="#7c8794" stroke-width="6" opacity="0.5"/><ellipse cx="362" cy="138" rx="22" ry="16" fill="#566373" opacity="0.85"/><ellipse cx="404" cy="142" rx="18" ry="14" fill="#4a5564" opacity="0.85"/><circle cx="380" cy="178" r="10" fill="#79505a" opacity="0.9"/><rect x="372" y="96" width="16" height="22" rx="4" fill="#2a323d"/><line x1="380" y1="58" x2="380" y2="242" stroke="#9aa6b2" stroke-width="0.6" stroke-dasharray="3 4" opacity="0.5"/><line x1="288" y1="150" x2="472" y2="150" stroke="#9aa6b2" stroke-width="0.6" stroke-dasharray="3 4" opacity="0.5"/></g><g><rect x="520" y="40" width="220" height="220" rx="6" fill="url(#recon)" stroke="#444b54" stroke-width="1.5"/><text x="630" y="30" text-anchor="middle" font-size="14" font-weight="bold" fill="#1d2d33">Image C</text><text x="630" y="282" text-anchor="middle" font-size="12" fill="#5b6b78">3D CT reconstruction</text><g opacity="0.92"><ellipse cx="630" cy="92" rx="34" ry="40" fill="#c9d3dc"/><path d="M598,120 Q592,170 604,225 L656,225 Q668,170 662,120 Q646,138 630,138 Q614,138 598,120 Z" fill="#aeb9c4"/><g stroke="#dde4ea" stroke-width="2" opacity="0.6"><path d="M604,150 Q630,158 656,150"/><path d="M606,175 Q630,182 654,175"/><path d="M608,200 Q630,206 652,200"/></g><circle cx="618" cy="86" r="4" fill="#3a4350"/><circle cx="642" cy="86" r="4" fill="#3a4350"/></g><g stroke="#6f7b88" stroke-width="0.8" opacity="0.35"><line x1="540" y1="60" x2="720" y2="60"/><line x1="540" y1="240" x2="720" y2="240"/></g></g></svg>' },
+      caption: 'Three representations of the same patient: a flat conventional X-ray (A), a single CT cross-sectional slice (B), and a computer-reconstructed 3D CT image (C).',
+    },
     tags: { unit: 'atomic-physics', topics: ['CT scan', 'X-ray', 'medical imaging', 'scientific applications'], level: 'developing' },
     tasks: [
       {

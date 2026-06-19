@@ -67,6 +67,58 @@ export const questions: Question[] = [
     marks: 4,
     stem:
       'After periods of conflict and division, groups of countries have formed international institutions and organizations intended to bring peace, stability and closer cooperation to their regions and the world.',
+    artefact: {
+      component: 'NetworkGraph',
+      caption:
+        'International institutions formed to build peace, stability and cooperation — hover or tap one to read how it has improved relations between its member states.',
+      data: {
+        title: 'International institutions and regional cooperation',
+        source: 'Civics knowledge organiser (recreated)',
+        center: {
+          label: 'International institutions',
+          detail:
+            'Organizations through which groups of countries cooperate to reduce conflict, build stability and work together on shared challenges.',
+          color: '#0b7285',
+        },
+        nodes: [
+          {
+            id: 'un',
+            label: 'United Nations',
+            color: '#1971c2',
+            detail:
+              'A near-global forum where states resolve disputes through dialogue rather than war, coordinate peacekeeping and agree shared rules — improving world peace and stability.',
+          },
+          {
+            id: 'eu',
+            label: 'European Union',
+            color: '#e8590c',
+            detail:
+              'Bound former rivals into a shared market and joint institutions after WWII, making war between members almost unthinkable — improving regional peace and cooperation.',
+          },
+          {
+            id: 'au',
+            label: 'African Union',
+            color: '#2f9e44',
+            detail:
+              'Brings African states together to mediate conflicts, deploy peacekeepers and pursue shared development goals across the continent — improving stability and cooperation.',
+          },
+          {
+            id: 'asean',
+            label: 'ASEAN',
+            color: '#9c36b5',
+            detail:
+              'A bloc of South-East Asian nations that meet regularly to settle disputes peacefully and deepen trade and security ties — improving regional stability and cooperation.',
+          },
+          {
+            id: 'nato',
+            label: 'NATO',
+            color: '#c2255c',
+            detail:
+              'A defensive alliance in which members pledge mutual protection, deterring aggression and coordinating security policy — improving stability between member states.',
+          },
+        ],
+      },
+    },
     tasks: [
       {
         label: '',
@@ -174,6 +226,44 @@ export const questions: Question[] = [
       '• Alliances and diplomacy\n' +
       '• Agriculture and food supply\n' +
       '• Law and government',
+    artefact: {
+      component: 'InfoGraphicPanel',
+      caption:
+        'The five factors you may investigate — hover or tap a factor to spotlight it. Choose ONE to build your research question around.',
+      data: {
+        title: 'Choose one factor to investigate',
+        source: 'Project brief',
+        intro: 'Each factor below has shaped the rise or fall of superpowers and empires. Pick exactly one as the focus of your team investigation.',
+        layout: 'grid',
+        blocks: [
+          {
+            icon: '⚓',
+            heading: 'Naval power',
+            items: ['Control of seas, trade routes and the ability to project force overseas.'],
+          },
+          {
+            icon: '📚',
+            heading: 'Education and learning',
+            items: ['Schools, universities and the spread of knowledge, science and skilled workers.'],
+          },
+          {
+            icon: '🤝',
+            heading: 'Alliances and diplomacy',
+            items: ['Treaties, partnerships and negotiation that win allies and avoid costly wars.'],
+          },
+          {
+            icon: '🌾',
+            heading: 'Agriculture and food supply',
+            items: ['The ability to feed a growing population, armies and cities reliably.'],
+          },
+          {
+            icon: '⚖️',
+            heading: 'Law and government',
+            items: ['Stable institutions, fair laws and effective administration that hold a state together.'],
+          },
+        ],
+      },
+    },
     tasks: [
       {
         label: 'a',

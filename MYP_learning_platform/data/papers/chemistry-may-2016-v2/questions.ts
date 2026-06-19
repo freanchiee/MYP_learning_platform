@@ -19,6 +19,13 @@ export const questions: Question[] = [
     topic: 'Exothermic Reactions and Zinc Chemistry',
     marks: 8,
     stem: 'Zinc-air batteries power many hearing aids. They contain zinc powder that reacts with oxygen from the air in an exothermic reaction.\n\nThe equation for the reaction is:\n\n2Zn + O₂ → 2ZnO',
+    artefact: {
+      component: 'GenericSVG',
+      data: {
+        svg: '<svg viewBox="0 0 600 230" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><rect width="600" height="230" fill="#ffffff"/><text x="300" y="22" font-size="14" font-weight="700" text-anchor="middle" fill="#1f2d3a">Periodic-table data for the zinc-air battery</text><g><rect x="240" y="42" width="74" height="58" fill="#eef4f7" stroke="#5b6b78"/><text x="248" y="56" font-size="9" text-anchor="start" fill="#64748b">30</text><text x="277" y="80" font-size="22" font-weight="700" text-anchor="middle" fill="#0b7285">Zn</text><text x="277" y="95" font-size="8" text-anchor="middle" fill="#64748b">zinc · 65.4</text></g><text x="277" y="118" font-size="10" text-anchor="middle" fill="#475569">forms Zn²⁺ in ZnO</text><g><rect x="40" y="140" width="60" height="48" fill="#fff7ed" stroke="#5b6b78"/><text x="70" y="156" font-size="9" text-anchor="middle" fill="#64748b">Group 1</text><text x="70" y="172" font-size="15" font-weight="700" text-anchor="middle" fill="#e8590c">Li</text><text x="70" y="184" font-size="8" text-anchor="middle" fill="#64748b">forms 1+</text></g><g><rect x="170" y="140" width="60" height="48" fill="#fff7ed" stroke="#5b6b78"/><text x="200" y="156" font-size="9" text-anchor="middle" fill="#64748b">Group 2</text><text x="200" y="172" font-size="15" font-weight="700" text-anchor="middle" fill="#e8590c">Ba</text><text x="200" y="184" font-size="8" text-anchor="middle" fill="#64748b">forms 2+</text></g><g><rect x="300" y="140" width="60" height="48" fill="#fff7ed" stroke="#5b6b78"/><text x="330" y="156" font-size="9" text-anchor="middle" fill="#64748b">Group 15</text><text x="330" y="172" font-size="15" font-weight="700" text-anchor="middle" fill="#e8590c">N</text><text x="330" y="184" font-size="8" text-anchor="middle" fill="#64748b">forms 3−</text></g><g><rect x="430" y="140" width="60" height="48" fill="#fff7ed" stroke="#5b6b78"/><text x="460" y="156" font-size="9" text-anchor="middle" fill="#64748b">Group 17</text><text x="460" y="172" font-size="15" font-weight="700" text-anchor="middle" fill="#e8590c">Cl</text><text x="460" y="184" font-size="8" text-anchor="middle" fill="#64748b">forms 1−</text></g><text x="300" y="214" font-size="10" text-anchor="middle" fill="#94a3ad">Ion charge depends on the group: an element in Group 2 forms a 2+ ion, like Zn in ZnO.</text></svg>',
+      },
+      caption: 'Periodic-table data: zinc (Aᵣ = 65.4) forms Zn²⁺, with the candidate elements for part (e) and their typical ion charges.',
+    },
     tasks: [
       {
         label: 'a',
@@ -30,7 +37,7 @@ export const questions: Question[] = [
         label: 'b',
         text: 'Using the periodic table, **calculate** how many moles of oxygen are needed to oxidize a zinc-air battery containing 6.5 g of zinc.',
         marks: 3,
-        ph: 'Mole ratio 2Zn:1O₂; 6.5÷65=0.1 mol Zn; 0.1×0.5=0.05 mol O₂',
+        ph: 'Mole ratio 2Zn:1O₂; 6.5÷65.4≈0.10 mol Zn; 0.10×0.5≈0.05 mol O₂',
       },
       {
         label: 'c',
@@ -61,6 +68,13 @@ export const questions: Question[] = [
     topic: 'Crystallization and Acid-Base Neutralization',
     marks: 10,
     stem: 'Reusable hand warmers contain a saturated aqueous solution of potassium acetate (CH₃COOK) that releases heat when it undergoes crystallization.\n\npotassium ethanoate + water ⇌ potassium ethanoate crystals + heat',
+    artefact: {
+      component: 'GenericSVG',
+      data: {
+        svg: '<svg viewBox="0 0 600 240" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><rect width="600" height="240" fill="#ffffff"/><text x="300" y="24" font-size="14" font-weight="700" text-anchor="middle" fill="#1f2d3a">Reusable hand warmer — a reversible physical change</text><g><rect x="55" y="60" width="170" height="120" rx="10" fill="#e7f5ff" stroke="#1971c2" stroke-width="1.5"/><text x="140" y="50" font-size="11" font-weight="700" text-anchor="middle" fill="#1971c2">Charged (warmed)</text><circle cx="95" cy="100" r="4" fill="#1971c2"/><circle cx="130" cy="120" r="4" fill="#1971c2"/><circle cx="175" cy="95" r="4" fill="#1971c2"/><circle cx="110" cy="150" r="4" fill="#1971c2"/><circle cx="190" cy="150" r="4" fill="#1971c2"/><circle cx="150" cy="90" r="4" fill="#1971c2"/><text x="140" y="172" font-size="9" text-anchor="middle" fill="#1971c2">saturated solution (dissolved)</text></g><g><rect x="375" y="60" width="170" height="120" rx="10" fill="#fff0f6" stroke="#c2255c" stroke-width="1.5"/><text x="460" y="50" font-size="11" font-weight="700" text-anchor="middle" fill="#c2255c">Activated (crystallized)</text><rect x="400" y="92" width="9" height="9" fill="#c2255c"/><rect x="425" y="110" width="9" height="9" fill="#c2255c"/><rect x="455" y="95" width="9" height="9" fill="#c2255c"/><rect x="480" y="120" width="9" height="9" fill="#c2255c"/><rect x="500" y="100" width="9" height="9" fill="#c2255c"/><rect x="430" y="140" width="9" height="9" fill="#c2255c"/><rect x="470" y="150" width="9" height="9" fill="#c2255c"/><text x="460" y="172" font-size="9" text-anchor="middle" fill="#c2255c">solid crystals + heat released</text></g><path d="M235 105 H365" stroke="#e8590c" stroke-width="2" fill="none" marker-end="url(#ar)"/><path d="M365 140 H235" stroke="#1971c2" stroke-width="2" fill="none" marker-end="url(#ar2)"/><defs><marker id="ar" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#e8590c"/></marker><marker id="ar2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#1971c2"/></marker></defs><text x="300" y="100" font-size="9" text-anchor="middle" fill="#e8590c">crystallize → heat OUT</text><text x="300" y="155" font-size="9" text-anchor="middle" fill="#1971c2">heat IN → re-dissolve (reuse)</text><text x="300" y="222" font-size="10" text-anchor="middle" fill="#94a3ad">No new substance is formed — the same potassium ethanoate cycles between dissolved and crystal forms.</text></svg>',
+      },
+      caption: 'The hand warmer cycles reversibly between a saturated solution and solid crystals; crystallization releases heat, and heating re-dissolves the crystals for reuse.',
+    },
     tasks: [
       {
         label: 'a',
@@ -95,6 +109,13 @@ export const questions: Question[] = [
     topic: 'Photochemical Smog and Catalytic Converters',
     marks: 11,
     stem: 'Vehicle exhaust emissions are a major cause of urban air pollution. Nitrogen oxides (NOₓ) and volatile organic compounds (VOCs) from car exhausts react with sunlight to produce photochemical smog. Ground-level ozone (O₃) is a primary component of photochemical smog and causes serious health and environmental problems.\n\nCatalytic converters contain platinum and palladium catalysts that convert toxic exhaust gases. For example:\n2NO(g) + 2CO(g) → N₂(g) + 2CO₂(g)\n\nThe catalysts are not consumed in the reactions they accelerate.',
+    artefact: {
+      component: 'GenericSVG',
+      data: {
+        svg: '<svg viewBox="0 0 560 320" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><rect width="560" height="320" fill="#ffffff"/><text x="280" y="22" font-size="14" font-weight="700" text-anchor="middle" fill="#1f2d3a">Energy profile for 2NO + 2CO → N₂ + 2CO₂</text><line x1="70" y1="40" x2="70" y2="270" stroke="#1f2d3a" stroke-width="1.5"/><line x1="70" y1="270" x2="520" y2="270" stroke="#1f2d3a" stroke-width="1.5"/><text x="24" y="160" font-size="11" font-weight="600" text-anchor="middle" fill="#1f2d3a" transform="rotate(-90 24 160)">Energy</text><text x="295" y="298" font-size="11" font-weight="600" text-anchor="middle" fill="#1f2d3a">Progress of reaction →</text><path d="M90 210 C150 210 150 70 230 70 C310 70 360 210 480 210" fill="none" stroke="#e8590c" stroke-width="2.5"/><path d="M90 210 C160 210 165 140 235 140 C305 140 360 210 480 210" fill="none" stroke="#0b7285" stroke-width="2.5" stroke-dasharray="6 4"/><line x1="90" y1="210" x2="225" y2="210" stroke="#94a3ad" stroke-width="1" stroke-dasharray="3 3"/><line x1="90" y1="70" x2="160" y2="70" stroke="#94a3ad" stroke-width="1" stroke-dasharray="3 3"/><line x1="90" y1="140" x2="170" y2="140" stroke="#94a3ad" stroke-width="1" stroke-dasharray="3 3"/><line x1="118" y1="210" x2="118" y2="70" stroke="#e8590c" stroke-width="1"/><text x="103" y="142" font-size="9" text-anchor="end" fill="#e8590c">Eₐ (no catalyst)</text><line x1="132" y1="210" x2="132" y2="140" stroke="#0b7285" stroke-width="1"/><text x="148" y="178" font-size="9" text-anchor="start" fill="#0b7285">Eₐ (with catalyst)</text><line x1="90" y1="210" x2="480" y2="210" stroke="#94a3ad" stroke-width="0.5"/><line x1="420" y1="210" x2="420" y2="245" stroke="#94a3ad" stroke-width="1" stroke-dasharray="3 3"/><text x="455" y="200" font-size="9" text-anchor="middle" fill="#475569">reactants</text><text x="450" y="232" font-size="9" text-anchor="middle" fill="#475569">products</text><g transform="translate(330,55)"><rect x="0" y="0" width="200" height="40" fill="#fafafa" stroke="#e2e8f0"/><line x1="10" y1="14" x2="34" y2="14" stroke="#e8590c" stroke-width="2.5"/><text x="40" y="17" font-size="9" fill="#475569">without catalyst</text><line x1="10" y1="30" x2="34" y2="30" stroke="#0b7285" stroke-width="2.5" stroke-dasharray="6 4"/><text x="40" y="33" font-size="9" fill="#475569">with platinum catalyst</text></g></svg>',
+      },
+      caption: 'The catalyst provides an alternative reaction pathway with a lower activation energy (Eₐ), so more collisions succeed and the reaction is faster — but the energy of reactants and products is unchanged.',
+    },
     tasks: [
       {
         label: 'a',
@@ -123,6 +144,13 @@ export const questions: Question[] = [
     topic: 'Esters and Fruit Aromas',
     marks: 3,
     stem: 'The aroma of fruits comes from characteristic ester molecules. Strawberry aroma is mainly caused by methyl butanoate (C₃H₇COOCH₃) and rum aroma by ethyl propanoate (C₂H₅COOC₂H₅).\n\nEthyl propanoate is formed in a reaction between propanoic acid and an alcohol.',
+    artefact: {
+      component: 'GenericSVG',
+      data: {
+        svg: '<svg viewBox="0 0 620 220" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><rect width="620" height="220" fill="#ffffff"/><text x="310" y="24" font-size="14" font-weight="700" text-anchor="middle" fill="#1f2d3a">Forming the ester ethyl propanoate (rum aroma)</text><g><rect x="30" y="70" width="150" height="64" rx="8" fill="#e7f5ff" stroke="#1971c2"/><text x="105" y="92" font-size="11" font-weight="700" text-anchor="middle" fill="#1971c2">propanoic acid</text><text x="105" y="112" font-size="11" text-anchor="middle" fill="#1f2d3a">C₂H₅COOH</text><text x="105" y="128" font-size="8" text-anchor="middle" fill="#64748b">carboxylic acid (–COOH)</text></g><text x="200" y="108" font-size="18" text-anchor="middle" fill="#1f2d3a">+</text><g><rect x="220" y="70" width="150" height="64" rx="8" fill="#e6fcf5" stroke="#0ca678"/><text x="295" y="92" font-size="11" font-weight="700" text-anchor="middle" fill="#0ca678">alcohol</text><text x="295" y="112" font-size="11" text-anchor="middle" fill="#1f2d3a">C₂H₅OH</text><text x="295" y="128" font-size="8" text-anchor="middle" fill="#64748b">the –OH group</text></g><path d="M380 100 H440" stroke="#1f2d3a" stroke-width="2" marker-end="url(#a4)"/><defs><marker id="a4" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#1f2d3a"/></marker></defs><g><rect x="450" y="58" width="150" height="64" rx="8" fill="#fff0f6" stroke="#c2255c"/><text x="525" y="80" font-size="11" font-weight="700" text-anchor="middle" fill="#c2255c">ethyl propanoate</text><text x="525" y="100" font-size="11" text-anchor="middle" fill="#1f2d3a">C₂H₅COOC₂H₅</text><text x="525" y="116" font-size="8" text-anchor="middle" fill="#64748b">ester (–COO–)</text></g><g><rect x="470" y="138" width="110" height="40" rx="8" fill="#fff9db" stroke="#f08c00"/><text x="525" y="156" font-size="10" font-weight="700" text-anchor="middle" fill="#e8590c">+ water</text><text x="525" y="170" font-size="10" text-anchor="middle" fill="#1f2d3a">H₂O</text></g><text x="310" y="206" font-size="10" text-anchor="middle" fill="#94a3ad">An ester forms when a carboxylic acid reacts with an alcohol; a small water molecule is lost (condensation).</text></svg>',
+      },
+      caption: 'Esterification: the carboxylic acid (propanoic acid) reacts with the alcohol to form the ester ethyl propanoate, releasing a small molecule of water.',
+    },
     tasks: [
       {
         label: 'a',
@@ -151,6 +179,18 @@ export const questions: Question[] = [
     topic: 'States of Matter and Phase Changes',
     marks: 10,
     stem: 'The diagram below shows the state changes for naphthalene (moth balls), which is a solid at room temperature. Three containers are shown, labelled Container 1 (left), Container 2 (middle), and Container 3 (right), each illustrating a different arrangement of particles.',
+    artefact: {
+      component: 'ParticleSim',
+      data: {
+        title: 'States of matter of naphthalene — particle model',
+        mode: 'states',
+        substance: 'naphthalene',
+        containers: ['Container 1 (left)', 'Container 2 (middle)', 'Container 3 (right)'],
+        options: ['Solid', 'Liquid', 'Gas'],
+        particleCount: 36,
+      },
+      caption: 'Each sealed container shows the particles of naphthalene in one state of matter. Compare the arrangement and motion to label Container 1, 2 and 3.',
+    },
     tasks: [
       {
         label: 'a',
@@ -188,6 +228,33 @@ export const questions: Question[] = [
     topic: 'Fatty Acid Melting Points and Scientific Method',
     marks: 27,
     stem: 'Stearic acid (C₁₈H₃₆O₂) is a saturated fatty acid found in animal fats and vegetable oils. It is a compound made from three different elements bonded together.\n\nThe melting temperature of stearic acid at standard pressure is 69.6 °C. The table shows the melting temperature of stearic acid measured at different IB schools located at different heights above sea level (altitude).',
+    artefact: {
+      component: 'LineGraph',
+      data: {
+        title: 'Melting temperature of stearic acid vs altitude',
+        xLabel: 'Altitude above sea level',
+        yLabel: 'Melting temperature',
+        xUnit: 'm',
+        yUnit: '°C',
+        xMin: 0,
+        xMax: 3000,
+        yMin: 66,
+        yMax: 70,
+        xStep: 500,
+        yStep: 1,
+        lobf: true,
+        dataPoints: [
+          { x: 0, y: 69.6 },
+          { x: 500, y: 69.1 },
+          { x: 1000, y: 68.5 },
+          { x: 1500, y: 68.0 },
+          { x: 2000, y: 67.4 },
+          { x: 2500, y: 66.9 },
+          { x: 3000, y: 66.3 },
+        ],
+      },
+      caption: 'Measured melting temperature of stearic acid at IB schools located at different altitudes. Read values from this graph to complete the missing cells in the table.',
+    },
     tasks: [
       {
         label: 'a',
@@ -234,6 +301,23 @@ export const questions: Question[] = [
     topic: 'Atmospheric Ozone and Data Analysis',
     marks: 14,
     stem: 'Use the simulation to collect samples of gas from each of the required parts of the atmosphere in the table below. Record the concentration of ozone (in parts per billion, ppb) obtained at each altitude level.',
+    artefact: {
+      component: 'DataTable',
+      data: {
+        headers: ['Altitude / km', 'Atmospheric layer', 'Ozone concentration / ppb'],
+        rows: [
+          ['0', 'troposphere (ground level)', '30'],
+          ['5', 'troposphere', '45'],
+          ['10', 'tropopause', '60'],
+          ['15', 'lower stratosphere', '110'],
+          ['20', 'stratosphere (ozone layer)', '180'],
+          ['25', 'stratosphere (ozone layer)', '95'],
+          ['30', 'upper stratosphere', '250'],
+          ['35', 'upper stratosphere', '300'],
+        ],
+      },
+      caption: 'Ozone concentration recorded from the simulation at each altitude. Plot altitude (x-axis) against ozone (y-axis); one reading does not fit the overall trend.',
+    },
     tasks: [
       {
         label: 'a',
@@ -280,6 +364,13 @@ export const questions: Question[] = [
     topic: 'Water-Gas Shift Reaction — Balanced Equations and Hydrogen Uses',
     marks: 5,
     stem: 'Hydrogen is a clean fuel of the future. One method of producing hydrogen is the water-gas shift reaction, used at industrial scale.\n\nThe word equation for the chemical reaction is:\n\ncarbon monoxide + water → carbon dioxide + hydrogen',
+    artefact: {
+      component: 'GenericSVG',
+      data: {
+        svg: '<svg viewBox="0 0 620 230" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><rect width="620" height="230" fill="#ffffff"/><text x="310" y="24" font-size="14" font-weight="700" text-anchor="middle" fill="#1f2d3a">Water-gas shift reaction</text><text x="310" y="46" font-size="10" text-anchor="middle" fill="#94a3ad">From word equation to balanced symbol equation</text><g><text x="155" y="86" font-size="12" text-anchor="middle" fill="#475569">carbon monoxide</text><text x="245" y="86" font-size="13" text-anchor="middle" fill="#1f2d3a">+</text><text x="335" y="86" font-size="12" text-anchor="middle" fill="#475569">water</text><text x="430" y="86" font-size="14" text-anchor="middle" fill="#1f2d3a">→</text><text x="510" y="86" font-size="12" text-anchor="middle" fill="#475569">carbon dioxide</text><text x="510" y="102" font-size="13" text-anchor="middle" fill="#1f2d3a">+ hydrogen</text></g><g><rect x="60" y="120" width="100" height="46" rx="8" fill="#e7f5ff" stroke="#1971c2"/><text x="110" y="142" font-size="13" font-weight="700" text-anchor="middle" fill="#1f2d3a">CO</text><text x="110" y="158" font-size="9" text-anchor="middle" fill="#1971c2">1 C, 1 O</text></g><text x="185" y="148" font-size="16" text-anchor="middle" fill="#1f2d3a">+</text><g><rect x="210" y="120" width="100" height="46" rx="8" fill="#e7f5ff" stroke="#1971c2"/><text x="260" y="142" font-size="13" font-weight="700" text-anchor="middle" fill="#1f2d3a">H₂O</text><text x="260" y="158" font-size="9" text-anchor="middle" fill="#1971c2">2 H, 1 O</text></g><text x="340" y="148" font-size="16" text-anchor="middle" fill="#1f2d3a">→</text><g><rect x="370" y="120" width="100" height="46" rx="8" fill="#fff0f6" stroke="#c2255c"/><text x="420" y="142" font-size="13" font-weight="700" text-anchor="middle" fill="#1f2d3a">CO₂</text><text x="420" y="158" font-size="9" text-anchor="middle" fill="#c2255c">1 C, 2 O</text></g><text x="495" y="148" font-size="16" text-anchor="middle" fill="#1f2d3a">+</text><g><rect x="520" y="120" width="80" height="46" rx="8" fill="#fff0f6" stroke="#c2255c"/><text x="560" y="142" font-size="13" font-weight="700" text-anchor="middle" fill="#1f2d3a">H₂</text><text x="560" y="158" font-size="9" text-anchor="middle" fill="#c2255c">2 H</text></g><text x="310" y="200" font-size="11" text-anchor="middle" fill="#475569">Atom count each side: C = 1, O = 2, H = 2 — already balanced (1 : 1 : 1 : 1).</text><text x="310" y="218" font-size="10" text-anchor="middle" fill="#94a3ad">All four substances are gases at the operating temperature — add state symbols (g).</text></svg>',
+      },
+      caption: 'Atom inventory for the water-gas shift reaction: carbon, oxygen and hydrogen atoms balance 1:1:1:1, and all four species are gases.',
+    },
     tasks: [
       {
         label: 'a',
@@ -302,6 +393,20 @@ export const questions: Question[] = [
     topic: 'Nitrate Salts, Hypothesis Evaluation and Isotopes',
     marks: 7,
     stem: 'Many nitrate salts have important uses in agriculture and food preservation. The table shows a list of nitrate salts, their taste, and their properties.\n\n| Salt | Taste | Uses |\n|---|---|---|\n| Sodium nitrate NaNO₃ | Salty | Meat preservative |\n| Potassium nitrate KNO₃ | Slightly salty and bitter | Meat preservation, fertilizer |\n| Magnesium nitrate Mg(NO₃)₂ | Slightly salty and bitter | Fertilizer |\n| Calcium nitrate Ca(NO₃)₂ | Slightly salty | Fertilizer |\n| Ammonium nitrate NH₄NO₃ | Slightly sweet and salty | High-nitrogen fertilizer |\n\nUsing information from the table, a student hypothesized: "The salty taste of salts is caused by the presence of a group one ion."',
+    artefact: {
+      component: 'DataTable',
+      data: {
+        headers: ['Nitrate salt', 'Metal/cation group', 'Taste', 'Uses'],
+        rows: [
+          ['Sodium nitrate NaNO₃', 'Na⁺ — Group 1', 'Salty', 'Meat preservative'],
+          ['Potassium nitrate KNO₃', 'K⁺ — Group 1', 'Slightly salty and bitter', 'Meat preservation, fertilizer'],
+          ['Magnesium nitrate Mg(NO₃)₂', 'Mg²⁺ — Group 2', 'Slightly salty and bitter', 'Fertilizer'],
+          ['Calcium nitrate Ca(NO₃)₂', 'Ca²⁺ — Group 2', 'Slightly salty', 'Fertilizer'],
+          ['Ammonium nitrate NH₄NO₃', 'NH₄⁺ — polyatomic', 'Slightly sweet and salty', 'High-nitrogen fertilizer'],
+        ],
+      },
+      caption: 'Nitrate salts with their cation group, taste and uses. Test the hypothesis against every row — note that Group 2 cations and the polyatomic NH₄⁺ ion also taste salty.',
+    },
     tasks: [
       {
         label: 'a',
@@ -330,6 +435,13 @@ export const questions: Question[] = [
     topic: 'Calcium Carbonate — Antacids and Equilibrium',
     marks: 9,
     stem: 'Calcium carbonate (CaCO₃) is used as an antacid tablet to treat excess stomach acid. The thermal decomposition of CaCO₃ in fire extinguishers produces CO₂ gas:\n\nCaCO₃(s) + heat → CaO(s) + CO₂(g)\n\nCaCO₃ is an amphoteric compound that can react with both acids and bases. It is also used to treat acid soil in farming.\n\nThe hydrogen carbonate ion is in equilibrium with water:\n\nHCO₃⁻(aq) + H₂O(l) ⇌ H₂CO₃(aq) + OH⁻(aq)',
+    artefact: {
+      component: 'GenericSVG',
+      data: {
+        svg: '<svg viewBox="0 0 620 230" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><rect width="620" height="230" fill="#ffffff"/><text x="310" y="24" font-size="14" font-weight="700" text-anchor="middle" fill="#1f2d3a">Hydrogen carbonate equilibrium and Le Chatelier&#39;s principle</text><g><rect x="40" y="70" width="220" height="58" rx="8" fill="#e7f5ff" stroke="#1971c2"/><text x="150" y="95" font-size="13" font-weight="700" text-anchor="middle" fill="#1f2d3a">HCO₃⁻ (aq) + H₂O (l)</text><text x="150" y="116" font-size="9" text-anchor="middle" fill="#1971c2">LEFT side (reactants)</text></g><g><text x="310" y="95" font-size="20" text-anchor="middle" fill="#1f2d3a">⇌</text><path d="M285 110 H335" stroke="#e8590c" stroke-width="2.5" marker-end="url(#sh)"/><defs><marker id="sh" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#e8590c"/></marker></defs><text x="310" y="128" font-size="9" text-anchor="middle" fill="#e8590c">shifts LEFT</text></g><g><rect x="360" y="70" width="220" height="58" rx="8" fill="#fff0f6" stroke="#c2255c"/><text x="470" y="95" font-size="13" font-weight="700" text-anchor="middle" fill="#1f2d3a">H₂CO₃ (aq) + OH⁻ (aq)</text><text x="470" y="116" font-size="9" text-anchor="middle" fill="#c2255c">RIGHT side (products)</text></g><g><rect x="360" y="150" width="220" height="34" rx="8" fill="#fff9db" stroke="#f08c00"/><text x="470" y="172" font-size="11" font-weight="700" text-anchor="middle" fill="#e8590c">Add base: increases [OH⁻] (a product)</text></g><path d="M470 184 V200 H310 V128" stroke="#f08c00" stroke-width="1.5" fill="none" stroke-dasharray="4 3" marker-end="url(#sh2)"/><defs><marker id="sh2" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#f08c00"/></marker></defs><text x="310" y="216" font-size="10" text-anchor="middle" fill="#475569">Adding a product (OH⁻) shifts the position of equilibrium LEFT → HCO₃⁻ increases, H₂CO₃ decreases.</text></svg>',
+      },
+      caption: 'OH⁻ is a product of this equilibrium. Adding a base raises [OH⁻], so by Le Chatelier\'s principle the equilibrium shifts left, increasing the amount of HCO₃⁻ and decreasing H₂CO₃.',
+    },
     tasks: [
       {
         label: 'a',
@@ -347,7 +459,7 @@ export const questions: Question[] = [
         label: 'c',
         text: '**Explain** how adding a base would affect the equilibrium above and would affect the quantity of HCO₃⁻ present.',
         marks: 4,
-        ph: 'OH⁻ reacts with H₂CO₃; equilibrium shifts left; HCO₃⁻ increases; H₂CO₃ decreases',
+        ph: 'OH⁻ is a product; adding base raises [OH⁻]; equilibrium shifts left; HCO₃⁻ increases; H₂CO₃ decreases',
       },
     ],
   },
@@ -358,6 +470,24 @@ export const questions: Question[] = [
     topic: 'Gummy Candies — Food Additives and Ethical Implications',
     marks: 16,
     stem: 'Gummy candies (such as gummy bears) were invented in the 1920s. They are manufactured by heating gelatine with sugar, glucose syrup, citric acid, artificial flavours and colourings, then pouring the mixture into moulds. When cooled below 40 °C, gelatine forms a network that gives the candy its characteristic texture.\n\nIngredients (% mass): Gelatine 6.3%, Sugar 45.0%, Glucose syrup 38.5%, Citric acid 0.5%, Artificial colourings 0.3%, Artificial flavouring 0.2%, Carnauba wax 0.2%',
+    artefact: {
+      component: 'PieChart',
+      data: {
+        kind: 'doughnut',
+        title: 'Composition of a gummy candy (% mass)',
+        unit: '%',
+        series: [
+          { name: 'Sugar', value: 45.0 },
+          { name: 'Glucose syrup', value: 38.5 },
+          { name: 'Gelatine', value: 6.3 },
+          { name: 'Citric acid', value: 0.5 },
+          { name: 'Artificial colourings', value: 0.3 },
+          { name: 'Artificial flavouring', value: 0.2 },
+          { name: 'Carnauba wax', value: 0.2 },
+        ],
+      },
+      caption: 'Percentage-by-mass composition of a gummy candy. Sugar and glucose syrup dominate; the additives (colourings, flavouring, citric acid, wax) make up under 1.5% combined.',
+    },
     tasks: [
       {
         label: 'a',

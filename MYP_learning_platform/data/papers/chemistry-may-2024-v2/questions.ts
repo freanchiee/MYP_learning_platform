@@ -19,6 +19,13 @@ export const questions: Question[] = [
     topic: 'Combustion, Lewis structures & chromatography — natural gas and autumn leaf pigments',
     marks: 10,
     stem: 'Natural gas is mainly composed of ethane (C₂H₆). When ethane burns completely in oxygen, it produces carbon dioxide and water. The word equation for the complete combustion of ethane is: ethane + oxygen → carbon dioxide + water.',
+    artefact: {
+      component: 'GenericSVG',
+      data: {
+        svg: '<svg viewBox="0 0 520 260" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><rect width="520" height="260" fill="#ffffff"/><text x="260" y="22" font-size="14" font-weight="700" text-anchor="middle" fill="#1f2d3a">Chromatography of autumn leaf pigments</text><rect x="170" y="40" width="120" height="190" fill="#fbfdfe" stroke="#5b6b78" stroke-width="1.5"/><line x1="170" y1="50" x2="290" y2="50" stroke="#0b7285" stroke-width="1.5" stroke-dasharray="4 3"/><text x="296" y="53" font-size="9" fill="#0b7285">solvent front</text><line x1="170" y1="218" x2="290" y2="218" stroke="#94a3ad" stroke-width="1.2" stroke-dasharray="2 2"/><text x="296" y="221" font-size="9" fill="#64748b">application point (origin)</text><rect x="186" y="70" width="88" height="14" rx="7" fill="#e8a317" opacity="0.85"/><text x="230" y="80" font-size="9" font-weight="700" text-anchor="middle" fill="#7a4f00">Band 1</text><rect x="186" y="120" width="88" height="14" rx="7" fill="#c2c20a" opacity="0.8"/><text x="230" y="130" font-size="9" font-weight="700" text-anchor="middle" fill="#5a5a00">Band 2</text><rect x="186" y="188" width="88" height="16" rx="7" fill="#2f8f3e" opacity="0.85"/><text x="230" y="200" font-size="9" font-weight="700" text-anchor="middle" fill="#114a18">Band 3</text><g stroke="#1f2d3a" stroke-width="1"><line x1="120" y1="50" x2="120" y2="218"/><line x1="114" y1="50" x2="126" y2="50"/><line x1="114" y1="71" x2="126" y2="71"/><line x1="114" y1="92" x2="126" y2="92"/><line x1="114" y1="113" x2="126" y2="113"/><line x1="114" y1="134" x2="126" y2="134"/><line x1="114" y1="155" x2="126" y2="155"/><line x1="114" y1="176" x2="126" y2="176"/><line x1="114" y1="197" x2="126" y2="197"/><line x1="114" y1="218" x2="126" y2="218"/></g><text x="108" y="53" font-size="8" text-anchor="end" fill="#475569">8</text><text x="108" y="116" font-size="8" text-anchor="end" fill="#475569">5</text><text x="108" y="221" font-size="8" text-anchor="end" fill="#475569">0</text><text x="60" y="138" font-size="9" fill="#475569" transform="rotate(-90 60 138)">distance / cm</text><text x="300" y="78" font-size="9" fill="#64748b">7.1 cm from origin</text><text x="300" y="128" font-size="9" fill="#64748b">≈ 4.9 cm from origin</text><text x="300" y="198" font-size="9" fill="#64748b">stays near origin</text></svg>',
+      },
+      caption: 'Chromatogram of an autumn leaf extract: three pigment bands separate up the column. The ruler reads distance in cm — solvent front at 8.4 cm, band 1 at 7.1 cm from the application point.',
+    },
     tasks: [
       {
         label: 'a',
@@ -73,6 +80,13 @@ export const questions: Question[] = [
     topic: 'pH, acids, salts & molar mass — acid rain and limestone buildings',
     marks: 9,
     stem: 'Acid rain is caused by the emission of sulfur dioxide and nitrogen dioxide from burning fossil fuels. These gases dissolve in rainwater to form dilute acids. Historic limestone buildings are damaged by acid rain, as the limestone (calcium carbonate, CaCO₃) reacts with the acidic rainwater.',
+    artefact: {
+      component: 'GenericSVG',
+      data: {
+        svg: '<svg viewBox="0 0 560 200" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><rect width="560" height="200" fill="#ffffff"/><text x="280" y="22" font-size="14" font-weight="700" text-anchor="middle" fill="#1f2d3a">Universal indicator pH scale</text><defs><linearGradient id="phgrad" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#d7263d"/><stop offset="0.28" stop-color="#f06f1e"/><stop offset="0.43" stop-color="#f2c200"/><stop offset="0.5" stop-color="#7ac143"/><stop offset="0.64" stop-color="#2f8f3e"/><stop offset="0.86" stop-color="#2f6fd0"/><stop offset="1" stop-color="#3b1f7a"/></linearGradient></defs><rect x="40" y="50" width="476" height="36" rx="6" fill="url(#phgrad)" stroke="#5b6b78"/><g font-size="11" font-weight="700" fill="#ffffff" text-anchor="middle"><text x="40" y="74">0</text><text x="74" y="74">1</text><text x="108" y="74">2</text><text x="142" y="74">3</text><text x="176" y="74">4</text><text x="210" y="74">5</text><text x="244" y="74">6</text><text x="278" y="74">7</text><text x="312" y="74">8</text><text x="346" y="74">9</text><text x="380" y="74">10</text><text x="414" y="74">11</text><text x="448" y="74">12</text><text x="482" y="74">13</text><text x="516" y="74">14</text></g><text x="60" y="106" font-size="10" font-weight="700" fill="#d7263d">acidic</text><text x="278" y="106" font-size="10" font-weight="700" text-anchor="middle" fill="#2f8f3e">neutral</text><text x="510" y="106" font-size="10" font-weight="700" text-anchor="end" fill="#3b1f7a">alkaline</text><g><polygon points="210,128 202,144 218,144" fill="#1f2d3a"/><text x="210" y="160" font-size="10" font-weight="700" text-anchor="middle" fill="#1f2d3a">acid rain</text><text x="210" y="174" font-size="9" text-anchor="middle" fill="#64748b">slightly acidic (≈ pH 5)</text></g><g><polygon points="278,128 270,144 286,144" fill="#2f8f3e"/><text x="278" y="160" font-size="10" font-weight="700" text-anchor="middle" fill="#2f8f3e">target (pH 7)</text></g></svg>',
+      },
+      caption: 'A universal-indicator colour chart maps pH 0–14 from red (strongly acidic) to violet (strongly alkaline). Acid rain sits on the acidic side; a conservator aims to neutralise back to pH 7.',
+    },
     tasks: [
       {
         label: 'a',
@@ -126,6 +140,16 @@ export const questions: Question[] = [
     topic: 'Balancing equations, particle model & diffusion — car exhaust emissions',
     marks: 9,
     stem: 'Car engines burn hydrocarbon fuels in oxygen. One important reaction in a car\'s catalytic converter converts hydrogen gas and oxygen gas into water vapour, helping to reduce the emission of unburned fuel.\n\nFurthermore, exhaust gases from car engines contain various pollutants that can spread widely in urban areas, even on calm days.',
+    artefact: {
+      component: 'ParticleSim',
+      data: {
+        title: 'Spread of carbon monoxide from a stationary exhaust',
+        mode: 'diffusion',
+        substance: 'carbon monoxide (CO)',
+        particleCount: 30,
+      },
+      caption: 'Press Play to release the exhaust-gas particles from the tailpipe (the source) and watch them spread to fill the enclosed space — even with no breeze. This random spreading from high to low concentration is diffusion.',
+    },
     tasks: [
       {
         label: 'a',
@@ -162,6 +186,17 @@ export const questions: Question[] = [
     topic: 'Hypothesis, measurement & denaturation — rennet enzyme and cheese making',
     marks: 9,
     stem: 'Rennet is a mixture of enzymes used in cheese making. The main enzyme, chymosin, cleaves the protein kappa-casein in milk, causing the milk to coagulate (curdle). The temperature at which milk is coagulated and the firmness of the curd can be measured using different methods.\n\nA conductivity meter measures how well the milk conducts electricity — as the proteins coagulate, conductivity changes.',
+    artefact: {
+      component: 'DataTable',
+      data: {
+        headers: ['Milk sample', 'Fat content / %', 'Starting temperature / °C', 'Temperature at coagulation / °C'],
+        rows: [
+          ['Full-fat milk', '3.5', '30', '38'],
+          ['Low-fat milk', '0.5', '30', 'to be measured'],
+        ],
+      },
+      caption: 'Both milk samples are warmed from the same 30 °C starting temperature with the same rennet concentration until coagulation is observed. The low-fat coagulation temperature is the value to read off and add to the table.',
+    },
     tasks: [
       {
         label: 'a',
@@ -206,6 +241,21 @@ export const questions: Question[] = [
     topic: 'Criterion B/C: Marinating investigation — concentration of marinade and tenderness',
     marks: 8,
     stem: 'Marinating meat in acidic solutions (such as citrus juice or vinegar) is a traditional food preparation method. The acid partially denatures the muscle proteins, making the meat more tender.\n\nA student has decided to investigate how the concentration of citric acid (a key acid in lemon juice) affects the tenderness of chicken breast after 24 hours of marination.\n\nThey record the following data:\n\n| Citric acid concentration / % | Starting texture score | Final texture score (1–10, 10=most tender) | pH of marinade |\n|---|---|---|---|\n| 0.5% | 4 | 5.2 | 5.8 |\n| 1.0% | 4 | pH probe broken | 4.9 |\n| 2.0% | 4 | 7.8 | 4.1 |\n| 4.0% | 4 | 6.4 | 3.6 |',
+    artefact: {
+      component: 'DataTableInteractive',
+      data: {
+        title: 'Effect of citric acid concentration on chicken tenderness',
+        headers: ['Citric acid concentration / %', 'Starting texture score', 'Final texture score (1–10)', 'pH of marinade'],
+        rows: [
+          ['0.5', '4', '5.2', '5.8'],
+          ['1.0', '4', 'probe broken', '4.9'],
+          ['2.0', '4', '7.8', '4.1'],
+          ['4.0', '4', '6.4', '3.6'],
+        ],
+        caption: 'Texture scored 1–10 (10 = most tender) after 24 hours marinating. Note the missing value at 1.0 % where the measurement failed.',
+      },
+      caption: 'Click a row to pin it while you read off the trend in texture score against citric acid concentration.',
+    },
     tasks: [
       {
         label: 'a',
@@ -242,6 +292,34 @@ export const questions: Question[] = [
     topic: 'Criterion C: Data processing & graph — lycopene in tomato products',
     marks: 14,
     stem: 'Lycopene is a powerful antioxidant found in tomatoes. It gives tomatoes their red colour. Unusually, the bioavailability of lycopene (how much the body can absorb) increases when tomatoes are cooked in oil, because heat breaks down cell walls and the fat helps absorption.',
+    artefact: {
+      component: 'RateSim',
+      data: {
+        title: 'Lycopene concentration in tomato sauce over 21 days of storage',
+        mode: 'saturating',
+        xAxis: { label: 'Storage time / days', min: 0, max: 21, tick: 3 },
+        yAxis: { label: 'Lycopene concentration / mg 100g⁻¹', min: 0, max: 10, tick: 2 },
+        series: [
+          {
+            label: 'Room temp (20°C)',
+            color: 'orange',
+            points: [[0, 9.7], [3, 9.2], [6, 8.7], [9, 8.3], [12, 7.9], [15, 7.6], [18, 7.3], [21, 7.1]],
+          },
+          {
+            label: 'Refrigerated (4°C)',
+            color: 'blue',
+            points: [[0, 9.7], [3, 9.5], [6, 9.3], [9, 9.1], [12, 9.0], [15, 8.9], [18, 8.8], [21, 8.7]],
+          },
+          {
+            label: 'Vitamin E + 4°C',
+            color: 'green',
+            points: [[0, 9.7], [3, 9.6], [6, 9.5], [9, 9.45], [12, 9.4], [15, 9.35], [18, 9.32], [21, 9.3]],
+          },
+        ],
+        note: 'Lycopene is lost fastest at room temperature; refrigeration and an added antioxidant (vitamin E) preserve it. Read the room-temperature line to find its change over 21 days.',
+      },
+      caption: 'Toggle the three storage conditions on the same axes and drag the cursor to read lycopene concentration at any day. This is the graph referred to in parts (b), (c) and (d).',
+    },
     tasks: [
       {
         label: 'a',
@@ -278,6 +356,18 @@ export const questions: Question[] = [
     topic: 'Criterion B: Investigation design — bioplastic degradation in compost',
     marks: 16,
     stem: 'Plastic waste pollution is a major environmental challenge. Biodegradable bioplastics made from renewable plant materials are a proposed alternative to conventional petroleum-based plastics. A materials company has developed three types of bioplastic:\n- polylactic acid (PLA) film\n- polyhydroxyalkanoate (PHA) film\n- thermoplastic starch (TPS) film\n\n**Design** an investigation to determine which bioplastic type degrades fastest when placed in a home compost bin. You are provided with standard laboratory equipment, pre-weighed samples of each bioplastic and a sample of standard home compost.\n\nIn your answer, you should include:\n- the independent, dependent and two control variables\n- a list of equipment you will use\n- the method you will follow\n- details of measurements you will take to collect sufficient data.',
+    artefact: {
+      component: 'DataTable',
+      data: {
+        headers: ['Bioplastic film', 'Source material', 'Starting mass per sample / g', 'Manufacturer compostability claim'],
+        rows: [
+          ['Polylactic acid (PLA)', 'corn starch (renewable)', '2.00', 'industrial compost only'],
+          ['Polyhydroxyalkanoate (PHA)', 'bacterial fermentation (renewable)', '2.00', 'home compostable'],
+          ['Thermoplastic starch (TPS)', 'potato/maize starch (renewable)', '2.00', 'home compostable'],
+        ],
+      },
+      caption: 'The three pre-weighed bioplastic samples provided. The film type is the independent variable; mass loss over time in the compost is the dependent variable to measure.',
+    },
     tasks: [
       {
         label: '',
@@ -296,6 +386,38 @@ export const questions: Question[] = [
     topic: 'Electrical conductivity, salinity & mangrove growth — coastal ecosystem water quality',
     marks: 8,
     stem: 'Mangrove forests grow along tropical coastlines and are highly productive ecosystems. They can tolerate a range of salinities, from fresh to full seawater. However, each mangrove species has an optimal salinity range for growth. Measuring the electrical conductivity of water is a fast way to estimate salinity levels in mangrove habitats.',
+    artefact: {
+      component: 'RateSim',
+      data: {
+        title: 'Biomass production vs salt concentration for three mangrove species',
+        xLabel: 'Salt concentration / g L⁻¹',
+        yLabel: 'Biomass production / %',
+        xAxis: { label: 'Salt concentration / g L⁻¹', min: 0, max: 50, tick: 10 },
+        yAxis: { label: 'Biomass production / %', min: 0, max: 100, tick: 20 },
+        options: [
+          {
+            // Species A — peaks early (~10 g/L) then falls sharply
+            label: 'Species A',
+            color: 'orange',
+            points: [[0, 55], [5, 80], [10, 100], [15, 78], [20, 50], [30, 22], [40, 8], [50, 2]],
+          },
+          {
+            // Species B — peaks later (~30 g/L) and declines more gradually
+            label: 'Species B',
+            color: 'blue',
+            points: [[0, 30], [10, 60], [20, 88], [30, 100], [40, 70], [50, 42]],
+          },
+          {
+            // Species C — peaks at ~25 g/L (the optimum read off in part c)
+            label: 'Species C',
+            color: 'green',
+            points: [[0, 40], [10, 72], [20, 95], [25, 100], [30, 96], [40, 68], [50, 38]],
+          },
+        ],
+        note: 'Toggle each species and drag the cursor to read % biomass at any salt concentration. Species A peaks near 10 g L⁻¹ then falls sharply; species B peaks near 30 g L⁻¹ and declines gradually; species C peaks near 25 g L⁻¹.',
+      },
+      caption: 'Toggle the three mangrove species and drag the cursor to read % biomass at any salt concentration — read the species C optimum (part c) and compare species A and species B tolerance (part d).',
+    },
     tasks: [
       {
         label: 'a',
@@ -311,7 +433,7 @@ export const questions: Question[] = [
       },
       {
         label: 'c',
-        text: 'High salinity affects mangrove growth. The graph shows the percentage biomass production of two mangrove species at different salt concentrations.\n\n**Determine** the optimum concentration of salt for maximum biomass production in mangrove species C.',
+        text: 'High salinity affects mangrove growth. The graph shows the percentage biomass production of three mangrove species (A, B and C) at different salt concentrations.\n\n**Determine** the optimum concentration of salt for maximum biomass production in mangrove species C.',
         marks: 1,
         ph: '25 ±3 g L⁻¹ (read from graph at maximum of species C curve)',
       },
@@ -332,6 +454,22 @@ export const questions: Question[] = [
     topic: 'Criterion D: Fog water collection systems — efficiency, economy & environment',
     marks: 17,
     stem: 'In many coastal and mountainous regions of the world, surface freshwater is scarce, but coastal fog occurs regularly. Fog water collection (FWC) technologies harvest fresh water directly from fog droplets. Three main fog water collection approaches have been developed: passive mesh fog collectors, active electrostatic fog collectors, and hybrid solar-assisted fog collectors.',
+    artefact: {
+      component: 'DataTableInteractive',
+      data: {
+        title: 'Tab 1 — Regional water scarcity and fog frequency',
+        headers: ['Region', 'Fog days per year', 'Surface freshwater', 'Rural population without clean water / millions'],
+        rows: [
+          ['Coastal Chile & Peru', '180', 'very limited', '4'],
+          ['Coastal NW Africa', '160', 'very limited', '9'],
+          ['Coastal sub-Saharan Africa', '120', 'very limited', '22'],
+          ['Mediterranean coast', '70', 'moderate', '2'],
+          ['Temperate NW Europe', '40', 'plentiful', '0'],
+        ],
+        caption: 'Tab 2 — Systems: passive mesh (no energy, low yield, cheap), active electrostatic (high energy, high yield, expensive), hybrid solar-assisted (moderate energy, moderate yield, moderate cost). Click a region to pin it while you justify where fog collection has the greatest impact.',
+      },
+      caption: 'Cross-reference fog frequency, freshwater availability and population need to identify the region where fog water collection would help most.',
+    },
     tasks: [
       {
         label: 'a',

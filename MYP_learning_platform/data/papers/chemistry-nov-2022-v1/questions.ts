@@ -5,6 +5,13 @@ export type Widget =
   | 'match_drag_drop'
   | 'fill_blank'
 
+/** Data-driven interactive artefact rendered in the context/stimulus slot. */
+export interface ArtefactSpec {
+  component: string
+  data?: unknown
+  caption?: string
+}
+
 export interface Task {
   label: string
   text: string
@@ -14,6 +21,7 @@ export interface Task {
   widgetOptions?: string[]
   widgetItems?: string[]
   figImages?: string[]
+  artefact?: ArtefactSpec
 }
 
 export interface Question {
@@ -24,6 +32,7 @@ export interface Question {
   marks: number
   stem: string
   figImages?: string[]
+  artefact?: ArtefactSpec
   tasks: Task[]
 }
 
@@ -56,6 +65,13 @@ export const questions: Question[] = [
     topic: 'Periodic Table & Atomic Structure',
     marks: 9,
     stem: 'Silver is one of the earliest metals used by humans. The period of time when silver coins first circulated is called the Silver Age. Silver and its alloys, such as sterling silver, have been used throughout history to make jewellery and decorative art objects.',
+    artefact: {
+      component: 'GenericSVG',
+      data: {
+        svg: '<svg viewBox="0 0 560 240" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><rect width="560" height="240" fill="#ffffff"/><text x="280" y="22" font-size="14" font-weight="700" text-anchor="middle" fill="#1f2d3a">Where silver (Ag) sits in the periodic table</text><g><rect x="40" y="40" width="80" height="14" fill="#fde68a" stroke="#5b6b78"/><text x="80" y="50" font-size="8.5" text-anchor="middle" fill="#475569">Alkali</text><rect x="40" y="40" width="80" height="120" fill="none" stroke="#94a3ad"/></g><g><rect x="200" y="86" width="160" height="40" fill="#cffafe" stroke="#0b7285" stroke-width="1.5"/><text x="280" y="78" font-size="10" text-anchor="middle" fill="#0b7285" font-weight="700">Transition metals (Period 5)</text><rect x="270" y="92" width="44" height="30" fill="#0b7285"/><text x="292" y="106" font-size="11" font-weight="700" text-anchor="middle" fill="#ffffff">47</text><text x="292" y="118" font-size="13" font-weight="700" text-anchor="middle" fill="#ffffff">Ag</text></g><g><rect x="440" y="40" width="80" height="120" fill="#e0f2fe" stroke="#94a3ad"/><text x="480" y="36" font-size="8.5" text-anchor="middle" fill="#475569">Halogens</text></g><text x="40" y="186" font-size="11" fill="#475569">Silver is a transition metal in Period 5, atomic number 47.</text><text x="40" y="204" font-size="11" fill="#475569">Sterling silver = 92.5% Ag + 7.5% Cu (an alloy).</text><text x="40" y="226" font-size="10" fill="#94a3ad">Alloying with copper makes silver harder and more durable than the pure metal.</text></svg>',
+      },
+      caption: 'Silver (Ag, 47) is a Period-5 transition metal; sterling silver alloys it with copper for hardness.',
+    },
     tasks: [
       {
         label: 'a',
@@ -109,6 +125,13 @@ export const questions: Question[] = [
     topic: 'Bonding & Chemical Reactions',
     marks: 17,
     stem: 'Some paints used by artists contain reactive metals. Magnesium powder is sometimes added to metallic paints to give a bright, silvery sheen. Magnesium reacts with oxygen in air, giving off a bright white light. Magnesium can also react with chlorine to form magnesium chloride (MgCl₂).',
+    artefact: {
+      component: 'GenericSVG',
+      data: {
+        svg: '<svg viewBox="0 0 560 260" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><rect width="560" height="260" fill="#ffffff"/><text x="280" y="22" font-size="14" font-weight="700" text-anchor="middle" fill="#1f2d3a">Ionic bonding: Mg + Cl₂ → MgCl₂</text><g><circle cx="120" cy="110" r="46" fill="none" stroke="#0b7285" stroke-width="1.5"/><circle cx="120" cy="110" r="30" fill="none" stroke="#0b7285" stroke-width="1.2"/><circle cx="120" cy="110" r="15" fill="#0b7285"/><text x="120" y="114" font-size="11" font-weight="700" text-anchor="middle" fill="#ffffff">Mg</text><circle cx="120" cy="64" r="4" fill="#e8590c"/><circle cx="166" cy="110" r="4" fill="#e8590c"/><text x="120" y="178" font-size="11" text-anchor="middle" fill="#475569">Mg (2.8.2)</text><text x="120" y="194" font-size="10" text-anchor="middle" fill="#94a3ad">loses 2 outer e⁻</text></g><g><text x="250" y="100" font-size="22" fill="#1f2d3a">→</text><text x="250" y="130" font-size="11" text-anchor="middle" fill="#475569">transfer</text></g><g><circle cx="380" cy="80" r="22" fill="#fff7ed" stroke="#e8590c" stroke-width="1.5"/><text x="380" y="84" font-size="11" font-weight="700" text-anchor="middle" fill="#e8590c">Cl⁻</text><circle cx="380" cy="150" r="22" fill="#fff7ed" stroke="#e8590c" stroke-width="1.5"/><text x="380" y="154" font-size="11" font-weight="700" text-anchor="middle" fill="#e8590c">Cl⁻</text><rect x="455" y="92" width="70" height="46" rx="6" fill="#cffafe" stroke="#0b7285" stroke-width="1.5"/><text x="490" y="112" font-size="12" font-weight="700" text-anchor="middle" fill="#0b7285">Mg²⁺</text><text x="490" y="128" font-size="9" text-anchor="middle" fill="#0b7285">(full shell)</text></g><text x="40" y="222" font-size="11" fill="#475569">Mg loses 2 electrons → Mg²⁺ ; two Cl atoms each gain 1 electron → 2 Cl⁻.</text><text x="40" y="242" font-size="11" fill="#475569">Oppositely charged ions attract: ionic bonding holds MgCl₂ together.</text></svg>',
+      },
+      caption: 'Magnesium transfers two electrons to two chlorine atoms, forming the ionic compound MgCl₂.',
+    },
     tasks: [
       {
         label: 'a',
@@ -182,6 +205,22 @@ export const questions: Question[] = [
     topic: 'Scientific Investigation & Acids',
     marks: 26,
     stem: 'Pollution is causing damage to the environment. Sulfur dioxide from burning fossil fuels dissolves in water to produce sulfuric acid, making rain acidic. Acid rain affects plant life, water sources and building materials, including marble sculptures (calcium carbonate). A student investigated the effects of three acidic solutions (vinegar, cola, lemon juice) on marble chips over seven days.\n\nTable: Change in mass of marble chips / g\n\n| Acid | | Trial 1 | Trial 2 | Trial 3 | Average |\n|---|---|---|---|---|---|\n| Vinegar | Change in mass | 2.87 | 3.01 | 2.94 | __ |\n| Cola | Change in mass | 0.09 | 0.15 | 0.08 | 0.11 |\n| Lemon juice | Change in mass | 1.28 | 1.45 | 1.13 | 1.29 |\n\nTable: Change in pH\n\n| Acid | Average change in pH |\n|---|---|\n| Vinegar | 2.61 |\n| Cola | 2.73 |\n| Lemon juice | 3.52 |',
+    artefact: {
+      component: 'RateSim',
+      data: {
+        title: 'Average change in mass of marble chips after 7 days',
+        mode: 'bars',
+        variable: 'Acidic solution',
+        metric: 'Average change in mass / g',
+        bars: [
+          { label: 'vinegar', value: 2.94 },
+          { label: 'cola', value: 0.11 },
+          { label: 'lemon juice', value: 1.29 },
+        ],
+        note: 'The taller the bar, the more marble (calcium carbonate) was eroded by that acid.',
+      },
+      caption: 'Average mass change per acid — vinegar eroded the most marble; cola the least.',
+    },
     tasks: [
       {
         label: 'a',
@@ -225,6 +264,13 @@ export const questions: Question[] = [
     topic: 'Scientific Investigation & Chemical Reactions',
     marks: 17,
     stem: 'Environmental pollution is causing changes to our climate. A student is investigating the effectiveness of a home-made CO₂ generator that produces carbon dioxide to inflate a balloon.\n\nMethod:\n1. Measure 50 cm³ of citric acid solution (0.1 mol·dm⁻³) and place it in a 500 mL plastic bottle.\n2. Measure 1 spoon of baking soda (sodium bicarbonate, NaHCO₃) into a balloon.\n3. Attach the balloon over the mouth of the bottle.\n4. Tip the baking soda from the balloon into the acid solution.\n5. Record the maximum diameter of the balloon (in cm) after 1 minute.\n6. Repeat steps 1 to 5 using 2 spoons, 3 spoons, 4 spoons and 5 spoons of baking soda.',
+    artefact: {
+      component: 'GenericSVG',
+      data: {
+        svg: '<svg viewBox="0 0 460 300" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><rect width="460" height="300" fill="#ffffff"/><text x="230" y="22" font-size="14" font-weight="700" text-anchor="middle" fill="#1f2d3a">Home-made CO₂ generator</text><ellipse cx="160" cy="74" rx="46" ry="34" fill="#bae6fd" stroke="#0369a1" stroke-width="1.5"/><text x="160" y="70" font-size="9" text-anchor="middle" fill="#0369a1">balloon inflating</text><text x="160" y="84" font-size="9" text-anchor="middle" fill="#0369a1">with CO₂ gas</text><path d="M148 104 q12 14 24 0" fill="none" stroke="#0369a1" stroke-width="1.2"/><rect x="150" y="106" width="20" height="14" fill="#e2e8f0" stroke="#64748b"/><path d="M132 120 L188 120 L182 250 Q160 270 138 250 Z" fill="#eff6ff" stroke="#475569" stroke-width="1.5"/><rect x="138" y="200" width="44" height="50" fill="#bfdbfe" opacity="0.7"/><path d="M138 200 L182 200" stroke="#3b82f6" stroke-width="1"/><text x="160" y="228" font-size="9" text-anchor="middle" fill="#1e3a8a">citric acid</text><text x="160" y="240" font-size="9" text-anchor="middle" fill="#1e3a8a">50 cm³</text><circle cx="150" cy="150" r="2.5" fill="#94a3b8"/><circle cx="170" cy="160" r="2.5" fill="#94a3b8"/><circle cx="160" cy="140" r="2.5" fill="#94a3b8"/><text x="178" y="152" font-size="8" fill="#64748b">baking soda</text><text x="178" y="163" font-size="8" fill="#64748b">tipped in</text><text x="300" y="120" font-size="11" font-weight="700" fill="#1f2d3a">Reaction:</text><text x="300" y="140" font-size="10" fill="#475569">citric acid + NaHCO₃</text><text x="300" y="156" font-size="10" fill="#475569">→ CO₂ + water + salt</text><text x="300" y="184" font-size="10" fill="#475569">IV: spoons of baking soda</text><text x="300" y="200" font-size="10" fill="#475569">DV: balloon diameter / cm</text><text x="300" y="216" font-size="10" fill="#475569">CV: volume of citric acid</text><text x="300" y="250" font-size="9" fill="#94a3ad">More CO₂ → larger balloon.</text></svg>',
+      },
+      caption: 'Apparatus: baking soda is tipped into citric acid in a bottle; the CO₂ produced inflates the balloon, whose diameter is measured.',
+    },
     tasks: [
       {
         label: 'a',
@@ -274,6 +320,20 @@ export const questions: Question[] = [
     topic: 'Data Analysis & Chemical Reactions',
     marks: 7,
     stem: 'There are many types of modern smoke detectors used in buildings. The table below gives data about three types:\n\n| | Ionisation detector | Optical detector | Heat detector |\n|---|---|---|---|\n| Weight / g | 120 | 185 | 145 |\n| Detection area / m² | 60 | 45 | 25 |\n| Battery life / years | 1 | 2 | 5 |\n| Best for | Fast-flaming fires | Slow-smouldering fires | High-heat areas |\n| False alarm risk | High | Low | Very low |',
+    artefact: {
+      component: 'DataTable',
+      data: {
+        headers: ['Property', 'Ionisation detector', 'Optical detector', 'Heat detector'],
+        rows: [
+          ['Weight / g', 120, 185, 145],
+          ['Detection area / m²', 60, 45, 25],
+          ['Battery life / years', 1, 2, 5],
+          ['Best for', 'Fast-flaming fires', 'Slow-smouldering fires', 'High-heat areas'],
+          ['False alarm risk', 'High', 'Low', 'Very low'],
+        ],
+      },
+      caption: 'Comparison of three smoke-detector types. Use the figures to test the research statement and pick the best detector.',
+    },
     tasks: [
       {
         label: 'a',
@@ -306,6 +366,13 @@ export const questions: Question[] = [
     topic: 'Organic Chemistry & Societal Impact',
     marks: 15,
     stem: 'High levels of anxiety about school work may cause disruption to sleep. The wellness industry has developed sleep sprays that contain plant extracts. Scientists have also identified melatonin (the hormone that promotes sleep) and found that many over-the-counter medicines contain ester or carboxylic acid functional groups that can affect sleep quality.',
+    artefact: {
+      component: 'GenericSVG',
+      data: {
+        svg: '<svg viewBox="0 0 560 230" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><rect width="560" height="230" fill="#ffffff"/><text x="280" y="22" font-size="14" font-weight="700" text-anchor="middle" fill="#1f2d3a">Two molecules — identify the circled functional group</text><g><text x="60" y="60" font-size="12" font-weight="700" fill="#0b7285">Molecule A</text><text x="40" y="110" font-size="15" font-family="monospace" fill="#1f2d3a">CH₃ — C( = O) — O — CH₃</text><ellipse cx="196" cy="105" rx="58" ry="26" fill="none" stroke="#e8590c" stroke-width="2"/><text x="196" y="150" font-size="10" text-anchor="middle" fill="#e8590c">circled group: –C(=O)–O–</text><text x="60" y="172" font-size="10" fill="#94a3ad">(methyl ethanoate, an ester)</text></g><line x1="300" y1="44" x2="300" y2="190" stroke="#e2e8f0" stroke-width="1.5"/><g><text x="340" y="60" font-size="12" font-weight="700" fill="#0b7285">Molecule B</text><text x="330" y="110" font-size="15" font-family="monospace" fill="#1f2d3a">CH₃ — C( = O) — O — H</text><ellipse cx="470" cy="105" rx="52" ry="26" fill="none" stroke="#e8590c" stroke-width="2"/><text x="470" y="150" font-size="10" text-anchor="middle" fill="#e8590c">circled group: –C(=O)–O–H</text><text x="340" y="172" font-size="10" fill="#94a3ad">(ethanoic acid, a carboxylic acid)</text></g><text x="280" y="210" font-size="10" text-anchor="middle" fill="#475569">An ester has –O– between two carbons; a carboxylic acid ends in –O–H.</text></svg>',
+      },
+      caption: 'Molecule A contains an ester group (–C(=O)–O–C); Molecule B contains a carboxylic acid group (–C(=O)–O–H).',
+    },
     tasks: [
       {
         label: 'a',
@@ -320,7 +387,20 @@ export const questions: Question[] = [
         label: 'b',
         text: 'A hotel is investigating which sleep spray should be provided for long-distance truck drivers to improve their sleep while staying at the hotel. Using the information about the four sprays and your wider MYP studies, **discuss** and **evaluate** which sleep spray the hotel company should select.\n\nIn your answer include:\n\n• an outline of why enough sleep is important for long-distance truck drivers\n• a comparison of the impact of each spray on the quality of sleep\n• a discussion of the economic considerations of using different sleep sprays\n• an evaluation with justification of your choice of spray for the hotel to choose',
         marks: 13,
-        ph: 'Crit D: safety for drivers; compare sleep quality from graphs; compare cost/lifespan; justified final choice',
+        ph: 'Crit D: safety for drivers; compare sleep quality from data; compare cost/lifespan; justified final choice',
+        artefact: {
+          component: 'DataTable',
+          data: {
+            headers: ['Sleep spray', 'Cost / USD', 'Volume / ml', 'Cost per sleep / USD', 'Plant extracts', 'Sleep quality (on test night)'],
+            rows: [
+              ['Spray A', 23, 30, 0.38, 'Lavender and chamomile', '1 time awake; 6 times interrupted sleep; 8 min awake'],
+              ['Spray B', 35, 30, 0.58, 'Peppermint and valerian', '0 times awake; 3 times interrupted sleep; 4 min awake'],
+              ['Spray C', 18, 50, 0.18, 'Chamomile only', '2 times awake; 9 times interrupted sleep; 15 min awake'],
+              ['Spray D', 41, 50, 0.41, 'Peppermint, lavender and melatonin', '0 times awake; 1 time interrupted sleep; 2 min awake'],
+            ],
+          },
+          caption: 'The four candidate sleep sprays (A–D). Cost per sleep is the bottle cost divided by the number of uses per bottle; sleep quality is read from each spray\'s overnight sleep trace — fewer interruptions and less time awake is better.',
+        },
       },
     ],
   },
@@ -333,6 +413,22 @@ export const questions: Question[] = [
     topic: 'Environmental & Social Impact of Chemistry',
     marks: 9,
     stem: 'Ingredients of sleep sprays often include peppermint and chamomile extracts. Peppermint has been harvested traditionally by small farming families for centuries, while chamomile is now grown intensively in large commercial operations.\n\nTable: Production comparison\n\n| | Peppermint | Chamomile |\n|---|---|---|\n| Source | Peppermint plant, small family farms | Chamomile flower, large commercial farms |\n| Growing conditions | Temperate climate, moderate water | Warm climate, high water, pesticides used |\n| Labour | Small family farms in rural communities | Large-scale agricultural workers |\n| Social | Supports family income; preserves tradition | Provides employment; lower product cost |\n| Cost per 15 ml / $ | 75.00 | 28.50 |\n| Mass of plant per 15 ml extract / kg | 0.35 | 1.20 |\n| Yield per hectare / kg | 1500 | 4200 |',
+    artefact: {
+      component: 'DataTable',
+      data: {
+        headers: ['Factor', 'Peppermint', 'Chamomile'],
+        rows: [
+          ['Source', 'Peppermint plant, small family farms', 'Chamomile flower, large commercial farms'],
+          ['Growing conditions', 'Temperate climate, moderate water', 'Warm climate, high water, pesticides used'],
+          ['Labour', 'Small family farms in rural communities', 'Large-scale agricultural workers'],
+          ['Social', 'Supports family income; preserves tradition', 'Provides employment; lower product cost'],
+          ['Cost per 15 ml / $', 75.0, 28.5],
+          ['Mass of plant per 15 ml extract / kg', 0.35, 1.2],
+          ['Yield per hectare / kg', 1500, 4200],
+        ],
+      },
+      caption: 'Production comparison of the two plant extracts — weigh the social, environmental and economic factors before choosing.',
+    },
     tasks: [
       {
         label: '',

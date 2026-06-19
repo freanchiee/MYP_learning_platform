@@ -46,6 +46,24 @@ export const questions: Question[] = [
     type: 'extended',
     topic: 'Conflict — causes of war',
     marks: 2,
+    artefact: {
+      component: 'NetworkGraph',
+      caption:
+        'Common causes of war — hover or tap a spoke to read how it can lead to conflict. Use it to prompt your own example; your outline must be in your own words.',
+      data: {
+        title: 'Common causes of war',
+        source: 'MYP Integrated Humanities — concept web',
+        center: { label: 'Causes of war', detail: 'Underlying factors that can push communities or states into armed conflict.', color: '#7f1d1d' },
+        nodes: [
+          { id: 'rights', label: 'Lack of human rights', color: '#c2255c', detail: 'When people are denied basic rights and freedoms, grievances can build into uprisings or rebellion.' },
+          { id: 'resources', label: 'Competition for resources', color: '#0b7285', detail: 'Scarcity of land, water, oil or food can drive groups or states to fight over what is available.' },
+          { id: 'territory', label: 'Territorial disputes', color: '#1971c2', detail: 'Disagreements over borders or contested land can escalate into war between neighbours.' },
+          { id: 'ideology', label: 'Ideology & religion', color: '#9c36b5', detail: 'Clashing political beliefs, nationalism or religious differences can be used to justify conflict.' },
+          { id: 'economy', label: 'Economic inequality', color: '#2f9e44', detail: 'Wide gaps between rich and poor, or poverty and unemployment, can fuel unrest and violence.' },
+          { id: 'power', label: 'Struggle for power', color: '#e8590c', detail: 'Leaders or factions seeking control of a state or region may resort to force to gain or keep power.' },
+        ],
+      },
+    },
     tasks: [
       {
         label: '',
@@ -61,6 +79,27 @@ export const questions: Question[] = [
     type: 'extended',
     topic: 'Conflict — effects of war',
     marks: 4,
+    artefact: {
+      component: 'InteractiveChart',
+      caption:
+        'Effects of the Second World War (illustrative figures) — hover a bar for its value, or toggle a category in the legend. Use it to choose ONE effect of a named war and explain it in your own words.',
+      data: {
+        kind: 'bar',
+        title: 'Some effects of the Second World War (1939–1945)',
+        source: 'MYP Integrated Humanities — illustrative comparison (not exam data)',
+        x: {
+          label: 'Type of effect',
+          categories: ['Human', 'Displacement', 'Economic', 'Political'],
+        },
+        y: { label: 'Relative scale (index, largest effect = 100)', min: 0, max: 100, ticks: [0, 20, 40, 60, 80, 100] },
+        series: [
+          { name: 'Lives lost (military + civilian)', color: '#c2255c', points: [100, 0, 0, 0] },
+          { name: 'People displaced / made refugees', color: '#e8590c', points: [0, 78, 0, 0] },
+          { name: 'Cities & infrastructure destroyed', color: '#1971c2', points: [0, 0, 64, 0] },
+          { name: 'New borders & institutions formed', color: '#2f9e44', points: [0, 0, 0, 55] },
+        ],
+      },
+    },
     tasks: [
       {
         label: '',
@@ -135,6 +174,25 @@ export const questions: Question[] = [
       'You have just completed a unit on peace and conflict in school. Your teacher has asked your class to organize an exhibition based on the unit’s statement of inquiry.\n\n' +
       '**Statement of inquiry: Peace agreements create change for communities.**\n\n' +
       'In preparation for your exhibition, answer the following questions.',
+    artefact: {
+      component: 'DataTableInteractive',
+      caption:
+        'Examples of peace agreements and the change they created — click a row to pin one. Use it to spark a research question that names a peace agreement, a community/location and a type of change. Your answer must be in your own words.',
+      data: {
+        title: 'Peace agreements and the change they created',
+        source: 'MYP Integrated Humanities — peace and conflict',
+        headers: ['Peace agreement', 'Year', 'Communities / location', 'Type of change created'],
+        rows: [
+          ['Good Friday Agreement', '1998', 'Northern Ireland (UK & Ireland)', 'Largely ended sectarian violence; power-sharing government'],
+          ['Dayton Agreement', '1995', 'Bosnia and Herzegovina', 'Stopped the war; redrew internal borders and institutions'],
+          ['Camp David Accords', '1978', 'Egypt and Israel', 'Established peace and the return of the Sinai Peninsula'],
+          ['Colombian Peace Agreement', '2016', 'Colombia (government & FARC)', 'Disarmament; reintegration of fighters into communities'],
+          ['Comprehensive Peace Agreement', '2005', 'Sudan / South Sudan', 'Ended civil war; led to a referendum on independence'],
+        ],
+        caption:
+          'Choose ONE agreement, then frame a research question linking it to a community and a specific change (social, political or economic).',
+      },
+    },
     tasks: [
       {
         label: 'a',
@@ -246,7 +304,18 @@ export const questions: Question[] = [
       'Water stress occurs when the demand for safe water is greater than the amount available in a country or region.\n\n' +
       'Look at **Source C** below, a map by the World Resources Institute, and answer the questions that follow.\n\n' +
       'Source C — **Global Water Stress**. A world choropleth map shading each country by its level of water stress: Extremely high (>80%), High (40–80%), Medium–high (20–40%), Low–medium (10–20%), Low (<10%), and Low water use. (*Water stress: when demand for safe, usable water in a country exceeds the supply.)',
-    nativeContent: 'water_stress_map', // ARTEFACT: interactive Source C choropleth (hover region + legend spotlight)
+    // Source C is rendered once, via the captioned ChoroplethWorld artefact below.
+    artefact: {
+      component: 'ChoroplethWorld',
+      caption:
+        'Source C — Global Water Stress (World Resources Institute). Hover a country to read its level of water stress; click a legend band to spotlight every country at that level.',
+      data: {
+        title: 'Source C — Global Water Stress',
+        source: 'World Resources Institute',
+        caption:
+          'Each country is shaded by its level of water stress (the ratio of demand for safe water to the supply available). The map shows where stress is highest and lowest, but not the causes.',
+      },
+    },
     tasks: [
       { label: 'a', text: '**State** the origin of **Source C**.', marks: 1, ph: 'World Resources Institute (wri.org).' },
       { label: 'b', text: '**State** the purpose of **Source C**.', marks: 1, ph: "To inform on countries' exposure to water stress." },
@@ -261,7 +330,18 @@ export const questions: Question[] = [
     topic: 'Water stress — global cooperation',
     marks: 2,
     stem: '**Source C** (Global Water Stress, World Resources Institute) is repeated here for information.',
-    nativeContent: 'water_stress_map', // ARTEFACT: interactive Source C choropleth (repeated)
+    // Source C is rendered once, via the captioned ChoroplethWorld artefact below.
+    artefact: {
+      component: 'ChoroplethWorld',
+      caption:
+        'Source C — Global Water Stress (repeated). Hover to see which countries face the most stress; these are the places the global community could be asked to support.',
+      data: {
+        title: 'Source C — Global Water Stress',
+        source: 'World Resources Institute',
+        caption:
+          'The countries shaded as extremely high or high water stress are those most likely to need international support such as aid, technology or shared management of rivers.',
+      },
+    },
     tasks: [
       {
         label: '',
@@ -280,7 +360,18 @@ export const questions: Question[] = [
     stem:
       '**Source C** (Global Water Stress, World Resources Institute) is repeated here for information.\n\n' +
       'Experts are predicting that water stress will become worse in the future. Global water demand is projected to increase by 20% to 25% by 2050.',
-    nativeContent: 'water_stress_map', // ARTEFACT: interactive Source C choropleth (repeated)
+    // Source C is rendered once, via the captioned ChoroplethWorld artefact below.
+    artefact: {
+      component: 'ChoroplethWorld',
+      caption:
+        'Source C — Global Water Stress (repeated). Hover a country already shaded extremely high or high to picture how rising demand by 2050 could deepen its future impacts.',
+      data: {
+        title: 'Source C — Global Water Stress',
+        source: 'World Resources Institute',
+        caption:
+          'With global water demand projected to rise 20–25% by 2050, the countries already shaded extremely high or high are most exposed to worsening future impacts on a named country or region.',
+      },
+    },
     tasks: [
       {
         label: '',
@@ -296,6 +387,27 @@ export const questions: Question[] = [
     type: 'extended',
     topic: 'Extended essay — technology & natural environments',
     marks: 24,
+    artefact: {
+      component: 'InteractiveChart',
+      caption:
+        'How technology can harm OR protect different biomes (illustrative data) — hover a bar for its value, or toggle a series in the legend. Use it as evidence to weigh different perspectives; reference at least one named biome in your essay. (Do not write about water stress.)',
+      data: {
+        kind: 'bar',
+        title: 'Technological impact on natural environments, by biome',
+        source: 'MYP Integrated Humanities — illustrative comparison (not exam data)',
+        x: {
+          label: 'Biome',
+          categories: ['Tropical rainforest', 'Desert', 'Polar / tundra', 'Ocean / coral reef'],
+        },
+        y: { label: 'Relative impact (index, largest = 100)', min: 0, max: 100, ticks: [0, 20, 40, 60, 80, 100] },
+        series: [
+          { name: 'Harm: habitat lost to technology', color: '#c2255c', points: [92, 48, 70, 80] },
+          { name: 'Harm: pollution / emissions', color: '#e8590c', points: [75, 40, 55, 88] },
+          { name: 'Protection: monitoring & conservation tech', color: '#2f9e44', points: [60, 52, 78, 66] },
+          { name: 'Protection: renewable / cleaner technology', color: '#1971c2', points: [48, 90, 35, 50] },
+        ],
+      },
+    },
     tasks: [
       {
         label: '',

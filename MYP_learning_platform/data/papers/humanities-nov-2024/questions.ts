@@ -91,6 +91,28 @@ export const questions: Question[] = [
     marks: 2,
     stem:
       'In 2020, the United Nations stated that “the estimated number of international migrants has increased over the past five decades.”',
+    artefact: {
+      component: 'NetworkGraph',
+      caption:
+        'Drivers behind the rise in international migration over the past five decades — hover or tap a driver to read how it has made moving across borders easier or more necessary. Use it to prompt your own reason; your answer must be in your own words.',
+      data: {
+        title: 'Why international migration has increased (1970–2020)',
+        source: 'MYP Integrated Humanities — concept web',
+        center: {
+          label: 'More migration',
+          detail: 'The estimated number of international migrants has risen steadily over the past five decades.',
+          color: '#1e293b',
+        },
+        nodes: [
+          { id: 'transport', label: 'Cheaper transport', color: '#1971c2', detail: 'Faster, more affordable air and sea travel makes long-distance moves possible for far more people than 50 years ago.' },
+          { id: 'communication', label: 'Global communication', color: '#0b7285', detail: 'The internet and mobile phones let people learn about opportunities abroad and stay in touch with family back home.' },
+          { id: 'work', label: 'Work & wages', color: '#2f9e44', detail: 'Large wage gaps between countries pull workers toward places offering better-paid jobs and labour shortages.' },
+          { id: 'conflict', label: 'Conflict & persecution', color: '#c2255c', detail: 'War, instability and persecution push people to seek safety across borders as refugees and asylum seekers.' },
+          { id: 'climate', label: 'Environmental change', color: '#e8590c', detail: 'Drought, flooding and other climate pressures force some communities to move in search of liveable conditions.' },
+          { id: 'networks', label: 'Migrant networks', color: '#9c36b5', detail: 'Established diaspora communities help newcomers settle, lowering the cost and risk of following the same route.' },
+        ],
+      },
+    },
     tasks: [
       {
         label: '',
@@ -106,6 +128,28 @@ export const questions: Question[] = [
     type: 'extended',
     topic: 'Impact of migration on a country or region',
     marks: 2,
+    artefact: {
+      component: 'NetworkGraph',
+      caption:
+        'Impacts migration can have on a country or region — hover or tap an impact to see how it can be positive and the negative consequence it can carry. Use it to prompt your own example; your answer must be in your own words.',
+      data: {
+        title: 'Impacts of migration on a country or region',
+        source: 'MYP Integrated Humanities — concept web',
+        center: {
+          label: 'Migration',
+          detail: 'People moving into or out of a country or region can affect it in many ways.',
+          color: '#1e293b',
+        },
+        nodes: [
+          { id: 'economy', label: 'Economy', color: '#2f9e44', detail: 'Positive: migrant workers fill labour shortages and pay taxes. Negative: some fear competition for jobs or downward pressure on wages.' },
+          { id: 'culture', label: 'Culture & diversity', color: '#9c36b5', detail: 'Positive: new food, languages and traditions enrich the community. Negative: tensions can arise if integration is poor.' },
+          { id: 'services', label: 'Public services', color: '#1971c2', detail: 'Positive: migrants often staff hospitals and schools. Negative: rapid arrivals can strain housing, healthcare and schooling.' },
+          { id: 'population', label: 'Population & ageing', color: '#0b7285', detail: 'Positive: younger migrants can offset an ageing population. Negative: the origin region may lose its working-age people.' },
+          { id: 'remittances', label: 'Remittances', color: '#f08c00', detail: 'Positive: money sent home supports families and the origin economy. Negative: heavy reliance on remittances can be unstable.' },
+          { id: 'braindrain', label: 'Skills & “brain drain”', color: '#c2255c', detail: 'Positive: destination gains skilled workers. Negative: the origin country can lose doctors, teachers and engineers it trained.' },
+        ],
+      },
+    },
     tasks: [
       {
         label: '',
@@ -192,6 +236,23 @@ export const questions: Question[] = [
     marks: 12,
     stem:
       'Following your work with the city officials of Madrid on the social integration of migrants, you have been asked by another city’s local government to plan an investigation into the economic integration of migrants.',
+    artefact: {
+      component: 'DataTableInteractive',
+      caption:
+        'The four sources you may choose from in part (c) — click a row to pin the source you are evaluating. The data type and viewpoint columns are prompts to weigh each source’s usefulness for an investigation into economic integration; build your own judgement in your answer.',
+      data: {
+        title: 'Sources to choose from — economic integration of migrants',
+        source: "Another city’s local government",
+        headers: ['Source', 'Type of data', 'Likely viewpoint', 'Directly about the economy?'],
+        rows: [
+          ['Local newspaper article about migrants’ countries of origin', 'Secondary · qualitative', 'Journalist', 'No — about origin, not jobs/wages'],
+          ['Statistics on the wages of migrants in the community', 'Secondary · quantitative', 'Official statistics', 'Yes — wages are an economic measure'],
+          ['Interview transcript with the director of the community centre', 'Primary · qualitative', 'Community worker', 'Partly — first-hand but one perspective'],
+          ['Article from an NGO website on the most common jobs given to migrants', 'Secondary · qualitative', 'NGO / advocacy', 'Yes — employment of migrants'],
+        ],
+        caption: 'Use the columns as prompts only; in part (c) select ONE source and explain in detail whether it would benefit your investigation.',
+      },
+    },
     tasks: [
       {
         label: 'a',
@@ -419,6 +480,30 @@ export const questions: Question[] = [
     stem:
       'In the past, gross domestic product (GDP) was the main focus when measuring development. Recently, other indicators measuring different aspects of life such as population dynamics, education and quality of life have also been used.\n\n' +
       'Write a well-structured essay in response to the following.',
+    artefact: {
+      component: 'DataTableInteractive',
+      caption:
+        'A range of development indicators for four contrasting example countries — click a row to pin a country, or compare across the columns. Notice how a country can rank differently on economic measures (GDP per capita) than on social ones (life expectancy, literacy, schooling). Use it to prompt examples and perspectives; the figures are illustrative.',
+      data: {
+        title: 'Development indicators — economic vs social measures',
+        source: 'Illustrative example data — MYP Integrated Humanities',
+        headers: [
+          'Country (example)',
+          'GDP per capita (US$)',
+          'Life expectancy (yrs)',
+          'Adult literacy (%)',
+          'Mean years schooling',
+          'Population growth (%/yr)',
+        ],
+        rows: [
+          ['Country W (high-income)', '52,000', '82', '99', '13.4', '0.3'],
+          ['Country X (oil-rich)', '38,000', '75', '94', '9.8', '1.6'],
+          ['Country Y (middle-income)', '9,500', '74', '95', '10.2', '0.9'],
+          ['Country Z (lower-income)', '2,100', '63', '71', '5.6', '2.7'],
+        ],
+        caption: 'GDP per capita alone can hide differences in health, education and population dynamics — the very aspects this essay asks you to weigh.',
+      },
+    },
     tasks: [
       {
         label: '',

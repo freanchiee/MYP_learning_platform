@@ -91,6 +91,27 @@ export const questions: Question[] = [
     topic: 'Population change — causes of rapid urbanisation',
     marks: 4,
     stem: 'Many cities in lower-income countries are experiencing rapid urbanisation.',
+    artefact: {
+      component: 'NetworkGraph',
+      caption:
+        'Causes of rapid urbanisation — hover or tap a spoke to read how that push or pull factor speeds up the growth of cities. Use it to prompt your own answer; you only need to explain ONE cause in your own words.',
+      data: {
+        title: 'Why cities in lower-income countries grow so fast',
+        source: 'MYP Geography — causes of rapid urbanisation (push & pull factors)',
+        center: {
+          label: 'Rapid urbanisation',
+          detail: 'The fast growth in the share of people living in towns and cities, driven mainly by rural-to-urban migration and high natural increase.',
+          color: '#1e293b',
+        },
+        nodes: [
+          { id: 'rural-jobs', label: 'Few rural jobs', color: '#e8590c', detail: 'PUSH: mechanised farming and low crop prices leave little paid work in the countryside, so people move to cities to find income.' },
+          { id: 'city-work', label: 'City jobs & wages', color: '#2f9e44', detail: 'PULL: factories, construction and services in the city offer more (and better-paid) work, attracting migrants from rural areas.' },
+          { id: 'services', label: 'Better services', color: '#1971c2', detail: 'PULL: cities tend to have more schools, hospitals and clean water, so families migrate hoping for better education and healthcare.' },
+          { id: 'natural-increase', label: 'Natural increase', color: '#9c36b5', detail: 'A young migrant population and falling death rates mean more births than deaths, so the urban population keeps rising on its own.' },
+          { id: 'disasters', label: 'Rural hardship', color: '#c2255c', detail: 'PUSH: drought, flooding or conflict can damage rural livelihoods, forcing people to leave the land and crowd into the nearest city.' },
+        ],
+      },
+    },
     tasks: [
       {
         label: '',
@@ -168,6 +189,27 @@ export const questions: Question[] = [
     stem:
       'You are a journalist working for the World Bank and will write an article for the website. The purpose of the article is to help readers understand the role of rural-to-urban migration in the growth of cities around the world. You will formulate your investigation around the following statement of inquiry.\n\n' +
       '**Statement of Inquiry:** Changes in populations can be impacted by time, place and space.',
+    artefact: {
+      component: 'InteractiveChart',
+      caption:
+        'Background data for your article — the growth of four cities over time (illustrative figures). Hover a point for its exact value, or toggle a city in the legend. Use it to ground your research question in a specific city, place and time period; it is not exam data and your article must be in your own words.',
+      data: {
+        kind: 'line',
+        title: 'Growth of selected cities, 1990–2030 (millions of people)',
+        source: 'MYP Geography — illustrative trends (after UN World Urbanization Prospects)',
+        x: {
+          label: 'Year',
+          categories: ['1990', '2000', '2010', '2020', '2030 (projected)'],
+        },
+        y: { label: 'Population', min: 0, max: 35, ticks: [0, 5, 10, 15, 20, 25, 30, 35], unit: 'million' },
+        series: [
+          { name: 'Delhi, India', color: '#1971c2', points: [9.7, 15.7, 22.1, 30.3, 34.7] },
+          { name: 'Mumbai, India', color: '#0b7285', points: [12.4, 16.1, 18.4, 20.4, 24.6] },
+          { name: 'Lagos, Nigeria', color: '#e8590c', points: [4.8, 7.3, 10.4, 14.9, 20.6] },
+          { name: 'Kano, Nigeria', color: '#2f9e44', points: [2.1, 2.9, 3.6, 4.6, 6.2] },
+        ],
+      },
+    },
     tasks: [
       {
         label: 'a',
@@ -213,6 +255,28 @@ export const questions: Question[] = [
       'You work for a company which builds new housing developments in growing cities. Some residents have raised concerns about the sustainability of new building projects in the local area. There will be a vote on whether to allow your company to continue building in the area. You must gain the support of locals so that they vote in your favour.\n\n' +
       'A community meeting has been arranged where you will give a speech.\n\n' +
       'Before you write, name the location and the type of development being built (for example — Location: Dharavi, Mumbai, India · Development: Affordable high-rise housing).',
+    artefact: {
+      component: 'VennOverlap',
+      caption:
+        'A development wins the vote when it is BOTH environmentally sustainable AND socially acceptable to residents — the overlap. Use the two circles as a prompt to choose the two sustainable ways you will explain in your speech; the strongest arguments sit in the middle.',
+      data: {
+        title: 'Winning the residents’ vote — what makes a development sustainable',
+        source: 'MYP Geography — sustainable urban development',
+        setA: {
+          label: 'Environmentally sustainable',
+          color: '#2f9e44',
+          items: ['Solar panels', 'Rainwater harvesting', 'Green/living roofs', 'Recycled materials'],
+        },
+        setB: {
+          label: 'Socially acceptable to residents',
+          color: '#1971c2',
+          items: ['Affordable rents', 'Parks & green space', 'Local jobs', 'Good transport links'],
+        },
+        overlapLabel: 'Energy-efficient affordable homes that locals support',
+        caption:
+          'Features on the left cut the development’s environmental footprint; those on the right win residents over. Ways that sit in the overlap — for example energy-efficient affordable housing or green community spaces — do both, so they are the most persuasive to explain in your speech.',
+      },
+    },
     tasks: [
       {
         label: '',

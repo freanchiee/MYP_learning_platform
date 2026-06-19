@@ -85,7 +85,7 @@ export const questions: Question[] = [
         label: '',
         text: 'Using data from **Source A**, **outline** the trend in global temperatures from 1960–2019.',
         marks: 2,
-        ph: 'State the overall trend AND quote data from the graph (e.g. an overall increase, with 2018 having the highest temperature).',
+        ph: 'State the overall trend AND quote data from the graph (e.g. an overall increase, with 2016 reaching the highest temperature difference of about +0.97 °C).',
       },
     ],
   },
@@ -96,6 +96,28 @@ export const questions: Question[] = [
     topic: 'Explaining a human cause of the climate trend',
     marks: 4,
     stem: '**Source A** is repeated for reference (the yearly average global temperature change from 1960 to 2019).',
+    artefact: {
+      component: 'NetworkGraph',
+      caption:
+        'Human activities and the greenhouse effect — hover or tap a spoke to read how that activity releases greenhouse gases that can warm the planet. Use it to prompt ONE activity to explain; your answer must be in your own words.',
+      data: {
+        title: 'How human activity can drive the temperature trend',
+        source: 'MYP Geography — concept web (illustrative)',
+        center: {
+          label: 'Global warming',
+          detail:
+            'Greenhouse gases (e.g. carbon dioxide, methane) build up in the atmosphere and trap heat, raising average global temperatures — the rising trend shown in Source A.',
+          color: '#1e293b',
+        },
+        nodes: [
+          { id: 'transport', label: 'Transport', color: '#e8590c', detail: 'Cars, lorries and planes burn petrol and diesel, releasing carbon dioxide that traps heat in the atmosphere.' },
+          { id: 'electricity', label: 'Burning fossil fuels for electricity', color: '#c2255c', detail: 'Coal- and gas-fired power stations burn fossil fuels to make electricity, releasing large amounts of carbon dioxide.' },
+          { id: 'deforestation', label: 'Deforestation', color: '#2f9e44', detail: 'Clearing forests removes trees that absorb carbon dioxide, so more of it stays in the atmosphere and traps heat.' },
+          { id: 'industry', label: 'Industry & factories', color: '#1971c2', detail: 'Manufacturing and heavy industry burn fuel and release greenhouse gases as a by-product of production.' },
+          { id: 'agriculture', label: 'Farming livestock', color: '#9c36b5', detail: 'Cattle and other livestock release methane, a powerful greenhouse gas, through digestion.' },
+        ],
+      },
+    },
     tasks: [
       {
         label: '',
@@ -311,6 +333,22 @@ export const questions: Question[] = [
     topic: 'Purpose & value of a source (Source D)',
     marks: 4,
     stem: '**Source D** (the forced-migration pictograph) is repeated to help you answer the questions that follow.',
+    artefact: {
+      component: 'InteractiveChart',
+      caption:
+        'Source D (repeated) — number of forced migrants in 2008 and 2018 (millions), by category. Hover a bar to read its value; click the legend to toggle a year. Consider what this source is for and what value it has in a newspaper article.',
+      data: {
+        kind: 'bar',
+        title: 'Source D — number of forced migrants in 2008 and 2018',
+        source: 'Newspaper article on forced migration (recreated)',
+        x: { label: 'Category of forced migrant', categories: ['Internally displaced people (IDPs)', 'Refugees', 'Asylum seekers'] },
+        y: { label: 'Number of people (millions)', min: 0, max: 45, ticks: [0, 10, 20, 30, 40], unit: 'million' },
+        series: [
+          { name: '2008', color: '#1971c2', points: [26, 15.2, 0.827] },
+          { name: '2018', color: '#e8590c', points: [41.3, 25.9, 3.5] },
+        ],
+      },
+    },
     tasks: [
       {
         label: 'a',
@@ -349,7 +387,7 @@ export const questions: Question[] = [
         baseLabel: 'No data shown',
         highlight: [
           'Colombia', 'China', 'India', 'Philippines', 'Syria', 'Yemen',
-          'South Sudan', 'Cuba', 'Mexico', 'Ecuador', 'Honduras', 'Haiti',
+          'S. Sudan', 'Cuba', 'Mexico', 'Ecuador', 'Honduras', 'Haiti',
           'Senegal', 'Italy', 'Israel', 'Fiji',
         ],
         caption:
@@ -378,6 +416,25 @@ export const questions: Question[] = [
     topic: 'Extended essay — benefits vs consequences of migration',
     marks: 24,
     stem: '"Migration creates more benefits for societies than negative consequences." To what extent do you agree with this statement?',
+    artefact: {
+      component: 'DataTableInteractive',
+      caption:
+        'Benefits and negative consequences of migration, by theme (illustrative — not exam data). Click a row to pin the points you want to weigh. Use your own MYP examples and named case studies in the essay; do not copy this table.',
+      data: {
+        title: 'Weighing migration: benefits vs negative consequences',
+        source: 'MYP Geography — illustrative comparison',
+        headers: ['Theme', 'Possible benefit for societies', 'Possible negative consequence'],
+        rows: [
+          ['Economy', 'Migrants fill labour shortages and pay taxes, helping the host economy grow.', 'Wages may be pushed down in some sectors; some send earnings (remittances) abroad.'],
+          ['Population & skills', 'New skills and a younger workforce help countries with ageing populations.', 'Source countries can suffer a "brain drain" as skilled workers leave.'],
+          ['Culture & society', 'Greater cultural diversity in food, language, music and ideas.', 'Social tension or discrimination can arise if integration is poor.'],
+          ['Services & housing', 'Migrants staff hospitals, transport and care services that communities rely on.', 'Rapid arrivals can strain housing, schools and healthcare in the short term.'],
+          ['Families & home country', 'Remittances sent home reduce poverty and fund education for families.', 'Families may be separated; home regions can lose working-age people.'],
+        ],
+        caption:
+          'A balanced answer weighs benefits AND negative consequences and reaches a supported judgement ("to what extent"). Strengthen each point with a named example from your MYP studies.',
+      },
+    },
     tasks: [
       {
         label: '',

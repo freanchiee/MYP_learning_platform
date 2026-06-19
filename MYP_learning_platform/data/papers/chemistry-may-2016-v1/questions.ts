@@ -19,6 +19,13 @@ export const questions: Question[] = [
     topic: 'Exothermic Reactions and Magnesium Chemistry',
     marks: 8,
     stem: 'In cold climates, chemical hand warmers provide extra warmth. Some hand warmers contain magnesium powder, which releases energy when exposed to oxygen.\n\nThe equation for the reaction is:\n\n2Mg + O₂ → 2MgO',
+    artefact: {
+      component: 'GenericSVG',
+      data: {
+        svg: '<svg viewBox="0 0 560 280" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><rect width="560" height="280" fill="#ffffff"/><text x="280" y="24" font-size="14" font-weight="700" text-anchor="middle" fill="#1f2d3a">Energy profile: 2Mg + O₂ → 2MgO</text><line x1="70" y1="240" x2="520" y2="240" stroke="#1f2d3a" stroke-width="1.5"/><line x1="70" y1="40" x2="70" y2="240" stroke="#1f2d3a" stroke-width="1.5"/><text x="22" y="150" font-size="11" font-weight="600" fill="#475569" transform="rotate(-90 22 150)">Energy</text><text x="295" y="266" font-size="11" font-weight="600" text-anchor="middle" fill="#475569">Progress of reaction →</text><line x1="90" y1="90" x2="200" y2="90" stroke="#0b7285" stroke-width="3"/><text x="145" y="82" font-size="11" font-weight="700" text-anchor="middle" fill="#0b7285">2Mg + O₂</text><path d="M200 90 C 250 90, 270 70, 300 70 C 330 70, 350 90, 390 200" fill="none" stroke="#94a3ad" stroke-width="2.5" stroke-dasharray="5 4"/><line x1="390" y1="200" x2="500" y2="200" stroke="#e8590c" stroke-width="3"/><text x="445" y="218" font-size="11" font-weight="700" text-anchor="middle" fill="#e8590c">2MgO (product)</text><line x1="220" y1="90" x2="220" y2="200" stroke="#9c36b5" stroke-width="1.2" stroke-dasharray="3 3"/><text x="232" y="150" font-size="10" fill="#9c36b5">energy released</text><text x="232" y="164" font-size="10" fill="#9c36b5">to surroundings (ΔH &lt; 0)</text><text x="90" y="262" font-size="10" fill="#94a3ad">Products lie below reactants — heat is given out to the surroundings.</text></svg>',
+      },
+      caption: 'Reaction profile for magnesium burning: the products (MgO) sit lower in energy than the reactants, so heat is released to the surroundings.',
+    },
     tasks: [
       {
         label: 'a',
@@ -61,6 +68,34 @@ export const questions: Question[] = [
     topic: 'Crystallization and Acid-Base Neutralization',
     marks: 10,
     stem: 'Reusable hand warmers contain a saturated aqueous solution of calcium acetate (Ca(CH₃COO)₂) that releases heat when it undergoes crystallization.\n\ncalcium acetate + water ⇌ calcium acetate crystals + heat',
+    artefact: {
+      component: 'LineGraph',
+      data: {
+        title: 'Solubility of calcium acetate in water',
+        xLabel: 'Temperature',
+        yLabel: 'Maximum mass dissolved per 100 g water',
+        xUnit: '°C',
+        yUnit: 'g',
+        xMin: 0,
+        xMax: 80,
+        yMin: 30,
+        yMax: 40,
+        xStep: 10,
+        yStep: 2,
+        dataPoints: [
+          { x: 0, y: 37.4 },
+          { x: 10, y: 36.0 },
+          { x: 20, y: 34.7 },
+          { x: 30, y: 33.8 },
+          { x: 40, y: 33.2 },
+          { x: 50, y: 32.7 },
+          { x: 60, y: 32.3 },
+          { x: 70, y: 31.9 },
+          { x: 80, y: 31.6 },
+        ],
+      },
+      caption: 'Solubility curve for calcium acetate. A solution is saturated when it holds the maximum mass shown for that temperature; cooling a saturated solution forces excess solute to crystallise out.',
+    },
     tasks: [
       {
         label: 'a',
@@ -95,6 +130,13 @@ export const questions: Question[] = [
     topic: 'Ocean Acidification and Catalysts',
     marks: 11,
     stem: 'The burning of fossil fuels releases carbon dioxide (CO₂) into the atmosphere. A large proportion of this CO₂ is absorbed by the world\'s oceans, where it dissolves to form carbonic acid (H₂CO₃). This lowers the pH of seawater, a process known as ocean acidification.\n\nScientists have developed nanoparticle photocatalysts based on titanium dioxide (TiO₂) that can be embedded in materials such as glass and concrete. These photocatalysts help break down pollutant gases and convert CO₂ into useful compounds. The catalysts are not consumed in the reactions they accelerate.',
+    artefact: {
+      component: 'GenericSVG',
+      data: {
+        svg: '<svg viewBox="0 0 560 300" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><rect width="560" height="300" fill="#ffffff"/><text x="280" y="24" font-size="14" font-weight="700" text-anchor="middle" fill="#1f2d3a">Effect of a catalyst on activation energy</text><line x1="70" y1="250" x2="525" y2="250" stroke="#1f2d3a" stroke-width="1.5"/><line x1="70" y1="45" x2="70" y2="250" stroke="#1f2d3a" stroke-width="1.5"/><text x="24" y="150" font-size="11" font-weight="600" fill="#475569" transform="rotate(-90 24 150)">Energy</text><text x="297" y="280" font-size="11" font-weight="600" text-anchor="middle" fill="#475569">Progress of reaction →</text><line x1="90" y1="170" x2="160" y2="170" stroke="#1f2d3a" stroke-width="2.5"/><text x="125" y="162" font-size="10" font-weight="700" text-anchor="middle" fill="#1f2d3a">reactants</text><line x1="430" y1="210" x2="505" y2="210" stroke="#1f2d3a" stroke-width="2.5"/><text x="467" y="228" font-size="10" font-weight="700" text-anchor="middle" fill="#1f2d3a">products</text><path d="M160 170 C 220 170, 250 70, 295 70 C 340 70, 370 210, 430 210" fill="none" stroke="#e8590c" stroke-width="2.8"/><path d="M160 170 C 215 170, 245 120, 295 120 C 345 120, 375 210, 430 210" fill="none" stroke="#2f9e44" stroke-width="2.8" stroke-dasharray="6 4"/><line x1="295" y1="70" x2="295" y2="170" stroke="#e8590c" stroke-width="1.2"/><text x="304" y="120" font-size="10" font-weight="700" fill="#e8590c">Eₐ without catalyst</text><line x1="335" y1="120" x2="335" y2="170" stroke="#2f9e44" stroke-width="1.2"/><text x="344" y="145" font-size="10" font-weight="700" fill="#2f9e44">Eₐ with catalyst (lower)</text><circle cx="455" cy="60" r="5" fill="#e8590c"/><text x="467" y="64" font-size="10" fill="#475569">no catalyst</text><circle cx="455" cy="78" r="5" fill="#2f9e44"/><text x="467" y="82" font-size="10" fill="#475569">with catalyst</text></svg>',
+      },
+      caption: 'A catalyst provides an alternative pathway with a lower activation energy (green, dashed). Reactant and product energies are unchanged — only the energy barrier is reduced.',
+    },
     tasks: [
       {
         label: 'a',
@@ -123,6 +165,13 @@ export const questions: Question[] = [
     topic: 'Esters and Fruit Aromas',
     marks: 3,
     stem: 'The aroma of fruits comes from characteristic ester molecules. Cherry aroma is mainly caused by ethyl formate (HCOOC₂H₅) and pineapple aroma by ethyl butanoate (C₃H₇COOC₂H₅).\n\nEthyl butanoate is formed in a reaction between butanoic acid and an alcohol.',
+    artefact: {
+      component: 'GenericSVG',
+      data: {
+        svg: '<svg viewBox="0 0 560 240" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><rect width="560" height="240" fill="#ffffff"/><text x="280" y="24" font-size="14" font-weight="700" text-anchor="middle" fill="#1f2d3a">Two fruit-aroma esters</text><g><rect x="40" y="44" width="220" height="150" rx="8" fill="#fff7ed" stroke="#e8590c" stroke-width="1.2"/><text x="150" y="66" font-size="12" font-weight="700" text-anchor="middle" fill="#e8590c">Ethyl formate (cherry)</text><text x="150" y="120" font-size="20" font-weight="700" text-anchor="middle" fill="#1f2d3a">H–C(=O)–O–C₂H₅</text><text x="150" y="150" font-size="11" text-anchor="middle" fill="#475569">HCOOC₂H₅</text><text x="150" y="176" font-size="10" text-anchor="middle" fill="#94a3ad">–COO– ester linkage</text></g><g><rect x="300" y="44" width="220" height="150" rx="8" fill="#eef9f1" stroke="#2f9e44" stroke-width="1.2"/><text x="410" y="66" font-size="12" font-weight="700" text-anchor="middle" fill="#2f9e44">Ethyl butanoate (pineapple)</text><text x="410" y="120" font-size="20" font-weight="700" text-anchor="middle" fill="#1f2d3a">C₃H₇–C(=O)–O–C₂H₅</text><text x="410" y="150" font-size="11" text-anchor="middle" fill="#475569">C₃H₇COOC₂H₅</text><text x="410" y="176" font-size="10" text-anchor="middle" fill="#94a3ad">acid part | alcohol part</text></g><text x="280" y="222" font-size="10" text-anchor="middle" fill="#94a3ad">Each molecule contains the characteristic –COO– (ester) functional group.</text></svg>',
+      },
+      caption: 'Both fruit aromas contain the –COO– ester functional group, formed when a carboxylic acid reacts with an alcohol.',
+    },
     tasks: [
       {
         label: 'a',
@@ -151,6 +200,18 @@ export const questions: Question[] = [
     topic: 'States of Matter and Phase Changes',
     marks: 10,
     stem: 'The diagram below shows the state changes for iodine, which is a solid at room temperature. Three containers are shown, labelled Container 1 (left), Container 2 (middle), and Container 3 (right), each illustrating a different arrangement of particles.',
+    artefact: {
+      component: 'ParticleSim',
+      data: {
+        title: 'Particle arrangements of iodine in three containers',
+        mode: 'states',
+        substance: 'iodine',
+        containers: ['Container 1 (left)', 'Container 2 (middle)', 'Container 3 (right)'],
+        options: ['Solid', 'Liquid', 'Gas'],
+        particleCount: 36,
+      },
+      caption: 'Each sealed container shows iodine particles in a different state. Compare how closely packed the particles are and how they move to identify each state of matter.',
+    },
     tasks: [
       {
         label: 'a',
@@ -163,21 +224,21 @@ export const questions: Question[] = [
       },
       {
         label: 'b',
-        text: 'For stage **B to C**: state the name of the process, then use kinetic theory to **explain** what is happening to the particles in the iodine.',
+        text: 'For the change from the **solid** container to the **liquid** container: state the name of the process, then use kinetic theory to **explain** what is happening to the particles in the iodine.',
         marks: 3,
         ph: 'State: melting; explain particle energy, movement, spacing and IMF changes',
       },
       {
         label: 'c',
-        text: 'For stage **E to D**: state the name of the process, then use kinetic theory to **explain** what is happening to the particles.',
+        text: 'For the change from the **gas** container to the **liquid** container: state the name of the process, then use kinetic theory to **explain** what is happening to the particles.',
         marks: 3,
         ph: 'State: condensation; explain particle energy, movement, intermolecular force changes',
       },
       {
         label: 'd',
-        text: 'For a stage in which there is **no change of state**: state the name of the process, then use kinetic theory to **explain** what is happening to the particles.',
+        text: 'For a process in which iodine **does not change state** (for example, warming the gas in one container): state the name of the process, then use kinetic theory to **explain** what is happening to the particles.',
         marks: 3,
-        ph: 'State process (e.g. cooling gas); explain kinetic energy, particle spacing, entropy changes',
+        ph: 'State process (e.g. heating/cooling a gas); explain kinetic energy, particle spacing, entropy changes',
       },
     ],
   },
@@ -188,6 +249,33 @@ export const questions: Question[] = [
     topic: 'Ethanol Boiling Point and Scientific Method',
     marks: 27,
     stem: 'Ethanol (C₂H₅OH) is a compound made from three different elements bonded together.\n\nThe boiling temperature of ethanol at standard pressure is 78.4 °C. The table shows the boiling temperature of ethanol measured at different IB schools located at different heights above sea level (altitude).',
+    artefact: {
+      component: 'LineGraph',
+      data: {
+        title: 'Boiling temperature of ethanol vs altitude',
+        xLabel: 'Altitude above sea level',
+        yLabel: 'Boiling temperature of ethanol',
+        xUnit: 'm',
+        yUnit: '°C',
+        lobf: true,
+        xMin: 0,
+        xMax: 3000,
+        yMin: 66,
+        yMax: 80,
+        xStep: 500,
+        yStep: 2,
+        dataPoints: [
+          { x: 0, y: 78.4 },
+          { x: 500, y: 76.7 },
+          { x: 1000, y: 75.0 },
+          { x: 1500, y: 73.3 },
+          { x: 2000, y: 71.6 },
+          { x: 2500, y: 69.9 },
+          { x: 3000, y: 68.2 },
+        ],
+      },
+      caption: 'Boiling temperature of ethanol falls by about 1.7 °C per 500 m of altitude. Read off the graph to find a missing altitude or boiling temperature for the table.',
+    },
     tasks: [
       {
         label: 'a',
@@ -234,6 +322,22 @@ export const questions: Question[] = [
     topic: 'Atmospheric CO₂ and Data Analysis',
     marks: 14,
     stem: 'Use the simulation to collect samples of gas from each of the required parts of the atmosphere in the table below. Record the percentage of carbon dioxide obtained at each level.',
+    artefact: {
+      component: 'DataTable',
+      data: {
+        headers: ['Altitude / km', 'Carbon dioxide / %'],
+        rows: [
+          ['0', '0.041'],
+          ['5', '0.038'],
+          ['10', '0.035'],
+          ['15', '0.058'],
+          ['20', '0.029'],
+          ['25', '0.026'],
+          ['30', '0.023'],
+        ],
+      },
+      caption: 'Percentage of carbon dioxide collected at each altitude. Plot altitude (x-axis) against CO₂ % (y-axis); one reading does not follow the downward trend.',
+    },
     tasks: [
       {
         label: 'a',
@@ -280,6 +384,13 @@ export const questions: Question[] = [
     topic: 'Haber Process — Balanced Equations and Ammonia Uses',
     marks: 5,
     stem: 'Nitrogen-based fertilizers are essential for modern agriculture. The Haber process synthesizes ammonia from atmospheric nitrogen and hydrogen gas, providing the raw material for fertilizer production.\n\nThe word equation for the reaction is:\n\nnitrogen + hydrogen → ammonia',
+    artefact: {
+      component: 'GenericSVG',
+      data: {
+        svg: '<svg viewBox="0 0 560 220" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><rect width="560" height="220" fill="#ffffff"/><text x="280" y="26" font-size="14" font-weight="700" text-anchor="middle" fill="#1f2d3a">The Haber process — counting atoms</text><g><circle cx="70" cy="110" r="18" fill="#1971c2"/><circle cx="98" cy="110" r="18" fill="#1971c2"/><text x="84" y="150" font-size="12" font-weight="700" text-anchor="middle" fill="#1f2d3a">N₂</text><text x="84" y="166" font-size="9" text-anchor="middle" fill="#94a3ad">1 molecule</text></g><text x="150" y="116" font-size="24" font-weight="700" text-anchor="middle" fill="#475569">+</text><g><circle cx="190" cy="90" r="12" fill="#e8590c"/><circle cx="214" cy="90" r="12" fill="#e8590c"/><circle cx="190" cy="120" r="12" fill="#e8590c"/><circle cx="214" cy="120" r="12" fill="#e8590c"/><circle cx="190" cy="150" r="12" fill="#e8590c"/><circle cx="214" cy="150" r="12" fill="#e8590c"/><text x="252" y="116" font-size="14" font-weight="700" text-anchor="middle" fill="#1f2d3a">3H₂</text></g><text x="300" y="116" font-size="24" font-weight="700" text-anchor="middle" fill="#475569">→</text><g><circle cx="350" cy="92" r="15" fill="#1971c2"/><circle cx="334" cy="118" r="9" fill="#e8590c"/><circle cx="366" cy="118" r="9" fill="#e8590c"/><circle cx="350" cy="74" r="9" fill="#e8590c"/><circle cx="430" cy="92" r="15" fill="#1971c2"/><circle cx="414" cy="118" r="9" fill="#e8590c"/><circle cx="446" cy="118" r="9" fill="#e8590c"/><circle cx="430" cy="74" r="9" fill="#e8590c"/><text x="390" y="158" font-size="14" font-weight="700" text-anchor="middle" fill="#1f2d3a">2NH₃</text></g><circle cx="470" cy="60" r="7" fill="#1971c2"/><text x="482" y="64" font-size="10" fill="#475569">nitrogen</text><circle cx="470" cy="80" r="7" fill="#e8590c"/><text x="482" y="84" font-size="10" fill="#475569">hydrogen</text><text x="280" y="200" font-size="11" text-anchor="middle" fill="#475569">2 N atoms and 6 H atoms on each side — the equation is balanced.</text></svg>',
+      },
+      caption: 'One N₂ molecule reacts with three H₂ molecules to make two NH₃ molecules. Count the atoms to balance the equation and add state symbols (all gases).',
+    },
     tasks: [
       {
         label: 'a',
@@ -302,6 +413,20 @@ export const questions: Question[] = [
     topic: 'Fertilizer Salts, Hypothesis Evaluation and Isotopes',
     marks: 7,
     stem: 'Many salts are used as agricultural fertilizers. The table shows a list of fertilizer salts, their taste, and their uses.\n\n| Salt | Taste | Uses |\n|---|---|---|\n| Ammonium sulfate (NH₄)₂SO₄ | Slightly salty | Acidifying fertilizer |\n| Ammonium nitrate NH₄NO₃ | Slightly salty | High-nitrogen fertilizer |\n| Potassium chloride KCl | Salty | Potassium fertilizer |\n| Sodium chloride NaCl | Salty | Not used as fertilizer; seasoning |\n| Potassium nitrate KNO₃ | Slightly salty | Potassium/nitrogen fertilizer |\n\nUsing information from the table, a student hypothesized: "The salty taste of salts is caused by the presence of an ammonium ion (NH₄⁺)."',
+    artefact: {
+      component: 'DataTable',
+      data: {
+        headers: ['Salt', 'Contains NH₄⁺?', 'Taste', 'Uses'],
+        rows: [
+          ['Ammonium sulfate (NH₄)₂SO₄', 'yes', 'slightly salty', 'Acidifying fertilizer'],
+          ['Ammonium nitrate NH₄NO₃', 'yes', 'slightly salty', 'High-nitrogen fertilizer'],
+          ['Potassium chloride KCl', 'no', 'salty', 'Potassium fertilizer'],
+          ['Sodium chloride NaCl', 'no', 'salty', 'Seasoning (not a fertilizer)'],
+          ['Potassium nitrate KNO₃', 'no', 'slightly salty', 'Potassium/nitrogen fertilizer'],
+        ],
+      },
+      caption: 'A "Contains NH₄⁺?" column is added so you can test the hypothesis: salts that taste fully salty (KCl, NaCl) contain no ammonium ion.',
+    },
     tasks: [
       {
         label: 'a',
@@ -330,6 +455,13 @@ export const questions: Question[] = [
     topic: 'Sodium Carbonate — Fire Safety and Equilibrium',
     marks: 9,
     stem: 'Sodium carbonate (Na₂CO₃) is used as a cleaning agent and as a flux in glass-making. When treated with acid, it releases carbon dioxide gas, which can be used to extinguish fires:\n\nNa₂CO₃(s) + 2HCl(aq) → 2NaCl(aq) + H₂O(l) + CO₂(g)\n\nNa₂CO₃ is an amphoteric compound that can react with both acids and bases. It is used in laundry products to remove acidic stains such as wine and coffee.\n\nThe carbonate ion is in equilibrium with water:\n\nCO₃²⁻(aq) + H₂O(l) ⇌ HCO₃⁻(aq) + OH⁻(aq)',
+    artefact: {
+      component: 'GenericSVG',
+      data: {
+        svg: '<svg viewBox="0 0 560 240" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><rect width="560" height="240" fill="#ffffff"/><text x="280" y="26" font-size="14" font-weight="700" text-anchor="middle" fill="#1f2d3a">Le Chatelier: adding acid to the carbonate equilibrium</text><rect x="40" y="70" width="200" height="70" rx="8" fill="#eef4f7" stroke="#0b7285" stroke-width="1.2"/><text x="140" y="100" font-size="13" font-weight="700" text-anchor="middle" fill="#0b7285">CO₃²⁻ + H₂O</text><text x="140" y="122" font-size="10" text-anchor="middle" fill="#64748b">left side (reactants)</text><rect x="320" y="70" width="200" height="70" rx="8" fill="#fff7ed" stroke="#e8590c" stroke-width="1.2"/><text x="420" y="100" font-size="13" font-weight="700" text-anchor="middle" fill="#e8590c">HCO₃⁻ + OH⁻</text><text x="420" y="122" font-size="10" text-anchor="middle" fill="#64748b">right side (products)</text><line x1="244" y1="95" x2="316" y2="95" stroke="#94a3ad" stroke-width="2"/><polygon points="316,95 308,91 308,99" fill="#94a3ad"/><line x1="316" y1="115" x2="244" y2="115" stroke="#94a3ad" stroke-width="2"/><polygon points="244,115 252,111 252,119" fill="#94a3ad"/><g><line x1="250" y1="170" x2="320" y2="170" stroke="#2f9e44" stroke-width="3"/><polygon points="320,170 310,164 310,176" fill="#2f9e44"/><text x="285" y="190" font-size="11" font-weight="700" text-anchor="middle" fill="#2f9e44">shift right</text></g><text x="40" y="170" font-size="11" fill="#475569">Add acid:</text><text x="40" y="188" font-size="11" fill="#475569">H⁺ removes OH⁻ → equilibrium shifts right →</text><text x="40" y="206" font-size="11" fill="#475569">CO₃²⁻ is used up (decreases); HCO₃⁻ increases.</text></svg>',
+      },
+      caption: 'Adding acid removes OH⁻ from the right-hand side, so the position of equilibrium shifts right to replace it — the amount of CO₃²⁻ falls and HCO₃⁻ rises.',
+    },
     tasks: [
       {
         label: 'a',
@@ -358,6 +490,24 @@ export const questions: Question[] = [
     topic: 'Agar Desserts — Food Additives and Ethical Implications',
     marks: 16,
     stem: 'Agar-agar is a polysaccharide derived from red algae. It is used worldwide as a vegan alternative to gelatine. When agar-agar is dissolved in hot water with sugar, citric acid, artificial flavour, artificial colouring, and carrageenan, then cooled below 40 °C, it forms a firm gel network.\n\nIngredients (% mass): Agar-agar 2.5%, Sugar 85.3%, Citric acid 5.8%, Artificial stabilizer 2.9%, Artificial colourings 1.8%, Artificial flavouring 1.2%, Carrageenan 0.5%',
+    artefact: {
+      component: 'PieChart',
+      data: {
+        kind: 'doughnut',
+        title: 'Composition of the agar dessert (% mass)',
+        unit: '%',
+        series: [
+          { name: 'Sugar', value: 85.3 },
+          { name: 'Citric acid', value: 5.8 },
+          { name: 'Artificial stabilizer', value: 2.9 },
+          { name: 'Agar-agar', value: 2.5 },
+          { name: 'Artificial colourings', value: 1.8 },
+          { name: 'Artificial flavouring', value: 1.2 },
+          { name: 'Carrageenan', value: 0.5 },
+        ],
+      },
+      caption: 'Percentage composition by mass of the agar dessert. Hover a slice to read its share; use the ingredient list to decide which components a lemon drink needs.',
+    },
     tasks: [
       {
         label: 'a',

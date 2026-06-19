@@ -45,6 +45,24 @@ export const questions: Question[] = [
     type: 'extended',
     topic: 'Trade — causes of global inequality',
     marks: 2,
+    artefact: {
+      component: 'InteractiveChart',
+      caption:
+        'Average income per person varies sharply between world regions (illustrative data) — hover a bar for its exact value. Use the gap shown here as the inequality you are asked to explain a cause of.',
+      data: {
+        kind: 'bar',
+        title: 'Average income per person by world region',
+        source: 'MYP Humanities — illustrative comparison (not exam data)',
+        x: {
+          label: 'World region',
+          categories: ['Sub-Saharan Africa', 'South Asia', 'Latin America', 'East Asia', 'Europe & N. America'],
+        },
+        y: { label: 'Income per person', min: 0, max: 50000, ticks: [0, 10000, 20000, 30000, 40000, 50000], unit: 'US$' },
+        series: [
+          { name: 'Average annual income (GNI per capita)', color: '#0b7285', points: [1700, 2300, 9500, 13000, 47000] },
+        ],
+      },
+    },
     tasks: [
       {
         label: '',
@@ -60,6 +78,22 @@ export const questions: Question[] = [
     type: 'extended',
     topic: 'Trade — effects of colonialism',
     marks: 4,
+    artefact: {
+      component: 'TimelineScrubber',
+      caption:
+        'A worked example: how colonial rule shaped one country (the Congo) over time. Scrub the timeline to see how an economy built around exporting raw materials can leave lasting effects. You may use this country, or choose your own, in your answer.',
+      data: {
+        title: 'One country over time — the Congo from colonial rule to today',
+        source: 'MYP Humanities — illustrative case study',
+        events: [
+          { date: '1885', label: 'Colonial rule begins', detail: 'The territory is claimed and run from Europe; its economy is reorganised around extracting raw materials for export.' },
+          { date: '1900s', label: 'An economy built on exports', detail: 'Rubber, then copper and other minerals, are dug and shipped out. Roads and railways are built to move resources to ports, not to connect communities.' },
+          { date: '1960', label: 'Independence', detail: 'The country gains independence, but inherits an economy that depends heavily on exporting a few raw materials and has little local industry.' },
+          { date: '1970s', label: 'Dependence on raw exports', detail: 'When world prices for minerals fall, government income falls with them, making it hard to fund schools, hospitals and roads.' },
+          { date: 'Today', label: 'A lasting legacy', detail: 'The economy still relies on exporting raw minerals; the value added by processing them is mostly earned abroad — a lasting effect of how the colonial economy was set up.' },
+        ],
+      },
+    },
     tasks: [
       {
         label: '',
@@ -135,6 +169,23 @@ export const questions: Question[] = [
       'You have just completed a unit on trade and development in school. Your teacher has asked your class to organize an exhibition based on the unit’s statement of inquiry.\n\n' +
       '**Statement of inquiry: Trade agreements create change for communities.**\n\n' +
       'In preparation for your exhibition, answer the following questions.',
+    artefact: {
+      component: 'InfoGraphicPanel',
+      caption:
+        'How a trade agreement can create change for a community — a worked chain from agreement to local impact. Hover a stage to spotlight it. Use it to shape a research question that names an agreement, a community and a type of change.',
+      data: {
+        title: 'Statement of inquiry — trade agreements create change for communities',
+        source: 'MYP Humanities — investigation framework',
+        intro: 'A trade agreement does not stay on paper — it works through a chain that ends with real change for a community. Each stage is a place your research question could focus on.',
+        layout: 'flow',
+        blocks: [
+          { heading: 'Trade agreement', items: ['Countries agree to cut tariffs or open markets'], note: 'e.g. a free-trade deal or a fair-trade scheme', icon: '📝' },
+          { heading: 'New trade flows', items: ['Goods become cheaper to export or import', 'Some industries grow, others face competition'], note: 'The economy shifts', icon: '🔄' },
+          { heading: 'Local community', items: ['Jobs created or lost', 'Incomes and prices change', 'Skills and migration shift'], note: 'Where the change is felt', icon: '🏘️' },
+          { heading: 'Type of change', items: ['Economic, social or environmental', 'Positive for some, negative for others'], note: 'What your investigation evaluates', icon: '⚖️' },
+        ],
+      },
+    },
     tasks: [
       {
         label: 'a',
@@ -254,7 +305,7 @@ export const questions: Question[] = [
         mode: 'highlight',
         title: 'Source C — Share of Population in Extreme Poverty',
         source: 'World Bank',
-        highlight: ['Dem. Rep. Congo', 'Madagascar', 'Mozambique', 'Burundi', 'South Sudan', 'Central African Rep.', 'Nigeria', 'Niger', 'Chad', 'Zambia'],
+        highlight: ['Dem. Rep. Congo', 'Madagascar', 'Mozambique', 'Burundi', 'S. Sudan', 'Central African Rep.', 'Nigeria', 'Niger', 'Chad', 'Zambia'],
         highlightLabel: 'Highest share in extreme poverty',
         baseLabel: 'Lower share in extreme poverty',
         caption: 'Countries with the highest share of their population living below the international poverty line.',
@@ -281,7 +332,7 @@ export const questions: Question[] = [
         mode: 'highlight',
         title: 'Source C — Share of Population in Extreme Poverty',
         source: 'World Bank',
-        highlight: ['Dem. Rep. Congo', 'Madagascar', 'Mozambique', 'Burundi', 'South Sudan', 'Central African Rep.', 'Nigeria', 'Niger', 'Chad', 'Zambia'],
+        highlight: ['Dem. Rep. Congo', 'Madagascar', 'Mozambique', 'Burundi', 'S. Sudan', 'Central African Rep.', 'Nigeria', 'Niger', 'Chad', 'Zambia'],
         highlightLabel: 'Highest share in extreme poverty',
         baseLabel: 'Lower share in extreme poverty',
         caption: 'Countries with the highest share of their population living below the international poverty line.',
@@ -312,7 +363,7 @@ export const questions: Question[] = [
         mode: 'highlight',
         title: 'Source C — Share of Population in Extreme Poverty',
         source: 'World Bank',
-        highlight: ['Dem. Rep. Congo', 'Madagascar', 'Mozambique', 'Burundi', 'South Sudan', 'Central African Rep.', 'Nigeria', 'Niger', 'Chad', 'Zambia'],
+        highlight: ['Dem. Rep. Congo', 'Madagascar', 'Mozambique', 'Burundi', 'S. Sudan', 'Central African Rep.', 'Nigeria', 'Niger', 'Chad', 'Zambia'],
         highlightLabel: 'Highest share in extreme poverty',
         baseLabel: 'Lower share in extreme poverty',
         caption: 'Countries with the highest share of their population living below the international poverty line.',
@@ -333,6 +384,26 @@ export const questions: Question[] = [
     type: 'extended',
     topic: 'Extended essay — technology & global trade',
     marks: 24,
+    artefact: {
+      component: 'InteractiveChart',
+      caption:
+        'Access to technology by country income level (illustrative data) — hover a bar for its exact value, or toggle a series in the legend. Use it to weigh both sides: technology can close gaps, but unequal access can also widen them. Cite a named country or region in your essay.',
+      data: {
+        kind: 'bar',
+        title: 'Does technology reach everyone equally?',
+        source: 'MYP Humanities — illustrative comparison (not exam data)',
+        x: {
+          label: 'Country income level',
+          categories: ['Low income', 'Lower-middle', 'Upper-middle', 'High income'],
+        },
+        y: { label: 'Share of population with access', min: 0, max: 100, ticks: [0, 20, 40, 60, 80, 100], unit: '%' },
+        series: [
+          { name: 'Internet users', color: '#0b7285', points: [22, 45, 72, 92] },
+          { name: 'Mobile phone owners', color: '#e8590c', points: [50, 70, 88, 97] },
+          { name: 'Reliable electricity', color: '#2f9e44', points: [40, 68, 90, 100] },
+        ],
+      },
+    },
     tasks: [
       {
         label: '',

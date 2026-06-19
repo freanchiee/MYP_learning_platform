@@ -95,6 +95,64 @@ export const questions: Question[] = [
     topic: 'Land-use change — causes of deforestation',
     marks: 4,
     stem: 'Many forests around the world are being lost rapidly to deforestation.',
+    artefact: {
+      component: 'NetworkGraph',
+      caption:
+        'Causes of deforestation — a concept web. Hover or tap a spoke to read how that driver leads to forest being cleared. Choose ONE cause and explain it in your own words; the web is a prompt, not the answer.',
+      data: {
+        title: 'What drives deforestation?',
+        source: 'MYP Geography — land-use change concept web',
+        center: {
+          label: 'Deforestation',
+          detail: 'The permanent removal of forest, usually so the land can be used for something else.',
+          color: '#2b6a4d',
+        },
+        nodes: [
+          {
+            id: 'farmland',
+            label: 'Farmland & cattle',
+            color: '#2f9e44',
+            detail:
+              'Demand for food and beef → forest is cleared to plant crops or graze cattle → the trees are permanently removed. The single largest driver in the Amazon.',
+          },
+          {
+            id: 'logging',
+            label: 'Logging for timber',
+            color: '#a67c00',
+            detail:
+              'Demand for hardwood and paper → valuable trees are felled and sold → roads cut into the forest open it up to further clearance.',
+          },
+          {
+            id: 'palmoil',
+            label: 'Palm-oil plantations',
+            color: '#e8590c',
+            detail:
+              'Global demand for palm oil → tropical rainforest is burned and replaced with single-crop plantations, especially in Indonesia and Malaysia.',
+          },
+          {
+            id: 'mining',
+            label: 'Mining & minerals',
+            color: '#495057',
+            detail:
+              'Demand for gold, iron and other minerals → forest is stripped to reach the ore → soil and rivers are polluted by the mine workings.',
+          },
+          {
+            id: 'roads',
+            label: 'Roads & settlement',
+            color: '#1971c2',
+            detail:
+              'Growing populations and new highways → forest is cleared for towns, roads and dams → access roads let more people move in and clear still more land.',
+          },
+          {
+            id: 'fires',
+            label: 'Fires to clear land',
+            color: '#c2255c',
+            detail:
+              'Land is set alight to clear it cheaply for farming → fires spread into surrounding forest in dry seasons → carbon stored in the trees is released.',
+          },
+        ],
+      },
+    },
     tasks: [
       {
         label: '',
@@ -116,7 +174,7 @@ export const questions: Question[] = [
     artefact: {
       component: 'TimelineScrubber',
       caption:
-        'The regional official’s investigation action plan, shown as a dated timeline. Drag the handle, click a marker, or use the arrow keys to step through the four stages — this action plan is the marked stimulus.',
+        'The regional official’s investigation action plan, shown as a dated timeline. Drag the handle, click a marker, or use the arrow keys to step through the plan (the agreed plan plus its three stages) — this action plan is the marked stimulus.',
       data: {
         title: 'Regional official’s action plan — investigating deforestation in Pará, Brazil',
         source: 'Regional official → you (evaluator)',
@@ -166,6 +224,30 @@ export const questions: Question[] = [
     stem:
       'You are a journalist working for the United Nations Environment Programme and will write an article for the website. The purpose of the article is to help readers understand the role of environmental (climate-displacement) migration in changing population structures around the world. You will formulate your investigation around the following statement of inquiry.\n\n' +
       '**Statement of Inquiry:** Changes in populations can be impacted by time, place and space.',
+    artefact: {
+      component: 'ChoroplethWorld',
+      caption:
+        'Places already losing people to environmental (climate-displacement) migration — highlighted on the world map. Hover a country to read it, or click the key to spotlight the highlighted set. Pick ONE highlighted place to anchor your clear, focused research question.',
+      data: {
+        mode: 'highlight',
+        title: 'Where environmental migration is reshaping populations',
+        source: 'UNEP / IDMC climate-displacement hotspots (recreated)',
+        highlight: [
+          'Bangladesh',
+          'Philippines',
+          'Indonesia',
+          'Brazil',
+          'Somalia',
+          'Mozambique',
+          'India',
+          'Pakistan',
+        ],
+        highlightLabel: 'Major climate-displacement hotspot',
+        baseLabel: 'Other countries',
+        caption:
+          'Flooding, drought and storms are already pushing people to move within and between these countries — changing both the rural areas they leave and the cities they move to. Choosing a specific highlighted place (and a time period) keeps your research question focused.',
+      },
+    },
     tasks: [
       {
         label: 'a',
@@ -211,6 +293,57 @@ export const questions: Question[] = [
       'You work for a company which clears and farms land in forested areas to grow crops. Some residents have raised concerns about the sustainability of clearing land for farming in the local area. There will be a vote on whether to allow your company to continue farming in the area. You must gain the support of locals so that they vote in your favour.\n\n' +
       'A community meeting has been arranged where you will give a speech.\n\n' +
       'Before you write, name the location and the crop or land use involved (for example — Location: Riau Province, Sumatra, Indonesia · Land use: Certified sustainable palm-oil plantation).',
+    artefact: {
+      component: 'SlideDeck',
+      caption:
+        'Your company’s sustainability briefing pack — page through it for the worked example location and two sustainable practices you can build your speech around. Use the arrows, the page dots, or your ← / → keys. You may adapt this example or invent your own; the briefing is a prompt, not a script.',
+      data: {
+        title: 'Sustainability briefing pack — community-meeting speech',
+        source: 'Your company (worked example for the speech)',
+        slides: [
+          {
+            title: 'The setting',
+            body:
+              'A worked example you can use, adapt or replace. Your job in the speech is to win the locals’ vote by explaining how the company farms the cleared land sustainably.',
+            bullets: [
+              'Location: Riau Province, Sumatra, Indonesia',
+              'Land use: certified sustainable palm-oil plantation',
+              'A vote will decide whether the company may keep farming here',
+            ],
+          },
+          {
+            title: 'Sustainable practice 1 — protect soil & water',
+            body:
+              'One way the company farms sustainably. Explain it in your own words and link it to a benefit the residents care about.',
+            bullets: [
+              'Replant cover crops and leave forest buffer strips along rivers',
+              'No burning to clear land — this protects soil and air quality',
+              'Benefit to locals: cleaner rivers and less flooding downstream',
+            ],
+          },
+          {
+            title: 'Sustainable practice 2 — replant & certify',
+            body:
+              'A second sustainable practice you could explain. Persuasive, evidence-based detail wins marks.',
+            bullets: [
+              'Replant two trees for every one removed and rotate plots so land recovers',
+              'Independent certification (e.g. RSPO) audits the plantation each year',
+              'Benefit to locals: long-term jobs and a forest that is not used up',
+            ],
+          },
+          {
+            title: 'Speak to your audience',
+            body:
+              'Remember the format and audience for the speech.',
+            bullets: [
+              'Open with a greeting to the local residents',
+              'Body: explain TWO sustainable practices with reasons',
+              'Close with a persuasive call to vote in the company’s favour',
+            ],
+          },
+        ],
+      },
+    },
     tasks: [
       {
         label: '',

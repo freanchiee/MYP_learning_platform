@@ -19,6 +19,13 @@ export const questions: Question[] = [
     topic: 'Periodic table, compounds & moles — Bronze Age copper-tin tools',
     marks: 9,
     stem: 'Bronze Age warriors used copper-tin alloy (bronze) for swords and shields. Archaeological analysis found that the metal artifacts contained magnesium oxide (MgO), tin oxide and traces of an unknown element Z. Researchers also found copper(II) sulfate pentahydrate (CuSO₄·5H₂O) — a blue hydrated salt — alongside the bronze weapons. Hydrated salts are ionic compounds with a constant number of water molecules as part of their structure.',
+    artefact: {
+      component: 'GenericSVG',
+      data: {
+        svg: '<svg viewBox="0 0 560 230" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><rect width="560" height="230" fill="#ffffff"/><text x="280" y="22" font-size="14" font-weight="700" text-anchor="middle" fill="#1f2d3a">Element Z — Bohr (shell) model: 2, 8, 2</text><g><circle cx="150" cy="120" r="78" fill="none" stroke="#cbd5e1" stroke-width="1"/><circle cx="150" cy="120" r="52" fill="none" stroke="#cbd5e1" stroke-width="1"/><circle cx="150" cy="120" r="26" fill="none" stroke="#cbd5e1" stroke-width="1"/><circle cx="150" cy="120" r="12" fill="#0b7285"/><text x="150" y="124" font-size="11" font-weight="700" text-anchor="middle" fill="#ffffff">Z</text><circle cx="124" cy="120" r="4" fill="#e8590c"/><circle cx="176" cy="120" r="4" fill="#e8590c"/><circle cx="202" cy="120" r="4" fill="#e8590c"/><circle cx="187" cy="157" r="4" fill="#e8590c"/><circle cx="150" cy="172" r="4" fill="#e8590c"/><circle cx="113" cy="157" r="4" fill="#e8590c"/><circle cx="98" cy="120" r="4" fill="#e8590c"/><circle cx="113" cy="83" r="4" fill="#e8590c"/><circle cx="150" cy="68" r="4" fill="#e8590c"/><circle cx="187" cy="83" r="4" fill="#e8590c"/><circle cx="150" cy="42" r="4" fill="#e8590c"/><circle cx="150" cy="198" r="4" fill="#e8590c"/></g><text x="300" y="70" font-size="11" fill="#475569">Shell 1: 2 electrons</text><text x="300" y="92" font-size="11" fill="#475569">Shell 2: 8 electrons</text><text x="300" y="114" font-size="11" fill="#475569">Shell 3: 2 electrons (outer)</text><text x="300" y="146" font-size="11" font-weight="700" fill="#0b7285">Total electrons = 12</text><text x="300" y="168" font-size="10" fill="#94a3ad">Group = outer electrons = 2</text><text x="300" y="186" font-size="10" fill="#94a3ad">Period = occupied shells = 3</text><text x="300" y="210" font-size="10" fill="#94a3ad">In a neutral atom, protons = electrons.</text></svg>',
+      },
+      caption: 'Electron-shell (Bohr) model of element Z showing the configuration 2, 8, 2.',
+    },
     tasks: [
       {
         label: 'a',
@@ -65,6 +72,20 @@ export const questions: Question[] = [
     topic: 'Transition metals, moles, molecular models & acids — ceramic mosaic tiles',
     marks: 15,
     stem: 'Mosaic tiles decorated Roman buildings. Transition metal oxides gave tiles their vivid colours. Modern restoration artists use alkali-resistant acrylic paint. Some restoration projects use sodium hydroxide (NaOH) solution to strip old paint from tile surfaces before re-applying colour. NaOH is a strong alkali. Tile compositions vary: a typical mosaic tile contains silicon dioxide (SiO₂), potassium oxide (K₂O) and calcium oxide (CaO) fused together.',
+    artefact: {
+      component: 'DataTable',
+      data: {
+        headers: ['Transition metal', 'Symbol', 'Oxide added', 'Colour of glazed tile'],
+        rows: [
+          ['Cobalt', 'Co', 'CoO', 'deep blue'],
+          ['Manganese', 'Mn', 'MnO₂', 'purple / brown'],
+          ['Chromium', 'Cr', 'Cr₂O₃', 'green'],
+          ['Iron', 'Fe', 'Fe₂O₃', 'red-brown'],
+          ['Copper', 'Cu', 'CuO', 'turquoise'],
+        ],
+      },
+      caption: 'Transition-metal oxides that gave Roman mosaic tiles their vivid colours.',
+    },
     tasks: [
       {
         label: 'a',
@@ -131,6 +152,34 @@ export const questions: Question[] = [
     topic: 'Cl₂ hazards, Lewis structures & fabric bleaching effectiveness',
     marks: 6,
     stem: 'Chlorine gas (Cl₂) is used to bleach fabrics in the textile industry. Cl₂ oxidises the colour pigments in fibres to make them white. If Cl₂ is not removed after bleaching, it damages the fabric. Industrial fabric bleaching must remove mould spores from fibres. Factories compare a one-step and a two-step Cl₂ bleaching process.',
+    artefact: {
+      component: 'RateSim',
+      data: {
+        title: 'Mould spores remaining during Cl₂ fabric bleaching',
+        xLabel: 'Time / hours',
+        yLabel: 'Mould spores remaining / %',
+        xAxis: { label: 'Time / hours', min: 0, max: 6, tick: 1 },
+        yAxis: { label: 'Mould spores remaining / %', min: 0, max: 100, tick: 10 },
+        options: [
+          {
+            label: 'One-step process',
+            color: 'orange',
+            points: [
+              [0, 100], [1, 63], [2, 40], [3, 25], [4, 16], [5, 10], [6, 6],
+            ],
+          },
+          {
+            label: 'Two-step process',
+            color: 'teal',
+            points: [
+              [0, 100], [1, 45], [2, 20], [3, 8], [4, 4], [5, 2], [6, 1],
+            ],
+          },
+        ],
+        note: 'Drag the cursor to read the % spores remaining at any time; the lower curve removes spores faster.',
+      },
+      caption: 'Percentage of mould spores remaining over time for the one-step and two-step bleaching processes.',
+    },
     tasks: [
       {
         label: 'a',
@@ -176,7 +225,14 @@ export const questions: Question[] = [
     type: 'extended',
     topic: 'Decomposition, hypothesis, variables & data analysis — KMnO₄ catalysts',
     marks: 18,
-    stem: 'Potassium permanganate (KMnO₄) decomposes when heated to produce manganese dioxide (MnO₂), potassium manganate (K₂MnO₄) and oxygen:\n\n4KMnO₄(s) → 2K₂MnO₄(s) + 2MnO₂(s) + O₂(g)\n\nThe decomposition can also be catalysed at room temperature by certain metallic compounds. A student has each catalyst in two states: a solid and a solution. The student wants to determine which state produces oxygen fastest.',
+    stem: 'Potassium permanganate (KMnO₄) decomposes when heated to produce manganese dioxide (MnO₂), potassium manganate (K₂MnO₄) and oxygen:\n\n4KMnO₄(s) → 2K₂MnO₄(s) + 2MnO₂(s) + 2O₂(g)\n\nThe decomposition can also be catalysed at room temperature by certain metallic compounds. A student has each catalyst in two states: a solid and a solution. The student wants to determine which state produces oxygen fastest.',
+    artefact: {
+      component: 'GenericSVG',
+      data: {
+        svg: '<svg viewBox="0 0 520 300" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><rect width="520" height="300" fill="#ffffff"/><text x="260" y="22" font-size="14" font-weight="700" text-anchor="middle" fill="#1f2d3a">Apparatus for collecting O₂ from KMnO₄ decomposition</text><rect x="90" y="150" width="120" height="90" rx="6" fill="#eef4f7" stroke="#5b6b78" stroke-width="1.5"/><rect x="90" y="210" width="120" height="30" rx="0" fill="#f3e0e8" stroke="#5b6b78" stroke-width="0"/><text x="150" y="228" font-size="9" text-anchor="middle" fill="#7a3b52">KMnO₄ + catalyst</text><text x="150" y="168" font-size="9" text-anchor="middle" fill="#64748b">conical flask</text><line x1="150" y1="150" x2="150" y2="120" stroke="#5b6b78" stroke-width="2"/><path d="M150 120 q0 -20 90 -20 l60 0" fill="none" stroke="#5b6b78" stroke-width="2"/><rect x="300" y="60" width="46" height="170" rx="4" fill="#e7f5ff" stroke="#0b7285" stroke-width="1.5"/><rect x="300" y="150" width="46" height="80" rx="0" fill="#a5d8ff" stroke="#0b7285" stroke-width="0"/><text x="323" y="50" font-size="9" text-anchor="middle" fill="#0b7285">eudiometer</text><text x="323" y="46" font-size="0" fill="#0b7285"></text><g font-size="8" fill="#0b7285" text-anchor="end"><text x="298" y="74">60</text><text x="298" y="100">50</text><text x="298" y="126">40</text><text x="298" y="152">30</text><text x="298" y="178">20</text><text x="298" y="204">10</text><text x="298" y="228">0</text></g><line x1="346" y1="71" x2="352" y2="71" stroke="#0b7285"/><line x1="346" y1="97" x2="352" y2="97" stroke="#0b7285"/><line x1="346" y1="123" x2="352" y2="123" stroke="#0b7285"/><line x1="346" y1="149" x2="352" y2="149" stroke="#0b7285"/><line x1="346" y1="175" x2="352" y2="175" stroke="#0b7285"/><line x1="346" y1="201" x2="352" y2="201" stroke="#0b7285"/><text x="395" y="120" font-size="10" fill="#475569">O₂ gas collected</text><text x="395" y="138" font-size="10" fill="#475569">displaces water down</text><text x="395" y="195" font-size="10" fill="#1f6f8b" font-weight="700">read volume / cm³</text><text x="90" y="265" font-size="10" fill="#94a3ad">Volume of O₂ collected in a fixed time = the dependent variable.</text></svg>',
+      },
+      caption: 'A conical flask of KMnO₄ and catalyst connected to a water-filled eudiometer that measures the volume of O₂ produced.',
+    },
     tasks: [
       {
         label: 'a',
@@ -224,7 +280,21 @@ export const questions: Question[] = [
     type: 'extended',
     topic: 'Criterion B: Investigation design — KMnO₄ decomposition with 5 catalysts',
     marks: 16,
-    stem: 'The students decided to compare the effect of different catalysts on the decomposition of KMnO₄ using a eudiometer to measure volume of O₂ produced.\n\n4KMnO₄(s) → 2K₂MnO₄(s) + 2MnO₂(s) + O₂(g)\n\nYou are provided with a eudiometer, stopwatch, five catalysts: MnO₂(s), FeO(s), CuCl₂(s), NiCl₂(s) and CoCl₂(s), and samples of solid KMnO₄. The independent variable in your investigation is the type of catalyst used. One control variable is the mass of KMnO₄.',
+    stem: 'The students decided to compare the effect of different catalysts on the decomposition of KMnO₄ using a eudiometer to measure volume of O₂ produced.\n\n4KMnO₄(s) → 2K₂MnO₄(s) + 2MnO₂(s) + 2O₂(g)\n\nYou are provided with a eudiometer, stopwatch, five catalysts: MnO₂(s), FeO(s), CuCl₂(s), NiCl₂(s) and CoCl₂(s), and samples of solid KMnO₄. The independent variable in your investigation is the type of catalyst used. One control variable is the mass of KMnO₄.',
+    artefact: {
+      component: 'DataTable',
+      data: {
+        headers: ['Catalyst provided', 'Formula', 'Metal', 'State as supplied'],
+        rows: [
+          ['Manganese(IV) oxide', 'MnO₂', 'Mn', 'solid'],
+          ['Iron(II) oxide', 'FeO', 'Fe', 'solid'],
+          ['Copper(II) chloride', 'CuCl₂', 'Cu', 'solid'],
+          ['Nickel(II) chloride', 'NiCl₂', 'Ni', 'solid'],
+          ['Cobalt(II) chloride', 'CoCl₂', 'Co', 'solid'],
+        ],
+      },
+      caption: 'The five catalysts supplied for the investigation, each to be tested with the same mass of solid KMnO₄.',
+    },
     tasks: [
       {
         label: '',
@@ -243,6 +313,22 @@ export const questions: Question[] = [
     topic: 'Data interpretation, graphing & validity — Cl₂ bleach concentration',
     marks: 11,
     stem: 'Chlorine solution (Cl₂ dissolved in water) is used to bleach fabrics. The degree of bleaching depends on the Cl₂ concentration. Higher concentrations remove more colour pigment. Regulators must check Cl₂ concentration in batches. A spectrophotometer measures the signal proportional to the Cl₂ concentration.',
+    artefact: {
+      component: 'DataTable',
+      data: {
+        headers: ['Cl₂ concentration / %', 'Signal strength'],
+        rows: [
+          ['1', '300'],
+          ['2', '900'],
+          ['3', '1650'],
+          ['4', '2500'],
+          ['6', '3800'],
+          ['8', '4300'],
+          ['10', '4700'],
+        ],
+      },
+      caption: 'Spectrophotometer calibration data: signal strength measured for known Cl₂ concentrations. Use these values to plot a graph and interpolate.',
+    },
     tasks: [
       {
         label: 'a',
@@ -279,6 +365,21 @@ export const questions: Question[] = [
     topic: 'Ceramic material properties & long-term cultural preservation',
     marks: 9,
     stem: 'Ceramic materials have been used throughout history for containers, tiles and writing tablets. Clay tablets were used in ancient Mesopotamia to record laws and stories. Museums today use a combination of acid-free paper and digital records for preservation. Ceramic tiles are coated with a layer of glaze (a glass-like substance) for protection.',
+    artefact: {
+      component: 'DataTable',
+      data: {
+        headers: ['Property', 'Fired clay tablet', 'Acid-free paper'],
+        rows: [
+          ['Typical lifespan', 'thousands of years', 'hundreds of years'],
+          ['Resistance to fire', 'high (already fired)', 'low (flammable)'],
+          ['Resistance to water', 'high', 'low (swells, rots)'],
+          ['Mass per record', 'heavy', 'light'],
+          ['Fragility', 'brittle — can shatter', 'tears but flexible'],
+          ['Cost to produce', 'higher', 'low'],
+        ],
+      },
+      caption: 'Comparison of fired clay tablets and acid-free paper as media for long-term record preservation.',
+    },
     tasks: [
       {
         label: 'a',
@@ -315,6 +416,21 @@ export const questions: Question[] = [
     topic: 'Criterion D: Environmental & economic implications — bamboo vs tree paper production',
     marks: 10,
     stem: 'Bamboo is one of the fastest-growing plants on Earth. It can reach full maturity in 3–5 years compared to 25–50 years for trees. The infographic below compares "bamboo-to-paper" and "tree-to-paper" paper production processes.',
+    artefact: {
+      component: 'DataTable',
+      data: {
+        headers: ['Factor', 'Bamboo-to-paper', 'Tree-to-paper'],
+        rows: [
+          ['Time to maturity', '3–5 years', '25–50 years'],
+          ['Replanting needed', 'regrows from same root', 'must replant after felling'],
+          ['CO₂ absorbed while growing', 'high (fast growth)', 'high but over longer time'],
+          ['Habitat / deforestation impact', 'lower', 'higher'],
+          ['Established processing industry', 'limited', 'large, well established'],
+          ['Relative cost per tonne', 'higher now, falling', 'lower (mature supply chain)'],
+        ],
+      },
+      caption: 'Infographic data comparing the bamboo-to-paper and tree-to-paper production processes.',
+    },
     tasks: [
       {
         label: '',
@@ -333,6 +449,21 @@ export const questions: Question[] = [
     topic: 'Criterion D: Cultural advantages — stone inscriptions vs electronic storage',
     marks: 6,
     stem: 'Ancient cultures carved important records into stone monuments. There is now a trend to digitise these inscriptions and store them electronically in national archives.',
+    artefact: {
+      component: 'DataTable',
+      data: {
+        headers: ['Cultural factor', 'Stone inscription', 'Electronic storage'],
+        rows: [
+          ['Sense of heritage / identity', 'strong — tangible monument', 'weaker — intangible file'],
+          ['Public access', 'limited to one location', 'shareable worldwide'],
+          ['Ease of copying / translating', 'difficult', 'easy'],
+          ['Vulnerability', 'weathering, vandalism', 'data loss, format obsolescence'],
+          ['Portability', 'immovable', 'highly portable'],
+          ['Equity of access', 'open to all who visit', 'needs technology / power'],
+        ],
+      },
+      caption: 'Cultural advantages and disadvantages of stone inscriptions versus electronic information storage.',
+    },
     tasks: [
       {
         label: '',

@@ -30,6 +30,21 @@ export const questions: Question[] = [
     tags: { unit: 'thermal-physics', topics: ['states of matter', 'kinetic theory', 'specific heat capacity', 'phase changes'], level: 'proficient' },
     stem: 'Coal-burning thermal power plants are systems that convert chemical potential energy into electricity, starting with the combustion of coal to heat water.\n\nA coal-burning thermal power plant involves three states of matter. The diagram shows the main components of the plant.',
     figImages: ['/images/papers/physics-may-2024/q1-power-station.svg?t=1781198922104'],
+    artefact: {
+      component: 'SankeySim',
+      data: {
+        title: 'Energy flow through a 25 %-efficient coal power plant (per 100 units of chemical energy)',
+        units: 'units',
+        input: { label: 'Chemical energy in coal', value: 100 },
+        outputs: [
+          { label: 'Useful electrical energy out', value: 25, kind: 'out' },
+          { label: 'Waste heat to cooling tower', value: 55, kind: 'loss' },
+          { label: 'Heat lost in flue gases / friction', value: 20, kind: 'loss' },
+        ],
+        conservation: 'Energy in (100) = useful (25) + wasted heat (55 + 20).',
+      },
+      caption: 'Only about 25 % of the chemical energy released by burning coal becomes useful electrical output; the rest is wasted as heat (efficiency = useful ÷ total).',
+    },
     tasks: [
       {
         label: 'a',
@@ -109,6 +124,22 @@ export const questions: Question[] = [
     tags: { unit: 'atomic-physics', topics: ['atomic structure', 'radioactive decay', 'nuclear equations', 'half-life', 'nuclear energy'], level: 'proficient' },
     stem: 'Nuclear fission is a reaction in which a heavy nucleus splits into two smaller nuclei, releasing large amounts of energy and two or more free neutrons.\n\nThe animation shows the fission of uranium-235 when it absorbs a neutron. The uranium nucleus splits into caesium-140 and rubidium-94, releasing two free neutrons and energy.',
     figImages: ['/images/papers/physics-may-2024/q2-fission.svg'],
+    artefact: {
+      component: 'DecaySim',
+      data: {
+        title: 'Radioactive decay of uranium-235 in a used fuel rod',
+        isotope: 'U-235',
+        daughter: 'decay product',
+        decayMode: 'alpha',
+        halfLife: 700,
+        units: 'million years',
+        initialCount: 100,
+        axisMax: 2100,
+        xAxis: 'Time / millions of years',
+        yAxis: 'Uranium-235 remaining / %',
+      },
+      caption: 'Uranium-235 decays with a half-life of about 700 million years. Drag the time marker: 75 % decayed means 25 % (one quarter) remains, which takes two half-lives.',
+    },
     tasks: [
       {
         label: 'a',
@@ -171,6 +202,28 @@ export const questions: Question[] = [
     topicGroup: 'Electricity & Magnetism',
     tags: { unit: 'electricity-circuits', topics: ['resistance', "Ohm\'s law", 'measuring current and voltage', 'series circuits'], level: 'proficient' },
     stem: 'A student plans to investigate how the length of a nichrome wire affects its electrical resistance.\n\nThe table shows the wires available in the laboratory:\n\n| Length / cm | Material  | Cross-sectional area / mm² |\n|-------------|-----------|----------------------------|\n| 40          | Nichrome  | 2.5                        |\n| 60          | Nichrome  | 2.5                        |\n| 80          | Nichrome  | 2.5                        |\n| 100         | Copper    | 1.0                        |\n| 100         | Nichrome  | 1.5                        |\n| 100         | Copper    | 2.0                        |\n| 100         | Aluminium | 2.5                        |\n| 100         | Copper    | 2.5                        |\n| 100         | Gold      | 2.5                        |\n| 100         | Nichrome  | 2.5                        |\n| 100         | Copper    | 3.0                        |\n| 120         | Nichrome  | 2.5                        |',
+    artefact: {
+      component: 'GraphSim',
+      data: {
+        title: 'Resistance of nichrome wire (2.5 mm²) against length',
+        mode: 'readoff',
+        xAxis: { label: 'Length of wire / cm', min: 0, max: 140, tick: 20 },
+        yAxis: { label: 'Resistance / Ω', min: 0, max: 9, tick: 1 },
+        dataMaxX: 120,
+        points: [
+          [40, 2.55],
+          [60, 3.7],
+          [80, 5.05],
+          [100, 6.25],
+          [120, 7.4],
+        ],
+        readouts: [
+          { x: 100, note: '100 cm trial: R = V / I = 1.5 / 0.24 = 6.25 Ω', expected: '6.25' },
+        ],
+        bestFit: 'A straight line through the origin: resistance is proportional to length (R = ρL/A).',
+      },
+      caption: 'Processed results for nichrome wires of fixed area. Drag the crosshair to read resistance at any length; the 100 cm point (6.25 Ω) is the trial calculated in part (f).',
+    },
     tasks: [
       {
         label: 'a',
@@ -264,6 +317,23 @@ export const questions: Question[] = [
     tags: { unit: 'magnetism-electromagnetism', topics: ['magnetic poles and fields', 'magnetic field lines', 'work done'], level: 'advanced' },
     stem: 'A student sets up an experiment with two iron spheres held magnetically on one side of a very strong ferrite magnet placed on a wooden track. A single sphere is rolled towards the other side of the magnet. As this sphere collides with the magnet, the sphere on the other side shoots out with a much faster velocity, as shown in the slow-motion video.',
     figImages: ['/images/papers/physics-may-2024/q4b-forces-diagram.svg'],
+    artefact: {
+      component: 'FieldSim',
+      data: {
+        title: 'Magnetic attraction on the rolling iron sphere as it nears the magnet',
+        quantity: 'magnetic force on sphere',
+        relationship: 'force increases sharply as distance to the magnet decreases',
+        k: 12,
+        distanceUnits: 'cm',
+        distanceRange: [1, 12],
+        forceUnits: 'N',
+        forceRange: [0, 12],
+        slider: 'Distance of sphere from magnet / cm',
+        readout: 'Attractive magnetic force / N',
+        passengerCoupling: 'Because the force is not constant, the resultant force grows as the sphere approaches — so by F = ma its acceleration is not constant (part c).',
+      },
+      caption: 'Drag the distance slider: the attractive magnetic force on the sphere rises steeply as it gets closer to the magnet, so the sphere does not accelerate at a constant rate.',
+    },
     tasks: [
       {
         label: 'a',
@@ -340,6 +410,21 @@ export const questions: Question[] = [
     tags: { unit: 'magnetism-electromagnetism', topics: ['motors', "Fleming\'s left-hand rule", 'electromagnetic induction'], level: 'proficient' },
     stem: 'A student carries out an experiment using the equipment below. The conducting rod rests between two rows of magnets on a level surface. When the switch is closed, a current flows through the rod. The rod accelerates to the right. The student adjusts the current of the power supply. The rod is initially at rest and the student measures the time taken by the rod to move **18 cm**.\n\nThe table shows results collected by the student at different current values:\n\n| Current / A | Time / s |\n|-------------|----------|\n| 7           | 2.73     |\n| 8           | 2.40     |\n| 9           | 2.10     |\n| 10          | (missing)|\n| 11          | 1.83     |\n| 12          | 1.70     |',
     figImages: ['/images/papers/physics-may-2024/q5-motor-setup.svg?t=1781199420447'],
+    artefact: {
+      component: 'DataTable',
+      data: {
+        headers: ['Current / A', 'Time to travel 18 cm / s'],
+        rows: [
+          ['7', '2.73'],
+          ['8', '2.40'],
+          ['9', '2.10'],
+          ['10', '? (not recorded)'],
+          ['11', '1.83'],
+          ['12', '1.70'],
+        ],
+      },
+      caption: 'Results collected by the student. The time at 10 A is missing — estimate it from the trend (part a); the 12 A trial (1.70 s) is used to find the acceleration in part (b).',
+    },
     tasks: [
       {
         label: 'a',
@@ -410,6 +495,20 @@ export const questions: Question[] = [
     topicGroup: 'Space & Astrophysics',
     tags: { unit: 'astrophysics', topics: ['telescopes', 'expansion of the universe', 'Big Bang theory'], level: 'proficient' },
     stem: 'This question is about telescopes used in astronomy to observe distant objects in the universe.',
+    artefact: {
+      component: 'OpticsSim',
+      data: {
+        mode: 'refraction',
+        title: 'Light refracting as it enters the glass lens of a refracting telescope',
+        n1: 1.0,
+        n2: 1.52,
+        medium1: 'air',
+        medium2: 'glass lens',
+        incidenceAngle: 40,
+        unit: 'cm',
+      },
+      caption: 'White light slows and bends as it enters the glass (n ≈ 1.52). Because each colour has a slightly different refractive index, the colours bend by different amounts and spread out (dispersion) — the cause of the colour separation in part (a).',
+    },
     tasks: [
       {
         label: 'a',
@@ -472,6 +571,23 @@ export const questions: Question[] = [
     topicGroup: 'Space & Astrophysics',
     tags: { unit: 'astrophysics', topics: ['telescopes', 'expansion of the universe', 'stars and stellar evolution'], level: 'advanced' },
     stem: 'The James Webb Space Telescope (JWST), named after a NASA administrator, was built in the 1970s but wasn\'t launched until 2021 due to technical delays and budget problems.\n\nSoon after the telescope had been successfully launched into space, a problem with the main mirror was discovered.\n\nA mission in 1993 corrected the problem with the mirror and brought instrument upgrades to the telescope. The mission to correct the telescope took almost 11 days and the crew members made five spacewalks during the mission.\n\nThe JWST has changed our understanding of the universe forever. A famous image was taken in 1995 of the Eagle Nebula at a distance of around 7000 light years from Earth. This image shows clouds of dust and gas in the process of creating new stars.\n\nThis image has been replicated on everything from T-shirts to coffee mugs.\n\nPlans for a new space telescope started in 1996. The new telescope would include a larger mirror and would have travel further from Earth so that it could see deeper into space than ever before. This telescope, the James Webb Space Telescope, was designed to look for waves in the infrared region of the electromagnetic spectrum.\n\nThe telescope would be sent to a location so far from Earth that it couldn\'t be repaired if there were problems.\n\nThe telescope is the most expensive piece of scientific equipment ever made. However, the 10-billion-dollar cost is much less than the over 750 billion dollars that the US has as its annual military budget.',
+    artefact: {
+      component: 'DataTable',
+      data: {
+        headers: ['Factor', 'James Webb Space Telescope (JWST)'],
+        rows: [
+          ['Cost', '$10 billion (most expensive scientific instrument ever)'],
+          ['Compared with', 'US annual military budget: over $750 billion'],
+          ['Location', 'So far from Earth it cannot be repaired'],
+          ['Observes', 'Infrared region of the electromagnetic spectrum'],
+          ['Eagle Nebula distance', '≈ 7000 light-years from Earth'],
+          ['Mid-IR instrument can detect', 'water, oxygen, ozone, methane, carbon dioxide'],
+          ['Target stars', 'Exoplanets orbiting white dwarfs only'],
+          ['White dwarfs within 40 ly', 'Only about 34 known (nearest > 8 ly away)'],
+        ],
+      },
+      caption: 'Key facts from the passage to use when evaluating the scientific, social and economic impact of the JWST and the reach of its mid-infrared instrument.',
+    },
     tasks: [
       {
         label: 'a',

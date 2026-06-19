@@ -86,7 +86,27 @@ export const questions: Question[] = [
     type: 'extended',
     topic: 'Disparity & equity — disaster impacts',
     marks: 4,
-    stem: 'Communities are not affected equally by natural disasters. Income can shape how vulnerable people are when a hazard strikes.',
+    stem:
+      'Communities are not affected equally by natural disasters. Income can shape how vulnerable people are when a hazard strikes.\n\n' +
+      'The chart alongside compares typical outcomes for lower-income and higher-income households affected by the **same** hazard event.',
+    artefact: {
+      component: 'InteractiveChart',
+      caption: 'Typical disaster outcomes for lower-income vs higher-income households facing the same hazard event (illustrative, original recreation). Hover a bar for its value; click a legend chip to toggle a group.',
+      data: {
+        kind: 'bar',
+        title: 'Disaster outcomes by household income group',
+        source: 'Illustrative (recreated)',
+        x: {
+          label: 'Outcome indicator',
+          categories: ['Homes with insurance', 'Evacuated early (>24 h)', 'Property fully rebuilt in 1 yr', 'Income lost (% of yearly)'],
+        },
+        y: { label: 'Share of households', min: 0, max: 100, ticks: [0, 20, 40, 60, 80, 100], unit: '%' },
+        series: [
+          { name: 'Lower-income households', color: '#c2255c', points: [18, 22, 25, 70] },
+          { name: 'Higher-income households', color: '#1971c2', points: [82, 75, 78, 20] },
+        ],
+      },
+    },
     tasks: [
       {
         label: '',
@@ -175,7 +195,47 @@ export const questions: Question[] = [
     marks: 12,
     stem:
       'A Non-Governmental Organisation (NGO) has asked you to investigate the strategies used to manage a natural disaster. The investigation will allow the NGO to evaluate the effectiveness of strategies in different locations.\n\n' +
-      '**Statement of inquiry:** Time, place and space can influence the effectiveness of a community’s response to natural disasters.',
+      '**Statement of inquiry:** Time, place and space can influence the effectiveness of a community’s response to natural disasters.\n\n' +
+      'The panel alongside groups disaster-management strategies by the stage at which they act. Use it to help you choose a strategy and disaster to focus your research question on — you do not have to use the examples given.',
+    artefact: {
+      component: 'InfoGraphicPanel',
+      caption: 'Disaster-management strategies grouped by stage (before / during / after a hazard). A planning prompt to help you choose a focus — hover a stage to spotlight it; click to pin it.',
+      data: {
+        title: 'Disaster-management strategies by stage',
+        source: 'MYP Geography planning aid',
+        intro: 'Statement of inquiry: Time, place and space can influence the effectiveness of a community’s response to natural disasters. Pick ONE strategy and ONE disaster/location to focus your investigation.',
+        layout: 'flow',
+        blocks: [
+          {
+            heading: 'Before · Prepare & mitigate',
+            note: 'Reduces risk before a hazard strikes',
+            items: [
+              'Early-warning systems and hazard alerts',
+              'Land-use zoning and building codes',
+              'Community evacuation drills and education',
+            ],
+          },
+          {
+            heading: 'During · Respond',
+            note: 'Acts while the hazard is happening',
+            items: [
+              'Evacuation routes and emergency shelters',
+              'Search-and-rescue teams',
+              'Emergency communications and coordination',
+            ],
+          },
+          {
+            heading: 'After · Recover & rebuild',
+            note: 'Restores the community afterwards',
+            items: [
+              'Aid, insurance pay-outs and temporary housing',
+              '“Build back better” reconstruction',
+              'Reviewing the response to improve next time',
+            ],
+          },
+        ],
+      },
+    },
     tasks: [
       {
         label: 'a',
@@ -214,7 +274,25 @@ export const questions: Question[] = [
     stem:
       'You are a popular travel **blogger** who has many online followers.\n\n' +
       'You decide to write a blog post to explain the positive and negative impacts of tourism on the culture of **one** community.\n\n' +
-      '(A photograph of a travel writer’s desk — laptop, camera, glasses, passport and an open notebook — accompanies the task in the exam. It is decorative and is not a marked source.)',
+      'The concept map alongside collects some common ways tourism can affect a community’s culture, split into positive and negative effects. Use it to plan your blog post — you do not have to use the ideas shown.',
+    artefact: {
+      component: 'NetworkGraph',
+      caption: 'How tourism can affect a community’s culture — positive effects (teal) and negative effects (pink) branching from the hub. Hover or tap a node to read it. A planning prompt, not a marked source.',
+      data: {
+        title: 'Cultural impacts of tourism',
+        source: 'MYP Geography planning aid',
+        center: { label: 'Tourism & local culture', detail: 'Tourism can both strengthen and erode the culture of a community it visits.', color: '#7048e8' },
+        nodes: [
+          { id: 'revive', label: 'Cultural revival', color: '#0b7285', detail: 'Demand from visitors can give value to traditional crafts, festivals, dances and dress, helping keep them alive.' },
+          { id: 'pride', label: 'Local pride & exchange', color: '#2f9e44', detail: 'Sharing traditions with visitors can build pride and mutual understanding between cultures.' },
+          { id: 'income', label: 'Income for heritage', color: '#1971c2', detail: 'Tourist spending can fund the upkeep of heritage sites, museums and language programmes.' },
+          { id: 'commodify', label: 'Commodified culture', color: '#c2255c', detail: 'Traditions may be staged or simplified to sell to tourists, losing their original meaning ("staged authenticity").' },
+          { id: 'erosion', label: 'Loss of traditions', color: '#e8590c', detail: 'Young people may adopt visitors’ habits and abandon local language, dress or customs.' },
+          { id: 'tension', label: 'Conflict & crowding', color: '#9c36b5', detail: 'Crowding, rising prices and disrespectful behaviour can create tension between visitors and residents.' },
+        ],
+        edges: [],
+      },
+    },
     tasks: [
       {
         label: '',
@@ -322,7 +400,25 @@ export const questions: Question[] = [
     topic: 'Source evaluation — limitation of a diagram',
     marks: 2,
     stem:
-      'Re-examine **Source C** (the clean-cookstove benefits diagram from Question 7). A resident is learning about the government’s proposal to invest in clean cookstoves.',
+      'Re-examine **Source C** (the clean-cookstove benefits diagram from Question 7, shown again alongside). A resident is learning about the government’s proposal to invest in clean cookstoves.',
+    artefact: {
+      component: 'NetworkGraph',
+      caption: 'Source C (shown again) — how a clean-cookstove programme is expected to work. Notice what the diagram does, and does not, show. Hover or tap a node to read it.',
+      data: {
+        title: 'Source C — Expected benefits of a clean-cookstove programme',
+        source: 'Government clean-cooking programme',
+        center: { label: 'Clean cookstove', detail: 'An improved stove that burns far less wood or charcoal and produces far less smoke than an open fire.', color: '#0b7285' },
+        nodes: [
+          { id: 'health', label: 'Better health', color: '#2f9e44', detail: 'Less smoke indoors means fewer respiratory and eye illnesses, especially for women and children.' },
+          { id: 'fuel', label: 'Less fuel used', color: '#e8590c', detail: 'The stove burns more efficiently, so households spend less money and time collecting wood or charcoal.' },
+          { id: 'forest', label: 'Less deforestation', color: '#9c36b5', detail: 'Burning less wood reduces the pressure to cut down nearby forests for fuel.' },
+          { id: 'climate', label: 'Lower emissions', color: '#1971c2', detail: 'Burning less biomass releases fewer greenhouse gases and less black-carbon soot.' },
+        ],
+        edges: [
+          { from: 'fuel', to: 'forest', label: 'reduces wood demand' },
+        ],
+      },
+    },
     tasks: [
       {
         label: '',
@@ -338,7 +434,23 @@ export const questions: Question[] = [
     type: 'extended',
     topic: 'Extended essay — sustainable fishing & biodiversity',
     marks: 24,
-    stem: 'A report by the United Nations found that around one third of the world’s fish stocks are being caught faster than they can reproduce, and overfishing is a leading cause of biodiversity loss in the world’s oceans.',
+    stem:
+      'A report by the United Nations found that around one third of the world’s fish stocks are being caught faster than they can reproduce, and overfishing is a leading cause of biodiversity loss in the world’s oceans.\n\n' +
+      'The chart alongside shows how the share of the world’s assessed marine fish stocks that are overfished has changed since 1975. Use it as background evidence for your essay.',
+    artefact: {
+      component: 'InteractiveChart',
+      caption: 'Share of the world’s assessed marine fish stocks that are overfished (caught faster than they can reproduce), 1975–2020. Hover a point for its value. Original recreation of UN-reported trend.',
+      data: {
+        kind: 'line',
+        title: 'Overfished share of world marine fish stocks, 1975–2020',
+        source: 'UN trend (recreated)',
+        x: { label: 'Year', categories: ['1975', '1985', '1995', '2005', '2015', '2020'] },
+        y: { label: 'Stocks overfished', min: 0, max: 40, ticks: [0, 10, 20, 30, 40], unit: '%' },
+        series: [
+          { name: '% of stocks overfished', color: '#1971c2', points: [10, 15, 24, 28, 34, 35] },
+        ],
+      },
+    },
     tasks: [
       {
         label: '',

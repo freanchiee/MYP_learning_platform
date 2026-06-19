@@ -228,6 +228,26 @@ export const questions: Question[] = [
       'The investigation will allow the city council to consider the actions they need to take to keep residents safe during increasingly frequent and severe heatwaves.\n\n' +
       '**Statement of inquiry:** Effective planning can reduce the impact of rising urban temperatures on people and places.\n\n' +
       'You must not repeat information from Question 3 in your responses.',
+    artefact: {
+      component: 'InteractiveChart',
+      caption:
+        'Background data for your investigation — the urban heat island profile. Air temperature recorded across one summer day at three sites: the dense city centre, a suburban park, and the surrounding countryside. Hover a point for its exact value; click the legend to toggle a line. The gap between the city-centre and countryside lines IS the urban heat island effect.',
+      data: {
+        kind: 'line',
+        title: 'The urban heat island effect — temperature across one summer day',
+        source: 'City weather stations, transect survey (recreated)',
+        x: {
+          label: 'Time of day',
+          categories: ['06:00', '09:00', '12:00', '15:00', '18:00', '21:00', '00:00'],
+        },
+        y: { label: 'Air temperature', min: 18, max: 38, ticks: [18, 22, 26, 30, 34, 38], unit: '°C' },
+        series: [
+          { name: 'City centre', color: '#c2255c', points: [24, 28, 33, 36, 34, 31, 28] },
+          { name: 'Suburban park', color: '#2f9e44', points: [21, 25, 30, 32, 29, 25, 22] },
+          { name: 'Countryside', color: '#1971c2', points: [19, 23, 28, 30, 26, 22, 20] },
+        ],
+      },
+    },
     tasks: [
       {
         label: 'a',
@@ -396,6 +416,30 @@ export const questions: Question[] = [
     type: 'extended',
     topic: 'Extended essay — sustainable consumption',
     marks: 24,
+    artefact: {
+      component: 'InteractiveChart',
+      caption:
+        'Stimulus for your essay — modelled reduction in the fashion industry’s annual carbon and water footprint under four different routes to sustainability. "Buy fewer / second-hand" is a CONSUMER-side change; the other three act on production, retail and policy. Use the data to weigh whether changing what consumers buy really is the most effective route. Hover a bar for its value; click the legend to toggle a footprint.',
+      data: {
+        kind: 'bar',
+        title: 'How much could each strategy cut fashion’s footprint?',
+        source: 'Sustainable-fashion modelling, illustrative estimates (recreated)',
+        x: {
+          label: 'Strategy',
+          categories: [
+            'Buy fewer / second-hand (consumer)',
+            'Cleaner production & energy',
+            'In-store repair & take-back',
+            'Recycle textiles into new cloth',
+          ],
+        },
+        y: { label: 'Estimated reduction', min: 0, max: 50, ticks: [0, 10, 20, 30, 40, 50], unit: '%' },
+        series: [
+          { name: 'Carbon footprint', color: '#495057', points: [40, 35, 18, 22] },
+          { name: 'Water footprint', color: '#1971c2', points: [38, 20, 15, 30] },
+        ],
+      },
+    },
     tasks: [
       {
         label: '',

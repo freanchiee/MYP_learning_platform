@@ -177,6 +177,55 @@ export const questions: Question[] = [
       'You will now plan an investigation into sustainable management strategies for a biome.\n\n' +
       'Use the following statement of inquiry to formulate a clear and focused research question for an investigation into a biome impacted by humans.\n\n' +
       '**Statement of inquiry:** Technological innovation can allow natural environments to become more sustainable.',
+    artefact: {
+      component: 'DataTableInteractive',
+      caption:
+        'Candidate biomes impacted by humans — click a row to pin the one you choose, then build a clear, focused research question around how technological innovation could make that environment more sustainable. The named sources are examples of reliable data you could cite.',
+      data: {
+        title: 'Possible biomes for your investigation',
+        source: 'MYP Geography — sustainable management of a biome',
+        headers: [
+          'Biome (case study)',
+          'Human impact on it',
+          'Technological innovation that could help',
+          'Reliable source to use',
+        ],
+        rows: [
+          [
+            'Tropical rainforest — Sabah, Borneo',
+            'Clearance for palm oil; selective logging',
+            'Satellite (GIS) monitoring; reduced-impact logging machinery',
+            'WWF deforestation data; FAO forest-use reports',
+          ],
+          [
+            'Coral reef — Great Barrier Reef, Australia',
+            'Bleaching from warming seas; tourism damage',
+            'Coral nurseries; reef-restoration robotics; drone surveys',
+            'AIMS reef-monitoring data; IPCC ocean reports',
+          ],
+          [
+            'Desert margin — Sahel, Africa',
+            'Over-grazing and over-farming drive land degradation',
+            'Drip irrigation; drought-resistant seed; re-greening tech',
+            'UNCCD land-degradation data; Great Green Wall reports',
+          ],
+          [
+            'Grassland — North American prairie',
+            'Intensive cereal cropping erodes soil',
+            'No-till precision farming; soil-moisture sensors',
+            'USDA soil-survey data; FAO crop statistics',
+          ],
+          [
+            'Arctic tundra — northern Canada',
+            'Permafrost thaw releases stored carbon',
+            'Remote temperature sensors; permafrost monitoring stations',
+            'NASA/NSIDC permafrost data; Arctic Council reports',
+          ],
+        ],
+        caption:
+          'Pick ONE biome and connect it to the statement of inquiry — how could technological innovation make that environment more sustainable?',
+      },
+    },
     tasks: [
       {
         label: 'a',
@@ -219,6 +268,55 @@ export const questions: Question[] = [
     stem:
       'Protecting natural biomes can play a part in reducing the causes of global climate change.\n\n' +
       'Select **one** biome from the list below: Aquatic biome · Desert biome · Forest biome · Grassland biome · Arctic/tundra biome.',
+    artefact: {
+      component: 'DataTableInteractive',
+      caption:
+        'The five biomes and the part each plays in the carbon/climate system — click a row to pin the biome you choose, then explain how protecting it reduces one cause of global climate change.',
+      data: {
+        title: 'How protecting each biome can slow climate change',
+        source: 'MYP Geography — biomes & the carbon cycle',
+        headers: [
+          'Biome',
+          'How it stores or affects carbon',
+          'What happens if it is destroyed',
+          'Cause of climate change reduced by protecting it',
+        ],
+        rows: [
+          [
+            'Forest biome',
+            'Trees and soil lock up large stores of carbon (a carbon sink)',
+            'Deforestation releases stored CO₂ to the atmosphere',
+            'Less CO₂ released → reduced greenhouse effect',
+          ],
+          [
+            'Aquatic biome',
+            'Oceans, mangroves and seagrass absorb CO₂ and "blue carbon"',
+            'Coastal habitat loss releases carbon and cuts absorption',
+            'Maintains a major carbon sink → less CO₂ in the air',
+          ],
+          [
+            'Grassland biome',
+            'Deep root systems hold carbon in the soil',
+            'Ploughing and over-grazing release soil carbon',
+            'Keeps soil carbon locked away → fewer emissions',
+          ],
+          [
+            'Arctic / tundra biome',
+            'Frozen permafrost traps ancient carbon and methane',
+            'Thawing permafrost releases CO₂ and methane',
+            'Prevents release of powerful greenhouse gases',
+          ],
+          [
+            'Desert biome',
+            'High albedo: pale ground reflects incoming sunlight',
+            'Degradation/darkening can reduce reflectivity',
+            'Maintains surface reflectivity → less heat absorbed',
+          ],
+        ],
+        caption:
+          'Pick ONE biome, then trace the chain in your answer: protect the biome → keep its carbon stored / its function intact → reduce one cause of climate change.',
+      },
+    },
     tasks: [
       {
         label: '',
@@ -394,6 +492,58 @@ export const questions: Question[] = [
     stem:
       'Source B and Source C above are repeated here for information.\n\n' +
       'Consider who is responsible for reducing the impact of fast fashion on people and the environment.',
+    artefact: {
+      component: 'NetworkGraph',
+      caption:
+        'Actions an individual can take — hover or tap a spoke to see how that personal choice feeds back into less waste, lower demand and reduced harm. Use it to build your justification in your own words.',
+      data: {
+        title: 'How the individual can reduce the impact of fast fashion',
+        source: 'MYP Geography — fast fashion & individual responsibility',
+        center: {
+          label: 'The individual',
+          detail:
+            'Every consumer makes daily choices about what to buy, how long to keep it and how to dispose of it — choices that add up across millions of people.',
+          color: '#1e293b',
+        },
+        nodes: [
+          {
+            id: 'buy-less',
+            label: 'Buy fewer, better clothes',
+            color: '#2f9e44',
+            detail:
+              'Choosing fewer, higher-quality items lowers demand → less is manufactured → fewer clothes head to landfill (linking to Source C’s 85% figure).',
+          },
+          {
+            id: 'second-hand',
+            label: 'Buy second-hand',
+            color: '#0b7285',
+            detail:
+              'Reusing clothing keeps items in use longer, supporting markets like Kantamanto rather than the discard-and-replace cycle of Source B.',
+          },
+          {
+            id: 'wear-longer',
+            label: 'Wear items more times',
+            color: '#1971c2',
+            detail:
+              'Source B shows clothing use falling while sales rise; wearing each item more often directly reverses that trend.',
+          },
+          {
+            id: 'repair',
+            label: 'Repair and mend',
+            color: '#9c36b5',
+            detail:
+              'Mending extends a garment’s life so fewer replacements are bought, cutting the 4 million tonnes of textiles shipped each year.',
+          },
+          {
+            id: 'recycle',
+            label: 'Donate / recycle responsibly',
+            color: '#e8590c',
+            detail:
+              'Donating usable clothing — not poor-quality items — reduces the 40% of exports that become worthless landfill in Accra.',
+          },
+        ],
+      },
+    },
     tasks: [
       {
         label: '',
@@ -413,6 +563,28 @@ export const questions: Question[] = [
     stem:
       'Source B and Source C above are repeated here for information.\n\n' +
       'In a well-structured essay, respond to the following question.',
+    artefact: {
+      component: 'VennOverlap',
+      caption:
+        'The two dimensions of sustainable trade — use the overlap to frame your judgement of "to what extent". Trade is only fully sustainable where it meets BOTH environmental and social conditions.',
+      data: {
+        title: 'When is trade sustainable? Environmental ∩ Social',
+        source: 'MYP Geography — sustainability of trade',
+        setA: {
+          label: 'Environmentally sustainable',
+          color: '#2f9e44',
+          items: ['Low emissions', 'Less landfill', 'Resources conserved'],
+        },
+        setB: {
+          label: 'Socially sustainable',
+          color: '#1971c2',
+          items: ['Fair wages', 'Safe conditions', 'Local benefit'],
+        },
+        overlapLabel: 'Truly sustainable trade',
+        caption:
+          'Trade often delivers one without the other — e.g. cheap fast-fashion exports (Source B/C) raise sales but harm the environment and the workers and communities of Accra. Weigh both circles in your essay to judge "to what extent".',
+      },
+    },
     tasks: [
       {
         label: '',

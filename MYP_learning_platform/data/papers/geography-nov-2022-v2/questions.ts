@@ -187,6 +187,48 @@ export const questions: Question[] = [
       'You will now plan an investigation into sustainable management strategies for a biome.\n\n' +
       'Use the following statement of inquiry to formulate a clear and focused research question for an investigation into a biome impacted by humans.\n\n' +
       '**Statement of inquiry:** Technological innovation can allow natural environments to become more sustainable.',
+    artefact: {
+      component: 'LocatedMap',
+      caption:
+        'Stimulus map — a candidate biome for your investigation: the peatlands of northern Scotland (the “Flow Country”), a globally important carbon-storing wetland. Hover a marker to read it; the inset globe locates the region. You may base your research question on this biome or on another biome you have studied.',
+      data: {
+        title: 'A human-impacted biome — peatland of the Flow Country, Scotland',
+        source: 'Peatland-restoration case study (recreated)',
+        region: 'Caithness & Sutherland, northern Scotland',
+        regionCountries: ['United Kingdom'],
+        scaleKm: 40,
+        north: true,
+        locator: [-3.8, 58.3],
+        markers: [
+          {
+            lon: -3.9,
+            lat: 58.35,
+            label: 'Drained blanket bog',
+            color: '#c2255c',
+            detail:
+              'Historically drained and planted with conifers. The lowered water table dries the peat, so stored carbon oxidises and is released as CO₂.',
+          },
+          {
+            lon: -4.2,
+            lat: 58.18,
+            label: 'Re-wetted peatland',
+            color: '#2f9e44',
+            detail:
+              'Drainage ditches blocked so the water table rises. Waterlogged peat stops decomposing and begins to store carbon again — a technology-assisted restoration.',
+          },
+          {
+            lon: -3.5,
+            lat: 58.45,
+            label: 'Monitoring station',
+            color: '#1971c2',
+            detail:
+              'Sensors log water-table depth and greenhouse-gas flux — a possible site for collecting primary data on whether re-wetting is working.',
+          },
+        ],
+        caption:
+          'Peatlands cover much of this region and hold vast amounts of carbon. Where they are drained the carbon escapes; where they are re-wetted it is locked back in — a clear test of how technology can make a natural environment more sustainable.',
+      },
+    },
     tasks: [
       {
         label: 'a',
@@ -229,6 +271,34 @@ export const questions: Question[] = [
     stem:
       'Protecting natural biomes can play a part in reducing the causes of global climate change.\n\n' +
       'Select **one** biome from the list below: Aquatic biome · Desert biome · Forest biome · Grassland biome · Arctic/tundra biome.',
+    artefact: {
+      component: 'InteractiveChart',
+      caption:
+        'Reference chart — carbon stored in each biome (tonnes of carbon per hectare, an indicative average). Biomes that store the most carbon do the most to keep CO₂ out of the atmosphere when protected. Hover a bar to read its value; toggle the series in the legend.',
+      data: {
+        kind: 'bar',
+        title: 'Carbon stored per biome (tonnes of carbon per hectare)',
+        source: 'Indicative carbon-density figures (recreated)',
+        x: {
+          label: 'Biome',
+          categories: ['Arctic/tundra', 'Forest', 'Grassland', 'Aquatic (coastal)', 'Desert'],
+        },
+        y: {
+          label: 'Carbon stored (t C per hectare)',
+          min: 0,
+          max: 500,
+          ticks: [0, 100, 200, 300, 400, 500],
+          unit: '',
+        },
+        series: [
+          {
+            name: 'Carbon stored (t C / ha)',
+            color: '#2f9e44',
+            points: [450, 240, 130, 280, 25],
+          },
+        ],
+      },
+    },
     tasks: [
       {
         label: '',
@@ -387,6 +457,46 @@ export const questions: Question[] = [
     stem:
       'Source B and Source C above are repeated here for information.\n\n' +
       'Consider who is responsible for reducing the impact of plastic waste on people and the environment.',
+    artefact: {
+      component: 'InfoGraphicPanel',
+      caption:
+        'Stimulus — three actors who could reduce the impact of plastic waste. Your task focuses on the individual (the first panel). Hover a panel to spotlight it; the actions listed are prompts you can develop or argue against.',
+      data: {
+        title: 'Who can reduce the impact of plastic waste?',
+        source: 'Levels of responsibility (recreated)',
+        layout: 'grid',
+        intro:
+          'Responsibility for plastic waste can be argued at three levels. This question asks you to justify the case for the individual.',
+        blocks: [
+          {
+            heading: 'The individual',
+            icon: '🙋',
+            items: [
+              'Refuse single-use plastics — carry a reusable bottle, bag and cup.',
+              'Reuse and repair before buying new; choose loose or unpackaged goods.',
+              'Sort waste correctly so more is actually recycled, not dumped.',
+              'Lower demand for new plastic by changing what you buy.',
+            ],
+          },
+          {
+            heading: 'Businesses',
+            icon: '🏭',
+            items: [
+              'Redesign packaging to use less plastic or switch to refillable formats.',
+              'Take back and recycle their own products (extended producer responsibility).',
+            ],
+          },
+          {
+            heading: 'Governments',
+            icon: '🏛',
+            items: [
+              'Ban or tax single-use plastics and unregulated waste exports.',
+              'Fund recycling infrastructure and enforce import rules (e.g. on dumping near Bangun, Java).',
+            ],
+          },
+        ],
+      },
+    },
     tasks: [
       {
         label: '',
@@ -406,6 +516,28 @@ export const questions: Question[] = [
     stem:
       'Source B and Source C above are repeated here for information.\n\n' +
       'In a well-structured essay, respond to the following question.',
+    artefact: {
+      component: 'VennOverlap',
+      caption:
+        'Planning frame — the essay asks you to judge trade against TWO tests at once: environmental sustainability and social sustainability. Trade is only “truly sustainable” where the two overlap. Use the two circles to organise perspectives and evidence (e.g. the plastic-waste trade in Sources B and C) on each side.',
+      data: {
+        title: 'Is trade sustainable? Two tests for your essay',
+        source: 'Essay-planning frame (recreated)',
+        setA: {
+          label: 'Environmentally sustainable',
+          color: '#2f9e44',
+          items: ['Low pollution', 'Resources renewed', 'Little waste exported'],
+        },
+        setB: {
+          label: 'Socially sustainable',
+          color: '#1971c2',
+          items: ['Fair pay & jobs', 'Safe communities', 'Health protected'],
+        },
+        overlapLabel: 'Truly sustainable trade',
+        caption:
+          'Where trade fails one test it is only partly sustainable: e.g. exporting plastic waste may create some jobs (social) yet dump pollution near Bangun village (not environmental). Weigh both sides to reach a “to what extent” judgement.',
+      },
+    },
     tasks: [
       {
         label: '',

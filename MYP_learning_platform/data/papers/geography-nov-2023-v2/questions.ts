@@ -112,6 +112,32 @@ export const questions: Question[] = [
       '**Option A:** Charge tourists a higher park entry fee and set a maximum number of visitors allowed onto the inland trail each day.\n\n' +
       '**Option B:** Build a raised boardwalk and an additional car park for the increased number of tourists. The car park is marked ‘B’, at marker ④.\n\n' +
       'Refer to the visitor map of Komodo Island above (the same map used in Question 1).',
+    artefact: {
+      component: 'DataTableInteractive',
+      caption:
+        'The two management options side by side, with how each is meant to work, a positive impact it could have, and a trade-off. Hover a row to highlight it; click to pin the option you choose to write about. Make your own map reference (e.g. the viewing platform ③ or the proposed car park ④) in your answer.',
+      data: {
+        title: 'Komodo trail management — Option A vs Option B',
+        source: 'Komodo National Park authority (recreated)',
+        headers: ['Option', 'How it works', 'Possible positive impact', 'Trade-off to weigh'],
+        rows: [
+          [
+            'Option A — fee + daily cap',
+            'Charge a higher park entry fee and cap how many tourists may enter the inland trail each day.',
+            'Fewer feet on the trail to platform ③ each day, so vegetation is trampled less and the dragons are disturbed less at their resting sites.',
+            'A higher fee and a daily limit may turn some visitors away, reducing income for local guides from Kampung Komodo.',
+          ],
+          [
+            'Option B — boardwalk + car park',
+            'Build a raised boardwalk along the inland trail and an additional car park (‘B’) at marker ④.',
+            'A raised boardwalk keeps walkers off the soil, so the widening path stops spreading and trampled ground beside platform ③ can recover.',
+            'Building the car park at ④ clears natural ground and brings more vehicles close to the dragons’ habitat.',
+          ],
+        ],
+        caption:
+          'Choose ONE option and explain ONE positive impact in detail, referring to a named site or marker on the visitor map above.',
+      },
+    },
     tasks: [
       {
         label: '',
@@ -191,6 +217,50 @@ export const questions: Question[] = [
     stem:
       'Now that you have explored the management of tourism on Komodo Island, you will plan an investigation into the future of sustainable tourism in another location of your choice. The information collected will be used to write an article for a travel magazine exploring sustainable tourism. You will use the statement of inquiry below to plan your investigation.\n\n' +
       '**Statement of Inquiry:** Global interactions can change identities and relationships.',
+    artefact: {
+      component: 'DataTableInteractive',
+      caption:
+        'Candidate destinations you could investigate for your travel-magazine article — each row shows the sustainable-tourism issue there, how global interactions are changing local identities and relationships, and example secondary sources. Click a row to pin the location you choose, then build your own research question and plan around it.',
+      data: {
+        title: 'Possible locations for your sustainable-tourism investigation',
+        source: 'MYP Geography — sustainable tourism case studies',
+        headers: ['Location', 'Sustainable-tourism issue', 'How global interactions change identities / relationships', 'Example secondary sources'],
+        rows: [
+          [
+            'Komodo Islands, Indonesia',
+            'Rising visitor numbers damage dragon habitat and the inland trail.',
+            'Local fishing families become tourist guides; relationships shift between residents, rangers and visitors.',
+            'Komodo National Park visitor statistics; UNESCO World Heritage reports',
+          ],
+          [
+            'Venice, Italy',
+            'Cruise tourism and overcrowding strain the historic city.',
+            'Residents move out as the city reshapes its identity around global tourists.',
+            'Italian national tourism board data; UNWTO city-tourism reports',
+          ],
+          [
+            'Machu Picchu, Peru',
+            'Daily visitor caps protect a fragile Inca site and trail.',
+            'Quechua communities re-present their heritage for an international audience.',
+            'Peru Ministry of Culture visitor data; ICOMOS heritage assessments',
+          ],
+          [
+            'Maasai Mara, Kenya',
+            'Safari tourism funds conservation but pressures grassland and wildlife.',
+            'Maasai herders take roles as guides and lodge staff, changing community livelihoods.',
+            'Kenya Wildlife Service statistics; WWF conservation reports',
+          ],
+          [
+            'Bhutan',
+            'A high daily tourist fee keeps visitor numbers low (“high value, low impact”).',
+            'The country manages how outside visitors interact with local culture and identity.',
+            'Bhutan Tourism Council data; World Bank country reports',
+          ],
+        ],
+        caption:
+          'Pick ONE location (or one of your own). The named sources are examples of reliable secondary data you could cite — but your research question and plan must be your own.',
+      },
+    },
     tasks: [
       {
         label: 'a',
@@ -402,6 +472,32 @@ export const questions: Question[] = [
     type: 'extended',
     topic: 'Extended essay — biome management vs economic development',
     marks: 24,
+    artefact: {
+      component: 'InteractiveChart',
+      caption:
+        'Three approaches to a threatened grassland/savanna biome, scored on outcomes that matter (illustrative data, not exam figures). Hover a bar for its value, or toggle a series in the legend. Use it to weigh how far sustainable management and economic development pull against — or support — each other; bring your own named biome and examples into the essay.',
+      data: {
+        kind: 'bar',
+        title: 'Sustainable biome management vs economic development — trade-offs (illustrative)',
+        source: 'MYP Geography — illustrative comparison (not exam data)',
+        x: {
+          label: 'Approach to the biome',
+          categories: ['Strict protection', 'Balanced / sustainable use', 'Maximise development'],
+        },
+        y: {
+          label: 'Relative outcome (index, 0–100)',
+          min: 0,
+          max: 100,
+          ticks: [0, 20, 40, 60, 80, 100],
+        },
+        series: [
+          { name: 'Biodiversity / biome health', color: '#2f9e44', points: [92, 70, 25] },
+          { name: 'Short-term economic gain', color: '#e8590c', points: [30, 62, 95] },
+          { name: 'Local jobs & livelihoods', color: '#1971c2', points: [40, 75, 80] },
+          { name: 'Long-term sustainability', color: '#0b7285', points: [85, 78, 30] },
+        ],
+      },
+    },
     tasks: [
       {
         label: '',

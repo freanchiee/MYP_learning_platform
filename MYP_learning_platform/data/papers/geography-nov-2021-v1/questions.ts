@@ -91,6 +91,25 @@ export const questions: Question[] = [
     topic: 'Explaining a human cause of the plastic trend',
     marks: 4,
     stem: '**Source A** is repeated for reference (annual global plastic production from 1960 to 2020).',
+    artefact: {
+      component: 'InteractiveChart',
+      caption:
+        'Plastic production (Source A) plotted against a human-activity driver that grew alongside it — global single-use packaging output. Hover a point for its value, or toggle a line in the legend, to help you link the trend to one human activity.',
+      data: {
+        kind: 'line',
+        title: 'Plastic production vs a human-activity driver, 1960–2020',
+        source: 'MYP Geography — illustrative comparison (Source A + driver)',
+        x: {
+          label: 'Year',
+          categories: ['1960', '1970', '1980', '1990', '2000', '2010', '2020'],
+        },
+        y: { label: 'Million tonnes per year', min: 0, max: 400, ticks: [0, 100, 200, 300, 400] },
+        series: [
+          { name: 'Plastic produced (Source A)', color: '#0b7285', points: [8, 35, 70, 120, 213, 313, 367] },
+          { name: 'Single-use packaging output (driver)', color: '#e8590c', points: [3, 16, 38, 74, 140, 205, 245] },
+        ],
+      },
+    },
     tasks: [
       {
         label: '',
@@ -294,6 +313,25 @@ export const questions: Question[] = [
     topic: 'Purpose & value of a source (Source E)',
     marks: 4,
     stem: '**Source E** (the mismanaged-plastic-waste table) is repeated to help you answer the questions that follow.',
+    artefact: {
+      component: 'InteractiveChart',
+      caption:
+        'The Source E figures shown as the grouped bar chart a newspaper would print alongside the table. Hover a bar for its exact value, or toggle 2010 / 2020 in the legend — this is the kind of clear, at-a-glance comparison the source provides for readers.',
+      data: {
+        kind: 'bar',
+        title: 'Source E — mismanaged plastic waste by region, 2010 vs 2020',
+        source: 'Newspaper article on ocean plastic (recreated)',
+        x: {
+          label: 'World region',
+          categories: ['East Asia & Pacific', 'South Asia', 'Sub-Saharan Africa'],
+        },
+        y: { label: 'Million tonnes per year', min: 0, max: 24, ticks: [0, 4, 8, 12, 16, 20, 24] },
+        series: [
+          { name: '2010', color: '#74c0fc', points: [12.5, 6.4, 1.9] },
+          { name: '2020', color: '#c2255c', points: [20.8, 12.1, 8.3] },
+        ],
+      },
+    },
     tasks: [
       {
         label: 'a',
@@ -365,6 +403,27 @@ export const questions: Question[] = [
     topic: 'Extended essay — benefits vs consequences of the global plastic-waste trade',
     marks: 24,
     stem: '"The global trade in plastic waste creates more benefits for societies than negative consequences." To what extent do you agree with this statement?',
+    artefact: {
+      component: 'InteractiveChart',
+      caption:
+        'Benefits and negative consequences of the global plastic-waste trade for exporting and importing societies (illustrative data) — hover a bar for its value, or toggle a series in the legend. Use it to weigh both sides; your essay must cite named examples from your MYP studies.',
+      data: {
+        kind: 'bar',
+        title: 'Weighing the global plastic-waste trade (illustrative)',
+        source: 'MYP Geography — illustrative comparison (not exam data)',
+        x: {
+          label: 'Society affected',
+          categories: ['Exporting (high-income)', 'Importing (lower-income)'],
+        },
+        y: { label: 'Relative scale (index, 0–100)', min: 0, max: 100, ticks: [0, 20, 40, 60, 80, 100] },
+        series: [
+          { name: 'Income / jobs from the trade', color: '#2f9e44', points: [45, 70] },
+          { name: 'Recycling capacity used', color: '#1971c2', points: [80, 55] },
+          { name: 'Pollution & health harm', color: '#c2255c', points: [20, 85] },
+          { name: 'Waste left uncollected', color: '#e8590c', points: [15, 75] },
+        ],
+      },
+    },
     tasks: [
       {
         label: '',

@@ -88,6 +88,24 @@ export const questions: Question[] = [
     topic: 'Causes of resource scarcity',
     marks: 4,
     stem: 'Natural resources can become scarce.',
+    artefact: {
+      component: 'DataTableInteractive',
+      caption:
+        'Factors that can cause resource scarcity — click a row to pin the factor you choose to explain. Each row pairs a factor with how it reduces supply and a named coastal/marine example. Pick ONE factor; develop it in your own words.',
+      data: {
+        title: 'What can make a natural resource scarce?',
+        source: 'MYP Geography — resource scarcity',
+        headers: ['Factor', 'How it causes scarcity', 'Named example'],
+        rows: [
+          ['Unsustainable extraction', 'A resource is taken out faster than it can be replaced or re-form', 'Sand mining on the Mekong delta strips river-bed sand for construction'],
+          ['Population growth', 'More people raise demand until supply per person falls', 'Rising coastal populations in Bangladesh increase demand for fresh groundwater'],
+          ['Pollution / contamination', 'A usable resource is spoiled so less of it is safe to use', 'Saltwater intrusion and plastic pollution contaminate freshwater in the Ganges delta'],
+          ['Climate change', 'Shifting rainfall and rising seas reduce the reliable supply', 'Erratic monsoons and sea-level rise reduce fresh water in low-lying river deltas'],
+          ['Uneven distribution / access', 'A resource exists but cannot reach everyone who needs it', 'Upstream dams reduce the water and sediment reaching downstream coastal communities'],
+        ],
+        caption: 'Choose ONE factor and explain it with reasons. Your answer must name an example — with no example the response is capped at 3 marks.',
+      },
+    },
     tasks: [
       {
         label: '',
@@ -164,6 +182,24 @@ export const questions: Question[] = [
       'Now that you have evaluated the consultant’s action plan in question 3, you will take on the role of a researcher who has been asked to plan an investigation into issues relating to natural resource management.\n\n' +
       'The following is the statement of inquiry you need to base your investigation on:\n\n' +
       '**Statement of inquiry:** “The extraction of natural resources can have a great impact on human and natural environments.”',
+    artefact: {
+      component: 'DataTableInteractive',
+      caption:
+        'Candidate extraction case studies — click a row to pin the one you build your investigation around, then formulate your research question and choose your methods/sources from it. Each row links an extraction activity to its human AND natural impact, plus a reliable source you could use.',
+      data: {
+        title: 'Possible case studies for your investigation',
+        source: 'MYP Geography — natural resource management',
+        headers: ['Extraction activity', 'Impact on humans', 'Impact on the natural environment', 'Reliable source to use'],
+        rows: [
+          ['Sand mining, Mekong delta', 'Riverbanks collapse, threatening homes and farmland', 'Loss of river-bed habitat and delta erosion', 'UNEP sand-resource reports; national river-survey data'],
+          ['Shrimp farming, Sundarbans coast', 'Income for some, but lost land and conflict for others', 'Clearance of protective mangrove forest', 'FAO aquaculture data; Forestry Dept restoration records'],
+          ['Groundwater pumping, Bay of Bengal', 'Wells run dry; saltier drinking water for residents', 'Falling water tables and saltwater intrusion', 'World Bank water data; hydrological surveys'],
+          ['Coastal tin/heavy-mineral mining, SE Asia', 'Jobs created but seasonal and often unsafe', 'Beach and reef damage from dredging', 'Government mining statistics; NGO marine surveys'],
+          ['Offshore fishing, South Asian coasts', 'Food and livelihoods for coastal communities', 'Overfished stocks and damaged seabed habitats', 'FAO fisheries data; NGO catch-monitoring reports'],
+        ],
+        caption: 'Pick ONE case study. Use it to formulate a clear, focused research question and to choose realistic methods and sources for your action plan.',
+      },
+    },
     tasks: [
       {
         label: 'a',
@@ -372,6 +408,25 @@ export const questions: Question[] = [
     type: 'extended',
     topic: 'Extended essay — technology & disaster impacts in HICs',
     marks: 24,
+    artefact: {
+      component: 'InteractiveChart',
+      caption:
+        'Disaster impacts in HICs before vs after introducing modern technology (illustrative data) — hover a bar for its exact value, or toggle a series in the legend. Use it as evidence to weigh how far technology has reduced disaster impacts; cite a named disaster in your essay.',
+      data: {
+        kind: 'bar',
+        title: 'Has technology reduced disaster impacts in HICs?',
+        source: 'MYP Geography — illustrative comparison (not exam data)',
+        x: {
+          label: 'Type of impact',
+          categories: ['Deaths', 'People made homeless', 'Days without power', 'Economic loss (index)'],
+        },
+        y: { label: 'Relative impact (index, worst case = 100)', min: 0, max: 100, ticks: [0, 20, 40, 60, 80, 100] },
+        series: [
+          { name: 'Before modern technology', color: '#c2255c', points: [100, 90, 80, 70] },
+          { name: 'With modern technology', color: '#2f9e44', points: [22, 48, 25, 75] },
+        ],
+      },
+    },
     tasks: [
       {
         label: '',

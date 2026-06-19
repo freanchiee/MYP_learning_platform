@@ -60,6 +60,34 @@ export const questions: Question[] = [
     topic: 'Physical processes — rivers & coasts',
     marks: 6,
     stem: 'Rivers and coasts are shaped by physical processes, some of which can put nearby communities at risk.',
+    artefact: {
+      component: 'DragAnnotate',
+      caption:
+        'An original recreation of a river meeting the coast. Drag each physical-process label onto the place it acts. Use the scene to help you state two physical processes and to explain how one of them can threaten a nearby community.',
+      data: {
+        title: 'Physical processes on a river and coast',
+        prompt:
+          'Where does each physical process act? Place the labels on the scene — then pick one process and think through how it could put a nearby community at risk.',
+        mode: 'annotate',
+        scene: 'river-coast',
+        sceneHint: 'A river meandering across the land to a coastline with a beach and headland.',
+        chips: [
+          { id: 'erosion', text: 'Erosion (abrasion)' },
+          { id: 'transportation', text: 'Transportation' },
+          { id: 'deposition', text: 'Deposition' },
+          { id: 'mass-movement', text: 'Mass movement' },
+          { id: 'intrusion', text: 'Saltwater intrusion' },
+        ],
+        targets: [
+          { id: 't-headland', x: 30, y: 22, label: 'Headland', correctLabelId: 'erosion' },
+          { id: 't-meander', x: 60, y: 50, label: 'Meander', correctLabelId: 'transportation' },
+          { id: 't-mouth', x: 36, y: 64, label: 'River mouth', correctLabelId: 'deposition' },
+          { id: 't-cliff', x: 33, y: 40, label: 'Coast slope', correctLabelId: 'mass-movement' },
+          { id: 't-delta', x: 31, y: 80, label: 'Lower delta', correctLabelId: 'intrusion' },
+        ],
+        showScore: true,
+      },
+    },
     tasks: [
       {
         label: 'a',
@@ -144,6 +172,28 @@ export const questions: Question[] = [
       'The local government of a river or coastal area wants to investigate ways to better protect the environment and the community. You must choose a location and design an action plan to investigate sustainable management solutions for the local government.\n\n' +
       '**Statement of inquiry:** Sustainable management of rivers and coastal environments can protect communities and the environment.\n\n' +
       'You must **not** repeat information from Question 2 in your responses.',
+    artefact: {
+      component: 'VennOverlap',
+      caption:
+        'The statement of inquiry, drawn out: a sustainable strategy is one that sits in the overlap — it protects the community AND the environment at once. Aim your research question and sources at this overlap.',
+      data: {
+        title: 'What makes river/coastal management sustainable?',
+        source: 'Statement of inquiry',
+        setA: {
+          label: 'Protecting the community',
+          color: '#1971c2',
+          items: ['Safer from floods', 'Water for homes & farms', 'Livelihoods (fishing, tourism)'],
+        },
+        setB: {
+          label: 'Protecting the environment',
+          color: '#2f9e44',
+          items: ['Healthy river flow', 'Wetlands & habitats', 'Less pollution & erosion'],
+        },
+        overlapLabel: 'Sustainable management',
+        caption:
+          'A focused research question should target a strategy in this overlap — one that protects the community without harming the environment (or vice versa).',
+      },
+    },
     tasks: [
       {
         label: 'a',

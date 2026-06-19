@@ -228,6 +228,26 @@ export const questions: Question[] = [
       'The investigation will allow the local government to consider the actions they need to take in reducing the impacts of climate change in the future.\n\n' +
       '**Statement of inquiry:** Effective planning can reduce the impact of changes in global temperatures on the environment.\n\n' +
       'You must not repeat information from Question 3 in your responses.',
+    artefact: {
+      component: 'DataTableInteractive',
+      caption:
+        'A reference panel of common climate-change mitigation strategies (actions that reduce the causes and impacts of climate change). Use it to choose a focus for your own research question — hover a row to highlight it, click to pin the strategy you build your investigation around.',
+      data: {
+        title: 'Mitigation strategies — reducing the causes and impacts of climate change',
+        source: 'Local government briefing (recreated)',
+        headers: ['Mitigation strategy', 'How it reduces warming', 'Scale', 'Possible challenge'],
+        rows: [
+          ['Renewable energy (solar / wind)', 'Replaces fossil-fuel power, cutting CO₂ emissions', 'National', 'High set-up cost; needs suitable climate/sites'],
+          ['Afforestation / reforestation', 'Trees absorb CO₂ from the atmosphere', 'Regional', 'Land competes with farming; slow to take effect'],
+          ['Improved public transport', 'Fewer private vehicles lowers transport emissions', 'City', 'Needs investment; changing travel habits is hard'],
+          ['Building insulation standards', 'Less energy used to heat and cool buildings', 'Local', 'Retro-fitting older buildings is expensive'],
+          ['Carbon pricing / emissions tax', 'Makes high-emission activity costlier, cutting demand', 'National', 'Can be unpopular; may raise living costs'],
+          ['Protecting wetlands & peatlands', 'Stores carbon and buffers flooding from sea-level rise', 'Regional', 'Hard to monitor; pressure from development'],
+        ],
+        caption:
+          'Mitigation = reducing the causes and impacts of climate change. These strategies are examples only — your investigation may focus on one of them, a place where it is used, or a different strategy of your choice.',
+      },
+    },
     tasks: [
       {
         label: 'a',
@@ -311,7 +331,7 @@ export const questions: Question[] = [
             source: 'Ministry of Disaster Response, Government of Tonga (recreated)',
             region: 'Nuku’alofa, Tongatapu, Kingdom of Tonga',
             scene: 'coast',
-            water: 'bottom',
+            water: 'left',
             terrain: 'none',
             scaleKm: 5,
             north: true,
@@ -332,7 +352,7 @@ export const questions: Question[] = [
             markers: [
               { x: 60, y: 22, label: 'Nuku’alofa (capital city)', detail: 'Capital city, hit by the 1.2 m tsunami wave; tsunami damaged 600 structures.' },
               { x: 36, y: 50, label: 'Kolofo’ou', detail: 'District of Nuku’alofa.' },
-              { x: 18, y: 70, label: 'Haveluloto', detail: 'Settlement to the west; hospitals located nearby.' },
+              { x: 32, y: 70, label: 'Haveluloto', detail: 'Settlement to the west; hospitals located nearby.' },
               { x: 62, y: 58, label: 'Malufanga', detail: 'Settlement to the east; power plant located nearby.' },
             ],
             caption:
@@ -406,6 +426,34 @@ export const questions: Question[] = [
     type: 'extended',
     topic: 'Extended essay — sustainable tourism',
     marks: 24,
+    artefact: {
+      component: 'InteractiveChart',
+      caption:
+        'Tourist arrivals to the Galápagos Islands (drawn from the figures in Source B). The statement to evaluate is whether this growth in tourist numbers is the greatest threat to sustainable tourism — hover a point to read its exact value.',
+      data: {
+        kind: 'line',
+        title: 'Tourist arrivals to the Galápagos Islands, 2007–2019',
+        source: 'Source B — Galapagos Daily (recreated)',
+        x: {
+          label: 'Year',
+          categories: ['2007', '2018', '2019'],
+        },
+        y: {
+          label: 'Tourists per year',
+          min: 0,
+          max: 320000,
+          ticks: [0, 80000, 160000, 240000, 320000],
+          unit: 'people',
+        },
+        series: [
+          {
+            name: 'Tourist arrivals',
+            color: '#0b7285',
+            points: [180000, 300000, 271238],
+          },
+        ],
+      },
+    },
     tasks: [
       {
         label: '',

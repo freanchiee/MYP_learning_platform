@@ -55,6 +55,28 @@ export const questions: Question[] = [
       '2. Despite the fact that each tonne of food now clears less forest than in 1970, the overall area of forest cleared for farming has actually increased due to:\n' +
       '   • population growth\n' +
       '   • rising incomes (as people become wealthier, they eat more meat, and pasture and feed crops need large areas of cleared land).',
+    artefact: {
+      component: 'SourceDocViewer',
+      caption: 'Source A — Conclusions of the environmental scientists on forest cleared for farming.',
+      data: {
+        kind: 'Secondary source',
+        title: 'Source A — Forest cleared for farming',
+        attribution: 'Conclusions of a group of environmental scientists investigating global historical trends in forest cleared to make way for farming.',
+        paragraphs: [
+          'A group of environmental scientists investigated global historical trends in the amount of forest cleared to make way for farming. They reached the following conclusions.',
+          'Conclusion 1. Globally, growing a given amount of food now clears far less forest per tonne than it did in 1970. This is due to higher crop yields, better seeds, fertilizers and farming on land that is already cleared.',
+          'Conclusion 2. Despite the fact that each tonne of food now clears less forest than in 1970, the overall area of forest cleared for farming has actually increased. This is due to population growth.',
+          'It is also due to rising incomes: as people become wealthier, they eat more meat, and pasture and feed crops need large areas of cleared land.',
+        ],
+        glossary: {
+          'crop yields': 'The amount of a crop harvested from a given area of land.',
+          'fertilizers': 'Substances added to soil to help crops grow better and produce more food per area.',
+          'population growth': 'An increase in the number of people, raising overall demand for food.',
+          'rising incomes': 'People becoming wealthier on average, which tends to increase demand for meat.',
+          'pasture': 'Grassland used to graze livestock such as cattle.',
+        },
+      },
+    },
     tasks: [
       {
         label: '',
@@ -196,6 +218,60 @@ export const questions: Question[] = [
       '• increased use of higher-yield seeds, fertilizers and technology in farming\n' +
       '• changing global population growth.\n\n' +
       'You will continue the investigation carried out by the scientists. You will need to develop an action plan by answering the following questions.',
+    artefact: {
+      component: 'InfoGraphicPanel',
+      caption: 'Action plan — steps to continue investigating future trends in forest clearance for farming.',
+      data: {
+        title: 'Action plan — investigating future trends in forest clearance',
+        source: 'Areas for further investigation suggested by the environmental scientists',
+        intro:
+          'The scientists suggested two future trends to investigate further: increased use of higher-yield seeds, fertilizers and technology in farming; and changing global population growth. Build your action plan across the stages below.',
+        layout: 'flow',
+        blocks: [
+          {
+            heading: 'Formulate a research question',
+            items: [
+              'Choose one future trend (farming technology OR population growth)',
+              'Write a clear, focused question linking it to forest clearance',
+              'Specify a place and product where you can',
+            ],
+            note: 'Part (a) — 2 marks.',
+          },
+          {
+            heading: 'Justify its relevance',
+            items: [
+              'Explain why this question matters to future forest-clearance trends',
+              'Link it back to the scientists’ two suggested future trends',
+            ],
+            note: 'Part (b) — 4 marks.',
+          },
+          {
+            heading: 'Anticipate a challenge',
+            items: [
+              'Identify one challenge in investigating future trends',
+              'Explain why it is a challenge (e.g. the future is uncertain)',
+            ],
+            note: 'Part (c) — 4 marks.',
+          },
+          {
+            heading: 'Choose a research method',
+            items: [
+              'Name one method to collect information',
+              'e.g. surveys, interviews, statistics, fieldwork',
+            ],
+            note: 'Part (d) — 1 mark.',
+          },
+          {
+            heading: 'Choose a recording method',
+            items: [
+              'Name one method to record information',
+              'e.g. spreadsheet, data table, field notes',
+            ],
+            note: 'Part (e) — 1 mark.',
+          },
+        ],
+      },
+    },
     tasks: [
       {
         label: 'a',

@@ -97,6 +97,32 @@ export const questions: Question[] = [
       '**Option A:** Raise the National Park entry fee for tourists and set a strict daily cap on the number of visitors allowed onto each island.\n\n' +
       '**Option B:** Build raised boardwalks and a designated visitor centre at the busiest landing site so that the increased number of tourists is kept off the fragile ground.\n\n' +
       'Refer to the location of Ecuador and the Galápagos Islands shown on the map above (the same map used in Question 1).',
+    artefact: {
+      component: 'DataTableInteractive',
+      caption:
+        'The two management options compared side by side. Hover a row to highlight it; click to pin the option you choose to write about. This is the stimulus for your answer.',
+      data: {
+        title: 'Two options to manage visitor numbers in the Galápagos',
+        source: 'Galápagos National Park authority',
+        headers: ['Option', 'What it does', 'How it protects the environment', 'Possible drawback'],
+        rows: [
+          [
+            'Option A — Fee + visitor cap',
+            'Raise the National Park entry fee and set a strict daily cap on visitors per island',
+            'Fewer tourists each day means less widening of footpaths, less disturbance to nesting sites and less litter on the coastal trails',
+            'A higher fee and daily cap reduce tourist income and may turn some visitors away',
+          ],
+          [
+            'Option B — Boardwalks + visitor centre',
+            'Build raised boardwalks and a designated visitor centre at the busiest landing site',
+            'Tourists are kept up off the fragile ground, so the same number of visitors causes far less damage to soil and nesting areas',
+            'Construction is costly and the building work itself can disturb the landing site',
+          ],
+        ],
+        caption:
+          'Both options aim to prevent damage to the fragile environment while still allowing tourism. Refer to the location of Ecuador and the Galápagos Islands (shown on the Q1 map) when you explain a positive impact.',
+      },
+    },
     tasks: [
       {
         label: '',
@@ -163,6 +189,44 @@ export const questions: Question[] = [
     stem:
       'Now that you have explored the management of tourism on the Galápagos Islands, you will plan an investigation into the future of sustainable tourism in another location of your choice. The information collected will be used to write an article for a travel magazine exploring sustainable tourism. You will use the statement of inquiry below to plan your investigation.\n\n' +
       '**Statement of Inquiry:** Global interactions can change identities and relationships.',
+    artefact: {
+      component: 'DataTableInteractive',
+      caption:
+        'Candidate locations you could investigate, with the kind of GIS map and secondary sources each offers. Click a row to pin the location you choose, then build your research question and source list around it. These are examples only — you may choose another location.',
+      data: {
+        title: 'Possible locations for your sustainable-tourism investigation',
+        source: 'MYP Geography — global interactions, identities & relationships',
+        headers: ['Location', 'Tourism pressure', 'GIS map you could use', 'Two secondary sources'],
+        rows: [
+          [
+            'Venice, Italy',
+            'Cruise-ship crowds and rising rents are changing the identity of the old city',
+            'GIS map of daily visitor density by district over the past ten years',
+            'City of Venice tourism statistics; an academic journal article on overtourism',
+          ],
+          [
+            'Maya Bay, Thailand',
+            'Reef damage forced a temporary closure of the bay to tourists',
+            'GIS map of reef health and boat-mooring sites over the past ten years',
+            'Thai national-park visitor reports; an NGO marine-survey dataset',
+          ],
+          [
+            'Machu Picchu, Peru',
+            'Footpath erosion and a daily visitor cap on the Inca Trail',
+            'GIS map of trail erosion and visitor numbers over the past ten years',
+            'Peru Ministry of Culture entry statistics; a UNESCO conservation report',
+          ],
+          [
+            'Iceland (Golden Circle)',
+            'Rapid growth in visitors is straining small rural communities',
+            'GIS map of tourist numbers at key sites over the past ten years',
+            'Icelandic Tourist Board statistics; a peer-reviewed sustainability study',
+          ],
+        ],
+        caption:
+          'Pick ONE location (or your own). The GIS column shows the map your teacher suggested; the final column gives two secondary sources other than GIS maps that you could list.',
+      },
+    },
     tasks: [
       {
         label: 'a',
@@ -354,6 +418,27 @@ export const questions: Question[] = [
     type: 'extended',
     topic: 'Extended essay — biome management vs economic development',
     marks: 24,
+    artefact: {
+      component: 'InteractiveChart',
+      caption:
+        'The trade-off at the heart of the essay — for three biomes, an illustrative comparison of what sustainable management protects versus what economic development can earn. Hover a bar for its value, or toggle a series in the legend. Use it to weigh both sides and consider different perspectives; cite a named biome in your essay.',
+      data: {
+        kind: 'bar',
+        title: 'Sustainable management vs economic development, by biome (illustrative)',
+        source: 'MYP Geography — illustrative comparison (not exam data)',
+        x: {
+          label: 'Biome',
+          categories: ['Forests (rainforest)', 'Aquatic (coral reef)', 'Arctic / tundra'],
+        },
+        y: { label: 'Relative index', min: 0, max: 100, ticks: [0, 20, 40, 60, 80, 100] },
+        series: [
+          { name: 'Biodiversity protected by sustainable management', color: '#2f9e44', points: [95, 88, 70] },
+          { name: 'Carbon stored if left intact', color: '#1971c2', points: [90, 55, 96] },
+          { name: 'Short-term income from development', color: '#e8590c', points: [80, 60, 72] },
+          { name: 'Local jobs from development', color: '#c2255c', points: [70, 50, 45] },
+        ],
+      },
+    },
     tasks: [
       {
         label: '',

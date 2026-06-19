@@ -28,6 +28,27 @@ export const questions: Question[] = [
     marks: 12,
     // FIGURE: constructable taxonomy tree → described as data in stem; no asset needed.
     stem: 'Living organisms can be grouped according to their characteristics. This process is known as classification.\n\nThe diagram below shows how six members of the dog family have been classified into a taxonomic hierarchy. All six species share Kingdom (Animals), Phylum (Chordates), Class (Mammals), Order (Carnivores) and Family (Dogs, Canidae).\n\nThe species are: Gray wolf (Canis lupus), Coyote (Canis latrans), Golden jackal (Canis aureus) — all Genus: Canis; Red fox (Vulpes vulpes) — Genus: Vulpes; African wild dog (Lycaon pictus) — Genus: Lycaon; Maned wolf (Chrysocyon brachyurus) — Genus: Chrysocyon.',
+    artefact: {
+      component: 'NetworkGraph',
+      data: {
+        title: 'Classification of six members of the dog family (Canidae)',
+        source: 'Taxonomic hierarchy',
+        center: { label: 'Family Canidae', detail: 'Kingdom Animalia · Phylum Chordata · Class Mammalia · Order Carnivora · Family Canidae — shared by all six species.', color: '#1e293b' },
+        nodes: [
+          { id: 'wolf', label: 'Gray wolf', color: '#0b7285', detail: 'Canis lupus — Genus Canis.' },
+          { id: 'coyote', label: 'Coyote', color: '#0b7285', detail: 'Canis latrans — Genus Canis.' },
+          { id: 'jackal', label: 'Golden jackal', color: '#0b7285', detail: 'Canis aureus — Genus Canis.' },
+          { id: 'fox', label: 'Red fox', color: '#e8590c', detail: 'Vulpes vulpes — Genus Vulpes.' },
+          { id: 'wilddog', label: 'African wild dog', color: '#9c36b5', detail: 'Lycaon pictus — Genus Lycaon.' },
+          { id: 'maned', label: 'Maned wolf', color: '#2f9e44', detail: 'Chrysocyon brachyurus — Genus Chrysocyon.' },
+        ],
+        edges: [
+          { from: 'wolf', to: 'coyote', label: 'Genus Canis' },
+          { from: 'coyote', to: 'jackal', label: 'Genus Canis' },
+        ],
+      },
+      caption: 'Spokes share Family Canidae; the three blue species share Genus Canis (linked), so they are the most closely related.',
+    },
     tasks: [
       {
         label: 'a',
@@ -96,6 +117,34 @@ export const questions: Question[] = [
     marks: 13,
     // FIGURE: constructable diagram → alveolus/capillary described in stem; no asset needed.
     stem: 'A smart ring can record data about a person\'s body, such as blood oxygen levels, pulse rate and breathing rate. Gas exchange between the air and the blood takes place in the alveoli of the lungs.',
+    artefact: {
+      component: 'LineGraph',
+      data: {
+        title: 'Pulse rate recorded by a smart ring during a swimming session',
+        xLabel: 'Time',
+        yLabel: 'Pulse rate',
+        xUnit: 'min',
+        yUnit: 'beats per minute',
+        xMin: 0,
+        xMax: 16,
+        yMin: 0,
+        yMax: 140,
+        xStep: 2,
+        yStep: 20,
+        dataPoints: [
+          { x: 0, y: 66 },
+          { x: 2, y: 67 },
+          { x: 4, y: 68 },
+          { x: 6, y: 86 },
+          { x: 8, y: 104 },
+          { x: 10, y: 120 },
+          { x: 12, y: 128 },
+          { x: 14, y: 110 },
+          { x: 16, y: 88 },
+        ],
+      },
+      caption: 'Pulse rate is steady at rest, then rises from about 68 bpm at 4 min to about 128 bpm at 12 min during swimming, before recovering.',
+    },
     tasks: [
       {
         label: 'a',
@@ -144,6 +193,23 @@ export const questions: Question[] = [
     marks: 10,
     // FIGURE: constructable data table → values given in stem; no asset needed.
     stem: 'Light is an environmental factor essential for life on Earth. Different seeds need different conditions to germinate. A research lab measured the effect of light intensity on the germination of three seed types (L, M, N) in a germination chamber.\n\nResults (number of seeds germinated out of 10):\nLight 100%: L=10, M=6, N=4\nLight 75%:  L=8,  M=5, N=4\nLight 50%:  L=5,  M=3, N=4\nLight 25%:  L=3,  M=1, N=4\nLight 0%:   L=2,  M=0, N=4',
+    artefact: {
+      component: 'DataTableInteractive',
+      data: {
+        title: 'Effect of light intensity on seed germination',
+        source: 'Germination chamber trial',
+        caption: 'Number of seeds germinated out of 10 for each seed type at five light intensities. Seed N stays constant at 4.',
+        headers: ['Light intensity', 'Seed type L', 'Seed type M', 'Seed type N'],
+        rows: [
+          ['100%', '10', '6', '4'],
+          ['75%', '8', '5', '4'],
+          ['50%', '5', '3', '4'],
+          ['25%', '3', '1', '4'],
+          ['0%', '2', '0', '4'],
+        ],
+      },
+      caption: 'Seeds germinated out of 10 versus light intensity for seed types L, M and N.',
+    },
     tasks: [
       {
         label: 'a',
@@ -203,6 +269,22 @@ export const questions: Question[] = [
     marks: 14,
     // FIGURE: constructable equation/data → described in text; no asset needed.
     stem: 'Indoor farms use artificial lighting to grow crops. A student decided to investigate the effect of light intensity on the growth of tomato seedlings.',
+    artefact: {
+      component: 'DataTableInteractive',
+      data: {
+        title: "Student's results: tomato stem length vs light intensity",
+        source: 'Indoor-farm investigation (temperature kept at 25°C)',
+        caption: 'The student forgot to add units to the stem-length column. Growth stops increasing between 80% and 100% light intensity.',
+        headers: ['Light intensity', 'Tomato stem length'],
+        rows: [
+          ['20%', '26'],
+          ['50%', '34'],
+          ['80%', '40'],
+          ['100%', '40'],
+        ],
+      },
+      caption: 'Stem length rises with light intensity then levels off at 40 above 80% — units are missing from the second column.',
+    },
     tasks: [
       {
         label: 'a',
@@ -270,6 +352,23 @@ export const questions: Question[] = [
     topicsAlso: ['Habitats & Ecosystems'],
     marks: 9,
     stem: 'The student also wanted to know how temperature affects plant growth. They used the following method:\n1. Select rice seedlings with similar stem lengths.\n2. Place each seedling in an enclosed container with a heater and carbon dioxide controller.\n3. Conduct the experiment at different temperatures: 20°C, 30°C, 40°C, 50°C and 60°C.\n4. Measure the increase in stem length after 15 days.\n5. Repeat the experiment for each temperature.\n\nResults:\nTemperature 20°C → Stem increase 5 mm\nTemperature 30°C → Stem increase 18 mm\nTemperature 40°C → Stem increase 38 mm\nTemperature 50°C → Stem increase 40 mm\nTemperature 60°C → Stem increase 2 mm',
+    artefact: {
+      component: 'DataTableInteractive',
+      data: {
+        title: 'Effect of temperature on rice stem growth',
+        source: 'Enclosed-container investigation (stem increase after 15 days)',
+        caption: 'Raw results to be plotted in part (b): growth rises to a peak near 40–50°C, then falls sharply at 60°C.',
+        headers: ['Temperature / °C', 'Increase in stem length after 15 days / mm'],
+        rows: [
+          ['20', '5'],
+          ['30', '18'],
+          ['40', '38'],
+          ['50', '40'],
+          ['60', '2'],
+        ],
+      },
+      caption: 'The five recorded data points the student must present as a graph.',
+    },
     tasks: [
       {
         label: 'a',
@@ -303,6 +402,24 @@ export const questions: Question[] = [
     topicsAlso: ['Pollution & Conservation'],
     marks: 16,
     stem: 'Farmers add dissolved fertiliser to crops to supply nutrients, but too much fertiliser can harm plants and pollute waterways.\n\nDesign an investigation to test how changing the concentration of dissolved fertiliser affects plant growth. You are provided with standard laboratory equipment and a range of fertiliser solutions with concentrations between 0 and 10 g/L.\n\nIn your answer, you should include:\n• the independent variable, dependent variable and two controlled variables\n• equipment you will use\n• details of how to manipulate, measure or monitor the variables\n• details of the method you will use to collect sufficient data\n• a safety consideration.',
+    artefact: {
+      component: 'DataTableInteractive',
+      data: {
+        title: 'Suggested results table to plan and fill in',
+        source: 'Fertiliser-concentration investigation',
+        caption: 'A blank template across the 0–10 g/L range with three repeats per concentration, to help you plan how to collect sufficient, repeatable data.',
+        headers: ['Fertiliser concentration / g L⁻¹', 'Stem length trial 1 / mm', 'Stem length trial 2 / mm', 'Stem length trial 3 / mm', 'Mean stem length / mm'],
+        rows: [
+          ['0', '', '', '', ''],
+          ['2', '', '', '', ''],
+          ['4', '', '', '', ''],
+          ['6', '', '', '', ''],
+          ['8', '', '', '', ''],
+          ['10', '', '', '', ''],
+        ],
+      },
+      caption: 'Independent variable across six levels (0–10 g/L) with three repeats and a mean column — a frame for the method you design.',
+    },
     tasks: [
       {
         label: 'a',
@@ -325,6 +442,24 @@ export const questions: Question[] = [
     marks: 10,
     // FIGURE: constructable line chart → trends described in tasks; no asset needed.
     stem: 'Tagging animals to follow their movements has been used for over a century. Sea turtles can be tagged with a small numbered flipper tag or a satellite tag, so each turtle can be identified again. Tagging does not harm the turtle, and lets scientists follow migration and survival.\n\nIn 1955, scientists tagged 40 young sea turtles with small numbered flipper tags. Only three of the 40 tags were ever returned, one from over 2000 km away. This was one of the first uses of sea-turtle tagging for scientific research.',
+    artefact: {
+      component: 'DataTableInteractive',
+      data: {
+        title: 'Sea-turtle population index for four ocean regions, 1970–2019',
+        source: 'Population index (1970 = 100)',
+        caption: 'Index relative to 1970. The Mediterranean population shows the steepest decline, falling from 100 to 38.',
+        headers: ['Year', 'Pacific', 'Atlantic', 'Indian Ocean', 'Mediterranean'],
+        rows: [
+          ['1970', '100', '100', '100', '100'],
+          ['1980', '92', '96', '90', '78'],
+          ['1990', '85', '94', '83', '61'],
+          ['2000', '79', '97', '76', '50'],
+          ['2010', '76', '101', '72', '43'],
+          ['2019', '74', '104', '69', '38'],
+        ],
+      },
+      caption: 'Population index for four sea-turtle populations; compare the size of each decline to answer part (a).',
+    },
     tasks: [
       {
         label: 'a',
@@ -372,6 +507,23 @@ export const questions: Question[] = [
     topicsAlso: ['Habitats & Ecosystems'],
     marks: 16,
     stem: 'GPS collars and camera traps provide information about a land animal\'s location and movement. A GPS collar is fitted around an animal\'s neck and records its position regularly. A camera trap is a fixed camera that photographs any animal that passes in front of it.\n\nGPS collars allow scientists to follow an individual animal\'s movements continuously over large areas, for months or years.',
+    artefact: {
+      component: 'DataTableInteractive',
+      data: {
+        title: 'Comparing two animal-tracking technologies',
+        source: 'Field-research equipment comparison',
+        caption: 'A GPS collar follows one named individual everywhere it goes; a camera trap stays in one place and records whatever passes by.',
+        headers: ['Feature', 'GPS collar', 'Camera trap'],
+        rows: [
+          ['Fitted to', 'An individual animal’s neck', 'A fixed point (tree or post)'],
+          ['What it records', 'Continuous position of that animal', 'A photo of any animal passing'],
+          ['Area covered', 'Wherever the animal travels', 'Only the spot it is aimed at'],
+          ['Duration', 'Months to years', 'Until battery/memory is full'],
+          ['Affects the animal?', 'Yes — animal must be caught and collared', 'No — animal is not handled'],
+        ],
+      },
+      caption: 'Side-by-side comparison of GPS collars and camera traps for studying land animals.',
+    },
     tasks: [
       {
         label: 'a',

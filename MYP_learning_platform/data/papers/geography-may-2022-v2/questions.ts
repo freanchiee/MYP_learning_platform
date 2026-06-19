@@ -89,7 +89,25 @@ export const questions: Question[] = [
     type: 'extended',
     topic: 'Disparity & equity — disaster impacts',
     marks: 4,
-    stem: 'Communities are not affected equally by natural disasters. Income can shape how vulnerable people are when a hazard strikes.',
+    stem: 'Communities are not affected equally by natural disasters. Income can shape how vulnerable people are when a hazard strikes.\n\nThe chart compares how the same flood hazard affected lower-income and higher-income households in one affected district.',
+    artefact: {
+      component: 'InteractiveChart',
+      caption: 'How the same flood hit lower-income and higher-income households differently (original recreation). Click a legend chip to toggle a group; hover a bar for its value.',
+      data: {
+        kind: 'bar',
+        title: 'Impact of one flood on lower- vs higher-income households',
+        source: 'District vulnerability survey (recreated)',
+        x: {
+          label: 'Measured impact',
+          categories: ['Homes badly damaged (%)', 'Crop or income lost (%)', 'Weeks to recover', 'Households with insurance (%)'],
+        },
+        y: { label: 'Value', min: 0, max: 100, ticks: [0, 20, 40, 60, 80, 100] },
+        series: [
+          { name: 'Lower-income households', color: '#e8590c', points: [62, 71, 34, 6] },
+          { name: 'Higher-income households', color: '#0b7285', points: [18, 23, 8, 58] },
+        ],
+      },
+    },
     tasks: [
       {
         label: '',
@@ -142,7 +160,7 @@ export const questions: Question[] = [
             icon: '📋',
             items: [
               'A person is counted as displaced when they register at an official relief centre away from their home.',
-              'Collect registration records from relief centres in every affected province of Thailand, Cambodia and Vietnam.',
+              'Collect registration records from relief centres in every affected province of Thailand, Cambodia, Vietnam and Laos.',
               'About 1.8 million people registered — roughly three quarters of those displaced.',
             ],
             note: 'How we gather evidence',
@@ -189,7 +207,26 @@ export const questions: Question[] = [
     marks: 12,
     stem:
       'A Non-Governmental Organisation (NGO) has asked you to investigate the strategies used to manage a natural disaster. The investigation will allow the NGO to evaluate the effectiveness of strategies in different locations.\n\n' +
-      '**Statement of inquiry:** Time, place and space can influence the effectiveness of a community’s response to natural disasters.',
+      '**Statement of inquiry:** Time, place and space can influence the effectiveness of a community’s response to natural disasters.\n\n' +
+      'The table below lists some management strategies used in different places against different hazards. You may use it to help choose a strategy and location for your investigation — but you are free to choose any other.',
+    artefact: {
+      component: 'DataTableInteractive',
+      caption: 'A starting list of disaster-management strategies used in different places — to help you choose a strategy and location to investigate. Click a row to pin the option you choose.',
+      data: {
+        title: 'Some disaster-management strategies, by hazard and place',
+        source: 'Investigation briefing pack (recreated)',
+        headers: ['Management strategy', 'Hazard it manages', 'Example location'],
+        rows: [
+          ['Early-warning sirens & phone alerts', 'Flood / tsunami', 'Lower Mekong basin, SE Asia'],
+          ['Raised stilt housing & flood embankments', 'River flood', 'Mekong Delta, Vietnam'],
+          ['Evacuation drills & marked routes', 'Wildfire / hurricane', 'Coastal towns, Hawaii'],
+          ['Earthquake-resistant building codes', 'Earthquake', 'Tokyo, Japan'],
+          ['Reforestation of slopes', 'Landslide / flood', 'Hill districts, India'],
+        ],
+        caption:
+          'The table is only a prompt — it does not say how effective each strategy is, which is what your investigation would find out. You may investigate any of these, or another strategy and location of your choice.',
+      },
+    },
     tasks: [
       {
         label: 'a',
@@ -228,7 +265,29 @@ export const questions: Question[] = [
     stem:
       'You are a popular travel **blogger** who has many online followers.\n\n' +
       'You decide to write a blog post to explain the positive and negative impacts of tourism on the culture of **one** community.\n\n' +
-      '(A photograph of a travel writer’s desk — laptop, camera, glasses, passport and an open notebook — accompanies the task in the exam. It is decorative and is not a marked source.)',
+      '(A photograph of a travel writer’s desk — laptop, camera, glasses, passport and an open notebook — accompanies the task in the exam. It is decorative and is not a marked source.)\n\n' +
+      'The diagram below sorts some cultural effects of tourism into positive and negative, with the shared middle showing how both pull on the same community traditions. You may draw on it for your blog post.',
+    artefact: {
+      component: 'VennOverlap',
+      caption: 'Cultural impacts of tourism on a community — positive on one side, negative on the other, with their shared effect on local traditions in the overlap (original recreation, a planning aid for your blog).',
+      data: {
+        title: 'Cultural impacts of tourism on a community',
+        source: 'Blog planning aid (recreated)',
+        setA: {
+          label: 'Positive cultural impacts',
+          color: '#2f9e44',
+          items: ['Crafts & festivals revived', 'Pride in heritage', 'Income funds restoration'],
+        },
+        setB: {
+          label: 'Negative cultural impacts',
+          color: '#c2255c',
+          items: ['Traditions staged for sale', 'Loss of local language', 'Younger people copy visitors'],
+        },
+        overlapLabel: 'Local traditions reshaped',
+        caption:
+          'Both sides act on the same living culture: tourism can revive traditions yet also commercialise them. Use one impact from each side in your blog post.',
+      },
+    },
     tasks: [
       {
         label: '',
@@ -338,7 +397,22 @@ export const questions: Question[] = [
     topic: 'Source evaluation — limitation of a diagram',
     marks: 2,
     stem:
-      'Re-examine **Source C** (the rainwater-harvesting rollout plan from Question 7). A resident of the town is learning about the council’s proposal to invest in rainwater harvesting.',
+      'Re-examine **Source C** (the rainwater-harvesting rollout plan from Question 7), shown again below. A resident of the town is learning about the council’s proposal to invest in rainwater harvesting.',
+    artefact: {
+      component: 'TimelineScrubber',
+      caption: 'Source C (shown again) — the council’s one-year rollout plan. Notice what the timeline does, and does not, tell a resident: drag the handle or click a marker to move through the stages.',
+      data: {
+        title: 'Source C — Rollout plan for the rainwater-harvesting programme',
+        source: 'Town council planning office',
+        events: [
+          { date: 'Jan 2024', label: 'Survey of rooftops', detail: 'Engineers survey rooftops and soil to estimate how much rain can be collected and where recharge pits should go.' },
+          { date: 'Mar 2024', label: 'Households sign up', detail: 'Residents are shown the plan and asked to join; the council records how many households opt in.' },
+          { date: 'Jun 2024', label: 'Tanks & gutters installed', detail: 'Before the monsoon, gutters, filters and storage tanks are fitted to rooftops that joined the scheme.' },
+          { date: 'Aug 2024', label: 'First monsoon collection', detail: 'The monsoon rains are captured; tanks fill and recharge pits begin to top up the groundwater under the town.' },
+          { date: 'Dec 2024', label: 'Handover & training', detail: 'The council hands the systems over to households and trains them to clean filters and maintain the tanks through the dry season.' },
+        ],
+      },
+    },
     tasks: [
       {
         label: '',
@@ -354,7 +428,25 @@ export const questions: Question[] = [
     type: 'extended',
     topic: 'Extended essay — sustainable forestry & biodiversity',
     marks: 24,
-    stem: 'A report by the United Nations found that the world is losing about 10 million hectares of forest every year, and that this loss of forest habitat is one of the leading causes of biodiversity loss on land.',
+    stem: 'A report by the United Nations found that the world is losing about 10 million hectares of forest every year, and that this loss of forest habitat is one of the leading causes of biodiversity loss on land.\n\nThe chart shows how forest area lost and a measure of land-animal populations have changed over recent decades. You may refer to it in your essay.',
+    artefact: {
+      component: 'InteractiveChart',
+      caption: 'Forest area lost each year and an index of land-animal populations over time (original recreation). Click a legend chip to toggle a series; hover a point for its value.',
+      data: {
+        kind: 'line',
+        title: 'Forest loss and land-animal populations over time',
+        source: 'UN forest & biodiversity report (recreated)',
+        x: {
+          label: 'Year',
+          categories: ['1990', '2000', '2010', '2020'],
+        },
+        y: { label: 'Index value', min: 0, max: 120, ticks: [0, 20, 40, 60, 80, 100, 120] },
+        series: [
+          { name: 'Forest lost (million ha/yr)', color: '#e8590c', points: [16, 14, 12, 10] },
+          { name: 'Land-animal population index (1990 = 100)', color: '#2f9e44', points: [100, 86, 74, 61] },
+        ],
+      },
+    },
     tasks: [
       {
         label: '',

@@ -101,6 +101,27 @@ export const questions: Question[] = [
     marks: 1,
     stem:
       'A short-response knowledge question on industrialization. A response can reference any industrialization period.',
+    artefact: {
+      component: 'NetworkGraph',
+      caption:
+        'Stakeholders of industrialization — hover or tap a node to read who that stakeholder is and how industrialization could affect them. Use it to prompt your own answer; identify one stakeholder in your own words.',
+      data: {
+        title: 'Who has a stake in industrialization?',
+        source: 'MYP Integrated Humanities — concept web',
+        center: {
+          label: 'Industrialization',
+          detail: 'The shift from hand production to machine-based manufacturing in factories, which reshapes who gains and who loses.',
+          color: '#1e293b',
+        },
+        nodes: [
+          { id: 'owners', label: 'Factory owners', color: '#2f9e44', detail: 'Benefitted: rising output and profits from mechanised mass production.' },
+          { id: 'investors', label: 'Investors', color: '#0b7285', detail: 'Benefitted: returns from funding factories, railways and new machinery.' },
+          { id: 'workers', label: 'Factory workers', color: '#e8590c', detail: 'Mixed: new wage jobs, but often long hours, low pay and unsafe conditions.' },
+          { id: 'consumers', label: 'Consumers', color: '#1971c2', detail: 'Benefitted: cheaper, more plentiful manufactured goods.' },
+          { id: 'government', label: 'Governments', color: '#9c36b5', detail: 'Benefitted: more tax revenue and stronger national economies.' },
+        ],
+      },
+    },
     tasks: [
       {
         label: '',
@@ -118,6 +139,60 @@ export const questions: Question[] = [
     marks: 2,
     stem:
       'A short-response question on the causes of industrialization. Note: a response can reference any industrialization period. Note: ease, speed and improvements are considered as changes/consequences and not reasons.',
+    artefact: {
+      component: 'InfoGraphicPanel',
+      caption:
+        'Reasons (causes) vs. consequences of industrialization — hover or tap a panel to spotlight it. Outline a reason from the left-hand causes; the examiner warns that ease, speed and improvements are consequences, not reasons.',
+      data: {
+        title: 'Causes of industrialization — and what they are NOT',
+        source: 'MYP Integrated Humanities — concept panel',
+        intro: 'A reason explains WHY industrialization began. A consequence is a change that FOLLOWED. The note on this question warns that ease, speed and improvements count as consequences, not reasons.',
+        layout: 'grid',
+        blocks: [
+          {
+            icon: '⚙️',
+            heading: 'Reason · New technology',
+            items: [
+              'Inventions such as the steam engine and powered machinery made factory production possible.',
+            ],
+            note: 'A cause — it enabled industry.',
+          },
+          {
+            icon: '💰',
+            heading: 'Reason · Available capital',
+            items: [
+              'Wealth from trade and finance could be invested in factories, machines and infrastructure.',
+            ],
+            note: 'A cause — it funded industry.',
+          },
+          {
+            icon: '👥',
+            heading: 'Reason · Labour supply',
+            items: [
+              'Population growth and people moving from farms to towns provided workers for factories.',
+            ],
+            note: 'A cause — it staffed industry.',
+          },
+          {
+            icon: '⛏️',
+            heading: 'Reason · Access to resources',
+            items: [
+              'Plentiful coal, iron and raw materials powered and supplied the new machines.',
+            ],
+            note: 'A cause — it supplied industry.',
+          },
+          {
+            icon: '⚠️',
+            heading: 'NOT a reason · Consequences',
+            items: [
+              'Ease, speed and improvements are CHANGES that resulted from industrialization.',
+              'Do not write these as reasons — they score 0 as causes.',
+            ],
+            note: 'These are consequences, not reasons.',
+          },
+        ],
+      },
+    },
     tasks: [
       {
         label: '',
@@ -135,6 +210,25 @@ export const questions: Question[] = [
     marks: 3,
     stem:
       'A short extended-response question. Note: a society can be considered as a nation, a country, or any structured group of people. Note: a response can reference any industrialization period.',
+    artefact: {
+      component: 'DataTableInteractive',
+      caption:
+        'How society changed after industrialization — hover a row to highlight it, click to pin the change you will describe. Each row contrasts a feature of society before and after. Describe one change in your own words.',
+      data: {
+        title: 'Society before and after industrialization',
+        source: 'MYP Integrated Humanities — comparison table',
+        caption: 'A society can be a nation, a country, or any structured group of people. Use a row as a prompt; develop your own detailed description.',
+        headers: ['Aspect of society', 'Before industrialization', 'After industrialization'],
+        rows: [
+          ['Where people lived', 'Mostly rural, in villages near farmland', 'Rapid growth of crowded industrial cities'],
+          ['Main type of work', 'Farming and handcrafts at home', 'Wage work in factories on fixed shifts'],
+          ['Family life', 'Whole family worked together on the land', 'Members left home for separate factory jobs'],
+          ['Social classes', 'Landowners and peasants', 'New factory-owning middle class and a working class'],
+          ['Living conditions', 'Spread out across the countryside', 'Overcrowded housing, pollution and disease in cities'],
+          ['Transport', 'On foot, by horse or by canal boat', 'Railways and steamships moved people and goods'],
+        ],
+      },
+    },
     tasks: [
       {
         label: '',
@@ -226,6 +320,51 @@ export const questions: Question[] = [
     stem:
       'You have been asked to investigate the impact of industrialization on the world. You have been given the following statement of inquiry:\n\n' +
       '**Statement of inquiry: Industrialization has changed lives around the world.**',
+    artefact: {
+      component: 'InfoGraphicPanel',
+      caption:
+        'Investigation planner — hover or tap a stage to spotlight it. Each stage maps to a part of this question (a–f). Use it to structure your plan; write your own research question, sources and interviewees.',
+      data: {
+        title: 'Planning an investigation — Industrialization has changed lives around the world',
+        source: 'MYP Integrated Humanities — Criterion B action plan',
+        intro: 'Statement of inquiry: Industrialization has changed lives around the world. Work through the stages below; each one corresponds to a part of this question.',
+        layout: 'flow',
+        blocks: [
+          {
+            heading: 'Stage 1 · Research question (a–b)',
+            items: [
+              'Formulate ONE clear and focused research question (name a specific group or place).',
+              'Be ready to justify why it is worthy of investigation.',
+            ],
+            note: 'Parts (a) clear & focused, (b) justification.',
+          },
+          {
+            heading: 'Stage 2 · Choose sources (c–d)',
+            items: [
+              'Select one PRIMARY source (e.g. an interview, a photograph, a factory record).',
+              'Select one SECONDARY source (e.g. a textbook, an encyclopaedia, a documentary).',
+            ],
+            note: 'Parts (c) primary, (d) secondary.',
+          },
+          {
+            heading: 'Stage 3 · Identify interviewees (e)',
+            items: [
+              'Name TWO specific people who could broaden your investigation.',
+              'For example a factory worker, a historian, a business owner or a local resident.',
+            ],
+            note: 'Part (e) — two people.',
+          },
+          {
+            heading: 'Stage 4 · Plan the information (f)',
+            items: [
+              'For ONE of those people, outline the information you would gather.',
+              'Tie it back to how industrialization changed lives.',
+            ],
+            note: 'Part (f) — information to gather.',
+          },
+        ],
+      },
+    },
     tasks: [
       {
         label: 'a',
@@ -285,6 +424,26 @@ export const questions: Question[] = [
       '• inform, engage, and convince so that your ideas lead the economic agent into action\n' +
       '• include two ways in which the economic agent could help.\n\n' +
       'Note: if you only provide one way in which the economic agent can help, the maximum mark that can be awarded for Criterion A is 3 marks.',
+    artefact: {
+      component: 'NetworkGraph',
+      caption:
+        'The four economic agents and labour shortage — hover or tap an agent to read how it could help. Choose ONE agent for your script; your two ways must be in your own words.',
+      data: {
+        title: 'Economic agents · tackling labour shortage',
+        source: 'MYP Integrated Humanities — concept web',
+        center: {
+          label: 'Labour shortage',
+          detail: 'When there are not enough available workers to fill the jobs an economy needs. Each agent below can act to ease it.',
+          color: '#1e293b',
+        },
+        nodes: [
+          { id: 'consumers', label: 'Consumers', color: '#0b7285', detail: 'Could re-enter the workforce, retrain for in-demand jobs, or accept services that use fewer staff.' },
+          { id: 'producers', label: 'Producers', color: '#e8590c', detail: 'Could raise wages, improve conditions, automate tasks, or recruit and train new workers.' },
+          { id: 'governments', label: 'Governments', color: '#9c36b5', detail: 'Could fund training, ease immigration rules, offer childcare, or incentivise older workers to stay.' },
+          { id: 'banks', label: 'Banks', color: '#2f9e44', detail: 'Could lend to firms to expand or automate, and fund training programmes and apprenticeships.' },
+        ],
+      },
+    },
     tasks: [
       {
         label: '',
@@ -361,6 +520,56 @@ export const questions: Question[] = [
     stem:
       'Write a well-structured essay in response to the question below.\n\n' +
       'Note: a place can be an area, town, building, etc. Perspectives must be considered depending on the place selected (e.g. if you select cities as a place, two different cities could be considered as two perspectives). A response that does not include a conclusion indicating to what extent the redevelopment of one place has contributed to its sustainable management is likely to be awarded 1–2 marks for Criterion D. A conclusion should not present new aspects not previously included in the essay.',
+    artefact: {
+      component: 'InfoGraphicPanel',
+      caption:
+        'Essay planner — hover or tap a panel to spotlight it. The first three panels are the dimensions of sustainable management to weigh; the last is the structure a "to what extent" essay needs. Remember: you cannot use Lyon as your example.',
+      data: {
+        title: 'Planning a "to what extent" essay on redevelopment & sustainable management',
+        source: 'MYP Integrated Humanities — Criterion D planner',
+        intro: 'Choose ONE place (an area, town, building, etc.) — but NOT the city of Lyon. Weigh its redevelopment against the three dimensions of sustainability below, consider different perspectives, then judge to what extent.',
+        layout: 'grid',
+        blocks: [
+          {
+            icon: '🌱',
+            heading: 'Environmental dimension',
+            items: [
+              'Green spaces, biodiversity and water bodies preserved or created',
+              'Energy use, pollution and reuse of existing buildings/materials',
+            ],
+            note: 'Argue: did redevelopment help or harm the environment?',
+          },
+          {
+            icon: '👥',
+            heading: 'Social dimension',
+            items: [
+              'Housing, jobs and services for residents',
+              'Whether existing communities were included or displaced',
+            ],
+            note: 'Argue: who benefitted, who lost out?',
+          },
+          {
+            icon: '💷',
+            heading: 'Economic dimension',
+            items: [
+              'Investment, tourism, employment and local business',
+              'Whether the gains can be sustained over the long term',
+            ],
+            note: 'Argue: is the prosperity lasting?',
+          },
+          {
+            icon: '⚖️',
+            heading: 'Structure & judgement',
+            items: [
+              'Use example(s) from your studies or own knowledge (NOT Lyon)',
+              'Consider different perspectives (e.g. two cities, or residents vs. planners)',
+              'End with a conclusion stating TO WHAT EXTENT — adding no new aspects',
+            ],
+            note: 'A missing "to what extent" conclusion is likely capped at 1–2 marks for Criterion D.',
+          },
+        ],
+      },
+    },
     tasks: [
       {
         label: '',

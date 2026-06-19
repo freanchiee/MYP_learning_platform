@@ -89,6 +89,23 @@ export const questions: Question[] = [
     topic: 'Causes of resource scarcity',
     marks: 4,
     stem: 'Natural resources can become scarce.',
+    artefact: {
+      component: 'NetworkGraph',
+      caption:
+        'Factors that can cause resource scarcity — hover or tap a spoke to read how that factor reduces the supply of a resource, with an example. Use it to prompt your own answer; you must explain one factor in your own words with a named example.',
+      data: {
+        title: 'Why natural resources become scarce',
+        source: 'MYP Geography — concept web',
+        center: { label: 'Resource scarcity', detail: 'When demand for a natural resource is greater than the supply available, so it becomes harder to obtain.', color: '#1e293b' },
+        nodes: [
+          { id: 'population', label: 'Population growth', color: '#c2255c', detail: 'A rising population uses more water, food and energy than before, so a fixed supply is shared among more people and runs short — e.g. groundwater over-extraction in northern India.' },
+          { id: 'overuse', label: 'Over-extraction', color: '#e8590c', detail: 'Using a resource faster than it can be replaced. Non-renewable resources (oil, coal) cannot be remade, and even renewable ones (fish, forests) collapse if harvested too fast — e.g. collapse of North Atlantic cod stocks.' },
+          { id: 'climate', label: 'Climate change', color: '#1971c2', detail: 'Changing rainfall and rising temperatures dry up rivers and shrink harvests, reducing freshwater and food — e.g. prolonged drought in the Sahel reducing crop yields.' },
+          { id: 'uneven', label: 'Uneven distribution', color: '#2f9e44', detail: 'Resources are not spread evenly across the world, so some regions have very little — e.g. desert states with almost no freshwater rivers relying on costly desalination.' },
+          { id: 'conflict', label: 'Conflict & politics', color: '#9c36b5', detail: 'War or trade disputes can block access to a resource even where it exists, cutting off imports or damaging supply infrastructure — e.g. disrupted energy and grain exports during armed conflict.' },
+        ],
+      },
+    },
     tasks: [
       {
         label: '',
@@ -165,6 +182,64 @@ export const questions: Question[] = [
       'Now that you have evaluated the consultant’s action plan in question 3, you will take on the role of a researcher who has been asked to plan an investigation into issues relating to natural resource management.\n\n' +
       'The following is the statement of inquiry you need to base your investigation on:\n\n' +
       '**Statement of inquiry:** “The extraction of natural resources can have a great impact on human and natural environments.”',
+    artefact: {
+      component: 'InfoGraphicPanel',
+      caption:
+        'Your investigation planner, mapped onto parts (a)–(e). Hover a stage to spotlight it; click to pin. The prompts are scaffolds only — write your own research question, methods and answers tied to the statement of inquiry on extraction impacts.',
+      data: {
+        title: 'Planning your investigation',
+        source: 'Researcher’s action-plan template',
+        intro: 'Statement of inquiry: “The extraction of natural resources can have a great impact on human and natural environments.” Each stage below corresponds to one part of question 4.',
+        layout: 'flow',
+        blocks: [
+          {
+            heading: '(a) Research question',
+            note: 'Clear AND focused',
+            items: [
+              'Name a real place or case study (e.g. a specific mine, oil field or quarry).',
+              'Make it answerable — not too broad, not a simple yes/no.',
+              'Link it directly to extraction’s impact on human or natural environments.',
+            ],
+          },
+          {
+            heading: '(b) Justify relevance',
+            note: 'Connect RQ → SoI',
+            items: [
+              'Explain why the question matters for the statement of inquiry.',
+              'Give reasons with detail, not just a single sentence.',
+              'Show the human and/or natural impacts you expect to uncover.',
+            ],
+          },
+          {
+            heading: '(c) Two methods',
+            note: 'How you collect data',
+            items: [
+              'Interview with an expert or affected resident.',
+              'Questionnaire or survey of a local community.',
+              'Library / internet secondary research and official statistics.',
+            ],
+          },
+          {
+            heading: '(d) Why a method helps',
+            note: 'Outline usefulness',
+            items: [
+              'Take ONE method from (c).',
+              'Explain, with brief detail, what kind of data it gives you.',
+              'e.g. an interview gives first-hand primary insight from an expert.',
+            ],
+          },
+          {
+            heading: '(e) One challenge',
+            note: 'Anticipate a problem',
+            items: [
+              'Identify a realistic difficulty in collecting your data.',
+              'Add brief detail on why it is a problem.',
+              'e.g. companies may withhold extraction data, so figures are unreliable.',
+            ],
+          },
+        ],
+      },
+    },
     tasks: [
       {
         label: 'a',
@@ -408,6 +483,25 @@ export const questions: Question[] = [
     type: 'extended',
     topic: 'Extended essay — technology & disaster impacts in HICs',
     marks: 24,
+    artefact: {
+      component: 'DataTableInteractive',
+      caption:
+        'Reference data for your essay — disaster-management technology and outcomes in higher- vs lower-income contexts. Click a row to pin it as you read. Use these as evidence for different perspectives; the figures are illustrative case-study values, not exact statistics.',
+      data: {
+        title: 'Technology and natural-disaster impacts: HICs vs LICs',
+        source: 'MYP Geography — comparative case data (illustrative)',
+        headers: ['Hazard event (context)', 'Income level', 'Early-warning / technology', 'Deaths', 'People displaced'],
+        rows: [
+          ['Tōhoku earthquake & tsunami, Japan 2011', 'HIC', 'Seismic sensors + tsunami sirens; ~minutes warning', '~18,000', '470,000'],
+          ['Indian Ocean tsunami 2004 (no warning system)', 'LIC/MIC', 'No regional tsunami warning system in place', '~227,000', '1,700,000'],
+          ['Hurricane forecasting & evacuation, USA', 'HIC', 'Satellite tracking + days of evacuation alerts', 'Tens to hundreds', 'Hundreds of thousands'],
+          ['Cyclone with limited forecasting, low-income coast', 'LIC', 'Limited forecasting and few storm shelters', 'Thousands to tens of thousands', 'Millions'],
+          ['Wildfire alert apps & water-bombing aircraft', 'HIC', 'Real-time satellite alerts + aerial firefighting', 'Lower per event', 'Localised'],
+        ],
+        caption:
+          'Technology such as early-warning systems, monitoring and rapid response tends to lower death tolls — but HICs can also afford it, so income and technology overlap. Consider whether technology, wealth, governance or preparedness is the real driver.',
+      },
+    },
     tasks: [
       {
         label: '',

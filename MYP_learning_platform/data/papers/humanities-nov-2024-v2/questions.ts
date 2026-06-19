@@ -85,6 +85,34 @@ export const questions: Question[] = [
     marks: 2,
     stem:
       'In 2021, the World Health Organization stated that “the share of the world’s population with access to safely managed drinking water has risen steadily over the past two decades, although large gaps remain between regions.”',
+    artefact: {
+      component: 'InteractiveChart',
+      caption:
+        'Global share of the population using safely managed drinking-water services, 2000–2020, illustrating the steady rise described by the WHO.',
+      data: {
+        kind: 'line',
+        title: 'Global access to safely managed drinking water, 2000–2020',
+        source: 'WHO/UNICEF Joint Monitoring Programme (adapted)',
+        x: {
+          label: 'Year',
+          categories: ['2000', '2005', '2010', '2015', '2020'],
+        },
+        y: {
+          label: 'Population using safely managed drinking water',
+          unit: '%',
+          min: 50,
+          max: 80,
+          ticks: [50, 55, 60, 65, 70, 75, 80],
+        },
+        series: [
+          {
+            name: 'World (% of population)',
+            color: '#0b7285',
+            points: [61, 64, 68, 71, 74],
+          },
+        ],
+      },
+    },
     tasks: [
       {
         label: '',
@@ -100,6 +128,52 @@ export const questions: Question[] = [
     type: 'extended',
     topic: 'Impact of access to safe water on a community or region',
     marks: 2,
+    artefact: {
+      component: 'InfoGraphicPanel',
+      caption:
+        'Some of the ways access to safe drinking water can affect a community — use these as prompts, then develop one impact in your own words.',
+      data: {
+        title: 'How safe drinking water can change a community',
+        source: 'MYP Integrated Humanities — stimulus panel',
+        intro:
+          'Access to safe, nearby drinking water can affect many areas of community life. The panels below show possible impacts you might develop in your answer.',
+        layout: 'grid',
+        blocks: [
+          {
+            heading: 'Health',
+            icon: '💧',
+            items: [
+              'Fewer waterborne diseases such as cholera and diarrhoea.',
+              'Lower child mortality from preventable illness.',
+            ],
+          },
+          {
+            heading: 'Education',
+            icon: '📚',
+            items: [
+              'Children, especially girls, spend less time collecting water.',
+              'Better school attendance and more time to study.',
+            ],
+          },
+          {
+            heading: 'Time & work',
+            icon: '⏱️',
+            items: [
+              'Households save hours each day not walking to distant sources.',
+              'More time for paid work, farming or caring for family.',
+            ],
+          },
+          {
+            heading: 'Economy',
+            icon: '💰',
+            items: [
+              'Lower spending on medicine and treatment.',
+              'Healthier, more productive workers strengthen the local economy.',
+            ],
+          },
+        ],
+      },
+    },
     tasks: [
       {
         label: '',
@@ -186,6 +260,40 @@ export const questions: Question[] = [
     marks: 12,
     stem:
       'Following your work with the county officials of Kisumu on access to healthcare, you have been asked by another region’s health authority to plan an investigation into childhood vaccination coverage (the share of children who receive recommended vaccines).',
+    artefact: {
+      component: 'InfoGraphicPanel',
+      caption:
+        'The four sources available for part (c). Hover or pin a card to focus on it as you decide which source would be most beneficial to your investigation.',
+      data: {
+        title: 'Sources available for your vaccination-coverage investigation',
+        source: 'MYP Integrated Humanities — source selection panel',
+        intro:
+          'For part (c) you must select ONE of these sources and explain whether or not it would be beneficial to your investigation into childhood vaccination coverage.',
+        layout: 'grid',
+        blocks: [
+          {
+            heading: 'Source 1 — Local newspaper article',
+            icon: '📰',
+            items: ['About which towns families have moved to.'],
+          },
+          {
+            heading: 'Source 2 — Vaccination statistics',
+            icon: '📊',
+            items: ['Percentage of children vaccinated in each district.'],
+          },
+          {
+            heading: 'Source 3 — Interview transcript',
+            icon: '🎙️',
+            items: ['With the director of the district health centre.'],
+          },
+          {
+            heading: 'Source 4 — NGO website article',
+            icon: '🌐',
+            items: ['Common reasons parents delay vaccinations.'],
+          },
+        ],
+      },
+    },
     tasks: [
       {
         label: 'a',
@@ -379,6 +487,44 @@ export const questions: Question[] = [
     stem:
       'In the past, life expectancy was the main focus when judging how healthy a population was. Recently, other indicators measuring different aspects of health — such as child mortality, access to clean water, vaccination rates and mental wellbeing — have also been used to understand a population’s health.\n\n' +
       'Write a well-structured essay in response to the following.',
+    artefact: {
+      component: 'InteractiveChart',
+      caption:
+        'Two example countries with a similar life expectancy can look very different across other health indicators — illustrating why a single indicator may not capture a population’s wellbeing. (Illustrative figures.)',
+      data: {
+        kind: 'bar',
+        title: 'One number is not enough: two countries with similar life expectancy',
+        source: 'Illustrative composite — MYP Integrated Humanities',
+        x: {
+          label: 'Health indicator',
+          categories: [
+            'Life expectancy (yrs)',
+            'Child survival* (per 100)',
+            'Safe water access (%)',
+            'Vaccination coverage (%)',
+            'Mental wellbeing index',
+          ],
+        },
+        y: {
+          label: 'Value (mixed units — see categories)',
+          min: 0,
+          max: 100,
+          ticks: [0, 20, 40, 60, 80, 100],
+        },
+        series: [
+          {
+            name: 'Country X',
+            color: '#1971c2',
+            points: [72, 97, 92, 90, 78],
+          },
+          {
+            name: 'Country Y',
+            color: '#e8590c',
+            points: [71, 88, 58, 64, 49],
+          },
+        ],
+      },
+    },
     tasks: [
       {
         label: '',

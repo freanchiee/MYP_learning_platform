@@ -270,6 +270,30 @@ export const questions: Question[] = [
       'The investigation will allow the regional government to consider the actions they need to take to keep farmland productive and stop the desert from spreading in the Sahel region of Africa.\n\n' +
       '**Statement of inquiry:** Effective planning can reduce the impact of land degradation on people and places.\n\n' +
       'You must not repeat information from Question 3 in your responses.',
+    artefact: {
+      component: 'LocatedMap',
+      caption:
+        'A located map of the Sahel — the semi-arid belt of Africa south of the Sahara where the regional government is considering action. The markers show study sites along the desertification front; the inset globe locates the region in the world. Use it to orient and focus your investigation.',
+      data: {
+        title: 'The Sahel region · the study area for your investigation',
+        source: 'Regional government briefing map (original recreation)',
+        region: 'The Sahel, Africa',
+        regionCountries: ['Senegal', 'Mauritania', 'Mali', 'Niger', 'Chad', 'Sudan', 'Burkina Faso', 'Nigeria'],
+        scaleKm: 1000,
+        north: true,
+        locator: [10, 15],
+        markers: [
+          { lon: -15.6, lat: 16.0, label: 'Northern Senegal', color: '#e8590c', detail: 'Farmland on the desert edge where shifting sand is burying fields and wells.' },
+          { lon: -4.0, lat: 17.0, label: 'Northern Mali', color: '#e8590c', detail: 'Overgrazed rangeland losing its vegetation cover after repeated droughts.' },
+          { lon: 8.1, lat: 16.9, label: 'Niger', color: '#2f9e44', detail: 'Restoration site: farmer-managed tree regeneration is greening cropland again.' },
+          { lon: 18.7, lat: 14.0, label: 'Chad', color: '#e8590c', detail: 'Land near Lake Chad degrading as the lake shrinks and pressure on the soil rises.' },
+        ],
+        legend: [
+          { label: 'Land degrading / desert advancing', color: '#e8590c' },
+          { label: 'Restoration under way', color: '#2f9e44' },
+        ],
+      },
+    },
     tasks: [
       {
         label: 'a',
@@ -453,6 +477,31 @@ export const questions: Question[] = [
     type: 'extended',
     topic: 'Extended essay — sustainable energy transition',
     marks: 24,
+    artefact: {
+      component: 'ChoroplethWorld',
+      caption:
+        'Context for the essay — the countries that dominate the supply of the critical minerals an energy transition depends on (lithium, cobalt, rare-earths and the metals refined for batteries and solar panels). The world map highlights this small group of producer and refiner countries. Hover a country to read it; click the key to spotlight the highlighted set. This is background only — the essay does not require you to read a value off the map.',
+      data: {
+        mode: 'highlight',
+        title: 'Where the world’s critical transition minerals are concentrated',
+        source: 'Critical-minerals production and refining overview (original recreation)',
+        highlight: [
+          'Dem. Rep. Congo',
+          'China',
+          'Australia',
+          'Chile',
+          'Indonesia',
+          'Argentina',
+          'South Africa',
+          'Peru',
+          'Russia',
+        ],
+        highlightLabel: 'Major producer / refiner of transition minerals',
+        baseLabel: 'Other countries',
+        caption:
+          'A handful of countries supply or refine most of the metals the energy transition relies on — for example around 70% of cobalt is mined in the Democratic Republic of the Congo and much of the world’s refining is concentrated in China. This concentration is part of why rising mineral demand raises questions about a sustainable transition.',
+      },
+    },
     tasks: [
       {
         label: '',

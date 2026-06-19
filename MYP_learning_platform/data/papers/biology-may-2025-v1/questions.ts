@@ -28,6 +28,27 @@ export const questions: Question[] = [
     marks: 12,
     // FIGURE: constructable taxonomy tree → described as data in stem; no asset needed.
     stem: 'Living organisms can be grouped according to their characteristics. This process is known as classification.\n\nThe diagram below shows how six bear species have been classified into a taxonomic hierarchy. All six species share Kingdom (Animals), Phylum (Chordates), Class (Mammals), Order (Carnivores) and Family (Bears, Ursidae).\n\nThe species are: Brown bear (Ursus arctos), Polar bear (Ursus maritimus), American black bear (Ursus americanus) — all Genus: Ursus; Giant panda (Ailuropoda melanoleuca) — Genus: Ailuropoda; Sun bear (Helarctos malayanus) — Genus: Helarctos; Spectacled bear (Tremarctos ornatus) — Genus: Tremarctos.',
+    artefact: {
+      component: 'NetworkGraph',
+      data: {
+        title: 'Classification of the bear family (Family Ursidae)',
+        center: { label: 'Family Ursidae (bears)', detail: 'All six species share Kingdom Animalia → Phylum Chordata → Class Mammalia → Order Carnivora → Family Ursidae. They are separated at genus and species level.', color: '#1e293b' },
+        nodes: [
+          { id: 'brown', label: 'Brown bear', color: '#0b7285', detail: 'Ursus arctos · Genus Ursus — shares its genus with polar and American black bears.' },
+          { id: 'polar', label: 'Polar bear', color: '#0b7285', detail: 'Ursus maritimus · Genus Ursus — most closely related to the other Ursus species.' },
+          { id: 'black', label: 'American black bear', color: '#0b7285', detail: 'Ursus americanus · Genus Ursus.' },
+          { id: 'panda', label: 'Giant panda', color: '#e8590c', detail: 'Ailuropoda melanoleuca · Genus Ailuropoda — its own genus.' },
+          { id: 'sun', label: 'Sun bear', color: '#9c36b5', detail: 'Helarctos malayanus · Genus Helarctos — its own genus.' },
+          { id: 'spec', label: 'Spectacled bear', color: '#2f9e44', detail: 'Tremarctos ornatus · Genus Tremarctos — its own genus.' },
+        ],
+        edges: [
+          { from: 'brown', to: 'polar', label: 'genus Ursus' },
+          { from: 'polar', to: 'black', label: 'genus Ursus' },
+          { from: 'brown', to: 'black', label: 'genus Ursus' },
+        ],
+      },
+      caption: 'Three species share the genus Ursus (teal); panda, sun and spectacled bears each sit in their own genus. The more classification levels two species share, the more closely related they are.',
+    },
     tasks: [
       {
         label: 'a',
@@ -96,6 +117,29 @@ export const questions: Question[] = [
     marks: 13,
     // FIGURE: constructable diagram → alveolus/capillary described in stem; no asset needed.
     stem: 'Fitness trackers can record data about a person\'s body, such as blood oxygen levels, pulse rate and breathing rate. Gas exchange between the air and the blood takes place in the alveoli of the lungs.',
+    artefact: {
+      component: 'RateSim',
+      data: {
+        title: 'Fitness-tracker recording during a cycling session',
+        xAxis: { label: 'Time / minutes', min: 0, max: 10, tick: 2 },
+        yAxis: { label: 'Rate / per minute', min: 0, max: 150, tick: 30 },
+        variable: 'time during exercise',
+        options: [
+          {
+            label: 'Pulse rate / beats per min',
+            color: 'orange',
+            points: [[0, 72], [1, 72], [2, 72], [4, 96], [6, 134], [8, 134], [10, 90]],
+          },
+          {
+            label: 'Breathing rate / breaths per min',
+            color: 'teal',
+            points: [[0, 16], [1, 16], [2, 16], [4, 26], [6, 38], [8, 38], [10, 22]],
+          },
+        ],
+        note: 'The wearer cycled between 2 and 8 minutes. Drag the cursor to read the pulse rate (~72 → ~134) and breathing rate (~16 → ~38) over this interval.',
+      },
+      caption: 'Both pulse rate and breathing rate rise sharply during cycling (2–8 min) and fall once the wearer stops. Toggle each line to compare.',
+    },
     tasks: [
       {
         label: 'a',
@@ -144,6 +188,20 @@ export const questions: Question[] = [
     marks: 10,
     // FIGURE: constructable data table → values given in stem; no asset needed.
     stem: 'Light is an environmental factor essential for life on Earth. Different seeds need different conditions to germinate. A vertical-farming company measured the effect of light intensity on the germination of three seed types (P, Q, R) in a germination chamber.\n\nResults (number of seeds germinated out of 10):\nLight 100%: P=9, Q=7, R=5\nLight 75%:  P=6, Q=5, R=5\nLight 50%:  P=4, Q=2, R=5\nLight 25%:  P=2, Q=1, R=5\nLight 0%:   P=1, Q=0, R=5',
+    artefact: {
+      component: 'DataTable',
+      data: {
+        headers: ['Light intensity / %', 'Seed type P — germinated /10', 'Seed type Q — germinated /10', 'Seed type R — germinated /10'],
+        rows: [
+          ['100', '9', '7', '5'],
+          ['75', '6', '5', '5'],
+          ['50', '4', '2', '5'],
+          ['25', '2', '1', '5'],
+          ['0', '1', '0', '5'],
+        ],
+      },
+      caption: 'Number of seeds germinated out of 10 at five light intensities. P and Q fall as light decreases; R stays constant at 5 regardless of light.',
+    },
     tasks: [
       {
         label: 'a',
@@ -203,6 +261,29 @@ export const questions: Question[] = [
     marks: 14,
     // FIGURE: constructable equation/data → described in text; no asset needed.
     stem: 'Greenhouses can increase the carbon dioxide concentration of the air to improve crop yields. A grower decided to investigate the effect of carbon dioxide concentration on plant growth.',
+    artefact: {
+      component: 'LineGraph',
+      data: {
+        title: 'Effect of carbon dioxide concentration on stem length',
+        xLabel: 'Carbon dioxide concentration',
+        yLabel: 'Stem length',
+        xUnit: '%',
+        yUnit: 'mm',
+        xMin: 0,
+        xMax: 0.16,
+        yMin: 0,
+        yMax: 50,
+        xStep: 0.04,
+        yStep: 10,
+        dataPoints: [
+          { x: 0.04, y: 28 },
+          { x: 0.08, y: 36 },
+          { x: 0.12, y: 44 },
+          { x: 0.16, y: 44 },
+        ],
+      },
+      caption: 'Stem length rises with CO₂ concentration up to 0.12%, then levels off (0.12% and 0.16% both 44 mm) as another factor becomes limiting.',
+    },
     tasks: [
       {
         label: 'a',
@@ -270,6 +351,21 @@ export const questions: Question[] = [
     topicsAlso: ['Habitats & Ecosystems'],
     marks: 9,
     stem: 'The grower also wanted to know how temperature affects plant growth. They used the following method:\n1. Select wheat seedlings with similar stem lengths.\n2. Place each seedling in an enclosed container with a heater and carbon dioxide controller.\n3. Conduct the experiment at different temperatures: 25°C, 30°C, 35°C, 40°C and 45°C.\n4. Measure the increase in stem length after 15 days.\n5. Repeat the experiment for each temperature.\n\nResults:\nTemperature 25°C → Stem increase 8 mm\nTemperature 30°C → Stem increase 20 mm\nTemperature 35°C → Stem increase 40 mm\nTemperature 40°C → Stem increase 41 mm\nTemperature 45°C → Stem increase 3 mm',
+    artefact: {
+      component: 'GraphSim',
+      data: {
+        title: 'Effect of temperature on stem growth over 15 days',
+        mode: 'readoff',
+        xAxis: { label: 'Temperature / °C', min: 20, max: 50, tick: 5 },
+        yAxis: { label: 'Increase in stem length after 15 days / mm', min: 0, max: 50, tick: 10 },
+        points: [[25, 8], [30, 20], [35, 40], [40, 41], [45, 3]],
+        readouts: [
+          { x: 40, note: 'optimum', expected: '41 mm — maximum growth' },
+          { x: 45, note: 'too hot', expected: '3 mm — growth collapses' },
+        ],
+      },
+      caption: 'Stem growth rises steeply to a peak near 35–40°C, then collapses to 3 mm at 45°C. Drag the cursor to read the increase at each temperature.',
+    },
     tasks: [
       {
         label: 'a',
@@ -303,6 +399,21 @@ export const questions: Question[] = [
     topicsAlso: ['Pollution & Conservation'],
     marks: 16,
     stem: 'Irrigation with poor-quality water can increase the salt concentration (salinity) of soil, which can affect plant growth.\n\nDesign an investigation to test how changing soil salinity affects plant growth. You are provided with standard laboratory equipment and a range of salt (sodium chloride) solutions with concentrations between 0% and 5%.\n\nIn your answer, you should include:\n• the independent variable, dependent variable and two controlled variables\n• equipment you will use\n• details of how to manipulate, measure or monitor the variables\n• details of the method you will use to collect sufficient data\n• a safety consideration.',
+    artefact: {
+      component: 'DataTable',
+      data: {
+        headers: ['Provided salt solution', 'NaCl concentration / %', 'Suggested role in your design'],
+        rows: [
+          ['Solution A (distilled water)', '0', 'Control / baseline (no added salt)'],
+          ['Solution B', '1', 'Low salinity'],
+          ['Solution C', '2', 'Moderate salinity'],
+          ['Solution D', '3', 'Higher salinity'],
+          ['Solution E', '4', 'High salinity'],
+          ['Solution F', '5', 'Maximum salinity provided'],
+        ],
+      },
+      caption: 'The sodium chloride solutions available (0–5%). Use these as the levels of your independent variable; the 0% solution acts as the control.',
+    },
     tasks: [
       {
         label: 'a',
@@ -325,6 +436,23 @@ export const questions: Question[] = [
     marks: 10,
     // FIGURE: constructable line chart → trends described in tasks; no asset needed.
     stem: 'Tagging animals to follow their movements has been used for over a century. Fish tagging attaches a small numbered or electronic tag to a fish so it can be identified again. It does not harm the fish or affect its behaviour, and lets scientists follow migration and survival.\n\nIn 1873, scientists tagged 32 young salmon with small numbered metal tags. Only two of the 32 tags were ever returned, one from 140 km away. This was one of the first uses of fish tagging for scientific research.',
+    artefact: {
+      component: 'RateSim',
+      data: {
+        title: 'Change in population size of four fish groups, 1970–2019',
+        xAxis: { label: 'Year', min: 1970, max: 2019, tick: 10 },
+        yAxis: { label: 'Population size (index, 1970 = 100)', min: 0, max: 110, tick: 20 },
+        variable: 'year',
+        options: [
+          { label: 'River fish', color: 'pink', points: [[1970, 100], [1980, 78], [1990, 55], [2000, 38], [2010, 25], [2019, 18]] },
+          { label: 'Coastal fish', color: 'orange', points: [[1970, 100], [1980, 92], [1990, 84], [2000, 76], [2010, 70], [2019, 66]] },
+          { label: 'Reef fish', color: 'teal', points: [[1970, 100], [1980, 95], [1990, 88], [2000, 80], [2010, 74], [2019, 70]] },
+          { label: 'Deep-sea fish', color: 'blue', points: [[1970, 100], [1980, 99], [1990, 96], [2000, 93], [2010, 90], [2019, 88]] },
+        ],
+        note: 'River fish (pink) fall from 100 to about 18 — the steepest decline of the four groups. Toggle each line to compare.',
+      },
+      caption: 'Population index (1970 = 100) for four groups of fish. River fish show by far the greatest decline over the period.',
+    },
     tasks: [
       {
         label: 'a',
@@ -372,6 +500,20 @@ export const questions: Question[] = [
     topicsAlso: ['Habitats & Ecosystems'],
     marks: 16,
     stem: 'Acoustic and satellite tags provide information about a marine animal\'s location and movement. Scientists attach a small tag to an animal. An acoustic tag sends a sound signal to underwater receivers; a satellite tag sends a signal to a satellite when the animal surfaces, which records the animal\'s location.\n\nSatellite tagging allows scientists to record a marine animal\'s location across whole oceans, for months or years.',
+    artefact: {
+      component: 'DataTable',
+      data: {
+        headers: ['Feature', 'Acoustic tag', 'Satellite tag'],
+        rows: [
+          ['Signal sent to', 'Underwater receivers', 'Satellite (when animal surfaces)'],
+          ['Location coverage', 'Only near fixed receivers', 'Across whole oceans'],
+          ['Works when animal is', 'Submerged', 'At the surface'],
+          ['Tracking duration', 'Days to months', 'Months to years'],
+          ['Typical use', 'Local movements / specific sites', 'Long-range migration'],
+        ],
+      },
+      caption: 'Comparison of acoustic and satellite tagging. Use the differences to answer part (a) and to evaluate each technology.',
+    },
     tasks: [
       {
         label: 'a',

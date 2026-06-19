@@ -40,10 +40,12 @@ export const paperMeta: PaperMeta = {
 
 // ── Source C — Singapore population pyramids (1972 & 1986) ──────────────────
 // Age bands 0–4 … 80+; each value is the % of the total population in that
-// age/sex band (men + women across all 17 bands ≈ 100% per year). The 1972
-// distribution is expansive (wide young base, steady taper); the 1986
-// distribution is constrictive/ageing (narrower base, a working-age bulge at
-// 20–39, and more people surviving into older bands).
+// age/sex band. Values are illustrative figures chosen to reproduce the SHAPE
+// of each pyramid (a later task asks students to read off the trend, not exact
+// census totals). The 1972 distribution is expansive (wide young base at 0–4,
+// steady taper, very few elderly); the 1986 distribution is constrictive/ageing
+// (narrower base, a working-age bulge around 25–34, and more people surviving
+// into older bands).
 const SG_AGE_BANDS = [
   '0–4', '5–9', '10–14', '15–19', '20–24', '25–29', '30–34', '35–39',
   '40–44', '45–49', '50–54', '55–59', '60–64', '65–69', '70–74', '75–79', '80+',
@@ -74,6 +76,28 @@ export const questions: Question[] = [
     marks: 4,
     stem:
       'As a response to wars and conflicts, many countries helped to create international institutions and organizations designed to bring peace, stability, and cooperation to the world.',
+    artefact: {
+      component: 'NetworkGraph',
+      caption:
+        'International institutions and organizations — hover or tap a spoke to read how it works to improve peace, stability or cooperation. Use it to choose ONE institution; your explanation must be in your own words.',
+      data: {
+        title: 'International institutions and organizations for world peace',
+        source: 'MYP Integrated Humanities — concept web',
+        center: {
+          label: 'International cooperation',
+          detail: 'Countries created institutions and organizations after wars and conflicts to build peace, stability and cooperation.',
+          color: '#1e293b',
+        },
+        nodes: [
+          { id: 'un', label: 'United Nations', color: '#1971c2', detail: 'Founded 1945; brings states together to negotiate, and deploys peacekeeping forces to reduce conflict and keep peace.' },
+          { id: 'who', label: 'World Health Organization', color: '#2f9e44', detail: 'A UN agency that coordinates global health responses, sharing data and vaccines so countries cooperate against disease.' },
+          { id: 'nato', label: 'NATO', color: '#0b7285', detail: 'A defensive alliance: members agree that an attack on one is an attack on all, deterring conflict and adding stability.' },
+          { id: 'eu', label: 'European Union', color: '#9c36b5', detail: 'Binds member states through shared trade and law, making war between members far less likely and deepening cooperation.' },
+          { id: 'icrc', label: 'Red Cross / Red Crescent', color: '#c2255c', detail: 'Provides neutral humanitarian aid in conflict and disaster, protecting civilians and prisoners under agreed rules.' },
+          { id: 'wto', label: 'World Trade Organization', color: '#e8590c', detail: 'Sets shared trade rules and settles disputes between countries, encouraging stable economic cooperation rather than trade wars.' },
+        ],
+      },
+    },
     tasks: [
       {
         label: '',
@@ -210,6 +234,25 @@ export const questions: Question[] = [
       '• Geography\n' +
       '• Technology\n' +
       '• Political system',
+    artefact: {
+      component: 'DataTableInteractive',
+      caption:
+        'Planning scaffold — click a row to pin the factor you choose, then formulate your own research question around it. The examples and sources are prompts, not model answers; your research question and sources must be your own.',
+      data: {
+        title: 'Factors affecting a superpower or empire',
+        source: 'MYP Integrated Humanities — investigation planner',
+        headers: ['Factor', 'Possible superpower / empire', 'How the factor can have an effect', 'Example primary source', 'Example secondary source'],
+        rows: [
+          ['Military', 'Roman Empire', 'Trained legions and roads let it conquer and hold vast territory', 'Inscriptions / records of Roman legions', 'A history book on the Roman army'],
+          ['Economy', 'British Empire', 'Trade, taxes and resources funded expansion and naval power', 'Trade ledgers or export records of the time', 'An economic history of the British Empire'],
+          ['Geography', 'Mongol Empire', 'Open steppe and rivers shaped how fast armies and trade could move', 'A historical map of trade routes', 'A geography study of the Silk Road'],
+          ['Technology', 'United States', 'Industrial and digital technology increased production and influence', 'Patent records or technology archives', 'A documentary on the technology race'],
+          ['Political system', 'USSR', 'A one-party communist system shaped its policies and alliances', 'A speech or government document of the era', 'A textbook on Cold War politics'],
+        ],
+        caption:
+          'Pick ONE factor and ONE superpower or empire, then design a clear, focused research question and link your own primary and secondary sources to it.',
+      },
+    },
     tasks: [
       {
         label: 'a',

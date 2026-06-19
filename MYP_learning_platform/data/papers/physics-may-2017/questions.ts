@@ -24,6 +24,21 @@ export const questions: Question[] = [
     topicGroup: 'Space & Astrophysics',
     stem: 'The colours of visible light emitted from a star are related to the star\'s temperature. Stars appear more red when they cool down and approach the end of their life. Young, hot stars appear more blue.',
     figImages: ['/images/papers/physics-may-2017/q1-stars.svg'],
+    artefact: {
+      component: 'DataTable',
+      data: {
+        headers: ['Apparent colour', 'Approx. surface temperature / °C', 'Example star'],
+        rows: [
+          ['Red', 'below 3 200', 'Betelgeuse (red supergiant)'],
+          ['Orange', '3 200 – 4 800', 'Arcturus'],
+          ['Yellow', '4 800 – 5 800', 'Sun'],
+          ['Yellow-white', '5 800 – 7 200', 'Procyon'],
+          ['White', '7 200 – 10 000', 'Sirius (≈ 8 500 °C → white)'],
+          ['Blue-white', 'above 10 000', 'Rigel'],
+        ],
+      },
+      caption: 'Star colour is a guide to surface temperature: cool stars glow red, hotter stars glow white then blue-white. Use this to read off the temperature of Betelgeuse and the colour at 8 500 °C.',
+    },
     tags: { unit: 'astrophysics', topics: ['star temperature', 'colour', 'EM spectrum', 'light properties'], level: 'developing' },
     tasks: [
       {
@@ -64,6 +79,18 @@ export const questions: Question[] = [
     topicCanonical: 'Light, Reflection & Refraction',
     topicGroup: 'Electromagnetic Waves & Optics',
     stem: 'White light from the Sun passes through a glass prism and produces a spectrum.',
+    artefact: {
+      component: 'SpectrumSim',
+      data: {
+        mode: 'scrub',
+        title: 'Spectrum from the prism — and the region beyond red',
+        bands: ['Infra-red', 'Red', 'Orange', 'Yellow', 'Green', 'Blue', 'Violet', 'Ultraviolet'],
+        axis: 'energy / frequency increases left → right  (wavelength decreases)',
+        target: 'Infra-red',
+        wavelengthRange: [1000e-9, 380e-9],
+      },
+      caption: 'White light splits into the visible colours because each colour refracts by a different amount. Drag the marker beyond the red end into the infra-red band — that is where the student places the thermometer bulb and records the largest temperature rise.',
+    },
     tags: { unit: 'light-optics', topics: ['white light', 'refraction', 'infrared radiation', 'electromagnetic spectrum'], level: 'developing' },
     tasks: [
       {
@@ -97,6 +124,13 @@ export const questions: Question[] = [
     topicCanonical: 'Solar System, Gravity & Space',
     topicGroup: 'Space & Astrophysics',
     stem: 'The appearance of the night sky changes over time. Astronomers use telescopes to study the sky in more detail.',
+    artefact: {
+      component: 'GenericSVG',
+      data: {
+        svg: '<svg viewBox="0 0 460 380" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><rect width="460" height="380" fill="#0b1020"/><text x="230" y="26" font-size="14" font-weight="700" text-anchor="middle" fill="#e2e8f0">Long-exposure photograph of the night sky</text><g fill="none" stroke="#9ec5ff" stroke-width="1.6" stroke-linecap="round" opacity="0.85"><path d="M 230 200 m -40 0 a 40 40 0 1 1 80 0"/><path d="M 230 200 m -78 0 a 78 78 0 1 1 156 0"/><path d="M 230 200 m -118 0 a 118 118 0 0 1 200 -54"/><path d="M 230 200 m 118 0 a 118 118 0 0 1 -176 88"/><path d="M 230 200 m -150 0 a 150 150 0 0 1 110 -134"/><path d="M 230 200 m 150 0 a 150 150 0 0 1 -96 130"/></g><g fill="#dbe9ff"><circle cx="190" cy="200" r="2.4"/><circle cx="270" cy="200" r="2.4"/><circle cx="152" cy="200" r="2.2"/><circle cx="308" cy="200" r="2.2"/><circle cx="112" cy="200" r="2"/><circle cx="345" cy="146" r="2"/><circle cx="80" cy="200" r="1.8"/></g><circle cx="230" cy="200" r="4.5" fill="#ffd166"/><circle cx="230" cy="200" r="9" fill="none" stroke="#ffd166" stroke-width="1" opacity="0.6"/><text x="230" y="182" font-size="12" font-weight="700" text-anchor="middle" fill="#ffd166">P — Polaris (stays still)</text><path d="M 320 110 a 60 60 0 0 1 18 26" fill="none" stroke="#e2e8f0" stroke-width="1.2" marker-end="url(#arr3)"/><defs><marker id="arr3" markerWidth="9" markerHeight="9" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#e2e8f0"/></marker></defs><text x="350" y="96" font-size="11" text-anchor="middle" fill="#e2e8f0">stars trace arcs</text><text x="230" y="356" font-size="11" text-anchor="middle" fill="#94a3b8">Every star sweeps a circular arc about Polaris during the exposure.</text></svg>',
+      },
+      caption: 'A long-exposure image: stars trace circular arcs around the pole star Polaris (P), which stays fixed because it lies almost exactly on Earth\'s axis of rotation. The arcs are evidence that Earth — not the stars — is turning.',
+    },
     tags: { unit: 'astrophysics', topics: ['telescopes', 'reflection', 'Earth rotation', 'Polaris', 'light year', 'distance'], level: 'proficient' },
     tasks: [
       {
@@ -155,6 +189,25 @@ export const questions: Question[] = [
     topicGroup: 'Space & Astrophysics',
     stem: 'Astronomers searching for Earth-like planets use a transit method: a planet passing in front of its star causes a measurable reduction in the brightness of light reaching Earth.',
     figImages: ['/images/papers/physics-may-2017/q1-stars.svg'],
+    artefact: {
+      component: 'GraphSim',
+      data: {
+        mode: 'readoff',
+        title: 'Transit light curve — brightness of a star measured from Earth',
+        xLabel: 'Time / hours',
+        yLabel: 'Measured brightness / %',
+        xAxis: { label: 'Time / hours', min: 0, max: 10, tick: 1 },
+        yAxis: { label: 'Measured brightness / %', min: 96, max: 101, tick: 1 },
+        points: [
+          [0, 100], [1, 100], [2, 100], [2.6, 100], [3, 98.8], [3.5, 98.5],
+          [5, 98.5], [6.5, 98.5], [7, 98.8], [7.4, 100], [8, 100], [9, 100], [10, 100],
+        ],
+        dataMaxX: 10,
+        readouts: [{ x: 5, note: 'The dip while the planet transits the star — brightness falls then recovers.' }],
+        bestFit: 'A brief, repeating dip in brightness as the opaque planet passes in front of (transits) its star.',
+      },
+      caption: 'A planet cannot be seen directly, but when it transits its star it blocks a little of the star\'s light, so the brightness measured from Earth dips and then recovers. The size and shape of this dip is how the planet is detected.',
+    },
     tags: { unit: 'astrophysics', topics: ['planets', 'habitable zone', 'transit method', 'luminosity'], level: 'developing' },
     tasks: [
       {
@@ -290,6 +343,19 @@ export const questions: Question[] = [
     topicCanonical: "Newton's Laws & Momentum",
     topicGroup: 'Forces & Motion',
     stem: 'The student wants to extend their investigation of the ramp experiment by changing a different variable.',
+    artefact: {
+      component: 'DataTable',
+      data: {
+        headers: ['Possible alternative independent variable', 'How it is changed', 'Expected effect on distance the block slides'],
+        rows: [
+          ['Surface material the block slides on', 'Swap the flat surface (carpet, wood, sandpaper…)', 'Rougher surface → more friction → shorter distance'],
+          ['Mass of the block', 'Add masses to the block (0.25, 0.50, 0.75 kg…)', 'More mass → more friction force, but also more KE'],
+          ['Angle / length of the ramp', 'Use a longer ramp or steeper incline', 'Affects speed gained at the bottom'],
+          ['Surface area of block in contact', 'Use blocks of the same mass but different base area', 'Tests whether contact area changes friction'],
+        ],
+      },
+      caption: 'Height was the independent variable last time. This table lists alternative independent variables the student could change instead — pick one of these (not height) to frame the new investigation question and hypothesis.',
+    },
     tags: { unit: 'forces-interactions', topics: ['experimental design', 'variables', 'hypothesis', 'friction'], level: 'developing' },
     tasks: [
       {
@@ -371,6 +437,28 @@ export const questions: Question[] = [
     topicGroup: 'Forces & Motion',
     stem: 'The student analyses their stopping distance data further by plotting four graphs: Graph 1 (stopping distance vs radius R), Graph 2 (stopping distance vs R²), Graph 3 (stopping distance vs 1/R), Graph 4 (stopping distance vs 1/R²).',
     figImages: ['/images/papers/physics-may-2017/q7e-graph1.svg'],
+    artefact: {
+      component: 'GraphSim',
+      data: {
+        mode: 'readoff',
+        title: 'Graph 1 — stopping distance against sail radius R',
+        xLabel: 'Sail radius R / m',
+        yLabel: 'Stopping distance / m',
+        xAxis: { label: 'Sail radius R / m', min: 0, max: 0.35, tick: 0.05 },
+        yAxis: { label: 'Stopping distance / m', min: 0, max: 8, tick: 1 },
+        points: [
+          [0.10, 6.0],
+          [0.12, 5.0],
+          [0.15, 4.0],
+          [0.20, 3.0],
+          [0.30, 2.0],
+        ],
+        dataMaxX: 0.30,
+        readouts: [{ x: 0.10, note: 'Smallest sail → longest stopping distance; the curve falls steeply as R increases.' }],
+        bestFit: 'A falling curve (inverse), not a straight line — stopping distance decreases as radius increases.',
+      },
+      caption: 'Graph 1 plots stopping distance against sail radius R. The points fall on a curve (an inverse relationship), not a straight line — this is the graph part (d) asks you to describe. Graph 3 (vs 1/R) is the one that turns out straight through the origin.',
+    },
     tags: { unit: 'forces-interactions', topics: ['data processing', 'proportionality', 'inverse relationship', 'drag'], level: 'advanced' },
     tasks: [
       {
@@ -433,6 +521,19 @@ export const questions: Question[] = [
     topicGroup: 'Forces & Motion',
     stem: 'When a force is applied to a material it can cause a change in the length of that material. Young\'s modulus (E) is a measure of how much the material can be changed. Stiffer or more rigid materials have a bigger value of E. The table shows data for some of the materials used in prostheses.',
     figImages: ['/images/papers/physics-may-2017/q8-materials-table.svg'],
+    artefact: {
+      component: 'DataTable',
+      data: {
+        headers: ['Material', 'Young\'s modulus E / GPa', 'Density / g cm⁻³'],
+        rows: [
+          ['Carbon fibre', '40', '1.60'],
+          ['Material X', '17', '4.23'],
+          ['Titanium alloy', '14', '4.43'],
+          ['Aluminium', '7', '2.70'],
+        ],
+      },
+      caption: 'Properties of some materials used in prostheses. A larger Young\'s modulus E means a stiffer (more rigid) material; a lower density means a lighter limb. Use these values to identify the most rigid material and to compare Material X with carbon fibre.',
+    },
     tags: { unit: 'forces-interactions', topics: ['materials', 'Young\'s modulus', 'density', 'prosthetics'], level: 'proficient' },
     tasks: [
       {
@@ -466,6 +567,13 @@ export const questions: Question[] = [
     topicCanonical: "Newton's Laws & Momentum",
     topicGroup: 'Forces & Motion',
     stem: 'Advances in materials science have led to the development of high-performance prosthetic limbs that allow athletes with limb differences to compete at high levels.',
+    artefact: {
+      component: 'GenericSVG',
+      data: {
+        svg: '<svg viewBox="0 0 600 320" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><rect width="600" height="320" fill="#ffffff"/><text x="300" y="26" font-size="14" font-weight="700" text-anchor="middle" fill="#1f2d3a">Should a carbon-fibre running blade count as fair?</text><line x1="40" y1="270" x2="560" y2="270" stroke="#94a3ad" stroke-width="2"/><g><circle cx="170" cy="92" r="14" fill="#f4a259"/><rect x="162" y="106" width="16" height="56" rx="6" fill="#3b82f6"/><line x1="170" y1="120" x2="138" y2="150" stroke="#3b82f6" stroke-width="7" stroke-linecap="round"/><line x1="170" y1="120" x2="200" y2="150" stroke="#3b82f6" stroke-width="7" stroke-linecap="round"/><line x1="166" y1="162" x2="150" y2="220" stroke="#1f2d3a" stroke-width="8" stroke-linecap="round"/><line x1="174" y1="162" x2="194" y2="220" stroke="#1f2d3a" stroke-width="8" stroke-linecap="round"/><line x1="150" y1="220" x2="142" y2="270" stroke="#1f2d3a" stroke-width="8" stroke-linecap="round"/><line x1="194" y1="220" x2="204" y2="270" stroke="#1f2d3a" stroke-width="8" stroke-linecap="round"/><text x="170" y="296" font-size="12" font-weight="700" text-anchor="middle" fill="#1f2d3a">Able-bodied athlete</text></g><g><circle cx="420" cy="92" r="14" fill="#f4a259"/><rect x="412" y="106" width="16" height="56" rx="6" fill="#0b7285"/><line x1="420" y1="120" x2="388" y2="150" stroke="#0b7285" stroke-width="7" stroke-linecap="round"/><line x1="420" y1="120" x2="450" y2="150" stroke="#0b7285" stroke-width="7" stroke-linecap="round"/><line x1="416" y1="162" x2="402" y2="208" stroke="#1f2d3a" stroke-width="8" stroke-linecap="round"/><path d="M 402 208 C 392 232 414 244 426 262 L 446 270" fill="none" stroke="#111827" stroke-width="7" stroke-linecap="round"/><line x1="424" y1="162" x2="438" y2="208" stroke="#1f2d3a" stroke-width="8" stroke-linecap="round"/><path d="M 438 208 C 430 232 452 244 462 262 L 482 270" fill="none" stroke="#111827" stroke-width="7" stroke-linecap="round"/><text x="420" y="296" font-size="12" font-weight="700" text-anchor="middle" fill="#0b7285">Athlete with running blades</text></g><rect x="250" y="120" width="100" height="74" rx="8" fill="#fff7ed" stroke="#e8590c"/><text x="300" y="142" font-size="10" font-weight="700" text-anchor="middle" fill="#e8590c">Blade stores &amp;</text><text x="300" y="156" font-size="10" font-weight="700" text-anchor="middle" fill="#e8590c">returns energy</text><text x="300" y="174" font-size="9" text-anchor="middle" fill="#9a4a12">advantage? cost?</text><text x="300" y="186" font-size="9" text-anchor="middle" fill="#9a4a12">inclusion?</text></svg>',
+      },
+      caption: 'A carbon-fibre blade can store and return elastic energy on each stride. This is the heart of the debate: does it give an unfair advantage, is access limited by its high cost, and how does including blade athletes affect fairness and inclusion in competition?',
+    },
     tags: { unit: 'forces-interactions', topics: ['prosthetics', 'ethics', 'sport', 'technology', 'evaluation'], level: 'advanced' },
     tasks: [
       {
@@ -487,13 +595,20 @@ export const questions: Question[] = [
     topicCanonical: 'Pressure, Density & Buoyancy',
     topicGroup: 'Pressure & Fluids',
     stem: 'An elephant in Thailand lost its foot in a landmine explosion. Veterinarians designed a prosthetic foot for the elephant. The elephant has a mass of 2500 kg and stands on four legs. Gravitational field strength g = 10 ms⁻². Each foot has a contact area of 0.05 m² with the ground.',
+    artefact: {
+      component: 'GenericSVG',
+      data: {
+        svg: '<svg viewBox="0 0 560 320" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><rect width="560" height="320" fill="#ffffff"/><text x="280" y="26" font-size="14" font-weight="700" text-anchor="middle" fill="#1f2d3a">Pressure under each foot · P = F ÷ A</text><ellipse cx="270" cy="120" rx="120" ry="62" fill="#9aa7b1"/><circle cx="160" cy="108" r="40" fill="#9aa7b1"/><path d="M 122 100 q -30 -6 -22 22 q 16 12 26 -2" fill="#9aa7b1"/><path d="M 150 138 q -8 26 14 30" fill="none" stroke="#6c7a86" stroke-width="10" stroke-linecap="round"/><rect x="208" y="170" width="20" height="50" rx="4" fill="#6c7a86"/><rect x="252" y="170" width="20" height="50" rx="4" fill="#6c7a86"/><rect x="312" y="170" width="20" height="50" rx="4" fill="#6c7a86"/><rect x="352" y="170" width="20" height="50" rx="4" fill="#f08c00"/><text x="362" y="160" font-size="9" text-anchor="middle" fill="#b56a00">prosthetic</text><line x1="40" y1="234" x2="520" y2="234" stroke="#8a6f4a" stroke-width="3"/><g stroke="#c0392b" stroke-width="2.5" marker-end="url(#dn11)"><line x1="218" y1="226" x2="218" y2="252"/><line x1="262" y1="226" x2="262" y2="252"/><line x1="322" y1="226" x2="322" y2="252"/><line x1="362" y1="226" x2="362" y2="252"/></g><defs><marker id="dn11" markerWidth="9" markerHeight="9" refX="4" refY="8" orient="auto"><path d="M0,0 L8,0 L4,8 Z" fill="#c0392b"/></marker></defs><text x="290" y="282" font-size="12" text-anchor="middle" fill="#1f2d3a">mass = 2500 kg  →  weight W = mg = 2500 × 10 = 25 000 N</text><text x="290" y="302" font-size="12" text-anchor="middle" fill="#1f2d3a">4 feet · each contact area A = 0.05 m²  ·  force per foot = 25 000 ÷ 4 N</text></svg>',
+      },
+      caption: 'The elephant\'s 25 000 N weight is shared over four feet, each touching the ground over an area of 0.05 m². Pressure under one foot is the force on that foot divided by its contact area (P = F ÷ A) — a larger prosthetic foot area lowers the pressure.',
+    },
     tags: { unit: 'pressure', topics: ['pressure', 'force', 'area', 'prosthetics design'], level: 'proficient' },
     tasks: [
       {
         label: 'a',
         text: '**Calculate** the pressure that the elephant exerts on the ground through one foot.',
         marks: 2,
-        ph: 'Weight of elephant = mg = 2500 × 10 = 25 000 N. Weight per foot = 25 000 / 4 = 6 250 N. OR total weight on all feet: P = F/A = 25000 / (4 × 0.05) = 25000 / 0.2 = 125 000 Pa. Per foot: P = 6250 / 0.05 = 125 000 Pa (50 000 Pa if calculated differently). Accept 50 000 N/m² or Pa.',
+        ph: 'Weight of elephant = mg = 2500 × 10 = 25 000 N. Weight per foot = 25 000 / 4 = 6 250 N. Pressure under one foot: P = F/A = 6 250 / 0.05 = 125 000 Pa. (Equivalently, total weight over total contact area: P = 25 000 / (4 × 0.05) = 25 000 / 0.2 = 125 000 Pa.) Accept 125 000 N/m² or Pa, or 1.25 × 10⁵ Pa.',
       },
       {
         label: 'b',

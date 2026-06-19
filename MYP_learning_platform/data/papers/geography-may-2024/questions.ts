@@ -49,6 +49,58 @@ export const questions: Question[] = [
     topic: 'Physical processes — rivers & coasts',
     marks: 6,
     stem: 'Rivers and coasts are shaped by physical processes, some of which can put nearby communities at risk.',
+    artefact: {
+      component: 'NetworkGraph',
+      caption:
+        'Physical processes that shape rivers and coasts — hover or tap a process to read how it works and how it can threaten nearby communities.',
+      data: {
+        title: 'Physical processes shaping rivers & coasts',
+        source: 'Geography knowledge organiser (recreated)',
+        center: {
+          label: 'Physical processes',
+          detail: 'Natural processes of erosion, transport and deposition that reshape rivers and coasts over time — some put nearby communities at risk.',
+          color: '#0b7285',
+        },
+        nodes: [
+          {
+            id: 'erosion',
+            label: 'Erosion',
+            color: '#e8590c',
+            detail: 'Moving water wears away rock and soil. It can undercut and destabilise a riverbank or cliff so it collapses, washing away farmland and homes.',
+          },
+          {
+            id: 'flooding',
+            label: 'Flooding',
+            color: '#1971c2',
+            detail: 'When a river or the sea overflows onto the surrounding land. It can submerge homes, farmland and roads and displace whole communities.',
+          },
+          {
+            id: 'longshore-drift',
+            label: 'Longshore drift',
+            color: '#9c36b5',
+            detail: 'Waves move sand and shingle along a coast in a zig-zag. It can strip a beach away, removing the natural barrier that protects a community from the sea.',
+          },
+          {
+            id: 'hydraulic-action',
+            label: 'Hydraulic action',
+            color: '#2f9e44',
+            detail: 'The sheer force of water forces air into cracks in rock, widening them. Repeated impacts weaken cliffs and riverbanks near settlements.',
+          },
+          {
+            id: 'attrition',
+            label: 'Attrition',
+            color: '#f08c00',
+            detail: 'Transported rocks and pebbles knock together and break into smaller, rounder pieces, adding to the sediment that a river or coast carries and deposits.',
+          },
+          {
+            id: 'deposition',
+            label: 'Deposition',
+            color: '#c2255c',
+            detail: 'When water slows it drops the material it was carrying. It can silt up a river channel, raising flood risk for communities downstream.',
+          },
+        ],
+      },
+    },
     tasks: [
       {
         label: 'a',
@@ -158,6 +210,60 @@ export const questions: Question[] = [
       'The local government of a river or coastal area wants to investigate ways to better protect the environment and the community. You must choose a location and design an action plan to investigate sustainable management solutions for the local government.\n\n' +
       '**Statement of inquiry:** Sustainable management of rivers and coastal environments can protect communities and the environment.\n\n' +
       'You must **not** repeat information from Question 2 in your responses.',
+    artefact: {
+      component: 'InfoGraphicPanel',
+      caption:
+        'The investigation scaffold your action plan must follow — each stage maps to a part of this question. Hover a stage to spotlight it.',
+      data: {
+        title: 'Designing your action plan',
+        source: 'MYP Geography investigation cycle (recreated)',
+        intro:
+          'Statement of inquiry: Sustainable management of rivers and coastal environments can protect communities and the environment. Build your plan stage by stage — each stage matches a part of this question.',
+        layout: 'flow',
+        blocks: [
+          {
+            heading: 'Choose a location',
+            note: 'Set the scene',
+            items: [
+              'Pick one named river or coastal area to focus on.',
+              'A sustainable management solution should be the aim of the investigation.',
+            ],
+          },
+          {
+            heading: 'Part (a) · Research question',
+            note: 'Formulate · 2 marks',
+            items: [
+              'Write a question that is clear AND focused.',
+              'Name the place and a management strategy.',
+              'Link it to the statement of inquiry.',
+            ],
+          },
+          {
+            heading: 'Part (b) · Justify',
+            note: 'Justify · 4 marks',
+            items: [
+              'Explain how investigating this question helps the council better protect the environment and community.',
+              'Give reasoning, in detail.',
+            ],
+          },
+          {
+            heading: 'Parts (c)–(d) · Secondary source',
+            note: 'Identify + Explain · 1 + 4 marks',
+            items: [
+              'Identify one reliable secondary source (e.g. local council website; GIS flood mapping).',
+              'Explain how it helps you answer the research question.',
+            ],
+          },
+          {
+            heading: 'Part (e) · Challenge',
+            note: 'State · 1 mark',
+            items: [
+              'State one specific challenge you could face (e.g. limited access to government data; a large research area).',
+            ],
+          },
+        ],
+      },
+    },
     tasks: [
       {
         label: 'a',
@@ -274,6 +380,7 @@ export const questions: Question[] = [
           { id: 'housing-high', label: 'High-income housing', color: '#c2a36b', count: 60, zone: 'south' },
           { id: 'cbd', label: 'Central business district', color: '#5c7cfa', count: 30, zone: 'all' },
           { id: 'industry', label: 'Industrial area', color: '#8a8f98', count: 30, zone: 'coast north' },
+          { id: 'agriculture', label: 'Agricultural land', color: '#5a9e4e', count: 40, zone: 'inland north' },
         ],
         markers: [
           { x: 30, y: 40, glyph: 'X', label: 'Area X', detail: 'The site being considered — expand industry or build housing?', color: '#c2255c' },

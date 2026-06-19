@@ -59,6 +59,21 @@ export const questions: Question[] = [
     topicCanonical: 'Electromagnetic Spectrum',
     topicGroup: 'Electromagnetic Waves & Optics',
     stem: 'White light from a projector passes through a glass prism and produces a spectrum on a screen. A student places a UV-sensitive fluorescent card in different positions across the spectrum and beyond the violet end.',
+    artefact: {
+      component: 'SpectrumSim',
+      data: {
+        title: 'Dispersed spectrum and the band beyond violet',
+        mode: 'sources',
+        axis: 'frequency / photon energy increases left → right',
+        bands: ['Red', 'Orange', 'Yellow', 'Green', 'Blue', 'Violet', 'UV'],
+        sources: [
+          { name: 'White light (projector)', covers: ['Red', 'Orange', 'Yellow', 'Green', 'Blue', 'Violet'] },
+          { name: 'UV lamp', covers: ['Violet', 'UV'] },
+          { name: 'Fluorescent card response', covers: ['UV'] },
+        ],
+      },
+      caption: 'White light disperses into the visible colours; the fluorescent card only glows for the UV band just beyond the violet end, where photon energy is highest.',
+    },
     tags: { unit: 'em-spectrum', topics: ['white light', 'refraction', 'ultraviolet radiation', 'electromagnetic spectrum'], level: 'developing' },
     tasks: [
       {
@@ -92,6 +107,15 @@ export const questions: Question[] = [
     topicCanonical: 'Solar System, Gravity & Space',
     topicGroup: 'Space & Astrophysics',
     stem: 'Astronomers use ground-based and space telescopes to study the night sky. Long-exposure photographs reveal details of how the sky appears to change over time.',
+    artefact: {
+      component: 'OpticsSim',
+      data: {
+        title: 'Reflection of light from a telescope mirror',
+        mode: 'mirror',
+        mirror: { angle: 35, readoutTarget: 'confirm that the reflected ray leaves at the same angle to the normal as the incident ray' },
+      },
+      caption: 'A reflecting telescope gathers light using a mirror. Drag the incident ray to confirm the law of reflection (angle of incidence = angle of reflection), which governs how the curved primary mirror focuses starlight.',
+    },
     tags: { unit: 'astrophysics', topics: ['telescopes', 'reflection', 'Earth rotation', 'pole star', 'light year', 'distance'], level: 'proficient' },
     tasks: [
       {
@@ -128,13 +152,13 @@ export const questions: Question[] = [
         label: 'f',
         text: 'Sirius A is estimated to be 8.7 light years from Earth. A light year is the distance light travels in one year. Light travels at 3.0 × 10⁸ ms⁻¹ in a vacuum. Assume a year has 365 days.\n\n**Calculate** how far Sirius A is from the Earth in metres. Show your working.',
         marks: 3,
-        ph: 'Time in 1 year = 365 × 24 × 3600 = 3.15 × 10⁷ s. 1 light year = 3.0 × 10⁸ × 3.15 × 10⁷ = 9.45 × 10¹⁵ m. Distance = 8.7 × 9.45 × 10¹⁵ = 8.22 × 10¹⁶ ≈ 8.3 × 10¹⁶ m.',
+        ph: 'Time in 1 year = 365 × 24 × 3600 = 3.15 × 10⁷ s. 1 light year = 3.0 × 10⁸ × 3.15 × 10⁷ = 9.46 × 10¹⁵ m. Distance = 8.7 × 9.46 × 10¹⁵ = 8.23 × 10¹⁶ ≈ 8.2 × 10¹⁶ m.',
       },
       {
         label: 'g',
         text: 'Using your answer to part (f), **state** the distance from Sirius A to Earth in metres. Give your answer in standard form.',
         marks: 1,
-        ph: '8.3 × 10¹⁶ m (ECF from part f)',
+        ph: '8.2 × 10¹⁶ m (ECF from part f)',
       },
     ],
   },
@@ -287,6 +311,20 @@ export const questions: Question[] = [
     topicCanonical: "Newton's Laws & Momentum",
     topicGroup: 'Forces & Motion',
     stem: 'The student wants to extend the ramp investigation by changing a different variable.',
+    artefact: {
+      component: 'DataTable',
+      data: {
+        headers: ['Ball mass / kg', 'Mean distance rolled / m', 'Number of trials'],
+        rows: [
+          [0.10, 1.42, 3],
+          [0.20, 1.39, 3],
+          [0.30, 1.41, 3],
+          [0.40, 1.40, 3],
+          [0.50, 1.38, 3],
+        ],
+      },
+      caption: 'Example results if ball mass is used as the new independent variable (ramp height kept constant): the distance rolled stays roughly the same, because mass cancels in GPE = KE.',
+    },
     tags: { unit: 'forces-interactions', topics: ['experimental design', 'variables', 'hypothesis', 'friction'], level: 'developing' },
     tasks: [
       {
@@ -454,6 +492,26 @@ export const questions: Question[] = [
     topicCanonical: "Newton's Laws & Momentum",
     topicGroup: 'Forces & Motion',
     stem: 'Powered robotic exoskeletons are wearable devices that support the wearer\'s movements using motorised joints. They are used in rehabilitation, and some athletes are beginning to use them in training to assist with movement and protect against injury.',
+    artefact: {
+      component: 'NetworkGraph',
+      data: {
+        title: 'Implications of powered exoskeletons in sport',
+        center: { label: 'Powered exoskeleton', detail: 'Wearable device with motorised joints that supports or enhances the wearer’s movements.', color: '#334155' },
+        nodes: [
+          { id: 'ethical', label: 'Ethical', color: '#c2255c', detail: 'Motorised joints give a mechanical performance advantage — is it fair competition against unassisted athletes?' },
+          { id: 'social', label: 'Social', color: '#1971c2', detail: 'Could make sport more inclusive for people with mobility impairments, but may divide athletes into assisted vs unassisted groups.' },
+          { id: 'access', label: 'Access & cost', color: '#f08c00', detail: 'Exoskeletons are very expensive — only elite or wealthy athletes could afford them, creating inequality.' },
+          { id: 'rehab', label: 'Rehabilitation', color: '#2f9e44', detail: 'Major benefit for injured athletes and people with disabilities — a clear positive use of the technology.' },
+          { id: 'regulation', label: 'Regulation', color: '#9c36b5', detail: 'Use in competition may need rules or separate categories; training-only use may be acceptable.' },
+        ],
+        edges: [
+          { from: 'ethical', to: 'social' },
+          { from: 'access', to: 'social' },
+          { from: 'ethical', to: 'regulation' },
+        ],
+      },
+      caption: 'A concept map of the ethical, social, access, rehabilitation and regulatory implications to weigh up when discussing exoskeletons in sport.',
+    },
     tags: { unit: 'forces-interactions', topics: ['exoskeleton', 'ethics', 'sport', 'technology', 'evaluation'], level: 'advanced' },
     tasks: [
       {
@@ -475,6 +533,19 @@ export const questions: Question[] = [
     topicCanonical: 'Pressure, Density & Buoyancy',
     topicGroup: 'Pressure & Fluids',
     stem: 'A hippopotamus at a wildlife rescue centre was fitted with a prosthetic foot after an injury. The hippopotamus has a mass of 2000 kg and stands on four legs. Gravitational field strength g = 10 ms⁻². Each foot has a contact area of 0.04 m² with the ground.',
+    artefact: {
+      component: 'DataTable',
+      data: {
+        headers: ['Quantity', 'Symbol', 'Value'],
+        rows: [
+          ['Mass of hippopotamus', 'm', '2000 kg'],
+          ['Gravitational field strength', 'g', '10 N kg⁻¹'],
+          ['Number of feet on the ground', 'n', '4'],
+          ['Contact area of one foot', 'A', '0.04 m²'],
+        ],
+      },
+      caption: 'Data for the pressure calculation: weight = mg is shared over four feet, and pressure on one foot is P = F / A.',
+    },
     tags: { unit: 'pressure', topics: ['pressure', 'force', 'area', 'prosthetics design'], level: 'proficient' },
     tasks: [
       {

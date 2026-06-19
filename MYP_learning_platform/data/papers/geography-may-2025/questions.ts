@@ -46,6 +46,23 @@ export const questions: Question[] = [
     topic: 'Globalization — impacts',
     marks: 6,
     stem: 'Globalization can have positive and negative impacts.',
+    artefact: {
+      component: 'NetworkGraph',
+      caption:
+        'Globalization web — hover or tap a spoke to read how that impact can be positive, and the negative consequence it can carry. Use it to prompt your own examples; your answer must be in your own words.',
+      data: {
+        title: 'Impacts of globalization',
+        source: 'MYP Geography — concept web',
+        center: { label: 'Globalization', detail: 'The growing interconnection of people, economies and cultures across the world.', color: '#1e293b' },
+        nodes: [
+          { id: 'tourism', label: 'Tourism', color: '#0b7285', detail: 'Positive: more visitors bring income and jobs. Negative: more air travel burns fossil fuels, adding pollution.' },
+          { id: 'internet', label: 'Internet access', color: '#1971c2', detail: 'Positive: access to information, education and online markets. Negative: a digital divide can leave poorer regions behind.' },
+          { id: 'trade', label: 'Global trade', color: '#2f9e44', detail: 'Positive: wider choice of goods and cheaper prices. Negative: local producers may be undercut and forced to close.' },
+          { id: 'culture', label: 'Cultural exchange', color: '#9c36b5', detail: 'Positive: sharing of food, music and ideas. Negative: local traditions and languages can be eroded.' },
+          { id: 'jobs', label: 'Foreign investment', color: '#e8590c', detail: 'Positive: multinational firms create employment. Negative: factory work can mean low wages and pollution.' },
+        ],
+      },
+    },
     tasks: [
       {
         label: 'a',
@@ -137,6 +154,25 @@ export const questions: Question[] = [
       'A local government wants to understand the social or environmental impacts of globalization on trade and exchange in their country.\n\n' +
       'The government asked you, as a research consultant, to design an action plan to investigate the social **or** environmental impacts on a case study of your choice. Use the following statement of inquiry to inform your action plan.\n\n' +
       '**Statement of inquiry:** Local and global processes are interconnected as a result of globalisation, creating challenges and opportunities.',
+    artefact: {
+      component: 'DataTableInteractive',
+      caption:
+        'Candidate case studies — click a row to pin the one you choose, then design your action plan around its social OR environmental impact and the reliable sources listed.',
+      data: {
+        title: 'Possible case studies for your investigation',
+        source: 'MYP Geography — globalization, trade & exchange',
+        headers: ['Case study', 'Trade / exchange link', 'Social impact', 'Environmental impact', 'Reliable source to use'],
+        rows: [
+          ['Garment industry, Bangladesh', 'Clothing exported to global brands', 'Low wages and unsafe factory conditions', 'River pollution from textile dyeing', 'World Bank labour statistics; ILO factory reports'],
+          ['Palm oil, Indonesia', 'Palm oil exported worldwide', 'Land disputes with local communities', 'Rainforest clearance and habitat loss', 'WWF deforestation data; UN FAO land-use reports'],
+          ['Coffee farming, Ethiopia', 'Coffee beans sold on the world market', 'Fairtrade can raise farmer incomes', 'Soil erosion from intensive cropping', 'Fairtrade International reports; FAO crop data'],
+          ['Cobalt mining, DR Congo', 'Cobalt exported for batteries', 'Child labour and unsafe mining', 'Water contamination near mines', 'Amnesty International reports; UN mining data'],
+          ['Tourism, Maldives', 'International tourists and resorts', 'Jobs created but seasonal and low-paid', 'Reef damage and beach erosion', 'UNWTO tourism statistics; NGO marine surveys'],
+        ],
+        caption:
+          'Pick ONE case study and ONE focus (social or environmental). The named sources are examples of reliable data you could cite in your plan.',
+      },
+    },
     tasks: [
       {
         label: 'a',
@@ -299,6 +335,27 @@ export const questions: Question[] = [
     type: 'extended',
     topic: 'Extended essay — income & disaster impacts',
     marks: 24,
+    artefact: {
+      component: 'InteractiveChart',
+      caption:
+        'Disaster impacts by country income level (illustrative data) — hover a bar for its exact value, or toggle a series in the legend. Use it as evidence to weigh how far income shapes disaster severity; cite a named disaster in your essay.',
+      data: {
+        kind: 'bar',
+        title: 'How income shapes the impact of natural disasters',
+        source: 'MYP Geography — illustrative comparison (not exam data)',
+        x: {
+          label: 'Country income level',
+          categories: ['Low income', 'Lower-middle', 'Upper-middle', 'High income'],
+        },
+        y: { label: 'Relative impact (index, worst-affected = 100)', min: 0, max: 100, ticks: [0, 20, 40, 60, 80, 100] },
+        series: [
+          { name: 'Deaths per disaster', color: '#c2255c', points: [100, 62, 30, 8] },
+          { name: 'People left homeless', color: '#e8590c', points: [88, 70, 41, 15] },
+          { name: 'Years to fully recover', color: '#1971c2', points: [80, 58, 35, 18] },
+          { name: 'Early-warning coverage', color: '#2f9e44', points: [22, 40, 68, 95] },
+        ],
+      },
+    },
     tasks: [
       {
         label: '',

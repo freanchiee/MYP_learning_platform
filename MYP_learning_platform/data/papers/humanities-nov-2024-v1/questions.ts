@@ -92,6 +92,48 @@ export const questions: Question[] = [
     marks: 2,
     stem:
       'In 2020, the World Bank stated that “for the first time in history, more than half of the world’s population now lives in towns and cities, and that share has risen steadily over recent decades.”',
+    artefact: {
+      component: 'InfoGraphicPanel',
+      caption:
+        'Common drivers behind the worldwide rise in urbanization — a chain from rural change to growing cities.',
+      data: {
+        title: 'Why has urbanization increased?',
+        source: 'MYP Integrated Humanities (drivers of urbanization)',
+        intro:
+          'Geographers usually explain rising urbanization as a chain: changes in the countryside push people away, opportunities in cities pull them in, and once in the city, natural growth keeps the urban share rising.',
+        layout: 'flow',
+        blocks: [
+          {
+            heading: 'Push factors (rural)',
+            icon: '🌾',
+            items: [
+              'Farm work mechanised, so fewer rural jobs',
+              'Drought, flooding or poor harvests',
+              'Limited schools, clinics and services',
+            ],
+          },
+          {
+            heading: 'Pull factors (urban)',
+            icon: '🏭',
+            items: [
+              'More factory and service jobs, higher wages',
+              'Better schools, hospitals and universities',
+              'Electricity, water and transport networks',
+            ],
+          },
+          {
+            heading: 'Cities keep growing',
+            icon: '📈',
+            items: [
+              'Migrants settle and raise families in the city',
+              'Natural increase adds to the urban population',
+              'Urban share of total population rises',
+            ],
+            note: 'The share living in towns and cities now exceeds half the world’s population.',
+          },
+        ],
+      },
+    },
     tasks: [
       {
         label: '',
@@ -107,6 +149,44 @@ export const questions: Question[] = [
     type: 'extended',
     topic: 'Impact of urbanization on a city or region',
     marks: 2,
+    artefact: {
+      component: 'InfoGraphicPanel',
+      caption:
+        'Some impacts urbanization can have on a city or region — these can be positive, negative, or both.',
+      data: {
+        title: 'Impacts of urbanization on a city or region',
+        source: 'MYP Integrated Humanities (impacts of urbanization)',
+        intro:
+          'When a city grows quickly, the effects are mixed. Some impacts improve life for residents, others put services and the environment under strain.',
+        layout: 'grid',
+        blocks: [
+          {
+            heading: 'Economic',
+            icon: '💼',
+            items: [
+              'More jobs and businesses concentrated in one place',
+              'Higher cost of housing and living',
+            ],
+          },
+          {
+            heading: 'Social',
+            icon: '🏘',
+            items: [
+              'Better access to schools, hospitals and services',
+              'Crowding, and informal settlements (slums) can form',
+            ],
+          },
+          {
+            heading: 'Environmental',
+            icon: '🌫',
+            items: [
+              'Traffic congestion and worse air pollution',
+              'Loss of green space and farmland to building',
+            ],
+          },
+        ],
+      },
+    },
     tasks: [
       {
         label: '',
@@ -181,6 +261,52 @@ export const questions: Question[] = [
     marks: 12,
     stem:
       'Following your work with the city officials of Curitiba on sustainable transport, you have been asked by another city’s local government to plan an investigation into residents’ access to urban green space (parks and other public green areas).',
+    artefact: {
+      component: 'InfoGraphicPanel',
+      caption:
+        'The stages of planning an investigation into residents’ access to urban green space — from research question to challenges.',
+      data: {
+        title: 'Planning an investigation: access to urban green space',
+        source: 'MYP Integrated Humanities — investigation planning cycle',
+        intro:
+          'A useful investigation plan moves through clear stages. Use these stages to shape your research question, justify it, choose helpful sources and anticipate challenges.',
+        layout: 'flow',
+        blocks: [
+          {
+            heading: 'Focus the question',
+            icon: '🎯',
+            items: [
+              'Name the place, the people and the time period',
+              'Target one aspect (e.g. distance to nearest park)',
+            ],
+          },
+          {
+            heading: 'Justify its usefulness',
+            icon: '✅',
+            items: [
+              'Show how it helps the local government decide',
+              'Explain why the focus matters for residents',
+            ],
+          },
+          {
+            heading: 'Choose sources',
+            icon: '📚',
+            items: [
+              'Statistics on parkland per resident by district',
+              'Interviews, articles and official records',
+            ],
+          },
+          {
+            heading: 'Anticipate challenges',
+            icon: '⚠',
+            items: [
+              'Missing, biased or out-of-date data',
+              'Access, time and comparing unlike districts',
+            ],
+          },
+        ],
+      },
+    },
     tasks: [
       {
         label: 'a',
@@ -372,6 +498,31 @@ export const questions: Question[] = [
     stem:
       'In the past, the size of a city’s economy or its population was the main focus when judging how well a city was doing. Recently, other indicators measuring different aspects of urban life — such as air quality, access to green space, housing affordability and public transport — have also been used to rank how “liveable” a city is.\n\n' +
       'Write a well-structured essay in response to the following.',
+    artefact: {
+      component: 'InteractiveChart',
+      caption:
+        'Two illustrative cities scored on five liveability indicators (0–100). A bigger economy does not always mean a more liveable city.',
+      data: {
+        kind: 'bar',
+        title: 'Liveability indicator scores: two illustrative cities',
+        source: 'Illustrative liveability index (0–100), composed for this paper',
+        x: {
+          label: 'Liveability indicator',
+          categories: [
+            'Air quality',
+            'Green-space access',
+            'Housing affordability',
+            'Public transport',
+            'Economic output',
+          ],
+        },
+        y: { label: 'Score', min: 0, max: 100, ticks: [0, 20, 40, 60, 80, 100], unit: '/100' },
+        series: [
+          { name: 'City A (large economy)', color: '#495057', points: [38, 45, 32, 71, 88] },
+          { name: 'City B (smaller economy)', color: '#2f9e44', points: [74, 82, 66, 69, 54] },
+        ],
+      },
+    },
     tasks: [
       {
         label: '',

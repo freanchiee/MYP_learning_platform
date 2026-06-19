@@ -19,6 +19,20 @@ export const questions: Question[] = [
     marks: 1,
     tags: { unit: 'measurement-motion', topics: ['SI units and conversions'], level: 'foundation' },
     stem: 'Which combination gives the basic SI units of mass, length and time?',
+    artefact: {
+      component: 'DataTable',
+      data: {
+        headers: ['Base quantity', 'SI base unit', 'Unit symbol'],
+        rows: [
+          ['Mass', 'kilogram', 'kg'],
+          ['Length', 'metre', 'm'],
+          ['Time', 'second', 's'],
+          ['Electric current', 'ampere', 'A'],
+          ['Temperature', 'kelvin', 'K'],
+        ],
+      },
+      caption: 'The SI base units. Mass, length and time use the kilogram, metre and second.',
+    },
     opts: [
       'kilogram, kilometre, second',
       'gram, centimetre, minute',
@@ -35,6 +49,13 @@ export const questions: Question[] = [
     marks: 1,
     tags: { unit: 'forces-interactions', topics: ['Newton\'s first law', 'Newton\'s second law', 'weight and mass'], level: 'developing' },
     stem: 'A 3.1 kg mass falls at terminal velocity. Select the correct combination for weight, air resistance and resultant force.',
+    artefact: {
+      component: 'GenericSVG',
+      data: {
+        svg: '<svg viewBox="0 0 360 260" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><rect width="360" height="260" fill="#ffffff"/><text x="180" y="22" font-size="13" font-weight="700" text-anchor="middle" fill="#1f2d3a">Object falling at terminal velocity</text><defs><marker id="ah" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#0b7285"/></marker><marker id="ar" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#e8590c"/></marker></defs><rect x="150" y="118" width="60" height="44" rx="6" fill="#eef4f7" stroke="#5b6b78" stroke-width="2"/><text x="180" y="145" font-size="11" text-anchor="middle" fill="#475569">3.1 kg</text><line x1="180" y1="118" x2="180" y2="60" stroke="#e8590c" stroke-width="4" marker-end="url(#ar)"/><text x="190" y="90" font-size="11" font-weight="700" fill="#e8590c">Air resistance ≈ 30 N (up)</text><line x1="180" y1="162" x2="180" y2="220" stroke="#0b7285" stroke-width="4" marker-end="url(#ah)"/><text x="190" y="198" font-size="11" font-weight="700" fill="#0b7285">Weight ≈ 30 N (down)</text><text x="180" y="244" font-size="11" text-anchor="middle" fill="#1f2d3a">Constant speed → forces balanced → resultant = 0</text></svg>',
+      },
+      caption: 'At terminal velocity the upward air resistance equals the downward weight, so the resultant force is zero.',
+    },
     tableData: {
       hd: ['', 'Weight', 'Air resistance', 'Resultant'],
       rows: [
@@ -55,6 +76,18 @@ export const questions: Question[] = [
     marks: 6,
     tags: { unit: 'measurement-motion', topics: ['SI units and conversions', 'displacement vs distance'], level: 'developing' },
     stem: 'A student measures properties of an object in the laboratory.',
+    artefact: {
+      component: 'DataTable',
+      data: {
+        headers: ['Property measured', 'Instrument', 'Smallest division', 'Reading'],
+        rows: [
+          ['Length', 'metre ruler', '1 mm', '0.835 m'],
+          ['Mass', 'electronic balance', '1 g', '120 g'],
+          ['Volume', 'measuring cylinder', '1 cm³', '15 cm³'],
+        ],
+      },
+      caption: 'The student\'s recorded laboratory measurements. The ruler\'s smallest division is 1 mm.',
+    },
     tasks: [
       { label: 'a', text: 'The smallest division on a metre ruler is 1 mm. A student records a length as 0.835 m. Is he justified in giving three significant figures? Explain.', marks: 1, ph: 'Write your answer here…' },
       { label: 'b', text: 'State the SI unit of density.', marks: 2, ph: 'Write your answer here…' },
@@ -69,6 +102,20 @@ export const questions: Question[] = [
     marks: 6,
     tags: { unit: 'electricity-circuits', topics: ['series circuits', 'parallel circuits', "Ohm's law"], level: 'developing' },
     stem: 'A series circuit has a 6 V battery connected to two resistors: 2 Ω and 1 Ω in series.',
+    artefact: {
+      component: 'CircuitSim',
+      data: {
+        title: 'Series circuit: 6 V across 2 Ω and 1 Ω',
+        mode: 'iv',
+        component: '2 Ω resistor',
+        emf: 6,
+        ivPairs: [
+          { Rvar: 1, V: 6, I: 2, label: '6 V supply' },
+        ],
+        task: 'The 2 Ω and 1 Ω resistors are in series, so the same current flows through both. Total resistance = 2 Ω + 1 Ω.',
+      },
+      caption: 'Series circuit with a 6 V supply. The ammeter reads the single current that flows through both resistors.',
+    },
     figCaption: 'Circuit diagram:\n  (+6V) ──[2Ω]──[1Ω]── (−)\n  (Series connection — same current through both)',
     tasks: [
       { label: 'a', text: 'Calculate the total resistance.', marks: 2, ph: 'Show your working here…' },
@@ -84,6 +131,32 @@ export const questions: Question[] = [
     marks: 8,
     tags: { unit: 'forces-interactions', topics: ['Hooke\'s law', 'elastic and inelastic collisions'], level: 'proficient' },
     stem: 'A student investigates how the extension of a spring depends on the load applied.',
+    artefact: {
+      component: 'LineGraph',
+      data: {
+        title: 'Spring extension against load',
+        xLabel: 'Load',
+        yLabel: 'Extension',
+        xUnit: 'N',
+        yUnit: 'cm',
+        xMin: 0,
+        xMax: 5,
+        yMin: 0,
+        yMax: 10,
+        xStep: 1,
+        yStep: 2,
+        lobf: true,
+        dataPoints: [
+          { x: 0, y: 0 },
+          { x: 1, y: 2 },
+          { x: 2, y: 4 },
+          { x: 3, y: 6 },
+          { x: 4, y: 8 },
+          { x: 5, y: 10 },
+        ],
+      },
+      caption: 'Typical results: a straight line through the origin — doubling the load doubles the extension.',
+    },
     tasks: [
       { label: 'a', text: 'State the research question for this investigation.', marks: 1, ph: 'How does … affect …?' },
       { label: 'b', text: 'Identify the independent variable, dependent variable, and two control variables.', marks: 2, ph: 'Independent variable:\nDependent variable:\nControl variables:' },
@@ -102,9 +175,34 @@ export const questions: Question[] = [
     marks: 4,
     tags: { unit: 'forces-interactions', topics: ['Hooke\'s law'], level: 'proficient' },
     stem: 'Use the simulation to investigate the relationship between load and spring extension.',
+    artefact: {
+      component: 'LineGraph',
+      data: {
+        title: 'Spring extension against load (k = 25 N/m)',
+        xLabel: 'Load',
+        yLabel: 'Extension',
+        xUnit: 'N',
+        yUnit: 'cm',
+        xMin: 0,
+        xMax: 4,
+        yMin: 0,
+        yMax: 16,
+        xStep: 1,
+        yStep: 4,
+        lobf: true,
+        dataPoints: [
+          { x: 0, y: 0 },
+          { x: 1, y: 4 },
+          { x: 2, y: 8 },
+          { x: 3, y: 12 },
+          { x: 4, y: 16 },
+        ],
+      },
+      caption: 'Extension is proportional to load (x = F / k). The gradient is 4 cm/N, so k = F / x = 1 / 0.04 = 25 N/m — matching the spring in the simulation.',
+    },
     tasks: [
-      { label: 'a', text: 'Record the extension for loads of 1N, 2N, 3N, and 4N from the simulation.', marks: 2, ph: '1N → … cm\n2N → … cm\n3N → … cm\n4N → … cm' },
-      { label: 'b', text: 'Use your data to calculate the spring constant k (in N/m). Show your working.', marks: 2, ph: 'k = F/x = …/… = … N/m' },
+      { label: 'a', text: 'Record the extension for loads of 1 N, 2 N, 3 N and 4 N from the simulation.', marks: 2, ph: '1 N → … cm\n2 N → … cm\n3 N → … cm\n4 N → … cm' },
+      { label: 'b', text: 'Use your data to calculate the spring constant k (in N/m). Show your working. (Remember to convert the extension to metres.)', marks: 2, ph: 'k = F / x = … N / … m = … N/m' },
     ],
   },
   {
@@ -115,6 +213,30 @@ export const questions: Question[] = [
     marks: 6,
     tags: { unit: 'measurement-motion', topics: ['speed and velocity', 'distance-time graphs', 'acceleration'], level: 'developing' },
     stem: 'A student records the following distance-time data for a moving object.',
+    artefact: {
+      component: 'LineGraph',
+      data: {
+        title: 'Distance–time graph for the moving object',
+        xLabel: 'Time',
+        yLabel: 'Distance',
+        xUnit: 's',
+        yUnit: 'm',
+        xMin: 0,
+        xMax: 8,
+        yMin: 0,
+        yMax: 40,
+        xStep: 2,
+        yStep: 10,
+        dataPoints: [
+          { x: 0, y: 0 },
+          { x: 2, y: 10 },
+          { x: 4, y: 20 },
+          { x: 6, y: 30 },
+          { x: 8, y: 40 },
+        ],
+      },
+      caption: 'The recorded distance–time data plotted. A straight line through the origin shows constant speed.',
+    },
     tableHeaders: ['Time / s', 'Distance / m', 'Speed / m s⁻¹'],
     tableRows: [
       ['0', '0', ''],
@@ -139,9 +261,24 @@ export const questions: Question[] = [
     marks: 7,
     tags: { unit: 'atomic-physics', topics: ['half-life', 'half-life calculations', 'radioactive decay'], level: 'developing' },
     stem: 'A radioactive sample initially contains 1600 atoms of a radioactive isotope with a half-life of 4 days.',
+    artefact: {
+      component: 'DecaySim',
+      data: {
+        title: 'Decay of the radioactive sample',
+        isotope: 'Parent',
+        daughter: 'Stable daughter',
+        halfLife: 4,
+        units: 'days',
+        initialCount: 1600,
+        axisMax: 20,
+        xAxis: 'Time / days',
+        yAxis: 'Atoms remaining',
+      },
+      caption: 'Half-life = 4 days. Drag the time marker: after each 4 days the number of radioactive atoms halves (1600 → 800 → 400 → 200 → 100 after 16 days).',
+    },
     tasks: [
       { label: 'a', text: 'State what is meant by the term "half-life".', marks: 1, ph: 'The half-life is the time taken for…' },
-      { label: 'b', text: 'Calculate the number of radioactive atoms remaining after 16 days.', marks: 3, ph: 'After 16 days (= … half-lives):\n1600 → … → … → …' },
+      { label: 'b', text: 'Calculate the number of radioactive atoms remaining after 16 days.', marks: 3, ph: 'After 16 days (= … half-lives):\n1600 → … → … → … → …' },
       { label: 'c', text: 'Describe how ionising radiation affects living cells and suggest one safety precaution for workers handling radioactive materials.', marks: 3, ph: 'Ionising radiation can…\nSafety precaution: …' },
     ],
   },
@@ -153,6 +290,19 @@ export const questions: Question[] = [
     marks: 8,
     tags: { unit: 'work-energy', topics: ['energy sources (renewable vs non-renewable)', 'energy efficiency'], level: 'advanced' },
     stem: 'Many countries are transitioning from fossil fuels to renewable energy sources to reduce environmental impact.',
+    artefact: {
+      component: 'DataTable',
+      data: {
+        headers: ['Energy source', 'Renewable?', 'CO₂ emitted', 'Main limitation'],
+        rows: [
+          ['Coal (fossil fuel)', 'No', 'High', 'Air pollution, finite fuel'],
+          ['Solar', 'Yes', 'Very low', 'Only generates in daylight'],
+          ['Wind', 'Yes', 'Very low', 'Intermittent — needs wind'],
+          ['Hydroelectric', 'Yes', 'Very low', 'Needs suitable river/dam site'],
+        ],
+      },
+      caption: 'Comparison of one fossil fuel with three renewable energy sources.',
+    },
     tasks: [
       { label: 'a', text: 'State two advantages of solar energy over coal-fired power stations.', marks: 2, ph: 'Advantage 1:\nAdvantage 2:' },
       { label: 'b', text: 'Outline one disadvantage of wind energy.', marks: 2, ph: 'One disadvantage of wind energy is…' },
@@ -167,6 +317,19 @@ export const questions: Question[] = [
     marks: 8,
     tags: { unit: 'work-energy', topics: ['energy sources (renewable vs non-renewable)'], level: 'advanced' },
     stem: 'Nuclear power stations generate electricity using nuclear fission. The table below shows a comparison of nuclear power and coal power.',
+    artefact: {
+      component: 'DataTable',
+      data: {
+        headers: ['Factor', 'Nuclear power', 'Coal power'],
+        rows: [
+          ['CO₂ emissions', 'Low', 'High'],
+          ['Waste produced', 'Radioactive waste', 'Air / water pollution'],
+          ['Setup cost', 'High', 'Lower'],
+          ['Reliability', 'Very reliable', 'Fuel-supply risk'],
+        ],
+      },
+      caption: 'Comparison of nuclear power and coal power across emissions, waste, cost and reliability.',
+    },
     figCaption: 'Comparison:\n  | Nuclear Power      | Coal Power         |\n  | Low CO₂ emissions  | High CO₂ emissions |\n  | Radioactive waste  | Air/water pollution|\n  | High setup cost    | Lower setup cost   |\n  | Very reliable      | Fuel-supply risk   |',
     tasks: [
       { label: 'a', text: 'Identify one social benefit and one social drawback of nuclear power compared to coal.', marks: 2, ph: 'Social benefit:\nSocial drawback:' },

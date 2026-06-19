@@ -90,6 +90,27 @@ export const questions: Question[] = [
     topic: 'Population change — causes of ageing populations',
     marks: 4,
     stem: 'Many countries around the world are experiencing ageing populations.',
+    artefact: {
+      component: 'NetworkGraph',
+      caption:
+        'Causes of an ageing population — hover or tap a spoke to read how that factor pushes the share of over-65s upwards. Use it to prompt your own example; you must explain one cause in your own words.',
+      data: {
+        title: 'Why populations age',
+        source: 'MYP Geography — concept web',
+        center: {
+          label: 'Ageing population',
+          detail: 'A rising share of people aged over 65, caused mainly by people living longer and by fewer children being born.',
+          color: '#1971c2',
+        },
+        nodes: [
+          { id: 'lifeexp', label: 'Rising life expectancy', color: '#2f9e44', detail: 'Better diet, clean water and living standards mean people live longer, so more survive past 65 and the over-65 share grows.' },
+          { id: 'healthcare', label: 'Improved health care', color: '#0b7285', detail: 'Vaccines, hospitals and new medicines cure diseases that once killed people young, so more reach old age.' },
+          { id: 'birthrate', label: 'Falling birth rate', color: '#e8590c', detail: 'As families choose to have fewer children, the young base of the population shrinks, raising the proportion who are elderly.' },
+          { id: 'contraception', label: 'Access to contraception', color: '#9c36b5', detail: 'Family planning and the education of women lower fertility, so each generation is smaller than the one before it.' },
+          { id: 'emigration', label: 'Emigration of the young', color: '#c2255c', detail: 'When working-age adults leave to find jobs abroad, those left behind are older on average, ageing the population further.' },
+        ],
+      },
+    },
     tasks: [
       {
         label: '',
@@ -178,6 +199,25 @@ export const questions: Question[] = [
     stem:
       'You are a journalist working for the Asian Development Bank and will write an article for the website. The purpose of the article is to help readers understand the role of migration in changing population structures around the world. You will formulate your investigation around the following statement of inquiry.\n\n' +
       '**Statement of Inquiry:** Changes in populations can be impacted by time, place and space.',
+    artefact: {
+      component: 'DataTableInteractive',
+      caption:
+        'Candidate migration movements for your article — click a row to pin the one you choose, then build a clear, focused research question and your investigation around how it reshaped a population structure over time, place and space.',
+      data: {
+        title: 'Migration movements that reshaped population structures',
+        source: 'Asian Development Bank — illustrative case studies',
+        headers: ['Migration movement', 'Type', 'Time period', 'Effect on population structure', 'Group you could interview'],
+        rows: [
+          ['Syrians to Germany', 'Forced (refugees)', '2015–2016', 'Inflow of young working-age adults slowed Germany’s ageing trend', 'Syrian refugees; local employers'],
+          ['Rural China to coastal cities', 'Internal, economic', '1990s–present', 'Young workers left rural areas, ageing the villages they left behind', 'Migrant factory workers; village elders'],
+          ['Filipino workers to the Gulf', 'Labour (temporary)', '2000s–present', 'Loss of working-age adults raised the dependency ratio at home', 'Overseas Filipino workers; their families'],
+          ['South Koreans returning home', 'Return migration', '2010s–present', 'Returning retirees added to an already ageing population', 'Returnee retirees; local government'],
+          ['Venezuelans to Colombia', 'Forced (economic crisis)', '2018–present', 'Influx of young families widened the youthful base in host cities', 'Venezuelan migrants; aid NGOs'],
+        ],
+        caption:
+          'Pick ONE movement, then frame a research question that names a specific place, time and population effect — and refers back to the statement of inquiry (time, place and space).',
+      },
+    },
     tasks: [
       {
         label: 'a',
@@ -223,6 +263,25 @@ export const questions: Question[] = [
       'You work for a company which extracts natural resources. Some residents have raised concerns about the sustainability of resource extraction in the local area. There will be a vote on whether to allow your company to continue extracting natural resources in the area. You must gain the support of locals so that they vote in your favour.\n\n' +
       'A community meeting has been arranged where you will give a speech.\n\n' +
       'Before you write, name the location and natural resource(s) being extracted (for example — Location: Cadia Mine, Australia · Natural resource: Gold).',
+    artefact: {
+      component: 'DataTableInteractive',
+      caption:
+        'Possible case studies for your speech — click a row to pin the one you choose. Each gives a real location, the resource extracted, and two ways extraction there is made more sustainable, so you can explain two methods to the residents.',
+      data: {
+        title: 'Locations, resources and ways to extract them sustainably',
+        source: 'MYP Geography — resource-extraction case studies',
+        headers: ['Location', 'Natural resource', 'Sustainable method 1', 'Sustainable method 2'],
+        rows: [
+          ['Cadia Mine, Australia', 'Gold', 'Recycle and re-use water in a closed loop to cut fresh-water use', 'Backfill and replant worked-out pits to restore the land'],
+          ['Forest concessions, Sweden', 'Timber', 'Replant two or more trees for every one felled (selective logging)', 'Leave buffer strips along rivers to protect habitats and soil'],
+          ['North Sea, Norway', 'Natural gas', 'Capture and store carbon dioxide underground to cut emissions', 'Power rigs from onshore renewable electricity'],
+          ['Atacama, Chile', 'Copper / lithium', 'Use desalinated sea water instead of scarce desert groundwater', 'Run haul trucks and plant on solar power'],
+          ['Salt pans, India', 'Sea salt', 'Use solar evaporation rather than burning fuel', 'Share profits with local cooperatives to protect livelihoods'],
+        ],
+        caption:
+          'Pick ONE location and resource (as the task asks), then explain its TWO sustainable methods to win the residents’ vote. Use your own persuasive words — do not copy the cells.',
+      },
+    },
     tasks: [
       {
         label: '',
@@ -247,7 +306,7 @@ export const questions: Question[] = [
     marks: 6,
     stem:
       'A policy maker is researching the impact of climate change in Spain and they have found the map below (**Source A**).\n\n' +
-      '**Source A** — “Level of Vulnerability to Climate Change in 2021”. The vulnerability of a location to climate change can be measured by the extent it is negatively affected and whether it can adapt to the changes. The map shades each country by a single national value on a five-class scale (Very low → Very high); circle icons represent island countries located in the Pacific Ocean.',
+      '**Source A** — “Level of Vulnerability to Climate Change in 2021”. The vulnerability of a location to climate change can be measured by the extent it is negatively affected and whether it can adapt to the changes. The map shades each country by a single national value on a five-class scale (Very low → Very high), so it gives one value for an entire country.',
     artefact: {
       component: 'ChoroplethWorld',
       caption:

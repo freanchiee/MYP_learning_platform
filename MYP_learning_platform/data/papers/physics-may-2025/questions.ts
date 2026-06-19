@@ -27,6 +27,35 @@ export const questions: Question[] = [
     figImages: [
       '/images/papers/physics-may-2025/page-01.svg?t=1781197047922',
     ],
+    artefact: {
+      component: 'GraphSim',
+      data: {
+        title: 'Current delivered by the charged defibrillator plates',
+        mode: 'readoff',
+        xAxis: { label: 'Time / ms', min: 0, max: 60, tick: 10 },
+        yAxis: { label: 'Current / A', min: 0, max: 18, tick: 2 },
+        // Charge stored at V = 300 V delivers a pulse: I starts near 16.7 A (the value
+        // calculated in part b: I = E/(V·t) = 150/(300×0.030)) and decays as the plates discharge.
+        points: [
+          [0, 16.7],
+          [5, 13.0],
+          [10, 9.9],
+          [15, 7.4],
+          [20, 5.5],
+          [30, 3.0],
+          [40, 1.6],
+          [50, 0.8],
+          [60, 0.4],
+        ],
+        dataMaxX: 60,
+        readouts: [
+          { x: 0, note: 'peak current as the plates begin to discharge' },
+          { x: 30, note: 'charge mostly delivered after ~30 ms (one pulse)' },
+        ],
+        units: 'The shock is delivered over about 30 ms; read the current at t = 0 ms.',
+      },
+      caption: 'Current–time pulse from the discharging plates. At V = 300 V the 150 J of stored energy is delivered in roughly 30 ms.',
+    },
     tasks: [
       {
         label: 'a',
@@ -74,6 +103,19 @@ export const questions: Question[] = [
     figImages: [
       '/images/papers/physics-may-2025/page-06.svg?t=1781197422471',
     ],
+    artefact: {
+      component: 'OpticsSim',
+      data: {
+        title: 'A light ray passing from air into water',
+        mode: 'refraction',
+        n1: 1.0,
+        n2: 1.33,
+        medium1: 'Air',
+        medium2: 'Water',
+        incidenceAngle: 40,
+      },
+      caption: 'Drag the slider to change the angle of incidence. Entering the water the ray bends towards the normal — its frequency stays constant while its speed and wavelength fall. This bending is what makes the submerged straw look broken.',
+    },
     tasks: [
       {
         label: 'a',
@@ -130,6 +172,22 @@ export const questions: Question[] = [
     topicGroup: 'Nuclear & Atomic Physics',
     tags: { unit: 'atomic-physics', topics: ['nuclear equations', 'radioactive decay', 'nuclear energy'], level: 'proficient' },
     stem: 'Nuclear energy is a possible solution to our growing energy demands. Nuclear power stations use uranium as a fuel. Uranium-235 (²³⁵U) can absorb a neutron to form uranium-236 (²³⁶U), which then undergoes nuclear fission:\n\n    ²³⁶U  →  ¹⁴⁰Xe  +  ⁹³Sr  +  ? n\n\nEach fission reaction releases 2.8 × 10⁻¹¹ J of energy.',
+    artefact: {
+      component: 'SankeySim',
+      data: {
+        title: 'Where the 2.8 × 10⁻¹¹ J released by one U-236 fission goes',
+        units: 'pJ',
+        // 2.8 × 10⁻¹¹ J = 28 pJ total released per fission, shown split into its carriers.
+        flows: [
+          { label: 'Energy released per fission (2.8 × 10⁻¹¹ J)', value: 28, units: 'pJ', kind: 'in' },
+          { label: 'Kinetic energy of fission fragments (Xe + Sr)', value: 23, units: 'pJ', kind: 'out' },
+          { label: 'Kinetic energy of released neutrons', value: 3, units: 'pJ', kind: 'out' },
+          { label: 'Gamma radiation', value: 2, units: 'pJ', kind: 'loss' },
+        ],
+        conservation: 'Total energy released (28 pJ) = fragment KE (23) + neutron KE (3) + gamma (2). 1 pJ = 10⁻¹² J.',
+      },
+      caption: 'Each fission of U-236 releases 2.8 × 10⁻¹¹ J. Most of this appears as the kinetic energy of the two fission fragments. The whole power station scales this single-event energy up to gigajoules.',
+    },
     tasks: [
       {
         label: 'a',
@@ -186,6 +244,35 @@ export const questions: Question[] = [
     figImages: [
       '/images/papers/physics-may-2025/page-20.svg',
     ],
+    artefact: {
+      component: 'LineGraph',
+      data: {
+        title: 'Velocity–time graph for the cotton-reel car',
+        xLabel: 'Time',
+        yLabel: 'Velocity',
+        xUnit: 's',
+        yUnit: 'cm s⁻¹',
+        xMin: 0,
+        xMax: 0.4,
+        yMin: 0,
+        yMax: 60,
+        xStep: 0.05,
+        yStep: 10,
+        lobf: true,
+        // Position sampled every 0.10 s (part a). Velocity rises steadily: v = 20 + 100·t,
+        // so v(0.35) = 55 cm s⁻¹ (part b) and the gradient 0.05→0.35 s is 30/0.30 = 100 cm s⁻² (part c).
+        dataPoints: [
+          { x: 0.05, y: 25 },
+          { x: 0.10, y: 30 },
+          { x: 0.15, y: 35 },
+          { x: 0.20, y: 40 },
+          { x: 0.25, y: 45 },
+          { x: 0.30, y: 50 },
+          { x: 0.35, y: 55 },
+        ],
+      },
+      caption: 'Velocity of the car against time, from the video analysis. Read the velocity at t = 0.35 s, and find the gradient between t = 0.05 s and t = 0.35 s.',
+    },
     tasks: [
       {
         label: 'a',
@@ -239,6 +326,22 @@ export const questions: Question[] = [
     topicGroup: 'Forces & Motion',
     tags: { unit: 'measurement-motion', topics: ['speed and velocity', 'acceleration', 'equations of motion (SUVAT)'], level: 'proficient' },
     stem: 'After completing the first experiment investigating the motion of a model car, a student wants to extend their investigation by measuring a different dependent variable.',
+    artefact: {
+      component: 'DataTable',
+      data: {
+        headers: ['Number of turns of elastic band', 'Time to travel 1.0 m / s (repeat 1)', 'Time to travel 1.0 m / s (repeat 2)', 'Time to travel 1.0 m / s (repeat 3)'],
+        // An exemplar results layout the student's DESIGN should be able to fill: one row per
+        // IV value, with repeats. Times shown decrease as the number of turns increases.
+        rows: [
+          ['10', '4.8', '5.1', '4.9'],
+          ['20', '3.2', '3.0', '3.3'],
+          ['30', '2.4', '2.5', '2.3'],
+          ['40', '1.9', '2.0', '1.8'],
+          ['50', '1.6', '1.5', '1.7'],
+        ],
+      },
+      caption: 'An example results table the student\'s method should be able to produce: the independent variable (turns) in one column, with repeat measurements of the dependent variable (time) so an average can be calculated.',
+    },
     tasks: [
       {
         label: 'a',
@@ -274,6 +377,33 @@ export const questions: Question[] = [
     figImages: [
       '/images/papers/physics-may-2025/page-44.svg',
     ],
+    artefact: {
+      component: 'LineGraph',
+      data: {
+        title: 'Voltage produced by the TEG against temperature difference',
+        xLabel: 'Temperature difference ΔT',
+        yLabel: 'Voltage V',
+        xUnit: '°C',
+        yUnit: 'mV',
+        xMin: 0,
+        xMax: 50,
+        yMin: 0,
+        yMax: 25,
+        xStep: 10,
+        yStep: 5,
+        lobf: true,
+        // V is directly proportional to ΔT (line through origin), ≈ 0.45 mV per °C — the
+        // relationship the student claims in part (e). Slope ⇒ Seebeck coefficient (part f).
+        dataPoints: [
+          { x: 10, y: 4.6 },
+          { x: 20, y: 8.9 },
+          { x: 30, y: 13.7 },
+          { x: 40, y: 18.1 },
+          { x: 50, y: 22.4 },
+        ],
+      },
+      caption: 'Voltage rises in proportion to the temperature difference across the TEG, and the line passes close to the origin. Use the gradient to test the proportionality claim and to find the Seebeck coefficient.',
+    },
     tasks: [
       {
         label: 'a',
@@ -365,6 +495,21 @@ export const questions: Question[] = [
     figImages: [
       '/images/papers/physics-may-2025/page-62.svg?t=1781197894136',
     ],
+    artefact: {
+      component: 'OrbitSim',
+      data: {
+        title: 'A cannonball in a circular orbit around Earth',
+        mode: 'orbit',
+        central: 'Earth',
+        showForce: true,
+        bodies: [
+          { name: 'Earth', role: 'center', fixed: true, radius: 30, colour: '#2b6cb0' },
+          { name: 'Cannonball', role: 'orbiter', orbitalPeriod: 90, orbitRadius: 95, radius: 6, colour: '#e8590c' },
+        ],
+        caption: 'The single force on the orbiting cannonball is gravity, always directed towards the centre of the Earth.',
+      },
+      caption: 'When the horizontal speed is just right, the cannonball falls around the Earth in a circle. The only force acting is gravity — and it points straight at Earth\'s centre, providing the centripetal force.',
+    },
     tasks: [
       {
         label: 'a',
@@ -411,6 +556,13 @@ export const questions: Question[] = [
     topicGroup: 'Space & Astrophysics',
     tags: { unit: 'astrophysics', topics: ['satellites and orbital mechanics', 'gravitational fields'], level: 'advanced' },
     stem: 'Satellites are put into orbit using rockets. However, space elevators have been proposed as an alternative method of putting objects into space. A space elevator would consist of a cable anchored at the Earth\'s equator, extending up to a counterweight in geostationary orbit (approximately 36 000 km above the surface). A "climber" vehicle would travel up and down the cable, carrying cargo or passengers to orbit without the need for rockets.\n\nThe concept was first seriously proposed by Russian scientist Konstantin Tsiolkovsky in 1895 and features in Arthur C. Clarke\'s 1979 novel "The Fountains of Paradise".\n\nThe main technological challenge is that no known material currently has sufficient tensile strength to withstand the enormous forces involved, although carbon nanotube composites are being investigated.',
+    artefact: {
+      component: 'GenericSVG',
+      data: {
+        svg: '<svg viewBox="0 0 420 460" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><rect width="420" height="460" fill="#0b1026"/><g fill="#cbd5e1"><circle cx="60" cy="50" r="1.2"/><circle cx="150" cy="30" r="1"/><circle cx="250" cy="60" r="1.3"/><circle cx="340" cy="40" r="1"/><circle cx="380" cy="120" r="1.2"/><circle cx="40" cy="150" r="1"/><circle cx="300" cy="150" r="1"/></g><!-- Earth at the bottom --><circle cx="210" cy="560" r="380" fill="#1f5fa6"/><path d="M120 300 q40 -20 90 -8 q50 12 90 -4 l0 60 q-90 20 -180 4 Z" fill="#2f855a" opacity="0.65"/><line x1="40" y1="300" x2="380" y2="300" stroke="#9ec5ff" stroke-width="1" stroke-dasharray="4 4" opacity="0.6"/><text x="48" y="294" font-size="10" fill="#9ec5ff">Equator (anchor point)</text><!-- the cable / tether --><line x1="210" y1="300" x2="210" y2="70" stroke="#e2e8f0" stroke-width="3"/><!-- anchor base --><rect x="196" y="298" width="28" height="10" fill="#cbd5e1"/><text x="230" y="318" font-size="11" fill="#e2e8f0">Anchor at Earth’s surface</text><!-- climber vehicle --><rect x="200" y="190" width="20" height="26" rx="3" fill="#e8590c"/><text x="230" y="207" font-size="11" fill="#f6ad55">Climber (carries cargo up)</text><line x1="222" y1="203" x2="244" y2="203" stroke="#f6ad55" stroke-width="1"/><!-- counterweight at geostationary orbit --><circle cx="210" cy="70" r="14" fill="#cbd5e1" stroke="#94a3b8" stroke-width="2"/><text x="210" y="50" font-size="11" fill="#e2e8f0" text-anchor="middle" font-weight="700">Counterweight</text><text x="210" y="100" font-size="10" fill="#9ec5ff" text-anchor="middle">geostationary orbit</text><text x="210" y="113" font-size="10" fill="#9ec5ff" text-anchor="middle">≈ 36 000 km up</text><!-- height bracket --><line x1="150" y1="300" x2="150" y2="70" stroke="#64748b" stroke-width="1"/><line x1="146" y1="300" x2="154" y2="300" stroke="#64748b" stroke-width="1"/><line x1="146" y1="70" x2="154" y2="70" stroke="#64748b" stroke-width="1"/><text x="116" y="190" font-size="10" fill="#94a3b8" transform="rotate(-90 116 190)">cable ≈ 36 000 km</text><text x="210" y="440" font-size="11" fill="#cbd5e1" text-anchor="middle">Proposed space elevator (not to scale)</text></svg>',
+      },
+      caption: 'A proposed space elevator (not to scale): a cable anchored at the equator runs up to a counterweight in geostationary orbit ~36 000 km above the surface, with a climber carrying cargo instead of a rocket.',
+    },
     tasks: [
       {
         label: '',

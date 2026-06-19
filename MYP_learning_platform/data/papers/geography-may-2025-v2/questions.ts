@@ -50,6 +50,24 @@ export const questions: Question[] = [
     topic: 'Globalization — impacts',
     marks: 6,
     stem: 'Globalization can have positive and negative impacts.',
+    artefact: {
+      component: 'NetworkGraph',
+      caption:
+        'Impacts of globalization — hover or tap a node to read it. Green spokes are commonly cited positive impacts, orange spokes are negative ones. The hub is the process itself; use it to help you frame part (a) and part (b).',
+      data: {
+        title: 'Globalization and its impacts',
+        source: 'Concept map (illustrative)',
+        center: { label: 'Globalization', detail: 'The growing interconnection of countries through flows of trade, money, people, technology and ideas.', color: '#1e293b' },
+        nodes: [
+          { id: 'jobs', label: 'New jobs', color: '#2f9e44', detail: 'Positive impact: foreign companies opening branches or factories can create new paid employment for local people.' },
+          { id: 'tech', label: 'Tech transfer', color: '#2f9e44', detail: 'Positive impact: new technologies and skills spread faster between countries, e.g. mobile banking or improved farming methods.' },
+          { id: 'goods', label: 'Wider choice', color: '#2f9e44', detail: 'Positive impact: people can buy a wider range of goods and services produced anywhere in the world, often more cheaply.' },
+          { id: 'local', label: 'Local firms close', color: '#e8590c', detail: 'Negative impact: local family-owned businesses may be unable to compete with large foreign companies and close down.' },
+          { id: 'culture', label: 'Cultural loss', color: '#e8590c', detail: 'Negative impact: global brands and media can erode local traditions, languages and ways of life.' },
+          { id: 'pollution', label: 'More pollution', color: '#e8590c', detail: 'Negative impact: increased transport of goods and people, and more factory output, can raise pollution and emissions.' },
+        ],
+      },
+    },
     tasks: [
       {
         label: 'a',
@@ -127,6 +145,23 @@ export const questions: Question[] = [
       'A local government wants to understand the social or environmental impacts of globalization on trade and exchange in their country.\n\n' +
       'The government asked you, as a research consultant, to design an action plan to investigate the social **or** environmental impacts on a case study of your choice. Use the following statement of inquiry to inform your action plan.\n\n' +
       '**Statement of inquiry:** Local and global processes are interconnected as a result of globalisation, creating challenges and opportunities.',
+    artefact: {
+      component: 'DataTableInteractive',
+      caption:
+        'A blank action-plan template you may use to structure your answer. Each row maps onto one part of the question — pin the row you are working on. You must supply your own case study, research question and sources; the examples in brackets are only there to show the level of detail expected.',
+      data: {
+        title: 'Investigation action-plan template',
+        source: 'Statement of inquiry: local and global processes are interconnected',
+        headers: ['Stage', 'Question part', 'What to provide', 'Worked example of the level expected'],
+        rows: [
+          ['1 · Question', 'Part (a) — Formulate', 'A research question that is clear AND focused (names a place / stakeholder) and linked to the statement of inquiry', 'e.g. "How has globalised electronics manufacturing affected workers in factories in Vietnam?"'],
+          ['2 · Justify', 'Part (b) — Justify', 'Reasons, in detail, why this question is worth investigating for the government', 'e.g. it reveals whether export-led growth is creating opportunities or harms for local people'],
+          ['3 · Sources', 'Part (c) — Identify', 'Two specific, reliable sources (named organisations / datasets, not vague types)', 'e.g. UN Comtrade export data for Vietnam; NGO reports monitoring factory conditions'],
+          ['4 · Use', 'Part (d) — Explain', 'How ONE named source helps answer the research question', 'e.g. UN Comtrade trade volumes show how fast electronics exports have grown over time'],
+        ],
+        caption: 'Choose either the social OR the environmental impacts of globalization — not both. The bracketed examples are illustrative only; use your own chosen case study.',
+      },
+    },
     tasks: [
       {
         label: 'a',
@@ -312,6 +347,33 @@ export const questions: Question[] = [
     type: 'extended',
     topic: 'Extended essay — income & disaster impacts',
     marks: 24,
+    stem:
+      'The map below highlights countries that have experienced major natural disasters across very different income levels. You may draw on any of these — or your own example — when planning your essay.',
+    artefact: {
+      component: 'ChoroplethWorld',
+      caption:
+        'Highlighted: countries hit by major natural disasters, spanning higher-income and lower-income economies. Hover a country to read it, or click the key to spotlight the highlighted set. Use it to choose a named disaster and to weigh how income shapes the severity of impacts.',
+      data: {
+        mode: 'highlight',
+        title: 'Major natural disasters across income levels',
+        source: 'Selected case studies (illustrative)',
+        highlight: [
+          'Japan',
+          'United States of America',
+          'New Zealand',
+          'Chile',
+          'Haiti',
+          'Nepal',
+          'Indonesia',
+          'Pakistan',
+          'Mozambique',
+          'Turkey',
+        ],
+        highlightLabel: 'Disaster case-study countries',
+        baseLabel: 'Other countries',
+        caption: 'Comparing how a high-income country (e.g. Japan, 2011) and a low-income country (e.g. Haiti, 2010) coped with major disasters can support different perspectives in your essay. Highlighted set is illustrative, not exhaustive.',
+      },
+    },
     tasks: [
       {
         label: '',

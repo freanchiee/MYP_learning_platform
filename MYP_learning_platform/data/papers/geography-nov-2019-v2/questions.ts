@@ -84,7 +84,31 @@ export const questions: Question[] = [
     type: 'extended',
     topic: 'Causes of resource scarcity',
     marks: 4,
-    stem: 'Natural resources can become scarce.',
+    stem:
+      'Natural resources can become scarce.\n\n' +
+      'The web below shows factors that can cause the scarcity of a natural resource. Hover or tap a factor to read how it works and a named example — then choose ONE factor to explain in detail in your own words.',
+    artefact: {
+      component: 'NetworkGraph',
+      caption:
+        'Factors that can cause natural resources to become scarce — hover or tap a spoke to read how it reduces a resource, with a named example. Choose ONE to explain; your answer must be in your own words.',
+      data: {
+        title: 'Causes of resource scarcity',
+        source: 'MYP Geography — concept web',
+        center: {
+          label: 'Resource scarcity',
+          detail: 'When demand for a natural resource is greater than the supply that can be replenished or extracted sustainably.',
+          color: '#1e293b',
+        },
+        nodes: [
+          { id: 'overabstraction', label: 'Over-abstraction', color: '#1971c2', detail: 'Pumping groundwater faster than rainfall can recharge the aquifer lowers the water table — e.g. heavy irrigation around Botswana boreholes leaves wells running dry.' },
+          { id: 'overconsumption', label: 'Over-consumption', color: '#e8590c', detail: 'A growing population and rising demand use a resource faster than it forms — e.g. cities burning charcoal faster than forests can regrow.' },
+          { id: 'drought', label: 'Drought & climate change', color: '#c2255c', detail: 'Lower or less reliable rainfall reduces the supply of fresh water and fertile soil — e.g. recurring drought across the Sahel shrinks usable water resources.' },
+          { id: 'pollution', label: 'Pollution', color: '#9c36b5', detail: 'Contamination makes a resource unusable even when it physically exists — e.g. mining runoff poisoning a river removes safe drinking water.' },
+          { id: 'distribution', label: 'Uneven distribution', color: '#2f9e44', detail: 'A resource is plentiful in one place but absent in another, and is costly to move — e.g. water-rich highlands upstream while the dry interior downstream goes short.' },
+          { id: 'conflict', label: 'Conflict & competing demand', color: '#f08c00', detail: 'When several users or countries claim the same resource, some are left without — e.g. upstream dams reducing the share of river water reaching downstream nations.' },
+        ],
+      },
+    },
     tasks: [
       {
         label: '',
@@ -157,7 +181,27 @@ export const questions: Question[] = [
     stem:
       'Now that you have evaluated the consultant’s action plan in question 3, you will take on the role of a researcher who has been asked to plan an investigation into issues relating to natural resource management.\n\n' +
       'The following is the statement of inquiry you need to base your investigation on:\n\n' +
-      '**Statement of inquiry:** “The extraction of natural resources can have a great impact on human and natural environments.”',
+      '**Statement of inquiry:** “The extraction of natural resources can have a great impact on human and natural environments.”\n\n' +
+      'The table below offers possible resource-extraction case studies you could base your investigation on. Click a row to pin the one you choose, then build your action plan (research question, methods, sources) around its human and natural impacts.',
+    artefact: {
+      component: 'DataTableInteractive',
+      caption:
+        'Candidate resource-extraction case studies — click a row to pin the one you choose, then design your action plan around its impact on human AND natural environments, using the reliable sources listed.',
+      data: {
+        title: 'Possible case studies — extraction of natural resources',
+        source: 'MYP Geography — natural resource management',
+        headers: ['Case study', 'Resource extracted', 'Impact on human environment', 'Impact on natural environment', 'Reliable source to use'],
+        rows: [
+          ['Charcoal & fuel-wood, Tanzania', 'Wood for charcoal', 'Smoke and longer journeys to gather fuel as nearby forest is cleared', 'Deforestation, habitat loss and soil erosion', 'FAO forest-loss data; UNEP charcoal reports'],
+          ['Groundwater irrigation, Botswana', 'Borehole groundwater', 'Wells run dry, raising the cost and labour of getting water', 'Falling water table; wetlands and rivers dry out', 'UN-Water reports; national hydrology surveys'],
+          ['Copper mining, Zambia', 'Copper ore', 'Jobs and income, but unsafe conditions and displaced villages', 'River contamination and waste-rock tailings', 'World Bank mining data; Amnesty International reports'],
+          ['Diamond mining, Botswana', 'Diamonds', 'Export revenue funds schools, but boom-town pressure on services', 'Open-pit scars, dust and disturbed land', 'Government export statistics; NGO land-use studies'],
+          ['Oil extraction, Niger Delta', 'Crude oil', 'Lost farming and fishing livelihoods from spills', 'Oil spills polluting wetlands and mangroves', 'UNEP environmental assessment; FAO fisheries data'],
+        ],
+        caption:
+          'Pick ONE case study. The named sources are examples of reliable data you could cite when you justify your research question and choose your methods.',
+      },
+    },
     tasks: [
       {
         label: 'a',
@@ -405,6 +449,25 @@ export const questions: Question[] = [
     type: 'extended',
     topic: 'Extended essay — technology & disaster impacts in HICs',
     marks: 24,
+    artefact: {
+      component: 'InteractiveChart',
+      caption:
+        'Impact of natural disasters in highly industrialized countries (HICs) — illustrative comparison before and after key technologies. Hover a bar for its value, or toggle a series in the legend. Use it as evidence to weigh “to what extent”; cite a named disaster in your essay.',
+      data: {
+        kind: 'bar',
+        title: 'How technology has changed disaster impacts in HICs',
+        source: 'MYP Geography — illustrative comparison (not exam data)',
+        x: {
+          label: 'Impact measure',
+          categories: ['Deaths per event', 'People evacuated in time', 'Warning time (hours)', 'Property damage rebuilt in 1 yr'],
+        },
+        y: { label: 'Relative index (per event = 100)', min: 0, max: 100, ticks: [0, 20, 40, 60, 80, 100] },
+        series: [
+          { name: 'Before early-warning technology', color: '#c2255c', points: [100, 25, 8, 30] },
+          { name: 'After early-warning technology', color: '#2f9e44', points: [18, 90, 72, 78] },
+        ],
+      },
+    },
     tasks: [
       {
         label: '',

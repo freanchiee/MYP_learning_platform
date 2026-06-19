@@ -53,6 +53,25 @@ export const questions: Question[] = [
       '2. Despite the fact that the production of crops requires less land than it did in 1960, the overall land used for farming has actually increased due to:\n' +
       '   • population growth\n' +
       '   • increasing wealth (as people get wealthier, they consume more meat, which requires more land to produce).',
+    artefact: {
+      component: 'SourceDocViewer',
+      caption: 'Source A — researchers’ conclusions on global historical trends in land used for farming.',
+      data: {
+        kind: 'Secondary source — research conclusions',
+        title: 'Source A — Global historical trends in land used for farming',
+        attribution: 'A group of researchers investigating global historical trends of land used for farming.',
+        paragraphs: [
+          'Recently, a group of researchers investigated global historical trends of land used for farming. They came to the following conclusions:',
+          '1. Globally, the production of crops requires 65 % less land than it did in 1960. This is due to fertilizers, pesticides, wider use of technology and better varieties of crops.',
+          '2. Despite the fact that the production of crops requires less land than it did in 1960, the overall land used for farming has actually increased due to: population growth; and increasing wealth (as people get wealthier, they consume more meat, which requires more land to produce).',
+        ],
+        glossary: {
+          fertilizers: 'Substances added to soil to supply nutrients and increase crop yields.',
+          pesticides: 'Chemicals used to control insects, weeds or other organisms that damage crops.',
+          'population growth': 'An increase in the number of people, which raises overall demand for food and farmland.',
+        },
+      },
+    },
     tasks: [
       {
         label: '',
@@ -193,6 +212,50 @@ export const questions: Question[] = [
       '• increased use of fertilizers, pesticides and technology in farming\n' +
       '• changing global population growth.\n\n' +
       'You will continue the investigation carried out by the researchers. You will need to develop an action plan by answering the following questions.',
+    artefact: {
+      component: 'InfoGraphicPanel',
+      caption: 'Action plan — extending the land-use investigation into future trends.',
+      data: {
+        title: 'ACTION PLAN — FUTURE TRENDS IN LAND USE FOR FARMING',
+        intro: 'The researchers suggest two future trends to investigate. Build an action plan: choose a trend, then work through each stage.',
+        layout: 'flow',
+        blocks: [
+          {
+            heading: 'Areas for further investigation',
+            items: [
+              'Increased use of fertilizers, pesticides and technology in farming',
+              'Changing global population growth',
+            ],
+            note: 'Pick ONE of these future trends to focus your investigation on.',
+          },
+          {
+            heading: 'Formulate a research question',
+            items: [
+              'Make it clear and focused',
+              'Specify a place and a product',
+              'Link it to your chosen future trend',
+            ],
+            note: 'Part (a): the research question.',
+          },
+          {
+            heading: 'Justify & anticipate challenges',
+            items: [
+              'Explain why the question matters to future farmland trends',
+              'Identify one challenge to overcome (e.g. predicting the future)',
+            ],
+            note: 'Parts (b) and (c).',
+          },
+          {
+            heading: 'Collect & record information',
+            items: [
+              'Choose a research method (e.g. surveys, statistics, interviews)',
+              'Choose a recording method (e.g. spreadsheet, data table)',
+            ],
+            note: 'Parts (d) and (e).',
+          },
+        ],
+      },
+    },
     tasks: [
       {
         label: 'a',
@@ -384,7 +447,7 @@ export const questions: Question[] = [
     stem:
       'The timeline below shows examples of technological developments and innovations through time. Look at these and answer the question that follows.\n\n' +
       'The interactive timeline (“Click on the timeline to show more information”) plots three innovations along a line, each pinned to a location on a rotating globe:\n' +
-      '• The compass — China — 1040 BCE\n' +
+      '• The magnetic compass — China — c. 1040 CE\n' +
       '• The Gutenberg printing press — Germany — 1430s\n' +
       '• The internal combustion engine — various locations — late 19th century.',
     artefact: {
@@ -394,9 +457,9 @@ export const questions: Question[] = [
         title: 'Technological developments and innovations through time',
         events: [
           {
-            date: '1040 BCE',
-            label: 'The compass',
-            detail: 'The compass — China, 1040 BCE. An early magnetic instrument used to determine direction.',
+            date: 'c. 1040 CE',
+            label: 'The magnetic compass',
+            detail: 'The magnetic compass — China, c. 1040 CE. An early magnetic instrument used to determine direction (first described for navigation in Song-dynasty China).',
           },
           {
             date: '1430s',

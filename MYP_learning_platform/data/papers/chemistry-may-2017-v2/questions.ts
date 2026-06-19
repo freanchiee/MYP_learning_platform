@@ -19,6 +19,13 @@ export const questions: Question[] = [
     topic: 'Medieval Stained Glass Pigments and Redox',
     marks: 18,
     stem: 'Medieval stained glass was made by adding metal oxides to molten glass to produce colours. Iron(II) oxide (FeO) gave green or grey tints, while cobalt(II) oxide (CoO) produced deep blue colours. The powdered oxides were mixed with oils and ground glass to form paint-like pastes for decoration.\n\nThe two main finishes used today for glass art are watercolour wash and oil-based enamel.',
+    artefact: {
+      component: 'GenericSVG',
+      data: {
+        svg: '<svg viewBox="0 0 600 220" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><rect width="600" height="220" fill="#ffffff"/><text x="300" y="22" font-size="14" font-weight="700" text-anchor="middle" fill="#1f2d3a">First-row transition metals used as glass pigments</text><g><rect x="60" y="44" width="74" height="58" fill="#fff1f2" stroke="#5b6b78"/><text x="97" y="60" font-size="9" text-anchor="middle" fill="#64748b">24</text><text x="97" y="80" font-size="20" font-weight="700" text-anchor="middle" fill="#be123c">Cr</text><text x="97" y="96" font-size="8" text-anchor="middle" fill="#64748b">chromium</text></g><g><rect x="160" y="44" width="74" height="58" fill="#ecfdf5" stroke="#5b6b78"/><text x="197" y="60" font-size="9" text-anchor="middle" fill="#64748b">26</text><text x="197" y="80" font-size="20" font-weight="700" text-anchor="middle" fill="#047857">Fe</text><text x="197" y="96" font-size="8" text-anchor="middle" fill="#64748b">iron · green tint</text></g><g><rect x="260" y="44" width="74" height="58" fill="#eff6ff" stroke="#5b6b78"/><text x="297" y="60" font-size="9" text-anchor="middle" fill="#64748b">27</text><text x="297" y="80" font-size="20" font-weight="700" text-anchor="middle" fill="#1d4ed8">Co</text><text x="297" y="96" font-size="8" text-anchor="middle" fill="#64748b">cobalt · deep blue</text></g><g><rect x="360" y="44" width="74" height="58" fill="#fefce8" stroke="#5b6b78"/><text x="397" y="60" font-size="9" text-anchor="middle" fill="#64748b">29</text><text x="397" y="80" font-size="20" font-weight="700" text-anchor="middle" fill="#a16207">Cu</text><text x="397" y="96" font-size="8" text-anchor="middle" fill="#64748b">copper · red/green</text></g><line x1="134" y1="73" x2="160" y2="73" stroke="#94a3ad" stroke-width="1.5" stroke-dasharray="3 3"/><line x1="234" y1="73" x2="260" y2="73" stroke="#94a3ad" stroke-width="1.5" stroke-dasharray="3 3"/><line x1="334" y1="73" x2="360" y2="73" stroke="#94a3ad" stroke-width="1.5" stroke-dasharray="3 3"/><text x="60" y="132" font-size="11" fill="#475569">All lie in the d-block (Period 4 transition metals).</text><text x="60" y="150" font-size="11" fill="#475569">Shared properties: variable oxidation states, coloured compounds, metallic, often catalytic.</text><text x="60" y="172" font-size="10" fill="#94a3ad">FeO → Fe is +2; CoO → Co is +2; Cr in Cr₂O₇²⁻ is +6.</text><text x="60" y="190" font-size="10" fill="#94a3ad">A coloured oxide added to molten glass tints the finished glass.</text></svg>',
+      },
+      caption: 'Iron, cobalt and chromium are neighbouring transition metals whose coloured ions tint stained glass.',
+    },
     tasks: [
       {
         label: 'a',
@@ -34,9 +41,9 @@ export const questions: Question[] = [
       },
       {
         label: 'c',
-        text: '**Select** whether the paste used in medieval stained glass is a solution, emulsion, or pure substance. **Justify** your answer.',
+        text: '**Select** whether the paste used in medieval stained glass is a solution, emulsion, suspension, or pure substance. **Justify** your answer.',
         marks: 2,
-        ph: 'Select type; justify as mixture of solid oxide powder in oil',
+        ph: 'Suspension; insoluble solid oxide powder dispersed (not dissolved) in oil, so it is a heterogeneous mixture not a solution',
         widget: 'radio_select',
         widgetOptions: ['Solution', 'Emulsion', 'Suspension', 'Pure substance'],
       },
@@ -73,6 +80,13 @@ export const questions: Question[] = [
     topic: 'Blueprint Photography and Silver Chemistry',
     marks: 9,
     stem: 'The blueprint (cyanotype) photographic process uses methanoic acid (HCOOH) as the fixer. The developer is pyrogallol (C₆H₆O₃), which reduces silver bromide to silver:\n\n2AgBr(aq) + C₆H₆O₃(aq) → 2Ag(s) + 2Br⁻(aq) + C₆H₄O₃(aq)',
+    artefact: {
+      component: 'GenericSVG',
+      data: {
+        svg: '<svg viewBox="0 0 600 230" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><rect width="600" height="230" fill="#ffffff"/><text x="300" y="22" font-size="14" font-weight="700" text-anchor="middle" fill="#1f2d3a">Chemicals in the blueprint (cyanotype) process</text><text x="160" y="48" font-size="11" font-weight="700" text-anchor="middle" fill="#475569">Methanoic acid — the fixer</text><g stroke="#1f2d3a" stroke-width="2" fill="none"><line x1="120" y1="92" x2="160" y2="92"/><line x1="160" y1="92" x2="160" y2="64"/><line x1="164" y1="92" x2="200" y2="92"/></g><text x="108" y="97" font-size="16" text-anchor="middle" fill="#1f2d3a">H</text><text x="160" y="60" font-size="16" text-anchor="middle" fill="#dc2626">O</text><text x="160" y="118" font-size="16" text-anchor="middle" fill="#1f2d3a">C</text><text x="214" y="97" font-size="16" text-anchor="middle" fill="#dc2626">O</text><text x="246" y="97" font-size="16" text-anchor="middle" fill="#1f2d3a">H</text><line x1="216" y1="90" x2="240" y2="90" stroke="#1f2d3a" stroke-width="2"/><rect x="116" y="132" width="150" height="22" rx="4" fill="#fff7ed" stroke="#f59e0b"/><text x="191" y="147" font-size="10" font-weight="700" text-anchor="middle" fill="#b45309">carboxyl group –COOH</text><line x1="320" y1="40" x2="320" y2="200" stroke="#e5e7eb" stroke-width="1.5"/><text x="460" y="48" font-size="11" font-weight="700" text-anchor="middle" fill="#475569">Developer reduces silver</text><rect x="350" y="70" width="220" height="64" rx="6" fill="#f1f5f9" stroke="#94a3b8"/><text x="460" y="96" font-size="11" font-family="monospace" text-anchor="middle" fill="#0f172a">2AgBr + C₆H₆O₃ →</text><text x="460" y="118" font-size="11" font-family="monospace" text-anchor="middle" fill="#0f172a">2Ag + 2Br⁻ + C₆H₄O₃</text><text x="460" y="158" font-size="10" text-anchor="middle" fill="#64748b">Mr(C₆H₆O₃) = 6(12) + 6(1) + 3(16) = 126</text><text x="460" y="176" font-size="10" text-anchor="middle" fill="#64748b">Mr(AgBr) = 108 + 80 = 188</text><text x="460" y="194" font-size="10" text-anchor="middle" fill="#94a3ad">Ag⁺ gains an electron → Ag (silver is reduced)</text></svg>',
+      },
+      caption: 'Methanoic acid (a carboxylic acid) fixes the image; pyrogallol reduces Ag⁺ in AgBr to silver metal.',
+    },
     tasks: [
       {
         label: 'a',
@@ -107,6 +121,21 @@ export const questions: Question[] = [
     topic: 'Earthquake-Zone Water Purification',
     marks: 27,
     stem: 'A major earthquake destroys the water infrastructure of a region, leaving communities without safe drinking water. Emergency response teams deploy portable water purification systems.\n\nOne system uses a solar condensation still: contaminated water is evaporated by solar heat inside a sealed unit; the vapour travels to a cooler surface where it condenses into clean water.\n\nOther units rely on sand filters, activated-carbon filters, and ceramic filters. A silver nitrate solution is used as a field test for chloride contamination in the purified water.',
+    artefact: {
+      component: 'RateSim',
+      data: {
+        title: 'Conductometric test for chloride in the purified water',
+        mode: 'titration',
+        reaction: 'Ag⁺ + Cl⁻ → AgCl(s)',
+        xAxis: { label: 'Volume of silver nitrate added / cm³', min: 0, max: 40, tick: 5 },
+        yAxis: { label: 'Conductivity / arbitrary units', min: 0, max: 340, tick: 40 },
+        plateauHigh: 320,
+        plateauLow: 30,
+        equivalenceVolume: 22.5,
+        note: 'Conductivity falls as Ag⁺ and Cl⁻ are removed as solid AgCl, reaching a minimum at the equivalence point (~22.5 cm³), then rises as excess silver nitrate adds free ions. Drag the cursor to read the sharp change between 20 and 25 cm³.',
+      },
+      caption: 'A conductometric titration: the conductivity dips sharply to a minimum at the equivalence point where all chloride has been precipitated.',
+    },
     tasks: [
       {
         label: 'a',
@@ -139,9 +168,9 @@ export const questions: Question[] = [
       },
       {
         label: 'e',
-        text: '**State** the change in conductivity you would expect to see between 20 and 25 cm³ of NaCl added. **Give** a reason for this change.',
+        text: '**State** the change in conductivity you would expect to see between 20 and 25 cm³ of silver nitrate added. **Give** a reason for this change.',
         marks: 2,
-        ph: 'Sharp drop in conductivity; silver ions precipitated as AgCl at equivalence point',
+        ph: 'Conductivity reaches a minimum at the equivalence point (~22.5 cm³) then rises; all Cl⁻ precipitated as AgCl, then excess Ag⁺ and NO₃⁻ ions add conductivity',
       },
       {
         label: 'f',
@@ -164,6 +193,23 @@ export const questions: Question[] = [
     topic: 'South-East Asian Fuels and Combustion Design',
     marks: 21,
     stem: 'A survey of energy use in a South-East Asian country recorded the percentage use of different fuel types in urban and rural communities. The data reveal significant differences in access to modern fuels.',
+    artefact: {
+      component: 'DataTable',
+      data: {
+        headers: ['Type of fuel', 'Urban use / %', 'Rural use / %'],
+        rows: [
+          ['Wood', 5.2, 61.8],
+          ['Dung', 0.9, 5.3],
+          ['LPG', 35.8, 2.4],
+          ['Kerosene', 31.2, 4.1],
+          ['Biogas', 7.5, 3.8],
+          ['Charcoal', 11.6, 0.7],
+          ['Crop waste', 2.3, 11.2],
+          ['Electricity', 5.5, 0],
+        ],
+      },
+      caption: 'Percentage use of each fuel type in urban versus rural communities. Read off the highest urban fuel and the rural crop-waste value.',
+    },
     tasks: [
       {
         label: 'a',
@@ -210,6 +256,32 @@ export const questions: Question[] = [
     topic: 'Titration and CO₂ Volume Calculation',
     marks: 8,
     stem: 'A student collects ash from charcoal production. The ash contains calcium carbonate (CaCO₃). The student adds hydrochloric acid (chemical X) in increasing volumes and measures the mass of CO₂ produced:\n\nCaCO₃(s) + 2HCl(aq) → CaCl₂(aq) + H₂O(l) + CO₂(g)\n\nTwo titration trials determine the average volume of HCl required.',
+    artefact: {
+      component: 'LineGraph',
+      data: {
+        title: 'Mass of CO₂ produced against volume of chemical X (HCl) added',
+        xLabel: 'Volume of chemical X added',
+        yLabel: 'Mass of CO₂ produced',
+        xUnit: 'cm³',
+        yUnit: 'g',
+        xMin: 0,
+        xMax: 30,
+        yMin: 0,
+        yMax: 2.5,
+        xStep: 5,
+        yStep: 0.5,
+        dataPoints: [
+          { x: 0, y: 0 },
+          { x: 5, y: 0.44 },
+          { x: 10, y: 0.88 },
+          { x: 15, y: 1.32 },
+          { x: 20, y: 1.76 },
+          { x: 25, y: 2.2 },
+          { x: 30, y: 2.2 },
+        ],
+      },
+      caption: 'Read the mass of CO₂ at the average volume of chemical X (20 cm³). The yield plateaus once the carbonate is used up.',
+    },
     tasks: [
       {
         label: 'a',
@@ -238,6 +310,40 @@ export const questions: Question[] = [
     topic: 'Acid Rain and Reaction Rate Data',
     marks: 7,
     stem: 'A class measured the volume of CO₂ produced as dilute sulfuric acid reacted with limestone chips (CaCO₃) to simulate acid rain damage. Different groups recorded data at different time intervals and in different volume units, requiring the data to be combined before analysis.',
+    artefact: {
+      component: 'LineGraph',
+      data: {
+        title: 'Volume of CO₂ produced against time (combined class data)',
+        xLabel: 'Time',
+        yLabel: 'Volume of CO₂',
+        xUnit: 's',
+        yUnit: 'cm³',
+        xMin: 0,
+        xMax: 150,
+        yMin: 0,
+        yMax: 25,
+        xStep: 30,
+        yStep: 5,
+        dataPoints: [
+          { x: 10, y: 9.5 },
+          { x: 20, y: 15.1 },
+          { x: 30, y: 18.3 },
+          { x: 40, y: 20.4 },
+          { x: 50, y: 21.6 },
+          { x: 60, y: 22.5 },
+          { x: 70, y: 22.9 },
+          { x: 80, y: 23.1 },
+          { x: 90, y: 15.8 },
+          { x: 100, y: 23.2 },
+          { x: 110, y: 23.4 },
+          { x: 120, y: 23.4 },
+          { x: 130, y: 23.5 },
+          { x: 140, y: 23.5 },
+          { x: 150, y: 23.5 },
+        ],
+      },
+      caption: 'The reaction is fast at first then levels off. One point at t = 90 s breaks the smooth trend — identify it as the outlier.',
+    },
     tasks: [
       {
         label: 'a',
@@ -274,6 +380,13 @@ export const questions: Question[] = [
     topic: 'Germanium: Properties and Atomic Structure',
     marks: 6,
     stem: 'Germanium is a useful metalloid that has become important in modern technology. Optical fibres made from germanium dioxide have been used since the 1970s, and many of those early fibres remain in operation today. Germanium is also used in night-vision devices and infrared optics.',
+    artefact: {
+      component: 'GenericSVG',
+      data: {
+        svg: '<svg viewBox="0 0 560 220" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><rect width="560" height="220" fill="#ffffff"/><text x="280" y="22" font-size="14" font-weight="700" text-anchor="middle" fill="#1f2d3a">Germanium in Group 14 of the periodic table</text><g><rect x="200" y="40" width="64" height="50" fill="#eef4f7" stroke="#5b6b78"/><text x="232" y="56" font-size="8" text-anchor="middle" fill="#64748b">Period 2</text><text x="232" y="74" font-size="16" font-weight="700" text-anchor="middle" fill="#334155">C</text><text x="232" y="86" font-size="8" text-anchor="middle" fill="#64748b">carbon · 6</text></g><g><rect x="200" y="90" width="64" height="50" fill="#eef4f7" stroke="#5b6b78"/><text x="232" y="106" font-size="8" text-anchor="middle" fill="#64748b">Period 3</text><text x="232" y="124" font-size="16" font-weight="700" text-anchor="middle" fill="#334155">Si</text><text x="232" y="136" font-size="8" text-anchor="middle" fill="#64748b">silicon · 14</text></g><g><rect x="200" y="140" width="64" height="56" fill="#fef9c3" stroke="#5b6b78" stroke-width="2"/><text x="232" y="156" font-size="8" text-anchor="middle" fill="#64748b">Period 4</text><text x="232" y="176" font-size="18" font-weight="700" text-anchor="middle" fill="#a16207">Ge</text><text x="232" y="190" font-size="8" text-anchor="middle" fill="#64748b">germanium · 32</text></g><text x="155" y="48" font-size="11" font-weight="700" text-anchor="end" fill="#475569">Group 14</text><line x1="232" y1="40" x2="232" y2="32" stroke="#94a3ad"/><text x="300" y="160" font-size="11" fill="#475569">Ge is a metalloid:</text><text x="300" y="178" font-size="11" fill="#475569">it sits on the metal / non-metal staircase.</text><text x="300" y="196" font-size="10" fill="#94a3ad">Most abundant isotope shown: ⁷⁴₃₂Ge → 32 protons, 42 neutrons.</text></svg>',
+      },
+      caption: 'Germanium (Ge) is a Group 14, Period 4 metalloid below carbon and silicon. Its common isotope is ⁷⁴₃₂Ge.',
+    },
     tasks: [
       {
         label: 'a',
@@ -310,6 +423,33 @@ export const questions: Question[] = [
     topic: 'Cadmium Pollution and Public Health',
     marks: 14,
     stem: 'Cadmium is a toxic heavy metal released as a by-product of zinc smelting and used in nickel-cadmium batteries and some pigments. The first graph shows blood cadmium levels in a community living near a zinc smelter from 1970 to 2010. The second graph shows the percentage of the population with symptoms of bone weakening (osteoporosis) compared to their blood cadmium level.',
+    artefact: {
+      component: 'LineGraph',
+      data: {
+        title: 'Graph 1 — Blood cadmium level in the community, 1970–2010',
+        xLabel: 'Year',
+        yLabel: 'Blood cadmium',
+        yUnit: 'µg/L',
+        xMin: 1970,
+        xMax: 2010,
+        yMin: 0,
+        yMax: 12,
+        xStep: 10,
+        yStep: 2,
+        dataPoints: [
+          { x: 1970, y: 10.8 },
+          { x: 1975, y: 11.2 },
+          { x: 1980, y: 10.1 },
+          { x: 1985, y: 8.4 },
+          { x: 1990, y: 6.5 },
+          { x: 1995, y: 4.8 },
+          { x: 2000, y: 3.3 },
+          { x: 2005, y: 2.1 },
+          { x: 2010, y: 1.4 },
+        ],
+      },
+      caption: 'Graph 1: blood cadmium peaked around 1975 then fell steadily after restrictions on cadmium use were introduced.',
+    },
     tasks: [
       {
         label: '',
@@ -326,6 +466,19 @@ export const questions: Question[] = [
     topic: 'Portable Medical Device Battery Evaluation',
     marks: 10,
     stem: 'Portable medical devices such as hearing aids, insulin pumps, and cardiac monitors require reliable batteries with specific properties. The wrong battery type can compromise patient safety.\n\nFour types of batteries used in portable medical devices and their specifications are shown below:\n\n| Type | Voltage (V) | Capacity (mAh) | Shelf life (years) | Weight (g) | Cost ($) | Safety rating |\n|---|---|---|---|---|---|---|\n| Lithium ion (Li-ion) | 3.6 | 2000 | 5 | 45 | 20 | Medium |\n| Nickel cadmium (NiCd) | 1.2 | 700 | 8 | 60 | 8 | Low |\n| Zinc-air | 1.4 | 600 | 3 | 10 | 3 | High |\n| Silver oxide | 1.55 | 180 | 10 | 8 | 5 | High |',
+    artefact: {
+      component: 'DataTable',
+      data: {
+        headers: ['Battery type', 'Voltage / V', 'Capacity / mAh', 'Shelf life / years', 'Weight / g', 'Cost / $', 'Safety rating'],
+        rows: [
+          ['Lithium ion (Li-ion)', 3.6, 2000, 5, 45, 20, 'Medium'],
+          ['Nickel cadmium (NiCd)', 1.2, 700, 8, 60, 8, 'Low'],
+          ['Zinc-air', 1.4, 600, 3, 10, 3, 'High'],
+          ['Silver oxide', 1.55, 180, 10, 8, 5, 'High'],
+        ],
+      },
+      caption: 'Specifications of four portable medical-device batteries. Use the data to identify and justify the best choice.',
+    },
     tasks: [
       {
         label: '',

@@ -54,7 +54,7 @@ const RESILIENCE_SOURCE_A: import('@/lib/types').ArtefactSpec = {
           'A former customs house turned into a maritime museum and visitor centre.',
         ],
         note: 'Old structures kept and adapted rather than demolished.',
-        icon: 'building',
+        icon: '🏢',
       },
       {
         heading: '2. Raised and historic buildings together',
@@ -62,7 +62,7 @@ const RESILIENCE_SOURCE_A: import('@/lib/types').ArtefactSpec = {
           'New stilt-raised housing built alongside preserved 19th-century quay buildings to show old and new can co-exist.',
         ],
         note: 'Modern flood-safe design surrounding heritage structures.',
-        icon: 'layers',
+        icon: '🏗️',
       },
       {
         heading: '3. Areas of cultural interest',
@@ -72,7 +72,7 @@ const RESILIENCE_SOURCE_A: import('@/lib/types').ArtefactSpec = {
           'Excavated colonial-era jetty foundations displayed in a public plaza.',
         ],
         note: 'Heritage features adapted for modern public use.',
-        icon: 'landmark',
+        icon: '🏛️',
       },
       {
         heading: '4. Natural spaces and water',
@@ -81,7 +81,7 @@ const RESILIENCE_SOURCE_A: import('@/lib/types').ArtefactSpec = {
           'A green riverside park with rain gardens that store and filter floodwater.',
         ],
         note: 'Natural defences preserved for recreation and ecological reasons.',
-        icon: 'leaf',
+        icon: '🌿',
       },
     ],
   },
@@ -97,6 +97,27 @@ export const questions: Question[] = [
     marks: 1,
     stem:
       'A short-response knowledge question on industrialization. A response can reference any industrialization period.',
+    artefact: {
+      component: 'NetworkGraph',
+      caption:
+        'Stakeholder web — hover or tap a spoke to see one group connected to industrialization and how it could benefit. Use it only to prompt your own answer; you must name a stakeholder in your own words.',
+      data: {
+        title: 'Stakeholders in industrialization',
+        source: 'MYP Integrated Humanities — concept web',
+        center: {
+          label: 'Industrialization',
+          detail: 'The shift from making goods by hand to producing them in factories using machines and new sources of power.',
+          color: '#1e293b',
+        },
+        nodes: [
+          { id: 'owners', label: 'Factory owners', color: '#0b7285', detail: 'Owned the mills and machinery; benefitted from large profits as output and sales grew.' },
+          { id: 'investors', label: 'Investors / bankers', color: '#1971c2', detail: 'Lent money to new industries and earned returns as companies and railways expanded.' },
+          { id: 'workers', label: 'Wage workers', color: '#2f9e44', detail: 'Some gained steady factory wages and new kinds of jobs, though often in hard conditions.' },
+          { id: 'merchants', label: 'Merchants / traders', color: '#e8590c', detail: 'Benefitted from cheaper mass-produced goods to buy, sell and transport to wider markets.' },
+          { id: 'consumers', label: 'Consumers', color: '#9c36b5', detail: 'Could buy manufactured goods (cloth, tools, household items) more cheaply than before.' },
+        ],
+      },
+    },
     tasks: [
       {
         label: '',
@@ -114,6 +135,27 @@ export const questions: Question[] = [
     marks: 2,
     stem:
       'A short-response question on the causes of industrialization. Note: a response can reference any industrialization period. Note: ease, speed and improvements are considered as changes/consequences and not reasons.',
+    artefact: {
+      component: 'NetworkGraph',
+      caption:
+        'Causes web — each spoke is a possible REASON industrialization occurred (a cause that came before it), not a consequence that followed. Hover a spoke to read how it could drive industrialization, then outline one reason in your own words.',
+      data: {
+        title: 'Why industrialization occurred — possible causes',
+        source: 'MYP Integrated Humanities — concept web',
+        center: {
+          label: 'Industrialization begins',
+          detail: 'Reasons (causes) are conditions present BEFORE industrialization that helped it start — not the ease, speed or improvements that came afterwards.',
+          color: '#1e293b',
+        },
+        nodes: [
+          { id: 'inventions', label: 'New inventions', color: '#0b7285', detail: 'Machines such as the steam engine and powered looms made factory production possible.' },
+          { id: 'resources', label: 'Access to raw materials', color: '#e8590c', detail: 'Plentiful coal and iron (and imported raw materials) provided fuel and materials for industry.' },
+          { id: 'capital', label: 'Available capital', color: '#1971c2', detail: 'Wealth from trade gave investors money to build factories, machines and transport.' },
+          { id: 'labour', label: 'Supply of labour', color: '#2f9e44', detail: 'Changes in farming freed up workers who moved to towns to work in new factories.' },
+          { id: 'demand', label: 'Growing demand', color: '#9c36b5', detail: 'A rising population and wider markets created demand for more manufactured goods.' },
+        ],
+      },
+    },
     tasks: [
       {
         label: '',
@@ -131,6 +173,24 @@ export const questions: Question[] = [
     marks: 3,
     stem:
       'A short extended-response question. Note: a society can be considered as a nation, a country, or any structured group of people. Note: a response can reference any industrialization period.',
+    artefact: {
+      component: 'InteractiveChart',
+      caption:
+        'Illustrative dataset for an industrializing society across the 1800s — toggle a series in the legend and hover a point to read its value. Use it to prompt a societal change to describe in your own words (the figures are indicative, not from a single named country).',
+      data: {
+        kind: 'line',
+        title: 'An industrializing society across the 19th century (indicative)',
+        source: 'MYP Integrated Humanities — illustrative dataset',
+        x: { label: 'Year', categories: ['1800', '1825', '1850', '1875', '1900'] },
+        y: { label: 'Percentage of population', min: 0, max: 100, ticks: [0, 20, 40, 60, 80, 100], unit: '%' },
+        series: [
+          { name: 'People living in towns/cities (%)', color: '#0b7285', points: [20, 30, 45, 60, 75] },
+          { name: 'People working in factories/industry (%)', color: '#e8590c', points: [10, 22, 38, 50, 58] },
+          { name: 'People working in farming (%)', color: '#2f9e44', points: [70, 58, 42, 30, 22] },
+          { name: 'Adults able to read and write (%)', color: '#1971c2', points: [40, 50, 62, 75, 88] },
+        ],
+      },
+    },
     tasks: [
       {
         label: '',
@@ -207,6 +267,23 @@ export const questions: Question[] = [
     stem:
       'You have been asked to investigate the impact of industrialization on the world. You have been given the following statement of inquiry:\n\n' +
       '**Statement of inquiry: Industrialization has changed lives around the world.**',
+    artefact: {
+      component: 'TimelineScrubber',
+      caption:
+        'Industrialization around the world — drag the handle or click a marker to see where and roughly when a major wave of industrialization happened. Use it to help you choose a focused place/time for your research question; it is a prompt, not a source to copy.',
+      data: {
+        title: 'Waves of industrialization around the world',
+        source: 'MYP Integrated Humanities — overview timeline',
+        events: [
+          { date: '1760s', label: 'Britain', detail: 'The first Industrial Revolution begins in Britain with textiles, coal and the steam engine.' },
+          { date: '1820s', label: 'Western Europe', detail: 'Industrialization spreads to Belgium, France and the German states, built on coal and iron.' },
+          { date: '1860s', label: 'United States', detail: 'Rapid industrial growth after the Civil War: railways, steel and large factories.' },
+          { date: '1870s', label: 'Japan', detail: 'The Meiji period drives state-led industrialization, the first major wave in Asia.' },
+          { date: '1930s', label: 'Soviet Union', detail: 'Five-Year Plans push heavy industry and rapid, state-directed industrialization.' },
+          { date: '1980s', label: 'China & East Asia', detail: 'Economic reforms make China and neighbours major centres of manufacturing.' },
+        ],
+      },
+    },
     tasks: [
       {
         label: 'a',
@@ -266,6 +343,22 @@ export const questions: Question[] = [
       '• inform, engage, and convince so that your ideas lead the economic agent into action\n' +
       '• include two ways in which the economic agent could help.\n\n' +
       'Note: if you only provide one way in which the economic agent can help, the maximum mark that can be awarded for Criterion A is 3 marks.',
+    artefact: {
+      component: 'InteractiveChart',
+      caption:
+        'Background data for your script — toggle a series and hover a bar to read a value. Use a figure or two to inform, engage and convince your chosen economic agent. The percentages are illustrative country profiles, not real national statistics.',
+      data: {
+        kind: 'bar',
+        title: 'Youth vs total unemployment — illustrative country profiles',
+        source: 'MYP Integrated Humanities — illustrative dataset',
+        x: { label: 'Country (illustrative)', categories: ['Country A', 'Country B', 'Country C', 'Country D'] },
+        y: { label: 'Unemployment rate', min: 0, max: 40, ticks: [0, 10, 20, 30, 40], unit: '%' },
+        series: [
+          { name: 'Youth (15–24) unemployment (%)', color: '#e8590c', points: [34, 22, 17, 9] },
+          { name: 'Total unemployment (%)', color: '#1971c2', points: [14, 10, 8, 5] },
+        ],
+      },
+    },
     tasks: [
       {
         label: '',
@@ -342,6 +435,55 @@ export const questions: Question[] = [
     stem:
       'Write a well-structured essay in response to the question below.\n\n' +
       'Note: a place can be an area, town, building, etc. Perspectives must be considered depending on the place selected (e.g. if you select cities as a place, two different cities could be considered as two perspectives). A response that does not include a conclusion indicating to what extent the redevelopment of one place has contributed to its sustainable management is likely to be awarded 1–2 marks for Criterion D. A conclusion should not present new aspects not previously included in the essay.',
+    artefact: {
+      component: 'InfoGraphicPanel',
+      caption:
+        'A planning framework for your essay (not an example to write about) — hover or tap a pillar to spotlight it. Use the three pillars of sustainability and the prompts to weigh "to what extent" and to bring in different perspectives. Remember you cannot use Marina Bay as your example.',
+      data: {
+        title: 'Judging sustainable management of a redevelopment',
+        source: 'MYP Integrated Humanities — essay-planning framework',
+        intro: 'A redevelopment is more sustainable when it balances all three pillars. Weigh the gains against the costs to reach a "to what extent" judgement.',
+        layout: 'grid',
+        blocks: [
+          {
+            heading: 'Environmental',
+            icon: '🌱',
+            items: [
+              'Does it protect or restore green/natural space, water and habitats?',
+              'Does it cut pollution, waste and energy use?',
+            ],
+            note: 'Perspective: local residents and environmental groups.',
+          },
+          {
+            heading: 'Economic',
+            icon: '💰',
+            items: [
+              'Does it create lasting jobs, businesses and investment?',
+              'Who pays for it, and who gains the most financially?',
+            ],
+            note: 'Perspective: investors, workers and local government.',
+          },
+          {
+            heading: 'Social',
+            icon: '👥',
+            items: [
+              'Does it provide affordable housing, services and public space?',
+              'Are any groups displaced or priced out by the change?',
+            ],
+            note: 'Perspective: long-term and new residents.',
+          },
+          {
+            heading: 'Reaching a judgement',
+            icon: '⚖️',
+            items: [
+              'Weigh the strengths against the limitations across all three pillars.',
+              'Compare perspectives (e.g. two places, or two groups) before concluding "to what extent".',
+            ],
+            note: 'Your conclusion must state how far the redevelopment was sustainable.',
+          },
+        ],
+      },
+    },
     tasks: [
       {
         label: '',

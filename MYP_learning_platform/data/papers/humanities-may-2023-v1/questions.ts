@@ -69,6 +69,24 @@ export const questions: Question[] = [
     marks: 4,
     stem:
       'After periods of crisis, countries have created international institutions and organizations intended to bring greater health, prosperity and cooperation to the world.',
+    artefact: {
+      component: 'InfoGraphicPanel',
+      caption: 'Reference panel — examples of international institutions and what each was set up to improve. Choose ONE for your answer; the panel does not write the explanation for you.',
+      data: {
+        title: 'International institutions',
+        source: 'reference panel',
+        intro: 'After periods of crisis, countries created institutions to improve peace, stability or cooperation. Here are some examples you could write about — pick ONE and explain HOW it helped.',
+        layout: 'grid',
+        blocks: [
+          { icon: '🕊️', heading: 'United Nations (UN)', items: ['Founded 1945 after the Second World War.', 'Aims to prevent conflict and keep international peace.'] },
+          { icon: '🏥', heading: 'World Health Organization (WHO)', items: ['Coordinates responses to disease outbreaks across borders.', 'Shares health data and helps eradicate illnesses.'] },
+          { icon: '💱', heading: 'International Monetary Fund (IMF)', items: ['Lends to countries facing financial crisis.', 'Aims to keep the global economy stable.'] },
+          { icon: '🤝', heading: 'European Union (EU)', items: ['Links member states through trade and shared rules.', 'Encourages cooperation between former rivals.'] },
+          { icon: '🛡️', heading: 'NATO', items: ['A defensive alliance for collective security.', 'Members agree to support one another if attacked.'] },
+          { icon: '⚖️', heading: 'International Court of Justice', items: ['Settles legal disputes between countries peacefully.', 'Provides an alternative to armed conflict.'] },
+        ],
+      },
+    },
     tasks: [
       {
         label: '',
@@ -177,6 +195,23 @@ export const questions: Question[] = [
       '• Natural resources\n' +
       '• Communication and transport\n' +
       '• Leadership',
+    artefact: {
+      component: 'InfoGraphicPanel',
+      caption: 'Choice panel — the five factors you may investigate, each with how it can affect a superpower or empire. Pick ONE to build your research question around.',
+      data: {
+        title: 'Factors affecting a superpower or empire',
+        source: 'project brief',
+        intro: 'Choose ONE of these factors to investigate. Each card suggests how that factor can shape the rise or fall of a superpower or empire.',
+        layout: 'grid',
+        blocks: [
+          { icon: '🛤️', heading: 'Trade networks', items: ['Routes and markets that bring wealth and exchange.', 'e.g. the Silk Road linking Asia and Europe.'] },
+          { icon: '🛐', heading: 'Religion', items: ['Shared beliefs that can unite or divide a society.', 'Can legitimise rulers and spread a common culture.'] },
+          { icon: '⛏️', heading: 'Natural resources', items: ['Land, minerals, water and food that fuel an economy.', 'Control of resources can give military and economic power.'] },
+          { icon: '📡', heading: 'Communication and transport', items: ['Roads, ports, writing and signalling systems.', 'Help a state govern and move armies over distance.'] },
+          { icon: '👑', heading: 'Leadership', items: ['The decisions and vision of rulers and officials.', 'Strong or weak leadership can change an empire’s fate.'] },
+        ],
+      },
+    },
     tasks: [
       {
         label: 'a',
@@ -341,10 +376,6 @@ export const questions: Question[] = [
           { id: 'labour', label: 'Labour', color: '#f08c00', detail: 'People who work to produce goods and services.' },
           { id: 'land', label: 'Land', color: '#2f9e44', detail: 'The natural resources such as soil, water, minerals and forests used in production.' },
           { id: 'entrepreneurship', label: 'Entrepreneurship', color: '#c2255c', detail: 'People who combine the other resources to produce or improve goods and services.' },
-        ],
-        edges: [
-          { from: 'capital', to: 'land', label: 'combine to produce' },
-          { from: 'labour', to: 'entrepreneurship', label: 'combine to produce' },
         ],
       },
     },

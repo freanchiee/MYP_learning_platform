@@ -112,6 +112,22 @@ export const questions: Question[] = [
       '**Option A:** Charge tourists a fee to enter South Bay and the Lookout Walk and set a maximum number of tourists allowed into the area each day.\n\n' +
       '**Option B:** Build an additional car park and viewing platform for the increased number of tourists. This is marked ‘B’, located at grid reference 4702.\n\n' +
       'Refer to the topographic map of the Kaikōura Peninsula above (the same map used in Question 1).',
+    artefact: {
+      component: 'DataTableInteractive',
+      caption:
+        'Comparison of the two management options — click a row to pin the option you write about. The same Kaikōura map (Question 1) is the marked stimulus; use a named location or grid reference from it in your answer.',
+      data: {
+        title: 'Managing tourism at South Bay (4702) — Option A vs Option B',
+        source: 'Kaikōura tourist operators · aim: protect the environment while allowing tourism',
+        headers: ['Option', 'Action proposed', 'Location on map', 'How it manages tourist numbers'],
+        rows: [
+          ['Option A', 'Charge an entry fee and set a daily maximum number of tourists for South Bay and the Lookout Walk', 'South Bay 4702 · Lookout Walk 4802', 'Limits and spreads out visitor numbers, reducing pressure on the natural environment'],
+          ['Option B', 'Build an additional car park and a viewing platform', '‘B’ at grid reference 4702, by South Bay', 'Concentrates visitors at a built site so foot traffic does not damage the wider area'],
+        ],
+        caption:
+          'Both options aim to prevent damage to the natural environment near South Bay (4702) and the South Bay Lookout Walk (4802) while still allowing tourism. Choose ONE option and explain one positive impact, with a map reference.',
+      },
+    },
     tasks: [
       {
         label: '',
@@ -203,6 +219,25 @@ export const questions: Question[] = [
     stem:
       'Now that you have explored the management of tourism in Kaikōura, you will plan an investigation into the future of sustainable tourism in another location of your choice. The information collected will be used to write an article for a tourist magazine exploring sustainable tourism. You will use the statement of inquiry below to plan your investigation.\n\n' +
       '**Statement of Inquiry:** Global interactions can change identities and relationships.',
+    artefact: {
+      component: 'DataTableInteractive',
+      caption:
+        'Candidate locations for a sustainable-tourism investigation — click a row to pin the one you choose, then build your research question and sources around it. These are starting points only; you may use a different location.',
+      data: {
+        title: 'Possible locations for your sustainable-tourism investigation',
+        source: 'MYP Geography — SoI: global interactions can change identities and relationships',
+        headers: ['Location', 'Tourism context', 'Identities / relationships affected', 'Example secondary source (not GIS)'],
+        rows: [
+          ['Venice, Italy', 'Mass tourism and cruise ships in a historic city', 'Residents leaving as housing becomes holiday lets', 'City-council visitor statistics; UNESCO heritage reports'],
+          ['Bali, Indonesia', 'Rapid growth of international resort tourism', 'Local culture commercialised; water shared with hotels', 'Indonesian tourism-ministry data; academic journal articles'],
+          ['Maasai Mara, Kenya', 'Safari and wildlife tourism on community land', 'Maasai livelihoods and land-use traditions changing', 'Kenya Wildlife Service figures; NGO community reports'],
+          ['Reykjavík, Iceland', 'Boom in nature and Northern-Lights tourism', 'Small towns reshaped by seasonal visitor flows', 'Statistics Iceland tourism data; news archives'],
+          ['Kaikōura, New Zealand', 'Māori-led eco-tourism on the peninsula', 'Spiritual land–people connection meeting visitor demand', 'Local-government tourist-number statistics; Māori operator interviews'],
+        ],
+        caption:
+          'Pick ONE location and connect it to the Statement of Inquiry. The named sources are examples of reliable secondary data you could cite (the GIS map mentioned in part c is in addition to these).',
+      },
+    },
     tasks: [
       {
         label: 'a',
@@ -422,6 +457,27 @@ export const questions: Question[] = [
     type: 'extended',
     topic: 'Extended essay — biome management vs economic development',
     marks: 24,
+    artefact: {
+      component: 'InteractiveChart',
+      caption:
+        'Biome conservation vs economic development — illustrative trade-offs across four land-use choices (not exam data). Hover a bar for its value or toggle a series. Use it to weigh the tension in your essay; you must still refer to at least one named biome and give your own examples.',
+      data: {
+        kind: 'bar',
+        title: 'The trade-off between protecting biomes and economic development',
+        source: 'MYP Geography — illustrative comparison (not exam data)',
+        x: {
+          label: 'Land-use choice',
+          categories: ['Strict protection', 'Eco-tourism', 'Sustainable use', 'Intensive extraction'],
+        },
+        y: { label: 'Relative index (0 = low, 100 = high)', min: 0, max: 100, ticks: [0, 20, 40, 60, 80, 100] },
+        series: [
+          { name: 'Biome / biodiversity protected', color: '#2f9e44', points: [95, 78, 55, 12] },
+          { name: 'Short-term economic gain', color: '#e8590c', points: [15, 45, 60, 92] },
+          { name: 'Local jobs supported', color: '#1971c2', points: [20, 65, 70, 80] },
+          { name: 'Long-term environmental cost', color: '#c2255c', points: [8, 25, 45, 90] },
+        ],
+      },
+    },
     tasks: [
       {
         label: '',

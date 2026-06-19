@@ -16,6 +16,12 @@ export interface Task {
   figImages?: string[]
 }
 
+export interface Artefact {
+  component: string
+  data: Record<string, unknown>
+  caption?: string
+}
+
 export interface Question {
   id: number
   crit: 'A' | 'B' | 'C' | 'D'
@@ -24,6 +30,7 @@ export interface Question {
   marks: number
   stem: string
   figImages?: string[]
+  artefact?: Artefact
   tasks: Task[]
 }
 
@@ -56,6 +63,13 @@ export const questions: Question[] = [
     topic: 'Periodic table — limestone caves and minerals',
     marks: 7,
     stem: 'Limestone caves are formed when slightly acidic rainwater dissolves calcium carbonate (CaCO₃) in limestone rock over thousands of years. The resulting caves contain dramatic formations called stalactites and stalagmites made from calcium and magnesium minerals. Cave systems also trap noble gases such as neon in pockets underground, which scientists use to date the age of the rock formations.',
+    artefact: {
+      component: 'GenericSVG',
+      data: {
+        svg: '<svg viewBox="0 0 560 240" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><rect width="560" height="240" fill="#ffffff"/><text x="280" y="22" font-size="14" font-weight="700" text-anchor="middle" fill="#1f2d3a">Bohr models: sodium vs rubidium</text><g><circle cx="150" cy="130" r="6" fill="#e8590c"/><circle cx="150" cy="130" r="22" fill="none" stroke="#94a3ad"/><circle cx="150" cy="130" r="42" fill="none" stroke="#94a3ad"/><circle cx="150" cy="130" r="62" fill="none" stroke="#94a3ad"/><circle cx="150" cy="108" r="3.5" fill="#0b7285"/><circle cx="150" cy="88" r="3.5" fill="#0b7285"/><circle cx="172" cy="98" r="3.5" fill="#0b7285"/><circle cx="150" cy="68" r="3.5" fill="#1f9d55"/><text x="150" y="208" font-size="12" font-weight="700" text-anchor="middle" fill="#1f2d3a">Sodium (Na)</text><text x="150" y="224" font-size="9" text-anchor="middle" fill="#64748b">3 shells · 2.8.1</text></g><g><circle cx="400" cy="130" r="6" fill="#e8590c"/><circle cx="400" cy="130" r="18" fill="none" stroke="#94a3ad"/><circle cx="400" cy="130" r="34" fill="none" stroke="#94a3ad"/><circle cx="400" cy="130" r="50" fill="none" stroke="#94a3ad"/><circle cx="400" cy="130" r="66" fill="none" stroke="#94a3ad"/><circle cx="400" cy="130" r="82" fill="none" stroke="#94a3ad"/><circle cx="400" cy="112" r="3.2" fill="#0b7285"/><circle cx="400" cy="96" r="3.2" fill="#0b7285"/><circle cx="400" cy="80" r="3.2" fill="#0b7285"/><circle cx="400" cy="64" r="3.2" fill="#0b7285"/><circle cx="400" cy="48" r="3.5" fill="#1f9d55"/><text x="400" y="208" font-size="12" font-weight="700" text-anchor="middle" fill="#1f2d3a">Rubidium (Rb)</text><text x="400" y="224" font-size="9" text-anchor="middle" fill="#64748b">5 shells · 2.8.18.8.1</text></g><text x="280" y="130" font-size="9" text-anchor="middle" fill="#1f9d55">green = outer e⁻</text></svg>',
+      },
+      caption: 'Bohr models of a sodium atom (3 shells) and a rubidium atom (5 shells). The green outer electron is further from the nucleus in rubidium.',
+    },
     tasks: [
       {
         label: 'a',
@@ -95,6 +109,24 @@ export const questions: Question[] = [
     topic: 'Bonding and chemical equations — ethanol antiseptic',
     marks: 9,
     stem: 'Ethanol (C₂H₅OH) is widely used as an antiseptic in hand sanitisers, wound cleaners, and surgical preparations. When applied to skin it evaporates rapidly, killing bacteria through dehydration of cells. The effectiveness of ethanol as an antiseptic depends on its concentration — typically 70% ethanol solutions are most effective.',
+    artefact: {
+      component: 'RateSim',
+      data: {
+        title: 'Time to kill a standard bacterial sample at different ethanol concentrations',
+        mode: 'bars',
+        variable: 'Ethanol concentration (increasing →)',
+        metric: 'Time to kill the bacteria / s',
+        bars: [
+          { label: '20%', value: 240 },
+          { label: '40%', value: 140 },
+          { label: '60%', value: 70 },
+          { label: '70%', value: 45 },
+          { label: '90%', value: 60 },
+        ],
+        note: 'Higher concentration → more frequent successful collisions with bacteria → faster kill, until very high concentration when too little water slows protein denaturation.',
+      },
+      caption: 'A more concentrated ethanol solution kills the bacteria faster (shorter bar) — used to reason with collision theory in part (e).',
+    },
     tasks: [
       {
         label: 'a',
@@ -143,6 +175,13 @@ export const questions: Question[] = [
     topic: 'Atmosphere and particle theory — car exhaust systems',
     marks: 12,
     stem: 'Car engines burn petrol or diesel to produce energy for movement. The exhaust gases released contain a mixture of substances that enter the atmosphere, where they can affect air quality and climate.',
+    artefact: {
+      component: 'GenericSVG',
+      data: {
+        svg: '<svg viewBox="0 0 560 260" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><rect width="560" height="260" fill="#ffffff"/><text x="280" y="24" font-size="14" font-weight="700" text-anchor="middle" fill="#1f2d3a">Composition of dry air</text><g transform="translate(150,140)"><path d="M0 0 L0 -90 A90 90 0 0 1 79.6 -42.0 Z" fill="#2563eb"/><path d="M0 0 L79.6 -42.0 A90 90 0 0 1 87.7 20.2 Z" fill="#0b7285"/><path d="M0 0 L87.7 20.2 A90 90 0 0 1 84.0 32.4 Z" fill="#e8590c"/><path d="M0 0 L84.0 32.4 A90 90 0 0 1 0 90 A90 90 0 0 1 -90 0 A90 90 0 0 1 0 -90 Z" fill="#94a3ad"/></g><g font-size="11"><rect x="330" y="60" width="14" height="14" fill="#2563eb"/><text x="352" y="72" fill="#1f2d3a">Nitrogen (N₂) — 78.0%</text><rect x="330" y="86" width="14" height="14" fill="#0b7285"/><text x="352" y="98" fill="#1f2d3a">Oxygen (O₂) — 20.9%</text><rect x="330" y="112" width="14" height="14" fill="#e8590c"/><text x="352" y="124" fill="#1f2d3a">Argon (Ar) — 0.93%</text><rect x="330" y="138" width="14" height="14" fill="#94a3ad"/><text x="352" y="150" fill="#1f2d3a">CO₂ + other gases — 0.17%</text></g><text x="280" y="246" font-size="9" text-anchor="middle" fill="#64748b">Percentages by volume of dry air at sea level.</text></svg>',
+      },
+      caption: 'Pie chart of the composition of dry air — read off the two most common gases and their percentages for part (a).',
+    },
     tasks: [
       {
         label: 'a',
@@ -195,6 +234,32 @@ export const questions: Question[] = [
     topic: 'Melting points and alloys — bismuth and bismuth-tin',
     marks: 12,
     stem: 'Bismuth is a brittle, silvery-pink metal used in cosmetics, pharmaceuticals, and low-melting alloys. Its melting point is an important property for quality control. Two students measured the melting point of bismuth in the laboratory. Student A used a thermometer and Student B used a digital temperature probe connected to a data logger.',
+    artefact: {
+      component: 'LineGraph',
+      data: {
+        title: 'Melting point of bismuth–tin alloys vs % tin',
+        xLabel: 'Percentage of tin',
+        xUnit: '%',
+        yLabel: 'Melting point',
+        yUnit: '°C',
+        xMin: 0,
+        xMax: 60,
+        yMin: 120,
+        yMax: 280,
+        xStep: 10,
+        yStep: 20,
+        dataPoints: [
+          { x: 0, y: 271 },
+          { x: 10, y: 250 },
+          { x: 20, y: 222 },
+          { x: 30, y: 200 },
+          { x: 40, y: 180 },
+          { x: 50, y: 158 },
+          { x: 57, y: 138 },
+        ],
+      },
+      caption: 'Melting point falls as the percentage of tin increases, reaching the low-melting eutectic near 138°C — read off this graph for parts (d), (f) and (g).',
+    },
     tasks: [
       {
         label: 'a',
@@ -252,6 +317,32 @@ export const questions: Question[] = [
     topic: 'Osmosis and diffusion — beetroot cell investigation',
     marks: 7,
     stem: 'A student cut equal-sized pieces of beetroot and placed them into solutions of different salt concentrations to investigate how salt concentration affects osmosis. After 30 minutes the student observed changes in the mass and appearance of the beetroot pieces.',
+    artefact: {
+      component: 'LineGraph',
+      data: {
+        title: 'Change in beetroot mass after 30 min vs salt concentration',
+        xLabel: 'Salt concentration',
+        xUnit: 'mol dm⁻³',
+        yLabel: 'Change in mass',
+        yUnit: '%',
+        xMin: 0,
+        xMax: 1,
+        yMin: -10,
+        yMax: 8,
+        xStep: 0.2,
+        yStep: 2,
+        lobf: true,
+        dataPoints: [
+          { x: 0, y: 6 },
+          { x: 0.2, y: 3.5 },
+          { x: 0.4, y: 0.5 },
+          { x: 0.6, y: -3 },
+          { x: 0.8, y: -6 },
+          { x: 1, y: -8.5 },
+        ],
+      },
+      caption: 'In dilute salt the beetroot gains mass (water enters by osmosis); in concentrated salt it loses mass (water leaves). The independent variable is salt concentration; the dependent variable is the change in mass.',
+    },
     tasks: [
       {
         label: 'a',
@@ -289,6 +380,20 @@ export const questions: Question[] = [
     topic: 'Data analysis — candle wax composition and solidification',
     marks: 14,
     stem: 'Candle wax is a mixture of paraffin wax and stearic acid. The ratio of paraffin to stearic acid affects the solidification temperature and hardness of the candle. The table shows the solidification temperatures of candle wax samples with different percentages of paraffin wax for three different candle types.',
+    artefact: {
+      component: 'DataTable',
+      data: {
+        headers: ['Paraffin wax / %', 'Candle Type A — solidification temp / °C', 'Candle Type B — solidification temp / °C', 'Candle Type C — solidification temp / °C'],
+        rows: [
+          ['20', '60.0', '38.0', '60.5'],
+          ['40', '54.0', '55.0', '54.0'],
+          ['60', '48.0', '57.0', '47.5'],
+          ['80', '42.0', '52.0', '41.5'],
+          ['100', '37.0', '46.0', '37.0'],
+        ],
+      },
+      caption: 'Solidification temperature of three candle types at different percentages of paraffin wax. Note the 20% Type B value looks anomalous; Type B holds the highest plateau (~57°C). Plot the Type B column for part (a) and read values for parts (b)–(e).',
+    },
     tasks: [
       {
         label: 'a',
@@ -311,9 +416,9 @@ export const questions: Question[] = [
       },
       {
         label: 'd',
-        text: '**Determine** the solidification temperature at 60% paraffin content from the graph.',
+        text: '**Determine** the solidification temperature of Candle Type B at 60% paraffin content from the graph you plotted.',
         marks: 2,
-        ph: '48°C (±1)',
+        ph: '57°C (±1)',
         widget: 'fill_blank',
       },
       {
@@ -339,6 +444,24 @@ export const questions: Question[] = [
     topic: 'Investigation design — candle dye concentration and burn time',
     marks: 15,
     stem: 'A student wants to investigate how the concentration of dye added to candle wax affects the burn time of the candle. **Design** a complete investigation to test this.',
+    artefact: {
+      component: 'RateSim',
+      data: {
+        title: 'Example preliminary data: candle burn time vs dye concentration',
+        mode: 'bars',
+        variable: 'Dye concentration (increasing →)',
+        metric: 'Burn time / minutes',
+        bars: [
+          { label: '0%', value: 95 },
+          { label: '1%', value: 88 },
+          { label: '2%', value: 80 },
+          { label: '4%', value: 70 },
+          { label: '6%', value: 61 },
+        ],
+        note: 'Illustrative trial data only — the independent variable is dye concentration (%) and the dependent variable is burn time (minutes). Your design should produce data like this with repeats and averages.',
+      },
+      caption: 'Example of the kind of data this investigation produces: as dye concentration increases the burn time changes. Use it to frame the variables, method and sufficient-data plan.',
+    },
     tasks: [
       {
         label: '',
@@ -357,6 +480,20 @@ export const questions: Question[] = [
     topic: 'Cobalt in batteries — environmental evaluation',
     marks: 12,
     stem: 'Cobalt is a key component of lithium-cobalt-oxide cathodes in many electric vehicle batteries. Cobalt is primarily mined in the Democratic Republic of Congo. The relative atomic mass of cobalt is 58.93.',
+    artefact: {
+      component: 'DataTable',
+      data: {
+        headers: ['Impact', 'Cobalt mining (EV batteries)', 'Crude-oil extraction (petrol engines)'],
+        rows: [
+          ['Main emissions / pollution', 'Mine tailings, toxic dust, heavy-metal water pollution', 'CO₂, NOₓ and SOₓ; oil spills, refinery emissions'],
+          ['Climate effect', 'One-off mining footprint; EV runs with low ongoing CO₂', 'Continuous CO₂ released each time fuel is burned'],
+          ['Land / habitat', 'Open-pit and artisanal mines degrade land', 'Drilling, pipelines and spills damage habitats'],
+          ['Social concerns', 'Reports of unsafe and child labour in DRC', 'Economic dependence on oil states; air-quality health effects'],
+          ['Resource lifetime', 'Cobalt is finite but recyclable from old batteries', 'Crude oil is finite and burned only once'],
+        ],
+      },
+      caption: 'Comparison of the environmental and social consequences of cobalt mining versus crude-oil extraction — use both columns to support the evaluation and conclusion in part (c).',
+    },
     tasks: [
       {
         label: 'a',
@@ -389,6 +526,20 @@ export const questions: Question[] = [
     topic: 'Right-to-repair vs planned obsolescence — resource use and sustainability',
     marks: 12,
     stem: 'Planned obsolescence is a design strategy where products are intentionally made to become outdated or stop working after a set time, encouraging consumers to buy new ones. The right-to-repair movement advocates for products that can be easily repaired and upgraded, reducing electronic waste.',
+    artefact: {
+      component: 'DataTable',
+      data: {
+        headers: ['Aspect', 'Planned obsolescence', 'Right-to-repair'],
+        rows: [
+          ['Economic — consumer', 'Higher long-term costs; must keep re-buying', 'Lower costs; cheaper to repair than replace'],
+          ['Economic — manufacturer', 'Repeat sales drive company profit', 'Lower new-unit sales but new repair-service revenue'],
+          ['Use of resources', 'High demand for rare metals; rapid depletion', 'Longer product life; less mining and material use'],
+          ['Electronic waste', 'Large volumes of e-waste, often exported', 'Less e-waste as devices last longer'],
+          ['Social impact', 'Few repair jobs; throwaway culture', 'Creates local repair jobs; more equitable access'],
+        ],
+      },
+      caption: 'Side-by-side comparison of the planned-obsolescence and right-to-repair models across economic, resource and social aspects — use it to structure the evaluation and justified conclusion.',
+    },
     tasks: [
       {
         label: '',

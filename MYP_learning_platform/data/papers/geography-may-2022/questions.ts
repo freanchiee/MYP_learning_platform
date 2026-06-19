@@ -87,6 +87,24 @@ export const questions: Question[] = [
     topic: 'Disparity & equity — disaster impacts',
     marks: 4,
     stem: 'Communities are not affected equally by natural disasters. Income can shape how vulnerable people are when a hazard strikes.',
+    artefact: {
+      component: 'InteractiveChart',
+      caption: 'Illustrative comparison of how the same hazard tends to affect low-income and high-income communities. Hover a bar for its value; click the legend to toggle a group. Indicative figures for discussion, not a single named disaster.',
+      data: {
+        kind: 'bar',
+        title: 'How income shapes vulnerability to the same hazard',
+        source: 'Composite illustration (recreated)',
+        x: {
+          label: 'Impact indicator',
+          categories: ['Homes with insurance', 'Built to hazard code', 'Lasting displacement', 'Recovery time'],
+        },
+        y: { label: 'Share of community / relative time', min: 0, max: 100, ticks: [0, 20, 40, 60, 80, 100], unit: '%' },
+        series: [
+          { name: 'Low-income community', color: '#c2255c', points: [18, 25, 65, 85] },
+          { name: 'High-income community', color: '#0b7285', points: [82, 88, 20, 30] },
+        ],
+      },
+    },
     tasks: [
       {
         label: '',
@@ -140,7 +158,14 @@ export const questions: Question[] = [
             title: 'Internally Displaced People — Aceh Province, 12 January 2005',
             source: 'Tsunami Response Indonesia (recreated)',
             region: 'Aceh Province, Sumatra, Indonesia',
-            regionCountries: ['Indonesia'],
+            // SCENE mode: a stylised map of Aceh — Indian Ocean to the west,
+            // the Bukit Barisan mountains inland to the east. Footprint density +
+            // colour encode displacement intensity by zone (a recreated choropleth),
+            // keyed to the graduated legend below. (REGION mode over all of Indonesia
+            // would crush every Aceh district into one corner and cannot draw a choropleth.)
+            scene: 'coast',
+            water: 'left',
+            terrain: 'right',
             scaleKm: 100,
             north: true,
             locator: [96.7, 4.5],
@@ -151,13 +176,20 @@ export const questions: Question[] = [
               { label: '50 001 – 116 984 displaced', color: '#6b1f0e' },
               { label: 'Data not available', color: '#e9e9e9' },
             ],
-            markers: [
-              { lon: 95.32, lat: 5.55, label: 'Banda Aceh / Aceh Besar', detail: 'North-west tip of Sumatra — worst hit: 50 001 – 116 984 internally displaced people.', color: '#6b1f0e' },
-              { lon: 96.95, lat: 5.0, label: 'Aceh Utara', detail: '50 001 – 116 984 internally displaced people.', color: '#6b1f0e' },
-              { lon: 95.6, lat: 4.85, label: 'Aceh Jaya / Aceh Barat', detail: '25 001 – 50 000 internally displaced people along the west coast.', color: '#e76f2c' },
-              { lon: 97.4, lat: 4.0, label: 'Gayo Lues / Aceh Tenggara', detail: 'Inland districts — data not available.', color: '#9aa0a6' },
+            groups: [
+              { id: 'worst', label: '50 001 – 116 984 displaced', color: '#6b1f0e', count: 150, zone: 'coast' },
+              { id: 'high', label: '25 001 – 50 000 displaced', color: '#e76f2c', count: 90, zone: 'coast south' },
+              { id: 'mid', label: '5 501 – 25 000 displaced', color: '#f4a261', count: 70, zone: 'all' },
+              { id: 'low', label: '2 400 – 5 500 displaced', color: '#fde3d2', count: 50, zone: 'inland north' },
+              { id: 'nodata', label: 'Data not available', color: '#e9e9e9', count: 80, zone: 'inland south' },
             ],
-            caption: 'A choropleth of displacement by district. It gives a clear overview of where people moved, but four inland districts have no data, so it is only a partial picture.',
+            markers: [
+              { x: 22, y: 18, label: 'Banda Aceh / Aceh Besar', detail: 'North-west tip of Sumatra — worst hit: 50 001 – 116 984 internally displaced people.', color: '#6b1f0e' },
+              { x: 50, y: 30, label: 'Aceh Utara', detail: 'North coast — 50 001 – 116 984 internally displaced people.', color: '#6b1f0e' },
+              { x: 30, y: 62, label: 'Aceh Jaya / Aceh Barat', detail: '25 001 – 50 000 internally displaced people along the west coast.', color: '#e76f2c' },
+              { x: 78, y: 76, label: 'Gayo Lues / Aceh Tenggara', detail: 'Inland mountain districts — data not available.', color: '#9aa0a6' },
+            ],
+            caption: 'A choropleth of displacement by district. It gives a clear overview of where people moved — the coastal districts were worst hit — but four inland districts have no data, so it is only a partial picture.',
           },
         },
       },
@@ -172,6 +204,51 @@ export const questions: Question[] = [
     stem:
       'A Non-Governmental Organisation (NGO) has asked you to investigate the strategies used to manage a natural disaster. The investigation will allow the NGO to evaluate the effectiveness of strategies in different locations.\n\n' +
       '**Statement of inquiry:** Time, place and space can influence the effectiveness of a community’s response to natural disasters.',
+    artefact: {
+      component: 'InfoGraphicPanel',
+      caption: 'The brief at a glance — the four stages your investigation design must cover for the NGO. Hover a stage to spotlight it; click to pin it. This scaffolds the task; it does not contain answers.',
+      data: {
+        title: 'Designing your investigation — the NGO brief',
+        source: 'Non-Governmental Organisation',
+        intro: 'Statement of inquiry: Time, place and space can influence the effectiveness of a community’s response to natural disasters. Goal: evaluate the effectiveness of management strategies in different locations.',
+        layout: 'flow',
+        blocks: [
+          {
+            heading: 'a · Research question',
+            icon: '❓',
+            items: [
+              'Name one management strategy and one specific natural disaster / location.',
+              'Keep it clear AND focused, and connected to the statement of inquiry.',
+            ],
+            note: 'A simple reworded SoI scores 0',
+          },
+          {
+            heading: 'b · Justify the question',
+            icon: '✅',
+            items: [
+              'Explain, with detail, why this question is worth investigating for the NGO.',
+            ],
+            note: 'Build from a simple link to a full justification',
+          },
+          {
+            heading: 'c · Primary-data methods',
+            icon: '📋',
+            items: [
+              'List two ways to collect primary data (e.g. interviews, questionnaires, surveys).',
+            ],
+            note: 'One mark per valid method',
+          },
+          {
+            heading: 'd · Explain a method',
+            icon: '🔎',
+            items: [
+              'Pick one method from (c) and explain, with reasons, how it helps answer your question.',
+            ],
+            note: 'Link the method back to the research question',
+          },
+        ],
+      },
+    },
     tasks: [
       {
         label: 'a',
@@ -211,6 +288,51 @@ export const questions: Question[] = [
       'You are a popular travel **blogger** who has many online followers.\n\n' +
       'You decide to write a blog post to explain the positive and negative impacts of tourism on the culture of **one** community.\n\n' +
       '(A photograph of a travel writer’s desk — laptop, camera, glasses, passport and an open notebook — accompanies the task in the exam. It is decorative and is not a marked source.)',
+    artefact: {
+      component: 'InfoGraphicPanel',
+      caption: 'Blog-post planner — the four parts your post is marked on. Hover a panel to spotlight it; click to pin it. This organises the format only; the cultural impacts you choose are your own.',
+      data: {
+        title: 'Travel-blog post — required structure',
+        source: 'Communicating task (Criteria A + C)',
+        intro: 'Explain the positive and negative impacts of tourism on the culture of one community. Marked: Knowledge (A /6), Format /2, Communicating /6, Organization /4.',
+        layout: 'grid',
+        blocks: [
+          {
+            heading: 'Title & sub-headings',
+            icon: '📝',
+            items: [
+              'A relevant blog title.',
+              'Clear sub-headings that organise the post.',
+            ],
+            note: 'Format /2',
+          },
+          {
+            heading: 'Positive cultural impact',
+            icon: '🎎',
+            items: [
+              'Explain at least one positive impact of tourism on the culture of one community.',
+            ],
+            note: 'e.g. revived crafts, festivals, languages, pride',
+          },
+          {
+            heading: 'Negative cultural impact',
+            icon: '⚠️',
+            items: [
+              'Explain at least one negative impact of tourism on the culture of the same community.',
+            ],
+            note: 'e.g. commodified traditions, loss of authenticity',
+          },
+          {
+            heading: 'Advice for travellers',
+            icon: '🧭',
+            items: [
+              'Conclude with advice for future travellers.',
+            ],
+            note: 'Tie the advice to the impacts you explained',
+          },
+        ],
+      },
+    },
     tasks: [
       {
         label: '',
@@ -364,6 +486,49 @@ export const questions: Question[] = [
     marks: 2,
     stem:
       'Re-examine **Source C** (the desalinization process diagram from Question 7). A resident of Jordan is learning about the government’s proposal to invest in desalinization.',
+    artefact: {
+      component: 'InfoGraphicPanel',
+      caption: 'Source C (re-shown for reference) — how desalinization works. Consider what this diagram does NOT tell a resident about the government’s proposal.',
+      data: {
+        title: 'Source C — The desalinization process',
+        source: 'Government of Jordan',
+        layout: 'flow',
+        blocks: [
+          {
+            heading: '1 · Salt water in',
+            icon: '🌊',
+            items: [
+              'A tank of salt water containing contaminants (bacteria, microplastics and other pollutants) sits on the left.',
+            ],
+            note: 'Input: untreated salt water',
+          },
+          {
+            heading: '2 · Pressure applied',
+            icon: '⬇️',
+            items: [
+              'Pressure is applied from above, pushing the salt water towards the filter.',
+            ],
+            note: 'Energy is needed to create this pressure',
+          },
+          {
+            heading: '3 · Filter',
+            icon: '⛛',
+            items: [
+              'A filter only allows water particles through, separating the water from salt and contaminants.',
+            ],
+            note: 'Water flow passes through the membrane',
+          },
+          {
+            heading: '4 · Fresh water out',
+            icon: '💧',
+            items: [
+              'Clean fresh water collects on the right and rises out of the tank.',
+            ],
+            note: 'Output: fresh water',
+          },
+        ],
+      },
+    },
     tasks: [
       {
         label: '',
@@ -380,6 +545,20 @@ export const questions: Question[] = [
     topic: 'Extended essay — sustainable extraction & biodiversity',
     marks: 24,
     stem: 'A report by the United Nations found that the extraction and processing of minerals is responsible for more than 80 % of the world’s biodiversity loss.',
+    artefact: {
+      component: 'PieChart',
+      caption: 'The UN finding behind the essay prompt: more than 80% of global biodiversity loss is linked to the extraction and processing of minerals. Hover a slice for its share. Indicative split for discussion.',
+      data: {
+        kind: 'doughnut',
+        title: 'Share of global biodiversity loss (UN report)',
+        source: 'United Nations report (recreated)',
+        unit: '%',
+        series: [
+          { name: 'Mineral extraction & processing', value: 80, color: '#c2255c' },
+          { name: 'All other drivers', value: 20, color: '#0b7285' },
+        ],
+      },
+    },
     tasks: [
       {
         label: '',

@@ -77,13 +77,13 @@ export const questions: Question[] = [
         label: 'b',
         text: 'The gravitational field strength (g) is related to both the density and the radius of a planet. Venus has a greater g than Mercury.\n\n**Explain** what this tells us about the relationship between density and g, and between radius and g.',
         marks: 2,
-        ph: 'A planet\'s g depends on both its density and radius. Venus is larger and denser than Mercury. Greater density → higher g. Greater radius also contributes to higher g when paired with higher density.',
+        ph: 'A planet\'s g depends on both its density and its radius: for the same density, a larger radius gives a higher g, and for the same radius, a higher density gives a higher g (g increases with each). Venus and Mercury have almost the same density, so the much greater g on Venus is mainly due to its larger radius.',
       },
       {
         label: 'c',
         text: 'The probe releases a test object of mass **450 g** from a height of **90.0 m** above the surface of Mars (g on Mars = 3.8 ms⁻²). **Calculate** the gravitational potential energy of the test object before release.',
         marks: 3,
-        ph: 'Ep = mgh = 0.45 × 3.8 × 90.0 = 154.35 J ≈ 154 J.',
+        ph: 'Ep = mgh = 0.45 × 3.8 × 90.0 = 153.9 J ≈ 154 J.',
       },
       {
         label: 'd',
@@ -104,6 +104,18 @@ export const questions: Question[] = [
     topicCanonical: "Newton's Laws & Momentum",
     topicGroup: 'Forces & Motion',
     stem: 'A student is going to investigate how the **mass attached to a cone parachute** affects the **terminal velocity** of the parachute falling through air.',
+    artefact: {
+      component: 'LineGraph',
+      data: {
+        title: 'Sample results: terminal velocity vs attached mass',
+        xLabel: 'Mass attached to parachute', xUnit: 'g',
+        yLabel: 'Terminal velocity', yUnit: 'm s⁻¹',
+        dataPoints: [{ x: 5, y: 0.9 }, { x: 10, y: 1.3 }, { x: 15, y: 1.6 }, { x: 20, y: 1.8 }, { x: 25, y: 2.0 }],
+        lobf: true,
+        xMin: 0, xMax: 25, yMin: 0, yMax: 2.5, xStep: 5, yStep: 0.5,
+      },
+      caption: 'A typical set of results the student might collect: as the attached mass increases, the parachute settles at a higher terminal velocity (greater weight requires more drag, so more speed).',
+    },
     tags: { unit: 'forces-interactions', topics: ['terminal velocity', 'drag', 'experimental design', 'variables'], level: 'developing' },
     tasks: [
       {
@@ -175,6 +187,18 @@ export const questions: Question[] = [
     topicCanonical: 'Solar System, Gravity & Space',
     topicGroup: 'Space & Astrophysics',
     stem: 'The Big Bang theory is the prevailing cosmological model for the origin and evolution of the universe. It states that the universe began approximately 13.8 billion years ago in an extremely hot and dense state and has been expanding ever since.',
+    artefact: {
+      component: 'DataTable',
+      data: {
+        headers: ['Observation', 'What is measured', 'What it tells us'],
+        rows: [
+          ['Redshift of distant galaxies', 'Light from galaxies is shifted to longer (redder) wavelengths', 'Galaxies are moving away from us — the universe is expanding'],
+          ['Cosmic Microwave Background (CMB)', 'Faint microwave radiation, ~2.7 K, almost uniform in every direction', 'A cooled-down echo of the hot, dense early universe'],
+          ['Abundance of light elements', 'About 75% hydrogen and 25% helium by mass across the cosmos', 'Matches the amounts predicted to form just after the Big Bang'],
+        ],
+      },
+      caption: 'Three independent observations and what each one tells cosmologists about the early universe.',
+    },
     tags: { unit: 'astrophysics', topics: ['Big Bang', 'evidence', 'cosmology', 'redshift'], level: 'developing' },
     tasks: [
       {
@@ -284,6 +308,17 @@ export const questions: Question[] = [
     topicCanonical: 'Circuits, Resistance & Power',
     topicGroup: 'Electricity & Magnetism',
     stem: 'Resistance (R) is defined as R = V/I. A student investigates how a negative temperature coefficient (NTC) thermistor behaves when it is heated.',
+    artefact: {
+      component: 'LineGraph',
+      data: {
+        title: 'Resistance of an NTC thermistor against temperature',
+        xLabel: 'Temperature', xUnit: '°C',
+        yLabel: 'Resistance', yUnit: 'Ω',
+        dataPoints: [{ x: 10, y: 1000 }, { x: 20, y: 980 }, { x: 30, y: 920 }, { x: 40, y: 720 }, { x: 50, y: 500 }, { x: 60, y: 330 }, { x: 70, y: 220 }, { x: 80, y: 150 }],
+        xMin: 0, xMax: 80, yMin: 0, yMax: 1000, xStep: 10, yStep: 200,
+      },
+      caption: 'Resistance stays near its room-temperature value up to about 30°C, then falls steeply as the thermistor is heated — typical NTC behaviour.',
+    },
     tags: { unit: 'electricity-circuits', topics: ['thermistor', 'resistance', 'temperature', 'NTC'], level: 'proficient' },
     tasks: [
       {
@@ -323,6 +358,18 @@ export const questions: Question[] = [
     topicCanonical: 'Waves, Sound & Frequency',
     topicGroup: 'Waves & Sound',
     stem: 'A student investigates how the depth of water in a tank affects the time for a sonar pulse to travel to the bottom of the tank and return.',
+    artefact: {
+      component: 'LineGraph',
+      data: {
+        title: 'Sonar echo return time vs water depth',
+        xLabel: 'Depth of water', xUnit: 'm',
+        yLabel: 'Echo return time', yUnit: 'ms',
+        dataPoints: [{ x: 0, y: 0 }, { x: 1, y: 1.33 }, { x: 2, y: 2.67 }, { x: 3, y: 4.0 }, { x: 4, y: 5.33 }, { x: 5, y: 6.67 }],
+        lobf: true,
+        xMin: 0, xMax: 5, yMin: 0, yMax: 8, xStep: 1, yStep: 2,
+      },
+      caption: 'Expected results: the echo return time is directly proportional to depth, because the pulse travels down and back through twice the depth (speed of sound in water ≈ 1500 m s⁻¹).',
+    },
     tags: { unit: 'sound-waves', topics: ['sonar', 'echo', 'variables', 'hypothesis', 'investigation'], level: 'developing' },
     tasks: [
       {
@@ -364,6 +411,20 @@ export const questions: Question[] = [
     topicCanonical: 'Nuclear Reactions & Energy',
     topicGroup: 'Nuclear & Atomic Physics',
     stem: 'Some developing countries are considering building nuclear power plants as part of their plan to increase electricity generation and reduce dependence on fossil fuels.',
+    artefact: {
+      component: 'SankeySim',
+      data: {
+        title: 'Energy flow through a typical nuclear power station',
+        units: 'units',
+        input: { label: 'Thermal energy from nuclear fission', value: 100 },
+        outputs: [
+          { label: 'Useful electrical energy', value: 35, kind: 'out', highlight: true },
+          { label: 'Wasted heat (cooling water + reactor)', value: 55, kind: 'loss' },
+          { label: 'Losses in generator and transmission', value: 10, kind: 'loss' },
+        ],
+      },
+      caption: 'For every 100 units of thermal energy released by fission, only about 35 units reach the grid as electricity — context for weighing the costs and benefits of nuclear power.',
+    },
     tags: { unit: 'atomic-physics', topics: ['nuclear power', 'evaluation', 'environment', 'economics'], level: 'advanced' },
     tasks: [
       {
@@ -385,6 +446,17 @@ export const questions: Question[] = [
     topicCanonical: 'Atomic Structure & Radioactivity',
     topicGroup: 'Nuclear & Atomic Physics',
     stem: 'Ionising radiation can affect the human body. Airport security systems use X-rays to scan baggage and detect prohibited items without opening bags.',
+    artefact: {
+      component: 'SpectrumSim',
+      data: {
+        title: 'The electromagnetic spectrum',
+        mode: 'scrub',
+        bands: ['Radio', 'Microwave', 'Infrared', 'Visible', 'Ultraviolet', 'X-rays', 'Gamma rays'],
+        axis: 'energy and penetrating power increase left → right',
+        target: 'X-rays',
+      },
+      caption: 'X-rays sit between ultraviolet and gamma rays. Energy, frequency and penetrating power all increase towards the right of the spectrum.',
+    },
     tags: { unit: 'atomic-physics', topics: ['ionisation', 'DNA damage', 'X-rays', 'security screening', 'electromagnetic spectrum'], level: 'proficient' },
     tasks: [
       {
@@ -429,6 +501,11 @@ export const questions: Question[] = [
     topicCanonical: 'Atomic Structure & Radioactivity',
     topicGroup: 'Nuclear & Atomic Physics',
     stem: 'X-ray imaging is used by art experts to examine paintings non-destructively. By passing X-rays through a painting and detecting the pattern on the other side, conservators can investigate what lies beneath the visible surface.',
+    artefact: {
+      component: 'GenericSVG',
+      data: { svg: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 360" font-family="Arial, Helvetica, sans-serif"><defs><linearGradient id="frame" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8a6324"/><stop offset="1" stop-color="#5c4014"/></linearGradient><linearGradient id="canvas" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6b5836"/><stop offset="1" stop-color="#43361f"/></linearGradient><radialGradient id="visFace" cx="0.5" cy="0.42" r="0.55"><stop offset="0" stop-color="#d7b48a"/><stop offset="1" stop-color="#7c5d3c"/></radialGradient><linearGradient id="xbg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1a1d22"/><stop offset="1" stop-color="#05070a"/></linearGradient></defs><rect x="0" y="0" width="760" height="360" fill="#ffffff"/><text x="190" y="32" text-anchor="middle" font-size="16" font-weight="bold" fill="#27343a">Visible painting</text><text x="570" y="32" text-anchor="middle" font-size="16" font-weight="bold" fill="#27343a">X-ray image</text><g><rect x="70" y="50" width="240" height="280" rx="4" fill="url(#frame)"/><rect x="86" y="66" width="208" height="248" fill="url(#canvas)"/><ellipse cx="190" cy="170" rx="58" ry="72" fill="url(#visFace)"/><path d="M132,250 Q190,210 248,250 L248,314 L132,314 Z" fill="#2c2418"/><ellipse cx="170" cy="160" rx="6" ry="4" fill="#2a1d10"/><ellipse cx="210" cy="160" rx="6" ry="4" fill="#2a1d10"/><path d="M176,195 Q190,205 204,195" fill="none" stroke="#3a2716" stroke-width="2.4"/><text x="190" y="304" text-anchor="middle" font-size="11" fill="#d9c6a4">Portrait of a man (surface layer)</text></g><g><rect x="450" y="50" width="240" height="280" rx="4" fill="url(#xbg)"/><ellipse cx="570" cy="168" rx="56" ry="70" fill="none" stroke="#dfe6ee" stroke-width="2" opacity="0.85"/><ellipse cx="552" cy="160" rx="6" ry="4" fill="#f2f6fa" opacity="0.85"/><ellipse cx="590" cy="160" rx="6" ry="4" fill="#f2f6fa" opacity="0.85"/><g opacity="0.6" stroke="#9fb4c8" stroke-width="1.6" fill="none" stroke-dasharray="4 4"><ellipse cx="588" cy="150" rx="48" ry="60"/><path d="M548,238 Q610,205 648,250"/></g><circle cx="612" cy="120" r="20" fill="#f4f8fb" opacity="0.85"/><text x="570" y="306" text-anchor="middle" font-size="11" fill="#cfe0ef">Hidden earlier figure + bright lead-white highlights</text></g><g font-size="12" fill="#475569"><rect x="612" y="106" width="120" height="0" fill="none"/></g><g transform="translate(330,170)" stroke="#27343a" stroke-width="2.2" fill="none"><line x1="0" y1="0" x2="100" y2="0" marker-end="url(#arrowR)"/></g><defs><marker id="arrowR" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,1 L9,5 L0,9 Z" fill="#27343a"/></marker></defs><text x="380" y="158" text-anchor="middle" font-size="11" fill="#475569">X-rays</text></svg>' },
+      caption: 'Left: the visible portrait. Right: the X-ray image, in which dense lead-white paint appears bright and reveals an earlier, hidden composition beneath the surface layer.',
+    },
     tags: { unit: 'atomic-physics', topics: ['X-rays', 'art authentication', 'interpretation', 'non-destructive testing'], level: 'developing' },
     tasks: [
       {
@@ -450,6 +527,11 @@ export const questions: Question[] = [
     topicCanonical: 'Electromagnetic Spectrum',
     topicGroup: 'Electromagnetic Waves & Optics',
     stem: 'Infrared thermography is a technique that uses a special camera to detect infrared radiation emitted by warm objects. It is used to survey buildings and identify areas of high heat loss.',
+    artefact: {
+      component: 'GenericSVG',
+      data: { svg: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 380" font-family="Arial, Helvetica, sans-serif"><defs><linearGradient id="cool" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3a4a8c"/><stop offset="1" stop-color="#1d2550"/></linearGradient><linearGradient id="thermoScale" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#1d2550"/><stop offset="0.3" stop-color="#3a4a8c"/><stop offset="0.5" stop-color="#7a3f8c"/><stop offset="0.7" stop-color="#d4622a"/><stop offset="0.88" stop-color="#f2a82c"/><stop offset="1" stop-color="#fff2b0"/></linearGradient></defs><rect x="0" y="0" width="720" height="380" fill="#0a0c14"/><text x="300" y="34" text-anchor="middle" font-size="16" font-weight="bold" fill="#e7ecf5">Thermographic image of a house</text><g><polygon points="120,150 330,90 540,150 540,330 120,330" fill="url(#cool)"/><polygon points="120,150 330,90 540,150 330,200" fill="#a23b8c"/><polygon points="320,200 360,200 360,330 320,330" fill="#f2a82c"/><rect x="170" y="200" width="70" height="60" fill="#e8742c"/><rect x="170" y="200" width="70" height="60" fill="none" stroke="#3a4a8c" stroke-width="3"/><rect x="420" y="200" width="70" height="60" fill="#e8742c"/><rect x="420" y="200" width="70" height="60" fill="none" stroke="#3a4a8c" stroke-width="3"/><rect x="200" y="160" width="40" height="22" fill="#fff2b0"/><rect x="420" y="160" width="40" height="22" fill="#fff2b0"/><path d="M120,150 L330,90 L540,150" fill="none" stroke="#ffd86a" stroke-width="5" opacity="0.85"/></g><g font-size="12" fill="#e7ecf5"><line x1="200" y1="171" x2="120" y2="120" stroke="#ffd86a" stroke-width="1.2"/><text x="40" y="118">windows (hot)</text><line x1="330" y1="92" x2="330" y2="60" stroke="#ffd86a" stroke-width="1.2"/><text x="300" y="54">roof ridge (hot)</text><line x1="205" y1="230" x2="120" y2="285" stroke="#3a4a8c" stroke-width="1.2"/><text x="30" y="290" fill="#aebbe0">insulated wall (cool)</text></g><g transform="translate(600,90)"><rect x="0" y="0" width="26" height="220" fill="url(#thermoScale)" stroke="#445" stroke-width="1"/><text x="40" y="10" font-size="12" fill="#fff2b0">hot</text><text x="40" y="218" font-size="12" fill="#aebbe0">cold</text><text x="40" y="60" font-size="11" fill="#e7ecf5">white / yellow</text><text x="40" y="160" font-size="11" fill="#e7ecf5">blue / purple</text></g></svg>' },
+      caption: 'A false-colour thermographic image: white and yellow show the warmest surfaces (greatest heat loss — windows and roof), while blue and purple show the coolest, well-insulated areas.',
+    },
     tags: { unit: 'em-spectrum', topics: ['infrared', 'thermography', 'heat loss', 'energy efficiency', 'scientific applications'], level: 'developing' },
     tasks: [
       {

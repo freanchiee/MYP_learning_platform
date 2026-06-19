@@ -49,6 +49,34 @@ export const questions: Question[] = [
     topic: 'Globalization — impacts',
     marks: 6,
     stem: 'Globalization can have positive and negative impacts.',
+    artefact: {
+      component: 'VennOverlap',
+      caption: 'A way of sorting the impacts of globalization. Some impacts sit clearly on one side; others (the overlap) bring benefits and harms at the same time. The diagram is a thinking aid — your answer must be in your own words.',
+      data: {
+        title: 'Two sides of globalization',
+        source: 'Stimulus diagram (illustrative)',
+        setA: {
+          label: 'Often seen as POSITIVE',
+          color: '#2f9e44',
+          items: [
+            'Cheaper electronics',
+            'Sharing of medical knowledge',
+            'New export jobs',
+          ],
+        },
+        setB: {
+          label: 'Often seen as NEGATIVE',
+          color: '#e8590c',
+          items: [
+            'Toxic e-waste exported',
+            'Loss of local industries',
+            'Cultural homogenisation',
+          ],
+        },
+        overlapLabel: 'Same change, both effects',
+        caption: 'Example: cheaper electronics (a positive impact) can lead to growing piles of toxic e-waste in importing countries (a negative consequence) — the kind of link part (b) asks you to explain.',
+      },
+    },
     tasks: [
       {
         label: 'a',
@@ -125,6 +153,48 @@ export const questions: Question[] = [
       'A local government wants to understand the social or environmental impacts of globalization on trade and exchange in their country.\n\n' +
       'The government asked you, as a research consultant, to design an action plan to investigate the social **or** environmental impacts on a case study of your choice. Use the following statement of inquiry to inform your action plan.\n\n' +
       '**Statement of inquiry:** Local and global processes are interconnected as a result of globalisation, creating challenges and opportunities.',
+    artefact: {
+      component: 'DataTableInteractive',
+      caption: 'A shortlist of candidate sources a research consultant might draw on (here, the global garment trade). Click a row to pin the source you would choose. You are not limited to these — choose and justify your own in parts (c) and (d).',
+      data: {
+        title: 'Candidate sources for an investigation',
+        source: 'Research-skills reference (illustrative)',
+        caption: 'A reliable source is relevant to the research question, comes from an authority on the topic, and is recent enough to be trusted.',
+        headers: ['Possible source', 'Type', 'What it could tell you', 'Reliability note'],
+        rows: [
+          [
+            'ILO data on garment-worker wages, Bangladesh',
+            'Official statistics',
+            'Average pay and hours for factory workers in Dhaka — evidence of social impacts of the trade',
+            'Strong: an international labour authority, regularly updated',
+          ],
+          [
+            'Reports from an NGO working in Dhaka',
+            'NGO report',
+            'On-the-ground accounts of working conditions and community impacts',
+            'Good, but check the NGO is not campaigning one-sidedly',
+          ],
+          [
+            'World Bank trade & export figures',
+            'Official statistics',
+            'Value of garment exports and how trade links the local economy to global markets',
+            'Strong: respected economic data, but country-scale only',
+          ],
+          [
+            'A fast-fashion brand’s own marketing website',
+            'Company source',
+            'How the company presents its supply chain to customers',
+            'Weak on its own: likely biased in the company’s favour',
+          ],
+          [
+            'Anonymous social-media posts about factories',
+            'Social media',
+            'Quick, recent opinions and rumours',
+            'Weak: author and accuracy cannot be verified',
+          ],
+        ],
+      },
+    },
     tasks: [
       {
         label: 'a',
@@ -324,6 +394,26 @@ export const questions: Question[] = [
     type: 'extended',
     topic: 'Extended essay — income & disaster impacts',
     marks: 24,
+    artefact: {
+      component: 'InteractiveChart',
+      caption: 'A comparison of how a hazard of similar physical magnitude tends to affect countries of different income levels. Use it to launch your argument — but build your essay from your own examples and reasoning. Hover a bar for its value; click a legend item to toggle a measure.',
+      data: {
+        kind: 'bar',
+        title: 'Typical disaster impacts by country income level',
+        source: 'Illustrative figures based on disaster-risk research',
+        x: {
+          label: 'Country income level',
+          categories: ['Low income', 'Lower-middle income', 'Upper-middle income', 'High income'],
+        },
+        y: { label: 'Indexed impact (100 = most severe)', min: 0, max: 100, ticks: [0, 20, 40, 60, 80, 100] },
+        series: [
+          { name: 'Deaths per disaster', color: '#c2255c', points: [100, 72, 40, 12] },
+          { name: 'Economic loss as % of GDP', color: '#e8590c', points: [85, 60, 35, 15] },
+          { name: 'Years to recover', color: '#1971c2', points: [90, 65, 38, 18] },
+          { name: 'Population with early warning', color: '#2f9e44', points: [20, 45, 70, 95] },
+        ],
+      },
+    },
     tasks: [
       {
         label: '',

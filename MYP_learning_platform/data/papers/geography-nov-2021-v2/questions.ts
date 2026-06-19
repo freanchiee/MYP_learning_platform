@@ -95,6 +95,25 @@ export const questions: Question[] = [
     topic: 'Explaining a human cause of the water-use trend',
     marks: 4,
     stem: '**Source A** is repeated for reference (global freshwater withdrawal by sector in 1980 and 2020).',
+    artefact: {
+      component: 'InteractiveChart',
+      caption:
+        'Source A (repeated) — global freshwater withdrawal by sector in 1980 vs 2020, in km³/yr. Hover a bar for its exact value, or toggle a year in the legend. Notice which sector grew most — that growth is what you must explain through one human activity.',
+      data: {
+        kind: 'bar',
+        title: 'Source A — Global freshwater withdrawal by sector: 1980 vs 2020',
+        source: 'Global water-use record (recreated)',
+        x: {
+          label: 'Sector',
+          categories: ['Agriculture', 'Industry', 'Domestic / homes'],
+        },
+        y: { label: 'Water withdrawn', min: 0, max: 3000, ticks: [0, 500, 1000, 1500, 2000, 2500, 3000], unit: 'km³/yr' },
+        series: [
+          { name: '1980', color: '#94a3b8', points: [1700, 350, 150] },
+          { name: '2020', color: '#1971c2', points: [2800, 800, 400] },
+        ],
+      },
+    },
     tasks: [
       {
         label: '',
@@ -185,7 +204,7 @@ export const questions: Question[] = [
           { id: 'taps', text: 'Fix dripping taps & leaks' },
           { id: 'greywater', text: 'Reuse greywater on gardens' },
           { id: 'rainwater', text: 'Collect & store rainwater' },
-          { id: 'crops', text: 'Plant drought-tolerant gardens' },
+          { id: 'crops', text: 'Replace public lawns with drought-tolerant planting' },
           { id: 'awareness', text: 'Run a water-saving campaign' },
         ],
         bins: [
@@ -326,6 +345,24 @@ export const questions: Question[] = [
     topic: 'Purpose & value of a source (Source E)',
     marks: 4,
     stem: '**Source E** (the "people without safe water" chart) is repeated to help you answer the questions that follow.',
+    artefact: {
+      component: 'DataTableInteractive',
+      caption:
+        'Source E (repeated) — the same data behind the chart, as a table of figures (millions of people without safely managed drinking water). Hover a row to highlight it; click to pin the region you are discussing.',
+      data: {
+        title: 'Source E — People without safely managed drinking water, by region',
+        source: 'Newspaper article on access to safe water (recreated)',
+        headers: ['World region', '2005 (millions)', '2020 (millions)', 'Change'],
+        rows: [
+          ['Sub-Saharan Africa', '300', '420', '+120'],
+          ['Central & Southern Asia', '455', '480', '+25'],
+          ['Latin America & the Caribbean', '15', '80', '+65'],
+          ['Total', '770', '980', '+210'],
+        ],
+        caption:
+          'The figures match the nested doughnut chart in Source E. The chart turns these numbers into a quick visual comparison for newspaper readers.',
+      },
+    },
     tasks: [
       {
         label: 'a',
@@ -396,6 +433,25 @@ export const questions: Question[] = [
     topic: 'Extended essay — benefits vs consequences of large dams',
     marks: 24,
     stem: '"Building large dams to supply water creates more benefits for societies than negative consequences." To what extent do you agree with this statement?',
+    artefact: {
+      component: 'InteractiveChart',
+      caption:
+        'Benefits and negative consequences of large dams (illustrative data) — hover a bar for its exact value, or toggle a side in the legend. Use it to weigh both sides of the statement; your essay must argue with named MYP examples, in your own words.',
+      data: {
+        kind: 'bar',
+        title: 'Large dams: weighing benefits against negative consequences',
+        source: 'MYP Geography — illustrative comparison (not exam data)',
+        x: {
+          label: 'Impact of building a large dam',
+          categories: ['Water supply', 'Electricity', 'Flood control', 'People displaced', 'Habitat lost', 'Methane / silt'],
+        },
+        y: { label: 'Relative scale (index, 0–100)', min: 0, max: 100, ticks: [0, 20, 40, 60, 80, 100] },
+        series: [
+          { name: 'Benefit to society', color: '#2f9e44', points: [90, 80, 70, 0, 0, 0] },
+          { name: 'Negative consequence', color: '#c2255c', points: [0, 0, 0, 75, 65, 55] },
+        ],
+      },
+    },
     tasks: [
       {
         label: '',

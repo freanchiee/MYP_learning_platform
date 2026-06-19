@@ -45,6 +45,24 @@ export const questions: Question[] = [
     type: 'extended',
     topic: 'Migration — causes of displacement',
     marks: 2,
+    artefact: {
+      component: 'DataTableInteractive',
+      caption:
+        'Common drivers of forced migration — click a row to pin the cause you choose, then outline it in your answer.',
+      data: {
+        title: 'Why people are forced to leave their homes',
+        source: 'MYP Integrated Humanities — migration & displacement',
+        headers: ['Driver of forced migration', 'What it means', 'Example'],
+        rows: [
+          ['Armed conflict / war', 'Fighting makes daily life unsafe and destroys homes', 'Families fleeing a civil war'],
+          ['Persecution', 'A group is targeted for its ethnicity, religion or beliefs', 'A minority group forced to flee for safety'],
+          ['Natural disaster', 'A sudden hazard destroys homes and livelihoods', 'Communities displaced by a flood or earthquake'],
+          ['Drought & food insecurity', 'Crops fail and there is not enough food or water', 'Herders leaving land hit by long drought'],
+          ['Political instability', 'A government collapses or rights are taken away', 'People leaving after a coup or crackdown'],
+        ],
+        caption: 'Pick ONE driver. These are categories of forced migration, not a ranking.',
+      },
+    },
     tasks: [
       {
         label: '',
@@ -60,6 +78,23 @@ export const questions: Question[] = [
     type: 'extended',
     topic: 'Migration — effects of displacement',
     marks: 4,
+    artefact: {
+      component: 'DataTableInteractive',
+      caption:
+        'Some major refugee crises and effects associated with them — click a row to pin one named crisis, then explain one of its effects.',
+      data: {
+        title: 'Examples of refugee crises and their effects',
+        source: 'MYP Integrated Humanities — migration & displacement',
+        headers: ['Refugee crisis', 'Main destination region', 'Effect on host communities', 'Effect on those displaced'],
+        rows: [
+          ['Syrian crisis (2011– )', 'Türkiye, Lebanon, Jordan, Europe', 'Pressure on housing and schools in host cities', 'Long stays in camps; interrupted education'],
+          ['Venezuelan crisis (2015– )', 'Colombia, Peru, Ecuador', 'Strain on health services in border cities', 'Loss of income and separated families'],
+          ['Rohingya crisis (2017– )', 'Bangladesh (Cox’s Bazar)', 'Land and resources stretched near camps', 'Crowded camps with limited clean water'],
+          ['South Sudan crisis (2013– )', 'Uganda, Sudan, Ethiopia', 'Demand for food aid in host regions', 'Food insecurity and disrupted farming'],
+        ],
+        caption: 'Pick ONE named crisis, then explain ONE effect with reasons. Effects can be on host communities OR on the people displaced.',
+      },
+    },
     tasks: [
       {
         label: '',
@@ -135,6 +170,23 @@ export const questions: Question[] = [
       'You have just completed a unit on migration and belonging in school. Your teacher has asked your class to organize an exhibition based on the unit’s statement of inquiry.\n\n' +
       '**Statement of inquiry: Migration policies create change for communities.**\n\n' +
       'In preparation for your exhibition, answer the following questions.',
+    artefact: {
+      component: 'InfoGraphicPanel',
+      caption:
+        'How the statement of inquiry unpacks — hover a stage to spotlight it. A migration policy sets off changes that a community then feels.',
+      data: {
+        title: 'Statement of inquiry — “Migration policies create change for communities”',
+        source: 'MYP Integrated Humanities — migration & belonging',
+        intro: 'Use these stages to find a focused research question: name a policy, a community/location, and the type of change you will investigate.',
+        layout: 'flow',
+        blocks: [
+          { heading: 'A migration policy', items: ['e.g. a refugee resettlement scheme', 'e.g. a points-based work-visa system', 'e.g. a border or asylum rule'] },
+          { heading: 'is applied to a community', items: ['A host town or city neighbourhood', 'A school or workplace', 'The people who migrate'] },
+          { heading: 'creates change', items: ['Social: belonging, language, identity', 'Economic: jobs, services, housing', 'Cultural: food, festivals, diversity'] },
+          { heading: 'which can be investigated', items: ['Is the change positive, negative or mixed?', 'Who benefits and who is affected?', 'What sources show the change?'] },
+        ],
+      },
+    },
     tasks: [
       {
         label: 'a',
@@ -335,6 +387,24 @@ export const questions: Question[] = [
     type: 'extended',
     topic: 'Extended essay — technology & access to healthcare',
     marks: 24,
+    artefact: {
+      component: 'DataTableInteractive',
+      caption:
+        'Examples of health technology in different regions, with arguments on both sides — click a row to pin a case you might use, and weigh the “improves access” against the “limits” column.',
+      data: {
+        title: 'Technology and access to healthcare around the world',
+        source: 'MYP Integrated Humanities — global health & wellbeing',
+        headers: ['Technology', 'Region / country example', 'How it can improve access', 'Limitation or counter-argument'],
+        rows: [
+          ['Mobile health payments', 'Kenya (M-Pesa health savings)', 'Lets remote families save and pay for care', 'Excludes those without phones or signal'],
+          ['Telemedicine (video consultations)', 'Rural India', 'Reaches villages far from a hospital', 'Needs reliable internet and electricity'],
+          ['Drone delivery of supplies', 'Rwanda (blood & vaccines)', 'Delivers to hard-to-reach clinics fast', 'High cost; depends on outside funding'],
+          ['Electronic health records', 'Estonia', 'Doctors share patient history instantly', 'Raises data-privacy and security concerns'],
+          ['AI diagnosis tools', 'High-income hospitals', 'Speeds up detection of some diseases', 'May widen the gap with poorer regions'],
+        ],
+        caption: 'A balanced case lets you argue “to what extent” — use at least one named region and weigh different perspectives. Do NOT use vaccination coverage.',
+      },
+    },
     tasks: [
       {
         label: '',

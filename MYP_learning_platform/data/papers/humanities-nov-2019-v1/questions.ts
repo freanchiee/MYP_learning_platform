@@ -55,6 +55,26 @@ export const questions: Question[] = [
       '2. Despite the fact that producing each tonne of grain requires less water than in 1970, the overall amount of freshwater withdrawn for farming has actually increased due to:\n' +
       '   • population growth\n' +
       '   • rising incomes (as people become wealthier, they eat more meat and dairy, which need far more water to produce).',
+    artefact: {
+      component: 'SourceDocViewer',
+      caption: 'Source A — conclusions of a geographers’ investigation into global agricultural water withdrawals.',
+      data: {
+        title: 'Source A — Global trends in freshwater withdrawn for agriculture',
+        kind: 'Secondary source · research summary',
+        attribution: 'Conclusions reached by a team of geographers investigating global historical trends in freshwater withdrawn for agriculture.',
+        paragraphs: [
+          'A team of geographers investigated global historical trends in the amount of freshwater withdrawn for agriculture. They reached the following conclusions.',
+          'Conclusion 1. Globally, producing one tonne of grain requires far less water than it did in 1970. This is due to drip irrigation, more efficient pumps, soil-moisture sensors and drought-tolerant crop varieties.',
+          'Conclusion 2. Despite the fact that producing each tonne of grain requires less water than in 1970, the overall amount of freshwater withdrawn for farming has actually increased. This is due to population growth and to rising incomes — as people become wealthier, they eat more meat and dairy, which need far more water to produce.',
+        ],
+        glossary: {
+          'freshwater withdrawn': 'Water taken from rivers, lakes or aquifers for human use, such as irrigating crops.',
+          'drip irrigation': 'Watering crops drop by drop directly at the roots, wasting far less water than flooding fields.',
+          'soil-moisture sensors': 'Devices placed in the ground that measure how wet the soil is so farmers only water when needed.',
+          'drought-tolerant crop varieties': 'Types of plants bred to grow with less water.',
+        },
+      },
+    },
     tasks: [
       {
         label: '',
@@ -180,6 +200,55 @@ export const questions: Question[] = [
       '• increased use of drip irrigation, efficient pumps and water-saving technology in farming\n' +
       '• changing global population growth.\n\n' +
       'You will continue the investigation carried out by the geographers. You will need to develop an action plan by answering the following questions.',
+    artefact: {
+      component: 'InfoGraphicPanel',
+      caption: 'Action-plan organiser — from a future trend to a planned investigation.',
+      data: {
+        title: 'PLANNING YOUR INVESTIGATION',
+        source: 'follow-on from the geographers’ investigation (Sources A & B)',
+        intro: 'The geographers suggested two future trends worth investigating further. Use this organiser to turn one trend into a focused, workable action plan.',
+        layout: 'flow',
+        blocks: [
+          {
+            icon: '🔎',
+            heading: 'Pick a future trend',
+            items: [
+              'More drip irrigation, efficient pumps and water-saving technology',
+              'Changing global population growth',
+            ],
+            note: 'Choose ONE area to focus your further investigation.',
+          },
+          {
+            icon: '❓',
+            heading: 'Formulate a research question',
+            items: [
+              'Make it clear and focused',
+              'Tie it to freshwater use for farming',
+              'Specify a place and a product',
+            ],
+            note: 'Task (a) — your research question.',
+          },
+          {
+            icon: '⚖️',
+            heading: 'Justify & foresee challenges',
+            items: [
+              'Why does this question matter for future water-use trends?',
+              'Name one challenge (e.g. the future is hard to predict)',
+            ],
+            note: 'Tasks (b) and (c).',
+          },
+          {
+            icon: '🗂️',
+            heading: 'Collect & record',
+            items: [
+              'A method to collect data (e.g. surveys, statistics)',
+              'A method to record data (e.g. spreadsheet, table)',
+            ],
+            note: 'Tasks (d) and (e).',
+          },
+        ],
+      },
+    },
     tasks: [
       {
         label: 'a',

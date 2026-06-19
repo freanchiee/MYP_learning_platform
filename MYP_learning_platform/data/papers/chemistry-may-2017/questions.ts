@@ -24,6 +24,13 @@ export const questions: Question[] = [
     figImages: [
       '/images/papers/chemistry-may-2017/q1f-sunflowers-painting.svg',
     ],
+    artefact: {
+      component: 'GenericSVG',
+      data: {
+        svg: '<svg viewBox="0 0 620 210" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><rect width="620" height="210" fill="#ffffff"/><text x="310" y="22" font-size="14" font-weight="700" text-anchor="middle" fill="#1f2d3a">The first row of transition metals (d-block, Period 4)</text><g font-size="8" text-anchor="middle"><g><rect x="40" y="46" width="60" height="50" fill="#eef4f7" stroke="#5b6b78"/><text x="70" y="60" fill="#64748b">22</text><text x="70" y="78" font-size="16" font-weight="700" fill="#0b7285">Ti</text><text x="70" y="92" fill="#64748b">titanium</text></g><g><rect x="105" y="46" width="60" height="50" fill="#eef4f7" stroke="#5b6b78"/><text x="135" y="60" fill="#64748b">23</text><text x="135" y="78" font-size="16" font-weight="700" fill="#0b7285">V</text><text x="135" y="92" fill="#64748b">vanadium</text></g><g><rect x="170" y="46" width="60" height="50" fill="#eef4f7" stroke="#5b6b78"/><text x="200" y="60" fill="#64748b">24</text><text x="200" y="78" font-size="16" font-weight="700" fill="#0b7285">Cr</text><text x="200" y="92" fill="#64748b">chromium</text></g><g><rect x="235" y="46" width="60" height="50" fill="#fff7ed" stroke="#e8590c" stroke-width="2"/><text x="265" y="60" fill="#64748b">25</text><text x="265" y="78" font-size="16" font-weight="700" fill="#e8590c">Mn</text><text x="265" y="92" fill="#64748b">manganese</text></g><g><rect x="300" y="46" width="60" height="50" fill="#fff7ed" stroke="#e8590c" stroke-width="2"/><text x="330" y="60" fill="#64748b">26</text><text x="330" y="78" font-size="16" font-weight="700" fill="#e8590c">Fe</text><text x="330" y="92" fill="#64748b">iron</text></g><g><rect x="365" y="46" width="60" height="50" fill="#eef4f7" stroke="#5b6b78"/><text x="395" y="60" fill="#64748b">27</text><text x="395" y="78" font-size="16" font-weight="700" fill="#0b7285">Co</text><text x="395" y="92" fill="#64748b">cobalt</text></g><g><rect x="430" y="46" width="60" height="50" fill="#eef4f7" stroke="#5b6b78"/><text x="460" y="60" fill="#64748b">28</text><text x="460" y="78" font-size="16" font-weight="700" fill="#0b7285">Ni</text><text x="460" y="92" fill="#64748b">nickel</text></g><g><rect x="495" y="46" width="60" height="50" fill="#eef4f7" stroke="#5b6b78"/><text x="525" y="60" fill="#64748b">29</text><text x="525" y="78" font-size="16" font-weight="700" fill="#0b7285">Cu</text><text x="525" y="92" fill="#64748b">copper</text></g></g><text x="40" y="130" font-size="11" fill="#475569">Highlighted: the pigment metals iron (Fe) and manganese (Mn).</text><text x="40" y="150" font-size="11" fill="#475569">Their d-block neighbours share the same characteristic properties:</text><text x="56" y="170" font-size="10.5" fill="#64748b">• variable oxidation states  • form coloured compounds</text><text x="56" y="186" font-size="10.5" fill="#64748b">• act as catalysts  • hard, dense, high melting-point metals</text></svg>',
+      },
+      caption: 'Iron and manganese sit among the first-row transition metals — any of their d-block neighbours can show the same characteristic properties.',
+    },
     tasks: [
       {
         label: 'a',
@@ -83,6 +90,22 @@ export const questions: Question[] = [
     figImages: [
       '/images/papers/chemistry-may-2017/q2a-molecule-builder.svg',
     ],
+    artefact: {
+      component: 'DataTable',
+      data: {
+        headers: ['Species', 'Formula', 'Relative atomic / molecular mass'],
+        rows: [
+          ['Silver', 'Ag', '108'],
+          ['Bromine', 'Br', '80'],
+          ['Silver bromide', 'AgBr', '188'],
+          ['Hydroquinone', 'C₆H₆O₂', '6×12 + 6×1 + 2×16 = 110'],
+          ['Carbon', 'C', '12'],
+          ['Hydrogen', 'H', '1'],
+          ['Oxygen', 'O', '16'],
+        ],
+      },
+      caption: 'Relative masses for the photographic chemicals — use these values for the molecular-mass and mass calculations.',
+    },
     tasks: [
       {
         label: 'a',
@@ -127,6 +150,23 @@ export const questions: Question[] = [
       '/images/papers/chemistry-may-2017/q3-conductivity-titration.svg',
       '/images/papers/chemistry-may-2017/q3f-conductivity-comparison.svg',
     ],
+    artefact: {
+      component: 'RateSim',
+      data: {
+        title: 'Conductivity of a silver nitrate water sample as NaCl is added',
+        mode: 'titration',
+        reaction: 'Ag⁺(aq) + Cl⁻(aq) → AgCl(s)',
+        xLabel: 'Volume of NaCl solution added / cm³',
+        yLabel: 'Conductivity / µS cm⁻¹',
+        xAxis: { label: 'Volume of NaCl added / cm³', min: 0, max: 40, tick: 5 },
+        yAxis: { label: 'Conductivity / µS cm⁻¹', min: 0, max: 350, tick: 50 },
+        plateauHigh: 300,
+        plateauLow: 20,
+        equivalenceVolume: 22.5,
+        note: 'Conductivity starts high (free Ag⁺ ions), falls sharply between about 20 and 25 cm³ as Ag⁺ is removed as solid AgCl, then rises again as excess Na⁺ and Cl⁻ ions build up.',
+      },
+      caption: 'Drag the cursor along the curve. Conductivity drops sharply near 22.5 cm³ — the point where the silver ions have been used up.',
+    },
     tasks: [
       {
         label: 'a',
@@ -190,6 +230,21 @@ export const questions: Question[] = [
       '/images/papers/chemistry-may-2017/q4a-fuels-table.svg',
       '/images/papers/chemistry-may-2017/q4c-combustion-apparatus.svg',
     ],
+    artefact: {
+      component: 'DataTable',
+      data: {
+        headers: ['Type of fuel', 'Use in urban areas / %', 'Use in rural areas / %'],
+        rows: [
+          ['LPG (liquefied petroleum gas)', '41.5', '4.8'],
+          ['Wood', '23.7', '64.0'],
+          ['Kerosene', '14.6', '5.2'],
+          ['Electricity', '11.4', '11.2'],
+          ['Dung (animal waste)', '1.2', '9.4'],
+          ['Biogas', '7.6', '5.4'],
+        ],
+      },
+      caption: 'Percentage use of different fuel types in urban and rural areas of Nepal. Read off the urban and rural figures you need.',
+    },
     tasks: [
       {
         label: 'a',
@@ -242,6 +297,34 @@ export const questions: Question[] = [
       '/images/papers/chemistry-may-2017/q5-titration-curves.svg',
       '/images/papers/chemistry-may-2017/q5b-co2-mass-vs-volume.svg',
     ],
+    artefact: {
+      component: 'LineGraph',
+      data: {
+        title: 'Mass of CO₂ produced vs volume of chemical X (HCl) added',
+        xLabel: 'Volume of chemical X added',
+        xUnit: 'ml',
+        yLabel: 'Mass of CO₂ produced',
+        yUnit: 'g',
+        xMin: 0,
+        xMax: 40,
+        yMin: 0,
+        yMax: 2.8,
+        xStep: 5,
+        yStep: 0.4,
+        dataPoints: [
+          { x: 0, y: 0 },
+          { x: 5, y: 0.33 },
+          { x: 10, y: 0.66 },
+          { x: 15, y: 0.99 },
+          { x: 20, y: 1.32 },
+          { x: 25, y: 1.65 },
+          { x: 30, y: 1.98 },
+          { x: 35, y: 2.31 },
+          { x: 40, y: 2.64 },
+        ],
+      },
+      caption: 'Read the mass of CO₂ produced at the average volume of chemical X (25 ml) found in part (a).',
+    },
     tasks: [
       {
         label: 'a',
@@ -276,6 +359,31 @@ export const questions: Question[] = [
       '/images/papers/chemistry-may-2017/q6-statue-data.svg',
       '/images/papers/chemistry-may-2017/q6b-graph-options.svg',
     ],
+    artefact: {
+      component: 'RateSim',
+      data: {
+        title: 'Combined class data: volume of CO₂ produced over time',
+        mode: 'scatter',
+        variable: 'CO₂ collected',
+        xLabel: 'Time / s',
+        yLabel: 'Volume of CO₂ / cm³',
+        xAxis: { label: 'Time / s', min: 0, max: 150, tick: 30 },
+        yAxis: { label: 'Volume of CO₂ / cm³', min: 0, max: 30, tick: 5 },
+        points: [
+          [0, 0],
+          [20, 6.5],
+          [40, 11.5],
+          [60, 15.3],
+          [80, 18.0],
+          [100, 19.8],
+          [110, 16.0],
+          [130, 22.3],
+          [150, 23.5],
+        ],
+        note: 'The rate slows as the reaction proceeds, so the points should follow a smooth curve that levels off. The reading at t = 110 s (16.0 cm³) sits well below the curve — it is an outlier.',
+      },
+      caption: 'Class results plotted as a scatter graph. Most points follow a smooth curve; spot the one measurement that does not fit.',
+    },
     tasks: [
       {
         label: 'a',
@@ -295,7 +403,7 @@ export const questions: Question[] = [
         label: 'c',
         text: '**Identify** the outlier measurement in the data. **Estimate** a more likely value for this data point.',
         marks: 2,
-        ph: 'Outlier at t=110s (value 20.1 cm³); estimated value ≈ 21 cm³',
+        ph: 'Outlier at t=110s (value 16.0 cm³, well below the curve); estimated value ≈ 20.5–21 cm³ to fit the smooth trend',
       },
       {
         label: 'd',
@@ -314,6 +422,13 @@ export const questions: Question[] = [
     topicGroup: 'Atomic Structure & Periodic Table',
     marks: 6,
     stem: 'Lead is a very useful metal. Lead has been used since Roman times — ancient Roman water pipes were made from lead, and many have survived intact to the present day. Lead was also widely used in paint and other manufacturing processes.',
+    artefact: {
+      component: 'GenericSVG',
+      data: {
+        svg: '<svg viewBox="0 0 540 230" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><rect width="540" height="230" fill="#ffffff"/><text x="270" y="22" font-size="14" font-weight="700" text-anchor="middle" fill="#1f2d3a">Lead in the periodic table</text><g font-size="9" text-anchor="middle"><g><rect x="60" y="48" width="58" height="48" fill="#eef4f7" stroke="#5b6b78"/><text x="89" y="63" fill="#64748b">6</text><text x="89" y="80" font-size="15" font-weight="700" fill="#0b7285">C</text><text x="89" y="92" font-size="7.5" fill="#64748b">Period 2</text></g><g><rect x="60" y="100" width="58" height="48" fill="#eef4f7" stroke="#5b6b78"/><text x="89" y="115" fill="#64748b">14</text><text x="89" y="132" font-size="15" font-weight="700" fill="#0b7285">Si</text><text x="89" y="144" font-size="7.5" fill="#64748b">Period 3</text></g><g><rect x="60" y="152" width="58" height="48" fill="#fff7ed" stroke="#e8590c" stroke-width="2"/><text x="89" y="167" fill="#64748b">82</text><text x="89" y="184" font-size="15" font-weight="700" fill="#e8590c">Pb</text><text x="89" y="196" font-size="7.5" fill="#64748b">Period 6</text></g></g><text x="140" y="70" font-size="11" fill="#475569">Group 14 (the carbon group).</text><text x="140" y="174" font-size="11" font-weight="700" fill="#e8590c">Lead: Group 14, Period 6.</text><g font-size="10.5" fill="#475569"><text x="300" y="120">Most common isotope: ²⁰⁸Pb</text><text x="316" y="142" fill="#64748b">mass number A = 208</text><text x="316" y="160" fill="#64748b">atomic number Z = 82 (protons)</text><text x="316" y="178" fill="#64748b">neutrons = A − Z = 208 − 82</text></g></svg>',
+      },
+      caption: 'Lead (Pb) sits at the bottom of Group 14, Period 6. Its most common isotope is ²⁰⁸₈₂Pb.',
+    },
     tasks: [
       {
         label: 'a',
@@ -356,6 +471,31 @@ export const questions: Question[] = [
       '/images/papers/chemistry-may-2017/q7-blood-lead-vs-year.svg',
       '/images/papers/chemistry-may-2017/q7-learning-difficulty-bars.svg',
     ],
+    artefact: {
+      component: 'LineGraph',
+      data: {
+        title: 'Average blood lead level in the US population, 1976–1999',
+        xLabel: 'Year',
+        yLabel: 'Blood lead level',
+        yUnit: 'µg/dL',
+        xMin: 1976,
+        xMax: 2000,
+        yMin: 0,
+        yMax: 16,
+        xStep: 4,
+        yStep: 2,
+        dataPoints: [
+          { x: 1976, y: 14.6 },
+          { x: 1980, y: 11.9 },
+          { x: 1984, y: 8.4 },
+          { x: 1988, y: 5.5 },
+          { x: 1991, y: 3.6 },
+          { x: 1994, y: 2.7 },
+          { x: 1999, y: 1.9 },
+        ],
+      },
+      caption: 'Blood lead levels fell sharply after lead was banned from paint and petrol — describe and explain this change in your answer.',
+    },
     tasks: [
       {
         label: '',
@@ -377,6 +517,19 @@ export const questions: Question[] = [
     figImages: [
       '/images/papers/chemistry-may-2017/q9-battery-table.svg',
     ],
+    artefact: {
+      component: 'DataTable',
+      data: {
+        headers: ['Type', 'Voltage / V', 'Capacity / mAh', 'Cycle life', 'Weight / g', 'Cost / $', 'Environmental impact'],
+        rows: [
+          ['Lithium polymer (LiPoly)', '3.7', '1000', '500', '20', '15', 'Low'],
+          ['Lithium ion (Li-ion)', '3.6', '1200', '600', '25', '12', 'Low'],
+          ['Nickel cadmium (NiCd)', '1.2', '600', '1000', '35', '8', 'High'],
+          ['Nickel metal hydride (NiMH)', '1.2', '900', '500', '30', '10', 'Medium'],
+        ],
+      },
+      caption: 'Specifications for four rechargeable mobile-phone batteries. Use this data to support your evaluation.',
+    },
     tasks: [
       {
         label: '',

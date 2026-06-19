@@ -54,6 +54,66 @@ export const questions: Question[] = [
     topic: 'Physical processes — rivers & coasts',
     marks: 6,
     stem: 'Rivers and coasts are shaped by physical processes, some of which can put nearby communities at risk.',
+    artefact: {
+      component: 'InfoGraphicPanel',
+      caption: 'A reference panel of physical processes that shape rivers and coasts. Hover a process to spotlight it; each card names the process and where it acts. Use it to choose the processes you write about.',
+      data: {
+        title: 'Physical processes that shape rivers and coasts',
+        source: 'Geography process reference (recreated)',
+        intro: 'Rivers and coasts are reshaped by physical processes acting on the land and water. Each card below names one process and where it typically operates. You choose which processes to write about.',
+        layout: 'grid',
+        blocks: [
+          {
+            icon: '🌊',
+            heading: 'Erosion',
+            items: [
+              'Moving water wears away rock and soil — abrasion, hydraulic action and attrition on a coast or riverbank.',
+              'Acts on cliffs, river banks and the river bed.',
+            ],
+          },
+          {
+            icon: '🏖️',
+            heading: 'Deposition',
+            items: [
+              'Sediment carried by water is dropped when the flow slows.',
+              'Builds beaches, spits, sandbars and river deltas.',
+            ],
+          },
+          {
+            icon: '🚚',
+            heading: 'Transportation',
+            items: [
+              'Water moves sediment along — traction, saltation, suspension and solution; longshore drift along a coast.',
+              'Acts in the river channel and the surf zone.',
+            ],
+          },
+          {
+            icon: '🪨',
+            heading: 'Weathering',
+            items: [
+              'Rock is broken down in place by physical, chemical or biological action (e.g. freeze–thaw, salt crystallisation).',
+              'Acts on exposed cliff faces and valley sides.',
+            ],
+          },
+          {
+            icon: '⛰️',
+            heading: 'Mass movement',
+            items: [
+              'Loosened rock and soil slide, slump or fall downslope under gravity.',
+              'Acts on undercut cliffs and steep, saturated river banks.',
+            ],
+          },
+          {
+            icon: '🌀',
+            heading: 'Flooding',
+            items: [
+              'A river or sea overtops its normal limits after heavy rain, snowmelt or storm surge.',
+              'Acts on floodplains, river mouths and low-lying coasts.',
+            ],
+          },
+        ],
+      },
+    },
     tasks: [
       {
         label: 'a',
@@ -77,7 +137,7 @@ export const questions: Question[] = [
     marks: 8,
     stem:
       'The people of coastal Ghana are growing increasingly concerned about the health of the Volta River. Since the Akosombo Dam was built, the flow of the Volta below the dam has changed and the delta is shrinking. The water reaching the coast carries less sediment, the shoreline is eroding, and salt water is creeping further up the river, harming farms and fisheries. By the time the Volta reaches the delta at Ada, it has completed most of its journey through its catchment area, and downstream communities have little control over how much water the dam releases.\n\n' +
-      'MYP5 students from Akosombo (upstream, beside the reservoir) and Ada (downstream, on the delta) are working together to investigate management strategies for the Volta River. The two basin countries that share the river are shown highlighted on the interactive map. The students met online and designed the action plan below for their investigation. You will be asked to evaluate this action plan.\n\n' +
+      'MYP5 students from Akosombo (upstream, beside the reservoir) and Ada (downstream, on the delta) are working together to investigate management strategies for the Volta River. The two countries that hold most of the river’s basin are shown highlighted on the interactive map. The students met online and designed the action plan below for their investigation. You will be asked to evaluate this action plan.\n\n' +
       'Background facts shown alongside the map:\n' +
       '• The Akosombo Dam created Lake Volta, one of the world’s largest reservoirs, to generate hydro-electricity.\n' +
       '• Around 24 million people in the Volta basin rely on the river for water, food and power.\n' +
@@ -151,6 +211,23 @@ export const questions: Question[] = [
       'The local government of a river or coastal area wants to investigate ways to better protect the environment and the community. You must choose a location and design an action plan to investigate sustainable management solutions for the local government.\n\n' +
       '**Statement of inquiry:** Sustainable management of rivers and coastal environments can protect communities and the environment.\n\n' +
       'You must **not** repeat information from Question 2 in your responses.',
+    artefact: {
+      component: 'DataTableInteractive',
+      caption: 'A blank action-plan framework to scaffold your investigation. The right-hand column gives the kind of answer expected (you supply the real detail). Click a row to mark the part you are working on.',
+      data: {
+        title: 'Action-plan framework for a sustainable management investigation',
+        source: 'Investigation planning guide (recreated)',
+        caption: 'This framework only shows the structure of an action plan. You must choose your own location and fill in each row — do not copy Question 2.',
+        headers: ['Stage of the plan', 'What this stage should contain'],
+        rows: [
+          ['Research question', 'A clear AND focused question linked to the statement of inquiry — names a place and a sustainable-management strategy.'],
+          ['Why it matters', 'How answering the question would help the local council protect the environment and the community.'],
+          ['Secondary source', 'One specific, reliable secondary source — name the organisation or dataset, not just “a website”.'],
+          ['How the source helps', 'How that secondary source gives evidence that helps answer the research question.'],
+          ['Possible challenge', 'One realistic difficulty you might face (e.g. restricted data, fieldwork timing, access).'],
+        ],
+      },
+    },
     tasks: [
       {
         label: 'a',

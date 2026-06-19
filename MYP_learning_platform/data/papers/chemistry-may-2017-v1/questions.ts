@@ -19,6 +19,13 @@ export const questions: Question[] = [
     topic: 'Ancient Greek Pottery Pigments and Redox',
     marks: 18,
     stem: 'Ancient Greek pottery used a variety of mineral pigments to produce distinctive colours. Copper(II) oxide (CuO) was used to produce blue-green colours, while manganese dioxide (MnO₂) gave brown-black tones. The pigments were ground into fine powders and mixed with water or oils to produce paint.\n\nThe two main types of paint finish used today on modern reproductions are watercolour wash and oil-based glaze.',
+    artefact: {
+      component: 'GenericSVG',
+      data: {
+        svg: '<svg viewBox="0 0 600 230" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><rect width="600" height="230" fill="#ffffff"/><text x="300" y="22" font-size="14" font-weight="700" text-anchor="middle" fill="#1f2d3a">The transition metals (d-block) used as pottery pigments</text><g><rect x="120" y="46" width="68" height="52" fill="#e3f3f0" stroke="#5b6b78"/><text x="154" y="63" font-size="9" text-anchor="middle" fill="#64748b">25</text><text x="154" y="82" font-size="18" font-weight="700" text-anchor="middle" fill="#0b7285">Mn</text><text x="154" y="94" font-size="8" text-anchor="middle" fill="#64748b">manganese</text></g><g><rect x="412" y="46" width="68" height="52" fill="#fdeee3" stroke="#5b6b78"/><text x="446" y="63" font-size="9" text-anchor="middle" fill="#64748b">29</text><text x="446" y="82" font-size="18" font-weight="700" text-anchor="middle" fill="#b45309">Cu</text><text x="446" y="94" font-size="8" text-anchor="middle" fill="#64748b">copper</text></g><rect x="200" y="46" width="200" height="52" fill="#f1f5f9" stroke="#cbd5e1" stroke-dasharray="3 3"/><text x="300" y="76" font-size="10" text-anchor="middle" fill="#94a3ad">Fe  Co  Ni  …</text><text x="60" y="76" font-size="11" font-weight="600" text-anchor="middle" fill="#475569" transform="rotate(-90 60 76)">Period 4</text><text x="40" y="130" font-size="11" fill="#475569">Both elements lie in the d-block (transition metals).</text><text x="40" y="150" font-size="11" fill="#475569">MnO₂ (brown-black, Mn⁴⁺) · CuO (blue-green, Cu²⁺) — coloured compounds.</text><text x="40" y="170" font-size="10" fill="#94a3ad">Transition metals show variable oxidation states (e.g. Mn²⁺ … Mn⁷⁺ in MnO₄⁻).</text><text x="40" y="188" font-size="10" fill="#94a3ad">They form coloured compounds and act as catalysts — useful as durable pigments.</text><text x="40" y="212" font-size="10" fill="#94a3ad">In MnO₄⁻ → MnO₂ the manganese is reduced from +7 to +4 (gains electrons).</text></svg>',
+      },
+      caption: 'Manganese (Mn) and copper (Cu) are neighbouring transition metals — coloured compounds and variable oxidation states make them useful pigments.',
+    },
     tasks: [
       {
         label: 'a',
@@ -72,7 +79,14 @@ export const questions: Question[] = [
     type: 'extended',
     topic: 'Daguerreotype Photography and Silver Chemistry',
     marks: 9,
-    stem: 'An early photographic process uses propanoic acid (CH₃CH₂COOH) as the fixer. The developer is gallic acid (C₇H₆O₅), a plant-derived reducing agent that converts silver bromide to silver:\n\n2AgBr(aq) + C₇H₆O₅(aq) → 2Ag(s) + 2Br⁻(aq) + C₇H₄O₄(aq)',
+    stem: 'An early photographic process uses propanoic acid (CH₃CH₂COOH) as the fixer. The developer is gallic acid (C₇H₆O₅), a plant-derived reducing agent that converts silver bromide to silver:\n\n2AgBr(s) + C₇H₆O₅(aq) → 2Ag(s) + 2Br⁻(aq) + C₇H₄O₄(aq) + 2H⁺(aq)',
+    artefact: {
+      component: 'GenericSVG',
+      data: {
+        svg: '<svg viewBox="0 0 560 220" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><rect width="560" height="220" fill="#ffffff"/><text x="280" y="24" font-size="14" font-weight="700" text-anchor="middle" fill="#1f2d3a">Propanoic acid — CH₃CH₂COOH</text><g stroke="#1f2d3a" stroke-width="2" fill="none"><line x1="90" y1="120" x2="170" y2="120"/><line x1="170" y1="120" x2="250" y2="120"/><line x1="250" y1="120" x2="330" y2="120"/><line x1="334" y1="116" x2="404" y2="76"/><line x1="330" y1="124" x2="400" y2="124"/></g><g font-size="20" font-weight="700" fill="#1f2d3a" text-anchor="middle"><text x="80" y="126">H₃C</text><text x="210" y="126">CH₂</text><text x="330" y="126">C</text><text x="416" y="72">O</text><text x="422" y="130">O</text></g><text x="455" y="130" font-size="20" font-weight="700" fill="#1f2d3a" text-anchor="middle">H</text><line x1="436" y1="124" x2="450" y2="124" stroke="#1f2d3a" stroke-width="2"/><text x="368" y="58" font-size="12" fill="#b45309" text-anchor="middle">double bond C=O</text><rect x="300" y="56" width="150" height="92" rx="8" fill="none" stroke="#0b7285" stroke-dasharray="5 4"/><text x="375" y="178" font-size="13" font-weight="700" fill="#0b7285" text-anchor="middle">carboxyl group (–COOH)</text><text x="280" y="202" font-size="11" fill="#94a3ad" text-anchor="middle">The –COOH carboxyl group makes this a carboxylic acid (it can donate an H⁺).</text></svg>',
+      },
+      caption: 'The structural formula of propanoic acid, with the carboxyl (–COOH) functional group highlighted.',
+    },
     tasks: [
       {
         label: 'a',
@@ -107,6 +121,23 @@ export const questions: Question[] = [
     topic: 'Cyclone-Zone Water Purification',
     marks: 27,
     stem: 'After a cyclone causes flooding, coastal communities lose access to safe drinking water. Scientists have developed portable water purification kits for use in disaster zones.\n\nOne approach uses a solar evaporation still: contaminated water is heated by sunlight inside a sealed chamber; vapour rises and condenses on a cooled surface, yielding cleaner water.\n\nOther kits use sand filters, activated-carbon filters, and ceramic filters to remove contaminants. A silver nitrate solution is added to test for chloride ions in the purified water.',
+    artefact: {
+      component: 'RateSim',
+      data: {
+        title: 'Conductometric titration: NaCl added to the silver nitrate test solution',
+        mode: 'titration',
+        xLabel: 'Volume of NaCl solution added / cm³',
+        yLabel: 'Conductivity / arbitrary units',
+        xAxis: { label: 'Volume of NaCl solution added / cm³', min: 0, max: 40, tick: 5 },
+        yAxis: { label: 'Conductivity / arbitrary units', min: 0, max: 320, tick: 40 },
+        plateauHigh: 300,
+        plateauLow: 40,
+        equivalenceVolume: 22.5,
+        reaction: 'Ag⁺(aq) + Cl⁻(aq) → AgCl(s)',
+        note: 'Conductivity falls sharply as free Ag⁺ ions are removed as AgCl precipitate, then rises again once excess Cl⁻ is added past ~22.5 cm³.',
+      },
+      caption: 'Drag the cursor along the curve: conductivity drops between about 20 and 25 cm³ as silver ions are used up forming AgCl.',
+    },
     tasks: [
       {
         label: 'a',
@@ -164,6 +195,23 @@ export const questions: Question[] = [
     topic: 'East African Fuels and Combustion Design',
     marks: 21,
     stem: 'A survey of fuel use in an East African country revealed significant differences between urban and rural communities. The table shows the percentage use of different fuel types in urban and rural areas.',
+    artefact: {
+      component: 'DataTable',
+      data: {
+        headers: ['Type of fuel', 'Urban use / %', 'Rural use / %'],
+        rows: [
+          ['Wood', '8.4', '72.6'],
+          ['Dung', '1.8', '6.5'],
+          ['Charcoal', '39.5', '4.3'],
+          ['Kerosene', '22.1', '3.7'],
+          ['LPG', '18.3', '1.5'],
+          ['Biogas', '3.6', '2.8'],
+          ['Crop waste', '1.2', '7.2'],
+          ['Electricity', '5.1', '0'],
+        ],
+      },
+      caption: 'Percentage use of each fuel type in urban versus rural areas. Wood dominates rural use; charcoal dominates urban use.',
+    },
     tasks: [
       {
         label: 'a',
@@ -209,7 +257,34 @@ export const questions: Question[] = [
     type: 'extended',
     topic: 'Titration and CO₂ Volume Calculation',
     marks: 8,
-    stem: 'A student collects ash from burning wood. The ash contains calcium carbonate (CaCO₃). The student adds hydrochloric acid (chemical X) in increasing volumes and measures the mass of CO₂ produced:\n\nCaCO₃(s) + 2HCl(aq) → CaCl₂(aq) + H₂O(l) + CO₂(g)\n\nTwo titration trials were performed to determine the volume of HCl required.',
+    stem: 'A student collects ash from burning wood. The ash contains calcium carbonate (CaCO₃). A 1.00 g sample of the ash is reacted, and the student adds hydrochloric acid (chemical X) in increasing volumes and measures the mass of CO₂ produced:\n\nCaCO₃(s) + 2HCl(aq) → CaCl₂(aq) + H₂O(l) + CO₂(g)\n\nTwo titration trials were performed to determine the volume of HCl required.',
+    artefact: {
+      component: 'LineGraph',
+      data: {
+        title: 'Mass of CO₂ produced against volume of chemical X (HCl) added',
+        xLabel: 'Volume of chemical X (HCl) added',
+        yLabel: 'Mass of CO₂ produced',
+        xUnit: 'cm³',
+        yUnit: 'g',
+        xMin: 0,
+        xMax: 30,
+        yMin: 0,
+        yMax: 1.8,
+        xStep: 5,
+        yStep: 0.2,
+        dataPoints: [
+          { x: 0, y: 0 },
+          { x: 5, y: 0.30 },
+          { x: 10, y: 0.60 },
+          { x: 15, y: 0.90 },
+          { x: 20, y: 1.20 },
+          { x: 22, y: 1.32 },
+          { x: 25, y: 1.50 },
+          { x: 30, y: 1.50 },
+        ],
+      },
+      caption: 'Read the mass of CO₂ off the line at the average volume of chemical X (22.00 cm³).',
+    },
     tasks: [
       {
         label: 'a',
@@ -227,7 +302,7 @@ export const questions: Question[] = [
         label: 'c',
         text: 'Using the mass of CO₂ from (b), **calculate** the volume of CO₂ gas that would be produced if 10 g of wood ash were reacted with excess HCl. (Molar mass of CO₂ = 44 g/mol; molar volume = 22.7 dm³/mol at STP)',
         marks: 4,
-        ph: '13.2g CO₂; 13.2/44=0.300mol; 0.300×22.7=6.81dm³; unit mark independently',
+        ph: '1.00 g ash → 1.32 g CO₂, so 10 g → 13.2 g CO₂; 13.2/44=0.300mol; 0.300×22.7=6.81dm³; unit mark independently',
       },
     ],
   },
@@ -238,6 +313,40 @@ export const questions: Question[] = [
     topic: 'Acid Rain and Reaction Rate Data',
     marks: 7,
     stem: 'Students measured the volume of CO₂ produced as dilute acid reacted with marble chips (CaCO₃). Different groups used different units and time intervals; the combined results need to be organised before analysis.',
+    artefact: {
+      component: 'LineGraph',
+      data: {
+        title: 'Volume of CO₂ produced against time (combined class data)',
+        xLabel: 'Time',
+        yLabel: 'Volume of CO₂',
+        xUnit: 's',
+        yUnit: 'cm³',
+        xMin: 0,
+        xMax: 150,
+        yMin: 0,
+        yMax: 24,
+        xStep: 30,
+        yStep: 4,
+        dataPoints: [
+          { x: 10, y: 8.2 },
+          { x: 20, y: 13.4 },
+          { x: 30, y: 16.1 },
+          { x: 40, y: 18.5 },
+          { x: 50, y: 19.8 },
+          { x: 60, y: 20.4 },
+          { x: 70, y: 20.8 },
+          { x: 80, y: 21.0 },
+          { x: 90, y: 21.2 },
+          { x: 100, y: 12.5 },
+          { x: 110, y: 21.3 },
+          { x: 120, y: 21.4 },
+          { x: 130, y: 21.5 },
+          { x: 140, y: 21.5 },
+          { x: 150, y: 21.5 },
+        ],
+      },
+      caption: 'The reaction levels off as it finishes — but one point at 100 s drops sharply below the trend (the outlier).',
+    },
     tasks: [
       {
         label: 'a',
@@ -274,6 +383,13 @@ export const questions: Question[] = [
     topic: 'Tin: Properties and Atomic Structure',
     marks: 6,
     stem: 'Tin is a useful metal that has been used since ancient times. Bronze Age artefacts made from tin alloys have survived for thousands of years. Tin was also used to coat iron cans to prevent rusting, and is present in solder used in electrical circuits.',
+    artefact: {
+      component: 'GenericSVG',
+      data: {
+        svg: '<svg viewBox="0 0 560 230" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif"><rect width="560" height="230" fill="#ffffff"/><text x="280" y="22" font-size="14" font-weight="700" text-anchor="middle" fill="#1f2d3a">Locating tin (Sn) in the periodic table</text><text x="230" y="44" font-size="10" text-anchor="middle" fill="#64748b">Group 14</text><g><rect x="200" y="50" width="60" height="50" fill="#e6f0f4" stroke="#5b6b78"/><text x="230" y="64" font-size="9" text-anchor="middle" fill="#64748b">50</text><text x="230" y="84" font-size="17" font-weight="700" text-anchor="middle" fill="#0b7285">Sn</text><text x="230" y="95" font-size="8" text-anchor="middle" fill="#64748b">tin</text></g><text x="150" y="80" font-size="11" text-anchor="end" fill="#475569">Period 5 →</text><text x="40" y="132" font-size="11" fill="#475569">Tin is a Group 14, Period 5 metal (a good electrical conductor — used in solder).</text><g font-size="11"><text x="40" y="160" fill="#1f2d3a" font-weight="700">Most abundant isotope: ¹²⁰₅₀Sn</text><text x="40" y="180" fill="#475569">atomic number Z = 50  →  protons = 50, electrons = 50</text><text x="40" y="198" fill="#475569">mass number A = 120  →  neutrons = A − Z = 120 − 50 = 70</text></g><text x="40" y="220" font-size="10" fill="#94a3ad">Low reactivity means tin corrodes very slowly — Bronze Age tin artefacts survive for millennia.</text></svg>',
+      },
+      caption: 'Tin (Sn) sits in Group 14, Period 5. Its most abundant isotope ¹²⁰₅₀Sn has 50 protons and 70 neutrons.',
+    },
     tasks: [
       {
         label: 'a',
@@ -310,12 +426,67 @@ export const questions: Question[] = [
     topic: 'Mercury Pollution and Public Health',
     marks: 14,
     stem: 'Mercury was widely used in industrial processes, including in chlor-alkali plants and in some paints and fungicides, before restrictions were introduced. The first graph shows blood mercury levels in a coastal fishing community from 1956 to 2000. The second graph shows the percentage of children with neurological symptoms compared to their blood mercury level.',
+    artefact: {
+      component: 'LineGraph',
+      data: {
+        title: 'Average blood mercury level in the fishing community, 1956–2000',
+        xLabel: 'Year',
+        yLabel: 'Blood mercury level',
+        yUnit: 'µg/L',
+        xMin: 1955,
+        xMax: 2000,
+        yMin: 0,
+        yMax: 60,
+        xStep: 5,
+        yStep: 10,
+        dataPoints: [
+          { x: 1956, y: 52 },
+          { x: 1960, y: 55 },
+          { x: 1965, y: 48 },
+          { x: 1970, y: 40 },
+          { x: 1975, y: 31 },
+          { x: 1980, y: 22 },
+          { x: 1985, y: 15 },
+          { x: 1990, y: 10 },
+          { x: 1995, y: 6 },
+          { x: 2000, y: 4 },
+        ],
+      },
+      caption: 'Blood mercury levels were high in the 1950s–60s and fell steadily after industrial restrictions were introduced.',
+    },
     tasks: [
       {
         label: '',
         text: 'Use the information from the graphs to **discuss** the implications of removing mercury from industrial processes. In your answer you should:\n- discuss the issues around the use of mercury in industry\n- describe how blood mercury levels in the fishing community have changed\n- describe the impact of blood mercury levels on children\'s neurological development\n- discuss the wider impact on society\n- give a concluding appraisal of the effect of restricting mercury use in manufacturing',
         marks: 14,
         ph: 'Mercury adversely affects nervous system/development; levels fell after restrictions; fewer neurological symptoms; societal benefit; balanced appraisal',
+        artefact: {
+          component: 'LineGraph',
+          data: {
+            title: 'Children with neurological symptoms against blood mercury level',
+            xLabel: 'Blood mercury level',
+            yLabel: 'Children with neurological symptoms',
+            xUnit: 'µg/L',
+            yUnit: '%',
+            xMin: 0,
+            xMax: 60,
+            yMin: 0,
+            yMax: 100,
+            xStep: 10,
+            yStep: 20,
+            dataPoints: [
+              { x: 5, y: 2 },
+              { x: 10, y: 5 },
+              { x: 15, y: 11 },
+              { x: 20, y: 20 },
+              { x: 30, y: 42 },
+              { x: 40, y: 66 },
+              { x: 50, y: 84 },
+              { x: 60, y: 93 },
+            ],
+          },
+          caption: 'The higher the blood mercury level, the greater the percentage of children showing neurological symptoms.',
+        },
       },
     ],
   },
@@ -326,6 +497,19 @@ export const questions: Question[] = [
     topic: 'Electric Vehicle Battery Evaluation',
     marks: 10,
     stem: 'Electric vehicles (EVs) are being adopted to reduce reliance on fossil fuels. The type of rechargeable battery used determines the performance, cost, and environmental impact of the vehicle.\n\nFour types of batteries used in electric vehicles and their specifications are shown in the table below:\n\n| Type | Voltage (V) | Energy density (Wh/kg) | Cycle life | Weight (kg/kWh) | Cost ($/kWh) | Environmental impact |\n|---|---|---|---|---|---|---|\n| Lead-acid | 2.0 | 35 | 500 | 29 | 150 | High |\n| Nickel metal hydride (NiMH) | 1.2 | 80 | 1000 | 12 | 300 | Medium |\n| Lithium ion (Li-ion) | 3.6 | 160 | 1500 | 6 | 400 | Low |\n| Lithium iron phosphate (LiFePO₄) | 3.2 | 130 | 3000 | 8 | 350 | Low |',
+    artefact: {
+      component: 'DataTable',
+      data: {
+        headers: ['Battery type', 'Voltage / V', 'Energy density / Wh kg⁻¹', 'Cycle life', 'Weight / kg kWh⁻¹', 'Cost / $ kWh⁻¹', 'Environmental impact'],
+        rows: [
+          ['Lead-acid', '2.0', '35', '500', '29', '150', 'High'],
+          ['Nickel metal hydride (NiMH)', '1.2', '80', '1000', '12', '300', 'Medium'],
+          ['Lithium ion (Li-ion)', '3.6', '160', '1500', '6', '400', 'Low'],
+          ['Lithium iron phosphate (LiFePO₄)', '3.2', '130', '3000', '8', '350', 'Low'],
+        ],
+      },
+      caption: 'Specifications of four rechargeable EV battery types — use the data to compare performance, cost and environmental impact.',
+    },
     tasks: [
       {
         label: '',
