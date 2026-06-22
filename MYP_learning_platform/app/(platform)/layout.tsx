@@ -4,6 +4,7 @@ import type { ReactNode } from 'react'
 import { createClient } from '@/lib/supabase/server'
 import type { Profile } from '@/lib/types'
 import PapersDropdownNav from '@/components/nav/PapersDropdownNav'
+import Wordmark from '@/components/brand/Wordmark'
 import ThemeSwitcher from '@/components/theme/ThemeSwitcher'
 import ThemeSync from '@/components/theme/ThemeSync'
 import { DEV_NO_AUTH, DEV_USER } from '@/lib/dev-auth'
@@ -81,12 +82,10 @@ export default async function PlatformLayout({ children }: { children: ReactNode
               MYP
             </span>
           </div>
-          <span
+          <Wordmark
             className="font-bold text-sm tracking-wide hidden sm:block"
             style={{ color: 'var(--nav-fg)' }}
-          >
-            EduVault
-          </span>
+          />
         </Link>
 
         {/* Nav links */}

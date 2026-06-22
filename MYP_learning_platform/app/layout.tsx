@@ -21,9 +21,9 @@ const jetbrainsMono = JetBrains_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'MYP Sciences — e-Assessment Platform',
+  title: 'CritABCD — IB MYP e-Assessment',
   description:
-    'International Baccalaureate MYP Sciences e-assessment platform with AI-powered grading and instant feedback.',
+    'CritABCD — the IB MYP e-assessment platform. Past papers, AI-powered grading and instant feedback across Physics, Chemistry, Biology, Humanities and Geography.',
 }
 
 export default function RootLayout({

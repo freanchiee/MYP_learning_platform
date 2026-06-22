@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion'
 import Link from 'next/link'
+import Wordmark from '@/components/brand/Wordmark'
 
 // ─── tiny helpers ────────────────────────────────────────────────────────────
 const PAPER_SUBJECTS = [
@@ -77,12 +78,7 @@ export default function LandingPage() {
           <span className="text-[10px] font-semibold tracking-[0.25em] uppercase opacity-50">
             Welcome to
           </span>
-          <span
-            className="text-2xl font-black tracking-tight"
-            style={{ letterSpacing: '-0.03em' }}
-          >
-            EDUVAULT
-          </span>
+          <Wordmark className="text-2xl font-black tracking-[-0.03em]" />
         </div>
 
         {/* Desktop nav */}
@@ -232,7 +228,7 @@ export default function LandingPage() {
             <motion.img
               key={heroSrc}
               src={heroSrc}
-              alt="EduVault — student workspace"
+              alt="CritABCD — student workspace"
               className="absolute inset-0 w-full h-full object-cover"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -564,7 +560,7 @@ export default function LandingPage() {
         className="flex flex-col md:flex-row items-center justify-between gap-4 px-7 md:px-14 py-8 text-[12px] opacity-40"
         style={{ borderTop: `1px solid ${dark ? 'rgba(255,255,255,0.08)' : 'var(--border)'}` }}
       >
-        <span className="font-bold tracking-tight text-sm">EDUVAULT</span>
+        <Wordmark className="font-bold tracking-tight text-sm" />
         <span>IB MYP e-Assessment Platform · {new Date().getFullYear()}</span>
         <span>Physics · Chemistry · Biology · Humanities · Geography</span>
       </footer>
