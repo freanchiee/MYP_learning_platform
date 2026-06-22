@@ -39,7 +39,6 @@ const SUBJECTS = [
 
 // Free, no-login practice resources (external EdgeOne deployments).
 // `url` overrides the link when the bare host 404s (hashed subdomain + .html path).
-// Still excluded (404 at root, no working URL yet): shrill-apricot-orberyd66d.edgeone.app
 const RESOURCES: { title: string; desc: string; host: string; url?: string }[] = [
   { title: 'IB Physics 2026',           desc: 'Full IB Physics revision hub',                    host: 'ibphym2026.edgeone.app', url: 'https://ibphym2026-0yomblyj3n.edgeone.app/ib-physics-guide.html' },
   { title: 'MYP Physics e-Assessment',  desc: '90-min interactive physics exam',                 host: 'indirect-coffee-beyrm1exsy.edgeone.app' },
@@ -48,6 +47,7 @@ const RESOURCES: { title: string; desc: string; host: string; url?: string }[] =
   { title: 'Radioactivity Quiz',        desc: 'Test yourself on decay & half-life',              host: 'radioactivityquiz.edgeone.app' },
   { title: 'Radioactive Decay Lab',     desc: 'Measure half-life from a decay simulation',       host: 'comparative-lavender-1ry5ejgdpx.edgeone.app' },
   { title: 'Half-Life (OIS)',           desc: 'Half-life practice & simulations',                host: 'halflife2026ois.edgeone.app' },
+  { title: 'Waves: Diffraction & Interference', desc: 'Interactive diffraction & interference lab', host: 'shrill-apricot-orberyd66d.edgeone.app', url: 'https://shrill-apricot-orberyd66d-6k7qhd1m8c.edgeone.app/waves_lab%20(9).html' },
   { title: 'Cell Biology',              desc: 'Interactive cell biology resource',               host: 'aflcellbiology.edgeone.app' },
   { title: 'Organelle Social Network',  desc: 'Cell biology, gamified — organelle profiles',     host: 'mute-olive-hlvzplrywj.edgeone.app' },
   { title: 'Organelle Profile Builder', desc: 'Build organelle profiles to learn cell structure', host: 'early-amethyst-cpvey2r3ff.edgeone.app' },
