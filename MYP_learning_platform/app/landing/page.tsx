@@ -38,10 +38,10 @@ const SUBJECTS = [
 ]
 
 // Free, no-login practice resources (external EdgeOne deployments).
-// Excluded (returned 404 — confirm live to re-add):
-//   shrill-apricot-orberyd66d.edgeone.app, horizontal-copper-9sounqsfuf.edgeone.app
-const RESOURCES = [
-  { title: 'IB Physics 2026',           desc: 'Full IB Physics revision hub',                    host: 'ibphym2026.edgeone.app' },
+// `url` overrides the link when the bare host 404s (hashed subdomain + .html path).
+// Still excluded (404 at root, no working URL yet): shrill-apricot-orberyd66d.edgeone.app
+const RESOURCES: { title: string; desc: string; host: string; url?: string }[] = [
+  { title: 'IB Physics 2026',           desc: 'Full IB Physics revision hub',                    host: 'ibphym2026.edgeone.app', url: 'https://ibphym2026-0yomblyj3n.edgeone.app/ib-physics-guide.html' },
   { title: 'MYP Physics e-Assessment',  desc: '90-min interactive physics exam',                 host: 'indirect-coffee-beyrm1exsy.edgeone.app' },
   { title: 'Stellar Evolution',         desc: 'Interactive astrophysics explorer',               host: 'stellarevolution.edgeone.app' },
   { title: 'Space Systems Study Guide', desc: 'Rockets, orbits & ISS life support',              host: 'gay-bronze-pagl7assk4.edgeone.app' },
@@ -51,8 +51,8 @@ const RESOURCES = [
   { title: 'Cell Biology',              desc: 'Interactive cell biology resource',               host: 'aflcellbiology.edgeone.app' },
   { title: 'Organelle Social Network',  desc: 'Cell biology, gamified — organelle profiles',     host: 'mute-olive-hlvzplrywj.edgeone.app' },
   { title: 'Organelle Profile Builder', desc: 'Build organelle profiles to learn cell structure', host: 'early-amethyst-cpvey2r3ff.edgeone.app' },
-  { title: 'IDL Flow',                  desc: 'Interdisciplinary learning flow',                 host: 'idlflow.edgeone.app' },
-  { title: '90-Minute IDL',             desc: 'Timed interdisciplinary challenge',               host: '90minidl.edgeone.app' },
+  { title: 'IDL Flow',                  desc: 'Interdisciplinary learning flow',                 host: 'idlflow.edgeone.app', url: 'https://idlflow-ck030bbz3o.edgeone.app/MYP_IDL_Facilitator_Dashboard.html' },
+  { title: '90-Minute IDL',             desc: 'Timed interdisciplinary challenge',               host: '90minidl.edgeone.app', url: 'https://horizontal-copper-9sounqsfuf-0ezypo7xmc.edgeone.app/MYP_IDL_May2026_Enhanced%20(1).html' },
   { title: 'Portfolio',                 desc: 'Student portfolio showcase',                      host: 'portfolioutk.edgeone.app' },
 ]
 const RESOURCE_COLORS = ['var(--logo-a)', 'var(--logo-b)', 'var(--logo-c)', 'var(--logo-d)']
@@ -543,7 +543,7 @@ export default function LandingPage() {
             return (
               <motion.a
                 key={r.host}
-                href={`https://${r.host}`}
+                href={r.url ?? `https://${r.host}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 initial={{ opacity: 0, y: 24 }}
