@@ -59,8 +59,6 @@ export default function LandingPage() {
     return () => clearTimeout(timer)
   }, [])
 
-  const heroSrc = dark ? '/images/landing/hero-dark.webp' : '/images/landing/hero-light.webp'
-
   return (
     <div
       className="min-h-screen font-sans antialiased overflow-x-hidden"
@@ -218,7 +216,7 @@ export default function LandingPage() {
         className="relative w-full overflow-hidden"
         style={{ height: '100svh', minHeight: 600 }}
       >
-        {/* Parallax image */}
+        {/* Parallax brand-gradient mesh — four ABCD colours as soft corner glows */}
         <motion.div
           style={{ y: imgY }}
           className="absolute inset-0 w-full"
@@ -226,26 +224,25 @@ export default function LandingPage() {
           animate={{ scale: loaded ? 1 : 1.06 }}
           transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
         >
-          <AnimatePresence initial={false}>
-            <motion.img
-              key={heroSrc}
-              src={heroSrc}
-              alt="CritABCD — student workspace"
-              className="absolute inset-0 w-full h-full object-cover"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.6 }}
-            />
-          </AnimatePresence>
-
-          {/* Gradient overlay — stronger on left + bottom for text legibility */}
+          <div
+            className="absolute inset-0"
+            style={{
+              background: [
+                'radial-gradient(60% 55% at 12% 18%, color-mix(in srgb, var(--logo-a) 26%, transparent), transparent 70%)',
+                'radial-gradient(55% 50% at 88% 14%, color-mix(in srgb, var(--logo-b) 20%, transparent), transparent 70%)',
+                'radial-gradient(55% 55% at 84% 82%, color-mix(in srgb, var(--logo-c) 20%, transparent), transparent 72%)',
+                'radial-gradient(55% 55% at 16% 88%, color-mix(in srgb, var(--logo-d) 18%, transparent), transparent 72%)',
+                dark ? '#0a0a0a' : 'var(--bg)',
+              ].join(', '),
+            }}
+          />
+          {/* Soft scrim so the left-aligned hero text stays calm + legible */}
           <div
             className="absolute inset-0"
             style={{
               background: dark
-                ? 'linear-gradient(105deg, rgba(0,0,0,0.93) 0%, rgba(0,0,0,0.7) 30%, rgba(0,0,0,0.25) 60%, rgba(0,0,0,0.05) 100%), linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 45%)'
-                : 'linear-gradient(105deg, color-mix(in srgb, var(--bg) 97%, transparent) 0%, color-mix(in srgb, var(--bg) 82%, transparent) 28%, color-mix(in srgb, var(--bg) 30%, transparent) 55%, color-mix(in srgb, var(--bg) 0%, transparent) 100%), linear-gradient(to top, color-mix(in srgb, var(--bg) 85%, transparent) 0%, transparent 45%)',
+                ? 'linear-gradient(105deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.2) 45%, transparent 75%)'
+                : 'linear-gradient(105deg, color-mix(in srgb, var(--bg) 80%, transparent) 0%, color-mix(in srgb, var(--bg) 35%, transparent) 45%, transparent 75%)',
             }}
           />
         </motion.div>
@@ -504,15 +501,16 @@ export default function LandingPage() {
         className="relative overflow-hidden"
         style={{ background: dark ? '#111' : 'var(--accent)' }}
       >
-        {/* Background image (dark mode version, heavily tinted) */}
-        <div className="absolute inset-0">
-          <img
-            src="/images/landing/hero-dark.webp"
-            alt=""
-            className="w-full h-full object-cover opacity-20"
-          />
-          <div className="absolute inset-0" style={{ background: dark ? 'rgba(10,10,10,0.7)' : 'color-mix(in srgb, var(--accent) 85%, transparent)' }} />
-        </div>
+        {/* Subtle brand mesh over the accent panel (mint + blue glow, no raster) */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background: [
+              'radial-gradient(60% 70% at 22% 12%, color-mix(in srgb, var(--accent-fg) 22%, transparent), transparent 70%)',
+              'radial-gradient(55% 65% at 85% 90%, color-mix(in srgb, var(--logo-a) 32%, transparent), transparent 72%)',
+            ].join(', '),
+          }}
+        />
 
         <div className="relative z-10 flex flex-col items-center text-center px-7 py-28 gap-8">
           <motion.h2
