@@ -38,18 +38,22 @@ const SUBJECTS = [
 ]
 
 // Free, no-login practice resources (external EdgeOne deployments).
-// TODO: add the 7 auto-named projects once real titles are supplied
-// (comparative-lavender, mute-olive, early-amethyst, gay-bronze,
-//  indirect-coffee, shrill-apricot, horizontal-copper).
+// Excluded (returned 404 — confirm live to re-add):
+//   shrill-apricot-orberyd66d.edgeone.app, horizontal-copper-9sounqsfuf.edgeone.app
 const RESOURCES = [
-  { title: 'IB Physics 2026',    desc: 'Full IB Physics revision hub',         host: 'ibphym2026.edgeone.app' },
-  { title: 'Stellar Evolution',  desc: 'Interactive astrophysics explorer',    host: 'stellarevolution.edgeone.app' },
-  { title: 'Radioactivity Quiz', desc: 'Test yourself on decay & half-life',   host: 'radioactivityquiz.edgeone.app' },
-  { title: 'Half-Life (OIS)',    desc: 'Half-life practice & simulations',     host: 'halflife2026ois.edgeone.app' },
-  { title: 'Cell Biology',       desc: 'Interactive cell biology resource',    host: 'aflcellbiology.edgeone.app' },
-  { title: 'IDL Flow',           desc: 'Interdisciplinary learning flow',      host: 'idlflow.edgeone.app' },
-  { title: '90-Minute IDL',      desc: 'Timed interdisciplinary challenge',    host: '90minidl.edgeone.app' },
-  { title: 'Portfolio',          desc: 'Student portfolio showcase',           host: 'portfolioutk.edgeone.app' },
+  { title: 'IB Physics 2026',           desc: 'Full IB Physics revision hub',                    host: 'ibphym2026.edgeone.app' },
+  { title: 'MYP Physics e-Assessment',  desc: '90-min interactive physics exam',                 host: 'indirect-coffee-beyrm1exsy.edgeone.app' },
+  { title: 'Stellar Evolution',         desc: 'Interactive astrophysics explorer',               host: 'stellarevolution.edgeone.app' },
+  { title: 'Space Systems Study Guide', desc: 'Rockets, orbits & ISS life support',              host: 'gay-bronze-pagl7assk4.edgeone.app' },
+  { title: 'Radioactivity Quiz',        desc: 'Test yourself on decay & half-life',              host: 'radioactivityquiz.edgeone.app' },
+  { title: 'Radioactive Decay Lab',     desc: 'Measure half-life from a decay simulation',       host: 'comparative-lavender-1ry5ejgdpx.edgeone.app' },
+  { title: 'Half-Life (OIS)',           desc: 'Half-life practice & simulations',                host: 'halflife2026ois.edgeone.app' },
+  { title: 'Cell Biology',              desc: 'Interactive cell biology resource',               host: 'aflcellbiology.edgeone.app' },
+  { title: 'Organelle Social Network',  desc: 'Cell biology, gamified — organelle profiles',     host: 'mute-olive-hlvzplrywj.edgeone.app' },
+  { title: 'Organelle Profile Builder', desc: 'Build organelle profiles to learn cell structure', host: 'early-amethyst-cpvey2r3ff.edgeone.app' },
+  { title: 'IDL Flow',                  desc: 'Interdisciplinary learning flow',                 host: 'idlflow.edgeone.app' },
+  { title: '90-Minute IDL',             desc: 'Timed interdisciplinary challenge',               host: '90minidl.edgeone.app' },
+  { title: 'Portfolio',                 desc: 'Student portfolio showcase',                      host: 'portfolioutk.edgeone.app' },
 ]
 const RESOURCE_COLORS = ['var(--logo-a)', 'var(--logo-b)', 'var(--logo-c)', 'var(--logo-d)']
 
@@ -69,7 +73,7 @@ export default function LandingPage() {
   const frameScale  = useTransform(scrollYProgress, [0, 0.7], [1, 0.82])
   const frameRotate = useTransform(scrollYProgress, [0, 0.7], [0, 10])
   const frameRadius = useTransform(scrollYProgress, [0, 0.5], [0, 28])
-  const heroSrc = dark ? '/images/landing/hero-dark.png' : '/images/landing/hero-light.png'
+  const heroSrc = dark ? '/images/landing/hero-dark.jpg' : '/images/landing/hero-light.jpg'
 
   // Prefer system preference on first load
   useEffect(() => {
