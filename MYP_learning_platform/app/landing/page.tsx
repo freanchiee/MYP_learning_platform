@@ -37,6 +37,22 @@ const SUBJECTS = [
   { id: 'geography', icon: '🗺', label: 'Geography',  href: '/geography-papers' },
 ]
 
+// Free, no-login practice resources (external EdgeOne deployments).
+// TODO: add the 7 auto-named projects once real titles are supplied
+// (comparative-lavender, mute-olive, early-amethyst, gay-bronze,
+//  indirect-coffee, shrill-apricot, horizontal-copper).
+const RESOURCES = [
+  { title: 'IB Physics 2026',    desc: 'Full IB Physics revision hub',         host: 'ibphym2026.edgeone.app' },
+  { title: 'Stellar Evolution',  desc: 'Interactive astrophysics explorer',    host: 'stellarevolution.edgeone.app' },
+  { title: 'Radioactivity Quiz', desc: 'Test yourself on decay & half-life',   host: 'radioactivityquiz.edgeone.app' },
+  { title: 'Half-Life (OIS)',    desc: 'Half-life practice & simulations',     host: 'halflife2026ois.edgeone.app' },
+  { title: 'Cell Biology',       desc: 'Interactive cell biology resource',    host: 'aflcellbiology.edgeone.app' },
+  { title: 'IDL Flow',           desc: 'Interdisciplinary learning flow',      host: 'idlflow.edgeone.app' },
+  { title: '90-Minute IDL',      desc: 'Timed interdisciplinary challenge',    host: '90minidl.edgeone.app' },
+  { title: 'Portfolio',          desc: 'Student portfolio showcase',           host: 'portfolioutk.edgeone.app' },
+]
+const RESOURCE_COLORS = ['var(--logo-a)', 'var(--logo-b)', 'var(--logo-c)', 'var(--logo-d)']
+
 // ─── component ───────────────────────────────────────────────────────────────
 export default function LandingPage() {
   const [dark, setDark] = useState(false)
@@ -46,10 +62,14 @@ export default function LandingPage() {
   const [papersOpen, setPapersOpen] = useState(false)
   const heroRef = useRef<HTMLDivElement>(null)
 
-  const { scrollYProgress } = useScroll({ target: heroRef })
-  const imgY    = useTransform(scrollYProgress, [0, 1], ['0%', '18%'])
+  const { scrollYProgress } = useScroll({ target: heroRef, offset: ['start start', 'end start'] })
   const textY   = useTransform(scrollYProgress, [0, 1], ['0%', '-12%'])
   const opacity = useTransform(scrollYProgress, [0, 0.6], [1, 0])
+  // 3D "frame" dock — the full-bleed hero recedes into a tilted, rounded card on scroll
+  const frameScale  = useTransform(scrollYProgress, [0, 0.7], [1, 0.82])
+  const frameRotate = useTransform(scrollYProgress, [0, 0.7], [0, 10])
+  const frameRadius = useTransform(scrollYProgress, [0, 0.5], [0, 28])
+  const heroSrc = dark ? '/images/landing/hero-dark.png' : '/images/landing/hero-light.png'
 
   // Prefer system preference on first load
   useEffect(() => {
@@ -214,35 +234,30 @@ export default function LandingPage() {
       <section
         ref={heroRef}
         className="relative w-full overflow-hidden"
-        style={{ height: '100svh', minHeight: 600 }}
+        style={{ height: '100svh', minHeight: 600, perspective: '1400px' }}
       >
-        {/* Parallax brand-gradient mesh — four ABCD colours as soft corner glows */}
+        {/* Full-bleed photo that docks into a 3D-tilted frame on scroll */}
         <motion.div
-          style={{ y: imgY }}
-          className="absolute inset-0 w-full"
-          initial={{ scale: 1.06 }}
-          animate={{ scale: loaded ? 1 : 1.06 }}
-          transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
+          style={{
+            scale: frameScale,
+            rotateX: frameRotate,
+            borderRadius: frameRadius,
+            transformOrigin: 'center 35%',
+            boxShadow: '0 40px 120px rgba(0,0,0,0.45)',
+          }}
+          className="absolute inset-0 w-full overflow-hidden will-change-transform"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: loaded ? 1 : 0 }}
+          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
         >
-          <div
-            className="absolute inset-0"
-            style={{
-              background: [
-                'radial-gradient(60% 55% at 12% 18%, color-mix(in srgb, var(--logo-a) 26%, transparent), transparent 70%)',
-                'radial-gradient(55% 50% at 88% 14%, color-mix(in srgb, var(--logo-b) 20%, transparent), transparent 70%)',
-                'radial-gradient(55% 55% at 84% 82%, color-mix(in srgb, var(--logo-c) 20%, transparent), transparent 72%)',
-                'radial-gradient(55% 55% at 16% 88%, color-mix(in srgb, var(--logo-d) 18%, transparent), transparent 72%)',
-                dark ? '#0a0a0a' : 'var(--bg)',
-              ].join(', '),
-            }}
-          />
-          {/* Soft scrim so the left-aligned hero text stays calm + legible */}
+          <img src={heroSrc} alt="" className="absolute inset-0 w-full h-full object-cover" />
+          {/* Legibility scrim — stronger on the left for the headline */}
           <div
             className="absolute inset-0"
             style={{
               background: dark
-                ? 'linear-gradient(105deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.2) 45%, transparent 75%)'
-                : 'linear-gradient(105deg, color-mix(in srgb, var(--bg) 80%, transparent) 0%, color-mix(in srgb, var(--bg) 35%, transparent) 45%, transparent 75%)',
+                ? 'linear-gradient(105deg, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.5) 35%, rgba(0,0,0,0.15) 65%, transparent 100%)'
+                : 'linear-gradient(105deg, color-mix(in srgb, var(--bg) 92%, transparent) 0%, color-mix(in srgb, var(--bg) 60%, transparent) 35%, color-mix(in srgb, var(--bg) 15%, transparent) 65%, transparent 100%)',
             }}
           />
         </motion.div>
@@ -490,6 +505,73 @@ export default function LandingPage() {
             <p className="text-[14px] leading-relaxed opacity-55">{f.body}</p>
           </motion.div>
         ))}
+      </section>
+
+      {/* ── FREE RESOURCES ───────────────────────────────────────────── */}
+      <section className="px-7 md:px-14 py-24">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          className="mb-10"
+        >
+          <span
+            className="inline-block px-3 py-1 text-[11px] font-bold tracking-[0.2em] uppercase rounded-full mb-4"
+            style={{
+              background: dark ? 'rgba(173,241,196,0.15)' : 'var(--accent-soft)',
+              color: dark ? '#adf1c4' : 'var(--accent)',
+            }}
+          >
+            Free · No login
+          </span>
+          <h2 className="text-[clamp(2rem,5vw,3.25rem)] font-black tracking-tight" style={{ letterSpacing: '-0.03em' }}>
+            Practice resources
+          </h2>
+          <p className="text-[14px] opacity-60 mt-2 max-w-md">
+            Interactive quizzes, simulations and revision tools — open instantly, nothing to sign up for.
+          </p>
+        </motion.div>
+
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          {RESOURCES.map((r, i) => {
+            const color = RESOURCE_COLORS[i % RESOURCE_COLORS.length]
+            return (
+              <motion.a
+                key={r.host}
+                href={`https://${r.host}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-40px' }}
+                transition={{ delay: (i % 3) * 0.06, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                whileHover={{ y: -4 }}
+                className="group relative flex flex-col justify-between rounded-2xl p-7 overflow-hidden min-h-[180px]"
+                style={{
+                  background: dark ? 'rgba(255,255,255,0.04)' : 'var(--surface)',
+                  border: `1px solid ${dark ? 'rgba(255,255,255,0.08)' : 'var(--border)'}`,
+                  boxShadow: '0 1px 2px rgba(0,0,0,0.04)',
+                }}
+              >
+                <span className="absolute top-0 left-0 h-1 w-full" style={{ background: color }} />
+                <div>
+                  <h3 className="text-lg font-bold tracking-tight mb-1">{r.title}</h3>
+                  <p className="text-[13px] leading-relaxed opacity-55">{r.desc}</p>
+                </div>
+                <div className="flex items-center justify-between mt-6 gap-2">
+                  <span className="text-[11px] font-mono opacity-40 truncate">{r.host}</span>
+                  <span
+                    className="text-sm font-bold flex items-center gap-1 shrink-0 transition-transform group-hover:translate-x-1"
+                    style={{ color }}
+                  >
+                    Open →
+                  </span>
+                </div>
+              </motion.a>
+            )
+          })}
+        </div>
       </section>
 
       {/* ── BIG CTA SECTION ──────────────────────────────────────────── */}
