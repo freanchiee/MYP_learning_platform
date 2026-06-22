@@ -92,6 +92,7 @@ export default async function PlatformLayout({ children }: { children: ReactNode
         <div className="flex items-center gap-1">
           {[
             { href: '/dashboard', label: 'Dashboard' },
+            { href: '/resources', label: 'Resources' },
             { href: '/settings',  label: 'Settings' },
           ].map(({ href, label }) => (
             <Link

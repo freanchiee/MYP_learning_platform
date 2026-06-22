@@ -4,6 +4,7 @@ import { createClient } from '@/lib/supabase/server'
 import type { Profile, UserBadge, Attempt } from '@/lib/types'
 import DashboardStats, { XPBar } from '@/components/dashboard/DashboardStats'
 import DashboardHero from '@/components/dashboard/DashboardHero'
+import ResourcesTeaser from '@/components/resources/ResourcesTeaser'
 import { DEV_NO_AUTH } from '@/lib/dev-auth'
 
 // ── Badge definitions ──────────────────────────────────────────────────────────
@@ -145,6 +146,17 @@ export default async function DashboardPage() {
             { label: 'Papers Completed', value: papersCompleted, sub: 'papers done',       color: 'var(--cD)', icon: '' },
           ]} />
           <XPBar pct={xpPct} level={level} xpInLevel={xpInLevel} xpNeeded={xpNeeded} />
+        </div>
+
+        {/* ── FREE RESOURCES (stays reachable after login) ── */}
+        <div className="max-w-7xl mx-auto px-6 md:px-12 pt-14">
+          <div className="flex items-end justify-between mb-6">
+            <h2 className="text-2xl font-extrabold" style={{ color: 'var(--text)', letterSpacing: '-0.5px' }}>
+              Free practice resources
+            </h2>
+            <span className="text-xs font-bold" style={{ color: 'var(--text-subtle)' }}>no login needed</span>
+          </div>
+          <ResourcesTeaser />
         </div>
 
         {/* ── ACHIEVEMENTS ── */}
