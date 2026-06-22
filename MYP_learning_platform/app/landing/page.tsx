@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion'
 import Link from 'next/link'
 import Wordmark from '@/components/brand/Wordmark'
+import { RESOURCES } from '@/lib/resources'
 
 // ─── tiny helpers ────────────────────────────────────────────────────────────
 const PAPER_SUBJECTS = [
@@ -37,25 +38,7 @@ const SUBJECTS = [
   { id: 'geography', icon: '🗺', label: 'Geography',  href: '/geography-papers' },
 ]
 
-// Free, no-login practice resources (external EdgeOne deployments).
-// `url` overrides the link when the bare host 404s (hashed subdomain + .html path).
-const RESOURCES: { title: string; desc: string; host: string; url?: string }[] = [
-  { title: 'IB Physics 2026',           desc: 'Full IB Physics revision hub',                    host: 'ibphym2026.edgeone.app', url: 'https://ibphym2026-0yomblyj3n.edgeone.app/ib-physics-guide.html' },
-  { title: 'MYP Physics e-Assessment',  desc: '90-min interactive physics exam',                 host: 'indirect-coffee-beyrm1exsy.edgeone.app' },
-  { title: 'Stellar Evolution',         desc: 'Interactive astrophysics explorer',               host: 'stellarevolution.edgeone.app' },
-  { title: 'Space Systems Study Guide', desc: 'Rockets, orbits & ISS life support',              host: 'gay-bronze-pagl7assk4.edgeone.app' },
-  { title: 'Radioactivity Quiz',        desc: 'Test yourself on decay & half-life',              host: 'radioactivityquiz.edgeone.app' },
-  { title: 'Radioactive Decay Lab',     desc: 'Measure half-life from a decay simulation',       host: 'comparative-lavender-1ry5ejgdpx.edgeone.app' },
-  { title: 'Half-Life (OIS)',           desc: 'Half-life practice & simulations',                host: 'halflife2026ois.edgeone.app' },
-  { title: 'Waves: Diffraction & Interference', desc: 'Interactive diffraction & interference lab', host: 'shrill-apricot-orberyd66d.edgeone.app', url: 'https://shrill-apricot-orberyd66d-6k7qhd1m8c.edgeone.app/waves_lab%20(9).html' },
-  { title: 'Cell Biology',              desc: 'Interactive cell biology resource',               host: 'aflcellbiology.edgeone.app' },
-  { title: 'Organelle Social Network',  desc: 'Cell biology, gamified — organelle profiles',     host: 'mute-olive-hlvzplrywj.edgeone.app' },
-  { title: 'Organelle Profile Builder', desc: 'Build organelle profiles to learn cell structure', host: 'early-amethyst-cpvey2r3ff.edgeone.app' },
-  { title: 'IDL Flow',                  desc: 'Interdisciplinary learning flow',                 host: 'idlflow.edgeone.app', url: 'https://idlflow-ck030bbz3o.edgeone.app/MYP_IDL_Facilitator_Dashboard.html' },
-  { title: '90-Minute IDL',             desc: 'Timed interdisciplinary challenge',               host: '90minidl.edgeone.app', url: 'https://horizontal-copper-9sounqsfuf-0ezypo7xmc.edgeone.app/MYP_IDL_May2026_Enhanced%20(1).html' },
-  { title: 'Portfolio',                 desc: 'Student portfolio showcase',                      host: 'portfolioutk.edgeone.app' },
-]
-const RESOURCE_COLORS = ['var(--logo-a)', 'var(--logo-b)', 'var(--logo-c)', 'var(--logo-d)']
+// Practice resources live in @/lib/resources and render on the /resources gate page.
 
 // ─── component ───────────────────────────────────────────────────────────────
 export default function LandingPage() {
@@ -533,61 +516,48 @@ export default function LandingPage() {
             Practice resources
           </h2>
           <p className="text-[14px] opacity-60 mt-2 max-w-md">
-            Interactive quizzes, simulations and revision tools — open instantly, nothing to sign up for.
+            {RESOURCES.length} interactive quizzes, simulations and labs across Physics,
+            Biology &amp; IDL — open instantly, nothing to sign up for.
           </p>
         </motion.div>
 
-        <div className="flex flex-col gap-3">
-          {RESOURCES.map((r, i) => {
-            const color = RESOURCE_COLORS[i % RESOURCE_COLORS.length]
-            return (
-              <motion.a
-                key={r.host}
-                href={r.url ?? `https://${r.host}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-40px' }}
-                transition={{ delay: Math.min(i * 0.04, 0.3), duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                whileHover={{ x: 6 }}
-                className="group relative flex items-center gap-4 md:gap-7 rounded-2xl pl-6 pr-6 md:pl-9 md:pr-9 py-6 md:py-8 overflow-hidden"
-                style={{
-                  background: dark ? 'rgba(255,255,255,0.04)' : 'var(--surface)',
-                  border: `1px solid ${dark ? 'rgba(255,255,255,0.08)' : 'var(--border)'}`,
-                  boxShadow: '0 1px 2px rgba(0,0,0,0.04)',
-                }}
-              >
-                {/* left accent edge */}
-                <span className="absolute left-0 top-0 h-full w-1" style={{ background: color }} />
-                {/* diamond marker (exam-gate style) */}
-                <span
-                  className="shrink-0 transition-transform group-hover:scale-110"
-                  style={{ width: 14, height: 14, transform: 'rotate(45deg)', background: color, boxShadow: `0 0 10px ${color}` }}
-                  aria-hidden
-                />
-                {/* index */}
-                <span className="hidden sm:block text-xs font-black tracking-widest tabular-nums shrink-0 opacity-30">
-                  {String(i + 1).padStart(2, '0')}
-                </span>
-                {/* title + desc */}
-                <div className="flex-1 min-w-0">
-                  <h3 className="text-lg md:text-xl font-bold tracking-tight truncate">{r.title}</h3>
-                  <p className="text-[13px] md:text-sm leading-relaxed opacity-55 truncate">{r.desc}</p>
+        {/* Teaser → full-screen /resources gate experience */}
+        <Link href="/resources">
+          <motion.div
+            initial={{ opacity: 0, y: 28 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-40px' }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            whileHover={{ y: -4 }}
+            className="group relative overflow-hidden rounded-3xl px-8 py-12 md:px-14 md:py-14 flex flex-col md:flex-row md:items-center md:justify-between gap-8"
+            style={{ background: 'linear-gradient(135deg, #0a0f2e 0%, #1f3674 55%, #274e68 100%)', boxShadow: '0 24px 60px rgba(31,54,116,0.3)' }}
+          >
+            <div className="flex items-center gap-4">
+              <div className="flex items-center gap-2.5 shrink-0">
+                {['var(--logo-a)', 'var(--logo-b)', 'var(--logo-c)', 'var(--logo-d)'].map((c, i) => (
+                  <span
+                    key={i}
+                    style={{ width: 15, height: 15, transform: 'rotate(45deg)', background: c, boxShadow: `0 0 14px ${c}` }}
+                  />
+                ))}
+              </div>
+              <div>
+                <div className="text-white font-black text-2xl md:text-3xl tracking-tight">
+                  Explore all {RESOURCES.length}
                 </div>
-                {/* host */}
-                <span className="hidden lg:block text-[11px] font-mono opacity-35 shrink-0 max-w-[240px] truncate">{r.host}</span>
-                {/* open */}
-                <span
-                  className="text-sm font-bold flex items-center gap-1.5 shrink-0 transition-transform group-hover:translate-x-1"
-                  style={{ color }}
-                >
-                  Open <span className="text-base">→</span>
-                </span>
-              </motion.a>
-            )
-          })}
-        </div>
+                <div className="text-white/55 text-sm mt-0.5">
+                  Full-screen gates — preview each tool, no login
+                </div>
+              </div>
+            </div>
+            <span
+              className="inline-flex items-center gap-2 self-start md:self-auto font-black text-sm tracking-[0.15em] px-7 py-4 rounded-full shrink-0 transition-transform group-hover:translate-x-1"
+              style={{ background: '#adf1c4', color: '#0a0f2e' }}
+            >
+              EXPLORE RESOURCES →
+            </span>
+          </motion.div>
+        </Link>
       </section>
 
       {/* ── BIG CTA SECTION ──────────────────────────────────────────── */}
