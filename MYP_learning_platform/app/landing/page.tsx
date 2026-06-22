@@ -26,6 +26,8 @@ const STATS = [
   { value: '88+', label: 'Questions / Paper' },
   { value: 'AI',  label: 'Grading' },
 ]
+// Subtle ABCD motif: each stat carries one of the four brand / criteria colours.
+const STAT_COLORS = ['var(--logo-a)', 'var(--logo-b)', 'var(--logo-c)', 'var(--logo-d)']
 
 const SUBJECTS = [
   { id: 'physics',   icon: '⚛', label: 'Physics',    href: '/physics-papers' },
@@ -444,8 +446,8 @@ export default function LandingPage() {
             }}
           >
             <span
-              className="text-3xl font-black tracking-tight"
-              style={{ color: dark ? '#adf1c4' : 'var(--accent)' }}
+              className="text-3xl md:text-4xl font-black tracking-tight tabular-nums"
+              style={{ color: STAT_COLORS[i % STAT_COLORS.length] }}
             >
               {s.value}
             </span>
