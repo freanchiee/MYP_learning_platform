@@ -537,7 +537,7 @@ export default function LandingPage() {
           </p>
         </motion.div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="flex flex-col gap-3">
           {RESOURCES.map((r, i) => {
             const color = RESOURCE_COLORS[i % RESOURCE_COLORS.length]
             return (
@@ -546,32 +546,44 @@ export default function LandingPage() {
                 href={r.url ?? `https://${r.host}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                initial={{ opacity: 0, y: 24 }}
+                initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-40px' }}
-                transition={{ delay: (i % 3) * 0.06, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                whileHover={{ y: -4 }}
-                className="group relative flex flex-col justify-between rounded-2xl p-7 overflow-hidden min-h-[180px]"
+                transition={{ delay: Math.min(i * 0.04, 0.3), duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                whileHover={{ x: 6 }}
+                className="group relative flex items-center gap-4 md:gap-7 rounded-2xl pl-6 pr-6 md:pl-9 md:pr-9 py-6 md:py-8 overflow-hidden"
                 style={{
                   background: dark ? 'rgba(255,255,255,0.04)' : 'var(--surface)',
                   border: `1px solid ${dark ? 'rgba(255,255,255,0.08)' : 'var(--border)'}`,
                   boxShadow: '0 1px 2px rgba(0,0,0,0.04)',
                 }}
               >
-                <span className="absolute top-0 left-0 h-1 w-full" style={{ background: color }} />
-                <div>
-                  <h3 className="text-lg font-bold tracking-tight mb-1">{r.title}</h3>
-                  <p className="text-[13px] leading-relaxed opacity-55">{r.desc}</p>
+                {/* left accent edge */}
+                <span className="absolute left-0 top-0 h-full w-1" style={{ background: color }} />
+                {/* diamond marker (exam-gate style) */}
+                <span
+                  className="shrink-0 transition-transform group-hover:scale-110"
+                  style={{ width: 14, height: 14, transform: 'rotate(45deg)', background: color, boxShadow: `0 0 10px ${color}` }}
+                  aria-hidden
+                />
+                {/* index */}
+                <span className="hidden sm:block text-xs font-black tracking-widest tabular-nums shrink-0 opacity-30">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                {/* title + desc */}
+                <div className="flex-1 min-w-0">
+                  <h3 className="text-lg md:text-xl font-bold tracking-tight truncate">{r.title}</h3>
+                  <p className="text-[13px] md:text-sm leading-relaxed opacity-55 truncate">{r.desc}</p>
                 </div>
-                <div className="flex items-center justify-between mt-6 gap-2">
-                  <span className="text-[11px] font-mono opacity-40 truncate">{r.host}</span>
-                  <span
-                    className="text-sm font-bold flex items-center gap-1 shrink-0 transition-transform group-hover:translate-x-1"
-                    style={{ color }}
-                  >
-                    Open →
-                  </span>
-                </div>
+                {/* host */}
+                <span className="hidden lg:block text-[11px] font-mono opacity-35 shrink-0 max-w-[240px] truncate">{r.host}</span>
+                {/* open */}
+                <span
+                  className="text-sm font-bold flex items-center gap-1.5 shrink-0 transition-transform group-hover:translate-x-1"
+                  style={{ color }}
+                >
+                  Open <span className="text-base">→</span>
+                </span>
               </motion.a>
             )
           })}
