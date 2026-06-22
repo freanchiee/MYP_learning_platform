@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { createClient } from '@/lib/supabase/server'
 import type { Profile, UserBadge, Attempt } from '@/lib/types'
 import DashboardStats, { XPBar } from '@/components/dashboard/DashboardStats'
+import DashboardHero from '@/components/dashboard/DashboardHero'
 import { DEV_NO_AUTH } from '@/lib/dev-auth'
 
 // ── Badge definitions ──────────────────────────────────────────────────────────
@@ -119,177 +120,16 @@ export default async function DashboardPage() {
   return (
     <div className="space-y-0">
 
-      {/* ══════════════════════════════════════════
-          TRUE 100VH HERO — full viewport, cinematic
-          ══════════════════════════════════════════ */}
-      <section
-        className="relative w-full overflow-hidden"
-        style={{
-          height: 'calc(100vh - 56px)',
-          background: 'linear-gradient(145deg, var(--surface-deep) 0%, var(--accent) 40%, var(--accent-2) 75%, var(--surface-deep) 100%)',
-        }}
-      >
-        {/* Dot-grid overlay */}
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            backgroundImage: 'radial-gradient(circle, var(--accent-soft) 1px, transparent 1px)',
-            backgroundSize: '50px 50px',
-          }}
-          aria-hidden
-        />
-
-        {/* Animated wave lines */}
-        <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" style={{ opacity: 0.08 }} aria-hidden>
-          {[0, 1, 2, 3].map((i) => (
-            <path
-              key={i}
-              d={`M -100 ${180 + i * 160} Q 360 ${80 + i * 160} 720 ${180 + i * 160} Q 1080 ${280 + i * 160} 1540 ${180 + i * 160}`}
-              fill="none" stroke="white" strokeWidth={1.2 - i * 0.15}
-              style={{ animation: `wave-move ${6 + i * 1.5}s ease-in-out infinite alternate`, animationDelay: `${i * 0.9}s` }}
-            />
-          ))}
-        </svg>
-
-        {/* Large rotating rings — right side */}
-        {[520, 380, 250].map((size, i) => (
-          <div
-            key={i}
-            className="absolute rounded-full pointer-events-none"
-            style={{
-              width: size, height: size,
-              right: -(size / 3), top: -(size / 4),
-              border: '1px solid var(--accent-soft)',
-              animation: `slow-spin ${14 + i * 5}s linear infinite ${i % 2 ? 'reverse' : ''}`,
-            }}
-            aria-hidden
-          />
-        ))}
-
-        {/* Floating particles */}
-        {[...Array(18)].map((_, i) => {
-          const x = ((i * 79 + 13) % 88) + 6
-          const y = ((i * 61 + 7) % 80) + 5
-          return (
-            <div
-              key={i}
-              className="absolute rounded-full bg-white pointer-events-none"
-              style={{
-                width: 2 + (i % 3), height: 2 + (i % 3),
-                left: `${x}%`, top: `${y}%`,
-                opacity: 0.04 + (i % 4) * 0.02,
-                animation: `float-particle ${3 + i % 5}s ease-in-out infinite alternate`,
-                animationDelay: `${i * 0.28}s`,
-              }}
-              aria-hidden
-            />
-          )
-        })}
-
-        {/* ── TOP LEFT: Welcome tag ── */}
-        <div
-          className="absolute top-10 left-10 z-10 text-xs font-black uppercase tracking-[0.3em]"
-          style={{ color: 'var(--accent-fg)', letterSpacing: '0.3em' }}
-        >
-          IB MYP Sciences
-        </div>
-
-        {/* ── TOP RIGHT: Quick stats ── */}
-        <div className="absolute top-10 right-10 z-10 flex items-center gap-8">
-          {[
-            { label: 'LVL', value: level },
-            { label: 'XP',  value: xp.toLocaleString() },
-            { label: 'STREAK', value: `${streakDays}D` },
-          ].map(({ label, value }) => (
-            <div key={label} className="text-right">
-              <div className="text-2xl md:text-3xl font-black text-white leading-none">{value}</div>
-              <div
-                className="text-[9px] font-black tracking-[0.2em] mt-0.5"
-                style={{ color: 'var(--accent-fg)' }}
-              >
-                {label}
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* ── CENTER: Giant name + CTA ── */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center z-10 text-center px-8">
-          <p
-            className="text-xs font-black uppercase tracking-[0.35em] mb-6"
-            style={{ color: 'var(--accent-fg)' }}
-          >
-            Welcome Back
-          </p>
-
-          {/* GIANT name */}
-          <h1
-            className="font-extrabold text-white leading-none select-none"
-            style={{
-              fontSize: 'clamp(64px, 12vw, 160px)',
-              letterSpacing: '-4px',
-              textShadow: '0 8px 80px rgba(0,0,0,0.5)',
-            }}
-          >
-            {name}
-          </h1>
-
-          {school && (
-            <p
-              className="mt-4 text-sm font-bold tracking-[0.2em]"
-              style={{ color: 'var(--accent-fg)' }}
-            >
-              {school.toUpperCase()}
-            </p>
-          )}
-
-          {/* Papers completed sub-line */}
-          <p
-            className="mt-3 text-xs font-black tracking-[0.2em]"
-            style={{ color: 'rgba(255,255,255,0.2)' }}
-          >
-            {papersCompleted} PAPER{papersCompleted !== 1 ? 'S' : ''} COMPLETED
-          </p>
-
-          {/* CTA buttons */}
-          <div className="flex gap-4 mt-12">
-            <Link
-              href="/papers"
-              className="inline-block font-black text-sm tracking-[0.2em] transition-all hover:opacity-80"
-              style={{
-                background: 'var(--gradient-cta)',
-                color: 'var(--text-on-accent)',
-                padding: '16px 48px',
-                boxShadow: '0 0 50px var(--accent-soft)',
-              }}
-            >
-              ENTER THE ARENA
-            </Link>
-            {attempts.length > 0 && (
-              <Link
-                href={`/results/${attempts[0].id}`}
-                className="inline-block font-black text-sm tracking-[0.2em] transition-all hover:opacity-80"
-                style={{
-                  padding: '16px 36px',
-                  color: 'rgba(255,255,255,0.6)',
-                  border: '1px solid rgba(255,255,255,0.15)',
-                }}
-              >
-                LAST RESULT
-              </Link>
-            )}
-          </div>
-        </div>
-
-        {/* ── BOTTOM: scroll hint ── */}
-        <div
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 text-xs font-black tracking-[0.25em]"
-          style={{ color: 'rgba(255,255,255,0.2)', animation: 'float-particle 2.5s ease-in-out infinite alternate' }}
-        >
-          SCROLL FOR STATS
-          <div style={{ width: 1, height: 28, background: 'rgba(255,255,255,0.12)' }} />
-        </div>
-      </section>
+      {/* ── HERO — landing-style 3D-frame photo + glass arena panel ── */}
+      <DashboardHero
+        name={name}
+        school={school}
+        level={level}
+        xp={xp}
+        streakDays={streakDays}
+        papersCompleted={papersCompleted}
+        lastAttemptId={attempts[0]?.id ?? null}
+      />
 
       {/* ══════════════════════════════════════════
           BELOW-HERO — cream editorial (finalized palette)
