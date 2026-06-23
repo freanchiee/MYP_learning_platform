@@ -355,3 +355,22 @@ html { transition: none; }
 body {
   transition: background-color 0.25s ease, color 0.25s ease;
 }
+
+/* ════════════════════════════════════════════════════════════════════════
+   BRAND ACCENT — matched to the CritABCD logo (purple / teal / coral / pink).
+   Placed last so it overrides every theme's accent regardless of [data-theme];
+   each theme keeps its own surfaces / chrome / text, but the brand accent is
+   consistent with the logo everywhere.
+   ════════════════════════════════════════════════════════════════════════ */
+:root,
+[data-theme] {
+  --accent:              #6c5dd6;            /* logo A — purple (primary brand) */
+  --accent-hover:        #5a49c4;
+  --accent-soft:         rgba(108, 93, 214, 0.10);
+  --accent-2:            #20a392;            /* logo B — teal (secondary) */
+  --accent-action:       #f4715d;            /* logo C — coral (CTAs / "Practice.") */
+  --accent-action-hover: #e3604c;
+  --accent-fg:           #efeaff;            /* light lavender on the purple accent */
+  --gradient-cta:        linear-gradient(135deg, #f4715d 0%, #d63e78 100%);
+  --gradient-brand:      linear-gradient(90deg, #6c5dd6, #20a392, #f4715d, #d63e78, #6c5dd6);
+}
