@@ -51,7 +51,7 @@
   --cA: #1f3674; --cB: #547ca4; --cC: #c3282d; --cD: #274e68;
   --criterion-fg: #ffffff;
   /* brand wordmark identity — fixed logo constants, identical across all themes */
-  --logo-a: #2b7de4; --logo-b: #2f9e44; --logo-c: #f08c00; --logo-d: #e23b35;
+  --logo-a: #6c5dd6; --logo-b: #20a392; --logo-c: #f4715d; --logo-d: #d63e78;
   --cmd-analyse: #1f3674; --cmd-apply: #547ca4; --cmd-justify: #c3282d;
   /* gradients */
   --gradient-cta: linear-gradient(135deg, #c3282d 0%, #a01f23 100%);
