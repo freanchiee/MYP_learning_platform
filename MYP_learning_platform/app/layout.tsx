@@ -20,10 +20,18 @@ const jetbrainsMono = JetBrains_Mono({
   weight: ['400', '500', '600', '700'],
 })
 
+const SITE_DESC =
+  'CritABCD — the IB MYP e-assessment platform. Past papers, AI-powered grading and instant feedback across Physics, Chemistry, Biology, Humanities and Geography.'
+
 export const metadata: Metadata = {
   title: 'CritABCD — IB MYP e-Assessment',
-  description:
-    'CritABCD — the IB MYP e-assessment platform. Past papers, AI-powered grading and instant feedback across Physics, Chemistry, Biology, Humanities and Geography.',
+  description: SITE_DESC,
+  openGraph: {
+    title: 'CritABCD — IB MYP e-Assessment',
+    description: SITE_DESC,
+    images: ['/images/landing/critabcd-logo.png'],
+  },
+  twitter: { card: 'summary', images: ['/images/landing/critabcd-logo.png'] },
 }
 
 export default function RootLayout({
