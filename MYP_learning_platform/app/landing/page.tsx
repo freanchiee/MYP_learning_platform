@@ -17,6 +17,7 @@ const PAPER_SUBJECTS = [
 ]
 
 const NAV_LINKS = [
+  { label: 'Design',    href: '/design' },
   { label: 'Dashboard', href: '/dashboard' },
   { label: 'Settings',  href: '/settings' },
   { label: 'Login',     href: '/login' },
@@ -24,7 +25,7 @@ const NAV_LINKS = [
 
 const STATS = [
   { value: '20+', label: 'Past Papers' },
-  { value: '5',   label: 'Subjects' },
+  { value: '6',   label: 'Subjects' },
   { value: '88+', label: 'Questions / Paper' },
   { value: 'AI',  label: 'Grading' },
 ]
@@ -37,6 +38,7 @@ const SUBJECTS = [
   { id: 'biology',   icon: '🌿', label: 'Biology',    href: '/bio-papers' },
   { id: 'humanities', icon: '🌍', label: 'Humanities (I&S)', href: '/humanities-papers' },
   { id: 'geography', icon: '🗺', label: 'Geography',  href: '/geography-papers' },
+  { id: 'design',    icon: '📐', label: 'Design',     href: '/design' },
 ]
 
 // Practice resources live in @/lib/resources and render on the /resources gate page.
