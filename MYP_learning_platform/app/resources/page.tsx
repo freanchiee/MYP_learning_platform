@@ -4,7 +4,8 @@ import Wordmark from '@/components/brand/Wordmark'
 import ResourceGates from '@/components/resources/ResourceGates'
 
 export const metadata: Metadata = {
-  title: 'Free Resources — CritABCD',
+  // Bare title — the root layout's template appends " · CritABCD".
+  title: 'Free Resources',
   description: 'Free, no-login interactive quizzes, simulations and revision tools for IB MYP.',
 }
 

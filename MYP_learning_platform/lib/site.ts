@@ -2,6 +2,48 @@
 // If your primary domain is the www host instead, change this one constant.
 export const SITE_URL = 'https://critabcd.com'
 
+// Subjects offered — rendered as schema.org/Course structured data on the
+// homepage (ItemList of Courses). Helps search + generative engines understand
+// the catalogue. `href` matches the in-app route.
+export const SITE_COURSES: { name: string; href: string; description: string }[] = [
+  {
+    name: 'IB MYP Physics',
+    href: '/physics-papers',
+    description:
+      'IB MYP Physics: past papers, topic- and criterion-level practice, and simulated exams with AI marking against the MYP Sciences criteria (A–D).',
+  },
+  {
+    name: 'IB MYP Chemistry',
+    href: '/chem-papers',
+    description:
+      'IB MYP Chemistry: past papers, topic- and criterion-level practice, and simulated exams with AI marking against the MYP Sciences criteria (A–D).',
+  },
+  {
+    name: 'IB MYP Biology',
+    href: '/bio-papers',
+    description:
+      'IB MYP Biology: past papers, topic- and criterion-level practice, and simulated exams with AI marking against the MYP Sciences criteria (A–D).',
+  },
+  {
+    name: 'IB MYP Individuals & Societies (Humanities)',
+    href: '/humanities-papers',
+    description:
+      'IB MYP Individuals & Societies (Integrated Humanities): past papers and practice marked against the MYP I&S criteria (A–D).',
+  },
+  {
+    name: 'IB MYP Geography',
+    href: '/geography-papers',
+    description:
+      'IB MYP Geography (Individuals & Societies): past papers and practice marked against the MYP I&S criteria (A–D).',
+  },
+  {
+    name: 'IB MYP Design',
+    href: '/design',
+    description:
+      'IB MYP Design (Years 4–5): a project-based self-study module. Study worked exemplar projects and build your own design folder through the design cycle — Criteria A (Inquiring and analysing), B (Developing ideas), C (Creating the solution) and D (Evaluating).',
+  },
+]
+
 // Canonical FAQ — the single biggest AI-citation (GEO) signal. Rendered as
 // FAQPage JSON-LD on the homepage and mirrored (by hand) into public/llms.txt.
 // Keep answers factual, self-contained and BLUF. If you edit these, update llms.txt.
