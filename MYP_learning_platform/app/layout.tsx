@@ -24,8 +24,9 @@ const jetbrainsMono = JetBrains_Mono({
 
 const SITE_NAME = 'CritABCD'
 const SITE_TITLE = 'CritABCD — IB MYP e-Assessment'
+// ≤160 chars so it isn't truncated in search results.
 const SITE_DESC =
-  'CritABCD is an IB MYP e-assessment platform: past papers, AI-powered grading and instant feedback across Physics, Chemistry, Biology, Individuals & Societies (Humanities), Geography, plus a project-based Design self-study module.'
+  'CritABCD: IB MYP past papers, AI-graded practice and instant feedback across Physics, Chemistry, Biology, Humanities, Geography and Design.'
 // Absolute so social/AI-preview scrapers always resolve it, independent of env.
 const OG_IMAGE = `${SITE_URL}/images/landing/critabcd-logo.png`
 
@@ -59,6 +60,7 @@ export const metadata: Metadata = {
   alternates: { canonical: '/' },
   openGraph: {
     type: 'website',
+    locale: 'en_US',
     url: SITE_URL,
     siteName: SITE_NAME,
     title: SITE_TITLE,

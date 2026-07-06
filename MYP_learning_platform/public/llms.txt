@@ -21,6 +21,15 @@ CritABCD is for MYP students (roughly ages 11–16) and their teachers. Work is 
 - Home: https://critabcd.com/
 - Resources (interactive quizzes, simulations and labs): https://critabcd.com/resources
 
+## FAQ
+- What is CritABCD? CritABCD is an IB Middle Years Programme (MYP) e-assessment and self-study platform offering past papers, AI-graded practice and instant, criterion-referenced feedback.
+- Which subjects does CritABCD cover? Physics, Chemistry, Biology, Individuals & Societies (Humanities), Geography, and a project-based Design self-study module.
+- How is my work graded? Against the four IB MYP criteria (A, B, C, D), each scored 1–8, with AI feedback tied to each criterion rather than a single percentage.
+- What is the MYP Design module? A project-based self-study module for MYP Years 4–5: study worked exemplars, then build your own design folder through the design cycle (Criteria A–D).
+- Who is CritABCD for? IB MYP students (roughly ages 11–16) and their teachers.
+- Can I take full practice exams? Yes — simulated exams under timed conditions with AI marking and instant feedback.
+- How do I practise a specific topic or criterion? Practise by topic (filter by concept) or by IB criterion (target a specific A–D skill), then attempt a full simulated exam.
+
 ## Notes for citation
 - Product name: CritABCD (styled as "CritABCD").
 - Category: education / IB MYP e-assessment.
