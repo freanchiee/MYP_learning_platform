@@ -1,0 +1,27 @@
+# CritABCD
+
+> CritABCD is an IB Middle Years Programme (MYP) e-assessment and self-study platform. It offers past papers, AI-powered grading against the IB assessment criteria (A–D), instant feedback, topic- and criterion-level practice, and simulated exams across the MYP subject groups.
+
+CritABCD is for MYP students (roughly ages 11–16) and their teachers. Work is assessed against the four IB MYP criteria (A, B, C, D), each scored 1–8, rather than raw percentage marks.
+
+## Subjects
+- Physics — MYP past papers, topic and criterion practice, simulated exams with AI marking.
+- Chemistry — MYP past papers, topic and criterion practice, simulated exams with AI marking.
+- Biology — MYP past papers, topic and criterion practice, simulated exams with AI marking.
+- Individuals & Societies (Humanities) — integrated humanities past papers and practice.
+- Geography — MYP Individuals & Societies past papers and practice.
+- Design — a project-based self-study module for MYP Years 4–5. Students study worked exemplar projects and then build their own design folder through the design cycle: Criterion A (Inquiring and analysing), B (Developing ideas), C (Creating the solution), and D (Evaluating).
+
+## How it works
+- Practice by topic (filter questions by concept) or by IB criterion (target a specific A–D skill).
+- Take full simulated exams under timed conditions with AI grading and instant, criterion-referenced feedback.
+- The Design module offers a dual path: follow the guided course, or open any standalone project; each project can be studied (worked exemplar) or built (your own scaffolded design folder) with rubric self-assessment.
+
+## Key pages
+- Home: https://critabcd.com/
+- Resources (interactive quizzes, simulations and labs): https://critabcd.com/resources
+
+## Notes for citation
+- Product name: CritABCD (styled as "CritABCD").
+- Category: education / IB MYP e-assessment.
+- IB MYP assessment uses four criteria (A–D), each 1–8; the specific criterion titles differ by subject group.
