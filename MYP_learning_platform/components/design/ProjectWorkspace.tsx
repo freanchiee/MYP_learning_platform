@@ -3,8 +3,9 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase/client'
-import { DESIGN_CYCLE, type CriterionKey, type Criterion } from '@/data/design/cycle'
+import { DESIGN_CYCLE, CRITERION_BY_KEY, type CriterionKey, type Criterion } from '@/data/design/cycle'
 import { DESIGN_PROJECTS, type DesignProject } from '@/data/design/projects'
+import DesignCycleRing from './DesignCycleRing'
 
 type Mode = 'study' | 'build'
 
@@ -70,7 +71,6 @@ export default function ProjectWorkspace({ project, initialMode }: Props) {
     if (!loaded) return
     localStorage.setItem(storageKey, JSON.stringify(saved))
     if (!userId) return
-    // skip the write triggered by the initial remote load
     if (firstSave.current) {
       firstSave.current = false
       return
@@ -95,7 +95,7 @@ export default function ProjectWorkspace({ project, initialMode }: Props) {
     return () => clearTimeout(t)
   }, [saved, loaded, userId, storageKey, project.id, supabase])
 
-  const crit = useMemo(() => DESIGN_CYCLE.find((c) => c.key === activeKey)!, [activeKey])
+  const crit = CRITERION_BY_KEY[activeKey]
   const stage = project.stages[activeKey]
 
   const setAnswer = (i: number, text: string) =>
@@ -105,41 +105,28 @@ export default function ProjectWorkspace({ project, initialMode }: Props) {
 
   const stageDone = (k: CriterionKey) =>
     saved.bands[k] !== undefined ||
-    crit.objectives.some((_, i) => (saved.answers[`${k}:${i}`] || '').trim().length > 0)
+    CRITERION_BY_KEY[k].objectives.some((_, i) => (saved.answers[`${k}:${i}`] || '').trim().length > 0)
 
+  const doneKeys = useMemo(() => new Set(KEYS.filter(stageDone)), [saved]) // eslint-disable-line react-hooks/exhaustive-deps
   const idx = DESIGN_PROJECTS.findIndex((p) => p.id === project.id)
   const next = DESIGN_PROJECTS[idx + 1]
-
   const activePos = KEYS.indexOf(activeKey)
 
   return (
     <div style={{ background: 'var(--bg)', backgroundImage: 'var(--bg-image)', minHeight: 'calc(100vh - 56px)' }}>
-      <div className="mx-auto max-w-5xl px-5 py-8">
-        {/* ── Header ── */}
-        <Link href="/design" className="text-xs font-bold tracking-widest" style={{ color: 'var(--text-subtle)' }}>
-          ← ALL PROJECTS
-        </Link>
-
-        <div className="mt-3 flex flex-wrap items-start justify-between gap-4">
-          <div>
-            <div className="text-[11px] font-black tracking-[0.3em]" style={{ color: 'var(--accent)' }}>
-              {project.designType.toUpperCase()}
-            </div>
-            <h1 className="mt-1 text-3xl font-extrabold" style={{ color: 'var(--text)' }}>
-              {project.title}
-            </h1>
-          </div>
-
+      <div className="mx-auto max-w-[1400px] px-5 py-8 md:px-10 md:py-10">
+        {/* ── Header (full width) ── */}
+        <div className="flex flex-wrap items-center justify-between gap-4">
+          <Link href="/design" className="text-sm font-bold tracking-widest" style={{ color: 'var(--text-subtle)' }}>
+            ← ALL PROJECTS
+          </Link>
           {/* Mode toggle */}
-          <div
-            className="flex overflow-hidden rounded-full text-xs font-black"
-            style={{ border: '1px solid var(--border)' }}
-          >
+          <div className="flex overflow-hidden rounded-full text-sm font-black" style={{ border: '1px solid var(--border)' }}>
             {(['study', 'build'] as Mode[]).map((m) => (
               <button
                 key={m}
                 onClick={() => setMode(m)}
-                className="px-4 py-2 tracking-widest transition-colors"
+                className="px-5 py-2.5 tracking-widest transition-colors"
                 style={{
                   background: mode === m ? 'var(--accent)' : 'transparent',
                   color: mode === m ? 'var(--text-on-accent)' : 'var(--text-subtle)',
@@ -151,133 +138,133 @@ export default function ProjectWorkspace({ project, initialMode }: Props) {
           </div>
         </div>
 
-        {/* Meta chips */}
-        <div className="mt-3 flex flex-wrap gap-2">
-          {[
-            `🌍 ${project.globalContext}`,
-            `🔑 ${project.keyConcept}`,
-            ...project.relatedConcepts.map((c) => c),
-          ].map((t) => (
-            <span
-              key={t}
-              className="rounded-full px-3 py-1 text-[11px] font-bold"
-              style={{ background: 'var(--surface-2)', color: 'var(--text-muted)' }}
-            >
-              {t}
-            </span>
-          ))}
+        <div className="mt-5">
+          <div className="text-sm font-black tracking-[0.3em]" style={{ color: 'var(--accent)' }}>
+            {project.designType.toUpperCase()}
+          </div>
+          <h1 className="mt-1 text-4xl font-extrabold md:text-5xl" style={{ color: 'var(--text)' }}>
+            {project.title}
+          </h1>
+          <div className="mt-4 flex flex-wrap gap-2">
+            {[`🌍 ${project.globalContext}`, `🔑 ${project.keyConcept}`, ...project.relatedConcepts].map((t) => (
+              <span key={t} className="rounded-full px-3.5 py-1.5 text-sm font-bold" style={{ background: 'var(--surface-2)', color: 'var(--text-muted)' }}>
+                {t}
+              </span>
+            ))}
+          </div>
         </div>
 
-        {/* Situation + challenge */}
-        <div
-          className="mt-5 rounded-2xl p-5"
-          style={{ background: 'var(--surface-elevated)', border: '1px solid var(--border)' }}
-        >
-          <p className="text-sm leading-relaxed" style={{ color: 'var(--text-muted)' }}>
+        {/* Situation + challenge (full width) */}
+        <div className="mt-6 grid gap-4 rounded-3xl p-6 md:grid-cols-2 md:p-8" style={{ background: 'var(--surface-elevated)', border: '1px solid var(--border)' }}>
+          <p className="text-lg leading-relaxed" style={{ color: 'var(--text-muted)' }}>
             <strong style={{ color: 'var(--text)' }}>The situation. </strong>
             {project.situation}
           </p>
-          <p className="mt-3 text-sm leading-relaxed" style={{ color: 'var(--text-muted)' }}>
-            <strong style={{ color: 'var(--text)' }}>Your challenge. </strong>
-            {project.challenge}
-          </p>
-          <p className="mt-3 text-xs" style={{ color: 'var(--text-subtle)' }}>
-            Client / target audience: {project.client}
-          </p>
+          <div>
+            <p className="text-lg leading-relaxed" style={{ color: 'var(--text-muted)' }}>
+              <strong style={{ color: 'var(--text)' }}>Your challenge. </strong>
+              {project.challenge}
+            </p>
+            <p className="mt-3 text-sm font-semibold" style={{ color: 'var(--text-subtle)' }}>
+              Client / target audience: {project.client}
+            </p>
+          </div>
         </div>
 
-        {/* ── Stage tabs (the design cycle) ── */}
-        <div className="mt-7 grid grid-cols-2 gap-2 sm:grid-cols-4">
-          {DESIGN_CYCLE.map((c) => {
-            const on = c.key === activeKey
-            return (
+        {/* ── Two-column body: sticky rail + wide stage content ── */}
+        <div className="mt-8 lg:grid lg:grid-cols-[340px_minmax(0,1fr)] lg:gap-10">
+          {/* LEFT RAIL */}
+          <aside className="lg:sticky lg:top-6 lg:self-start">
+            <div className="rounded-3xl p-6" style={{ background: 'var(--surface-elevated)', border: '1px solid var(--border)' }}>
+              <DesignCycleRing activeKey={activeKey} onSelect={setActiveKey} doneKeys={doneKeys} />
+
+              {/* Stage list — precise nav + table of contents */}
+              <div className="mt-5 space-y-1.5">
+                {DESIGN_CYCLE.map((c) => {
+                  const on = c.key === activeKey
+                  return (
+                    <button
+                      key={c.key}
+                      onClick={() => setActiveKey(c.key)}
+                      className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left transition-all"
+                      style={{ background: on ? 'var(--surface-2)' : 'transparent', border: `1px solid ${on ? c.cssVar : 'transparent'}` }}
+                    >
+                      <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-base font-black text-white" style={{ background: c.cssVar }}>
+                        {c.key}
+                      </span>
+                      <span className="min-w-0 flex-1">
+                        <span className="block text-sm font-bold leading-tight" style={{ color: 'var(--text)' }}>{c.phase}</span>
+                      </span>
+                      {mode === 'build' && doneKeys.has(c.key) && <span style={{ color: 'var(--success)' }}>✓</span>}
+                    </button>
+                  )
+                })}
+              </div>
+
+              {/* Progress + export */}
+              <div className="mt-5 border-t pt-4" style={{ borderColor: 'var(--border)' }}>
+                <div className="mb-3 text-xs font-bold" style={{ color: 'var(--text-subtle)' }}>
+                  {mode === 'build' ? `${doneKeys.size} of 4 criteria started` : 'Study each criterion, then switch to Build'}
+                </div>
+                <button
+                  onClick={() => printFolder(project, saved)}
+                  className="w-full rounded-xl px-4 py-3 text-sm font-black"
+                  style={{ background: 'var(--accent)', color: 'var(--text-on-accent)' }}
+                >
+                  ⬇ Download my design folder
+                </button>
+              </div>
+            </div>
+          </aside>
+
+          {/* MAIN STAGE CONTENT */}
+          <main className="mt-6 lg:mt-0">
+            <StageHeader crit={crit} />
+
+            {mode === 'study' ? (
+              <StudyView key={activeKey} crit={crit} exemplar={stage.exemplar} tip={stage.tip} />
+            ) : (
+              <BuildView
+                key={activeKey}
+                crit={crit}
+                answers={saved.answers}
+                band={saved.bands[activeKey]}
+                synced={!!userId}
+                onAnswer={setAnswer}
+                onBand={setBand}
+              />
+            )}
+
+            {/* Prev / next */}
+            <div className="mt-8 flex items-center justify-between gap-3">
               <button
-                key={c.key}
-                onClick={() => setActiveKey(c.key)}
-                className="rounded-xl px-3 py-3 text-left transition-all"
-                style={{
-                  background: on ? c.cssVar : 'var(--surface-elevated)',
-                  border: `1px solid ${on ? c.cssVar : 'var(--border)'}`,
-                  color: on ? '#fff' : 'var(--text)',
-                  boxShadow: on ? 'var(--shadow-card)' : 'none',
-                }}
+                disabled={activePos === 0}
+                onClick={() => setActiveKey(KEYS[activePos - 1])}
+                className="rounded-xl px-5 py-3 text-sm font-bold disabled:opacity-30"
+                style={{ border: '1px solid var(--border)', color: 'var(--text)' }}
               >
-                <div className="flex items-center justify-between">
-                  <span className="text-lg font-black">{c.key}</span>
-                  {stageDone(c.key) && mode === 'build' && (
-                    <span className="text-xs" style={{ opacity: on ? 1 : 0.6 }}>✓</span>
-                  )}
-                </div>
-                <div className="text-[11px] font-bold leading-tight" style={{ opacity: on ? 0.95 : 0.7 }}>
-                  {c.phase}
-                </div>
+                ← Criterion {activePos > 0 ? KEYS[activePos - 1] : 'A'}
               </button>
-            )
-          })}
-        </div>
 
-        {/* ── Active stage ── */}
-        <div className="mt-6">
-          <StageHeader crit={crit} />
-
-          {mode === 'study' ? (
-            <StudyView crit={crit} exemplar={stage.exemplar} tip={stage.tip} />
-          ) : (
-            <BuildView
-              crit={crit}
-              answers={saved.answers}
-              band={saved.bands[activeKey]}
-              synced={!!userId}
-              onAnswer={setAnswer}
-              onBand={setBand}
-            />
-          )}
-        </div>
-
-        {/* ── Footer nav ── */}
-        <div className="mt-8 flex items-center justify-between gap-3 border-t pt-5" style={{ borderColor: 'var(--border)' }}>
-          <button
-            disabled={activePos === 0}
-            onClick={() => setActiveKey(KEYS[activePos - 1])}
-            className="rounded-lg px-4 py-2 text-sm font-bold disabled:opacity-30"
-            style={{ border: '1px solid var(--border)', color: 'var(--text)' }}
-          >
-            ← {activePos > 0 ? `Criterion ${KEYS[activePos - 1]}` : 'Criterion A'}
-          </button>
-
-          <button
-            onClick={() => printFolder(project, saved)}
-            className="rounded-lg px-4 py-2 text-sm font-black"
-            style={{ background: 'var(--accent)', color: 'var(--text-on-accent)' }}
-          >
-            ⬇ Download my design folder
-          </button>
-
-          {activePos < KEYS.length - 1 ? (
-            <button
-              onClick={() => setActiveKey(KEYS[activePos + 1])}
-              className="rounded-lg px-4 py-2 text-sm font-bold"
-              style={{ border: '1px solid var(--border)', color: 'var(--text)' }}
-            >
-              Criterion {KEYS[activePos + 1]} →
-            </button>
-          ) : next ? (
-            <Link
-              href={`/design/${next.id}`}
-              className="rounded-lg px-4 py-2 text-sm font-bold"
-              style={{ border: '1px solid var(--border)', color: 'var(--text)' }}
-            >
-              Next project →
-            </Link>
-          ) : (
-            <Link
-              href="/design"
-              className="rounded-lg px-4 py-2 text-sm font-bold"
-              style={{ border: '1px solid var(--border)', color: 'var(--text)' }}
-            >
-              Finish ✓
-            </Link>
-          )}
+              {activePos < KEYS.length - 1 ? (
+                <button
+                  onClick={() => setActiveKey(KEYS[activePos + 1])}
+                  className="rounded-xl px-5 py-3 text-sm font-black"
+                  style={{ background: crit.cssVar, color: '#fff' }}
+                >
+                  Next: Criterion {KEYS[activePos + 1]} →
+                </button>
+              ) : next ? (
+                <Link href={`/design/${next.id}`} className="rounded-xl px-5 py-3 text-sm font-black" style={{ background: 'var(--accent)', color: 'var(--text-on-accent)' }}>
+                  Next project: {next.title} →
+                </Link>
+              ) : (
+                <Link href="/design" className="rounded-xl px-5 py-3 text-sm font-bold" style={{ border: '1px solid var(--border)', color: 'var(--text)' }}>
+                  Finish ✓
+                </Link>
+              )}
+            </div>
+          </main>
         </div>
       </div>
     </div>
@@ -286,18 +273,15 @@ export default function ProjectWorkspace({ project, initialMode }: Props) {
 
 function StageHeader({ crit }: { crit: Criterion }) {
   return (
-    <div className="flex items-baseline gap-3">
-      <span
-        className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-lg font-black text-white"
-        style={{ background: crit.cssVar }}
-      >
+    <div className="flex items-start gap-4">
+      <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl text-2xl font-black text-white" style={{ background: crit.cssVar }}>
         {crit.key}
       </span>
       <div>
-        <h2 className="text-xl font-extrabold" style={{ color: 'var(--text)' }}>
+        <h2 className="text-2xl font-extrabold md:text-3xl" style={{ color: 'var(--text)' }}>
           {crit.title}
         </h2>
-        <p className="text-sm" style={{ color: 'var(--text-subtle)' }}>
+        <p className="mt-1 text-base" style={{ color: 'var(--text-subtle)' }}>
           {crit.summary}
         </p>
       </div>
@@ -306,68 +290,72 @@ function StageHeader({ crit }: { crit: Criterion }) {
 }
 
 function StudyView({ crit, exemplar, tip }: { crit: Criterion; exemplar: string[]; tip?: string }) {
+  const [band, setBand] = useState(crit.bands.length - 1) // default to the top band
+  const b = crit.bands[band]
+  const isTop = band === crit.bands.length - 1
+
   return (
-    <div className="mt-4 grid gap-4 lg:grid-cols-2">
+    <div className="mt-6 grid gap-5 xl:grid-cols-2">
       {/* Worked example */}
-      <div className="rounded-2xl p-5" style={{ background: 'var(--surface-elevated)', border: '1px solid var(--border)' }}>
-        <div className="text-[11px] font-black tracking-widest" style={{ color: crit.cssVar }}>
+      <section className="rounded-3xl p-6 md:p-7" style={{ background: 'var(--surface-elevated)', border: '1px solid var(--border)' }}>
+        <div className="text-xs font-black tracking-widest" style={{ color: crit.cssVar }}>
           WORKED EXAMPLE — A STRONG (7–8) RESPONSE
         </div>
-        <ul className="mt-3 space-y-3">
+        <ul className="mt-4 space-y-4">
           {exemplar.map((e, i) => (
-            <li key={i} className="flex gap-2 text-sm leading-relaxed" style={{ color: 'var(--text-muted)' }}>
-              <span style={{ color: crit.cssVar }}>●</span>
+            <li key={i} className="flex gap-3 text-base leading-relaxed md:text-lg" style={{ color: 'var(--text-muted)' }}>
+              <span className="mt-1.5 h-2.5 w-2.5 shrink-0 rounded-full" style={{ background: crit.cssVar }} />
               <span>{e}</span>
             </li>
           ))}
         </ul>
         {tip && (
-          <p className="mt-4 rounded-lg p-3 text-xs leading-relaxed" style={{ background: 'var(--surface-2)', color: 'var(--text-muted)' }}>
+          <p className="mt-5 rounded-xl p-4 text-sm leading-relaxed" style={{ background: 'var(--surface-2)', color: 'var(--text-muted)' }}>
             💡 {tip}
           </p>
         )}
-      </div>
+      </section>
 
-      {/* Rubric */}
-      <div className="rounded-2xl p-5" style={{ background: 'var(--surface-elevated)', border: '1px solid var(--border)' }}>
-        <div className="text-[11px] font-black tracking-widest" style={{ color: 'var(--text-subtle)' }}>
-          HOW IT'S ASSESSED (MAX 8)
+      {/* Interactive rubric — pick a band to explore what it takes */}
+      <section className="rounded-3xl p-6 md:p-7" style={{ background: 'var(--surface-elevated)', border: '1px solid var(--border)' }}>
+        <div className="text-xs font-black tracking-widest" style={{ color: 'var(--text-subtle)' }}>
+          HOW IT&apos;S ASSESSED — TAP A BAND (MAX 8)
         </div>
-        <div className="mt-3 space-y-2">
-          {crit.bands.map((b, i) => {
-            const top = i === crit.bands.length - 1
+
+        {/* Band selector */}
+        <div className="mt-4 grid grid-cols-4 gap-2">
+          {crit.bands.map((bb, i) => {
+            const on = band === i
             return (
-              <div
-                key={b.range}
-                className="rounded-lg p-3"
-                style={{
-                  background: top ? 'var(--surface-2)' : 'transparent',
-                  border: `1px solid ${top ? crit.cssVar : 'var(--border)'}`,
-                }}
+              <button
+                key={bb.range}
+                onClick={() => setBand(i)}
+                className="rounded-xl px-2 py-2.5 text-center transition-all"
+                style={{ background: on ? crit.cssVar : 'var(--surface-2)', color: on ? '#fff' : 'var(--text)', border: `1px solid ${on ? crit.cssVar : 'transparent'}` }}
               >
-                <div className="flex items-center gap-2">
-                  <span
-                    className="rounded px-2 py-0.5 text-xs font-black text-white"
-                    style={{ background: top ? crit.cssVar : 'var(--text-subtle)' }}
-                  >
-                    {b.range}
-                  </span>
-                  <span className="text-xs font-bold" style={{ color: 'var(--text)' }}>
-                    {b.label}
-                  </span>
-                </div>
-                <ul className="mt-2 space-y-1">
-                  {b.descriptors.map((d, j) => (
-                    <li key={j} className="text-[12px] leading-snug" style={{ color: 'var(--text-muted)' }}>
-                      • {d}
-                    </li>
-                  ))}
-                </ul>
-              </div>
+                <div className="text-base font-black">{bb.range}</div>
+                <div className="text-[11px] font-bold leading-tight" style={{ opacity: on ? 0.95 : 0.6 }}>{bb.label}</div>
+              </button>
             )
           })}
         </div>
-      </div>
+
+        {/* Selected band descriptors */}
+        <ul className="mt-5 space-y-2.5">
+          {b.descriptors.map((d, j) => (
+            <li key={j} className="flex gap-2.5 text-base leading-relaxed" style={{ color: 'var(--text-muted)' }}>
+              <span style={{ color: crit.cssVar }}>•</span>
+              <span>{d}</span>
+            </li>
+          ))}
+        </ul>
+
+        <p className="mt-5 rounded-xl p-3.5 text-sm font-semibold" style={{ background: 'var(--surface-2)', color: isTop ? 'var(--success)' : 'var(--text-muted)' }}>
+          {isTop
+            ? '✓ This is the target — the worked example on the left hits this band.'
+            : '▲ Aim higher — tap 7–8 to see what a top response adds.'}
+        </p>
+      </section>
     </div>
   )
 }
@@ -388,69 +376,63 @@ function BuildView({
   onBand: (idx: number) => void
 }) {
   return (
-    <div className="mt-4 space-y-4">
-      <div className="rounded-2xl p-5" style={{ background: 'var(--surface-elevated)', border: '1px solid var(--border)' }}>
-        <div className="text-[11px] font-black tracking-widest" style={{ color: crit.cssVar }}>
+    <div className="mt-6 space-y-5">
+      <section className="rounded-3xl p-6 md:p-7" style={{ background: 'var(--surface-elevated)', border: '1px solid var(--border)' }}>
+        <div className="text-xs font-black tracking-widest" style={{ color: crit.cssVar }}>
           YOUR DESIGN FOLDER — CRITERION {crit.key}
         </div>
-        <p className="mt-1 text-xs" style={{ color: 'var(--text-subtle)' }}>
+        <p className="mt-1.5 text-sm" style={{ color: 'var(--text-subtle)' }}>
           Answer each strand for <strong>your own</strong> project.{' '}
           {synced ? '☁ Synced to your account.' : '💾 Saved on this device.'}
         </p>
 
-        <div className="mt-4 space-y-5">
+        <div className="mt-5 space-y-6">
           {crit.objectives.map((obj, i) => (
             <label key={i} className="block">
-              <span className="text-sm font-bold" style={{ color: 'var(--text)' }}>
+              <span className="text-base font-bold" style={{ color: 'var(--text)' }}>
                 {i + 1}. {obj}
               </span>
               <textarea
                 value={answers[`${crit.key}:${i}`] || ''}
                 onChange={(e) => onAnswer(i, e.target.value)}
-                rows={3}
+                rows={4}
                 placeholder="Write your response…"
-                className="mt-2 w-full resize-y rounded-lg p-3 text-sm outline-none"
+                className="mt-2.5 w-full resize-y rounded-xl p-4 text-base outline-none"
                 style={{ background: 'var(--bg)', border: '1px solid var(--border)', color: 'var(--text)' }}
               />
             </label>
           ))}
         </div>
-      </div>
+      </section>
 
       {/* Self-assessment */}
-      <div className="rounded-2xl p-5" style={{ background: 'var(--surface-elevated)', border: '1px solid var(--border)' }}>
-        <div className="text-[11px] font-black tracking-widest" style={{ color: 'var(--text-subtle)' }}>
+      <section className="rounded-3xl p-6 md:p-7" style={{ background: 'var(--surface-elevated)', border: '1px solid var(--border)' }}>
+        <div className="text-xs font-black tracking-widest" style={{ color: 'var(--text-subtle)' }}>
           SELF-ASSESS — WHICH BAND DOES YOUR WORK HIT?
         </div>
-        <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-4">
+        <div className="mt-4 grid grid-cols-2 gap-2.5 sm:grid-cols-4">
           {crit.bands.map((b, i) => {
             const on = band === i
             return (
               <button
                 key={b.range}
                 onClick={() => onBand(i)}
-                className="rounded-lg p-3 text-left transition-all"
-                style={{
-                  background: on ? crit.cssVar : 'var(--bg)',
-                  border: `1px solid ${on ? crit.cssVar : 'var(--border)'}`,
-                  color: on ? '#fff' : 'var(--text)',
-                }}
+                className="rounded-xl p-4 text-left transition-all"
+                style={{ background: on ? crit.cssVar : 'var(--bg)', border: `1px solid ${on ? crit.cssVar : 'var(--border)'}`, color: on ? '#fff' : 'var(--text)' }}
               >
-                <div className="text-sm font-black">{b.range}</div>
-                <div className="text-[11px] font-bold" style={{ opacity: on ? 0.95 : 0.7 }}>
-                  {b.label}
-                </div>
+                <div className="text-base font-black">{b.range}</div>
+                <div className="text-xs font-bold" style={{ opacity: on ? 0.95 : 0.7 }}>{b.label}</div>
               </button>
             )
           })}
         </div>
         {band !== undefined && (
-          <p className="mt-3 text-xs leading-relaxed" style={{ color: 'var(--text-muted)' }}>
+          <p className="mt-4 text-sm leading-relaxed" style={{ color: 'var(--text-muted)' }}>
             To reach the next band, compare your folder above against the wording in{' '}
-            <strong>Study exemplar</strong> mode — be honest about what's missing.
+            <strong>Study exemplar</strong> mode — be honest about what&apos;s missing.
           </p>
         )}
-      </div>
+      </section>
     </div>
   )
 }
@@ -458,8 +440,7 @@ function BuildView({
 // ponytail: export = print-to-PDF via the browser. Zero deps. Swap for a PDF
 // lib only if pixel-perfect layout/branding becomes a requirement.
 function printFolder(project: DesignProject, saved: Saved) {
-  const esc = (s: string) =>
-    s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+  const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
   const sections = DESIGN_CYCLE.map((c) => {
     const bandIdx = saved.bands[c.key]
     const bandTxt = bandIdx !== undefined ? `${c.bands[bandIdx].range} (${c.bands[bandIdx].label})` : '—'
