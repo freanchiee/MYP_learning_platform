@@ -1,6 +1,6 @@
 // Canonical production origin, shared by metadata, robots.ts and sitemap.ts.
 // If your primary domain is the www host instead, change this one constant.
-export const SITE_URL = 'https://critabcd.com'
+export const SITE_URL = 'https://www.critabcd.com'
 
 // Subjects offered — rendered as schema.org/Course structured data on the
 // homepage (ItemList of Courses). Helps search + generative engines understand

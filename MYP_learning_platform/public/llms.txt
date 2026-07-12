@@ -18,9 +18,9 @@ CritABCD is for MYP students (roughly ages 11–16) and their teachers. Work is 
 - The Design module offers a dual path: follow the guided course, or open any standalone project; each project can be studied (worked exemplar) or built (your own scaffolded design folder) with rubric self-assessment.
 
 ## Key pages
-- Home: https://critabcd.com/
-- Free MYP subject guides (aims, A–D criteria, concepts, grading): https://critabcd.com/guides
-- Resources (interactive quizzes, simulations and labs): https://critabcd.com/resources
+- Home: https://www.critabcd.com/
+- Free MYP subject guides (aims, A–D criteria, concepts, grading): https://www.critabcd.com/guides
+- Resources (interactive quizzes, simulations and labs): https://www.critabcd.com/resources
 
 ## FAQ
 - What is CritABCD? CritABCD is an IB Middle Years Programme (MYP) e-assessment and self-study platform offering past papers, AI-graded practice and instant, criterion-referenced feedback.
