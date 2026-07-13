@@ -18,6 +18,7 @@ const PAPER_SUBJECTS = [
 
 const NAV_LINKS = [
   { label: 'Guides',    href: '/guides' },
+  { label: 'Blog',      href: '/blog' },
   { label: 'Design',    href: '/design' },
   { label: 'Dashboard', href: '/dashboard' },
   { label: 'Settings',  href: '/settings' },

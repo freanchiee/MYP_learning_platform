@@ -1,6 +1,7 @@
 import type { MetadataRoute } from 'next'
 import { SITE_URL } from '@/lib/site'
 import { GUIDES } from '@/data/guides'
+import { POSTS } from '@/data/blog'
 
 // Served at /sitemap.xml. Only genuinely public (non-auth-gated) pages belong here —
 // the subject/exam/design routes redirect to /login for crawlers, so they're omitted.
@@ -15,6 +16,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: now,
       changeFrequency: 'monthly' as const,
       priority: 0.8,
+    })),
+    { url: `${SITE_URL}/blog`, lastModified: now, changeFrequency: 'weekly', priority: 0.8 },
+    ...POSTS.map((p) => ({
+      url: `${SITE_URL}/blog/${p.slug}`,
+      lastModified: new Date(p.datePublished),
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
     })),
   ]
 }
