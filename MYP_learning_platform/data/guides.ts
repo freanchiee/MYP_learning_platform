@@ -238,3 +238,67 @@ export const GUIDES: SubjectGuide[] = [
 export function getGuide(slug: string): SubjectGuide | undefined {
   return GUIDES.find((g) => g.slug === slug)
 }
+
+// Exam pattern + syllabus areas power the interactive Subject Explorer on each
+// guide page. Kept as a slug-keyed map so the core GUIDES stay lean.
+export interface ExamPattern {
+  format: string
+  details: string[]
+}
+
+const SCIENCES_EXAM: ExamPattern = {
+  format: 'MYP eAssessment — optional 2-hour on-screen exam (Year 5)',
+  details: [
+    'Sat on-screen; students respond to tasks built around unseen scientific material, data and real-world scenarios.',
+    'Assesses criteria A (Knowing and understanding), C (Processing and evaluating) and D (Reflecting on the impacts of science). Criterion B (Inquiring and designing) is assessed through classroom investigations.',
+    'Schools may instead award grades through internal, IB-moderated assessment across the year.',
+    'On CritABCD you practise full past papers under timed conditions with instant AI marking against each criterion.',
+  ],
+}
+
+const IANDS_EXAM: ExamPattern = {
+  format: 'MYP eAssessment — optional 2-hour on-screen exam (Year 5)',
+  details: [
+    'Sat on-screen; tasks are built around unseen sources — text, data, maps and images.',
+    'Assesses the Individuals & Societies criteria through source analysis, structured responses and an extended answer.',
+    'Schools may instead award grades through internal, IB-moderated assessment.',
+    'On CritABCD you practise past I&S papers with interactive source artefacts and AI marking.',
+  ],
+}
+
+const DESIGN_EXAM: ExamPattern = {
+  format: 'No written exam — ePortfolio (design folder)',
+  details: [
+    'MYP Design is assessed by a portfolio, not a written examination.',
+    'Students submit a design folder documenting the full design cycle: inquiring & analysing, developing ideas, creating the solution, and evaluating.',
+    'Marked against criteria A–D (each out of 8) and, for eAssessment, moderated by the IB.',
+    'On CritABCD you study worked exemplar projects and build your own folder in the Design module.',
+  ],
+}
+
+export const GUIDE_EXTRAS: Record<string, { examPattern: ExamPattern; syllabusAreas: string[] }> = {
+  physics: {
+    examPattern: SCIENCES_EXAM,
+    syllabusAreas: ['Forces & Motion', 'Thermal Physics', 'Waves & Sound', 'Electromagnetic Waves & Optics', 'Electricity & Magnetism', 'Nuclear & Atomic Physics', 'Space & Astrophysics', 'Pressure & Fluids'],
+  },
+  chemistry: {
+    examPattern: SCIENCES_EXAM,
+    syllabusAreas: ['Atomic Structure & Periodic Table', 'Bonding & Structure', 'States of Matter', 'Chemical Reactions', 'Quantitative Chemistry', 'Organic Chemistry', 'Electrochemistry', 'Environmental Chemistry', 'Nuclear Chemistry'],
+  },
+  biology: {
+    examPattern: SCIENCES_EXAM,
+    syllabusAreas: ['Cells', 'Organisms & Systems', 'Metabolism & Processes', 'Genetics & Evolution', 'Ecology & Environment', 'Human Health', 'Biotechnology'],
+  },
+  humanities: {
+    examPattern: IANDS_EXAM,
+    syllabusAreas: ['Historical inquiry', 'Geographic processes', 'Economic systems', 'Government, power & civics', 'Culture & society', 'Global interactions & development'],
+  },
+  geography: {
+    examPattern: IANDS_EXAM,
+    syllabusAreas: ['Population & settlement', 'Urbanisation', 'Resources & energy', 'Climate & environment', 'Development & globalisation', 'Natural hazards & risk', 'Maps, data & fieldwork'],
+  },
+  design: {
+    examPattern: DESIGN_EXAM,
+    syllabusAreas: ['The design cycle (A–D)', 'Product design', 'Digital design', 'Design & global contexts', 'Technical skills & materials', 'The design folder / ePortfolio'],
+  },
+}

@@ -20,6 +20,7 @@ CritABCD is for MYP students (roughly ages 11–16) and their teachers. Work is 
 ## Key pages
 - Home: https://www.critabcd.com/
 - Free MYP subject guides (aims, A–D criteria, concepts, grading): https://www.critabcd.com/guides
+- MYP blog (grading, criteria, command terms, eAssessment explained): https://www.critabcd.com/blog
 - Resources (interactive quizzes, simulations and labs): https://www.critabcd.com/resources
 
 ## FAQ

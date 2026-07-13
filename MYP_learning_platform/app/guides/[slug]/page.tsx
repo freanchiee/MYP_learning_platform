@@ -1,9 +1,10 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { GUIDES, getGuide, MYP_GLOBAL_CONTEXTS } from '@/data/guides'
+import { GUIDES, getGuide, MYP_GLOBAL_CONTEXTS, GUIDE_EXTRAS } from '@/data/guides'
 import { SITE_URL } from '@/lib/site'
 import GuideTopBar from '@/components/guides/GuideTopBar'
+import SubjectExplorer from '@/components/guides/SubjectExplorer'
 
 export function generateStaticParams() {
   return GUIDES.map((g) => ({ slug: g.slug }))
@@ -101,6 +102,19 @@ export default function GuidePage({ params }: { params: { slug: string } }) {
         <p className="mt-4 text-lg leading-relaxed" style={{ color: 'var(--text-muted)' }}>
           {g.overview}
         </p>
+
+        {/* Interactive explorer: syllabus areas · exam pattern · criteria */}
+        {GUIDE_EXTRAS[g.slug] && (
+          <div className="mt-8">
+            <SubjectExplorer
+              subject={g.subject}
+              syllabusAreas={GUIDE_EXTRAS[g.slug].syllabusAreas}
+              examPattern={GUIDE_EXTRAS[g.slug].examPattern}
+              criteria={g.criteria}
+              papersHref={g.papersHref}
+            />
+          </div>
+        )}
 
         <Section label="AIMS">
           <ul className="space-y-2.5">
