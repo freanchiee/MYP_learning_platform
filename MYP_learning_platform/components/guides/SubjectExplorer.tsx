@@ -32,8 +32,14 @@ export default function SubjectExplorer({
 
   return (
     <div className="rounded-3xl p-5 md:p-7" style={{ background: 'var(--surface-elevated)', border: '1px solid var(--border)' }}>
-      {/* Tab bar */}
-      <div className="flex flex-wrap gap-2" role="tablist" aria-label={`${subject} guide explorer`}>
+      {/* Tab bar — sticky just below the 56px top bar so tabs are never
+          occluded by it and stay clickable while the panel is in view. */}
+      <div
+        className="sticky z-20 -mx-5 -mt-5 mb-1 flex flex-wrap gap-2 rounded-t-3xl px-5 py-4 md:-mx-7 md:-mt-7 md:px-7"
+        style={{ top: 56, background: 'var(--surface-elevated)' }}
+        role="tablist"
+        aria-label={`${subject} guide explorer`}
+      >
         {tabs.map((t) => {
           const on = tab === t.id
           return (
