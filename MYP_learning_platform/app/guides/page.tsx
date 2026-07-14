@@ -34,7 +34,7 @@ export default function GuidesHubPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ITEMLIST_LD) }} />
       <GuideTopBar />
 
-      <main className="mx-auto max-w-5xl px-5 py-12 md:px-8">
+      <main className="mx-auto w-full max-w-[1600px] px-5 py-12 md:px-10">
         <div className="text-sm font-black tracking-[0.3em]" style={{ color: 'var(--accent)' }}>
           FREE · NO SIGN-UP
         </div>
@@ -47,7 +47,7 @@ export default function GuidesHubPage() {
           graded. Each page links to the official IB guide and to free practice on CritABCD.
         </p>
 
-        <div className="mt-10 grid gap-4 sm:grid-cols-2">
+        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {GUIDES.map((g) => (
             <Link
               key={g.slug}
