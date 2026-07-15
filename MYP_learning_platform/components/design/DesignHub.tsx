@@ -49,8 +49,8 @@ export default function DesignHub() {
   const [activeIdx, setActiveIdx] = useState(0)
   const [hoveredDot, setHoveredDot] = useState<number | null>(null)
 
-  // Gate 0 = the design cycle; gates 1..N = projects.
-  const gates = [{ id: '__cycle__' }, ...DESIGN_PROJECTS]
+  // Gate 0 = the design cycle; gates 1..N = the core 3 projects; final gate = advanced case studies.
+  const gates = [{ id: '__cycle__' }, ...DESIGN_PROJECTS, { id: '__case_studies__' }]
 
   useEffect(() => {
     const el = containerRef.current
@@ -88,10 +88,13 @@ export default function DesignHub() {
         {gates.map((g, idx) => {
           const isActive = Math.abs(activeIdx - idx) <= 1
           const isCycle = idx === 0
-          const proj = isCycle ? null : DESIGN_PROJECTS[idx - 1]
+          const isCaseStudies = idx === gates.length - 1
+          const proj = isCycle || isCaseStudies ? null : DESIGN_PROJECTS[idx - 1]
           const grad = isCycle
             ? { from: '#0a0a14', via: '#1a1430', to: '#2a1f4a' }
-            : proj!.accent
+            : isCaseStudies
+              ? { from: '#0a1420', via: '#123048', to: '#1f5f6b' }
+              : proj!.accent
           return (
             <section
               key={g.id}
@@ -115,7 +118,13 @@ export default function DesignHub() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, ease: 'easeOut' }}
                   >
-                    {isCycle ? <CycleGate onBrowse={() => goTo(1)} /> : <ProjectGate proj={proj!} num={idx} total={DESIGN_PROJECTS.length} />}
+                    {isCycle ? (
+                      <CycleGate onBrowse={() => goTo(1)} />
+                    ) : isCaseStudies ? (
+                      <CaseStudiesGate />
+                    ) : (
+                      <ProjectGate proj={proj!} num={idx} total={DESIGN_PROJECTS.length} />
+                    )}
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -141,7 +150,7 @@ export default function DesignHub() {
         {gates.map((g, idx) => {
           const isActive = idx === activeIdx
           const isHov = hoveredDot === idx
-          const label = idx === 0 ? 'THE DESIGN CYCLE' : DESIGN_PROJECTS[idx - 1].title
+          const label = idx === 0 ? 'THE DESIGN CYCLE' : idx === gates.length - 1 ? 'ADVANCED CASE STUDIES' : DESIGN_PROJECTS[idx - 1].title
           return (
             <div key={g.id} className="flex items-center gap-2 cursor-pointer" onClick={() => goTo(idx)} onMouseEnter={() => setHoveredDot(idx)} onMouseLeave={() => setHoveredDot(null)}>
               <div
@@ -246,6 +255,28 @@ function ProjectGate({ proj, num, total }: { proj: (typeof DESIGN_PROJECTS)[numb
         </Link>
         <Link href={`/design/${proj.id}?mode=build`} className="inline-block font-black text-sm tracking-[0.2em] text-white transition-all hover:scale-105" style={{ border: '1px solid rgba(255,255,255,0.5)', padding: '14px 40px' }}>
           BUILD YOUR OWN
+        </Link>
+      </div>
+    </>
+  )
+}
+
+function CaseStudiesGate() {
+  return (
+    <>
+      <div className="text-xs font-black tracking-[0.3em] mb-6 px-4 py-1.5" style={{ border: '1px solid rgba(255,255,255,0.35)', color: 'rgba(255,255,255,0.65)' }}>
+        OPTIONAL · FOR STUDENTS WHO WANT MORE
+      </div>
+      <h1 className="font-extrabold text-white leading-none select-none" style={{ fontSize: 'clamp(40px, 7vw, 88px)', letterSpacing: '-3px', textShadow: '0 8px 60px rgba(0,0,0,0.4)', lineHeight: 0.95 }}>
+        ADVANCED<br />CASE STUDIES
+      </h1>
+      <p className="mt-5 max-w-md text-base leading-relaxed" style={{ color: 'rgba(255,255,255,0.55)', fontFamily: 'Georgia, serif' }}>
+        Ambitious, self-selected briefs — NFC systems, weather stations, an AI to-do app, face-shape haircut matching
+        and more. Build something real, still through the full A→D design cycle.
+      </p>
+      <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
+        <Link href="/design/case-studies" className="inline-block font-black text-sm tracking-[0.2em] text-black transition-all hover:scale-105" style={{ background: '#fff', padding: '14px 40px' }}>
+          EXPLORE CASE STUDIES →
         </Link>
       </div>
     </>
