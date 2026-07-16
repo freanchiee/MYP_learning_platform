@@ -1,10 +1,10 @@
 'use client'
 
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useMemo, useState } from 'react'
 import Link from 'next/link'
-import { createClient } from '@/lib/supabase/client'
 import { DESIGN_CYCLE, CRITERION_BY_KEY, type CriterionKey, type Criterion } from '@/data/design/cycle'
 import { DESIGN_PROJECTS, type DesignProject } from '@/data/design/projects'
+import { useDesignProgress, type DesignProgress } from '@/hooks/useDesignProgress'
 import DesignCycleRing from './DesignCycleRing'
 
 type Mode = 'study' | 'build'
@@ -14,94 +14,18 @@ interface Props {
   initialMode: Mode
 }
 
-interface Saved {
-  answers: Record<string, string> // `${crit}:${strandIndex}` -> text
-  bands: Partial<Record<CriterionKey, number>> // crit -> band index (0–3)
-}
-
 const KEYS: CriterionKey[] = ['A', 'B', 'C', 'D']
 
 export default function ProjectWorkspace({ project, initialMode }: Props) {
-  const storageKey = `myp-design:${project.id}`
-  const supabase = useMemo(() => createClient(), [])
   const [mode, setMode] = useState<Mode>(initialMode)
   const [activeKey, setActiveKey] = useState<CriterionKey>('A')
-  const [saved, setSaved] = useState<Saved>({ answers: {}, bands: {} })
-  const [loaded, setLoaded] = useState(false)
-  const [userId, setUserId] = useState<string | null>(null)
-
-  // Load: localStorage first (instant, offline), then the signed-in user's row
-  // from Supabase (cross-device source of truth) if it exists.
-  useEffect(() => {
-    let active = true
-    try {
-      const raw = localStorage.getItem(storageKey)
-      if (raw) setSaved(JSON.parse(raw))
-    } catch {
-      /* corrupt/absent — start fresh */
-    }
-    ;(async () => {
-      let uid: string | null = null
-      try {
-        uid = (await supabase.auth.getUser()).data.user?.id ?? null
-      } catch {
-        /* no session / no backend (dev) — stay local-only */
-      }
-      if (!active) return
-      setUserId(uid)
-      if (uid) {
-        const { data } = await supabase
-          .from('design_progress')
-          .select('answers, bands')
-          .eq('user_id', uid)
-          .eq('project_id', project.id)
-          .maybeSingle()
-        if (active && data) setSaved({ answers: data.answers ?? {}, bands: data.bands ?? {} })
-      }
-      if (active) setLoaded(true)
-    })()
-    return () => {
-      active = false
-    }
-  }, [storageKey, project.id, supabase])
-
-  // Save: localStorage immediately; debounced upsert to Supabase when signed in.
-  const firstSave = useRef(true)
-  useEffect(() => {
-    if (!loaded) return
-    localStorage.setItem(storageKey, JSON.stringify(saved))
-    if (!userId) return
-    if (firstSave.current) {
-      firstSave.current = false
-      return
-    }
-    const t = setTimeout(() => {
-      supabase
-        .from('design_progress')
-        .upsert(
-          {
-            user_id: userId,
-            project_id: project.id,
-            answers: saved.answers,
-            bands: saved.bands,
-            updated_at: new Date().toISOString(),
-          },
-          { onConflict: 'user_id,project_id' },
-        )
-        .then(({ error }) => {
-          if (error) console.warn('design_progress sync failed:', error.message)
-        })
-    }, 800)
-    return () => clearTimeout(t)
-  }, [saved, loaded, userId, storageKey, project.id, supabase])
+  const { saved, setAnswer: setAnswerRaw, setBand: setBandRaw, synced } = useDesignProgress(project.id)
 
   const crit = CRITERION_BY_KEY[activeKey]
   const stage = project.stages[activeKey]
 
-  const setAnswer = (i: number, text: string) =>
-    setSaved((s) => ({ ...s, answers: { ...s.answers, [`${activeKey}:${i}`]: text } }))
-  const setBand = (idx: number) =>
-    setSaved((s) => ({ ...s, bands: { ...s.bands, [activeKey]: idx } }))
+  const setAnswer = (i: number, text: string) => setAnswerRaw(`${activeKey}:${i}`, text)
+  const setBand = (idx: number) => setBandRaw(activeKey, idx)
 
   const stageDone = (k: CriterionKey) =>
     saved.bands[k] !== undefined ||
@@ -229,7 +153,7 @@ export default function ProjectWorkspace({ project, initialMode }: Props) {
                 crit={crit}
                 answers={saved.answers}
                 band={saved.bands[activeKey]}
-                synced={!!userId}
+                synced={synced}
                 onAnswer={setAnswer}
                 onBand={setBand}
               />
@@ -439,7 +363,7 @@ function BuildView({
 
 // ponytail: export = print-to-PDF via the browser. Zero deps. Swap for a PDF
 // lib only if pixel-perfect layout/branding becomes a requirement.
-function printFolder(project: DesignProject, saved: Saved) {
+function printFolder(project: DesignProject, saved: DesignProgress) {
   const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
   const sections = DESIGN_CYCLE.map((c) => {
     const bandIdx = saved.bands[c.key]
