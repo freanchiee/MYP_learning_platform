@@ -42,6 +42,12 @@ export const SITE_COURSES: { name: string; href: string; description: string }[]
     description:
       'IB MYP Design (Years 4–5): a project-based self-study module. Study worked exemplar projects and build your own design folder through the design cycle — Criteria A (Inquiring and analysing), B (Developing ideas), C (Creating the solution) and D (Evaluating).',
   },
+  {
+    name: 'Gameducation — Live Classes',
+    href: '/gameducation',
+    description:
+      'Gameducation: live, teacher-hosted classroom sessions for MYP Design (Years 2–4) — quizzes, worksheets and team icebreakers with real-time dashboards, private chat and a Kahoot-style finish.',
+  },
 ]
 
 // Canonical FAQ — the single biggest AI-citation (GEO) signal. Rendered as
@@ -75,5 +81,9 @@ export const SITE_FAQ: { q: string; a: string }[] = [
   {
     q: 'How do I practise a specific topic or IB criterion?',
     a: 'You can practise by topic (filter questions by concept) or by IB criterion (target a specific A–D skill) before attempting a full simulated exam.',
+  },
+  {
+    q: 'What is Gameducation on CritABCD?',
+    a: 'Gameducation is CritABCD’s live, teacher-hosted classroom feature for MYP Design (Years 2–4) — quizzes, worksheets and team icebreakers projected to the class, with students joining from their own device via a join code, real-time dashboards, private chat and a Kahoot-style podium finish.',
   },
 ]

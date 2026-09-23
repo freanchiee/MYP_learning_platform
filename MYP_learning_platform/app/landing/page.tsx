@@ -17,12 +17,13 @@ const PAPER_SUBJECTS = [
 ]
 
 const NAV_LINKS = [
-  { label: 'Guides',    href: '/guides' },
-  { label: 'Blog',      href: '/blog' },
-  { label: 'Design',    href: '/design' },
-  { label: 'Dashboard', href: '/dashboard' },
-  { label: 'Settings',  href: '/settings' },
-  { label: 'Login',     href: '/login' },
+  { label: 'Guides',       href: '/guides' },
+  { label: 'Blog',         href: '/blog' },
+  { label: 'Design',       href: '/design' },
+  { label: 'Gameducation', href: '/gameducation' },
+  { label: 'Dashboard',    href: '/dashboard' },
+  { label: 'Settings',     href: '/settings' },
+  { label: 'Login',        href: '/login' },
 ]
 
 const STATS = [
