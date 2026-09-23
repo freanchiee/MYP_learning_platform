@@ -11,6 +11,7 @@ import { cardStyle, btnStyle, inputStyle, pageBg, ErrorBanner, BadgeRow, MCQOpti
 import ChatPanel from './ChatPanel'
 import { Podium } from './Podium'
 import PersonaChatField from './PersonaChatField'
+import { getPersona } from '@/data/design/live/personas'
 import { useCelebration, CelebrationOverlay } from './Celebration'
 
 /** Case-insensitive "does this text contain this word/phrase" check used by
@@ -493,11 +494,26 @@ function WorksheetPlayer({
     patchMyData(stage.key, { [sectionKey]: { ...drafts[sectionKey], [fieldKey]: value } })
   }
 
+  // Which section+field (if any) holds this stage's personaChat field —
+  // most activities have at most one. Once a character's picked, a
+  // floating chat bubble surfaces it from every OTHER section (e.g. the
+  // empathy map) so a student never has to leave what they're filling in
+  // just to go check what the persona said.
+  const personaField = useMemo(() => {
+    for (const s of stage.sections) {
+      const f = s.fields.find((f) => f.type === 'personaChat')
+      if (f) return { sectionKey: s.key, fieldKey: f.key }
+    }
+    return null
+  }, [stage])
+  const personaValue = personaField ? drafts[personaField.sectionKey]?.[personaField.fieldKey] : undefined
+
   // Sections that are open render "wide" (span every column) since they
   // hold the actual fields — a full grid width in a laptop browser instead
   // of squeezing a table/chat into a narrow single column. Collapsed
   // sections are compact and flow into whatever columns are left.
   return (
+    <>
     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 14, alignItems: 'start' }}>
       {stage.sections.map((s) => {
         const pct = worksheetSectionPct(s, drafts[s.key])
@@ -534,27 +550,54 @@ function WorksheetPlayer({
         )
       })}
     </div>
+    {personaField && openSection !== personaField.sectionKey && (
+      <FloatingPersonaChat
+        value={personaValue}
+        onChange={(v) => updateField(personaField.sectionKey, personaField.fieldKey, v)}
+        onPersist={(v) => persistField(personaField.sectionKey, personaField.fieldKey, v)}
+        onDraft={(text) => reportDraft(stage.key, text, personaField.sectionKey)}
+        sessionCode={sessionCode}
+        playerId={me.id}
+      />
+    )}
+    </>
   )
 }
 
-/** A model answer a student can optionally reveal — collapsed by default so
- *  it scaffolds rather than gives the answer away outright. Shared by
- *  worksheet text/textarea fields and openIdeas prompts. */
-function ExemplarReveal({ exemplar }: { exemplar?: string }) {
+/** A collapsed bubble docked to the right edge — expand it to keep talking
+ *  to the persona while filling in any OTHER section (the empathy map,
+ *  most often) without switching back to the Interview section. Renders
+ *  nothing until a character has actually been picked. */
+function FloatingPersonaChat({
+  value,
+  onChange,
+  onPersist,
+  onDraft,
+  sessionCode,
+  playerId,
+}: {
+  value: { characterId: string; messages: unknown[] } | undefined
+  onChange: (v: any) => void
+  onPersist: (v: any) => void
+  onDraft: (text: string) => void
+  sessionCode: string
+  playerId: string
+}) {
   const [open, setOpen] = useState(false)
-  if (!exemplar) return null
+  const character = value?.characterId ? getPersona(value.characterId) : undefined
+  if (!character) return null
   return (
-    <div style={{ fontWeight: 400 }}>
+    <div style={{ position: 'fixed', right: 16, top: '50%', transform: 'translateY(-50%)', zIndex: 44, display: 'flex', flexDirection: 'row-reverse', alignItems: 'flex-start', gap: 8 }}>
       <button
-        type="button"
         onClick={() => setOpen(!open)}
-        style={{ background: 'transparent', border: 'none', color: 'var(--accent, #5C3FD6)', cursor: 'pointer', fontSize: 11, fontWeight: 700, padding: 0 }}
+        style={{ ...btnStyle('#5C3FD6', true), borderRadius: 999, padding: '8px 14px', fontSize: 12.5, display: 'flex', alignItems: 'center', gap: 6, boxShadow: '3px 3px 0 var(--text)' }}
       >
-        {open ? '▾ Hide example answer' : '▸ 💡 Show example answer'}
+        <Avatar seed={character.id} size={20} />
+        {open ? '✕ Close' : `Chat with ${character.name}`}
       </button>
       {open && (
-        <div style={{ marginTop: 4, fontSize: 12, fontStyle: 'italic', color: 'var(--text-muted)', background: 'var(--surface-2)', borderRadius: 8, padding: '6px 9px' }}>
-          {exemplar}
+        <div style={{ width: 'min(340px, calc(100vw - 32px))', maxHeight: '75vh', overflowY: 'auto' }}>
+          <PersonaChatField value={value as any} onChange={onChange} onPersist={onPersist} onDraft={onDraft} sessionCode={sessionCode} playerId={playerId} />
         </div>
       )}
     </div>
@@ -586,7 +629,6 @@ function WorksheetFieldInput({
       <label style={{ display: 'grid', gap: 4, fontSize: 12, fontWeight: 700, color: 'var(--text-muted)' }}>
         {field.label}
         <input value={value || ''} placeholder={field.placeholder} onChange={(e) => onChange(e.target.value)} style={inputStyle} />
-        <ExemplarReveal exemplar={field.exemplar} />
       </label>
     )
   }
@@ -596,7 +638,6 @@ function WorksheetFieldInput({
         {field.label}
         {field.hint && <span style={{ fontWeight: 400, fontSize: 11 }}>{field.hint}</span>}
         <textarea value={value || ''} placeholder={field.placeholder} onChange={(e) => onChange(e.target.value)} style={{ ...inputStyle, minHeight: 70 }} />
-        <ExemplarReveal exemplar={field.exemplar} />
       </label>
     )
   }
@@ -710,7 +751,6 @@ function OpenIdeasPlayer({
       )}
       {st.locked && !mine && <div style={{ textAlign: 'center', fontSize: 13, fontWeight: 700, color: '#D6425E' }}>🔒 Time&apos;s up — your teacher has locked this round.</div>}
       <input value={text} disabled={st.locked} onChange={(e) => onType(e.target.value)} placeholder="Your idea, in a few words…" style={inputStyle} onKeyDown={(e) => e.key === 'Enter' && submit()} />
-      <ExemplarReveal exemplar={prompt.exemplar} />
       <button onClick={submit} disabled={st.locked} style={btnStyle('#1FA98A', true, true)}>
         {flash ? '✅ Saved!' : mine ? 'Update my idea' : 'Submit my idea'}
       </button>

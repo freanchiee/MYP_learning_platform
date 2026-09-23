@@ -68,11 +68,21 @@ export interface WorksheetField {
   columns?: WorksheetTableColumn[] // for 'table'
   minRows?: number // for 'table' — rows to start with
   hint?: string
-  exemplar?: string // a model answer a student can optionally reveal, for text/textarea fields
+  /** A variety of model answers (2-3 recommended, different phrasings of a
+   *  strong response) — NEVER shown to the student. Used only server/
+   *  client-side to fuzzy-match their typed answer and suggest an auto
+   *  score a teacher can accept or override (see lib/design-live/
+   *  fuzzyMatch.ts and WorksheetReview.tsx). */
+  exemplars?: string[]
   /** Words or short phrases (case-insensitive) that, the first time they
    *  appear in this field's typed text, burst confetti for the student —
-   *  a light-touch nudge that they've hit something worth including. */
+   *  a light-touch nudge that they've hit something worth including. Also
+   *  feeds into the fuzzy-match auto score. */
   celebrateKeywords?: string[]
+  /** Max points this field contributes to its section's fuzzy-match auto
+   *  score, for text/textarea fields with exemplars/celebrateKeywords set.
+   *  Default 10. */
+  points?: number
 }
 
 export interface WorksheetSection {
@@ -100,7 +110,7 @@ export interface WorksheetStage {
 export interface OpenIdeasPrompt {
   text: string
   icon?: string
-  exemplar?: string // a model pitch a student can optionally reveal
+  exemplars?: string[] // a variety of model pitches — never shown to the student, see WorksheetField.exemplars
   celebrateKeywords?: string[] // see WorksheetField.celebrateKeywords
 }
 

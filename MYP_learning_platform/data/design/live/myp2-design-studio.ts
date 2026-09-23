@@ -52,31 +52,46 @@ export const MYP2_DESIGN_STUDIO: LiveActivityDefinition = {
         {
           icon: '🎒',
           text: 'How might we make packing a school bag easier?',
-          exemplar: 'A see-through front pocket with a checklist sewn inside the flap, so a student can check everything is packed at a glance before they rush out the door.',
+          exemplars: [
+            'A see-through front pocket with a checklist sewn inside the flap, so a student can check everything is packed at a glance before they rush out the door.',
+            'A colour-coded tag for each subject that clips onto the matching book, so packing the right books takes seconds even in a rush.',
+          ],
           celebrateKeywords: ['so that', 'because', 'checklist'],
         },
         {
           icon: '🪑',
           text: 'How might we help students keep their desks organised?',
-          exemplar: 'A slim raised lip along the edge of the desk that stops pencils and bottles rolling off, made from recycled rubber so it is cheap to add to any existing desk.',
+          exemplars: [
+            'A slim raised lip along the edge of the desk that stops pencils and bottles rolling off, made from recycled rubber so it is cheap to add to any existing desk.',
+            'A small clip-on tray that attaches to the side of any desk to hold loose items during the lesson.',
+          ],
           celebrateKeywords: ['recycled', 'because', 'everyone'],
         },
         {
           icon: '🏫',
           text: 'How might we make a shared classroom space easier to use?',
-          exemplar: 'A simple sign-up card by the reading corner with time slots, so everyone gets a fair turn instead of whoever gets there first.',
+          exemplars: [
+            'A simple sign-up card by the reading corner with time slots, so everyone gets a fair turn instead of whoever gets there first.',
+            'A visible turn-tracker card that flips over when someone starts using the space, so it is obvious when it is free.',
+          ],
           celebrateKeywords: ['everyone', 'fair', 'so that'],
         },
         {
           icon: '📝',
           text: 'How might we help students remember their homework?',
-          exemplar: 'A small whiteboard strip on the inside of each pencil case lid, so today\'s homework is the first thing a student sees when they pack up — no app or phone needed.',
+          exemplars: [
+            'A small whiteboard strip on the inside of each pencil case lid, so today\'s homework is the first thing a student sees when they pack up — no app or phone needed.',
+            'A homework hook by the classroom door where each student flips a tag before leaving, as a physical reminder.',
+          ],
           celebrateKeywords: ['because', 'so that', 'accessib'],
         },
         {
           icon: '🍽️',
           text: 'How might we make the lunch queue fairer for everyone?',
-          exemplar: 'A second, lower queue line just for younger students, staffed by a prefect, so smaller students are not stuck waiting behind much taller ones.',
+          exemplars: [
+            'A second, lower queue line just for younger students, staffed by a prefect, so smaller students are not stuck waiting behind much taller ones.',
+            'A rotating priority system where a different year group gets to go first each day, so waiting time is shared fairly over the week.',
+          ],
           celebrateKeywords: ['younger', 'everyone', 'because'],
         },
       ],

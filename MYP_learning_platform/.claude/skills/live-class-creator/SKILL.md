@@ -255,13 +255,13 @@ light up for whichever section the student happened to be typing in, not
 just the right one. Hovering the cell still opens the full
 `<PlayerPreviewPanel>` for the bigger read.
 
-## Exemplar answers + keyword celebration
+## Exemplar answers, keyword celebration + fuzzy-match auto-scoring
 
-Any `WorksheetField` (text/textarea) or `OpenIdeasPrompt` can carry an
-`exemplar` (a model answer, shown to the student via a collapsed
-`<ExemplarReveal>` toggle — scaffolding, not an answer key dumped in their
-face) and `celebrateKeywords` (words/phrases that, the first time they
-appear in what the student types, burst confetti via
+Any `WorksheetField` (text/textarea) or `OpenIdeasPrompt` can carry
+`exemplars` (a *variety* of model answers, 2-3 different phrasings — never
+shown to the student, unlike the earlier single-`exemplar`-reveal design
+this replaced) and `celebrateKeywords` (words/phrases that, the first time
+they appear in what the student types, burst confetti via
 `Celebration.tsx`'s `useCelebration`/`<CelebrationOverlay>`). Detection
 lives in `WorksheetPlayer.updateField` and `OpenIdeasPlayer.onType` — a
 `celebratedRef` Set (keyed `sectionKey.fieldKey.keyword` /
@@ -269,17 +269,36 @@ lives in `WorksheetPlayer.updateField` and `OpenIdeasPlayer.onType` — a
 session, not on every keystroke after the match. `celebrate` is threaded
 down from `LiveJoin`'s root, which owns the one `<CelebrationOverlay>` for
 the whole page — the same overlay also fires for incoming host reactions
-(see above), so "the teacher appreciated this" and "you nailed a key
-concept" both land as the same kind of moment for the student instead of
-two competing UI patterns.
+(see the chat section above), so "the teacher appreciated this" and "you
+nailed a key concept" both land as the same kind of moment for the
+student instead of two competing UI patterns.
+
+**Fuzzy-match auto-scoring**: `lib/design-live/fuzzyMatch.ts` turns a
+field's `exemplars`/`celebrateKeywords` into a 0–`points` (default 10)
+suggested score — word-set (Dice coefficient) overlap against the best-
+matching exemplar, plus a small bonus per distinct keyword actually
+present. This is a *suggestion*, never an auto-applied grade. The host
+opens `WorksheetReviewModal` (`WorksheetReview.tsx`) by clicking the 📝
+button next to any student on `WorksheetHost` — it shows every field's
+full written answer (not truncated) alongside its auto-suggested score,
+with an editable number input pre-filled with that suggestion the teacher
+can accept or override per section. Scores save into the existing
+`live_grades` row under synthetic keys (`ws:<stageKey>:<sectionKey>`),
+alongside whatever the grading stage's strand scores use (`A.i` etc.) —
+deliberately no new table/migration, since both are just entries in the
+same `scores: Record<string, number|null>` JSON column.
 
 When authoring a new activity: pick keywords that reward the actual skill
 being assessed (see `myp4-prototyping.ts`'s empathy-map fields — keywords
 like `because`/`currently`/`wonders` reward justification and observed-not-
-assumed detail, not just "wrote something"), not generic filler words.
-`exemplar` only renders for `text`/`textarea` worksheet fields and
-`openIdeas` prompts — `select`/`table` fields don't have anywhere to put it
-in the current UI.
+assumed detail, not just "wrote something"), not generic filler words, and
+write exemplars in genuinely different phrasings rather than near-
+duplicates — the fuzzy matcher takes the *best* match across all of them,
+so variety is what makes a differently-worded-but-equally-good student
+answer still score well. `exemplars`/auto-scoring only apply to
+`text`/`textarea` worksheet fields — `select`/`table`/`personaChat` fields
+aren't scoreable this way (the review modal shows their raw answer/table
+rows/interview count with no auto score).
 
 ## The victory screen — Podium
 
@@ -313,6 +332,17 @@ traits/anthro — one specific person, not a generalized stereotype) and
 guards against abuse by requiring the caller to be signed in AND be the
 actual `live_players` row they claim (checked against `session_code` +
 `user_id`), not just any anonymous caller with the URL.
+
+**Floating access from other sections**: `WorksheetPlayer` (`LiveJoin.tsx`)
+looks across `stage.sections` for whichever one holds the `personaChat`
+field and, once a character's actually been picked, renders
+`<FloatingPersonaChat>` — a bubble docked to the right edge — whenever any
+OTHER section is open (e.g. the empathy map). It reuses the same
+`PersonaChatField` and the same `updateField`/`persistField`/`reportDraft`
+plumbing as the Interview section itself, just called with that section's
+key instead of whichever section happens to be open — so a student filling
+in the empathy map never has to tab back to Interview just to re-check or
+continue what the persona said.
 
 If you add a second AI-backed feature, ask first whether it should be
 BYOK (like grading — where the student/teacher already has their own key

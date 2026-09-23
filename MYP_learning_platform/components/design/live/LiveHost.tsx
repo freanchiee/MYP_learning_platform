@@ -12,6 +12,7 @@ import { getPersona } from '@/data/design/live/personas'
 import { cardStyle, btnStyle, inputStyle, pageBg, ErrorBanner, QRCode, Avatar, ProgressStream, PlayerPreview, PlayerPreviewProvider, ChatButton, QuickReactButton, QuickReactProvider, UnreadChatContext } from './ui'
 import ChatPanel from './ChatPanel'
 import { Podium } from './Podium'
+import { WorksheetReviewModal } from './WorksheetReview'
 
 function PlayerChip({ player, now, onChat, sessionCode }: { player: LivePlayerRow; now: number; onChat?: (id: string) => void; sessionCode?: string }) {
   return (
@@ -52,6 +53,7 @@ export default function LiveHost({ activity }: { activity: LiveActivityDefinitio
   const [apiError, setApiError] = useState<string | null>(null)
   const [joinUrl, setJoinUrl] = useState('')
   const [chatWithId, setChatWithId] = useState<string | null>(null)
+  const [reviewPlayerId, setReviewPlayerId] = useState<string | null>(null)
   const [events, setEvents] = useState<LiveEventRow[]>([])
   const [chatReadAt, setChatReadAt] = useState<Record<string, string>>({})
   const now = useNowTick()
@@ -230,7 +232,7 @@ export default function LiveHost({ activity }: { activity: LiveActivityDefinitio
         )}
 
         {session.status === 'active' && stage && (
-          <StageHost activity={activity} stage={stage} session={session} players={players} grades={grades} patchState={patchState} advanceStage={advanceStage} run={run} now={now} onChat={openChat} />
+          <StageHost activity={activity} stage={stage} session={session} players={players} grades={grades} patchState={patchState} advanceStage={advanceStage} run={run} now={now} onChat={openChat} onReview={setReviewPlayerId} />
         )}
 
         {session.status === 'ended' && <EndedHost activity={activity} players={players} session={session} onRestart={newSession} />}
@@ -255,6 +257,16 @@ export default function LiveHost({ activity }: { activity: LiveActivityDefinitio
           </div>
         </div>
       )}
+
+      {reviewPlayerId && stage?.type === 'worksheet' && (
+        <WorksheetReviewModal
+          stage={stage}
+          player={players.find((p) => p.id === reviewPlayerId)!}
+          grade={grades.find((g) => g.player_id === reviewPlayerId)}
+          sessionCode={code!}
+          onClose={() => setReviewPlayerId(null)}
+        />
+      )}
     </div>
     </PlayerPreviewProvider>
     </QuickReactProvider>
@@ -273,6 +285,7 @@ function StageHost({
   run,
   now,
   onChat,
+  onReview,
 }: {
   activity: LiveActivityDefinition
   stage: LiveActivityDefinition['stages'][number]
@@ -284,6 +297,7 @@ function StageHost({
   run: (p: PromiseLike<{ error: any }>) => Promise<any>
   now: number
   onChat: (id: string) => void
+  onReview: (id: string) => void
 }) {
   const isLastStage = session.stage_idx >= activity.stages.length - 1
   const advanceLabel = isLastStage ? 'Finish & show results →' : 'Next stage →'
@@ -295,7 +309,7 @@ function StageHost({
       </div>
 
       {stage.type === 'mcq' && <McqHost activity={activity} stage={stage} session={session} players={players} patchState={patchState} now={now} onChat={onChat} />}
-      {stage.type === 'worksheet' && <WorksheetHost stage={stage} players={players} now={now} onChat={onChat} sessionCode={session.code} />}
+      {stage.type === 'worksheet' && <WorksheetHost stage={stage} players={players} now={now} onChat={onChat} sessionCode={session.code} onReview={onReview} />}
       {stage.type === 'openIdeas' && <OpenIdeasHost activity={activity} stage={stage} session={session} players={players} patchState={patchState} now={now} onChat={onChat} />}
       {stage.type === 'grading' && <GradingHost activity={activity} stage={stage} players={players} grades={grades} run={run} session={session} />}
 
@@ -465,7 +479,21 @@ function McqDashboard({ stage, players, now, onChat, sessionCode }: { stage: Mcq
   )
 }
 
-function WorksheetHost({ stage, players, now, onChat, sessionCode }: { stage: WorksheetStage; players: LivePlayerRow[]; now: number; onChat: (id: string) => void; sessionCode: string }) {
+function WorksheetHost({
+  stage,
+  players,
+  now,
+  onChat,
+  sessionCode,
+  onReview,
+}: {
+  stage: WorksheetStage
+  players: LivePlayerRow[]
+  now: number
+  onChat: (id: string) => void
+  sessionCode: string
+  onReview: (id: string) => void
+}) {
   return (
     <div style={{ ...cardStyle(), overflowX: 'auto' }}>
       <table style={{ borderCollapse: 'collapse', width: '100%', fontSize: 12 }}>
@@ -490,6 +518,13 @@ function WorksheetHost({ stage, players, now, onChat, sessionCode }: { stage: Wo
                   </PlayerPreview>
                   <ChatButton playerId={p.id} onClick={() => onChat(p.id)} title={`Message ${p.name}`} />
                   <QuickReactButton sessionCode={sessionCode} playerId={p.id} playerName={p.name} />
+                  <button
+                    onClick={() => onReview(p.id)}
+                    title={`Review & score ${p.name}'s work`}
+                    style={{ background: 'transparent', border: 'none', cursor: 'pointer', fontSize: 11, padding: 0, lineHeight: 1 }}
+                  >
+                    📝
+                  </button>
                 </div>
               </td>
               {stage.sections.map((s) => {
