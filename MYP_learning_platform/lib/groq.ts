@@ -1,44 +1,68 @@
 // Server-only Groq client — free hosted inference of small open-weight
-// models (Llama 3.1/3.2, Gemma). Used for the MYP4 persona-interview chat
+// models (Llama, Gemma). Used for the MYP4 persona-interview chat
 // (app/api/persona-chat/route.ts). Requires GROQ_API_KEY as a server env
 // var (never exposed to the client) — get one free at console.groq.com,
 // no credit card required. This is a platform-level key, unlike the
 // bring-your-own-key pattern in lib/ai-grading.ts: a classroom of
 // students shouldn't each need their own API key just to interview a
 // persona, so the server pays (nothing, within Groq's free tier) instead.
+//
+// Groq retires/renames model ids faster than Anthropic/OpenAI/Gemini do
+// (llama-3.1-8b-instant, live at build time, returned a 404
+// "does not exist" days later) — so this tries a short list of current
+// models in order instead of hardcoding one, and remembers whichever one
+// actually worked for the life of this warm serverless instance so
+// subsequent requests don't re-pay the discovery cost.
 
-const GROQ_MODEL = process.env.GROQ_MODEL || 'llama-3.1-8b-instant'
+const FALLBACK_MODELS = ['llama-3.3-70b-versatile', 'llama-3.1-8b-instant', 'gemma2-9b-it', 'llama3-70b-8192', 'llama3-8b-8192']
+
+let cachedWorkingModel: string | null = null
 
 export interface GroqMessage {
   role: 'system' | 'user' | 'assistant'
   content: string
 }
 
-export async function groqChat(messages: GroqMessage[], maxTokens = 220): Promise<string> {
-  const apiKey = process.env.GROQ_API_KEY
-  if (!apiKey) throw new Error('GROQ_API_KEY is not configured on the server')
-
+async function callGroq(apiKey: string, model: string, messages: GroqMessage[], maxTokens: number): Promise<{ ok: boolean; status: number; body: any }> {
   const resp = await fetch('https://api.groq.com/openai/v1/chat/completions', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${apiKey}`,
     },
-    body: JSON.stringify({
-      model: GROQ_MODEL,
-      messages,
-      max_tokens: maxTokens,
-      temperature: 0.8,
-    }),
+    body: JSON.stringify({ model, messages, max_tokens: maxTokens, temperature: 0.8 }),
   })
+  const body = await resp.json().catch(() => ({}))
+  return { ok: resp.ok, status: resp.status, body }
+}
 
-  if (!resp.ok) {
-    const text = await resp.text().catch(() => '')
-    throw new Error(`Groq API ${resp.status}: ${text}`)
+export async function groqChat(messages: GroqMessage[], maxTokens = 220): Promise<string> {
+  const apiKey = process.env.GROQ_API_KEY
+  if (!apiKey) throw new Error('GROQ_API_KEY is not configured on the server')
+
+  const configured = process.env.GROQ_MODEL
+  const candidates = [cachedWorkingModel, configured, ...FALLBACK_MODELS].filter((m, i, arr): m is string => !!m && arr.indexOf(m) === i)
+
+  let lastError: string | null = null
+  for (const model of candidates) {
+    const { ok, status, body } = await callGroq(apiKey, model, messages, maxTokens)
+    if (ok) {
+      cachedWorkingModel = model
+      const reply = body.choices?.[0]?.message?.content
+      if (typeof reply === 'string' && reply.trim()) return reply.trim()
+      lastError = `Groq returned an empty reply from ${model}`
+      continue
+    }
+    // A model-not-found/decommissioned error means "try the next
+    // candidate" — anything else (bad key, rate limit, content policy)
+    // is a real failure worth surfacing immediately instead of masking
+    // it behind four more doomed attempts.
+    const code = body?.error?.code
+    if (status === 404 || code === 'model_not_found' || code === 'model_decommissioned') {
+      lastError = `Groq API ${status} on ${model}: ${JSON.stringify(body)}`
+      continue
+    }
+    throw new Error(`Groq API ${status}: ${JSON.stringify(body)}`)
   }
-
-  const data = await resp.json()
-  const reply = data.choices?.[0]?.message?.content
-  if (typeof reply !== 'string' || !reply.trim()) throw new Error('Groq returned an empty reply')
-  return reply.trim()
+  throw new Error(lastError || 'No working Groq model found')
 }

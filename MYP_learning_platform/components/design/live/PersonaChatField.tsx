@@ -24,12 +24,14 @@ export default function PersonaChatField({
   value,
   onChange,
   onPersist,
+  onDraft,
   sessionCode,
   playerId,
 }: {
   value: PersonaChatValue | undefined
   onChange: (v: PersonaChatValue) => void
   onPersist: (v: PersonaChatValue) => void
+  onDraft: (text: string) => void
   sessionCode: string
   playerId: string
 }) {
@@ -162,7 +164,10 @@ export default function PersonaChatField({
         <div style={{ display: 'flex', gap: 6 }}>
           <input
             value={text}
-            onChange={(e) => setText(e.target.value)}
+            onChange={(e) => {
+              setText(e.target.value)
+              if (e.target.value.trim()) onDraft(e.target.value)
+            }}
             onKeyDown={(e) => e.key === 'Enter' && send()}
             placeholder={`Ask ${character.name} something…`}
             style={inputStyle}

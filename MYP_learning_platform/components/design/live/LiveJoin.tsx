@@ -466,6 +466,7 @@ function WorksheetPlayer({
                     value={drafts[s.key]?.[f.key]}
                     onChange={(v) => updateField(s.key, f.key, v)}
                     onPersist={(v) => persistField(s.key, f.key, v)}
+                    onDraft={(text) => reportDraft(stage.key, text)}
                     sessionCode={sessionCode}
                     playerId={me.id}
                   />
@@ -487,6 +488,7 @@ function WorksheetFieldInput({
   value,
   onChange,
   onPersist,
+  onDraft,
   sessionCode,
   playerId,
 }: {
@@ -494,11 +496,12 @@ function WorksheetFieldInput({
   value: any
   onChange: (v: any) => void
   onPersist?: (v: any) => void
+  onDraft?: (text: string) => void
   sessionCode?: string
   playerId?: string
 }) {
   if (field.type === 'personaChat') {
-    return <PersonaChatField value={value} onChange={onChange} onPersist={onPersist!} sessionCode={sessionCode!} playerId={playerId!} />
+    return <PersonaChatField value={value} onChange={onChange} onPersist={onPersist!} onDraft={onDraft!} sessionCode={sessionCode!} playerId={playerId!} />
   }
   if (field.type === 'text') {
     return (
