@@ -7,14 +7,20 @@
 // students shouldn't each need their own API key just to interview a
 // persona, so the server pays (nothing, within Groq's free tier) instead.
 //
-// Groq retires/renames model ids faster than Anthropic/OpenAI/Gemini do
-// (llama-3.1-8b-instant, live at build time, returned a 404
-// "does not exist" days later) — so this tries a short list of current
-// models in order instead of hardcoding one, and remembers whichever one
-// actually worked for the life of this warm serverless instance so
-// subsequent requests don't re-pay the discovery cost.
-
-const FALLBACK_MODELS = ['llama-3.3-70b-versatile', 'llama-3.1-8b-instant', 'gemma2-9b-it', 'llama3-70b-8192', 'llama3-8b-8192']
+// Groq retires/renames model ids faster than Anthropic/OpenAI/Gemini do,
+// AND which models a given account/key can see varies — the commonly-
+// documented Llama/Gemma ids (llama-3.1-8b-instant, gemma2-9b-it,
+// llama3-8b-8192...) all 404'd or came back "decommissioned" for this
+// key. Don't guess again: hit GET https://api.groq.com/openai/v1/models
+// with the real key (e.g. via a temporary route) to see what's actually
+// available before changing this list. As of the last check, this
+// account's only general-purpose text chat models were the ones below
+// (everything else on the account was audio (whisper), speech synthesis
+// (orpheus), or a safety/prompt-guard classifier — not a chat model).
+// This still tries them in order and remembers whichever one worked for
+// the life of this warm serverless instance, since Groq's catalog will
+// keep moving.
+const FALLBACK_MODELS = ['openai/gpt-oss-20b', 'openai/gpt-oss-120b', 'qwen/qwen3.8-27b']
 
 let cachedWorkingModel: string | null = null
 
