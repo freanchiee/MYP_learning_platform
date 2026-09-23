@@ -129,6 +129,17 @@ shaped by your activity's own stage config instead.
   design tokens (`var(--text)`, `var(--surface)`, `var(--border)`, etc. from
   `app/themes.css`) instead of hardcoded hex, so it inherits the user's
   chosen theme.
+- `LiveJoin.tsx` is laptop-first, not phone-first: the outer shell is
+  `maxWidth: min(1180px, 94vw)`, not a ~480px mobile column stretched
+  across a wide monitor. A single-focus stage (`mcq`/`openIdeas`/`grading`,
+  see `stageIsNarrow` in `LiveJoin`) still centers in a comfortable ~560px
+  reading column inside that shell — only content-heavy stages
+  (`worksheet`, `ended`) actually use the full width, via CSS grid
+  (`repeat(auto-fit, minmax(Npx, 1fr))`) rather than a fixed column count,
+  so they reflow naturally instead of needing a media query. If you add a
+  new stage type with more than one focal element (like `personaChat`'s
+  persona-card + chat-log split), give it the same `auto-fit`/`minmax`
+  treatment rather than stacking everything in one column by default.
 
 ## Player identity — avatars, not just names
 

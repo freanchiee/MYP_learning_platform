@@ -110,7 +110,7 @@ export default function PersonaChatField({
   }
 
   return (
-    <div style={{ display: 'grid', gap: 10 }}>
+    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 14, alignItems: 'start' }}>
       <div style={cardStyle('#5C3FD6')}>
         <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
           <Avatar seed={character.id} size={48} />
@@ -128,49 +128,49 @@ export default function PersonaChatField({
             <li key={s}>{s}</li>
           ))}
         </ul>
+        <div style={{ fontSize: 11, color: 'var(--text-muted)', marginTop: 10, fontStyle: 'italic' }}>
+          Ask how they feel, what they actually do to cope, or their measurements — use what they tell you to fill in the empathy map below.
+        </div>
         <button onClick={() => onChange({ characterId: '', messages: [] })} style={{ ...btnStyle('var(--surface)'), marginTop: 10, fontSize: 11 }}>
           ← Choose a different character
         </button>
       </div>
 
-      <div style={{ fontSize: 11.5, color: 'var(--text-muted)' }}>
-        Ask how they feel, what they actually do to cope, or their measurements — use what they tell you to fill in the empathy map below.
-      </div>
+      <div style={{ ...cardStyle(), display: 'grid', gap: 10 }}>
+        <div style={{ display: 'grid', gap: 6, maxHeight: 360, overflowY: 'auto', padding: '4px 2px' }}>
+          {messages.map((m, i) => (
+            <div
+              key={i}
+              style={{
+                marginLeft: m.from === 'student' ? 'auto' : 0,
+                maxWidth: '85%',
+                background: m.from === 'student' ? '#5C3FD6' : 'var(--surface-2)',
+                color: m.from === 'student' ? '#fff' : 'var(--text)',
+                borderRadius: 10,
+                padding: '7px 11px',
+                fontSize: 12.5,
+              }}
+            >
+              {m.text}
+            </div>
+          ))}
+          {sending && <div style={{ fontSize: 11.5, color: 'var(--text-muted)', fontStyle: 'italic' }}>{character.name} is typing…</div>}
+        </div>
 
-      <div style={{ display: 'grid', gap: 6, maxHeight: 260, overflowY: 'auto', padding: '4px 2px' }}>
-        {messages.map((m, i) => (
-          <div
-            key={i}
-            style={{
-              alignSelf: m.from === 'student' ? 'flex-end' : 'flex-start',
-              marginLeft: m.from === 'student' ? 'auto' : 0,
-              maxWidth: '85%',
-              background: m.from === 'student' ? '#5C3FD6' : 'var(--surface-2)',
-              color: m.from === 'student' ? '#fff' : 'var(--text)',
-              borderRadius: 10,
-              padding: '7px 11px',
-              fontSize: 12.5,
-            }}
-          >
-            {m.text}
-          </div>
-        ))}
-        {sending && <div style={{ fontSize: 11.5, color: 'var(--text-muted)', fontStyle: 'italic' }}>{character.name} is typing…</div>}
-      </div>
+        {error && <div style={{ fontSize: 11.5, color: '#D6425E' }}>⚠ {error}</div>}
 
-      {error && <div style={{ fontSize: 11.5, color: '#D6425E' }}>⚠ {error}</div>}
-
-      <div style={{ display: 'flex', gap: 6 }}>
-        <input
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-          onKeyDown={(e) => e.key === 'Enter' && send()}
-          placeholder={`Ask ${character.name} something…`}
-          style={inputStyle}
-        />
-        <button onClick={send} disabled={sending || !text.trim()} style={btnStyle('#5C3FD6', true)}>
-          Send
-        </button>
+        <div style={{ display: 'flex', gap: 6 }}>
+          <input
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+            onKeyDown={(e) => e.key === 'Enter' && send()}
+            placeholder={`Ask ${character.name} something…`}
+            style={inputStyle}
+          />
+          <button onClick={send} disabled={sending || !text.trim()} style={btnStyle('#5C3FD6', true)}>
+            Send
+          </button>
+        </div>
       </div>
     </div>
   )

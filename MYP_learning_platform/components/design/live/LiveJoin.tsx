@@ -198,10 +198,17 @@ export default function LiveJoin({ activity, initialCode }: { activity: LiveActi
   const team = activity.teams && me.team != null ? activity.teams[me.team] : null
   const stage = activity.stages[session.stage_idx]
 
+  // Wide, single-focus (mcq/openIdeas/grading) stages read best in a
+  // comfortable column even on a laptop-wide screen — the shell itself
+  // goes full-bleed, but a single question or prompt shouldn't stretch to
+  // fill 1200px. Worksheet/ended stages have genuinely more content and
+  // use the full shell width (with their own responsive grids inside).
+  const stageIsNarrow = session.status !== 'active' || stage?.type === 'mcq' || stage?.type === 'openIdeas' || stage?.type === 'grading'
+
   return (
     <div style={pageBg(activity.theme)}>
-      <div style={{ maxWidth: 480, margin: '0 auto', display: 'grid', gap: 14 }}>
-        <div style={{ textAlign: 'center', color: '#fff', display: 'grid', justifyItems: 'center', gap: 6 }}>
+      <div style={{ maxWidth: 'min(1180px, 94vw)', margin: '0 auto', display: 'grid', gap: 18 }}>
+        <div style={{ maxWidth: 480, width: '100%', margin: '0 auto', textAlign: 'center', color: '#fff', display: 'grid', justifyItems: 'center', gap: 6 }}>
           <Avatar seed={me.id} size={56} />
           <div style={{ fontWeight: 800 }}>
             {team ? `${team.icon} ${me.name} · ${team.name}` : `👋 ${me.name}`}
@@ -211,77 +218,80 @@ export default function LiveJoin({ activity, initialCode }: { activity: LiveActi
             📜 My history
           </Link>
         </div>
-        <BadgeRow badges={me.badges} />
-        <ErrorBanner message={apiError} onClose={() => setApiError(null)} />
 
-        <StudentChatToggle sessionCode={code} me={me} accent={activity.theme.accent} />
+        <div style={{ maxWidth: stageIsNarrow ? 560 : '100%', width: '100%', margin: '0 auto', display: 'grid', gap: 14 }}>
+          <BadgeRow badges={me.badges} />
+          <ErrorBanner message={apiError} onClose={() => setApiError(null)} />
 
-        {session.status === 'lobby' && (
-          <div style={{ ...cardStyle('#1FA98A'), textAlign: 'center' }}>
-            You&apos;re in! Waiting for your teacher to start… ({players.length} joined)
-          </div>
-        )}
+          <StudentChatToggle sessionCode={code} me={me} accent={activity.theme.accent} />
 
-        {session.status === 'active' && stage?.type === 'mcq' && (
-          <McqPlayer activity={activity} stage={stage} session={session} me={me} patchMyData={patchMyData} addPoints={addPoints} />
-        )}
-        {session.status === 'active' && stage?.type === 'worksheet' && <WorksheetPlayer stage={stage} me={me} sessionCode={code} patchMyData={patchMyData} reportDraft={reportDraft} />}
-        {session.status === 'active' && stage?.type === 'openIdeas' && (
-          <OpenIdeasPlayer activity={activity} stage={stage} session={session} me={me} patchMyData={patchMyData} reportDraft={reportDraft} />
-        )}
-        {session.status === 'active' && stage?.type === 'grading' && (
-          <div style={cardStyle(activity.theme.accent)}>
-            {myGrade?.graded ? (
-              <div>
-                <div style={{ fontWeight: 800, marginBottom: 6 }}>Your feedback</div>
-                <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 8 }}>
-                  {Object.entries(myGrade.scores).map(([k, v]) => (
-                    <span key={k} style={{ fontSize: 12, fontWeight: 700, background: 'var(--surface-2)', borderRadius: 8, padding: '4px 8px' }}>
-                      {k}: {v ?? '–'}
-                    </span>
-                  ))}
-                </div>
-                <div style={{ fontSize: 13 }}>{myGrade.feedback || 'No written feedback yet.'}</div>
-              </div>
-            ) : (
-              <div style={{ textAlign: 'center', color: 'var(--text-muted)' }}>Your teacher is reviewing everyone&apos;s work — check back soon.</div>
-            )}
-          </div>
-        )}
-
-        {session.status === 'ended' && (
-          <div style={{ display: 'grid', gap: 14 }}>
-            <div style={{ ...cardStyle('#FFCF3F'), textAlign: 'center' }}>
-              <div style={{ fontSize: 20, fontWeight: 800 }}>🏆 Final results</div>
+          {session.status === 'lobby' && (
+            <div style={{ ...cardStyle('#1FA98A'), textAlign: 'center' }}>
+              You&apos;re in! Waiting for your teacher to start… ({players.length} joined)
             </div>
-            {activity.teams ? (
-              <div style={{ display: 'grid', gridTemplateColumns: `repeat(auto-fit, minmax(140px, 1fr))`, gap: 10 }}>
-                {activity.teams.map((t, ti) => (
-                  <div key={t.name} style={{ ...cardStyle(t.color), textAlign: 'center', border: me.team === ti ? '2.5px solid #FFCF3F' : undefined }}>
-                    <div style={{ fontWeight: 800, color: t.color }}>
-                      {t.icon} {t.name}
-                    </div>
-                    <div style={{ fontSize: 24, fontWeight: 800 }}>{session.state?.teamScores?.[ti] || 0}</div>
+          )}
+
+          {session.status === 'active' && stage?.type === 'mcq' && (
+            <McqPlayer activity={activity} stage={stage} session={session} me={me} patchMyData={patchMyData} addPoints={addPoints} />
+          )}
+          {session.status === 'active' && stage?.type === 'worksheet' && <WorksheetPlayer stage={stage} me={me} sessionCode={code} patchMyData={patchMyData} reportDraft={reportDraft} />}
+          {session.status === 'active' && stage?.type === 'openIdeas' && (
+            <OpenIdeasPlayer activity={activity} stage={stage} session={session} me={me} patchMyData={patchMyData} reportDraft={reportDraft} />
+          )}
+          {session.status === 'active' && stage?.type === 'grading' && (
+            <div style={cardStyle(activity.theme.accent)}>
+              {myGrade?.graded ? (
+                <div>
+                  <div style={{ fontWeight: 800, marginBottom: 6 }}>Your feedback</div>
+                  <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 8 }}>
+                    {Object.entries(myGrade.scores).map(([k, v]) => (
+                      <span key={k} style={{ fontSize: 12, fontWeight: 700, background: 'var(--surface-2)', borderRadius: 8, padding: '4px 8px' }}>
+                        {k}: {v ?? '–'}
+                      </span>
+                    ))}
                   </div>
-                ))}
+                  <div style={{ fontSize: 13 }}>{myGrade.feedback || 'No written feedback yet.'}</div>
+                </div>
+              ) : (
+                <div style={{ textAlign: 'center', color: 'var(--text-muted)' }}>Your teacher is reviewing everyone&apos;s work — check back soon.</div>
+              )}
+            </div>
+          )}
+
+          {session.status === 'ended' && (
+            <div style={{ display: 'grid', gap: 14 }}>
+              <div style={{ ...cardStyle('#FFCF3F'), textAlign: 'center' }}>
+                <div style={{ fontSize: 20, fontWeight: 800 }}>🏆 Final results</div>
               </div>
-            ) : (
-              <Podium entries={[...players].sort((a, b) => b.points - a.points).map((p) => ({ id: p.id, name: p.name, points: p.points }))} accent={activity.theme.accent} youId={me.id} />
-            )}
-            {activity.debriefQuestions && (
-              <div style={cardStyle('var(--accent-2)')}>
-                <div style={{ fontWeight: 800, marginBottom: 8 }}>💬 Talk it through</div>
-                <div style={{ display: 'grid', gap: 8 }}>
-                  {activity.debriefQuestions.map((q, i) => (
-                    <div key={i} style={{ fontSize: 13.5, background: 'var(--surface-2)', borderRadius: 8, padding: '8px 10px', border: '1.5px solid var(--border)' }}>
-                      {q}
+              {activity.teams ? (
+                <div style={{ display: 'grid', gridTemplateColumns: `repeat(auto-fit, minmax(140px, 1fr))`, gap: 10 }}>
+                  {activity.teams.map((t, ti) => (
+                    <div key={t.name} style={{ ...cardStyle(t.color), textAlign: 'center', border: me.team === ti ? '2.5px solid #FFCF3F' : undefined }}>
+                      <div style={{ fontWeight: 800, color: t.color }}>
+                        {t.icon} {t.name}
+                      </div>
+                      <div style={{ fontSize: 24, fontWeight: 800 }}>{session.state?.teamScores?.[ti] || 0}</div>
                     </div>
                   ))}
                 </div>
-              </div>
-            )}
-          </div>
-        )}
+              ) : (
+                <Podium entries={[...players].sort((a, b) => b.points - a.points).map((p) => ({ id: p.id, name: p.name, points: p.points }))} accent={activity.theme.accent} youId={me.id} />
+              )}
+              {activity.debriefQuestions && (
+                <div style={cardStyle('var(--accent-2)')}>
+                  <div style={{ fontWeight: 800, marginBottom: 8 }}>💬 Talk it through</div>
+                  <div style={{ display: 'grid', gap: 8 }}>
+                    {activity.debriefQuestions.map((q, i) => (
+                      <div key={i} style={{ fontSize: 13.5, background: 'var(--surface-2)', borderRadius: 8, padding: '8px 10px', border: '1.5px solid var(--border)' }}>
+                        {q}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+        </div>
       </div>
     </div>
   )
@@ -429,13 +439,17 @@ function WorksheetPlayer({
     patchMyData(stage.key, { [sectionKey]: { ...drafts[sectionKey], [fieldKey]: value } })
   }
 
+  // Sections that are open render "wide" (span every column) since they
+  // hold the actual fields — a full grid width in a laptop browser instead
+  // of squeezing a table/chat into a narrow single column. Collapsed
+  // sections are compact and flow into whatever columns are left.
   return (
-    <div style={{ display: 'grid', gap: 10 }}>
+    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 14, alignItems: 'start' }}>
       {stage.sections.map((s) => {
         const pct = worksheetSectionPct(s, drafts[s.key])
         const open = openSection === s.key
         return (
-          <div key={s.key} style={cardStyle(pct >= 70 ? '#1FA98A' : 'var(--border)')}>
+          <div key={s.key} style={{ ...cardStyle(pct >= 70 ? '#1FA98A' : 'var(--border)'), gridColumn: open ? '1 / -1' : undefined }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', cursor: 'pointer' }} onClick={() => setOpenSection(open ? undefined : s.key)}>
               <div style={{ fontWeight: 800 }}>
                 {s.icon} {s.label}
@@ -443,7 +457,7 @@ function WorksheetPlayer({
               <div style={{ fontSize: 12, color: 'var(--text-muted)' }}>{pct}%</div>
             </div>
             {open && (
-              <div style={{ marginTop: 10, display: 'grid', gap: 10 }}>
+              <div style={{ marginTop: 10, display: 'grid', gap: 10, maxWidth: s.fields.some((f) => f.type === 'personaChat') ? 960 : 720 }}>
                 {s.blurb && <div style={{ fontSize: 12.5, color: 'var(--text-muted)' }}>{s.blurb}</div>}
                 {s.fields.map((f) => (
                   <WorksheetFieldInput
@@ -456,7 +470,7 @@ function WorksheetPlayer({
                     playerId={me.id}
                   />
                 ))}
-                <button onClick={() => saveSection(s.key)} style={btnStyle('#1FA98A', true)}>
+                <button onClick={() => saveSection(s.key)} style={{ ...btnStyle('#1FA98A', true), justifySelf: 'start' }}>
                   {savedFlash === s.key ? '✅ Saved!' : '💾 Save'}
                 </button>
               </div>
