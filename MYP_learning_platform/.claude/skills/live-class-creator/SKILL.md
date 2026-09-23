@@ -25,6 +25,7 @@ data/design/live/registry.ts     — LIVE_ACTIVITIES + getLiveActivity(id)
 lib/design-live/hooks.ts         — useLiveRow / useLiveTable (Realtime + poll fallback)
 lib/design-live/scoring.ts       — generic completeness/score helpers
 lib/design-live/types.ts         — DB row shapes
+lib/design-live/avatar.ts        — deterministic per-player dicebear avatar, seeded off live_players.id
 components/design/live/          — the ENGINE (do not fork; extend it)
   ui.tsx                         — shared visual primitives
   LiveHost.tsx                   — host/projector screen, all stage types
@@ -118,6 +119,23 @@ shaped by your activity's own stage config instead.
   design tokens (`var(--text)`, `var(--surface)`, `var(--border)`, etc. from
   `app/themes.css`) instead of hardcoded hex, so it inherits the user's
   chosen theme.
+
+## Player identity — avatars, not just names
+
+Every player gets a deterministic avatar (`lib/design-live/avatar.ts`, dicebear
+"micah" style, seeded off `live_players.id`) rendered via the shared
+`<Avatar seed size />` in `ui.tsx` — the same player renders the same face
+everywhere (roster chips, dashboard tables, leaderboard, their own header),
+with zero extra DB column or migration, since the id is already stable. This
+pattern — and the `<ProgressCell pct />` mini bar used in the worksheet
+dashboard, and `framer-motion`'s `AnimatePresence`/`motion.div` for players
+popping in/out of the roster — were lifted from a sibling project's
+Strandhoot builder (`PlayerIdentityModal.tsx`, `ParticipantList.tsx`,
+`LiveStrandhootTable.tsx`), which uses the identical dicebear + framer-motion
+combo with a randomizable, DB-stored seed instead of a deterministic one. If
+a future activity wants a *randomizable* avatar (student picks their own
+face), store a `avatar_seed text` column on `live_players` instead of reusing
+`id` — that's the one piece of this pattern that genuinely needs a migration.
 
 ## History — nothing a teacher hosts is ever lost
 

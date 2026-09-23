@@ -2,6 +2,7 @@
 
 import type { CSSProperties } from 'react'
 import type { LiveTheme } from '@/data/design/live/types'
+import { avatarSvg } from '@/lib/design-live/avatar'
 
 export const cardStyle = (accent?: string): CSSProperties => ({
   background: 'var(--surface)',
@@ -74,6 +75,41 @@ export function QRCode({ url, size = 150 }: { url: string; size?: number }) {
   return (
     // eslint-disable-next-line @next/next/no-img-element
     <img alt="QR code to join" src={src} width={size} height={size} style={{ border: '2.5px solid var(--text)', borderRadius: 10 }} />
+  )
+}
+
+/** A deterministic per-player avatar (see lib/design-live/avatar.ts) — same
+ *  player, same face, everywhere: roster, dashboards, leaderboards. */
+export function Avatar({ seed, size = 40 }: { seed: string; size?: number }) {
+  return (
+    <span
+      aria-hidden
+      style={{
+        display: 'inline-flex',
+        width: size,
+        height: size,
+        borderRadius: '50%',
+        overflow: 'hidden',
+        border: '2px solid var(--text)',
+        background: 'var(--surface-2)',
+        flexShrink: 0,
+      }}
+      dangerouslySetInnerHTML={{ __html: avatarSvg(seed) }}
+    />
+  )
+}
+
+/** A compact colour-coded progress bar for a dashboard table cell — e.g. a
+ *  worksheet section's completeness %, or a quiz score out of a total. */
+export function ProgressCell({ pct, label }: { pct: number; label?: string }) {
+  const color = pct >= 70 ? '#1FA98A' : pct >= 30 ? '#FFCF3F' : pct > 0 ? '#D6425E' : 'var(--border-strong)'
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2, minWidth: 46 }}>
+      <div style={{ width: '100%', height: 6, borderRadius: 999, background: 'var(--border)', overflow: 'hidden' }}>
+        <div style={{ width: `${Math.max(0, Math.min(100, pct))}%`, height: '100%', background: color, transition: 'width .4s ease' }} />
+      </div>
+      <span style={{ fontSize: 10, fontWeight: 800, color }}>{label ?? `${pct}%`}</span>
+    </div>
   )
 }
 

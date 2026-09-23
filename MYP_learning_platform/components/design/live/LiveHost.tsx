@@ -2,12 +2,39 @@
 
 import { useEffect, useMemo, useState } from 'react'
 import Link from 'next/link'
+import { motion, AnimatePresence } from 'framer-motion'
 import { createClient } from '@/lib/supabase/client'
 import { useLiveRow, useLiveTable, generateJoinCode, hostStorageKey } from '@/lib/design-live/hooks'
 import { worksheetSectionPct } from '@/lib/design-live/scoring'
 import type { LiveActivityDefinition, McqStage, WorksheetStage, OpenIdeasStage, GradingStage } from '@/data/design/live/types'
 import type { LiveSessionRow, LivePlayerRow, LiveGradeRow } from '@/lib/design-live/types'
-import { cardStyle, btnStyle, inputStyle, pageBg, ErrorBanner, QRCode } from './ui'
+import { cardStyle, btnStyle, inputStyle, pageBg, ErrorBanner, QRCode, Avatar, ProgressCell } from './ui'
+
+function PlayerChip({ player }: { player: LivePlayerRow }) {
+  return (
+    <motion.span
+      layout
+      initial={{ opacity: 0, scale: 0.85 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.85 }}
+      transition={{ duration: 0.2 }}
+      style={{
+        display: 'inline-flex',
+        alignItems: 'center',
+        gap: 6,
+        fontSize: 12.5,
+        fontWeight: 600,
+        background: 'var(--surface-2)',
+        border: '1.5px solid var(--border)',
+        borderRadius: 999,
+        padding: '3px 10px 3px 3px',
+      }}
+    >
+      <Avatar seed={player.id} size={22} />
+      {player.name}
+    </motion.span>
+  )
+}
 
 export default function LiveHost({ activity }: { activity: LiveActivityDefinition }) {
   const [hostId, setHostId] = useState<string | null | undefined>(undefined) // undefined = loading, null = not signed in
@@ -129,18 +156,18 @@ export default function LiveHost({ activity }: { activity: LiveActivityDefinitio
         {session.status === 'lobby' && (
           <div style={{ display: 'grid', gap: 14 }}>
             {activity.teams ? (
-              <div style={{ display: 'grid', gridTemplateColumns: `repeat(${activity.teams.length}, 1fr)`, gap: 12 }}>
+              <div style={{ display: 'grid', gridTemplateColumns: `repeat(auto-fit, minmax(220px, 1fr))`, gap: 12 }}>
                 {activity.teams.map((t, ti) => (
                   <div key={t.name} style={cardStyle(t.color)}>
                     <div style={{ fontWeight: 800, color: t.color }}>
                       {t.icon} {t.name}
                     </div>
-                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginTop: 8 }}>
-                      {players.filter((p) => p.team === ti).map((p) => (
-                        <span key={p.id} style={{ fontSize: 12.5, fontWeight: 600, background: 'var(--surface-2)', border: '1.5px solid var(--border)', borderRadius: 999, padding: '3px 9px' }}>
-                          {p.name}
-                        </span>
-                      ))}
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginTop: 10 }}>
+                      <AnimatePresence>
+                        {players.filter((p) => p.team === ti).map((p) => (
+                          <PlayerChip key={p.id} player={p} />
+                        ))}
+                      </AnimatePresence>
                       {teamCounts?.[ti] === 0 && <span style={{ color: 'var(--text-muted)', fontSize: 12 }}>Waiting…</span>}
                     </div>
                   </div>
@@ -149,12 +176,12 @@ export default function LiveHost({ activity }: { activity: LiveActivityDefinitio
             ) : (
               <div style={cardStyle()}>
                 <div style={{ fontWeight: 800, marginBottom: 8 }}>Roster</div>
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
-                  {players.map((p) => (
-                    <span key={p.id} style={{ fontSize: 12.5, fontWeight: 600, background: 'var(--surface-2)', border: '1.5px solid var(--border)', borderRadius: 999, padding: '3px 9px' }}>
-                      {p.name}
-                    </span>
-                  ))}
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+                  <AnimatePresence>
+                    {players.map((p) => (
+                      <PlayerChip key={p.id} player={p} />
+                    ))}
+                  </AnimatePresence>
                   {players.length === 0 && <span style={{ color: 'var(--text-muted)', fontSize: 13 }}>Waiting for students to join…</span>}
                 </div>
               </div>
@@ -301,7 +328,7 @@ function McqHost({
         </button>
       </div>
       {activity.teams && (
-        <div style={{ display: 'grid', gridTemplateColumns: `repeat(${activity.teams.length}, 1fr)`, gap: 10 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: `repeat(auto-fit, minmax(150px, 1fr))`, gap: 10 }}>
           {activity.teams.map((t, ti) => (
             <div key={t.name} style={{ ...cardStyle(t.color), textAlign: 'center' }}>
               <div style={{ fontWeight: 800, color: t.color, fontSize: 12.5 }}>
@@ -337,7 +364,12 @@ function McqDashboard({ stage, players }: { stage: McqStage; players: LivePlayer
         <tbody>
           {players.map((p) => (
             <tr key={p.id} style={{ borderTop: '1px solid var(--border)' }}>
-              <td style={{ padding: '6px 8px', fontWeight: 700, whiteSpace: 'nowrap' }}>{p.name}</td>
+              <td style={{ padding: '6px 8px', fontWeight: 700, whiteSpace: 'nowrap' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                  <Avatar seed={p.id} size={22} />
+                  {p.name}
+                </div>
+              </td>
               {stage.questions.map((_, i) => {
                 const a = p.data?.[stage.key]?.answers?.[i]
                 const symbol = !a ? '●' : a.correct ? '✓' : '✕'
@@ -380,14 +412,17 @@ function WorksheetHost({ stage, players }: { stage: WorksheetStage; players: Liv
         <tbody>
           {players.map((p) => (
             <tr key={p.id} style={{ borderTop: '1px solid var(--border)' }}>
-              <td style={{ padding: '6px 8px', fontWeight: 700, whiteSpace: 'nowrap' }}>{p.name}</td>
+              <td style={{ padding: '6px 8px', fontWeight: 700, whiteSpace: 'nowrap' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                  <Avatar seed={p.id} size={22} />
+                  {p.name}
+                </div>
+              </td>
               {stage.sections.map((s) => {
                 const pct = worksheetSectionPct(s, p.data?.[stage.key]?.[s.key] || {})
-                const symbol = pct >= 70 ? '✓' : pct > 0 ? '◐' : '●'
-                const color = pct >= 70 ? '#1FA98A' : pct > 0 ? '#FFCF3F' : 'var(--border-strong)'
                 return (
-                  <td key={s.key} style={{ textAlign: 'center', padding: '6px 3px', color, fontWeight: 800 }}>
-                    {symbol}
+                  <td key={s.key} style={{ textAlign: 'center', padding: '6px 3px' }}>
+                    <ProgressCell pct={pct} />
                   </td>
                 )
               })}
@@ -402,7 +437,6 @@ function WorksheetHost({ stage, players }: { stage: WorksheetStage; players: Liv
           )}
         </tbody>
       </table>
-      <div style={{ fontSize: 11, color: 'var(--text-muted)', marginTop: 6 }}>✓ done · ◐ started · ● not yet</div>
     </div>
   )
 }
@@ -470,7 +504,7 @@ function OpenIdeasHost({
       {activity.teams && stage.bonusCategories && (
         <div style={cardStyle('#FFCF3F')}>
           <div style={{ fontWeight: 800, fontSize: 14, marginBottom: 8 }}>🏅 Teacher bonus scoring</div>
-          <div style={{ display: 'grid', gridTemplateColumns: `repeat(${activity.teams.length}, 1fr)`, gap: 14 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: `repeat(auto-fit, minmax(180px, 1fr))`, gap: 14 }}>
             {activity.teams.map((t, ti) => (
               <div key={t.name}>
                 <div style={{ fontWeight: 800, fontSize: 13, color: t.color, marginBottom: 6 }}>
@@ -490,9 +524,10 @@ function OpenIdeasHost({
       )}
       <div style={{ ...cardStyle(), maxHeight: 180, overflowY: 'auto' }}>
         <div style={{ fontSize: 11, fontWeight: 700, color: 'var(--text-muted)', marginBottom: 6 }}>SUBMISSIONS ({submissions.length}/{players.length})</div>
-        <div style={{ display: 'grid', gap: 5 }}>
+        <div style={{ display: 'grid', gap: 6 }}>
           {submissions.map(({ player, sub }) => (
-            <div key={player.id} style={{ fontSize: 12.5 }}>
+            <div key={player.id} style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 12.5 }}>
+              <Avatar seed={player.id} size={20} />
               <strong>{player.name}:</strong> {sub.text}
             </div>
           ))}
@@ -566,7 +601,10 @@ function GradeCard({
   return (
     <div style={cardStyle(grade?.graded ? '#1FA98A' : 'var(--border)')}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', cursor: 'pointer' }} onClick={() => setOpen(!open)}>
-        <div style={{ fontWeight: 800 }}>{player.name}</div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontWeight: 800 }}>
+          <Avatar seed={player.id} size={26} />
+          {player.name}
+        </div>
         <div style={{ fontSize: 12, color: 'var(--text-muted)' }}>{grade?.graded ? '✅ graded' : 'not graded'}</div>
       </div>
       {open && (
@@ -605,7 +643,7 @@ function EndedHost({ activity, players, session, onRestart }: { activity: LiveAc
         <div style={{ fontSize: 20, fontWeight: 800 }}>🏆 Final scores</div>
       </div>
       {activity.teams ? (
-        <div style={{ display: 'grid', gridTemplateColumns: `repeat(${activity.teams.length}, 1fr)`, gap: 12 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: `repeat(auto-fit, minmax(160px, 1fr))`, gap: 12 }}>
           {activity.teams.map((t, ti) => (
             <div key={t.name} style={{ ...cardStyle(t.color), textAlign: 'center' }}>
               <div style={{ fontWeight: 800, color: t.color }}>
@@ -618,15 +656,16 @@ function EndedHost({ activity, players, session, onRestart }: { activity: LiveAc
       ) : (
         <div style={{ display: 'grid', gap: 8 }}>
           {sorted.map((p, i) => (
-            <div key={p.id} style={cardStyle(i === 0 ? '#FFCF3F' : 'var(--border)')}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', fontWeight: 800 }}>
-                <span>
-                  {i === 0 ? '🥇 ' : i === 1 ? '🥈 ' : i === 2 ? '🥉 ' : ''}
+            <motion.div key={p.id} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }} style={cardStyle(i === 0 ? '#FFCF3F' : 'var(--border)')}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontWeight: 800 }}>
+                <span style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                  {i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : <span style={{ width: 18, textAlign: 'center', color: 'var(--text-muted)', fontSize: 12 }}>{i + 1}</span>}
+                  <Avatar seed={p.id} size={28} />
                   {p.name}
                 </span>
                 <span>{p.points} pts</span>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       )}

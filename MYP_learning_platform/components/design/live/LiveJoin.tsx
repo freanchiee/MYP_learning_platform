@@ -6,7 +6,7 @@ import { useLiveRow, useLiveTable, shuffle } from '@/lib/design-live/hooks'
 import { worksheetSectionPct } from '@/lib/design-live/scoring'
 import type { LiveActivityDefinition, McqStage, WorksheetStage, OpenIdeasStage, WorksheetField } from '@/data/design/live/types'
 import type { LiveSessionRow, LivePlayerRow, LiveGradeRow } from '@/lib/design-live/types'
-import { cardStyle, btnStyle, inputStyle, pageBg, ErrorBanner, BadgeRow, MCQOptions } from './ui'
+import { cardStyle, btnStyle, inputStyle, pageBg, ErrorBanner, BadgeRow, MCQOptions, Avatar } from './ui'
 
 function pickTeam(players: LivePlayerRow[], teamCount: number): number {
   const counts = new Array(teamCount).fill(0)
@@ -141,7 +141,8 @@ export default function LiveJoin({ activity, initialCode }: { activity: LiveActi
   return (
     <div style={pageBg(activity.theme)}>
       <div style={{ maxWidth: 480, margin: '0 auto', display: 'grid', gap: 14 }}>
-        <div style={{ textAlign: 'center', color: '#fff' }}>
+        <div style={{ textAlign: 'center', color: '#fff', display: 'grid', justifyItems: 'center', gap: 6 }}>
+          <Avatar seed={me.id} size={56} />
           <div style={{ fontWeight: 800 }}>
             {team ? `${team.icon} ${me.name} · ${team.name}` : `👋 ${me.name}`}
           </div>
