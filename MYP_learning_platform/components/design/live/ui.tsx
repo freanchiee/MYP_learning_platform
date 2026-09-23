@@ -1,8 +1,9 @@
 'use client'
 
-import type { CSSProperties } from 'react'
+import { useState, type CSSProperties, type ReactNode } from 'react'
 import type { LiveTheme } from '@/data/design/live/types'
 import { avatarSvg } from '@/lib/design-live/avatar'
+import { isDraftFresh, type LiveDraft } from '@/lib/design-live/hooks'
 
 export const cardStyle = (accent?: string): CSSProperties => ({
   background: 'var(--surface)',
@@ -110,6 +111,47 @@ export function ProgressCell({ pct, label }: { pct: number; label?: string }) {
       </div>
       <span style={{ fontSize: 10, fontWeight: 800, color }}>{label ?? `${pct}%`}</span>
     </div>
+  )
+}
+
+/** Wraps a player's name/avatar with a hover preview of what they're
+ *  currently typing (see lib/design-live/hooks.ts useLiveDraftReporter) — a
+ *  minified window onto their in-progress answer, for the host dashboard.
+ *  `now` should come from useNowTick so the "typing…" cue expires on its
+ *  own. Renders `children` unchanged if there's no live draft to show. */
+export function PlayerPreview({ name, draft, now, children }: { name: string; draft?: LiveDraft | null; now: number; children: ReactNode }) {
+  const [hovered, setHovered] = useState(false)
+  const fresh = isDraftFresh(draft, now)
+  return (
+    <span style={{ position: 'relative', display: 'inline-flex' }} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
+      <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+        {children}
+        {fresh && <span style={{ color: '#1FA98A', fontSize: 10, fontWeight: 800, animation: 'live-pulse 1.2s ease-in-out infinite' }}>✍️</span>}
+      </span>
+      {hovered && draft?.text && (
+        <div
+          style={{
+            position: 'absolute',
+            top: '100%',
+            left: 0,
+            zIndex: 20,
+            marginTop: 6,
+            minWidth: 180,
+            maxWidth: 260,
+            background: 'var(--surface)',
+            color: 'var(--text)',
+            border: '2px solid var(--text)',
+            borderRadius: 10,
+            boxShadow: '3px 3px 0 var(--text)',
+            padding: '8px 10px',
+            fontSize: 11.5,
+          }}
+        >
+          <div style={{ fontWeight: 800, marginBottom: 3, color: fresh ? '#1FA98A' : 'var(--text-muted)' }}>{fresh ? `✍️ ${name} is typing…` : `Last seen typing`}</div>
+          <div style={{ whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>{draft.text}</div>
+        </div>
+      )}
+    </span>
   )
 }
 

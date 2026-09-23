@@ -134,6 +134,14 @@ code, pre, kbd, samp {
 }
 
 /* ─────────────────────────────────────────────
+   LIVE CLASS — "TYPING…" PULSE  (components/design/live)
+   ───────────────────────────────────────────── */
+@keyframes live-pulse {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.3; }
+}
+
+/* ─────────────────────────────────────────────
    STAGGER FADE-UP  (CSS fallback)
    ───────────────────────────────────────────── */
 @keyframes fade-up {

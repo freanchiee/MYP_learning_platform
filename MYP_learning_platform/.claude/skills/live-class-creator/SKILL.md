@@ -27,15 +27,18 @@ lib/design-live/scoring.ts       — generic completeness/score helpers
 lib/design-live/types.ts         — DB row shapes
 lib/design-live/avatar.ts        — deterministic per-player dicebear avatar, seeded off live_players.id
 components/design/live/          — the ENGINE (do not fork; extend it)
-  ui.tsx                         — shared visual primitives
+  ui.tsx                         — shared visual primitives (Avatar, ProgressCell, PlayerPreview, MCQOptions...)
   LiveHost.tsx                   — host/projector screen, all stage types
   LiveJoin.tsx                   — student screen, all stage types
   LiveActivityRunner.tsx         — role picker (host vs join), reads ?s=CODE / ?host=1
   LiveHub.tsx                    — /design/live year-wise picker
-  HostHistory.tsx                — "My hosted games" — every session a teacher has ever
-                                    hosted, across every activity, with a Reopen button
+  MyActivityHistory.tsx          — "Hosted by me" + "Joined by me" tabs, symmetrical for
+                                    teachers and students — nothing either role does is ever lost
+  ChatPanel.tsx                  — private 1:1 host<->student chat thread (over live_events)
+  Podium.tsx                     — the Kahoot-style top-3 podium + ranked list "victory screen"
 app/(platform)/design/live/...   — routes (gated by the platform's existing login)
 supabase/migrations/0004_live_classes.sql — the ONE generic schema (live_sessions/live_players/live_events/live_grades)
+supabase/migrations/0005_live_chat_rls.sql — scopes live_events reads/writes for private host<->student chat
 ```
 
 ## The core idea: one generic schema, many activities
@@ -137,17 +140,76 @@ a future activity wants a *randomizable* avatar (student picks their own
 face), store a `avatar_seed text` column on `live_players` instead of reusing
 `id` — that's the one piece of this pattern that genuinely needs a migration.
 
-## History — nothing a teacher hosts is ever lost
+## History — nothing anyone does is ever lost
 
-Starting a "New session" only forgets the OLD session code in that browser's
-localStorage (`lib/design-live/hooks.ts` → `hostStorageKey`) — the
-`live_sessions` row itself is never deleted. `/design/live/history`
-(`HostHistory.tsx`) queries `live_sessions` filtered to `host_id = auth.uid()`
-across every activity, and "Reopen as host" just re-writes that same
-localStorage key and navigates to `/design/live/<activityId>?host=1`, which
-`LiveActivityRunner` reads to jump straight to `LiveHost` instead of the
-role-picker screen. If you add a new stage type or activity, this page needs
-no changes — it works off `live_sessions` alone.
+Starting a "New session" (host) only forgets the OLD session code in that
+browser's localStorage (`lib/design-live/hooks.ts` → `hostStorageKey`) — the
+`live_sessions` row itself is never deleted. Same for a student: revisiting a
+join screen never creates a second row (see "One account, one player row"
+below) and never loses one either. `/design/live/history`
+(`MyActivityHistory.tsx`) has two tabs sourced straight from the DB —
+"Hosted by me" (`live_sessions` where `host_id = auth.uid()`) and "Joined by
+me" (`live_players` where `user_id = auth.uid()`, joined back to
+`live_sessions` for status + `activity_id`) — both symmetrical, both need no
+changes when you add a new activity or stage type, since they work off the
+generic schema alone. "Reopen as host" re-writes `hostStorageKey` and
+navigates to `/design/live/<activityId>?host=1`; "Rejoin" navigates to
+`/design/live/<activityId>?s=<code>` — both read by `LiveActivityRunner` to
+skip straight past the role-picker screen.
+
+## One account, one player row — real names, never duplicated
+
+A student's name is their **account's** `profiles.name` when set (fetched and
+the join-screen field locked to it) — not a freely-typed one, so a teacher
+always sees who someone really is; it only falls back to an editable field
+when the account has no name set yet. Duplicate joins are prevented at the
+DB level by the `unique (session_code, user_id)` constraint on
+`live_players`, and `LiveJoin.join()` is deliberately a plain `INSERT`, not
+an upsert — an upsert would silently reset an existing player's
+points/badges/answers back to defaults on every conflict (e.g. a re-visit,
+a double-click, a slow network causing two submits), wiping real progress.
+On a genuine conflict (Postgres error `23505`) the code just re-fetches the
+existing row instead. **If you touch `join()`, keep it this shape** — insert
+first, fetch-on-conflict, never upsert student progress.
+
+## Typing indicator + live draft preview
+
+Every free-text input (`OpenIdeasPlayer`'s idea box, `WorksheetFieldInput`'s
+text/textarea fields) reports what's being typed via
+`useLiveDraftReporter` (`lib/design-live/hooks.ts`) — throttled to at most
+one write every ~900ms, merged into `live_players.data.live` (top-level, not
+nested under a stage key, since it's transient and never graded). The host
+side reads it back through `<PlayerPreview>` (`ui.tsx`): hovering a
+student's avatar/name anywhere — roster, dashboards, submissions list — pops
+a small window showing their in-progress text, with a pulsing ✍️ while it's
+fresh (`isDraftFresh`, a 4s TTL). `useNowTick` in `LiveHost.tsx` forces a
+re-render every second so the indicator expires on its own, without waiting
+for a new realtime event from a student who stopped typing.
+
+## Host <-> student private chat
+
+Built on `live_events` (`type: 'message'`, `payload: {from, text}`) — no new
+table. `ChatPanel.tsx` renders one thread for one `playerId`; the host opens
+it from a 💬 button next to any player (roster chip, dashboard row,
+submission) via `chatWithId` state in `LiveHost.tsx`; a student gets a
+persistent collapsible "Chat with your teacher" toggle in `LiveJoin.tsx`.
+`supabase/migrations/0005_live_chat_rls.sql` is what makes this safe: it
+lets the session's host insert/read events for ANY of their students (0004
+only allowed a student to touch their own), and scopes reads of a directed
+event to just that student and that session's host — nobody else can read
+someone else's private thread. If you add a new kind of directed event
+(not chat), reread that migration's comment before assuming the existing
+policies cover it.
+
+## The victory screen — Podium
+
+`Podium.tsx` renders the Kahoot-style top-3-on-a-podium (crown-equivalent
+medal on #1, elevated stagger-in bars) plus a simple ranked list below for
+everyone else — shared by both `EndedHost` (the projector) and `LiveJoin`'s
+own `ended` view (pass `youId` there to highlight the viewer's own row).
+Team-based activities keep the existing team-score cards instead (a podium
+doesn't make sense for two team totals) — see `EndedHost`/`LiveJoin` for
+where that branch happens.
 
 ## What's NOT built yet (known gaps — extend deliberately, don't hack around)
 
@@ -162,11 +224,11 @@ no changes — it works off `live_sessions` alone.
   question) — could be added as an optional `tiers` field on `McqQuestion`
   plus a host difficulty selector, following the same pattern as
   `detective_difficulty` in the original.
-- **Host broadcast messages** — the `live_events` table exists for this
-  (`type: 'message'`) but no UI reads/writes it yet. Wire a small "message a
-  student" box into `LiveHost.tsx` writing an event, and a dismissible
-  banner into `LiveJoin.tsx` filtering events by `player_id` (or null for
-  everyone).
+- **Broadcast (whole-class) messages** — only 1:1 host<->student chat is
+  built. A broadcast would reuse the same `live_events` mechanism with
+  `player_id: null`, already readable by everyone per 0004/0005 — the host
+  UI to send one, and a dismissible banner filtering `player_id: null` in
+  `LiveJoin.tsx`, is what's missing.
 - **PDF export of a student's results** — the reference builds used
   `jsPDF`; not added here to avoid a new dependency until a real activity
   needs it.

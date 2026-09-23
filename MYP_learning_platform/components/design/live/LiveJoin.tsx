@@ -1,12 +1,15 @@
 'use client'
 
 import { useEffect, useMemo, useState } from 'react'
+import Link from 'next/link'
 import { createClient } from '@/lib/supabase/client'
-import { useLiveRow, useLiveTable, shuffle } from '@/lib/design-live/hooks'
+import { useLiveRow, useLiveTable, shuffle, useLiveDraftReporter } from '@/lib/design-live/hooks'
 import { worksheetSectionPct } from '@/lib/design-live/scoring'
 import type { LiveActivityDefinition, McqStage, WorksheetStage, OpenIdeasStage, WorksheetField } from '@/data/design/live/types'
 import type { LiveSessionRow, LivePlayerRow, LiveGradeRow } from '@/lib/design-live/types'
 import { cardStyle, btnStyle, inputStyle, pageBg, ErrorBanner, BadgeRow, MCQOptions, Avatar } from './ui'
+import ChatPanel from './ChatPanel'
+import { Podium } from './Podium'
 
 function pickTeam(players: LivePlayerRow[], teamCount: number): number {
   const counts = new Array(teamCount).fill(0)
@@ -19,6 +22,7 @@ function pickTeam(players: LivePlayerRow[], teamCount: number): number {
 export default function LiveJoin({ activity, initialCode }: { activity: LiveActivityDefinition; initialCode: string }) {
   const [userId, setUserId] = useState<string | null | undefined>(undefined)
   const [userEmail, setUserEmail] = useState('')
+  const [profileName, setProfileName] = useState('')
   const [code, setCode] = useState(initialCode.toUpperCase())
   const [codeInput, setCodeInput] = useState(initialCode.toUpperCase())
   const [sessionExists, setSessionExists] = useState<boolean | null>(null)
@@ -28,12 +32,17 @@ export default function LiveJoin({ activity, initialCode }: { activity: LiveActi
   const [myGrade, setMyGrade] = useState<LiveGradeRow | null>(null)
   const [nameInput, setNameInput] = useState('')
   const [apiError, setApiError] = useState<string | null>(null)
+  const [joining, setJoining] = useState(false)
 
   useEffect(() => {
     const sb = createClient()
-    sb.auth.getUser().then(({ data }) => {
+    sb.auth.getUser().then(async ({ data }) => {
       setUserId(data.user?.id ?? null)
       setUserEmail(data.user?.email?.split('@')[0] || '')
+      if (data.user?.id) {
+        const { data: profile } = await sb.from('profiles').select('name').eq('id', data.user.id).maybeSingle()
+        if (profile?.name?.trim()) setProfileName(profile.name.trim())
+      }
     })
   }, [])
 
@@ -54,15 +63,40 @@ export default function LiveJoin({ activity, initialCode }: { activity: LiveActi
     if (userId && players.length) setMe(players.find((p) => p.user_id === userId) || null)
   }, [players, userId])
 
+  // Real name, not a freely-typed one, once the account has one set. The
+  // (session_code, user_id) unique constraint is what actually makes "one
+  // account, one player row per session" bulletproof — a double-click, a
+  // race between two tabs, or revisiting the join screen can never create
+  // a second row. Plain INSERT (not upsert) on purpose: an upsert would
+  // silently reset an existing player's points/badges/answers back to
+  // defaults on every conflict, wiping a returning/reconnecting student's
+  // progress. On a genuine conflict (code 23505) we instead just fetch
+  // their existing row — no data lost, no duplicate created.
   const join = async () => {
-    if (!nameInput.trim() || !userId || !code) return
+    const name = (profileName || nameInput).trim()
+    if (!name || !userId || !code || joining) return
+    setJoining(true)
     const sb = createClient()
     const team = activity.teams ? pickTeam(players, activity.teams.length) : null
-    const { error } = await sb.from('live_players').insert({ session_code: code, user_id: userId, name: nameInput.trim(), team, points: 0, badges: [], data: {} })
-    if (error) {
-      setApiError(error.message)
+    const { data, error } = await sb
+      .from('live_players')
+      .insert({ session_code: code, user_id: userId, name, team, points: 0, badges: [], data: {} })
+      .select()
+      .maybeSingle()
+    if (!error) {
+      setJoining(false)
+      if (data) setMe(data as LivePlayerRow)
       return
     }
+    if (error.code === '23505') {
+      const { data: existing, error: fetchErr } = await sb.from('live_players').select('*').eq('session_code', code).eq('user_id', userId).maybeSingle()
+      setJoining(false)
+      if (fetchErr) setApiError(fetchErr.message)
+      else if (existing) setMe(existing as LivePlayerRow)
+      return
+    }
+    setJoining(false)
+    setApiError(error.message)
   }
 
   const patchMyData = async (stageKey: string, patch: Record<string, any>) => {
@@ -73,6 +107,20 @@ export default function LiveJoin({ activity, initialCode }: { activity: LiveActi
     const { error } = await sb.from('live_players').update({ data: nextData }).eq('id', me.id)
     if (error) setApiError(error.message)
   }
+
+  // Same idea as patchMyData but merges at the TOP of `data` (not nested
+  // under a stage key) — used for the transient "what am I typing right
+  // now" draft, which isn't per-stage state a host should grade, just a
+  // live preview.
+  const patchMyRawData = (patch: Record<string, any>) => {
+    if (!me) return
+    const sb = createClient()
+    const nextData = { ...me.data, ...patch }
+    sb.from('live_players').update({ data: nextData }).eq('id', me.id).then(({ error }) => {
+      if (error) console.error('live: failed to sync draft:', error.message)
+    })
+  }
+  const reportDraft = useLiveDraftReporter(patchMyRawData)
 
   const addPoints = async (delta: number) => {
     if (!me || !delta) return
@@ -119,6 +167,7 @@ export default function LiveJoin({ activity, initialCode }: { activity: LiveActi
     )
   }
   if (!me) {
+    const nameLocked = !!profileName
     return (
       <div style={pageBg(activity.theme)}>
         <div style={{ ...cardStyle(activity.theme.accent), maxWidth: 380, margin: '60px auto', textAlign: 'center' }}>
@@ -126,9 +175,19 @@ export default function LiveJoin({ activity, initialCode }: { activity: LiveActi
           <h2>{activity.title}</h2>
           <div style={{ color: 'var(--text-muted)', fontSize: 13, marginBottom: 10 }}>Session {code}</div>
           <ErrorBanner message={apiError} onClose={() => setApiError(null)} />
-          <input value={nameInput || userEmail} onChange={(e) => setNameInput(e.target.value)} placeholder="Your name" style={inputStyle} onKeyDown={(e) => e.key === 'Enter' && join()} />
-          <button onClick={join} style={{ ...btnStyle('#1FA98A', true), marginTop: 12, width: '100%' }}>
-            Join the class →
+          <input
+            value={nameLocked ? profileName : nameInput || userEmail}
+            disabled={nameLocked}
+            onChange={(e) => setNameInput(e.target.value)}
+            placeholder="Your name"
+            style={{ ...inputStyle, opacity: nameLocked ? 0.75 : 1 }}
+            onKeyDown={(e) => e.key === 'Enter' && join()}
+          />
+          <div style={{ fontSize: 11, color: 'var(--text-muted)', marginTop: 4 }}>
+            {nameLocked ? "This is your account's name — teachers see who you really are." : 'Set your name in Settings to lock it here.'}
+          </div>
+          <button onClick={join} disabled={joining} style={{ ...btnStyle('#1FA98A', true), marginTop: 12, width: '100%' }}>
+            {joining ? 'Joining…' : 'Join the class →'}
           </button>
         </div>
       </div>
@@ -147,9 +206,14 @@ export default function LiveJoin({ activity, initialCode }: { activity: LiveActi
             {team ? `${team.icon} ${me.name} · ${team.name}` : `👋 ${me.name}`}
           </div>
           {!activity.teams && <div style={{ fontWeight: 800 }}>⭐ {me.points} pts</div>}
+          <Link href="/design/live/history" style={{ fontSize: 11, color: 'rgba(255,255,255,0.7)' }}>
+            📜 My history
+          </Link>
         </div>
         <BadgeRow badges={me.badges} />
         <ErrorBanner message={apiError} onClose={() => setApiError(null)} />
+
+        <StudentChatToggle sessionCode={code} me={me} accent={activity.theme.accent} />
 
         {session.status === 'lobby' && (
           <div style={{ ...cardStyle('#1FA98A'), textAlign: 'center' }}>
@@ -160,9 +224,9 @@ export default function LiveJoin({ activity, initialCode }: { activity: LiveActi
         {session.status === 'active' && stage?.type === 'mcq' && (
           <McqPlayer activity={activity} stage={stage} session={session} me={me} patchMyData={patchMyData} addPoints={addPoints} />
         )}
-        {session.status === 'active' && stage?.type === 'worksheet' && <WorksheetPlayer stage={stage} me={me} patchMyData={patchMyData} />}
+        {session.status === 'active' && stage?.type === 'worksheet' && <WorksheetPlayer stage={stage} me={me} patchMyData={patchMyData} reportDraft={reportDraft} />}
         {session.status === 'active' && stage?.type === 'openIdeas' && (
-          <OpenIdeasPlayer activity={activity} stage={stage} session={session} me={me} patchMyData={patchMyData} />
+          <OpenIdeasPlayer activity={activity} stage={stage} session={session} me={me} patchMyData={patchMyData} reportDraft={reportDraft} />
         )}
         {session.status === 'active' && stage?.type === 'grading' && (
           <div style={cardStyle(activity.theme.accent)}>
@@ -185,8 +249,24 @@ export default function LiveJoin({ activity, initialCode }: { activity: LiveActi
         )}
 
         {session.status === 'ended' && (
-          <div style={{ display: 'grid', gap: 10 }}>
-            <div style={{ ...cardStyle('#FFCF3F'), textAlign: 'center' }}>Nice work! The class has ended — check the big screen for final results.</div>
+          <div style={{ display: 'grid', gap: 14 }}>
+            <div style={{ ...cardStyle('#FFCF3F'), textAlign: 'center' }}>
+              <div style={{ fontSize: 20, fontWeight: 800 }}>🏆 Final results</div>
+            </div>
+            {activity.teams ? (
+              <div style={{ display: 'grid', gridTemplateColumns: `repeat(auto-fit, minmax(140px, 1fr))`, gap: 10 }}>
+                {activity.teams.map((t, ti) => (
+                  <div key={t.name} style={{ ...cardStyle(t.color), textAlign: 'center', border: me.team === ti ? '2.5px solid #FFCF3F' : undefined }}>
+                    <div style={{ fontWeight: 800, color: t.color }}>
+                      {t.icon} {t.name}
+                    </div>
+                    <div style={{ fontSize: 24, fontWeight: 800 }}>{session.state?.teamScores?.[ti] || 0}</div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <Podium entries={[...players].sort((a, b) => b.points - a.points).map((p) => ({ id: p.id, name: p.name, points: p.points }))} accent={activity.theme.accent} youId={me.id} />
+            )}
             {activity.debriefQuestions && (
               <div style={cardStyle('var(--accent-2)')}>
                 <div style={{ fontWeight: 800, marginBottom: 8 }}>💬 Talk it through</div>
@@ -202,6 +282,22 @@ export default function LiveJoin({ activity, initialCode }: { activity: LiveActi
           </div>
         )}
       </div>
+    </div>
+  )
+}
+
+function StudentChatToggle({ sessionCode, me, accent }: { sessionCode: string; me: LivePlayerRow; accent: string }) {
+  const [open, setOpen] = useState(false)
+  return (
+    <div>
+      <button onClick={() => setOpen(!open)} style={{ ...btnStyle(accent), width: '100%', fontSize: 12.5 }}>
+        {open ? '✕ Close chat' : '💬 Chat with your teacher'}
+      </button>
+      {open && (
+        <div style={{ marginTop: 8 }}>
+          <ChatPanel sessionCode={sessionCode} playerId={me.id} playerName={me.name} asHost={false} accent={accent} />
+        </div>
+      )}
     </div>
   )
 }
@@ -297,7 +393,17 @@ function McqPlayer({
   )
 }
 
-function WorksheetPlayer({ stage, me, patchMyData }: { stage: WorksheetStage; me: LivePlayerRow; patchMyData: (stageKey: string, patch: Record<string, any>) => void }) {
+function WorksheetPlayer({
+  stage,
+  me,
+  patchMyData,
+  reportDraft,
+}: {
+  stage: WorksheetStage
+  me: LivePlayerRow
+  patchMyData: (stageKey: string, patch: Record<string, any>) => void
+  reportDraft: (stageKey: string, text: string) => void
+}) {
   const [openSection, setOpenSection] = useState<string | undefined>(stage.sections[0]?.key)
   const [drafts, setDrafts] = useState<Record<string, Record<string, any>>>(() =>
     Object.fromEntries(stage.sections.map((s) => [s.key, me.data?.[stage.key]?.[s.key] || {}]))
@@ -306,6 +412,7 @@ function WorksheetPlayer({ stage, me, patchMyData }: { stage: WorksheetStage; me
 
   const updateField = (sectionKey: string, fieldKey: string, value: any) => {
     setDrafts((d) => ({ ...d, [sectionKey]: { ...d[sectionKey], [fieldKey]: value } }))
+    if (typeof value === 'string' && value.trim()) reportDraft(stage.key, value)
   }
   const saveSection = (sectionKey: string) => {
     patchMyData(stage.key, { [sectionKey]: drafts[sectionKey] })
@@ -410,12 +517,14 @@ function OpenIdeasPlayer({
   session,
   me,
   patchMyData,
+  reportDraft,
 }: {
   activity: LiveActivityDefinition
   stage: OpenIdeasStage
   session: LiveSessionRow
   me: LivePlayerRow
   patchMyData: (stageKey: string, patch: Record<string, any>) => void
+  reportDraft: (stageKey: string, text: string) => void
 }) {
   const st = session.state?.[stage.key] || { ideaIndex: 0, locked: false, constraintIdx: null }
   const prompt = stage.prompts[st.ideaIndex]
@@ -426,6 +535,11 @@ function OpenIdeasPlayer({
   useEffect(() => {
     setText(mine?.text || '')
   }, [st.ideaIndex])
+
+  const onType = (v: string) => {
+    setText(v)
+    if (v.trim()) reportDraft(stage.key, v)
+  }
 
   const submit = () => {
     if (!text.trim()) return
@@ -452,7 +566,7 @@ function OpenIdeasPlayer({
         </div>
       )}
       {st.locked && !mine && <div style={{ textAlign: 'center', fontSize: 13, fontWeight: 700, color: '#D6425E' }}>🔒 Time&apos;s up — your teacher has locked this round.</div>}
-      <input value={text} disabled={st.locked} onChange={(e) => setText(e.target.value)} placeholder="Your idea, in a few words…" style={inputStyle} onKeyDown={(e) => e.key === 'Enter' && submit()} />
+      <input value={text} disabled={st.locked} onChange={(e) => onType(e.target.value)} placeholder="Your idea, in a few words…" style={inputStyle} onKeyDown={(e) => e.key === 'Enter' && submit()} />
       <button onClick={submit} disabled={st.locked} style={btnStyle('#1FA98A', true, true)}>
         {flash ? '✅ Saved!' : mine ? 'Update my idea' : 'Submit my idea'}
       </button>

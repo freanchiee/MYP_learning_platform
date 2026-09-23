@@ -16,7 +16,7 @@ export default function LiveHub() {
             className="rounded-full px-4 py-2 text-sm font-black"
             style={{ background: 'var(--surface-2)', color: 'var(--text)', border: '1px solid var(--border)' }}
           >
-            📜 My hosted games
+            📜 My live class history
           </Link>
         </div>
 

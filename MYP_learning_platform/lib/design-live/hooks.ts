@@ -6,7 +6,7 @@
 // dropped WebSocket (phone locks, network switch) never leaves a
 // device stuck until a manual refresh.
 
-import { useEffect } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
 
 const POLL_MS = 3000
@@ -101,6 +101,61 @@ export function generateJoinCode(): string {
   let c = ''
   for (let i = 0; i < 4; i++) c += A[Math.floor(Math.random() * A.length)]
   return c
+}
+
+/** Forces a re-render every `intervalMs` — used by host dashboards to expire
+ *  a "typing…" indicator on its own, without waiting for a fresh realtime
+ *  event from the student who stopped typing. */
+export function useNowTick(intervalMs = 1000): number {
+  const [now, setNow] = useState(() => Date.now())
+  useEffect(() => {
+    const id = setInterval(() => setNow(Date.now()), intervalMs)
+    return () => clearInterval(id)
+  }, [intervalMs])
+  return now
+}
+
+const TYPING_TTL_MS = 4000
+const DRAFT_THROTTLE_MS = 900
+
+export interface LiveDraft {
+  stageKey: string
+  text: string
+  at: string // ISO timestamp
+}
+
+/** True while `draft` was reported within the last few seconds — the
+ *  "is this student actively typing right now" signal shown on host
+ *  dashboards. Pass `now` from useNowTick so it expires on its own. */
+export function isDraftFresh(draft: LiveDraft | undefined | null, now: number): boolean {
+  if (!draft?.at) return false
+  return now - Date.parse(draft.at) < TYPING_TTL_MS
+}
+
+/** Throttled sync of a student's in-progress (unsaved) answer text up to
+ *  their own live_players row, under `data.live` — so a host hovering over
+ *  that student's name can see roughly what they're typing right now, and
+ *  the dashboard can show a "✍️ typing…" cue. Never overwrites the rest of
+ *  `data` (merges), and writes at most once per `DRAFT_THROTTLE_MS`. */
+export function useLiveDraftReporter(
+  patchRawData: (patch: Record<string, any>) => void
+): (stageKey: string, text: string) => void {
+  const lastSentAt = useRef(0)
+  const pending = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  return (stageKey: string, text: string) => {
+    const send = () => {
+      lastSentAt.current = Date.now()
+      patchRawData({ live: { stageKey, text: text.slice(0, 280), at: new Date().toISOString() } as LiveDraft })
+    }
+    const elapsed = Date.now() - lastSentAt.current
+    if (elapsed >= DRAFT_THROTTLE_MS) {
+      send()
+    } else {
+      if (pending.current) clearTimeout(pending.current)
+      pending.current = setTimeout(send, DRAFT_THROTTLE_MS - elapsed)
+    }
+  }
 }
 
 export function shuffle<T>(arr: T[]): T[] {
