@@ -10,6 +10,7 @@ import type { LiveSessionRow, LivePlayerRow, LiveGradeRow } from '@/lib/design-l
 import { cardStyle, btnStyle, inputStyle, pageBg, ErrorBanner, BadgeRow, MCQOptions, Avatar } from './ui'
 import ChatPanel from './ChatPanel'
 import { Podium } from './Podium'
+import PersonaChatField from './PersonaChatField'
 
 function pickTeam(players: LivePlayerRow[], teamCount: number): number {
   const counts = new Array(teamCount).fill(0)
@@ -224,7 +225,7 @@ export default function LiveJoin({ activity, initialCode }: { activity: LiveActi
         {session.status === 'active' && stage?.type === 'mcq' && (
           <McqPlayer activity={activity} stage={stage} session={session} me={me} patchMyData={patchMyData} addPoints={addPoints} />
         )}
-        {session.status === 'active' && stage?.type === 'worksheet' && <WorksheetPlayer stage={stage} me={me} patchMyData={patchMyData} reportDraft={reportDraft} />}
+        {session.status === 'active' && stage?.type === 'worksheet' && <WorksheetPlayer stage={stage} me={me} sessionCode={code} patchMyData={patchMyData} reportDraft={reportDraft} />}
         {session.status === 'active' && stage?.type === 'openIdeas' && (
           <OpenIdeasPlayer activity={activity} stage={stage} session={session} me={me} patchMyData={patchMyData} reportDraft={reportDraft} />
         )}
@@ -396,11 +397,13 @@ function McqPlayer({
 function WorksheetPlayer({
   stage,
   me,
+  sessionCode,
   patchMyData,
   reportDraft,
 }: {
   stage: WorksheetStage
   me: LivePlayerRow
+  sessionCode: string
   patchMyData: (stageKey: string, patch: Record<string, any>) => void
   reportDraft: (stageKey: string, text: string) => void
 }) {
@@ -418,6 +421,12 @@ function WorksheetPlayer({
     patchMyData(stage.key, { [sectionKey]: drafts[sectionKey] })
     setSavedFlash(sectionKey)
     setTimeout(() => setSavedFlash(null), 1200)
+  }
+  // Persona chat messages persist immediately (not gated behind the
+  // section's Save button) — losing a saved conversation because a
+  // student navigated away before clicking Save would be a bad time.
+  const persistField = (sectionKey: string, fieldKey: string, value: any) => {
+    patchMyData(stage.key, { [sectionKey]: { ...drafts[sectionKey], [fieldKey]: value } })
   }
 
   return (
@@ -437,7 +446,15 @@ function WorksheetPlayer({
               <div style={{ marginTop: 10, display: 'grid', gap: 10 }}>
                 {s.blurb && <div style={{ fontSize: 12.5, color: 'var(--text-muted)' }}>{s.blurb}</div>}
                 {s.fields.map((f) => (
-                  <WorksheetFieldInput key={f.key} field={f} value={drafts[s.key]?.[f.key]} onChange={(v) => updateField(s.key, f.key, v)} />
+                  <WorksheetFieldInput
+                    key={f.key}
+                    field={f}
+                    value={drafts[s.key]?.[f.key]}
+                    onChange={(v) => updateField(s.key, f.key, v)}
+                    onPersist={(v) => persistField(s.key, f.key, v)}
+                    sessionCode={sessionCode}
+                    playerId={me.id}
+                  />
                 ))}
                 <button onClick={() => saveSection(s.key)} style={btnStyle('#1FA98A', true)}>
                   {savedFlash === s.key ? '✅ Saved!' : '💾 Save'}
@@ -451,7 +468,24 @@ function WorksheetPlayer({
   )
 }
 
-function WorksheetFieldInput({ field, value, onChange }: { field: WorksheetField; value: any; onChange: (v: any) => void }) {
+function WorksheetFieldInput({
+  field,
+  value,
+  onChange,
+  onPersist,
+  sessionCode,
+  playerId,
+}: {
+  field: WorksheetField
+  value: any
+  onChange: (v: any) => void
+  onPersist?: (v: any) => void
+  sessionCode?: string
+  playerId?: string
+}) {
+  if (field.type === 'personaChat') {
+    return <PersonaChatField value={value} onChange={onChange} onPersist={onPersist!} sessionCode={sessionCode!} playerId={playerId!} />
+  }
   if (field.type === 'text') {
     return (
       <label style={{ display: 'grid', gap: 4, fontSize: 12, fontWeight: 700, color: 'var(--text-muted)' }}>

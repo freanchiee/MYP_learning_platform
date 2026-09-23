@@ -43,6 +43,13 @@ export const MYP4_PROTOTYPING: LiveActivityDefinition = {
           ],
         },
         {
+          key: 'personaChat',
+          label: 'Interview',
+          icon: '🎭',
+          blurb: 'Optional but recommended: pick a persona-pack character and interview them — use what they tell you to fill in the empathy map below.',
+          fields: [{ key: 'chat', label: 'Interview a persona-pack character', type: 'personaChat' }],
+        },
+        {
           key: 'empathy',
           label: 'Empathy map',
           icon: '💭',

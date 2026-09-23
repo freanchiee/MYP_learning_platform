@@ -8,6 +8,7 @@ import { useLiveRow, useLiveTable, generateJoinCode, hostStorageKey, useNowTick,
 import { worksheetSectionPct } from '@/lib/design-live/scoring'
 import type { LiveActivityDefinition, McqStage, WorksheetStage, OpenIdeasStage, GradingStage } from '@/data/design/live/types'
 import type { LiveSessionRow, LivePlayerRow, LiveGradeRow } from '@/lib/design-live/types'
+import { getPersona } from '@/data/design/live/personas'
 import { cardStyle, btnStyle, inputStyle, pageBg, ErrorBanner, QRCode, Avatar, ProgressCell, PlayerPreview, PlayerPreviewProvider } from './ui'
 import ChatPanel from './ChatPanel'
 import { Podium } from './Podium'
@@ -644,6 +645,27 @@ function GradingHost({
   )
 }
 
+// Scans a player's worksheet data (shape: data[stageKey][sectionKey][fieldKey])
+// for a personaChat field's value, regardless of which activity/stage/section
+// it lives under — so the grading card works for any activity that uses the
+// personaChat field type, not just this one.
+function findPersonaChat(data: any): { characterId: string; count: number } | null {
+  if (!data || typeof data !== 'object') return null
+  for (const stageVal of Object.values(data)) {
+    if (!stageVal || typeof stageVal !== 'object') continue
+    for (const sectionVal of Object.values(stageVal as Record<string, unknown>)) {
+      if (!sectionVal || typeof sectionVal !== 'object') continue
+      for (const fieldVal of Object.values(sectionVal as Record<string, unknown>)) {
+        const v = fieldVal as any
+        if (v && typeof v === 'object' && typeof v.characterId === 'string' && v.characterId && Array.isArray(v.messages)) {
+          return { characterId: v.characterId, count: v.messages.filter((m: any) => m.from === 'student').length }
+        }
+      }
+    }
+  }
+  return null
+}
+
 function GradeCard({
   stage,
   player,
@@ -660,6 +682,7 @@ function GradeCard({
   const [open, setOpen] = useState(false)
   const [scores, setScores] = useState<Record<string, string>>(() => Object.fromEntries(stage.strands.map((s) => [s.key, grade?.scores?.[s.key] != null ? String(grade.scores[s.key]) : ''])))
   const [feedback, setFeedback] = useState(grade?.feedback || '')
+  const personaChat = findPersonaChat(player.data)
 
   const save = () =>
     run(
@@ -686,6 +709,11 @@ function GradeCard({
       </div>
       {open && (
         <div style={{ marginTop: 10, display: 'grid', gap: 10 }}>
+          {personaChat && (
+            <div style={{ fontSize: 12, color: 'var(--text-muted)' }}>
+              🎭 Interviewed <strong>{getPersona(personaChat.characterId)?.name || personaChat.characterId}</strong> — {personaChat.count} question{personaChat.count === 1 ? '' : 's'} asked
+            </div>
+          )}
           <div style={{ display: 'grid', gridTemplateColumns: `repeat(${stage.strands.length}, 1fr)`, gap: 6 }}>
             {stage.strands.map((s) => (
               <div key={s.key}>

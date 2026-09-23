@@ -78,6 +78,13 @@ shaped by your activity's own stage config instead.
    - **`grading`** — teacher enters MYP criterion strand scores (1-8) +
      written feedback per student. Always a human judgement call; never
      auto-computed.
+   - A `worksheet` section can also use the **`personaChat`** field type
+     (`WorksheetField.type`) — a student picks a persona-pack character
+     (`data/design/live/personas.ts`) and has a real natural-language
+     interview with them, powered by a small hosted model (Groq, see "AI
+     persona chat" below), not a scripted keyword-matched bot. Use this
+     when an activity wants students to build empathy for a specific user
+     archetype through conversation rather than filling in a form.
 2. Pick a `theme` (accent + gradient) and, if this is a team icebreaker, a
    `teams` array (name/short/icon/color) — presence of `teams` switches the
    whole engine into team mode (lobby groups by team, host shows a team
@@ -210,6 +217,29 @@ own `ended` view (pass `youId` there to highlight the viewer's own row).
 Team-based activities keep the existing team-score cards instead (a podium
 doesn't make sense for two team totals) — see `EndedHost`/`LiveJoin` for
 where that branch happens.
+
+## AI persona chat (Groq, platform-level key — not BYOK)
+
+The platform already has a bring-your-own-key AI pattern for exam grading
+(`lib/ai-grading.ts`, `/settings`) — a student pastes their own Claude/
+OpenAI/Gemini key, stored in their browser, sent per-request. **The
+persona chat does NOT use that pattern.** Asking every student in a class
+to obtain their own API key just to interview a persona is impractical.
+Instead `app/api/persona-chat/route.ts` calls Groq (`lib/groq.ts`) with a
+single **server-side** `GROQ_API_KEY` env var — Groq hosts small open-
+weight models (default `llama-3.1-8b-instant`) free, no credit card, so
+this costs the platform nothing within Groq's free tier. The route builds
+the system prompt from `data/design/live/personas.ts` (bio/struggles/
+traits/anthro — one specific person, not a generalized stereotype) and
+guards against abuse by requiring the caller to be signed in AND be the
+actual `live_players` row they claim (checked against `session_code` +
+`user_id`), not just any anonymous caller with the URL.
+
+If you add a second AI-backed feature, ask first whether it should be
+BYOK (like grading — where the student/teacher already has their own key
+for a task they'd do anyway) or platform-level (like persona chat — where
+requiring a key from every user would kill the feature). Don't default to
+copying whichever pattern is closest in the code.
 
 ## What's NOT built yet (known gaps — extend deliberately, don't hack around)
 
