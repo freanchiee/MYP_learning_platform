@@ -163,6 +163,67 @@ function PlayerPreviewPanel({ entry }: { entry: PreviewEntry }) {
   )
 }
 
+/** A progress cell that also streams a compact, continuously-updating
+ *  glimpse of the student's live draft for THIS exact section — a snippet
+ *  cross-fades in above the bar whenever a fresh matching draft arrives
+ *  (see LiveDraft.sectionKey / isDraftFresh) and fades back out on its own,
+ *  so the host sees a running ticker of who's writing what without having
+ *  to hover anything. The fade cycle runs faster the closer the student is
+ *  to done — the near-finished moment is the one worth watching closest.
+ *  Hovering still opens the full <PlayerPreviewPanel> for the bigger read,
+ *  via the same channel <PlayerPreview> uses. Must be rendered under a
+ *  <PlayerPreviewProvider>. */
+export function ProgressStream({
+  pct,
+  draft,
+  sectionKey,
+  now,
+  name,
+}: {
+  pct: number
+  draft?: LiveDraft | null
+  sectionKey: string
+  now: number
+  name: string
+}) {
+  const setPreview = useContext(PlayerPreviewContext)
+  const matches = draft?.sectionKey === sectionKey
+  const fresh = matches && isDraftFresh(draft, now)
+  const snippet = matches ? draft?.text?.trim().slice(-42) : ''
+  const cycleMs = Math.max(1400, 3200 - pct * 18)
+
+  return (
+    <span
+      style={{ display: 'inline-flex', flexDirection: 'column', alignItems: 'center', gap: 2, minWidth: 60 }}
+      onMouseEnter={() => matches && draft?.text && setPreview?.({ name, draft: draft!, fresh })}
+      onMouseLeave={() => matches && setPreview?.(null)}
+    >
+      <ProgressCell pct={pct} />
+      <span style={{ position: 'relative', height: 12, width: '100%', overflow: 'hidden' }}>
+        {fresh && snippet && (
+          <span
+            key={snippet}
+            style={{
+              position: 'absolute',
+              inset: 0,
+              textAlign: 'center',
+              fontSize: 9,
+              fontStyle: 'italic',
+              color: 'var(--text-muted)',
+              whiteSpace: 'nowrap',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              animation: `live-ticker ${cycleMs}ms ease-in-out`,
+            }}
+          >
+            “{snippet}”
+          </span>
+        )}
+      </span>
+    </span>
+  )
+}
+
 /** Wraps a player's name/avatar with a hover preview of what they're
  *  currently typing (see lib/design-live/hooks.ts useLiveDraftReporter) — a
  *  minified window onto their in-progress answer, for the host dashboard.

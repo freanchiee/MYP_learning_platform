@@ -9,7 +9,7 @@ import { worksheetSectionPct } from '@/lib/design-live/scoring'
 import type { LiveActivityDefinition, McqStage, WorksheetStage, OpenIdeasStage, GradingStage } from '@/data/design/live/types'
 import type { LiveSessionRow, LivePlayerRow, LiveGradeRow } from '@/lib/design-live/types'
 import { getPersona } from '@/data/design/live/personas'
-import { cardStyle, btnStyle, inputStyle, pageBg, ErrorBanner, QRCode, Avatar, ProgressCell, PlayerPreview, PlayerPreviewProvider } from './ui'
+import { cardStyle, btnStyle, inputStyle, pageBg, ErrorBanner, QRCode, Avatar, ProgressStream, PlayerPreview, PlayerPreviewProvider } from './ui'
 import ChatPanel from './ChatPanel'
 import { Podium } from './Podium'
 
@@ -474,7 +474,7 @@ function WorksheetHost({ stage, players, now, onChat }: { stage: WorksheetStage;
                 const pct = worksheetSectionPct(s, p.data?.[stage.key]?.[s.key] || {})
                 return (
                   <td key={s.key} style={{ textAlign: 'center', padding: '6px 3px' }}>
-                    <ProgressCell pct={pct} />
+                    <ProgressStream pct={pct} draft={p.data?.live as LiveDraft} sectionKey={s.key} now={now} name={p.name} />
                   </td>
                 )
               })}

@@ -122,6 +122,7 @@ export interface LiveDraft {
   stageKey: string
   text: string
   at: string // ISO timestamp
+  sectionKey?: string // which worksheet section this text belongs to, if any
 }
 
 /** True while `draft` was reported within the last few seconds — the
@@ -139,14 +140,14 @@ export function isDraftFresh(draft: LiveDraft | undefined | null, now: number): 
  *  `data` (merges), and writes at most once per `DRAFT_THROTTLE_MS`. */
 export function useLiveDraftReporter(
   patchRawData: (patch: Record<string, any>) => void
-): (stageKey: string, text: string) => void {
+): (stageKey: string, text: string, sectionKey?: string) => void {
   const lastSentAt = useRef(0)
   const pending = useRef<ReturnType<typeof setTimeout> | null>(null)
 
-  return (stageKey: string, text: string) => {
+  return (stageKey: string, text: string, sectionKey?: string) => {
     const send = () => {
       lastSentAt.current = Date.now()
-      patchRawData({ live: { stageKey, text: text.slice(0, 280), at: new Date().toISOString() } as LiveDraft })
+      patchRawData({ live: { stageKey, sectionKey, text: text.slice(0, 280), at: new Date().toISOString() } as LiveDraft })
     }
     const elapsed = Date.now() - lastSentAt.current
     if (elapsed >= DRAFT_THROTTLE_MS) {

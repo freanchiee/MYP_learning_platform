@@ -415,7 +415,7 @@ function WorksheetPlayer({
   me: LivePlayerRow
   sessionCode: string
   patchMyData: (stageKey: string, patch: Record<string, any>) => void
-  reportDraft: (stageKey: string, text: string) => void
+  reportDraft: (stageKey: string, text: string, sectionKey?: string) => void
 }) {
   const [openSection, setOpenSection] = useState<string | undefined>(stage.sections[0]?.key)
   const [drafts, setDrafts] = useState<Record<string, Record<string, any>>>(() =>
@@ -425,7 +425,7 @@ function WorksheetPlayer({
 
   const updateField = (sectionKey: string, fieldKey: string, value: any) => {
     setDrafts((d) => ({ ...d, [sectionKey]: { ...d[sectionKey], [fieldKey]: value } }))
-    if (typeof value === 'string' && value.trim()) reportDraft(stage.key, value)
+    if (typeof value === 'string' && value.trim()) reportDraft(stage.key, value, sectionKey)
   }
   const saveSection = (sectionKey: string) => {
     patchMyData(stage.key, { [sectionKey]: drafts[sectionKey] })
@@ -466,7 +466,7 @@ function WorksheetPlayer({
                     value={drafts[s.key]?.[f.key]}
                     onChange={(v) => updateField(s.key, f.key, v)}
                     onPersist={(v) => persistField(s.key, f.key, v)}
-                    onDraft={(text) => reportDraft(stage.key, text)}
+                    onDraft={(text) => reportDraft(stage.key, text, s.key)}
                     sessionCode={sessionCode}
                     playerId={me.id}
                   />
