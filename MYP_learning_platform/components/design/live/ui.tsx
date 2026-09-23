@@ -4,6 +4,7 @@ import { createContext, useContext, useState, type CSSProperties, type ReactNode
 import type { LiveTheme } from '@/data/design/live/types'
 import { avatarSvg } from '@/lib/design-live/avatar'
 import { isDraftFresh, type LiveDraft } from '@/lib/design-live/hooks'
+import { createClient } from '@/lib/supabase/client'
 
 export const cardStyle = (accent?: string): CSSProperties => ({
   background: 'var(--surface)',
@@ -243,6 +244,135 @@ export function PlayerPreview({ name, draft, now, children }: { name: string; dr
       {children}
       {fresh && <span style={{ color: '#1FA98A', fontSize: 10, fontWeight: 800, animation: 'live-pulse 1.2s ease-in-out infinite' }}>✍️</span>}
     </span>
+  )
+}
+
+/** Which players currently have an unread student-initiated chat message —
+ *  computed by LiveHost (it owns the live_events subscription) and handed
+ *  down via context so <ChatButton> can show a dot without every
+ *  intermediate dashboard component threading the set through as a prop. */
+export const UnreadChatContext = createContext<Set<string>>(new Set())
+
+/** The 💬 button used on every host dashboard row — now unread-aware: a
+ *  small red dot appears while this player has a message the host hasn't
+ *  opened their chat panel for yet (see UnreadChatContext). */
+export function ChatButton({ playerId, onClick, title }: { playerId: string; onClick: () => void; title: string }) {
+  const unreadIds = useContext(UnreadChatContext)
+  const unread = unreadIds.has(playerId)
+  return (
+    <span style={{ position: 'relative', display: 'inline-flex' }}>
+      <button onClick={onClick} title={title} style={{ background: 'transparent', border: 'none', cursor: 'pointer', fontSize: 11, padding: 0, lineHeight: 1 }}>
+        💬
+      </button>
+      {unread && (
+        <span
+          aria-hidden
+          style={{ position: 'absolute', top: -3, right: -3, width: 7, height: 7, borderRadius: '50%', background: '#D6425E', border: '1px solid var(--surface)' }}
+        />
+      )}
+    </span>
+  )
+}
+
+/** Channel for the "quick-appreciate a student" picker — same clipping
+ *  problem and same fix as PlayerPreviewContext above: one floating panel
+ *  at the top level instead of a popup nested in an overflow-x:auto table
+ *  cell. Sends a live_events row (type: 'reaction'), which the student's
+ *  <CelebrationOverlay> picks up and turns into a confetti burst. */
+type ReactTarget = { sessionCode: string; playerId: string; playerName: string } | null
+const QuickReactContext = createContext<((t: ReactTarget) => void) | null>(null)
+
+const QUICK_EMOJI = ['👍', '🔥', '🌟', '💡', '❤️', '✅']
+const QUICK_MESSAGES = ['Nice work!', 'Great start!', 'Add more detail here', 'Keep going — almost there!']
+
+export function QuickReactProvider({ children }: { children: ReactNode }) {
+  const [target, setTarget] = useState<ReactTarget>(null)
+  return (
+    <QuickReactContext.Provider value={setTarget}>
+      {children}
+      <QuickReactPanel target={target} onClose={() => setTarget(null)} />
+    </QuickReactContext.Provider>
+  )
+}
+
+function QuickReactPanel({ target, onClose }: { target: ReactTarget; onClose: () => void }) {
+  const [sentFlash, setSentFlash] = useState<string | null>(null)
+  if (!target) return null
+
+  const send = async (payload: { emoji?: string; text?: string }) => {
+    setSentFlash(payload.emoji || payload.text || '✓')
+    const sb = createClient()
+    await sb.from('live_events').insert({ session_code: target.sessionCode, player_id: target.playerId, type: 'reaction', payload: { from: 'host', ...payload } })
+    setTimeout(() => {
+      setSentFlash(null)
+      onClose()
+    }, 900)
+  }
+
+  return (
+    <div
+      style={{
+        position: 'fixed',
+        left: 16,
+        bottom: 16,
+        zIndex: 55,
+        minWidth: 200,
+        maxWidth: 260,
+        background: 'var(--surface)',
+        color: 'var(--text)',
+        border: '2.5px solid var(--text)',
+        borderRadius: 12,
+        boxShadow: '4px 4px 0 var(--text)',
+        padding: '10px 14px',
+        fontSize: 12,
+      }}
+    >
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
+        <span style={{ fontWeight: 800 }}>🎉 Appreciate {target.playerName}</span>
+        <button onClick={onClose} style={{ background: 'transparent', border: 'none', cursor: 'pointer', fontSize: 13, color: 'var(--text-muted)' }}>
+          ✕
+        </button>
+      </div>
+      {sentFlash ? (
+        <div style={{ textAlign: 'center', fontWeight: 700, color: '#1FA98A', padding: '6px 0' }}>Sent {sentFlash} ✓</div>
+      ) : (
+        <>
+          <div style={{ display: 'flex', gap: 6, marginBottom: 8, flexWrap: 'wrap' }}>
+            {QUICK_EMOJI.map((e) => (
+              <button
+                key={e}
+                onClick={() => send({ emoji: e })}
+                style={{ fontSize: 18, background: 'var(--surface-2)', border: '1.5px solid var(--border)', borderRadius: 8, padding: '4px 7px', cursor: 'pointer', lineHeight: 1 }}
+              >
+                {e}
+              </button>
+            ))}
+          </div>
+          <div style={{ display: 'grid', gap: 5 }}>
+            {QUICK_MESSAGES.map((m) => (
+              <button key={m} onClick={() => send({ text: m })} style={{ ...btnStyle('var(--surface)'), fontSize: 11.5, padding: '6px 9px', textAlign: 'left' }}>
+                {m}
+              </button>
+            ))}
+          </div>
+        </>
+      )}
+    </div>
+  )
+}
+
+/** Opens the quick-reaction picker for one player — drop next to <ChatButton>
+ *  on any host dashboard row. Must be rendered under a <QuickReactProvider>. */
+export function QuickReactButton({ sessionCode, playerId, playerName }: { sessionCode: string; playerId: string; playerName: string }) {
+  const setTarget = useContext(QuickReactContext)
+  return (
+    <button
+      onClick={() => setTarget?.({ sessionCode, playerId, playerName })}
+      title={`Appreciate ${playerName}`}
+      style={{ background: 'transparent', border: 'none', cursor: 'pointer', fontSize: 11, padding: 0, lineHeight: 1 }}
+    >
+      🎉
+    </button>
   )
 }
 

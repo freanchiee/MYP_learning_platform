@@ -68,6 +68,11 @@ export interface WorksheetField {
   columns?: WorksheetTableColumn[] // for 'table'
   minRows?: number // for 'table' — rows to start with
   hint?: string
+  exemplar?: string // a model answer a student can optionally reveal, for text/textarea fields
+  /** Words or short phrases (case-insensitive) that, the first time they
+   *  appear in this field's typed text, burst confetti for the student —
+   *  a light-touch nudge that they've hit something worth including. */
+  celebrateKeywords?: string[]
 }
 
 export interface WorksheetSection {
@@ -95,6 +100,8 @@ export interface WorksheetStage {
 export interface OpenIdeasPrompt {
   text: string
   icon?: string
+  exemplar?: string // a model pitch a student can optionally reveal
+  celebrateKeywords?: string[] // see WorksheetField.celebrateKeywords
 }
 
 export interface ConstraintCard {

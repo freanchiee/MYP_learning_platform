@@ -1,16 +1,24 @@
 'use client'
 
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase/client'
 import { useLiveRow, useLiveTable, shuffle, useLiveDraftReporter } from '@/lib/design-live/hooks'
 import { worksheetSectionPct } from '@/lib/design-live/scoring'
 import type { LiveActivityDefinition, McqStage, WorksheetStage, OpenIdeasStage, WorksheetField } from '@/data/design/live/types'
-import type { LiveSessionRow, LivePlayerRow, LiveGradeRow } from '@/lib/design-live/types'
+import type { LiveSessionRow, LivePlayerRow, LiveGradeRow, LiveEventRow } from '@/lib/design-live/types'
 import { cardStyle, btnStyle, inputStyle, pageBg, ErrorBanner, BadgeRow, MCQOptions, Avatar } from './ui'
 import ChatPanel from './ChatPanel'
 import { Podium } from './Podium'
 import PersonaChatField from './PersonaChatField'
+import { useCelebration, CelebrationOverlay } from './Celebration'
+
+/** Case-insensitive "does this text contain this word/phrase" check used by
+ *  both the keyword-celebration nudge and (loosely) nowhere else — kept
+ *  here so WorksheetPlayer/OpenIdeasPlayer share one definition of match. */
+function containsKeyword(text: string, keyword: string): boolean {
+  return text.toLowerCase().includes(keyword.toLowerCase())
+}
 
 function pickTeam(players: LivePlayerRow[], teamCount: number): number {
   const counts = new Array(teamCount).fill(0)
@@ -63,6 +71,29 @@ export default function LiveJoin({ activity, initialCode }: { activity: LiveActi
   useEffect(() => {
     if (userId && players.length) setMe(players.find((p) => p.user_id === userId) || null)
   }, [players, userId])
+
+  // A teacher's quick reaction (see ui.tsx QuickReactButton) is a
+  // live_events row addressed to this player — pick up NEW ones (not the
+  // ones already sitting there from before this page loaded) and turn each
+  // into a confetti burst.
+  const { bursts, celebrate } = useCelebration()
+  const [reactionEvents, setReactionEvents] = useState<LiveEventRow[]>([])
+  const seenReactionIds = useRef<Set<string> | null>(null)
+  useLiveTable<LiveEventRow>('live_events', 'player_id', me?.id, (rows) => setReactionEvents(rows.filter((r) => r.type === 'reaction')), !!me)
+  useEffect(() => {
+    if (seenReactionIds.current === null) {
+      // First load: treat every reaction already on record as already seen,
+      // so reopening the page doesn't replay every past "nice work!" as new confetti.
+      seenReactionIds.current = new Set(reactionEvents.map((r) => r.id))
+      return
+    }
+    reactionEvents.forEach((r) => {
+      if (!seenReactionIds.current!.has(r.id)) {
+        seenReactionIds.current!.add(r.id)
+        celebrate(r.payload?.emoji ? `${r.payload.emoji} Your teacher noticed your work!` : `💌 ${r.payload?.text || 'Your teacher sent you a note!'}`)
+      }
+    })
+  }, [reactionEvents, celebrate])
 
   // Real name, not a freely-typed one, once the account has one set. The
   // (session_code, user_id) unique constraint is what actually makes "one
@@ -234,9 +265,11 @@ export default function LiveJoin({ activity, initialCode }: { activity: LiveActi
           {session.status === 'active' && stage?.type === 'mcq' && (
             <McqPlayer activity={activity} stage={stage} session={session} me={me} patchMyData={patchMyData} addPoints={addPoints} />
           )}
-          {session.status === 'active' && stage?.type === 'worksheet' && <WorksheetPlayer stage={stage} me={me} sessionCode={code} patchMyData={patchMyData} reportDraft={reportDraft} />}
+          {session.status === 'active' && stage?.type === 'worksheet' && (
+            <WorksheetPlayer stage={stage} me={me} sessionCode={code} patchMyData={patchMyData} reportDraft={reportDraft} celebrate={celebrate} />
+          )}
           {session.status === 'active' && stage?.type === 'openIdeas' && (
-            <OpenIdeasPlayer activity={activity} stage={stage} session={session} me={me} patchMyData={patchMyData} reportDraft={reportDraft} />
+            <OpenIdeasPlayer activity={activity} stage={stage} session={session} me={me} patchMyData={patchMyData} reportDraft={reportDraft} celebrate={celebrate} />
           )}
           {session.status === 'active' && stage?.type === 'grading' && (
             <div style={cardStyle(activity.theme.accent)}>
@@ -293,22 +326,27 @@ export default function LiveJoin({ activity, initialCode }: { activity: LiveActi
           )}
         </div>
       </div>
+      <CelebrationOverlay bursts={bursts} />
     </div>
   )
 }
 
+/** A floating chat bubble (bottom-left, fixed) instead of an inline banner
+ *  at the top of the stage — it shouldn't compete for space with the
+ *  activity itself, and `position: fixed` means its place in the render
+ *  tree doesn't matter for layout. */
 function StudentChatToggle({ sessionCode, me, accent }: { sessionCode: string; me: LivePlayerRow; accent: string }) {
   const [open, setOpen] = useState(false)
   return (
-    <div>
-      <button onClick={() => setOpen(!open)} style={{ ...btnStyle(accent), width: '100%', fontSize: 12.5 }}>
-        {open ? '✕ Close chat' : '💬 Chat with your teacher'}
-      </button>
+    <div style={{ position: 'fixed', left: 16, bottom: 16, zIndex: 45, display: 'grid', gap: 8, justifyItems: 'start' }}>
       {open && (
-        <div style={{ marginTop: 8 }}>
+        <div style={{ width: 'min(320px, calc(100vw - 32px))' }}>
           <ChatPanel sessionCode={sessionCode} playerId={me.id} playerName={me.name} asHost={false} accent={accent} />
         </div>
       )}
+      <button onClick={() => setOpen(!open)} style={{ ...btnStyle(accent, true), borderRadius: 999, padding: '10px 16px', fontSize: 13, boxShadow: '3px 3px 0 var(--text)' }}>
+        {open ? '✕ Close chat' : '💬 Chat with your teacher'}
+      </button>
     </div>
   )
 }
@@ -410,22 +448,38 @@ function WorksheetPlayer({
   sessionCode,
   patchMyData,
   reportDraft,
+  celebrate,
 }: {
   stage: WorksheetStage
   me: LivePlayerRow
   sessionCode: string
   patchMyData: (stageKey: string, patch: Record<string, any>) => void
   reportDraft: (stageKey: string, text: string, sectionKey?: string) => void
+  celebrate: (label: string) => void
 }) {
   const [openSection, setOpenSection] = useState<string | undefined>(stage.sections[0]?.key)
   const [drafts, setDrafts] = useState<Record<string, Record<string, any>>>(() =>
     Object.fromEntries(stage.sections.map((s) => [s.key, me.data?.[stage.key]?.[s.key] || {}]))
   )
   const [savedFlash, setSavedFlash] = useState<string | null>(null)
+  // Which "sectionKey.fieldKey.keyword" combos have already fired their
+  // confetti burst this session, so re-typing over the same keyword (or
+  // deleting and retyping it) doesn't spam the celebration on every keystroke.
+  const celebratedRef = useRef<Set<string>>(new Set())
 
   const updateField = (sectionKey: string, fieldKey: string, value: any) => {
     setDrafts((d) => ({ ...d, [sectionKey]: { ...d[sectionKey], [fieldKey]: value } }))
-    if (typeof value === 'string' && value.trim()) reportDraft(stage.key, value, sectionKey)
+    if (typeof value === 'string' && value.trim()) {
+      reportDraft(stage.key, value, sectionKey)
+      const field = stage.sections.find((s) => s.key === sectionKey)?.fields.find((f) => f.key === fieldKey)
+      field?.celebrateKeywords?.forEach((kw) => {
+        const id = `${sectionKey}.${fieldKey}.${kw.toLowerCase()}`
+        if (!celebratedRef.current.has(id) && containsKeyword(value, kw)) {
+          celebratedRef.current.add(id)
+          celebrate(`⭐ Nice! You mentioned "${kw}"`)
+        }
+      })
+    }
   }
   const saveSection = (sectionKey: string) => {
     patchMyData(stage.key, { [sectionKey]: drafts[sectionKey] })
@@ -483,6 +537,30 @@ function WorksheetPlayer({
   )
 }
 
+/** A model answer a student can optionally reveal — collapsed by default so
+ *  it scaffolds rather than gives the answer away outright. Shared by
+ *  worksheet text/textarea fields and openIdeas prompts. */
+function ExemplarReveal({ exemplar }: { exemplar?: string }) {
+  const [open, setOpen] = useState(false)
+  if (!exemplar) return null
+  return (
+    <div style={{ fontWeight: 400 }}>
+      <button
+        type="button"
+        onClick={() => setOpen(!open)}
+        style={{ background: 'transparent', border: 'none', color: 'var(--accent, #5C3FD6)', cursor: 'pointer', fontSize: 11, fontWeight: 700, padding: 0 }}
+      >
+        {open ? '▾ Hide example answer' : '▸ 💡 Show example answer'}
+      </button>
+      {open && (
+        <div style={{ marginTop: 4, fontSize: 12, fontStyle: 'italic', color: 'var(--text-muted)', background: 'var(--surface-2)', borderRadius: 8, padding: '6px 9px' }}>
+          {exemplar}
+        </div>
+      )}
+    </div>
+  )
+}
+
 function WorksheetFieldInput({
   field,
   value,
@@ -508,6 +586,7 @@ function WorksheetFieldInput({
       <label style={{ display: 'grid', gap: 4, fontSize: 12, fontWeight: 700, color: 'var(--text-muted)' }}>
         {field.label}
         <input value={value || ''} placeholder={field.placeholder} onChange={(e) => onChange(e.target.value)} style={inputStyle} />
+        <ExemplarReveal exemplar={field.exemplar} />
       </label>
     )
   }
@@ -517,6 +596,7 @@ function WorksheetFieldInput({
         {field.label}
         {field.hint && <span style={{ fontWeight: 400, fontSize: 11 }}>{field.hint}</span>}
         <textarea value={value || ''} placeholder={field.placeholder} onChange={(e) => onChange(e.target.value)} style={{ ...inputStyle, minHeight: 70 }} />
+        <ExemplarReveal exemplar={field.exemplar} />
       </label>
     )
   }
@@ -569,6 +649,7 @@ function OpenIdeasPlayer({
   me,
   patchMyData,
   reportDraft,
+  celebrate,
 }: {
   activity: LiveActivityDefinition
   stage: OpenIdeasStage
@@ -576,12 +657,14 @@ function OpenIdeasPlayer({
   me: LivePlayerRow
   patchMyData: (stageKey: string, patch: Record<string, any>) => void
   reportDraft: (stageKey: string, text: string) => void
+  celebrate: (label: string) => void
 }) {
   const st = session.state?.[stage.key] || { ideaIndex: 0, locked: false, constraintIdx: null }
   const prompt = stage.prompts[st.ideaIndex]
   const mine = me.data?.[stage.key]?.[st.ideaIndex]
   const [text, setText] = useState(mine?.text || '')
   const [flash, setFlash] = useState(false)
+  const celebratedRef = useRef<Set<string>>(new Set())
 
   useEffect(() => {
     setText(mine?.text || '')
@@ -589,7 +672,16 @@ function OpenIdeasPlayer({
 
   const onType = (v: string) => {
     setText(v)
-    if (v.trim()) reportDraft(stage.key, v)
+    if (v.trim()) {
+      reportDraft(stage.key, v)
+      prompt.celebrateKeywords?.forEach((kw) => {
+        const id = `${st.ideaIndex}.${kw.toLowerCase()}`
+        if (!celebratedRef.current.has(id) && containsKeyword(v, kw)) {
+          celebratedRef.current.add(id)
+          celebrate(`⭐ Nice! You mentioned "${kw}"`)
+        }
+      })
+    }
   }
 
   const submit = () => {
@@ -618,6 +710,7 @@ function OpenIdeasPlayer({
       )}
       {st.locked && !mine && <div style={{ textAlign: 'center', fontSize: 13, fontWeight: 700, color: '#D6425E' }}>🔒 Time&apos;s up — your teacher has locked this round.</div>}
       <input value={text} disabled={st.locked} onChange={(e) => onType(e.target.value)} placeholder="Your idea, in a few words…" style={inputStyle} onKeyDown={(e) => e.key === 'Enter' && submit()} />
+      <ExemplarReveal exemplar={prompt.exemplar} />
       <button onClick={submit} disabled={st.locked} style={btnStyle('#1FA98A', true, true)}>
         {flash ? '✅ Saved!' : mine ? 'Update my idea' : 'Submit my idea'}
       </button>

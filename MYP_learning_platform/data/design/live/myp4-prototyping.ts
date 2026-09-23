@@ -39,7 +39,14 @@ export const MYP4_PROTOTYPING: LiveActivityDefinition = {
           fields: [
             { key: 'name', label: 'Persona name', type: 'text', placeholder: 'e.g. Marcus, 34' },
             { key: 'type', label: 'Persona type', type: 'select', options: ['A consenting classmate or family member', 'An approved persona-pack character', 'A composite persona based on real research'] },
-            { key: 'traits', label: 'Key traits relevant to the design problem', type: 'textarea', hint: 'What matters physically/sensorially for this user?' },
+            {
+              key: 'traits',
+              label: 'Key traits relevant to the design problem',
+              type: 'textarea',
+              hint: 'What matters physically/sensorially for this user?',
+              exemplar: 'Marcus has limited grip strength in his right hand after a wrist injury, so tasks needing a firm two-handed grip are difficult. He\'s also sensitive to loud, sudden sounds.',
+              celebrateKeywords: ['grip', 'mobility', 'sensory', 'vision', 'reach'],
+            },
           ],
         },
         {
@@ -54,10 +61,38 @@ export const MYP4_PROTOTYPING: LiveActivityDefinition = {
           label: 'Empathy map',
           icon: '💭',
           fields: [
-            { key: 'says', label: 'Says', type: 'textarea', hint: 'What does your persona actually say about this problem?' },
-            { key: 'thinks', label: 'Thinks', type: 'textarea', hint: 'What might they be thinking, but not always saying out loud?' },
-            { key: 'does', label: 'Does', type: 'textarea', hint: 'What do they currently do to work around the problem?' },
-            { key: 'feels', label: 'Feels', type: 'textarea', hint: 'How does the problem make them feel?' },
+            {
+              key: 'says',
+              label: 'Says',
+              type: 'textarea',
+              hint: 'What does your persona actually say about this problem?',
+              exemplar: '"I just leave it on the counter because carrying it one-handed makes my wrist hurt."',
+              celebrateKeywords: ['because', "i can't", 'i wish'],
+            },
+            {
+              key: 'thinks',
+              label: 'Thinks',
+              type: 'textarea',
+              hint: 'What might they be thinking, but not always saying out loud?',
+              exemplar: 'He wonders if people notice him struggling, and hopes for something that doesn\'t make him feel singled out.',
+              celebrateKeywords: ['worried', 'embarrassed', 'wonders', 'hopes'],
+            },
+            {
+              key: 'does',
+              label: 'Does',
+              type: 'textarea',
+              hint: 'What do they currently do to work around the problem?',
+              exemplar: 'He currently avoids carrying more than one item at a time, and asks a classmate for help when the load is heavy.',
+              celebrateKeywords: ['instead', 'avoids', 'asks for help', 'currently'],
+            },
+            {
+              key: 'feels',
+              label: 'Feels',
+              type: 'textarea',
+              hint: 'How does the problem make them feel?',
+              exemplar: 'Frustrated when a task takes longer than it should, and anxious about dropping something in front of others.',
+              celebrateKeywords: ['frustrated', 'anxious', 'relieved', 'confident'],
+            },
           ],
         },
         {

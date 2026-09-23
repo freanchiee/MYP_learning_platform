@@ -7,13 +7,13 @@ import { createClient } from '@/lib/supabase/client'
 import { useLiveRow, useLiveTable, generateJoinCode, hostStorageKey, useNowTick, isDraftFresh, type LiveDraft } from '@/lib/design-live/hooks'
 import { worksheetSectionPct } from '@/lib/design-live/scoring'
 import type { LiveActivityDefinition, McqStage, WorksheetStage, OpenIdeasStage, GradingStage } from '@/data/design/live/types'
-import type { LiveSessionRow, LivePlayerRow, LiveGradeRow } from '@/lib/design-live/types'
+import type { LiveSessionRow, LivePlayerRow, LiveGradeRow, LiveEventRow } from '@/lib/design-live/types'
 import { getPersona } from '@/data/design/live/personas'
-import { cardStyle, btnStyle, inputStyle, pageBg, ErrorBanner, QRCode, Avatar, ProgressStream, PlayerPreview, PlayerPreviewProvider } from './ui'
+import { cardStyle, btnStyle, inputStyle, pageBg, ErrorBanner, QRCode, Avatar, ProgressStream, PlayerPreview, PlayerPreviewProvider, ChatButton, QuickReactButton, QuickReactProvider, UnreadChatContext } from './ui'
 import ChatPanel from './ChatPanel'
 import { Podium } from './Podium'
 
-function PlayerChip({ player, now, onChat }: { player: LivePlayerRow; now: number; onChat?: (id: string) => void }) {
+function PlayerChip({ player, now, onChat, sessionCode }: { player: LivePlayerRow; now: number; onChat?: (id: string) => void; sessionCode?: string }) {
   return (
     <motion.span
       layout
@@ -37,11 +37,8 @@ function PlayerChip({ player, now, onChat }: { player: LivePlayerRow; now: numbe
         <Avatar seed={player.id} size={22} />
         {player.name}
       </PlayerPreview>
-      {onChat && (
-        <button onClick={() => onChat(player.id)} title={`Message ${player.name}`} style={{ background: 'transparent', border: 'none', cursor: 'pointer', fontSize: 12, padding: 0, lineHeight: 1 }}>
-          💬
-        </button>
-      )}
+      {onChat && <ChatButton playerId={player.id} onClick={() => onChat(player.id)} title={`Message ${player.name}`} />}
+      {sessionCode && <QuickReactButton sessionCode={sessionCode} playerId={player.id} playerName={player.name} />}
     </motion.span>
   )
 }
@@ -55,6 +52,8 @@ export default function LiveHost({ activity }: { activity: LiveActivityDefinitio
   const [apiError, setApiError] = useState<string | null>(null)
   const [joinUrl, setJoinUrl] = useState('')
   const [chatWithId, setChatWithId] = useState<string | null>(null)
+  const [events, setEvents] = useState<LiveEventRow[]>([])
+  const [chatReadAt, setChatReadAt] = useState<Record<string, string>>({})
   const now = useNowTick()
 
   useEffect(() => {
@@ -95,6 +94,27 @@ export default function LiveHost({ activity }: { activity: LiveActivityDefinitio
   useLiveRow<LiveSessionRow>('live_sessions', 'code', code, setSession)
   useLiveTable<LivePlayerRow>('live_players', 'session_code', code, setPlayers, true, 'joined_at')
   useLiveTable<LiveGradeRow>('live_grades', 'session_code', code, setGrades, !!activity.stages.find((s) => s.type === 'grading'))
+  useLiveTable<LiveEventRow>('live_events', 'session_code', code, setEvents, !!code)
+
+  // A student's chat message counts as "unread" for the host until the host
+  // actually opens that student's chat panel (see openChat below) — gives
+  // the dashboard a way to surface an incoming message without the host
+  // having to guess who to check on.
+  const unreadIds = useMemo(() => {
+    const set = new Set<string>()
+    events.forEach((e) => {
+      if (e.type === 'message' && e.payload?.from === 'player' && e.player_id) {
+        const readAt = chatReadAt[e.player_id]
+        if (!readAt || e.created_at > readAt) set.add(e.player_id)
+      }
+    })
+    return set
+  }, [events, chatReadAt])
+
+  const openChat = (id: string) => {
+    setChatWithId(id)
+    setChatReadAt((r) => ({ ...r, [id]: new Date().toISOString() }))
+  }
 
   const newSession = () => {
     if (!hostId) return
@@ -136,6 +156,8 @@ export default function LiveHost({ activity }: { activity: LiveActivityDefinitio
   const teamCounts = activity.teams?.map((_, t) => players.filter((p) => p.team === t).length)
 
   return (
+    <UnreadChatContext.Provider value={unreadIds}>
+    <QuickReactProvider>
     <PlayerPreviewProvider>
     <div style={pageBg(activity.theme)}>
       <div style={{ maxWidth: 900, margin: '0 auto', display: 'grid', gap: 16 }}>
@@ -178,7 +200,7 @@ export default function LiveHost({ activity }: { activity: LiveActivityDefinitio
                     <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginTop: 10 }}>
                       <AnimatePresence>
                         {players.filter((p) => p.team === ti).map((p) => (
-                          <PlayerChip key={p.id} player={p} now={now} onChat={setChatWithId} />
+                          <PlayerChip key={p.id} player={p} now={now} onChat={openChat} sessionCode={code!} />
                         ))}
                       </AnimatePresence>
                       {teamCounts?.[ti] === 0 && <span style={{ color: 'var(--text-muted)', fontSize: 12 }}>Waiting…</span>}
@@ -192,7 +214,7 @@ export default function LiveHost({ activity }: { activity: LiveActivityDefinitio
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
                   <AnimatePresence>
                     {players.map((p) => (
-                      <PlayerChip key={p.id} player={p} now={now} onChat={setChatWithId} />
+                      <PlayerChip key={p.id} player={p} now={now} onChat={openChat} sessionCode={code!} />
                     ))}
                   </AnimatePresence>
                   {players.length === 0 && <span style={{ color: 'var(--text-muted)', fontSize: 13 }}>Waiting for students to join…</span>}
@@ -208,7 +230,7 @@ export default function LiveHost({ activity }: { activity: LiveActivityDefinitio
         )}
 
         {session.status === 'active' && stage && (
-          <StageHost activity={activity} stage={stage} session={session} players={players} grades={grades} patchState={patchState} advanceStage={advanceStage} run={run} now={now} onChat={setChatWithId} />
+          <StageHost activity={activity} stage={stage} session={session} players={players} grades={grades} patchState={patchState} advanceStage={advanceStage} run={run} now={now} onChat={openChat} />
         )}
 
         {session.status === 'ended' && <EndedHost activity={activity} players={players} session={session} onRestart={newSession} />}
@@ -235,6 +257,8 @@ export default function LiveHost({ activity }: { activity: LiveActivityDefinitio
       )}
     </div>
     </PlayerPreviewProvider>
+    </QuickReactProvider>
+    </UnreadChatContext.Provider>
   )
 }
 
@@ -271,7 +295,7 @@ function StageHost({
       </div>
 
       {stage.type === 'mcq' && <McqHost activity={activity} stage={stage} session={session} players={players} patchState={patchState} now={now} onChat={onChat} />}
-      {stage.type === 'worksheet' && <WorksheetHost stage={stage} players={players} now={now} onChat={onChat} />}
+      {stage.type === 'worksheet' && <WorksheetHost stage={stage} players={players} now={now} onChat={onChat} sessionCode={session.code} />}
       {stage.type === 'openIdeas' && <OpenIdeasHost activity={activity} stage={stage} session={session} players={players} patchState={patchState} now={now} onChat={onChat} />}
       {stage.type === 'grading' && <GradingHost activity={activity} stage={stage} players={players} grades={grades} run={run} session={session} />}
 
@@ -310,7 +334,7 @@ function McqHost({
         <div style={{ ...cardStyle(activity.theme.accent), color: 'var(--text-muted)', fontSize: 13, textAlign: 'center' }}>
           Free explore — everyone works through all {stage.questions.length} questions at their own pace. Watch progress live below.
         </div>
-        <McqDashboard stage={stage} players={players} now={now} onChat={onChat} />
+        <McqDashboard stage={stage} players={players} now={now} onChat={onChat} sessionCode={session.code} />
       </div>
     )
   }
@@ -389,7 +413,7 @@ function McqHost({
   )
 }
 
-function McqDashboard({ stage, players, now, onChat }: { stage: McqStage; players: LivePlayerRow[]; now: number; onChat: (id: string) => void }) {
+function McqDashboard({ stage, players, now, onChat, sessionCode }: { stage: McqStage; players: LivePlayerRow[]; now: number; onChat: (id: string) => void; sessionCode: string }) {
   return (
     <div style={{ ...cardStyle(), overflowX: 'auto' }}>
       <table style={{ borderCollapse: 'collapse', width: '100%', fontSize: 12 }}>
@@ -412,9 +436,8 @@ function McqDashboard({ stage, players, now, onChat }: { stage: McqStage; player
                     <Avatar seed={p.id} size={22} />
                     {p.name}
                   </PlayerPreview>
-                  <button onClick={() => onChat(p.id)} title={`Message ${p.name}`} style={{ background: 'transparent', border: 'none', cursor: 'pointer', fontSize: 11, padding: 0 }}>
-                    💬
-                  </button>
+                  <ChatButton playerId={p.id} onClick={() => onChat(p.id)} title={`Message ${p.name}`} />
+                  <QuickReactButton sessionCode={sessionCode} playerId={p.id} playerName={p.name} />
                 </div>
               </td>
               {stage.questions.map((_, i) => {
@@ -442,7 +465,7 @@ function McqDashboard({ stage, players, now, onChat }: { stage: McqStage; player
   )
 }
 
-function WorksheetHost({ stage, players, now, onChat }: { stage: WorksheetStage; players: LivePlayerRow[]; now: number; onChat: (id: string) => void }) {
+function WorksheetHost({ stage, players, now, onChat, sessionCode }: { stage: WorksheetStage; players: LivePlayerRow[]; now: number; onChat: (id: string) => void; sessionCode: string }) {
   return (
     <div style={{ ...cardStyle(), overflowX: 'auto' }}>
       <table style={{ borderCollapse: 'collapse', width: '100%', fontSize: 12 }}>
@@ -465,9 +488,8 @@ function WorksheetHost({ stage, players, now, onChat }: { stage: WorksheetStage;
                     <Avatar seed={p.id} size={22} />
                     {p.name}
                   </PlayerPreview>
-                  <button onClick={() => onChat(p.id)} title={`Message ${p.name}`} style={{ background: 'transparent', border: 'none', cursor: 'pointer', fontSize: 11, padding: 0 }}>
-                    💬
-                  </button>
+                  <ChatButton playerId={p.id} onClick={() => onChat(p.id)} title={`Message ${p.name}`} />
+                  <QuickReactButton sessionCode={sessionCode} playerId={p.id} playerName={p.name} />
                 </div>
               </td>
               {stage.sections.map((s) => {
@@ -604,9 +626,10 @@ function OpenIdeasHost({
                 <Avatar seed={player.id} size={20} />
               </PlayerPreview>
               <strong>{player.name}:</strong> {sub.text}
-              <button onClick={() => onChat(player.id)} title={`Message ${player.name}`} style={{ background: 'transparent', border: 'none', cursor: 'pointer', fontSize: 11, padding: 0, marginLeft: 'auto' }}>
-                💬
-              </button>
+              <span style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 4 }}>
+                <ChatButton playerId={player.id} onClick={() => onChat(player.id)} title={`Message ${player.name}`} />
+                <QuickReactButton sessionCode={session.code} playerId={player.id} playerName={player.name} />
+              </span>
             </div>
           ))}
         </div>

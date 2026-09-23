@@ -208,16 +208,78 @@ for a new realtime event from a student who stopped typing.
 
 Built on `live_events` (`type: 'message'`, `payload: {from, text}`) — no new
 table. `ChatPanel.tsx` renders one thread for one `playerId`; the host opens
-it from a 💬 button next to any player (roster chip, dashboard row,
-submission) via `chatWithId` state in `LiveHost.tsx`; a student gets a
-persistent collapsible "Chat with your teacher" toggle in `LiveJoin.tsx`.
-`supabase/migrations/0005_live_chat_rls.sql` is what makes this safe: it
-lets the session's host insert/read events for ANY of their students (0004
-only allowed a student to touch their own), and scopes reads of a directed
-event to just that student and that session's host — nobody else can read
-someone else's private thread. If you add a new kind of directed event
-(not chat), reread that migration's comment before assuming the existing
-policies cover it.
+it from a `<ChatButton>` next to any player (roster chip, dashboard row,
+submission) via `openChat` (wraps `chatWithId` state) in `LiveHost.tsx`; a
+student gets a floating bottom-left chat bubble (`StudentChatToggle` in
+`LiveJoin.tsx`, `position: fixed` so it never competes with the stage for
+layout space) instead of an inline banner. `supabase/migrations/
+0005_live_chat_rls.sql` is what makes this safe: it lets the session's host
+insert/read events for ANY of their students (0004 only allowed a student
+to touch their own), and scopes reads of a directed event to just that
+student and that session's host — nobody else can read someone else's
+private thread. If you add a new kind of directed event (not chat), reread
+that migration's comment before assuming the existing policies cover it.
+
+**Unread indicator**: `LiveHost.tsx` subscribes to every `live_events` row
+for the session and computes `unreadIds` — any player whose latest
+`type:'message', payload.from:'player'` event is newer than the last time
+the host opened that player's chat (`chatReadAt`, set by `openChat`). That
+`Set<string>` is handed down via `UnreadChatContext` (`ui.tsx`) rather than
+threaded as a prop through every dashboard, so `<ChatButton playerId=... />`
+can show its own red dot without every intermediate component knowing
+about unread state.
+
+**Quick reactions**: a lighter-weight alternative to chat for "quickly
+appreciate this student's work" — `<QuickReactButton>` (`ui.tsx`) opens a
+floating picker (same clipping fix as `<PlayerPreview>`: one panel at the
+top level via `QuickReactProvider`/`QuickReactContext`, not a popup nested
+in an `overflow-x: auto` table cell) offering a few emoji and canned
+messages. Sending one inserts a `live_events` row (`type: 'reaction'`,
+`payload: {from:'host', emoji?, text?}`) — the existing chat RLS policies
+already cover it since it's just another directed event. The student's
+`<CelebrationOverlay>` (see below) turns each new one into a confetti
+burst, so appreciation is felt immediately, not just logged in a chat
+thread nobody's looking at.
+
+## Progress-cell ticker — an ambient view into live drafts
+
+`WorksheetHost`'s per-section progress cells use `<ProgressStream>`
+(`ui.tsx`) instead of the plain `<ProgressCell>` — it cross-fades in a
+short snippet of the student's current draft for THAT exact section
+whenever one arrives (`live-ticker` keyframe, `app/globals.css`), and fades
+back out once the draft goes stale. This needed `LiveDraft` to carry a
+`sectionKey` (`lib/design-live/hooks.ts`), threaded through
+`useLiveDraftReporter`/`reportDraft` from `WorksheetPlayer.updateField` and
+`WorksheetFieldInput`'s `onDraft` — without it every column in a row would
+light up for whichever section the student happened to be typing in, not
+just the right one. Hovering the cell still opens the full
+`<PlayerPreviewPanel>` for the bigger read.
+
+## Exemplar answers + keyword celebration
+
+Any `WorksheetField` (text/textarea) or `OpenIdeasPrompt` can carry an
+`exemplar` (a model answer, shown to the student via a collapsed
+`<ExemplarReveal>` toggle — scaffolding, not an answer key dumped in their
+face) and `celebrateKeywords` (words/phrases that, the first time they
+appear in what the student types, burst confetti via
+`Celebration.tsx`'s `useCelebration`/`<CelebrationOverlay>`). Detection
+lives in `WorksheetPlayer.updateField` and `OpenIdeasPlayer.onType` — a
+`celebratedRef` Set (keyed `sectionKey.fieldKey.keyword` /
+`ideaIndex.keyword`) makes sure a keyword only fires once per field per
+session, not on every keystroke after the match. `celebrate` is threaded
+down from `LiveJoin`'s root, which owns the one `<CelebrationOverlay>` for
+the whole page — the same overlay also fires for incoming host reactions
+(see above), so "the teacher appreciated this" and "you nailed a key
+concept" both land as the same kind of moment for the student instead of
+two competing UI patterns.
+
+When authoring a new activity: pick keywords that reward the actual skill
+being assessed (see `myp4-prototyping.ts`'s empathy-map fields — keywords
+like `because`/`currently`/`wonders` reward justification and observed-not-
+assumed detail, not just "wrote something"), not generic filler words.
+`exemplar` only renders for `text`/`textarea` worksheet fields and
+`openIdeas` prompts — `select`/`table` fields don't have anywhere to put it
+in the current UI.
 
 ## The victory screen — Podium
 
@@ -238,8 +300,14 @@ persona chat does NOT use that pattern.** Asking every student in a class
 to obtain their own API key just to interview a persona is impractical.
 Instead `app/api/persona-chat/route.ts` calls Groq (`lib/groq.ts`) with a
 single **server-side** `GROQ_API_KEY` env var — Groq hosts small open-
-weight models (default `llama-3.1-8b-instant`) free, no credit card, so
-this costs the platform nothing within Groq's free tier. The route builds
+weight models (default `openai/gpt-oss-20b`) free, no credit card, so
+this costs the platform nothing within Groq's free tier. Which model ids a
+given account can actually see varies and drifts over time — `lib/groq.ts`
+tries a short fallback list and remembers whichever one worked; if they
+all start 404ing/decommissioning again, don't re-guess model names, hit
+`GET https://api.groq.com/openai/v1/models` with the real key (e.g. via a
+temporary diagnostic route) and read the account's real catalog first.
+The route builds
 the system prompt from `data/design/live/personas.ts` (bio/struggles/
 traits/anthro — one specific person, not a generalized stereotype) and
 guards against abuse by requiring the caller to be signed in AND be the

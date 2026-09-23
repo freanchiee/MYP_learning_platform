@@ -49,11 +49,36 @@ export const MYP2_DESIGN_STUDIO: LiveActivityDefinition = {
       label: 'Idea Face-Off',
       icon: '💡',
       prompts: [
-        { icon: '🎒', text: 'How might we make packing a school bag easier?' },
-        { icon: '🪑', text: 'How might we help students keep their desks organised?' },
-        { icon: '🏫', text: 'How might we make a shared classroom space easier to use?' },
-        { icon: '📝', text: 'How might we help students remember their homework?' },
-        { icon: '🍽️', text: 'How might we make the lunch queue fairer for everyone?' },
+        {
+          icon: '🎒',
+          text: 'How might we make packing a school bag easier?',
+          exemplar: 'A see-through front pocket with a checklist sewn inside the flap, so a student can check everything is packed at a glance before they rush out the door.',
+          celebrateKeywords: ['so that', 'because', 'checklist'],
+        },
+        {
+          icon: '🪑',
+          text: 'How might we help students keep their desks organised?',
+          exemplar: 'A slim raised lip along the edge of the desk that stops pencils and bottles rolling off, made from recycled rubber so it is cheap to add to any existing desk.',
+          celebrateKeywords: ['recycled', 'because', 'everyone'],
+        },
+        {
+          icon: '🏫',
+          text: 'How might we make a shared classroom space easier to use?',
+          exemplar: 'A simple sign-up card by the reading corner with time slots, so everyone gets a fair turn instead of whoever gets there first.',
+          celebrateKeywords: ['everyone', 'fair', 'so that'],
+        },
+        {
+          icon: '📝',
+          text: 'How might we help students remember their homework?',
+          exemplar: 'A small whiteboard strip on the inside of each pencil case lid, so today\'s homework is the first thing a student sees when they pack up — no app or phone needed.',
+          celebrateKeywords: ['because', 'so that', 'accessib'],
+        },
+        {
+          icon: '🍽️',
+          text: 'How might we make the lunch queue fairer for everyone?',
+          exemplar: 'A second, lower queue line just for younger students, staffed by a prefect, so smaller students are not stuck waiting behind much taller ones.',
+          celebrateKeywords: ['younger', 'everyone', 'because'],
+        },
       ],
       constraintCards: [
         { icon: '♿', label: 'Accessibility', text: 'Your design must work for a user with limited hand mobility.' },
