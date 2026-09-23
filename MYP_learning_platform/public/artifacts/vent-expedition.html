@@ -1,0 +1,2364 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Vent Expedition</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ============ TOKENS ============ */
+:root{
+  --bg:#EEF3EC;
+  --surface:#FBFDFA;
+  --surface-2:#E4EBE1;
+  --ink:#152119;
+  --ink-soft:#4A594F;
+  --ink-faint:#7C8C80;
+  --line:#D2DBCC;
+  --line-strong:#AFC0A8;
+  --teal:#0E7A72;
+  --teal-ink:#08403C;
+  --teal-tint:#DCEEEC;
+  --amber:#D97E1F;
+  --amber-ink:#7A4408;
+  --amber-tint:#FBE9D2;
+  --coral:#C4485A;
+  --coral-tint:#F8DEE1;
+  --moss:#3F8F51;
+  --moss-tint:#DCEFDD;
+  --shadow: 0 1px 2px rgba(15,30,20,.06), 0 8px 24px -12px rgba(15,30,20,.18);
+  --radius: 14px;
+  --font-display:'Fraunces', ui-serif, Georgia, serif;
+  --font-body:'Archivo', ui-sans-serif, system-ui, sans-serif;
+  --font-mono:'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0E1713;
+    --surface:#15201B;
+    --surface-2:#1B2721;
+    --ink:#E9F1EA;
+    --ink-soft:#A9BCAE;
+    --ink-faint:#748379;
+    --line:#28352C;
+    --line-strong:#3A4A3E;
+    --teal:#3FBDAF;
+    --teal-ink:#B7ECE4;
+    --teal-tint:#122824;
+    --amber:#F0A24C;
+    --amber-ink:#FCDBAA;
+    --amber-tint:#2A1D0F;
+    --coral:#E48293;
+    --coral-tint:#301419;
+    --moss:#6FCB80;
+    --moss-tint:#122A16;
+    --shadow: 0 1px 2px rgba(0,0,0,.4), 0 12px 28px -14px rgba(0,0,0,.6);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0E1713;
+  --surface:#15201B;
+  --surface-2:#1B2721;
+  --ink:#E9F1EA;
+  --ink-soft:#A9BCAE;
+  --ink-faint:#748379;
+  --line:#28352C;
+  --line-strong:#3A4A3E;
+  --teal:#3FBDAF;
+  --teal-ink:#B7ECE4;
+  --teal-tint:#122824;
+  --amber:#F0A24C;
+  --amber-ink:#FCDBAA;
+  --amber-tint:#2A1D0F;
+  --coral:#E48293;
+  --coral-tint:#301419;
+  --moss:#6FCB80;
+  --moss-tint:#122A16;
+  --shadow: 0 1px 2px rgba(0,0,0,.4), 0 12px 28px -14px rgba(0,0,0,.6);
+}
+
+/* ============ RESET / BASE ============ */
+*{box-sizing:border-box;}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--font-body);
+  font-size:16px;
+  line-height:1.5;
+  padding-inline:20px;
+  padding-block:0;
+}
+h1,h2,h3,h4{
+  font-family:var(--font-display);
+  font-weight:600;
+  color:var(--ink);
+  text-wrap:balance;
+  margin:0;
+}
+p{margin:0;}
+button{font-family:inherit;}
+::selection{background:var(--teal);color:#fff;}
+.mono{font-family:var(--font-mono);}
+.tnum{font-variant-numeric:tabular-nums;}
+a{color:var(--teal-ink);}
+[hidden]{display:none!important;}
+.visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);}
+
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:.01ms!important; animation-iteration-count:1!important; transition-duration:.01ms!important;}
+}
+
+button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible, [tabindex]:focus-visible{
+  outline:3px solid var(--teal);
+  outline-offset:2px;
+}
+
+/* ============ SHELL ============ */
+.app{
+  max-width:1040px;
+  margin:0 auto;
+  padding-block:18px 64px;
+}
+.topbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:10px 16px;
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:999px;
+  box-shadow:var(--shadow);
+  position:sticky;
+  top:12px;
+  z-index:40;
+  flex-wrap:wrap;
+}
+.brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-family:var(--font-mono);
+  font-size:12.5px;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  color:var(--ink-soft);
+  white-space:nowrap;
+}
+.brand .mark{
+  width:28px;height:28px;border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(155deg, var(--teal), var(--amber));
+  color:#08130F;
+  font-family:var(--font-display);
+  font-weight:700;
+  font-size:14px;
+  flex:none;
+}
+.topbar-nav{display:flex;gap:6px;flex-wrap:wrap;}
+.pill-btn{
+  border:1px solid transparent;
+  background:transparent;
+  color:var(--ink-soft);
+  font-size:13.5px;
+  font-weight:600;
+  padding:7px 14px;
+  border-radius:999px;
+  cursor:pointer;
+  transition:background .15s, color .15s;
+}
+.pill-btn:hover{background:var(--surface-2);}
+.pill-btn.active{background:var(--ink);color:var(--surface);}
+
+main{padding-top:34px;}
+
+/* ============ HOME ============ */
+.hero{
+  display:grid;
+  gap:10px;
+  margin-bottom:34px;
+  max-width:680px;
+}
+.eyebrow{
+  font-family:var(--font-mono);
+  font-size:12px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--teal-ink);
+  background:var(--teal-tint);
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:4px 10px;
+  border-radius:999px;
+  width:fit-content;
+}
+.hero h1{font-size:clamp(28px,4.4vw,42px); line-height:1.08;}
+.hero p{color:var(--ink-soft); font-size:16.5px; max-width:58ch;}
+
+.mission-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:18px;
+}
+@media (max-width:720px){ .mission-grid{grid-template-columns:1fr;} }
+
+.mission-card{
+  position:relative;
+  border-radius:20px;
+  padding:24px;
+  border:1px solid var(--line);
+  background:var(--surface);
+  box-shadow:var(--shadow);
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+  cursor:pointer;
+  text-align:left;
+  color:inherit;
+  overflow:hidden;
+  min-height:220px;
+}
+.mission-card::before{
+  content:"";
+  position:absolute; inset:0;
+  opacity:.08;
+  background:var(--accent-grad);
+}
+.mission-card.unit1{--accent-grad:radial-gradient(circle at 85% -10%, var(--teal), transparent 60%);}
+.mission-card.unit2{--accent-grad:radial-gradient(circle at 85% -10%, var(--amber), transparent 60%);}
+.mission-card .tag{
+  font-family:var(--font-mono);
+  font-size:11.5px;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  padding:3px 9px;
+  border-radius:999px;
+  width:fit-content;
+  position:relative;
+}
+.mission-card.unit1 .tag{background:var(--teal-tint); color:var(--teal-ink);}
+.mission-card.unit2 .tag{background:var(--amber-tint); color:var(--amber-ink);}
+.mission-card h2{font-size:24px; position:relative;}
+.mission-card .desc{color:var(--ink-soft); font-size:14.5px; position:relative; max-width:42ch;}
+.mission-card .meta{
+  margin-top:auto; display:flex; align-items:center; justify-content:space-between;
+  font-size:13px; color:var(--ink-faint); position:relative;
+}
+.mission-card .go{
+  display:inline-flex; align-items:center; gap:6px; font-weight:700; font-size:14px;
+}
+.mission-card.unit1 .go{color:var(--teal-ink);}
+.mission-card.unit2 .go{color:var(--amber-ink);}
+.mission-card:hover{transform:translateY(-2px); transition:transform .15s;}
+
+.briefing{
+  margin-top:28px;
+  border:1px dashed var(--line-strong);
+  border-radius:16px;
+  padding:18px 20px;
+  background:var(--surface);
+  display:grid;
+  gap:8px;
+}
+.briefing h3{font-size:15px; font-family:var(--font-mono); text-transform:uppercase; letter-spacing:.08em; color:var(--ink-soft); font-weight:600;}
+.briefing p{color:var(--ink-soft); font-size:14.5px; max-width:70ch;}
+
+/* ============ SHARED: SECTION HEADER ============ */
+.unit-head{
+  display:flex; align-items:flex-start; justify-content:space-between; gap:16px;
+  flex-wrap:wrap;
+  margin-bottom:24px;
+  padding-bottom:20px;
+  border-bottom:1px solid var(--line);
+}
+.unit-head h1{font-size:clamp(24px,3.6vw,34px);}
+.unit-head .sub{color:var(--ink-soft); font-size:14.5px; margin-top:6px; max-width:60ch;}
+.back-link{
+  display:inline-flex; align-items:center; gap:6px;
+  font-size:13.5px; font-weight:600; color:var(--ink-soft);
+  background:none; border:none; cursor:pointer; padding:0;
+}
+.back-link:hover{color:var(--ink);}
+
+/* ============ CARD / PANEL PRIMITIVES ============ */
+.panel{
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:20px;
+  box-shadow:var(--shadow);
+}
+.stack{display:grid; gap:16px;}
+
+/* ============ UNIT 1 SPECIFIC ============ */
+.specimen-card{
+  display:grid;
+  grid-template-columns: 200px 1fr;
+  gap:22px;
+  align-items:center;
+  border:1px solid var(--line);
+  background:var(--surface);
+  border-radius:18px;
+  padding:20px;
+  box-shadow:var(--shadow);
+}
+@media (max-width:600px){ .specimen-card{grid-template-columns:1fr;} }
+.specimen-card figure{margin:0; display:grid; justify-items:center; gap:8px;}
+.specimen-card figcaption{font-family:var(--font-mono); font-size:11px; color:var(--ink-faint); text-align:center;}
+.specimen-card .facts{display:grid; gap:6px; font-size:14px;}
+.specimen-card .facts dt{font-family:var(--font-mono); font-size:11px; text-transform:uppercase; letter-spacing:.06em; color:var(--teal-ink); margin-top:6px;}
+.specimen-card .facts dd{margin:0; color:var(--ink-soft);}
+.specimen-card h2{font-size:19px;}
+.specimen-card .id{font-family:var(--font-mono); font-size:12.5px; color:var(--ink-faint);}
+
+.strand-block{
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  background:var(--surface);
+  overflow:hidden;
+  box-shadow:var(--shadow);
+}
+.strand-head{
+  display:flex; align-items:center; gap:12px;
+  padding:16px 20px;
+  border-bottom:1px solid var(--line);
+  background:var(--surface-2);
+  flex-wrap:wrap;
+}
+.strand-code{
+  font-family:var(--font-mono);
+  font-weight:600;
+  font-size:13px;
+  background:var(--ink);
+  color:var(--surface);
+  padding:3px 9px;
+  border-radius:7px;
+  flex:none;
+}
+.strand-head h3{font-size:16px; flex:1; min-width:180px;}
+.strand-quote{
+  font-size:12.5px;
+  color:var(--ink-faint);
+  font-style:italic;
+  flex:none;
+}
+.strand-body{padding:20px; display:grid; gap:18px;}
+.task{display:grid; gap:10px;}
+.task .prompt{font-size:15px; line-height:1.55;}
+.task .prompt b{color:var(--teal-ink);}
+textarea.answer{
+  width:100%;
+  min-height:96px;
+  resize:vertical;
+  border:1px solid var(--line-strong);
+  border-radius:10px;
+  background:var(--bg);
+  color:var(--ink);
+  padding:11px 13px;
+  font-family:var(--font-body);
+  font-size:14.5px;
+  line-height:1.5;
+}
+textarea.answer:focus{border-color:var(--teal);}
+.field-row{display:flex; gap:10px; flex-wrap:wrap; align-items:center;}
+.wordbank{display:flex; flex-wrap:wrap; gap:6px;}
+.wordchip{
+  font-family:var(--font-mono);
+  font-size:12px;
+  padding:3px 10px;
+  border-radius:999px;
+  background:var(--teal-tint);
+  color:var(--teal-ink);
+  border:1px solid transparent;
+  transition:opacity .15s;
+}
+.wordchip.used{opacity:.35; text-decoration:line-through;}
+
+.self-assess{
+  display:flex; align-items:center; gap:8px; flex-wrap:wrap;
+  font-size:13px; color:var(--ink-soft);
+}
+.band-btn{
+  font-family:var(--font-mono);
+  font-size:12px;
+  border:1px solid var(--line-strong);
+  background:var(--surface);
+  color:var(--ink-soft);
+  padding:5px 10px;
+  border-radius:8px;
+  cursor:pointer;
+}
+.band-btn.sel{background:var(--teal); border-color:var(--teal); color:#fff;}
+
+details.rubric{
+  border:1px solid var(--line);
+  border-radius:10px;
+  background:var(--surface-2);
+  padding:2px 14px;
+}
+details.rubric summary{
+  cursor:pointer; padding:10px 0; font-size:13.5px; font-weight:600; color:var(--ink-soft);
+  list-style:none; display:flex; align-items:center; gap:8px;
+}
+details.rubric summary::-webkit-details-marker{display:none;}
+details.rubric summary::before{content:"▸"; font-size:11px; color:var(--teal);}
+details.rubric[open] summary::before{content:"▾";}
+.rubric-table{width:100%; border-collapse:collapse; font-size:12.8px; margin-bottom:12px;}
+.rubric-table th, .rubric-table td{border:1px solid var(--line); padding:8px 10px; text-align:left; vertical-align:top;}
+.rubric-table th{background:var(--surface); font-family:var(--font-mono); font-size:11px; text-transform:uppercase; letter-spacing:.04em; color:var(--ink-faint);}
+.rubric-table td{color:var(--ink-soft);}
+
+.citebox{
+  border:1px solid var(--line-strong);
+  border-radius:10px;
+  padding:14px;
+  background:var(--bg);
+  font-size:13.5px;
+  display:grid;
+  gap:8px;
+}
+.citebox input[type=text]{
+  width:100%;
+  border:1px solid var(--line-strong);
+  border-radius:8px;
+  padding:8px 10px;
+  background:var(--surface);
+  color:var(--ink);
+  font-size:13.5px;
+  font-family:var(--font-body);
+}
+
+.toolbar{
+  display:flex; gap:10px; flex-wrap:wrap; align-items:center;
+  padding:14px 18px;
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:14px;
+  box-shadow:var(--shadow);
+  position:sticky;
+  bottom:14px;
+  z-index:30;
+}
+.btn{
+  font-weight:700; font-size:13.5px;
+  padding:9px 16px;
+  border-radius:10px;
+  border:1px solid transparent;
+  cursor:pointer;
+  display:inline-flex; align-items:center; gap:7px;
+}
+.btn-primary{background:var(--ink); color:var(--surface);}
+.btn-teal{background:var(--teal); color:#fff;}
+.btn-amber{background:var(--amber); color:#231404;}
+.btn-ghost{background:transparent; border-color:var(--line-strong); color:var(--ink-soft);}
+.btn-ghost:hover{background:var(--surface-2);}
+.btn:disabled{opacity:.45; cursor:not-allowed;}
+.progress-chip{
+  margin-left:auto;
+  font-family:var(--font-mono); font-size:12.5px; color:var(--ink-soft);
+}
+
+.toast{
+  position:fixed; left:50%; bottom:26px; transform:translateX(-50%) translateY(20px);
+  background:var(--ink); color:var(--surface);
+  padding:10px 18px; border-radius:999px; font-size:13.5px; font-weight:600;
+  box-shadow:var(--shadow);
+  opacity:0; pointer-events:none; transition:opacity .2s, transform .2s;
+  z-index:100;
+}
+.toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
+
+@media print{
+  .topbar, .toolbar, .no-print{display:none!important;}
+  body{background:#fff; color:#000; padding:0;}
+  .panel, .strand-block, .specimen-card{box-shadow:none; border-color:#999;}
+  main{padding-top:0;}
+}
+</style>
+
+<style>
+/* ============ UNIT 2 — ENERGY QUEST ============ */
+.quest-head{
+  display:flex; align-items:center; gap:18px; flex-wrap:wrap;
+  padding:18px 20px;
+  background:linear-gradient(120deg, var(--amber-tint), var(--surface) 65%);
+  border:1px solid var(--line);
+  border-radius:18px;
+  margin-bottom:22px;
+}
+.atp-dial{
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  width:84px; height:84px; border-radius:50%;
+  background:var(--surface); border:3px solid var(--amber);
+  flex:none;
+}
+.atp-dial b{font-family:var(--font-mono); font-size:20px; color:var(--amber-ink); line-height:1;}
+.atp-dial span{font-size:9.5px; text-transform:uppercase; letter-spacing:.06em; color:var(--ink-faint);}
+.quest-meta{flex:1; min-width:200px;}
+.quest-meta .level-name{font-family:var(--font-display); font-size:21px; font-weight:600;}
+.quest-meta .level-sub{font-size:13px; color:var(--ink-soft); margin-top:2px;}
+.xp-bar{height:9px; border-radius:999px; background:var(--surface-2); overflow:hidden; margin-top:8px; max-width:340px; border:1px solid var(--line);}
+.xp-bar > div{height:100%; background:linear-gradient(90deg, var(--amber), var(--teal)); border-radius:999px; transition:width .4s ease;}
+
+.station-grid{
+  display:grid; grid-template-columns:repeat(3,1fr); gap:14px;
+}
+@media (max-width:820px){ .station-grid{grid-template-columns:repeat(2,1fr);} }
+@media (max-width:560px){ .station-grid{grid-template-columns:1fr;} }
+.station-card{
+  text-align:left; border:1px solid var(--line); background:var(--surface);
+  border-radius:16px; padding:16px; cursor:pointer; box-shadow:var(--shadow);
+  display:grid; gap:8px; position:relative;
+}
+.station-card:hover{transform:translateY(-2px); transition:transform .15s;}
+.station-card .snum{font-family:var(--font-mono); font-size:11px; color:var(--ink-faint); text-transform:uppercase; letter-spacing:.08em;}
+.station-card h4{font-size:15.5px;}
+.station-card p{font-size:12.8px; color:var(--ink-soft);}
+.station-card .badge-done{
+  position:absolute; top:12px; right:12px; font-size:16px;
+}
+.station-card .best{font-family:var(--font-mono); font-size:11.5px; color:var(--amber-ink);}
+
+.game-shell{display:grid; gap:18px;}
+.game-toolbar{display:flex; align-items:center; gap:12px; flex-wrap:wrap;}
+.score-pill{
+  font-family:var(--font-mono); font-size:12.5px; padding:5px 12px; border-radius:999px;
+  background:var(--amber-tint); color:var(--amber-ink); font-weight:600;
+}
+
+.sort-grid{display:grid; grid-template-columns:1fr; gap:10px;}
+.sort-card{
+  border:1px solid var(--line); border-radius:12px; background:var(--surface);
+  padding:14px 16px; display:flex; align-items:center; gap:14px; flex-wrap:wrap;
+  box-shadow:var(--shadow);
+}
+.sort-card.correct{border-color:var(--moss); background:var(--moss-tint);}
+.sort-card.wrong{border-color:var(--coral); background:var(--coral-tint);}
+.sort-card .stmt{flex:1; min-width:200px; font-size:14px;}
+.sort-card .choices{display:flex; gap:8px;}
+.chip-btn{
+  font-size:12.5px; font-weight:700; padding:7px 13px; border-radius:9px; cursor:pointer;
+  border:1px solid var(--line-strong); background:var(--surface);
+  color:var(--ink-soft);
+}
+.chip-btn.anabolic:hover, .chip-btn.anabolic.pick{background:var(--teal); border-color:var(--teal); color:#fff;}
+.chip-btn.catabolic:hover, .chip-btn.catabolic.pick{background:var(--amber); border-color:var(--amber); color:#231404;}
+.sort-explain{font-size:12.5px; color:var(--ink-soft); width:100%; margin-top:2px; display:none;}
+.sort-card.answered .sort-explain{display:block;}
+.sort-card.answered .choices button{pointer-events:none; opacity:.55;}
+.sort-card.answered .choices button.pick{opacity:1;}
+
+.eqn-builder{display:flex; flex-wrap:wrap; gap:8px; align-items:center; min-height:52px; padding:14px; border:1.5px dashed var(--line-strong); border-radius:12px; background:var(--surface);}
+.eqn-pool{display:flex; flex-wrap:wrap; gap:8px; margin-top:12px;}
+.eqn-tile{
+  font-family:var(--font-mono); font-size:14px; font-weight:600;
+  padding:8px 13px; border-radius:9px; border:1px solid var(--line-strong);
+  background:var(--surface-2); color:var(--ink); cursor:pointer;
+}
+.eqn-tile:hover{border-color:var(--teal);}
+.eqn-tile.placed{opacity:.3; pointer-events:none;}
+.eqn-slot-tile{
+  font-family:var(--font-mono); font-size:14px; font-weight:600;
+  padding:8px 13px; border-radius:9px; background:var(--teal); color:#fff; cursor:pointer;
+}
+
+.quiz-q{border:1px solid var(--line); border-radius:12px; padding:16px; background:var(--surface); display:grid; gap:10px; box-shadow:var(--shadow);}
+.quiz-opts{display:grid; gap:8px;}
+.quiz-opt{
+  text-align:left; padding:10px 14px; border-radius:10px; border:1px solid var(--line-strong);
+  background:var(--surface); cursor:pointer; font-size:14px; color:var(--ink);
+}
+.quiz-opt:hover{background:var(--surface-2);}
+.quiz-opt.correct{background:var(--moss-tint); border-color:var(--moss); font-weight:600;}
+.quiz-opt.wrong{background:var(--coral-tint); border-color:var(--coral);}
+.quiz-explain{font-size:13px; color:var(--ink-soft); display:none; padding-top:2px;}
+.quiz-q.answered .quiz-explain{display:block;}
+.quiz-q.answered .quiz-opt{pointer-events:none;}
+
+.lab-layout{display:grid; grid-template-columns:280px 1fr; gap:20px;}
+@media (max-width:760px){ .lab-layout{grid-template-columns:1fr;} }
+.slider-group{display:grid; gap:16px;}
+.slider-row label{display:flex; justify-content:space-between; font-size:13px; font-weight:600; margin-bottom:4px;}
+.slider-row .val{font-family:var(--font-mono); color:var(--teal-ink);}
+input[type=range]{width:100%; accent-color:var(--teal);}
+canvas{max-width:100%; background:var(--surface); border:1px solid var(--line); border-radius:12px;}
+.trial-table{width:100%; border-collapse:collapse; font-size:12.5px; margin-top:10px;}
+.trial-table th, .trial-table td{border:1px solid var(--line); padding:6px 8px; text-align:left;}
+.trial-table th{background:var(--surface-2); font-family:var(--font-mono); font-size:10.5px; text-transform:uppercase; color:var(--ink-faint);}
+
+.shape-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(90px,1fr)); gap:10px;}
+.shape-btn{
+  border:2px solid var(--line-strong); border-radius:12px; background:var(--surface);
+  padding:10px; display:grid; justify-items:center; gap:6px; cursor:pointer; font-size:11px; color:var(--ink-soft);
+}
+.shape-btn:hover{border-color:var(--amber);}
+.shape-btn.correct{border-color:var(--moss); background:var(--moss-tint);}
+.shape-btn.wrong{border-color:var(--coral); background:var(--coral-tint);}
+
+.scenario-card{border:1px solid var(--line); border-radius:14px; background:var(--surface); padding:18px; box-shadow:var(--shadow); display:grid; gap:12px;}
+.scenario-card h4{font-size:16px;}
+.stance-row{display:flex; gap:8px; flex-wrap:wrap;}
+.stance-btn{padding:8px 14px; border-radius:9px; border:1px solid var(--line-strong); background:var(--surface); cursor:pointer; font-size:13px; font-weight:600; color:var(--ink-soft);}
+.stance-btn.sel{background:var(--ink); color:var(--surface); border-color:var(--ink);}
+.stance-follow{font-size:13.5px; color:var(--ink-soft); background:var(--surface-2); border-radius:10px; padding:12px; display:none;}
+.scenario-card.answered .stance-follow{display:block;}
+
+.badge-gallery{display:flex; gap:10px; flex-wrap:wrap;}
+.badge-pill{display:flex; align-items:center; gap:6px; font-size:12px; font-weight:600; padding:6px 12px; border-radius:999px; background:var(--surface-2); color:var(--ink-faint); border:1px solid var(--line);}
+.badge-pill.earned{background:var(--amber-tint); color:var(--amber-ink); border-color:var(--amber);}
+
+.certificate{
+  border:2px solid var(--amber); border-radius:18px; padding:28px; text-align:center;
+  background:radial-gradient(circle at 50% 0%, var(--amber-tint), var(--surface) 70%);
+  display:grid; gap:10px;
+}
+.certificate .cert-title{font-family:var(--font-display); font-size:26px; font-weight:700;}
+.certificate .cert-name{font-family:var(--font-display); font-size:22px; border-bottom:2px solid var(--ink); display:inline-block; padding:2px 14px; min-width:220px;}
+.certificate input{font-family:var(--font-display); font-size:20px; text-align:center; border:none; background:transparent; color:var(--ink); border-bottom:2px solid var(--ink-soft); padding:2px 14px; min-width:220px;}
+
+/* ============ FIELD MANUAL (self-study) ============ */
+.manual{
+  border:1px solid var(--line); border-radius:16px; background:var(--surface);
+  box-shadow:var(--shadow); margin-bottom:22px; overflow:hidden;
+}
+.manual-head{
+  padding:16px 20px; background:linear-gradient(120deg, var(--teal-tint), var(--surface) 70%);
+  border-bottom:1px solid var(--line); display:flex; align-items:baseline; gap:10px; flex-wrap:wrap;
+}
+.manual-head h3{font-size:17px;}
+.manual-head span{font-size:12.5px; color:var(--ink-soft);}
+.manual-body{padding:16px 20px; display:grid; gap:10px;}
+.manual-card{border:1px solid var(--line); border-radius:11px; background:var(--surface); overflow:hidden;}
+.manual-card summary{
+  cursor:pointer; padding:12px 16px; font-weight:700; font-size:14px; color:var(--ink);
+  list-style:none; display:flex; align-items:center; gap:9px; background:var(--surface-2);
+}
+.manual-card summary::-webkit-details-marker{display:none;}
+.manual-card summary::before{content:"▸"; font-size:11px; color:var(--teal);}
+.manual-card[open] summary::before{content:"▾";}
+.manual-card .mc-body{padding:14px 16px; font-size:13.8px; color:var(--ink-soft); display:grid; gap:10px;}
+.manual-card .mc-body b{color:var(--ink);}
+.etym{
+  display:inline-block; font-family:var(--font-mono); font-size:12px; background:var(--teal-tint);
+  color:var(--teal-ink); padding:1px 7px; border-radius:6px; margin:0 2px;
+}
+.edat-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:10px;}
+.edat-tile{border:1px solid var(--line-strong); border-radius:10px; padding:10px 12px; background:var(--bg);}
+.edat-tile b{color:var(--amber-ink); font-family:var(--font-mono); font-size:13px;}
+.diff-table{width:100%; border-collapse:collapse; font-size:13px;}
+.diff-table th, .diff-table td{border:1px solid var(--line); padding:7px 10px; text-align:left; vertical-align:top;}
+.diff-table th{background:var(--surface-2); font-size:12px;}
+.cascade-mini{display:grid; gap:6px;}
+.cascade-mini div{border-left:3px solid var(--coral); padding:6px 10px; background:var(--coral-tint); border-radius:0 8px 8px 0; font-size:13px;}
+
+/* ============ NEW QUESTION TYPES (Control Room station) ============ */
+.qtype-label{
+  font-family:var(--font-mono); font-size:10.5px; text-transform:uppercase; letter-spacing:.08em;
+  color:var(--teal-ink); background:var(--teal-tint); padding:3px 9px; border-radius:999px; width:fit-content;
+}
+.qblock{border:1px solid var(--line); border-radius:14px; background:var(--surface); padding:18px 20px; box-shadow:var(--shadow); display:grid; gap:12px; margin-bottom:20px;}
+
+.match-wrap{display:grid; grid-template-columns:1fr 1fr; gap:24px;}
+@media (max-width:600px){ .match-wrap{grid-template-columns:1fr;} }
+.match-col{display:grid; gap:8px;}
+.match-item{
+  text-align:left; padding:10px 14px; border-radius:10px; border:1.5px solid var(--line-strong);
+  background:var(--surface); cursor:pointer; font-size:13.5px; color:var(--ink);
+}
+.match-item.sel{border-color:var(--teal); background:var(--teal-tint);}
+.match-item.paired{border-color:var(--moss); background:var(--moss-tint); cursor:default; opacity:.85;}
+.match-item.shake{animation:shake .3s;}
+@keyframes shake{ 25%{transform:translateX(-4px);} 75%{transform:translateX(4px);} }
+
+.cloze-para{font-size:14.5px; line-height:2.1; color:var(--ink);}
+.cloze-in{
+  font-family:var(--font-mono); font-size:13px; border:none; border-bottom:2px solid var(--line-strong);
+  background:transparent; color:var(--teal-ink); text-align:center; width:100px; padding:2px 4px;
+}
+.cloze-in.ok{border-color:var(--moss); color:var(--moss);}
+.cloze-in.bad{border-color:var(--coral); color:var(--coral);}
+
+.drag-list{display:grid; gap:8px; max-width:480px;}
+.drag-card{
+  padding:12px 16px; border-radius:10px; border:1.5px solid var(--line-strong); background:var(--surface);
+  cursor:grab; font-size:13.5px; font-weight:600; display:flex; align-items:center; gap:10px;
+  touch-action:none; user-select:none;
+}
+.drag-card .gh{color:var(--ink-faint); font-family:var(--font-mono); font-size:12px;}
+.drag-card.dragging{opacity:.4;}
+.drag-card.over{border-color:var(--teal); border-style:dashed;}
+.drag-card.correct-pos{border-color:var(--moss); background:var(--moss-tint);}
+.drag-card.wrong-pos{border-color:var(--coral); background:var(--coral-tint);}
+
+.fillcell{
+  width:100%; border:1px solid var(--line-strong); border-radius:6px; padding:5px 7px;
+  font-size:12.5px; font-family:var(--font-body); background:var(--surface); color:var(--ink);
+}
+.fillcell.ok{border-color:var(--moss); background:var(--moss-tint);}
+.fillcell.bad{border-color:var(--coral); background:var(--coral-tint);}
+.cell-correction{font-size:11px; color:var(--coral); margin-top:3px;}
+</style>
+
+</head>
+<body>
+<div class="app">
+
+  <header class="topbar no-print">
+    <div class="brand"><span class="mark">V</span> Field Station · Vent Expedition</div>
+    <nav class="topbar-nav" id="topNav">
+      <button class="pill-btn active" data-route="home">Home</button>
+      <button class="pill-btn" data-route="unit1">Unit 1 · Expedition Log</button>
+      <button class="pill-btn" data-route="unit2">Unit 2 · Energy Quest</button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ======================= HOME ======================= -->
+    <section id="view-home" class="view">
+      <div class="hero">
+        <span class="eyebrow">MYP Biology · Field Station Log #KX-19</span>
+        <h1>Something surfaced from the vent. It's yours to figure out.</h1>
+        <p>A submersible pulled an unclassified organism from a hydrothermal vent 2,400&nbsp;m down. Unit&nbsp;1 is your official classification report. Unit&nbsp;2 is the field lab where you work out the chemistry keeping it alive. Pick a mission to begin — your progress is saved on this device.</p>
+      </div>
+
+      <div class="mission-grid">
+        <button class="mission-card unit1" data-route="unit1">
+          <span class="tag">Unit 1 · Assessment</span>
+          <h2>Expedition Log: Classify the Find</h2>
+          <p class="desc">A criterion-referenced end-of-unit assessment on the levels of organization & classification of life — Criterion A (all 3 strands) and Criterion D (all 4 strands).</p>
+          <div class="meta"><span id="home-u1-progress">0 of 7 tasks logged</span><span class="go">Open log →</span></div>
+        </button>
+        <button class="mission-card unit2" data-route="unit2">
+          <span class="tag">Unit 2 · Gamified learning</span>
+          <h2>Energy Quest: What Keeps It Alive?</h2>
+          <p class="desc">Six stations on metabolism, respiration, photosynthesis and enzymes — with two virtual labs, an equation builder and a boss battle. Earn ATP, not just marks.</p>
+          <div class="meta"><span id="home-u2-progress" class="tnum">0 ATP earned</span><span class="go">Enter quest →</span></div>
+        </button>
+      </div>
+
+      <div class="briefing">
+        <h3>For the teacher</h3>
+        <p>This page runs entirely in the browser — no accounts, no server. Unit 1 is a formal, self-paced criterion assessment: students write extended responses, self-assess against the exact MYP Sciences strand descriptors, then print or copy a report for you to grade. Unit 2 is formative and ungraded by design — a set of gamified quizzes and two parameter-driven virtual labs (photosynthesis limiting factors; enzyme temperature/pH) that a class can run without physical apparatus, or alongside it. Publish this file as-is on EdgeOne (or any static host) — everything is a single self-contained HTML file.</p>
+      </div>
+    </section>
+
+    <!-- ======================= UNIT 1 ======================= -->
+    <section id="view-unit1" class="view" hidden>
+      <div id="unit1-root"></div>
+    </section>
+
+    <!-- ======================= UNIT 2 ======================= -->
+    <section id="view-unit2" class="view" hidden>
+      <div id="unit2-root"></div>
+    </section>
+  </main>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+/* ======================================================================
+   CORE APP: routing, storage, small utilities shared by both units
+   ====================================================================== */
+const Store = (()=>{
+  const KEY = 'vent-expedition-v1';
+  let mem = null;
+  function load(){
+    if(mem) return mem;
+    try{
+      const raw = localStorage.getItem(KEY);
+      mem = raw ? JSON.parse(raw) : {};
+    }catch(e){ mem = {}; }
+    return mem;
+  }
+  function save(){
+    try{ localStorage.setItem(KEY, JSON.stringify(mem)); }catch(e){/* ignore */}
+  }
+  return {
+    get(path, fallback){
+      const parts = path.split('.');
+      let obj = load();
+      for(const p of parts){ if(obj==null) return fallback; obj = obj[p]; }
+      return obj===undefined ? fallback : obj;
+    },
+    set(path, value){
+      const parts = path.split('.');
+      let obj = load();
+      for(let i=0;i<parts.length-1;i++){
+        const p = parts[i];
+        if(typeof obj[p] !== 'object' || obj[p]===null) obj[p] = {};
+        obj = obj[p];
+      }
+      obj[parts[parts.length-1]] = value;
+      save();
+    }
+  };
+})();
+
+function toast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toast._t);
+  toast._t = setTimeout(()=>t.classList.remove('show'), 2200);
+}
+
+function shuffle(arr){
+  const a = arr.slice();
+  for(let i=a.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
+}
+function el(tag, attrs={}, ...children){
+  const e = document.createElement(tag);
+  for(const [k,v] of Object.entries(attrs)){
+    if(k==='class') e.className = v;
+    else if(k==='html') e.innerHTML = v;
+    else if(k.startsWith('on') && typeof v==='function') e.addEventListener(k.slice(2), v);
+    else if(v!==false && v!=null) e.setAttribute(k, v);
+  }
+  for(const c of children){
+    if(c==null || c===false) continue;
+    e.appendChild(c instanceof Node ? c : document.createTextNode(String(c)));
+  }
+  return e;
+}
+function clamp(v,min,max){ return Math.max(min, Math.min(max, v)); }
+
+/* ---------- routing ---------- */
+function route(name){
+  document.querySelectorAll('.view').forEach(v=>v.hidden = true);
+  document.getElementById('view-'+name).hidden = false;
+  document.querySelectorAll('#topNav .pill-btn').forEach(b=>{
+    b.classList.toggle('active', b.dataset.route===name);
+  });
+  window.scrollTo({top:0, behavior:'instant' in document.documentElement.style ? 'instant':'auto'});
+  Store.set('lastRoute', name);
+  if(name==='unit1') refreshUnit1Home();
+  if(name==='unit2') refreshUnit2Dashboard();
+  refreshHomeStats();
+}
+document.querySelectorAll('[data-route]').forEach(b=>b.addEventListener('click', ()=>route(b.dataset.route)));
+
+function refreshHomeStats(){
+  const {done,total} = unit1StrandProgress();
+  document.getElementById('home-u1-progress').textContent = done+' of '+total+' strands addressed';
+  document.getElementById('home-u2-progress').textContent = (Store.get('u2.atp',0))+' ATP earned';
+}
+
+/* ======================================================================
+   UNIT 1 DATA — built after DOM below in the Unit 1 script block
+   ====================================================================== */
+</script>
+
+<script>
+/* ======================================================================
+   UNIT 1 — Expedition Log (Criterion A + D end-of-unit assessment)
+   ====================================================================== */
+
+const RUBRIC_A = {
+  title: 'Criterion A · Knowing and understanding',
+  strands: [
+    { code:'A(i)', label:'Explain scientific knowledge',
+      bands:[
+        ['1–2','State scientific knowledge.'],
+        ['3–4','Outline scientific knowledge.'],
+        ['5–6','Describe scientific knowledge.'],
+        ['7–8','Explain scientific knowledge.'],
+      ]},
+    { code:'A(ii)', label:'Apply scientific knowledge and understanding to solve problems set in familiar and unfamiliar situations',
+      bands:[
+        ['1–2','Apply understanding to suggest solutions to problems set in familiar situations.'],
+        ['3–4','Apply understanding to solve problems set in familiar situations.'],
+        ['5–6','Apply understanding to solve problems set in familiar situations, and suggest solutions to problems set in unfamiliar situations.'],
+        ['7–8','Apply understanding to solve problems set in both familiar and unfamiliar situations.'],
+      ]},
+    { code:'A(iii)', label:'Analyse and evaluate information to make scientifically supported judgments',
+      bands:[
+        ['1–2','Interpret information to make judgments.'],
+        ['3–4','Interpret information to make scientifically supported judgments.'],
+        ['5–6','Analyse information to make scientifically supported judgments.'],
+        ['7–8','Analyse and evaluate information to make scientifically supported judgments.'],
+      ]},
+  ]
+};
+const RUBRIC_D = {
+  title: 'Criterion D · Reflecting on the impacts of science',
+  strands: [
+    { code:'D(i)', label:'Explain the ways in which science is applied and used to address a specific problem or issue',
+      bands:[
+        ['1–2','Outline the ways in which science is used to address a specific problem or issue.'],
+        ['3–4','Summarize the ways in which science is applied and used to address a specific problem or issue.'],
+        ['5–6','Describe the ways in which science is applied and used to address a specific problem or issue.'],
+        ['7–8','Explain the ways in which science is applied and used to address a specific problem or issue.'],
+      ]},
+    { code:'D(ii)', label:'Discuss and evaluate the implications of using science and its application to solve a specific problem or issue',
+      bands:[
+        ['1–2','Outline the implications of using science and its application to solve a specific problem or issue.'],
+        ['3–4','Describe the implications of using science and its application to solve a specific problem or issue.'],
+        ['5–6','Discuss the implications of using science and its application to solve a specific problem or issue.'],
+        ['7–8','Discuss and evaluate the implications of using science and its application to solve a specific problem or issue.'],
+      ]},
+    { code:'D(iii)', label:'Apply scientific language effectively',
+      bands:[
+        ['1–2','Apply scientific language with limited success.'],
+        ['3–4','Sometimes apply scientific language appropriately.'],
+        ['5–6','Usually apply scientific language accurately and appropriately.'],
+        ['7–8','Consistently apply scientific language accurately and appropriately.'],
+      ]},
+    { code:'D(iv)', label:'Document the work of others and sources of information used, in accordance with recognized conventions',
+      bands:[
+        ['1–2','Document sources with limited success.'],
+        ['3–4','Sometimes document sources correctly.'],
+        ['5–6','Usually document sources correctly.'],
+        ['7–8','Consistently document sources correctly.'],
+      ]},
+  ]
+};
+
+const UNIT1_TASKS = [
+  { id:'a1', strand:'A(i)', rubric:RUBRIC_A, sIdx:0,
+    title:'Explain the science behind the specimen',
+    prompt:`<p class="prompt">Using <b>cell theory</b>, explain what the presence of a nucleus-like structure and a mitochondria-like structure inside Specimen KX-19 tells the team about whether it is made of one cell or many, and what each structure most likely does for the organism. Write your explanation as you would for a field report — a colleague with no biology background should be able to follow it.</p>`,
+    type:'text', minChars:120 },
+
+  { id:'a2f', strand:'A(ii)', rubric:RUBRIC_A, sIdx:1,
+    title:'Apply your knowledge — a familiar cell',
+    prompt:`<p class="prompt"><b>Part 1 (familiar situation).</b> A student on your team brings you a second sample from the ship's herb garden, not the vent. Under the microscope it shows: a rigid outer wall, a large central fluid-filled space, and small green disc-shaped structures. Apply what you know about cell structure to identify what kind of organism this sample is from, and justify your answer using the features listed.</p>`,
+    type:'text', minChars:60 },
+  { id:'a2u', strand:'A(ii)', rubric:RUBRIC_A, sIdx:1,
+    title:'Apply your knowledge — the unfamiliar specimen',
+    prompt:`<p class="prompt"><b>Part 2 (unfamiliar situation).</b> Now look again at the Specimen KX-19 data card. It doesn't match any organism you've studied before. Apply your knowledge of the five kingdoms to work out which kingdom it most likely belongs to <i>provisionally</i>, and explain, feature by feature, how the evidence on the card supports your placement.</p>`,
+    type:'text', minChars:120 },
+
+  { id:'a3', strand:'A(iii)', rubric:RUBRIC_A, sIdx:2,
+    title:'Weigh the conflicting evidence',
+    prompt:`<p class="prompt">Two lines of evidence disagree. Under the microscope, KX-19's outer covering looks superficially similar to a fungal hypha. But genetic sampling shows its sequence is a much closer match to single-celled Protoctista. Analyse and evaluate these two types of evidence — which is <b>homologous</b> and which is closer to an <b>analogous</b> similarity — and make a scientifically supported judgment about which kingdom classification the team should report, explaining why one line of evidence should carry more weight than the other.</p>`,
+    type:'text', minChars:150 },
+
+  { id:'d1', strand:'D(i)', rubric:RUBRIC_D, sIdx:0,
+    title:'Why classify it at all?',
+    prompt:`<p class="prompt">Explain the ways in which the scientific classification system — kingdoms, and Linnaeus's binomial nomenclature — is applied by researchers to address the practical problem of naming, studying and communicating about a genuinely new organism like KX-19, before its full identity is confirmed.</p>`,
+    type:'text', minChars:100 },
+
+  { id:'d2', strand:'D(ii)', rubric:RUBRIC_D, sIdx:1,
+    title:'The patent question',
+    prompt:`<div class="prompt">
+        <p style="margin-bottom:10px">In 1966, microbiologist Thomas Brock found the heat-tolerant bacterium <i>Thermus aquaticus</i> in a Yellowstone hot spring. Decades later, an enzyme from that organism — Taq polymerase — turned out to be exactly what was needed to make PCR (the DNA-copying technique used in everything from Covid testing to forensics) work reliably. The enzyme was patented and licensed for enormous commercial value, even though the organism was discovered in a public national park using public research funding.</p>
+        <p>Early lab tests suggest KX-19 also produces a heat-stable enzyme. The expedition's funder wants to file a patent on it before the classification is published openly. Discuss and evaluate the scientific, economic and ethical implications of that decision — for the funder, for the wider scientific community, and for future access to whatever this enzyme can do.</p>
+      </div>`,
+    type:'text', minChars:150 },
+
+  { id:'d3', strand:'D(iii)', rubric:RUBRIC_D, sIdx:2,
+    title:'Write it up like a scientist',
+    prompt:`<p class="prompt">Write a short paragraph (4–6 sentences) summarizing how KX-19 has been classified so far, for the expedition's official log. You must use <b>at least six</b> of the words below, correctly and in context — click a word to drop it into your answer, then keep editing.</p>`,
+    type:'wordbank', minChars:80,
+    bank:['kingdom','organelle','unicellular','homologous','analogous','binomial nomenclature','taxonomy','autotroph','heterotroph','classification','chemosynthesis','provisional'] },
+
+  { id:'d4', strand:'D(iv)', rubric:RUBRIC_D, sIdx:3,
+    title:'Document your sources',
+    prompt:`<p class="prompt">Good field science is traceable. Cite <b>one</b> outside source you used while researching classification, extremophiles, or the <i>Thermus aquaticus</i>/Taq polymerase story above (a textbook, article or website) and show, with an example sentence, how you would credit it inside your D(ii) answer.</p>`,
+    type:'cite' },
+];
+
+let unit1Built = false;
+function buildUnit1(){
+  if(unit1Built) return;
+  unit1Built = true;
+  const root = document.getElementById('unit1-root');
+
+  const head = el('div',{class:'unit-head'},
+    el('div',{},
+      el('button',{class:'back-link', onclick:()=>route('home')}, '← Field Station'),
+      el('h1',{style:'margin-top:10px'}, 'Expedition Log: Classify the Find'),
+      el('p',{class:'sub'}, 'End-of-unit assessment for Unit 1 — How is life organized? Covers every strand of Criterion A and Criterion D. Write extended responses, self-assess against the exact rubric language, then print or copy your report for your teacher.')
+    ),
+    el('div',{id:'u1-progress-chip', class:'progress-chip', style:'position:static'})
+  );
+  root.appendChild(head);
+
+  root.appendChild(buildSpecimenCard());
+
+  const wrap = el('div',{class:'stack', style:'margin-top:22px'});
+  root.appendChild(wrap);
+
+  // group tasks by strand id in order given
+  const groups = [];
+  UNIT1_TASKS.forEach(t=>{
+    let g = groups.find(g=>g.strand===t.strand);
+    if(!g){ g = {strand:t.strand, rubric:t.rubric, sIdx:t.sIdx, tasks:[]}; groups.push(g); }
+    g.tasks.push(t);
+  });
+
+  groups.forEach(g=>{
+    const sinfo = g.rubric.strands[g.sIdx];
+    const block = el('div',{class:'strand-block'});
+    block.appendChild(el('div',{class:'strand-head'},
+      el('span',{class:'strand-code'}, g.strand),
+      el('h3',{}, sinfo.label),
+      el('span',{class:'strand-quote'}, g.rubric.title.split('·')[0].trim())
+    ));
+    const body = el('div',{class:'strand-body'});
+    body.appendChild(buildRubricDetails(g.rubric.title, [sinfo]));
+    g.tasks.forEach(t=> body.appendChild(buildTask(t)));
+    block.appendChild(body);
+    wrap.appendChild(block);
+  });
+
+  const toolbar = el('div',{class:'toolbar no-print'},
+    el('button',{class:'btn btn-teal', onclick:printReport}, '🖨️ Print report'),
+    el('button',{class:'btn btn-ghost', onclick:copyReport}, '📋 Copy report'),
+    el('button',{class:'btn btn-ghost', onclick:()=>{ if(confirm('Clear all Unit 1 answers on this device?')){ Store.set('u1', {}); location.reload(); } }}, 'Reset'),
+    el('span',{class:'progress-chip tnum', id:'u1-toolbar-progress'}, '')
+  );
+  root.appendChild(toolbar);
+
+  root.appendChild(buildFullRubricAppendix());
+
+  refreshUnit1Home();
+}
+
+function buildSpecimenCard(){
+  const svg = `<svg width="150" height="150" viewBox="0 0 150 150" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagram of specimen KX-19">
+    <circle cx="75" cy="75" r="66" fill="var(--teal-tint)" stroke="var(--teal)" stroke-width="2"/>
+    <ellipse cx="75" cy="80" rx="46" ry="40" fill="none" stroke="var(--ink-soft)" stroke-width="1.6" stroke-dasharray="3 3"/>
+    <circle cx="66" cy="70" r="17" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.6"/>
+    <circle cx="66" cy="70" r="4" fill="var(--ink-soft)"/>
+    <ellipse cx="98" cy="92" rx="13" ry="8" fill="var(--amber-tint)" stroke="var(--amber)" stroke-width="1.6"/>
+    <ellipse cx="98" cy="92" rx="13" ry="8" fill="none" stroke="var(--amber)" stroke-width="1" stroke-dasharray="2 2" transform="translate(0,0)"/>
+    <ellipse cx="55" cy="102" rx="10" ry="6.5" fill="var(--amber-tint)" stroke="var(--amber)" stroke-width="1.6"/>
+    <path d="M40 55 Q50 40 70 45" stroke="var(--ink-faint)" stroke-width="1.4" fill="none"/>
+    <text x="75" y="140" text-anchor="middle" font-size="8" fill="var(--ink-faint)" font-family="IBM Plex Mono, monospace">×2000 (interpretive)</text>
+  </svg>`;
+  return el('div',{class:'specimen-card'},
+    el('figure',{},
+      el('div',{html:svg}),
+      el('figcaption',{}, 'Fig. KX-19.1 — cell interior, interpretive sketch from microscopy notes')
+    ),
+    el('div',{},
+      el('div',{class:'id'}, 'FIELD SAMPLE · LOG #KX-19'),
+      el('h2',{}, 'The Vent Strand'),
+      el('dl',{class:'facts'},
+        el('dt',{},'Found'), el('dd',{},'Hydrothermal vent, 2,400 m depth, ~340 °C fluid cooling to 4 °C seawater — total darkness'),
+        el('dt',{},'Structure'), el('dd',{},'Unicellular; membrane-bound nucleus-like body; a small heat-stable organelle resembling a mitochondrion, with its own loop of DNA'),
+        el('dt',{},'Outer covering'), el('dd',{},'A tough wall of an unidentified polymer — lab could not match it to cellulose, chitin or murein'),
+        el('dt',{},'Pigment'), el('dd',{},'No chlorophyll detected. Contains a rust-coloured pigment that appears to capture energy from hydrogen sulfide dissolved in the vent water'),
+        el('dt',{},'Genetics'), el('dd',{},'DNA sequence is a much closer match to Kingdom Protoctista than to Fungi, despite a fungus-like outer appearance'),
+      )
+    )
+  );
+}
+
+function buildRubricDetails(title, strandList){
+  const d = el('details',{class:'rubric'});
+  d.appendChild(el('summary',{}, 'Show rubric language for this strand'));
+  const inner = el('div',{});
+  strandList.forEach(s=>{
+    const table = el('table',{class:'rubric-table'});
+    table.appendChild(el('tr',{},
+      el('th',{style:'width:70px'}, 'Level'), el('th',{}, 'At the end of Year 5, students...')
+    ));
+    s.bands.forEach(b=>{
+      table.appendChild(el('tr',{}, el('td',{class:'mono tnum'}, b[0]), el('td',{}, b[1])));
+    });
+    inner.appendChild(table);
+  });
+  d.appendChild(inner);
+  return d;
+}
+
+function buildTask(t){
+  const box = el('div',{class:'task'});
+  box.appendChild(el('div',{html:t.prompt}));
+  const saved = Store.get('u1.answers.'+t.id, '');
+
+  if(t.type==='wordbank'){
+    const bankWrap = el('div',{class:'wordbank'});
+    t.bank.forEach(w=>{
+      const chip = el('button',{class:'wordchip', type:'button'}, w);
+      chip.addEventListener('click', ()=>{
+        ta.value = (ta.value.trim().length? ta.value.trim()+' ':'') + w + ' ';
+        ta.dispatchEvent(new Event('input'));
+        ta.focus();
+      });
+      bankWrap.appendChild(chip);
+    });
+    box.appendChild(bankWrap);
+  }
+
+  const ta = el('textarea',{class:'answer', id:'ta-'+t.id, placeholder:'Write your response here…'});
+  ta.value = saved;
+  ta.addEventListener('input', ()=>{
+    Store.set('u1.answers.'+t.id, ta.value);
+    updateWordbankChips(t, box, ta.value);
+    refreshUnit1Progress();
+  });
+  box.appendChild(ta);
+  if(t.type==='wordbank') updateWordbankChips(t, box, saved);
+
+  if(t.type==='cite'){
+    const cite = el('div',{class:'citebox'},
+      el('div',{class:'mono', style:'font-size:11.5px; color:var(--ink-faint); text-transform:uppercase; letter-spacing:.05em;'},'Reference (Author/Site, Year, Title, URL)'),
+      (()=>{ const i = el('input',{type:'text', id:'cite-ref-'+t.id, placeholder:'e.g. Brock, T. (1997). The road to Yellowstone — and beyond. www.asm.org/…'}); i.value = Store.get('u1.cite.'+t.id,''); i.addEventListener('input', ()=>Store.set('u1.cite.'+t.id, i.value)); return i; })()
+    );
+    box.appendChild(cite);
+  }
+
+  // self assessment
+  const bandsRow = el('div',{class:'self-assess'}, el('span',{}, 'I think this response is closest to:'));
+  const sinfo = t.rubric.strands[t.sIdx];
+  const selected = Store.get('u1.bands.'+t.id, '');
+  sinfo.bands.forEach(b=>{
+    const btn = el('button',{class:'band-btn'+(selected===b[0]?' sel':''), type:'button'}, t.strand+' · '+b[0]);
+    btn.addEventListener('click', ()=>{
+      Store.set('u1.bands.'+t.id, b[0]);
+      bandsRow.querySelectorAll('.band-btn').forEach(x=>x.classList.remove('sel'));
+      btn.classList.add('sel');
+    });
+    bandsRow.appendChild(btn);
+  });
+  box.appendChild(bandsRow);
+
+  return box;
+}
+
+function updateWordbankChips(t, box, text){
+  if(t.type!=='wordbank') return;
+  const lower = (text||'').toLowerCase();
+  box.querySelectorAll('.wordchip').forEach(chip=>{
+    chip.classList.toggle('used', lower.includes(chip.textContent.toLowerCase()));
+  });
+}
+
+function buildFullRubricAppendix(){
+  const wrap = el('div',{class:'panel no-print', style:'margin-top:22px'});
+  wrap.appendChild(el('h3',{style:'font-size:16px; margin-bottom:12px'}, 'Appendix — full Criterion A & D rubric'));
+  wrap.appendChild(buildRubricDetails(RUBRIC_A.title, RUBRIC_A.strands));
+  const d2 = buildRubricDetails(RUBRIC_D.title, RUBRIC_D.strands);
+  d2.style.marginTop = '8px';
+  wrap.appendChild(d2);
+  return wrap;
+}
+
+function unit1StrandProgress(){
+  const byStrand = {};
+  UNIT1_TASKS.forEach(t=>{
+    (byStrand[t.strand] = byStrand[t.strand]||[]).push(t.id);
+  });
+  const strands = Object.keys(byStrand);
+  let done = 0;
+  strands.forEach(s=>{
+    const allFilled = byStrand[s].every(id => (Store.get('u1.answers.'+id,'')||'').trim().length>0);
+    if(allFilled) done++;
+  });
+  return {done, total:strands.length};
+}
+function refreshUnit1Progress(){
+  const {done,total} = unit1StrandProgress();
+  const el1 = document.getElementById('u1-toolbar-progress');
+  if(el1) el1.textContent = done+' / '+total+' strands addressed';
+  const el2 = document.getElementById('u1-progress-chip');
+  if(el2) el2.textContent = '';
+  refreshHomeStats();
+}
+function refreshUnit1Home(){
+  buildUnit1();
+  refreshUnit1Progress();
+}
+
+function reportText(){
+  const lines = [];
+  lines.push('EXPEDITION LOG — Specimen KX-19 Classification Report');
+  lines.push('MYP Biology · Unit 1: How is life organized? · Criteria A & D\n');
+  UNIT1_TASKS.forEach(t=>{
+    lines.push('— '+t.strand+' — '+t.title);
+    const ans = (Store.get('u1.answers.'+t.id,'')||'').trim() || '[no response yet]';
+    lines.push(ans);
+    const band = Store.get('u1.bands.'+t.id,'');
+    if(band) lines.push('(Self-assessed: '+t.strand+' · '+band+')');
+    if(t.type==='cite'){
+      const c = (Store.get('u1.cite.'+t.id,'')||'').trim();
+      if(c) lines.push('Reference: '+c);
+    }
+    lines.push('');
+  });
+  return lines.join('\n');
+}
+function printReport(){
+  const win = window.open('', '_blank');
+  if(!win){ toast('Allow pop-ups to print, or use your browser print button.'); return; }
+  const body = reportText().split('\n').map(l=>{
+    if(l.startsWith('— ')) return '<h3 style="font-family:Georgia,serif;margin:22px 0 6px">'+l.slice(2)+'</h3>';
+    if(l.startsWith('EXPEDITION') || l.startsWith('MYP')) return '<p style="font-weight:700;margin:2px 0">'+l+'</p>';
+    if(l.startsWith('(Self-assessed') || l.startsWith('Reference:')) return '<p style="font-size:12px;color:#555;font-style:italic;margin:4px 0 0">'+l+'</p>';
+    return '<p style="white-space:pre-wrap;margin:4px 0">'+l+'</p>';
+  }).join('');
+  win.document.write('<html><head><title>KX-19 Expedition Log</title></head><body style="font-family:Georgia,serif;max-width:680px;margin:40px auto;color:#111;line-height:1.5">'+body+'</body></html>');
+  win.document.close();
+  win.focus();
+  setTimeout(()=>win.print(), 250);
+}
+async function copyReport(){
+  try{
+    await navigator.clipboard.writeText(reportText());
+    toast('Report copied — paste it anywhere.');
+  }catch(e){
+    toast('Could not access the clipboard — try Print instead.');
+  }
+}
+</script>
+
+<script>
+/* ======================================================================
+   UNIT 2 — Energy Quest (gamified learning, formative)
+   ====================================================================== */
+const LEVELS = [
+  {name:'Novice', min:0,  blurb:'You’ve logged into the field station.'},
+  {name:'Learner', min:60, blurb:'The chemistry is starting to click.'},
+  {name:'Practitioner', min:160, blurb:'You could run this lab solo.'},
+  {name:'Expert', min:280, blurb:'KX-19’s chemistry has no secrets left.'},
+];
+function addATP(n){
+  const cur = Store.get('u2.atp',0);
+  Store.set('u2.atp', Math.max(0,cur+n));
+  document.querySelectorAll('.score-pill[data-live]').forEach(p=>p.textContent = 'ATP '+Store.get('u2.atp',0));
+  renderQuestHeader();
+  refreshHomeStats();
+}
+function levelInfo(atp){
+  let cur = LEVELS[0], idx = 0;
+  LEVELS.forEach((l,i)=>{ if(atp>=l.min){ cur=l; idx=i; } });
+  const next = LEVELS[idx+1];
+  const pct = next ? clamp((atp-cur.min)/(next.min-cur.min)*100, 4, 100) : 100;
+  return {cur, next, pct};
+}
+
+const STATIONS = [
+  {id:'metabolism', num:1, title:'Metabolism Sort', tag:'Anabolic or catabolic? Sort 10 real reactions from the vent lab.', max:50},
+  {id:'respiration', num:2, title:'Respiration Relay', tag:'Build the aerobic respiration equation, then race a 6-question quiz.', max:45},
+  {id:'photosynthesis', num:3, title:'Photosynthesis Field Lab', tag:'Run a virtual pondweed rig and hunt for the limiting factor.', max:60},
+  {id:'enzyme', num:4, title:'Enzyme Arena', tag:'Lock-and-key matching, then a temperature & pH virtual lab.', max:50},
+  {id:'control', num:5, title:'Control Room', tag:'Hormones, homeostasis & the emergency cascade — five question styles in one station.', max:120},
+  {id:'debate', num:6, title:'Food & Fuel Debate', tag:'Four real dilemmas about manipulating the chemistry of life.', max:20},
+  {id:'boss', num:7, title:'Boss Battle: Vent Chemistry', tag:'The cumulative challenge — and your Field Certificate.', max:150},
+];
+
+let unit2Built = false;
+function buildUnit2(){
+  if(unit2Built) return;
+  unit2Built = true;
+  const root = document.getElementById('unit2-root');
+  root.appendChild(el('div',{id:'u2-head-wrap'}));
+  root.appendChild(el('div',{id:'u2-body-wrap'}));
+  showQuestDashboard();
+}
+function refreshUnit2Dashboard(){
+  buildUnit2();
+  if(!document.getElementById('u2-body-wrap').dataset.station) showQuestDashboard();
+  renderQuestHeader();
+}
+
+function renderQuestHeader(){
+  const wrap = document.getElementById('u2-head-wrap');
+  if(!wrap) return;
+  const atp = Store.get('u2.atp',0);
+  const {cur,next,pct} = levelInfo(atp);
+  wrap.innerHTML = '';
+  const back = document.getElementById('u2-body-wrap').dataset.station ?
+    el('button',{class:'back-link', onclick:showQuestDashboard}, '← Station map') :
+    el('button',{class:'back-link', onclick:()=>route('home')}, '← Field Station');
+  wrap.appendChild(el('div',{class:'unit-head'},
+    el('div',{},
+      back,
+      el('h1',{style:'margin-top:10px'}, 'Energy Quest: What Keeps It Alive?'),
+      el('p',{class:'sub'}, 'Gamified practice for Unit 2 — What chemical processes support life? Formative and ungraded: read the field manual, then play through all seven stations to build your case for the expedition report.')
+    )
+  ));
+  wrap.appendChild(el('div',{class:'quest-head'},
+    el('div',{class:'atp-dial'}, el('b',{class:'tnum'}, atp), el('span',{},'ATP')),
+    el('div',{class:'quest-meta'},
+      el('div',{class:'level-name'}, cur.name),
+      el('div',{class:'level-sub'}, cur.blurb + (next? '  ·  '+(next.min-atp>0?next.min-atp:0)+' ATP to '+next.name : '')),
+      el('div',{class:'xp-bar'}, el('div',{style:'width:'+pct+'%'}))
+    )
+  ));
+}
+
+function showQuestDashboard(){
+  const wrap = document.getElementById('u2-body-wrap');
+  wrap.dataset.station = '';
+  wrap.innerHTML = '';
+  renderFieldManual(wrap);
+  const grid = el('div',{class:'station-grid'});
+  STATIONS.forEach(s=>{
+    const done = Store.get('u2.stations.'+s.id+'.done', false);
+    const best = Store.get('u2.stations.'+s.id+'.score', 0);
+    const card = el('button',{class:'station-card', onclick:()=>openStation(s.id)},
+      el('span',{class:'snum'}, 'Station '+s.num),
+      el('h4',{}, s.title),
+      el('p',{html:s.tag}),
+      best>0 ? el('span',{class:'best tnum'}, 'Best: '+best+' ATP') : el('span',{class:'best', style:'color:var(--ink-faint)'}, 'Not started'),
+    );
+    if(done) card.appendChild(el('span',{class:'badge-done', title:'Completed'}, '✅'));
+    grid.appendChild(card);
+  });
+  wrap.appendChild(grid);
+
+  // badge gallery
+  const gallery = el('div',{class:'panel', style:'margin-top:20px'});
+  gallery.appendChild(el('h3',{style:'font-size:15px;margin-bottom:12px'}, 'Field badges'));
+  const bg = el('div',{class:'badge-gallery'});
+  STATIONS.forEach(s=>{
+    const done = Store.get('u2.stations.'+s.id+'.done', false);
+    bg.appendChild(el('span',{class:'badge-pill'+(done?' earned':'')}, (done?'★ ':'☆ ')+s.title));
+  });
+  gallery.appendChild(bg);
+  wrap.appendChild(gallery);
+  renderQuestHeader();
+}
+
+function openStation(id){
+  const s = STATIONS.find(x=>x.id===id);
+  const wrap = document.getElementById('u2-body-wrap');
+  wrap.dataset.station = id;
+  wrap.innerHTML = '';
+  const shell = el('div',{class:'game-shell'});
+  const toolbar = el('div',{class:'game-toolbar'},
+    el('span',{class:'score-pill', 'data-live':'1'}, 'ATP '+Store.get('u2.atp',0)),
+    el('span',{class:'progress-chip'}, 'Station '+s.num+' · '+s.title)
+  );
+  shell.appendChild(toolbar);
+  const stage = el('div',{});
+  shell.appendChild(stage);
+  wrap.appendChild(shell);
+  renderQuestHeader();
+  const fn = STATION_RENDERERS[id];
+  if(fn) fn(stage, toolbar);
+}
+function markStationDone(id, score){
+  const prevBest = Store.get('u2.stations.'+id+'.score', 0);
+  Store.set('u2.stations.'+id+'.done', true);
+  if(score>prevBest) Store.set('u2.stations.'+id+'.score', score);
+}
+const STATION_RENDERERS = {};
+
+/* ---------- generic MCQ quiz helper (used by Respiration Relay + Boss Battle) ---------- */
+function renderQuiz(container, questions, opts){
+  opts = opts||{};
+  const perCorrect = opts.perCorrect || 5;
+  let score = 0, answered = 0;
+  const list = el('div',{class:'stack'});
+  questions.forEach((q,qi)=>{
+    const card = el('div',{class:'quiz-q'});
+    card.appendChild(el('p',{style:'font-weight:600; font-size:14.5px'}, (qi+1)+'. '+q.q));
+    const opts_ = el('div',{class:'quiz-opts'});
+    const explain = el('div',{class:'quiz-explain'}, q.explain);
+    shuffle(q.a.map((t,i)=>({t,i}))).forEach(({t,i})=>{
+      const btn = el('button',{class:'quiz-opt', type:'button'}, t);
+      btn.addEventListener('click', ()=>{
+        if(card.classList.contains('answered')) return;
+        card.classList.add('answered');
+        const correct = i===q.correct;
+        btn.classList.add(correct?'correct':'wrong');
+        if(!correct){
+          [...opts_.children].forEach(b=>{ if(b.textContent===q.a[q.correct]) b.classList.add('correct'); });
+        } else { score += perCorrect; addATP(perCorrect); }
+        answered++;
+        if(answered===questions.length && opts.onComplete) opts.onComplete(score);
+      });
+      opts_.appendChild(btn);
+    });
+    card.appendChild(opts_);
+    card.appendChild(explain);
+    list.appendChild(card);
+  });
+  container.appendChild(list);
+  return { getScore:()=>score };
+}
+
+/* ============ STATION 1 · METABOLISM SORT ============ */
+const METABOLISM_ITEMS = [
+  {stmt:'Respiration: glucose + oxygen → carbon dioxide + water (+ ATP)', type:'catabolic',
+   explain:'A large molecule (glucose) is broken down into smaller ones — that’s catabolic, even though it’s the reaction that releases the energy cells run on.'},
+  {stmt:'Photosynthesis: carbon dioxide + water → glucose + oxygen', type:'anabolic',
+   explain:'Small molecules are built up into glucose using light energy. Building up = anabolic.'},
+  {stmt:'Amino acids are joined together to build a new muscle protein', type:'anabolic',
+   explain:'Joining small units into one larger molecule (a protein) is anabolic — this is how your body repairs and grows tissue.'},
+  {stmt:'Amylase breaks starch down into maltose in saliva', type:'catabolic',
+   explain:'An enzyme splitting one big molecule into smaller sugar units is catabolic — this is digestion.'},
+  {stmt:'Glycolysis splits one glucose molecule into two molecules of pyruvic acid', type:'catabolic',
+   explain:'Splitting = catabolic. This is the first stage of respiration, and it needs no oxygen.'},
+  {stmt:'The liver joins many glucose molecules together to store them as glycogen', type:'anabolic',
+   explain:'Building a storage polymer out of smaller units is anabolic.'},
+  {stmt:'Catalase breaks hydrogen peroxide down into water and oxygen', type:'catabolic',
+   explain:'Even though nothing here ‘feeds’ the cell, splitting one molecule into two smaller products is still catabolic.'},
+  {stmt:'A plant links glucose units into long chains of cellulose to thicken its cell wall', type:'anabolic',
+   explain:'Linking small units into a bigger molecule (cellulose) is anabolic.'},
+  {stmt:'Lipase breaks a fat molecule down into fatty acids and glycerol', type:'catabolic',
+   explain:'Digestion always breaks bonds to release smaller products — catabolic.'},
+  {stmt:'At the vent, KX-19 combines carbon dioxide and hydrogen sulfide to build its own glucose (chemosynthesis)', type:'anabolic',
+   explain:'Just like photosynthesis, this builds a bigger, energy-rich molecule from smaller ones — only the energy source is a chemical reaction, not light.'},
+];
+STATION_RENDERERS.metabolism = function(stage, toolbar){
+  stage.appendChild(el('p',{style:'color:var(--ink-soft); font-size:14px; margin-bottom:14px; max-width:64ch'},
+    'Sort each reaction from the vent lab notebook. Anabolic reactions build bigger molecules from smaller ones; catabolic reactions break big molecules into smaller ones. +5 ATP per correct sort.'));
+  const grid = el('div',{class:'sort-grid'});
+  let correctCount = 0, doneCount = 0;
+  shuffle(METABOLISM_ITEMS).forEach(item=>{
+    const card = el('div',{class:'sort-card'});
+    card.appendChild(el('div',{class:'stmt'}, item.stmt));
+    const choices = el('div',{class:'choices'});
+    ['anabolic','catabolic'].forEach(type=>{
+      const b = el('button',{class:'chip-btn '+type, type:'button'}, type[0].toUpperCase()+type.slice(1));
+      b.addEventListener('click', ()=>{
+        if(card.classList.contains('answered')) return;
+        card.classList.add('answered','answered');
+        b.classList.add('pick');
+        const correct = type===item.type;
+        card.classList.add(correct?'correct':'wrong');
+        if(!correct){
+          [...choices.children].forEach(x=>{ if(x.textContent.toLowerCase()===item.type) x.classList.add('pick'); });
+        } else { correctCount++; addATP(5); }
+        doneCount++;
+        if(doneCount===METABOLISM_ITEMS.length){
+          finishBtn.hidden = false;
+        }
+      });
+      choices.appendChild(b);
+    });
+    card.appendChild(choices);
+    card.appendChild(el('div',{class:'sort-explain'}, item.explain));
+    grid.appendChild(card);
+  });
+  stage.appendChild(grid);
+  const finishBtn = el('button',{class:'btn btn-amber', style:'margin-top:16px', hidden:true, onclick:()=>{
+    markStationDone('metabolism', correctCount*5);
+    toast('Metabolism Sort complete — '+correctCount+'/'+METABOLISM_ITEMS.length+' correct!');
+    showQuestDashboard();
+  }}, 'Finish station →');
+  stage.appendChild(finishBtn);
+};
+
+/* ============ STATION 2 · RESPIRATION RELAY ============ */
+const EQN_TARGET = ['Glucose','+','Oxygen','→','Carbon dioxide','+','Water','+','Energy (ATP)'];
+STATION_RENDERERS.respiration = function(stage){
+  stage.appendChild(el('p',{style:'color:var(--ink-soft); font-size:14px; margin-bottom:14px; max-width:64ch'},
+    'Part 1 — rebuild the word equation for aerobic respiration by clicking the tiles in the right order.'));
+  const slot = el('div',{class:'eqn-builder'}, el('span',{style:'color:var(--ink-faint); font-size:13px'}, 'Click tiles below to build the equation here…'));
+  const pool = el('div',{class:'eqn-pool'});
+  const feedback = el('div',{style:'margin-top:10px; font-size:13.5px'});
+  let placed = [];
+  let poolTokens = shuffle(EQN_TARGET.slice());
+  function renderSlot(){
+    slot.innerHTML = '';
+    if(placed.length===0){ slot.appendChild(el('span',{style:'color:var(--ink-faint); font-size:13px'}, 'Click tiles below to build the equation here…')); return; }
+    placed.forEach((tok,i)=>{
+      const t = el('span',{class:'eqn-slot-tile'}, tok);
+      t.addEventListener('click', ()=>{ placed.splice(i,1); poolTokens.push(tok); renderSlot(); renderPool(); });
+      slot.appendChild(t);
+    });
+  }
+  function renderPool(){
+    pool.innerHTML = '';
+    poolTokens.forEach((tok,j)=>{
+      const tile = el('button',{class:'eqn-tile', type:'button'}, tok);
+      tile.addEventListener('click', ()=>{ poolTokens.splice(j,1); placed.push(tok); renderSlot(); renderPool(); });
+      pool.appendChild(tile);
+    });
+  }
+  renderSlot(); renderPool();
+  stage.appendChild(el('div',{},
+    el('div',{}, slot),
+    pool,
+    el('div',{class:'field-row', style:'margin-top:14px'},
+      el('button',{class:'btn btn-teal', onclick:()=>{
+        const ok = placed.length===EQN_TARGET.length && placed.every((t,i)=>t===EQN_TARGET[i]);
+        if(ok){
+          feedback.innerHTML = '✅ <b>Glucose + Oxygen → Carbon dioxide + Water (+ Energy/ATP)</b><br>Chemical equation: C₆H₁₂O₆ + 6O₂ → 6CO₂ + 6H₂O (+ ATP)';
+          feedback.style.color = 'var(--moss)';
+          if(!stage.dataset.eqnDone){ addATP(15); stage.dataset.eqnDone='1'; }
+          quizSection.hidden = false;
+        } else {
+          feedback.textContent = 'Not quite the right order yet — keep rearranging (click a placed tile to remove it).';
+          feedback.style.color = 'var(--coral)';
+        }
+      }}, 'Check equation'),
+      el('button',{class:'btn btn-ghost', onclick:()=>{ placed=[]; renderSlot(); renderPool(); feedback.textContent=''; }}, 'Clear')
+    ),
+    feedback
+  ));
+
+  const quizSection = el('div',{style:'margin-top:26px', hidden:true});
+  quizSection.appendChild(el('h4',{style:'font-size:15px; margin-bottom:10px'}, 'Part 2 — aerobic vs anaerobic respiration'));
+  const RESP_QUIZ = [
+    {q:'Where in the cell does glycolysis — the first stage of respiration — take place?',
+     a:['Cytoplasm','Nucleus','Mitochondrion','Cell wall'], correct:0,
+     explain:'Glycolysis splits glucose into pyruvic acid in the cytoplasm, and needs no oxygen.'},
+    {q:'A sprinter’s muscles run short of oxygen during a race. Which substance builds up in the muscle cells?',
+     a:['Lactic acid','Ethanol','Only carbon dioxide','Extra glycogen'], correct:0,
+     explain:'Human anaerobic respiration produces lactic acid, which causes the cramping, tired feeling in overworked muscles.'},
+    {q:'Bread dough rises because yeast respires anaerobically in the sugary dough. What gas causes the rise?',
+     a:['Oxygen','Carbon dioxide','Hydrogen','Nitrogen'], correct:1,
+     explain:'Yeast’s anaerobic respiration produces ethanol and carbon dioxide — the CO₂ bubbles make the dough rise.'},
+    {q:'Why does aerobic respiration release far more usable energy per glucose molecule than anaerobic respiration?',
+     a:['The pyruvic acid is completely broken down to carbon dioxide and water inside the mitochondria, releasing much more of the energy stored in glucose',
+        'Oxygen itself contains extra stored energy that gets added in',
+        'Anaerobic respiration doesn’t use enzymes, so it is inefficient',
+        'Aerobic respiration simply happens faster, which makes more energy'], correct:0,
+     explain:'Without oxygen, respiration stops at pyruvic acid (or lactic acid/ethanol) — most of the energy in glucose stays locked up. With oxygen, that pyruvic acid is fully broken down in the mitochondria.'},
+    {q:'Surgeons sometimes cool a patient’s body dramatically during very high-risk operations. What does this buy the surgical team?',
+     a:['More time to operate, because cooled cells need much less oxygen and food to survive',
+        'Nothing — temperature has no effect on cells',
+        'Faster respiration, which speeds up healing',
+        'A permanent stop to all cell activity'], correct:0,
+     explain:'Cooling slows the enzyme-controlled reactions of metabolism, so cells can survive on far less oxygen for a while — this is the ‘suspended animation’ idea from the start of the chapter.'},
+    {q:'KX-19 lives in total darkness but still builds its own glucose by chemosynthesis. Why doesn’t it use photosynthesis instead?',
+     a:['There is no sunlight at 2,400 m depth, but the vent supplies hydrogen sulfide it can use as an energy source instead',
+        'Photosynthesis doesn’t actually need light, so it makes no difference',
+        'Chemosynthesis is always more efficient than photosynthesis, regardless of light',
+        'KX-19 is a heterotroph, so neither process applies to it'], correct:0,
+     explain:'Organisms with chlorophyll capture light energy; where there is no light, some organisms (chemoautotrophs) instead capture energy from chemical reactions — here, reactions involving hydrogen sulfide from the vent.'},
+  ];
+  renderQuiz(quizSection, RESP_QUIZ, {perCorrect:5, onComplete:(score)=>{
+    markStationDone('respiration', 15+score);
+    quizSection.appendChild(el('button',{class:'btn btn-amber', style:'margin-top:16px', onclick:showQuestDashboard}, 'Finish station → ('+(15+score)+' ATP this run)'));
+    toast('Respiration Relay complete!');
+  }});
+  stage.appendChild(quizSection);
+};
+</script>
+
+<script>
+/* ============ STATION 3 · PHOTOSYNTHESIS FIELD LAB ============ */
+function tempMultPhoto(T){
+  if(T<=5) return 0.15;
+  if(T<25) return 0.15 + (T-5)/20*0.85;
+  if(T<=32) return 1.0;
+  if(T<45) return Math.max(0.05, 1.0 - (T-32)/13*0.95);
+  return 0.05;
+}
+function simulatePhoto(L, cIdx, T){
+  const lightContribution = Math.min(L*2.4, 24);
+  const co2Cap = [8,14,24][cIdx];
+  const base = Math.min(lightContribution, co2Cap) * tempMultPhoto(T);
+  const noisy = base * (0.94 + Math.random()*0.12);
+  return Math.max(0, Math.round(noisy));
+}
+STATION_RENDERERS.photosynthesis = function(stage){
+  stage.appendChild(el('p',{style:'color:var(--ink-soft); font-size:14px; margin-bottom:14px; max-width:70ch'},
+    'A pondweed sample from near the vent mouth still photosynthesizes when given light. Set your rig, run a trial, and watch bubbles of oxygen collect. Run at least 4 trials — try changing only one variable at a time.'));
+  const layout = el('div',{class:'lab-layout'});
+  const co2Labels = ['Low (0.04%)','Medium (0.09%)','High (0.14%)'];
+  let L=5, cIdx=1, T=25, trials=0, trialLog=[];
+
+  const lightVal = el('span',{class:'val tnum'}, L);
+  const tempVal = el('span',{class:'val tnum'}, T+'°C');
+  const co2Val = el('span',{class:'val'}, co2Labels[cIdx]);
+
+  const bubbleStage = el('div',{style:'height:70px; border:1px dashed var(--line-strong); border-radius:10px; position:relative; overflow:hidden; background:var(--surface); margin-top:12px;'});
+  const bubbleReadout = el('div',{class:'mono tnum', style:'font-size:13px; color:var(--teal-ink); margin-top:6px'}, 'Bubbles/min: —');
+
+  const controls = el('div',{class:'slider-group'},
+    el('div',{class:'slider-row'},
+      el('label',{}, el('span',{},'Light intensity'), lightVal),
+      (()=>{ const i=el('input',{type:'range', min:'0', max:'10', value:String(L), id:'sl-light'}); i.addEventListener('input',e=>{L=+e.target.value; lightVal.textContent=L;}); return i; })()
+    ),
+    el('div',{class:'slider-row'},
+      el('label',{}, el('span',{},'Carbon dioxide'), co2Val),
+      (()=>{ const i=el('input',{type:'range', min:'0', max:'2', value:String(cIdx), id:'sl-co2'}); i.addEventListener('input',e=>{cIdx=+e.target.value; co2Val.textContent=co2Labels[cIdx];}); return i; })()
+    ),
+    el('div',{class:'slider-row'},
+      el('label',{}, el('span',{},'Temperature'), tempVal),
+      (()=>{ const i=el('input',{type:'range', min:'5', max:'45', value:String(T), id:'sl-temp'}); i.addEventListener('input',e=>{T=+e.target.value; tempVal.textContent=T+'°C';}); return i; })()
+    ),
+    el('button',{class:'btn btn-teal', onclick:runTrial}, '💡 Run trial'),
+    bubbleReadout,
+    bubbleStage
+  );
+  layout.appendChild(controls);
+
+  const right = el('div',{});
+  const canvas = el('canvas',{width:'520', height:'260'});
+  right.appendChild(canvas);
+  const tbl = el('table',{class:'trial-table'});
+  tbl.appendChild(el('tr',{}, el('th',{},'#'), el('th',{},'Light'), el('th',{},'CO₂'), el('th',{},'Temp'), el('th',{},'Bubbles/min')));
+  right.appendChild(tbl);
+  const conclusion = el('div',{style:'margin-top:20px', hidden:true});
+  right.appendChild(conclusion);
+  layout.appendChild(right);
+  stage.appendChild(layout);
+
+  function drawGraph(){
+    const ctx = canvas.getContext('2d');
+    const W=520,H=260, padL=42,padB=32,padT=14,padR=14;
+    ctx.clearRect(0,0,W,H);
+    const css = getComputedStyle(document.documentElement);
+    const ink = css.getPropertyValue('--ink-soft').trim() || '#555';
+    const line = css.getPropertyValue('--line').trim() || '#ddd';
+    ctx.strokeStyle = line; ctx.fillStyle = ink; ctx.font = '11px IBM Plex Mono, monospace';
+    ctx.lineWidth = 1;
+    // axes
+    ctx.beginPath(); ctx.moveTo(padL,padT); ctx.lineTo(padL,H-padB); ctx.lineTo(W-padR,H-padB); ctx.stroke();
+    for(let g=0; g<=26; g+=5){
+      const y = H-padB-(g/26)*(H-padB-padT);
+      ctx.strokeStyle = line; ctx.beginPath(); ctx.moveTo(padL,y); ctx.lineTo(W-padR,y); ctx.stroke();
+      ctx.fillStyle = ink; ctx.fillText(String(g), 8, y+3);
+    }
+    for(let x=0;x<=10;x+=2){
+      const px = padL + (x/10)*(W-padL-padR);
+      ctx.fillText(String(x), px-3, H-padB+16);
+    }
+    ctx.save(); ctx.translate(12,H/2); ctx.rotate(-Math.PI/2); ctx.fillText('bubbles / min', -30,0); ctx.restore();
+    ctx.fillText('light intensity →', W-140, H-6);
+    const colors = ['#C4485A','#D97E1F','#0E7A72'];
+    trialLog.forEach(t=>{
+      const px = padL + (t.L/10)*(W-padL-padR);
+      const py = H-padB-(clamp(t.rate,0,26)/26)*(H-padB-padT);
+      ctx.beginPath(); ctx.arc(px,py,5,0,7); ctx.fillStyle = colors[t.cIdx]; ctx.fill();
+      ctx.strokeStyle = 'rgba(0,0,0,.25)'; ctx.stroke();
+    });
+    // legend
+    co2Labels.forEach((lab,i)=>{
+      ctx.fillStyle = colors[i];
+      ctx.beginPath(); ctx.arc(padL+10+i*150, 12, 4,0,7); ctx.fill();
+      ctx.fillStyle = ink; ctx.fillText('CO₂ '+['low','med','high'][i], padL+18+i*150, 16);
+    });
+  }
+  function popBubbles(rate){
+    bubbleStage.innerHTML='';
+    const n = Math.min(Math.round(rate/1.3), 18);
+    for(let i=0;i<n;i++){
+      const b = el('span',{style:'position:absolute; bottom:0; left:'+(4+Math.random()*90)+'%; width:7px; height:7px; border-radius:50%; background:var(--teal); opacity:.85; animation:rise 1.4s ease-in '+(Math.random()*0.6)+'s forwards;'});
+      bubbleStage.appendChild(b);
+    }
+  }
+  function runTrial(){
+    const rate = simulatePhoto(L,cIdx,T);
+    trials++;
+    trialLog.push({L,cIdx,T,rate});
+    tbl.appendChild(el('tr',{}, el('td',{},String(trials)), el('td',{},String(L)), el('td',{},co2Labels[cIdx]), el('td',{},T+'°C'), el('td',{class:'tnum'},String(rate))));
+    bubbleReadout.textContent = 'Bubbles/min: '+rate;
+    popBubbles(rate);
+    drawGraph();
+    if(trials<=6) addATP(5);
+    if(trials>=4 && conclusion.hidden){
+      conclusion.hidden = false;
+      buildPhotoConclusion(conclusion);
+    }
+  }
+  drawGraph();
+  if(!document.getElementById('rise-kf')){
+    const st = document.createElement('style'); st.id='rise-kf';
+    st.textContent = '@keyframes rise{ from{ transform:translateY(0); opacity:.9;} to{ transform:translateY(-60px); opacity:0;} }';
+    document.head.appendChild(st);
+  }
+};
+function buildPhotoConclusion(container){
+  container.appendChild(el('h4',{style:'font-size:15px; margin-bottom:10px'}, 'Lab report — draw your conclusions'));
+  const PHOTO_QUIZ = [
+    {q:'In your trials, raising the CO₂ level increases the rate even though light intensity stayed exactly the same. What does that tell you about the limiting factor at that light level?',
+     a:['CO₂ concentration was the limiting factor','Light intensity was the limiting factor','Temperature was the limiting factor','There is no limiting factor at this light level'], correct:0,
+     explain:'If changing CO₂ changes the rate, CO₂ must have been holding the rate back — it was limiting.'},
+    {q:'Two trials share the same light intensity and CO₂ level. One runs at 5 °C, the other at 27 °C. Which is very likely to show the lower rate, and why?',
+     a:['The 5 °C trial — low temperature slows the enzyme-controlled reactions of photosynthesis','The 27 °C trial — heat always speeds up every reaction without limit','Neither — temperature has no effect on photosynthesis','The 5 °C trial — cold water contains less carbon dioxide'], correct:0,
+     explain:'Photosynthesis depends on enzyme-controlled reactions. Very low temperatures slow molecular movement and enzyme activity, lowering the rate.'},
+  ];
+  renderQuiz(container, PHOTO_QUIZ, {perCorrect:10, onComplete:(score)=>{
+    const ta = el('textarea',{class:'answer', placeholder:'Suggest one more variable you could test, and predict what would happen…', style:'margin-top:6px'});
+    container.appendChild(el('p',{style:'font-weight:600;font-size:14px;margin-top:16px'},'One more thing to try:'));
+    container.appendChild(ta);
+    container.appendChild(el('button',{class:'btn btn-amber', style:'margin-top:14px', onclick:()=>{
+      markStationDone('photosynthesis', Math.min(30,6*5)+score);
+      toast('Photosynthesis Field Lab complete!');
+      showQuestDashboard();
+    }}, 'Finish station →'));
+  }});
+}
+</script>
+
+<script>
+/* ============ STATION 4 · ENZYME ARENA ============ */
+const ENZYMES = [
+  {name:'Amylase', substrate:'Starch', product:'Maltose', shape:'tri'},
+  {name:'Lipase', substrate:'Fat', product:'Fatty acids + glycerol', shape:'hex'},
+  {name:'Protease', substrate:'Protein', product:'Amino acids', shape:'wave'},
+  {name:'Catalase', substrate:'Hydrogen peroxide', product:'Water + oxygen', shape:'star'},
+];
+function shapeSVG(kind, notch){
+  const c = 'currentColor';
+  if(kind==='tri') return `<svg width="34" height="34" viewBox="0 0 34 34"><polygon points="17,4 30,28 4,28" fill="none" stroke="${c}" stroke-width="2.4"/>${notch?'<polygon points="17,16 24,28 10,28" fill="'+c+'"/>':''}</svg>`;
+  if(kind==='hex') return `<svg width="34" height="34" viewBox="0 0 34 34"><polygon points="17,3 29,10 29,24 17,31 5,24 5,10" fill="none" stroke="${c}" stroke-width="2.4"/>${notch?'<circle cx="17" cy="17" r="7" fill="'+c+'"/>':''}</svg>`;
+  if(kind==='wave') return `<svg width="34" height="34" viewBox="0 0 34 34"><path d="M4 20 Q10 6 17 20 T30 20 L30 30 L4 30 Z" fill="none" stroke="${c}" stroke-width="2.4"/>${notch?'<path d="M9 22 Q17 12 25 22 L25 28 L9 28 Z" fill="'+c+'"/>':''}</svg>`;
+  return `<svg width="34" height="34" viewBox="0 0 34 34"><polygon points="17,2 21,13 32,13 23,20 26,31 17,24 8,31 11,20 2,13 13,13" fill="none" stroke="${c}" stroke-width="2.2"/>${notch?'<polygon points="17,10 19,16 25,16 20,20 22,26 17,22 12,26 14,20 9,16 15,16" fill="'+c+'"/>':''}</svg>`;
+}
+STATION_RENDERERS.enzyme = function(stage){
+  stage.appendChild(el('p',{style:'color:var(--ink-soft); font-size:14px; margin-bottom:14px; max-width:70ch'},
+    'Part 1 — the lock-and-key model. Each enzyme’s active site fits only one substrate shape. Click the substrate that matches the active site shown.'));
+  const rows = el('div',{class:'stack'});
+  shuffle(ENZYMES).forEach(enz=>{
+    const row = el('div',{class:'panel', style:'display:flex; gap:18px; align-items:center; flex-wrap:wrap;'});
+    row.appendChild(el('div',{style:'display:flex;align-items:center;gap:10px; color:var(--teal)'},
+      el('div',{html:shapeSVG(enz.shape,false)}),
+      el('div',{},
+        el('div',{style:'font-weight:700; color:var(--ink); font-size:14.5px'}, enz.name),
+        el('div',{style:'font-size:12px; color:var(--ink-faint)'}, 'active site — find the matching substrate')
+      )
+    ));
+    const opts = el('div',{class:'shape-grid', style:'flex:1; min-width:220px'});
+    shuffle(ENZYMES).forEach(cand=>{
+      const btn = el('button',{class:'shape-btn', type:'button'},
+        el('div',{html:shapeSVG(cand.shape,true), style:'color:var(--amber)'}),
+        cand.substrate
+      );
+      btn.addEventListener('click', ()=>{
+        if(row.dataset.done) return;
+        row.dataset.done='1';
+        const correct = cand.shape===enz.shape;
+        btn.classList.add(correct?'correct':'wrong');
+        if(!correct){
+          [...opts.children].forEach(b=>{ if(b.textContent===enz.substrate) b.classList.add('correct'); });
+        } else { addATP(5); }
+        [...opts.children].forEach(b=>b.style.pointerEvents='none');
+        row.appendChild(el('p',{style:'width:100%; font-size:13px; color:var(--ink-soft); margin-top:8px'},
+          enz.name+' breaks down '+enz.substrate.toLowerCase()+' into '+enz.product.toLowerCase()+'.'));
+        checkEnzymeDone();
+      });
+      opts.appendChild(btn);
+    });
+    row.appendChild(opts);
+    rows.appendChild(row);
+  });
+  stage.appendChild(rows);
+
+  const labSection = el('div',{style:'margin-top:30px', hidden:true});
+  stage.appendChild(labSection);
+
+  function checkEnzymeDone(){
+    if([...rows.children].every(r=>r.dataset.done)){
+      labSection.hidden = false;
+      buildEnzymeLab(labSection);
+    }
+  }
+};
+
+function enzymeActivity(T, pH, optT, optPH){
+  const tf = Math.exp(-Math.pow((T-optT)/12,2));
+  const pf = Math.exp(-Math.pow((pH-optPH)/1.6,2));
+  return clamp(tf*pf*100, 0, 100);
+}
+function buildEnzymeLab(container){
+  container.appendChild(el('h4',{style:'font-size:15px; margin-bottom:6px'}, 'Part 2 — temperature & pH lab'));
+  container.appendChild(el('p',{style:'color:var(--ink-soft); font-size:13.5px; margin-bottom:14px; max-width:66ch'},
+    'Choose an enzyme, then drag the sliders. Watch how far you are from its optimum conditions.'));
+  const layout = el('div',{class:'lab-layout'});
+  const ENZ_PROFILES = [
+    {name:'Salivary amylase (mouth)', optT:37, optPH:7},
+    {name:'Pepsin (stomach)', optT:37, optPH:2},
+  ];
+  let profile = ENZ_PROFILES[0], T=37, pH=7, moved=false;
+  const select = el('select',{style:'padding:8px 10px;border-radius:8px;border:1px solid var(--line-strong);background:var(--surface);color:var(--ink);font-size:13.5px'});
+  ENZ_PROFILES.forEach((p,i)=>select.appendChild(el('option',{value:String(i)}, p.name)));
+  select.addEventListener('change', e=>{ profile = ENZ_PROFILES[+e.target.value]; draw(); });
+
+  const tVal = el('span',{class:'val tnum'}, T+'°C');
+  const pVal = el('span',{class:'val tnum'}, 'pH '+pH);
+  const activityReadout = el('div',{class:'mono', style:'font-size:14px; margin-top:10px; color:var(--teal-ink)'});
+
+  const controls = el('div',{class:'slider-group'},
+    el('div',{},el('label',{style:'font-size:13px;font-weight:600'},'Enzyme'),select),
+    el('div',{class:'slider-row'}, el('label',{}, el('span',{},'Temperature'), tVal),
+      (()=>{ const i=el('input',{type:'range',min:'0',max:'100',value:String(T)}); i.addEventListener('input',e=>{T=+e.target.value; tVal.textContent=T+'°C'; moved=true; draw();}); return i; })()),
+    el('div',{class:'slider-row'}, el('label',{}, el('span',{},'pH'), pVal),
+      (()=>{ const i=el('input',{type:'range',min:'1',max:'14',value:String(pH)}); i.addEventListener('input',e=>{pH=+e.target.value; pVal.textContent='pH '+pH; moved=true; draw();}); return i; })()),
+    activityReadout
+  );
+  layout.appendChild(controls);
+  const canvas = el('canvas',{width:'480',height:'240'});
+  layout.appendChild(canvas);
+  container.appendChild(layout);
+
+  function draw(){
+    const act = enzymeActivity(T,pH,profile.optT,profile.optPH);
+    let state = act>75?'optimal — reaction proceeding fast':act>25?'reduced — conditions away from optimum':(T>profile.optT+25||pH<profile.optPH-4||pH>profile.optPH+4)?'denatured — active site has changed shape':'very slow';
+    activityReadout.textContent = 'Relative activity: '+Math.round(act)+'%  ('+state+')';
+    const ctx = canvas.getContext('2d');
+    const W=480,H=240,padL=42,padB=30,padT=14,padR=14;
+    ctx.clearRect(0,0,W,H);
+    const css = getComputedStyle(document.documentElement);
+    const ink = css.getPropertyValue('--ink-soft').trim()||'#555';
+    const line = css.getPropertyValue('--line').trim()||'#ddd';
+    ctx.font='11px IBM Plex Mono, monospace';
+    ctx.strokeStyle=line; ctx.beginPath(); ctx.moveTo(padL,padT); ctx.lineTo(padL,H-padB); ctx.lineTo(W-padR,H-padB); ctx.stroke();
+    ctx.fillStyle=ink;
+    ctx.fillText('activity %', 4, 12);
+    ctx.fillText('temperature (°C) →', W-160, H-8);
+    // curve of activity vs T at current pH
+    ctx.beginPath();
+    for(let t=0; t<=100; t++){
+      const a = enzymeActivity(t,pH,profile.optT,profile.optPH);
+      const px = padL + (t/100)*(W-padL-padR);
+      const py = H-padB - (a/100)*(H-padB-padT);
+      if(t===0) ctx.moveTo(px,py); else ctx.lineTo(px,py);
+    }
+    ctx.strokeStyle = getComputedStyle(document.documentElement).getPropertyValue('--teal').trim()||'#0E7A72';
+    ctx.lineWidth=2.4; ctx.stroke();
+    // marker
+    const mx = padL + (T/100)*(W-padL-padR);
+    const my = H-padB-(act/100)*(H-padB-padT);
+    ctx.beginPath(); ctx.arc(mx,my,5,0,7);
+    ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--amber').trim()||'#D97E1F';
+    ctx.fill();
+    for(let tk=0; tk<=100; tk+=20){ ctx.fillStyle=ink; ctx.fillText(String(tk), padL+(tk/100)*(W-padL-padR)-6, H-padB+16); }
+  }
+  draw();
+
+  const poeWrap = el('div',{style:'margin-top:24px'});
+  container.appendChild(poeWrap);
+  let atpGiven = false;
+  const checkBtn = el('button',{class:'btn btn-ghost', style:'margin-top:10px', onclick:()=>{
+    if(!atpGiven && moved){ addATP(10); atpGiven=true; }
+    poeWrap.innerHTML='';
+    buildEnzymePOE(poeWrap);
+    checkBtn.hidden = true;
+  }}, 'I’ve explored the curve — continue to questions');
+  container.appendChild(checkBtn);
+}
+function buildEnzymePOE(container){
+  const POE = [
+    {q:'You slowly raise the temperature well past the enzyme’s optimum and activity crashes to near zero. What has most likely happened?',
+     a:['Its active site has changed shape (denatured), so the substrate no longer fits','It has turned into a completely different molecule','The enzyme has been used up and there is none left','The substrate has evaporated'], correct:0,
+     explain:'High heat breaks the bonds holding an enzyme’s shape together. Once the active site’s shape changes, the substrate no longer fits — this is denaturation, and it cannot be reversed by cooling back down.'},
+    {q:'Pepsin works fastest around pH 2, the acidity of the stomach. What would most likely happen if pepsin were placed in the small intestine, at around pH 8?',
+     a:['Its activity would drop sharply — it is far from its optimum pH and may denature','Its activity would increase, because a higher pH is always better for enzymes','No change — enzymes are unaffected by pH','It would only affect the substrate, not the enzyme itself'], correct:0,
+     explain:'Every enzyme has an optimum pH shaped by its role. Moving far from that optimum changes the shape of the active site, lowering activity — which is exactly why the body switches to different enzymes (like trypsin) in the intestine.'},
+  ];
+  renderQuiz(container, POE, {perCorrect:10, onComplete:(score)=>{
+    container.appendChild(el('button',{class:'btn btn-amber', style:'margin-top:16px', onclick:()=>{
+      markStationDone('enzyme', 20+10+score);
+      toast('Enzyme Arena complete!');
+      showQuestDashboard();
+    }}, 'Finish station →'));
+  }});
+}
+</script>
+
+<script>
+/* ============ STATION 5 · FOOD & FUEL DEBATE (formative, ungraded) ============ */
+const DEBATE_SCENARIOS = [
+  {title:'Patent the enzyme, or publish openly?',
+   body:'The lab confirms KX-19 makes a heat-stable enzyme. The funder wants a patent filed before anything is published — much like Taq polymerase, patented after being isolated from a heat-loving bacterium found in a public national park.',
+   stances:['Patent it — research funding needs a return', 'Publish openly — public-land discoveries should benefit everyone', 'A middle path: patent narrowly, share the organism data'],
+   follow:'All three positions have real backing. Patents can fund years of further research and are how many biotech breakthroughs reach the public at all — Taq polymerase’s patent helped fund the biotech boom that made PCR cheap and widespread. But critics point out the underlying organism was discovered using public funding on public land, and international agreements like the Nagoya Protocol now exist specifically because of disputes like this over who benefits from a discovery. There usually isn’t a clean answer — only trade-offs.'},
+  {title:'Should crops be engineered to photosynthesize faster?',
+   body:'Global food demand is projected to keep rising. Genetically modifying crop plants to improve their photosynthesis or enzyme efficiency could raise yields substantially.',
+   stances:['Support it — the food-security case is urgent', 'Oppose it — ecological and long-term risks are still unclear', 'Support it, but only with strict testing and labelling'],
+   follow:'Supporters point to real yield gains already achieved in trials, and the scale of projected food demand. Critics raise genuine concerns: reduced crop diversity, corporate control over seed supply, and ecological effects that only show up after widespread planting. Most scientific bodies that have reviewed the evidence see current approved GM crops as safe to eat, but the ecological and economic questions remain actively debated — which is different from the safety question.'},
+  {title:'Should we scale up algae biofuel research?',
+   body:'Genetically modified algae and cyanobacteria can be engineered to produce biofuel from sunlight and carbon dioxide, offering a possible alternative to fossil fuels.',
+   stances:['Invest heavily — it could cut fossil fuel dependence fast', 'Go slowly — releasing modified organisms carries ecological risk', 'Fund it, but keep it contained to closed systems for now'],
+   follow:'Algal biofuel research is real and ongoing, and the appeal is obvious: it uses sunlight and CO₂ rather than land needed for food crops. The caution is also well founded — a modified organism that escapes a contained facility into open water is very hard to recall, and its ecological effects are difficult to predict in advance. Most current pilot projects do run in closed bioreactors for exactly this reason.'},
+  {title:'What should the school do about food waste?',
+   body:'A widely cited UK Institution of Mechanical Engineers report found that as much as half of all food produced worldwide is wasted — roughly 2 billion tonnes a year, all of it representing trapped solar energy from photosynthesis that went nowhere.',
+   stances:['Start a share-table and composting program', 'Focus on smaller, better-planned portions', 'Do both together'],
+   follow:'These aren’t competing ideas — most successful school food-waste campaigns combine both: better portion planning to reduce waste at the source, and a share-table or composting system to recover whatever is still wasted. The energy argument is the biology point worth keeping: every wasted meal represents captured solar energy, and the metabolic work of growing, transporting and cooking it, that never reached anyone.'},
+];
+STATION_RENDERERS.debate = function(stage){
+  stage.appendChild(el('p',{style:'color:var(--ink-soft); font-size:14px; margin-bottom:16px; max-width:70ch'},
+    'Four real dilemmas about manipulating the chemistry of life. Pick the position closest to your own — there’s no wrong answer here, only a chance to see the other side.'));
+  const wrap = el('div',{class:'stack'});
+  let completed = 0;
+  DEBATE_SCENARIOS.forEach(sc=>{
+    const card = el('div',{class:'scenario-card'});
+    card.appendChild(el('h4',{}, sc.title));
+    card.appendChild(el('p',{style:'font-size:13.5px; color:var(--ink-soft)'}, sc.body));
+    const row = el('div',{class:'stance-row'});
+    const follow = el('div',{class:'stance-follow'}, sc.follow);
+    sc.stances.forEach(s=>{
+      const b = el('button',{class:'stance-btn', type:'button'}, s);
+      b.addEventListener('click', ()=>{
+        if(card.classList.contains('answered')) return;
+        card.classList.add('answered');
+        b.classList.add('sel');
+        completed++;
+        addATP(5);
+        if(completed===DEBATE_SCENARIOS.length){ finishBtn.hidden=false; }
+      });
+      row.appendChild(b);
+    });
+    card.appendChild(row);
+    card.appendChild(follow);
+    wrap.appendChild(card);
+  });
+  stage.appendChild(wrap);
+  const finishBtn = el('button',{class:'btn btn-amber', style:'margin-top:18px', hidden:true, onclick:()=>{
+    markStationDone('debate', 20);
+    toast('Food & Fuel Debate complete!');
+    showQuestDashboard();
+  }}, 'Finish station →');
+  stage.appendChild(finishBtn);
+};
+
+/* ============ STATION 6 · BOSS BATTLE + CERTIFICATE ============ */
+const BOSS_QUIZ = [
+  {q:'Which statement correctly matches a metabolic reaction type with its description?',
+   a:['Anabolic — breaks large molecules into smaller ones','Catabolic — builds large molecules from smaller ones','Anabolic — builds large molecules from smaller ones','Catabolic — always requires light energy'], correct:2,
+   explain:'Anabolic reactions build up bigger molecules from smaller ones; catabolic reactions break big molecules down.'},
+  {q:'What is the word equation for aerobic respiration?',
+   a:['Glucose + oxygen → carbon dioxide + water (+ energy)','Carbon dioxide + water → glucose + oxygen','Glucose → alcohol + carbon dioxide','Glucose → lactic acid'], correct:0, explain:'Aerobic respiration breaks glucose down using oxygen, releasing carbon dioxide, water and energy (as ATP).'},
+  {q:'Which product forms when human muscle cells respire anaerobically?',
+   a:['Lactic acid','Ethanol','Extra oxygen','Starch'], correct:0, explain:'Human cells produce lactic acid when oxygen is in short supply — this causes the burning, tired feeling in overworked muscle.'},
+  {q:'Which products form when yeast respires anaerobically?',
+   a:['Lactic acid only','Ethanol and carbon dioxide','Glucose and water','ATP with no by-products'], correct:1, explain:'Yeast (and plants) produce ethanol and carbon dioxide during anaerobic respiration — the basis of both brewing and baking.'},
+  {q:'An enzyme’s activity drops to zero after heating to 90 °C, and does not recover on cooling. What has happened?',
+   a:['It was used up in the reaction','Its active site has permanently changed shape (denatured)','It turned into a substrate','It froze solid'], correct:1, explain:'High heat breaks the bonds holding the enzyme’s 3D shape together. Once denatured, the substrate no longer fits the active site — and cooling cannot undo it.'},
+  {q:'What is the word equation for photosynthesis?',
+   a:['Glucose + oxygen → carbon dioxide + water','Carbon dioxide + water → glucose + oxygen (using light and chlorophyll)','Starch → glucose','Water → hydrogen + oxygen'], correct:1, explain:'Photosynthesis uses light energy, trapped by chlorophyll, to build glucose from carbon dioxide and water, releasing oxygen.'},
+  {q:'In a photosynthesis experiment, increasing light intensity raises the rate — until it suddenly levels off even as light keeps increasing. What does this show?',
+   a:['Light is still the limiting factor throughout','Some other factor (e.g. CO₂ or temperature) has become limiting','Photosynthesis has stopped completely','The plant has started respiring instead'], correct:1, explain:'Once increasing one factor no longer increases the rate, a different factor must now be holding the rate back.'},
+  {q:'KX-19 has no chlorophyll, yet builds its own glucose using energy from hydrogen sulfide. What term best describes this kind of organism?',
+   a:['Heterotroph','Photoautotroph','Chemoautotroph','Saprotroph'], correct:2, explain:'Chemoautotrophs build their own food using energy released by chemical reactions rather than light — exactly like KX-19 at the vent.'},
+  {q:'If the vent stopped releasing hydrogen sulfide, what would you predict for KX-19’s energy production?',
+   a:['No change — it would switch instantly to photosynthesis','It would likely fail, since it depends on chemical energy from hydrogen sulfide, not light','It would increase due to less competition','It would begin respiring anaerobically forever with no ill effect'], correct:1, explain:'A chemoautotroph’s food-building reaction depends on its specific chemical energy source. Remove hydrogen sulfide, and KX-19 has no obvious way to build glucose in permanent darkness.'},
+  {q:'Catalase breaks hydrogen peroxide down into water and oxygen. What type of reaction is this?',
+   a:['Anabolic','Catabolic','Photosynthetic','Neither anabolic nor catabolic'], correct:1, explain:'One molecule is split into two smaller products — that’s catabolic, regardless of whether it ‘feeds’ the cell.'},
+  {q:'Why might doctors deliberately cool a patient’s body during a very high-risk operation?',
+   a:['Cooling speeds up metabolism so surgery finishes faster','Cooling slows the enzyme-controlled reactions of metabolism, reducing the need for oxygen and food','Cooling has no effect on cell chemistry','Cooling permanently stops the heart, which is the goal'], correct:1, explain:'Slower metabolic reactions mean cells can survive longer on the oxygen and glucose already available — buying the surgical team time.'},
+  {q:'A heat-stable enzyme from an extremophile is patented before the discovery is published. What is the central ethical tension in a case like this?',
+   a:['There is no tension — patents and science never interact','Balancing fair reward for research investment against open access to discoveries that may rely on publicly funded science or public land','Whether the enzyme works at all','Whether the organism is truly alive'], correct:1, explain:'This is the real tension behind cases like Taq polymerase — commercial incentive versus open, equitable access to publicly-enabled discoveries.'},
+  {q:'On the EDAT control panel, which pair correctly matches a controller to its role?',
+   a:['Enzyme = distant chemical messenger; Hormone = local reaction site','Thyroxine = fast "fight or flight" spike; Adrenaline = slow daily baseline','Thyroxine = slow, sustained baseline metabolic rate; Adrenaline = fast, short-lived stress response','Temperature has no real effect on reaction rate'], correct:2, explain:'Thyroxine is the "dial" — a slow, steady baseline set by the thyroid gland. Adrenaline is the "accelerator" — a fast, short-lived spike from the adrenal glands during acute stress.'},
+];
+STATION_RENDERERS.boss = function(stage){
+  stage.appendChild(el('p',{style:'color:var(--ink-soft); font-size:14px; margin-bottom:16px; max-width:70ch'},
+    'Thirteen questions, every topic from the Energy Quest, plus KX-19 itself. Finish this and your Field Certificate unlocks.'));
+  const quizWrap = el('div',{});
+  stage.appendChild(quizWrap);
+  renderQuiz(quizWrap, BOSS_QUIZ, {perCorrect:10, onComplete:(score)=>{
+    const total = score+30;
+    addATP(30);
+    markStationDone('boss', total);
+    quizWrap.appendChild(el('p',{style:'font-weight:700; margin-top:16px; font-size:15px'}, 'Boss defeated! +30 ATP completion bonus — '+total+' ATP this run.'));
+    const certWrap = el('div',{style:'margin-top:22px'});
+    stage.appendChild(certWrap);
+    buildCertificate(certWrap);
+  }});
+};
+
+function buildCertificate(container){
+  const atp = Store.get('u2.atp',0);
+  const {cur} = levelInfo(atp);
+  const nameInput = el('input',{type:'text', placeholder:'Type your name…', value:Store.get('u2.certName','')});
+  nameInput.addEventListener('input', ()=>Store.set('u2.certName', nameInput.value));
+  const cert = el('div',{class:'certificate'},
+    el('div',{style:'font-family:'+"'IBM Plex Mono', monospace"+'; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--amber-ink)'}, 'Field Station · Vent Expedition'),
+    el('div',{class:'cert-title'}, 'Certificate of Completion'),
+    el('p',{style:'font-size:13.5px; color:var(--ink-soft)'}, 'This certifies that'),
+    nameInput,
+    el('p',{style:'font-size:13.5px; color:var(--ink-soft); margin-top:6px'}, 'completed the Energy Quest, reaching '+atp+' ATP as a '+cur.name+'.'),
+    el('p',{class:'mono', style:'font-size:11.5px; color:var(--ink-faint)'}, new Date().toLocaleDateString())
+  );
+  container.appendChild(cert);
+  container.appendChild(el('div',{class:'field-row', style:'margin-top:14px'},
+    el('button',{class:'btn btn-teal', onclick:()=>printCertificate(nameInput.value||'—', atp, cur.name)}, '🖨️ Print certificate'),
+    el('button',{class:'btn btn-ghost', onclick:showQuestDashboard}, 'Back to station map')
+  ));
+}
+function printCertificate(name, atp, levelName){
+  const win = window.open('', '_blank');
+  if(!win){ toast('Allow pop-ups to print.'); return; }
+  win.document.write(`<html><head><title>Certificate — ${name}</title></head><body style="font-family:Georgia,serif;text-align:center;padding:60px;color:#111">
+    <p style="letter-spacing:.15em;text-transform:uppercase;font-size:12px;color:#a06a1c">Field Station · Vent Expedition</p>
+    <h1 style="font-size:34px;margin:14px 0">Certificate of Completion</h1>
+    <p style="font-size:15px">This certifies that</p>
+    <p style="font-size:26px;border-bottom:2px solid #111;display:inline-block;padding:4px 30px;margin:14px 0">${name}</p>
+    <p style="font-size:15px">completed the Energy Quest — Unit 2: What chemical processes support life?<br>reaching <b>${atp} ATP</b> as a <b>${levelName}</b>.</p>
+    <p style="font-size:12px;color:#666;margin-top:30px">${new Date().toLocaleDateString()}</p>
+  </body></html>`);
+  win.document.close(); win.focus();
+  setTimeout(()=>win.print(), 250);
+}
+</script>
+
+<script>
+/* ======================================================================
+   FIELD MANUAL — self-study briefing for Unit 2, shown before the stations
+   Source material: hormone/enzyme control of metabolic rate, and the
+   haemorrhage → shock → anaerobic → denaturation cascade.
+   ====================================================================== */
+function renderFieldManual(container){
+  const manual = el('div',{class:'manual'});
+  manual.appendChild(el('div',{class:'manual-head'},
+    el('h3',{}, '📖 Field Manual — read before you play'),
+    el('span',{}, 'Six short briefings on what actually controls the chemistry of life. Open the ones you need.')
+  ));
+  const body = el('div',{class:'manual-body'});
+
+  function card(title, open, bodyBuilder){
+    const d = el('details',{class:'manual-card'});
+    if(open) d.setAttribute('open','');
+    d.appendChild(el('summary',{}, title));
+    const mc = el('div',{class:'mc-body'});
+    bodyBuilder(mc);
+    d.appendChild(mc);
+    return d;
+  }
+
+  body.appendChild(card('1 · Metabolism — a balance of opposing forces', true, mc=>{
+    mc.appendChild(el('p',{}, el('b',{},'Metabolism'), ' is simply the sum of every chemical reaction happening in a cell. Every one of those reactions is either building up or breaking down — never both.'));
+    mc.appendChild(el('p',{}, el('span',{class:'etym'},'ana-'), '= "upward" + ', el('span',{class:'etym'},'ballein'), '= "to throw" (Greek) → ', el('b',{},'anabolic'), ': throwing molecules ', el('i',{},'upward'), ' into bigger ones. Uses energy. Examples: protein synthesis, photosynthesis.'));
+    mc.appendChild(el('p',{}, el('span',{class:'etym'},'kata-'), '= "downward" + ', el('i',{},'ballein'), ' → ', el('b',{},'catabolic'), ': throwing molecules ', el('i',{},'down'), ' into smaller ones. Releases energy. Examples: respiration, digestion.'));
+    mc.appendChild(el('p',{style:'font-size:12.5px;color:var(--ink-faint)'}, 'Bonus root: ', el('b',{},'catalyst'), ' = ', el('i',{},'kata'), ' ("down") + ', el('i',{},'lyein'), ' ("to loosen") — something that "loosens down" a reaction\'s energy barrier without being used up itself.'));
+  }));
+
+  body.appendChild(card('2 · The EDAT control panel — what sets your reaction rate', false, mc=>{
+    mc.appendChild(el('p',{}, 'Four things speed up or slow down the chemistry of a cell. Remember them as a dashboard: '));
+    const grid = el('div',{class:'edat-grid'});
+    [['E','Engine = Enzyme','Does the actual chemical work — catalyses reactions.'],
+     ['D','Dial = Thyroxine','Hormone from the thyroid gland. Sets the steady, long-term baseline metabolic rate.'],
+     ['A','Accelerator = Adrenaline','Fast, short-lived "fight or flight" hormone for acute stress or danger.'],
+     ['T','Tarmac = Temperature','Higher temperature means more molecular collisions and faster activity — up to a strict limit.']]
+    .forEach(([l,t,d])=>{
+      grid.appendChild(el('div',{class:'edat-tile'}, el('b',{},l+' — '+t), el('div',{style:'margin-top:4px'}, d)));
+    });
+    mc.appendChild(grid);
+  }));
+
+  body.appendChild(card('3 · Enzyme vs hormone — the local tool vs the distant manager', false, mc=>{
+    const t = el('table',{class:'diff-table'});
+    t.appendChild(el('tr',{}, el('th',{},''), el('th',{},'Enzyme (the tool)'), el('th',{},'Hormone (the manager)')));
+    [['Identity','A protein (biological catalyst)','A chemical messenger'],
+     ['Site of action','Acts directly at the reaction site, inside or at the cell','Made in a gland, travels via the bloodstream to a distant target cell'],
+     ['Function','Does the chemistry — speeds up a specific reaction','Signals a target cell to change its behaviour'],
+     ['Reusability','Comes out unchanged, reused repeatedly','Not reused — broken down after signalling'],
+     ['Examples','Amylase, catalase, respiratory enzymes','Thyroxine, adrenaline']]
+    .forEach(row=> t.appendChild(el('tr',{}, el('td',{},row[0]), el('td',{},row[1]), el('td',{},row[2]))));
+    mc.appendChild(t);
+  }));
+
+  body.appendChild(card('4 · Thyroxine vs adrenaline — cruising speed vs fight-or-flight', false, mc=>{
+    mc.appendChild(el('p',{}, 'Plotted over a day, thyroxine looks like a gentle, steady wave — always present, rising and falling slowly. Adrenaline is a flat line at almost zero that suddenly spikes hard during a threat, then fades within minutes.'));
+    const t = el('table',{class:'diff-table'});
+    t.appendChild(el('tr',{}, el('th',{},''), el('th',{},'Thyroxine (the dial)'), el('th',{},'Adrenaline (the accelerator)')));
+    [['Source','Thyroid gland','Adrenal glands'],
+     ['Timescale','Slow, sustained','Fast, short-lived — spikes in seconds, fades quickly'],
+     ['Trigger','Ongoing regulation of baseline metabolism','Acute stress / danger'],
+     ['Effect','Steady rise or fall in overall metabolic rate and body temperature','Sharp, temporary rise in heart rate, breathing rate and glucose release']]
+    .forEach(row=> t.appendChild(el('tr',{}, el('td',{},row[0]), el('td',{},row[1]), el('td',{},row[2]))));
+    mc.appendChild(t);
+  }));
+
+  body.appendChild(card('5 · Denaturation — when the engine warps', false, mc=>{
+    mc.appendChild(el('p',{}, el('span',{class:'etym'},'de-'), '= "away / reversal" + ', el('span',{class:'etym'},'natura'), '= "nature" (Latin) → literally, "taken away from its natural form."'));
+    mc.appendChild(el('p',{}, el('b',{},'Optimal state (~37°C):'), ' an enzyme\'s active site keeps its precise shape, so the substrate fits like a puzzle piece and the reaction proceeds.'));
+    mc.appendChild(el('p',{}, el('b',{},'Failure state (>42°C, or extreme pH):'), ' the enzyme denatures — its shape is permanently destroyed, the substrate no longer fits, and the reaction halts for good. Cooling it back down will not undo the damage.'));
+  }));
+
+  body.appendChild(card('6 · The emergency cascade — how blood loss can stop the machine', false, mc=>{
+    mc.appendChild(el('p',{}, 'This is the same "suspended life" idea from the start of the chapter, run in reverse — instead of doctors deliberately slowing metabolism, the body\'s own emergency response spirals out of control.'));
+    const casc = el('div',{class:'cascade-mini'});
+    ['1. Haemorrhage — blood volume drops, so less fluid is available to carry oxygen.',
+     '2. Compensated shock — baroreceptors detect the pressure drop and trigger an adrenaline spike; heart rate rises and vessels constrict to protect the brain and heart. Pressure holds, for now.',
+     '3. Decompensated shock — compensation fails. Blood pressure plummets and tissues become severely starved of oxygen.',
+     '4. Cardiac arrest — the oxygen-starved heart muscle can no longer contract. Circulation stops completely.']
+    .forEach(s=>casc.appendChild(el('div',{},s)));
+    mc.appendChild(casc);
+    mc.appendChild(el('p',{style:'margin-top:4px'}, el('b',{},'The chemistry underneath:'), ' oxygen-starved cells are forced into anaerobic respiration (a catabolic reaction), which produces a build-up of lactic acid. That acid acts like extreme heat — it denatures the cell\'s enzymes. Without working enzymes, metabolism halts entirely, and every one of the MRS GREN life processes stops with it.'));
+  }));
+
+  manual.appendChild(body);
+  container.appendChild(manual);
+}
+</script>
+
+<script>
+/* ======================================================================
+   STATION 5 (was slot 5) · CONTROL ROOM — five question formats:
+   short answer · match the following · fill in the blanks ·
+   drag-and-drop sequencing · digital table of differences
+   ====================================================================== */
+STATION_RENDERERS.control = function(stage){
+  stage.appendChild(el('p',{style:'color:var(--ink-soft); font-size:14px; margin-bottom:6px; max-width:70ch'},
+    'The vent has no hormones, no blood pressure, no shock response — but the humans running this expedition do. Five short exercises on what controls (and can break) a human metabolic system.'));
+
+  buildShortAnswer(stage);
+  buildMatching(stage);
+  buildCloze(stage);
+  buildDragSort(stage);
+  buildDiffTable(stage);
+
+  const finishBtn = el('button',{class:'btn btn-amber', onclick:()=>{
+    markStationDone('control', Store.get('u2._controlScore',0));
+    toast('Control Room complete!');
+    showQuestDashboard();
+  }}, 'Finish station →');
+  stage.appendChild(finishBtn);
+};
+function bumpControlScore(n){
+  addATP(n);
+  Store.set('u2._controlScore', Store.get('u2._controlScore',0)+n);
+}
+
+/* ---- 1. Short answer ---- */
+function buildShortAnswer(stage){
+  const box = el('div',{class:'qblock'});
+  box.appendChild(el('span',{class:'qtype-label'}, 'Short answer'));
+  box.appendChild(el('p',{style:'font-weight:600; font-size:14.5px'},
+    'KX-19’s environment holds a near-constant temperature set by the vent itself. Explain, in your own words, why a human instead needs both a slow “dial” (thyroxine) and a fast “accelerator” (adrenaline) to control metabolic rate, rather than just one.'));
+  const ta = el('textarea',{class:'answer', placeholder:'Write two or three sentences…'});
+  box.appendChild(ta);
+  const reveal = el('div',{class:'quiz-explain', style:'display:none; background:var(--surface-2); padding:12px; border-radius:8px'},
+    'Model answer: a single control can’t do both jobs well. The body needs a steady, always-on baseline rate for everyday life — set slowly by thyroxine — and separately needs the ability to suddenly spike energy release for a rare emergency — triggered fast by adrenaline. A hormone built for slow regulation would react far too slowly to sudden danger; one built for fast spikes would make an exhausting, unstable way to run day-to-day metabolism.');
+  const btn = el('button',{class:'btn btn-ghost', onclick:()=>{
+    if(reveal.style.display==='none'){
+      reveal.style.display='block';
+      if(!box.dataset.awarded && ta.value.trim().length>15){ bumpControlScore(10); box.dataset.awarded='1'; }
+      btn.textContent = 'Hide model answer';
+    } else { reveal.style.display='none'; btn.textContent = 'Show a model answer'; }
+  }}, 'Show a model answer');
+  box.appendChild(btn);
+  box.appendChild(reveal);
+  stage.appendChild(box);
+}
+
+/* ---- 2. Match the following ---- */
+const MATCH_PAIRS = [
+  ['Enzyme','A protein that speeds up a specific reaction without being used up'],
+  ['Hormone','A chemical messenger made in a gland, carried by the blood to a distant target cell'],
+  ['Catalyst','Something that speeds up a reaction by "loosening down" its energy barrier'],
+  ['Denature','A permanent change in shape that destroys an active site, usually from heat or extreme pH'],
+  ['Homeostasis','Keeping the internal conditions of the body steady despite external changes'],
+  ['Haemorrhage','Severe loss of blood that can trigger a cascade toward shock'],
+];
+function buildMatching(stage){
+  const box = el('div',{class:'qblock'});
+  box.appendChild(el('span',{class:'qtype-label'}, 'Match the following'));
+  box.appendChild(el('p',{style:'font-weight:600; font-size:14.5px'}, 'Click a term, then click its matching definition.'));
+  const wrap = el('div',{class:'match-wrap'});
+  const termsCol = el('div',{class:'match-col'});
+  const defsCol = el('div',{class:'match-col'});
+  let selectedTerm = null;
+  let pairsLeft = MATCH_PAIRS.length;
+  const termEls = {}, defEls = {};
+  shuffle(MATCH_PAIRS.map(p=>p[0])).forEach(term=>{
+    const b = el('button',{class:'match-item', type:'button'}, term);
+    b.addEventListener('click', ()=>{
+      if(b.classList.contains('paired')) return;
+      termsCol.querySelectorAll('.match-item').forEach(x=>x.classList.remove('sel'));
+      b.classList.add('sel');
+      selectedTerm = term;
+    });
+    termEls[term]=b;
+    termsCol.appendChild(b);
+  });
+  shuffle(MATCH_PAIRS.map(p=>p[1])).forEach(def=>{
+    const b = el('button',{class:'match-item', type:'button'}, def);
+    b.addEventListener('click', ()=>{
+      if(b.classList.contains('paired') || !selectedTerm) return;
+      const correctDef = MATCH_PAIRS.find(p=>p[0]===selectedTerm)[1];
+      if(def===correctDef){
+        b.classList.add('paired');
+        termEls[selectedTerm].classList.add('paired');
+        termEls[selectedTerm].classList.remove('sel');
+        pairsLeft--; bumpControlScore(5);
+        selectedTerm = null;
+        if(pairsLeft===0) toast('All matched!');
+      } else {
+        b.classList.add('shake');
+        setTimeout(()=>b.classList.remove('shake'),300);
+      }
+    });
+    defEls[def]=b;
+    defsCol.appendChild(b);
+  });
+  wrap.appendChild(termsCol); wrap.appendChild(defsCol);
+  box.appendChild(wrap);
+  stage.appendChild(box);
+}
+
+/* ---- 3. Fill in the blanks ---- */
+const CLOZE_ANSWERS = ['compensated','adrenaline','decompensated','plummets','oxygen','anaerobic','lactic'];
+function buildCloze(stage){
+  const box = el('div',{class:'qblock'});
+  box.appendChild(el('span',{class:'qtype-label'}, 'Fill in the blanks'));
+  const p = el('p',{class:'cloze-para'});
+  const parts = [
+    'When severe blood loss occurs, the body enters ', 0, ' shock: baroreceptors detect the pressure drop and trigger a spike of ', 1,
+    ', which increases heart rate and redirects blood to the brain and heart. If blood loss continues, this compensation fails and the body enters ', 2,
+    ' shock, in which blood pressure ', 3, ' and tissues become severely short of ', 4,
+    '. Starved cells are forced into ', 5, ' respiration, which produces a build-up of ', 6,
+    ' acid — and because this acid can denature enzymes just like extreme heat, the cell’s whole metabolism can grind to a halt.'
+  ];
+  const inputs = [];
+  parts.forEach(part=>{
+    if(typeof part==='number'){
+      const inp = el('input',{class:'cloze-in', type:'text', size:'10', 'aria-label':'blank '+(part+1)});
+      inputs[part]=inp;
+      p.appendChild(inp);
+    } else {
+      p.appendChild(document.createTextNode(part));
+    }
+  });
+  box.appendChild(p);
+  const feedback = el('div',{style:'font-size:13px'});
+  box.appendChild(el('div',{class:'field-row'},
+    el('button',{class:'btn btn-teal', onclick:()=>{
+      let correct=0;
+      inputs.forEach((inp,i)=>{
+        const ok = inp.value.trim().toLowerCase() === CLOZE_ANSWERS[i];
+        inp.classList.toggle('ok', ok);
+        inp.classList.toggle('bad', !ok);
+        if(ok) correct++;
+      });
+      feedback.textContent = correct+' / '+CLOZE_ANSWERS.length+' correct';
+      if(!box.dataset.awarded){ bumpControlScore(correct*5); box.dataset.awarded='1'; }
+      else feedback.textContent += ' (ATP already awarded for this station on first check)';
+    }}, 'Check answers')
+  ));
+  box.appendChild(feedback);
+  stage.appendChild(box);
+}
+
+/* ---- 4. Drag-and-drop sequencing ---- */
+const CASCADE_STEPS = ['Haemorrhage','Compensated shock','Decompensated shock','Cardiac arrest'];
+function buildDragSort(stage){
+  const box = el('div',{class:'qblock'});
+  box.appendChild(el('span',{class:'qtype-label'}, 'Drag and drop sorting'));
+  box.appendChild(el('p',{style:'font-weight:600; font-size:14.5px'}, 'Drag these into the correct order — from first to last in the emergency cascade.'));
+  const list = el('div',{class:'drag-list'});
+  let order = shuffle(CASCADE_STEPS.slice());
+  let dragEl = null;
+
+  // drag/drop uses dataset.step for reliable identification, plus ↑↓ buttons as a touch/accessibility fallback
+  function render2(){
+    list.innerHTML = '';
+    order.forEach((step)=>{
+      const card = el('div',{class:'drag-card', draggable:'true'}, el('span',{class:'gh'},'⠿'), step);
+      card.dataset.step = step;
+      card.addEventListener('dragstart', e=>{ dragEl = card; card.classList.add('dragging'); e.dataTransfer.effectAllowed='move'; try{e.dataTransfer.setData('text/plain', step);}catch(err){} });
+      card.addEventListener('dragend', ()=>{ card.classList.remove('dragging'); [...list.children].forEach(c=>c.classList.remove('over')); });
+      card.addEventListener('dragover', e=>{ e.preventDefault(); if(card!==dragEl) card.classList.add('over'); });
+      card.addEventListener('dragleave', ()=> card.classList.remove('over'));
+      card.addEventListener('drop', e=>{
+        e.preventDefault(); card.classList.remove('over');
+        if(!dragEl || dragEl===card) return;
+        const fromIdx = order.indexOf(dragEl.dataset.step);
+        const toIdx = order.indexOf(card.dataset.step);
+        order.splice(fromIdx,1);
+        order.splice(toIdx,0,dragEl.dataset.step);
+        render2();
+      });
+      // touch/pointer fallback: simple up/down buttons for accessibility & touch devices
+      const moveWrap = el('span',{style:'margin-left:auto; display:flex; gap:4px;'});
+      const up = el('button',{class:'btn-ghost btn', style:'padding:2px 8px; font-size:11px;', type:'button', onclick:(e)=>{ e.stopPropagation(); const i=order.indexOf(step); if(i>0){ [order[i-1],order[i]]=[order[i],order[i-1]]; render2(); } }}, '↑');
+      const down = el('button',{class:'btn-ghost btn', style:'padding:2px 8px; font-size:11px;', type:'button', onclick:(e)=>{ e.stopPropagation(); const i=order.indexOf(step); if(i<order.length-1){ [order[i+1],order[i]]=[order[i],order[i+1]]; render2(); } }}, '↓');
+      moveWrap.appendChild(up); moveWrap.appendChild(down);
+      card.appendChild(moveWrap);
+      list.appendChild(card);
+    });
+  }
+  render2();
+  box.appendChild(list);
+  const feedback = el('div',{style:'font-size:13px; margin-top:4px'});
+  box.appendChild(el('button',{class:'btn btn-teal', style:'margin-top:10px', onclick:()=>{
+    const correct = order.every((s,i)=>s===CASCADE_STEPS[i]);
+    [...list.children].forEach((card,i)=>{
+      card.classList.remove('correct-pos','wrong-pos');
+      card.classList.add(order[i]===CASCADE_STEPS[i] ? 'correct-pos' : 'wrong-pos');
+    });
+    if(correct){
+      feedback.textContent = '✅ Correct order!';
+      if(!box.dataset.awarded){ bumpControlScore(20); box.dataset.awarded='1'; }
+    } else {
+      feedback.textContent = 'Not yet — use the ↑↓ buttons (or drag) and try again.';
+    }
+  }}, 'Check order'));
+  box.appendChild(feedback);
+  stage.appendChild(box);
+}
+
+/* ---- 5. Digital table of differences (fill in the cells) ---- */
+const DIFF_TABLE_DATA = [
+  {row:'Identity', enzyme:'A protein (biological catalyst)', hormone:'A chemical messenger', blankEnzyme:false, blankHormone:true},
+  {row:'Site of action', enzyme:'Acts directly at the reaction site', hormone:'Travels via the bloodstream to a distant target cell', blankEnzyme:true, blankHormone:false},
+  {row:'Reusability', enzyme:'Comes out unchanged, reused repeatedly', hormone:'Not reused — broken down after signalling', blankEnzyme:false, blankHormone:true},
+  {row:'Example', enzyme:'Catalase', hormone:'Adrenaline', blankEnzyme:true, blankHormone:true},
+];
+function looseMatch(input, target){
+  const clean = s=>s.toLowerCase().replace(/[^a-z]/g,'');
+  const i = clean(input), t = clean(target);
+  if(!i) return false;
+  return t.includes(i.slice(0,Math.min(6,i.length))) || i.includes(t.slice(0,Math.min(6,t.length)));
+}
+function buildDiffTable(stage){
+  const box = el('div',{class:'qblock'});
+  box.appendChild(el('span',{class:'qtype-label'}, 'Table of differences'));
+  box.appendChild(el('p',{style:'font-weight:600; font-size:14.5px'}, 'Fill in the missing cells of the comparison table (a few keywords is enough).'));
+  const table = el('table',{class:'diff-table'});
+  table.appendChild(el('tr',{}, el('th',{},''), el('th',{},'Enzyme'), el('th',{},'Hormone')));
+  const cells = [];
+  DIFF_TABLE_DATA.forEach(r=>{
+    const tr = el('tr',{});
+    tr.appendChild(el('td',{}, r.row));
+    ['enzyme','hormone'].forEach(col=>{
+      const blank = col==='enzyme' ? r.blankEnzyme : r.blankHormone;
+      const td = el('td',{});
+      if(blank){
+        const inp = el('input',{class:'fillcell', type:'text', placeholder:'type an answer…'});
+        cells.push({inp, correct:r[col], td});
+        td.appendChild(inp);
+      } else {
+        td.textContent = r[col];
+      }
+      tr.appendChild(td);
+    });
+    table.appendChild(tr);
+  });
+  box.appendChild(table);
+  const feedback = el('div',{style:'font-size:13px; margin-top:6px'});
+  box.appendChild(el('button',{class:'btn btn-teal', style:'margin-top:10px', onclick:()=>{
+    let correct=0;
+    cells.forEach(c=>{
+      const ok = looseMatch(c.inp.value, c.correct);
+      c.inp.classList.toggle('ok', ok);
+      c.inp.classList.toggle('bad', !ok);
+      let note = c.td.querySelector('.cell-correction');
+      if(!ok){
+        if(!note){ note = el('div',{class:'cell-correction'}); c.td.appendChild(note); }
+        note.textContent = 'Expected: '+c.correct;
+      } else if(note){ note.remove(); }
+      if(ok) correct++;
+    });
+    feedback.textContent = correct+' / '+cells.length+' cells correct';
+    if(!box.dataset.awarded){ bumpControlScore(correct*5); box.dataset.awarded='1'; }
+  }}, 'Check table'));
+  box.appendChild(feedback);
+  stage.appendChild(box);
+}
+</script>
+
+<script>
+/* ======================================================================
+   BOOT
+   ====================================================================== */
+(function boot(){
+  function start(){
+    const last = Store.get('lastRoute','home');
+    route(['home','unit1','unit2'].includes(last) ? last : 'home');
+  }
+  try{
+    if(window.claude && window.claude.hot && typeof window.claude.hot.ready === 'function'){
+      window.claude.hot.ready(start);
+    } else {
+      start();
+    }
+  }catch(e){ start(); }
+})();
+</script>
+
+</body>
+</html>

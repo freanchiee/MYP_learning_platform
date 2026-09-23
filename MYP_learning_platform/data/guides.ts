@@ -23,6 +23,10 @@ export interface SubjectGuide {
   relatedConcepts: string[]
   officialUrl: string
   faq: { q: string; a: string }[]
+  /** Optional links to /blog posts that dig into a specific topic from this
+   *  subject in more depth — the internal-linking half of the blog↔guide
+   *  pair (a post's own `related` links back here). */
+  relatedPosts?: { label: string; href: string }[]
 }
 
 // Shared across all MYP subjects.
@@ -159,6 +163,7 @@ export const GUIDES: SubjectGuide[] = [
     relatedConcepts: ['Balance', 'Consequences', 'Environment', 'Form', 'Function', 'Interaction', 'Models', 'Patterns'],
     officialUrl: SCIENCES_URL,
     faq: sciencesFaq('Biology'),
+    relatedPosts: [{ label: 'Hydrothermal vents & chemosynthesis, with a live classification lab', href: '/blog/hydrothermal-vents-chemosynthesis-myp-biology' }],
   },
   {
     slug: 'humanities',

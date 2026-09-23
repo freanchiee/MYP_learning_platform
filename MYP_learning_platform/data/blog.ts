@@ -8,6 +8,18 @@ export interface BlogSection {
   bullets?: string[]
 }
 
+/** An interactive tool embedded inline in a post via <iframe> — the static
+ *  file lives under public/ (e.g. public/artifacts/vent-expedition.html)
+ *  and is served same-origin, so it needs no CORS/sandbox allowances. The
+ *  surrounding article text (intro, sections, faq) is what actually gets
+ *  indexed and ranks — the embed is the payoff for a reader who's already
+ *  landed on the page, not a substitute for real written content. */
+export interface BlogEmbed {
+  src: string
+  title: string
+  height?: number // px, default 760
+}
+
 export interface BlogPost {
   slug: string
   title: string
@@ -16,6 +28,8 @@ export interface BlogPost {
   readMinutes: number
   tags: string[]
   intro: string
+  embed?: BlogEmbed
+  embedIntro?: string // one-line caption shown directly above the embed
   sections: BlogSection[]
   faq?: { q: string; a: string }[]
   related?: { label: string; href: string }[]
@@ -315,6 +329,66 @@ export const POSTS: BlogPost[] = [
     related: [
       { label: 'MYP Design subject guide', href: '/guides/design' },
       { label: 'Open the Design module', href: '/design' },
+    ],
+  },
+  {
+    slug: 'hydrothermal-vents-chemosynthesis-myp-biology',
+    title: 'Hydrothermal Vents & Chemosynthesis: MYP Biology Explained (with a Live Classification Lab)',
+    description:
+      'How life survives at hydrothermal vents without sunlight — chemosynthesis vs photosynthesis, cell theory and classification, explained for MYP Biology with a free interactive lab.',
+    datePublished: '2026-09-24',
+    readMinutes: 7,
+    tags: ['Biology', 'Sciences'],
+    intro:
+      'In 1977, researchers exploring the Galápagos Rift in a submersible found something that shouldn\'t have been possible: dense communities of life clustered around hydrothermal vents nearly 2,500 metres down, in total darkness, bathed in water hot enough to melt lead a few centimetres away. No sunlight reaches that deep — so where was the energy for life coming from? The answer, chemosynthesis, is one of the clearest real-world tests of what a "producer" actually is, which is exactly why it shows up so often in MYP Biology.',
+    embed: { src: '/artifacts/vent-expedition.html', title: 'The Vent Expedition — an interactive MYP Biology classification & chemosynthesis lab', height: 780 },
+    embedIntro:
+      'Try it yourself: a submersible has just pulled an unclassified organism from a vent 2,400 m down. Classify it using cell theory, then work through the chemistry that keeps it alive — a free, self-contained lab built around the ideas below. Your progress saves on this device.',
+    sections: [
+      {
+        heading: 'Photosynthesis needs light. Chemosynthesis doesn\'t.',
+        body: [
+          'Every living thing needs a source of energy to build the organic molecules (like glucose) that power its cells. Producers get that energy from their environment rather than by eating something else — but "producer" does not mean "plant", and it does not require sunlight.',
+          'Photoautotrophs (most plants, algae, some bacteria) capture light energy and use it to combine carbon dioxide and water into glucose — photosynthesis. Chemoautotrophs instead capture energy released by chemical reactions between inorganic compounds — at a hydrothermal vent, typically hydrogen sulfide reacting with oxygen dissolved in seawater — and use that energy to build glucose from carbon dioxide, the same way a plant would, just without the light step. The product is the same; the energy source is completely different.',
+        ],
+      },
+      {
+        heading: 'Why this matters for Criterion A (Knowing and understanding)',
+        body: [
+          'A common exam trap is defining a producer as "an organism that photosynthesises". That definition breaks the moment you meet a vent ecosystem. The MYP-safe definition is broader and more accurate: a producer is an organism that makes its own organic molecules from inorganic starting materials, using an external energy source — light for photoautotrophs, chemical reactions for chemoautotrophs. Being able to apply a concept to an unfamiliar situation, not just recite the plant example, is precisely what Criterion A rewards at the higher bands.',
+        ],
+      },
+      {
+        heading: 'Classifying an unfamiliar organism with cell theory',
+        body: [
+          'Cell theory gives you a small, reusable toolkit for classifying anything you\'ve never seen before: is it made of one cell or many? Does it have a nucleus (eukaryotic) or not (prokaryotic)? What structures does it contain, and what does each one most likely do? A membrane-bound nucleus suggests a eukaryote; the presence of something mitochondria-like suggests aerobic respiration is happening inside it. You don\'t need to already know the species to reason about what it is and how it probably lives — that\'s the whole point of applying a framework instead of memorising a list of organisms.',
+        ],
+      },
+      {
+        heading: 'A quick sanity check: energy still has to balance',
+        body: [
+          'Whichever energy source an organism uses, the biology underneath is still governed by the same rules: anabolic reactions build larger molecules and require energy input; catabolic reactions break larger molecules down and release energy. Chemosynthesis is anabolic (building glucose); respiration, which every living cell does afterwards to release that stored energy, is catabolic. Sorting real reactions into these two categories is a fast way to check you actually understand what "metabolism" means, rather than just being able to say the word.',
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: 'Is chemosynthesis the same as photosynthesis?',
+        a: 'No. Both build glucose from carbon dioxide, but photosynthesis is powered by light energy while chemosynthesis is powered by energy released from chemical reactions (e.g. hydrogen sulfide reacting with oxygen). The energy source is different; the basic idea — an organism making its own food — is the same.',
+      },
+      {
+        q: 'Can an organism be a producer without doing photosynthesis?',
+        a: 'Yes. Chemoautotrophs (e.g. many bacteria and archaea at hydrothermal vents) are producers that never use light at all. "Producer" describes how an organism gets its organic molecules, not whether it uses sunlight specifically.',
+      },
+      {
+        q: 'How deep are hydrothermal vents, and why is there no light there?',
+        a: 'Many hydrothermal vents sit at depths of 2,000–2,500 metres or more. Sunlight is absorbed by seawater and effectively disappears within the top ~200 metres (the photic zone), so vent ecosystems exist in permanent darkness and cannot rely on photosynthesis.',
+      },
+    ],
+    related: [
+      { label: 'MYP assessment criteria explained', href: '/blog/myp-assessment-criteria-explained' },
+      { label: 'MYP Biology subject guide', href: '/guides/biology' },
+      { label: 'Practise MYP Biology past papers', href: '/bio-papers' },
     ],
   },
 ]

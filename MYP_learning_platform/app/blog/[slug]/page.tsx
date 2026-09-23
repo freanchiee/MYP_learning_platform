@@ -90,6 +90,22 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
 
         <p className="mt-6 text-xl leading-relaxed" style={{ color: 'var(--text-muted)' }}>{p.intro}</p>
 
+        {p.embed && (
+          <div className="mt-8">
+            {p.embedIntro && (
+              <p className="text-base leading-relaxed" style={{ color: 'var(--text-muted)' }}>{p.embedIntro}</p>
+            )}
+            <div className="mt-4 overflow-hidden rounded-2xl" style={{ border: '1px solid var(--border)', boxShadow: 'var(--shadow-card)' }}>
+              <iframe
+                src={p.embed.src}
+                title={p.embed.title}
+                loading="lazy"
+                style={{ width: '100%', height: p.embed.height ?? 760, border: 'none', display: 'block' }}
+              />
+            </div>
+          </div>
+        )}
+
         {p.sections.map((s, i) => (
           <section key={i} className="mt-8">
             {s.heading && (

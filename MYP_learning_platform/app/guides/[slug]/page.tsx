@@ -196,6 +196,25 @@ export default function GuidePage({ params }: { params: { slug: string } }) {
           </div>
         </div>
 
+        {/* Related blog posts */}
+        {g.relatedPosts && g.relatedPosts.length > 0 && (
+          <div className="mt-6">
+            <h2 className="text-xs font-black tracking-widest" style={{ color: 'var(--text-subtle)' }}>KEEP READING</h2>
+            <div className="mt-3 flex flex-wrap gap-3">
+              {g.relatedPosts.map((r) => (
+                <Link
+                  key={r.href}
+                  href={r.href}
+                  className="rounded-xl px-4 py-2.5 text-sm font-bold"
+                  style={{ border: '1px solid var(--border)', color: 'var(--text)' }}
+                >
+                  {r.label} →
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
+
         {/* CTA band */}
         <div className="mt-8 flex flex-wrap items-center gap-3 rounded-3xl p-6 md:p-7" style={{ background: 'var(--accent)', color: 'var(--text-on-accent)' }}>
           <div className="mr-auto">
