@@ -162,9 +162,24 @@ export default function LiveJoin({ activity, initialCode }: { activity: LiveActi
   }
 
   if (userId === null) {
+    // Send them to sign in (or create an account — the login page's OTP
+    // flow does both, there's no separate signup) with `next` pointing
+    // right back at THIS join link, so accepting a shared code doesn't
+    // require the student to already have an account or re-find the link
+    // afterwards.
+    const next = typeof window !== 'undefined' ? window.location.pathname + window.location.search : `/design/live/${activity.id}${code ? `?s=${code}` : ''}`
     return (
       <div style={pageBg(activity.theme)}>
-        <div style={{ ...cardStyle(), maxWidth: 420, margin: '80px auto', textAlign: 'center' }}>Sign in to join this live class.</div>
+        <div style={{ ...cardStyle(activity.theme.accent), maxWidth: 400, margin: '80px auto', textAlign: 'center' }}>
+          <div style={{ fontSize: 32 }}>{activity.icon}</div>
+          <h2 style={{ margin: '6px 0 4px' }}>{activity.title}</h2>
+          <p style={{ color: 'var(--text-muted)', fontSize: 13.5, marginBottom: 14 }}>
+            Sign in — or create a free account, it&apos;s the same step — to join this live class. You&apos;ll land right back on this join link afterwards.
+          </p>
+          <Link href={`/login?next=${encodeURIComponent(next)}`} style={{ ...btnStyle(activity.theme.accent, true, true), width: '100%', boxSizing: 'border-box', display: 'block', textDecoration: 'none' }}>
+            Sign in to join →
+          </Link>
+        </div>
       </div>
     )
   }

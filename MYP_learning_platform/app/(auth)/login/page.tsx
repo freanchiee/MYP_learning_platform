@@ -1,13 +1,31 @@
 'use client'
 
-import { useState, type FormEvent } from 'react'
-import { useRouter } from 'next/navigation'
+import { Suspense, useState, type FormEvent } from 'react'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 import { Loader2, Mail, KeyRound, AlertCircle, ArrowLeft } from 'lucide-react'
 
 export default function LoginPage() {
+  // useSearchParams needs a Suspense boundary to be statically safe — see
+  // https://nextjs.org/docs/messages/missing-suspense-with-csr-bailout
+  return (
+    <Suspense fallback={null}>
+      <LoginForm />
+    </Suspense>
+  )
+}
+
+function LoginForm() {
   const router = useRouter()
+  const searchParams = useSearchParams()
   const supabase = createClient()
+
+  // Where to send the user after they sign in — e.g. back to a live-class
+  // join link they weren't signed in for yet (see LiveJoin.tsx). Only ever
+  // a same-site path: never follow a `next` value that isn't relative, so
+  // this can't be turned into an open redirect via a crafted login link.
+  const rawNext = searchParams.get('next')
+  const next = rawNext && rawNext.startsWith('/') && !rawNext.startsWith('//') ? rawNext : '/dashboard'
 
   const [step, setStep] = useState<'email' | 'code'>('email')
   const [email, setEmail] = useState('')
@@ -55,7 +73,7 @@ export default function LoginPage() {
       return
     }
 
-    router.push('/dashboard')
+    router.push(next)
     router.refresh()
   }
 
@@ -68,7 +86,7 @@ export default function LoginPage() {
     const { error: oauthError } = await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        redirectTo: `${origin}/api/auth/callback`,
+        redirectTo: `${origin}/api/auth/callback?next=${encodeURIComponent(next)}`,
       },
     })
 
