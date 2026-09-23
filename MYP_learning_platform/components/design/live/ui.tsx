@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, type CSSProperties, type ReactNode } from 'react'
+import { createContext, useContext, useState, type CSSProperties, type ReactNode } from 'react'
 import type { LiveTheme } from '@/data/design/live/types'
 import { avatarSvg } from '@/lib/design-live/avatar'
 import { isDraftFresh, type LiveDraft } from '@/lib/design-live/hooks'
@@ -114,43 +114,73 @@ export function ProgressCell({ pct, label }: { pct: number; label?: string }) {
   )
 }
 
+/** Channel for the "peek at a student's live draft" hover preview. A nested
+ *  position:absolute popup doesn't work here — every usage site
+ *  (McqDashboard, WorksheetHost, the submissions list) sits inside a
+ *  container with `overflow-x: auto`, and CSS forces `overflow-y` to clip
+ *  too in that case, silently cutting the popup off. Instead every
+ *  `<PlayerPreview>` reports into this context, and ONE floating panel
+ *  (`<PlayerPreviewPanel>`) renders at the top level of the host screen,
+ *  outside any scroll container, guaranteed unclipped. */
+type PreviewEntry = { name: string; draft: LiveDraft; fresh: boolean } | null
+const PlayerPreviewContext = createContext<((entry: PreviewEntry) => void) | null>(null)
+
+export function PlayerPreviewProvider({ children }: { children: ReactNode }) {
+  const [preview, setPreview] = useState<PreviewEntry>(null)
+  return (
+    <PlayerPreviewContext.Provider value={setPreview}>
+      {children}
+      <PlayerPreviewPanel entry={preview} />
+    </PlayerPreviewContext.Provider>
+  )
+}
+
+function PlayerPreviewPanel({ entry }: { entry: PreviewEntry }) {
+  if (!entry) return null
+  return (
+    <div
+      style={{
+        position: 'fixed',
+        right: 16,
+        bottom: 16,
+        zIndex: 50,
+        minWidth: 220,
+        maxWidth: 320,
+        background: 'var(--surface)',
+        color: 'var(--text)',
+        border: '2.5px solid var(--text)',
+        borderRadius: 12,
+        boxShadow: '4px 4px 0 var(--text)',
+        padding: '10px 14px',
+        fontSize: 12,
+      }}
+    >
+      <div style={{ fontWeight: 800, marginBottom: 4, color: entry.fresh ? '#1FA98A' : 'var(--text-muted)' }}>
+        {entry.fresh ? `✍️ ${entry.name} is typing…` : `Last seen typing — ${entry.name}`}
+      </div>
+      <div style={{ whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>{entry.draft.text}</div>
+    </div>
+  )
+}
+
 /** Wraps a player's name/avatar with a hover preview of what they're
  *  currently typing (see lib/design-live/hooks.ts useLiveDraftReporter) — a
  *  minified window onto their in-progress answer, for the host dashboard.
  *  `now` should come from useNowTick so the "typing…" cue expires on its
- *  own. Renders `children` unchanged if there's no live draft to show. */
+ *  own. Must be rendered under a <PlayerPreviewProvider>. Renders
+ *  `children` unchanged if there's no live draft to show. */
 export function PlayerPreview({ name, draft, now, children }: { name: string; draft?: LiveDraft | null; now: number; children: ReactNode }) {
-  const [hovered, setHovered] = useState(false)
+  const setPreview = useContext(PlayerPreviewContext)
   const fresh = isDraftFresh(draft, now)
+  const canPreview = !!draft?.text
   return (
-    <span style={{ position: 'relative', display: 'inline-flex' }} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
-      <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
-        {children}
-        {fresh && <span style={{ color: '#1FA98A', fontSize: 10, fontWeight: 800, animation: 'live-pulse 1.2s ease-in-out infinite' }}>✍️</span>}
-      </span>
-      {hovered && draft?.text && (
-        <div
-          style={{
-            position: 'absolute',
-            top: '100%',
-            left: 0,
-            zIndex: 20,
-            marginTop: 6,
-            minWidth: 180,
-            maxWidth: 260,
-            background: 'var(--surface)',
-            color: 'var(--text)',
-            border: '2px solid var(--text)',
-            borderRadius: 10,
-            boxShadow: '3px 3px 0 var(--text)',
-            padding: '8px 10px',
-            fontSize: 11.5,
-          }}
-        >
-          <div style={{ fontWeight: 800, marginBottom: 3, color: fresh ? '#1FA98A' : 'var(--text-muted)' }}>{fresh ? `✍️ ${name} is typing…` : `Last seen typing`}</div>
-          <div style={{ whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>{draft.text}</div>
-        </div>
-      )}
+    <span
+      style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}
+      onMouseEnter={() => canPreview && setPreview?.({ name, draft: draft!, fresh })}
+      onMouseLeave={() => canPreview && setPreview?.(null)}
+    >
+      {children}
+      {fresh && <span style={{ color: '#1FA98A', fontSize: 10, fontWeight: 800, animation: 'live-pulse 1.2s ease-in-out infinite' }}>✍️</span>}
     </span>
   )
 }

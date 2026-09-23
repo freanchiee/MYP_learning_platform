@@ -8,7 +8,7 @@ import { useLiveRow, useLiveTable, generateJoinCode, hostStorageKey, useNowTick,
 import { worksheetSectionPct } from '@/lib/design-live/scoring'
 import type { LiveActivityDefinition, McqStage, WorksheetStage, OpenIdeasStage, GradingStage } from '@/data/design/live/types'
 import type { LiveSessionRow, LivePlayerRow, LiveGradeRow } from '@/lib/design-live/types'
-import { cardStyle, btnStyle, inputStyle, pageBg, ErrorBanner, QRCode, Avatar, ProgressCell, PlayerPreview } from './ui'
+import { cardStyle, btnStyle, inputStyle, pageBg, ErrorBanner, QRCode, Avatar, ProgressCell, PlayerPreview, PlayerPreviewProvider } from './ui'
 import ChatPanel from './ChatPanel'
 import { Podium } from './Podium'
 
@@ -135,6 +135,7 @@ export default function LiveHost({ activity }: { activity: LiveActivityDefinitio
   const teamCounts = activity.teams?.map((_, t) => players.filter((p) => p.team === t).length)
 
   return (
+    <PlayerPreviewProvider>
     <div style={pageBg(activity.theme)}>
       <div style={{ maxWidth: 900, margin: '0 auto', display: 'grid', gap: 16 }}>
         <header style={{ textAlign: 'center', color: '#fff' }}>
@@ -232,6 +233,7 @@ export default function LiveHost({ activity }: { activity: LiveActivityDefinitio
         </div>
       )}
     </div>
+    </PlayerPreviewProvider>
   )
 }
 
