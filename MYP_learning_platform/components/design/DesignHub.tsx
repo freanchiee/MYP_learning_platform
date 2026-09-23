@@ -225,6 +225,13 @@ function CycleGate({ onBrowse }: { onBrowse: () => void }) {
         >
           BROWSE PROJECTS
         </button>
+        <Link
+          href="/design/live"
+          className="inline-block font-black text-sm tracking-[0.2em] text-white transition-all hover:scale-105"
+          style={{ border: '1px solid rgba(255,255,255,0.5)', padding: '15px 44px' }}
+        >
+          🎮 LIVE CLASSES
+        </Link>
       </div>
     </>
   )
