@@ -88,6 +88,14 @@ export function useLiveTable<T>(
   }, [table, filterCol, filterVal, enabled, orderCol])
 }
 
+/** The localStorage key a teacher's device uses to remember which session code it's
+ *  currently hosting for a given activity. Shared between LiveHost (writes/reads it to
+ *  resume the active session across reloads) and the "My hosted games" history page
+ *  (writes it when a teacher chooses to reopen a past session as host). */
+export function hostStorageKey(activityId: string): string {
+  return `liveHost_${activityId}`
+}
+
 export function generateJoinCode(): string {
   const A = 'ABCDEFGHJKMNPQRSTUVWXYZ23456789'
   let c = ''

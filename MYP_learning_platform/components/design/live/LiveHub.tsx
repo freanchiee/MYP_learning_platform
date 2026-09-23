@@ -7,9 +7,18 @@ export default function LiveHub() {
   return (
     <div style={{ background: 'var(--bg)', backgroundImage: 'var(--bg-image)', minHeight: 'calc(100vh - 56px)' }}>
       <div className="mx-auto max-w-[1100px] px-5 py-10 md:px-10">
-        <Link href="/design" className="text-sm font-bold tracking-widest" style={{ color: 'var(--text-subtle)' }}>
-          ← BACK TO DESIGN
-        </Link>
+        <div className="flex items-center justify-between flex-wrap gap-3">
+          <Link href="/design" className="text-sm font-bold tracking-widest" style={{ color: 'var(--text-subtle)' }}>
+            ← BACK TO DESIGN
+          </Link>
+          <Link
+            href="/design/live/history"
+            className="rounded-full px-4 py-2 text-sm font-black"
+            style={{ background: 'var(--surface-2)', color: 'var(--text)', border: '1px solid var(--border)' }}
+          >
+            📜 My hosted games
+          </Link>
+        </div>
 
         <div className="mt-4 text-xs font-black tracking-[0.35em]" style={{ color: 'var(--accent)' }}>
           LIVE CLASS · HOST FROM ANY DEVICE · STUDENTS JOIN WITH A CODE

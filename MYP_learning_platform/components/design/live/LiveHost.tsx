@@ -1,14 +1,13 @@
 'use client'
 
 import { useEffect, useMemo, useState } from 'react'
+import Link from 'next/link'
 import { createClient } from '@/lib/supabase/client'
-import { useLiveRow, useLiveTable, generateJoinCode } from '@/lib/design-live/hooks'
+import { useLiveRow, useLiveTable, generateJoinCode, hostStorageKey } from '@/lib/design-live/hooks'
 import { worksheetSectionPct } from '@/lib/design-live/scoring'
 import type { LiveActivityDefinition, McqStage, WorksheetStage, OpenIdeasStage, GradingStage } from '@/data/design/live/types'
 import type { LiveSessionRow, LivePlayerRow, LiveGradeRow } from '@/lib/design-live/types'
 import { cardStyle, btnStyle, inputStyle, pageBg, ErrorBanner, QRCode } from './ui'
-
-const HOST_STORAGE_KEY = (activityId: string) => `liveHost_${activityId}`
 
 export default function LiveHost({ activity }: { activity: LiveActivityDefinition }) {
   const [hostId, setHostId] = useState<string | null | undefined>(undefined) // undefined = loading, null = not signed in
@@ -38,13 +37,13 @@ export default function LiveHost({ activity }: { activity: LiveActivityDefinitio
       setApiError(error.message)
       return
     }
-    localStorage.setItem(HOST_STORAGE_KEY(activity.id), newCode)
+    localStorage.setItem(hostStorageKey(activity.id), newCode)
     setCode(newCode)
   }
 
   useEffect(() => {
     if (hostId === undefined || hostId === null) return
-    const stored = localStorage.getItem(HOST_STORAGE_KEY(activity.id))
+    const stored = localStorage.getItem(hostStorageKey(activity.id))
     if (stored) setCode(stored)
     else createSession(hostId)
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -60,7 +59,7 @@ export default function LiveHost({ activity }: { activity: LiveActivityDefinitio
 
   const newSession = () => {
     if (!hostId) return
-    localStorage.removeItem(HOST_STORAGE_KEY(activity.id))
+    localStorage.removeItem(hostStorageKey(activity.id))
     setSession(null)
     setPlayers([])
     createSession(hostId)
@@ -117,9 +116,14 @@ export default function LiveHost({ activity }: { activity: LiveActivityDefinitio
             <div style={{ fontSize: 12, color: 'var(--text-muted)', wordBreak: 'break-all', marginTop: 4 }}>{joinUrl}</div>
           </div>
           {joinUrl && <QRCode url={joinUrl} />}
-          <button onClick={newSession} style={{ ...btnStyle('var(--text-muted)'), fontSize: 12 }}>
-            ↻ New session
-          </button>
+          <div style={{ display: 'grid', gap: 6 }}>
+            <button onClick={newSession} style={{ ...btnStyle('var(--text-muted)'), fontSize: 12 }}>
+              ↻ New session
+            </button>
+            <Link href="/design/live/history" style={{ ...btnStyle('var(--text-muted)'), fontSize: 12, textAlign: 'center', textDecoration: 'none' }}>
+              📜 History
+            </Link>
+          </div>
         </div>
 
         {session.status === 'lobby' && (

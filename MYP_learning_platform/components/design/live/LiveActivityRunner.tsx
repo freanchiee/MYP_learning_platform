@@ -11,7 +11,8 @@ import { btnStyle, pageBg } from './ui'
 export default function LiveActivityRunner({ activity }: { activity: LiveActivityDefinition }) {
   const params = useSearchParams()
   const urlCode = params.get('s')
-  const [role, setRole] = useState<'host' | 'join' | null>(urlCode ? 'join' : null)
+  const wantsHost = params.get('host') === '1'
+  const [role, setRole] = useState<'host' | 'join' | null>(wantsHost ? 'host' : urlCode ? 'join' : null)
 
   if (role === 'join') return <LiveJoin activity={activity} initialCode={urlCode || ''} />
   if (role === 'host') return <LiveHost activity={activity} />

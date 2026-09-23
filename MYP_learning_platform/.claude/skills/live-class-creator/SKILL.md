@@ -29,8 +29,10 @@ components/design/live/          — the ENGINE (do not fork; extend it)
   ui.tsx                         — shared visual primitives
   LiveHost.tsx                   — host/projector screen, all stage types
   LiveJoin.tsx                   — student screen, all stage types
-  LiveActivityRunner.tsx         — role picker (host vs join), reads ?s=CODE
+  LiveActivityRunner.tsx         — role picker (host vs join), reads ?s=CODE / ?host=1
   LiveHub.tsx                    — /design/live year-wise picker
+  HostHistory.tsx                — "My hosted games" — every session a teacher has ever
+                                    hosted, across every activity, with a Reopen button
 app/(platform)/design/live/...   — routes (gated by the platform's existing login)
 supabase/migrations/0004_live_classes.sql — the ONE generic schema (live_sessions/live_players/live_events/live_grades)
 ```
@@ -116,6 +118,18 @@ shaped by your activity's own stage config instead.
   design tokens (`var(--text)`, `var(--surface)`, `var(--border)`, etc. from
   `app/themes.css`) instead of hardcoded hex, so it inherits the user's
   chosen theme.
+
+## History — nothing a teacher hosts is ever lost
+
+Starting a "New session" only forgets the OLD session code in that browser's
+localStorage (`lib/design-live/hooks.ts` → `hostStorageKey`) — the
+`live_sessions` row itself is never deleted. `/design/live/history`
+(`HostHistory.tsx`) queries `live_sessions` filtered to `host_id = auth.uid()`
+across every activity, and "Reopen as host" just re-writes that same
+localStorage key and navigates to `/design/live/<activityId>?host=1`, which
+`LiveActivityRunner` reads to jump straight to `LiveHost` instead of the
+role-picker screen. If you add a new stage type or activity, this page needs
+no changes — it works off `live_sessions` alone.
 
 ## What's NOT built yet (known gaps — extend deliberately, don't hack around)
 
