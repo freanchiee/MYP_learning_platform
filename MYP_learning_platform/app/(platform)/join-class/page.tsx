@@ -33,7 +33,7 @@ export default function JoinClassPage() {
       <h1 className="text-3xl font-extrabold" style={{ color: 'var(--text)' }}>Join a class</h1>
       <p className="mt-2 text-sm" style={{ color: 'var(--text-muted)' }}>Ask your teacher for the class code.</p>
       {joined ? (
-        <div className="mt-6 rounded-2xl p-6" style={{ background: 'var(--surface-elevated)', border: '1px solid var(--border)' }}>
+        <div className="mt-6 rounded-[var(--radius-card)] p-6" style={{ background: 'var(--surface-elevated)', border: '1px solid var(--border)' }}>
           <div className="text-lg font-extrabold" style={{ color: 'var(--text)' }}>You joined {joined} ✅</div>
           <Link href="/dashboard" className="mt-3 inline-block text-sm font-bold" style={{ color: 'var(--accent)' }}>Go to my dashboard →</Link>
         </div>
@@ -46,11 +46,11 @@ export default function JoinClassPage() {
             required
             placeholder="ABC123"
             aria-label="Class code"
-            className="w-full rounded-lg px-4 py-3 text-center text-2xl font-extrabold tracking-[0.3em] focus:outline-none focus:ring-2"
+            className="w-full rounded-[var(--radius-control)] px-4 py-3 text-center text-2xl font-extrabold tracking-[0.3em] focus:outline-none focus:ring-2"
             style={{ background: 'var(--surface-inset)', border: '1px solid var(--border-strong)', color: 'var(--text)' }}
           />
           {error && <p className="text-sm" style={{ color: 'var(--danger)' }}>{error}</p>}
-          <button disabled={busy || code.length < 6} className="w-full rounded-lg py-3 text-sm font-bold disabled:opacity-50" style={{ background: 'var(--gradient-cta)', color: 'var(--text-on-accent)' }}>
+          <button disabled={busy || code.length < 6} className="w-full rounded-[var(--radius-control)] py-3 text-sm font-bold disabled:opacity-50" style={{ background: 'var(--gradient-cta)', color: 'var(--text-on-accent)' }}>
             {busy ? 'Joining…' : 'Join class'}
           </button>
           <Link href="/dashboard" className="block text-center text-sm" style={{ color: 'var(--text-subtle)' }}>Skip for now</Link>

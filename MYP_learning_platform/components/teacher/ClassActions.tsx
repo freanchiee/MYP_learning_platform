@@ -45,22 +45,22 @@ export function AssignLibrary({ classId, teacherId, subject, papers, topics, can
             {k === 'paper' ? `Past papers (${papers.length})` : `Topic revision (${topics.length})`}
           </button>
         ))}
-        <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search…" className="ml-auto rounded-lg px-3 py-2 text-sm" style={{ background: 'var(--surface-inset)', border: '1px solid var(--border-strong)', color: 'var(--text)' }} />
+        <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search…" className="ml-auto rounded-[var(--radius-control)] px-3 py-2 text-sm" style={{ background: 'var(--surface-inset)', border: '1px solid var(--border-strong)', color: 'var(--text)' }} />
         <label className="flex items-center gap-2 text-xs" style={{ color: 'var(--text-muted)' }}>
           Due (optional)
-          <input type="date" value={due} onChange={(e) => setDue(e.target.value)} className="rounded-lg px-2 py-1.5 text-sm" style={{ background: 'var(--surface-inset)', border: '1px solid var(--border-strong)', color: 'var(--text)' }} />
+          <input type="date" value={due} onChange={(e) => setDue(e.target.value)} className="rounded-[var(--radius-control)] px-2 py-1.5 text-sm" style={{ background: 'var(--surface-inset)', border: '1px solid var(--border-strong)', color: 'var(--text)' }} />
         </label>
       </div>
       {error && <p className="mt-3 text-sm" style={{ color: 'var(--danger)' }}>{error}</p>}
       <div className="mt-4 grid gap-2">
         {list.length === 0 && <p className="text-sm" style={{ color: 'var(--text-subtle)' }}>Nothing found.</p>}
         {list.map((i) => (
-          <div key={i.ref} className="flex items-center justify-between gap-3 rounded-xl px-4 py-3 text-sm" style={{ background: 'var(--surface-inset)', border: '1px solid var(--border)' }}>
+          <div key={i.ref} className="flex items-center justify-between gap-3 rounded-[var(--radius-panel)] px-4 py-3 text-sm" style={{ background: 'var(--surface-inset)', border: '1px solid var(--border)' }}>
             <span className="font-semibold">{i.title}</span>
             {i.assigned ? (
               <span className="text-xs font-bold" style={{ color: 'var(--text-subtle)' }}>ASSIGNED ✓</span>
             ) : (
-              <button disabled={busy === i.ref} onClick={() => assign(tab, i)} className="rounded-lg px-3 py-1.5 text-xs font-black tracking-wider disabled:opacity-50" style={solid}>
+              <button disabled={busy === i.ref} onClick={() => assign(tab, i)} className="rounded-[var(--radius-control)] px-3 py-1.5 text-xs font-black tracking-wider disabled:opacity-50" style={solid}>
                 {busy === i.ref ? '…' : 'ASSIGN'}
               </button>
             )}
@@ -84,7 +84,7 @@ export function DeleteAssignmentButton({ id }: { id: string }) {
         setBusy(false)
         router.refresh()
       }}
-      className="rounded-lg px-3 py-1.5 text-xs font-bold disabled:opacity-50"
+      className="rounded-[var(--radius-control)] px-3 py-1.5 text-xs font-bold disabled:opacity-50"
       style={ghost}
     >
       Remove
@@ -105,7 +105,7 @@ export function RemoveMemberButton({ classId, userId, name }: { classId: string;
         setBusy(false)
         router.refresh()
       }}
-      className="rounded-lg px-3 py-1.5 text-xs font-bold disabled:opacity-50"
+      className="rounded-[var(--radius-control)] px-3 py-1.5 text-xs font-bold disabled:opacity-50"
       style={ghost}
     >
       Remove

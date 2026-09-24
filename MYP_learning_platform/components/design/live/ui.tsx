@@ -9,7 +9,7 @@ import { createClient } from '@/lib/supabase/client'
 export const cardStyle = (accent?: string): CSSProperties => ({
   background: 'var(--surface)',
   border: '2.5px solid var(--text)',
-  borderRadius: 14,
+  borderRadius: 'var(--radius-card)',
   boxShadow: `4px 4px 0 ${accent || 'var(--text)'}`,
   padding: 18,
   color: 'var(--text)',

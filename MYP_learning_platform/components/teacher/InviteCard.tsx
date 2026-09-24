@@ -35,21 +35,21 @@ export default function InviteCard({ code, className: name }: { code: string; cl
   }
 
   return (
-    <div className="rounded-2xl p-5" style={{ background: 'var(--surface-elevated)', border: '1px solid var(--border)' }}>
+    <div className="rounded-[var(--radius-card)] p-5" style={{ background: 'var(--surface-elevated)', border: '1px solid var(--border)' }}>
       <div className="text-xs font-black tracking-widest" style={{ color: 'var(--text-subtle)' }}>INVITE STUDENTS</div>
       <div className="mt-3 flex flex-wrap items-start gap-5">
         <div className="min-w-[260px] flex-1">
-          <div className="break-all rounded-lg px-3 py-2.5 text-sm font-semibold" style={{ background: 'var(--surface-inset)', border: '1px solid var(--border)', color: 'var(--text)' }}>
+          <div className="break-all rounded-[var(--radius-control)] px-3 py-2.5 text-sm font-semibold" style={{ background: 'var(--surface-inset)', border: '1px solid var(--border)', color: 'var(--text)' }}>
             {url || '…'}
           </div>
           <div className="mt-3 flex flex-wrap gap-2">
-            <button onClick={copy} className="rounded-lg px-4 py-2 text-xs font-black tracking-wider" style={{ background: 'var(--gradient-cta)', color: 'var(--text-on-accent)' }}>
+            <button onClick={copy} className="rounded-[var(--radius-control)] px-4 py-2 text-xs font-black tracking-wider" style={{ background: 'var(--gradient-cta)', color: 'var(--text-on-accent)' }}>
               {copied ? '✓ COPIED' : '🔗 COPY LINK'}
             </button>
-            <a href={`https://wa.me/?text=${encodeURIComponent(message)}`} target="_blank" rel="noopener noreferrer" className="rounded-lg px-3 py-2 text-xs font-bold" style={btn}>💬 WhatsApp</a>
-            <a href={`mailto:?subject=${encodeURIComponent(`Join ${name} on CritABCD`)}&body=${encodeURIComponent(message)}`} className="rounded-lg px-3 py-2 text-xs font-bold" style={btn}>✉️ Email</a>
+            <a href={`https://wa.me/?text=${encodeURIComponent(message)}`} target="_blank" rel="noopener noreferrer" className="rounded-[var(--radius-control)] px-3 py-2 text-xs font-bold" style={btn}>💬 WhatsApp</a>
+            <a href={`mailto:?subject=${encodeURIComponent(`Join ${name} on CritABCD`)}&body=${encodeURIComponent(message)}`} className="rounded-[var(--radius-control)] px-3 py-2 text-xs font-bold" style={btn}>✉️ Email</a>
             {canShare && (
-              <button onClick={() => navigator.share({ title: `Join ${name}`, text: message, url }).catch(() => undefined)} className="rounded-lg px-3 py-2 text-xs font-bold" style={btn}>📤 Share…</button>
+              <button onClick={() => navigator.share({ title: `Join ${name}`, text: message, url }).catch(() => undefined)} className="rounded-[var(--radius-control)] px-3 py-2 text-xs font-bold" style={btn}>📤 Share…</button>
             )}
           </div>
           <p className="mt-3 text-xs" style={{ color: 'var(--text-muted)' }}>
@@ -74,7 +74,7 @@ export function CopyInviteButton({ code, style }: { code: string; style?: React.
         const u = inviteUrl(window.location.origin, code)
         try { await navigator.clipboard.writeText(u); setCopied(true); setTimeout(() => setCopied(false), 1600) } catch { window.prompt('Copy this link:', u) }
       }}
-      className="rounded-lg px-3 py-2 text-xs font-black tracking-wider"
+      className="rounded-[var(--radius-control)] px-3 py-2 text-xs font-black tracking-wider"
       style={style ?? { border: '1px solid var(--border-strong)', color: 'var(--text)' }}
       title="Copy the invite link"
     >

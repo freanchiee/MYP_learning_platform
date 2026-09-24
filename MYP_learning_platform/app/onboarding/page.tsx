@@ -70,11 +70,11 @@ function Picker() {
   if (pickSubjects) {
     return (
       <div className="min-h-screen flex items-center justify-center px-5" style={{ background: 'var(--bg)' }}>
-        <div className="w-full max-w-lg rounded-2xl p-8 shadow-2xl" style={{ background: 'var(--surface)' }}>
+        <div className="w-full max-w-lg rounded-[var(--radius-card)] p-8 shadow-2xl" style={{ background: 'var(--surface)' }}>
           <h1 className="text-2xl font-bold" style={{ color: 'var(--accent)' }}>What do you teach?</h1>
           <p className="mt-1 text-sm" style={{ color: 'var(--text-subtle)' }}>Pick your subjects. We will offer free resources and papers for them to assign to your classes. You can change this any time.</p>
           <div className="mt-6"><SubjectPicker initial={[]} /></div>
-          <button onClick={() => { router.push(next); router.refresh() }} className="mt-6 w-full rounded-lg py-3 text-sm font-bold" style={{ background: 'var(--gradient-cta)', color: 'var(--text-on-accent)' }}>Continue</button>
+          <button onClick={() => { router.push(next); router.refresh() }} className="mt-6 w-full rounded-[var(--radius-control)] py-3 text-sm font-bold" style={{ background: 'var(--gradient-cta)', color: 'var(--text-on-accent)' }}>Continue</button>
         </div>
       </div>
     )
@@ -82,7 +82,7 @@ function Picker() {
 
   return (
     <div className="min-h-screen flex items-center justify-center px-5" style={{ background: 'var(--bg)' }}>
-      <div className="w-full max-w-lg rounded-2xl p-8 shadow-2xl" style={{ background: 'var(--surface)' }}>
+      <div className="w-full max-w-lg rounded-[var(--radius-card)] p-8 shadow-2xl" style={{ background: 'var(--surface)' }}>
         <h1 className="text-2xl font-bold" style={{ color: 'var(--accent)' }}>Welcome to CritABCD</h1>
         <p className="mt-1 text-sm" style={{ color: 'var(--text-subtle)' }}>Which describes you? You will see a dashboard made for you.</p>
         <div className="mt-6 grid gap-3">
@@ -91,7 +91,7 @@ function Picker() {
               key={c.role}
               onClick={() => choose(c.role)}
               disabled={saving !== null}
-              className="flex items-start gap-4 rounded-xl p-4 text-left transition-transform hover:-translate-y-0.5 disabled:opacity-60"
+              className="flex items-start gap-4 rounded-[var(--radius-panel)] p-4 text-left transition-transform hover:-translate-y-0.5 disabled:opacity-60"
               style={{ border: '1px solid var(--border-strong)', color: 'var(--text)', background: 'var(--surface-inset)' }}
             >
               <span className="text-3xl">{c.icon}</span>

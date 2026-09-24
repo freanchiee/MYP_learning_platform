@@ -52,7 +52,7 @@ export default function TeacherHub({ name, subjects, classes, assignments, resou
             <div className={eyebrow} style={{ color: 'var(--text-subtle)' }}>TEACHER DASHBOARD</div>
             <h1 className="mt-3 font-extrabold leading-none" style={{ fontSize: 'clamp(36px, 6vw, 84px)', letterSpacing: '-3px' }}>Welcome, {name}</h1>
 
-            <div className="mt-6 max-w-2xl rounded-2xl p-4" style={glass}>
+            <div className="mt-6 max-w-2xl rounded-[var(--radius-card)] p-4" style={glass}>
               <div className="mb-2 text-xs font-black tracking-widest" style={{ color: 'var(--text-subtle)' }}>SUBJECTS YOU TEACH</div>
               <SubjectPicker initial={subjects} onChange={setMine} />
             </div>
@@ -62,24 +62,24 @@ export default function TeacherHub({ name, subjects, classes, assignments, resou
                 <div className="mb-3 flex flex-wrap items-end justify-between gap-3">
                   <h2 className="text-2xl font-extrabold">Your active classes</h2>
                 </div>
-                <div className="mb-4 rounded-2xl p-4" style={glass}><CreateClassForm /></div>
+                <div className="mb-4 rounded-[var(--radius-card)] p-4" style={glass}><CreateClassForm /></div>
                 {classes.length === 0 ? (
                   <p className="text-sm" style={{ color: 'var(--text-subtle)' }}>No classes yet — create one above and share its code with your students.</p>
                 ) : (
                   <div className="grid gap-4 sm:grid-cols-2">
                     {classes.map((c, i) => (
-                      <div key={c.id} className="overflow-hidden rounded-2xl" style={glass}>
+                      <div key={c.id} className="overflow-hidden rounded-[var(--radius-card)]" style={glass}>
                         <div className="relative h-24 overflow-hidden" style={{ background: `linear-gradient(135deg, ${c.from}, ${c.to})` }}>
                           <span aria-hidden className="absolute -right-2 -top-4 select-none leading-none" style={{ fontSize: 110, opacity: 0.25 }}>{c.emoji}</span>
-                          <span className="absolute bottom-[-18px] left-4 grid h-14 w-14 place-items-center rounded-2xl text-3xl shadow-lg" style={{ background: 'var(--surface-elevated)', border: '3px solid var(--surface-elevated)' }}>{c.emoji}</span>
+                          <span className="absolute bottom-[-18px] left-4 grid h-14 w-14 place-items-center rounded-[var(--radius-card)] text-3xl shadow-lg" style={{ background: 'var(--surface-elevated)', border: '3px solid var(--surface-elevated)' }}>{c.emoji}</span>
                         </div>
                         <div className="p-4 pt-6">
                           <Link href={`/classes/${c.id}`} className="text-lg font-extrabold hover:underline">{c.name}</Link>
                           <div className="mt-1 text-xs font-bold tracking-widest" style={{ color: 'var(--text-subtle)' }}>CODE <span style={{ color: 'var(--accent)' }}>{c.join_code}</span></div>
                           <div className="mt-2 text-sm" style={{ color: 'var(--text-muted)' }}>{c.students} student{c.students === 1 ? '' : 's'} · {c.assignments} assignment{c.assignments === 1 ? '' : 's'}</div>
                           <div className="mt-4 flex gap-2">
-                            <Link href={`/classes/${c.id}?tab=library`} className="rounded-lg px-3 py-2 text-xs font-black tracking-wider" style={btnSolid}>CREATE ASSIGNMENT</Link>
-                            <Link href={`/classes/${c.id}`} className="rounded-lg px-3 py-2 text-xs font-black tracking-wider" style={btnGhost}>OPEN</Link>
+                            <Link href={`/classes/${c.id}?tab=library`} className="rounded-[var(--radius-control)] px-3 py-2 text-xs font-black tracking-wider" style={btnSolid}>CREATE ASSIGNMENT</Link>
+                            <Link href={`/classes/${c.id}`} className="rounded-[var(--radius-control)] px-3 py-2 text-xs font-black tracking-wider" style={btnGhost}>OPEN</Link>
                             <CopyInviteButton code={c.join_code} />
                           </div>
                         </div>
@@ -89,13 +89,13 @@ export default function TeacherHub({ name, subjects, classes, assignments, resou
                 )}
               </div>
 
-              <aside className="rounded-2xl p-5 self-start" style={glass}>
+              <aside className="rounded-[var(--radius-card)] p-5 self-start" style={glass}>
                 <h2 className="text-xl font-extrabold">Assignments</h2>
                 {assignments.length === 0 ? (
                   <p className="mt-3 text-sm" style={{ color: 'var(--text-subtle)' }}>No ongoing or recent assignments.</p>
                 ) : (
                   assignments.map((a) => (
-                    <Link key={a.id} href={`/classes/${a.classId}?tab=insights`} className="mt-3 block rounded-xl p-3" style={{ background: 'var(--surface-inset)' }}>
+                    <Link key={a.id} href={`/classes/${a.classId}?tab=insights`} className="mt-3 block rounded-[var(--radius-panel)] p-3" style={{ background: 'var(--surface-inset)' }}>
                       <div className="text-sm font-bold">{a.title}</div>
                       <div className="text-xs" style={{ color: 'var(--text-subtle)' }}>{a.className} · {a.kind === 'paper' ? 'Past paper' : 'Topic revision'}</div>
                       <div className="mt-2 h-1.5 overflow-hidden rounded-full" style={{ background: 'var(--border)' }}>
@@ -124,7 +124,7 @@ export default function TeacherHub({ name, subjects, classes, assignments, resou
             ) : (
               <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 {shown.map((r) => (
-                  <div key={r.slug} className="rounded-2xl p-5" style={glass}>
+                  <div key={r.slug} className="rounded-[var(--radius-card)] p-5" style={glass}>
                     <div className="text-3xl">{r.icon}</div>
                     <h3 className="mt-2 text-xl font-extrabold">{r.label}</h3>
                     <div className="mt-1 text-sm" style={{ color: 'var(--text-muted)' }}>
@@ -132,11 +132,11 @@ export default function TeacherHub({ name, subjects, classes, assignments, resou
                       {r.papers === 0 && r.topics === 0 && 'Live classes and guides'}
                     </div>
                     {firstClass && (r.papers > 0 || r.topics > 0) ? (
-                      <Link href={`/classes/${firstClass.id}?tab=library&subject=${r.slug}`} className="mt-4 inline-block rounded-lg px-3 py-2 text-xs font-black tracking-wider" style={btnSolid}>ASSIGN TO {firstClass.name.toUpperCase()} →</Link>
+                      <Link href={`/classes/${firstClass.id}?tab=library&subject=${r.slug}`} className="mt-4 inline-block rounded-[var(--radius-control)] px-3 py-2 text-xs font-black tracking-wider" style={btnSolid}>ASSIGN TO {firstClass.name.toUpperCase()} →</Link>
                     ) : r.papers > 0 || r.topics > 0 ? (
                       <div className="mt-4 text-xs" style={{ color: 'var(--text-subtle)' }}>Create a class first to assign this.</div>
                     ) : (
-                      <Link href="/guides" className="mt-4 inline-block rounded-lg px-3 py-2 text-xs font-black tracking-wider" style={btnGhost}>FREE GUIDES →</Link>
+                      <Link href="/guides" className="mt-4 inline-block rounded-[var(--radius-control)] px-3 py-2 text-xs font-black tracking-wider" style={btnGhost}>FREE GUIDES →</Link>
                     )}
                   </div>
                 ))}
@@ -161,7 +161,7 @@ export default function TeacherHub({ name, subjects, classes, assignments, resou
                   <h3 className="text-lg font-extrabold">{year}</h3>
                   <div className="mt-3 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                     {acts.map((a) => (
-                      <Link key={a.id} href={`/design/live/${a.id}`} className="rounded-2xl p-5 transition-transform hover:-translate-y-1" style={{ background: `linear-gradient(145deg, ${a.theme.from}, ${a.theme.via} 55%, ${a.theme.to})`, border: '1px solid var(--border)', color: '#fff' }}>
+                      <Link key={a.id} href={`/design/live/${a.id}`} className="rounded-[var(--radius-card)] p-5 transition-transform hover:-translate-y-1" style={{ background: `linear-gradient(145deg, ${a.theme.from}, ${a.theme.via} 55%, ${a.theme.to})`, border: '1px solid var(--border)', color: '#fff' }}>
                         <div className="text-2xl">{a.icon}</div>
                         <div className="mt-1 text-lg font-extrabold leading-tight">{a.title}</div>
                         <div className="mt-1 text-sm" style={{ color: 'rgba(255,255,255,0.75)' }}>{a.subtitle}</div>
@@ -173,9 +173,9 @@ export default function TeacherHub({ name, subjects, classes, assignments, resou
               )
             })}
             <div className="mt-8 flex flex-wrap gap-3">
-              <Link href="/design/live" className="rounded-lg px-4 py-3 text-xs font-black tracking-widest" style={btnSolid}>ALL LIVE CLASSES →</Link>
-              <Link href="/design/live/history" className="rounded-lg px-4 py-3 text-xs font-black tracking-widest" style={btnGhost}>PAST SESSIONS</Link>
-              <Link href="/gameducation" className="rounded-lg px-4 py-3 text-xs font-black tracking-widest" style={btnGhost}>ABOUT GAMEDUCATION</Link>
+              <Link href="/design/live" className="rounded-[var(--radius-control)] px-4 py-3 text-xs font-black tracking-widest" style={btnSolid}>ALL LIVE CLASSES →</Link>
+              <Link href="/design/live/history" className="rounded-[var(--radius-control)] px-4 py-3 text-xs font-black tracking-widest" style={btnGhost}>PAST SESSIONS</Link>
+              <Link href="/gameducation" className="rounded-[var(--radius-control)] px-4 py-3 text-xs font-black tracking-widest" style={btnGhost}>ABOUT GAMEDUCATION</Link>
             </div>
           </div>
         </section>

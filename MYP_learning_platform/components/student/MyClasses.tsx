@@ -32,7 +32,7 @@ export default async function MyClasses({ supabase, userId }: { supabase: Supaba
 
   return (
     <section className="mx-auto max-w-6xl px-6 pt-8">
-      <div className="rounded-2xl p-5" style={{ background: 'var(--surface-elevated)', border: '1px solid var(--border)' }}>
+      <div className="rounded-[var(--radius-card)] p-5" style={{ background: 'var(--surface-elevated)', border: '1px solid var(--border)' }}>
         <div className="flex flex-wrap items-center justify-between gap-2">
           <h2 className="text-lg font-extrabold" style={{ color: 'var(--text)' }}>My classes</h2>
           <Link href="/join-class" className="text-sm font-bold" style={{ color: 'var(--accent)' }}>Join a class with a code →</Link>
@@ -47,7 +47,7 @@ export default async function MyClasses({ supabase, userId }: { supabase: Supaba
             {list.map((a) => {
               const done = isDone(a)
               return (
-                <div key={a.id} className="mt-2 flex flex-wrap items-center justify-between gap-2 rounded-lg px-3 py-2.5 text-sm" style={row}>
+                <div key={a.id} className="mt-2 flex flex-wrap items-center justify-between gap-2 rounded-[var(--radius-control)] px-3 py-2.5 text-sm" style={row}>
                   <span>
                     <span className="font-semibold">{a.title}</span>
                     <span className="ml-2 text-xs" style={{ color: 'var(--text-subtle)' }}>
@@ -62,7 +62,7 @@ export default async function MyClasses({ supabase, userId }: { supabase: Supaba
               )
             })}
             {(sessions ?? []).map((s) => (
-              <Link key={s.code} href={`/design/live/${s.activity_id}?s=${s.code}`} className="mt-2 flex items-center justify-between rounded-lg px-3 py-2.5 text-sm font-semibold" style={row}>
+              <Link key={s.code} href={`/design/live/${s.activity_id}?s=${s.code}`} className="mt-2 flex items-center justify-between rounded-[var(--radius-control)] px-3 py-2.5 text-sm font-semibold" style={row}>
                 <span>{getLiveActivity(s.activity_id)?.icon} {getLiveActivity(s.activity_id)?.title ?? s.activity_id}</span>
                 <span style={{ color: 'var(--accent)' }}>{s.status === 'lobby' ? 'Join →' : 'In progress — join →'}</span>
               </Link>

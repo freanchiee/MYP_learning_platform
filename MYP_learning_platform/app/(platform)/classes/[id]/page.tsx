@@ -126,7 +126,6 @@ export default async function ClassPage({ params, searchParams }: { params: { id
     <div className="flex" style={{ minHeight: 'calc(100vh - 56px)', background: 'var(--bg)', backgroundImage: 'var(--bg-image)', color: 'var(--text)' }}>
       {/* Diamond navigation, same language as the Design and teacher hubs */}
       <nav className="fixed z-40 hidden flex-col gap-4 md:flex" style={{ left: '2rem', top: 'calc(50% + 28px)', transform: 'translateY(-50%)' }} aria-label="Class sections">
-        <Link href="/dashboard" className="mb-2 text-[10px] font-black tracking-[0.25em]" style={{ color: 'var(--text-subtle)' }}>← DASHBOARD</Link>
         {TABS.map((t) => {
           const on = tab === t.id
           return (
@@ -152,12 +151,13 @@ export default async function ClassPage({ params, searchParams }: { params: { id
         </div>
 
         {/* Hero banner — the class's emoji and colours */}
-        <div className="relative overflow-hidden px-6 py-9 md:px-10" style={{ background: look.gradient, color: '#fff' }}>
+        <div className="mx-auto max-w-5xl px-6 pt-8 md:px-10">
+        <div className="relative overflow-hidden px-6 py-8 md:px-8" style={{ background: look.gradient, color: '#fff', borderRadius: 'calc(var(--radius-card) + 8px)', boxShadow: 'var(--shadow-card-hover)' }}>
           <div aria-hidden className="pointer-events-none absolute -right-4 -top-6 select-none leading-none" style={{ fontSize: 190, opacity: 0.22 }}>{look.emoji}</div>
           <div className="relative flex items-center gap-5">
-            <div className="grid h-20 w-20 shrink-0 place-items-center rounded-3xl text-5xl" style={{ background: 'rgba(255,255,255,0.22)', border: '2px solid rgba(255,255,255,0.5)' }}>{look.emoji}</div>
+            <div className="grid h-20 w-20 shrink-0 place-items-center rounded-[calc(var(--radius-card)+8px)] text-5xl" style={{ background: 'rgba(255,255,255,0.22)', border: '2px solid rgba(255,255,255,0.5)' }}>{look.emoji}</div>
             <div className="min-w-0">
-              <div className="text-[10px] font-black tracking-[0.4em]" style={{ opacity: 0.8 }}>CLASS</div>
+              <Link href="/dashboard" className="text-[10px] font-black tracking-[0.3em] hover:underline" style={{ opacity: 0.85 }}>← DASHBOARD</Link>
               <h1 className="mt-1 font-extrabold leading-tight" style={{ fontSize: 'clamp(28px, 4vw, 52px)', letterSpacing: '-1.5px' }}>{cls.name}</h1>
               <div className="mt-2 flex flex-wrap items-center gap-3 text-sm" style={{ opacity: 0.92 }}>
                 <span>{memberList.length} student{memberList.length === 1 ? '' : 's'}</span>
@@ -167,8 +167,9 @@ export default async function ClassPage({ params, searchParams }: { params: { id
             </div>
           </div>
         </div>
+        </div>
 
-        <div className="mx-auto max-w-5xl px-6 py-8 md:px-10">
+        <div className="mx-auto max-w-5xl px-6 pb-8 pt-6 md:px-10">
           {tab === 'overview' && (
             <div className="grid gap-5">
               <div className="grid gap-4 sm:grid-cols-3">
@@ -177,16 +178,16 @@ export default async function ClassPage({ params, searchParams }: { params: { id
                   { n: assignList.length, l: 'Assignments' },
                   { n: sessionList.length, l: 'Live sessions' },
                 ].map((s) => (
-                  <div key={s.l} className="rounded-2xl p-5" style={glass}>
+                  <div key={s.l} className="rounded-[var(--radius-card)] p-5" style={glass}>
                     <div className="text-4xl font-extrabold">{s.n}</div>
                     <div className="text-xs font-black tracking-widest" style={muted}>{s.l.toUpperCase()}</div>
                   </div>
                 ))}
               </div>
-              <section className="rounded-2xl p-5" style={glass}>
+              <section className="rounded-[var(--radius-card)] p-5" style={glass}>
                 <div className="flex items-center justify-between"><h2 className="text-lg font-extrabold">Recent assignments</h2><Link href={href('library')} className="text-xs font-black tracking-widest">+ NEW</Link></div>
                 {assignList.length === 0 ? <p className="mt-3 text-sm" style={muted}>Nothing assigned yet. Open the Library to set a past paper or topic revision.</p> : assignList.slice(0, 4).map((a) => (
-                  <div key={a.id} className="mt-3 flex items-center justify-between rounded-xl px-4 py-3 text-sm" style={{ background: 'var(--surface-inset)' }}>
+                  <div key={a.id} className="mt-3 flex items-center justify-between rounded-[var(--radius-panel)] px-4 py-3 text-sm" style={{ background: 'var(--surface-inset)' }}>
                     <span className="font-semibold">{a.title}</span><span style={muted}>{doneCount(a)} / {memberList.length} done</span>
                   </div>
                 ))}
@@ -197,9 +198,9 @@ export default async function ClassPage({ params, searchParams }: { params: { id
 
           {tab === 'assignments' && (
             <section>
-              <div className="flex items-center justify-between"><h2 className="text-2xl font-extrabold">Assignments</h2><Link href={href('library')} className="rounded-lg px-4 py-2 text-xs font-black tracking-widest" style={{ background: 'var(--gradient-cta)', color: 'var(--text-on-accent)' }}>CREATE ASSIGNMENT</Link></div>
+              <div className="flex items-center justify-between"><h2 className="text-2xl font-extrabold">Assignments</h2><Link href={href('library')} className="rounded-[var(--radius-control)] px-4 py-2 text-xs font-black tracking-widest" style={{ background: 'var(--gradient-cta)', color: 'var(--text-on-accent)' }}>CREATE ASSIGNMENT</Link></div>
               {assignList.length === 0 ? <p className="mt-4 text-sm" style={muted}>No assignments yet.</p> : assignList.map((a) => (
-                <div key={a.id} className="mt-3 flex flex-wrap items-center justify-between gap-3 rounded-2xl p-4" style={glass}>
+                <div key={a.id} className="mt-3 flex flex-wrap items-center justify-between gap-3 rounded-[var(--radius-card)] p-4" style={glass}>
                   <div>
                     <div className="font-extrabold">{a.title}</div>
                     <div className="text-xs" style={muted}>{a.kind === 'paper' ? 'Past paper' : 'Topic revision'} · {subjectLabel(a.subject)}{a.due_at ? ` · due ${new Date(a.due_at).toLocaleDateString()}` : ''}</div>
@@ -215,7 +216,7 @@ export default async function ClassPage({ params, searchParams }: { params: { id
               <h2 className="text-2xl font-extrabold">Insights</h2>
               <p className="mt-1 text-sm" style={muted}>Papers show the student&apos;s best score; topic revision shows when they mark it done; live tasks show worksheet completion.</p>
               {memberList.length === 0 ? <p className="mt-4 text-sm" style={muted}>No students have joined yet — share the class code.</p> : assignList.length + sessionList.length === 0 ? <p className="mt-4 text-sm" style={muted}>Nothing to track yet.</p> : (
-                <div className="mt-4 overflow-x-auto rounded-2xl" style={glass}>
+                <div className="mt-4 overflow-x-auto rounded-[var(--radius-card)]" style={glass}>
                   <table className="w-full min-w-[560px] text-left text-sm">
                     <thead>
                       <tr style={muted}>
@@ -255,9 +256,9 @@ export default async function ClassPage({ params, searchParams }: { params: { id
 
           {tab === 'live' && (
             <section>
-              <div className="flex items-center justify-between"><h2 className="text-2xl font-extrabold">Live sessions</h2><Link href="/design/live" className="rounded-lg px-4 py-2 text-xs font-black tracking-widest" style={{ background: 'var(--gradient-cta)', color: 'var(--text-on-accent)' }}>HOST A LIVE CLASS</Link></div>
+              <div className="flex items-center justify-between"><h2 className="text-2xl font-extrabold">Live sessions</h2><Link href="/design/live" className="rounded-[var(--radius-control)] px-4 py-2 text-xs font-black tracking-widest" style={{ background: 'var(--gradient-cta)', color: 'var(--text-on-accent)' }}>HOST A LIVE CLASS</Link></div>
               <p className="mt-1 text-sm" style={muted}>Attach one of your recent live sessions to {cls.name}, or remove it.</p>
-              <div className="rounded-2xl p-4 mt-3" style={glass}><AssignSessions classId={cls.id} sessions={assignable} /></div>
+              <div className="rounded-[var(--radius-card)] p-4 mt-3" style={glass}><AssignSessions classId={cls.id} sessions={assignable} /></div>
             </section>
           )}
 
@@ -266,15 +267,15 @@ export default async function ClassPage({ params, searchParams }: { params: { id
               <h2 className="text-2xl font-extrabold">Manage class</h2>
               <div className="mt-4"><InviteCard code={cls.join_code} className={cls.name} /></div>
               <div className="mt-4"><ClassLookPicker classId={cls.id} emoji={cls.emoji ?? null} theme={cls.theme ?? null} /></div>
-              <div className="mt-4 rounded-2xl p-5" style={glass}>
+              <div className="mt-4 rounded-[var(--radius-card)] p-5" style={glass}>
                 <div className="text-xs font-black tracking-widest" style={muted}>CLASS CODE</div>
                 <div className="text-4xl font-extrabold tracking-[0.25em]">{cls.join_code}</div>
                 <p className="mt-2 text-sm" style={muted}>Students enter this at <b>Join a class</b>.</p>
               </div>
-              <div className="mt-4 rounded-2xl p-5" style={glass}>
+              <div className="mt-4 rounded-[var(--radius-card)] p-5" style={glass}>
                 <h3 className="text-lg font-extrabold">Students ({memberList.length})</h3>
                 {memberList.length === 0 ? <p className="mt-2 text-sm" style={muted}>Nobody has joined yet.</p> : memberList.map((m) => (
-                  <div key={m.user_id} className="mt-2 flex items-center justify-between rounded-lg px-3 py-2 text-sm" style={{ background: 'var(--surface-inset)' }}>
+                  <div key={m.user_id} className="mt-2 flex items-center justify-between rounded-[var(--radius-control)] px-3 py-2 text-sm" style={{ background: 'var(--surface-inset)' }}>
                     <span className="font-semibold">{m.name || 'Student'}</span>
                     <RemoveMemberButton classId={cls.id} userId={m.user_id} name={m.name} />
                   </div>

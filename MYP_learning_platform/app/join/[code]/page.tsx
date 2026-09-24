@@ -45,20 +45,20 @@ export default function JoinByLinkPage() {
 
   return (
     <div className="flex min-h-screen items-center justify-center px-5" style={{ background: 'var(--bg)' }}>
-      <div className="w-full max-w-md rounded-2xl p-8 text-center shadow-2xl" style={{ background: 'var(--surface)' }}>
+      <div className="w-full max-w-md rounded-[var(--radius-card)] p-8 text-center shadow-2xl" style={{ background: 'var(--surface)' }}>
         <div className="text-5xl">🎒</div>
         {joined ? (
           <>
             <h1 className="mt-3 text-2xl font-extrabold" style={{ color: 'var(--text)' }}>You joined {joined} ✅</h1>
             <p className="mt-2 text-sm" style={{ color: 'var(--text-muted)' }}>Tasks from your teacher will appear on your dashboard.</p>
-            <Link href="/dashboard" className="mt-5 inline-block rounded-lg px-6 py-3 text-sm font-bold" style={{ background: 'var(--gradient-cta)', color: 'var(--text-on-accent)' }}>Go to my dashboard →</Link>
+            <Link href="/dashboard" className="mt-5 inline-block rounded-[var(--radius-control)] px-6 py-3 text-sm font-bold" style={{ background: 'var(--gradient-cta)', color: 'var(--text-on-accent)' }}>Go to my dashboard →</Link>
           </>
         ) : (
           <>
             <h1 className="mt-3 text-2xl font-extrabold" style={{ color: 'var(--text)' }}>You have been invited to a class</h1>
             <p className="mt-2 text-sm" style={{ color: 'var(--text-muted)' }}>Class code <b style={{ color: 'var(--text)', letterSpacing: '0.2em' }}>{code}</b></p>
             {error && <p className="mt-4 text-sm" style={{ color: 'var(--danger)' }}>{error}</p>}
-            <button onClick={join} disabled={busy || code.length < 6} className="mt-5 w-full rounded-lg py-3 text-sm font-bold disabled:opacity-50" style={{ background: 'var(--gradient-cta)', color: 'var(--text-on-accent)' }}>
+            <button onClick={join} disabled={busy || code.length < 6} className="mt-5 w-full rounded-[var(--radius-control)] py-3 text-sm font-bold disabled:opacity-50" style={{ background: 'var(--gradient-cta)', color: 'var(--text-on-accent)' }}>
               {busy ? 'Joining…' : 'Join this class'}
             </button>
             <Link href="/dashboard" className="mt-3 block text-sm" style={{ color: 'var(--text-subtle)' }}>Not now</Link>

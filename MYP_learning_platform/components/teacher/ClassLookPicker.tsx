@@ -21,7 +21,7 @@ export default function ClassLookPicker({ classId, emoji, theme }: { classId: st
   }
 
   return (
-    <div className="rounded-2xl p-5" style={{ background: 'var(--surface-elevated)', border: '1px solid var(--border)' }}>
+    <div className="rounded-[var(--radius-card)] p-5" style={{ background: 'var(--surface-elevated)', border: '1px solid var(--border)' }}>
       <div className="text-xs font-black tracking-widest" style={{ color: 'var(--text-subtle)' }}>CLASS LOOK</div>
       <div className="mt-3 flex flex-wrap gap-2">
         {CLASS_EMOJIS.map((e) => (
@@ -29,7 +29,7 @@ export default function ClassLookPicker({ classId, emoji, theme }: { classId: st
             key={e}
             onClick={() => { setEmoji(e); save({ emoji: e }) }}
             aria-pressed={curEmoji === e}
-            className="grid h-11 w-11 place-items-center rounded-xl text-2xl transition-transform hover:scale-110"
+            className="grid h-11 w-11 place-items-center rounded-[var(--radius-panel)] text-2xl transition-transform hover:scale-110"
             style={{ background: curEmoji === e ? 'var(--accent-soft)' : 'var(--surface-inset)', border: curEmoji === e ? '2px solid var(--accent)' : '1px solid var(--border)' }}
           >
             {e}
@@ -43,7 +43,7 @@ export default function ClassLookPicker({ classId, emoji, theme }: { classId: st
             onClick={() => { setTheme(t.key); save({ theme: t.key }) }}
             aria-pressed={curTheme === t.key}
             title={t.name}
-            className="h-9 w-16 rounded-lg transition-transform hover:scale-105"
+            className="h-9 w-16 rounded-[var(--radius-control)] transition-transform hover:scale-105"
             style={{ background: `linear-gradient(135deg, ${t.from}, ${t.to})`, outline: curTheme === t.key ? '3px solid var(--accent)' : 'none', outlineOffset: 2 }}
           />
         ))}

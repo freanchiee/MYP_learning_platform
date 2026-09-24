@@ -27,7 +27,7 @@ export default function AssignSessions({ classId, sessions }: { classId: string;
   return (
     <div className="mt-3 grid gap-2">
       {sessions.map((s) => (
-        <div key={s.code} className="flex items-center justify-between gap-3 rounded-lg px-3 py-2 text-sm" style={{ border: '1px solid var(--border)', color: 'var(--text)' }}>
+        <div key={s.code} className="flex items-center justify-between gap-3 rounded-[var(--radius-control)] px-3 py-2 text-sm" style={{ border: '1px solid var(--border)', color: 'var(--text)' }}>
           <span>{s.title} · <span style={{ color: 'var(--text-subtle)' }}>{s.date} · {s.status}</span></span>
           <button
             disabled={busy === s.code}
