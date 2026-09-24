@@ -5,6 +5,7 @@ import { createClient } from '@/lib/supabase/client'
 import { fuzzyMatchPoints } from '@/lib/design-live/fuzzyMatch'
 import { getPersona } from '@/data/design/live/personas'
 import { getPersonality } from '@/data/design/live/personalities'
+import { getOpportunity } from '@/data/design/live/opportunities'
 import type { WorksheetStage, WorksheetField, WorksheetSection } from '@/data/design/live/types'
 import type { LivePlayerRow, LiveGradeRow } from '@/lib/design-live/types'
 import { cardStyle, btnStyle, inputStyle, Avatar } from './ui'
@@ -139,6 +140,15 @@ export function WorksheetReviewModal({
                         return (
                           <div key={f.key} style={{ fontSize: 12, color: 'var(--text-muted)' }}>
                             🌟 {chosen ? `Chose ${chosen.name} for a simulated interview` : 'No famous person chosen yet'}
+                          </div>
+                        )
+                      }
+                      if (f.type === 'opportunityCards') {
+                        const v = data[f.key] as { opportunityId?: string } | undefined
+                        const chosen = v?.opportunityId ? getOpportunity(v.opportunityId) : undefined
+                        return (
+                          <div key={f.key} style={{ fontSize: 12, color: 'var(--text-muted)' }}>
+                            💡 {chosen ? `Started from: ${chosen.hmw}` : 'No starter opportunity chosen (may have written their own)'}
                           </div>
                         )
                       }

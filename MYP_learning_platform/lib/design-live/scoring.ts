@@ -19,6 +19,10 @@ export function worksheetSectionPct(section: WorksheetSection, values: Record<st
       let filledCells = 0
       rows.forEach((row) => cols.forEach((c) => { if (row?.[c.key] && String(row[c.key]).trim().length > 1) filledCells++ }))
       filled += filledCells / totalCells
+    } else if (f.type === 'personalityPrompt') {
+      if (v?.personalityId) filled += 1
+    } else if (f.type === 'opportunityCards') {
+      if (v?.opportunityId) filled += 1
     } else if (f.type === 'personaChat') {
       // "Complete" means the student actually asked something, not just picked a character.
       const messages: any[] = v?.messages || []

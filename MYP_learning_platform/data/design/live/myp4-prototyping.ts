@@ -33,6 +33,30 @@ export const MYP4_PROTOTYPING: LiveActivityDefinition = {
           ],
         },
         {
+          key: 'opportunity',
+          label: 'Opportunity',
+          icon: '💡',
+          blurb:
+            'Not sure where to start? These starting points are built for an online class: each one says how to prototype it with things at home, what to measure, and how to test it on a video call. Pick one, then make it your own.',
+          fields: [
+            { key: 'starter', label: 'Starting points for your track', type: 'opportunityCards' },
+            {
+              key: 'mine',
+              label: 'Your opportunity, written for YOUR user',
+              type: 'textarea',
+              hint: 'Rewrite it as “How might we…” for a specific, named person — and say why it matters to them.',
+              placeholder: 'How might we…',
+              exemplars: [
+                'How might we help Marcus open jars with one hand so that cooking dinner is quicker and less frustrating for him?',
+                'How might we make labels easier to read for Elias, because small print on his medicine is hard for him to see?',
+                'How might we help Leo keep his headphones and fidget tools within reach so that a busy classroom feels calmer?',
+              ],
+              celebrateKeywords: ['how might we', 'so that', 'because', 'for'],
+              points: 10,
+            },
+          ],
+        },
+        {
           key: 'persona',
           label: 'Persona',
           icon: '🧑',

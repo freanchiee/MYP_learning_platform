@@ -12,6 +12,7 @@ import ChatPanel from './ChatPanel'
 import { Podium } from './Podium'
 import PersonaChatField from './PersonaChatField'
 import PersonalityPromptField from './PersonalityPromptField'
+import OpportunityCardsField from './OpportunityCardsField'
 import { getPersona } from '@/data/design/live/personas'
 import { useCelebration, CelebrationOverlay } from './Celebration'
 
@@ -642,6 +643,9 @@ function WorksheetFieldInput({
   }
   if (field.type === 'personalityPrompt') {
     return <PersonalityPromptField value={value} onChange={onChange} onPersist={onPersist ?? onChange} />
+  }
+  if (field.type === 'opportunityCards') {
+    return <OpportunityCardsField value={value} onChange={onChange} onPersist={onPersist ?? onChange} />
   }
   if (field.type === 'text') {
     return (
