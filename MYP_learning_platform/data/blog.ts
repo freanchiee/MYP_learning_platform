@@ -24,6 +24,10 @@ export interface BlogEmbed {
 
 export interface BlogPost {
   slug: string
+  /** Short <title> for search results (aim for 49 chars or fewer — the site
+   *  template appends " · CritABCD" and Google truncates around 60). The page
+   *  H1 and Article headline keep the fuller `title`. */
+  seoTitle?: string
   title: string
   description: string
   datePublished: string // ISO date
@@ -40,6 +44,7 @@ export interface BlogPost {
 const CORE_POSTS: BlogPost[] = [
   {
     slug: 'what-is-the-myp',
+    seoTitle: 'What Is the IB MYP? A Plain-English Guide',
     title: 'What Is the IB MYP? A Plain-English Guide for Students & Parents',
     description:
       'The IB Middle Years Programme (MYP) explained simply: who it’s for, the eight subject groups, how it’s assessed against criteria, and how it differs from GCSE.',
@@ -95,6 +100,7 @@ const CORE_POSTS: BlogPost[] = [
   },
   {
     slug: 'myp-grading-explained',
+    seoTitle: 'MYP Grading Explained: Criteria & the 1–7 Grade',
     title: 'MYP Grading Explained: Criteria, the 1–8 Levels and the Final 1–7 Grade',
     description:
       'How MYP grading actually works: the four criteria, level descriptors out of 8, grade boundaries, and how criterion levels become a final grade from 1 to 7.',
@@ -141,6 +147,7 @@ const CORE_POSTS: BlogPost[] = [
   },
   {
     slug: 'myp-assessment-criteria-explained',
+    seoTitle: 'MYP Assessment Criteria A–D Explained',
     title: 'MYP Assessment Criteria (A–D) Explained for Every Subject',
     description:
       'What the four MYP assessment criteria (A, B, C, D) mean in Sciences, Individuals & Societies and Design — and how to move up the level descriptors.',
@@ -195,6 +202,7 @@ const CORE_POSTS: BlogPost[] = [
   },
   {
     slug: 'myp-command-terms',
+    seoTitle: 'MYP Command Terms: Analyse, Evaluate, Justify',
     title: 'MYP Command Terms: What “Analyse”, “Evaluate” and “Justify” Really Want',
     description:
       'A student’s guide to MYP command terms. What examiners mean by describe, explain, analyse, evaluate, justify and more — with quick tips to answer each correctly.',
@@ -246,6 +254,7 @@ const CORE_POSTS: BlogPost[] = [
   },
   {
     slug: 'myp-eassessment-explained',
+    seoTitle: 'MYP eAssessment: On-Screen Exams & ePortfolios',
     title: 'MYP eAssessment: On-Screen Exams and ePortfolios Explained',
     description:
       'How MYP eAssessment works in Year 5: the 2-hour on-screen examinations, the ePortfolios for Design and Arts, and what leads to the IB MYP Certificate.',
@@ -335,6 +344,7 @@ const CORE_POSTS: BlogPost[] = [
   },
   {
     slug: 'hydrothermal-vents-chemosynthesis-myp-biology',
+    seoTitle: 'Hydrothermal Vents & Chemosynthesis (MYP Biology)',
     title: 'Hydrothermal Vents & Chemosynthesis: MYP Biology Explained (with a Live Classification Lab)',
     description:
       'How life survives at hydrothermal vents without sunlight — chemosynthesis vs photosynthesis, cell theory and classification, explained for MYP Biology with a free interactive lab.',
@@ -396,6 +406,7 @@ const CORE_POSTS: BlogPost[] = [
   },
   {
     slug: 'classification-kingdoms-dichotomous-keys-myp-biology',
+    seoTitle: 'Classification: Kingdoms & Dichotomous Keys',
     title: 'Classification in MYP Biology: Kingdoms, Binomial Names & Dichotomous Keys',
     description:
       'How scientists classify living things — the five kingdoms, genus and species names, and how to use a dichotomous key — explained for MYP Biology with a free interactive classification quest.',
@@ -458,6 +469,7 @@ const CORE_POSTS: BlogPost[] = [
   },
   {
     slug: 'cells-tissues-organs-levels-of-organisation-myp-biology',
+    seoTitle: 'Cells, Tissues & Organs: Levels of Organisation',
     title: 'Cells, Tissues, Organs & Organ Systems: Levels of Biological Organisation (MYP Year 4)',
     description:
       'From organelles to whole organisms: how cells, tissues, organs and organ systems fit together, with a free interactive MYP Year 4 Biology unit on cells and life.',
@@ -521,6 +533,7 @@ const CORE_POSTS: BlogPost[] = [
   },
   {
     slug: 'scalars-vectors-si-units-myp-physics',
+    seoTitle: 'Scalars vs Vectors & SI Units (MYP Physics)',
     title: 'Scalars vs Vectors, SI Units & Measurement: MYP Physics Explained',
     description:
       'What makes a quantity measurable, why physics uses SI units, and the difference between scalars and vectors (distance vs displacement) — with a free interactive MYP Physics mission game.',
@@ -585,6 +598,7 @@ const CORE_POSTS: BlogPost[] = [
   },
   {
     slug: 'scientific-method-hypothesis-variables-myp-science',
+    seoTitle: 'Scientific Method: Hypotheses & Variables',
     title: 'Scientific Method in MYP Science: Predictions, Hypotheses & Variables (with the Butterfly Effect)',
     description:
       'The difference between a prediction and a hypothesis, how to identify independent, dependent and controlled variables, and field vs lab investigations — with a free interactive MYP inquiry game.',

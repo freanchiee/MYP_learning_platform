@@ -16,6 +16,18 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+  // The interactive artifacts in public/artifacts are embedded (iframe) inside
+  // /blog posts, which carry the real article text. Left indexable, Google can
+  // rank the bare game pages instead of the articles that explain them — so
+  // keep them out of the index. They stay crawlable/renderable for the embed.
+  async headers() {
+    return [
+      {
+        source: '/artifacts/:path*',
+        headers: [{ key: 'X-Robots-Tag', value: 'noindex' }],
+      },
+    ]
+  },
   // Keep scripts and any leftover scratch images out of the server build trace.
   experimental: {
     outputFileTracingExcludes: {

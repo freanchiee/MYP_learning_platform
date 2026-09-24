@@ -10,6 +10,7 @@ const DATE = '2026-09-24'
 export const ARTIFACT_POSTS: BlogPost[] = [
   {
     slug: 'food-chains-food-webs-human-impact-myp-biology',
+    seoTitle: 'Food Chains, Food Webs & Human Impact',
     title: 'Food Chains, Food Webs & Human Impact on Ecosystems: MYP Biology (Amazon Rainforest Case Study)',
     description:
       'How energy moves through food chains and food webs, why removing one species affects many others, and how deforestation changes an ecosystem — with a free interactive Amazon rainforest assessment.',
@@ -66,6 +67,7 @@ export const ARTIFACT_POSTS: BlogPost[] = [
   },
   {
     slug: 'producers-consumers-decomposers-ecosystem-roles-myp-biology',
+    seoTitle: 'Producers, Consumers & Decomposers Explained',
     title: 'Producers, Consumers & Decomposers: The Roles in an Ecosystem (MYP Biology)',
     description:
       'What producers, consumers and decomposers do, why decomposers matter for recycling nutrients, and how the three roles fit together — with a free interactive ecosystem game.',
@@ -118,6 +120,7 @@ export const ARTIFACT_POSTS: BlogPost[] = [
   },
   {
     slug: 'atomic-models-dalton-thomson-rutherford-bohr-myp-chemistry',
+    seoTitle: 'History of the Atom: Dalton to Bohr',
     title: 'The History of the Atom: Dalton, Thomson, Rutherford & Bohr (MYP Chemistry)',
     description:
       'How our model of the atom changed — from indivisible spheres to the plum pudding, the nucleus and electron shells — and the evidence behind each step, with a free interactive atomic-models game.',
@@ -173,6 +176,7 @@ export const ARTIFACT_POSTS: BlogPost[] = [
   },
   {
     slug: 'ionic-covalent-metallic-bonding-myp-chemistry',
+    seoTitle: 'Ionic, Covalent & Metallic Bonding Explained',
     title: 'Ionic, Covalent & Metallic Bonding Explained (MYP Chemistry)',
     description:
       'How atoms bond — ionic, covalent, giant structures and metallic — and how bonding explains melting points and conductivity, with a free interactive chemical bonding game.',
@@ -228,6 +232,7 @@ export const ARTIFACT_POSTS: BlogPost[] = [
   },
   {
     slug: 'research-question-variables-methodology-criterion-b-myp-science',
+    seoTitle: 'Criterion B: Research Question & Variables',
     title: 'Criterion B Made Simple: Research Question, Variables & Method (MYP Science)',
     description:
       'How to write a focused research question, identify independent, dependent and controlled variables, and plan a safe, repeatable method — with a free interactive "How to Be a Scientist" game.',
@@ -280,6 +285,7 @@ export const ARTIFACT_POSTS: BlogPost[] = [
   },
   {
     slug: 'significant-figures-rules-myp-science',
+    seoTitle: 'Significant Figures: Rules for Zeros & Rounding',
     title: 'Significant Figures: The Rules for Zeros, Rounding & Calculations (MYP Science)',
     description:
       'A clear guide to significant figures — which digits count, the rules for leading, sandwiched and trailing zeros, and how to round calculation answers — with a free interactive game.',
@@ -332,6 +338,7 @@ export const ARTIFACT_POSTS: BlogPost[] = [
   },
   {
     slug: 'electromagnetic-spectrum-myp-physics',
+    seoTitle: 'The Electromagnetic Spectrum: Uses & Hazards',
     title: 'The Electromagnetic Spectrum: Waves, Uses & Hazards (MYP Physics)',
     description:
       'The seven regions of the electromagnetic spectrum in order, what they have in common, how wavelength and frequency link, and their uses and hazards — with a free interactive strand-based challenge.',
@@ -388,6 +395,7 @@ export const ARTIFACT_POSTS: BlogPost[] = [
   },
   {
     slug: 'separation-techniques-natural-vs-synthetic-criterion-d-myp-chemistry',
+    seoTitle: 'Separation Techniques & Criterion D (Chemistry)',
     title: 'Separation Techniques, Natural vs Synthetic & Criterion D (MYP Chemistry: Toiletries)',
     description:
       'How separation techniques are used to make everyday products, and how to discuss environmental, social and ethical impacts for Criterion D — with a free interactive toiletries science challenge.',
@@ -441,6 +449,7 @@ export const ARTIFACT_POSTS: BlogPost[] = [
   },
   {
     slug: 'criterion-d-reflecting-on-impact-safety-myp-science',
+    seoTitle: 'Criterion D: Weighing the Impact of Technology',
     title: 'Criterion D in Practice: Weighing the Safety Impact of Technology (Crumple Zones & Electric Vehicles)',
     description:
       'How to structure a Criterion D answer using personal, local, global, critical and sustainable thinking, with crumple zones and electric vehicles as worked examples — plus a free interactive task.',
@@ -495,6 +504,7 @@ export const ARTIFACT_POSTS: BlogPost[] = [
   },
   {
     slug: 'thermal-conductivity-heat-transfer-myp-physics',
+    seoTitle: 'Thermal Conductivity & Heat Transfer Explained',
     title: 'Thermal Conductivity & Heat Transfer by Conduction (MYP Physics)',
     description:
       'How heat travels by conduction, why metals conduct better than insulators, and what changes the rate of heat transfer — with a free interactive 3D thermal conductivity simulator.',
@@ -548,6 +558,7 @@ export const ARTIFACT_POSTS: BlogPost[] = [
   },
   {
     slug: 'life-cycle-of-stars-stellar-evolution-myp-physics',
+    seoTitle: 'The Life Cycle of Stars: Stellar Evolution',
     title: 'The Life Cycle of Stars: Stellar Evolution from Nebula to Black Hole',
     description:
       'How stars form, live and die — main sequence, red giants, white dwarfs, supernovae, neutron stars and black holes — and why a star\'s mass decides its fate, with a free interactive 3D explorer.',

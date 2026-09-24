@@ -12,17 +12,20 @@ export function generateStaticParams() {
 export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
   const p = getPost(params.slug)
   if (!p) return {}
+  const shortTitle = p.seoTitle ?? p.title
   return {
-    title: p.title,
+    title: shortTitle,
     description: p.description,
     alternates: { canonical: `/blog/${p.slug}` },
     openGraph: {
       type: 'article',
-      title: `${p.title} · CritABCD`,
+      title: `${shortTitle} · CritABCD`,
       description: p.description,
       url: `${SITE_URL}/blog/${p.slug}`,
       publishedTime: p.datePublished,
     },
+    // The share image comes from ./opengraph-image.tsx; large card so it shows.
+    twitter: { card: 'summary_large_image', title: `${shortTitle} · CritABCD`, description: p.description },
   }
 }
 
@@ -39,6 +42,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
         '@id': `${url}#article`,
         headline: p.title,
         description: p.description,
+        image: [`${url}/opengraph-image`],
         datePublished: p.datePublished,
         dateModified: p.datePublished,
         author: { '@id': `${SITE_URL}/#org` },

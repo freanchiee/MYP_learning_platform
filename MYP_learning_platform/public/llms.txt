@@ -22,6 +22,10 @@ CritABCD is for MYP students (roughly ages 11–16) and their teachers. Work is 
 - Free MYP subject guides (aims, A–D criteria, concepts, grading): https://www.critabcd.com/guides
 - MYP blog (grading, criteria, command terms, eAssessment explained): https://www.critabcd.com/blog
 - Resources (interactive quizzes, simulations and labs): https://www.critabcd.com/resources
+- Blog (explained topics, each with a free interactive activity): https://www.critabcd.com/blog
+- Subject guides: https://www.critabcd.com/guides
+- Full text of every public guide and article, as one plain-text file: https://www.critabcd.com/llms-full.txt
+- Sitemap: https://www.critabcd.com/sitemap.xml
 
 ## FAQ
 - What is CritABCD? CritABCD is an IB Middle Years Programme (MYP) e-assessment and self-study platform offering past papers, AI-graded practice and instant, criterion-referenced feedback.
