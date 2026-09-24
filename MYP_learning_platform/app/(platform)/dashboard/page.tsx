@@ -6,6 +6,8 @@ import DashboardStats, { XPBar } from '@/components/dashboard/DashboardStats'
 import DashboardHero from '@/components/dashboard/DashboardHero'
 import ResourcesTeaser from '@/components/resources/ResourcesTeaser'
 import { DEV_NO_AUTH } from '@/lib/dev-auth'
+import TeacherDashboard from '@/components/teacher/TeacherDashboard'
+import MyClasses from '@/components/student/MyClasses'
 
 // ── Badge definitions ──────────────────────────────────────────────────────────
 type Rarity = 'common' | 'rare' | 'epic' | 'legendary'
@@ -72,6 +74,16 @@ export default async function DashboardPage() {
   if (!session && !DEV_NO_AUTH) redirect('/login')
   const userId = session?.user?.id
 
+  // Teachers get their own dashboard (classes, live tasks, student progress).
+  let role: string | null = null
+  if (userId) {
+    const { data: r } = await supabase.from('profiles').select('role, name').eq('id', userId).maybeSingle()
+    role = r?.role ?? null
+    if (role === 'teacher') {
+      return <TeacherDashboard supabase={supabase} userId={userId} name={r?.name || session?.user?.email?.split('@')[0] || 'teacher'} />
+    }
+  }
+
   // Parallel fetches (skipped when browsing without a session in dev)
   let profile: Pick<Profile, 'name' | 'school' | 'xp' | 'level' | 'streak_days'> | null = null
   let badges: Pick<UserBadge, 'badge_id' | 'earned_at'>[] = []
@@ -131,6 +143,10 @@ export default async function DashboardPage() {
         papersCompleted={papersCompleted}
         lastAttemptId={attempts[0]?.id ?? null}
       />
+
+      {userId && <div style={{ background: 'var(--bg)' }}><MyClasses supabase={supabase} userId={userId} />{role === null && (
+        <p className="mx-auto max-w-6xl px-6 pt-3 text-sm" style={{ color: 'var(--text-subtle)' }}>Are you a teacher? <Link href="/onboarding?change=1" className="font-bold" style={{ color: 'var(--accent)' }}>Set up your teacher dashboard →</Link></p>
+      )}</div>}
 
       {/* ══════════════════════════════════════════
           BELOW-HERO — cream editorial (finalized palette)

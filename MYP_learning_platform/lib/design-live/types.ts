@@ -7,6 +7,7 @@ export interface LiveSessionRow {
   status: 'lobby' | 'active' | 'ended'
   stage_idx: number
   state: Record<string, any>
+  class_id?: string | null
   created_at: string
   updated_at: string
 }

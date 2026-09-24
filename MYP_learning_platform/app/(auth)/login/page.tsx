@@ -27,6 +27,10 @@ function LoginForm() {
   const rawNext = searchParams.get('next')
   const next = rawNext && rawNext.startsWith('/') && !rawNext.startsWith('//') ? rawNext : '/dashboard'
 
+  // After sign-in everyone passes through /onboarding: it asks new accounts
+  // whether they are a teacher or a student, and forwards on if already chosen.
+  const afterLogin = `/onboarding?next=${encodeURIComponent(next)}`
+
   const [step, setStep] = useState<'email' | 'code'>('email')
   const [email, setEmail] = useState('')
   const [code, setCode] = useState('')
@@ -73,7 +77,7 @@ function LoginForm() {
       return
     }
 
-    router.push(next)
+    router.push(afterLogin)
     router.refresh()
   }
 
@@ -86,7 +90,7 @@ function LoginForm() {
     const { error: oauthError } = await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        redirectTo: `${origin}/api/auth/callback?next=${encodeURIComponent(next)}`,
+        redirectTo: `${origin}/api/auth/callback?next=${encodeURIComponent(afterLogin)}`,
       },
     })
 

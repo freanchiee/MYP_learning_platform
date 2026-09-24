@@ -11,6 +11,7 @@ import type { LiveSessionRow, LivePlayerRow, LiveGradeRow, LiveEventRow } from '
 import { getPersona } from '@/data/design/live/personas'
 import { cardStyle, btnStyle, inputStyle, pageBg, ErrorBanner, QRCode, Avatar, ProgressStream, PlayerPreview, PlayerPreviewProvider, ChatButton, QuickReactButton, QuickReactProvider, UnreadChatContext } from './ui'
 import ChatPanel from './ChatPanel'
+import ClassPicker from './ClassPicker'
 import { Podium } from './Podium'
 import { WorksheetReviewModal } from './WorksheetReview'
 
@@ -180,6 +181,7 @@ export default function LiveHost({ activity }: { activity: LiveActivityDefinitio
             <div style={{ fontSize: 12, color: 'var(--text-muted)', wordBreak: 'break-all', marginTop: 4 }}>{joinUrl}</div>
           </div>
           {joinUrl && <QRCode url={joinUrl} />}
+          {hostId && code && <ClassPicker code={code} hostId={hostId} classId={session.class_id ?? null} accent={activity.theme.accent} />}
           <div style={{ display: 'grid', gap: 6 }}>
             <button onClick={newSession} style={{ ...btnStyle('var(--text-muted)'), fontSize: 12 }}>
               ↻ New session
