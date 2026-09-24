@@ -39,8 +39,9 @@ export const MYP5_SUSTAINABILITY: LiveActivityDefinition = {
       key: 'creditcheck',
       label: 'Carbon Credit Check',
       icon: '🧾',
-      pacing: 'self-paced',
-      intro: { title: '🧾 What did the market teach you?', blurb: 'Seven quick questions on carbon credits, offsets and greenwashing — your own pace.' },
+      pacing: 'host-paced',
+      pointsPerCorrect: 10,
+      intro: { title: '🧾 What did the market teach you?', blurb: 'Seven quick questions on carbon credits, offsets and greenwashing. Your teacher runs it: lock the round, reveal the correct answer, and every correct answer earns points.' },
       questions: [
         { icon: '🌍', context: 'The basics', q: 'What does ONE carbon credit stand for?', options: ['One tree planted anywhere', 'One tonne of carbon dioxide (or equivalent) avoided or removed', 'One tonne of rubbish recycled', 'One kilowatt-hour of clean energy'], correct: 1 },
         { icon: '🧪', context: 'A real credit', q: 'A credit is “additional” when…', options: ['It is cheap to buy', 'The emissions cut would NOT have happened without the money from the credit', 'It comes from a very big company', 'It is sold in another country'], correct: 1 },

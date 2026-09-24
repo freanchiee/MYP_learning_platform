@@ -384,6 +384,8 @@ not the UI, to change the rules. Worksheet sections also take an optional `crite
 stakeholder representatives (`data/design/live/community-personas.ts`). `productCards` is a
 field like `makeCards` for the 25 digital products (`digital-products.ts`).
 
+**War Quiz side mission.** Two students on the same space can duel over three sustainability questions (`sc_duel_offer/reply/answer` events, state in `game.duel`, telemetry via `DuelBanner` and the log). Points are collected once by each student's own browser from `game.duels` (marked in `me.data.game.paidDuels`) because only a student can update their own row. Host-paced MCQ stages likewise award `pointsPerCorrect` when the host reveals the answer (marked `paid`). Worksheets autosave after 2.5 s of quiet and keep a browser-storage backup.
+
 ## What's NOT built yet (known gaps — extend deliberately, don't hack around)
 
 - **Physical/whiteboard rounds with a host-only secret** (Pictionary,

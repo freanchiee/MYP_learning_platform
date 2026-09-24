@@ -202,6 +202,19 @@ export default function Board3D({ pawns, health, smog, activePos = null, youId =
       return { group, ring, cur: info.pos, queue: [], hop: 1, from: start.clone(), to: start.clone(), role: info.role }
     }
 
+    // Crossed swords over any space two or more students share: a War Quiz is possible there
+    const swordTex = track(emojiTexture('⚔️'))
+    const swords = BOARD.map((_, i) => {
+      const sp = new THREE.Sprite(track(new THREE.SpriteMaterial({ map: swordTex, transparent: true, depthTest: false })))
+      const p = tilePosition(i, BOARD.length, HALF)
+      sp.position.set(p.x, 2.9, p.z)
+      sp.scale.set(1.5, 1.5, 1)
+      sp.renderOrder = 11
+      sp.visible = false
+      scene.add(sp)
+      return sp
+    })
+
     // Sizing + drag-to-rotate
     let yaw = 0.6, pitch = 0.62, zoom = 1, fit = 34, autoPause = 0
     let dragging = false, lastX = 0, lastY = 0
@@ -321,6 +334,11 @@ export default function Board3D({ pawns, health, smog, activePos = null, youId =
         if (po.ring.visible) po.ring.rotation.z += dt * 2
       })
       pawnObjs.forEach((po, id) => { if (!seen.has(id)) { scene.remove(po.group); pawnObjs.delete(id) } })
+      swords.forEach((sp, i) => {
+        const n = (bySlot.get(i) ?? []).length
+        sp.visible = n >= 2
+        if (sp.visible) { const k = 1.4 + Math.sin(t / 260) * 0.15; sp.scale.set(k, k, 1); sp.position.y = 2.9 + Math.sin(t / 400) * 0.2 }
+      })
 
       // camera
       if (!dragging && !reduced && performance.now() > autoPause) yaw += dt * 0.09

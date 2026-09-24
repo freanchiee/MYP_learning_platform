@@ -292,7 +292,7 @@ export default function LiveJoin({ activity, initialCode }: { activity: LiveActi
           {session.status === 'active' && stage?.type === 'openIdeas' && (
             <OpenIdeasPlayer activity={activity} stage={stage} session={session} me={me} patchMyData={patchMyData} reportDraft={reportDraft} celebrate={celebrate} />
           )}
-          {session.status === 'active' && stage?.type === 'boardGame' && <SustainabilityGamePlayer session={session} me={me} code={code} />}
+          {session.status === 'active' && stage?.type === 'boardGame' && <SustainabilityGamePlayer session={session} me={me} code={code} players={players} patchMyData={patchMyData} addPoints={addPoints} />}
           {session.status === 'active' && stage?.type === 'grading' && (
             <div style={cardStyle(activity.theme.accent)}>
               {myGrade?.graded ? (
@@ -399,6 +399,16 @@ function McqPlayer({
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const order = useMemo(() => shuffle(q.options.map((text, i) => ({ text, i }))), [activeQIdx, q.options])
 
+  // Host-paced: when the host reveals the answer, a correct student's own browser
+  // collects the points once (marked `paid`, so a refresh or a re-reveal cannot double up).
+  const mine = answers[st.mcqIndex] as { choiceIdx: number; correct: boolean; paid?: boolean } | undefined
+  useEffect(() => {
+    if (stage.pacing !== 'host-paced' || !st.revealed || !mine || !mine.correct || mine.paid) return
+    addPoints(points)
+    patchMyData(stage.key, { answers: { ...answers, [st.mcqIndex]: { ...mine, paid: true } } })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [st.revealed, st.mcqIndex, mine?.correct, mine?.paid])
+
   if (stage.pacing === 'self-paced') {
     const done = answeredCount >= stage.questions.length
     const qIdx = selfPacedQIdx
@@ -441,12 +451,10 @@ function McqPlayer({
   }
 
   // host-paced
-  const mine = answers[st.mcqIndex]
-
   const pick = (choiceIdx: number) => {
     if (st.locked || mine) return
     const correct = choiceIdx === q.correct
-    patchMyData(stage.key, { answers: { ...answers, [st.mcqIndex]: { choiceIdx, correct } } })
+    patchMyData(stage.key, { answers: { ...answers, [st.mcqIndex]: { choiceIdx, correct, paid: false } } })
   }
 
   return (
@@ -489,6 +497,55 @@ function WorksheetPlayer({
   // deleting and retyping it) doesn't spam the celebration on every keystroke.
   const celebratedRef = useRef<Set<string>>(new Set())
 
+  // Progress is saved three ways so a student never loses work:
+  //  1. the database (live_players.data) — the real record, follows the account to any device;
+  //  2. an autosave that writes changed sections after ~2.5 s of quiet, so pressing Save is optional;
+  //  3. a backup copy in this browser's storage, restored if the tab is closed or the connection
+  //     drops before (2) lands. (Browser storage rather than a cookie: cookies are tiny and are
+  //     sent with every request.)
+  const storageKey = `myp:ws:${sessionCode}:${me.id}:${stage.key}`
+  const lastSaved = useRef<Record<string, string>>(Object.fromEntries(stage.sections.map((s) => [s.key, JSON.stringify(me.data?.[stage.key]?.[s.key] || {})])))
+  const [saveState, setSaveState] = useState<'idle' | 'saving' | 'saved'>('idle')
+
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem(storageKey)
+      if (!raw) return
+      const local = JSON.parse(raw) as Record<string, Record<string, any>>
+      setDrafts((d) => {
+        const next = { ...d }
+        let changed = false
+        for (const [k, v] of Object.entries(local)) {
+          if (!(k in next) || !v || Object.keys(v).length === 0) continue
+          if (JSON.stringify(v) !== JSON.stringify(d[k])) { next[k] = v; changed = true }
+        }
+        return changed ? next : d
+      })
+    } catch { /* storage unavailable — the database copy still works */ }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  useEffect(() => {
+    try { localStorage.setItem(storageKey, JSON.stringify(drafts)) } catch { /* ignore */ }
+  }, [drafts, storageKey])
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      const patch: Record<string, any> = {}
+      for (const s of stage.sections) {
+        const j = JSON.stringify(drafts[s.key] || {})
+        if (j !== lastSaved.current[s.key]) { patch[s.key] = drafts[s.key]; lastSaved.current[s.key] = j }
+      }
+      if (Object.keys(patch).length) {
+        setSaveState('saving')
+        patchMyData(stage.key, patch)
+        setTimeout(() => setSaveState('saved'), 700)
+      }
+    }, 2500)
+    return () => clearTimeout(timer)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [drafts])
+
   const updateField = (sectionKey: string, fieldKey: string, value: any) => {
     setDrafts((d) => ({ ...d, [sectionKey]: { ...d[sectionKey], [fieldKey]: value } }))
     if (typeof value === 'string' && value.trim()) {
@@ -504,6 +561,7 @@ function WorksheetPlayer({
     }
   }
   const saveSection = (sectionKey: string) => {
+    lastSaved.current[sectionKey] = JSON.stringify(drafts[sectionKey] || {})
     patchMyData(stage.key, { [sectionKey]: drafts[sectionKey] })
     setSavedFlash(sectionKey)
     setTimeout(() => setSavedFlash(null), 1200)
@@ -535,6 +593,9 @@ function WorksheetPlayer({
   // sections are compact and flow into whatever columns are left.
   return (
     <>
+    <div style={{ textAlign: 'right', fontSize: 11.5, fontWeight: 700, color: 'rgba(255,255,255,0.75)', marginBottom: 6 }}>
+      {saveState === 'saving' ? '💾 Saving…' : saveState === 'saved' ? '✅ All changes saved' : '💾 Your work saves automatically'}
+    </div>
     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 14, alignItems: 'start' }}>
       {stage.sections.map((s) => {
         const pct = worksheetSectionPct(s, drafts[s.key])

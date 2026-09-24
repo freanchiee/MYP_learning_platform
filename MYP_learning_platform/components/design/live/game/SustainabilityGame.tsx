@@ -10,9 +10,9 @@ import { createClient } from '@/lib/supabase/client'
 import { useLiveTable } from '@/lib/design-live/hooks'
 import type { LiveEventRow, LivePlayerRow, LiveSessionRow } from '@/lib/design-live/types'
 import {
-  ACTIONS, BOARD, CREDIT_EXPLAINER, DEBRIEF_QUESTIONS, MARKET_ACTIONS, ROLES, ROLE_ORDER, SECTOR_META, SECTOR_SCENARIO,
-  actionAvailable, actionsFor, beginPhase2, canAct, defaultCarbonTarget, endPhase1, endPhase2, newGame, offsetCap, processEvents,
-  reassignRole, sceneMetrics, startPhase1, syncPlayers, type GameAction, type GameState, type RoleKey,
+  BOARD, CREDIT_EXPLAINER, DEBRIEF_QUESTIONS, DUEL_CORRECT, DUEL_QUESTIONS, DUEL_ROUNDS, DUEL_SPEED, DUEL_WIN, ROLES, ROLE_ORDER, SECTOR_META, SECTOR_SCENARIO,
+  actionAvailable, actionsFor, beginPhase2, canAct, defaultCarbonTarget, duelOpen, endPhase1, endPhase2, expireDuel, newGame, offsetCap, processEvents,
+  reassignRole, sceneMetrics, sharedWith, startPhase1, syncPlayers, type Duel, type GameAction, type GameState, type RoleKey,
 } from '@/lib/design-live/sustainability'
 import { Avatar, cardStyle, btnStyle, inputStyle } from '../ui'
 
@@ -98,7 +98,7 @@ function LogFeed({ game }: { game: GameState }) {
       <div style={{ display: 'grid', gap: 5 }}>
         {recent.map((e, i) => (
           <div key={i} style={{ fontSize: 12.5 }}>
-            <RoleBadge role={e.role} size={12} /> <b>{e.name}</b> — {e.label}
+            {e.kind === 'duel' ? <span>{e.label}</span> : <><RoleBadge role={e.role} size={12} /> <b>{e.name}</b> — {e.label}</>}
             {e.note && <span style={{ color: 'var(--text-muted)' }}> · {e.note}</span>}
             {e.combo && <span style={{ color: '#1E7A5F', fontWeight: 800 }}> · combo!</span>}
           </div>
@@ -125,7 +125,7 @@ function ClassSummary({ game, names }: { game: GameState; names: Record<string, 
         </thead>
         <tbody>
           {rows.map(([id, p]) => {
-            const mine = game.log.filter((e) => e.pid === id && e.phase === phase)
+            const mine = game.log.filter((e) => e.pid === id && e.phase === phase && e.kind !== 'duel')
             return (
               <tr key={id} style={{ borderTop: '1px solid var(--border)' }}>
                 <td style={{ padding: '6px 10px 6px 2px', whiteSpace: 'nowrap' }}><RoleBadge role={p.role} size={12} /> <b>{names[id] || 'Student'}</b></td>
@@ -139,6 +139,114 @@ function ClassSummary({ game, names }: { game: GameState; names: Record<string, 
           })}
         </tbody>
       </table>
+    </div>
+  )
+}
+
+/** Deterministic option order so both duellists see the same, unpredictable order. */
+function orderFor(n: number, seed: string): number[] {
+  const idx = Array.from({ length: n }, (_, i) => i)
+  let h = 2166136261
+  for (let i = 0; i < seed.length; i++) { h ^= seed.charCodeAt(i); h = Math.imul(h, 16777619) }
+  for (let i = n - 1; i > 0; i--) { h = Math.imul(h ^ (h >>> 13), 1274126177) >>> 0; const j = h % (i + 1); [idx[i], idx[j]] = [idx[j], idx[i]] }
+  return idx
+}
+
+/** Live telemetry of a War Quiz for the whole class: who, what stage, the scores, each finished round — and, for the two duellists, the actual question. */
+function DuelBanner({ duel, names, meId, onReply, onAnswer }: {
+  duel: Duel
+  names: Record<string, string>
+  meId?: string
+  onReply?: (accept: boolean) => void
+  onAnswer?: (choice: number) => void
+}) {
+  const nm = (id: string) => names[id] || 'Student'
+  const side = meId === duel.a ? 'a' : meId === duel.b ? 'b' : null
+  const q = DUEL_QUESTIONS[duel.qs[Math.min(duel.round, duel.qs.length - 1)]]
+  const answered = { a: !!duel.cur.a, b: !!duel.cur.b }
+  const order = orderFor(q.options.length, duel.id + ':' + duel.round)
+  const tone = duel.status === 'done' ? '#C99A2E' : duel.status === 'declined' || duel.status === 'expired' ? 'var(--text-muted)' : '#D6425E'
+  return (
+    <div style={{ ...cardStyle(tone), display: 'grid', gap: 10 }} role="status" aria-live="polite">
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 8 }}>
+        <div style={{ fontWeight: 800, letterSpacing: 1 }}>⚔️ SUSTAINABILITY WAR QUIZ <span style={{ fontWeight: 600, fontSize: 11, color: 'var(--text-muted)' }}>· side mission on {BOARD[duel.pos].name}</span></div>
+        <div style={{ fontSize: 12, fontWeight: 700, color: 'var(--text-muted)' }}>
+          {duel.status === 'offered' && 'Waiting for an answer to the challenge'}
+          {duel.status === 'active' && `Round ${duel.round + 1} of ${DUEL_ROUNDS} · ${q.topic}`}
+          {duel.status === 'done' && 'Finished'}
+          {duel.status === 'declined' && 'Declined'}
+          {duel.status === 'expired' && 'Timed out'}
+        </div>
+      </div>
+
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr auto 1fr', gap: 10, alignItems: 'center' }}>
+        {(['a', 'b'] as const).map((k, i) => {
+          const id = duel[k]
+          return (
+            <div key={k} style={{ order: i === 0 ? 0 : 2, textAlign: i === 0 ? 'left' : 'right', display: 'flex', gap: 8, alignItems: 'center', justifyContent: i === 0 ? 'flex-start' : 'flex-end', flexDirection: i === 0 ? 'row' : 'row-reverse' }}>
+              <Avatar seed={id} size={34} />
+              <div>
+                <div style={{ fontWeight: 800 }}>{nm(id)}{duel.winner === id ? ' 🏆' : ''}</div>
+                <div style={{ fontSize: 12, color: 'var(--text-muted)' }}>
+                  {duel.score[k]} correct · +{duel.pts[k]} pts{duel.status === 'active' && (answered[k] ? ' · ✓ answered' : ' · thinking…')}
+                </div>
+              </div>
+            </div>
+          )
+        })}
+        <div style={{ order: 1, fontWeight: 800, fontSize: 20 }}>VS</div>
+      </div>
+
+      {duel.status === 'offered' && (
+        side === 'b' && onReply ? (
+          <div style={{ display: 'grid', gap: 8 }}>
+            <div style={{ fontSize: 13 }}>{nm(duel.a)} landed on your space and challenged you. Up to <b>{DUEL_ROUNDS * (DUEL_CORRECT + DUEL_SPEED) + DUEL_WIN} points</b> for the winner. It does not use a turn — but everyone is watching.</div>
+            <div style={{ display: 'flex', gap: 8 }}>
+              <button onClick={() => onReply(true)} style={btnStyle('#D6425E', true)}>⚔️ Accept the challenge</button>
+              <button onClick={() => onReply(false)} style={btnStyle('var(--text-muted)')}>No thanks</button>
+            </div>
+          </div>
+        ) : <div style={{ fontSize: 13, color: 'var(--text-muted)' }}>{nm(duel.a)} has challenged {nm(duel.b)}. If {nm(duel.b)} accepts, three sustainability questions decide it.</div>
+      )}
+
+      {duel.status === 'active' && (
+        <div style={{ display: 'grid', gap: 8 }}>
+          <div style={{ fontWeight: 700 }}>{q.q}</div>
+          {side && onAnswer ? (
+            answered[side] ? (
+              <div style={{ fontSize: 13, color: 'var(--text-muted)' }}>Answer locked in — waiting for {nm(side === 'a' ? duel.b : duel.a)}…</div>
+            ) : (
+              <div style={{ display: 'grid', gap: 6 }}>
+                {order.map((oi) => (
+                  <button key={oi} onClick={() => onAnswer(oi)} style={{ ...btnStyle('var(--surface)'), textAlign: 'left' }}>{q.options[oi]}</button>
+                ))}
+              </div>
+            )
+          ) : (
+            <div style={{ fontSize: 12, color: 'var(--text-muted)' }}>Watching live — the answer is revealed when both have chosen.</div>
+          )}
+        </div>
+      )}
+
+      {duel.rounds.length > 0 && (
+        <div style={{ display: 'grid', gap: 4 }}>
+          {duel.rounds.map((rd, i) => {
+            const dq = DUEL_QUESTIONS[rd.q]
+            return (
+              <div key={i} style={{ fontSize: 12, background: 'var(--surface-2)', border: '1.5px solid var(--border)', borderRadius: 8, padding: '5px 8px' }}>
+                <b>Round {i + 1}</b> · {dq.q} → <span style={{ color: '#1E7A5F', fontWeight: 700 }}>{dq.options[dq.correct]}</span>
+                <span style={{ marginLeft: 8 }}>{nm(duel.a)} {rd.ca ? '✓' : '✗'} (+{rd.pa}) · {nm(duel.b)} {rd.cb ? '✓' : '✗'} (+{rd.pb})</span>
+              </div>
+            )
+          })}
+        </div>
+      )}
+
+      {duel.status === 'done' && (
+        <div style={{ fontWeight: 800, textAlign: 'center' }}>
+          {duel.winner ? `🏆 ${nm(duel.winner)} wins ${Math.max(duel.score.a, duel.score.b)}–${Math.min(duel.score.a, duel.score.b)} (winner bonus +${DUEL_WIN})` : `🤝 Level at ${duel.score.a}–${duel.score.b}`}
+        </div>
+      )}
     </div>
   )
 }
@@ -177,10 +285,23 @@ export function SustainabilityGameHost({ session, players, patchState, run }: {
   const [p2, setP2] = useState(3)
   const [target, setTarget] = useState<number | null>(null)
   const writing = useRef(false)
+  const gameRef = useRef(game)
+  gameRef.current = game
   useLiveTable<LiveEventRow>('live_events', 'session_code', session.code, setEvents, true)
 
   const names = useMemo(() => Object.fromEntries(players.map((p) => [p.id, p.name])), [players])
   const write = (g: GameState) => patchState({ game: g })
+  const writeRef = useRef(write)
+  writeRef.current = write
+
+  // A challenge nobody answers must not freeze the class: time it out.
+  useEffect(() => {
+    const t = setInterval(() => {
+      const g2 = expireDuel(gameRef.current, Date.now())
+      if (g2 !== gameRef.current && !writing.current) writeRef.current(g2)
+    }, 5000)
+    return () => clearInterval(t)
+  }, [])
 
   // Keep roles in sync with who has joined, and apply students' moves, in order.
   useEffect(() => {
@@ -204,11 +325,12 @@ export function SustainabilityGameHost({ session, players, patchState, run }: {
 
   const boardBlock = (
     <>
+      {game.duel && <DuelBanner duel={game.duel} names={names} />}
       <div style={{ display: 'flex', gap: 8, justifyContent: 'center' }}>
         <button onClick={() => setView('board')} style={btnStyle('var(--text)', view === 'board')}>🗺️ Board</button>
         <button onClick={() => setView('summary')} style={btnStyle('var(--text)', view === 'summary')}>📊 Class summary</button>
       </div>
-      {view === 'board' ? <Board3D pawns={pawns} health={metrics.health} smog={metrics.smog} activePos={activePlayer?.pending?.newPos ?? null} height={480} /> : <ClassSummary game={game} names={names} />}
+      {view === 'board' ? <Board3D pawns={pawns} health={metrics.health} smog={metrics.smog} activePos={game.duel && duelOpen(game) ? game.duel.pos : activePlayer?.pending?.newPos ?? null} height={480} /> : <ClassSummary game={game} names={names} />}
       <div style={{ textAlign: 'center', fontSize: 14, fontWeight: 700, color: '#fff' }}>
         {game.mode === 'async'
           ? `${Object.values(game.players).filter((p) => (game.phase === 'phase1' ? p.t1 < game.p1Turns : p.t2 < game.p2Turns)).length} of ${n} students still have turns left`
@@ -346,8 +468,17 @@ export function SustainabilityGameHost({ session, players, patchState, run }: {
 }
 
 // ---------------------------------------------------------------- student
-export function SustainabilityGamePlayer({ session, me, code }: { session: LiveSessionRow; me: LivePlayerRow; code: string }) {
+export function SustainabilityGamePlayer({ session, me, code, players, patchMyData, addPoints }: {
+  session: LiveSessionRow
+  me: LivePlayerRow
+  code: string
+  players: LivePlayerRow[]
+  patchMyData: (stageKey: string, patch: Record<string, any>) => void
+  addPoints: (delta: number) => void
+}) {
   const game = gameOf(session)
+  const names = useMemo(() => Object.fromEntries(players.map((p) => [p.id, p.name])), [players])
+  const [declinedHere, setDeclinedHere] = useState<string | null>(null)
   const mine = game.players[me.id]
   const [rolling, setRolling] = useState(false)
   const [rolled, setRolled] = useState<number | null>(null)
@@ -365,7 +496,23 @@ export function SustainabilityGamePlayer({ session, me, code }: { session: LiveS
   const turnKey = `${phase}:${game.idx}:${mine?.t1 ?? 0}:${mine?.t2 ?? 0}`
   useEffect(() => { setRolled(null); setBusy(false); setWhy(null) }, [turnKey])
 
-  const send = async (type: 'sc_roll' | 'sc_act', payload: Record<string, any>) => {
+  // Collect War Quiz points once per finished duel (recorded in my own data so a refresh cannot repeat it).
+  const paidRef = useRef<Set<string>>(new Set())
+  useEffect(() => {
+    const paid: string[] = me.data?.game?.paidDuels ?? []
+    let next = paid
+    ;(game.duels ?? []).forEach((r) => {
+      const pts = r.pts[me.id]
+      if (!pts || paid.includes(r.id) || paidRef.current.has(r.id)) return
+      paidRef.current.add(r.id)
+      addPoints(pts)
+      next = [...next, r.id]
+    })
+    if (next !== paid) patchMyData('game', { paidDuels: next })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [game.duels])
+
+  const send = async (type: 'sc_roll' | 'sc_act' | 'sc_duel_offer' | 'sc_duel_reply' | 'sc_duel_answer', payload: Record<string, any>) => {
     setBusy(true)
     setError(null)
     const { error: err } = await createClient().from('live_events').insert({ session_code: code, player_id: me.id, type, payload })
@@ -386,6 +533,8 @@ export function SustainabilityGamePlayer({ session, me, code }: { session: LiveS
   }
 
   const role = ROLES[mine.role]
+  const inMyDuel = !!game.duel && duelOpen(game) && game.duel.a === me.id
+  const mates = pending && !duelOpen(game) && myTurn ? sharedWith(game, me.id).filter((id) => id !== declinedHere) : []
   const space = pending ? BOARD[pending.newPos] : null
   const scenario = space ? SECTOR_SCENARIO[space.sector] : null
 
@@ -406,6 +555,16 @@ export function SustainabilityGamePlayer({ session, me, code }: { session: LiveS
     <div style={{ display: 'grid', gap: 14 }}>
       {header}
       {error && <div style={{ background: '#D6425E', color: '#fff', borderRadius: 10, padding: '8px 14px', fontSize: 13 }}>⚠ {error}</div>}
+
+      {game.duel && (
+        <DuelBanner
+          duel={game.duel}
+          names={names}
+          meId={me.id}
+          onReply={(accept) => send('sc_duel_reply', { accept })}
+          onAnswer={(choice) => send('sc_duel_answer', { round: game.duel!.round, choice })}
+        />
+      )}
 
       {phase !== 'lobby' && <Board3D pawns={pawns} health={metrics.health} smog={metrics.smog} activePos={pending?.newPos ?? mine.pos} youId={me.id} height={400} />}
 
@@ -442,7 +601,24 @@ export function SustainabilityGamePlayer({ session, me, code }: { session: LiveS
         </div>
       )}
 
-      {phase === 'phase1' && myTurn && pending && space && scenario && (
+      {mates.length > 0 && (
+        <div style={{ ...cardStyle('#D6425E'), display: 'grid', gap: 8 }}>
+          <div style={{ fontWeight: 800 }}>⚔️ Side mission: you share this space!</div>
+          <div style={{ fontSize: 13, color: 'var(--text-muted)' }}>
+            {mates.map((id) => names[id] || 'a classmate').join(' and ')} {mates.length > 1 ? 'are' : 'is'} here too. Challenge one of them to a Sustainability War Quiz — {DUEL_ROUNDS} questions, up to {DUEL_ROUNDS * (DUEL_CORRECT + DUEL_SPEED) + DUEL_WIN} points, and the whole class watches. They must say yes. It does not use up your turn.
+          </div>
+          <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+            {mates.map((id) => (
+              <button key={id} disabled={busy} onClick={() => send('sc_duel_offer', { targetId: id })} style={btnStyle('#D6425E', true)}>⚔️ Challenge {names[id] || 'classmate'}</button>
+            ))}
+            <button onClick={() => setDeclinedHere(mates[0])} style={btnStyle('var(--text-muted)')}>No thanks, carry on</button>
+          </div>
+        </div>
+      )}
+
+      {inMyDuel && <div style={{ ...cardStyle(), textAlign: 'center', color: 'var(--text-muted)' }}>Your turn is paused while the War Quiz plays out…</div>}
+
+      {phase === 'phase1' && !inMyDuel && myTurn && pending && space && scenario && (
         <div style={{ ...cardStyle(SECTOR_META[space.sector].color), display: 'grid', gap: 10 }}>
           <div style={{ fontWeight: 800 }}>{SECTOR_META[space.sector].icon} You landed on {space.name}</div>
           <div style={{ fontSize: 13.5, color: 'var(--text-muted)' }}>{scenario.blurb}</div>
@@ -453,7 +629,7 @@ export function SustainabilityGamePlayer({ session, me, code }: { session: LiveS
         </div>
       )}
 
-      {phase === 'phase2' && myTurn && pending && space && (
+      {phase === 'phase2' && !inMyDuel && myTurn && pending && space && (
         <div style={{ ...cardStyle('#1E7A5F'), display: 'grid', gap: 10 }}>
           <div style={{ fontWeight: 800 }}>{SECTOR_META[space.sector].icon} You are at {space.name}. Choose your action.</div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 8 }}>

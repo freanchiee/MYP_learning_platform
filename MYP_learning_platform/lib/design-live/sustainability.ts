@@ -182,6 +182,67 @@ export interface GameLogEntry {
   choice?: 'a' | 'b'
   combo?: boolean
   note?: string
+  /** 'duel' entries are telemetry for the side mission, not turns. */
+  kind?: 'duel'
+}
+
+// ------------------------------------------------------------------
+// Side mission: Sustainability War Quiz
+//
+// When a mover lands on a space another student is already standing on, they
+// may challenge that student to a 1-v-1 quiz. Both must agree. It does not use
+// up a turn, but the challenger cannot act until it ends, so the whole class
+// watches it unfold (see DuelBanner). Points: correct answers, a small speed
+// bonus when both are right, and a winner bonus.
+// ------------------------------------------------------------------
+export const DUEL_ROUNDS = 3
+export const DUEL_CORRECT = 10
+export const DUEL_SPEED = 5
+export const DUEL_WIN = 20
+
+export interface DuelQuestion { q: string; options: string[]; correct: number; topic: string }
+
+export const DUEL_QUESTIONS: DuelQuestion[] = [
+  { topic: 'Carbon credits', q: 'One carbon credit stands for…', options: ['One tree planted', 'One tonne of CO₂e avoided or removed', 'One recycled bottle', 'One solar panel'], correct: 1 },
+  { topic: 'Carbon credits', q: 'A credit is “additional” when…', options: ['It is cheap', 'The cut would not have happened without the credit money', 'A big firm sells it', 'It is sold abroad'], correct: 1 },
+  { topic: 'Carbon credits', q: 'Which is the best order of action?', options: ['Offset first, reduce later', 'Reduce first, offset what remains', 'Never reduce, only offset', 'Ignore both'], correct: 1 },
+  { topic: 'Greenwashing', q: 'A product says “eco-friendly” with no evidence. This is most likely…', options: ['A certified claim', 'Greenwashing', 'A legal requirement', 'A carbon credit'], correct: 1 },
+  { topic: 'Circular economy', q: 'Which best describes a circular economy?', options: ['Make, use, throw away', 'Keep materials in use through reuse, repair and recycling', 'Burn waste for energy', 'Buy more, faster'], correct: 1 },
+  { topic: 'Circular economy', q: 'Which choice keeps a phone in use the longest?', options: ['Replace it yearly', 'Repair it and resell it when done', 'Bin it', 'Ship it overseas'], correct: 1 },
+  { topic: 'Externalities', q: 'A factory’s pollution is paid for by nearby residents’ health. This cost is called…', options: ['A profit', 'An externality', 'A subsidy', 'A credit'], correct: 1 },
+  { topic: 'Life cycle', q: 'A simple life-cycle look at a product compares…', options: ['Price, colour, size', 'Sourcing, use and end of life', 'Advertising, sales, profit', 'Only manufacturing'], correct: 1 },
+  { topic: 'Systems', q: 'Planned obsolescence means…', options: ['Products designed to last decades', 'Products designed to become outdated or fail sooner', 'A repair scheme', 'A recycling law'], correct: 1 },
+  { topic: 'Digital footprint', q: 'Which helps keep a website’s footprint low?', options: ['Large autoplay videos', 'Small compressed images and less tracking', 'Storing every file forever', 'Very heavy scripts'], correct: 1 },
+  { topic: 'Ethics', q: 'Before interviewing real people for a design project you should…', options: ['Record them secretly', 'Get consent and anonymise notes', 'Publish their names', 'Skip the ethics note'], correct: 1 },
+  { topic: 'Fairness', q: 'A carbon-offset forest stops villagers farming. The key design concern is…', options: ['Logo colour', 'Consent and fair sharing of benefit', 'Credit price only', 'Nothing — it is legal'], correct: 1 },
+  { topic: 'Policy', q: 'In cap-and-trade, who sets the cap?', options: ['Each company', 'Consumers', 'The regulator or government', 'The community'], correct: 2 },
+  { topic: 'Permanence', q: 'If a protected forest burns, the credit’s problem is…', options: ['None', 'The stored carbon is released, so the saving was not permanent', 'It is worth more', 'The buyer is fined'], correct: 1 },
+]
+
+export interface DuelRound { q: number; a: number; b: number; ca: boolean; cb: boolean; pa: number; pb: number }
+export interface Duel {
+  id: string
+  a: string
+  b: string
+  status: 'offered' | 'active' | 'done' | 'declined' | 'expired'
+  round: number
+  qs: number[]
+  cur: { a?: { choice: number; at: string }; b?: { choice: number; at: string } }
+  rounds: DuelRound[]
+  score: { a: number; b: number }
+  pts: { a: number; b: number }
+  winner: string | null
+  pos: number
+  at: string
+}
+export interface DuelResult { id: string; a: string; b: string; pts: Record<string, number>; winner: string | null; score: { a: number; b: number } }
+
+const hash = (str: string) => { let h = 2166136261; for (let i = 0; i < str.length; i++) { h ^= str.charCodeAt(i); h = Math.imul(h, 16777619) } return h >>> 0 }
+function pickQuestions(seed: string): number[] {
+  const out: number[] = []
+  let h = hash(seed)
+  while (out.length < DUEL_ROUNDS) { h = Math.imul(h ^ (h >>> 15), 2246822507) >>> 0; const i = h % DUEL_QUESTIONS.length; if (!out.includes(i)) out.push(i) }
+  return out
 }
 
 export interface GameState {
@@ -207,6 +268,10 @@ export interface GameState {
   log: GameLogEntry[]
   cursor: string
   doneIds: string[]
+  /** The side-mission duel in progress (or just finished), if any. */
+  duel?: Duel | null
+  /** Finished duels, used once by each student's browser to collect their points. */
+  duels?: DuelResult[]
 }
 
 export interface ScEvent {
@@ -224,7 +289,7 @@ export function newGame(): GameState {
     phase: 'lobby', mode: 'live', turnOrder: [], idx: 0, p1Turns: 3, p2Turns: 3,
     consumption: 0, externality: 0, wellbeing: 100, landHealth: 100,
     carbonDebt: 0, carbonStart: 0, carbonTarget: 0, creditPool: 0, retired: 0,
-    turns1: 0, turns2: 0, lastRole: null, players: {}, log: [], cursor: '', doneIds: [],
+    turns1: 0, turns2: 0, lastRole: null, players: {}, log: [], cursor: '', doneIds: [], duel: null, duels: [],
   }
 }
 
@@ -268,7 +333,7 @@ export function startPhase1(g: GameState, mode: 'live' | 'async', p1Turns: numbe
   return {
     ...g, phase: 'phase1', mode, turnOrder: shuffle(ids), idx: 0, p1Turns, p2Turns,
     consumption: 0, externality: 0, wellbeing: 100, landHealth: 100, turns1: 0, turns2: 0,
-    carbonDebt: 0, carbonStart: 0, carbonTarget: 0, creditPool: 0, retired: 0, lastRole: null, players, log: [],
+    carbonDebt: 0, carbonStart: 0, carbonTarget: 0, creditPool: 0, retired: 0, lastRole: null, players, log: [], duel: null, duels: [],
   }
 }
 
@@ -309,10 +374,90 @@ export function canAct(g: GameState, id: string): boolean {
   return (g.phase === 'phase1' ? p.t1 : p.t2) < (g.phase === 'phase1' ? g.p1Turns : g.p2Turns)
 }
 
+export const duelOpen = (g: GameState) => !!g.duel && (g.duel.status === 'offered' || g.duel.status === 'active')
+/** Other students standing on the same space as this player. */
+export const sharedWith = (g: GameState, id: string): string[] => {
+  const me = g.players[id]
+  if (!me) return []
+  return Object.entries(g.players).filter(([oid, o]) => oid !== id && o.pos === me.pos).map(([oid]) => oid)
+}
+
+function applyDuelEvent(g: GameState, ev: ScEvent, names: Record<string, string>): GameState {
+  const id = ev.player_id
+  const me = id ? g.players[id] : undefined
+  if (!id || !me || (g.phase !== 'phase1' && g.phase !== 'phase2')) return g
+  const nm = (x: string) => names[x] || 'Student'
+  const say = (label: string): GameLogEntry => ({ n: 0, pid: id, name: nm(id), role: me.role, phase: g.phase as 'phase1' | 'phase2', label, kind: 'duel' })
+  const withLog = (next: GameState, label: string): GameState => ({ ...next, log: [...g.log, say(label)].slice(-80) })
+  const d = g.duel ?? null
+
+  if (ev.type === 'sc_duel_offer') {
+    const target = String(ev.payload?.targetId || '')
+    const t = g.players[target]
+    if (duelOpen(g) || !t || target === id || !me.pending || !canAct(g, id) || t.pos !== me.pos) return g
+    const duel: Duel = { id: ev.id, a: id, b: target, status: 'offered', round: 0, qs: pickQuestions(ev.id), cur: {}, rounds: [], score: { a: 0, b: 0 }, pts: { a: 0, b: 0 }, winner: null, pos: me.pos, at: ev.created_at }
+    return withLog({ ...g, duel }, `⚔️ ${nm(id)} challenged ${nm(target)} to a Sustainability War Quiz on ${BOARD[me.pos].name}`)
+  }
+  if (!d) return g
+
+  if (ev.type === 'sc_duel_reply') {
+    if (d.status !== 'offered' || id !== d.b) return g
+    if (ev.payload?.accept) return withLog({ ...g, duel: { ...d, status: 'active', at: ev.created_at } }, `✅ ${nm(id)} accepted — the War Quiz begins (${DUEL_ROUNDS} rounds)`)
+    return withLog({ ...g, duel: { ...d, status: 'declined', at: ev.created_at } }, `🕊️ ${nm(id)} declined the challenge`)
+  }
+
+  if (ev.type === 'sc_duel_answer') {
+    if (d.status !== 'active') return g
+    const side = id === d.a ? 'a' : id === d.b ? 'b' : null
+    const choice = Number(ev.payload?.choice)
+    if (!side || Number(ev.payload?.round) !== d.round || d.cur[side] || !Number.isInteger(choice)) return g
+    const cur = { ...d.cur, [side]: { choice, at: ev.created_at } }
+    if (!(cur.a && cur.b)) return { ...g, duel: { ...d, cur, at: ev.created_at } }
+
+    const q = DUEL_QUESTIONS[d.qs[d.round]]
+    const ca = cur.a.choice === q.correct
+    const cb = cur.b.choice === q.correct
+    let pa = ca ? DUEL_CORRECT : 0
+    let pb = cb ? DUEL_CORRECT : 0
+    if (ca && cb && cur.a.at !== cur.b.at) { if (cur.a.at < cur.b.at) pa += DUEL_SPEED; else pb += DUEL_SPEED }
+    const round: DuelRound = { q: d.qs[d.round], a: cur.a.choice, b: cur.b.choice, ca, cb, pa, pb }
+    const score = { a: d.score.a + (ca ? 1 : 0), b: d.score.b + (cb ? 1 : 0) }
+    const pts = { a: d.pts.a + pa, b: d.pts.b + pb }
+    const rounds = [...d.rounds, round]
+    const roundLine = `Round ${d.round + 1}: ${nm(d.a)} ${ca ? '✓' : '✗'} · ${nm(d.b)} ${cb ? '✓' : '✗'}${ca && cb ? ' (speed bonus to the faster)' : ''}`
+
+    if (d.round + 1 < DUEL_ROUNDS) {
+      return withLog({ ...g, duel: { ...d, cur: {}, round: d.round + 1, rounds, score, pts, at: ev.created_at } }, roundLine)
+    }
+    const winner = score.a === score.b ? null : score.a > score.b ? d.a : d.b
+    if (winner === d.a) pts.a += DUEL_WIN
+    if (winner === d.b) pts.b += DUEL_WIN
+    const done: Duel = { ...d, cur: {}, rounds, score, pts, status: 'done', winner, at: ev.created_at }
+    const result: DuelResult = { id: d.id, a: d.a, b: d.b, pts: { [d.a]: pts.a, [d.b]: pts.b }, winner, score }
+    const summary = winner ? `🏆 ${nm(winner)} wins the War Quiz ${Math.max(score.a, score.b)}–${Math.min(score.a, score.b)}` : `🤝 The War Quiz ends level at ${score.a}–${score.b}`
+    return { ...g, duel: done, duels: [...(g.duels ?? []), result].slice(-30), log: [...g.log, say(roundLine), say(`${summary} · ${nm(d.a)} +${pts.a} pts, ${nm(d.b)} +${pts.b} pts`)].slice(-80) }
+  }
+  return g
+}
+
+/** Host-side housekeeping: a challenge nobody answers must not freeze the class. */
+export function expireDuel(g: GameState, nowMs: number): GameState {
+  const d = g.duel
+  if (!d || !duelOpen(g)) return g
+  const limit = d.status === 'offered' ? 90000 : 150000
+  if (nowMs - Date.parse(d.at) < limit) return g
+  const a = g.players[d.a]
+  const entry: GameLogEntry = { n: 0, pid: d.a, name: 'Class', role: a?.role ?? 'community', phase: g.phase === 'phase2' ? 'phase2' : 'phase1', label: '⏱️ The War Quiz timed out — play goes on', kind: 'duel' }
+  return { ...g, duel: { ...d, status: 'expired' }, log: [...g.log, entry].slice(-80) }
+}
+
 /** Apply one player event. Returns the same object if the event is not valid right now. */
 export function applyEvent(g: GameState, ev: ScEvent, names: Record<string, string>): GameState {
   const id = ev.player_id
+  if (ev.type === 'sc_duel_offer' || ev.type === 'sc_duel_reply' || ev.type === 'sc_duel_answer') return applyDuelEvent(g, ev, names)
   if (!id || !g.players[id] || !canAct(g, id)) return g
+  // Taking part in a War Quiz pauses your own turn until it is over.
+  if (g.duel && duelOpen(g) && g.duel.a === id) return g
   const p = g.players[id]
   const phase = g.phase as 'phase1' | 'phase2'
 
@@ -382,6 +527,7 @@ export function applyEvent(g: GameState, ev: ScEvent, names: Record<string, stri
   }
 
   next.players[id] = np
+  if (next.duel && !duelOpen(next)) next.duel = null
   next.log = [...g.log, logEntry].slice(-80)
   if (g.mode === 'live') next.idx = (g.idx + 1) % Math.max(1, g.turnOrder.length)
   if (isDone(next, phase)) next.phase = phase === 'phase1' ? 'reveal1' : 'reveal2'
@@ -395,7 +541,7 @@ export function applyEvent(g: GameState, ev: ScEvent, names: Record<string, stri
  */
 export function processEvents(g: GameState, events: ScEvent[], names: Record<string, string>): GameState {
   const fresh = events
-    .filter((e) => e.type === 'sc_roll' || e.type === 'sc_act')
+    .filter((e) => e.type === 'sc_roll' || e.type === 'sc_act' || e.type === 'sc_duel_offer' || e.type === 'sc_duel_reply' || e.type === 'sc_duel_answer')
     .filter((e) => !g.doneIds.includes(e.id) && (!g.cursor || e.created_at >= g.cursor))
     .sort((a, b) => (a.created_at < b.created_at ? -1 : a.created_at > b.created_at ? 1 : a.id < b.id ? -1 : 1))
   if (!fresh.length) return g
