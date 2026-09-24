@@ -1,9 +1,10 @@
 import type { LiveActivityDefinition, MypYear } from './types'
 import { MYP2_DESIGN_STUDIO } from './myp2-design-studio'
+import { MYP2_EVERYDAY_NEEDS } from './myp2-everyday-needs'
 import { MYP3_UNIT1_KICKOFF } from './myp3-unit1-kickoff'
 import { MYP4_PROTOTYPING } from './myp4-prototyping'
 
-export const LIVE_ACTIVITIES: LiveActivityDefinition[] = [MYP2_DESIGN_STUDIO, MYP3_UNIT1_KICKOFF, MYP4_PROTOTYPING]
+export const LIVE_ACTIVITIES: LiveActivityDefinition[] = [MYP2_DESIGN_STUDIO, MYP2_EVERYDAY_NEEDS, MYP3_UNIT1_KICKOFF, MYP4_PROTOTYPING]
 
 export const YEARS: MypYear[] = ['MYP2', 'MYP3', 'MYP4']
 
