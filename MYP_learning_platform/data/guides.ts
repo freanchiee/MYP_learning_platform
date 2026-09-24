@@ -125,7 +125,12 @@ export const GUIDES: SubjectGuide[] = [
     faq: sciencesFaq('Physics'),
     relatedPosts: [
       { label: 'Scalars vs vectors, SI units & measurement', href: '/blog/scalars-vectors-si-units-myp-physics' },
+      { label: 'The electromagnetic spectrum: waves, uses & hazards', href: '/blog/electromagnetic-spectrum-myp-physics' },
+      { label: 'Thermal conductivity & heat transfer', href: '/blog/thermal-conductivity-heat-transfer-myp-physics' },
+      { label: 'The life cycle of stars', href: '/blog/life-cycle-of-stars-stellar-evolution-myp-physics' },
+      { label: 'Significant figures: rules & rounding', href: '/blog/significant-figures-rules-myp-science' },
       { label: 'Scientific method: predictions, hypotheses & variables', href: '/blog/scientific-method-hypothesis-variables-myp-science' },
+      { label: 'Criterion B: research question, variables & method', href: '/blog/research-question-variables-methodology-criterion-b-myp-science' },
     ],
   },
   {
@@ -147,7 +152,14 @@ export const GUIDES: SubjectGuide[] = [
     relatedConcepts: ['Balance', 'Conditions', 'Consequences', 'Interaction', 'Patterns', 'Transfer', 'Transformation'],
     officialUrl: SCIENCES_URL,
     faq: sciencesFaq('Chemistry'),
-    relatedPosts: [{ label: 'Scientific method: predictions, hypotheses & variables', href: '/blog/scientific-method-hypothesis-variables-myp-science' }],
+    relatedPosts: [
+      { label: 'The history of the atom: Dalton to Bohr', href: '/blog/atomic-models-dalton-thomson-rutherford-bohr-myp-chemistry' },
+      { label: 'Ionic, covalent & metallic bonding', href: '/blog/ionic-covalent-metallic-bonding-myp-chemistry' },
+      { label: 'Separation techniques & Criterion D (toiletries)', href: '/blog/separation-techniques-natural-vs-synthetic-criterion-d-myp-chemistry' },
+      { label: 'Significant figures: rules & rounding', href: '/blog/significant-figures-rules-myp-science' },
+      { label: 'Scientific method: predictions, hypotheses & variables', href: '/blog/scientific-method-hypothesis-variables-myp-science' },
+      { label: 'Criterion B: research question, variables & method', href: '/blog/research-question-variables-methodology-criterion-b-myp-science' },
+    ],
   },
   {
     slug: 'biology',
@@ -172,7 +184,10 @@ export const GUIDES: SubjectGuide[] = [
       { label: 'Hydrothermal vents & chemosynthesis, with a live classification lab', href: '/blog/hydrothermal-vents-chemosynthesis-myp-biology' },
       { label: 'Classification: kingdoms, binomial names & dichotomous keys', href: '/blog/classification-kingdoms-dichotomous-keys-myp-biology' },
       { label: 'Cells, tissues, organs & organ systems (Year 4)', href: '/blog/cells-tissues-organs-levels-of-organisation-myp-biology' },
+      { label: 'Food chains, food webs & human impact', href: '/blog/food-chains-food-webs-human-impact-myp-biology' },
+      { label: 'Producers, consumers & decomposers', href: '/blog/producers-consumers-decomposers-ecosystem-roles-myp-biology' },
       { label: 'Scientific method: predictions, hypotheses & variables', href: '/blog/scientific-method-hypothesis-variables-myp-science' },
+      { label: 'Criterion D: weighing the safety impact of technology', href: '/blog/criterion-d-reflecting-on-impact-safety-myp-science' },
     ],
   },
   {

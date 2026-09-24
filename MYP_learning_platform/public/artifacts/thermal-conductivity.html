@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thermal Conductivity - Interactive Simulator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            overflow: hidden;
+        }
+        
+        #canvas {
+            width: 60%;
+            height: 100vh;
+            background: radial-gradient(circle at 30% 50%, #1a1a3e 0%, #0d0d1f 100%);
+        }
+
+        .sidebar {
+            width: 40%;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.85);
+            padding: 30px;
+            color: white;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        h1 {
+            color: #4ade80;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .section {
+            background: rgba(30, 30, 50, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+
+        .section h2 {
+            color: #60a5fa;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .option-btn {
+            padding: 15px;
+            background: rgba(100, 120, 234, 0.2);
+            border: 2px solid #667eea;
+            color: #e5e7eb;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+            font-size: 13px;
+        }
+
+        .option-btn:hover {
+            background: rgba(100, 120, 234, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .option-btn.active {
+            background: #4ade80;
+            border-color: #4ade80;
+            color: #000;
+            box-shadow: 0 0 15px rgba(74, 222, 128, 0.5);
+        }
+
+        .control-group {
+            margin-bottom: 15px;
+        }
+
+        .control-label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #a0aec0;
+        }
+
+        .control-label strong {
+            color: #e5e7eb;
+        }
+
+        .slider {
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: rgba(255, 255, 255, 0.1);
+            outline: none;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #667eea;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .slider::-webkit-slider-thumb:hover {
+            background: #764ba2;
+            box-shadow: 0 0 10px rgba(100, 120, 234, 0.6);
+        }
+
+        .slider::-moz-range-thumb {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #667eea;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+        }
+
+        .slider::-moz-range-thumb:hover {
+            background: #764ba2;
+            box-shadow: 0 0 10px rgba(100, 120, 234, 0.6);
+        }
+
+        .toggle-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .toggle-btn {
+            flex: 1;
+            padding: 10px;
+            background: rgba(100, 120, 234, 0.2);
+            border: 2px solid #667eea;
+            color: #e5e7eb;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .toggle-btn.active {
+            background: #667eea;
+            border-color: #667eea;
+        }
+
+        .specs-display {
+            background: rgba(74, 222, 128, 0.1);
+            border-left: 4px solid #4ade80;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+        }
+
+        .spec-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 13px;
+        }
+
+        .spec-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .spec-label {
+            color: #a0aec0;
+        }
+
+        .spec-value {
+            color: #4ade80;
+            font-weight: bold;
+        }
+
+        .analysis {
+            background: rgba(251, 146, 60, 0.1);
+            border-left: 4px solid #fbbf24;
+            padding: 15px;
+            border-radius: 6px;
+            font-size: 13px;
+            line-height: 1.6;
+            color: #fef3c7;
+        }
+
+        .particle-speed-indicator {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            background: rgba(255, 107, 53, 0.1);
+            border-radius: 6px;
+            margin-bottom: 15px;
+        }
+
+        .speed-bar {
+            flex: 1;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .speed-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ff6b35, #fbbf24);
+            border-radius: 4px;
+            transition: width 0.3s;
+        }
+
+        .speed-label {
+            font-size: 12px;
+            color: #fca5a5;
+            min-width: 50px;
+        }
+
+        .controls-bottom {
+            display: flex;
+            gap: 10px;
+            margin-top: auto;
+        }
+
+        button {
+            flex: 1;
+            padding: 12px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        button:hover {
+            background: #764ba2;
+            transform: translateY(-2px);
+        }
+
+        .lagging-visual {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            background: rgba(100, 120, 234, 0.1);
+            border-radius: 6px;
+            margin-bottom: 10px;
+            font-size: 13px;
+        }
+
+        .lagging-indicator {
+            width: 20px;
+            height: 20px;
+            border-radius: 3px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid #667eea;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+        }
+
+        .lagging-indicator.active {
+            background: #fbbf24;
+            border-color: #fbbf24;
+        }
+
+        @media (max-width: 1024px) {
+            body {
+                flex-direction: column;
+            }
+            #canvas {
+                width: 100%;
+                height: 50vh;
+            }
+            .sidebar {
+                width: 100%;
+                height: 50vh;
+                padding: 20px;
+            }
+            .options-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .info-text {
+            font-size: 12px;
+            color: #a0aec0;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    
+    <div class="sidebar">
+        <div>
+            <h1>🔬 Thermal Conductivity Simulator</h1>
+            <p style="font-size: 12px; color: #a0aec0; margin-bottom: 15px;">Adjust parameters to see how they affect heat transfer</p>
+
+            <div class="section">
+                <h2>Select Option</h2>
+                <div class="options-grid">
+                    <button class="option-btn" onclick="selectOption('A')">
+                        A: Small + Thin<br><span style="font-size: 11px;">No lagging</span>
+                    </button>
+                    <button class="option-btn" onclick="selectOption('B')">
+                        B: Small + Thick<br><span style="font-size: 11px;">With lagging</span>
+                    </button>
+                    <button class="option-btn" onclick="selectOption('C')">
+                        C: Large + Thin<br><span style="font-size: 11px;">No lagging</span>
+                    </button>
+                    <button class="option-btn active" onclick="selectOption('D')">
+                        D: Large + Thick<br><span style="font-size: 11px;">With lagging</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Customize Specimen</h2>
+                
+                <div class="control-group">
+                    <div class="control-label">
+                        <strong>Cross-sectional Area</strong>
+                        <span id="areaValue">6.0 × 3.5 = 21</span>
+                    </div>
+                    <div style="display: flex; gap: 10px; align-items: center;">
+                        <button style="flex: 0; padding: 8px 12px; font-size: 16px;" onclick="decreaseArea()">−</button>
+                        <input type="range" class="slider" id="areaSlider" min="1" max="10" value="6" oninput="updateArea(this.value)">
+                        <button style="flex: 0; padding: 8px 12px; font-size: 16px;" onclick="increaseArea()">+</button>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <div class="control-label">
+                        <strong>Thickness</strong>
+                        <span id="thicknessValue">0.8 mm</span>
+                    </div>
+                    <div style="display: flex; gap: 10px; align-items: center;">
+                        <button style="flex: 0; padding: 8px 12px; font-size: 16px;" onclick="decreaseThickness()">−</button>
+                        <input type="range" class="slider" id="thicknessSlider" min="0.3" max="2.0" step="0.1" value="0.8" oninput="updateThickness(this.value)">
+                        <button style="flex: 0; padding: 8px 12px; font-size: 16px;" onclick="increaseThickness()">+</button>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <div class="control-label">
+                        <strong>Lagging (Insulation)</strong>
+                    </div>
+                    <div class="lagging-visual">
+                        <div class="lagging-indicator" id="laggingIndicator"></div>
+                        <span id="laggingText">No insulation</span>
+                    </div>
+                    <div class="toggle-group">
+                        <button class="toggle-btn active" onclick="setLagging(false)">No Lagging</button>
+                        <button class="toggle-btn" onclick="setLagging(true)">Add Lagging</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Heat Transfer Analysis</h2>
+                <div class="specs-display">
+                    <div class="spec-item">
+                        <span class="spec-label">Current Speed:</span>
+                        <span class="spec-value" id="speedValue">Fast</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Surface Area:</span>
+                        <span class="spec-value" id="areaVal">Large</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Distance (Heat Path):</span>
+                        <span class="spec-value" id="distanceVal">Short</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Insulation:</span>
+                        <span class="spec-value" id="insulationVal">None</span>
+                    </div>
+                </div>
+
+                <div class="particle-speed-indicator">
+                    <span class="speed-label">Heat Flow:</span>
+                    <div class="speed-bar">
+                        <div class="speed-fill" id="speedBar" style="width: 75%;"></div>
+                    </div>
+                </div>
+
+                <div class="analysis" id="analysis">
+                    ✓ <strong>Optimal Choice:</strong> Large surface area allows maximum heat flow. Thin specimen means quick measurement. No lagging needed due to geometry.
+                </div>
+            </div>
+        </div>
+
+        <div class="controls-bottom">
+            <button onclick="resetToDefaults()">⟲ Reset Defaults</button>
+            <button onclick="toggleHeatAnimation()">🔥 Pause Heat</button>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        let scene, camera, renderer, specimen, particles, hotBox, coldBox, laggingMesh;
+        let currentOption = 'D';
+        let specimenDimensions = { width: 6, height: 0.8, depth: 3.5 };
+        let hasLagging = false;
+        let heatAnimationEnabled = true;
+        let particleSystem;
+
+        const optionConfigs = {
+            'A': { width: 2, height: 0.8, depth: 1.5, lagging: false, analysis: '❌ Too small to measure accurately. Small surface area reduces heat flow.' },
+            'B': { width: 2, height: 2.0, depth: 1.5, lagging: true, analysis: '❌ Small area + thick = Very slow heat flow. Takes too long to measure results.' },
+            'C': { width: 6, height: 0.8, depth: 3.5, lagging: false, analysis: '✓ CORRECT: Large area, thin, no lagging = Optimal heat transfer and fast measurements!' },
+            'D': { width: 6, height: 2.0, depth: 3.5, lagging: true, analysis: '⚠ Large but too thick. Lagging complicates the setup unnecessarily.' }
+        };
+
+        function init() {
+            const canvas = document.getElementById('canvas');
+            
+            scene = new THREE.Scene();
+            scene.background = new THREE.Color(0x1a1a3e);
+            
+            const width = canvas.clientWidth;
+            const height = canvas.clientHeight;
+            camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
+            camera.position.set(8, 5, 10);
+            camera.lookAt(0, 0, 0);
+            
+            renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true });
+            renderer.setSize(width, height);
+            renderer.setPixelRatio(window.devicePixelRatio);
+            renderer.shadowMap.enabled = true;
+            
+            // Lighting
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+            scene.add(ambientLight);
+            
+            const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+            directionalLight.position.set(10, 12, 8);
+            directionalLight.castShadow = true;
+            directionalLight.shadow.mapSize.width = 2048;
+            directionalLight.shadow.mapSize.height = 2048;
+            scene.add(directionalLight);
+            
+            const redLight = new THREE.PointLight(0xff6b35, 0.8);
+            redLight.position.set(-6, 0, 0);
+            scene.add(redLight);
+            
+            const blueLight = new THREE.PointLight(0x3498db, 0.8);
+            blueLight.position.set(6, 0, 0);
+            scene.add(blueLight);
+            
+            // Ground
+            const groundGeom = new THREE.PlaneGeometry(30, 30);
+            const groundMat = new THREE.MeshLambertMaterial({ color: 0x0a0a1a });
+            const ground = new THREE.Mesh(groundGeom, groundMat);
+            ground.rotation.x = -Math.PI / 2;
+            ground.position.y = -3;
+            ground.receiveShadow = true;
+            scene.add(ground);
+            
+            // Create initial setup
+            createHotSource();
+            createSpecimen();
+            createColdSink();
+            createParticleSystem();
+            
+            // Mouse controls
+            setupControls();
+            window.addEventListener('resize', onWindowResize);
+            
+            animate();
+        }
+
+        function createHotSource() {
+            if (hotBox) scene.remove(hotBox);
+            
+            const hotGeom = new THREE.BoxGeometry(1, 1.2, 3.5);
+            const hotMat = new THREE.MeshPhongMaterial({
+                color: 0xff6b35,
+                emissive: 0xff4500,
+                shininess: 60
+            });
+            hotBox = new THREE.Mesh(hotGeom, hotMat);
+            hotBox.position.x = -5;
+            hotBox.castShadow = true;
+            hotBox.receiveShadow = true;
+            scene.add(hotBox);
+        }
+
+        function createSpecimen() {
+            if (specimen) scene.remove(specimen);
+            
+            const geom = new THREE.BoxGeometry(
+                specimenDimensions.width,
+                specimenDimensions.height,
+                specimenDimensions.depth
+            );
+            const mat = new THREE.MeshPhongMaterial({
+                color: 0x60a5fa,
+                emissive: 0x1e40af,
+                shininess: 40
+            });
+            specimen = new THREE.Mesh(geom, mat);
+            specimen.castShadow = true;
+            specimen.receiveShadow = true;
+            scene.add(specimen);
+
+            // Add lagging if enabled
+            if (hasLagging) {
+                if (laggingMesh) scene.remove(laggingMesh);
+                
+                const laggingGeom = new THREE.BoxGeometry(
+                    specimenDimensions.width + 0.3,
+                    specimenDimensions.height + 0.3,
+                    specimenDimensions.depth + 0.3
+                );
+                const laggingMat = new THREE.MeshPhongMaterial({
+                    color: 0xffb366,
+                    emissive: 0xff8800,
+                    shininess: 20,
+                    wireframe: true,
+                    wireframeLinewidth: 1
+                });
+                laggingMesh = new THREE.Mesh(laggingGeom, laggingMat);
+                laggingMesh.position.z = specimen.position.z;
+                laggingMesh.castShadow = false;
+                scene.add(laggingMesh);
+            } else if (laggingMesh) {
+                scene.remove(laggingMesh);
+                laggingMesh = null;
+            }
+        }
+
+        function createColdSink() {
+            if (coldBox) scene.remove(coldBox);
+            
+            const coldGeom = new THREE.BoxGeometry(1, 1.2, 3.5);
+            const coldMat = new THREE.MeshPhongMaterial({
+                color: 0x3498db,
+                emissive: 0x1e3a8a,
+                shininess: 60
+            });
+            coldBox = new THREE.Mesh(coldGeom, coldMat);
+            coldBox.position.x = 5;
+            coldBox.castShadow = true;
+            coldBox.receiveShadow = true;
+            scene.add(coldBox);
+        }
+
+        function createParticleSystem() {
+            if (particles) scene.remove(particles);
+            
+            const speed = calculateParticleSpeed();
+            const particleCount = Math.max(50, Math.min(300, Math.floor(100 * (specimenDimensions.width * specimenDimensions.depth) / 21)));
+            
+            const geometry = new THREE.BufferGeometry();
+            const positions = new Float32Array(particleCount * 3);
+            const velocities = new Float32Array(particleCount * 3);
+            
+            for (let i = 0; i < particleCount; i++) {
+                positions[i * 3] = -3 + Math.random() * 0.3;
+                positions[i * 3 + 1] = -specimenDimensions.height / 2 + Math.random() * specimenDimensions.height;
+                positions[i * 3 + 2] = -specimenDimensions.depth / 2 + Math.random() * specimenDimensions.depth;
+                
+                velocities[i * 3] = speed + Math.random() * 0.01;
+                velocities[i * 3 + 1] = (Math.random() - 0.5) * 0.008;
+                velocities[i * 3 + 2] = (Math.random() - 0.5) * 0.008;
+            }
+            
+            geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+            geometry.userData.velocities = velocities;
+            
+            const material = new THREE.PointsMaterial({
+                color: 0xff6b35,
+                size: 0.1,
+                sizeAttenuation: true,
+                transparent: true,
+                opacity: 0.85
+            });
+            
+            particles = new THREE.Points(geometry, material);
+            scene.add(particles);
+            
+            particleSystem = {
+                positions: positions,
+                velocities: velocities,
+                geometry: geometry,
+                particleCount: particleCount,
+                speed: speed
+            };
+        }
+
+        function calculateParticleSpeed() {
+            // Speed based on thickness and area
+            // Thin and large = fast
+            // Thick and small = slow
+            const thicknessEffect = 1 / (specimenDimensions.height + 0.1);
+            const areaEffect = (specimenDimensions.width * specimenDimensions.depth) / 21;
+            return (thicknessEffect * areaEffect) * 0.03;
+        }
+
+        function updateParticles() {
+            if (!heatAnimationEnabled || !particleSystem) return;
+            
+            const pos = particleSystem.positions;
+            const vel = particleSystem.velocities;
+            const maxX = 3 + specimenDimensions.width / 2;
+            
+            for (let i = 0; i < particleSystem.particleCount; i++) {
+                pos[i * 3] += vel[i * 3];
+                pos[i * 3 + 1] += vel[i * 3 + 1];
+                pos[i * 3 + 2] += vel[i * 3 + 2];
+                
+                if (pos[i * 3] > maxX) {
+                    pos[i * 3] = -3;
+                    pos[i * 3 + 1] = -specimenDimensions.height / 2 + Math.random() * specimenDimensions.height;
+                    pos[i * 3 + 2] = -specimenDimensions.depth / 2 + Math.random() * specimenDimensions.depth;
+                }
+            }
+            
+            particles.geometry.attributes.position.needsUpdate = true;
+        }
+
+        function selectOption(option) {
+            currentOption = option;
+            const config = optionConfigs[option];
+            
+            specimenDimensions = { width: config.width, height: config.height, depth: config.depth };
+            hasLagging = config.lagging;
+            
+            // Update UI
+            document.querySelectorAll('.option-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.closest('.option-btn').classList.add('active');
+            
+            // Update controls
+            document.getElementById('areaSlider').value = config.width;
+            document.getElementById('thicknessSlider').value = config.height;
+            setLagging(config.lagging);
+            updateDisplay();
+            
+            // Recreate 3D
+            createSpecimen();
+            createParticleSystem();
+        }
+
+        function updateArea(value) {
+            specimenDimensions.width = parseFloat(value);
+            document.getElementById('areaValue').textContent = `${value} × 3.5 = ${(value * 3.5).toFixed(1)}`;
+            createSpecimen();
+            createParticleSystem();
+            updateDisplay();
+        }
+
+        function updateThickness(value) {
+            specimenDimensions.height = parseFloat(value);
+            document.getElementById('thicknessValue').textContent = `${value} mm`;
+            createSpecimen();
+            createParticleSystem();
+            updateDisplay();
+        }
+
+        function increaseArea() {
+            const slider = document.getElementById('areaSlider');
+            slider.value = Math.min(10, parseFloat(slider.value) + 1);
+            updateArea(slider.value);
+        }
+
+        function decreaseArea() {
+            const slider = document.getElementById('areaSlider');
+            slider.value = Math.max(1, parseFloat(slider.value) - 1);
+            updateArea(slider.value);
+        }
+
+        function increaseThickness() {
+            const slider = document.getElementById('thicknessSlider');
+            slider.value = Math.min(2, (parseFloat(slider.value) + 0.1).toFixed(1));
+            updateThickness(slider.value);
+        }
+
+        function decreaseThickness() {
+            const slider = document.getElementById('thicknessSlider');
+            slider.value = Math.max(0.3, (parseFloat(slider.value) - 0.1).toFixed(1));
+            updateThickness(slider.value);
+        }
+
+        function setLagging(value) {
+            hasLagging = value;
+            document.querySelectorAll('.toggle-btn').forEach(btn => btn.classList.remove('active'));
+            if (value) {
+                document.querySelectorAll('.toggle-btn')[1].classList.add('active');
+                document.getElementById('laggingText').textContent = 'With insulation';
+                document.getElementById('laggingIndicator').classList.add('active');
+            } else {
+                document.querySelectorAll('.toggle-btn')[0].classList.add('active');
+                document.getElementById('laggingText').textContent = 'No insulation';
+                document.getElementById('laggingIndicator').classList.remove('active');
+            }
+            createSpecimen();
+            updateDisplay();
+        }
+
+        function updateDisplay() {
+            const area = specimenDimensions.width * specimenDimensions.depth;
+            const thickness = specimenDimensions.height;
+            const speed = particleSystem ? particleSystem.speed : 0;
+            const speedPercent = Math.min(100, speed * 3000);
+            
+            document.getElementById('areaVal').textContent = specimenDimensions.width > 3 ? 'Large' : 'Small';
+            document.getElementById('distanceVal').textContent = thickness < 1.2 ? 'Short' : 'Long';
+            document.getElementById('insulationVal').textContent = hasLagging ? 'Yes' : 'None';
+            document.getElementById('speedValue').textContent = speed > 0.03 ? 'Fast ⚡' : (speed > 0.015 ? 'Medium 🔥' : 'Slow 🐢');
+            document.getElementById('speedBar').style.width = speedPercent + '%';
+            
+            const config = optionConfigs[currentOption];
+            document.getElementById('analysis').textContent = config.analysis;
+        }
+
+        function resetToDefaults() {
+            selectOption('C');
+        }
+
+        function toggleHeatAnimation() {
+            heatAnimationEnabled = !heatAnimationEnabled;
+            if (!heatAnimationEnabled) {
+                particles.material.opacity = 0.2;
+            } else {
+                particles.material.opacity = 0.85;
+            }
+        }
+
+        function setupControls() {
+            let isDragging = false;
+            let previousMousePosition = { x: 0, y: 0 };
+            
+            document.getElementById('canvas').addEventListener('mousedown', (e) => {
+                isDragging = true;
+                previousMousePosition = { x: e.clientX, y: e.clientY };
+            });
+            
+            document.addEventListener('mousemove', (e) => {
+                if (isDragging) {
+                    const deltaX = e.clientX - previousMousePosition.x;
+                    const deltaY = e.clientY - previousMousePosition.y;
+                    
+                    specimen.rotation.y += deltaX * 0.01;
+                    specimen.rotation.x += deltaY * 0.01;
+                    
+                    previousMousePosition = { x: e.clientX, y: e.clientY };
+                }
+            });
+            
+            document.addEventListener('mouseup', () => {
+                isDragging = false;
+            });
+            
+            document.getElementById('canvas').addEventListener('wheel', (e) => {
+                e.preventDefault();
+                camera.position.z += e.deltaY * 0.005;
+                camera.position.z = Math.max(3, Math.min(25, camera.position.z));
+            }, { passive: false });
+        }
+
+        function onWindowResize() {
+            const canvas = document.getElementById('canvas');
+            const width = canvas.clientWidth;
+            const height = canvas.clientHeight;
+            
+            camera.aspect = width / height;
+            camera.updateProjectionMatrix();
+            renderer.setSize(width, height);
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            updateParticles();
+            specimen.rotation.y += 0.0008;
+            renderer.render(scene, camera);
+        }
+
+        window.addEventListener('load', init);
+        if (document.readyState === 'complete') {
+            init();
+        }
+    </script>
+</body>
+</html>

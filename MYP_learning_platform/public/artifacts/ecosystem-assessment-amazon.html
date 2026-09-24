@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amazon Rainforest Ecosystem Assessment</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a4d0a 0%, #2d5016 25%, #4a7c22 50%, #6ba83a 75%, #8bc34a 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+            color: #333;
+            position: relative;
+        }
+
+        .floating-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(107, 168, 58, 0.4);
+            border-radius: 50%;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .particle:nth-child(1) { width: 4px; height: 4px; left: 10%; animation-delay: 0s; }
+        .particle:nth-child(2) { width: 6px; height: 6px; left: 25%; animation-delay: 2s; }
+        .particle:nth-child(3) { width: 3px; height: 3px; left: 40%; animation-delay: 4s; }
+        .particle:nth-child(4) { width: 5px; height: 5px; left: 60%; animation-delay: 1s; }
+        .particle:nth-child(5) { width: 4px; height: 4px; left: 80%; animation-delay: 3s; }
+
+        @keyframes float {
+            0%, 100% { 
+                transform: translateY(100vh) translateX(0px);
+                opacity: 0;
+            }
+            10%, 90% { opacity: 0.6; }
+            50% { 
+                transform: translateY(0vh) translateX(30px);
+                opacity: 0.8;
+            }
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            min-height: calc(100vh - 40px);
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 1;
+        }
+
+        .header {
+            background: rgba(45, 80, 22, 0.3);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            border-radius: 25px;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .header p {
+            font-size: 1.3em;
+            opacity: 0.95;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 25px;
+            margin: 25px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4a7c22, #6ba83a, #8bc34a);
+            width: 0%;
+            transition: width 0.5s ease;
+            border-radius: 25px;
+        }
+
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .welcome-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .welcome-card h3 {
+            color: #ffffff;
+            font-size: 2.2em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .welcome-card p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.2em;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px) scale(1.05);
+        }
+
+        .stat-icon {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .stat-value {
+            font-size: 1.6em;
+            font-weight: bold;
+            color: #ffffff;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            font-size: 1em;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .badges-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+            margin: 30px 0;
+        }
+
+        .badge {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .badge:hover {
+            transform: scale(1.1);
+            border-color: rgba(255, 215, 0, 0.5);
+        }
+
+        .badge-icon {
+            font-size: 2.8em;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .badge-title {
+            font-size: 0.95em;
+            font-weight: bold;
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .info-box {
+            background: rgba(23, 162, 184, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(23, 162, 184, 0.3);
+            border-left: 5px solid #17a2b8;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 25px 0;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .info-box strong {
+            color: #ffffff;
+        }
+
+        .input-container {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+        }
+
+        .input-group {
+            margin: 20px 0;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 12px;
+            font-weight: 600;
+            color: #ffffff;
+            font-size: 1.2em;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        input[type="text"], textarea, select {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            font-size: 16px;
+            background: rgba(255, 255, 255, 0.9);
+            transition: all 0.3s ease;
+        }
+
+        input[type="text"]:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #4a7c22;
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 0 20px rgba(74, 124, 34, 0.3);
+        }
+
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #4a7c22, #2d5016);
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin: 15px 10px;
+            box-shadow: 0 8px 20px rgba(74, 124, 34, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(74, 124, 34, 0.4);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #6c757d, #495057);
+            box-shadow: 0 8px 20px rgba(108, 117, 125, 0.3);
+        }
+
+        .btn-secondary:hover {
+            box-shadow: 0 12px 25px rgba(108, 117, 125, 0.4);
+        }
+
+        .question-box {
+            background: rgba(248, 249, 250, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-left: 5px solid #4a7c22;
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .question-box h3 {
+            color: #ffffff;
+            margin-bottom: 15px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .question-box p {
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 15px;
+        }
+
+        .food-chain {
+            text-align: center;
+            font-size: 1.3em;
+            margin: 20px 0;
+            padding: 20px;
+            background: rgba(232, 245, 232, 0.2);
+            border-radius: 10px;
+            color: #ffffff;
+            font-weight: bold;
+        }
+
+        .drag-container {
+            display: flex;
+            gap: 30px;
+            margin: 25px 0;
+        }
+
+        .drag-items {
+            flex: 1;
+            background: rgba(232, 245, 232, 0.15);
+            backdrop-filter: blur(10px);
+            border: 2px dashed #4a7c22;
+            border-radius: 15px;
+            padding: 20px;
+        }
+
+        .drag-items h4 {
+            color: #ffffff;
+            margin-bottom: 15px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .drag-item {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 12px 18px;
+            margin: 10px 0;
+            border: 2px solid #4a7c22;
+            border-radius: 10px;
+            cursor: grab;
+            transition: all 0.3s ease;
+            user-select: none;
+            font-weight: 500;
+        }
+
+        .drag-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .drop-zones {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .drop-zone {
+            min-height: 140px;
+            border: 3px dashed rgba(255, 255, 255, 0.4);
+            border-radius: 15px;
+            padding: 20px;
+            background: rgba(249, 249, 249, 0.1);
+            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .drop-zone h4 {
+            color: #ffffff;
+            margin-bottom: 10px;
+            text-align: center;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .drop-zone p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9em;
+            text-align: center;
+        }
+
+        .dropped-item {
+            background: #4a7c22;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 8px;
+            margin: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .dropped-item:hover {
+            background: #2d5016;
+            transform: scale(1.05);
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .data-table th, .data-table td {
+            padding: 15px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .data-table th {
+            background: #4a7c22;
+            color: white;
+            font-weight: 600;
+        }
+
+        .results-container {
+            text-align: center;
+            padding: 40px;
+            background: rgba(248, 249, 250, 0.1);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            margin: 25px 0;
+        }
+
+        .score-circle {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2.8em;
+            font-weight: bold;
+            margin: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .score-excellent { background: linear-gradient(135deg, #28a745, #20c997); }
+        .score-good { background: linear-gradient(135deg, #ffc107, #fd7e14); color: #333; }
+        .score-needs-improvement { background: linear-gradient(135deg, #dc3545, #e83e8c); }
+
+        @media (max-width: 768px) {
+            .container { padding: 15px; }
+            .header h1 { font-size: 2.2em; }
+            .drag-container { flex-direction: column; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .badges-grid { grid-template-columns: repeat(3, 1fr); }
+            .btn { padding: 15px 30px; font-size: 16px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <h1>🌳 Amazon Rainforest Ecosystem Assessment</h1>
+            <p>Interactive Formative Assessment - Grade 6 Biology</p>
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressBar"></div>
+        </div>
+
+        <!-- Landing Page -->
+        <div class="section active" id="landing">
+            <div class="welcome-card">
+                <h3>Welcome to Your Amazon Adventure! 🌿</h3>
+                <p>Embark on an exciting journey through the world's most biodiverse ecosystem! This interactive assessment will help you master ecosystem concepts while exploring the incredible Amazon Rainforest.</p>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-icon">🏆</span>
+                    <div class="stat-value">500+</div>
+                    <div class="stat-label">Points Available</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-icon">⭐</span>
+                    <div class="stat-value">5</div>
+                    <div class="stat-label">Stars to Collect</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-icon">🎯</span>
+                    <div class="stat-value">10</div>
+                    <div class="stat-label">Questions</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-icon">⏱️</span>
+                    <div class="stat-value">30-40min</div>
+                    <div class="stat-label">Duration</div>
+                </div>
+            </div>
+
+            <div class="badges-grid">
+                <div class="badge">
+                    <span class="badge-icon">🌿</span>
+                    <div class="badge-title">Explorer</div>
+                </div>
+                <div class="badge">
+                    <span class="badge-icon">🐆</span>
+                    <div class="badge-title">Predator</div>
+                </div>
+                <div class="badge">
+                    <span class="badge-icon">👑</span>
+                    <div class="badge-title">Master</div>
+                </div>
+                <div class="badge">
+                    <span class="badge-icon">🎯</span>
+                    <div class="badge-title">Classifier</div>
+                </div>
+                <div class="badge">
+                    <span class="badge-icon">📝</span>
+                    <div class="badge-title">Scholar</div>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <strong>🎮 How to Succeed:</strong>
+                <ul style="margin: 15px 0; padding-left: 25px;">
+                    <li>Answer all questions thoughtfully</li>
+                    <li>Use scientific terminology in explanations</li>
+                    <li>Interact with drag-and-drop elements</li>
+                    <li>Download your detailed report at the end</li>
+                </ul>
+            </div>
+
+            <div class="input-container">
+                <div class="input-group">
+                    <label for="studentName">🎓 Enter Your Full Name:</label>
+                    <input type="text" id="studentName" placeholder="Your name will appear on your certificate!" required>
+                </div>
+                <button class="btn" onclick="startAssessment()">🚀 Begin Amazon Adventure</button>
+            </div>
+        </div>
+
+        <!-- Section 1: Food Chains -->
+        <div class="section" id="section1">
+            <h2 style="color: #fff; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); margin-bottom: 20px;">Section 1: Food Chains & Energy Flow (Criterion A: Strand 1)</h2>
+            
+            <div class="question-box">
+                <h3>Question 1: Primary Consumer Identification</h3>
+                <p>The Amazon Rainforest is home to millions of organisms that are interdependent through feeding relationships. Look at this Amazon food chain:</p>
+                <div class="food-chain">🌱 Banana Plant → 🐛 Caterpillar → 🐦 Toucan → 🐍 Boa Constrictor</div>
+                <div class="input-group">
+                    <label>Identify which organism is a <strong>primary consumer</strong>:</label>
+                    <select id="q1">
+                        <option value="">Choose your answer</option>
+                        <option value="banana">🌱 Banana Plant</option>
+                        <option value="caterpillar">🐛 Caterpillar</option>
+                        <option value="toucan">🐦 Toucan</option>
+                        <option value="boa">🐍 Boa Constrictor</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="question-box">
+                <h3>Question 2: Justification</h3>
+                <div class="input-group">
+                    <label>Based on your choice, <strong>justify</strong> why this organism is the primary consumer (minimum 30 words):</label>
+                    <textarea id="q2" placeholder="Explain your reasoning using scientific terms like 'producer,' 'herbivore,' 'energy transfer'..."></textarea>
+                </div>
+            </div>
+
+            <div class="question-box">
+                <h3>Question 3: Drag & Drop Classification Challenge</h3>
+                <p>Drag each organism/phrase into the correct category to show the difference between Primary Consumers and Apex Predators:</p>
+                <div class="drag-container">
+                    <div class="drag-items">
+                        <h4>🧩 Available Options:</h4>
+                        <div class="drag-item" draggable="true" data-type="primary-eats">Eats plants directly</div>
+                        <div class="drag-item" draggable="true" data-type="apex-eats">Eats other animals</div>
+                        <div class="drag-item" draggable="true" data-type="primary-example">🐛 Caterpillar</div>
+                        <div class="drag-item" draggable="true" data-type="apex-example">🐆 Jaguar</div>
+                        <div class="drag-item" draggable="true" data-type="primary-position">First consumer level</div>
+                        <div class="drag-item" draggable="true" data-type="apex-position">Top of food chain</div>
+                        <div class="drag-item" draggable="true" data-type="decomposer">🍄 Mushrooms (decomposer)</div>
+                    </div>
+                    <div class="drop-zones">
+                        <div class="drop-zone" data-category="primary" id="primaryZone">
+                            <h4>🌿 Primary Consumers</h4>
+                            <p>Characteristics and examples</p>
+                        </div>
+                        <div class="drop-zone" data-category="apex" id="apexZone">
+                            <h4>🦁 Apex Predators</h4>
+                            <p>Characteristics and examples</p>
+                        </div>
+                        <div class="drop-zone" data-category="other" id="otherZone">
+                            <h4>🔄 Other Organisms</h4>
+                            <p>Different ecological roles</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question-box">
+                <h3>Question 4: Energy Source and Transfer</h3>
+                <p>Trees in the rainforest act as the main producers.</p>
+                <div class="input-group">
+                    <label>State the <strong>source of energy</strong> for rainforest trees:</label>
+                    <select id="q4a">
+                        <option value="">Select energy source</option>
+                        <option value="sun">☀️ Sunlight</option>
+                        <option value="soil">🌱 Soil nutrients</option>
+                        <option value="water">💧 Water</option>
+                        <option value="air">🌬️ Air/Wind</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label>Describe how this energy is passed through the food chain (minimum 40 words):</label>
+                    <textarea id="q4b" placeholder="Explain the energy transfer process from producers to primary consumers to secondary consumers..."></textarea>
+                </div>
+            </div>
+
+            <button class="btn" onclick="goToSection(2)">Continue to Section 2 →</button>
+        </div>
+
+        <!-- Section 2: Food Web Analysis -->
+        <div class="section" id="section2">
+            <h2 style="color: #fff; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); margin-bottom: 20px;">Section 2: Food Web Interactions (Criterion A: Strand 2)</h2>
+            
+            <div class="question-box">
+                <h3>Question 5: Food Web Impact Analysis</h3>
+                <p>For thousands of years, Indigenous communities of the Amazon have relied on rainforest plants and animals for food, shelter, and medicine. Study this rainforest food web:</p>
+                <div style="background: rgba(255,255,255,0.9); border-radius: 15px; padding: 20px; margin: 20px 0;">
+                    <svg width="100%" height="400" viewBox="0 0 800 400" style="max-width: 800px;">
+                        <defs>
+                            <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                                <polygon points="0 0, 10 3.5, 0 7" fill="#2d5016"/>
+                            </marker>
+                        </defs>
+                        
+                        <!-- Producers -->
+                        <circle cx="100" cy="350" r="30" fill="#4CAF50" stroke="#2d5016" stroke-width="2"/>
+                        <text x="100" y="355" text-anchor="middle" fill="white" font-size="12" font-weight="bold">🌳 Trees</text>
+                        
+                        <circle cx="300" cy="350" r="30" fill="#4CAF50" stroke="#2d5016" stroke-width="2"/>
+                        <text x="300" y="355" text-anchor="middle" fill="white" font-size="12" font-weight="bold">🍃 Plants</text>
+                        
+                        <!-- Primary Consumers -->
+                        <circle cx="150" cy="250" r="25" fill="#FFC107" stroke="#2d5016" stroke-width="2"/>
+                        <text x="150" y="255" text-anchor="middle" fill="#2d5016" font-size="11" font-weight="bold">🐛 Insects</text>
+                        
+                        <circle cx="350" cy="250" r="25" fill="#FFC107" stroke="#2d5016" stroke-width="2"/>
+                        <text x="350" y="255" text-anchor="middle" fill="#2d5016" font-size="11" font-weight="bold">🐒 Monkeys</text>
+                        
+                        <!-- Secondary Consumers -->
+                        <circle cx="200" cy="150" r="28" fill="#FF9800" stroke="#2d5016" stroke-width="2"/>
+                        <text x="200" y="155" text-anchor="middle" fill="#2d5016" font-size="11" font-weight="bold">🐦 Toucan</text>
+                        
+                        <circle cx="450" cy="200" r="25" fill="#FF9800" stroke="#2d5016" stroke-width="2"/>
+                        <text x="450" y="205" text-anchor="middle" fill="#2d5016" font-size="11" font-weight="bold">🐍 Snakes</text>
+                        
+                        <!-- Apex Predator -->
+                        <circle cx="600" cy="100" r="35" fill="#F44336" stroke="#2d5016" stroke-width="2"/>
+                        <text x="600" y="105" text-anchor="middle" fill="white" font-size="12" font-weight="bold">🐆 Jaguar</text>
+                        
+                        <!-- Decomposer -->
+                        <circle cx="500" cy="350" r="25" fill="#8BC34A" stroke="#2d5016" stroke-width="2"/>
+                        <text x="500" y="355" text-anchor="middle" fill="#2d5016" font-size="11" font-weight="bold">🍄 Fungi</text>
+                        
+                        <!-- Arrows showing energy flow -->
+                        <line x1="120" y1="330" x2="140" y2="270" stroke="#2d5016" stroke-width="2" marker-end="url(#arrow)"/>
+                        <line x1="320" y1="330" x2="340" y2="270" stroke="#2d5016" stroke-width="2" marker-end="url(#arrow)"/>
+                        <line x1="165" y1="235" x2="190" y2="170" stroke="#2d5016" stroke-width="2" marker-end="url(#arrow)"/>
+                        <line x1="365" y1="235" x2="440" y2="215" stroke="#2d5016" stroke-width="2" marker-end="url(#arrow)"/>
+                        <line x1="220" y1="140" x2="580" y2="120" stroke="#2d5016" stroke-width="2" marker-end="url(#arrow)"/>
+                        <line x1="465" y1="185" x2="580" y2="125" stroke="#2d5016" stroke-width="2" marker-end="url(#arrow)"/>
+                        
+                        <!-- Clickable overlays for interaction -->
+                        <circle cx="100" cy="350" r="35" fill="transparent" class="clickable-organism" data-name="trees" onclick="selectOrganism('trees')"/>
+                        <circle cx="300" cy="350" r="35" fill="transparent" class="clickable-organism" data-name="plants" onclick="selectOrganism('plants')"/>
+                        <circle cx="150" cy="250" r="30" fill="transparent" class="clickable-organism" data-name="insects" onclick="selectOrganism('insects')"/>
+                        <circle cx="350" cy="250" r="30" fill="transparent" class="clickable-organism" data-name="monkeys" onclick="selectOrganism('monkeys')"/>
+                        <circle cx="200" cy="150" r="33" fill="transparent" class="clickable-organism" data-name="toucan" onclick="selectOrganism('toucan')"/>
+                        <circle cx="450" cy="200" r="30" fill="transparent" class="clickable-organism" data-name="snakes" onclick="selectOrganism('snakes')"/>
+                        <circle cx="600" cy="100" r="40" fill="transparent" class="clickable-organism" data-name="jaguar" onclick="selectOrganism('jaguar')"/>
+                        <circle cx="500" cy="350" r="30" fill="transparent" class="clickable-organism" data-name="fungi" onclick="selectOrganism('fungi')"/>
+                    </svg>
+                </div>
+                <p style="margin: 15px 0;"><strong>Scenario:</strong> Imagine there is a sharp <strong>decline in toucan population</strong>.</p>
+                <div class="input-group">
+                    <label>Click on <strong>TWO organisms</strong> in the food web above that would be most impacted:</label>
+                    <div id="selectedOrganisms" style="margin: 10px 0; padding: 10px; background: rgba(255,255,255,0.1); border-radius: 8px; min-height: 50px;">
+                        <em>Click organisms in the food web above...</em>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question-box">
+                <h3>Question 6: Abiotic Factors for Conservation</h3>
+                <p>Jaguars are top predators of the rainforest. If jaguar numbers decrease, suggest one improvement in an <strong>abiotic factor</strong> that could help increase their prey population (e.g., capybaras, monkeys).</p>
+                <div class="input-group">
+                    <label>Select an abiotic factor that could help:</label>
+                    <select id="q6a">
+                        <option value="">Choose abiotic factor</option>
+                        <option value="water">💧 Increased water availability</option>
+                        <option value="temperature">🌡️ Optimal temperature ranges</option>
+                        <option value="soil">🌱 Improved soil quality</option>
+                        <option value="light">☀️ Better sunlight access</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label>Explain how this would help prey populations (minimum 25 words):</label>
+                    <textarea id="q6b" placeholder="Describe how your chosen abiotic factor would support prey animals..."></textarea>
+                </div>
+            </div>
+
+            <button class="btn btn-secondary" onclick="goToSection(1)">← Previous Section</button>
+            <button class="btn" onclick="goToSection(3)">Continue to Section 3 →</button>
+        </div>
+
+        <!-- Section 3: Data Analysis -->
+        <div class="section" id="section3">
+            <h2 style="color: #fff; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); margin-bottom: 20px;">Section 3: Human Impact & Conservation (Criterion A: Strand 3)</h2>
+            
+            <div class="question-box">
+                <h3>Question 7: Deforestation Data Analysis</h3>
+                <p>Rainforests are often called the <strong>"lungs of the Earth"</strong> because they absorb carbon dioxide and release oxygen. Deforestation, however, reduces the ability of the rainforest to perform this role.</p>
+                <p>Study this data showing tree cover loss in parts of the Amazon:</p>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Year</th>
+                            <th>Forest Cover Lost (sq km)</th>
+                            <th>Species Affected (estimated)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>2019</td><td>10,000</td><td>1,200</td></tr>
+                        <tr><td>2020</td><td>11,200</td><td>1,350</td></tr>
+                        <tr><td>2021</td><td>13,000</td><td>1,560</td></tr>
+                        <tr><td>2022</td><td>12,500</td><td>1,500</td></tr>
+                        <tr><td>2023</td><td>14,200</td><td>1,704</td></tr>
+                    </tbody>
+                </table>
+                
+                <div class="input-group">
+                    <label><strong>7a.</strong> Interpret the data and state whether deforestation is increasing or decreasing over time:</label>
+                    <select id="q7a">
+                        <option value="">Select trend</option>
+                        <option value="increasing">📈 Generally increasing over time</option>
+                        <option value="decreasing">📉 Generally decreasing over time</option>
+                        <option value="stable">➡️ Remaining stable</option>
+                        <option value="fluctuating">🔄 Fluctuating with no clear trend</option>
+                    </select>
+                </div>
+                
+                <div class="input-group">
+                    <label><strong>7b.</strong> Suggest one possible consequence of this trend for rainforest organisms (minimum 30 words):</label>
+                    <textarea id="q7b" placeholder="Describe how increasing deforestation affects plants and animals in the rainforest..."></textarea>
+                </div>
+                
+                <div class="input-group">
+                    <label><strong>7c.</strong> Identify one action humans could take to make rainforest use more sustainable:</label>
+                    <select id="q7c">
+                        <option value="">Choose sustainable action</option>
+                        <option value="selective">🌲 Selective logging instead of clear-cutting</option>
+                        <option value="alternatives">🌾 Use alternative materials to reduce demand for wood</option>
+                        <option value="reforestation">🌱 Reforestation and replanting programs</option>
+                        <option value="protected">🏛️ Create more protected conservation areas</option>
+                        <option value="education">📚 Education and awareness campaigns</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="question-box">
+                <h3>Question 8: Global Impact Connection</h3>
+                <p>As a student in Mumbai, India, how can you personally contribute to Amazon conservation efforts?</p>
+                <div class="input-group">
+                    <label>Describe TWO practical actions you could take (minimum 35 words):</label>
+                    <textarea id="q8" placeholder="Think about everyday choices, awareness activities, or supporting organizations..."></textarea>
+                </div>
+            </div>
+
+            <button class="btn btn-secondary" onclick="goToSection(2)">← Previous Section</button>
+            <button class="btn" onclick="finishAssessment()">🏆 Complete Assessment</button>
+        </div>
+
+        <!-- Results -->
+        <div class="section" id="results">
+            <div class="results-container">
+                <h2 style="color: #fff; margin-bottom: 25px;">🎉 Assessment Complete!</h2>
+                <div id="finalScore"></div>
+                <div id="finalFeedback" style="color: #fff; margin: 20px 0;"></div>
+                <button class="btn" onclick="downloadReport()">📄 Download Report</button>
+                <button class="btn btn-secondary" onclick="restart()">🔄 Try Again</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentSection = 0;
+        let studentName = '';
+        let answers = {};
+
+        function startAssessment() {
+            const nameInput = document.getElementById('studentName');
+            studentName = nameInput.value.trim();
+            
+            if (!studentName) {
+                alert('Please enter your name to begin!');
+                return;
+            }
+            
+            goToSection(1);
+        }
+
+        function goToSection(sectionNum) {
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(function(section) {
+                section.classList.remove('active');
+            });
+            
+            // Show target section
+            if (sectionNum === 0) {
+                document.getElementById('landing').classList.add('active');
+            } else if (sectionNum <= 2) {
+                document.getElementById('section' + sectionNum).classList.add('active');
+            } else {
+                document.getElementById('results').classList.add('active');
+            }
+            
+            currentSection = sectionNum;
+            updateProgress();
+        }
+
+        function updateProgress() {
+            const progress = (currentSection / 3) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+        }
+
+        function finishAssessment() {
+            // Collect answers
+            answers.q1 = document.getElementById('q1').value;
+            answers.q2 = document.getElementById('q2').value;
+            answers.q3 = document.getElementById('q3').value;
+            
+            // Grade assessment
+            let score = 0;
+            let maxScore = 3;
+            
+            if (answers.q1 === 'caterpillar') score += 1;
+            if (answers.q2.length >= 30) score += 1;
+            if (answers.q3 === '2021') score += 1;
+            
+            const percentage = Math.round((score / maxScore) * 100);
+            
+            // Display results
+            let scoreClass = 'score-needs-improvement';
+            if (percentage >= 80) scoreClass = 'score-excellent';
+            else if (percentage >= 60) scoreClass = 'score-good';
+            
+            document.getElementById('finalScore').innerHTML = 
+                '<div class="score-circle ' + scoreClass + '">' + percentage + '%</div>';
+            
+            document.getElementById('finalFeedback').innerHTML = 
+                '<p><strong>Score: ' + score + '/' + maxScore + ' (' + percentage + '%)</strong></p>';
+            
+            goToSection(3);
+        }
+
+        function downloadReport() {
+            const html = '<!DOCTYPE html><html><head><title>Assessment Report</title></head><body>' +
+                '<h1>Amazon Assessment Report</h1>' +
+                '<h2>Student: ' + studentName + '</h2>' +
+                '<p>Date: ' + new Date().toLocaleDateString() + '</p>' +
+                '<h3>Answers:</h3>' +
+                '<p>Q1: ' + (answers.q1 || 'Not answered') + '</p>' +
+                '<p>Q2: ' + (answers.q2 || 'Not answered') + '</p>' +
+                '<p>Q3: ' + (answers.q3 || 'Not answered') + '</p>' +
+                '</body></html>';
+            
+            const blob = new Blob([html], {type: 'text/html'});
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = studentName.replace(/\s+/g, '_') + '_Report.html';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        function restart() {
+            currentSection = 0;
+            studentName = '';
+            answers = {};
+            
+            document.querySelectorAll('input, textarea, select').forEach(function(input) {
+                input.value = '';
+            });
+            
+            goToSection(0);
+        }
+
+        // Prevent copy-paste
+        document.addEventListener('paste', function(e) {
+            if (e.target.tagName === 'TEXTAREA') {
+                e.preventDefault();
+                alert('Copy-pasting is not allowed! Please type your answer.');
+            }
+        });
+
+        // Initialize
+        updateProgress();
+    </script>
+</body>
+</html>

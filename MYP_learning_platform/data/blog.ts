@@ -2,6 +2,8 @@
 // ("what is the MYP", "how is MYP graded", "MYP command terms", etc.).
 // All content is original — written for CritABCD, not copied from IB materials.
 
+import { ARTIFACT_POSTS } from './blog-artifact-posts'
+
 export interface BlogSection {
   heading?: string
   body?: string[]
@@ -35,7 +37,7 @@ export interface BlogPost {
   related?: { label: string; href: string }[]
 }
 
-export const POSTS: BlogPost[] = [
+const CORE_POSTS: BlogPost[] = [
   {
     slug: 'what-is-the-myp',
     title: 'What Is the IB MYP? A Plain-English Guide for Students & Parents',
@@ -641,6 +643,9 @@ export const POSTS: BlogPost[] = [
     ],
   },
 ]
+
+// Posts that wrap an interactive artifact live in their own file to keep this one readable.
+export const POSTS: BlogPost[] = [...CORE_POSTS, ...ARTIFACT_POSTS]
 
 export function getPost(slug: string): BlogPost | undefined {
   return POSTS.find((p) => p.slug === slug)
