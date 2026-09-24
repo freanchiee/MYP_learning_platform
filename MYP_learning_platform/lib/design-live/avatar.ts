@@ -13,7 +13,9 @@ const cache = new Map<string, string>()
 export function avatarSvg(seed: string): string {
   const cached = cache.get(seed)
   if (cached) return cached
-  const svg = createAvatar(micah, { seed, backgroundColor: ['transparent'], size: 64 }).toString()
+  // dicebear writes fixed width/height; let the svg fill whatever box it is put in,
+  // otherwise small avatars (28px in pickers) show only a cropped corner of the face.
+  const svg = createAvatar(micah, { seed, backgroundColor: ['transparent'], size: 64 }).toString().replace(/^(<svg[^>]*?)width="64" height="64"/, '$1width="100%" height="100%"')
   cache.set(seed, svg)
   return svg
 }
