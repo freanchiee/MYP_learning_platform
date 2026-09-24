@@ -366,6 +366,24 @@ for a task they'd do anyway) or platform-level (like persona chat — where
 requiring a key from every user would kill the feature). Don't default to
 copying whichever pattern is closest in the code.
 
+## Board-game stage (MYP5 Sustainability Check)
+
+A fifth stage type, `boardGame`, runs a turn-based two-phase game on a **three.js board**
+(`components/design/live/game/Board3D.tsx`). Rules and state are pure code in
+`lib/design-live/sustainability.ts`; UI is `game/SustainabilityGame.tsx` (host + student).
+
+Because only the HOST can write `live_sessions`, players never touch shared meters:
+a student inserts a `live_events` row (`sc_roll` then `sc_act`, tied to their own player
+row), the host's browser applies new events in order with `processEvents()` and writes the
+resulting `GameState` into `live_sessions.state.game`; everyone else renders that. A
+`cursor` + `doneIds` make replays after a refresh safe. The host must have the page open
+(true for a live class). Phase 2 adds a carbon-credit market (issue, sell, buy verified, buy
+cheap with a dice roll, retire with a 40% offset cap) — edit `MARKET_ACTIONS`/`applyEvent`,
+not the UI, to change the rules. Worksheet sections also take an optional `criterion` (e.g.
+`'A.ii'`) shown as a chip, and `personaPack: 'community'` swaps the persona picker to the MYP5
+stakeholder representatives (`data/design/live/community-personas.ts`). `productCards` is a
+field like `makeCards` for the 25 digital products (`digital-products.ts`).
+
 ## What's NOT built yet (known gaps — extend deliberately, don't hack around)
 
 - **Physical/whiteboard rounds with a host-only secret** (Pictionary,

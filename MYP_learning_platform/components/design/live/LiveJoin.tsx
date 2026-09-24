@@ -14,6 +14,8 @@ import PersonaChatField from './PersonaChatField'
 import PersonalityPromptField from './PersonalityPromptField'
 import OpportunityCardsField from './OpportunityCardsField'
 import MakeCardsField from './MakeCardsField'
+import ProductCardsField from './ProductCardsField'
+import { SustainabilityGamePlayer } from './game/SustainabilityGame'
 import { getPersona } from '@/data/design/live/personas'
 import { useCelebration, CelebrationOverlay } from './Celebration'
 
@@ -290,6 +292,7 @@ export default function LiveJoin({ activity, initialCode }: { activity: LiveActi
           {session.status === 'active' && stage?.type === 'openIdeas' && (
             <OpenIdeasPlayer activity={activity} stage={stage} session={session} me={me} patchMyData={patchMyData} reportDraft={reportDraft} celebrate={celebrate} />
           )}
+          {session.status === 'active' && stage?.type === 'boardGame' && <SustainabilityGamePlayer session={session} me={me} code={code} />}
           {session.status === 'active' && stage?.type === 'grading' && (
             <div style={cardStyle(activity.theme.accent)}>
               {myGrade?.graded ? (
@@ -541,6 +544,7 @@ function WorksheetPlayer({
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', cursor: 'pointer' }} onClick={() => setOpenSection(open ? undefined : s.key)}>
               <div style={{ fontWeight: 800 }}>
                 {s.icon} {s.label}
+                {s.criterion && <span style={{ marginLeft: 8, fontSize: 10.5, fontWeight: 800, background: 'var(--surface-2)', border: '1.5px solid var(--border)', borderRadius: 999, padding: '2px 8px', color: 'var(--text-muted)' }}>Criterion {s.criterion}</span>}
               </div>
               <div style={{ fontSize: 12, color: 'var(--text-muted)' }}>{pct}%</div>
             </div>
@@ -643,11 +647,14 @@ function WorksheetFieldInput({
   /** Read a value the student saved earlier, from any stage: (stageKey, sectionKey, fieldKey). */
   lookup?: (stageKey: string, sectionKey: string, fieldKey: string) => any
 }) {
+  if (field.type === 'productCards') {
+    return <ProductCardsField value={value} onChange={onChange} onPersist={onPersist ?? onChange} preferredGroup={lookup?.('community', 'need', 'community')} />
+  }
   if (field.type === 'makeCards') {
     return <MakeCardsField value={value} onChange={onChange} onPersist={onPersist ?? onChange} preferredDirection={lookup?.('week1', 'direction', 'direction')} />
   }
   if (field.type === 'personaChat') {
-    return <PersonaChatField value={value} onChange={onChange} onPersist={onPersist!} onDraft={onDraft!} sessionCode={sessionCode!} playerId={playerId!} />
+    return <PersonaChatField value={value} onChange={onChange} onPersist={onPersist!} onDraft={onDraft!} sessionCode={sessionCode!} playerId={playerId!} pack={field.personaPack} />
   }
   if (field.type === 'personalityPrompt') {
     return <PersonalityPromptField value={value} onChange={onChange} onPersist={onPersist ?? onChange} />

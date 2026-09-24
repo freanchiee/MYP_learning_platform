@@ -1,5 +1,6 @@
 'use client'
 
+import { getProduct, isWildProduct } from '@/data/design/live/digital-products'
 import { useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { fuzzyMatchPoints } from '@/lib/design-live/fuzzyMatch'
@@ -122,6 +123,7 @@ export function WorksheetReviewModal({
                 <div key={s.key} style={{ border: '1.5px solid var(--border)', borderRadius: 10, padding: 10 }}>
                   <div style={{ fontWeight: 800, fontSize: 13, marginBottom: 6 }}>
                     {s.icon} {s.label}
+                    {s.criterion && <span style={{ marginLeft: 8, fontSize: 10.5, fontWeight: 800, color: 'var(--text-muted)' }}>Criterion {s.criterion}</span>}
                   </div>
                   <div style={{ display: 'grid', gap: 8, marginBottom: 10 }}>
                     {s.fields.map((f) => {
@@ -141,6 +143,15 @@ export function WorksheetReviewModal({
                         return (
                           <div key={f.key} style={{ fontSize: 12, color: 'var(--text-muted)' }}>
                             🌟 {chosen ? `Chose ${chosen.name} for a simulated interview` : 'No famous person chosen yet'}
+                          </div>
+                        )
+                      }
+                      if (f.type === 'productCards') {
+                        const v = data[f.key] as { productId?: string; custom?: string } | undefined
+                        const chosen = v?.productId && !isWildProduct(v.productId) ? getProduct(v.productId) : undefined
+                        return (
+                          <div key={f.key} style={{ fontSize: 12, color: 'var(--text-muted)' }}>
+                            💻 {!v?.productId ? 'Has not chosen a digital product yet' : isWildProduct(v.productId) ? `Wild card: ${v.custom?.trim() || '(not described yet)'}` : `Designing: ${chosen?.name ?? v.productId}`}
                           </div>
                         )
                       }

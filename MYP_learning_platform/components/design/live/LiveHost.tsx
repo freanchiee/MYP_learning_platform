@@ -12,6 +12,7 @@ import { getPersona } from '@/data/design/live/personas'
 import { cardStyle, btnStyle, inputStyle, pageBg, ErrorBanner, QRCode, Avatar, ProgressStream, PlayerPreview, PlayerPreviewProvider, ChatButton, QuickReactButton, QuickReactProvider, UnreadChatContext } from './ui'
 import ChatPanel from './ChatPanel'
 import ClassPicker from './ClassPicker'
+import { SustainabilityGameHost } from './game/SustainabilityGame'
 import { Podium } from './Podium'
 import { WorksheetReviewModal } from './WorksheetReview'
 
@@ -313,6 +314,7 @@ function StageHost({
       {stage.type === 'mcq' && <McqHost activity={activity} stage={stage} session={session} players={players} patchState={patchState} now={now} onChat={onChat} />}
       {stage.type === 'worksheet' && <WorksheetHost stage={stage} players={players} now={now} onChat={onChat} sessionCode={session.code} onReview={onReview} />}
       {stage.type === 'openIdeas' && <OpenIdeasHost activity={activity} stage={stage} session={session} players={players} patchState={patchState} now={now} onChat={onChat} />}
+      {stage.type === 'boardGame' && <SustainabilityGameHost session={session} players={players} patchState={patchState} run={run} />}
       {stage.type === 'grading' && <GradingHost activity={activity} stage={stage} players={players} grades={grades} run={run} session={session} />}
 
       <div style={{ textAlign: 'center' }}>

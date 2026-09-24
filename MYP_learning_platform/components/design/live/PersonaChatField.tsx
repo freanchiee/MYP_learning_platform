@@ -1,7 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-import { PERSONA_DIRECTIONS, personasByDirection, getPersona } from '@/data/design/live/personas'
+import { PERSONA_DIRECTIONS, PERSONAS, personasByDirection, getPersona } from '@/data/design/live/personas'
+import { ROLES, ROLE_ORDER } from '@/lib/design-live/sustainability'
 import { cardStyle, btnStyle, inputStyle, Avatar } from './ui'
 
 interface ChatMessage {
@@ -27,6 +28,7 @@ export default function PersonaChatField({
   onDraft,
   sessionCode,
   playerId,
+  pack = 'accessibility',
 }: {
   value: PersonaChatValue | undefined
   onChange: (v: PersonaChatValue) => void
@@ -34,6 +36,8 @@ export default function PersonaChatField({
   onDraft: (text: string) => void
   sessionCode: string
   playerId: string
+  /** 'community' offers the MYP5 stakeholder representatives instead of the accessibility personas. */
+  pack?: 'accessibility' | 'community'
 }) {
   const [text, setText] = useState('')
   const [sending, setSending] = useState(false)
@@ -126,6 +130,26 @@ export default function PersonaChatField({
       setSending(false)
       setRetryNote(null)
     }
+  }
+
+  if (!character && pack === 'community') {
+    return (
+      <div style={{ display: 'grid', gap: 10 }}>
+        {ROLE_ORDER.map((r) => (
+          <div key={r}>
+            <div style={{ fontSize: 11, fontWeight: 800, color: ROLES[r].color, marginBottom: 4 }}>{ROLES[r].icon} {ROLES[r].name.toUpperCase()}</div>
+            <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+              {PERSONAS.filter((p) => p.direction === 'community' && p.group === r).map((p) => (
+                <button key={p.id} onClick={() => pickCharacter(p.id)} style={{ ...btnStyle('var(--surface)'), display: 'flex', alignItems: 'center', gap: 8, textAlign: 'left', fontSize: 12.5 }}>
+                  <Avatar seed={p.id} size={28} />
+                  <span>{p.name}<br /><span style={{ fontWeight: 400, fontSize: 11, color: 'var(--text-muted)' }}>{p.represents}</span></span>
+                </button>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    )
   }
 
   if (!character) {

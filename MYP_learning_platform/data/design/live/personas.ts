@@ -14,9 +14,19 @@ export interface PersonaAnthroRow {
   why: string
 }
 
+import type { RoleKey } from '@/lib/design-live/sustainability'
+import { COMMUNITY_PERSONAS } from './community-personas'
+
+export type AccessibilityDirection = 'onehand' | 'lowvision' | 'sensory' | 'elderly' | 'classroom'
+
 export interface Persona {
   id: string
-  direction: 'onehand' | 'lowvision' | 'sensory' | 'elderly' | 'classroom'
+  /** 'community' personas belong to the MYP5 Sustainability Check pack (see community-personas.ts). */
+  direction: AccessibilityDirection | 'community'
+  /** Community pack only: which game role this representative speaks for. */
+  group?: RoleKey
+  /** Community pack only: the organisation or place they represent. */
+  represents?: string
   icon: string
   name: string
   age: number
@@ -27,7 +37,7 @@ export interface Persona {
   greeting: string
 }
 
-export const PERSONA_DIRECTIONS: { key: Persona['direction']; label: string }[] = [
+export const PERSONA_DIRECTIONS: { key: AccessibilityDirection; label: string }[] = [
   { key: 'onehand', label: 'One-handed tool' },
   { key: 'lowvision', label: 'Low-vision object' },
   { key: 'sensory', label: 'Sensory organiser' },
@@ -35,7 +45,7 @@ export const PERSONA_DIRECTIONS: { key: Persona['direction']; label: string }[] 
   { key: 'classroom', label: 'Classroom accessibility' },
 ]
 
-export const PERSONAS: Persona[] = [
+const ACCESS_PERSONAS: Persona[] = [
   {
     id: 'marcus', direction: 'onehand', icon: '🧑‍🔧', name: 'Marcus', age: 34,
     bio: "Marcus lost the use of his left hand in a workshop accident three years ago. He's right-handed and has adapted a lot, but plenty of everyday objects still assume you have two working hands.",
@@ -147,6 +157,8 @@ export const PERSONAS: Persona[] = [
     greeting: "Oh hey, what's up? Ask away, I'm probably fidgeting while I answer.",
   },
 ]
+
+export const PERSONAS: Persona[] = [...ACCESS_PERSONAS, ...COMMUNITY_PERSONAS]
 
 export function getPersona(id: string): Persona | undefined {
   return PERSONAS.find((p) => p.id === id)

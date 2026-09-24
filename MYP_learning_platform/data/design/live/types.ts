@@ -8,7 +8,7 @@
 // this was extracted from (three one-off HTML builds) and how to
 // author a new activity.
 
-export type MypYear = 'MYP2' | 'MYP3' | 'MYP4'
+export type MypYear = 'MYP2' | 'MYP3' | 'MYP4' | 'MYP5'
 
 export interface LiveTheme {
   accent: string // primary brand colour for this activity, e.g. '#2456C9'
@@ -51,7 +51,7 @@ export interface McqStage {
 // ---------------------------------------------------------------
 // Stage: Worksheet (structured research/build artefacts + grading)
 // ---------------------------------------------------------------
-export type WorksheetFieldType = 'text' | 'textarea' | 'select' | 'table' | 'personaChat' | 'personalityPrompt' | 'opportunityCards' | 'makeCards'
+export type WorksheetFieldType = 'text' | 'textarea' | 'select' | 'table' | 'personaChat' | 'personalityPrompt' | 'opportunityCards' | 'makeCards' | 'productCards'
 
 export interface WorksheetTableColumn {
   key: string
@@ -79,6 +79,8 @@ export interface WorksheetField {
    *  a light-touch nudge that they've hit something worth including. Also
    *  feeds into the fuzzy-match auto score. */
   celebrateKeywords?: string[]
+  /** For 'personaChat': which pack of characters to offer. Default 'accessibility'. */
+  personaPack?: 'accessibility' | 'community'
   /** Max points this field contributes to its section's fuzzy-match auto
    *  score, for text/textarea fields with exemplars/celebrateKeywords set.
    *  Default 10. */
@@ -91,6 +93,8 @@ export interface WorksheetSection {
   icon?: string
   blurb?: string
   fields: WorksheetField[]
+  /** MYP criterion strand this section evidences, e.g. 'A.ii' — shown as a chip so work is organised criterion by criterion. */
+  criterion?: string
   /** Minimum filled-field ratio (0–1) counted as "meaningfully complete" for the progress dashboard. */
   completenessTarget?: number
 }
@@ -155,7 +159,20 @@ export interface GradingStage {
   strands: CriterionStrand[] // each scored 1–8, matching MYP practice
 }
 
-export type LiveStage = McqStage | WorksheetStage | OpenIdeasStage | GradingStage
+// ---------------------------------------------------------------
+// Stage: Board game (Sustainability Check) — a two-phase, turn-based game
+// with a 3D board. Rules live in lib/design-live/sustainability.ts; state is
+// host-written into live_sessions.state.game.
+// ---------------------------------------------------------------
+export interface BoardGameStage {
+  type: 'boardGame'
+  key: string
+  label: string
+  icon: string
+  intro?: { title: string; blurb: string }
+}
+
+export type LiveStage = McqStage | WorksheetStage | OpenIdeasStage | GradingStage | BoardGameStage
 
 export interface LiveActivityDefinition {
   id: string
