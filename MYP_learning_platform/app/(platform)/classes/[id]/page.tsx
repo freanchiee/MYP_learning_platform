@@ -19,8 +19,8 @@ interface AssignmentRow { id: string; kind: string; subject: string; ref: string
 
 const BANKS: Record<string, { topicCanonical?: string }[]> = { biology: BIOLOGY_BANK, chemistry: CHEMISTRY_BANK, physics: PHYSICS_BANK }
 
-const glass = { background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.16)' } as const
-const muted = { color: 'rgba(255,255,255,0.6)' } as const
+const glass = { background: 'var(--surface-elevated)', border: '1px solid var(--border)' } as const
+const muted = { color: 'var(--text-muted)' } as const
 
 const TABS = [
   { id: 'overview', label: 'Overview', icon: '🏠' },
@@ -120,12 +120,12 @@ export default async function ClassPage({ params, searchParams }: { params: { id
   const href = (t: string) => `/classes/${cls.id}?tab=${t}`
 
   return (
-    <div className="flex" style={{ minHeight: 'calc(100vh - 56px)', background: 'linear-gradient(145deg, #0a0a14 0%, #1a1430 55%, #2a1f4a 100%)', color: '#fff' }}>
+    <div className="flex" style={{ minHeight: 'calc(100vh - 56px)', background: 'var(--bg)', backgroundImage: 'var(--bg-image)', color: 'var(--text)' }}>
       {/* Sidebar */}
-      <aside className="hidden w-64 shrink-0 flex-col gap-1 p-4 md:flex" style={{ background: 'rgba(10,8,22,0.6)', borderRight: '1px solid rgba(255,255,255,0.1)' }}>
-        <Link href="/dashboard" className="mb-3 text-[11px] font-black tracking-[0.25em]" style={{ color: 'rgba(255,255,255,0.45)' }}>← DASHBOARD</Link>
+      <aside className="hidden w-64 shrink-0 flex-col gap-1 p-4 md:flex" style={{ background: 'var(--surface)', borderRight: '1px solid var(--border)' }}>
+        <Link href="/dashboard" className="mb-3 text-[11px] font-black tracking-[0.25em]" style={{ color: 'var(--text-subtle)' }}>← DASHBOARD</Link>
         {TABS.map((t) => (
-          <Link key={t.id} href={href(t.id)} className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-bold" style={tab === t.id ? { background: 'rgba(255,255,255,0.14)' } : { color: 'rgba(255,255,255,0.7)' }}>
+          <Link key={t.id} href={href(t.id)} className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-bold" style={tab === t.id ? { background: 'var(--accent-soft)' } : { color: 'var(--text-muted)' }}>
             <span>{t.icon}</span>{t.label}
           </Link>
         ))}
@@ -135,18 +135,18 @@ export default async function ClassPage({ params, searchParams }: { params: { id
         {/* Mobile tabs */}
         <div className="flex gap-2 overflow-x-auto p-3 md:hidden">
           {TABS.map((t) => (
-            <Link key={t.id} href={href(t.id)} className="whitespace-nowrap rounded-full px-3 py-1.5 text-xs font-bold" style={tab === t.id ? { background: '#fff', color: '#160f2a' } : { border: '1px solid rgba(255,255,255,0.35)' }}>{t.label}</Link>
+            <Link key={t.id} href={href(t.id)} className="whitespace-nowrap rounded-full px-3 py-1.5 text-xs font-bold" style={tab === t.id ? { background: 'var(--gradient-cta)', color: 'var(--text-on-accent)' } : { border: '1px solid var(--border-strong)', color: 'var(--text)' }}>{t.label}</Link>
           ))}
         </div>
 
         {/* Hero banner */}
-        <div className="px-6 py-8 md:px-10" style={{ background: 'linear-gradient(120deg, rgba(91,42,134,0.55), rgba(31,95,107,0.45))', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
-          <div className="text-[10px] font-black tracking-[0.4em]" style={{ color: 'rgba(255,255,255,0.5)' }}>CLASS</div>
+        <div className="px-6 py-8 md:px-10" style={{ background: 'var(--accent-soft)', borderBottom: '1px solid var(--border)' }}>
+          <div className="text-[10px] font-black tracking-[0.4em]" style={{ color: 'var(--text-subtle)' }}>CLASS</div>
           <h1 className="mt-1 font-extrabold leading-tight" style={{ fontSize: 'clamp(28px, 4vw, 52px)', letterSpacing: '-1.5px' }}>{cls.name}</h1>
           <div className="mt-2 flex flex-wrap items-center gap-3 text-sm" style={muted}>
             <span>{memberList.length} student{memberList.length === 1 ? '' : 's'}</span>
             <span>·</span>
-            <span>Code <b className="tracking-[0.2em] text-white">{cls.join_code}</b></span>
+            <span>Code <b >{cls.join_code}</b></span>
           </div>
         </div>
 
@@ -168,18 +168,18 @@ export default async function ClassPage({ params, searchParams }: { params: { id
               <section className="rounded-2xl p-5" style={glass}>
                 <div className="flex items-center justify-between"><h2 className="text-lg font-extrabold">Recent assignments</h2><Link href={href('library')} className="text-xs font-black tracking-widest">+ NEW</Link></div>
                 {assignList.length === 0 ? <p className="mt-3 text-sm" style={muted}>Nothing assigned yet. Open the Library to set a past paper or topic revision.</p> : assignList.slice(0, 4).map((a) => (
-                  <div key={a.id} className="mt-3 flex items-center justify-between rounded-xl px-4 py-3 text-sm" style={{ background: 'rgba(255,255,255,0.05)' }}>
+                  <div key={a.id} className="mt-3 flex items-center justify-between rounded-xl px-4 py-3 text-sm" style={{ background: 'var(--surface-inset)' }}>
                     <span className="font-semibold">{a.title}</span><span style={muted}>{doneCount(a)} / {memberList.length} done</span>
                   </div>
                 ))}
               </section>
-              <p className="text-sm" style={muted}>Students join at <b>Join a class</b> on their dashboard using code <b className="text-white">{cls.join_code}</b>.</p>
+              <p className="text-sm" style={muted}>Students join at <b>Join a class</b> on their dashboard using code <b style={{ color: 'var(--text)' }}>{cls.join_code}</b>.</p>
             </div>
           )}
 
           {tab === 'assignments' && (
             <section>
-              <div className="flex items-center justify-between"><h2 className="text-2xl font-extrabold">Assignments</h2><Link href={href('library')} className="rounded-lg px-4 py-2 text-xs font-black tracking-widest" style={{ background: '#fff', color: '#160f2a' }}>CREATE ASSIGNMENT</Link></div>
+              <div className="flex items-center justify-between"><h2 className="text-2xl font-extrabold">Assignments</h2><Link href={href('library')} className="rounded-lg px-4 py-2 text-xs font-black tracking-widest" style={{ background: 'var(--gradient-cta)', color: 'var(--text-on-accent)' }}>CREATE ASSIGNMENT</Link></div>
               {assignList.length === 0 ? <p className="mt-4 text-sm" style={muted}>No assignments yet.</p> : assignList.map((a) => (
                 <div key={a.id} className="mt-3 flex flex-wrap items-center justify-between gap-3 rounded-2xl p-4" style={glass}>
                   <div>
@@ -208,10 +208,10 @@ export default async function ClassPage({ params, searchParams }: { params: { id
                     </thead>
                     <tbody>
                       {memberList.map((m) => (
-                        <tr key={m.user_id} style={{ borderTop: '1px solid rgba(255,255,255,0.1)' }}>
+                        <tr key={m.user_id} style={{ borderTop: '1px solid var(--border)' }}>
                           <td className="p-3 font-semibold">{m.name || 'Student'}</td>
-                          {assignList.map((a) => { const c = assignmentCell(a, m.user_id); return <td key={a.id} className="p-3" style={{ color: c.on ? '#fff' : 'rgba(255,255,255,0.35)' }}>{c.text}</td> })}
-                          {sessionList.map((s) => { const c = liveCell(m.user_id, s); return <td key={s.code} className="p-3" style={{ color: c.on ? '#fff' : 'rgba(255,255,255,0.35)' }}>{c.text}</td> })}
+                          {assignList.map((a) => { const c = assignmentCell(a, m.user_id); return <td key={a.id} className="p-3" style={{ color: c.on ? 'var(--text)' : 'var(--text-subtle)' }}>{c.text}</td> })}
+                          {sessionList.map((s) => { const c = liveCell(m.user_id, s); return <td key={s.code} className="p-3" style={{ color: c.on ? 'var(--text)' : 'var(--text-subtle)' }}>{c.text}</td> })}
                         </tr>
                       ))}
                     </tbody>
@@ -227,7 +227,7 @@ export default async function ClassPage({ params, searchParams }: { params: { id
               <p className="mt-1 text-sm" style={muted}>Free resources for your subjects. Assign a past paper or topic revision to this class.</p>
               <div className="mt-4 flex flex-wrap gap-2">
                 {subjectOptions.map((s) => (
-                  <Link key={s} href={`/classes/${cls.id}?tab=library&subject=${s}`} className="rounded-full px-4 py-2 text-sm font-bold" style={s === subject ? { background: '#fff', color: '#160f2a' } : { border: '1px solid rgba(255,255,255,0.35)' }}>{subjectLabel(s)}</Link>
+                  <Link key={s} href={`/classes/${cls.id}?tab=library&subject=${s}`} className="rounded-full px-4 py-2 text-sm font-bold" style={s === subject ? { background: 'var(--gradient-cta)', color: 'var(--text-on-accent)' } : { border: '1px solid var(--border-strong)', color: 'var(--text)' }}>{subjectLabel(s)}</Link>
                 ))}
               </div>
               {teacherSubjects.length === 0 && <p className="mt-3 text-xs" style={muted}>Tip: choose the subjects you teach on your dashboard to personalise this list.</p>}
@@ -237,7 +237,7 @@ export default async function ClassPage({ params, searchParams }: { params: { id
 
           {tab === 'live' && (
             <section>
-              <div className="flex items-center justify-between"><h2 className="text-2xl font-extrabold">Live sessions</h2><Link href="/design/live" className="rounded-lg px-4 py-2 text-xs font-black tracking-widest" style={{ background: '#fff', color: '#160f2a' }}>HOST A LIVE CLASS</Link></div>
+              <div className="flex items-center justify-between"><h2 className="text-2xl font-extrabold">Live sessions</h2><Link href="/design/live" className="rounded-lg px-4 py-2 text-xs font-black tracking-widest" style={{ background: 'var(--gradient-cta)', color: 'var(--text-on-accent)' }}>HOST A LIVE CLASS</Link></div>
               <p className="mt-1 text-sm" style={muted}>Attach one of your recent live sessions to {cls.name}, or remove it.</p>
               <div className="rounded-2xl p-4 mt-3" style={glass}><AssignSessions classId={cls.id} sessions={assignable} /></div>
             </section>
@@ -254,7 +254,7 @@ export default async function ClassPage({ params, searchParams }: { params: { id
               <div className="mt-4 rounded-2xl p-5" style={glass}>
                 <h3 className="text-lg font-extrabold">Students ({memberList.length})</h3>
                 {memberList.length === 0 ? <p className="mt-2 text-sm" style={muted}>Nobody has joined yet.</p> : memberList.map((m) => (
-                  <div key={m.user_id} className="mt-2 flex items-center justify-between rounded-lg px-3 py-2 text-sm" style={{ background: 'rgba(255,255,255,0.05)' }}>
+                  <div key={m.user_id} className="mt-2 flex items-center justify-between rounded-lg px-3 py-2 text-sm" style={{ background: 'var(--surface-inset)' }}>
                     <span className="font-semibold">{m.name || 'Student'}</span>
                     <RemoveMemberButton classId={cls.id} userId={m.user_id} name={m.name} />
                   </div>

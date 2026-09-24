@@ -4,8 +4,8 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 
-const ghost = { border: '1px solid rgba(255,255,255,0.35)', color: '#fff' } as const
-const solid = { background: '#fff', color: '#160f2a' } as const
+const ghost = { border: '1px solid var(--border-strong)', color: 'var(--text)' } as const
+const solid = { background: 'var(--gradient-cta)', color: 'var(--text-on-accent)' } as const
 
 export interface LibItem { ref: string; title: string; assigned: boolean }
 
@@ -45,20 +45,20 @@ export function AssignLibrary({ classId, teacherId, subject, papers, topics, can
             {k === 'paper' ? `Past papers (${papers.length})` : `Topic revision (${topics.length})`}
           </button>
         ))}
-        <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search…" className="ml-auto rounded-lg px-3 py-2 text-sm" style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.25)', color: '#fff' }} />
-        <label className="flex items-center gap-2 text-xs" style={{ color: 'rgba(255,255,255,0.65)' }}>
+        <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search…" className="ml-auto rounded-lg px-3 py-2 text-sm" style={{ background: 'var(--surface-inset)', border: '1px solid var(--border-strong)', color: 'var(--text)' }} />
+        <label className="flex items-center gap-2 text-xs" style={{ color: 'var(--text-muted)' }}>
           Due (optional)
-          <input type="date" value={due} onChange={(e) => setDue(e.target.value)} className="rounded-lg px-2 py-1.5 text-sm" style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.25)', color: '#fff' }} />
+          <input type="date" value={due} onChange={(e) => setDue(e.target.value)} className="rounded-lg px-2 py-1.5 text-sm" style={{ background: 'var(--surface-inset)', border: '1px solid var(--border-strong)', color: 'var(--text)' }} />
         </label>
       </div>
-      {error && <p className="mt-3 text-sm" style={{ color: '#ff9b9b' }}>{error}</p>}
+      {error && <p className="mt-3 text-sm" style={{ color: 'var(--danger)' }}>{error}</p>}
       <div className="mt-4 grid gap-2">
-        {list.length === 0 && <p className="text-sm" style={{ color: 'rgba(255,255,255,0.55)' }}>Nothing found.</p>}
+        {list.length === 0 && <p className="text-sm" style={{ color: 'var(--text-subtle)' }}>Nothing found.</p>}
         {list.map((i) => (
-          <div key={i.ref} className="flex items-center justify-between gap-3 rounded-xl px-4 py-3 text-sm" style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)' }}>
+          <div key={i.ref} className="flex items-center justify-between gap-3 rounded-xl px-4 py-3 text-sm" style={{ background: 'var(--surface-inset)', border: '1px solid var(--border)' }}>
             <span className="font-semibold">{i.title}</span>
             {i.assigned ? (
-              <span className="text-xs font-bold" style={{ color: 'rgba(255,255,255,0.5)' }}>ASSIGNED ✓</span>
+              <span className="text-xs font-bold" style={{ color: 'var(--text-subtle)' }}>ASSIGNED ✓</span>
             ) : (
               <button disabled={busy === i.ref} onClick={() => assign(tab, i)} className="rounded-lg px-3 py-1.5 text-xs font-black tracking-wider disabled:opacity-50" style={solid}>
                 {busy === i.ref ? '…' : 'ASSIGN'}
