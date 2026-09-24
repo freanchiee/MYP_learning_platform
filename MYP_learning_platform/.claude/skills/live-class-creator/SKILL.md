@@ -344,6 +344,22 @@ key instead of whichever section happens to be open — so a student filling
 in the empathy map never has to tab back to Interview just to re-check or
 continue what the persona said.
 
+**Famous-personality interviews (no AI of ours involved)**: the
+`personalityPrompt` worksheet field (`PersonalityPromptField.tsx`, data in
+`data/design/live/personalities.ts`) lets a student pick one of 10 well-known
+people — two per accessibility track — as a target user, then hands them a
+ready-made prompt to paste into whichever AI assistant their school
+approves so it can role-play that person. We deliberately don't run this
+chat ourselves: putting invented words in a real person's mouth from our own
+endpoint is a different risk from an invented persona-pack character. So the
+`facts` are limited to widely-documented public information, the generated
+prompt (`buildInterviewPrompt`) forbids inventing facts/quotes/medical
+detail, and the UI keeps saying "this is a simulation, not evidence" — the
+design-education point being that a simulated interview is a stand-in that
+must be checked against secondary research or a real user. Only the choice
+is saved (`{personalityId}`), which the teacher's review screen shows. Add a
+new person only if their relevant experience is public and well documented.
+
 If you add a second AI-backed feature, ask first whether it should be
 BYOK (like grading — where the student/teacher already has their own key
 for a task they'd do anyway) or platform-level (like persona chat — where

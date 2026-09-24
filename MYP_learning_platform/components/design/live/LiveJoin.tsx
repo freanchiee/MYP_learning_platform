@@ -11,6 +11,7 @@ import { cardStyle, btnStyle, inputStyle, pageBg, ErrorBanner, BadgeRow, MCQOpti
 import ChatPanel from './ChatPanel'
 import { Podium } from './Podium'
 import PersonaChatField from './PersonaChatField'
+import PersonalityPromptField from './PersonalityPromptField'
 import { getPersona } from '@/data/design/live/personas'
 import { useCelebration, CelebrationOverlay } from './Celebration'
 
@@ -638,6 +639,9 @@ function WorksheetFieldInput({
 }) {
   if (field.type === 'personaChat') {
     return <PersonaChatField value={value} onChange={onChange} onPersist={onPersist!} onDraft={onDraft!} sessionCode={sessionCode!} playerId={playerId!} />
+  }
+  if (field.type === 'personalityPrompt') {
+    return <PersonalityPromptField value={value} onChange={onChange} onPersist={onPersist ?? onChange} />
   }
   if (field.type === 'text') {
     return (

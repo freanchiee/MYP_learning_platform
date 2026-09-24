@@ -62,6 +62,29 @@ export const MYP4_PROTOTYPING: LiveActivityDefinition = {
           fields: [{ key: 'chat', label: 'Interview a persona-pack character', type: 'personaChat' }],
         },
         {
+          key: 'famous',
+          label: 'Famous voice',
+          icon: '🌟',
+          blurb:
+            'Optional: pick a well-known person whose everyday experience matches your track, copy the prompt into your school’s approved AI assistant, and run a simulated interview. It’s practice and inspiration — not a substitute for talking to a real user.',
+          fields: [
+            { key: 'pick', label: 'Interview a well-known person (with an AI assistant)', type: 'personalityPrompt' },
+            {
+              key: 'takeaways',
+              label: 'What did the simulated interview suggest — and what do you still need to check?',
+              type: 'textarea',
+              hint: 'Note 2–3 answers that surprised you. For each, say whether it is an assumption, and which real source (an interview, a biography, a real user) could confirm it.',
+              exemplars: [
+                'The AI said opening jars is the hardest task, which surprised me, but that is only an assumption. I need to check it against a real interview and ask a real user to confirm.',
+                'One answer suggested small print is a problem. I will treat that as a simulated assumption and look for a published source or ask a real person before using it as evidence.',
+                'The simulated answers gave me new questions, but they are not evidence. I will verify the important ones with secondary research and a real interview.',
+              ],
+              celebrateKeywords: ['assumption', 'check', 'source', 'evidence', 'simulated'],
+              points: 10,
+            },
+          ],
+        },
+        {
           key: 'empathy',
           label: 'Empathy map',
           icon: '💭',

@@ -51,7 +51,7 @@ export interface McqStage {
 // ---------------------------------------------------------------
 // Stage: Worksheet (structured research/build artefacts + grading)
 // ---------------------------------------------------------------
-export type WorksheetFieldType = 'text' | 'textarea' | 'select' | 'table' | 'personaChat'
+export type WorksheetFieldType = 'text' | 'textarea' | 'select' | 'table' | 'personaChat' | 'personalityPrompt'
 
 export interface WorksheetTableColumn {
   key: string

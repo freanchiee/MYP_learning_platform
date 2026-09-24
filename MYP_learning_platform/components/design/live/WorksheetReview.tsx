@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { fuzzyMatchPoints } from '@/lib/design-live/fuzzyMatch'
 import { getPersona } from '@/data/design/live/personas'
+import { getPersonality } from '@/data/design/live/personalities'
 import type { WorksheetStage, WorksheetField, WorksheetSection } from '@/data/design/live/types'
 import type { LivePlayerRow, LiveGradeRow } from '@/lib/design-live/types'
 import { cardStyle, btnStyle, inputStyle, Avatar } from './ui'
@@ -129,6 +130,15 @@ export function WorksheetReviewModal({
                         return (
                           <div key={f.key} style={{ fontSize: 12, color: 'var(--text-muted)' }}>
                             🎭 {persona ? `Interviewed ${persona.name}` : 'No interview yet'} — {asked} question{asked === 1 ? '' : 's'}
+                          </div>
+                        )
+                      }
+                      if (f.type === 'personalityPrompt') {
+                        const v = data[f.key] as { personalityId?: string } | undefined
+                        const chosen = v?.personalityId ? getPersonality(v.personalityId) : undefined
+                        return (
+                          <div key={f.key} style={{ fontSize: 12, color: 'var(--text-muted)' }}>
+                            🌟 {chosen ? `Chose ${chosen.name} for a simulated interview` : 'No famous person chosen yet'}
                           </div>
                         )
                       }
