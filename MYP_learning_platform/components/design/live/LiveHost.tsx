@@ -423,6 +423,59 @@ function McqHost({
         </div>
       )}
       <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.75)', textAlign: 'center' }}>{answersHere.length} of {players.length} answered</div>
+      <McqRoster stage={stage} mcqIndex={st.mcqIndex} players={players} now={now} onChat={onChat} sessionCode={session.code} />
+    </div>
+  )
+}
+
+/** Live per-student view for a HOST-PACED quiz, where everyone answers the
+ *  same question together: who has answered the current question (and
+ *  whether they got it right), plus a running score across the whole stage.
+ *  Same hover-peek / chat / react controls as the other host dashboards. */
+function McqRoster({
+  stage,
+  mcqIndex,
+  players,
+  now,
+  onChat,
+  sessionCode,
+}: {
+  stage: McqStage
+  mcqIndex: number
+  players: LivePlayerRow[]
+  now: number
+  onChat: (id: string) => void
+  sessionCode: string
+}) {
+  const total = stage.questions.length
+  return (
+    <div style={cardStyle()}>
+      <div style={{ fontSize: 11, fontWeight: 800, letterSpacing: 1, color: 'var(--text-muted)', marginBottom: 8 }}>
+        STUDENTS — QUESTION {mcqIndex + 1} OF {total}
+      </div>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(230px, 1fr))', gap: 8 }}>
+        {players.map((p) => {
+          const answers: Record<number, { choiceIdx: number; correct: boolean }> = p.data?.[stage.key]?.answers || {}
+          const a = answers[mcqIndex]
+          const correctSoFar = Object.values(answers).filter((x) => x.correct).length
+          const color = !a ? 'var(--text-muted)' : a.correct ? '#1FA98A' : '#D6425E'
+          return (
+            <div key={p.id} style={{ display: 'flex', alignItems: 'center', gap: 6, border: '1.5px solid var(--border)', borderRadius: 10, padding: '6px 8px', fontSize: 12.5 }}>
+              <PlayerPreview name={p.name} draft={p.data?.live as LiveDraft} now={now}>
+                <Avatar seed={p.id} size={22} />
+                <span style={{ fontWeight: 700, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: 110 }}>{p.name}</span>
+              </PlayerPreview>
+              <span style={{ marginLeft: 'auto', fontWeight: 800, color, whiteSpace: 'nowrap' }}>{!a ? '● waiting' : a.correct ? '✓' : '✕'}</span>
+              <span style={{ fontSize: 10.5, color: 'var(--text-muted)', whiteSpace: 'nowrap' }}>
+                {correctSoFar}/{Object.keys(answers).length}
+              </span>
+              <ChatButton playerId={p.id} onClick={() => onChat(p.id)} title={`Message ${p.name}`} />
+              <QuickReactButton sessionCode={sessionCode} playerId={p.id} playerName={p.name} />
+            </div>
+          )
+        })}
+        {!players.length && <div style={{ fontSize: 12.5, color: 'var(--text-muted)' }}>No one&apos;s joined yet.</div>}
+      </div>
     </div>
   )
 }
