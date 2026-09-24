@@ -6,6 +6,7 @@ import { fuzzyMatchPoints } from '@/lib/design-live/fuzzyMatch'
 import { getPersona } from '@/data/design/live/personas'
 import { getPersonality } from '@/data/design/live/personalities'
 import { getOpportunity } from '@/data/design/live/opportunities'
+import { getMake, isWildCard } from '@/data/design/live/makes'
 import type { WorksheetStage, WorksheetField, WorksheetSection } from '@/data/design/live/types'
 import type { LivePlayerRow, LiveGradeRow } from '@/lib/design-live/types'
 import { cardStyle, btnStyle, inputStyle, Avatar } from './ui'
@@ -140,6 +141,15 @@ export function WorksheetReviewModal({
                         return (
                           <div key={f.key} style={{ fontSize: 12, color: 'var(--text-muted)' }}>
                             🌟 {chosen ? `Chose ${chosen.name} for a simulated interview` : 'No famous person chosen yet'}
+                          </div>
+                        )
+                      }
+                      if (f.type === 'makeCards') {
+                        const v = data[f.key] as { makeId?: string; custom?: string } | undefined
+                        const chosen = v?.makeId ? getMake(v.makeId) : undefined
+                        return (
+                          <div key={f.key} style={{ fontSize: 12, color: 'var(--text-muted)' }}>
+                            🛠️ {!chosen ? 'Has not chosen what to make yet' : isWildCard(chosen.id) ? `Wild card: ${v?.custom?.trim() || '(not described yet)'}` : `Making: ${chosen.name}`}
                           </div>
                         )
                       }

@@ -189,6 +189,86 @@ export const MYP4_PROTOTYPING: LiveActivityDefinition = {
     },
     {
       type: 'worksheet',
+      key: 'make',
+      label: 'What Will You Make?',
+      icon: '🛠️',
+      intro: {
+        title: '🛠️ Enough thinking — make something!',
+        blurb:
+          'Pick something to BUILD for your user, from the make menu for your track — or play the wild card and choose your own. Then plan the first steps and start building with what you have at home. Work at your own pace: no need to click Next.',
+      },
+      sections: [
+        {
+          key: 'choose',
+          label: 'Choose your make',
+          icon: '🃏',
+          blurb: 'Your track is listed first. Stuck? Hit 🎲 Surprise me. Have your own idea? Play the wild card.',
+          fields: [{ key: 'pick', label: 'What will you make?', type: 'makeCards' }],
+        },
+        {
+          key: 'plan',
+          label: 'Make plan',
+          icon: '📐',
+          blurb: 'Decide what your first version must prove, then plan your first three steps.',
+          fields: [
+            {
+              key: 'proves',
+              label: 'What must your first prototype prove?',
+              type: 'textarea',
+              hint: 'ONE thing only — for example “the jar stays still while one hand turns the lid”.',
+              exemplars: [
+                'My first prototype must prove that the jar stays still while my user turns the lid with one hand, so I will test it on a real jar.',
+                'It needs to prove that the label can be read from arm’s length, so I will test three sizes with my user.',
+                'The first version has to show that my user can find each setting by touch without looking, so I can check if the design works.',
+              ],
+              celebrateKeywords: ['prove', 'test', 'so that', 'my user', 'works'],
+              points: 10,
+            },
+            {
+              key: 'steps',
+              label: 'My first three steps',
+              type: 'table',
+              minRows: 3,
+              columns: [
+                { key: 'step', label: 'Step', placeholder: 'e.g. Cut a cardboard base' },
+                { key: 'materials', label: 'Materials I have at home', placeholder: 'e.g. Cereal box, tape, scissors' },
+                { key: 'time', label: 'Time (minutes)', placeholder: 'e.g. 10' },
+              ],
+            },
+          ],
+        },
+        {
+          key: 'build',
+          label: 'Build log',
+          icon: '🔨',
+          blurb: 'Build your first version, then tell the story of what happened. Add a dated journal entry — photos go in your own design folder.',
+          fields: [
+            { key: 'date', label: 'Date', type: 'text', placeholder: 'e.g. 5 Oct' },
+            {
+              key: 'made',
+              label: 'What did you make?',
+              type: 'textarea',
+              hint: 'Describe your first version: what it looks like and what you made it from.',
+            },
+            {
+              key: 'learned',
+              label: 'What worked, what did not, and what will you change?',
+              type: 'textarea',
+              hint: 'Be honest — a prototype that fails teaches you the most.',
+              exemplars: [
+                'The grip worked because the jar stayed still, but the rubber band slipped on smooth lids, so next I will add a rougher surface.',
+                'It did not work as planned: the labels were still too small, so I will change the text size and test again with my user.',
+                'The handle felt comfortable but too thin, which I did not expect, so my next version will be thicker.',
+              ],
+              celebrateKeywords: ['worked', 'did not', 'because', 'change', 'next'],
+              points: 10,
+            },
+          ],
+        },
+      ],
+    },
+    {
+      type: 'worksheet',
       key: 'week2',
       label: 'Research Plan',
       icon: '📊',

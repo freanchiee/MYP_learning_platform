@@ -23,6 +23,9 @@ export function worksheetSectionPct(section: WorksheetSection, values: Record<st
       if (v?.personalityId) filled += 1
     } else if (f.type === 'opportunityCards') {
       if (v?.opportunityId) filled += 1
+    } else if (f.type === 'makeCards') {
+      // A wild card only counts once the student has said what they'll make.
+      if (v?.makeId && (!String(v.makeId).startsWith('wild-') || String(v?.custom || '').trim().length > 3)) filled += 1
     } else if (f.type === 'personaChat') {
       // "Complete" means the student actually asked something, not just picked a character.
       const messages: any[] = v?.messages || []

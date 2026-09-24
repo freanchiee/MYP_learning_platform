@@ -13,6 +13,7 @@ import { Podium } from './Podium'
 import PersonaChatField from './PersonaChatField'
 import PersonalityPromptField from './PersonalityPromptField'
 import OpportunityCardsField from './OpportunityCardsField'
+import MakeCardsField from './MakeCardsField'
 import { getPersona } from '@/data/design/live/personas'
 import { useCelebration, CelebrationOverlay } from './Celebration'
 
@@ -556,6 +557,7 @@ function WorksheetPlayer({
                     onDraft={(text) => reportDraft(stage.key, text, s.key)}
                     sessionCode={sessionCode}
                     playerId={me.id}
+                    lookup={(stageKey, sectionKey, fieldKey) => me.data?.[stageKey]?.[sectionKey]?.[fieldKey]}
                   />
                 ))}
                 <button onClick={() => saveSection(s.key)} style={{ ...btnStyle('#1FA98A', true), justifySelf: 'start' }}>
@@ -629,6 +631,7 @@ function WorksheetFieldInput({
   onDraft,
   sessionCode,
   playerId,
+  lookup,
 }: {
   field: WorksheetField
   value: any
@@ -637,7 +640,12 @@ function WorksheetFieldInput({
   onDraft?: (text: string) => void
   sessionCode?: string
   playerId?: string
+  /** Read a value the student saved earlier, from any stage: (stageKey, sectionKey, fieldKey). */
+  lookup?: (stageKey: string, sectionKey: string, fieldKey: string) => any
 }) {
+  if (field.type === 'makeCards') {
+    return <MakeCardsField value={value} onChange={onChange} onPersist={onPersist ?? onChange} preferredDirection={lookup?.('week1', 'direction', 'direction')} />
+  }
   if (field.type === 'personaChat') {
     return <PersonaChatField value={value} onChange={onChange} onPersist={onPersist!} onDraft={onDraft!} sessionCode={sessionCode!} playerId={playerId!} />
   }
