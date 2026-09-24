@@ -32,6 +32,11 @@ export async function POST(req: NextRequest, { params }: Params) {
     return NextResponse.json({ error: 'Not authorised' }, { status: 401 })
   }
 
+  if (session) {
+    const { data: isAdmin } = await supabase.rpc('is_admin')
+    if (!isAdmin) return NextResponse.json({ error: 'Admins only' }, { status: 403 })
+  }
+
   // In dev-bypass (no session) write via the service-role client; in prod the user's
   // session client is used so RLS gates the write to authenticated editors.
   const db = !session && DEV_NO_AUTH ? createAdminClient() : supabase

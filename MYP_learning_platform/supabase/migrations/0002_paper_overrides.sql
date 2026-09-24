@@ -19,8 +19,7 @@ drop policy if exists "paper_overrides_read" on public.paper_overrides;
 create policy "paper_overrides_read" on public.paper_overrides
   for select using (true);
 
--- Authenticated users may publish overrides. Tighten to an editor role later, e.g.
---   with check (exists (select 1 from public.profiles p where p.id = auth.uid() and p.role = 'editor'))
+-- Only admins (public.admins, see is_admin()) may publish overrides.
 drop policy if exists "paper_overrides_write" on public.paper_overrides;
 create policy "paper_overrides_write" on public.paper_overrides
-  for all using (auth.uid() is not null) with check (auth.uid() is not null);
+  for all using (public.is_admin()) with check (public.is_admin());
