@@ -3,6 +3,8 @@
 // All content is original — written for CritABCD, not copied from IB materials.
 
 import { ARTIFACT_POSTS } from './blog-artifact-posts'
+import { PERSONA_DIRECTIONS } from './design/live/personas'
+import { OPPORTUNITIES } from './design/live/opportunities'
 
 export interface BlogSection {
   heading?: string
@@ -39,6 +41,25 @@ export interface BlogPost {
   sections: BlogSection[]
   faq?: { q: string; a: string }[]
   related?: { label: string; href: string }[]
+}
+
+// One section per accessibility track, built from the SAME data the live-class
+// game uses (data/design/live/opportunities.ts), so the article and the game
+// can never drift apart.
+const TRACK_INTROS: Record<string, string> = {
+  onehand: 'Everyday objects often assume two working hands. These starting points focus on holding, gripping and steadying with one.',
+  lowvision: 'Low vision covers a wide range of experiences, so ask your user what they can see and what helps them. These starting points focus on contrast, touch and light.',
+  sensory: 'Sensory needs differ a great deal from person to person. These starting points start from calm, predictable routines and keeping useful things within reach.',
+  elderly: 'Kitchens are full of small grips, small print and stiff controls. These starting points focus on comfort, legibility and parts that are easy to turn.',
+  classroom: 'A classroom only works for everyone if information and space are accessible. These starting points begin with reading, timetables and moving around.',
+}
+
+function opportunitySections(): BlogSection[] {
+  return PERSONA_DIRECTIONS.map((d) => ({
+    heading: d.label,
+    body: [TRACK_INTROS[d.key]],
+    bullets: OPPORTUNITIES.filter((o) => o.direction === d.key).map((o) => `${o.hmw} Prototype: ${o.prototype} Measure: ${o.measure} Test: ${o.test}`),
+  }))
 }
 
 const CORE_POSTS: BlogPost[] = [
@@ -654,6 +675,53 @@ const CORE_POSTS: BlogPost[] = [
       { label: 'MYP assessment criteria explained', href: '/blog/myp-assessment-criteria-explained' },
       { label: 'Scalars vs vectors & SI units', href: '/blog/scalars-vectors-si-units-myp-physics' },
       { label: 'MYP command terms', href: '/blog/myp-command-terms' },
+    ],
+  },
+  {
+    slug: 'accessibility-design-project-ideas-myp-design',
+    seoTitle: '15 Accessibility Design Project Ideas (MYP)',
+    title: 'Accessibility Design Project Ideas for MYP Design: 15 Online-Friendly Starting Points',
+    description:
+      'Fifteen "How might we" design opportunities for MYP Design accessibility projects, each with a way to prototype, measure and test it at home or online.',
+    datePublished: '2026-09-24',
+    readMinutes: 9,
+    tags: ['Design', 'Prototyping'],
+    intro:
+      'A good design project starts with a real person and a real problem, not a product idea. But when the class is online there is no workshop, so students also need ideas they can prototype with what is at home. Here are fifteen starting points across five accessibility tracks, each written as a "How might we…" opportunity with a cheap way to build it, something to measure, and a way to test it on a video call.',
+    sections: [
+      {
+        heading: 'How to use these starting points',
+        body: [
+          'A design opportunity is a problem rewritten as "How might we…" for a specific person, so a designer can start solving it. Treat each idea below as a starting point to adapt to your own named user, not a menu to copy.',
+          'Then build the cheapest version that proves one thing. Climb a fidelity ladder: a paper mock-up first, then a functional mock-up in cardboard, tape and household items, and only then a digital model in a free tool such as Tinkercad. Deciding what a prototype must prove before choosing how polished it should be is one of the most useful habits in design.',
+        ],
+      },
+      ...opportunitySections(),
+      {
+        heading: 'Testing without a workshop',
+        bullets: [
+          'Test with your chosen user, or with someone whose hands, eyes or attention are genuinely busy. Do not ask people to imitate a disability: it builds sympathy, not understanding.',
+          'Record what you observe — time taken, failed attempts, where someone hesitates — instead of only asking whether they liked it.',
+          'Compare against a baseline, such as the ordinary version of the object.',
+          'Photograph every version in a dated design journal so your reasoning is visible.',
+        ],
+      },
+      {
+        heading: 'A note on interviews and AI role-play',
+        body: [
+          'If you cannot reach a real user, a simulated interview can help you practise your questions — for example, asking an AI assistant to play a well-known person whose public experience is relevant. But treat every answer as an assumption. It is not primary research. Check anything important against a published interview or a real user before you use it as evidence in your design folder.',
+        ],
+      },
+    ],
+    faq: [
+      { q: 'What is a design opportunity?', a: 'A problem rewritten as a "How might we…" question for a specific person, framed so that a designer can start solving it.' },
+      { q: 'Can students prototype without a workshop?', a: 'Yes. Start with a paper mock-up, then a cardboard-and-tape functional mock-up using household materials, then a free digital model such as Tinkercad. Each version should be built to prove one specific thing.' },
+      { q: 'How do you test an accessibility design online?', a: 'Test with your chosen user (or someone whose hands or eyes are busy) on a video call, record what you observe against your success criteria, and compare with the ordinary version of the object.' },
+    ],
+    related: [
+      { label: 'The MYP design cycle explained', href: '/blog/myp-design-cycle-explained' },
+      { label: 'MYP Design subject guide', href: '/guides/design' },
+      { label: 'Run it as a live class', href: '/gameducation' },
     ],
   },
 ]

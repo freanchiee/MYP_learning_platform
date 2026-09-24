@@ -262,6 +262,10 @@ export const GUIDES: SubjectGuide[] = [
         a: 'The design cycle is the process at the heart of MYP Design: inquire and analyse the problem, develop ideas, create the solution, then evaluate it — mirrored by criteria A, B, C and D.',
       },
     ],
+    relatedPosts: [
+      { label: '15 accessibility design project ideas you can prototype online', href: '/blog/accessibility-design-project-ideas-myp-design' },
+      { label: 'The MYP design cycle explained', href: '/blog/myp-design-cycle-explained' },
+    ],
   },
 ]
 
