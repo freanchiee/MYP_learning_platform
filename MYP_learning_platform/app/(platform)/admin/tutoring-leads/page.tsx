@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { notFound, redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
 import type { TutoringLead } from '@/lib/tutoring'
@@ -23,7 +24,12 @@ export default async function TutoringLeadsPage() {
 
   return (
     <div className="mx-auto max-w-7xl px-5 py-8 md:px-8">
-      <h1 className="text-2xl font-extrabold" style={{ color: 'var(--text)' }}>Tutoring leads</h1>
+      <div className="flex flex-wrap items-baseline gap-4">
+        <h1 className="text-2xl font-extrabold" style={{ color: 'var(--text)' }}>Tutoring leads</h1>
+        <nav className="flex gap-3 text-sm font-bold" style={{ color: 'var(--accent)' }}>
+          <Link href="/admin/interest-leads">Interest sign-ups →</Link>
+        </nav>
+      </div>
       <p className="mt-1 text-sm" style={{ color: 'var(--text-muted)' }}>
         People who filled in the form at /tutoring. Most are parents writing about a child — handle these details with care, and delete a lead when someone asks.
       </p>

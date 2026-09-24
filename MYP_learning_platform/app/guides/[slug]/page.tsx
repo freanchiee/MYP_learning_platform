@@ -5,6 +5,8 @@ import { GUIDES, getGuide, MYP_GLOBAL_CONTEXTS, GUIDE_EXTRAS } from '@/data/guid
 import { SITE_URL } from '@/lib/site'
 import GuideTopBar from '@/components/guides/GuideTopBar'
 import SubjectExplorer from '@/components/guides/SubjectExplorer'
+import InterestForm from '@/components/leads/InterestForm'
+import { interestsForGuide } from '@/lib/interests'
 
 export function generateStaticParams() {
   return GUIDES.map((g) => ({ slug: g.slug }))
@@ -214,6 +216,11 @@ export default function GuidePage({ params }: { params: { slug: string } }) {
             </div>
           </div>
         )}
+
+        {/* Interest sign-up — pre-ticks the subject being read about */}
+        <div className="mt-8">
+          <InterestForm sourcePage={`/guides/${g.slug}`} defaultInterests={interestsForGuide(g.slug)} />
+        </div>
 
         {/* CTA band */}
         <div className="mt-8 flex flex-wrap items-center gap-3 rounded-3xl p-6 md:p-7" style={{ background: 'var(--accent)', color: 'var(--text-on-accent)' }}>

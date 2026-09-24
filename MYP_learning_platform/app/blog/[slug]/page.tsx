@@ -4,6 +4,8 @@ import { notFound } from 'next/navigation'
 import { POSTS, getPost } from '@/data/blog'
 import { SITE_URL } from '@/lib/site'
 import GuideTopBar from '@/components/guides/GuideTopBar'
+import InterestForm from '@/components/leads/InterestForm'
+import { interestsForTags } from '@/lib/interests'
 
 export function generateStaticParams() {
   return POSTS.map((p) => ({ slug: p.slug }))
@@ -159,6 +161,15 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
             </div>
           </section>
         )}
+        {/* Interest sign-up — pre-ticks subjects from the post's tags */}
+        <section className="mt-12">
+          <InterestForm
+            sourcePage={`/blog/${p.slug}`}
+            defaultInterests={interestsForTags(p.tags)}
+            heading="Want more like this?"
+            blurb="Tell me what you are studying or teaching and I will email you new guides, activities and tools. Nothing is charged, and you can unsubscribe any time."
+          />
+        </section>
       </main>
     </div>
   )

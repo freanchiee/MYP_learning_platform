@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import Wordmark from '@/components/brand/Wordmark'
+import InterestForm from '@/components/leads/InterestForm'
 import { Avatar, ProgressCell } from '@/components/design/live/ui'
 import { Podium } from '@/components/design/live/Podium'
 import { GAMEDUCATION_FEATURES, GAMEDUCATION_STATS, GAMEDUCATION_BENEFITS, GAMEDUCATION_TESTIMONIALS } from '@/data/gameducation/content'
@@ -273,6 +274,17 @@ export default function GameducationLanding() {
           </Link>
         </div>
       </motion.section>
+
+      {/* ── INTEREST SIGN-UP ── */}
+      <section className="mx-auto w-full max-w-3xl px-7 py-16">
+        <InterestForm
+          sourcePage="/gameducation"
+          defaultRole="teacher"
+          defaultInterests={['Live classes for teachers (Gameducation)']}
+          heading="Want early access to new live-class activities?"
+          blurb="Tell me which subjects you teach and I will email you when new activities are ready. Nothing is charged, and you can unsubscribe any time."
+        />
+      </section>
 
       {/* ── FOOTER ── */}
       <footer className="flex flex-col md:flex-row items-center justify-between gap-4 px-7 md:px-14 py-8 text-[12px] opacity-40" style={{ borderTop: '1px solid var(--border)' }}>
