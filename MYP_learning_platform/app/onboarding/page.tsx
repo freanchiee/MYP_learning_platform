@@ -4,6 +4,7 @@ import { Suspense, useEffect, useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 import type { UserRole } from '@/lib/classes'
+import SubjectPicker from '@/components/teacher/SubjectPicker'
 
 const CHOICES: { role: UserRole; icon: string; title: string; body: string }[] = [
   { role: 'student', icon: '🎓', title: "I'm a student", body: 'Practise, join live classes and follow tasks your teacher sets.' },
@@ -28,6 +29,7 @@ function Picker() {
   const [ready, setReady] = useState(false)
   const [saving, setSaving] = useState<UserRole | null>(null)
   const [error, setError] = useState<string | null>(null)
+  const [pickSubjects, setPickSubjects] = useState(false)
 
   useEffect(() => {
     const sb = createClient()
@@ -54,11 +56,29 @@ function Picker() {
       setSaving(null)
       return
     }
+    if (role === 'teacher') {
+      setSaving(null)
+      setPickSubjects(true)
+      return
+    }
     router.push(role === 'student' && next === '/dashboard' ? '/join-class' : next)
     router.refresh()
   }
 
   if (!ready) return null
+
+  if (pickSubjects) {
+    return (
+      <div className="min-h-screen flex items-center justify-center px-5" style={{ background: 'var(--bg)' }}>
+        <div className="w-full max-w-lg rounded-2xl p-8 shadow-2xl" style={{ background: 'var(--surface)' }}>
+          <h1 className="text-2xl font-bold" style={{ color: 'var(--accent)' }}>What do you teach?</h1>
+          <p className="mt-1 text-sm" style={{ color: 'var(--text-subtle)' }}>Pick your subjects. We will offer free resources and papers for them to assign to your classes. You can change this any time.</p>
+          <div className="mt-6"><SubjectPicker initial={[]} /></div>
+          <button onClick={() => { router.push(next); router.refresh() }} className="mt-6 w-full rounded-lg py-3 text-sm font-bold" style={{ background: 'var(--gradient-cta)', color: 'var(--text-on-accent)' }}>Continue</button>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="min-h-screen flex items-center justify-center px-5" style={{ background: 'var(--bg)' }}>
