@@ -32,7 +32,7 @@ const STATS = [
   { value: '20+', label: 'Past Papers' },
   { value: '6',   label: 'Subjects' },
   { value: '88+', label: 'Questions / Paper' },
-  { value: 'AI',  label: 'Grading' },
+  { value: 'Live', label: 'Classes' },
 ]
 // Subtle ABCD motif: each stat carries one of the four brand / criteria colours.
 const STAT_COLORS = ['var(--logo-a)', 'var(--logo-b)', 'var(--logo-c)', 'var(--logo-d)']
@@ -304,8 +304,8 @@ export default function LandingPage() {
             transition={{ delay: 0.55, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             className="text-[15px] leading-relaxed opacity-70 max-w-sm mb-10"
           >
-            Guides, interactive labs, live classes, past papers and AI-powered
-            feedback — everything for IB MYP Sciences, Humanities, Geography and Design, in one place.
+            Guides, interactive labs, live classes, past papers and more —
+            everything for IB MYP Sciences, Humanities, Geography and Design, in one place.
           </motion.p>
 
           {/* CTAs */}
@@ -489,8 +489,9 @@ export default function LandingPage() {
           },
           {
             icon: '🤖',
-            title: 'AI-Powered Grading',
-            body: 'Bring your own Claude, OpenAI or Gemini key. Structured tasks grade via keyword engine; open-ended prose grades via LLM.',
+            title: 'AI Marking',
+            body: 'Instant, criterion-based feedback on your written answers. We are building this now and it will arrive after launch.',
+            badge: 'Coming next',
           },
           {
             icon: '🔬',
@@ -515,7 +516,13 @@ export default function LandingPage() {
             body: 'Stuck on a criterion or a topic? Tell us what you need and ask about one-to-one help.',
             href: '/tutoring',
           },
-        ].map((f: { icon: string; title: string; body: string; href?: string }, i) => (
+          {
+            icon: '➗',
+            title: 'MYP Maths',
+            body: 'Practice, guides and past papers for MYP Mathematics.',
+            badge: 'Coming soon',
+          },
+        ].map((f: { icon: string; title: string; body: string; href?: string; badge?: string }, i) => (
           <motion.div
             key={f.title}
             initial={{ opacity: 0, y: 28 }}
@@ -535,6 +542,9 @@ export default function LandingPage() {
                 f.title
               )}
             </h3>
+            {f.badge && (
+              <span className="mb-3 inline-block rounded-full px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wide" style={{ background: 'var(--accent-soft)', color: 'var(--accent)' }}>{f.badge}</span>
+            )}
             <p className="text-[14px] leading-relaxed opacity-55">{f.body}</p>
           </motion.div>
         ))}
@@ -612,8 +622,7 @@ export default function LandingPage() {
             transition={{ delay: 0.1, duration: 0.6 }}
             className="text-white/60 text-base max-w-md leading-relaxed"
           >
-            Learn with guides and interactive labs. Practise past papers and get instant
-            AI feedback. Run or join a live class. Track your progress across the MYP criteria.
+            Learn with guides and interactive labs. Practise past papers. Run or join a live class. Track your progress across the MYP criteria.
           </motion.p>
 
           <motion.div

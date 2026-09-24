@@ -93,7 +93,7 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
           className="text-center text-xs mt-6 fade-up"
           style={{ color: 'var(--text-subtle)', animationDelay: '0.3s' }}
         >
-          Guides · Live classes · Past papers · AI-Powered Feedback
+          Guides · Live classes · Past papers · Practice
         </p>
       </div>
     </div>

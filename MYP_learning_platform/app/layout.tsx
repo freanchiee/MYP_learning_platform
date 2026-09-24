@@ -26,7 +26,7 @@ const SITE_NAME = 'CritABCD'
 const SITE_TITLE = 'CritABCD — The Next-Gen IB MYP Learning Site'
 // ≤160 chars so it isn't truncated in search results.
 const SITE_DESC =
-  'The next-gen IB MYP learning site: guides, interactive labs, live classes, past papers and AI-graded practice across Sciences, Humanities and Design.'
+  'The next-gen IB MYP learning site: guides, interactive labs, live classes, past papers and practice across Sciences, Humanities and Design.'
 // Absolute so social/AI-preview scrapers always resolve it, independent of env.
 const OG_IMAGE = `${SITE_URL}/images/landing/critabcd-logo.png`
 
@@ -53,7 +53,6 @@ export const metadata: Metadata = {
     'MYP Geography',
     'MYP Design',
     'IB criteria A B C D',
-    'AI grading',
     'MYP practice questions',
   ],
   authors: [{ name: SITE_NAME }],

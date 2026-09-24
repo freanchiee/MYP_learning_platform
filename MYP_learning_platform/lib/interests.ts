@@ -12,7 +12,7 @@ export const INTEREST_CONSENT_TEXT =
 export const INTEREST_SUBJECTS = ['MYP Physics', 'MYP Chemistry', 'MYP Biology', 'MYP Humanities', 'MYP Geography', 'MYP Design'] as const
 
 export const INTEREST_EXPERIENCES = [
-  'Past papers & AI-graded practice',
+  'Past papers & practice',
   'Live classes for teachers (Gameducation)',
   'Free interactive resources',
   '1:1 tutoring',

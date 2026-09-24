@@ -56,7 +56,7 @@ export const SITE_COURSES: { name: string; href: string; description: string }[]
 export const SITE_FAQ: { q: string; a: string }[] = [
   {
     q: 'What is CritABCD?',
-    a: 'CritABCD is a next-generation learning site for the IB Middle Years Programme (MYP): free guides and articles, interactive labs and resources, live teacher-hosted classes, past papers, and AI-graded practice with instant, criterion-referenced feedback across several MYP subjects.',
+    a: 'CritABCD is a next-generation learning site for the IB Middle Years Programme (MYP): free guides and articles, interactive labs and resources, live teacher-hosted classes, past papers and practice across several MYP subjects.',
   },
   {
     q: 'Which subjects does CritABCD cover?',
