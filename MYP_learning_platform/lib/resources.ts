@@ -8,7 +8,15 @@ export interface Resource {
   url?: string
 }
 
+// Entries whose `url` starts with "/" are hosted on this site (public/artifacts)
+// and each has a matching article under /blog that surrounds it with real
+// explanation — `host` is just a unique id/label for those.
 export const RESOURCES: Resource[] = [
+  { title: 'The Vent Expedition',              category: 'Biology',          desc: 'Classify an unknown organism from a hydrothermal vent, then work out the chemistry that keeps it alive.', host: 'critabcd.com/blog/hydrothermal-vents', url: '/artifacts/vent-expedition.html' },
+  { title: 'The Biological Blueprint',         category: 'Biology',          desc: 'A classification quest: kingdoms, binomial names and dichotomous keys.', host: 'critabcd.com/blog/classification', url: '/artifacts/biological-blueprint-quest.html' },
+  { title: 'Cells & Life (Year 4)',            category: 'Biology',          desc: 'Levels of biological organisation from organelle to organism, with self-checking tasks.', host: 'critabcd.com/blog/cells-tissues-organs', url: '/artifacts/myp-year4-cells-and-life.html' },
+  { title: 'Quantity Quest: Mission Vector',   category: 'Physics',          desc: 'Four missions on measurement, SI units, scalars vs vectors and vector navigation.', host: 'critabcd.com/blog/scalars-vectors', url: '/artifacts/quantity-quest.html' },
+  { title: 'The Butterfly Code',               category: 'Sciences',         desc: 'Predictions, hypotheses, variables and field vs lab investigations, as a game.', host: 'critabcd.com/blog/scientific-method', url: '/artifacts/butterfly-code.html' },
   { title: 'IB Physics 2026',                  category: 'Physics',          desc: 'A full IB Physics revision hub — focused guides across the whole course.', host: 'ibphym2026.edgeone.app', url: 'https://ibphym2026-0yomblyj3n.edgeone.app/ib-physics-guide.html' },
   { title: 'MYP Physics e-Assessment',         category: 'Physics',          desc: 'A 90-minute interactive physics exam with simulation-based inquiry tasks.', host: 'indirect-coffee-beyrm1exsy.edgeone.app' },
   { title: 'Stellar Evolution',                category: 'Astrophysics',     desc: 'An interactive explorer for the life cycle of stars.', host: 'stellarevolution.edgeone.app' },

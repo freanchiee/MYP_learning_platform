@@ -123,6 +123,10 @@ export const GUIDES: SubjectGuide[] = [
     relatedConcepts: ['Energy', 'Forces', 'Movement', 'Interaction', 'Models', 'Transformation', 'Consequences'],
     officialUrl: SCIENCES_URL,
     faq: sciencesFaq('Physics'),
+    relatedPosts: [
+      { label: 'Scalars vs vectors, SI units & measurement', href: '/blog/scalars-vectors-si-units-myp-physics' },
+      { label: 'Scientific method: predictions, hypotheses & variables', href: '/blog/scientific-method-hypothesis-variables-myp-science' },
+    ],
   },
   {
     slug: 'chemistry',
@@ -143,6 +147,7 @@ export const GUIDES: SubjectGuide[] = [
     relatedConcepts: ['Balance', 'Conditions', 'Consequences', 'Interaction', 'Patterns', 'Transfer', 'Transformation'],
     officialUrl: SCIENCES_URL,
     faq: sciencesFaq('Chemistry'),
+    relatedPosts: [{ label: 'Scientific method: predictions, hypotheses & variables', href: '/blog/scientific-method-hypothesis-variables-myp-science' }],
   },
   {
     slug: 'biology',
@@ -163,7 +168,12 @@ export const GUIDES: SubjectGuide[] = [
     relatedConcepts: ['Balance', 'Consequences', 'Environment', 'Form', 'Function', 'Interaction', 'Models', 'Patterns'],
     officialUrl: SCIENCES_URL,
     faq: sciencesFaq('Biology'),
-    relatedPosts: [{ label: 'Hydrothermal vents & chemosynthesis, with a live classification lab', href: '/blog/hydrothermal-vents-chemosynthesis-myp-biology' }],
+    relatedPosts: [
+      { label: 'Hydrothermal vents & chemosynthesis, with a live classification lab', href: '/blog/hydrothermal-vents-chemosynthesis-myp-biology' },
+      { label: 'Classification: kingdoms, binomial names & dichotomous keys', href: '/blog/classification-kingdoms-dichotomous-keys-myp-biology' },
+      { label: 'Cells, tissues, organs & organ systems (Year 4)', href: '/blog/cells-tissues-organs-levels-of-organisation-myp-biology' },
+      { label: 'Scientific method: predictions, hypotheses & variables', href: '/blog/scientific-method-hypothesis-variables-myp-science' },
+    ],
   },
   {
     slug: 'humanities',

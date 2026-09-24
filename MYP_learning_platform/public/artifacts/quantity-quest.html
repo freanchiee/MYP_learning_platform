@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quantity Quest: Mission Vector</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap');
+
+:root{
+  --space:#0B1026;
+  --deep:#070B1C;
+  --panel:#141B3C;
+  --panel-2:#1B2350;
+  --line:#2C3670;
+  --amber:#FFB347;
+  --amber-dim:#B87E2E;
+  --cyan:#4DD9E8;
+  --coral:#FF6B8A;
+  --green:#5CE8A4;
+  --red:#FF7A6B;
+  --text:#E8ECFF;
+  --muted:#8B94C4;
+  --font-d:'Chakra Petch', 'Trebuchet MS', sans-serif;
+  --font-b:'Space Grotesk', 'Segoe UI', sans-serif;
+}
+*{box-sizing:border-box; margin:0; padding:0; -webkit-tap-highlight-color:transparent;}
+html,body{height:100%;}
+body{
+  font-family:var(--font-b);
+  background:var(--deep);
+  color:var(--text);
+  overflow-x:hidden;
+  min-height:100vh;
+  background-image:
+    radial-gradient(ellipse 80% 60% at 70% -10%, rgba(77,120,232,.18), transparent 60%),
+    radial-gradient(ellipse 60% 50% at 10% 110%, rgba(255,107,138,.10), transparent 60%);
+}
+/* starfield */
+.stars, .stars2{position:fixed; inset:0; pointer-events:none; z-index:0;}
+.stars{
+  background-image:
+    radial-gradient(1px 1px at 20% 30%, #fff 50%, transparent 51%),
+    radial-gradient(1px 1px at 60% 70%, #cfe3ff 50%, transparent 51%),
+    radial-gradient(1.5px 1.5px at 80% 20%, #fff 50%, transparent 51%),
+    radial-gradient(1px 1px at 35% 80%, #ffe9c9 50%, transparent 51%),
+    radial-gradient(1px 1px at 90% 55%, #fff 50%, transparent 51%),
+    radial-gradient(1.5px 1.5px at 45% 15%, #cfe3ff 50%, transparent 51%),
+    radial-gradient(1px 1px at 12% 60%, #fff 50%, transparent 51%),
+    radial-gradient(1px 1px at 70% 90%, #ffe9c9 50%, transparent 51%);
+  background-size:600px 600px;
+  opacity:.8;
+  animation:twinkle 5s ease-in-out infinite alternate;
+}
+.stars2{
+  background-image:
+    radial-gradient(1px 1px at 15% 45%, #fff 50%, transparent 51%),
+    radial-gradient(1px 1px at 55% 25%, #fff 50%, transparent 51%),
+    radial-gradient(1px 1px at 85% 75%, #cfe3ff 50%, transparent 51%),
+    radial-gradient(1px 1px at 30% 10%, #fff 50%, transparent 51%);
+  background-size:400px 400px;
+  opacity:.5;
+  animation:twinkle 7s ease-in-out infinite alternate-reverse;
+}
+@keyframes twinkle{from{opacity:.45}to{opacity:.9}}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.001s !important; transition-duration:.001s !important;}
+}
+
+.wrap{position:relative; z-index:1; max-width:960px; margin:0 auto; padding:12px 14px 40px;}
+
+/* ============ HUD ============ */
+#hud{
+  display:none;
+  position:sticky; top:0; z-index:20;
+  background:linear-gradient(180deg, rgba(7,11,28,.97), rgba(7,11,28,.88));
+  border-bottom:1px solid var(--line);
+  padding:8px 14px;
+  backdrop-filter:blur(4px);
+}
+#hud .hud-inner{max-width:960px; margin:0 auto; display:flex; align-items:center; gap:14px; flex-wrap:wrap;}
+.hud-name{font-family:var(--font-d); font-weight:700; color:var(--amber); letter-spacing:.06em; text-transform:uppercase; font-size:.95rem;}
+.hud-stat{font-size:.85rem; color:var(--muted);}
+.hud-stat b{color:var(--text); font-family:var(--font-d);}
+.hud-badges{display:flex; gap:6px; margin-left:auto;}
+.hud-badge{
+  width:26px; height:26px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  font-size:.85rem; background:var(--panel); border:1px solid var(--line);
+  filter:grayscale(1) opacity(.35);
+}
+.hud-badge.earned{filter:none; border-color:var(--amber); box-shadow:0 0 8px rgba(255,179,71,.4);}
+
+/* ============ screens ============ */
+.screen{display:none;}
+.screen.active{display:block; animation:fadeUp .4s ease both;}
+@keyframes fadeUp{from{opacity:0; transform:translateY(12px)}to{opacity:1; transform:none}}
+
+/* ============ panel with bracket corners (signature frame) ============ */
+.panel{
+  position:relative;
+  background:linear-gradient(180deg, var(--panel), var(--panel-2));
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:22px 20px;
+  margin-top:18px;
+}
+.panel::before,.panel::after,
+.panel .bk::before,.panel .bk::after{
+  content:""; position:absolute; width:16px; height:16px; border:2px solid var(--amber);
+}
+.panel::before{top:-2px; left:-2px; border-right:none; border-bottom:none; border-radius:8px 0 0 0;}
+.panel::after{top:-2px; right:-2px; border-left:none; border-bottom:none; border-radius:0 8px 0 0;}
+.panel .bk::before{bottom:-2px; left:-2px; border-right:none; border-top:none; border-radius:0 0 0 8px;}
+.panel .bk::after{bottom:-2px; right:-2px; border-left:none; border-top:none; border-radius:0 0 8px 0;}
+
+.eyebrow{
+  font-family:var(--font-d); font-size:.72rem; letter-spacing:.28em; text-transform:uppercase;
+  color:var(--cyan); margin-bottom:8px;
+}
+h1{font-family:var(--font-d); font-weight:700; font-size:clamp(1.7rem, 5vw, 2.6rem); letter-spacing:.04em; line-height:1.15;}
+h1 .hl{color:var(--amber);}
+h2{font-family:var(--font-d); font-weight:600; font-size:clamp(1.15rem, 3.4vw, 1.5rem); letter-spacing:.05em;}
+p.lead{color:var(--muted); margin-top:10px; font-size:1rem; line-height:1.55; max-width:60ch;}
+
+/* buttons */
+.btn{
+  font-family:var(--font-d); font-weight:600; letter-spacing:.1em; text-transform:uppercase;
+  background:var(--amber); color:#211200; border:none; border-radius:8px;
+  padding:13px 26px; font-size:.95rem; cursor:pointer;
+  box-shadow:0 0 0 1px rgba(255,179,71,.5), 0 4px 18px rgba(255,179,71,.25);
+  transition:transform .12s ease, box-shadow .12s ease;
+}
+.btn:hover{transform:translateY(-2px); box-shadow:0 0 0 1px rgba(255,179,71,.7), 0 8px 24px rgba(255,179,71,.35);}
+.btn:focus-visible{outline:3px solid var(--cyan); outline-offset:3px;}
+.btn:disabled{opacity:.4; cursor:not-allowed; transform:none;}
+.btn.ghost{background:transparent; color:var(--cyan); box-shadow:0 0 0 1px var(--cyan);}
+.btn.ghost:hover{box-shadow:0 0 0 1px var(--cyan), 0 6px 18px rgba(77,217,232,.25);}
+
+/* name input */
+.name-row{display:flex; gap:10px; margin-top:22px; flex-wrap:wrap;}
+#cadetName{
+  flex:1; min-width:200px;
+  font-family:var(--font-d); font-size:1.05rem; letter-spacing:.05em;
+  background:var(--deep); color:var(--text);
+  border:1px solid var(--line); border-radius:8px; padding:13px 16px;
+}
+#cadetName:focus-visible{outline:2px solid var(--amber); outline-offset:2px; border-color:var(--amber);}
+#cadetName::placeholder{color:var(--muted); opacity:.7;}
+
+/* title screen extras */
+.title-crest{font-size:3rem; margin-bottom:10px;}
+.title-list{margin-top:18px; color:var(--muted); font-size:.92rem; line-height:1.9;}
+.title-list b{color:var(--text);}
+
+/* ============ STAR MAP ============ */
+#mapSvg{width:100%; height:auto; display:block; margin-top:6px;}
+.map-node{cursor:pointer;}
+.map-node.locked{cursor:not-allowed;}
+.map-node:focus-visible circle.node-ring{stroke:var(--cyan); stroke-width:3;}
+.node-label{font-family:var(--font-d); font-size:11px; letter-spacing:.08em; fill:var(--text); text-transform:uppercase;}
+.node-sub{font-size:9.5px; fill:var(--muted);}
+.node-star{font-size:10px;}
+.map-hint{color:var(--muted); font-size:.9rem; margin-top:10px; text-align:center;}
+@keyframes pulse{0%,100%{opacity:.5; r:22}50%{opacity:.15; r:27}}
+.pulse-ring{animation:pulse 2s ease-in-out infinite; transform-origin:center;}
+
+/* ============ mission play area ============ */
+.mission-head{display:flex; align-items:baseline; gap:12px; flex-wrap:wrap;}
+.mission-tag{font-family:var(--font-d); color:var(--amber); font-size:.8rem; letter-spacing:.2em;}
+.progress-track{height:8px; background:var(--deep); border:1px solid var(--line); border-radius:99px; margin-top:14px; overflow:hidden;}
+.progress-fill{height:100%; width:0%; background:linear-gradient(90deg, var(--cyan), var(--amber)); border-radius:99px; transition:width .3s ease;}
+
+.qcard{
+  margin-top:20px; text-align:center;
+  background:var(--deep); border:1px solid var(--line); border-radius:12px;
+  padding:28px 18px;
+}
+.qcard .item{font-family:var(--font-d); font-size:clamp(1.5rem, 6vw, 2.2rem); font-weight:700; letter-spacing:.03em;}
+.qcard .hint{color:var(--muted); font-size:.88rem; margin-top:8px;}
+.choice-row{display:flex; gap:12px; margin-top:20px; flex-wrap:wrap; justify-content:center;}
+.choice-btn{
+  flex:1; min-width:130px; max-width:280px;
+  font-family:var(--font-d); font-weight:600; font-size:1rem; letter-spacing:.05em;
+  padding:16px 12px; border-radius:10px; cursor:pointer;
+  background:var(--panel-2); color:var(--text); border:1px solid var(--line);
+  transition:transform .1s ease, border-color .1s ease;
+}
+.choice-btn:hover{transform:translateY(-2px); border-color:var(--cyan);}
+.choice-btn:focus-visible{outline:2px solid var(--cyan); outline-offset:2px;}
+.choice-btn.c1{border-bottom:3px solid var(--cyan);}
+.choice-btn.c2{border-bottom:3px solid var(--coral);}
+.choice-btn.c3{border-bottom:3px solid var(--green);}
+.feedback{
+  min-height:32px; margin-top:14px; font-family:var(--font-d); font-weight:600;
+  font-size:1.02rem; letter-spacing:.04em;
+}
+.feedback.good{color:var(--green);}
+.feedback.bad{color:var(--red);}
+.qcard.flash-good{border-color:var(--green); box-shadow:0 0 20px rgba(92,232,164,.25);}
+.qcard.flash-bad{border-color:var(--red); box-shadow:0 0 20px rgba(255,122,107,.25);}
+
+/* matching game */
+.match-grid{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:18px;}
+.match-col{display:flex; flex-direction:column; gap:8px;}
+.match-btn{
+  font-family:var(--font-b); font-size:.95rem;
+  background:var(--deep); color:var(--text); border:1px solid var(--line);
+  border-radius:8px; padding:12px 10px; cursor:pointer; text-align:center;
+  transition:border-color .1s, background .1s;
+}
+.match-btn:hover{border-color:var(--cyan);}
+.match-btn:focus-visible{outline:2px solid var(--cyan); outline-offset:2px;}
+.match-btn.sel{border-color:var(--amber); background:rgba(255,179,71,.12);}
+.match-btn.done{border-color:var(--green); background:rgba(92,232,164,.10); color:var(--green); cursor:default;}
+.match-btn.wrongflash{border-color:var(--red); background:rgba(255,122,107,.12);}
+.match-btn b{font-family:var(--font-d);}
+
+/* MCQ */
+.mcq-q{font-family:var(--font-d); font-size:clamp(1.1rem,4vw,1.5rem); font-weight:600; text-align:center; margin-top:6px;}
+.mcq-opts{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:18px;}
+@media(max-width:520px){.mcq-opts{grid-template-columns:1fr;}}
+
+/* ============ vector lab ============ */
+.lab-grid{display:grid; grid-template-columns:1.2fr 1fr; gap:18px; margin-top:16px;}
+@media(max-width:760px){.lab-grid{grid-template-columns:1fr;}}
+#vecSvg{width:100%; height:auto; background:var(--deep); border:1px solid var(--line); border-radius:12px;}
+.slider-block{margin-top:14px;}
+.slider-block label{display:flex; justify-content:space-between; font-size:.88rem; color:var(--muted); font-family:var(--font-d); letter-spacing:.05em;}
+.slider-block label b{color:var(--text);}
+input[type=range]{width:100%; accent-color:var(--amber); margin-top:6px; height:28px;}
+input[type=range].cy{accent-color:var(--cyan);}
+input[type=range].co{accent-color:var(--coral);}
+.readout{
+  margin-top:16px; background:var(--deep); border:1px solid var(--line); border-radius:10px;
+  padding:14px; font-family:var(--font-d); font-size:.95rem; line-height:1.8;
+}
+.readout .rv{color:var(--amber); font-weight:700;}
+.readout .small{font-family:var(--font-b); color:var(--muted); font-size:.8rem; line-height:1.5; display:block; margin-top:6px;}
+.num-row{display:flex; gap:10px; margin-top:14px; flex-wrap:wrap; justify-content:center;}
+.num-row input{
+  width:140px; font-family:var(--font-d); font-size:1.1rem; text-align:center;
+  background:var(--deep); color:var(--text); border:1px solid var(--line); border-radius:8px; padding:12px;
+}
+.num-row input:focus-visible{outline:2px solid var(--amber); outline-offset:2px;}
+
+/* ============ overlays: briefing + mission complete ============ */
+.overlay{
+  position:fixed; inset:0; z-index:50; display:none;
+  background:rgba(4,7,20,.85); backdrop-filter:blur(3px);
+  align-items:center; justify-content:center; padding:18px;
+}
+.overlay.show{display:flex; animation:fadeUp .3s ease both;}
+.overlay .panel{max-width:520px; width:100%; text-align:center; margin-top:0;}
+.badge-big{font-size:4rem; margin:8px 0 4px; filter:drop-shadow(0 0 18px rgba(255,179,71,.55));}
+.stars-row{font-size:2rem; letter-spacing:.2em; margin:8px 0;}
+.stars-row .off{opacity:.22; filter:grayscale(1);}
+.overlay .msg{color:var(--muted); line-height:1.6; margin-top:8px; font-size:.95rem;}
+.overlay .msg b{color:var(--text);}
+.pill{
+  display:inline-block; font-family:var(--font-d); font-size:.72rem; letter-spacing:.22em;
+  color:var(--amber); border:1px solid var(--amber-dim); border-radius:99px;
+  padding:5px 14px; text-transform:uppercase;
+}
+
+/* ============ certificate ============ */
+.cert{
+  text-align:center; padding:34px 20px;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(255,179,71,.12), transparent 55%),
+    linear-gradient(180deg, var(--panel), var(--panel-2));
+}
+.cert .badge-line{display:flex; gap:18px; justify-content:center; margin:18px 0; font-size:2.2rem;}
+.cert .badge-line span{filter:drop-shadow(0 0 10px rgba(255,179,71,.5));}
+.cert-name{
+  font-family:var(--font-d); font-size:clamp(1.6rem,6vw,2.4rem); font-weight:700;
+  color:var(--amber); letter-spacing:.06em; margin:8px 0;
+}
+.cert-stats{color:var(--muted); font-size:.95rem; line-height:2; margin-top:6px;}
+.cert-stats b{color:var(--text); font-family:var(--font-d);}
+.rule{height:1px; background:linear-gradient(90deg, transparent, var(--line), transparent); margin:16px auto; max-width:340px;}
+
+.center{text-align:center;}
+.mt{margin-top:20px;}
+.sr-only{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0);}
+</style>
+</head>
+<body>
+<div class="stars" aria-hidden="true"></div>
+<div class="stars2" aria-hidden="true"></div>
+
+<!-- HUD -->
+<header id="hud">
+  <div class="hud-inner">
+    <span class="hud-name" id="hudName">CADET</span>
+    <span class="hud-stat">Score <b id="hudScore">0</b></span>
+    <span class="hud-stat">⭐ <b id="hudStars">0</b>/12</span>
+    <div class="hud-badges" aria-label="Badges earned">
+      <span class="hud-badge" id="hb1" title="Quantity Cadet">🔭</span>
+      <span class="hud-badge" id="hb2" title="SI Specialist">⚖️</span>
+      <span class="hud-badge" id="hb3" title="Scalar-Vector Scout">🧭</span>
+      <span class="hud-badge" id="hb4" title="Vector Navigator">🚀</span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- ========== TITLE SCREEN ========== -->
+  <section class="screen active" id="scr-title">
+    <div class="panel"><span class="bk"></span>
+      <div class="title-crest" aria-hidden="true">🛰️</div>
+      <div class="eyebrow">MYP Physics · Measurements &amp; Vector Quantities</div>
+      <h1>QUANTITY QUEST<br><span class="hl">MISSION VECTOR</span></h1>
+      <p class="lead">The star freighter <b>Meridian</b> has lost its navigation core. Only a cadet who truly understands
+      <b>what can be measured</b> — and how vectors combine — can plot the route home.
+      Complete 4 missions across the sector to earn your <b>Vector Navigator</b> licence.</p>
+      <div class="title-list">
+        🔭 <b>Mission 1</b> — Measurable or Not? · Station Meridian<br>
+        ⚖️ <b>Mission 2</b> — SI Unit Squad · Septem Prime<br>
+        🧭 <b>Mission 3</b> — Scalar vs Vector · The Duality Belt<br>
+        🚀 <b>Mission 4</b> — Vector Navigation Lab · The Vector Gate
+      </div>
+      <div class="name-row">
+        <label class="sr-only" for="cadetName">Enter your cadet name</label>
+        <input id="cadetName" maxlength="20" placeholder="Enter your cadet name…" autocomplete="off">
+        <button class="btn" id="btnLaunch">Launch ▸</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== STAR MAP ========== -->
+  <section class="screen" id="scr-map">
+    <div class="panel"><span class="bk"></span>
+      <div class="eyebrow">Sector Chart · Meridian Route</div>
+      <h2 id="mapTitle">Choose your next destination, Cadet</h2>
+      <svg id="mapSvg" viewBox="0 0 900 480" role="img" aria-label="Star map with four mission destinations"></svg>
+      <p class="map-hint" id="mapHint">Tap a glowing station to begin its mission. Locked stations open in order.</p>
+      <div class="center mt"><button class="btn ghost" id="btnCert" style="display:none">Claim your certificate ▸</button></div>
+    </div>
+  </section>
+
+  <!-- ========== MISSION SCREEN (shared shell) ========== -->
+  <section class="screen" id="scr-mission">
+    <div class="panel"><span class="bk"></span>
+      <div class="mission-head">
+        <span class="mission-tag" id="mTag">MISSION 1</span>
+        <h2 id="mTitle">Measurable or Not?</h2>
+      </div>
+      <div class="progress-track"><div class="progress-fill" id="mProg"></div></div>
+      <div id="mBody"></div>
+    </div>
+  </section>
+
+  <!-- ========== CERTIFICATE ========== -->
+  <section class="screen" id="scr-cert">
+    <div class="panel cert"><span class="bk"></span>
+      <span class="pill">Navigation Core Restored</span>
+      <h1 style="margin-top:14px">VECTOR NAVIGATOR<br><span class="hl">CERTIFICATE</span></h1>
+      <div class="rule"></div>
+      <p class="lead" style="margin:0 auto">This certifies that Cadet</p>
+      <div class="cert-name" id="certName">—</div>
+      <p class="lead" style="margin:0 auto">has completed all four missions of Quantity Quest</p>
+      <div class="badge-line">
+        <span title="Quantity Cadet">🔭</span><span title="SI Specialist">⚖️</span>
+        <span title="Scalar-Vector Scout">🧭</span><span title="Vector Navigator">🚀</span>
+      </div>
+      <div class="cert-stats">
+        Total score <b id="certScore">0</b> · Stars <b id="certStars">0</b>/12<br>
+        <span id="certLine">Physical quantities need a number and a unit. Vectors need a direction too.</span>
+      </div>
+      <div class="rule"></div>
+      <button class="btn" id="btnReplay">New cadet ▸</button>
+    </div>
+  </section>
+</div>
+
+<!-- ========== BRIEFING OVERLAY ========== -->
+<div class="overlay" id="ovBrief" role="dialog" aria-modal="true" aria-labelledby="bTitle">
+  <div class="panel"><span class="bk"></span>
+    <span class="pill" id="bTag">MISSION 1</span>
+    <div class="badge-big" id="bIcon">🔭</div>
+    <h2 id="bTitle">Station Meridian</h2>
+    <p class="msg" id="bText"></p>
+    <div class="mt"><button class="btn" id="btnBriefGo">Begin mission ▸</button></div>
+  </div>
+</div>
+
+<!-- ========== MISSION COMPLETE OVERLAY ========== -->
+<div class="overlay" id="ovDone" role="dialog" aria-modal="true" aria-labelledby="dTitle">
+  <div class="panel"><span class="bk"></span>
+    <span class="pill">Mission complete</span>
+    <div class="badge-big" id="dIcon">🔭</div>
+    <h2 id="dTitle">Badge earned!</h2>
+    <div class="stars-row" id="dStars">⭐⭐⭐</div>
+    <p class="msg" id="dText"></p>
+    <div class="mt"><button class="btn" id="btnDoneGo">Return to star map ▸</button></div>
+  </div>
+</div>
+
+<script>
+"use strict";
+/* ================= STATE ================= */
+const S = {
+  name:"", score:0, unlocked:1,
+  stars:[0,0,0,0], badges:[false,false,false,false],
+  right:0, wrong:0, prog:0, progTotal:1, mission:0
+};
+const $ = id => document.getElementById(id);
+const scr = ["scr-title","scr-map","scr-mission","scr-cert"];
+function show(id){ scr.forEach(s=>$(s).classList.remove("active")); $(id).classList.add("active"); window.scrollTo({top:0}); }
+function hud(){
+  $("hudName").textContent = S.name || "CADET";
+  $("hudScore").textContent = S.score;
+  $("hudStars").textContent = S.stars.reduce((a,b)=>a+b,0);
+  for(let i=0;i<4;i++) $("hb"+(i+1)).classList.toggle("earned", S.badges[i]);
+}
+
+/* ================= SOUND (tiny blips) ================= */
+let AC=null;
+function beep(freq, dur=0.09, type="square", vol=0.05){
+  try{
+    AC = AC || new (window.AudioContext||window.webkitAudioContext)();
+    const o=AC.createOscillator(), g=AC.createGain();
+    o.type=type; o.frequency.value=freq; g.gain.value=vol;
+    o.connect(g); g.connect(AC.destination);
+    o.start(); g.gain.exponentialRampToValueAtTime(0.0001, AC.currentTime+dur);
+    o.stop(AC.currentTime+dur+0.02);
+  }catch(e){}
+}
+const sGood=()=>{beep(660,.08);setTimeout(()=>beep(880,.1),80);};
+const sBad =()=>beep(160,.18,"sawtooth",.045);
+const sBadge=()=>{[523,659,784,1046].forEach((f,i)=>setTimeout(()=>beep(f,.12,"triangle",.06), i*110));};
+
+/* ================= MISSION META ================= */
+const MISSIONS = [
+  {tag:"MISSION 1", title:"Measurable or Not?", place:"Station Meridian", icon:"🔭", badge:"Quantity Cadet",
+   brief:"Cadet, the station's sensor bay is jammed with cargo crates — some hold <b>physical quantities</b> we can measure, others hold <b>emotional quantities</b> that belong to the psychologists' lab. Remember the rule: <b>if it can be measured, it's physical.</b> Sort them fast!"},
+  {tag:"MISSION 2", title:"SI Unit Squad", place:"Septem Prime", icon:"⚖️", badge:"SI Specialist",
+   brief:"Welcome to Septem Prime — home of the <b>7 SI base units</b>. The station's unit registry has been scrambled! Re-match every base quantity to its unit, separate <b>base</b> from <b>derived</b> units, then recalibrate the prefix converters."},
+  {tag:"MISSION 3", title:"Scalar vs Vector", place:"The Duality Belt", icon:"🧭", badge:"Scalar-Vector Scout",
+   brief:"You're entering the Duality Belt, where every quantity has a twin. Ask the navigator's question: <b>“Does it need a direction to be complete?”</b> No → <b>scalar</b> (number + unit). Yes → <b>vector</b> (number + unit + direction)."},
+  {tag:"MISSION 4", title:"Vector Navigation Lab", place:"The Vector Gate", icon:"🚀", badge:"Vector Navigator",
+   brief:"Final mission, Cadet. The Vector Gate only opens for a true navigator. Combine two vectors at <b>right angles</b>, watch them join <b>tip-to-tail</b>, and compute the resultant with <b>Pythagoras</b> and <b>trigonometry</b>. Get this right and the Meridian flies home."}
+];
+
+/* ================= STAR MAP ================= */
+const NODES=[
+  {x:115,y:380,c:"#4DD9E8",r:26,name:"Station Meridian",sub:"Mission 1"},
+  {x:355,y:150,c:"#FFB347",r:30,name:"Septem Prime",sub:"Mission 2"},
+  {x:610,y:345,c:"#FF6B8A",r:24,name:"The Duality Belt",sub:"Mission 3"},
+  {x:800,y:120,c:"#5CE8A4",r:28,name:"The Vector Gate",sub:"Mission 4"}
+];
+function mapPath(){
+  let d=`M ${NODES[0].x} ${NODES[0].y}`;
+  for(let i=1;i<NODES.length;i++){
+    const a=NODES[i-1], b=NODES[i];
+    d+=` Q ${(a.x+b.x)/2+(i%2?60:-60)} ${(a.y+b.y)/2+(i%2?-70:70)} ${b.x} ${b.y}`;
+  }
+  return d;
+}
+function renderMap(){
+  const done = i => S.stars[i]>0;
+  const shipAt = Math.min(S.unlocked-1, 3);
+  const sp = NODES[shipAt];
+  let g=`<defs>
+    <filter id="glow"><feGaussianBlur stdDeviation="3.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <path d="${mapPath()}" fill="none" stroke="#2C3670" stroke-width="2" stroke-dasharray="3 8" stroke-linecap="round"/>`;
+  NODES.forEach((n,i)=>{
+    const locked = (i+1)>S.unlocked;
+    const active = (i+1)===S.unlocked && !done(i);
+    const op = locked? .35 : 1;
+    const stars = "⭐".repeat(S.stars[i]);
+    g+=`<g class="map-node ${locked?"locked":""}" data-i="${i}" tabindex="${locked?-1:0}" role="button"
+          aria-label="${n.name}, ${locked?"locked":done(i)?"completed":"available"}" opacity="${op}">
+      ${active?`<circle class="pulse-ring" cx="${n.x}" cy="${n.y}" r="${n.r+8}" fill="none" stroke="${n.c}" stroke-width="2"/>`:""}
+      <circle cx="${n.x}" cy="${n.y}" r="${n.r+6}" fill="${n.c}" opacity="0.12"/>
+      <circle class="node-ring" cx="${n.x}" cy="${n.y}" r="${n.r}" fill="url(#pg${i})" stroke="${done(i)?"#5CE8A4":n.c}" stroke-width="2" filter="url(#glow)"/>
+      <defs><radialGradient id="pg${i}" cx="35%" cy="30%"><stop offset="0%" stop-color="${n.c}" stop-opacity=".85"/><stop offset="100%" stop-color="#141B3C"/></radialGradient></defs>
+      <ellipse cx="${n.x}" cy="${n.y}" rx="${n.r+13}" ry="6" fill="none" stroke="${n.c}" stroke-opacity=".45" stroke-width="1.5" transform="rotate(-18 ${n.x} ${n.y})"/>
+      <text class="node-label" x="${n.x}" y="${n.y+n.r+26}" text-anchor="middle">${n.name}</text>
+      <text class="node-sub" x="${n.x}" y="${n.y+n.r+41}" text-anchor="middle">${locked?"🔒 Locked":done(i)?"Complete":n.sub}</text>
+      ${stars?`<text class="node-star" x="${n.x}" y="${n.y+n.r+56}" text-anchor="middle">${stars}</text>`:""}
+      <text x="${n.x}" y="${n.y+6}" text-anchor="middle" font-size="${n.r*0.8}">${MISSIONS[i].icon}</text>
+    </g>`;
+  });
+  g+=`<g id="ship" transform="translate(${sp.x+NODES[shipAt].r+16},${sp.y-NODES[shipAt].r-8})" style="transition:transform .8s ease">
+        <text font-size="24" text-anchor="middle" transform="rotate(20)">🛸</text>
+        <text class="node-sub" y="18" text-anchor="middle" fill="#FFB347">YOU</text></g>`;
+  $("mapSvg").innerHTML=g;
+  document.querySelectorAll(".map-node").forEach(el=>{
+    const i=+el.dataset.i;
+    const go=()=>{ if((i+1)<=S.unlocked && S.stars[i]===0) openBrief(i); else if(S.stars[i]>0) openBrief(i,true); };
+    el.addEventListener("click",go);
+    el.addEventListener("keydown",e=>{ if(e.key==="Enter"||e.key===" "){e.preventDefault();go();} });
+  });
+  $("mapTitle").textContent = S.unlocked>4 ? "All missions complete, Navigator "+S.name+"!" : "Choose your next destination, Cadet "+S.name;
+  $("btnCert").style.display = S.unlocked>4 ? "inline-block" : "none";
+  $("mapHint").textContent = S.unlocked>4 ? "The Meridian's navigation core hums back to life. Claim your certificate!" :
+    "Tap the glowing station to begin its mission. Stations unlock in order.";
+}
+
+/* ================= BRIEFING ================= */
+let pendingMission=0, replayMode=false;
+function openBrief(i, replay=false){
+  pendingMission=i; replayMode=replay;
+  const m=MISSIONS[i];
+  $("bTag").textContent=m.tag; $("bIcon").textContent=m.icon;
+  $("bTitle").textContent=m.place+" — "+m.title;
+  $("bText").innerHTML=m.brief + (replay?"<br><br><b>Replay:</b> improve your stars! (Score still counts.)":"");
+  $("ovBrief").classList.add("show");
+  $("btnBriefGo").focus();
+}
+$("btnBriefGo").addEventListener("click",()=>{ $("ovBrief").classList.remove("show"); startMission(pendingMission); });
+
+/* ================= MISSION SHELL ================= */
+function startMission(i){
+  S.mission=i; S.right=0; S.wrong=0; S.prog=0;
+  S.progTotal=[12,17,10,3][i];
+  $("mTag").textContent=MISSIONS[i].tag;
+  $("mTitle").textContent=MISSIONS[i].title;
+  setProg();
+  show("scr-mission");
+  [m1,m2,m3,m4][i]();
+}
+function setProg(){ $("mProg").style.width=Math.min(100,(S.prog/S.progTotal)*100)+"%"; }
+function addResult(ok){
+  if(ok){S.right++; S.score+=10; sGood();} else {S.wrong++; sBad();}
+  S.prog++; setProg(); hud();
+}
+function finishMission(){
+  const i=S.mission;
+  const acc = S.right/Math.max(1,S.right+S.wrong);
+  const stars = acc>=0.9?3:acc>=0.65?2:1;
+  if(stars>S.stars[i]) S.stars[i]=stars;
+  S.badges[i]=true;
+  if(!replayMode) S.unlocked=Math.max(S.unlocked,i+2);
+  hud(); sBadge();
+  $("dIcon").textContent=MISSIONS[i].icon;
+  $("dTitle").textContent="Badge earned: "+MISSIONS[i].badge+"!";
+  $("dStars").innerHTML="⭐".repeat(stars)+`<span class="off">${"⭐".repeat(3-stars)}</span>`;
+  $("dText").innerHTML=`Accuracy <b>${Math.round(acc*100)}%</b> · Score <b>${S.score}</b><br>${
+    ["Physical quantities can be measured — and every one needs a <b>number + unit</b>.",
+     "The 7 SI base units build every other unit in physics.",
+     "Scalars: magnitude only. Vectors: magnitude <b>and</b> direction.",
+     "R = √(A² + B²) and θ = tan⁻¹(B/A). You are cleared to navigate, Cadet."][i]}`;
+  $("ovDone").classList.add("show");
+  $("btnDoneGo").focus();
+}
+$("btnDoneGo").addEventListener("click",()=>{ $("ovDone").classList.remove("show"); renderMap(); show("scr-map"); });
+
+/* ================= GENERIC ENGINES ================= */
+function quickfire(host, items, choices, hint, onEnd){
+  let idx=0; const arr=[...items].sort(()=>Math.random()-0.5);
+  host.innerHTML=`<div class="qcard" id="qc">
+      <div class="item" id="qItem"></div><div class="hint">${hint}</div>
+      <div class="choice-row">${choices.map((c,ci)=>`<button class="choice-btn c${ci+1}" data-k="${c.key}">${c.label}</button>`).join("")}</div>
+      <div class="feedback" id="qFb" aria-live="polite"></div></div>`;
+  const card=$("qc"), fb=$("qFb"), itemEl=$("qItem");
+  const btns=[...host.querySelectorAll(".choice-btn")];
+  function render(){ itemEl.textContent=arr[idx].t; fb.textContent=""; fb.className="feedback"; card.className="qcard"; btns.forEach(b=>b.disabled=false); }
+  btns.forEach(b=>b.addEventListener("click",()=>{
+    btns.forEach(x=>x.disabled=true);
+    const it=arr[idx], ok = b.dataset.k===it.k;
+    addResult(ok);
+    card.classList.add(ok?"flash-good":"flash-bad");
+    fb.className="feedback "+(ok?"good":"bad");
+    fb.innerHTML=(ok?"✔ +10 — ":"✘ ")+it.e;
+    setTimeout(()=>{ idx++; idx<arr.length?render():onEnd(); }, ok?950:1900);
+  }));
+  render();
+}
+function mcqSet(host, qs, onEnd){
+  let idx=0;
+  host.innerHTML=`<div class="qcard" id="qc"><div class="mcq-q" id="mq"></div>
+      <div class="mcq-opts" id="mo"></div><div class="feedback" id="qFb" aria-live="polite"></div></div>`;
+  const card=$("qc"), fb=$("qFb");
+  function render(){
+    const q=qs[idx]; $("mq").innerHTML=q.q; fb.textContent=""; fb.className="feedback"; card.className="qcard";
+    const opts=[...q.opts].sort(()=>Math.random()-0.5);
+    $("mo").innerHTML=opts.map(o=>`<button class="choice-btn" data-o="${o}">${o}</button>`).join("");
+    [...$("mo").children].forEach(b=>b.addEventListener("click",()=>{
+      [...$("mo").children].forEach(x=>x.disabled=true);
+      const ok=b.dataset.o===q.a; addResult(ok);
+      card.classList.add(ok?"flash-good":"flash-bad");
+      fb.className="feedback "+(ok?"good":"bad");
+      fb.innerHTML=(ok?"✔ +10 — ":"✘ Answer: <b>"+q.a+"</b> — ")+q.e;
+      setTimeout(()=>{ idx++; idx<qs.length?render():onEnd(); }, ok?1000:2100);
+    }));
+  }
+  render();
+}
+
+/* ================= MISSION 1 ================= */
+function m1(){
+  const host=$("mBody");
+  const items=[
+    {t:"Mass",k:"p",e:"Mass is measurable → physical quantity (kg)."},
+    {t:"Joy",k:"e",e:"Joy can't be measured with a unit → emotional quantity."},
+    {t:"Temperature",k:"p",e:"Temperature is measurable → physical (kelvin)."},
+    {t:"Fear",k:"e",e:"Fear has no number + unit → emotional (psychologists study it)."},
+    {t:"Time",k:"p",e:"Time is measurable → physical (second)."},
+    {t:"Courage",k:"e",e:"Courage can't be measured → emotional quantity."},
+    {t:"Length",k:"p",e:"Length is measurable → physical (metre)."},
+    {t:"Pain",k:"e",e:"Pain has no true unit → emotional quantity."},
+    {t:"Electric current",k:"p",e:"Current is measurable → physical (ampere)."},
+    {t:"Love",k:"e",e:"Love can't be measured → emotional quantity."}
+  ];
+  quickfire(host, items,
+    [{label:"📏 Physical (measurable)",key:"p"},{label:"💭 Emotional (not measurable)",key:"e"}],
+    "Sensor rule: <b>if it can be measured, it's a physical quantity.</b>",
+    ()=> mcqSet(host, [
+      {q:"To represent a physical quantity you <b>must</b> have a…", a:"Number + Unit",
+       opts:["Number + Unit","Number only","Unit only","Direction only"],
+       e:"e.g. 5 <b>kg</b> — without both, it means nothing."},
+      {q:"Which extra piece of information is <b>optional</b> for a physical quantity?", a:"Direction",
+       opts:["Direction","Number","Unit","Colour"],
+       e:"Direction is only needed for <b>vector</b> quantities — coming up in Mission 3!"}
+    ], finishMission)
+  );
+}
+
+/* ================= MISSION 2 ================= */
+function m2(){
+  const host=$("mBody");
+  const pairs=[
+    ["Length","metre (m)"],["Mass","kilogram (kg)"],["Time","second (s)"],
+    ["Electric current","ampere (A)"],["Temperature","kelvin (K)"],
+    ["Amount of substance","mole (mol)"],["Luminous intensity","candela (cd)"]
+  ];
+  matching(host, pairs, ()=> quickfire(host, [
+      {t:"metre (m)",k:"b",e:"metre is one of the 7 SI base units."},
+      {t:"newton (N)",k:"d",e:"newton = kg·m/s² → built from base units → derived."},
+      {t:"second (s)",k:"b",e:"second is a base unit."},
+      {t:"m/s (speed)",k:"d",e:"m/s combines metre and second → derived."},
+      {t:"kelvin (K)",k:"b",e:"kelvin is a base unit."},
+      {t:"joule (J)",k:"d",e:"joule = kg·m²/s² → derived."}
+    ],
+    [{label:"🧱 Base unit",key:"b"},{label:"🔧 Derived unit",key:"d"}],
+    "Base units stand alone. Derived units are <b>built from</b> base units.",
+    ()=> mcqSet(host, [
+      {q:"3.5 km = ? m", a:"3500 m", opts:["3500 m","350 m","35 m","35 000 m"], e:"kilo- = ×10³, so 3.5 × 1000."},
+      {q:"250 mA = ? A", a:"0.25 A", opts:["0.25 A","2.5 A","25 A","0.025 A"], e:"milli- = ×10⁻³, so 250 ÷ 1000."},
+      {q:"4500 μm = ? mm", a:"4.5 mm", opts:["4.5 mm","45 mm","0.45 mm","450 mm"], e:"micro- = ×10⁻⁶; 1000 μm = 1 mm."},
+      {q:"0.75 kg = ? g", a:"750 g", opts:["750 g","75 g","7500 g","7.5 g"], e:"1 kg = 1000 g, so 0.75 × 1000."}
+    ], finishMission)));
+}
+function matching(host, pairs, onEnd){
+  const left=pairs.map(p=>p[0]);
+  const right=pairs.map(p=>p[1]).sort(()=>Math.random()-0.5);
+  host.innerHTML=`<div class="qcard"><div class="hint" style="margin-top:0">Registry scrambled! Tap a <b>quantity</b>, then tap its <b>SI base unit</b>.</div>
+    <div class="match-grid">
+      <div class="match-col" id="mcL">${left.map(t=>`<button class="match-btn" data-t="${t}"><b>${t}</b></button>`).join("")}</div>
+      <div class="match-col" id="mcR">${right.map(t=>`<button class="match-btn" data-t="${t}">${t}</button>`).join("")}</div>
+    </div><div class="feedback" id="qFb" aria-live="polite"></div></div>`;
+  let selL=null, doneCount=0;
+  const fb=$("qFb");
+  const correctOf=t=>pairs.find(p=>p[0]===t)[1];
+  function pick(btn, side){
+    if(btn.classList.contains("done")) return;
+    if(side==="L"){ host.querySelectorAll("#mcL .match-btn").forEach(b=>b.classList.remove("sel")); btn.classList.add("sel"); selL=btn; return; }
+    if(!selL){ fb.className="feedback"; fb.textContent="Pick a quantity on the left first."; return; }
+    const ok = correctOf(selL.dataset.t)===btn.dataset.t;
+    addResult(ok);
+    if(ok){
+      selL.classList.remove("sel"); selL.classList.add("done"); btn.classList.add("done");
+      fb.className="feedback good"; fb.innerHTML=`✔ +10 — ${selL.dataset.t} → <b>${btn.dataset.t}</b>`;
+      selL=null; doneCount++;
+      if(doneCount===pairs.length) setTimeout(onEnd, 900);
+    }else{
+      btn.classList.add("wrongflash");
+      fb.className="feedback bad"; fb.innerHTML=`✘ ${selL.dataset.t} is not measured in ${btn.dataset.t}. Try again!`;
+      setTimeout(()=>btn.classList.remove("wrongflash"), 700);
+    }
+  }
+  host.querySelectorAll("#mcL .match-btn").forEach(b=>b.addEventListener("click",()=>pick(b,"L")));
+  host.querySelectorAll("#mcR .match-btn").forEach(b=>b.addEventListener("click",()=>pick(b,"R")));
+}
+
+/* ================= MISSION 3 ================= */
+function m3(){
+  quickfire($("mBody"), [
+    {t:"Distance",k:"s",e:"Distance = total path length, no direction → scalar."},
+    {t:"Displacement",k:"v",e:"Displacement needs a direction (e.g. 5 m <b>east</b>) → vector."},
+    {t:"Speed",k:"s",e:"Speed = how fast, no direction → scalar."},
+    {t:"Velocity",k:"v",e:"Velocity = speed <b>in a direction</b> → vector."},
+    {t:"Mass",k:"s",e:"Mass has no direction → scalar."},
+    {t:"Force",k:"v",e:"A force acts in a direction (push/pull) → vector."},
+    {t:"Time",k:"s",e:"Time has no direction → scalar."},
+    {t:"Acceleration",k:"v",e:"Acceleration has a direction → vector."},
+    {t:"Temperature",k:"s",e:"Temperature has no direction → scalar."},
+    {t:"Weight",k:"v",e:"Weight is a force pulling <b>downward</b> → vector."}
+  ],
+  [{label:"🔢 Scalar",key:"s"},{label:"➡️ Vector",key:"v"}],
+  "The navigator's test: <b>“Does it need a direction to be complete?”</b>",
+  finishMission);
+}
+
+/* ================= MISSION 4: VECTOR LAB ================= */
+const LAB={E:30,N:40,unit:"N",showR:true};
+function vecSvg(){
+  const pad=46, size=380, scale=3.4;
+  const ox=pad, oy=size-pad/1.4;
+  const ex=ox+LAB.E*scale, ny=oy-LAB.N*scale;
+  const R=Math.sqrt(LAB.E**2+LAB.N**2), th=LAB.E>0?Math.atan2(LAB.N,LAB.E)*180/Math.PI:90;
+  let grid="";
+  for(let g=0;g<=size;g+=34) grid+=`<line x1="${g}" y1="0" x2="${g}" y2="${size}" stroke="#1B2350" stroke-width="1"/><line x1="0" y1="${g}" x2="${size}" y2="${g}" stroke="#1B2350" stroke-width="1"/>`;
+  const arrow=(x1,y1,x2,y2,c,dash,label,lx,ly)=>`
+    <line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${c}" stroke-width="3.5" ${dash?'stroke-dasharray="7 6"':''} marker-end="url(#ah-${c.slice(1)})"/>
+    <text x="${lx}" y="${ly}" fill="${c}" font-size="13" font-family="Chakra Petch" font-weight="700">${label}</text>`;
+  $("vecSvg").innerHTML=`
+    <defs>${["FFB347","4DD9E8","FF6B8A"].map(c=>`<marker id="ah-${c}" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#${c}"/></marker>`).join("")}</defs>
+    ${grid}
+    <line x1="${ox}" y1="${oy}" x2="${size-12}" y2="${oy}" stroke="#2C3670" stroke-width="1.5"/>
+    <line x1="${ox}" y1="${oy}" x2="${ox}" y2="14" stroke="#2C3670" stroke-width="1.5"/>
+    <text x="${size-34}" y="${oy+18}" fill="#8B94C4" font-size="11">East</text>
+    <text x="${ox-34}" y="26" fill="#8B94C4" font-size="11">North</text>
+    ${arrow(ox,oy,ex,oy,"#FFB347",false,`A = ${LAB.E} ${LAB.unit}`, (ox+ex)/2-28, oy+22)}
+    ${LAB.N>0?arrow(ex,oy,ex,ny,"#4DD9E8",false,`B = ${LAB.N} ${LAB.unit}`, ex+8, (oy+ny)/2):""}
+    ${LAB.showR&&(LAB.E>0||LAB.N>0)?arrow(ox,oy,ex,ny,"#FF6B8A",true,`R = ${R.toFixed(1)} ${LAB.unit}`, ox+18, ny+((oy-ny)/2)-8):""}
+    ${LAB.showR&&LAB.E>0?`<path d="M ${ox+30} ${oy} A 30 30 0 0 0 ${ox+30*Math.cos(th*Math.PI/180)} ${oy-30*Math.sin(th*Math.PI/180)}" fill="none" stroke="#FF6B8A" stroke-width="1.5"/><text x="${ox+40}" y="${oy-10}" fill="#FF6B8A" font-size="12">θ = ${th.toFixed(1)}°</text>`:""}`;
+  const ro=$("labReadout");
+  if(ro) ro.innerHTML= LAB.showR ?
+    `R = √(A² + B²) = √(${LAB.E}² + ${LAB.N}²) = <span class="rv">${R.toFixed(1)} ${LAB.unit}</span><br>
+     θ = tan⁻¹(B/A) = tan⁻¹(${LAB.N}/${LAB.E}) = <span class="rv">${th.toFixed(1)}° from East</span>
+     <span class="small">Tip-to-tail: B starts where A ends. The resultant R runs from the start of A to the tip of B.</span>`
+    :`<span class="small">Resultant hidden — that's your job, Navigator! Use R = √(A² + B²) or θ = tan⁻¹(B/A).</span>`;
+}
+function m4(){
+  const host=$("mBody");
+  LAB.E=30; LAB.N=40; LAB.unit="N"; LAB.showR=true;
+  host.innerHTML=`
+    <div class="lab-grid">
+      <div><svg id="vecSvg" viewBox="0 0 380 380" role="img" aria-label="Vector addition diagram"></svg></div>
+      <div>
+        <div class="hint" style="color:var(--muted);font-size:.9rem">Drag the sliders. Watch vector <b style="color:var(--cyan)">B</b> join
+        <b style="color:var(--amber)">A</b> tip-to-tail, and the <b style="color:var(--coral)">resultant R</b> close the triangle.</div>
+        <div class="slider-block"><label>Vector A → East <b id="lvE">30 N</b></label>
+          <input type="range" id="slE" min="5" max="80" value="30"></div>
+        <div class="slider-block"><label>Vector B → North <b id="lvN">40 N</b></label>
+          <input class="cy" type="range" id="slN" min="0" max="80" value="40"></div>
+        <div class="readout" id="labReadout"></div>
+        <div class="center mt"><button class="btn" id="btnLabGo">I've explored — start challenges ▸</button></div>
+      </div>
+    </div>`;
+  const upd=()=>{ LAB.E=+$("slE").value; LAB.N=+$("slN").value;
+    $("lvE").textContent=LAB.E+" N"; $("lvN").textContent=LAB.N+" N"; vecSvg(); };
+  $("slE").addEventListener("input",upd); $("slN").addEventListener("input",upd);
+  vecSvg();
+  $("btnLabGo").addEventListener("click",()=>labChallenges(host));
+}
+function labChallenges(host){
+  const ch=[
+    {E:30,N:40,unit:"N",ask:"R",ans:50,q:"A drone thrusts <b>30 N East</b> and <b>40 N North</b>. Find the resultant force R.",u:"N"},
+    {E:60,N:25,unit:"m/s",ask:"R",ans:65,q:"The Meridian moves at <b>60 m/s East</b> while a solar wind pushes it <b>25 m/s North</b>. Find the resultant velocity.",u:"m/s"},
+    {E:40,N:40,unit:"N",ask:"θ",ans:45,q:"Two equal tow-cables pull <b>40 N East</b> and <b>40 N North</b>. Find the angle θ of the resultant from East.",u:"°"}
+  ];
+  let idx=0;
+  host.innerHTML=`
+    <div class="lab-grid">
+      <div><svg id="vecSvg" viewBox="0 0 380 380" role="img" aria-label="Vector challenge diagram"></svg></div>
+      <div>
+        <div class="mission-tag" id="chNum" style="letter-spacing:.15em"></div>
+        <div class="mcq-q" id="chQ" style="text-align:left;font-size:1.05rem;line-height:1.5;margin-top:8px"></div>
+        <div class="readout" id="labReadout"></div>
+        <div class="num-row">
+          <label class="sr-only" for="chIn">Your answer</label>
+          <input id="chIn" inputmode="decimal" placeholder="answer">
+          <button class="btn" id="chGo">Check ▸</button>
+        </div>
+        <div class="feedback center" id="qFb" aria-live="polite"></div>
+      </div>
+    </div>`;
+  function render(){
+    const c=ch[idx];
+    LAB.E=c.E; LAB.N=c.N; LAB.unit=c.unit; LAB.showR=false; vecSvg();
+    $("chNum").textContent=`CHALLENGE ${idx+1} / 3`;
+    $("chQ").innerHTML=c.q+` <span style="color:var(--muted)">(${c.ask==="R"?"in "+c.u:"in degrees"})</span>`;
+    $("chIn").value=""; $("qFb").textContent=""; $("qFb").className="feedback center";
+    $("chIn").focus();
+  }
+  function check(){
+    const c=ch[idx], v=parseFloat($("chIn").value);
+    if(isNaN(v)){ $("qFb").className="feedback center bad"; $("qFb").textContent="Type a number first, Cadet."; return; }
+    const ok=Math.abs(v-c.ans)<=1;
+    addResult(ok);
+    LAB.showR=true; vecSvg();
+    $("qFb").className="feedback center "+(ok?"good":"bad");
+    $("qFb").innerHTML= ok? `✔ +10 — ${c.ask} = <b>${c.ans} ${c.u}</b>. Perfect navigation!`
+      : `✘ ${c.ask} = <b>${c.ans} ${c.u}</b> — ${c.ask==="R"?`√(${c.E}² + ${c.N}²)`:`tan⁻¹(${c.N}/${c.E})`}. Study the diagram!`;
+    $("chGo").disabled=true;
+    setTimeout(()=>{ $("chGo").disabled=false; idx++; idx<ch.length?render():finishMission(); }, ok?1400:2600);
+  }
+  $("chGo").addEventListener("click",check);
+  $("chIn").addEventListener("keydown",e=>{ if(e.key==="Enter") check(); });
+  render();
+}
+
+/* ================= CERT + WIRING ================= */
+$("btnLaunch").addEventListener("click",()=>{
+  const n=$("cadetName").value.trim();
+  if(!n){ $("cadetName").focus(); $("cadetName").placeholder="Name required for launch clearance!"; return; }
+  S.name=n; hud(); $("hud").style.display="block";
+  beep(440,.1,"triangle",.06);
+  renderMap(); show("scr-map");
+});
+$("cadetName").addEventListener("keydown",e=>{ if(e.key==="Enter") $("btnLaunch").click(); });
+$("btnCert").addEventListener("click",()=>{
+  $("certName").textContent=S.name;
+  $("certScore").textContent=S.score;
+  $("certStars").textContent=S.stars.reduce((a,b)=>a+b,0);
+  sBadge(); show("scr-cert");
+});
+$("btnReplay").addEventListener("click",()=>location.reload());
+hud();
+
+</script>
+</body>
+</html>

@@ -1,0 +1,1884 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Butterfly Code — Shaking the World of Science</title>
+<meta name="description" content="A Grade 6 choose-your-own-research adventure based on Jo Nagai's butterfly memory study.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Space+Mono:wght@400;700&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+/* ============================================================
+   THE BUTTERFLY CODE — design tokens
+   Palette pulled from the study itself: lavender oil, leaf,
+   chrysalis gold, night-garden ink.
+   ============================================================ */
+:root{
+  --night:#160F2B;
+  --ink:#241B3F;
+  --ink-2:#332758;
+  --paper:#FBF8FF;
+  --paper-2:#EFE8FB;
+  --lav:#A78BE8;
+  --lav-deep:#7C5CD6;
+  --leaf:#B8E62B;
+  --leaf-deep:#7FA615;
+  --sky:#5BC8F5;
+  --berry:#F5426C;
+  --gold:#FFC53D;
+  --muted:#7E71A3;
+  --r:18px;
+  --shadow:0 10px 0 rgba(0,0,0,.18);
+  --font-d:'Fredoka',system-ui,sans-serif;
+  --font-b:'Nunito',system-ui,sans-serif;
+  --font-m:'Space Mono',ui-monospace,monospace;
+  --font-h:'Caveat',cursive;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--font-b);
+  background:
+    radial-gradient(1100px 620px at 12% -10%, #3A2470 0%, transparent 60%),
+    radial-gradient(900px 520px at 92% 8%, #1D3A63 0%, transparent 58%),
+    var(--night);
+  background-attachment:fixed;
+  color:var(--paper);
+  min-height:100vh;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+/* faint lab-notebook grid over everything */
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:linear-gradient(rgba(167,139,232,.07) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(167,139,232,.07) 1px,transparent 1px);
+  background-size:34px 34px;
+}
+.wrap{position:relative;z-index:1;max-width:960px;margin:0 auto;padding:0 16px 90px}
+
+/* ---------- type ---------- */
+h1,h2,h3,h4{font-family:var(--font-d);font-weight:600;line-height:1.12;letter-spacing:-.01em}
+h1{font-size:clamp(2rem,6.5vw,3.4rem)}
+h2{font-size:clamp(1.5rem,4.4vw,2.2rem)}
+h3{font-size:clamp(1.15rem,3vw,1.45rem)}
+p{line-height:1.62}
+.eyebrow{font-family:var(--font-m);font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--lav)}
+.hand{font-family:var(--font-h);font-size:1.35rem;line-height:1.35}
+.mono{font-family:var(--font-m)}
+
+/* ---------- buttons ---------- */
+.btn{
+  font-family:var(--font-d);font-weight:600;font-size:1.02rem;
+  border:none;border-radius:999px;padding:14px 26px;cursor:pointer;
+  background:var(--leaf);color:#1B2A00;box-shadow:0 5px 0 var(--leaf-deep);
+  transition:transform .12s ease, box-shadow .12s ease, filter .12s ease;
+}
+.btn:hover{filter:brightness(1.06)}
+.btn:active{transform:translateY(4px);box-shadow:0 1px 0 var(--leaf-deep)}
+.btn:disabled{opacity:.4;cursor:not-allowed;box-shadow:0 5px 0 var(--leaf-deep)}
+.btn.lav{background:var(--lav);color:#1A1030;box-shadow:0 5px 0 var(--lav-deep)}
+.btn.ghost{background:transparent;color:var(--paper);border:2px solid rgba(255,255,255,.28);box-shadow:none}
+/* ghost buttons sitting on a light paper card need dark ink, not paper white */
+.card:not(.dark) .btn.ghost,.modal-in .card .btn.ghost{color:var(--lav-deep);border-color:var(--lav-deep)}
+.card:not(.dark) .btn.ghost:hover{background:var(--paper-2)}
+.btn.ghost:active{transform:translateY(2px)}
+.btn.sm{padding:9px 18px;font-size:.9rem;box-shadow:0 4px 0 var(--lav-deep)}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px;border-radius:6px}
+
+/* ---------- cards ---------- */
+.card{
+  background:var(--paper);color:var(--ink);border-radius:var(--r);
+  padding:26px;box-shadow:var(--shadow);margin:18px 0;
+}
+.card.dark{background:rgba(255,255,255,.055);color:var(--paper);
+  border:1px solid rgba(167,139,232,.28);box-shadow:none;backdrop-filter:blur(6px)}
+.tape{
+  position:absolute;top:-13px;left:50%;transform:translateX(-50%) rotate(-2deg);
+  background:rgba(255,197,61,.85);color:#4A3400;font-family:var(--font-m);
+  font-size:.66rem;letter-spacing:.16em;padding:5px 20px;border-radius:3px;
+}
+
+/* ---------- HUD ---------- */
+.hud{
+  position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);
+  background:rgba(22,15,43,.86);border-bottom:1px solid rgba(167,139,232,.24);
+}
+.hud-in{max-width:960px;margin:0 auto;padding:9px 16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.who{display:flex;align-items:center;gap:9px;min-width:0}
+.av{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;font-size:1.25rem;
+  background:linear-gradient(140deg,var(--lav),var(--sky));flex:none}
+.who b{font-family:var(--font-d);font-size:.95rem;display:block;line-height:1.1;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:140px}
+.who span{font-size:.7rem;color:var(--muted)}
+.hud-spacer{flex:1}
+.chip{
+  font-family:var(--font-m);font-size:.78rem;background:rgba(255,255,255,.09);
+  border:1px solid rgba(255,255,255,.14);border-radius:999px;padding:6px 13px;
+  display:inline-flex;align-items:center;gap:6px;cursor:pointer;color:var(--paper);
+}
+.chip:hover{background:rgba(255,255,255,.16)}
+.chip.star{color:var(--gold);border-color:rgba(255,197,61,.4)}
+
+/* metamorphosis meter — the signature progress element */
+.meta{display:flex;align-items:center;gap:8px;width:100%;order:9}
+.meta-track{
+  flex:1;height:16px;border-radius:999px;background:rgba(255,255,255,.09);
+  position:relative;overflow:hidden;border:1px solid rgba(255,255,255,.12)
+}
+.meta-fill{height:100%;width:0;border-radius:999px;
+  background:linear-gradient(90deg,var(--leaf),var(--lav),var(--sky));
+  transition:width .7s cubic-bezier(.5,1.6,.5,1)}
+.meta-bug{position:absolute;top:50%;left:0;transform:translate(-50%,-50%);
+  font-size:1.15rem;transition:left .7s cubic-bezier(.5,1.6,.5,1);filter:drop-shadow(0 1px 2px rgba(0,0,0,.5))}
+.meta-cap{font-family:var(--font-m);font-size:.65rem;color:var(--muted);white-space:nowrap}
+
+/* ---------- screens ---------- */
+.screen{display:none;animation:in .45s ease both}
+.screen.on{display:block}
+@keyframes in{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+
+/* ---------- hero ---------- */
+.hero{padding:44px 0 10px;text-align:center;position:relative}
+.hero .flutter{font-size:clamp(3.4rem,13vw,6rem);display:inline-block;animation:flap 3.4s ease-in-out infinite}
+@keyframes flap{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-16px) rotate(5deg)}}
+.hero h1 span{color:var(--leaf)}
+.lede{font-size:clamp(1rem,2.6vw,1.18rem);color:#DED4F5;max-width:52ch;margin:16px auto 0}
+
+/* ---------- auth / profile ---------- */
+.auth-box{max-width:460px;margin:0 auto;text-align:center}
+.avatar-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(58px,1fr));gap:10px;margin:12px 0 4px}
+.av-pick{font-size:1.7rem;padding:12px 0;border-radius:14px;cursor:pointer;
+  background:rgba(255,255,255,.07);border:2px solid transparent;transition:.15s}
+.av-pick:hover{background:rgba(255,255,255,.14)}
+.av-pick.sel{border-color:var(--leaf);background:rgba(184,230,43,.16);transform:scale(1.06)}
+label.f{display:block;text-align:left;margin:14px 0 6px;font-weight:700;font-size:.9rem;color:#D9CEF5}
+input[type=text],textarea,select{
+  width:100%;font-family:var(--font-b);font-size:1rem;padding:12px 14px;border-radius:12px;
+  border:2px solid rgba(167,139,232,.35);background:rgba(255,255,255,.94);color:var(--ink);
+}
+textarea{min-height:88px;resize:vertical;line-height:1.5}
+input:focus,textarea:focus,select:focus{border-color:var(--leaf);outline:none}
+.hintline{font-size:.8rem;color:var(--muted);margin-top:6px;text-align:left}
+
+/* ---------- level map ---------- */
+.map-grid{display:grid;gap:16px;margin-top:8px}
+.lvl{
+  position:relative;display:flex;gap:16px;align-items:center;padding:20px;border-radius:20px;
+  background:rgba(255,255,255,.06);border:1px solid rgba(167,139,232,.26);cursor:pointer;transition:.18s;
+}
+.lvl:hover:not(.locked){transform:translateY(-3px);border-color:var(--leaf);background:rgba(184,230,43,.09)}
+.lvl.locked{opacity:.45;cursor:not-allowed}
+.lvl.done{border-color:var(--leaf)}
+.lvl-ico{width:62px;height:62px;flex:none;border-radius:18px;display:grid;place-items:center;font-size:1.9rem;
+  background:linear-gradient(140deg,var(--ink-2),var(--lav-deep))}
+.lvl h3{margin-bottom:3px}
+.lvl p{font-size:.9rem;color:#C9BEE6}
+.lvl .tag{font-family:var(--font-m);font-size:.62rem;color:var(--lav);letter-spacing:.12em}
+.lvl-stars{margin-left:auto;text-align:right;font-family:var(--font-m);font-size:.82rem;color:var(--gold);flex:none}
+
+/* ---------- challenge ---------- */
+.qhead{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:6px;flex-wrap:wrap}
+.code{font-family:var(--font-m);font-size:.64rem;letter-spacing:.1em;background:var(--paper-2);
+  color:var(--lav-deep);padding:5px 11px;border-radius:999px;font-weight:700}
+.qprompt{font-family:var(--font-d);font-size:1.22rem;color:var(--ink);margin:10px 0 6px;line-height:1.3}
+.qhelp{font-size:.94rem;color:#5A5075;margin-bottom:14px}
+
+.opt{
+  display:flex;gap:12px;align-items:flex-start;width:100%;text-align:left;
+  background:var(--paper-2);border:2px solid transparent;border-radius:14px;
+  padding:13px 15px;margin:9px 0;cursor:pointer;font-family:var(--font-b);
+  font-size:.98rem;color:var(--ink);transition:.14s;line-height:1.45;
+}
+.opt:hover{border-color:var(--lav)}
+.opt.sel{border-color:var(--lav-deep);background:#E4D9FB}
+.opt.ok{border-color:var(--leaf-deep);background:#E9F8C8}
+.opt.no{border-color:var(--berry);background:#FDE2E9}
+.opt .bx{width:24px;height:24px;flex:none;border-radius:8px;border:2px solid var(--lav);
+  display:grid;place-items:center;font-size:.85rem;font-weight:700;background:#fff}
+.opt.sel .bx{background:var(--lav-deep);color:#fff;border-color:var(--lav-deep)}
+.opt.ok .bx{background:var(--leaf-deep);color:#fff;border-color:var(--leaf-deep)}
+.opt.no .bx{background:var(--berry);color:#fff;border-color:var(--berry)}
+
+/* bins */
+.pool{display:flex;flex-wrap:wrap;gap:9px;margin:14px 0;min-height:20px}
+.tokn{
+  background:#fff;border:2px solid var(--lav);border-radius:12px;padding:9px 13px;
+  font-size:.9rem;color:var(--ink);cursor:pointer;transition:.14s;line-height:1.3
+}
+.tokn:hover{background:var(--paper-2)}
+.tokn.act{background:var(--lav-deep);color:#fff;transform:scale(1.05)}
+.tokn.ok{border-color:var(--leaf-deep);background:#E9F8C8}
+.tokn.no{border-color:var(--berry);background:#FDE2E9}
+.bins{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(190px,1fr))}
+.bin{background:var(--paper-2);border:2px dashed var(--lav);border-radius:16px;padding:13px;min-height:120px}
+.bin.hot{border-color:var(--leaf-deep);background:#EDF9D2}
+.bin h4{font-size:.95rem;color:var(--lav-deep);margin-bottom:8px}
+.bin .drop{display:flex;flex-direction:column;gap:7px}
+
+/* fill-in sentence */
+.sent{background:var(--paper-2);border-radius:14px;padding:18px;font-size:1.05rem;line-height:2.4;color:var(--ink)}
+.sent select{display:inline-block;width:auto;min-width:150px;padding:7px 10px;font-size:.95rem;
+  border-radius:10px;border:2px solid var(--lav-deep);background:#fff;font-weight:700;color:var(--lav-deep)}
+.sent select.ok{border-color:var(--leaf-deep);color:var(--leaf-deep)}
+.sent select.no{border-color:var(--berry);color:var(--berry)}
+
+/* data table */
+table{width:100%;border-collapse:collapse;font-size:.9rem;margin:12px 0;background:#fff;border-radius:12px;overflow:hidden}
+th{background:var(--ink);color:var(--paper);font-family:var(--font-m);font-size:.68rem;
+  letter-spacing:.08em;text-transform:uppercase;padding:10px 8px;text-align:left}
+td{padding:10px 8px;border-top:1px solid var(--paper-2);color:var(--ink)}
+tr.odd td{background:#FDFCFF}
+tr.flag td{background:#FFF3D6}
+
+/* chart builder */
+.chart{display:flex;align-items:flex-end;gap:14px;height:210px;background:var(--paper-2);
+  border-radius:14px;padding:16px 14px 8px;margin:14px 0}
+.bar-col{flex:1;display:flex;flex-direction:column;align-items:center;height:100%;justify-content:flex-end;gap:6px}
+.bar{width:100%;max-width:66px;border-radius:9px 9px 0 0;transition:height .25s ease;position:relative;min-height:3px}
+.bar b{position:absolute;top:-22px;left:50%;transform:translateX(-50%);font-family:var(--font-m);font-size:.76rem;color:var(--ink)}
+.bar-lab{font-size:.68rem;text-align:center;color:#5A5075;line-height:1.2;font-weight:700}
+.sliders{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
+.sl{background:var(--paper-2);border-radius:12px;padding:10px 12px}
+.sl label{font-size:.78rem;font-weight:700;color:var(--ink);display:block;margin-bottom:4px}
+input[type=range]{width:100%;accent-color:var(--lav-deep)}
+
+/* mentor hints */
+.mentor{display:flex;gap:12px;align-items:flex-start;border-radius:16px;padding:14px 16px;margin:14px 0;
+  border:2px dashed;transform:rotate(-.5deg)}
+.mentor.jo{background:#F3EDFF;border-color:var(--lav);color:#3A2A66}
+.mentor.martha{background:#E4F6FE;border-color:var(--sky);color:#123A52}
+.mentor .face{font-size:1.7rem;flex:none}
+.mentor .nm{font-family:var(--font-d);font-size:.85rem;display:block;margin-bottom:2px}
+.mentor .tx{font-family:var(--font-h);font-size:1.22rem;line-height:1.3}
+
+/* feedback */
+.fb{border-radius:14px;padding:15px 17px;margin:14px 0;font-size:.96rem;line-height:1.55;display:none}
+.fb.on{display:block;animation:pop .3s cubic-bezier(.4,1.7,.5,1) both}
+@keyframes pop{from{opacity:0;transform:scale(.94)}to{opacity:1;transform:none}}
+.fb.good{background:#E9F8C8;color:#2E4400;border-left:6px solid var(--leaf-deep)}
+.fb.bad{background:#FDE2E9;color:#6A0E28;border-left:6px solid var(--berry)}
+.fb.info{background:#E4F6FE;color:#123A52;border-left:6px solid var(--sky)}
+.fb b{font-family:var(--font-d)}
+
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px;align-items:center}
+
+/* badges */
+.badge-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(104px,1fr));gap:12px;margin-top:12px}
+.badge{text-align:center;padding:14px 8px;border-radius:16px;background:rgba(255,255,255,.06);
+  border:1px solid rgba(167,139,232,.24)}
+.badge.got{background:linear-gradient(150deg,rgba(255,197,61,.22),rgba(184,230,43,.14));border-color:var(--gold);
+  animation:shine .5s ease both}
+@keyframes shine{from{transform:scale(.8) rotate(-8deg);opacity:0}to{transform:none;opacity:1}}
+.badge .e{font-size:1.9rem;display:block;filter:grayscale(1) opacity(.35)}
+.badge.got .e{filter:none}
+.badge .n{font-size:.7rem;margin-top:5px;font-weight:700;color:#CFC3EC;line-height:1.2}
+
+/* leaderboard */
+.lb-row{display:flex;align-items:center;gap:12px;padding:11px 13px;border-radius:14px;
+  background:rgba(255,255,255,.05);margin-bottom:8px;border:1px solid transparent}
+.lb-row.me{border-color:var(--leaf);background:rgba(184,230,43,.12)}
+.lb-row.hero-row{border-color:var(--gold);background:rgba(255,197,61,.12)}
+.rank{font-family:var(--font-m);font-weight:700;width:30px;text-align:center;color:var(--lav);flex:none}
+.lb-row .nm{flex:1;min-width:0}
+.lb-row .nm b{font-family:var(--font-d);font-size:.98rem;display:block}
+.lb-row .nm span{font-size:.72rem;color:var(--muted)}
+.lb-row .sc{font-family:var(--font-m);color:var(--gold);font-weight:700;flex:none}
+
+/* modal */
+.modal{position:fixed;inset:0;z-index:100;background:rgba(12,7,26,.82);backdrop-filter:blur(6px);
+  display:none;align-items:center;justify-content:center;padding:18px}
+.modal.on{display:flex}
+.modal-in{max-width:520px;width:100%;max-height:86vh;overflow:auto;background:var(--ink);
+  border:1px solid rgba(167,139,232,.36);border-radius:22px;padding:24px}
+
+/* certificate */
+.cert{background:linear-gradient(160deg,#FFFDF6,#F1E9FF);color:var(--ink);border-radius:22px;
+  padding:32px 26px;text-align:center;border:5px double var(--lav-deep);position:relative}
+.cert .seal{font-size:3.2rem}
+.cert h2{color:var(--lav-deep)}
+.cert .nm{font-family:var(--font-h);font-size:2.4rem;color:var(--ink);margin:6px 0}
+.cert .line{width:60%;height:2px;background:var(--lav);margin:14px auto;opacity:.5}
+
+/* misc */
+.pill-row{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.pill{background:var(--paper-2);border:2px solid transparent;border-radius:999px;padding:8px 14px;
+  font-size:.86rem;cursor:pointer;color:var(--ink)}
+.pill.sel{background:var(--lav-deep);color:#fff;border-color:var(--lav-deep)}
+/* needed / not-needed toggle rows (equipment, safety, limitations challenges) */
+.togwrap{display:flex;flex-direction:column;gap:8px;margin:12px 0}
+.togrow{display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:var(--paper-2);
+  border-radius:14px;padding:10px 14px;border:2px solid transparent}
+.togrow.settled{border-color:transparent}
+.togtxt{flex:1 1 240px;font-size:.92rem;color:var(--ink);line-height:1.4;min-width:180px}
+.togbtns{display:flex;gap:8px;flex:none}
+.togbtn{font-family:var(--font-b);font-size:.82rem;font-weight:700;border-radius:999px;
+  padding:8px 14px;border:2px solid var(--lav);background:#fff;color:var(--lav-deep);cursor:pointer;
+  white-space:nowrap;transition:.14s}
+.togbtn:hover{background:var(--paper-2)}
+.togbtn.sel{background:var(--lav-deep);color:#fff;border-color:var(--lav-deep)}
+.togbtn.ok{border-color:var(--leaf-deep)!important;background:#E9F8C8!important;color:#2E4400!important}
+.togbtn.no{border-color:var(--berry)!important;background:#FDE2E9!important;color:#6A0E28!important}
+.togbtn.miss{border-color:var(--gold)!important;background:#FFF3D6!important;color:#5A4300!important}
+.tiny{font-size:.76rem;color:var(--muted);line-height:1.5}
+.center{text-align:center}
+.video{position:relative;padding-bottom:56.25%;height:0;border-radius:18px;overflow:hidden;
+  background:#000;margin:16px 0;border:1px solid rgba(167,139,232,.3)}
+.video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+#confetti{position:fixed;inset:0;pointer-events:none;z-index:99}
+.streak{display:inline-block;padding:4px 10px;border-radius:999px;background:rgba(255,197,61,.18);
+  color:var(--gold);font-family:var(--font-m);font-size:.72rem}
+/* ---- printable lab report (fallback path if the PDF library can't load) ---- */
+.print-report{display:none}
+body.print-mode > *:not(.print-report){display:none!important}
+body.print-mode .print-report{display:block!important;color:#111;background:#fff;padding:26px;max-width:760px;margin:0 auto}
+.print-report h1,.print-report h2,.print-report h3{font-family:var(--font-d);color:#241B3F}
+.print-report .pr-q{border-top:1px solid #ddd;padding:10px 0}
+.print-report .pr-code{font-family:var(--font-m);font-size:.68rem;color:#7C5CD6}
+.print-report .pr-ok{color:#3E7D0E;font-weight:700}
+.print-report .pr-no{color:#B0163B;font-weight:700}
+@media (max-width:560px){
+  .card{padding:20px 17px}
+  .who b{max-width:92px}
+  .chip{font-size:.72rem;padding:5px 10px}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms!important;transition-duration:.01ms!important}
+}
+@media print{
+  .hud,.actions,.btn,#confetti{display:none!important}
+  body{background:#fff;color:#000}
+  .cert{border-color:#000}
+}
+</style>
+</head>
+<body>
+<canvas id="confetti"></canvas>
+
+<!-- ================= HUD ================= -->
+<header class="hud" id="hud" style="display:none">
+  <div class="hud-in">
+    <div class="who">
+      <div class="av" id="hudAv">🦋</div>
+      <div><b id="hudName">Lab</b><span id="hudSub">Junior Researcher</span></div>
+    </div>
+    <div class="hud-spacer"></div>
+    <button class="chip star" id="chipStars">⭐ <span id="starCount">0</span></button>
+    <button class="chip" id="chipBadges">🏅 <span id="badgeCount">0</span></button>
+    <button class="chip" id="chipBoard">🏆 Leaderboard</button>
+    <button class="chip" id="chipSound" title="Sound on/off">🔇</button>
+    <button class="chip" id="chipMap" title="Back to the lab map">🗺️</button>
+    <button class="chip" id="chipSwitch" title="Switch lab">👥</button>
+    <div class="meta">
+      <div class="meta-track"><div class="meta-fill" id="metaFill"></div><div class="meta-bug" id="metaBug">🥚</div></div>
+      <div class="meta-cap" id="metaCap">Egg stage</div>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+<!-- ================= SCREEN: SIGN IN ================= -->
+<section class="screen on" id="scAuth">
+  <div class="hero">
+    <div class="flutter">🦋</div>
+    <p class="eyebrow">Grade 6 · Choose your own research adventure</p>
+    <h1>The Butterfly <span>Code</span></h1>
+    <p class="lede">A 10-year-old walked into a hall full of world-famous scientists and told them butterflies remember their caterpillar days. Then he proved it. Today the lab is yours.</p>
+  </div>
+
+  <div class="card auth-box">
+    <h3>Who's in the lab today?</h3>
+    <p class="tiny" style="margin:8px 0 14px">No password, no email, no account. Your stars and badges are saved on this device only.</p>
+    <div id="labList"></div>
+    <div class="actions" style="justify-content:center;margin-top:14px">
+      <button class="btn" id="btnNewLab">➕ New researcher</button>
+      <button class="btn ghost sm" id="btnRestore">🔑 I have a Lab Pass</button>
+    </div>
+  </div>
+  <p class="tiny center">Built for Grade 6 Science · Inquiry &amp; Method (6.IM.1–6.IM.15)</p>
+</section>
+
+<!-- ================= SCREEN: PROFILE ================= -->
+<section class="screen" id="scProfile">
+  <div class="hero" style="padding-top:28px">
+    <p class="eyebrow">Step 2 of 2</p>
+    <h2>Set up your research lab</h2>
+  </div>
+  <div class="card auth-box" style="text-align:left">
+    <label class="f" for="inName">Your researcher name</label>
+    <input type="text" id="inName" maxlength="24" placeholder="e.g. Aarav">
+    <label class="f" for="inLab">Name your lab</label>
+    <input type="text" id="inLab" maxlength="28" placeholder="e.g. The Lavender Lab">
+    <p class="hintline">This is the name that shows on the leaderboard.</p>
+    <label class="f" for="inCls">Class</label>
+    <select id="inCls">
+      <option>6A</option><option>6B</option><option>6C</option><option>6D</option>
+      <option>6E</option><option>6F</option><option>Other</option>
+    </select>
+    <label class="f">Pick your lab avatar</label>
+    <div class="avatar-grid" id="avGrid"></div>
+    <label class="f" for="inPin">Lab PIN <span style="font-weight:400;color:var(--muted)">— optional</span></label>
+    <input type="text" id="inPin" maxlength="4" inputmode="numeric" placeholder="4 digits, or leave blank">
+    <p class="hintline">Sharing a Chromebook? A PIN stops a classmate opening your lab by mistake. Forget it and you can just start a new lab.</p>
+    <div class="actions"><button class="btn" id="btnProfile">Open the lab 🔬</button>
+    <button class="btn ghost sm" id="btnBackAuth">← Back</button></div>
+    <p id="profErr" class="hintline" style="color:var(--berry)"></p>
+  </div>
+</section>
+
+<!-- ================= SCREEN: THE HOOK ================= -->
+<section class="screen" id="scHook">
+  <div class="card dark" style="position:relative;margin-top:22px">
+    <div class="tape">CASE FILE 001</div>
+    <p class="eyebrow" style="margin-top:8px">The hook</p>
+    <h2>Jo didn't wait to grow up.</h2>
+    <p style="margin-top:12px">Jo Nagai was <b>10 years old</b>. Not a professor. Not a PhD student. A kid who raised caterpillars in his room and noticed something strange.</p>
+    <p style="margin-top:10px">The butterflies <b>he</b> had raised would land calmly on his hand. Wild butterflies flew away the second he came close. Same species. Different behaviour. Why?</p>
+    <p style="margin-top:10px">Most people would shrug. Jo wrote a <b>four-page handwritten letter</b> to a scientist and asked for help. Years later he stood in front of the International Congress of Entomology and presented findings that made a room full of experts go quiet.</p>
+    <div class="mentor jo" style="margin-top:18px">
+      <div class="face">🧒</div>
+      <div><span class="nm">Jo Nagai</span><span class="tx">"I wasn't clever. I was just really, really curious — and I wrote everything down."</span></div>
+    </div>
+    <div class="video"><iframe src="https://www.youtube.com/embed/nhESxrqPjfU" title="Jo Nagai's story" allowfullscreen loading="lazy"></iframe></div>
+    <p class="tiny">Video not loading? Watch it here: <a href="https://www.youtube.com/watch?v=nhESxrqPjfU" target="_blank" rel="noopener" style="color:var(--leaf)">youtube.com/watch?v=nhESxrqPjfU</a></p>
+    <div class="mentor martha">
+      <div class="face">👩‍🔬</div>
+      <div><span class="nm">Dr. Martha Weiss · biologist</span><span class="tx">"A real question beats a fancy title. Bring me a question and a fair test, and we can do science together."</span></div>
+    </div>
+    <h3 style="margin-top:22px">Your mission</h3>
+    <p style="margin-top:8px">Rebuild Jo's investigation across three levels. Earn ⭐ stars for good thinking, collect 🏅 badges, and climb the leaderboard. Beat Jo's benchmark of <b>100 stars</b> and you've matched a 10-year-old who shook the world of science.</p>
+    <div class="actions"><button class="btn" id="btnToMap">Start Level 1 🚀</button></div>
+  </div>
+</section>
+
+<!-- ================= SCREEN: LEVEL MAP ================= -->
+<section class="screen" id="scMap">
+  <div class="hero" style="padding:30px 0 6px">
+    <p class="eyebrow" id="mapEyebrow">Lab map</p>
+    <h2 id="mapTitle">Where to next, researcher?</h2>
+    <p class="lede" id="mapLede">Finish a level to unlock the next one. You can replay any level you've already opened.</p>
+  </div>
+  <div class="map-grid" id="mapGrid"></div>
+  <div class="actions center" style="justify-content:center">
+    <button class="btn ghost sm" id="btnBadges2">🏅 Badge case</button>
+    <button class="btn ghost sm" id="btnBoard2">🏆 Leaderboard</button>
+    <button class="btn ghost sm" id="btnReport2">📄 Lab report</button>
+    <button class="btn ghost sm" id="btnPass2">🔑 Lab Pass</button>
+    <button class="btn ghost sm" id="btnSwitch">👥 Switch lab</button>
+    <button class="btn ghost sm" id="btnReset">↺ Start over</button>
+  </div>
+</section>
+
+<!-- ================= SCREEN: PLAY ================= -->
+<section class="screen" id="scPlay">
+  <div id="playHead" class="card dark" style="margin-top:20px"></div>
+  <div id="playBody"></div>
+</section>
+
+<!-- ================= SCREEN: LEVEL COMPLETE ================= -->
+<section class="screen" id="scLevelDone">
+  <div class="card dark center" style="margin-top:36px" id="doneBox"></div>
+</section>
+
+<!-- ================= SCREEN: FINALE ================= -->
+<section class="screen" id="scFinale">
+  <div id="finaleBox"></div>
+</section>
+
+</div><!-- /wrap -->
+
+<!-- ================= MODALS ================= -->
+<div class="modal" id="mdBadges"><div class="modal-in">
+  <div style="display:flex;justify-content:space-between;align-items:center">
+    <h3>🏅 Badge case</h3><button class="chip" data-close>✕</button>
+  </div>
+  <p class="tiny" style="margin-top:6px" id="badgeSub"></p>
+  <div class="badge-grid" id="badgeGrid"></div>
+</div></div>
+
+<div class="modal" id="mdPass"><div class="modal-in">
+  <div style="display:flex;justify-content:space-between;align-items:center">
+    <h3>🔑 Lab Pass</h3><button class="chip" data-close>✕</button>
+  </div>
+  <p class="tiny" style="margin:8px 0 12px">A Lab Pass is a code that carries your whole lab — stars, badges, answers — to another device. Copy it out, paste it in.</p>
+  <div id="passOut"></div>
+  <label class="f">Paste a Lab Pass to restore a lab</label>
+  <textarea id="passIn" placeholder="Paste the code here…" style="font-family:var(--font-m);font-size:.8rem"></textarea>
+  <div class="actions"><button class="btn" id="btnPassIn">Restore this lab</button></div>
+  <p id="passMsg" class="tiny" style="margin-top:8px"></p>
+</div></div>
+
+<div class="modal" id="mdBoard"><div class="modal-in">
+  <div style="display:flex;justify-content:space-between;align-items:center">
+    <h3>🏆 Leaderboard</h3><button class="chip" data-close>✕</button>
+  </div>
+  <p class="tiny" style="margin:6px 0 14px">Labs that have played on this device. Jo's benchmark is the score to beat.</p>
+  <div id="boardList"></div>
+</div></div>
+
+<script>
+/* ============================================================
+   1. STORAGE — no accounts, no server.
+   Cookies are the primary store (they persist for a year and
+   survive a browser restart). localStorage mirrors them so a
+   lab still opens if cookies get cleared, and an in-memory
+   fallback keeps the game playable in locked-down browsers.
+   ============================================================ */
+const CK = 'bc_';
+const MEM = {};
+function wc(k, s){
+  try{ document.cookie = CK+k+'='+encodeURIComponent(s)+';path=/;max-age='+(365*86400)+';SameSite=Lax'; }catch(e){}
+}
+function rc(k){
+  try{
+    const m = document.cookie.match(new RegExp('(?:^|; )'+CK+k+'=([^;]*)'));
+    return m ? decodeURIComponent(m[1]) : null;
+  }catch(e){ return null; }
+}
+function save(k, v){
+  const s = JSON.stringify(v);
+  try{ localStorage.setItem(CK+k, s); }catch(e){}
+  if(s.length < 3200) wc(k, s);     // stay well under the 4KB cookie limit
+  MEM[k] = v;
+}
+function load(k, dflt){
+  const c = rc(k);
+  if(c){ try{ return JSON.parse(c); }catch(e){} }
+  try{ const l = localStorage.getItem(CK+k); if(l) return JSON.parse(l); }catch(e){}
+  return (k in MEM) ? MEM[k] : dflt;
+}
+
+/* ---- many labs can share one device ---- */
+function labIndex(){ return load('index', []); }
+function newId(){ return 'L' + Date.now().toString(36) + Math.random().toString(36).slice(2,5); }
+function blankState(){
+  return {
+    id:null,
+    profile:{name:'', lab:'', cls:'6A', avatar:'🦋', pin:''},
+    stars:0, badges:[], done:{}, answers:{}, report:{}, unlocked:1, bigQ:'', finished:false, sound:false
+  };
+}
+let S = blankState();
+
+function persist(){
+  if(!S.id) return;
+  save('lab_'+S.id, S);
+  const ix = labIndex().filter(x => x.id !== S.id);
+  ix.push({id:S.id, lab:S.profile.lab, who:S.profile.name, cls:S.profile.cls,
+           av:S.profile.avatar, pin:S.profile.pin||'', stars:S.stars,
+           badges:S.badges.length, ts:Date.now()});
+  save('index', ix.slice(-30));
+  save('active', S.id);
+}
+function openLab(id){
+  const d = load('lab_'+id, null);
+  if(!d) return false;
+  S = Object.assign(blankState(), d); S.id = id;
+  save('active', id); hud(); return true;
+}
+function deleteLab(id){
+  save('index', labIndex().filter(x=>x.id!==id));
+  try{ localStorage.removeItem(CK+'lab_'+id); }catch(e){}
+  wc('lab_'+id, ''); 
+  try{ document.cookie = CK+'lab_'+id+'=;path=/;max-age=0'; }catch(e){}
+}
+
+/* ---- Lab Pass: move a lab between devices, still no server ---- */
+function makePass(){
+  try{ return btoa(unescape(encodeURIComponent(JSON.stringify(S)))).replace(/=+$/,''); }
+  catch(e){ return ''; }
+}
+function readPass(code){
+  try{
+    const pad = code.trim() + '==='.slice((code.trim().length + 3) % 4);
+    return JSON.parse(decodeURIComponent(escape(atob(pad))));
+  }catch(e){ return null; }
+}
+
+/* ============================================================
+   3. STATE
+   ============================================================ */
+const AVATARS = ['🦋','🐛','🔬','🧪','🌿','🧠','🦉','🐝','🌸','🚀','🧬','🔭'];
+const BADGES = [
+  {id:'predict',   e:'🔮', n:'Predictor'},
+  {id:'hypo',      e:'🧪', n:'Hypothesis Smith'},
+  {id:'vars',      e:'🎛️', n:'Variable Master'},
+  {id:'fair',      e:'⚖️', n:'Fair Tester'},
+  {id:'kit',       e:'🧰', n:'Kit Chooser'},
+  {id:'safe',      e:'🥽', n:'Safety Officer'},
+  {id:'care',      e:'🐛', n:'Caterpillar Carer'},
+  {id:'precise',   e:'🎯', n:'Accurate & Precise'},
+  {id:'record',    e:'📓', n:'Field Recorder'},
+  {id:'chart',     e:'📊', n:'Chart Builder'},
+  {id:'trend',     e:'🔍', n:'Trend Spotter'},
+  {id:'gen',       e:'🧬', n:'Generation Detective'},
+  {id:'concl',     e:'✅', n:'Conclusion Drawer'},
+  {id:'limits',    e:'🛠️', n:'Limitation Finder'},
+  {id:'key',       e:'🗝️', n:'Key Master'},
+  {id:'world',     e:'🦋', n:'World Shaker'}
+];
+const STAGES = [
+  {t:0,   e:'🥚', c:'Egg stage'},
+  {t:.25, e:'🐛', c:'Caterpillar stage'},
+  {t:.55, e:'🍃', c:'Chrysalis forming'},
+  {t:.8,  e:'🪺', c:'Almost out!'},
+  {t:1,   e:'🦋', c:'Butterfly! Complete'}
+];
+
+/* state now lives in the multi-lab store defined in section 1 */
+
+/* ============================================================
+   4. SOUND + CONFETTI
+   ============================================================ */
+let AC = null;
+function beep(freq, dur, type){
+  if(!S.sound) return;
+  try{
+    AC = AC || new (window.AudioContext||window.webkitAudioContext)();
+    const o = AC.createOscillator(), g = AC.createGain();
+    o.type = type || 'sine'; o.frequency.value = freq;
+    g.gain.setValueAtTime(.06, AC.currentTime);
+    g.gain.exponentialRampToValueAtTime(.001, AC.currentTime + dur);
+    o.connect(g); g.connect(AC.destination); o.start(); o.stop(AC.currentTime + dur);
+  }catch(e){}
+}
+const sndGood = ()=>{ beep(660,.12); setTimeout(()=>beep(880,.16),110); };
+const sndBad  = ()=>  beep(200,.2,'square');
+const sndStar = ()=>{ beep(1046,.09); setTimeout(()=>beep(1318,.12),90); };
+
+const cv = document.getElementById('confetti');
+const ctx = cv.getContext('2d');
+let bits = [];
+function sizeCv(){ cv.width = innerWidth; cv.height = innerHeight; }
+sizeCv(); addEventListener('resize', sizeCv);
+function confetti(n){
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const cols = ['#B8E62B','#A78BE8','#5BC8F5','#FFC53D','#F5426C'];
+  for(let i=0;i<(n||70);i++) bits.push({
+    x:Math.random()*cv.width, y:-20-Math.random()*120,
+    vx:(Math.random()-.5)*3, vy:2+Math.random()*3.5,
+    s:5+Math.random()*7, r:Math.random()*6.3, vr:(Math.random()-.5)*.3,
+    c:cols[(Math.random()*cols.length)|0]
+  });
+  if(bits.length) requestAnimationFrame(drawBits);
+}
+function drawBits(){
+  ctx.clearRect(0,0,cv.width,cv.height);
+  bits = bits.filter(b=>b.y < cv.height+40);
+  bits.forEach(b=>{
+    b.x+=b.vx; b.y+=b.vy; b.r+=b.vr;
+    ctx.save(); ctx.translate(b.x,b.y); ctx.rotate(b.r);
+    ctx.fillStyle=b.c; ctx.fillRect(-b.s/2,-b.s/2,b.s,b.s*.6); ctx.restore();
+  });
+  if(bits.length) requestAnimationFrame(drawBits);
+}
+
+/* ============================================================
+   5. CONTENT — three levels, fifteen challenges
+   ============================================================ */
+const LEVELS = [
+{
+  id:'L1', num:1, emoji:'🧭', title:'The Blueprint of Inquiry',
+  tag:'6.IM.1 – 6.IM.4', blurb:'Predict, write a hypothesis, and lock down your variables.',
+  scenario:`Jo raises caterpillars in a mesh cage on his desk. When they become butterflies, they land on his hand without panicking. The wild butterflies in his garden never do that.<br><br>One night he writes a single line in his notebook: <b>"Do they remember me?"</b><br><br>Before you touch a single piece of equipment, you have to think like a scientist. That starts here.`,
+  challenges:[
+  {
+    id:'q1', code:'6.IM.1', badge:'predict', type:'mcq', anyAnswer:true,
+    prompt:'Make a prediction using what you already know.',
+    help:'Inside a chrysalis, most of the caterpillar\u2019s body breaks down into a soup of cells and rebuilds into a butterfly. Some of the brain breaks down too. So — can a memory survive that?',
+    hint:{who:'jo', text:'There is no wrong answer here. A prediction is a smart guess built on what you already know. Just be able to say WHY.'},
+    options:[
+      'No way — if the brain turns to mush, every memory is erased.',
+      'Maybe — if some brain cells survive the rebuild, the memory could survive with them.',
+      'Yes — memory might be stored in a part of the body that doesn\u2019t break down.',
+      'Only smells could survive, because smell is a very old, very simple sense.'
+    ],
+    reveal:`<b>Every one of those is a legitimate prediction</b> — scientists argued about all four. In 2008, Dr. Martha Weiss and her team at Georgetown University trained caterpillars to avoid a smell, and the adult moths they turned into still avoided it. Some nerve cells <i>do</i> survive metamorphosis. Jo's question was standing on real, unfinished science.`
+  },
+  {
+    id:'q2', code:'6.IM.2', badge:'hypo', type:'fill',
+    prompt:'Turn Jo\u2019s question into a testable hypothesis.',
+    help:'A hypothesis is not a question and not a wish. It says what you think will happen, and why — in a way you can actually test.',
+    hint:{who:'martha', text:'Use the shape: IF I change something... THEN this will happen... BECAUSE of this reason. If you can\u2019t measure the "then", it isn\u2019t testable.'},
+    segments:['If caterpillars are ', 0, ' a lavender smell, then the butterflies they become will ', 1, ' lavender in a Y-maze, because ', 2, '.'],
+    blanks:[
+      {options:['trained to avoid','fed on','painted with','named after'], answer:'trained to avoid'},
+      {options:['avoid','be attracted to','ignore','eat'], answer:'avoid'},
+      {options:['memories made as a caterpillar can survive metamorphosis','lavender is a purple colour','butterflies are prettier than moths','the cage smells nice'], answer:'memories made as a caterpillar can survive metamorphosis'}
+    ],
+    reveal:`That is a <b>testable hypothesis</b>. You can change one thing (training), measure one thing (which arm they choose), and your reason connects to real biology. "Do butterflies have feelings?" is a lovely question, but you can\u2019t measure it — so it isn\u2019t a hypothesis yet.`
+  },
+  {
+    id:'q3', code:'6.IM.3', badge:'vars', type:'bins',
+    prompt:'Sort every part of the experiment into the right variable box.',
+    help:'Tap a card, then tap the box it belongs in. Tap a card in a box to send it back.',
+    hint:{who:'martha', text:'Ask yourself three questions. What am I deliberately changing? What am I counting or measuring at the end? What must stay identical so the test is fair?'},
+    bins:[
+      {id:'iv', label:'🔀 What we CHANGE', sub:'Independent variable'},
+      {id:'dv', label:'📏 What we MEASURE', sub:'Dependent variable'},
+      {id:'cv', label:'🔒 What we KEEP THE SAME', sub:'Control variables'}
+    ],
+    cards:[
+      {t:'Whether a caterpillar got lavender training or not', bin:'iv'},
+      {t:'Which arm of the Y-maze the butterfly flies into', bin:'dv'},
+      {t:'How many seconds it takes to choose an arm', bin:'dv'},
+      {t:'The temperature of the room', bin:'cv'},
+      {t:'The species of butterfly used', bin:'cv'},
+      {t:'The number of drops of lavender oil', bin:'cv'},
+      {t:'The time of day each test runs', bin:'cv'},
+      {t:'The size of the Y-maze', bin:'cv'}
+    ],
+    reveal:`Notice you can have <b>more than one dependent variable</b> — Jo measured both the choice and the time taken. But there is only ever <b>one independent variable</b> in a fair test. The moment you change two things at once, you can\u2019t tell which one caused the result.`
+  },
+  {
+    id:'q4', code:'6.IM.4', badge:'fair', type:'bins',
+    prompt:'Fair test or field study? Sort each investigation.',
+    help:'A fair test controls everything except one variable. A field study watches the real world, where you can\u2019t control much at all.',
+    hint:{who:'jo', text:'Both are real science! Field studies gave me my first clue. Fair tests let me prove it.'},
+    bins:[
+      {id:'fair', label:'🧪 Fair test', sub:'One variable changes'},
+      {id:'field', label:'🌳 Field study', sub:'Real world, less control'}
+    ],
+    cards:[
+      {t:'Testing one butterfly at a time in a Y-maze indoors, same temperature every time', bin:'fair'},
+      {t:'Watching wild butterflies in the school garden on a windy afternoon', bin:'field'},
+      {t:'Counting how many trained vs untrained butterflies avoid lavender, everything else identical', bin:'fair'},
+      {t:'Recording which flowers butterflies visit in a park across one month', bin:'field'},
+      {t:'Noticing that hand-raised butterflies seem calmer than wild ones', bin:'field'}
+    ],
+    reveal:`Jo\u2019s whole story starts with a <b>field observation</b> — butterflies landing on his hand. That gave him the question. But an observation can be explained a hundred ways. To prove it, he needed a <b>fair test</b> indoors where he controlled the wind, the light and the temperature. Good scientists use both.`
+  }]
+},
+{
+  id:'L2', num:2, emoji:'🧰', title:'Tools of the Trade',
+  tag:'6.IM.5 – 6.IM.7 · 6.IM.13 – 6.IM.15', blurb:'Choose your kit, pass the safety gate, and record real observations.',
+  scenario:`Jo posts a four-page handwritten letter to Dr. Martha Weiss. She writes back.<br><br>Her lab had used a mild electric shock to train caterpillars. Jo refuses. "They're my friends," he says. He wants a method that teaches without hurting — so he pairs a <b>lavender scent</b> with a gentle <b>vibration</b> from a muscle-therapy massager. Unpleasant. Never harmful.<br><br>Now stock your bench.`,
+  challenges:[
+  {
+    id:'q5', code:'6.IM.5', badge:'kit', type:'multi',
+    prompt:'Select every piece of equipment this investigation actually needs.',
+    help:'Mark every item Needed or Not needed — no leaving one blank. Wrong calls cost stars, and in a real lab, they cost lives.',
+    hint:{who:'martha', text:'Pick tools that answer your question without harming your organism. If a tool kills the animal you\u2019re studying, you\u2019ve ended the experiment.'},
+    options:[
+      {t:'Y-maze choice chamber', ok:true},
+      {t:'Lavender essential oil', ok:true},
+      {t:'Gentle vibration device (muscle massager)', ok:true},
+      {t:'Stopwatch', ok:true},
+      {t:'Mesh rearing cage with fresh host leaves', ok:true},
+      {t:'Data log sheet and pencil', ok:true},
+      {t:'Killing jar and mounting pins', ok:false},
+      {t:'Toxic solvent to make the smell stronger', ok:false},
+      {t:'Bunsen burner', ok:false},
+      {t:'Bright desk lamp pointed into the maze', ok:false}
+    ],
+    reveal:`The lamp is the sneaky one. Butterflies steer by light — a bright lamp on one side would pull them toward that arm no matter what it smelled like. That\u2019s an <b>uncontrolled variable</b> hiding inside a piece of equipment.`
+  },
+  {
+    id:'q6', code:'6.IM.13 · 6.IM.14 · 6.IM.15', badge:'safe', type:'multi',
+    prompt:'Safety gate: select every correct safety and care action before the lab opens.',
+    help:'You are handling essential oils, equipment, and living animals. Mark every action Needed or Not needed.',
+    hint:{who:'martha', text:'Three duties, every single time: protect yourself, protect the equipment, protect the living things.'},
+    options:[
+      {t:'Wear gloves when handling essential oil', ok:true},
+      {t:'Wear safety goggles — oils sting eyes badly', ok:true},
+      {t:'Wear a lab coat or apron', ok:true},
+      {t:'Open a window so the room is ventilated', ok:true},
+      {t:'Give the caterpillars fresh host leaves every day', ok:true},
+      {t:'Clean and return every instrument at the end', ok:true},
+      {t:'Release the butterflies where they were found', ok:true},
+      {t:'Wash hands before and after handling organisms', ok:true},
+      {t:'Taste the lavender oil to check it\u2019s the right one', ok:false},
+      {t:'Leave the cage on a sunny windowsill all afternoon', ok:false},
+      {t:'Pick caterpillars up by pinching their heads', ok:false},
+      {t:'Pour leftover oil down the sink', ok:false}
+    ],
+    reveal:`Jo could have used the shock method — it was published, it was accepted, it worked. He designed a kinder one instead and it <b>still</b> produced results. Ethics isn\u2019t a rule that slows science down. It\u2019s part of doing science well.`,
+    extraBadge:'care'
+  },
+  {
+    id:'q7', code:'6.IM.6', badge:'precise', type:'match',
+    prompt:'Three students time the same butterfly. The true time is 30.0 seconds. Judge each set.',
+    help:'Accurate = close to the true value. Precise = the readings agree with each other. You can have one without the other.',
+    hint:{who:'martha', text:'Precise-but-not-accurate is the dangerous one. All your numbers agree beautifully — and they\u2019re all wrong the same amount.'},
+    choices:['Accurate AND precise','Precise but NOT accurate','Neither accurate nor precise'],
+    rows:[
+      {label:'Student A', detail:'29.9 s · 30.0 s · 30.1 s', answer:'Accurate AND precise'},
+      {label:'Student B', detail:'27.1 s · 27.2 s · 27.2 s', answer:'Precise but NOT accurate'},
+      {label:'Student C', detail:'24.8 s · 31.5 s · 28.0 s', answer:'Neither accurate nor precise'}
+    ],
+    reveal:`Student B\u2019s readings look like the best data in the room — tidy, consistent, professional. They\u2019re also wrong every time, probably because the stopwatch was started late. This is why we <b>repeat trials</b> and <b>check our method</b>, not just our numbers.`
+  },
+  {
+    id:'q8', code:'6.IM.7', badge:'record', type:'log',
+    prompt:'Run three training trials and fill in your lab log.',
+    help:'For each trial, pick what you SAW (qualitative) and count what you can COUNT (quantitative). Then write one honest note.',
+    hint:{who:'jo', text:'Write it down while it happens. Not after lunch. Not from memory. Memory is exactly what we\u2019re investigating — don\u2019t trust yours.'},
+    chips:['Curled up tightly','Turned away from the scent','Froze completely still','Reared its front end up','Crawled to the far corner','Kept eating, ignored it'],
+    trials:[
+      {n:'Trial 1', ev:'Lavender puff + 2 s vibration'},
+      {n:'Trial 2', ev:'Lavender puff + 2 s vibration'},
+      {n:'Trial 3', ev:'Lavender puff + 2 s vibration'}
+    ],
+    reveal:`Your log now holds both kinds of evidence. <b>Qualitative</b> = described in words (curled up, froze). <b>Quantitative</b> = counted or measured with numbers (3 turn-aways, 2.4 seconds). A strong investigation collects both, because numbers tell you <i>how much</i> and words tell you <i>what it looked like</i>.`
+  }]
+},
+{
+  id:'L3', num:3, emoji:'🔍', title:'The Data Detective',
+  tag:'6.IM.8 – 6.IM.12', blurb:'Graph it, spot the trend, find the twist, and be honest about the limits.',
+  scenario:`Two weeks pass. The chrysalises crack open.<br><br><b>The Y-maze:</b> picture a giant letter Y lying flat, made of clear tubes. The butterfly is released at the bottom of the stem 🔽. It flies up and hits a fork. The <b>left arm</b> carries lavender-scented air 💜. The <b>right arm</b> carries clean air 🌬️. Fine mesh at each end stops it escaping. Between every single run you swap which side the lavender goes to, so the butterfly can't just be favouring "left".<br><br>Forty trained butterflies. Forty untrained. Time to find out.`,
+  challenges:[
+  {
+    id:'q9', code:'6.IM.8', badge:'chart', type:'chart',
+    prompt:'Build the bar chart from your results table.',
+    help:'Drag each slider until the bar matches the percentage in the table. Then check your chart.',
+    hint:{who:'martha', text:'Percentage = (that group \u00F7 total) \u00D7 100. With 40 butterflies, 12 choosing lavender is 12 \u00F7 40 \u00D7 100.'},
+    table:{
+      head:['Group','Chose LAVENDER arm','Chose CLEAN arm','Total'],
+      rows:[['Trained (as caterpillars)','12','28','40'],['Untrained (control)','20','20','40']]
+    },
+    bars:[
+      {k:'Trained · lavender', v:30, c:'var(--lav-deep)'},
+      {k:'Trained · clean',    v:70, c:'var(--leaf-deep)'},
+      {k:'Control · lavender', v:50, c:'var(--lav)'},
+      {k:'Control · clean',    v:50, c:'var(--sky)'}
+    ],
+    tol:3,
+    follow:{
+      prompt:'Why is a BAR chart correct here instead of a line graph?',
+      options:[
+        'Because the groups are separate categories, not a continuous measurement',
+        'Because bar charts are easier to colour in',
+        'Because there are only four numbers',
+        'Because line graphs are only for science fairs'
+      ],
+      answer:0
+    },
+    reveal:`<b>Bar chart</b> for separate categories (trained / control). <b>Line graph</b> for continuous data where one thing changes smoothly, like temperature over time. Choosing the wrong graph doesn\u2019t just look untidy — it tells your reader the wrong story about your data.`
+  },
+  {
+    id:'q10', code:'6.IM.9', badge:'trend', type:'mcq',
+    prompt:'One day\u2019s data doesn\u2019t fit the pattern. Find the outlier.',
+    help:'Look at the daily results from the trained group. Which day is anomalous?',
+    hint:{who:'jo', text:'Don\u2019t delete a weird result. Investigate it. My weirdest day taught me the most about my own method.'},
+    table:{
+      head:['Day','Butterflies tested','% that avoided lavender'],
+      rows:[['Monday','8','75%'],['Tuesday','8','71%'],['Wednesday','8','68%'],['Thursday','8','50%'],['Friday','8','72%']],
+      flagRow:3
+    },
+    options:['Monday — the highest result','Wednesday — the lowest of the first three','Thursday — it drops to a coin-flip','Friday — the last day is always unreliable'],
+    answer:2,
+    reveal:`Thursday sits at exactly 50% — no better than random. The lab notebook for that day reads: <i>"window left open, breezy."</i> The draught spread lavender through <b>both</b> arms, so there was nothing to choose between. <br><br>The <b>trend</b> across the other four days is clear and consistent: around 70% of trained butterflies avoided the lavender arm, while the control group split 50/50. An outlier isn\u2019t a failure — it\u2019s a clue about your method.`
+  },
+  {
+    id:'q11', code:'6.IM.9 · 6.IM.10', badge:'gen', type:'mcq',
+    prompt:'THE TWIST. The trained butterflies had babies. Nobody trained the babies.',
+    help:'The F1 generation (children) and F2 generation (grandchildren) were tested in the same Y-maze, with zero lavender training. Read the results, then answer.',
+    hint:{who:'martha', text:'Careful here. Ask what the result SUGGESTS, not what it proves. Those are different words and the difference matters.'},
+    table:{
+      head:['Generation','Training received','Butterflies tested','% avoiding lavender'],
+      rows:[
+        ['Trained originals','Full training','40','70%'],
+        ['F1 · children','NONE','32','66%'],
+        ['F2 · grandchildren','NONE','14','64%'],
+        ['Control line','NONE','40','50%']
+      ]
+    },
+    options:[
+      'The babies were secretly trained by their parents flying around them',
+      'Something about the parents\u2019 experience appears to have been passed to offspring that never had that experience',
+      'Butterflies naturally dislike lavender, so this result means nothing',
+      'The F2 result is 64%, so the memory is getting stronger each generation'
+    ],
+    answer:1,
+    reveal:`This is the finding that made the conference hall go quiet. Offspring that had <b>never encountered lavender</b> avoided it at roughly the same rate as their trained parents — while the control line stayed at a coin-flip 50%.<br><br>Scientists call this area <b>epigenetics</b>: chemical tags that sit on top of DNA and can switch genes on or off, and that can sometimes be inherited.<br><br>⚠️ <b>Science in progress:</b> inherited memory-like effects are a genuinely debated, unfinished field. Jo\u2019s work is a striking contribution to it, not the final word. Other labs need to repeat it. That\u2019s not a weakness — that\u2019s exactly how science is supposed to work.`
+  },
+  {
+    id:'q12', code:'6.IM.10', badge:'concl', type:'fill',
+    prompt:'Write your conclusion — and link it directly to your evidence.',
+    help:'A conclusion states what the data showed, whether the hypothesis was supported, and points at the specific numbers.',
+    hint:{who:'martha', text:'"Supported" or "contradicted" — never "proved". One experiment supports a hypothesis. It never finishes the argument.'},
+    segments:['The data ', 0, ' our hypothesis. Trained butterflies avoided lavender ', 1, ' of the time, compared with ', 2, ' for the untrained control group.'],
+    blanks:[
+      {options:['supported','contradicted','ignored','proved beyond doubt'], answer:'supported'},
+      {options:['70%','50%','12%','100%'], answer:'70%'},
+      {options:['50%','70%','30%','0%'], answer:'50%'}
+    ],
+    extraText:{label:'Now add one sentence in your own words: what does this tell us about memory and metamorphosis?', min:25},
+    reveal:`That is a proper scientific conclusion: it names the evidence, uses the actual numbers, and uses honest language. Notice we said <b>supported</b>, not <b>proved</b>. Even Jo, standing in front of the world\u2019s entomologists, said his results <i>suggest</i>.`
+  },
+  {
+    id:'q13', code:'6.IM.11', badge:'limits', type:'multi',
+    prompt:'Be your own toughest critic. Select every real limitation of this study.',
+    help:'A limitation is something about your method that could weaken your conclusion. Mark every item as a real limitation or not.',
+    togLabels:['✅ Real limitation','🚫 Not a limitation'],
+    hint:{who:'jo', text:'The scientists in that hall didn\u2019t attack me for listing my weaknesses. They respected me for it. Hiding a flaw is the only real mistake.'},
+    options:[
+      {t:'Only 14 butterflies were tested in the F2 generation — a small sample', ok:true},
+      {t:'The open window on Thursday let air move between both arms', ok:true},
+      {t:'Only one species of butterfly was studied', ok:true},
+      {t:'Only one scent (lavender) was tested', ok:true},
+      {t:'The study hasn\u2019t yet been repeated by other independent labs', ok:true},
+      {t:'The researcher was young, so the results don\u2019t count', ok:false},
+      {t:'The butterflies were pretty, which biased the results', ok:false},
+      {t:'70% is a low number, so the experiment failed', ok:false}
+    ],
+    reveal:`Age is not a limitation. <b>Sample size, uncontrolled variables, narrow scope and lack of replication</b> are. Only 14 grandchildren were tested — flip a coin 14 times and you might easily get 9 heads by pure luck. That\u2019s why sample size matters so much.`
+  },
+  {
+    id:'q14', code:'6.IM.11', badge:null, type:'text',
+    prompt:'Now fix it. Suggest one specific improvement for the next round of trials.',
+    help:'Be specific. "Do it better" isn\u2019t an improvement. "Test 60 F2 butterflies instead of 14, in a sealed room" is.',
+    hint:{who:'martha', text:'Good improvements name the problem, name the fix, and name the number. All three.'},
+    min:30, keywords:['more','sample','seal','window','repeat','species','scent','60','100','another','control','blind','random'],
+    reveal:`Strong improvements from real scientists included: raise the F2 sample to 60+, run every trial in a sealed chamber with controlled airflow, test a second scent to check the effect isn\u2019t lavender-specific, and have a second observer record choices <b>without knowing</b> which group each butterfly came from.`
+  },
+  {
+    id:'q15', code:'6.IM.12', badge:'key', type:'key',
+    prompt:'Identify your specimen using the dichotomous key.',
+    help:'A dichotomous key gives you two choices at every step. Pick the one that matches your butterfly, and follow it down.',
+    hint:{who:'martha', text:'Read both options fully before choosing. Keys punish skim-readers.'},
+    specimen:{
+      desc:'Your specimen: medium-sized, wings mostly creamy white on top, two small dark grey spots on each forewing, wingspan about 5 cm, common around cabbage plants in the school garden.',
+      emoji:'🦋'
+    },
+    steps:{
+      s1:{q:'Step 1', a:{t:'1a · Wings mostly white or pale cream', go:'s2'}, b:{t:'1b · Wings mostly orange with black markings', go:'s3'}},
+      s2:{q:'Step 2', a:{t:'2a · Dark spots present on the forewings', go:'CABBAGE'}, b:{t:'2b · No spots, plain pale wings', go:'WOOD'}},
+      s3:{q:'Step 3', a:{t:'3a · Large, with white dots along a black border', go:'MONARCH'}, b:{t:'3b · Smaller, orange with a checkered pattern', go:'LADY'}}
+    },
+    ends:{
+      CABBAGE:{ok:true,  n:'Cabbage White', sci:'Pieris rapae'},
+      WOOD:{ok:false, n:'Wood White', sci:'Leptidea sinapis'},
+      MONARCH:{ok:false, n:'Monarch', sci:'Danaus plexippus'},
+      LADY:{ok:false, n:'Painted Lady', sci:'Vanessa cardui'}
+    },
+    reveal:`<b>Cabbage White (Pieris rapae)</b> — correct. Keys like this let scientists anywhere in the world identify the same organism the same way. Without them, your "white butterfly" and my "white butterfly" might be two completely different species, and neither of our results would mean anything.`
+  }]
+}];
+
+const TOTAL_Q = LEVELS.reduce((a,l)=>a+l.challenges.length,0);
+const MAX_STARS = TOTAL_Q*5 + 25;
+
+/* ============================================================
+   6. NAVIGATION + HUD
+   ============================================================ */
+const $ = id => document.getElementById(id);
+function show(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));
+  $(id).classList.add('on');
+  scrollTo({top:0, behavior:'instant'});
+}
+function hud(){
+  $('hud').style.display = S.profile.lab ? 'block' : 'none';
+  $('hudAv').textContent = S.profile.avatar;
+  $('hudName').textContent = S.profile.lab || 'Lab';
+  $('hudSub').textContent = (S.profile.name||'Researcher') + ' · ' + S.profile.cls;
+  $('starCount').textContent = S.stars;
+  $('badgeCount').textContent = S.badges.length;
+  $('chipSound').textContent = S.sound ? '🔊' : '🔇';
+  const done = Object.keys(S.done).length;
+  const p = Math.min(1, done/TOTAL_Q);
+  $('metaFill').style.width = (p*100)+'%';
+  $('metaBug').style.left = (p*100)+'%';
+  let st = STAGES[0];
+  STAGES.forEach(x=>{ if(p >= x.t) st = x; });
+  $('metaBug').textContent = st.e;
+  $('metaCap').textContent = st.c + ' · ' + done + '/' + TOTAL_Q;
+}
+function award(n){
+  S.stars += n; persist(); hud(); sndStar();
+  const c = $('starCount');
+  c.style.transform='scale(1.6)'; setTimeout(()=>c.style.transform='', 260);
+}
+function giveBadge(id){
+  if(!id || S.badges.includes(id)) return null;
+  S.badges.push(id); persist(); hud();
+  return BADGES.find(b=>b.id===id);
+}
+
+/* ---- lab picker ---- */
+function renderLabs(){
+  const ix = labIndex().slice().sort((a,b)=>(b.ts||0)-(a.ts||0));
+  const box = $('labList');
+  if(!ix.length){
+    box.innerHTML = `<p class="tiny" style="padding:14px 0">No labs on this device yet. Create the first one.</p>`;
+    return;
+  }
+  box.innerHTML = ix.map(r=>`<div class="lb-row" data-lab="${r.id}" style="cursor:pointer">
+    <div class="av" style="width:34px;height:34px;font-size:1.05rem">${r.av}</div>
+    <div class="nm"><b>${escapeHTML(r.lab)}</b><span>${escapeHTML(r.who)} · ${escapeHTML(r.cls)} · ⭐ ${r.stars} · 🏅 ${r.badges}${r.pin?' · 🔒':''}</span></div>
+    <button class="chip" data-del="${r.id}" title="Delete this lab">🗑️</button>
+  </div>`).join('') + `<p id="pinSlot"></p>`;
+
+  box.querySelectorAll('[data-lab]').forEach(row=>row.onclick = e=>{
+    if(e.target.dataset.del) return;
+    const id = row.dataset.lab;
+    const rec = ix.find(x=>x.id===id);
+    if(rec.pin){ askPin(rec); return; }
+    if(openLab(id)) S.finished ? finale() : renderMap();
+  });
+  box.querySelectorAll('[data-del]').forEach(b=>b.onclick = e=>{
+    e.stopPropagation();
+    const rec = ix.find(x=>x.id===b.dataset.del);
+    if(confirm('Delete "'+rec.lab+'" and all its progress from this device?')){ deleteLab(rec.id); renderLabs(); }
+  });
+}
+function askPin(rec){
+  $('pinSlot').innerHTML = `<div class="card" style="padding:16px;margin:10px 0">
+    <label class="f" style="color:var(--ink);margin-top:0">PIN for ${escapeHTML(rec.lab)}</label>
+    <input type="text" id="pinTry" maxlength="4" inputmode="numeric" placeholder="4 digits">
+    <div class="actions"><button class="btn sm" id="pinGo" style="box-shadow:0 4px 0 var(--leaf-deep)">Open</button></div>
+    <p id="pinErr" class="tiny" style="color:var(--berry)"></p></div>`;
+  $('pinTry').focus();
+  const go = ()=>{
+    if($('pinTry').value.trim() !== rec.pin){ $('pinErr').textContent = 'That PIN doesn\u2019t match. Try again, or start a new lab.'; sndBad(); return; }
+    if(openLab(rec.id)) S.finished ? finale() : renderMap();
+  };
+  $('pinGo').onclick = go;
+  $('pinTry').onkeydown = e=>{ if(e.key==='Enter') go(); };
+}
+$('btnNewLab').onclick = ()=>{ S = blankState(); toProfile(); };
+$('btnRestore').onclick = ()=> openPass();
+$('btnBackAuth').onclick = ()=>{ renderLabs(); show('scAuth'); };
+
+function toProfile(){
+  $('inName').value = S.profile.name || '';
+  $('inLab').value  = S.profile.lab  || '';
+  $('inCls').value  = S.profile.cls  || '6A';
+  $('inPin').value  = S.profile.pin  || '';
+  const g = $('avGrid'); g.innerHTML='';
+  AVATARS.forEach(a=>{
+    const d = document.createElement('button');
+    d.className = 'av-pick' + (a===S.profile.avatar?' sel':'');
+    d.textContent = a; d.type='button';
+    d.onclick = ()=>{ S.profile.avatar = a; toProfile(); };
+    g.appendChild(d);
+  });
+  show('scProfile');
+}
+$('btnProfile').onclick = ()=>{
+  const n = $('inName').value.trim(), l = $('inLab').value.trim();
+  const p = $('inPin').value.trim();
+  if(n.length<2 || l.length<2){ $('profErr').textContent='Please add a researcher name and a lab name (at least 2 letters each).'; return; }
+  if(p && !/^\d{4}$/.test(p)){ $('profErr').textContent='A PIN must be exactly 4 digits — or leave it blank.'; return; }
+  if(!S.id && labIndex().some(x=>x.lab.toLowerCase()===l.toLowerCase())){
+    $('profErr').textContent='A lab on this device already uses that name. Pick another one.'; return;
+  }
+  S.id = S.id || newId();
+  S.profile.name=n; S.profile.lab=l; S.profile.cls=$('inCls').value; S.profile.pin=p;
+  persist(); hud(); show('scHook');
+};
+$('btnToMap').onclick = ()=> renderMap();
+
+/* ---- map ---- */
+function renderMap(){
+  const g = $('mapGrid'); g.innerHTML='';
+  LEVELS.forEach((L,i)=>{
+    const done = L.challenges.filter(c=>S.done[c.id]).length;
+    const all = done===L.challenges.length;
+    const locked = (i+1) > S.unlocked;
+    const el = document.createElement('div');
+    el.className = 'lvl' + (locked?' locked':'') + (all?' done':'');
+    el.innerHTML = `<div class="lvl-ico">${locked?'🔒':L.emoji}</div>
+      <div style="min-width:0">
+        <span class="tag">LEVEL ${L.num} · ${L.tag}</span>
+        <h3>${L.title}</h3><p>${L.blurb}</p>
+      </div>
+      <div class="lvl-stars">${done}/${L.challenges.length}${all?'<br>✅':''}</div>`;
+    if(!locked) el.onclick = ()=> openLevel(i);
+    g.appendChild(el);
+  });
+  const allDone = Object.keys(S.done).length===TOTAL_Q;
+  if(allDone){
+    const el = document.createElement('div');
+    el.className='lvl done';
+    el.innerHTML = `<div class="lvl-ico">🏆</div><div><span class="tag">FINALE</span>
+      <h3>Your Big Question</h3><p>Collect your certificate and write the question you want to chase.</p></div>
+      <div class="lvl-stars">→</div>`;
+    el.onclick = finale;
+    g.appendChild(el);
+  }
+  show('scMap');
+}
+$('chipMap').onclick = renderMap;
+$('btnReset').onclick = ()=>{
+  if(!confirm('Start over? The stars, badges and answers in this lab will be cleared.')) return;
+  const p = S.profile, id = S.id;
+  S = blankState(); S.profile = p; S.id = id;
+  persist(); hud(); renderMap();
+};
+$('btnPass2').onclick = openPass;
+$('btnReport2').onclick = downloadReportPDF;
+$('btnSwitch').onclick = ()=>{ persist(); renderLabs(); show('scAuth'); };
+$('chipSwitch').onclick = ()=>{ persist(); renderLabs(); show('scAuth'); };
+$('chipSound').onclick = ()=>{ S.sound=!S.sound; persist(); hud(); if(S.sound) sndGood(); };
+
+/* ============================================================
+   7. CHALLENGE ENGINE
+   ============================================================ */
+let LI=0, CI=0, attempts=0, settled=false;
+
+function openLevel(i){
+  LI=i;
+  const L = LEVELS[i];
+  const first = L.challenges.findIndex(c=>!S.done[c.id]);
+  CI = first === -1 ? 0 : first;
+  $('playHead').innerHTML = `<p class="eyebrow">Level ${L.num} · ${L.tag}</p>
+    <h2>${L.emoji} ${L.title}</h2><p style="margin-top:12px">${L.scenario}</p>`;
+  renderQ();
+  show('scPlay');
+}
+
+function renderQ(){
+  attempts=0; settled=false;
+  const L = LEVELS[LI], C = L.challenges[CI];
+  const b = $('playBody');
+  const idx = `Challenge ${CI+1} of ${L.challenges.length}`;
+  let body = '';
+
+  if(C.type==='mcq')   body = uiMcq(C);
+  if(C.type==='multi') body = uiMulti(C);
+  if(C.type==='bins')  body = uiBins(C);
+  if(C.type==='fill')  body = uiFill(C);
+  if(C.type==='match') body = uiMatch(C);
+  if(C.type==='log')   body = uiLog(C);
+  if(C.type==='chart') body = uiChart(C);
+  if(C.type==='text')  body = uiText(C);
+  if(C.type==='key')   body = uiKey(C);
+
+  b.innerHTML = `<div class="card">
+    <div class="qhead"><span class="code">${C.code}</span><span class="tiny mono">${idx}</span></div>
+    <div class="qprompt">${C.prompt}</div>
+    <p class="qhelp">${C.help}</p>
+    ${C.table ? tableHTML(C.table) : ''}
+    ${body}
+    <div id="mentorSlot"></div>
+    <div class="fb" id="fb"></div>
+    <div class="actions">
+      <button class="btn" id="btnCheck">Check my answer</button>
+      <button class="btn lav sm" id="btnHint">💡 Ask ${C.hint.who==='jo'?'Jo':'Dr. Weiss'}</button>
+      <button class="btn" id="btnNext" style="display:none">Next →</button>
+    </div>
+  </div>`;
+
+  $('btnHint').onclick = ()=>{
+    const m = C.hint;
+    $('mentorSlot').innerHTML = `<div class="mentor ${m.who}">
+      <div class="face">${m.who==='jo'?'🧒':'👩‍🔬'}</div>
+      <div><span class="nm">${m.who==='jo'?'Jo Nagai':'Dr. Martha Weiss'}</span>
+      <span class="tx">"${m.text}"</span></div></div>`;
+    $('btnHint').style.display='none';
+  };
+  $('btnCheck').onclick = ()=> check(C);
+  $('btnNext').onclick = ()=> next();
+  wire(C);
+  hud();
+}
+
+function tableHTML(t){
+  let h = '<table><thead><tr>' + t.head.map(x=>`<th>${x}</th>`).join('') + '</tr></thead><tbody>';
+  t.rows.forEach((r,i)=>{
+    const cls = (t.flagRow===i) ? 'flag' : (i%2 ? 'odd' : '');
+    h += `<tr class="${cls}">` + r.map(c=>`<td>${c}</td>`).join('') + '</tr>';
+  });
+  return h + '</tbody></table>';
+}
+
+/* ---------- renderers ---------- */
+function uiMcq(C){
+  return C.options.map((o,i)=>`<button class="opt" data-i="${i}"><span class="bx">${String.fromCharCode(65+i)}</span><span>${o}</span></button>`).join('');
+}
+function uiMulti(C){
+  const L = C.togLabels || ['✅ Needed','🚫 Not needed'];
+  return `<div class="togwrap">` + C.options.map((o,i)=>`
+    <div class="togrow" data-row="${i}">
+      <span class="togtxt">${o.t}</span>
+      <div class="togbtns">
+        <button class="togbtn" data-i="${i}" data-v="1">${L[0]}</button>
+        <button class="togbtn" data-i="${i}" data-v="0">${L[1]}</button>
+      </div>
+    </div>`).join('') + `</div>
+  <p class="tiny" id="togProg" style="margin-top:2px;color:#7E71A3">0 of ${C.options.length} marked</p>`;
+}
+function uiBins(C){
+  return `<div class="pool" id="pool">${C.cards.map((c,i)=>`<button class="tokn" data-i="${i}">${c.t}</button>`).join('')}</div>
+  <div class="bins">${C.bins.map(b=>`<div class="bin" data-bin="${b.id}"><h4>${b.label}</h4>
+    <p class="tiny" style="color:#7E71A3;margin-bottom:8px">${b.sub}</p>
+    <div class="drop" data-drop="${b.id}"></div></div>`).join('')}</div>`;
+}
+function uiFill(C){
+  let h = '<div class="sent">';
+  C.segments.forEach(s=>{
+    if(typeof s === 'number'){
+      const bl = C.blanks[s];
+      const opts = bl.options.slice().sort(()=>Math.random()-.5);
+      h += `<select data-b="${s}"><option value="">choose…</option>${opts.map(o=>`<option>${o}</option>`).join('')}</select>`;
+    } else h += s;
+  });
+  h += '</div>';
+  if(C.extraText) h += `<label class="f" style="color:var(--ink)">${C.extraText.label}</label><textarea id="extraT" placeholder="Write your sentence here…"></textarea>`;
+  return h;
+}
+function uiMatch(C){
+  return C.rows.map((r,i)=>`<div class="sl" style="margin:10px 0">
+    <label>${r.label} — <span class="mono">${r.detail}</span></label>
+    <select data-r="${i}"><option value="">choose…</option>${C.choices.map(c=>`<option>${c}</option>`).join('')}</select></div>`).join('');
+}
+function uiLog(C){
+  return C.trials.map((t,i)=>`<div class="sl" style="margin:12px 0;background:var(--paper-2);padding:14px">
+    <label style="font-size:.95rem">${t.n} — ${t.ev}</label>
+    <p class="tiny" style="color:#5A5075;margin:6px 0 4px">What did you see? (qualitative)</p>
+    <div class="pill-row" data-pills="${i}">${C.chips.map((c,j)=>`<button class="pill" data-p="${i}-${j}">${c}</button>`).join('')}</div>
+    <p class="tiny" style="color:#5A5075;margin:8px 0 4px">How many times did it turn away? (quantitative)</p>
+    <input type="range" min="0" max="10" value="0" data-num="${i}">
+    <span class="mono" style="color:var(--ink)" id="numv${i}">0 turn-aways</span>
+  </div>`).join('') + `<label class="f" style="color:var(--ink)">One honest note about this trial set</label>
+  <textarea id="logNote" placeholder="e.g. By trial 3 it curled up before the vibration even started…"></textarea>`;
+}
+function uiChart(C){
+  return `<div class="chart" id="chartBox">${C.bars.map((b,i)=>`<div class="bar-col">
+    <div class="bar" id="bar${i}" style="height:2%;background:${b.c}"><b id="barv${i}">0%</b></div>
+    <div class="bar-lab">${b.k}</div></div>`).join('')}</div>
+  <div class="sliders">${C.bars.map((b,i)=>`<div class="sl"><label>${b.k}</label>
+    <input type="range" min="0" max="100" value="0" data-bar="${i}"></div>`).join('')}</div>
+  <div id="followBox" style="display:none;margin-top:18px">
+    <div class="qprompt" style="font-size:1.05rem">${C.follow?C.follow.prompt:''}</div>
+    ${C.follow?C.follow.options.map((o,i)=>`<button class="opt" data-f="${i}"><span class="bx">${String.fromCharCode(65+i)}</span><span>${o}</span></button>`).join(''):''}
+  </div>`;
+}
+function uiText(C){
+  return `<textarea id="freeT" placeholder="Write at least a sentence or two…"></textarea>
+  <p class="tiny" style="color:#5A5075;margin-top:6px" id="tcount">0 characters</p>`;
+}
+function uiKey(C){
+  return `<div class="fb info on" style="display:block"><b>${C.specimen.emoji} Specimen on the bench</b><br>${C.specimen.desc}</div>
+  <div id="keyBox"></div>`;
+}
+
+/* ---------- wiring ---------- */
+const W = {};
+function wire(C){
+  W.sel = null; W.bins = {}; W.chart = C.bars? C.bars.map(()=>0) : [];
+  W.follow = null; W.pills = {}; W.nums = {}; W.keyEnd = null; W.chartPhase2 = false;
+
+  if(C.type==='mcq'){
+    document.querySelectorAll('.opt[data-i]').forEach(o=>o.onclick=()=>{
+      if(settled) return;
+      document.querySelectorAll('.opt').forEach(x=>x.classList.remove('sel'));
+      o.classList.add('sel'); W.sel = +o.dataset.i; beep(520,.06);
+    });
+  }
+  if(C.type==='multi'){
+    W.tog = {};
+    document.querySelectorAll('.togbtn').forEach(b=>b.onclick=()=>{
+      if(settled) return;
+      const i = +b.dataset.i, v = +b.dataset.v;
+      W.tog[i] = v;
+      b.closest('.togrow').querySelectorAll('.togbtn').forEach(x=>x.classList.remove('sel'));
+      b.classList.add('sel');
+      beep(520,.05);
+      const n = Object.keys(W.tog).length;
+      const p = $('togProg'); if(p) p.textContent = n + ' of ' + C.options.length + ' marked';
+    });
+  }
+  if(C.type==='bins'){
+    let active = null;
+    const setActive = el => {
+      document.querySelectorAll('.tokn').forEach(t=>t.classList.remove('act'));
+      if(el){ el.classList.add('act'); active = el; } else active = null;
+      document.querySelectorAll('.bin').forEach(b=>b.classList.toggle('hot', !!el));
+    };
+    document.querySelectorAll('.tokn').forEach(t=>t.onclick=()=>{
+      if(settled) return;
+      if(t.parentElement.dataset.drop){
+        delete W.bins[t.dataset.i];
+        $('pool').appendChild(t); setActive(null); beep(300,.06); return;
+      }
+      setActive(active===t ? null : t);
+    });
+    document.querySelectorAll('.bin').forEach(b=>b.onclick=()=>{
+      if(settled || !active) return;
+      const target = b.querySelector('[data-drop]');
+      W.bins[active.dataset.i] = b.dataset.bin;
+      target.appendChild(active); setActive(null); beep(660,.06);
+    });
+  }
+  if(C.type==='log'){
+    document.querySelectorAll('.pill').forEach(p=>p.onclick=()=>{
+      if(settled) return;
+      const [ti,pi] = p.dataset.p.split('-');
+      document.querySelectorAll(`[data-pills="${ti}"] .pill`).forEach(x=>x.classList.remove('sel'));
+      p.classList.add('sel'); W.pills[ti] = p.textContent; beep(520,.05);
+    });
+    document.querySelectorAll('[data-num]').forEach(r=>r.oninput=()=>{
+      const i = r.dataset.num; W.nums[i] = +r.value;
+      $('numv'+i).textContent = r.value + ' turn-away' + (r.value==='1'?'':'s');
+    });
+  }
+  if(C.type==='chart'){
+    document.querySelectorAll('[data-bar]').forEach(r=>r.oninput=()=>{
+      const i = +r.dataset.bar; W.chart[i] = +r.value;
+      $('bar'+i).style.height = Math.max(2,+r.value) + '%';
+      $('barv'+i).textContent = r.value + '%';
+    });
+  }
+  if(C.type==='text'){
+    $('freeT').oninput = e => $('tcount').textContent = e.target.value.trim().length + ' characters';
+  }
+  if(C.type==='key') drawKey(C, 's1');
+}
+
+function drawKey(C, node){
+  const box = $('keyBox');
+  if(C.ends[node]){
+    const e = C.ends[node];
+    W.keyEnd = node;
+    box.innerHTML += `<div class="fb ${e.ok?'good':'bad'} on"><b>Identified as: ${e.n}</b><br>
+      <span class="mono">${e.sci}</span></div>`;
+    if(!e.ok) box.innerHTML += `<button class="btn lav sm" id="keyRetry">↺ Try the key again</button>`;
+    const rt = $('keyRetry'); if(rt) rt.onclick = ()=>{ box.innerHTML=''; W.keyEnd=null; drawKey(C,'s1'); };
+    return;
+  }
+  const s = C.steps[node];
+  const d = document.createElement('div');
+  d.innerHTML = `<p class="eyebrow" style="margin-top:14px">${s.q}</p>
+    <button class="opt" data-go="${s.a.go}"><span class="bx">1</span><span>${s.a.t}</span></button>
+    <button class="opt" data-go="${s.b.go}"><span class="bx">2</span><span>${s.b.t}</span></button>`;
+  box.appendChild(d);
+  d.querySelectorAll('.opt').forEach(o=>o.onclick=()=>{
+    if(W.keyEnd) return;
+    d.querySelectorAll('.opt').forEach(x=>{x.classList.remove('sel'); x.disabled=true;});
+    o.classList.add('sel'); beep(600,.06);
+    drawKey(C, o.dataset.go);
+  });
+}
+
+/* ---------- checking ---------- */
+function check(C){
+  if(settled) return;
+  attempts++;
+  let ok = false, msg = '';
+
+  if(C.type==='mcq'){
+    if(W.sel===null && attempts < 2){ nudge('Pick an option first.'); return; }
+    if(C.anyAnswer){ ok = (W.sel!==null); }
+    else {
+      ok = W.sel === C.answer;
+      document.querySelectorAll('.opt').forEach(o=>{
+        const i = +o.dataset.i;
+        if(i===C.answer) o.classList.add('ok');
+        else if(i===W.sel) o.classList.add('no');
+        o.classList.remove('sel');
+      });
+    }
+    if(C.anyAnswer) document.querySelectorAll('.opt').forEach(o=>o.classList.add('ok'));
+  }
+
+  if(C.type==='multi'){
+    const marked = Object.keys(W.tog).length;
+    if(marked < C.options.length && attempts < 2){
+      nudge('Mark every item — ' + (C.options.length - marked) + ' still need a ✅ or 🚫.');
+      return;
+    }
+    // anything never touched by the 2nd attempt defaults to "not needed"
+    ok = C.options.every((o,i)=> (W.tog[i]===1) === o.ok);
+    if(!ok){
+      const missed = C.options.filter((o,i)=>o.ok && W.tog[i]!==1).length;
+      const wrong  = C.options.filter((o,i)=>!o.ok && W.tog[i]===1).length;
+      msg = `${missed} item${missed===1?' needs':'s need'} to be marked Needed, and ${wrong} item${wrong===1?' shouldn\u2019t':' shouldn\u2019t'} be. Look again.`;
+    }
+    if(ok || attempts>=2){
+      document.querySelectorAll('.togrow').forEach((row,i)=>{
+        const correctIsNeeded = C.options[i].ok;
+        row.querySelectorAll('.togbtn').forEach(b=>{
+          const v = +b.dataset.v;
+          const thisIsCorrectChoice = (v===1) === correctIsNeeded;
+          if(thisIsCorrectChoice) b.classList.add('ok');
+          else if(W.tog[i]===v) b.classList.add('no');
+          else if(W.tog[i]===undefined) b.classList.add('miss');
+        });
+      });
+    }
+  }
+
+  if(C.type==='bins'){
+    const left = C.cards.length - Object.keys(W.bins).length;
+    if(left > 0 && attempts < 2){ nudge('Every card needs a box. '+left+' still waiting.'); return; }
+    ok = C.cards.every((c,i)=> W.bins[i]===c.bin);
+    if(!ok){
+      const n = C.cards.filter((c,i)=>W.bins[i]!==c.bin).length;
+      msg = `${n} card${n===1?' is':'s are'} in the wrong box. The wrong ones are outlined in pink — move them and check again.`;
+      document.querySelectorAll('.tokn').forEach(t=>{
+        const i=+t.dataset.i;
+        t.classList.toggle('no', W.bins[i]!==C.cards[i].bin);
+        t.classList.toggle('ok', W.bins[i]===C.cards[i].bin);
+      });
+    } else document.querySelectorAll('.tokn').forEach(t=>t.classList.add('ok'));
+  }
+
+  if(C.type==='fill'){
+    const sels = [...document.querySelectorAll('[data-b]')];
+    if(sels.some(s=>!s.value) && attempts < 2){ nudge('Fill every blank.'); return; }
+    ok = sels.every(s=> s.value === C.blanks[+s.dataset.b].answer);
+    sels.forEach(s=> s.classList.add(s.value===C.blanks[+s.dataset.b].answer?'ok':'no'));
+    if(C.extraText){
+      const t = $('extraT').value.trim();
+      if(t.length < C.extraText.min && attempts < 2){
+        nudge(`Add your own sentence too — at least ${C.extraText.min} characters. You have ${t.length}.`);
+        sels.forEach(s=>s.classList.remove('ok','no')); return;
+      }
+      S.answers[C.id+'_txt'] = t;
+      if(t.length < C.extraText.min) ok = false;
+    }
+    if(!ok) msg = 'Some blanks aren\u2019t right — the pink ones. Think about what makes a claim testable.';
+  }
+
+  if(C.type==='match'){
+    const sels = [...document.querySelectorAll('[data-r]')];
+    if(sels.some(s=>!s.value) && attempts < 2){ nudge('Judge all three students.'); return; }
+    ok = sels.every(s=> s.value === C.rows[+s.dataset.r].answer);
+    sels.forEach(s=> s.classList.add(s.value===C.rows[+s.dataset.r].answer?'ok':'no'));
+    if(!ok) msg = 'Not quite. Remember: accurate = near the TRUE value. Precise = the readings agree with EACH OTHER.';
+  }
+
+  if(C.type==='log'){
+    const note = $('logNote').value.trim();
+    const incomplete = Object.keys(W.pills).length < C.trials.length || !Object.keys(W.nums).length || note.length < 15;
+    if(incomplete && attempts < 2){
+      if(Object.keys(W.pills).length < C.trials.length) nudge('Choose an observation for each of the three trials.');
+      else if(!Object.keys(W.nums).length) nudge('Set a turn-away count for at least one trial.');
+      else nudge('Add a note of at least 15 characters — a real log always has one.');
+      return;
+    }
+    S.answers[C.id] = {pills:W.pills, nums:W.nums, note};
+    ok = !incomplete;
+    if(incomplete) msg = 'The log is a bit thin, but here\u2019s what a complete one looks like:';
+  }
+
+  if(C.type==='chart'){
+    if(!W.chartPhase2){
+      ok = C.bars.every((b,i)=> Math.abs(W.chart[i]-b.v) <= C.tol);
+      if(!ok){
+        msg = 'One or more bars don\u2019t match the table yet. Work out each percentage from the numbers above.';
+      } else {
+        W.chartPhase2 = true;
+        $('followBox').style.display='block';
+        document.querySelectorAll('[data-f]').forEach(o=>o.onclick=()=>{
+          document.querySelectorAll('[data-f]').forEach(x=>x.classList.remove('sel'));
+          o.classList.add('sel'); W.follow = +o.dataset.f;
+        });
+        attempts = 0;
+        nudge('Bars match the table \u2014 nice measuring. One more question below 👇');
+        return;
+      }
+    } else {
+      if(W.follow===null && attempts < 2){ nudge('Pick an answer to the question below.'); return; }
+      ok = W.follow === C.follow.answer;
+      document.querySelectorAll('[data-f]').forEach(o=>{
+        const i=+o.dataset.f; o.classList.remove('sel');
+        o.classList.add(i===C.follow.answer?'ok':(i===W.follow?'no':''));
+      });
+      if(!ok) msg = 'Think about what kind of data you have: separate groups, or one thing changing smoothly?';
+    }
+  }
+
+  if(C.type==='text'){
+    const t = $('freeT').value.trim();
+    if(t.length < C.min && attempts < 2){ nudge(`Give it a bit more — at least ${C.min} characters. You have ${t.length}.`); return; }
+    S.answers[C.id] = t;
+    ok = true;
+  }
+
+  if(C.type==='key'){
+    if(!W.keyEnd && attempts < 2){ nudge('Work through the key to an identification first.'); return; }
+    ok = !!(W.keyEnd && C.ends[W.keyEnd] && C.ends[W.keyEnd].ok);
+    if(!ok) msg = 'That species doesn\u2019t match your specimen. Re-read the description and try the key again.';
+  }
+
+  /* ---- resolve ---- */
+  if(!ok && attempts < 2 && C.type!=='mcq'){
+    fb('bad', '<b>Not yet.</b> ' + msg + '<br><span class="tiny">Attempt 1 of 2 — you can still earn 3 stars.</span>');
+    sndBad(); return;
+  }
+  settled = true;
+  const stars = ok ? (attempts===1 ? 5 : 3) : 1;
+  const bd = giveBadge(C.badge);
+  const bd2 = C.extraBadge ? giveBadge(C.extraBadge) : null;
+  S.done[C.id] = stars;
+  recordAnswer(C, ok, stars);
+  persist();
+  award(stars);
+
+  let out = ok
+    ? `<b>${['Nailed it!','Excellent thinking!','That\u2019s exactly it!','Sharp work, researcher!'][(Math.random()*4)|0]}</b> +${stars} ⭐`
+    : `<b>Close, but not quite.</b> +${stars} ⭐ for trying — here\u2019s what\u2019s going on:`;
+  out += '<br><br>' + C.reveal;
+  if(bd)  out += `<br><br><span class="streak">🏅 Badge unlocked: ${bd.e} ${bd.n}</span>`;
+  if(bd2) out += ` <span class="streak">🏅 ${bd2.e} ${bd2.n}</span>`;
+  fb(ok?'good':'info', out);
+  ok ? sndGood() : sndBad();
+  if(ok && attempts===1) confetti(28);
+  $('btnCheck').style.display='none';
+  $('btnNext').style.display='inline-block';
+  $('btnNext').focus();
+}
+function fb(kind, html){
+  const f = $('fb'); f.className='fb on '+kind; f.innerHTML=html;
+  f.scrollIntoView({behavior:'smooth', block:'center'});
+}
+function nudge(t){ fb('info', t); beep(340,.09); }
+
+/* ---------- record what the student actually answered, for the report ---------- */
+function recordAnswer(C, ok, stars){
+  S.report = S.report || {};
+  let mine = '', correct = '';
+  try{
+    if(C.type==='mcq'){
+      mine = C.options[W.sel];
+      correct = C.anyAnswer ? '(open prediction — no single right answer)' : C.options[C.answer];
+    }
+    else if(C.type==='multi'){
+      const L = (C.togLabels || ['Needed','Not needed']).map(x=>x.replace(/[^\w\s]/g,'').trim());
+      mine = C.options.map((o,i)=> o.t+': '+(W.tog[i]===1?L[0]:W.tog[i]===0?L[1]:'(not marked)')).join('; ');
+      correct = C.options.map(o=> o.t+': '+(o.ok?L[0]:L[1])).join('; ');
+    }
+    else if(C.type==='bins'){
+      mine = C.cards.map((c,i)=> c.t+' → '+(C.bins.find(b=>b.id===W.bins[i])||{label:'?'}).label).join('; ');
+      correct = C.cards.map(c=> c.t+' → '+(C.bins.find(b=>b.id===c.bin)||{label:'?'}).label).join('; ');
+    }
+    else if(C.type==='fill'){
+      const sels=[...document.querySelectorAll('[data-b]')];
+      let sentence = C.segments.map(s=> typeof s==='number' ? (sels[C.segments.slice(0,C.segments.indexOf(s)).filter(x=>typeof x==='number').length]?.value || '____') : s).join('');
+      mine = sentence + (S.answers[C.id+'_txt'] ? ' — ' + S.answers[C.id+'_txt'] : '');
+      correct = C.segments.map(s=> typeof s==='number' ? C.blanks[s].answer : s).join('');
+    }
+    else if(C.type==='match'){
+      mine = C.rows.map((r,i)=> r.label+': '+(document.querySelector(`[data-r="${i}"]`)?.value||'—')).join('; ');
+      correct = C.rows.map(r=> r.label+': '+r.answer).join('; ');
+    }
+    else if(C.type==='log'){
+      const a = S.answers[C.id] || {pills:{},nums:{},note:''};
+      mine = C.trials.map((t,i)=> `${t.n}: "${a.pills[i]||'—'}", ${a.nums[i]||0} turn-away(s)`).join(' | ') + ` — Note: ${a.note||''}`;
+      correct = '(observational — judged for completeness, not a single right answer)';
+    }
+    else if(C.type==='chart'){
+      mine = C.bars.map((b,i)=> `${b.k}: ${W.chart[i]}%`).join('; ') + (C.follow && W.follow!==null ? ` — Follow-up: ${C.follow.options[W.follow]}` : '');
+      correct = C.bars.map(b=> `${b.k}: ${b.v}%`).join('; ') + (C.follow ? ` — Follow-up: ${C.follow.options[C.follow.answer]}` : '');
+    }
+    else if(C.type==='text'){
+      mine = S.answers[C.id] || '';
+      correct = '(open response — judged for length/effort, not a single right answer)';
+    }
+    else if(C.type==='key'){
+      const end = C.ends[W.keyEnd] || {n:'?',sci:''};
+      mine = `${end.n} (${end.sci})`;
+      const rightEnd = Object.values(C.ends).find(e=>e.ok);
+      correct = rightEnd ? `${rightEnd.n} (${rightEnd.sci})` : '';
+    }
+  }catch(e){ mine = mine || '(answer recorded)'; }
+  S.report[C.id] = {
+    code:C.code, prompt:stripTags(C.prompt), mine:stripTags(String(mine)),
+    correct:stripTags(String(correct)), ok, stars
+  };
+}
+function stripTags(s){ return s.replace(/<[^>]*>/g,'').replace(/\s+/g,' ').trim(); }
+
+function next(){
+  const L = LEVELS[LI];
+  if(CI < L.challenges.length-1){ CI++; renderQ(); return; }
+  if(S.unlocked < LI+2) S.unlocked = Math.min(3, LI+2);
+  persist(); pushBoard();
+  const earned = L.challenges.reduce((a,c)=>a+(S.done[c.id]||0),0);
+  const perfect = L.challenges.every(c=>S.done[c.id]===5);
+  confetti(120);
+  const allDone = Object.keys(S.done).length===TOTAL_Q;
+  $('doneBox').innerHTML = `<div style="font-size:3.6rem">${perfect?'🌟':'✅'}</div>
+    <p class="eyebrow">Level ${L.num} complete</p>
+    <h2>${L.title}</h2>
+    <p style="margin:14px 0"><span class="streak">⭐ ${earned} stars this level</span>
+    ${perfect?' <span class="streak">🌟 PERFECT RUN</span>':''}</p>
+    <p class="lede">${allDone
+      ? 'Every level is done. There is one thing left — and it is the most important part.'
+      : 'The next level is unlocked. Jo kept going after every setback. So do you.'}</p>
+    <div class="actions" style="justify-content:center">
+      ${allDone ? '<button class="btn" onclick="finale()">Collect your certificate 🏆</button>'
+                : '<button class="btn" onclick="renderMap()">Back to the lab map 🗺️</button>'}
+      <button class="btn ghost sm" onclick="openBadges()">🏅 See badges</button>
+      <button class="btn ghost sm" onclick="downloadReportPDF()">📄 Download report so far</button>
+    </div>`;
+  show('scLevelDone');
+}
+
+/* ============================================================
+   8. BADGES · LEADERBOARD · FINALE
+   ============================================================ */
+function openBadges(){
+  $('badgeSub').textContent = S.badges.length + ' of ' + BADGES.length + ' collected';
+  $('badgeGrid').innerHTML = BADGES.map(b=>`<div class="badge ${S.badges.includes(b.id)?'got':''}">
+    <span class="e">${b.e}</span><div class="n">${S.badges.includes(b.id)?b.n:'???'}</div></div>`).join('');
+  $('mdBadges').classList.add('on');
+}
+function pushBoard(){ persist(); }
+function openBoard(){
+  persist();
+  const bd = labIndex().map(r=>({lab:r.lab, who:r.who, cls:r.cls, av:r.av, stars:r.stars, badges:r.badges, id:r.id}));
+  bd.push({lab:'Jo Nagai\u2019s benchmark', who:'age 10', cls:'—', av:'🧒', stars:100, badges:16, hero:true});
+  bd.sort((a,b)=>b.stars-a.stars);
+  $('boardList').innerHTML = bd.map((r,i)=>`<div class="lb-row ${r.hero?'hero-row':''} ${(!r.hero && r.id===S.id)?'me':''}">
+    <div class="rank">${i===0?'🥇':i===1?'🥈':i===2?'🥉':'#'+(i+1)}</div>
+    <div class="av" style="width:32px;height:32px;font-size:1rem">${r.av}</div>
+    <div class="nm"><b>${escapeHTML(r.lab)}</b><span>${escapeHTML(r.who)} · ${escapeHTML(r.cls)} · 🏅 ${r.badges}</span></div>
+    <div class="sc">⭐ ${r.stars}</div></div>`).join('');
+  $('mdBoard').classList.add('on');
+}
+
+/* ---- Lab Pass ---- */
+function openPass(){
+  const code = S.id ? makePass() : '';
+  $('passOut').innerHTML = code
+    ? `<label class="f">Your Lab Pass — copy this somewhere safe</label>
+       <textarea id="passCode" readonly style="font-family:var(--font-m);font-size:.72rem;min-height:110px">${code}</textarea>
+       <div class="actions"><button class="btn lav sm" id="btnCopyPass">📋 Copy code</button></div>`
+    : `<p class="tiny">Open a lab first to generate its Lab Pass.</p>`;
+  const cp = $('btnCopyPass');
+  if(cp) cp.onclick = ()=>{
+    const t = $('passCode'); t.select(); t.setSelectionRange(0, 99999);
+    try{ document.execCommand('copy'); }catch(e){}
+    if(navigator.clipboard) navigator.clipboard.writeText(t.value).catch(()=>{});
+    cp.textContent = '✅ Copied';
+    setTimeout(()=>cp.textContent='📋 Copy code', 1800);
+  };
+  $('passMsg').textContent = '';
+  $('mdPass').classList.add('on');
+}
+$('btnPassIn').onclick = ()=>{
+  const d = readPass($('passIn').value);
+  const msg = $('passMsg');
+  if(!d || !d.profile || !d.profile.lab){
+    msg.style.color='var(--berry)';
+    msg.textContent = 'That code isn\u2019t readable. Check nothing was cut off when it was copied.';
+    sndBad(); return;
+  }
+  S = Object.assign(blankState(), d);
+  S.id = newId();
+  if(labIndex().some(x=>x.lab.toLowerCase()===S.profile.lab.toLowerCase())) S.profile.lab += ' (restored)';
+  persist(); hud(); confetti(50); sndStar();
+  msg.style.color='var(--leaf)';
+  msg.textContent = 'Restored "'+S.profile.lab+'". Opening the lab map…';
+  setTimeout(()=>{ $('mdPass').classList.remove('on'); S.finished ? finale() : renderMap(); }, 1100);
+};
+$('chipBadges').onclick = openBadges;
+$('btnBadges2').onclick = openBadges;
+$('chipBoard').onclick = openBoard;
+$('btnBoard2').onclick = openBoard;
+$('chipStars').onclick = openBadges;
+document.querySelectorAll('[data-close]').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('.modal').forEach(m=>m.classList.remove('on'));
+});
+document.querySelectorAll('.modal').forEach(m=>m.onclick=e=>{ if(e.target===m) m.classList.remove('on'); });
+addEventListener('keydown', e=>{ if(e.key==='Escape') document.querySelectorAll('.modal').forEach(m=>m.classList.remove('on')); });
+
+function finale(){
+  if(!S.finished){ S.finished = true; S.stars += 25; giveBadge('world'); persist(); }
+  pushBoard(); hud(); confetti(200);
+  const pct = Math.round(S.stars/MAX_STARS*100);
+  $('finaleBox').innerHTML = `
+  <div class="cert" style="margin-top:26px">
+    <div class="seal">🦋</div>
+    <p class="eyebrow" style="color:var(--lav-deep)">Certificate of Inquiry</p>
+    <h2>The Butterfly Code</h2>
+    <div class="line"></div>
+    <p style="font-size:.95rem">This certifies that</p>
+    <div class="nm">${escapeHTML(S.profile.name)}</div>
+    <p style="font-size:.95rem">of <b>${escapeHTML(S.profile.lab)}</b> · Class ${escapeHTML(S.profile.cls)}<br>
+    completed all three levels of the investigation, applying objectives <b>6.IM.1 – 6.IM.15</b>.</p>
+    <div class="line"></div>
+    <p class="mono" style="font-size:1.1rem;color:var(--lav-deep)">⭐ ${S.stars} stars &nbsp;·&nbsp; 🏅 ${S.badges.length}/${BADGES.length} badges &nbsp;·&nbsp; ${pct}%</p>
+    <p class="hand" style="margin-top:14px;color:var(--muted)">"Research is not age-specific."</p>
+  </div>
+
+  <div class="card dark" style="margin-top:22px">
+    <h2>Jo was 10.</h2>
+    <p style="margin-top:12px">He didn\u2019t have a PhD. He didn\u2019t have a lab. He had a four-page handwritten letter, a mesh cage on his desk, and a lot of questions.</p>
+    <p style="margin-top:10px">He noticed something everybody else walked past. He wrote it down. He asked for help. He designed a fair test. He was honest about his limitations.</p>
+    <p style="margin-top:10px;font-size:1.15rem"><b>That is the whole method. You just did all of it.</b></p>
+    <div class="mentor jo" style="margin-top:18px">
+      <div class="face">🧒</div>
+      <div><span class="nm">Jo Nagai</span><span class="tx">"Somebody had to ask. It might as well be you."</span></div>
+    </div>
+    <h3 style="margin-top:24px">So — what\u2019s your big question?</h3>
+    <p style="margin-top:8px">Something you\u2019ve noticed that nobody around you can explain. Write it here. It saves to your lab.</p>
+    <textarea id="bigQ" placeholder="I\u2019ve always wondered why…" style="margin-top:10px">${escapeHTML(S.bigQ||'')}</textarea>
+    <div class="actions">
+      <button class="btn" id="saveQ">Save my big question</button>
+      <button class="btn lav" onclick="downloadReportPDF()">📄 Download my Lab Report (PDF)</button>
+      <button class="btn ghost sm" onclick="window.print()">🖨️ Print certificate</button>
+      <button class="btn ghost sm" onclick="openBoard()">🏆 Leaderboard</button>
+      <button class="btn ghost sm" onclick="renderMap()">🗺️ Lab map</button>
+    </div>
+    <p id="qSaved" class="tiny" style="color:var(--leaf);margin-top:8px"></p>
+  </div>`;
+  $('saveQ').onclick = ()=>{
+    const v = $('bigQ').value.trim();
+    if(v.length < 10){ $('qSaved').style.color='var(--berry)'; $('qSaved').textContent='Give it a few more words — a real question deserves them.'; return; }
+    S.bigQ = v; persist(); confetti(60); sndStar();
+    $('qSaved').style.color='var(--leaf)';
+    $('qSaved').textContent='Saved. Now go and find out. 🦋';
+  };
+  show('scFinale');
+}
+function escapeHTML(s){ return String(s).replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+/* ============================================================
+   9.5. LAB REPORT — every question, the student's own answer,
+   the reference answer, and the score, as a downloadable PDF.
+   Falls back to the browser's Print dialog if the PDF library
+   didn't load (e.g. a school network blocking the CDN).
+   ============================================================ */
+function attemptedRows(){
+  const rows = [];
+  LEVELS.forEach(L=>{
+    const qs = L.challenges.filter(c => S.report && S.report[c.id]);
+    if(qs.length) rows.push({level:L, qs});
+  });
+  return rows;
+}
+function safeFile(s){ return (s||'lab-report').replace(/[^a-z0-9\-]+/gi,'_').slice(0,40); }
+
+function downloadReportPDF(){
+  const rows = attemptedRows();
+  if(!rows.length){
+    alert('No answered questions yet — play at least one challenge before downloading a report.');
+    return;
+  }
+  if(window.jspdf && window.jspdf.jsPDF){
+    try{ buildPDF(rows); return; }catch(e){ /* fall through to print */ }
+  }
+  buildPrintable(rows);
+}
+
+function buildPDF(rows){
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({ unit:'pt', format:'a4' });
+  const W = 595, M = 48, LH = 14;
+  let y = M;
+
+  function pageBreak(need){
+    if(y + need > 800){ doc.addPage(); y = M; }
+  }
+  function wrap(text, size, font, maxW){
+    doc.setFont('helvetica', font||'normal'); doc.setFontSize(size);
+    return doc.splitTextToSize(String(text||''), maxW || (W-2*M));
+  }
+  function para(text, size, font, color){
+    const lines = wrap(text, size, font);
+    pageBreak(lines.length*LH + 4);
+    doc.setTextColor(color || '#1a1a1a');
+    doc.text(lines, M, y);
+    y += lines.length*LH + 4;
+  }
+
+  // header
+  doc.setFillColor('#241B3F'); doc.rect(0,0,W,86,'F');
+  doc.setTextColor('#ffffff'); doc.setFont('helvetica','bold'); doc.setFontSize(20);
+  doc.text('The Butterfly Code — Lab Report', M, 40);
+  doc.setFont('helvetica','normal'); doc.setFontSize(10.5);
+  doc.text(`${S.profile.lab}  ·  ${S.profile.name}  ·  Class ${S.profile.cls}`, M, 62);
+  doc.text(new Date().toLocaleDateString(undefined,{year:'numeric',month:'long',day:'numeric'}), M, 78);
+  y = 108;
+
+  // score summary
+  const totalPossible = rows.reduce((a,r)=>a+r.qs.length*5,0);
+  const totalEarned = rows.reduce((a,r)=>a+r.qs.reduce((b,c)=>b+S.report[c.id].stars,0),0);
+  doc.setTextColor('#241B3F'); doc.setFont('helvetica','bold'); doc.setFontSize(13);
+  doc.text('Score summary', M, y); y += 18;
+  para(`Stars earned: ${totalEarned} / ${totalPossible}  (${Math.round(totalEarned/totalPossible*100)}%)   ·   Badges: ${S.badges.length} / ${BADGES.length}   ·   Questions answered: ${rows.reduce((a,r)=>a+r.qs.length,0)} / ${TOTAL_Q}`, 10.5, 'normal');
+  y += 6;
+
+  rows.forEach(r=>{
+    pageBreak(30);
+    doc.setDrawColor('#A78BE8'); doc.setLineWidth(1);
+    doc.line(M, y, W-M, y); y += 16;
+    doc.setTextColor('#7C5CD6'); doc.setFont('helvetica','bold'); doc.setFontSize(14);
+    doc.text(`Level ${r.level.num} · ${r.level.title}`, M, y); y += 18;
+
+    r.qs.forEach(c=>{
+      const rep = S.report[c.id];
+      pageBreak(24);
+      doc.setFont('helvetica','normal'); doc.setFontSize(8.5); doc.setTextColor('#7C5CD6');
+      doc.text(rep.code + '   ·   ' + (rep.ok ? 'Correct' : 'Reviewed') + '   ·   ' + rep.stars + '/5 stars', M, y);
+      y += 13;
+      para(rep.prompt, 10.5, 'bold', '#1a1a1a');
+      para('Your answer: ' + (rep.mine || '—'), 9.5, 'normal', rep.ok ? '#2E6B12' : '#241B3F');
+      if(rep.correct && !rep.correct.startsWith('(')){
+        para('Reference: ' + rep.correct, 9.5, 'italic', '#5A5075');
+      }
+      y += 6;
+    });
+  });
+
+  if(S.bigQ){
+    pageBreak(60);
+    doc.setDrawColor('#A78BE8'); doc.line(M, y, W-M, y); y += 16;
+    doc.setTextColor('#7C5CD6'); doc.setFont('helvetica','bold'); doc.setFontSize(13);
+    doc.text('My big question', M, y); y += 18;
+    para(S.bigQ, 11, 'italic', '#241B3F');
+  }
+
+  // footer page numbers
+  const pages = doc.internal.getNumberOfPages();
+  for(let i=1;i<=pages;i++){
+    doc.setPage(i);
+    doc.setFont('helvetica','normal'); doc.setFontSize(8); doc.setTextColor('#999');
+    doc.text(`Page ${i} of ${pages}  ·  Grade 6 Science · 6.IM.1–6.IM.15`, M, 822);
+  }
+
+  doc.save(safeFile(S.profile.lab) + '_lab-report.pdf');
+  confetti(40); sndStar();
+}
+
+function buildPrintable(rows){
+  let box = $('printReport');
+  if(!box){
+    box = document.createElement('div');
+    box.id = 'printReport'; box.className = 'print-report';
+    document.body.appendChild(box);
+  }
+  const totalPossible = rows.reduce((a,r)=>a+r.qs.length*5,0);
+  const totalEarned = rows.reduce((a,r)=>a+r.qs.reduce((b,c)=>b+S.report[c.id].stars,0),0);
+  let h = `<h1>The Butterfly Code — Lab Report</h1>
+    <p><b>${escapeHTML(S.profile.lab)}</b> · ${escapeHTML(S.profile.name)} · Class ${escapeHTML(S.profile.cls)} · ${new Date().toLocaleDateString()}</p>
+    <p>Stars: ${totalEarned}/${totalPossible} (${Math.round(totalEarned/totalPossible*100)}%) · Badges: ${S.badges.length}/${BADGES.length}</p>`;
+  rows.forEach(r=>{
+    h += `<h2>Level ${r.level.num} · ${escapeHTML(r.level.title)}</h2>`;
+    r.qs.forEach(c=>{
+      const rep = S.report[c.id];
+      h += `<div class="pr-q"><span class="pr-code">${rep.code} · ${rep.stars}/5 stars · <span class="${rep.ok?'pr-ok':'pr-no'}">${rep.ok?'Correct':'Reviewed'}</span></span>
+        <h3>${escapeHTML(rep.prompt)}</h3>
+        <p><b>Your answer:</b> ${escapeHTML(rep.mine||'—')}</p>
+        ${(rep.correct && !rep.correct.startsWith('(')) ? `<p><i>Reference: ${escapeHTML(rep.correct)}</i></p>` : ''}</div>`;
+    });
+  });
+  if(S.bigQ) h += `<h2>My big question</h2><p><i>${escapeHTML(S.bigQ)}</i></p>`;
+  box.innerHTML = h;
+  document.body.classList.add('print-mode');
+  window.print();
+}
+window.addEventListener('afterprint', ()=> document.body.classList.remove('print-mode'));
+
+
+(function boot(){
+  const active = load('active', null);
+  if(active && openLab(active)){
+    hud();
+    S.finished ? finale() : renderMap();
+  } else {
+    hud(); renderLabs(); show('scAuth');
+  }
+})();
+</script>
+</body>
+</html>

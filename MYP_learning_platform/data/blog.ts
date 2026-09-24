@@ -388,7 +388,256 @@ export const POSTS: BlogPost[] = [
     related: [
       { label: 'MYP assessment criteria explained', href: '/blog/myp-assessment-criteria-explained' },
       { label: 'MYP Biology subject guide', href: '/guides/biology' },
+      { label: 'Classification: kingdoms & dichotomous keys', href: '/blog/classification-kingdoms-dichotomous-keys-myp-biology' },
       { label: 'Practise MYP Biology past papers', href: '/bio-papers' },
+    ],
+  },
+  {
+    slug: 'classification-kingdoms-dichotomous-keys-myp-biology',
+    title: 'Classification in MYP Biology: Kingdoms, Binomial Names & Dichotomous Keys',
+    description:
+      'How scientists classify living things — the five kingdoms, genus and species names, and how to use a dichotomous key — explained for MYP Biology with a free interactive classification quest.',
+    datePublished: '2026-09-24',
+    readMinutes: 7,
+    tags: ['Biology', 'Sciences'],
+    intro:
+      'There are millions of known species, and every one of them has to fit somewhere in a system that scientists everywhere agree on. Classification is that system. It turns "a huge pile of living things" into a tidy set of groups you can reason about — and it is one of the most reliably examined topics in early MYP Biology because it tests whether you can apply a rule to something you have never seen before.',
+    embed: { src: '/artifacts/biological-blueprint-quest.html', title: 'The Biological Blueprint — an interactive MYP Biology classification quest', height: 780 },
+    embedIntro:
+      'Try it yourself: sort real organisms into kingdoms, read their scientific names, and identify unknown "mystery organisms" with a dichotomous key. Progress saves on this device.',
+    sections: [
+      {
+        heading: 'Why we classify',
+        body: [
+          'Common names are unreliable: the same animal can have different names in different languages, and different animals can share one name. A shared classification system gives every organism one agreed identity and shows how organisms are related, which lets us predict features of an unfamiliar species from the group it belongs to.',
+        ],
+      },
+      {
+        heading: 'The five kingdoms',
+        body: ['A widely taught scheme sorts living things into five kingdoms, using features you can check for:'],
+        bullets: [
+          'Animals — multicellular, no cell walls, feed on other organisms (e.g. tiger, honeybee, frog).',
+          'Plants — multicellular, cell walls, photosynthesise; can be flowering or non-flowering (e.g. wheat, rose, bracken fern).',
+          'Fungi — cell walls made of chitin, feed by absorbing nutrients from dead material (saprotrophic), e.g. the button mushroom.',
+          'Protoctists — mostly single-celled organisms with a true nucleus, e.g. amoeba.',
+          'Prokaryotes — no true nucleus (their DNA floats free in the cell), e.g. the bacterium E. coli.',
+        ],
+      },
+      {
+        heading: 'Two-part scientific names',
+        body: [
+          'Every species has a binomial name made of its genus (capitalised) and species (lower case), written in italics: Panthera tigris for the tiger, Homo sapiens for humans. Closely related organisms share a genus — the domestic cat, Felis catus, is a different genus from the tiger, but both belong to the mammals. A common exam mistake is to write the name with the wrong capitalisation, so it is worth practising until it is automatic.',
+        ],
+      },
+      {
+        heading: 'Using a dichotomous key',
+        body: [
+          'A dichotomous key identifies an organism by a chain of yes/no choices about observable features. Each step splits the remaining possibilities in two — for example "backbone present" leads towards the vertebrate groups (mammal, bird, reptile, amphibian, fish), while "no backbone" leads to invertebrates such as insects and crustaceans. Follow the choices one at a time, and never skip ahead: the order is what makes the key work.',
+          'To score well when asked to build a key, make each question about a feature that is clear and observable (not "looks scary"), and check that every organism ends up at exactly one answer.',
+        ],
+      },
+      {
+        heading: 'How this is assessed',
+        body: [
+          'Classification questions mostly sit in Criterion A (Knowing and understanding): recall the groups, then apply them to unfamiliar organisms. Higher bands reward explaining why an organism belongs to a group by pointing to its specific features, not just naming the group.',
+        ],
+      },
+    ],
+    faq: [
+      { q: 'How many kingdoms are there in MYP Biology?', a: 'MYP courses commonly teach five kingdoms: animals, plants, fungi, protoctists and prokaryotes. Other schemes group life differently (for example into three domains), so use whichever your teacher and course follow.' },
+      { q: 'How do you write a scientific name correctly?', a: 'Use two parts: the genus with a capital letter first, then the species in lower case, both italicised or underlined — for example Homo sapiens.' },
+      { q: 'What is a dichotomous key?', a: 'A step-by-step tool for identifying organisms in which each step gives two choices based on an observable feature, until only one organism is left.' },
+    ],
+    related: [
+      { label: 'Hydrothermal vents & chemosynthesis', href: '/blog/hydrothermal-vents-chemosynthesis-myp-biology' },
+      { label: 'Cells, tissues & organs', href: '/blog/cells-tissues-organs-levels-of-organisation-myp-biology' },
+      { label: 'MYP Biology subject guide', href: '/guides/biology' },
+    ],
+  },
+  {
+    slug: 'cells-tissues-organs-levels-of-organisation-myp-biology',
+    title: 'Cells, Tissues, Organs & Organ Systems: Levels of Biological Organisation (MYP Year 4)',
+    description:
+      'From organelles to whole organisms: how cells, tissues, organs and organ systems fit together, with a free interactive MYP Year 4 Biology unit on cells and life.',
+    datePublished: '2026-09-24',
+    readMinutes: 7,
+    tags: ['Biology', 'Sciences'],
+    intro:
+      'A living thing is not one big blob — it is a nested set of parts, each built from the level below. Understanding those levels of organisation is the backbone of MYP Year 4 Biology, because almost every later topic (digestion, respiration, disease, homeostasis) is really a question about how one level depends on another.',
+    embed: { src: '/artifacts/myp-year4-cells-and-life.html', title: 'MYP Year 4 Biology — Cells & Life: an interactive unit on cells, tissues and organs', height: 800 },
+    embedIntro:
+      'Work through the unit yourself: three short sessions on what makes something alive, the levels of biological organisation, and how cells, tissues and organs work together, with self-checking tasks.',
+    sections: [
+      {
+        heading: 'What counts as "alive"?',
+        body: [
+          'Biologists decide whether something is living by checking for a set of shared characteristics: living things move, respire, sense their surroundings, grow, reproduce, excrete waste and need nutrition. A single feature is never enough — fire moves and grows, but it does not reproduce or respire. It is the whole set that defines life.',
+        ],
+      },
+      {
+        heading: 'The levels of organisation',
+        body: ['Read the levels from smallest to largest, and notice that each one is made of the one before it:'],
+        bullets: [
+          'Atom → molecule: atoms join to make the molecules of life (water, proteins, DNA).',
+          'Organelle: a specialised structure inside a cell, such as the nucleus or mitochondria, that does one job.',
+          'Cell: the basic unit of life.',
+          'Tissue: a group of similar cells working together (e.g. muscle tissue).',
+          'Organ: a group of different tissues that carries out a particular function (e.g. the heart or the stomach).',
+          'Organ system: organs cooperating on a larger job (e.g. the digestive or circulatory system).',
+          'Organism: the whole living thing.',
+        ],
+      },
+      {
+        heading: 'Structure matches function',
+        body: [
+          'A recurring MYP idea is that a structure is shaped by the job it does. Specialised cells show this clearly: a red blood cell has no nucleus, leaving more room to carry oxygen; a nerve cell is long so signals can travel far; a root hair cell has a thin extension that increases its surface area for absorbing water. When an exam asks you to "explain how the cell is adapted", name the feature and link it to the function.',
+        ],
+      },
+      {
+        heading: 'Why failure at one level matters at the next',
+        body: [
+          'Because each level is built from the previous one, damage travels upwards. Harm to the cells of the skin — for example from too much ultraviolet radiation — affects the skin tissue, then the skin as an organ, and finally the body\'s ability to protect itself. Being able to trace a problem up through the levels is exactly the kind of applied reasoning that earns higher-band marks.',
+        ],
+      },
+      {
+        heading: 'How this is assessed',
+        body: [
+          'The unit maps mainly onto Criterion A (Knowing and understanding) and Criterion D (Reflecting on the impacts of science). Aim to define each level accurately, give an example of each, and explain how one level depends on another rather than just listing them.',
+        ],
+      },
+    ],
+    faq: [
+      { q: 'What is the difference between a tissue and an organ?', a: 'A tissue is a group of similar cells doing the same job. An organ is made of several different tissues working together for a particular function.' },
+      { q: 'What are the levels of organisation in biology?', a: 'From smallest to largest: atom, molecule, organelle, cell, tissue, organ, organ system, organism.' },
+      { q: 'Why do cells specialise?', a: 'Different jobs need different structures. Specialised cells are adapted to their function, which makes the organism as a whole more efficient than if every cell did everything.' },
+    ],
+    related: [
+      { label: 'Classification: kingdoms & dichotomous keys', href: '/blog/classification-kingdoms-dichotomous-keys-myp-biology' },
+      { label: 'MYP assessment criteria explained', href: '/blog/myp-assessment-criteria-explained' },
+      { label: 'MYP Biology subject guide', href: '/guides/biology' },
+    ],
+  },
+  {
+    slug: 'scalars-vectors-si-units-myp-physics',
+    title: 'Scalars vs Vectors, SI Units & Measurement: MYP Physics Explained',
+    description:
+      'What makes a quantity measurable, why physics uses SI units, and the difference between scalars and vectors (distance vs displacement) — with a free interactive MYP Physics mission game.',
+    datePublished: '2026-09-24',
+    readMinutes: 7,
+    tags: ['Physics', 'Sciences'],
+    intro:
+      'Physics starts with measurement: if you cannot put a number and a unit on something, you cannot test a prediction about it. Once you can measure, the next question is whether direction matters — and that single question separates scalars from vectors, one of the most useful ideas in the whole subject.',
+    embed: { src: '/artifacts/quantity-quest.html', title: 'Quantity Quest: Mission Vector — an interactive MYP Physics game on measurement and vectors', height: 780 },
+    embedIntro:
+      'Try it yourself: four short missions on what can be measured, SI units, scalar vs vector quantities, and a vector navigation lab where you plot a route. Your progress saves on this device.',
+    sections: [
+      {
+        heading: 'What makes something measurable?',
+        body: [
+          'A physical quantity is something you can measure with a number and a unit — length, mass, time, temperature. Feelings such as "how scary a film is" are not physical quantities, because there is no agreed unit or instrument. A useful test: could two different people measure it and get the same result?',
+        ],
+      },
+      {
+        heading: 'SI units: one shared language',
+        body: [
+          'Scientists use the International System of Units (SI) so results can be compared anywhere. The base units you meet most often are the metre (length), kilogram (mass), second (time), kelvin (temperature) and ampere (electric current). Other units are combinations — speed is metres per second (m/s), force is the newton. Always write the unit; a number without one loses most of its marks.',
+        ],
+      },
+      {
+        heading: 'Scalars and vectors',
+        body: ['Some quantities need only a size, and others need a direction too:'],
+        bullets: [
+          'Scalar — magnitude only: distance, speed, mass, time, energy, temperature.',
+          'Vector — magnitude and direction: displacement, velocity, force, acceleration.',
+        ],
+      },
+      {
+        heading: 'Distance vs displacement — a worked example',
+        body: [
+          'Walk 3 km east, then 4 km north. The distance you travelled is 3 + 4 = 7 km, a scalar. Your displacement is the straight line from start to finish: because the two legs are at right angles, Pythagoras gives √(3² + 4²) = 5 km, at an angle of about 53° north of east. Same journey, two different answers — and both are correct, because they answer different questions.',
+        ],
+      },
+      {
+        heading: 'Adding vectors',
+        body: [
+          'Vectors are added head to tail: draw the first, start the second where the first ends, and the resultant runs from the very start to the very end. If vectors point in opposite directions they partly cancel, which is why two equal forces pulling in opposite directions give a resultant of zero. This is the idea behind navigation, forces and, later, motion in two dimensions.',
+        ],
+      },
+      {
+        heading: 'How this is assessed',
+        body: [
+          'Expect Criterion A questions that ask you to classify quantities, convert or state units, and apply vector addition to a simple scenario. Show the direction as well as the size whenever the question involves a vector.',
+        ],
+      },
+    ],
+    faq: [
+      { q: 'What is the difference between a scalar and a vector?', a: 'A scalar has magnitude only (e.g. speed, mass). A vector has magnitude and direction (e.g. velocity, force, displacement).' },
+      { q: 'What is the difference between distance and displacement?', a: 'Distance is the total path length travelled (a scalar). Displacement is the straight-line change in position from start to finish, with a direction (a vector).' },
+      { q: 'Why do we use SI units?', a: 'A single international system means measurements made anywhere can be compared and combined without conversion errors.' },
+    ],
+    related: [
+      { label: 'MYP assessment criteria explained', href: '/blog/myp-assessment-criteria-explained' },
+      { label: 'MYP Physics subject guide', href: '/guides/physics' },
+      { label: 'Scientific method: hypotheses & variables', href: '/blog/scientific-method-hypothesis-variables-myp-science' },
+    ],
+  },
+  {
+    slug: 'scientific-method-hypothesis-variables-myp-science',
+    title: 'Scientific Method in MYP Science: Predictions, Hypotheses & Variables (with the Butterfly Effect)',
+    description:
+      'The difference between a prediction and a hypothesis, how to identify independent, dependent and controlled variables, and field vs lab investigations — with a free interactive MYP inquiry game.',
+    datePublished: '2026-09-24',
+    readMinutes: 7,
+    tags: ['Sciences', 'Criterion B'],
+    intro:
+      'Every science investigation, from a Year 7 experiment to real research, rests on the same handful of habits: asking a testable question, predicting what will happen, and controlling what could confuse the result. Those habits are what Criterion B (Inquiring and designing) assesses — and they are easier to learn by trying them than by reading about them.',
+    embed: { src: '/artifacts/butterfly-code.html', title: 'The Butterfly Code — an interactive MYP science game on inquiry and scientific method', height: 780 },
+    embedIntro:
+      'Try it yourself: predict outcomes, write hypotheses, sort real scenarios into field and lab investigations, and earn badges along the way, with a theme built around the butterfly effect. Progress saves on this device.',
+    sections: [
+      {
+        heading: 'Prediction vs hypothesis',
+        body: [
+          'A prediction states what you expect to happen: "the plant near the window will grow taller". A hypothesis goes further and gives a testable explanation: "plants grow taller with more light because light drives photosynthesis". The "because" is what turns a guess into something you can test and explain. In Criterion B the explanation is what earns the higher bands.',
+        ],
+      },
+      {
+        heading: 'The three kinds of variable',
+        body: ['A fair test changes one thing and keeps everything else the same:'],
+        bullets: [
+          'Independent variable — the one thing you deliberately change (amount of light).',
+          'Dependent variable — the thing you measure as the result (height of the plant).',
+          'Controlled variables — everything you keep the same so the test is fair (water, soil, pot size, temperature).',
+        ],
+      },
+      {
+        heading: 'Field investigations and lab investigations',
+        body: [
+          'A lab investigation lets you control almost everything but is artificial. A field investigation happens in the real environment, which is more realistic but harder to control — weather, time of day and other organisms all interfere. Good scientists can say which approach suits a question and name the trade-off.',
+        ],
+      },
+      {
+        heading: 'Why the butterfly effect belongs in a science lesson',
+        body: [
+          'The "butterfly effect" comes from the study of chaotic systems such as the weather, where a tiny difference at the start can grow into a very different outcome later. It is a reminder of why scientists control variables and record their methods precisely: small uncontrolled differences can change the result, and if you did not write them down you cannot explain what happened.',
+        ],
+      },
+      {
+        heading: 'Writing a method others can repeat',
+        body: [
+          'A strong method lists the materials, states exactly what is changed, measured and kept constant, and gives steps clear enough for someone else to repeat. If a stranger could not run your experiment from your write-up, the method is not finished.',
+        ],
+      },
+    ],
+    faq: [
+      { q: 'What is the difference between a prediction and a hypothesis?', a: 'A prediction says what you expect to happen. A hypothesis also gives a testable scientific reason (often using "because") for why it should happen.' },
+      { q: 'What are independent, dependent and controlled variables?', a: 'The independent variable is what you change, the dependent variable is what you measure, and controlled variables are the factors you keep the same to make the test fair.' },
+      { q: 'Which MYP criterion covers scientific method?', a: 'Criterion B, Inquiring and designing, covers formulating a hypothesis, identifying variables and designing a method. Criterion C covers processing and evaluating the results.' },
+    ],
+    related: [
+      { label: 'MYP assessment criteria explained', href: '/blog/myp-assessment-criteria-explained' },
+      { label: 'Scalars vs vectors & SI units', href: '/blog/scalars-vectors-si-units-myp-physics' },
+      { label: 'MYP command terms', href: '/blog/myp-command-terms' },
     ],
   },
 ]
