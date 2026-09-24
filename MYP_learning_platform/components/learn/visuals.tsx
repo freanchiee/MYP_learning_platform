@@ -343,3 +343,38 @@ export function Deck({ slides, render }: { slides: { id: string; kicker: string;
     </section>
   )
 }
+
+// ---------- worked example stepper: one line at a time, with "why this step?" ----------
+export function WorkedSteps({ title, given, steps, answer }: { title: string; given: string; steps: { line: string; why: string }[]; answer: string }) {
+  const [n, setN] = useState(0)
+  const [why, setWhy] = useState<number | null>(null)
+  return (
+    <div className="rounded-[var(--radius-card)] p-4" style={inset}>
+      <div className="text-xs font-black tracking-[0.3em]" style={{ color: 'var(--accent)' }}>WORKED EXAMPLE · {title.toUpperCase()}</div>
+      <p className="mt-2 text-sm font-bold" style={{ color: 'var(--text)' }}>{given}</p>
+      <ol className="mt-3 grid gap-2">
+        {steps.slice(0, n).map((s, i) => (
+          <li key={i} className="dp-pop">
+            <div className="flex items-start gap-3">
+              <span className="mt-0.5 flex h-6 w-6 flex-none items-center justify-center rounded-full text-xs font-black" style={{ background: 'var(--accent-soft)', color: 'var(--accent)' }}>{i + 1}</span>
+              <div className="min-w-0 flex-1">
+                <div className="text-base font-bold" style={{ color: 'var(--text)', fontFamily: 'var(--font-mono)' }}>{s.line}</div>
+                <button onClick={() => setWhy(why === i ? null : i)} aria-expanded={why === i} className={`${hand.className} text-lg underline`} style={{ color: 'var(--text-muted)' }}>why this step?</button>
+                {why === i && <div className="dp-pop text-sm" style={{ color: 'var(--text-muted)' }}>{s.why}</div>}
+              </div>
+            </div>
+          </li>
+        ))}
+      </ol>
+      {n >= steps.length && (
+        <div className="dp-pop mt-3 rounded-[var(--radius-panel)] px-3 py-2 text-base font-extrabold" style={{ background: 'var(--success-surface)', color: 'var(--text)', border: '1px solid var(--success)' }}>
+          Answer: {answer}
+        </div>
+      )}
+      <div className="mt-3 flex gap-2">
+        <button onClick={() => setN((x) => Math.min(steps.length, x + 1))} disabled={n >= steps.length} className={`${ctl} disabled:opacity-50`} style={primary}>{n === 0 ? 'START ▸' : 'NEXT LINE ▸'}</button>
+        <button onClick={() => { setN(0); setWhy(null) }} className={ctl} style={secondary}>RESET</button>
+      </div>
+    </div>
+  )
+}

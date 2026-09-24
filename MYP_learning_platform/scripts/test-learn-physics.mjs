@@ -25,4 +25,32 @@ ok('incline 30 deg frictionless a=g/2', near(m.inclineAcceleration(30, 0), 4.905
 ok('zeno n=3 = 7/8', near(m.zenoSum(3), 0.875, 1e-12))
 ok('zeno n=50 < 1', m.zenoSum(50) < 1 && 1 - m.zenoSum(50) < 1e-14)
 ok('passenger from platform moves, from train at rest', m.relativePosition(0, 10, 0, 0, 5) === 50 && m.relativePosition(0, 10, 0, 10, 5) === 0)
+
+// ---- conversions ----
+const out2 = path.resolve('node_modules/.cache/conversions.mjs')
+await build({ entryPoints: ['lib/learn/conversions.ts'], outfile: out2, format: 'esm', bundle: true, logLevel: 'silent' })
+const cv = await import(pathToFileURL(out2).href)
+let seed = 7
+const rng = () => ((seed = (seed * 16807) % 2147483647) / 2147483647)
+// Independent reference: convert via SI factors, not via the generator's own steps
+const REF = { G: 1e9, M: 1e6, k: 1e3, m: 1e-3, 'µ': 1e-6, n: 1e-9, p: 1e-12 }
+let n = 0, bad = 0
+for (let i = 0; i < 400; i++) {
+  const pr = cv.makeProblem(rng)
+  n++
+  let ref
+  const num = Number(pr.q.match(/Convert ([\d.]+)/)[1])
+  if (pr.kind === 'prefix') ref = num * REF[pr.q.match(/Convert [\d.]+ (.)/u)[1]]
+  else if (pr.kind === 'speed') ref = pr.q.includes('km/h to') ? num * 1000 / 3600 : num * 3600 / 1000
+  else if (pr.kind === 'area') ref = num * (0.01 * 0.01)
+  else if (pr.kind === 'volume') ref = num * (0.01 ** 3)
+  else ref = num * 3600
+  if (Math.abs(ref - pr.answer) > 1e-9 * Math.abs(ref)) { bad++; console.log('MISMATCH', pr.q, pr.answer, ref) }
+  if (pr.traps.some((t) => Math.abs(t.value - pr.answer) < 1e-12 * Math.abs(pr.answer))) { bad++; console.log('TRAP equals answer', pr.q) }
+}
+ok('400 random conversions match an independent SI calculation', bad === 0, `${n} problems`)
+ok('36 km/h = 10 m/s', near(36 * 1000 / 3600, 10, 1e-12))
+ok('5 cm cube = 1.25e-4 m3', near(0.05 ** 3, 1.25e-4, 1e-18))
+ok('100 N over 10 cm2 = 1e5 Pa', near(100 / (10 * 1e-4), 1e5, 1e-6))
+ok('2 kg x 5 m/s2 = 10 N', 2 * 5 === 10)
 process.exit(fail ? 1 : 0)

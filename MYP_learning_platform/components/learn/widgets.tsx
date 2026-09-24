@@ -1,6 +1,7 @@
 'use client'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import type { WidgetId } from '@/data/learn/physics'
+import { makeProblem, type ConvProblem } from '@/lib/learn/conversions'
 import {
   C, G, H, inclineAcceleration, massEnergy, pendulumPeriod, photonEnergy, relativePosition, slideAngle, zenoSum,
 } from '@/lib/learn/physics-models'
@@ -438,6 +439,50 @@ function ZenoSeries() {
   )
 }
 
+// ---------- unit converter (randomised, worked steps, typical-mistake feedback) ----------
+function UnitConverter() {
+  const [p, setP] = useState<ConvProblem | null>(null)
+  const [ans, setAns] = useState('')
+  const [res, setRes] = useState<{ ok: boolean; msg: string } | null>(null)
+  const [showSteps, setShowSteps] = useState(false)
+  const [score, setScore] = useState({ right: 0, tried: 0 })
+  useEffect(() => setP(makeProblem()), [])
+  const next = () => { setP(makeProblem()); setAns(''); setRes(null); setShowSteps(false) }
+  const check = () => {
+    if (!p) return
+    const v = parseSci(ans)
+    if (v == null) return setRes({ ok: false, msg: 'Enter a number, for example 2500 or 2.5e3. The unit is already shown.' })
+    const near = (a: number, b: number) => Math.abs(a - b) <= 0.01 * Math.abs(b)
+    setScore((s) => ({ right: s.right + (near(v, p.answer) ? 1 : 0), tried: s.tried + 1 }))
+    if (near(v, p.answer)) return setRes({ ok: true, msg: 'Units and factor both right. Check the steps to compare your method.' })
+    const trap = p.traps.find((t) => near(v, t.value))
+    setRes({ ok: false, msg: trap ? trap.msg : 'Not the value I get. Look at the steps, then try the next problem.' })
+    setShowSteps(true)
+  }
+  return (
+    <div className="rounded-[var(--radius-panel)] p-4" style={panel}>
+      <div className="text-[11px] font-black tracking-[0.3em]" style={{ color: 'var(--accent)' }}>CONVERT · FRESH NUMBERS EVERY TIME</div>
+      <p className="mt-2 text-lg font-bold" style={{ color: 'var(--text)' }}>{p ? p.q : '…'}</p>
+      <div className="mt-3 flex items-center gap-2">
+        <input aria-label="Your answer" value={ans} onChange={(e) => setAns(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && check()} placeholder="your answer" className={`${ctl} w-40`} style={{ ...btn2, fontFamily: 'var(--font-mono)' }} />
+        <span className="text-sm font-bold" style={{ color: 'var(--text)' }}>{p?.unit}</span>
+      </div>
+      <div className="mt-3 flex flex-wrap gap-2">
+        <button onClick={check} className={ctl} style={btn1}>CHECK</button>
+        <button onClick={() => setShowSteps((x) => !x)} className={ctl} style={btn2}>{showSteps ? 'HIDE STEPS' : 'SHOW STEPS'}</button>
+        <button onClick={next} className={ctl} style={btn2}>NEW PROBLEM</button>
+      </div>
+      {res && <Feedback ok={res.ok}>{res.msg}</Feedback>}
+      {showSteps && p && (
+        <ol className="mt-3 grid gap-1 text-sm" style={{ color: 'var(--text)', fontFamily: 'var(--font-mono)' }}>
+          {p.steps.map((s, i) => <li key={i}>{i + 1}. {s}</li>)}
+        </ol>
+      )}
+      <p className="mt-3 text-xs font-bold" style={{ color: 'var(--text-muted)' }} aria-live="polite">{score.right} right out of {score.tried} tried</p>
+    </div>
+  )
+}
+
 const REGISTRY: Record<WidgetId, () => JSX.Element> = {
   'energy-generator': EnergyGenerator,
   'measurable-sorter': () => <Sorter cats={['PHYSICAL QUANTITY', 'RATING / INDEX']} items={MEASURABLE} />,
@@ -450,6 +495,7 @@ const REGISTRY: Record<WidgetId, () => JSX.Element> = {
   'frame-of-reference': FrameOfReference,
   pendulum: Pendulum,
   'zeno-series': ZenoSeries,
+  'unit-converter': UnitConverter,
 }
 
 export function Widget({ id }: { id: WidgetId }) {

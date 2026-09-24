@@ -22,6 +22,7 @@ export type WidgetId =
   | 'frame-of-reference'
   | 'pendulum'
   | 'zeno-series'
+  | 'unit-converter'
 
 export type BoxKind = 'yes' | 'no' | 'opt'
 
@@ -45,6 +46,7 @@ export type Block =
   | { t: 'pills'; groups: { label: string; tone?: 'accent' | 'muted' | 'warn'; items: string[] }[] }
   | { t: 'formulas'; items: { eq: string; legend: string[] }[] }
   | { t: 'note'; text: string; by?: string }
+  | { t: 'steps'; title: string; given: string; steps: { line: string; why: string }[]; answer: string }
   | { t: 'deck'; slides: { id: string; kicker: string; title: string; blocks: Block[] }[] }
   | { t: 'hook'; text: string }
   | { t: 'h'; id: string; text: string }

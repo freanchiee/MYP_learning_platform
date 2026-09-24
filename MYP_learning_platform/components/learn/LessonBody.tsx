@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from 'react'
 import type { Block, Mcq } from '@/data/learn/physics'
 import { useLessonProgress } from '@/lib/learn/progress'
 import { Widget } from './widgets'
-import { ArrowList, Deck, DeckCtx, Flow, Formulas, HandNote, Matrix, Pills } from './visuals'
+import { ArrowList, Deck, DeckCtx, Flow, Formulas, HandNote, Matrix, Pills, WorkedSteps } from './visuals'
 
 const ctl = 'rounded-[var(--radius-control)] px-4 py-2 text-xs font-black tracking-wider focus:outline-none focus:ring-2'
 const primary: React.CSSProperties = { background: 'var(--gradient-cta)', color: 'var(--text-on-accent)' }
@@ -204,6 +204,8 @@ function StaticBlock({ b }: { b: Block }) {
       return <Formulas items={b.items} />
     case 'note':
       return <HandNote text={b.text} by={b.by} />
+    case 'steps':
+      return <WorkedSteps title={b.title} given={b.given} steps={b.steps} answer={b.answer} />
     default:
       return null
   }

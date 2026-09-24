@@ -239,8 +239,203 @@ export const PREFACE: Module = {
     },
     // ------------------------------------------------------------------ 0.4
     {
-      slug: 'what-makes-things-move',
+      slug: 'unit-prefixes',
       code: '0.4',
+      title: 'Prefixes: kilo to femto',
+      blurb: 'One word in front of a unit that says how big or small.',
+      syllabus: 'Preface · Tools: SI prefixes',
+      level: 'SL+HL',
+      difficulty: 1,
+      minutes: 8,
+      access: 'free',
+      blocks: [
+        { t: 'hook', text: 'The distance to school and the width of a virus are both lengths. Do we write them with the same number of zeros? No. We change the prefix.' },
+        {
+          t: 'deck',
+          slides: [
+            {
+              id: 'prefix',
+              kicker: 'Follow the arrows',
+              title: 'Prefix',
+              blocks: [
+                {
+                  t: 'flow',
+                  title: 'A prefix is a multiplier',
+                  root: {
+                    title: 'Prefix',
+                    note: '1000 g = 1 kg',
+                    tag: 'a word in front of a unit',
+                    branches: [
+                      { label: 'HIGH', tone: 'plain', node: { title: 'Big multipliers', note: 'kilo, mega, giga, tera, peta' } },
+                      { label: 'LOW', tone: 'plain', node: { title: 'Small multipliers', note: 'milli, micro, nano, pico, femto' } },
+                    ],
+                  },
+                },
+              ],
+            },
+            {
+              id: 'high',
+              kicker: 'High',
+              title: 'Big prefixes',
+              blocks: [
+                {
+                  t: 'arrows',
+                  head: ['Prefix', 'Symbol'],
+                  rows: [
+                    { from: 'kilo = 10³', to: 'km', note: '(kilometre)' },
+                    { from: 'mega = 10⁶', to: 'MW', note: '(megawatt)' },
+                    { from: 'giga = 10⁹', to: 'GB', note: '(gigabytes)' },
+                    { from: 'tera = 10¹²', to: 'TB' },
+                    { from: 'peta = 10¹⁵', to: 'PB' },
+                  ],
+                },
+              ],
+            },
+            {
+              id: 'low',
+              kicker: 'Low',
+              title: 'Small prefixes',
+              blocks: [
+                {
+                  t: 'arrows',
+                  head: ['Prefix', 'Symbol'],
+                  rows: [
+                    { from: 'milli = 10⁻³', to: 'mm', note: '(millimetre)' },
+                    { from: 'micro = 10⁻⁶', to: 'µm', note: '(micrometre)' },
+                    { from: 'nano = 10⁻⁹', to: 'nm' },
+                    { from: 'pico = 10⁻¹²', to: 'pm' },
+                    { from: 'femto = 10⁻¹⁵', to: 'fm' },
+                  ],
+                },
+                { t: 'callout', kind: 'warn', title: 'Capital or small?', text: 'MW (megawatt, 10⁶ W) and mW (milliwatt, 10⁻³ W) differ by a factor of 10⁹. The case of the letter matters.' },
+              ],
+            },
+          ],
+        },
+        { t: 'check', id: 'p4a-c1', q: 'What does the prefix kilo mean?', options: ['× 10³', '× 10⁻³', '× 10⁶'], answer: 0, why: 'kilo = 10³, so 1 km = 1000 m.', back: 'high' },
+        { t: 'check', id: 'p4a-c2', q: 'Which is the longest?', options: ['1 mm', '1 µm', '1 nm'], answer: 0, why: 'milli (10⁻³) is larger than micro (10⁻⁶), which is larger than nano (10⁻⁹).', back: 'low' },
+        { t: 'check', id: 'p4a-c3', q: '4.2 µm written in metres is…', options: ['4.2 × 10⁻⁶ m', '4.2 × 10⁶ m', '4.2 × 10⁻³ m'], answer: 0, why: 'micro = 10⁻⁶, so 4.2 µm = 4.2 × 10⁻⁶ m.', back: 'low' },
+        { t: 'apply', id: 'p4a-a1', prompt: 'A cell is 0.000035 m wide. Write its width using a prefix, and explain your choice.', model: '0.000035 m = 35 × 10⁻⁶ m = 35 µm. Micro means 10⁻⁶, so the prefix turns a long string of zeros into a short number.', checklist: ['I chose micro (µm)', 'I wrote 35 µm', 'I linked micro to 10⁻⁶', 'I kept the unit'] },
+        { t: 'retrieval', items: [{ from: '0.3', q: 'How many SI base units are there?', options: ['5', '7', '9'], answer: 1, why: 'Seven.' }, { from: '0.3', q: 'The SI base unit of mass is…', options: ['g', 'kg', 'N'], answer: 1, why: 'The kilogram (it already has a prefix, kilo).' }] },
+        { t: 'summary', points: ['A prefix multiplies a unit: 1000 g = 1 kg.', 'High: kilo 10³, mega 10⁶, giga 10⁹, tera 10¹², peta 10¹⁵.', 'Low: milli 10⁻³, micro 10⁻⁶, nano 10⁻⁹, pico 10⁻¹², femto 10⁻¹⁵.'], terms: [{ term: 'Prefix', def: 'a word in front of a unit that multiplies it by a power of ten' }], formulas: ['1 km = 10³ m', '1 µm = 10⁻⁶ m'], errors: ['Mixing up M (mega) and m (milli).', 'Getting the sign of the exponent wrong.'] },
+      ],
+    },
+    // ------------------------------------------------------------------ 0.5
+    {
+      slug: 'derived-units',
+      code: '0.5',
+      title: 'Derived units',
+      blurb: 'Area, speed, acceleration, force and pressure, all built from base units.',
+      syllabus: 'Preface · Tools: derived units',
+      level: 'SL+HL',
+      difficulty: 2,
+      minutes: 12,
+      access: 'free',
+      blocks: [
+        { t: 'hook', text: 'A ruler gives metres. How do you measure how big a tabletop is, or how fast a car goes? No new unit needed: just combine the ones you have.' },
+        {
+          t: 'deck',
+          slides: [
+            {
+              id: 'combine',
+              kicker: 'The idea',
+              title: 'Derived units',
+              blocks: [
+                { t: 'note', text: 'Derived units are a combination of base units.' },
+                { t: 'arrows', head: ['Quantity', 'Unit'], rows: [{ from: 'length L', to: 'm' }, { from: 'area = L × b', to: 'm²', note: '10 m × 5 m = 50 m²' }, { from: 'volume = L × b × h', to: 'm³', note: '5 m × 5 m × 5 m = 125 m³' }] },
+              ],
+            },
+            {
+              id: 'motion',
+              kicker: 'Motion',
+              title: 'Speed and acceleration',
+              blocks: [
+                { t: 'arrows', head: ['Quantity', 'Unit'], rows: [{ from: 'speed = distance ÷ time', to: 'm s⁻¹', note: 'same as m/s' }, { from: 'acceleration = change in velocity ÷ time', to: 'm s⁻²', note: 'same as m/s²' }] },
+                { t: 'callout', kind: 'idea', title: 'What "5 m s⁻²" means', text: 'The object changes its speed by 5 m s⁻¹ every second (here, it increases). Velocity is speed with a direction.' },
+              ],
+            },
+            {
+              id: 'force',
+              kicker: 'Forces',
+              title: 'Force and pressure',
+              blocks: [
+                { t: 'formulas', items: [{ eq: 'F = ma', legend: ['F: force (N)', 'm: mass (kg)', 'a: acceleration (m s⁻²)'] }, { eq: 'p = F / A', legend: ['p: pressure (Pa)', 'F: force (N)', 'A: area (m²)'] }] },
+                { t: 'arrows', head: ['Quantity', 'Unit'], rows: [{ from: 'force = mass × a', to: 'kg m s⁻² = N', note: '2 kg × 5 m s⁻² = 10 N' }, { from: 'pressure = force ÷ area', to: 'N m⁻² = Pa', note: 'pascal' }] },
+              ],
+            },
+          ],
+        },
+        { t: 'check', id: 'p5a-c1', q: 'The SI unit of area is…', options: ['m', 'm²', 'm³'], answer: 1, why: 'Area = length × breadth, so m × m = m².', back: 'combine' },
+        { t: 'check', id: 'p5a-c2', q: 'An object accelerates at 5 m s⁻². This means…', options: ['it travels 5 m every second', 'its speed increases by 5 m s⁻¹ every second', 'its speed is 5 m s⁻¹'], answer: 1, why: 'Acceleration is the change in velocity per unit time.', back: 'motion' },
+        { t: 'check', id: 'p5a-c3', q: 'The newton in base units is…', options: ['kg m s⁻²', 'kg m s⁻¹', 'kg m² s⁻²'], answer: 0, why: 'F = ma: kg × m s⁻² = kg m s⁻². (kg m² s⁻² is the joule.)', back: 'force' },
+        { t: 'apply', id: 'p5a-a1', prompt: 'A 3 kg trolley accelerates at 4 m s⁻². Find the force on it and give the unit in two ways.', model: 'F = ma = 3 kg × 4 m s⁻² = 12 N. In base units, 12 kg m s⁻².', checklist: ['I used F = ma', 'I substituted with units', 'The answer is 12', 'I gave N and kg m s⁻²'] },
+        { t: 'retrieval', items: [{ from: '0.4', q: 'kilo means…', options: ['10³', '10⁻³', '10⁶'], answer: 0, why: 'kilo = 10³.' }, { from: '0.3', q: 'Which is NOT a base unit?', options: ['metre', 'newton', 'second'], answer: 1, why: 'The newton is derived.' }] },
+        { t: 'summary', points: ['Derived units combine base units.', 'Area m², volume m³, speed m s⁻¹, acceleration m s⁻².', 'Force: N = kg m s⁻². Pressure: Pa = N m⁻².'], terms: [{ term: 'Newton (N)', def: 'the unit of force, kg m s⁻²' }, { term: 'Pascal (Pa)', def: 'the unit of pressure, N m⁻²' }], formulas: ['F = ma', 'p = F / A'], errors: ['Writing m for an area.', 'Confusing the newton (kg m s⁻²) with the joule (kg m² s⁻²).'] },
+      ],
+    },
+    // ------------------------------------------------------------------ 0.6
+    {
+      slug: 'converting-units',
+      code: '0.6',
+      title: 'Converting units',
+      blurb: 'Worked examples, then practise with fresh numbers.',
+      syllabus: 'Preface · Tools: unit conversion',
+      level: 'SL+HL',
+      difficulty: 2,
+      minutes: 15,
+      access: 'free',
+      blocks: [
+        { t: 'hook', text: 'A speedometer says 36 km/h. A physics problem needs m s⁻¹. Same speed, different unit. How do you switch without slipping?' },
+        {
+          t: 'deck',
+          slides: [
+            {
+              id: 'method',
+              kicker: 'The method',
+              title: 'Write what each unit is worth first',
+              blocks: [
+                { t: 'arrows', head: ['Fact', 'In SI'], rows: [{ from: '1 km', to: '1000 m' }, { from: '1 h', to: '3600 s' }, { from: '1 cm', to: '10⁻² m', note: 'so 1 cm² = 10⁻⁴ m²' }] },
+                { t: 'note', text: 'Convert the length first, then square or cube.' },
+              ],
+            },
+            {
+              id: 'speed',
+              kicker: 'Worked example 1',
+              title: 'Speed',
+              blocks: [{ t: 'steps', title: 'km/h to m s⁻¹', given: 'Convert 36 km/h to m s⁻¹.', steps: [{ line: '1 km = 1000 m, 1 h = 3600 s', why: 'Write what each unit is worth in SI first.' }, { line: '36 km/h = 36 × 1000 m / 3600 s', why: 'Replace km with 1000 m and h with 3600 s.' }, { line: '= 36 000 / 3 600', why: 'Multiply the top, multiply the bottom.' }, { line: '= 10 m s⁻¹', why: 'Divide. The unit is now metres per second.' }], answer: '10 m s⁻¹' }],
+            },
+            {
+              id: 'volume',
+              kicker: 'Worked example 2',
+              title: 'Volume',
+              blocks: [{ t: 'steps', title: 'cm³ to m³', given: 'A cube has sides of 5 cm. Find its volume in m³.', steps: [{ line: '5 cm = 5 × 10⁻² m = 0.05 m', why: 'Convert the length to metres BEFORE working out the volume.' }, { line: 'V = L × b × h = (0.05 m)³', why: 'A volume is length × breadth × height. All three are 0.05 m.' }, { line: '= (5/100)³ = 125 / 10⁶', why: '5³ = 125 and 100³ = 10⁶.' }, { line: '= 125 × 10⁻⁶ = 1.25 × 10⁻⁴ m³', why: 'Write in standard form: 125 = 1.25 × 10².' }], answer: '1.25 × 10⁻⁴ m³' }],
+            },
+            {
+              id: 'pressure',
+              kicker: 'Worked example 3',
+              title: 'Pressure',
+              blocks: [{ t: 'steps', title: 'cm² to m²', given: 'A force of 100 N acts on an area of 10 cm². Find the pressure in Pa.', steps: [{ line: '10 cm² = 10 × (10⁻² m)² = 10 × 10⁻⁴ m²', why: 'The unit is squared, so the conversion factor is squared too.' }, { line: '= 10⁻³ m²', why: '10 × 10⁻⁴ = 10⁻³.' }, { line: 'p = F / A = 100 N / 10⁻³ m²', why: 'Pressure is force divided by area, in SI units.' }, { line: '= 1 × 10⁵ N m⁻²', why: '100 / 10⁻³ = 10² × 10³ = 10⁵.' }], answer: '1 × 10⁵ Pa' }],
+            },
+            {
+              id: 'try',
+              kicker: 'Your turn',
+              title: 'Convert with fresh numbers',
+              blocks: [{ t: 'widget', id: 'unit-converter', title: 'Unit converter', idea: 'Every problem is new. Wrong answers get feedback on the usual slip.', predict: { q: 'Predict: 1 cm² is how many m²?', options: ['10⁻²', '10⁻⁴', '10⁻³'], answer: 1, why: '1 cm = 10⁻² m, so 1 cm² = (10⁻²)² = 10⁻⁴ m².' } }],
+            },
+          ],
+        },
+        { t: 'check', id: 'p6-c1', q: '72 km/h in m s⁻¹ is…', options: ['20', '72', '259'], answer: 0, why: '72 × 1000 / 3600 = 20 m s⁻¹.', back: 'speed' },
+        { t: 'check', id: 'p6-c2', q: '250 cm² in m² is…', options: ['0.025 m²', '2.5 m²', '2.5 × 10⁻⁴ m²'], answer: 0, why: '250 × 10⁻⁴ = 0.025 m².', back: 'pressure' },
+        { t: 'check', id: 'p6-c3', q: '2 h in seconds is…', options: ['120 s', '7200 s', '3600 s'], answer: 1, why: '2 × 3600 = 7200 s.', back: 'method' },
+        { t: 'apply', id: 'p6-a1', prompt: 'Convert 500 cm³ to m³, and explain why the factor is 10⁻⁶ and not 10⁻².', model: '500 cm³ = 500 × 10⁻⁶ m³ = 5 × 10⁻⁴ m³. Each length converts by 10⁻², and a volume has three lengths, so the factor is (10⁻²)³ = 10⁻⁶.', checklist: ['I got 5 × 10⁻⁴ m³', 'I used 10⁻⁶', 'I explained it as cubing 10⁻²', 'I kept the unit'] },
+        { t: 'retrieval', items: [{ from: '0.5', q: 'Pressure is measured in…', options: ['N', 'Pa', 'J'], answer: 1, why: 'Pascal: N m⁻².' }, { from: '0.4', q: 'micro means…', options: ['10⁻⁶', '10⁶', '10⁻³'], answer: 0, why: 'micro = 10⁻⁶.' }] },
+        { t: 'summary', points: ['Write what each unit is worth in SI first.', 'Convert lengths before squaring or cubing.', 'cm² → m²: × 10⁻⁴. cm³ → m³: × 10⁻⁶. km/h → m s⁻¹: ÷ 3.6.'], terms: [{ term: 'Conversion factor', def: 'what one unit is worth in another' }], formulas: ['1 cm² = 10⁻⁴ m²', '1 cm³ = 10⁻⁶ m³', 'v(m s⁻¹) = v(km/h) ÷ 3.6'], errors: ['Using 10⁻² for an area or a volume.', 'Multiplying instead of dividing when going from km/h to m s⁻¹.'] },
+      ],
+    },
+    // ------------------------------------------------------------------ 0.7
+    {
+      slug: 'what-makes-things-move',
+      code: '0.7',
       title: 'What makes things move?',
       blurb: 'Unbalanced forces and the four fundamental forces.',
       syllabus: 'Preface · Forces and motion overview',
@@ -266,10 +461,10 @@ export const PREFACE: Module = {
         { t: 'summary', points: ['Unbalanced forces change motion.', 'There are four fundamental forces.', 'Bigger imbalance, more rapid change.'], terms: [{ term: 'Force', def: 'a push or a pull' }, { term: 'Unbalanced', def: 'the forces do not cancel' }], formulas: [], errors: ['Thinking constant speed needs a force.', 'Forgetting friction.'] },
       ],
     },
-    // ------------------------------------------------------------------ 0.5
+    // ------------------------------------------------------------------ 0.8
     {
       slug: 'themes-and-assessment',
-      code: '0.5',
+      code: '0.8',
       title: 'The map: themes and assessment',
       blurb: 'The five themes and how you are assessed.',
       syllabus: 'Preface · Course overview',
@@ -306,7 +501,7 @@ export const PREFACE: Module = {
         { t: 'check', id: 'p5-c1', q: 'How many themes are there?', options: ['3', '5', '7'], answer: 1, why: 'Five, A to E.', back: 'themes' },
         { t: 'check', id: 'p5-c2', q: 'Which theme holds motion and forces?', options: ['Theme A', 'Theme C', 'Theme E'], answer: 0, why: 'Theme A: Space, time and motion.', back: 'themes' },
         { t: 'check', id: 'p5-c3', q: 'The internal assessment is a…', options: ['multiple-choice test', 'mini research paper', 'oral exam'], answer: 1, why: 'An investigation written up as a mini research paper.', back: 'assessment' },
-        { t: 'retrieval', items: [{ from: '0.4', q: 'How many fundamental forces are there?', options: ['2', '4', '7'], answer: 1, why: 'Four.' }, { from: '0.3', q: 'The SI base unit of mass is…', options: ['g', 'kg', 'N'], answer: 1, why: 'The kilogram.' }] },
+        { t: 'retrieval', items: [{ from: '0.7', q: 'How many fundamental forces are there?', options: ['2', '4', '7'], answer: 1, why: 'Four.' }, { from: '0.3', q: 'The SI base unit of mass is…', options: ['g', 'kg', 'N'], answer: 1, why: 'The kilogram.' }] },
         { t: 'summary', points: ['Five themes: A to E.', 'Papers 1 and 2 are 80%, the IA is 20%.', 'The EE is a core part of the Diploma.'], terms: [{ term: 'IA', def: 'internal assessment, marked by your teacher' }], formulas: [], errors: [] },
       ],
     },
