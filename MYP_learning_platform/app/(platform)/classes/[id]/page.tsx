@@ -1,7 +1,7 @@
 import { notFound, redirect } from 'next/navigation'
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase/server'
-import type { ClassMemberRow, ClassRow } from '@/lib/classes'
+import { classLook, type ClassMemberRow, type ClassRow } from '@/lib/classes'
 import { getLiveActivity } from '@/data/design/live/registry'
 import { worksheetSectionPct } from '@/lib/design-live/scoring'
 import { LAUNCHED_PAPERS } from '@/data/launched-papers'
@@ -10,6 +10,8 @@ import { CHEMISTRY_BANK } from '@/data/practice/chemistry-bank'
 import { PHYSICS_BANK } from '@/data/practice/physics-bank'
 import { TEACH_SUBJECTS, paperTitle, subjectLabel } from '@/lib/subjects'
 import AssignSessions from '@/components/teacher/AssignSessions'
+import InviteCard from '@/components/teacher/InviteCard'
+import ClassLookPicker from '@/components/teacher/ClassLookPicker'
 import { AssignLibrary, DeleteAssignmentButton, RemoveMemberButton } from '@/components/teacher/ClassActions'
 
 interface SessionRow { code: string; activity_id: string; status: string; created_at: string }
@@ -118,20 +120,30 @@ export default async function ClassPage({ params, searchParams }: { params: { id
   }))
 
   const href = (t: string) => `/classes/${cls.id}?tab=${t}`
+  const look = classLook(cls)
 
   return (
     <div className="flex" style={{ minHeight: 'calc(100vh - 56px)', background: 'var(--bg)', backgroundImage: 'var(--bg-image)', color: 'var(--text)' }}>
-      {/* Sidebar */}
-      <aside className="hidden w-64 shrink-0 flex-col gap-1 p-4 md:flex" style={{ background: 'var(--surface)', borderRight: '1px solid var(--border)' }}>
-        <Link href="/dashboard" className="mb-3 text-[11px] font-black tracking-[0.25em]" style={{ color: 'var(--text-subtle)' }}>← DASHBOARD</Link>
-        {TABS.map((t) => (
-          <Link key={t.id} href={href(t.id)} className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-bold" style={tab === t.id ? { background: 'var(--accent-soft)' } : { color: 'var(--text-muted)' }}>
-            <span>{t.icon}</span>{t.label}
-          </Link>
-        ))}
-      </aside>
+      {/* Diamond navigation, same language as the Design and teacher hubs */}
+      <nav className="fixed z-40 hidden flex-col gap-4 md:flex" style={{ left: '2rem', top: 'calc(50% + 28px)', transform: 'translateY(-50%)' }} aria-label="Class sections">
+        <Link href="/dashboard" className="mb-2 text-[10px] font-black tracking-[0.25em]" style={{ color: 'var(--text-subtle)' }}>← DASHBOARD</Link>
+        {TABS.map((t) => {
+          const on = tab === t.id
+          return (
+            <Link key={t.id} href={href(t.id)} className="group flex items-center gap-2" aria-current={on ? 'page' : undefined}>
+              <span
+                className="block transition-all"
+                style={{ width: on ? 12 : 8, height: on ? 12 : 8, transform: 'rotate(45deg)', background: on ? 'var(--accent)' : 'var(--border)', border: on ? 'none' : '1px solid var(--border-strong)', boxShadow: on ? '0 0 10px var(--accent)' : 'none', flexShrink: 0 }}
+              />
+              <span style={{ color: on ? 'var(--text)' : 'var(--text-subtle)', fontSize: on ? 11 : 9.5, fontWeight: on ? 900 : 700, letterSpacing: '0.15em', whiteSpace: 'nowrap' }} className="group-hover:opacity-100">
+                {t.label.toUpperCase()}
+              </span>
+            </Link>
+          )
+        })}
+      </nav>
 
-      <div className="min-w-0 flex-1">
+      <div className="min-w-0 flex-1 md:pl-52">
         {/* Mobile tabs */}
         <div className="flex gap-2 overflow-x-auto p-3 md:hidden">
           {TABS.map((t) => (
@@ -139,14 +151,20 @@ export default async function ClassPage({ params, searchParams }: { params: { id
           ))}
         </div>
 
-        {/* Hero banner */}
-        <div className="px-6 py-8 md:px-10" style={{ background: 'var(--accent-soft)', borderBottom: '1px solid var(--border)' }}>
-          <div className="text-[10px] font-black tracking-[0.4em]" style={{ color: 'var(--text-subtle)' }}>CLASS</div>
-          <h1 className="mt-1 font-extrabold leading-tight" style={{ fontSize: 'clamp(28px, 4vw, 52px)', letterSpacing: '-1.5px' }}>{cls.name}</h1>
-          <div className="mt-2 flex flex-wrap items-center gap-3 text-sm" style={muted}>
-            <span>{memberList.length} student{memberList.length === 1 ? '' : 's'}</span>
-            <span>·</span>
-            <span>Code <b >{cls.join_code}</b></span>
+        {/* Hero banner — the class's emoji and colours */}
+        <div className="relative overflow-hidden px-6 py-9 md:px-10" style={{ background: look.gradient, color: '#fff' }}>
+          <div aria-hidden className="pointer-events-none absolute -right-4 -top-6 select-none leading-none" style={{ fontSize: 190, opacity: 0.22 }}>{look.emoji}</div>
+          <div className="relative flex items-center gap-5">
+            <div className="grid h-20 w-20 shrink-0 place-items-center rounded-3xl text-5xl" style={{ background: 'rgba(255,255,255,0.22)', border: '2px solid rgba(255,255,255,0.5)' }}>{look.emoji}</div>
+            <div className="min-w-0">
+              <div className="text-[10px] font-black tracking-[0.4em]" style={{ opacity: 0.8 }}>CLASS</div>
+              <h1 className="mt-1 font-extrabold leading-tight" style={{ fontSize: 'clamp(28px, 4vw, 52px)', letterSpacing: '-1.5px' }}>{cls.name}</h1>
+              <div className="mt-2 flex flex-wrap items-center gap-3 text-sm" style={{ opacity: 0.92 }}>
+                <span>{memberList.length} student{memberList.length === 1 ? '' : 's'}</span>
+                <span>·</span>
+                <span>Code <b className="tracking-[0.2em]">{cls.join_code}</b></span>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -173,7 +191,7 @@ export default async function ClassPage({ params, searchParams }: { params: { id
                   </div>
                 ))}
               </section>
-              <p className="text-sm" style={muted}>Students join at <b>Join a class</b> on their dashboard using code <b style={{ color: 'var(--text)' }}>{cls.join_code}</b>.</p>
+              <InviteCard code={cls.join_code} className={cls.name} />
             </div>
           )}
 
@@ -246,6 +264,8 @@ export default async function ClassPage({ params, searchParams }: { params: { id
           {tab === 'manage' && (
             <section>
               <h2 className="text-2xl font-extrabold">Manage class</h2>
+              <div className="mt-4"><InviteCard code={cls.join_code} className={cls.name} /></div>
+              <div className="mt-4"><ClassLookPicker classId={cls.id} emoji={cls.emoji ?? null} theme={cls.theme ?? null} /></div>
               <div className="mt-4 rounded-2xl p-5" style={glass}>
                 <div className="text-xs font-black tracking-widest" style={muted}>CLASS CODE</div>
                 <div className="text-4xl font-extrabold tracking-[0.25em]">{cls.join_code}</div>

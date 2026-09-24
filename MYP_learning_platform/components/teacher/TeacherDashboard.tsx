@@ -5,6 +5,7 @@ import { TEACH_SUBJECTS } from '@/lib/subjects'
 import { BIOLOGY_BANK } from '@/data/practice/biology-bank'
 import { CHEMISTRY_BANK } from '@/data/practice/chemistry-bank'
 import { PHYSICS_BANK } from '@/data/practice/physics-bank'
+import { classLook } from '@/lib/classes'
 import TeacherHub, { type HubAssignment, type HubClass, type HubResource } from './TeacherHub'
 
 const BANKS: Record<string, { topicCanonical?: string }[]> = { biology: BIOLOGY_BANK, chemistry: CHEMISTRY_BANK, physics: PHYSICS_BANK }
@@ -34,6 +35,7 @@ export default async function TeacherDashboard({ supabase, userId, name }: { sup
     : [{ data: [] as any[] }, { data: [] as any[] }]
 
   const hubClasses: HubClass[] = list.map((c) => ({
+    ...(() => { const l = classLook(c); return { emoji: l.emoji, from: l.theme.from, to: l.theme.to } })(),
     id: c.id,
     name: c.name,
     join_code: c.join_code,

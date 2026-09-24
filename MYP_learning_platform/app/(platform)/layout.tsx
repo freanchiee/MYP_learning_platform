@@ -71,17 +71,6 @@ export default async function PlatformLayout({ children }: { children: ReactNode
       >
         {/* Logo */}
         <Link href="/dashboard" className="flex items-center gap-2.5 select-none shrink-0 group">
-          <div
-            className="w-8 h-8 rounded-lg flex items-center justify-center transition-transform group-hover:scale-105"
-            style={{ background: 'var(--accent)' }}
-          >
-            <span
-              className="text-xs font-extrabold tracking-tight"
-              style={{ color: 'var(--text-on-accent)' }}
-            >
-              MYP
-            </span>
-          </div>
           <Wordmark
             className="font-bold text-sm tracking-wide hidden sm:block"
             style={{ color: 'var(--nav-fg)' }}

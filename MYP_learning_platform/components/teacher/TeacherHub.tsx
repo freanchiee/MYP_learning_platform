@@ -5,10 +5,11 @@ import Link from 'next/link'
 import { YEARS, liveActivitiesForYear } from '@/data/design/live/registry'
 import CreateClassForm from './CreateClassForm'
 import SubjectPicker from './SubjectPicker'
+import { CopyInviteButton } from './InviteCard'
 
 const NAV_H = 56
 
-export interface HubClass { id: string; name: string; join_code: string; students: number; assignments: number }
+export interface HubClass { id: string; name: string; join_code: string; students: number; assignments: number; emoji: string; from: string; to: string }
 export interface HubAssignment { id: string; classId: string; className: string; title: string; kind: string; subject: string; due_at: string | null; done: number; total: number }
 export interface HubResource { slug: string; label: string; icon: string; papers: number; topics: number }
 
@@ -68,14 +69,18 @@ export default function TeacherHub({ name, subjects, classes, assignments, resou
                   <div className="grid gap-4 sm:grid-cols-2">
                     {classes.map((c, i) => (
                       <div key={c.id} className="overflow-hidden rounded-2xl" style={glass}>
-                        <div className="h-16" style={{ background: `linear-gradient(120deg, hsl(${(i * 47 + 260) % 360} 55% 30%), hsl(${(i * 47 + 300) % 360} 60% 45%))` }} />
-                        <div className="p-4">
+                        <div className="relative h-24 overflow-hidden" style={{ background: `linear-gradient(135deg, ${c.from}, ${c.to})` }}>
+                          <span aria-hidden className="absolute -right-2 -top-4 select-none leading-none" style={{ fontSize: 110, opacity: 0.25 }}>{c.emoji}</span>
+                          <span className="absolute bottom-[-18px] left-4 grid h-14 w-14 place-items-center rounded-2xl text-3xl shadow-lg" style={{ background: 'var(--surface-elevated)', border: '3px solid var(--surface-elevated)' }}>{c.emoji}</span>
+                        </div>
+                        <div className="p-4 pt-6">
                           <Link href={`/classes/${c.id}`} className="text-lg font-extrabold hover:underline">{c.name}</Link>
                           <div className="mt-1 text-xs font-bold tracking-widest" style={{ color: 'var(--text-subtle)' }}>CODE <span style={{ color: 'var(--accent)' }}>{c.join_code}</span></div>
                           <div className="mt-2 text-sm" style={{ color: 'var(--text-muted)' }}>{c.students} student{c.students === 1 ? '' : 's'} · {c.assignments} assignment{c.assignments === 1 ? '' : 's'}</div>
                           <div className="mt-4 flex gap-2">
                             <Link href={`/classes/${c.id}?tab=library`} className="rounded-lg px-3 py-2 text-xs font-black tracking-wider" style={btnSolid}>CREATE ASSIGNMENT</Link>
                             <Link href={`/classes/${c.id}`} className="rounded-lg px-3 py-2 text-xs font-black tracking-wider" style={btnGhost}>OPEN</Link>
+                            <CopyInviteButton code={c.join_code} />
                           </div>
                         </div>
                       </div>
