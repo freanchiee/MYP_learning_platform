@@ -29,7 +29,7 @@ export default function GuideTopBar({ label = 'MYP Guides' }: { label?: string }
           <Link
             key={l.href}
             href={l.href}
-            className="rounded-lg px-3.5 py-1.5 text-sm font-semibold"
+            className="rounded-lg px-2 py-1.5 sm:px-3.5 text-sm font-semibold"
             style={{ color: 'var(--nav-fg)' }}
           >
             {l.label}
