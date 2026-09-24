@@ -16,7 +16,7 @@ export default function InterestForm({
   sourcePage,
   defaultInterests = [],
   heading = 'Want updates on the subjects and tools that matter to you?',
-  blurb = 'Tell me what you are interested in and I will email you when it is ready. Nothing is charged, and you can unsubscribe any time.',
+  blurb = 'Choose what interests you and leave your email. We may contact you about it. Nothing is charged, and you can unsubscribe or ask for your details to be deleted at any time.',
   defaultRole = '',
 }: {
   sourcePage: string
@@ -65,7 +65,7 @@ export default function InterestForm({
     return (
       <div className="rounded-2xl p-6" style={box}>
         <div className="text-xl font-extrabold" style={{ color: 'var(--text)' }}>You&apos;re on the list ✅</div>
-        <p className="mt-2 text-base leading-relaxed" style={{ color: 'var(--text-muted)' }}>Thank you — I&apos;ll be in touch about what you picked.</p>
+        <p className="mt-2 text-base leading-relaxed" style={{ color: 'var(--text-muted)' }}>Thank you. We may email you about what you picked, and you can unsubscribe at any time.</p>
       </div>
     )
   }

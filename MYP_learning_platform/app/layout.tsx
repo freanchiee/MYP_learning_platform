@@ -23,10 +23,10 @@ const jetbrainsMono = JetBrains_Mono({
 })
 
 const SITE_NAME = 'CritABCD'
-const SITE_TITLE = 'CritABCD — IB MYP e-Assessment'
+const SITE_TITLE = 'CritABCD — The Next-Gen IB MYP Learning Site'
 // ≤160 chars so it isn't truncated in search results.
 const SITE_DESC =
-  'CritABCD: IB MYP past papers, AI-graded practice and instant feedback across Physics, Chemistry, Biology, Humanities, Geography and Design.'
+  'The next-gen IB MYP learning site: guides, interactive labs, live classes, past papers and AI-graded practice across Sciences, Humanities and Design.'
 // Absolute so social/AI-preview scrapers always resolve it, independent of env.
 const OG_IMAGE = `${SITE_URL}/images/landing/critabcd-logo.png`
 
@@ -42,6 +42,9 @@ export const metadata: Metadata = {
   keywords: [
     'IB MYP',
     'MYP e-assessment',
+    'MYP learning site',
+    'MYP live classes',
+    'IB MYP resources',
     'MYP past papers',
     'IB MYP Physics',
     'IB MYP Chemistry',
@@ -95,7 +98,7 @@ const JSON_LD = {
       '@type': 'EducationalOrganization',
       '@id': `${SITE_URL}/#org`,
       name: SITE_NAME,
-      alternateName: 'CritABCD — IB MYP e-Assessment',
+      alternateName: 'CritABCD — The Next-Gen IB MYP Learning Site',
       url: SITE_URL,
       logo: OG_IMAGE,
       description: SITE_DESC,

@@ -71,9 +71,9 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
               MYP
             </span>
           </div>
-          <h1 className="text-2xl font-bold tracking-wide" style={{ color: 'var(--text)' }}>MYP Sciences</h1>
+          <h1 className="text-2xl font-bold tracking-wide" style={{ color: 'var(--text)' }}>CritABCD</h1>
           <p className="text-sm mt-1" style={{ color: 'var(--text-muted)' }}>
-            e-Assessment Platform
+            The Next-Gen MYP Learning Site
           </p>
         </div>
 
@@ -93,7 +93,7 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
           className="text-center text-xs mt-6 fade-up"
           style={{ color: 'var(--text-subtle)', animationDelay: '0.3s' }}
         >
-          IB MYP Sciences · AI-Powered Grading
+          Guides · Live classes · Past papers · AI-Powered Feedback
         </p>
       </div>
     </div>

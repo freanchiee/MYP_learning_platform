@@ -6,7 +6,7 @@ import InterestForm from '@/components/leads/InterestForm'
 // menu). Kept out of search results — it is a form, not content.
 export const metadata: Metadata = {
   title: 'Get updates',
-  description: 'Tell me which MYP subjects and tools you are interested in and I will email you when they are ready.',
+  description: 'Tell us which MYP subjects and tools you are interested in and we may email you about them.',
   robots: { index: false, follow: true },
 }
 

@@ -1,13 +1,15 @@
 /**
  * /admin/svg-preview — Quick visual test for SVG figure components.
- * Not auth-gated (admin-only path, local dev only).
+ * Admin-only (see lib/admin.ts). It used to have no gate at all.
  */
+import { requireAdmin } from '@/lib/admin'
 import DemolitionCraneDiagram from '@/components/exam/figures/DemolitionCraneDiagram'
 import SmokeAlarm from '@/components/exam/figures/SmokeAlarm'
 
 export const dynamic = 'force-dynamic'
 
-export default function SvgPreviewPage() {
+export default async function SvgPreviewPage() {
+  await requireAdmin()
   return (
     <main className="min-h-screen bg-bg p-8" style={{ backgroundImage: 'var(--bg-image)' }}>
       <h1 className="text-2xl font-bold text-ink mb-2">SVG Figure Preview</h1>

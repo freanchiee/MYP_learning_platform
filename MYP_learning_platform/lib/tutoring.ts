@@ -15,7 +15,7 @@ export const TUTORING_CONSENT_TEXT =
 export const TUTORING_COPY = {
   headline: 'One-to-one help for IB students',
   intro:
-    'Stuck on a criterion, a topic, or an assessment? Tell me what you need and I will reply personally to say whether I can help and what a first session could look like.',
+    'Stuck on a criterion, a topic, or an assessment? Tell us what you need and we will get back to you by email about whether we can help.',
   credentialLine: '',
 }
 
@@ -55,11 +55,11 @@ export interface TutoringLead {
 export const TUTORING_FAQ: { q: string; a: string }[] = [
   {
     q: 'What happens after I send the form?',
-    a: 'I read it myself and reply by email to say whether I can help and to suggest a first step. There is no automatic sign-up and no payment on this page.',
+    a: 'We read it and reply by email if we can help. There is no automatic sign-up and no payment on this page.',
   },
   {
     q: 'What details do you keep, and for how long?',
-    a: 'Only what you type into the form, plus the time you sent it and which wording of the consent box you agreed to. It is used only to reply about tutoring. Ask at any time and I will delete it.',
+    a: 'Only what you type into the form, plus the time you sent it and which wording of the consent box you agreed to. It is used only to reply about tutoring. Ask at any time and we will delete it.',
   },
   {
     q: 'I am under 16. Can I fill it in?',
@@ -67,6 +67,6 @@ export const TUTORING_FAQ: { q: string; a: string }[] = [
   },
   {
     q: 'Which subjects and levels do you help with?',
-    a: 'Tell me what you need in the message box — the subject, the level (MYP or DP) and what you are stuck on — and I will reply honestly about whether it is something I can help with.',
+    a: 'Tell us what you need in the message box — the subject, the level (MYP or DP) and what you are stuck on — and we will reply honestly about whether it is something we can help with.',
   },
 ]

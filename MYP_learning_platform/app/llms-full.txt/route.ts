@@ -14,7 +14,7 @@ export function GET() {
   out.push('# CritABCD — full public content')
   out.push('')
   out.push(
-    '> CritABCD is an IB Middle Years Programme (MYP) e-assessment and self-study platform: past papers, AI-graded practice against the four IB MYP criteria (A–D), and free guides and articles. This file contains the text of every public guide and article. Short index: ' +
+    '> CritABCD is a next-generation learning site for the IB Middle Years Programme (MYP): free guides and articles, interactive resources, live classes, past papers, and AI-graded practice against the four IB MYP criteria (A–D). This file contains the text of every public guide and article. Short index: ' +
       `${SITE_URL}/llms.txt`
   )
   out.push('')

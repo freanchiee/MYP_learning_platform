@@ -1,5 +1,7 @@
 'use server'
 
+import { assertAdminAction } from '@/lib/admin'
+
 import fs from 'fs'
 import path from 'path'
 import { revalidatePath } from 'next/cache'
@@ -339,6 +341,7 @@ export async function approveImage(
   taskPath: string,
   generatedPath: string,
 ): Promise<{ ok: boolean; error?: string }> {
+  await assertAdminAction()
   const entries = readSidecar(paperId)
   const idx = entries.findIndex(e => e.taskPath === taskPath)
   if (idx === -1) return { ok: false, error: `Entry not found: ${taskPath}` }
@@ -422,6 +425,7 @@ export async function regenerateImage(
   paperId: string,
   taskPath: string,
 ): Promise<{ ok: boolean; newUrl?: string; error?: string; visionUsed?: boolean; visionProvider?: string; visionError?: string; method?: string; generationProvider?: string; generationNote?: string }> {
+  await assertAdminAction()
   const entries = readSidecar(paperId)
   const idx = entries.findIndex(e => e.taskPath === taskPath)
   if (idx === -1) return { ok: false, error: `Entry not found: ${taskPath}` }
@@ -507,6 +511,7 @@ export async function editPromptAndRegenerate(
   taskPath: string,
   newPrompt: string,
 ): Promise<{ ok: boolean; newUrl?: string; error?: string }> {
+  await assertAdminAction()
   const entries = readSidecar(paperId)
   const idx = entries.findIndex(e => e.taskPath === taskPath)
   if (idx === -1) return { ok: false, error: `Entry not found: ${taskPath}` }
@@ -526,6 +531,7 @@ export async function uploadReplacementImage(
   taskPath: string,
   formData: FormData,
 ): Promise<{ ok: boolean; newUrl?: string; error?: string }> {
+  await assertAdminAction()
   const file = formData.get('file') as File | null
   if (!file || file.size === 0) return { ok: false, error: 'No file provided' }
 
@@ -578,6 +584,7 @@ export async function applySvgComponent(
   taskPath: string,
   componentName: string,
 ): Promise<{ ok: boolean; error?: string }> {
+  await assertAdminAction()
   if (!componentName.trim()) return { ok: false, error: 'Component name required' }
 
   const entries = readSidecar(paperId)
@@ -606,6 +613,7 @@ export async function flagImage(
   taskPath: string,
   flagNote: string,
 ): Promise<{ ok: boolean }> {
+  await assertAdminAction()
   const entries = readSidecar(paperId)
   const idx = entries.findIndex(e => e.taskPath === taskPath)
   if (idx === -1) return { ok: false }
@@ -634,6 +642,7 @@ export interface ReviewEntry extends SidecarEntry {
 }
 
 export async function loadReviewQueue(): Promise<ReviewEntry[]> {
+  await assertAdminAction()
   const paperDirs = fs.readdirSync(DATA_PAPERS)
     .filter(d => d !== '_archive' && fs.existsSync(path.join(DATA_PAPERS, d, 'image-classifications.json')))
 
@@ -651,6 +660,7 @@ export async function loadReviewQueue(): Promise<ReviewEntry[]> {
 }
 
 export async function loadAllEntries(): Promise<ReviewEntry[]> {
+  await assertAdminAction()
   const paperDirs = fs.readdirSync(DATA_PAPERS)
     .filter(d => d !== '_archive' && fs.existsSync(path.join(DATA_PAPERS, d, 'image-classifications.json')))
 

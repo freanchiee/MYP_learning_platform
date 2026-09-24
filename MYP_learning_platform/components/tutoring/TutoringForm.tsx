@@ -51,7 +51,7 @@ export default function TutoringForm({ sourcePage }: { sourcePage: string }) {
       <div className="rounded-2xl p-6" style={{ background: 'var(--surface-elevated)', border: '1px solid var(--border)' }}>
         <div className="text-xl font-extrabold" style={{ color: 'var(--text)' }}>Thank you — that&apos;s sent ✅</div>
         <p className="mt-2 text-base leading-relaxed" style={{ color: 'var(--text-muted)' }}>
-          I&apos;ll read it and reply by email. If you don&apos;t see a reply, check your spam folder.
+          We&apos;ll read it and reply by email if we can help. If you don&apos;t see a reply, check your spam folder.
         </p>
       </div>
     )

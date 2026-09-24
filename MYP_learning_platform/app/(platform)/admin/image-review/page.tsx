@@ -1,8 +1,6 @@
-import { redirect } from 'next/navigation'
-import { createClient } from '@/lib/supabase/server'
+import { requireAdmin } from '@/lib/admin'
 import { loadReviewQueue, loadAllEntries } from './actions'
 import ReviewCard from './ReviewCard'
-import { DEV_NO_AUTH } from '@/lib/dev-auth'
 
 export const dynamic = 'force-dynamic'
 
@@ -11,10 +9,8 @@ export default async function ImageReviewPage({
 }: {
   searchParams: Promise<{ subject?: string; paper?: string; status?: string; tab?: string }>
 }) {
-  // Auth gate
-  const supabase = await createClient()
-  const { data: { user } } = await supabase.auth.getUser()
-  if (!user && !DEV_NO_AUTH) redirect('/login')
+  // Admin gate (signed in is not enough — see lib/admin.ts)
+  await requireAdmin()
 
   const params = await searchParams
   const subjectFilter = params.subject ?? ''

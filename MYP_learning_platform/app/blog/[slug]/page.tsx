@@ -167,7 +167,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
             sourcePage={`/blog/${p.slug}`}
             defaultInterests={interestsForTags(p.tags)}
             heading="Want more like this?"
-            blurb="Tell me what you are studying or teaching and I will email you new guides, activities and tools. Nothing is charged, and you can unsubscribe any time."
+            blurb="Tell us what you are studying or teaching and we may email you about new guides, activities and tools. Nothing is charged, and you can unsubscribe any time."
           />
         </section>
       </main>

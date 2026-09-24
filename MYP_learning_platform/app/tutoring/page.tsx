@@ -8,7 +8,7 @@ import TutoringForm from '@/components/tutoring/TutoringForm'
 export const metadata: Metadata = {
   // Bare title — the root layout's template appends " · CritABCD".
   title: 'Online IB Tutoring',
-  description: 'One-to-one online help for IB MYP and DP students. Tell me what you are stuck on and I will reply personally.',
+  description: 'One-to-one online help for IB MYP and DP students. Tell us what you are stuck on and we will get back to you by email.',
   alternates: { canonical: '/tutoring' },
   openGraph: {
     title: 'Online IB Tutoring · CritABCD',
@@ -50,9 +50,9 @@ export default function TutoringPage() {
         )}
 
         <section className="mt-8">
-          <h2 className="text-2xl font-extrabold" style={{ color: 'var(--text)' }}>Tell me what you need</h2>
+          <h2 className="text-2xl font-extrabold" style={{ color: 'var(--text)' }}>Tell us what you need</h2>
           <p className="mt-2 text-base leading-relaxed" style={{ color: 'var(--text-muted)' }}>
-            It takes a minute. Nothing is charged here — I reply by email first.
+            It takes a minute. Nothing is charged here — we reply by email first.
           </p>
           <div className="mt-4">
             <TutoringForm sourcePage="/tutoring" />

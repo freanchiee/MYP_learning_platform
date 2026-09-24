@@ -282,7 +282,7 @@ export default function GameducationLanding() {
           defaultRole="teacher"
           defaultInterests={['Live classes for teachers (Gameducation)']}
           heading="Want early access to new live-class activities?"
-          blurb="Tell me which subjects you teach and I will email you when new activities are ready. Nothing is charged, and you can unsubscribe any time."
+          blurb="Tell us which subjects you teach and we may email you about new live-class activities. Nothing is charged, and you can unsubscribe any time."
         />
       </section>
 

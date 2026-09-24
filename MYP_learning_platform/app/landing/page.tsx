@@ -21,6 +21,8 @@ const NAV_LINKS = [
   { label: 'Blog',         href: '/blog' },
   { label: 'Design',       href: '/design' },
   { label: 'Gameducation', href: '/gameducation' },
+  { label: 'Tutoring',     href: '/tutoring' },
+  { label: 'Get updates',  href: '/updates' },
   { label: 'Dashboard',    href: '/dashboard' },
   { label: 'Settings',     href: '/settings' },
   { label: 'Login',        href: '/login' },
@@ -95,7 +97,7 @@ export default function LandingPage() {
         </div>
 
         {/* Desktop nav */}
-        <nav className="hidden md:flex items-center gap-8">
+        <nav className="hidden lg:flex items-center gap-6 xl:gap-8">
           {/* Papers dropdown */}
           <div className="relative" onMouseEnter={() => setPapersOpen(true)} onMouseLeave={() => setPapersOpen(false)}>
             <button className="text-[13px] font-medium tracking-wide opacity-60 hover:opacity-100 transition-opacity duration-200 flex items-center gap-1">
@@ -177,7 +179,7 @@ export default function LandingPage() {
 
         {/* Mobile hamburger */}
         <button
-          className="md:hidden w-10 h-10 flex flex-col justify-center gap-[5px] px-2"
+          className="lg:hidden w-10 h-10 flex flex-col justify-center gap-[5px] px-2"
           onClick={() => setMenuOpen(m => !m)}
         >
           <motion.span animate={{ rotate: menuOpen ? 45 : 0, y: menuOpen ? 6 : 0 }} className="block h-[1.5px] w-full rounded-full" style={{ background: 'currentColor' }} />
@@ -277,7 +279,7 @@ export default function LandingPage() {
             >
               IB MYP
             </span>
-            <span className="text-xs opacity-40 tracking-wide">e-Assessment Platform</span>
+            <span className="text-xs opacity-40 tracking-wide">The Next-Gen MYP Learning Site</span>
           </motion.div>
 
           {/* Main headline */}
@@ -302,8 +304,8 @@ export default function LandingPage() {
             transition={{ delay: 0.55, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             className="text-[15px] leading-relaxed opacity-70 max-w-sm mb-10"
           >
-            Past papers, AI-powered grading, instant feedback — all in one place
-            for IB MYP Physics, Chemistry, Biology, Humanities & Geography.
+            Guides, interactive labs, live classes, past papers and AI-powered
+            feedback — everything for IB MYP Sciences, Humanities, Geography and Design, in one place.
           </motion.p>
 
           {/* CTAs */}
@@ -329,15 +331,27 @@ export default function LandingPage() {
             </Link>
 
             <Link
-              href="/physics-papers"
+              href="/resources"
               className="flex items-center gap-2 px-7 py-3.5 rounded-full font-semibold text-[14px] tracking-wide transition-all duration-300 hover:scale-[1.03]"
               style={{
                 border: `1.5px solid ${dark ? 'rgba(255,255,255,0.2)' : 'var(--border-strong)'}`,
                 color: dark ? 'rgba(255,255,255,0.8)' : 'var(--accent)',
               }}
             >
-              Browse Papers
+              Explore free resources
             </Link>
+          </motion.div>
+
+          {/* Other ways in */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: loaded ? 1 : 0 }}
+            transition={{ delay: 0.8, duration: 0.7 }}
+            className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-[13px] font-medium opacity-60"
+          >
+            <Link href="/gameducation" className="hover:opacity-100 transition-opacity">🎮 Live classes</Link>
+            <Link href="/tutoring" className="hover:opacity-100 transition-opacity">🧑‍🏫 1:1 tutoring</Link>
+            <Link href="/updates" className="hover:opacity-100 transition-opacity">✉️ Get updates</Link>
           </motion.div>
         </motion.div>
 
@@ -483,7 +497,25 @@ export default function LandingPage() {
             title: 'Interactive Simulations',
             body: 'Explore osmosis, mitosis, Punnett squares, enzyme kinetics and food webs — all animated and interactive inside each paper.',
           },
-        ].map((f, i) => (
+          {
+            icon: '🎮',
+            title: 'Live Classes',
+            body: 'Teachers can run game-style live classes for MYP Design: students join with a code, work in real time, and the class sees a live dashboard.',
+            href: '/gameducation',
+          },
+          {
+            icon: '📚',
+            title: 'Free Guides & Articles',
+            body: 'Plain-English guides to each MYP subject and articles that pair every idea with a hands-on activity you can try straight away.',
+            href: '/guides',
+          },
+          {
+            icon: '🧑‍🏫',
+            title: '1:1 Tutoring',
+            body: 'Stuck on a criterion or a topic? Tell us what you need and ask about one-to-one help.',
+            href: '/tutoring',
+          },
+        ].map((f: { icon: string; title: string; body: string; href?: string }, i) => (
           <motion.div
             key={f.title}
             initial={{ opacity: 0, y: 28 }}
@@ -494,7 +526,15 @@ export default function LandingPage() {
             style={{ background: dark ? 'rgba(255,255,255,0.03)' : 'var(--surface)' }}
           >
             <div className="text-4xl mb-5">{f.icon}</div>
-            <h3 className="text-lg font-bold mb-3 tracking-tight">{f.title}</h3>
+            <h3 className="text-lg font-bold mb-3 tracking-tight">
+              {f.href ? (
+                <Link href={f.href} className="hover:underline">
+                  {f.title} →
+                </Link>
+              ) : (
+                f.title
+              )}
+            </h3>
             <p className="text-[14px] leading-relaxed opacity-55">{f.body}</p>
           </motion.div>
         ))}
@@ -522,8 +562,8 @@ export default function LandingPage() {
             Practice resources
           </h2>
           <p className="text-[14px] opacity-60 mt-2 max-w-md">
-            {RESOURCES.length} interactive quizzes, simulations and labs across Physics,
-            Biology &amp; IDL — open instantly, nothing to sign up for.
+            {RESOURCES.length} interactive quizzes, simulations, labs and games across Sciences,
+            Design and more — open instantly, nothing to sign up for.
           </p>
         </motion.div>
 
@@ -560,7 +600,7 @@ export default function LandingPage() {
             className="text-[clamp(2.5rem,6vw,5rem)] font-black text-white tracking-tight leading-[0.95]"
             style={{ letterSpacing: '-0.04em' }}
           >
-            Your IB MYP exam
+            Your MYP journey
             <br />
             <span style={{ color: 'var(--accent-fg)' }}>starts here.</span>
           </motion.h2>
@@ -572,8 +612,8 @@ export default function LandingPage() {
             transition={{ delay: 0.1, duration: 0.6 }}
             className="text-white/60 text-base max-w-md leading-relaxed"
           >
-            Practice every past paper. Get instant AI feedback. Track your
-            progress across all four MYP Science criteria.
+            Learn with guides and interactive labs. Practise past papers and get instant
+            AI feedback. Run or join a live class. Track your progress across the MYP criteria.
           </motion.p>
 
           <motion.div
@@ -590,6 +630,11 @@ export default function LandingPage() {
               Get Started — it&apos;s free
               <span>→</span>
             </Link>
+            <div className="mt-6 flex flex-wrap justify-center gap-x-6 gap-y-2 text-[13px] font-semibold text-white/70">
+              <Link href="/gameducation" className="hover:text-white transition-colors">Live classes</Link>
+              <Link href="/tutoring" className="hover:text-white transition-colors">1:1 tutoring</Link>
+              <Link href="/updates" className="hover:text-white transition-colors">Get updates</Link>
+            </div>
           </motion.div>
         </div>
       </motion.section>
@@ -600,8 +645,14 @@ export default function LandingPage() {
         style={{ borderTop: `1px solid ${dark ? 'rgba(255,255,255,0.08)' : 'var(--border)'}` }}
       >
         <Wordmark className="font-bold tracking-tight text-sm" />
-        <span>IB MYP e-Assessment Platform · {new Date().getFullYear()}</span>
-        <span>Physics · Chemistry · Biology · Humanities · Geography</span>
+        <span>CritABCD · The Next-Gen MYP Learning Site · {new Date().getFullYear()}</span>
+        <span className="flex flex-wrap justify-center gap-x-4 gap-y-1">
+          <Link href="/guides" className="hover:opacity-100">Guides</Link>
+          <Link href="/blog" className="hover:opacity-100">Blog</Link>
+          <Link href="/gameducation" className="hover:opacity-100">Live classes</Link>
+          <Link href="/tutoring" className="hover:opacity-100">Tutoring</Link>
+          <Link href="/updates" className="hover:opacity-100">Get updates</Link>
+        </span>
       </footer>
     </div>
   )
