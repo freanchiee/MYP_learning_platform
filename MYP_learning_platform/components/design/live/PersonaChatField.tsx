@@ -38,6 +38,8 @@ export default function PersonaChatField({
   const [text, setText] = useState('')
   const [sending, setSending] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [failedText, setFailedText] = useState<string | null>(null)
+  const [retryNote, setRetryNote] = useState<string | null>(null)
 
   const characterId = value?.characterId
   const messages = value?.messages || []
@@ -51,37 +53,78 @@ export default function PersonaChatField({
     setError(null)
   }
 
-  const send = async () => {
-    if (!text.trim() || !character || sending) return
+  // POST to the persona API, riding out a flaky connection: a dropped
+  // connection ("Failed to fetch" — common on busy school Wi-Fi) or a request
+  // that hangs is retried twice before giving up. A server that ANSWERS with an
+  // error (sign-in, validation, bad gateway) is reported straight away.
+  const requestReply = async (payload: object): Promise<string> => {
+    const delays = [0, 1200, 2500]
+    for (let attempt = 0; attempt < delays.length; attempt++) {
+      if (delays[attempt]) {
+        setRetryNote('Connection hiccup — trying again…')
+        await new Promise((r) => setTimeout(r, delays[attempt]))
+      }
+      const ctrl = new AbortController()
+      const timer = setTimeout(() => ctrl.abort(), 25000)
+      try {
+        const resp = await fetch('/api/persona-chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+          signal: ctrl.signal,
+        })
+        clearTimeout(timer)
+        const data = await resp.json().catch(() => null)
+        if (resp.ok && data?.reply) return data.reply as string
+        throw new Error(data?.error || `The persona couldn't answer (error ${resp.status}). Try again.`)
+      } catch (e: any) {
+        clearTimeout(timer)
+        const networkDrop = e?.name === 'AbortError' || e instanceof TypeError
+        if (!networkDrop) throw e
+      }
+    }
+    throw new Error('Couldn’t reach the server — check your connection.')
+  }
+
+  // `retryOf` re-sends a message that already sits in the transcript (its
+  // reply never arrived) instead of adding it a second time.
+  const send = async (retryOf?: string) => {
+    const outgoing = retryOf ?? text.trim()
+    if (!outgoing || !character || sending) return
     setError(null)
-    const userMsg: ChatMessage = { from: 'student', text: text.trim(), at: new Date().toISOString() }
-    const withUser: PersonaChatValue = { characterId: character.id, messages: [...messages, userMsg] }
-    onChange(withUser)
-    onPersist(withUser)
-    setText('')
+    setFailedText(null)
+    setRetryNote(null)
+
+    let transcript = messages
+    if (!retryOf) {
+      const userMsg: ChatMessage = { from: 'student', text: outgoing, at: new Date().toISOString() }
+      const withUser: PersonaChatValue = { characterId: character.id, messages: [...messages, userMsg] }
+      onChange(withUser)
+      onPersist(withUser)
+      setText('')
+      transcript = withUser.messages
+    }
+
     setSending(true)
     try {
-      const resp = await fetch('/api/persona-chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          sessionCode,
-          playerId,
-          characterId: character.id,
-          message: userMsg.text,
-          history: withUser.messages.slice(-10).map((m) => ({ role: m.from === 'student' ? 'user' : 'assistant', text: m.text })),
-        }),
+      const reply = await requestReply({
+        sessionCode,
+        playerId,
+        characterId: character.id,
+        message: outgoing,
+        // the API adds `message` itself, so history stops just before it
+        history: transcript.slice(0, -1).slice(-10).map((m) => ({ role: m.from === 'student' ? 'user' : 'assistant', text: m.text })),
       })
-      const data = await resp.json()
-      if (!resp.ok) throw new Error(data.error || 'Could not reach the persona.')
-      const charMsg: ChatMessage = { from: 'character', text: data.reply, at: new Date().toISOString() }
-      const withReply: PersonaChatValue = { characterId: character.id, messages: [...withUser.messages, charMsg] }
+      const charMsg: ChatMessage = { from: 'character', text: reply, at: new Date().toISOString() }
+      const withReply: PersonaChatValue = { characterId: character.id, messages: [...transcript, charMsg] }
       onChange(withReply)
       onPersist(withReply)
     } catch (e: any) {
       setError(e.message || 'Something went wrong — try again.')
+      setFailedText(outgoing)
     } finally {
       setSending(false)
+      setRetryNote(null)
     }
   }
 
@@ -156,10 +199,19 @@ export default function PersonaChatField({
               {m.text}
             </div>
           ))}
-          {sending && <div style={{ fontSize: 11.5, color: 'var(--text-muted)', fontStyle: 'italic' }}>{character.name} is typing…</div>}
+          {sending && <div style={{ fontSize: 11.5, color: 'var(--text-muted)', fontStyle: 'italic' }}>{retryNote || `${character.name} is typing…`}</div>}
         </div>
 
-        {error && <div style={{ fontSize: 11.5, color: '#D6425E' }}>⚠ {error}</div>}
+        {error && (
+          <div style={{ fontSize: 11.5, color: '#D6425E', display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
+            <span>⚠ {error}</span>
+            {failedText && (
+              <button onClick={() => send(failedText)} disabled={sending} style={{ ...btnStyle('#5C3FD6', true), fontSize: 11.5, padding: '4px 10px' }}>
+                ↻ Try again
+              </button>
+            )}
+          </div>
+        )}
 
         <div style={{ display: 'flex', gap: 6 }}>
           <input
@@ -172,7 +224,7 @@ export default function PersonaChatField({
             placeholder={`Ask ${character.name} something…`}
             style={inputStyle}
           />
-          <button onClick={send} disabled={sending || !text.trim()} style={btnStyle('#5C3FD6', true)}>
+          <button onClick={() => send()} disabled={sending || !text.trim()} style={btnStyle('#5C3FD6', true)}>
             Send
           </button>
         </div>
