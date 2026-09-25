@@ -15,6 +15,7 @@ import PersonalityPromptField from './PersonalityPromptField'
 import OpportunityCardsField from './OpportunityCardsField'
 import MakeCardsField from './MakeCardsField'
 import ProductCardsField from './ProductCardsField'
+import WorksheetOverview, { SectionMarker, StrandBadge } from './WorksheetOverview'
 import { SustainabilityGamePlayer } from './game/SustainabilityGame'
 import { getPersona } from '@/data/design/live/personas'
 import { useCelebration, CelebrationOverlay } from './Celebration'
@@ -596,21 +597,30 @@ function WorksheetPlayer({
     <div style={{ textAlign: 'right', fontSize: 11.5, fontWeight: 700, color: 'rgba(255,255,255,0.75)', marginBottom: 6 }}>
       {saveState === 'saving' ? '💾 Saving…' : saveState === 'saved' ? '✅ All changes saved' : '💾 Your work saves automatically'}
     </div>
+    <WorksheetOverview
+      stage={stage}
+      pct={Object.fromEntries(stage.sections.map((s) => [s.key, worksheetSectionPct(s, drafts[s.key])]))}
+      onJump={(k) => {
+        setOpenSection(k)
+        setTimeout(() => document.getElementById(`ws-${k}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 60)
+      }}
+    />
     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 14, alignItems: 'start' }}>
       {stage.sections.map((s) => {
         const pct = worksheetSectionPct(s, drafts[s.key])
         const open = openSection === s.key
         return (
-          <div key={s.key} style={{ ...cardStyle(pct >= 70 ? '#1FA98A' : 'var(--border)'), gridColumn: open ? '1 / -1' : undefined }}>
+          <div key={s.key} id={`ws-${s.key}`} style={{ ...cardStyle(pct >= 70 ? '#1FA98A' : 'var(--border)'), gridColumn: open ? '1 / -1' : undefined, scrollMarginTop: 72 }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', cursor: 'pointer' }} onClick={() => setOpenSection(open ? undefined : s.key)}>
               <div style={{ fontWeight: 800 }}>
                 {s.icon} {s.label}
-                {s.criterion && <span style={{ marginLeft: 8, fontSize: 10.5, fontWeight: 800, background: 'var(--surface-2)', border: '1.5px solid var(--border)', borderRadius: 999, padding: '2px 8px', color: 'var(--text-muted)' }}>Criterion {s.criterion}</span>}
+                {s.criterion && <span style={{ marginLeft: 8 }}><StrandBadge strand={s.criterion} compact /></span>}
               </div>
               <div style={{ fontSize: 12, color: 'var(--text-muted)' }}>{pct}%</div>
             </div>
             {open && (
               <div style={{ marginTop: 10, display: 'grid', gap: 10, maxWidth: s.fields.some((f) => f.type === 'personaChat') ? 960 : 720 }}>
+                <SectionMarker section={s} />
                 {s.blurb && <div style={{ fontSize: 12.5, color: 'var(--text-muted)' }}>{s.blurb}</div>}
                 {s.fields.map((f) => (
                   <WorksheetFieldInput

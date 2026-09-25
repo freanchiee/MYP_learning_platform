@@ -23,11 +23,39 @@ export const MYP4_PROTOTYPING: LiveActivityDefinition = {
       label: 'Persona & Empathy',
       icon: '❤️',
       intro: { title: '❤️ Week 1: Persona, Empathy Map & Anthropometrics', blurb: 'Pick a direction, build a persona and empathy map, and log the measurements that matter for your user — free explore, no need to click Next.' },
+      overview: {
+        brief: {
+          context:
+            'Most everyday objects are designed for an “average” person. For someone with limited grip, low vision or sensory sensitivity, an ordinary jar, label or classroom can be hard to use. Good designers start from one real person, not the average.',
+          task: 'Choose a direction, build a persona and an empathy map for ONE specific user, record the measurements that matter for them, make a first prototype, and plan the research you still need.',
+          produce: [
+            'A direction and a “How might we…” opportunity for a named user',
+            'A persona with the traits that matter for the design problem',
+            'An empathy map: Says, Thinks, Does, Feels',
+            'Anthropometric measurements, each with a reason',
+            'A first prototype with a build log, and a research plan (Week 2)',
+          ],
+          assessedOn: ['A.i', 'A.ii', 'A.iii', 'A.iv', 'C.i', 'C.iii'],
+          time: 'Weeks 1–2 · work at your own pace, your work saves automatically',
+        },
+        flow: [
+          { strand: 'A.i', title: 'Justify the need', asks: 'Explain why this problem matters, for a specified client.', sections: ['direction', 'opportunity', 'persona'] },
+          { strand: 'A.ii', title: 'Research your user', asks: 'Gather primary and secondary research: interviews and simulated voices.', sections: ['personaChat', 'famous'] },
+          { strand: 'A.i', title: 'Understand your user', asks: 'Turn what you learned into an empathy map.', sections: ['empathy'] },
+          { strand: 'A.ii', title: 'Measure what matters', asks: 'Record anthropometrics and say why each one matters.', sections: ['anthro'] },
+          { strand: 'C.i', title: 'Plan your make', asks: 'Choose what to build and plan your first steps.', where: 'next stage · What Will You Make?' },
+          { strand: 'C.iii', title: 'Build and reflect', asks: 'Follow the plan, then justify what you change.', where: 'next stage · What Will You Make?' },
+          { strand: 'A.ii', title: 'Plan the research', asks: 'Identify and prioritise the research you still need.', where: 'Week 2 · Research Plan' },
+          { strand: 'A.iv', title: 'Teacher review', asks: 'Your teacher reviews everything against A.i–A.iv (including A.iii and A.iv).', where: 'Criterion A Review' },
+        ],
+      },
       sections: [
         {
           key: 'direction',
           label: 'Direction',
           icon: '🧭',
+          criterion: 'A.i',
+          strandLabel: 'Justify the need for a solution, for a specified client',
           fields: [
             { key: 'direction', label: 'Accessibility-focused direction', type: 'select', options: ['One-handed tool', 'Low-vision object', 'Sensory organiser', 'Elderly-friendly kitchen aid', 'Classroom accessibility', 'Something else'] },
           ],
@@ -36,6 +64,9 @@ export const MYP4_PROTOTYPING: LiveActivityDefinition = {
           key: 'opportunity',
           label: 'Opportunity',
           icon: '💡',
+          criterion: 'A.i',
+          strandLabel: 'Justify the need for a solution, for a specified client',
+          brief: { title: 'Brief: write a problem worth solving', points: ['Name ONE real person, not “people” or “everyone”.', 'Say what is hard for them and why it matters to them.', 'Start from a starting-point card, then make it your own.'] },
           blurb:
             'Not sure where to start? These starting points are built for an online class: each one says how to prototype it with things at home, what to measure, and how to test it on a video call. Pick one, then make it your own.',
           fields: [
@@ -60,6 +91,9 @@ export const MYP4_PROTOTYPING: LiveActivityDefinition = {
           key: 'persona',
           label: 'Persona',
           icon: '🧑',
+          criterion: 'A.i',
+          strandLabel: 'Justify the need for a solution, for a specified client',
+          brief: { title: 'Brief: describe your client', points: ['Choose a persona you can learn from: a consenting person, an approved pack character or a composite from research.', 'List only the traits that matter for THIS design problem (grip, vision, hearing, reach…).'] },
           fields: [
             { key: 'name', label: 'Persona name', type: 'text', placeholder: 'e.g. Marcus, 34' },
             { key: 'type', label: 'Persona type', type: 'select', options: ['A consenting classmate or family member', 'An approved persona-pack character', 'A composite persona based on real research'] },
@@ -82,6 +116,9 @@ export const MYP4_PROTOTYPING: LiveActivityDefinition = {
           key: 'personaChat',
           label: 'Interview',
           icon: '🎭',
+          criterion: 'A.ii',
+          strandLabel: 'Identify and prioritise the primary and secondary research needed',
+          brief: { title: 'Brief: gather primary research', points: ['Ask about what they do, not what they would like. Ask “why” twice.', 'Note answers you can use in the empathy map, and answers you should double-check.'] },
           blurb: 'Optional but recommended: pick a persona-pack character and interview them — use what they tell you to fill in the empathy map below.',
           fields: [{ key: 'chat', label: 'Interview a persona-pack character', type: 'personaChat' }],
         },
@@ -89,6 +126,8 @@ export const MYP4_PROTOTYPING: LiveActivityDefinition = {
           key: 'famous',
           label: 'Famous voice',
           icon: '🌟',
+          criterion: 'A.ii',
+          strandLabel: 'Identify and prioritise the primary and secondary research needed',
           blurb:
             'Optional: pick a well-known person whose everyday experience matches your track, copy the prompt into your school’s approved AI assistant, and run a simulated interview. It’s practice and inspiration — not a substitute for talking to a real user.',
           fields: [
@@ -112,6 +151,17 @@ export const MYP4_PROTOTYPING: LiveActivityDefinition = {
           key: 'empathy',
           label: 'Empathy map',
           icon: '💭',
+          criterion: 'A.i',
+          strandLabel: 'Justify the need for a solution, for a specified client',
+          brief: {
+            title: 'Brief: before you fill in the map',
+            points: [
+              'An empathy map is a picture of ONE person’s experience of the problem, built from your interview and research.',
+              'Says and Does can be observed. Thinks and Feels have to be inferred, so back them with evidence and mark guesses as assumptions.',
+              'Use your persona’s traits and interview answers. Open the chat bubble to re-check what they told you.',
+              'Be specific: “avoids carrying two things at once” beats “finds it hard”.',
+            ],
+          },
           fields: [
             {
               key: 'says',
@@ -171,6 +221,9 @@ export const MYP4_PROTOTYPING: LiveActivityDefinition = {
           key: 'anthro',
           label: 'Anthropometrics',
           icon: '📏',
+          criterion: 'A.ii',
+          strandLabel: 'Identify and prioritise the primary and secondary research needed',
+          brief: { title: 'Brief: measure the person, not the object', points: ['Pick measurements your design must fit: grip diameter, reach, hand span, force.', 'For each, say WHY it matters. A number with no reason is not research.'] },
           fields: [
             {
               key: 'measurements',
@@ -202,6 +255,8 @@ export const MYP4_PROTOTYPING: LiveActivityDefinition = {
           key: 'choose',
           label: 'Choose your make',
           icon: '🃏',
+          criterion: 'C.i',
+          strandLabel: 'Construct a logical plan for what you will make',
           blurb: 'Your track is listed first. Stuck? Hit 🎲 Surprise me. Have your own idea? Play the wild card.',
           fields: [{ key: 'pick', label: 'What will you make?', type: 'makeCards' }],
         },
@@ -209,6 +264,8 @@ export const MYP4_PROTOTYPING: LiveActivityDefinition = {
           key: 'plan',
           label: 'Make plan',
           icon: '📐',
+          criterion: 'C.i',
+          strandLabel: 'Construct a logical plan that others could follow',
           blurb: 'Decide what your first version must prove, then plan your first three steps.',
           fields: [
             {
@@ -241,6 +298,8 @@ export const MYP4_PROTOTYPING: LiveActivityDefinition = {
           key: 'build',
           label: 'Build log',
           icon: '🔨',
+          criterion: 'C.iii',
+          strandLabel: 'Follow your plan to make the solution, and justify changes',
           blurb: 'Build your first version, then tell the story of what happened. Add a dated journal entry — photos go in your own design folder.',
           fields: [
             { key: 'date', label: 'Date', type: 'text', placeholder: 'e.g. 5 Oct' },
@@ -278,6 +337,9 @@ export const MYP4_PROTOTYPING: LiveActivityDefinition = {
           key: 'plan',
           label: 'Research plan',
           icon: '📋',
+          criterion: 'A.ii',
+          strandLabel: 'Identify and prioritise the primary and secondary research needed',
+          brief: { title: 'Brief: research you still need', points: ['List what you do not know yet, then choose the method that would answer it.', 'Prioritise: what must you find out first? Mix primary (interview, observation) and secondary (reading).'] },
           fields: [
             {
               key: 'rows',

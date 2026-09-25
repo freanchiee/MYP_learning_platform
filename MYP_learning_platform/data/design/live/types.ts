@@ -87,6 +87,25 @@ export interface WorksheetField {
   points?: number
 }
 
+/** Short, student-facing brief that leads a stage: why, what, what you hand in, how it is assessed. */
+export interface ActivityBrief {
+  context: string
+  task: string
+  produce: string[]
+  /** Criterion strands this activity evidences, e.g. ['A.i', 'A.ii']. */
+  assessedOn: string[]
+  time?: string
+}
+
+/** One step of the activity's journey, tagged with the criterion strand it evidences. */
+export interface FlowStep {
+  strand: string // e.g. 'A.i'
+  title: string
+  asks: string // one line: what the strand asks of the student
+  sections?: string[] // section keys in THIS stage that make up the step (clickable)
+  where?: string // where it happens when it is in another stage, e.g. 'Week 2 · Research Plan'
+}
+
 export interface WorksheetSection {
   key: string
   label: string
@@ -95,6 +114,10 @@ export interface WorksheetSection {
   fields: WorksheetField[]
   /** MYP criterion strand this section evidences, e.g. 'A.ii' — shown as a chip so work is organised criterion by criterion. */
   criterion?: string
+  /** What that strand asks, in the student's words, e.g. 'Justify the need, for a specified client'. */
+  strandLabel?: string
+  /** A short brief shown at the top of the open section: what this step is and how to do it well. */
+  brief?: { title: string; points: string[] }
   /** Minimum filled-field ratio (0–1) counted as "meaningfully complete" for the progress dashboard. */
   completenessTarget?: number
 }
@@ -105,6 +128,8 @@ export interface WorksheetStage {
   label: string
   icon: string
   intro?: { title: string; blurb: string }
+  /** Activity brief + criteria-wise flow shown before the sections. */
+  overview?: { brief?: ActivityBrief; flow?: FlowStep[] }
   sections: WorksheetSection[]
 }
 
