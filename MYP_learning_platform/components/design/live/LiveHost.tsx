@@ -99,7 +99,7 @@ export default function LiveHost({ activity }: { activity: LiveActivityDefinitio
 
   useLiveRow<LiveSessionRow>('live_sessions', 'code', code, setSession)
   useLiveTable<LivePlayerRow>('live_players', 'session_code', code, setPlayers, true, 'joined_at')
-  useLiveTable<LiveGradeRow>('live_grades', 'session_code', code, setGrades, !!activity.stages.find((s) => s.type === 'grading'))
+  useLiveTable<LiveGradeRow>('live_grades', 'session_code', code, setGrades, !!activity.stages.find((s) => s.type === 'grading' || s.type === 'worksheet'))
   useLiveTable<LiveEventRow>('live_events', 'session_code', code, setEvents, !!code)
 
   // A student's chat message counts as "unread" for the host until the host
@@ -274,6 +274,7 @@ export default function LiveHost({ activity }: { activity: LiveActivityDefinitio
 
       {reviewPlayerId && stage?.type === 'worksheet' && (
         <WorksheetReviewModal
+          activity={activity}
           stage={stage}
           player={players.find((p) => p.id === reviewPlayerId)!}
           grade={grades.find((g) => g.player_id === reviewPlayerId)}
@@ -826,7 +827,8 @@ function GradeCard({
         .upsert({
           session_code: sessionCode,
           player_id: player.id,
-          scores: Object.fromEntries(stage.strands.map((s) => [s.key, scores[s.key] ? Number(scores[s.key]) : null])),
+          // keep every other key on the row (worksheet scores, revealed exemplars); only the strands change
+          scores: { ...(grade?.scores || {}), ...Object.fromEntries(stage.strands.map((s) => [s.key, scores[s.key] ? Number(scores[s.key]) : null])) },
           feedback,
           graded: true,
           updated_at: new Date().toISOString(),

@@ -18,6 +18,7 @@
 // same strands at the end.
 
 import type { LiveActivityDefinition } from './types'
+import { MYP5_EXEMPLARS } from './myp5-exemplars'
 
 export const MYP5_SUSTAINABILITY: LiveActivityDefinition = {
   id: 'myp5-sustainability',
@@ -26,6 +27,8 @@ export const MYP5_SUSTAINABILITY: LiveActivityDefinition = {
   subtitle: 'Play the materials economy in 3D, meet carbon credits, then design a digital solution for a real community — criterion by criterion.',
   icon: '🌍',
   theme: { accent: '#1E7A5F', from: '#0B1F17', via: '#123526', to: '#1E4A36' },
+  // Model answers written for the community each student chose in "Community & need".
+  exemplarsByChoice: { from: { stage: 'community', section: 'need', field: 'community' }, noun: 'community', byField: MYP5_EXEMPLARS },
   stages: [
     {
       type: 'boardGame',

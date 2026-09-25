@@ -18,6 +18,8 @@ import ProductCardsField from './ProductCardsField'
 import WorksheetOverview, { SectionMarker, StrandBadge } from './WorksheetOverview'
 import CriteriaRingCard from './CriteriaRing'
 import StageFeedback from './StageFeedback'
+import { StudentExemplarCard } from './ExemplarReveal'
+import { exemplarsFor, revealKey } from '@/lib/design-live/exemplars'
 import { feedbackOf } from '@/lib/design-live/feedback'
 import { CRITERION_LETTERS } from '@/lib/design-live/criteria'
 import { SustainabilityGamePlayer } from './game/SustainabilityGame'
@@ -292,7 +294,7 @@ export default function LiveJoin({ activity, initialCode }: { activity: LiveActi
             <McqPlayer activity={activity} stage={stage} session={session} me={me} patchMyData={patchMyData} addPoints={addPoints} />
           )}
           {session.status === 'active' && stage?.type === 'worksheet' && (
-            <WorksheetPlayer stage={stage} allStages={activity.stages} me={me} sessionCode={code} patchMyData={patchMyData} reportDraft={reportDraft} celebrate={celebrate} />
+            <WorksheetPlayer stage={stage} allStages={activity.stages} activity={activity} grade={myGrade} me={me} sessionCode={code} patchMyData={patchMyData} reportDraft={reportDraft} celebrate={celebrate} />
           )}
           {session.status === 'active' && stage?.type === 'openIdeas' && (
             <OpenIdeasPlayer activity={activity} stage={stage} session={session} me={me} patchMyData={patchMyData} reportDraft={reportDraft} celebrate={celebrate} />
@@ -314,7 +316,7 @@ export default function LiveJoin({ activity, initialCode }: { activity: LiveActi
                 <div>
                   <div style={{ fontWeight: 800, marginBottom: 6 }}>Your feedback</div>
                   <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 8 }}>
-                    {Object.entries(myGrade.scores).map(([k, v]) => (
+                    {Object.entries(myGrade.scores).filter(([k]) => !k.startsWith('reveal:')).map(([k, v]) => (
                       <span key={k} style={{ fontSize: 12, fontWeight: 700, background: 'var(--surface-2)', borderRadius: 8, padding: '4px 8px' }}>
                         {k}: {v ?? '–'}
                       </span>
@@ -490,6 +492,8 @@ function McqPlayer({
 function WorksheetPlayer({
   stage,
   allStages,
+  activity,
+  grade,
   me,
   sessionCode,
   patchMyData,
@@ -498,6 +502,8 @@ function WorksheetPlayer({
 }: {
   stage: WorksheetStage
   allStages: LiveStage[]
+  activity: LiveActivityDefinition
+  grade: LiveGradeRow | null
   me: LivePlayerRow
   sessionCode: string
   patchMyData: (stageKey: string, patch: Record<string, any>) => void
@@ -667,8 +673,8 @@ function WorksheetPlayer({
                 <SectionMarker section={s} progress={criteriaProgress} present={criteriaPresent} />
                 {s.blurb && <div style={{ fontSize: 12.5, color: 'var(--text-muted)' }}>{s.blurb}</div>}
                 {s.fields.map((f) => (
+                  <div key={f.key} style={{ display: 'grid', gap: 8 }}>
                   <WorksheetFieldInput
-                    key={f.key}
                     field={f}
                     value={drafts[s.key]?.[f.key]}
                     onChange={(v) => updateField(s.key, f.key, v)}
@@ -678,6 +684,10 @@ function WorksheetPlayer({
                     playerId={me.id}
                     lookup={(stageKey, sectionKey, fieldKey) => me.data?.[stageKey]?.[sectionKey]?.[fieldKey]}
                   />
+                  {grade?.scores?.[revealKey(stage.key, s.key, f.key)] ? (
+                    <StudentExemplarCard resolved={exemplarsFor(activity.exemplarsByChoice, stage.key, s.key, f, me.data)} noun={activity.exemplarsByChoice?.noun} />
+                  ) : null}
+                  </div>
                 ))}
                 <button onClick={() => saveSection(s.key)} style={{ ...btnStyle('#1FA98A', true), justifySelf: 'start' }}>
                   {savedFlash === s.key ? '✅ Saved!' : '💾 Save'}

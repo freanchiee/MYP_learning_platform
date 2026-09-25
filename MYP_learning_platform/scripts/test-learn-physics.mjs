@@ -71,4 +71,31 @@ back = nav.stateForBack(back.state, 1) // quiz -> game
 ok('second back restores the game exactly', back.restored && back.state.game.phase === 2 && back.state.game.credits === 7)
 const legacy = nav.stateForBack({ mcqIndex: 1 }, 1)
 ok('back with nothing stashed (older session) starts fresh, and says so', legacy.restored === false && legacy.state._stash[1].mcqIndex === 1)
+
+// ---- community-specific exemplars: full coverage, resolver behaves ----
+const out4 = path.resolve('node_modules/.cache/myp5.mjs')
+await build({ entryPoints: ['data/design/live/myp5-sustainability.ts'], outfile: path.resolve('node_modules/.cache/myp5/myp5-sustainability.mjs'), format: 'esm', bundle: true, logLevel: 'silent' })
+await build({ entryPoints: ['lib/design-live/exemplars.ts'], outfile: path.resolve('node_modules/.cache/myp5/exemplars.mjs'), format: 'esm', bundle: true, logLevel: 'silent' })
+const act = (await import(pathToFileURL(path.resolve('node_modules/.cache/myp5/myp5-sustainability.mjs')).href)).MYP5_SUSTAINABILITY
+const ex = await import(pathToFileURL(path.resolve('node_modules/.cache/myp5/exemplars.mjs')).href)
+const cfg = act.exemplarsByChoice
+const communities = act.stages.find((x) => x.key === 'community').sections.find((x) => x.key === 'need').fields.find((x) => x.key === 'community').options
+let missing = 0, badEx = 0, total = 0
+const fieldsByPath = {}
+for (const st of act.stages) if (st.type === 'worksheet') for (const sec of st.sections) for (const f of sec.fields) fieldsByPath[`${st.key}.${sec.key}.${f.key}`] = f
+for (const [p2, byC] of Object.entries(cfg.byField)) {
+  if (!fieldsByPath[p2]) { badEx++; console.log('exemplar key points at no field:', p2); continue }
+  for (const c of communities) { total++; if (!byC[c] || byC[c].length < 2 || byC[c].some((t) => t.trim().length < 30)) { missing++; console.log('missing/short:', p2, c) } }
+  for (const c of Object.keys(byC)) if (!communities.includes(c)) { badEx++; console.log('unknown community', c, 'in', p2) }
+}
+ok('every mapped field has 2+ real exemplars for all 5 communities', missing === 0 && badEx === 0, `${Object.keys(cfg.byField).length} fields x ${communities.length} communities = ${total}`)
+const needField = fieldsByPath['community.need.need']
+const data = { community: { need: { community: 'Factory Worker' } } }
+const r = ex.exemplarsFor(cfg, 'community', 'need', needField, data)
+ok('resolver returns the Factory Worker exemplars', r.specific && r.choice === 'Factory Worker' && r.texts[0].includes('factory workers'))
+const r2 = ex.exemplarsFor(cfg, 'community', 'need', needField, {})
+ok('no community chosen -> general exemplars, flagged as not specific', !r2.specific && r2.texts.length === needField.exemplars.length)
+const r3 = ex.exemplarsFor(cfg, 'ideation', 'spec', fieldsByPath['ideation.spec.mustnot'], data)
+ok('a field with no community version falls back to its general exemplars', !r3.specific && r3.choice === 'Factory Worker')
+ok('reveal key format', ex.revealKey('community', 'need', 'need') === 'reveal:community:need:need')
 process.exit(fail ? 1 : 0)

@@ -8,7 +8,9 @@ import { getPersona } from '@/data/design/live/personas'
 import { getPersonality } from '@/data/design/live/personalities'
 import { getOpportunity } from '@/data/design/live/opportunities'
 import { getMake, isWildCard } from '@/data/design/live/makes'
-import type { WorksheetStage, WorksheetField, WorksheetSection } from '@/data/design/live/types'
+import type { LiveActivityDefinition, WorksheetStage, WorksheetField, WorksheetSection } from '@/data/design/live/types'
+import { chosenValue, exemplarsFor, revealKey } from '@/lib/design-live/exemplars'
+import { ExemplarControls } from './ExemplarReveal'
 import type { LivePlayerRow, LiveGradeRow } from '@/lib/design-live/types'
 import { cardStyle, btnStyle, inputStyle, Avatar } from './ui'
 
@@ -26,7 +28,7 @@ function fieldAnswerText(field: WorksheetField, value: unknown): string {
 
 /** The score this section would get if the teacher accepted the fuzzy-match
  *  suggestion outright — sum of each scoreable field's best-exemplar match. */
-function sectionAutoScore(section: WorksheetSection, data: Record<string, unknown>): { auto: number; max: number } {
+function sectionAutoScore(section: WorksheetSection, data: Record<string, unknown>, activity: LiveActivityDefinition, stageKey: string, playerData: unknown): { auto: number; max: number } {
   let auto = 0
   let max = 0
   section.fields.forEach((f) => {
@@ -34,12 +36,21 @@ function sectionAutoScore(section: WorksheetSection, data: Record<string, unknow
     if (!f.exemplars?.length && !f.celebrateKeywords?.length) return
     const points = f.points ?? 10
     max += points
-    auto += fuzzyMatchPoints(fieldAnswerText(f, data?.[f.key]), f.exemplars, f.celebrateKeywords, points)
+    // match against the model answers written for THIS student's community when there are any
+    auto += fuzzyMatchPoints(fieldAnswerText(f, data?.[f.key]), exemplarsFor(activity.exemplarsByChoice, stageKey, section.key, f, playerData).texts, f.celebrateKeywords, points)
   })
   return { auto, max }
 }
 
 const scoreKey = (stageKey: string, sectionKey: string) => `ws:${stageKey}:${sectionKey}`
+
+/** The grade row's scores with its reveal flags set to exactly `revealed` (everything else kept). */
+function mergeReveals(scores: Record<string, number | null> | undefined, revealed: Set<string>): Record<string, number | null> {
+  const next: Record<string, number | null> = {}
+  for (const [k, v] of Object.entries(scores || {})) if (!k.startsWith('reveal:')) next[k] = v
+  revealed.forEach((k) => (next[k] = 1))
+  return next
+}
 
 /** Click a student's name on the worksheet host dashboard to open this: a
  *  window onto everything they've written for the current worksheet stage,
@@ -51,23 +62,30 @@ const scoreKey = (stageKey: string, sectionKey: string) => `ws:${stageKey}:${sec
  *  (`ws:<stageKey>:<sectionKey>`), alongside whatever the grading stage's
  *  strand scores use — no new table needed. */
 export function WorksheetReviewModal({
+  activity,
   stage,
   player,
   grade,
   sessionCode,
   onClose,
 }: {
+  activity: LiveActivityDefinition
   stage: WorksheetStage
   player: LivePlayerRow
   grade?: LiveGradeRow
   sessionCode: string
   onClose: () => void
 }) {
+  const cfg = activity.exemplarsByChoice
+  const choice = chosenValue(cfg, player.data)
+  // Which exemplars this student can currently see (stored on their grade row as reveal:<stage>:<section>:<field> = 1).
+  const [revealed, setRevealed] = useState<Set<string>>(() => new Set(Object.entries(grade?.scores || {}).filter(([k, v]) => k.startsWith('reveal:') && v).map(([k]) => k)))
+  const [revealBusy, setRevealBusy] = useState(false)
   const [scores, setScores] = useState<Record<string, string>>(() => {
     const init: Record<string, string> = {}
     stage.sections.forEach((s) => {
       const saved = grade?.scores?.[scoreKey(stage.key, s.key)]
-      const { auto } = sectionAutoScore(s, player.data?.[stage.key]?.[s.key] || {})
+      const { auto } = sectionAutoScore(s, player.data?.[stage.key]?.[s.key] || {}, activity, stage.key, player.data)
       init[s.key] = saved != null ? String(saved) : String(auto)
     })
     return init
@@ -75,10 +93,29 @@ export function WorksheetReviewModal({
   const [saving, setSaving] = useState(false)
   const [savedFlash, setSavedFlash] = useState(false)
 
+  // Reveal / hide exemplar(s) for this student straight away (no need to press Save scores).
+  const toggleReveal = async (keys: string[]) => {
+    const on = keys.some((k) => !revealed.has(k)) // if any is hidden, reveal all; otherwise hide all
+    const next = new Set(revealed)
+    keys.forEach((k) => (on ? next.add(k) : next.delete(k)))
+    setRevealed(next)
+    setRevealBusy(true)
+    const { error } = await createClient().from('live_grades').upsert({
+      session_code: sessionCode,
+      player_id: player.id,
+      scores: mergeReveals(grade?.scores, next),
+      feedback: grade?.feedback || '',
+      graded: grade?.graded ?? false,
+      updated_at: new Date().toISOString(),
+    })
+    setRevealBusy(false)
+    if (error) setRevealed(revealed) // could not save: put the button back
+  }
+
   const save = async () => {
     setSaving(true)
     const sb = createClient()
-    const nextScores = { ...(grade?.scores || {}) }
+    const nextScores = mergeReveals(grade?.scores, revealed)
     stage.sections.forEach((s) => {
       const n = Number(scores[s.key])
       nextScores[scoreKey(stage.key, s.key)] = Number.isFinite(n) ? n : null
@@ -109,6 +146,11 @@ export function WorksheetReviewModal({
             <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontWeight: 800 }}>
               <Avatar seed={player.id} size={30} />
               {player.name}
+              {cfg && (
+                <span style={{ fontSize: 11, fontWeight: 800, background: 'var(--surface-2)', border: '1.5px solid var(--border)', borderRadius: 999, padding: '2px 9px', color: 'var(--text-muted)' }}>
+                  {cfg.noun}: {choice ?? 'not chosen yet'}
+                </span>
+              )}
             </div>
             <button onClick={onClose} style={{ background: 'transparent', border: 'none', cursor: 'pointer', fontSize: 18, color: 'var(--text-muted)' }}>
               ✕
@@ -118,7 +160,7 @@ export function WorksheetReviewModal({
           <div style={{ display: 'grid', gap: 14 }}>
             {stage.sections.map((s) => {
               const data = player.data?.[stage.key]?.[s.key] || {}
-              const { auto, max } = sectionAutoScore(s, data)
+              const { auto, max } = sectionAutoScore(s, data, activity, stage.key, player.data)
               return (
                 <div key={s.key} style={{ border: '1.5px solid var(--border)', borderRadius: 10, padding: 10 }}>
                   <div style={{ fontWeight: 800, fontSize: 13, marginBottom: 6 }}>
@@ -174,6 +216,8 @@ export function WorksheetReviewModal({
                         )
                       }
                       const text = fieldAnswerText(f, data[f.key])
+                      const resolved = exemplarsFor(cfg, stage.key, s.key, f, player.data)
+                      const rk = revealKey(stage.key, s.key, f.key)
                       const points = f.points ?? 10
                       const scoreable = (f.type === 'text' || f.type === 'textarea') && ((f.exemplars?.length ?? 0) > 0 || (f.celebrateKeywords?.length ?? 0) > 0)
                       return (
@@ -182,17 +226,31 @@ export function WorksheetReviewModal({
                             <strong style={{ color: 'var(--text-muted)', fontSize: 11 }}>{f.label}</strong>
                             {scoreable && (
                               <span style={{ fontSize: 10.5, fontWeight: 700, color: '#1FA98A', whiteSpace: 'nowrap' }}>
-                                Auto: {fuzzyMatchPoints(text, f.exemplars, f.celebrateKeywords, points)}/{points}
+                                Auto: {fuzzyMatchPoints(text, resolved.texts, f.celebrateKeywords, points)}/{points}
                               </span>
                             )}
                           </div>
                           <div style={{ whiteSpace: 'pre-wrap', color: text ? 'var(--text)' : 'var(--text-muted)', fontStyle: text ? 'normal' : 'italic' }}>
                             {text || 'Not answered yet'}
                           </div>
+                          {(f.type === 'text' || f.type === 'textarea') && (
+                            <ExemplarControls resolved={resolved} noun={cfg?.noun} studentName={player.name} revealed={revealed.has(rk)} busy={revealBusy} onToggle={() => toggleReveal([rk])} />
+                          )}
                         </div>
                       )
                     })}
                   </div>
+                  {(() => {
+                    const keys = s.fields.filter((f) => (f.type === 'text' || f.type === 'textarea') && exemplarsFor(cfg, stage.key, s.key, f, player.data).texts.length > 0).map((f) => revealKey(stage.key, s.key, f.key))
+                    if (keys.length < 2) return null
+                    const all = keys.every((k) => revealed.has(k))
+                    const first = player.name.split(' ')[0]
+                    return (
+                      <button onClick={() => toggleReveal(keys)} disabled={revealBusy} style={{ cursor: 'pointer', fontSize: 11.5, fontWeight: 800, border: '1.5px solid var(--border-strong)', background: 'var(--surface-2)', color: 'var(--text)', borderRadius: 999, padding: '3px 11px', marginBottom: 8 }}>
+                        {all ? `Hide all exemplars in this section from ${first}` : `📤 Reveal all ${keys.length} exemplars in this section to ${first}`}
+                      </button>
+                    )
+                  })()}
                   {max > 0 && (
                     <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                       <span style={{ fontSize: 11.5, color: 'var(--text-muted)' }}>Score (auto-suggested {auto}/{max}):</span>

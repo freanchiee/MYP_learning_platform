@@ -207,6 +207,18 @@ export interface BoardGameStage {
 
 export type LiveStage = McqStage | WorksheetStage | OpenIdeasStage | GradingStage | BoardGameStage
 
+/**
+ * Model answers that depend on a choice the student made earlier (for example which community they are
+ * designing for). `from` points at the select that holds the choice; `byField` maps
+ * "<stageKey>.<sectionKey>.<fieldKey>" -> choice -> exemplars. A field with no entry for the student's
+ * choice falls back to the exemplars written on the field itself.
+ */
+export interface ExemplarsByChoice {
+  from: { stage: string; section: string; field: string }
+  noun: string // shown to the teacher and student, e.g. 'community'
+  byField: Record<string, Record<string, string[]>>
+}
+
 export interface LiveActivityDefinition {
   id: string
   year: MypYear
@@ -217,4 +229,5 @@ export interface LiveActivityDefinition {
   teams?: LiveTeam[] // present => team-based (icebreaker style); absent => individual
   stages: LiveStage[]
   debriefQuestions?: string[]
+  exemplarsByChoice?: ExemplarsByChoice
 }
