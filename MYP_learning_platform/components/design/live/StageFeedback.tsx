@@ -2,7 +2,7 @@
 import { useState } from 'react'
 import type { LiveActivityDefinition } from '@/data/design/live/types'
 import type { LivePlayerRow } from '@/lib/design-live/types'
-import { summariseFeedback, type StageFeedbackValue } from '@/lib/design-live/feedback'
+import { feedbackOf, summariseFeedback, type StageFeedbackValue } from '@/lib/design-live/feedback'
 import { btnStyle, cardStyle, inputStyle } from './ui'
 
 const STAR = '#F5A623'
@@ -128,30 +128,82 @@ export function FeedbackSummary({ stageKey, stageLabel, players, compact }: { st
               ))}
             </div>
           </div>
-          {s.comments.length > 0 && (
-            <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'grid', gap: 6 }}>
-              {s.comments.map((c, i) => (
-                <li key={i} style={{ background: 'var(--surface-2)', border: '1.5px solid var(--border)', borderRadius: 'var(--radius-panel)', padding: '8px 10px', fontSize: 12.5 }}>
-                  <strong>{c.name}</strong> <span style={{ color: STAR, fontWeight: 900 }}>{'★'.repeat(c.stars)}</span>
-                  {c.liked && <div>👍 {c.liked}</div>}
-                  {c.improve && <div>🔧 {c.improve}</div>}
-                </li>
-              ))}
-            </ul>
-          )}
+          <ul aria-label="Each student's rating" style={{ listStyle: 'none', margin: 0, padding: 0, display: 'grid', gap: 6 }}>
+            {s.students.map((c) => (
+              <li key={c.id} style={{ background: 'var(--surface-2)', border: '1.5px solid var(--border)', borderRadius: 'var(--radius-panel)', padding: '8px 10px', fontSize: 12.5, opacity: c.stars ? 1 : 0.65 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 8, justifyContent: 'space-between' }}>
+                  <strong>{c.name}</strong>
+                  {c.stars ? (
+                    <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+                      <Stars value={c.stars} size={14} />
+                      <span style={{ fontWeight: 800 }}>{c.stars}/5</span>
+                    </span>
+                  ) : (
+                    <span style={{ color: 'var(--text-subtle)' }}>not rated yet</span>
+                  )}
+                </div>
+                {c.liked && <div>👍 {c.liked}</div>}
+                {c.improve && <div>🔧 {c.improve}</div>}
+              </li>
+            ))}
+          </ul>
         </div>
       )}
     </details>
   )
 }
 
-/** Teacher view of every part at once (used on the final screen). */
+/** Teacher view of every part at once (final screen): a students x parts table, then the per-part detail. */
 export function FeedbackOverview({ activity, players }: { activity: LiveActivityDefinition; players: LivePlayerRow[] }) {
   const parts = activity.stages.filter((s) => s.type !== 'grading')
   if (!parts.length) return null
+  const rows = [...players]
+    .sort((a, b) => a.name.localeCompare(b.name))
+    .map((p) => {
+      const stars = parts.map((s) => feedbackOf(p, s.key)?.stars)
+      const given = stars.filter((x): x is number => typeof x === 'number')
+      return { p, stars, avg: given.length ? Math.round((given.reduce((a, b) => a + b, 0) / given.length) * 10) / 10 : undefined }
+    })
+  const partAvg = parts.map((s) => summariseFeedback(players, s.key).average)
+  const all = rows.flatMap((r) => r.stars).filter((x): x is number => typeof x === 'number')
+  const overall = all.length ? Math.round((all.reduce((a, b) => a + b, 0) / all.length) * 10) / 10 : undefined
+  const th = { padding: '6px 8px', fontSize: 11, fontWeight: 800, color: 'var(--text-muted)', textAlign: 'center' as const, borderBottom: '2px solid var(--border-strong)' }
+  const td = { padding: '6px 8px', fontSize: 12.5, textAlign: 'center' as const, borderBottom: '1px solid var(--border)' }
   return (
     <div style={{ display: 'grid', gap: 10 }}>
-      <div style={{ ...cardStyle('#F5A623'), fontWeight: 800, fontSize: 15 }}>⭐ What students thought of each part</div>
+      <div style={{ ...cardStyle('#F5A623'), display: 'grid', gap: 10 }}>
+        <div style={{ fontWeight: 800, fontSize: 15 }}>
+          ⭐ What students thought of each part
+          {overall !== undefined && <span style={{ fontWeight: 700, fontSize: 13, color: 'var(--text-muted)' }}> · overall average {overall} / 5</span>}
+        </div>
+        <div style={{ overflowX: 'auto' }}>
+          <table style={{ width: '100%', borderCollapse: 'collapse', minWidth: 360 }}>
+            <thead>
+              <tr>
+                <th style={{ ...th, textAlign: 'left' }}>Student</th>
+                {parts.map((s) => <th key={s.key} style={th} title={s.label}>{s.icon} {s.label}</th>)}
+                <th style={th}>Their average</th>
+              </tr>
+            </thead>
+            <tbody>
+              {rows.map((r) => (
+                <tr key={r.p.id}>
+                  <td style={{ ...td, textAlign: 'left', fontWeight: 700 }}>{r.p.name}</td>
+                  {r.stars.map((v, i) => (
+                    <td key={i} style={{ ...td, color: v ? 'var(--text)' : 'var(--text-subtle)' }}>{v ? <><span style={{ color: STAR }}>★</span> {v}</> : '–'}</td>
+                  ))}
+                  <td style={{ ...td, fontWeight: 900 }}>{r.avg ?? '–'}</td>
+                </tr>
+              ))}
+              <tr>
+                <td style={{ ...td, textAlign: 'left', fontWeight: 900, borderBottom: 'none' }}>Class average</td>
+                {partAvg.map((v, i) => <td key={i} style={{ ...td, fontWeight: 900, borderBottom: 'none' }}>{v ? <><span style={{ color: STAR }}>★</span> {v}</> : '–'}</td>)}
+                <td style={{ ...td, fontWeight: 900, borderBottom: 'none' }}>{overall ?? '–'}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
       {parts.map((s) => <FeedbackSummary key={s.key} stageKey={s.key} stageLabel={`${s.icon} ${s.label}`} players={players} compact />)}
     </div>
   )
