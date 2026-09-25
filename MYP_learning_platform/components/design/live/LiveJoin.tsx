@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { createClient } from '@/lib/supabase/client'
 import { useLiveRow, useLiveTable, shuffle, useLiveDraftReporter } from '@/lib/design-live/hooks'
 import { worksheetSectionPct } from '@/lib/design-live/scoring'
-import type { LiveActivityDefinition, McqStage, WorksheetStage, OpenIdeasStage, WorksheetField } from '@/data/design/live/types'
+import type { LiveActivityDefinition, LiveStage, McqStage, WorksheetStage, OpenIdeasStage, WorksheetField } from '@/data/design/live/types'
 import type { LiveSessionRow, LivePlayerRow, LiveGradeRow, LiveEventRow } from '@/lib/design-live/types'
 import { cardStyle, btnStyle, inputStyle, pageBg, ErrorBanner, BadgeRow, MCQOptions, Avatar } from './ui'
 import ChatPanel from './ChatPanel'
@@ -16,6 +16,8 @@ import OpportunityCardsField from './OpportunityCardsField'
 import MakeCardsField from './MakeCardsField'
 import ProductCardsField from './ProductCardsField'
 import WorksheetOverview, { SectionMarker, StrandBadge } from './WorksheetOverview'
+import CriteriaRingCard from './CriteriaRing'
+import { CRITERION_LETTERS } from '@/lib/design-live/criteria'
 import { SustainabilityGamePlayer } from './game/SustainabilityGame'
 import { getPersona } from '@/data/design/live/personas'
 import { useCelebration, CelebrationOverlay } from './Celebration'
@@ -288,7 +290,7 @@ export default function LiveJoin({ activity, initialCode }: { activity: LiveActi
             <McqPlayer activity={activity} stage={stage} session={session} me={me} patchMyData={patchMyData} addPoints={addPoints} />
           )}
           {session.status === 'active' && stage?.type === 'worksheet' && (
-            <WorksheetPlayer stage={stage} me={me} sessionCode={code} patchMyData={patchMyData} reportDraft={reportDraft} celebrate={celebrate} />
+            <WorksheetPlayer stage={stage} allStages={activity.stages} me={me} sessionCode={code} patchMyData={patchMyData} reportDraft={reportDraft} celebrate={celebrate} />
           )}
           {session.status === 'active' && stage?.type === 'openIdeas' && (
             <OpenIdeasPlayer activity={activity} stage={stage} session={session} me={me} patchMyData={patchMyData} reportDraft={reportDraft} celebrate={celebrate} />
@@ -475,6 +477,7 @@ function McqPlayer({
 
 function WorksheetPlayer({
   stage,
+  allStages,
   me,
   sessionCode,
   patchMyData,
@@ -482,6 +485,7 @@ function WorksheetPlayer({
   celebrate,
 }: {
   stage: WorksheetStage
+  allStages: LiveStage[]
   me: LivePlayerRow
   sessionCode: string
   patchMyData: (stageKey: string, patch: Record<string, any>) => void
@@ -588,6 +592,27 @@ function WorksheetPlayer({
   }, [stage])
   const personaValue = personaField ? drafts[personaField.sectionKey]?.[personaField.fieldKey] : undefined
 
+  // The CritABCD dial: which criterion is open right now, and how complete each criterion is across the
+  // WHOLE activity (this stage from live drafts, other stages from what is already saved).
+  const currentSection = stage.sections.find((x) => x.key === openSection)
+  const currentStrand = currentSection?.criterion ?? stage.sections.find((x) => x.criterion)?.criterion
+  const { criteriaProgress, criteriaPresent } = useMemo(() => {
+    const acc: Record<string, number[]> = {}
+    for (const st of allStages) {
+      if (st.type !== 'worksheet') continue
+      for (const sec of st.sections) {
+        const l = sec.criterion?.[0]
+        if (!l || !/^[A-D]\./.test(sec.criterion ?? '')) continue
+        const vals = st.key === stage.key ? drafts[sec.key] : me.data?.[st.key]?.[sec.key]
+        ;(acc[l] ||= []).push(worksheetSectionPct(sec, vals || {}))
+      }
+    }
+    return {
+      criteriaPresent: CRITERION_LETTERS.filter((l) => acc[l]?.length) as string[],
+      criteriaProgress: Object.fromEntries(Object.entries(acc).map(([l, v]) => [l, Math.round(v.reduce((a, b) => a + b, 0) / v.length)])),
+    }
+  }, [allStages, stage.key, drafts, me.data])
+
   // Sections that are open render "wide" (span every column) since they
   // hold the actual fields — a full grid width in a laptop browser instead
   // of squeezing a table/chat into a narrow single column. Collapsed
@@ -597,6 +622,12 @@ function WorksheetPlayer({
     <div style={{ textAlign: 'right', fontSize: 11.5, fontWeight: 700, color: 'rgba(255,255,255,0.75)', marginBottom: 6 }}>
       {saveState === 'saving' ? '💾 Saving…' : saveState === 'saved' ? '✅ All changes saved' : '💾 Your work saves automatically'}
     </div>
+    {criteriaPresent.length > 0 && (
+      <div style={{ ...cardStyle('#5C3FD6'), marginBottom: 14 }}>
+        <div style={{ fontSize: 10.5, fontWeight: 900, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'var(--text-subtle)', marginBottom: 8 }}>Where you are · CritABCD</div>
+        <CriteriaRingCard currentStrand={currentStrand} progress={criteriaProgress} present={criteriaPresent} />
+      </div>
+    )}
     <WorksheetOverview
       stage={stage}
       pct={Object.fromEntries(stage.sections.map((s) => [s.key, worksheetSectionPct(s, drafts[s.key])]))}
@@ -620,7 +651,7 @@ function WorksheetPlayer({
             </div>
             {open && (
               <div style={{ marginTop: 10, display: 'grid', gap: 10, maxWidth: s.fields.some((f) => f.type === 'personaChat') ? 960 : 720 }}>
-                <SectionMarker section={s} />
+                <SectionMarker section={s} progress={criteriaProgress} present={criteriaPresent} />
                 {s.blurb && <div style={{ fontSize: 12.5, color: 'var(--text-muted)' }}>{s.blurb}</div>}
                 {s.fields.map((f) => (
                   <WorksheetFieldInput

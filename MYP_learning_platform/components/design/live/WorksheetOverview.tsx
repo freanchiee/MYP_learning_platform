@@ -1,7 +1,8 @@
 'use client'
 import { useState } from 'react'
 import type { ActivityBrief, FlowStep, WorksheetSection, WorksheetStage } from '@/data/design/live/types'
-import { criterionOf } from '@/lib/design-live/criteria'
+import { CRITERIA, criterionOf, STRAND_LABELS } from '@/lib/design-live/criteria'
+import { CriteriaRing } from './CriteriaRing'
 import { cardStyle } from './ui'
 
 const eyebrow = { fontSize: 10.5, fontWeight: 900, letterSpacing: '0.22em', textTransform: 'uppercase' as const, color: 'var(--text-subtle)' }
@@ -21,25 +22,33 @@ export function StrandBadge({ strand, label, compact }: { strand: string; label?
 }
 
 /** Shown at the top of an OPEN section: which criterion and strand this is, plus the section brief. */
-export function SectionMarker({ section }: { section: WorksheetSection }) {
+export function SectionMarker({ section, progress, present }: { section: WorksheetSection; progress?: Partial<Record<string, number>>; present?: string[] }) {
   if (!section.criterion && !section.brief) return null
   const c = section.criterion ? criterionOf(section.criterion) : null
+  const label = section.strandLabel ?? (section.criterion ? STRAND_LABELS[section.criterion] : undefined)
   return (
-    <div style={{ borderLeft: `5px solid ${c?.color ?? 'var(--border-strong)'}`, background: 'var(--surface-2)', borderRadius: 'var(--radius-panel)', padding: '10px 14px', display: 'grid', gap: 6 }}>
-      {c && section.criterion && (
-        <div style={{ fontSize: 12.5, fontWeight: 800, color: 'var(--text)' }}>
-          📍 You are on <span style={{ color: c.color }}>Criterion {c.letter}: {c.name}</span> · strand <StrandBadge strand={section.criterion} compact />
-          {section.strandLabel && <span style={{ display: 'block', fontWeight: 600, color: 'var(--text-muted)', marginTop: 2 }}>This strand asks you to: {section.strandLabel}.</span>}
-        </div>
-      )}
-      {section.brief && (
-        <div>
-          <div style={{ fontSize: 12.5, fontWeight: 900, color: 'var(--text)' }}>📝 {section.brief.title}</div>
-          <ul style={{ margin: '4px 0 0', paddingLeft: 18, listStyle: 'disc', fontSize: 12.5, color: 'var(--text-muted)', display: 'grid', gap: 2 }}>
-            {section.brief.points.map((p) => <li key={p}>{p}</li>)}
-          </ul>
-        </div>
-      )}
+    <div style={{ borderLeft: `5px solid ${c?.color ?? 'var(--border-strong)'}`, background: 'var(--surface-2)', borderRadius: 'var(--radius-panel)', padding: '10px 14px', display: 'flex', gap: 14, alignItems: 'center', flexWrap: 'wrap' }}>
+      {c && c.letter && <CriteriaRing current={c.letter} progress={progress ?? {}} present={present ?? ['A', 'B', 'C', 'D']} size={72} />}
+      <div style={{ flex: 1, minWidth: 220, display: 'grid', gap: 6 }}>
+        {c && section.criterion && (
+          <div style={{ fontSize: 12.5, fontWeight: 800, color: 'var(--text)' }}>
+            {c.letter ? (
+              <>📍 You are on <span style={{ color: c.color }}>Criterion {c.letter}: {c.name}</span> · strand <StrandBadge strand={section.criterion} compact /></>
+            ) : (
+              <>📍 You are on: <strong>{section.criterion}</strong></>
+            )}
+            {label && <span style={{ display: 'block', fontWeight: 600, color: 'var(--text-muted)', marginTop: 2 }}>This strand asks you to: {label}.</span>}
+          </div>
+        )}
+        {section.brief && (
+          <div>
+            <div style={{ fontSize: 12.5, fontWeight: 900, color: 'var(--text)' }}>📝 {section.brief.title}</div>
+            <ul style={{ margin: '4px 0 0', paddingLeft: 18, listStyle: 'disc', fontSize: 12.5, color: 'var(--text-muted)', display: 'grid', gap: 2 }}>
+              {section.brief.points.map((p) => <li key={p}>{p}</li>)}
+            </ul>
+          </div>
+        )}
+      </div>
     </div>
   )
 }
@@ -74,10 +83,10 @@ function FlowStrip({ flow, pct, labels, onJump }: { flow: FlowStep[]; pct: Recor
           <li key={`${f.strand}-${i}`} style={{ display: 'flex', alignItems: 'center', gap: 10, flex: '1 1 210px', minWidth: 0 }}>
             <div style={{ flex: 1, minWidth: 0, height: '100%', border: `2px solid ${c.color}`, borderRadius: 'var(--radius-panel)', background: 'var(--surface)', padding: '10px 12px', display: 'grid', gap: 5, alignContent: 'start' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', gap: 6, alignItems: 'center' }}>
-                <span style={{ fontSize: 10.5, fontWeight: 900, color: c.color, letterSpacing: '0.12em' }}>STEP {i + 1} · CRITERION {c.letter}</span>
+                <span style={{ fontSize: 10.5, fontWeight: 900, color: c.color, letterSpacing: '0.12em' }}>STEP {i + 1} · {c.letter ? `CRITERION ${c.letter}` : 'REFLECTION'}</span>
                 {done !== null && <span style={{ fontSize: 11, fontWeight: 800, color: done >= 70 ? '#1FA98A' : 'var(--text-muted)' }}>{done}%</span>}
               </div>
-              <div><StrandBadge strand={f.strand} compact /> <span style={{ fontSize: 13.5, fontWeight: 900, color: 'var(--text)' }}>{f.title}</span></div>
+              <div>{c.letter && <StrandBadge strand={f.strand} compact />} <span style={{ fontSize: 13.5, fontWeight: 900, color: 'var(--text)' }}>{f.title}</span></div>
               <div style={{ fontSize: 12, color: 'var(--text-muted)' }}>{f.asks}</div>
               {secs.length > 0 && (
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: 5 }}>
@@ -102,7 +111,7 @@ export default function WorksheetOverview({ stage, pct, onJump }: { stage: Works
   const ov = stage.overview
   const [open, setOpen] = useState(true)
   if (!ov || (!ov.brief && !ov.flow?.length)) return null
-  const letters = Array.from(new Set((ov.flow ?? []).map((f) => criterionOf(f.strand).letter)))
+  const letters = Array.from(new Set((ov.flow ?? []).map((f) => criterionOf(f.strand).letter).filter(Boolean)))
   return (
     <div style={{ ...cardStyle('#5C3FD6'), marginBottom: 14, display: 'grid', gap: 16 }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 10 }}>
@@ -119,7 +128,7 @@ export default function WorksheetOverview({ stage, pct, onJump }: { stage: Works
               <div style={eyebrow}>The journey, criterion by criterion</div>
               <FlowStrip flow={ov.flow} pct={pct} labels={Object.fromEntries(stage.sections.map((x) => [x.key, `${x.icon ?? ''} ${x.label}`.trim()]))} onJump={onJump} />
               <div style={{ fontSize: 11.5, color: 'var(--text-subtle)' }}>
-                {letters.map((l) => `Criterion ${l}: ${criterionOf(l).name}`).join('  ·  ')}
+                {letters.map((l) => `Criterion ${l}: ${CRITERIA[l].name}`).join('  ·  ')}
               </div>
             </div>
           )}
