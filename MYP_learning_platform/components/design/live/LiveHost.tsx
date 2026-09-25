@@ -12,6 +12,7 @@ import { getPersona } from '@/data/design/live/personas'
 import { cardStyle, btnStyle, inputStyle, pageBg, ErrorBanner, QRCode, Avatar, ProgressStream, PlayerPreview, PlayerPreviewProvider, ChatButton, QuickReactButton, QuickReactProvider, UnreadChatContext } from './ui'
 import ChatPanel from './ChatPanel'
 import ClassPicker from './ClassPicker'
+import { stateForAdvance, stateForBack } from '@/lib/design-live/stageNav'
 import { SustainabilityGameHost } from './game/SustainabilityGame'
 import { Podium } from './Podium'
 import { WorksheetReviewModal } from './WorksheetReview'
@@ -132,11 +133,20 @@ export default function LiveHost({ activity }: { activity: LiveActivityDefinitio
   const stage = session ? activity.stages[session.stage_idx] : undefined
 
   const startSession = () => run(createClient().from('live_sessions').update({ status: 'active', stage_idx: 0, state: {} }).eq('code', code))
+  // Moving between stages never throws a stage's host state away (see lib/design-live/stageNav.ts).
   const advanceStage = () => {
     if (!session) return
     const next = session.stage_idx + 1
     if (next >= activity.stages.length) run(createClient().from('live_sessions').update({ status: 'ended' }).eq('code', code))
-    else run(createClient().from('live_sessions').update({ stage_idx: next, state: {} }).eq('code', code))
+    else run(createClient().from('live_sessions').update({ stage_idx: next, state: stateForAdvance(session.state, session.stage_idx) }).eq('code', code))
+  }
+  const goBack = () => {
+    if (!session || session.stage_idx <= 0) return
+    const prev = session.stage_idx - 1
+    const { state, restored } = stateForBack(session.state, session.stage_idx)
+    const msg = `Go back to “${activity.stages[prev].label}”? Students will see that part again and everything they already saved stays.${restored ? '' : ' Its earlier host state (for example the current question) was not kept, so it starts fresh.'}`
+    if (typeof window !== 'undefined' && !window.confirm(msg)) return
+    run(createClient().from('live_sessions').update({ stage_idx: prev, state }).eq('code', code))
   }
   const patchState = (patch: Record<string, any>) => {
     if (!session) return
@@ -236,7 +246,7 @@ export default function LiveHost({ activity }: { activity: LiveActivityDefinitio
         )}
 
         {session.status === 'active' && stage && (
-          <StageHost activity={activity} stage={stage} session={session} players={players} grades={grades} patchState={patchState} advanceStage={advanceStage} run={run} now={now} onChat={openChat} onReview={setReviewPlayerId} />
+          <StageHost activity={activity} stage={stage} session={session} players={players} grades={grades} patchState={patchState} advanceStage={advanceStage} goBack={goBack} run={run} now={now} onChat={openChat} onReview={setReviewPlayerId} />
         )}
 
         {session.status === 'ended' && <EndedHost activity={activity} players={players} session={session} onRestart={newSession} />}
@@ -286,6 +296,7 @@ function StageHost({
   grades,
   patchState,
   advanceStage,
+  goBack,
   run,
   now,
   onChat,
@@ -298,6 +309,7 @@ function StageHost({
   grades: LiveGradeRow[]
   patchState: (patch: Record<string, any>) => void
   advanceStage: () => void
+  goBack: () => void
   run: (p: PromiseLike<{ error: any }>) => Promise<any>
   now: number
   onChat: (id: string) => void
@@ -320,7 +332,12 @@ function StageHost({
 
       {stage.type !== 'grading' && <FeedbackSummary stageKey={stage.key} stageLabel={`${stage.icon} ${stage.label}`} players={players} compact />}
 
-      <div style={{ textAlign: 'center' }}>
+      <div style={{ display: 'flex', justifyContent: 'center', gap: 12, flexWrap: 'wrap' }}>
+        {session.stage_idx > 0 && (
+          <button onClick={goBack} style={btnStyle(activity.theme.accent, false, true)} title={`Go back to ${activity.stages[session.stage_idx - 1].label}`}>
+            ← Previous stage
+          </button>
+        )}
         <button onClick={advanceStage} style={btnStyle(activity.theme.accent, true, true)}>
           {advanceLabel}
         </button>

@@ -53,4 +53,22 @@ ok('36 km/h = 10 m/s', near(36 * 1000 / 3600, 10, 1e-12))
 ok('5 cm cube = 1.25e-4 m3', near(0.05 ** 3, 1.25e-4, 1e-18))
 ok('100 N over 10 cm2 = 1e5 Pa', near(100 / (10 * 1e-4), 1e5, 1e-6))
 ok('2 kg x 5 m/s2 = 10 N', 2 * 5 === 10)
+
+// ---- live stage navigation: forward then back must restore each stage's host state ----
+const out3 = path.resolve('node_modules/.cache/stageNav.mjs')
+await build({ entryPoints: ['lib/design-live/stageNav.ts'], outfile: out3, format: 'esm', bundle: true, logLevel: 'silent' })
+const nav = await import(pathToFileURL(out3).href)
+const game = { game: { phase: 2, credits: 7 } }
+let st = nav.stateForAdvance(game, 0) // game -> quiz
+ok('advance stashes the old stage state', JSON.stringify(st._stash[0]) === JSON.stringify(game))
+const quiz = { ...st, mcqIndex: 3, locked: true }
+st = nav.stateForAdvance(quiz, 1) // quiz -> worksheet
+ok('both stages are stashed after two advances', st._stash[0].game.credits === 7 && st._stash[1].mcqIndex === 3 && !('_stash' in st._stash[1]))
+let back = nav.stateForBack(st, 2) // worksheet -> quiz
+ok('back restores the quiz state', back.restored && back.state.mcqIndex === 3 && back.state.locked === true)
+ok('back keeps the earlier game stash', back.state._stash[0].game.phase === 2)
+back = nav.stateForBack(back.state, 1) // quiz -> game
+ok('second back restores the game exactly', back.restored && back.state.game.phase === 2 && back.state.game.credits === 7)
+const legacy = nav.stateForBack({ mcqIndex: 1 }, 1)
+ok('back with nothing stashed (older session) starts fresh, and says so', legacy.restored === false && legacy.state._stash[1].mcqIndex === 1)
 process.exit(fail ? 1 : 0)
