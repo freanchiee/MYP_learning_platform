@@ -5,12 +5,12 @@ import type { ResolvedExemplars } from '@/lib/design-live/exemplars'
 const small = { cursor: 'pointer', fontSize: 11.5, fontWeight: 800, borderRadius: 999, padding: '3px 11px' } as const
 
 /** Teacher, inside a student's review: preview the model answer that would be shown, and reveal / hide it for THIS student. */
-export function ExemplarControls({ resolved, noun, studentName, revealed, onToggle, busy }: { resolved: ResolvedExemplars; noun?: string; studentName: string; revealed: boolean; onToggle: () => void; busy?: boolean }) {
-  const [preview, setPreview] = useState(false)
+export function ExemplarControls({ resolved, noun, studentName, revealed, onToggle, busy, defaultOpen }: { resolved: ResolvedExemplars; noun?: string; studentName: string; revealed: boolean; onToggle: () => void; busy?: boolean; defaultOpen?: boolean }) {
+  const [preview, setPreview] = useState(!!defaultOpen)
   if (!resolved.texts.length) return null
   const first = studentName.split(' ')[0]
   return (
-    <div style={{ marginTop: 6, display: 'grid', gap: 6 }}>
+    <div style={{ display: 'grid', gap: 6, borderLeft: revealed ? '3px solid #1FA98A' : '3px solid var(--border)', paddingLeft: 10 }}>
       <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 6 }}>
         <button onClick={() => setPreview(!preview)} aria-expanded={preview} style={{ ...small, border: '1.5px solid var(--border-strong)', background: 'var(--surface-2)', color: 'var(--text)' }}>
           {preview ? 'Hide preview' : '👀 Preview exemplar'}

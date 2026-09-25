@@ -140,7 +140,7 @@ export function WorksheetReviewModal({
       onClick={onClose}
       style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.55)', zIndex: 60, display: 'flex', alignItems: 'flex-start', justifyContent: 'center', padding: 16, overflowY: 'auto' }}
     >
-      <div onClick={(e) => e.stopPropagation()} style={{ width: '100%', maxWidth: 640, margin: '24px 0' }}>
+      <div onClick={(e) => e.stopPropagation()} style={{ width: '100%', maxWidth: 980, margin: '24px 0' }}>
         <div style={cardStyle('#5C3FD6')}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontWeight: 800 }}>
@@ -230,12 +230,15 @@ export function WorksheetReviewModal({
                               </span>
                             )}
                           </div>
-                          <div style={{ whiteSpace: 'pre-wrap', color: text ? 'var(--text)' : 'var(--text-muted)', fontStyle: text ? 'normal' : 'italic' }}>
-                            {text || 'Not answered yet'}
+                          {/* the student's answer and the model answer sit side by side, so nothing needs scrolling */}
+                          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 12, alignItems: 'start', marginTop: 2 }}>
+                            <div style={{ whiteSpace: 'pre-wrap', color: text ? 'var(--text)' : 'var(--text-muted)', fontStyle: text ? 'normal' : 'italic' }}>
+                              {text || 'Not answered yet'}
+                            </div>
+                            {(f.type === 'text' || f.type === 'textarea') && (
+                              <ExemplarControls resolved={resolved} noun={cfg?.noun} studentName={player.name} revealed={revealed.has(rk)} busy={revealBusy} onToggle={() => toggleReveal([rk])} defaultOpen={revealed.has(rk)} />
+                            )}
                           </div>
-                          {(f.type === 'text' || f.type === 'textarea') && (
-                            <ExemplarControls resolved={resolved} noun={cfg?.noun} studentName={player.name} revealed={revealed.has(rk)} busy={revealBusy} onToggle={() => toggleReveal([rk])} />
-                          )}
                         </div>
                       )
                     })}

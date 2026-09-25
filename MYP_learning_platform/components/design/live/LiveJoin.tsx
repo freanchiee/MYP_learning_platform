@@ -669,11 +669,11 @@ function WorksheetPlayer({
               <div style={{ fontSize: 12, color: 'var(--text-muted)' }}>{pct}%</div>
             </div>
             {open && (
-              <div style={{ marginTop: 10, display: 'grid', gap: 10, maxWidth: s.fields.some((f) => f.type === 'personaChat') ? 960 : 720 }}>
+              <div style={{ marginTop: 10, display: 'grid', gap: 10, maxWidth: s.fields.some((f) => f.type === 'personaChat') ? 960 : s.fields.some((f) => grade?.scores?.[revealKey(stage.key, s.key, f.key)]) ? 1180 : 720 }}>
                 <SectionMarker section={s} progress={criteriaProgress} present={criteriaPresent} />
                 {s.blurb && <div style={{ fontSize: 12.5, color: 'var(--text-muted)' }}>{s.blurb}</div>}
                 {s.fields.map((f) => (
-                  <div key={f.key} style={{ display: 'grid', gap: 8 }}>
+                  <div key={f.key} style={{ display: 'grid', gap: 12, alignItems: 'start', gridTemplateColumns: grade?.scores?.[revealKey(stage.key, s.key, f.key)] ? 'repeat(auto-fit, minmax(300px, 1fr))' : 'minmax(0, 1fr)' }}>
                   <WorksheetFieldInput
                     field={f}
                     value={drafts[s.key]?.[f.key]}
