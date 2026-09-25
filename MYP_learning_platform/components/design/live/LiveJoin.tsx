@@ -17,6 +17,8 @@ import MakeCardsField from './MakeCardsField'
 import ProductCardsField from './ProductCardsField'
 import WorksheetOverview, { SectionMarker, StrandBadge } from './WorksheetOverview'
 import CriteriaRingCard from './CriteriaRing'
+import StageFeedback from './StageFeedback'
+import { feedbackOf } from '@/lib/design-live/feedback'
 import { CRITERION_LETTERS } from '@/lib/design-live/criteria'
 import { SustainabilityGamePlayer } from './game/SustainabilityGame'
 import { getPersona } from '@/data/design/live/personas'
@@ -296,6 +298,15 @@ export default function LiveJoin({ activity, initialCode }: { activity: LiveActi
             <OpenIdeasPlayer activity={activity} stage={stage} session={session} me={me} patchMyData={patchMyData} reportDraft={reportDraft} celebrate={celebrate} />
           )}
           {session.status === 'active' && stage?.type === 'boardGame' && <SustainabilityGamePlayer session={session} me={me} code={code} players={players} patchMyData={patchMyData} addPoints={addPoints} />}
+          {session.status === 'active' && stage && stage.type !== 'grading' && (
+            <StageFeedback
+              key={stage.key}
+              stageLabel={`${stage.icon} ${stage.label}`}
+              value={feedbackOf(me, stage.key)}
+              onSave={(v) => patchMyData('_feedback', { [stage.key]: v })}
+            />
+          )}
+
           {session.status === 'active' && stage?.type === 'grading' && (
             <div style={cardStyle(activity.theme.accent)}>
               {myGrade?.graded ? (

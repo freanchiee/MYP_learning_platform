@@ -15,6 +15,7 @@ import ClassPicker from './ClassPicker'
 import { SustainabilityGameHost } from './game/SustainabilityGame'
 import { Podium } from './Podium'
 import { WorksheetReviewModal } from './WorksheetReview'
+import { FeedbackSummary, FeedbackOverview } from './StageFeedback'
 
 function PlayerChip({ player, now, onChat, sessionCode }: { player: LivePlayerRow; now: number; onChat?: (id: string) => void; sessionCode?: string }) {
   return (
@@ -316,6 +317,8 @@ function StageHost({
       {stage.type === 'openIdeas' && <OpenIdeasHost activity={activity} stage={stage} session={session} players={players} patchState={patchState} now={now} onChat={onChat} />}
       {stage.type === 'boardGame' && <SustainabilityGameHost session={session} players={players} patchState={patchState} run={run} />}
       {stage.type === 'grading' && <GradingHost activity={activity} stage={stage} players={players} grades={grades} run={run} session={session} />}
+
+      {stage.type !== 'grading' && <FeedbackSummary stageKey={stage.key} stageLabel={`${stage.icon} ${stage.label}`} players={players} compact />}
 
       <div style={{ textAlign: 'center' }}>
         <button onClick={advanceStage} style={btnStyle(activity.theme.accent, true, true)}>
@@ -876,6 +879,7 @@ function EndedHost({ activity, players, session, onRestart }: { activity: LiveAc
       ) : (
         <Podium entries={sorted.map((p) => ({ id: p.id, name: p.name, points: p.points }))} accent={activity.theme.accent} />
       )}
+      <FeedbackOverview activity={activity} players={players} />
       {activity.debriefQuestions && (
         <div style={cardStyle('var(--accent-2)')}>
           <div style={{ fontWeight: 800, fontSize: 15, marginBottom: 8 }}>💬 Talk it through</div>
