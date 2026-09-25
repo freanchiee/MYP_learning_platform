@@ -33,6 +33,38 @@ export const MYP5_SUSTAINABILITY: LiveActivityDefinition = {
       label: 'The Game',
       icon: '🎲',
       intro: { title: '🎲 Sustainability Check', blurb: 'Everyone gets a role in the materials economy. Grow the economy in Phase 1, then pay the carbon debt down together in Phase 2.' },
+      overview: {
+        brief: {
+          context:
+            'Every product starts as materials, and someone bears the cost at each step. In the game you will each take a role in a materials economy, grow it, then face the carbon debt it creates and meet carbon credits first-hand. Afterwards you will use that experience to design a digital product for a real community.',
+          task: 'Play the game in your role, check what you learned about carbon credits, then choose a real community from the game, research their need responsibly, and design a DIGITAL product for them. You will move through the four criteria in order: A research, B ideas, C plan, D test and impact.',
+          produce: [
+            'Now: play your role in the game and take the carbon credit check',
+            'A: a community need, a prioritised research plan with ethics, an empathy map for the group, a product analysis and a detailed design brief',
+            'B: a specification, a range of digital-product ideas, a justified choice and planning drawings',
+            'C and D: a logical plan, a log of changes, a test that generates data, the impact on the community and a circular ending, then a reflection',
+          ],
+          assessedOn: ['A.i', 'A.ii', 'A.iii', 'A.iv', 'B.i', 'B.ii', 'B.iii', 'B.iv', 'C.i', 'D.i', 'D.iv'],
+          time: 'Several lessons · your work saves automatically',
+        },
+        flow: [
+          { strand: 'Game', title: 'Play the materials economy', asks: 'Take a role, grow the economy, then pay the carbon debt down together.', where: 'this stage, first' },
+          { strand: 'Quiz', title: 'Carbon credit check', asks: 'Seven quick questions to lock in what the game showed.', where: 'next stage' },
+          { strand: 'A.i', title: 'Name the need', asks: 'Explain and justify the need, grounded in the game.', sections: ['need'] },
+          { strand: 'A.ii', title: 'Research responsibly', asks: 'Prioritise your research, interview a representative, map stakeholders.', sections: ['research', 'personaChat', 'stakeholders'] },
+          { strand: 'A.i', title: 'Understand the community', asks: 'One empathy map for the whole group.', sections: ['empathy'] },
+          { strand: 'A.iii', title: 'Learn from products', asks: 'Analyse existing products and draft a weighted matrix.', sections: ['products', 'matrix'] },
+          { strand: 'A.iv', title: 'Write the brief', asks: 'Summarise the research in a detailed design brief.', sections: ['brief'] },
+          { strand: 'B.i', title: 'Set success criteria', asks: 'Write a specification others can test against.', where: 'stage · Ideation' },
+          { strand: 'B.ii', title: 'Generate ideas', asks: 'A range of feasible ideas a stranger can understand.', where: 'stage · Ideation' },
+          { strand: 'B.iii', title: 'Choose and justify', asks: 'Present the chosen design and say why it wins.', where: 'stage · Ideation' },
+          { strand: 'B.iv', title: 'Draw the plan', asks: 'Accurate planning drawings and what is needed to make it.', where: 'stage · Ideation' },
+          { strand: 'C.i', title: 'Plan the make', asks: 'A logical plan a peer could follow.', where: 'stage · Plan & Reflect' },
+          { strand: 'C.iv', title: 'Justify changes', asks: 'Record what changed and why, with evidence.', where: 'stage · Plan & Reflect' },
+          { strand: 'D.i', title: 'Design the test', asks: 'A test that generates data about success.', where: 'stage · Plan & Reflect' },
+          { strand: 'D.iv', title: 'Impact and circular ending', asks: 'Explain the impact on the community and the product’s end of life.', where: 'stage · Plan & Reflect' },
+        ],
+      },
     },
     {
       type: 'mcq',
@@ -64,17 +96,11 @@ export const MYP5_SUSTAINABILITY: LiveActivityDefinition = {
       },
       overview: {
         brief: {
-          context:
-            'In the game you ran a materials economy and saw who gains and who pays when a market grows: workers, consumers, frontline communities, corporations and governments. Carbon credits and offsets looked like a fix, but only when they are honest, additional and fair. This unit turns that experience into a design project.',
-          task: 'Choose a real community from the game, research their need responsibly, and design a DIGITAL product that helps them. You will move through the four criteria in order: A research, B ideas, C plan, D test and impact.',
-          produce: [
-            'A: a community need, a prioritised research plan with ethics, an empathy map for the group, a product analysis and a detailed design brief',
-            'B: a specification, a range of digital-product ideas, a justified choice and planning drawings',
-            'C: a logical plan and a log of changes with reasons',
-            'D: a test that generates data, the impact on the community and a circular ending, then a reflection',
-          ],
-          assessedOn: ['A.i', 'A.ii', 'A.iii', 'A.iv', 'B.i', 'B.ii', 'B.iii', 'B.iv', 'C.i', 'D.i', 'D.iv'],
-          time: 'Several lessons · work at your own pace, your work saves automatically',
+          context: 'The game showed you who gains and who pays when a market grows. Now you choose one of those communities and find out, with them and about them, what they actually need.',
+          task: 'Choose a community, name its need, research responsibly, understand the group with an empathy map, learn from existing products, and end with a detailed design brief.',
+          produce: ['A community need written as “How might we…”', 'A prioritised research plan with an ethics and consent note', 'One empathy map for the whole community', 'A stakeholder map, a product analysis and a first weighted matrix', 'A detailed design brief that summarises the research'],
+          assessedOn: ['A.i', 'A.ii', 'A.iii', 'A.iv'],
+          time: 'Work at your own pace · your work saves automatically',
         },
         flow: [
           { strand: 'A.i', title: 'Name the need', asks: 'Explain and justify the need, grounded in the game.', sections: ['need'] },
@@ -82,14 +108,6 @@ export const MYP5_SUSTAINABILITY: LiveActivityDefinition = {
           { strand: 'A.i', title: 'Understand the community', asks: 'One empathy map for the whole group.', sections: ['empathy'] },
           { strand: 'A.iii', title: 'Learn from products', asks: 'Analyse existing products and draft a weighted matrix.', sections: ['products', 'matrix'] },
           { strand: 'A.iv', title: 'Write the brief', asks: 'Summarise the research in a detailed design brief.', sections: ['brief'] },
-          { strand: 'B.i', title: 'Set success criteria', asks: 'Write a specification others can test against.', where: 'stage · Ideation' },
-          { strand: 'B.ii', title: 'Generate ideas', asks: 'A range of feasible ideas a stranger can understand.', where: 'stage · Ideation' },
-          { strand: 'B.iii', title: 'Choose and justify', asks: 'Present the chosen design and say why it wins.', where: 'stage · Ideation' },
-          { strand: 'B.iv', title: 'Draw the plan', asks: 'Accurate planning drawings and what is needed to make it.', where: 'stage · Ideation' },
-          { strand: 'C.i', title: 'Plan the make', asks: 'A logical plan a peer could follow.', where: 'stage · Plan & Reflect' },
-          { strand: 'C.iv', title: 'Justify changes', asks: 'Record what changed and why, with evidence.', where: 'stage · Plan & Reflect' },
-          { strand: 'D.i', title: 'Design the test', asks: 'A test that generates data about success.', where: 'stage · Plan & Reflect' },
-          { strand: 'D.iv', title: 'Impact and circular ending', asks: 'Explain the impact on the community and the product’s end of life.', where: 'stage · Plan & Reflect' },
         ],
       },
       sections: [

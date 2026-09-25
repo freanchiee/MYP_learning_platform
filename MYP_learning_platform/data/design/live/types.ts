@@ -106,6 +106,12 @@ export interface FlowStep {
   where?: string // where it happens when it is in another stage, e.g. 'Week 2 · Research Plan'
 }
 
+/** Brief + journey shown at the top of a stage (students see it before they start). */
+export interface StageOverview {
+  brief?: ActivityBrief
+  flow?: FlowStep[]
+}
+
 export interface WorksheetSection {
   key: string
   label: string
@@ -129,7 +135,7 @@ export interface WorksheetStage {
   icon: string
   intro?: { title: string; blurb: string }
   /** Activity brief + criteria-wise flow shown before the sections. */
-  overview?: { brief?: ActivityBrief; flow?: FlowStep[] }
+  overview?: StageOverview
   sections: WorksheetSection[]
 }
 
@@ -195,6 +201,8 @@ export interface BoardGameStage {
   label: string
   icon: string
   intro?: { title: string; blurb: string }
+  /** Shown to students above the game, so the brief comes BEFORE play. */
+  overview?: StageOverview
 }
 
 export type LiveStage = McqStage | WorksheetStage | OpenIdeasStage | GradingStage | BoardGameStage

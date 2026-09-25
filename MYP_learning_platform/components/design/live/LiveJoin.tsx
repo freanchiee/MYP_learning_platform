@@ -297,6 +297,7 @@ export default function LiveJoin({ activity, initialCode }: { activity: LiveActi
           {session.status === 'active' && stage?.type === 'openIdeas' && (
             <OpenIdeasPlayer activity={activity} stage={stage} session={session} me={me} patchMyData={patchMyData} reportDraft={reportDraft} celebrate={celebrate} />
           )}
+          {session.status === 'active' && stage?.type === 'boardGame' && stage.overview && <WorksheetOverview overview={stage.overview} />}
           {session.status === 'active' && stage?.type === 'boardGame' && <SustainabilityGamePlayer session={session} me={me} code={code} players={players} patchMyData={patchMyData} addPoints={addPoints} />}
           {session.status === 'active' && stage && stage.type !== 'grading' && (
             <StageFeedback
@@ -640,7 +641,8 @@ function WorksheetPlayer({
       </div>
     )}
     <WorksheetOverview
-      stage={stage}
+      overview={stage.overview}
+      sections={stage.sections}
       pct={Object.fromEntries(stage.sections.map((s) => [s.key, worksheetSectionPct(s, drafts[s.key])]))}
       onJump={(k) => {
         setOpenSection(k)

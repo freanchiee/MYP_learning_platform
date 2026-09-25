@@ -1,6 +1,6 @@
 'use client'
 import { useState } from 'react'
-import type { ActivityBrief, FlowStep, WorksheetSection, WorksheetStage } from '@/data/design/live/types'
+import type { ActivityBrief, FlowStep, StageOverview, WorksheetSection } from '@/data/design/live/types'
 import { CRITERIA, criterionOf, STRAND_LABELS } from '@/lib/design-live/criteria'
 import { CriteriaRing } from './CriteriaRing'
 import { cardStyle } from './ui'
@@ -83,7 +83,7 @@ function FlowStrip({ flow, pct, labels, onJump }: { flow: FlowStep[]; pct: Recor
           <li key={`${f.strand}-${i}`} style={{ display: 'flex', alignItems: 'center', gap: 10, flex: '1 1 210px', minWidth: 0 }}>
             <div style={{ flex: 1, minWidth: 0, height: '100%', border: `2px solid ${c.color}`, borderRadius: 'var(--radius-panel)', background: 'var(--surface)', padding: '10px 12px', display: 'grid', gap: 5, alignContent: 'start' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', gap: 6, alignItems: 'center' }}>
-                <span style={{ fontSize: 10.5, fontWeight: 900, color: c.color, letterSpacing: '0.12em' }}>STEP {i + 1} · {c.letter ? `CRITERION ${c.letter}` : 'REFLECTION'}</span>
+                <span style={{ fontSize: 10.5, fontWeight: 900, color: c.color, letterSpacing: '0.12em' }}>STEP {i + 1} · {c.letter ? `CRITERION ${c.letter}` : f.strand.toUpperCase()}</span>
                 {done !== null && <span style={{ fontSize: 11, fontWeight: 800, color: done >= 70 ? '#1FA98A' : 'var(--text-muted)' }}>{done}%</span>}
               </div>
               <div>{c.letter && <StrandBadge strand={f.strand} compact />} <span style={{ fontSize: 13.5, fontWeight: 900, color: 'var(--text)' }}>{f.title}</span></div>
@@ -107,8 +107,8 @@ function FlowStrip({ flow, pct, labels, onJump }: { flow: FlowStep[]; pct: Recor
   )
 }
 
-export default function WorksheetOverview({ stage, pct, onJump }: { stage: WorksheetStage; pct: Record<string, number>; onJump: (sectionKey: string) => void }) {
-  const ov = stage.overview
+export default function WorksheetOverview({ overview, sections = [], pct = {}, onJump = () => {} }: { overview?: StageOverview; sections?: WorksheetSection[]; pct?: Record<string, number>; onJump?: (sectionKey: string) => void }) {
+  const ov = overview
   const [open, setOpen] = useState(true)
   if (!ov || (!ov.brief && !ov.flow?.length)) return null
   const letters = Array.from(new Set((ov.flow ?? []).map((f) => criterionOf(f.strand).letter).filter(Boolean)))
@@ -126,7 +126,7 @@ export default function WorksheetOverview({ stage, pct, onJump }: { stage: Works
           {ov.flow && ov.flow.length > 0 && (
             <div style={{ display: 'grid', gap: 8 }}>
               <div style={eyebrow}>The journey, criterion by criterion</div>
-              <FlowStrip flow={ov.flow} pct={pct} labels={Object.fromEntries(stage.sections.map((x) => [x.key, `${x.icon ?? ''} ${x.label}`.trim()]))} onJump={onJump} />
+              <FlowStrip flow={ov.flow} pct={pct} labels={Object.fromEntries(sections.map((x) => [x.key, `${x.icon ?? ''} ${x.label}`.trim()]))} onJump={onJump} />
               <div style={{ fontSize: 11.5, color: 'var(--text-subtle)' }}>
                 {letters.map((l) => `Criterion ${l}: ${CRITERIA[l].name}`).join('  ·  ')}
               </div>
