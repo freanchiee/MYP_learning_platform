@@ -144,4 +144,15 @@ ok('Q9 puck 13.75 N ~ 14 N', near(0.250 * (8.0 + 3.0) / 0.20, 13.75, 1e-9))
 ok('L2 F = m dv / t = 2.0 N', near(2.0 * (5.0 - 1.0) / 4.0, 2.0, 1e-12))
 ok('L4 skaters 3.0 m/s', near(60 * 2.0 / 40, 3.0, 1e-12))
 ok('L4 stick together 2.0 m/s', near((2.0 * 3.0) / 3.0, 2.0, 1e-12))
+
+// ---- force links time and space: from rest under constant F, p/t = F and E/x = F ----
+let linkBad = 0
+for (let i = 0; i < 2000; i++) {
+  const mm = 0.5 + rnd2() * 6, F = 0.5 + rnd2() * 9, t = 0.1 + rnd2() * 6
+  const st = m.motionUnderForce(mm, F, 0, t)
+  const E = 0.5 * mm * st.v * st.v
+  if (Math.abs(st.p / t - F) > 1e-9 || Math.abs(E / st.x - F) > 1e-9) linkBad++
+}
+ok('constant F from rest: momentum/time = F and energy/distance = F (2000 random cases)', linkBad === 0)
+ok('6.0 N for 2.0 m transfers 12 J; 6.0 N for 2.0 s gives 12 kg m/s', near(6 * 2, 12, 1e-12))
 process.exit(fail ? 1 : 0)

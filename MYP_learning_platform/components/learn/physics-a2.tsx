@@ -317,3 +317,98 @@ export function NslDiagram() {
     </figure>
   )
 }
+
+// ---------------------------------------------------------------- force links space and time
+export function SpacetimeDiagram() {
+  return (
+    <figure className="m-0 p-2" style={fig}>
+      <svg viewBox="0 0 640 290" className="w-full" role="img" aria-label="Left: three spatial axes x, y and z, labelled spatial, three dimensions. Right: a time arrow from past through present to future, labelled temporal, one dimension. Together they make four dimensions. Below, a box labelled Force links them: energy change per unit distance on the space side, and momentum change per unit time on the time side.">
+        {/* space: x, y, z */}
+        <g>
+          <Arrow x1="110" y1="170" x2="270" y2="170" color="var(--accent)" w={3} />
+          <Arrow x1="110" y1="170" x2="110" y2="40" color="var(--accent)" w={3} />
+          <Arrow x1="110" y1="170" x2="205" y2="100" color="var(--accent)" w={3} />
+          <text x="278" y="176" fontSize="15" fontWeight="900" fill="var(--accent)">x</text>
+          <text x="100" y="34" fontSize="15" fontWeight="900" fill="var(--accent)">y</text>
+          <text x="212" y="98" fontSize="15" fontWeight="900" fill="var(--accent)">z</text>
+          <text x="60" y="208" fontSize="14" fontWeight="900" fill="var(--text)">Spatial: 3D</text>
+        </g>
+        {/* time */}
+        <g>
+          <Arrow x1="370" y1="170" x2="610" y2="170" color="var(--warning)" w={3} />
+          {[['Past', 395], ['Present', 490], ['Future', 585]].map(([l, x]) => (
+            <g key={String(l)}>
+              <circle cx={Number(x)} cy="170" r={l === 'Present' ? 9 : 6} fill={l === 'Present' ? 'var(--warning)' : 'none'} stroke="var(--warning)" strokeWidth="2.5" strokeDasharray={l === 'Future' ? '3 3' : undefined} />
+              <text x={Number(x)} y="150" fontSize="12" fontWeight="800" textAnchor="middle" fill="var(--text)">{String(l)}</text>
+            </g>
+          ))}
+          <text x="380" y="208" fontSize="14" fontWeight="900" fill="var(--text)">Temporal: time</text>
+        </g>
+        <path d="M60 222 H610" stroke="var(--border-strong)" strokeWidth="2" fill="none" />
+        <text x="330" y="240" fontSize="13" fontWeight="900" textAnchor="middle" fill="var(--text-muted)">3 + 1 = 4 dimensions</text>
+        {/* force box */}
+        <rect x="250" y="252" width="140" height="30" rx="8" fill="var(--accent-soft)" stroke="var(--accent)" strokeWidth="2.5" />
+        <text x="320" y="272" fontSize="15" fontWeight="900" textAnchor="middle" fill="var(--accent)">FORCE</text>
+        <text x="60" y="272" fontSize="12" fontWeight="800" fill="var(--text)">ΔE / x  (per unit distance)</text>
+        <text x="600" y="272" fontSize="12" fontWeight="800" textAnchor="end" fill="var(--text)">Δp / t  (per unit time)</text>
+      </svg>
+    </figure>
+  )
+}
+
+export function ForceLink() {
+  const [F, setF] = useState(4)
+  const [m, setM] = useState(2)
+  const [t, setT] = useState(3)
+  const st = motionUnderForce(m, F, 0, t)
+  const E = 0.5 * m * st.v * st.v
+  const xmax = motionUnderForce(m, F, 0, 5).x
+  const X = (x: number) => 40 + (x / xmax) * 540
+  const ticks = [0, 1, 2, 3, 4, 5]
+  const started = t > 0
+  return (
+    <div className="grid gap-4">
+      <figure className="m-0 p-2" style={fig}>
+        <svg viewBox="0 0 620 150" className="w-full" role="img" aria-label={`A body starting from rest under a constant ${F} newton force. At ${t} seconds it has moved ${f2(st.x)} metres and has momentum ${f2(st.p)} kilogram metres per second. Earlier positions are the past, the current position is the present, and later positions are the future, predicted from the force.`}>
+          <line x1="20" y1="90" x2="600" y2="90" stroke="var(--border-strong)" strokeWidth="2" />
+          {ticks.map((ti) => {
+            const xi = motionUnderForce(m, F, 0, ti).x
+            const past = ti < t - 1e-9
+            const future = ti > t + 1e-9
+            return (
+              <g key={ti}>
+                <circle cx={X(xi)} cy="90" r="8" fill={past ? 'var(--warning)' : 'none'} fillOpacity={past ? 0.45 : 0} stroke="var(--warning)" strokeWidth="2" strokeDasharray={future ? '3 3' : undefined} />
+                <text x={X(xi)} y="122" fontSize="10.5" textAnchor="middle" fill="var(--text-muted)">t={ti}s</text>
+              </g>
+            )
+          })}
+          <circle cx={X(st.x)} cy="90" r="13" fill="var(--warning)" stroke="var(--text)" strokeWidth="2.5" />
+          <text x={X(st.x)} y="66" fontSize="12" fontWeight="900" textAnchor="middle" fill="var(--text)">PRESENT</text>
+          <text x="24" y="30" fontSize="12" fontWeight="800" fill="var(--text-muted)">◀ past (already happened)</text>
+          <text x="596" y="30" fontSize="12" fontWeight="800" textAnchor="end" fill="var(--text-muted)">future (predicted from the force) ▶</text>
+          <text x="24" y="146" fontSize="11" fill="var(--text-subtle)">solid = past, dashed = future. Move the time slider to move the present.</text>
+        </svg>
+      </figure>
+      <div className="grid gap-3 md:grid-cols-3">
+        <Slider label="Net force F" value={F} min={1} max={8} step={1} unit="N" onChange={setF} />
+        <Slider label="Mass m" value={m} min={1} max={5} step={1} unit="kg" onChange={setM} />
+        <Slider label="Time t (the present)" value={t} min={0} max={5} step={0.5} unit="s" onChange={setT} />
+      </div>
+      <div className="grid gap-3 sm:grid-cols-2" aria-live="polite">
+        <div className="rounded-[var(--radius-panel)] p-3 text-sm" style={{ ...panel, borderColor: 'var(--warning)' }}>
+          <div className="text-[11px] font-black tracking-[0.25em]" style={{ color: 'var(--text-subtle)' }}>THE TIME SIDE</div>
+          <div style={{ color: 'var(--text)' }}>momentum gained after {f2(t, 1)} s: <strong>{f2(st.p)} kg m s⁻¹</strong></div>
+          <div className="font-black" style={{ color: 'var(--text)' }}>{started ? `Δp / t = ${f2(st.p)} / ${f2(t, 1)} = ${f2(st.p / t)} N` : 'move t above 0 to see it'}</div>
+        </div>
+        <div className="rounded-[var(--radius-panel)] p-3 text-sm" style={{ ...panel, borderColor: 'var(--accent)' }}>
+          <div className="text-[11px] font-black tracking-[0.25em]" style={{ color: 'var(--text-subtle)' }}>THE SPACE SIDE</div>
+          <div style={{ color: 'var(--text)' }}>energy gained over {f2(st.x)} m: <strong>{f2(E)} J</strong></div>
+          <div className="font-black" style={{ color: 'var(--text)' }}>{started ? `ΔE / x = ${f2(E)} / ${f2(st.x)} = ${f2(E / st.x)} N` : 'move t above 0 to see it'}</div>
+        </div>
+      </div>
+      <p className="text-sm font-semibold" style={{ color: 'var(--text)' }}>
+        Both ratios give the same {F} N. Change the mass and both still equal F: force is what connects how energy changes with distance and how momentum changes with time.
+      </p>
+    </div>
+  )
+}

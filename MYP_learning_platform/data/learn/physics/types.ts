@@ -29,6 +29,8 @@ export type WidgetId =
   | 'newton-lab'
   | 'momentum-cases'
   | 'collision-lab'
+  | 'spacetime-diagram'
+  | 'force-link'
 
 export type BoxKind = 'yes' | 'no' | 'opt'
 

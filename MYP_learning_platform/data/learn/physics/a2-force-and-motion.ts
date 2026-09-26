@@ -506,7 +506,98 @@ const lessons: Lesson[] = [
       { t: 'summary', points: ['Δp = m(v_f − v_i), with signs.', 'If the direction reverses, one velocity is negative.', 'Use the number line: the change is the arrow from i to f.'], terms: [{ term: 'Change in momentum', def: 'final momentum minus initial momentum, a vector' }], formulas: ['Δp = p_{f} − p_{i} = mΔv'], errors: ['Subtracting speeds instead of velocities.', 'Dropping the sign of the final velocity after a rebound.'] },
     ],
   },
-  // ------------------------------------------------------------------ 7 quiz
+  // ------------------------------------------------------------------ 7 force, space and time
+  {
+    slug: 'force-space-and-time',
+    code: 'A.2 · 7',
+    title: 'Force: the link between space and time',
+    blurb: 'Imbalance drives motion. Force connects the three dimensions of space with time, and carries the present into the future.',
+    syllabus: 'A.2 Forces and momentum · big picture (enrichment)',
+    level: 'SL+HL',
+    difficulty: 2,
+    minutes: 14,
+    access: 'free',
+    blocks: [
+      { t: 'hook', text: 'Space has three dimensions and time has one. Is there a single quantity that ties both to the way things change?' },
+      {
+        t: 'deck',
+        slides: [
+          {
+            id: 'imbalance',
+            kicker: 'Utkarsh laws of motion',
+            title: 'Imbalance is the cause of motion',
+            blocks: [
+              {
+                t: 'pills',
+                groups: [
+                  { label: 'Rule 1', items: ['Imbalance is the cause of motion'] },
+                  { label: 'Rule 2', items: ['The greater the imbalance, the more the motion'] },
+                ],
+              },
+              {
+                t: 'table',
+                title: 'One idea, four kinds of motion',
+                head: ['Example of motion', 'What moves', 'The imbalance', 'The law'],
+                rows: [
+                  ['1  Transportation', 'bulk movement of matter', 'forces: 10 N one way, 2 N the other, so F_{net} = 8 N', 'Newton’s second law: F_{net} = ma (acceleration)'],
+                  ['2  Diffusion', 'particles', 'concentration A ≠ B, with A > B', 'rate of diffusion ∝ Δconcentration'],
+                  ['3  Heat energy', 'energy', 'temperature T_{A} ≠ T_{B}, with T_{A} > T_{B}', 'Q = mcΔT'],
+                  ['4  Current', 'movement of charge', 'potential V_{A} > V_{B}', 'I ∝ ΔV, so V = IR (Ohm’s law)'],
+                ],
+                note: 'no imbalance, no motion',
+              },
+            ],
+          },
+          {
+            id: 'dimensions',
+            kicker: 'Space and time',
+            title: 'Four dimensions',
+            blocks: [{ t: 'widget', id: 'spacetime-diagram', title: '3 + 1', idea: 'Position needs three numbers (x, y, z). Change needs one more: time.' }],
+          },
+          {
+            id: 'link',
+            kicker: 'Force is the link',
+            title: 'One quantity, two ways to see it',
+            blocks: [
+              {
+                t: 'arrows',
+                head: ['Look at…', 'And you find'],
+                rows: [
+                  { emoji: '📏', from: 'work done per unit displacement (ΔE / x)', to: 'force', note: 'the space side' },
+                  { emoji: '⏱️', from: 'change in momentum per unit time (Δp / t)', to: 'force', note: 'the time side' },
+                ],
+              },
+              { t: 'formulas', items: [{ eq: 'WD / x = F = Δp / t', legend: ['WD: work done (energy transferred, J)', 'x: displacement (m)', 'Δp: change in momentum (kg m s⁻¹)', 't: time (s)'] }] },
+              { t: 'callout', kind: 'note', title: 'Conditions', text: 'This form assumes a constant force acting along the displacement. E₁ → work done → E₂ is the energy story; the second law is the time story.' },
+            ],
+          },
+          {
+            id: 'evolve',
+            kicker: 'Past → present → future',
+            title: 'How the present evolves',
+            blocks: [
+              {
+                t: 'widget',
+                id: 'force-link',
+                title: 'One force, both ratios',
+                idea: 'Start from rest. Move the present along the timeline and watch momentum per second and energy per metre both come out as F.',
+                predict: { q: 'Predict: a constant 4 N net force acts on a body for 3 s, starting from rest. The momentum gained is…', options: ['4 kg m s⁻¹', '12 kg m s⁻¹', '36 kg m s⁻¹'], answer: 1, why: 'Δp = Ft = 4 × 3 = 12 kg m s⁻¹.' },
+              },
+              { t: 'note', text: 'Know the present state and the force, and you can find the future. Run it backwards and you recover the past.' },
+            ],
+          },
+        ],
+      },
+      { t: 'check', id: 'a2-7-c1', q: 'Which pair are BOTH equal to force?', options: ['work done per unit displacement, and change in momentum per unit time', 'work done per unit time, and change in momentum per unit displacement', 'energy per unit time, and momentum per unit distance'], answer: 0, why: 'F = WD / x (space side) and F = Δp / t (time side).', back: 'link' },
+      { t: 'check', id: 'a2-7-c2', q: 'A constant 6.0 N force acts along a body’s path for 2.0 m. The energy transferred is…', options: ['12 J', '3.0 J', '8.0 J'], answer: 0, why: 'WD = Fx = 6.0 × 2.0 = 12 J.', back: 'link' },
+      { t: 'check', id: 'a2-7-c3', q: 'The same 6.0 N force acts for 2.0 s. The change in momentum is…', options: ['12 kg m s⁻¹', '3.0 kg m s⁻¹', '8.0 kg m s⁻¹'], answer: 0, why: 'Δp = Ft = 6.0 × 2.0 = 12 kg m s⁻¹. Same number, different quantity and unit.', back: 'evolve' },
+      { t: 'check', id: 'a2-7-c4', q: 'In the imbalance table, what plays the role of the imbalance for an electric current?', options: ['a potential difference V_A − V_B', 'a concentration difference', 'a temperature difference'], answer: 0, why: 'Charge flows when there is a potential difference: I ∝ ΔV.', back: 'imbalance' },
+      { t: 'apply', id: 'a2-7-a1', prompt: 'Explain how force connects space and time, using two equations.', model: 'Force is the work done per unit displacement, F = WD / x, which ties it to space. It is also the change in momentum per unit time, F = Δp / t, which ties it to time. So one quantity, the net force, links how energy changes over distance with how momentum changes over time.', checklist: ['I wrote F = WD / x', 'I wrote F = Δp / t', 'I linked one to space and the other to time', 'I said both equal the same force'] },
+      { t: 'retrieval', items: [{ from: 'A.2 · 2', q: 'F_net = …', options: ['Δp / t', 'mv', '½mv²'], answer: 0, why: 'Rate of change of momentum.' }, { from: 'A.2 · 5', q: 'Which quantity is a scalar?', options: ['kinetic energy', 'momentum', 'force'], answer: 0, why: 'Kinetic energy has no direction.' }] },
+      { t: 'summary', points: ['Imbalance is the cause of motion; a bigger imbalance means more motion.', 'Force = work done per unit displacement (space) = change in momentum per unit time (time).', 'Given the present state and the force, the future (and the past) follows.'], terms: [{ term: 'Imbalance', def: 'a difference (of force, concentration, temperature or potential) that drives a flow' }, { term: 'Work done', def: 'energy transferred by a force acting through a displacement' }], formulas: ['WD / x = F = Δp / t'], errors: ['Mixing up energy per distance (force) with energy per time (power).', 'Forgetting the condition: constant force along the displacement.'] },
+    ],
+  },
+  // ------------------------------------------------------------------ 8 quiz
   {
     slug: 'quiz-momentum-and-force',
     code: 'A.2 · Quiz',

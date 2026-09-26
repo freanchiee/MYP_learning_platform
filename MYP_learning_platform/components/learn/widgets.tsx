@@ -2,7 +2,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import type { WidgetId } from '@/data/learn/physics'
 import { makeProblem, type ConvProblem } from '@/lib/learn/conversions'
-import { CollisionLab, MomentumCases, NewtonLab, NflDiagram, NslDiagram } from './physics-a2'
+import { CollisionLab, ForceLink, MomentumCases, NewtonLab, NflDiagram, NslDiagram, SpacetimeDiagram } from './physics-a2'
 import {
   C, G, H, inclineAcceleration, massEnergy, pendulumPeriod, photonEnergy, relativePosition, slideAngle, zenoSum,
 } from '@/lib/learn/physics-models'
@@ -503,6 +503,8 @@ const REGISTRY: Record<WidgetId, () => JSX.Element> = {
   'newton-lab': () => <NewtonLab startF={2} startM={2} />,
   'momentum-cases': MomentumCases,
   'collision-lab': CollisionLab,
+  'spacetime-diagram': SpacetimeDiagram,
+  'force-link': ForceLink,
 }
 
 export function Widget({ id }: { id: WidgetId }) {
