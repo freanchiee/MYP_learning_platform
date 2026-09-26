@@ -541,7 +541,7 @@ const lessons: Lesson[] = [
                 rows: [
                   ['1  Transportation', 'bulk movement of matter', 'forces: 10 N one way, 2 N the other, so F_{net} = 8 N', 'Newton’s second law: F_{net} = ma (acceleration)'],
                   ['2  Diffusion', 'particles', 'concentration A ≠ B, with A > B', 'rate of diffusion ∝ Δconcentration'],
-                  ['3  Heat energy', 'energy', 'temperature T_{A} ≠ T_{B}, with T_{A} > T_{B}', 'Q = mcΔT'],
+                  ['3  Heat energy', 'energy', 'temperature T_{A} ≠ T_{B}, with T_{A} > T_{B}', 'rate of heat flow ∝ ΔT'],
                   ['4  Current', 'movement of charge', 'potential V_{A} > V_{B}', 'I ∝ ΔV, so V = IR (Ohm’s law)'],
                 ],
                 note: 'no imbalance, no motion',
@@ -568,12 +568,18 @@ const lessons: Lesson[] = [
                 ],
               },
               { t: 'formulas', items: [{ eq: 'WD / x = F = Δp / t', legend: ['WD: work done (energy transferred, J)', 'x: displacement (m)', 'Δp: change in momentum (kg m s⁻¹)', 't: time (s)'] }] },
-              { t: 'callout', kind: 'note', title: 'Conditions', text: 'This form assumes a constant force acting along the displacement. E₁ → work done → E₂ is the energy story; the second law is the time story.' },
+              {
+                t: 'arrows',
+                head: ['Energy in one form', 'Becomes'],
+                rows: [{ emoji: '🔁', from: 'E₁ (form 1)', to: 'E₂ (form 2)', note: 'through work done, WD' }],
+              },
+              { t: 'callout', kind: 'idea', title: 'Work done is the conversion', text: 'Work done (WD) is the way energy in one form, E₁, gets converted into energy in another form, E₂. Force is the work done per unit displacement, and the change in momentum per unit time.' },
+              { t: 'callout', kind: 'warn', title: 'Condition', text: 'F = WD / x = ΔE / x holds for a constant force acting along the displacement. If the force is not constant, or is at an angle to the motion, this simple form no longer applies directly.' },
             ],
           },
           {
             id: 'evolve',
-            kicker: 'Past → present → future',
+            kicker: '⏪ Past → 📍 present → 🔮 future',
             title: 'How the present evolves',
             blocks: [
               {
@@ -583,7 +589,7 @@ const lessons: Lesson[] = [
                 idea: 'Start from rest. Move the present along the timeline and watch momentum per second and energy per metre both come out as F.',
                 predict: { q: 'Predict: a constant 4 N net force acts on a body for 3 s, starting from rest. The momentum gained is…', options: ['4 kg m s⁻¹', '12 kg m s⁻¹', '36 kg m s⁻¹'], answer: 1, why: 'Δp = Ft = 4 × 3 = 12 kg m s⁻¹.' },
               },
-              { t: 'note', text: 'Know the present state and the force, and you can find the future. Run it backwards and you recover the past.' },
+              { t: 'note', text: '📍 Know the present state and the force, and you can find the 🔮 future. Run it backwards and you recover the ⏪ past.' },
             ],
           },
         ],
@@ -592,9 +598,9 @@ const lessons: Lesson[] = [
       { t: 'check', id: 'a2-7-c2', q: 'A constant 6.0 N force acts along a body’s path for 2.0 m. The energy transferred is…', options: ['12 J', '3.0 J', '8.0 J'], answer: 0, why: 'WD = Fx = 6.0 × 2.0 = 12 J.', back: 'link' },
       { t: 'check', id: 'a2-7-c3', q: 'The same 6.0 N force acts for 2.0 s. The change in momentum is…', options: ['12 kg m s⁻¹', '3.0 kg m s⁻¹', '8.0 kg m s⁻¹'], answer: 0, why: 'Δp = Ft = 6.0 × 2.0 = 12 kg m s⁻¹. Same number, different quantity and unit.', back: 'evolve' },
       { t: 'check', id: 'a2-7-c4', q: 'In the imbalance table, what plays the role of the imbalance for an electric current?', options: ['a potential difference V_A − V_B', 'a concentration difference', 'a temperature difference'], answer: 0, why: 'Charge flows when there is a potential difference: I ∝ ΔV.', back: 'imbalance' },
-      { t: 'apply', id: 'a2-7-a1', prompt: 'Explain how force connects space and time, using two equations.', model: 'Force is the work done per unit displacement, F = WD / x, which ties it to space. It is also the change in momentum per unit time, F = Δp / t, which ties it to time. So one quantity, the net force, links how energy changes over distance with how momentum changes over time.', checklist: ['I wrote F = WD / x', 'I wrote F = Δp / t', 'I linked one to space and the other to time', 'I said both equal the same force'] },
+      { t: 'apply', id: 'a2-7-a1', prompt: 'Explain how force connects space and time, using two equations.', model: 'Work done is how energy in one form is converted into another. Force is the work done per unit displacement, F = WD / x (for a constant force along the displacement), which ties it to space. It is also the change in momentum per unit time, F = Δp / t, which ties it to time. So one quantity, the net force, links how energy changes over distance with how momentum changes over time.', checklist: ['I wrote F = WD / x', 'I wrote F = Δp / t', 'I linked one to space and the other to time', 'I said both equal the same force'] },
       { t: 'retrieval', items: [{ from: 'A.2 · 2', q: 'F_net = …', options: ['Δp / t', 'mv', '½mv²'], answer: 0, why: 'Rate of change of momentum.' }, { from: 'A.2 · 5', q: 'Which quantity is a scalar?', options: ['kinetic energy', 'momentum', 'force'], answer: 0, why: 'Kinetic energy has no direction.' }] },
-      { t: 'summary', points: ['Imbalance is the cause of motion; a bigger imbalance means more motion.', 'Force = work done per unit displacement (space) = change in momentum per unit time (time).', 'Given the present state and the force, the future (and the past) follows.'], terms: [{ term: 'Imbalance', def: 'a difference (of force, concentration, temperature or potential) that drives a flow' }, { term: 'Work done', def: 'energy transferred by a force acting through a displacement' }], formulas: ['WD / x = F = Δp / t'], errors: ['Mixing up energy per distance (force) with energy per time (power).', 'Forgetting the condition: constant force along the displacement.'] },
+      { t: 'summary', points: ['Imbalance is the cause of motion; a bigger imbalance means more motion.', 'Force = work done per unit displacement (space) = change in momentum per unit time (time).', 'Given the present state and the force, the future (and the past) follows.'], terms: [{ term: 'Imbalance', def: 'a difference (of force, concentration, temperature or potential) that drives a flow' }, { term: 'Work done', def: 'the way energy in one form (E₁) is converted into energy in another form (E₂); a force acting through a displacement' }], formulas: ['WD / x = F = Δp / t'], errors: ['Mixing up energy per distance (force) with energy per time (power).', 'Forgetting the condition: constant force along the displacement.', 'Treating work done as a store of energy: it is the process that converts E₁ into E₂.'] },
     ],
   },
   // ------------------------------------------------------------------ 8 quiz

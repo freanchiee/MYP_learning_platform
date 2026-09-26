@@ -336,10 +336,10 @@ export function SpacetimeDiagram() {
         {/* time */}
         <g>
           <Arrow x1="370" y1="170" x2="610" y2="170" color="var(--warning)" w={3} />
-          {[['Past', 395], ['Present', 490], ['Future', 585]].map(([l, x]) => (
+          {[['Past', 395, '⏪'], ['Present', 490, '📍'], ['Future', 585, '🔮']].map(([l, x, e]) => (
             <g key={String(l)}>
               <circle cx={Number(x)} cy="170" r={l === 'Present' ? 9 : 6} fill={l === 'Present' ? 'var(--warning)' : 'none'} stroke="var(--warning)" strokeWidth="2.5" strokeDasharray={l === 'Future' ? '3 3' : undefined} />
-              <text x={Number(x)} y="150" fontSize="12" fontWeight="800" textAnchor="middle" fill="var(--text)">{String(l)}</text>
+              <text x={Number(x)} y="150" fontSize="12" fontWeight="800" textAnchor="middle" fill="var(--text)">{String(e)} {String(l)}</text>
             </g>
           ))}
           <text x="380" y="208" fontSize="14" fontWeight="900" fill="var(--text)">Temporal: time</text>
@@ -383,10 +383,10 @@ export function ForceLink() {
             )
           })}
           <circle cx={X(st.x)} cy="90" r="13" fill="var(--warning)" stroke="var(--text)" strokeWidth="2.5" />
-          <text x={X(st.x)} y="66" fontSize="12" fontWeight="900" textAnchor="middle" fill="var(--text)">PRESENT</text>
-          <text x="24" y="30" fontSize="12" fontWeight="800" fill="var(--text-muted)">◀ past (already happened)</text>
-          <text x="596" y="30" fontSize="12" fontWeight="800" textAnchor="end" fill="var(--text-muted)">future (predicted from the force) ▶</text>
-          <text x="24" y="146" fontSize="11" fill="var(--text-subtle)">solid = past, dashed = future. Move the time slider to move the present.</text>
+          <text x={X(st.x)} y="66" fontSize="12" fontWeight="900" textAnchor="middle" fill="var(--text)">📍 PRESENT</text>
+          <text x="24" y="30" fontSize="12" fontWeight="800" fill="var(--text-muted)">⏪ past (already happened)</text>
+          <text x="596" y="30" fontSize="12" fontWeight="800" textAnchor="end" fill="var(--text-muted)">🔮 future (predicted from the force)</text>
+          <text x="24" y="146" fontSize="11" fill="var(--text-subtle)">⏪ solid = past, 📍 filled = present, 🔮 dashed = future. Move the time slider to move the present.</text>
         </svg>
       </figure>
       <div className="grid gap-3 md:grid-cols-3">
