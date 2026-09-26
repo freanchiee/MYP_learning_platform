@@ -2,6 +2,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import type { WidgetId } from '@/data/learn/physics'
 import { makeProblem, type ConvProblem } from '@/lib/learn/conversions'
+import { CollisionLab, MomentumCases, NewtonLab, NflDiagram, NslDiagram } from './physics-a2'
 import {
   C, G, H, inclineAcceleration, massEnergy, pendulumPeriod, photonEnergy, relativePosition, slideAngle, zenoSum,
 } from '@/lib/learn/physics-models'
@@ -496,6 +497,12 @@ const REGISTRY: Record<WidgetId, () => JSX.Element> = {
   pendulum: Pendulum,
   'zeno-series': ZenoSeries,
   'unit-converter': UnitConverter,
+  'nfl-diagram': NflDiagram,
+  'nsl-diagram': NslDiagram,
+  'inertia-lab': () => <NewtonLab startF={0} fixedZero />,
+  'newton-lab': () => <NewtonLab startF={2} startM={2} />,
+  'momentum-cases': MomentumCases,
+  'collision-lab': CollisionLab,
 }
 
 export function Widget({ id }: { id: WidgetId }) {

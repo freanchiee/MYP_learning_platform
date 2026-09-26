@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from 'react'
 import type { Block, Mcq } from '@/data/learn/physics'
 import { useLessonProgress } from '@/lib/learn/progress'
 import { Widget } from './widgets'
-import { ArrowList, Deck, DeckCtx, Flow, Formulas, HandNote, Matrix, Pills, WorkedSteps } from './visuals'
+import { ArrowList, DataTable, Sci, Deck, DeckCtx, Figure, Flow, Formulas, HandNote, LawCard, Matrix, Pills, WorkedSteps } from './visuals'
 
 const ctl = 'rounded-[var(--radius-control)] px-4 py-2 text-xs font-black tracking-wider focus:outline-none focus:ring-2'
 const primary: React.CSSProperties = { background: 'var(--gradient-cta)', color: 'var(--text-on-accent)' }
@@ -29,7 +29,7 @@ function Card({ children, label }: { children: React.ReactNode; label?: string }
   )
 }
 
-function McqView({ q, saved, onPick, back }: { q: Mcq; saved?: number; onPick: (i: number) => void; back?: string }) {
+function McqView({ q, saved, onPick, back, backHref, backLabel }: { q: Mcq; saved?: number; onPick: (i: number) => void; back?: string; backHref?: string; backLabel?: string }) {
   const answered = saved !== undefined
   const right = saved === q.answer
   return (
@@ -57,7 +57,9 @@ function McqView({ q, saved, onPick, back }: { q: Mcq; saved?: number; onPick: (
       {answered && (
         <div role="status" className="mt-3 rounded-[var(--radius-panel)] px-4 py-3 text-sm" style={{ background: right ? 'var(--success-surface)' : 'var(--warning-surface)', color: 'var(--text)' }}>
           <strong>{right ? 'Correct. ' : 'Not yet. '}</strong>
-          {right ? q.why : back ? (
+          {right ? q.why : backHref ? (
+            <>Have another go. <a href={backHref} className="font-bold underline" style={{ color: 'var(--accent)' }}>{backLabel ?? 'Review the lesson that covers this'}</a>.</>
+          ) : back ? (
             <>Have another go. <a
               href={`#${back}`}
               onClick={(e) => {
@@ -204,6 +206,12 @@ function StaticBlock({ b }: { b: Block }) {
       return <Formulas items={b.items} />
     case 'note':
       return <HandNote text={b.text} by={b.by} />
+    case 'law':
+      return <LawCard ordinal={b.ordinal} name={b.name} nameNote={b.nameNote} words={b.words} maths={b.maths} mathsNote={b.mathsNote} />
+    case 'table':
+      return <DataTable title={b.title} head={b.head} rows={b.rows} note={b.note} firstColHeader={b.firstColHeader} />
+    case 'figure':
+      return <Figure src={b.src} alt={b.alt} caption={b.caption} credit={b.credit} />
     case 'steps':
       return <WorkedSteps title={b.title} given={b.given} steps={b.steps} answer={b.answer} />
     default:
@@ -234,7 +242,7 @@ export default function LessonBody({ lessonKey, blocks }: { lessonKey: string; b
             checkNo += 1
             return (
               <Card key={i} label={`Check ${checkNo} of ${checkIds.length}`}>
-                <McqView q={b} back={b.back} saved={progress.checks[b.id]} onPick={(v) => update((p) => ({ ...p, checks: { ...p.checks, [b.id]: v } }))} />
+                <McqView q={b} back={b.back} backHref={b.backHref} backLabel={b.backLabel} saved={progress.checks[b.id]} onPick={(v) => update((p) => ({ ...p, checks: { ...p.checks, [b.id]: v } }))} />
               </Card>
             )
           }
@@ -265,7 +273,7 @@ export default function LessonBody({ lessonKey, blocks }: { lessonKey: string; b
                     {b.formulas.length > 0 && (
                       <>
                         <h3 className="mt-4 text-sm font-black" style={{ color: 'var(--text)' }}>Formulas</h3>
-                        <ul className="mt-2 grid gap-1.5 text-sm" style={{ color: 'var(--text)', fontFamily: 'var(--font-mono)' }}>{b.formulas.map((f) => <li key={f}>{f}</li>)}</ul>
+                        <ul className="mt-2 grid gap-1.5 text-sm" style={{ color: 'var(--text)', fontFamily: 'var(--font-mono)' }}>{b.formulas.map((f) => <li key={f}><Sci text={f} /></li>)}</ul>
                       </>
                     )}
                   </div>

@@ -98,4 +98,50 @@ ok('no community chosen -> general exemplars, flagged as not specific', !r2.spec
 const r3 = ex.exemplarsFor(cfg, 'ideation', 'spec', fieldsByPath['ideation.spec.mustnot'], data)
 ok('a field with no community version falls back to its general exemplars', !r3.specific && r3.choice === 'Factory Worker')
 ok('reveal key format', ex.revealKey('community', 'need', 'need') === 'reveal:community:need:need')
+
+// ---- A.2 force and momentum ----
+let seed2 = 11
+const rnd2 = () => ((seed2 = (seed2 * 48271) % 2147483647) / 2147483647)
+let pBad = 0, keBadEl = 0, keBadIn = 0, restBad = 0
+for (let i = 0; i < 2000; i++) {
+  const m1 = 0.5 + rnd2() * 5, m2 = 0.5 + rnd2() * 5, v1 = -6 + rnd2() * 12, v2 = -6 + rnd2() * 12
+  for (const e of [1, 0.5, 0]) {
+    const o = m.collide1D(m1, v1, m2, v2, e)
+    if (Math.abs(m1 * v1 + m2 * v2 - (m1 * o.v1 + m2 * o.v2)) > 1e-9) pBad++
+    const ke0 = m.kineticEnergy(m1, v1) + m.kineticEnergy(m2, v2), ke1 = m.kineticEnergy(m1, o.v1) + m.kineticEnergy(m2, o.v2)
+    if (e === 1 && Math.abs(ke0 - ke1) > 1e-9) keBadEl++
+    if (e < 1 && ke1 > ke0 + 1e-9) keBadIn++
+    if (e === 0 && Math.abs(o.v1 - o.v2) > 1e-9) restBad++
+  }
+}
+ok('momentum conserved in 6000 random collisions (e = 1, 0.5, 0)', pBad === 0)
+ok('KE conserved when elastic', keBadEl === 0)
+ok('KE never increases when inelastic', keBadIn === 0)
+ok('perfectly inelastic: bodies move together', restBad === 0)
+const skaters = m.collide1D(60, 0, 40, 0, 1) // at rest, no motion: sanity
+ok('nothing moves if nothing moves', skaters.v1 === 0 && skaters.v2 === 0)
+const eq = m.collide1D(2, 4, 2, 0, 1)
+ok('equal masses, elastic: velocities swap', near(eq.v1, 0, 1e-12) && near(eq.v2, 4, 1e-12))
+const halfKE = m.collide1D(2, 4, 2, 0, 0)
+ok('equal masses, perfectly inelastic, one at rest: half the KE remains', near(m.kineticEnergy(2, halfKE.v1) * 2 / m.kineticEnergy(2, 4), 0.5, 1e-12))
+const mu = m.motionUnderForce(2, 6, 1, 3)
+ok('motion under force: p(t) gradient is F', near((m.motionUnderForce(2, 6, 1, 3).p - m.motionUnderForce(2, 6, 1, 2).p), 6, 1e-12) && mu.a === 3)
+// teacher's four cases: ball 0.2 kg, initial 5 m/s
+const dp = (vf) => m.momentumChange(0.2, 5, vf)
+ok('case 1 dp = 0', near(dp(5), 0, 1e-12))
+ok('case 2 dp = -0.4 kg m/s', near(dp(3), -0.4, 1e-12))
+ok('case 3 dp = -1.0 kg m/s', near(dp(0), -1.0, 1e-12))
+ok('case 4 dp = -1.4 kg m/s (rebound at 2 m/s)', near(dp(-2), -1.4, 1e-12))
+ok('case 4 velocity number line spans 7', Math.abs(-2 - 5) === 7)
+// original quiz answers, recomputed from scratch
+ok('Q1 F = 1.0 N', near(5.0 + (2.1 - 4.5) / 0.60, 1.0, 1e-9))
+ok('Q2 air speed 7.85 m/s', near(0.80 * 9.81 / 4 / 0.25, 7.848, 1e-9))
+ok('Q4 hose 24 N', near((180 / 60) * 8.0, 24, 1e-12))
+ok('Q5 final velocity 3.0 m/s', near((2.0 * 9.0 - 6.0 * 2.0) / 2.0, 3.0, 1e-12))
+ok('Q6 a = 4.0 m/s2', near((3.0 * 2.0) / 1.5, 4.0, 1e-12))
+ok('Q7 tennis ball 180 N', near(0.150 * (24 + 12) / 0.030, 180, 1e-9))
+ok('Q9 puck 13.75 N ~ 14 N', near(0.250 * (8.0 + 3.0) / 0.20, 13.75, 1e-9))
+ok('L2 F = m dv / t = 2.0 N', near(2.0 * (5.0 - 1.0) / 4.0, 2.0, 1e-12))
+ok('L4 skaters 3.0 m/s', near(60 * 2.0 / 40, 3.0, 1e-12))
+ok('L4 stick together 2.0 m/s', near((2.0 * 3.0) / 3.0, 2.0, 1e-12))
 process.exit(fail ? 1 : 0)

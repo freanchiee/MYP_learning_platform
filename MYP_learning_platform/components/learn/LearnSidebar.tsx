@@ -3,7 +3,7 @@ import Link from 'next/link'
 import type { Module } from '@/data/learn/physics'
 import { useDoneLessons } from '@/lib/learn/progress'
 
-const NEXT_UP = ['A.2 Forces and momentum', 'A.3 Work, energy and power', 'B · Particulate nature of matter', 'C · Wave behaviour', 'D · Fields', 'E · Nuclear and quantum']
+const NEXT_UP = ['A.3 Work, energy and power', 'B · Particulate nature of matter', 'C · Wave behaviour', 'D · Fields', 'E · Nuclear and quantum']
 
 // Table-of-contents rail: modules, and the lessons inside the open module.
 export default function LearnSidebar({ modules, activeModule, activeLesson }: { modules: Module[]; activeModule?: string; activeLesson?: string }) {

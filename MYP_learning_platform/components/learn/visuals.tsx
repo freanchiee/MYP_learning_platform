@@ -269,8 +269,8 @@ export function Formulas({ items }: { items: { eq: string; legend: string[] }[] 
     <div className="grid gap-3 sm:grid-cols-2">
       {items.map((f, i) => (
         <div key={f.eq} className="dp-pop rounded-[var(--radius-card)] p-4 text-center" style={{ ...inset, ['--d' as string]: `${i * 0.2}s` }}>
-          <div className="text-3xl font-extrabold" style={{ color: 'var(--accent)', fontFamily: 'var(--font-mono)' }}>{f.eq}</div>
-          <ul className={`${hand.className} mt-2 text-xl leading-tight`} style={{ color: 'var(--text-muted)' }}>{f.legend.map((l) => <li key={l}>{l}</li>)}</ul>
+          <div className="text-3xl font-extrabold" style={{ color: 'var(--accent)', fontFamily: 'var(--font-mono)' }}><Sci text={f.eq} /></div>
+          <ul className={`${hand.className} mt-2 text-xl leading-tight`} style={{ color: 'var(--text-muted)' }}>{f.legend.map((l) => <li key={l}><Sci text={l} /></li>)}</ul>
         </div>
       ))}
     </div>
@@ -296,6 +296,12 @@ export function Deck({ slides, render }: { slides: { id: string; kicker: string;
     setDir(c >= i ? 'next' : 'prev')
     setI(c)
   }
+  useEffect(() => {
+    const id = typeof window !== 'undefined' ? window.location.hash.slice(1) : ''
+    const k = slides.findIndex((x) => x.id === id)
+    if (k > 0) setI(k)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
   useEffect(() => {
     const h = (e: Event) => {
       const id = (e as CustomEvent<string>).detail
@@ -358,7 +364,7 @@ export function WorkedSteps({ title, given, steps, answer }: { title: string; gi
             <div className="flex items-start gap-3">
               <span className="mt-0.5 flex h-6 w-6 flex-none items-center justify-center rounded-full text-xs font-black" style={{ background: 'var(--accent-soft)', color: 'var(--accent)' }}>{i + 1}</span>
               <div className="min-w-0 flex-1">
-                <div className="text-base font-bold" style={{ color: 'var(--text)', fontFamily: 'var(--font-mono)' }}>{s.line}</div>
+                <div className="text-base font-bold" style={{ color: 'var(--text)', fontFamily: 'var(--font-mono)' }}><Sci text={s.line} /></div>
                 <button onClick={() => setWhy(why === i ? null : i)} aria-expanded={why === i} className={`${hand.className} text-lg underline`} style={{ color: 'var(--text-muted)' }}>why this step?</button>
                 {why === i && <div className="dp-pop text-sm" style={{ color: 'var(--text-muted)' }}>{s.why}</div>}
               </div>
@@ -376,5 +382,102 @@ export function WorkedSteps({ title, given, steps, answer }: { title: string; gi
         <button onClick={() => { setN(0); setWhy(null) }} className={ctl} style={secondary}>RESET</button>
       </div>
     </div>
+  )
+}
+
+// ---------- tiny maths markup: F_{net,ext}, m^{2}, Δp_{T} ----------
+export function Sci({ text }: { text: string }) {
+  const parts = text.split(/(_\{[^}]*\}|\^\{[^}]*\})/g)
+  return (
+    <>
+      {parts.map((p, i) =>
+        p.startsWith('_{') ? <sub key={i}>{p.slice(2, -1)}</sub> : p.startsWith('^{') ? <sup key={i}>{p.slice(2, -1)}</sup> : <span key={i}>{p}</span>,
+      )}
+    </>
+  )
+}
+
+// ---------- a Newton's law, always in the same three parts ----------
+export function LawCard({ ordinal, name, nameNote, words, maths, mathsNote }: { ordinal: string; name: string; nameNote?: string; words: string; maths: string[]; mathsNote?: string }) {
+  const Row = ({ n, label, children, delay }: { n: number; label: string; children: React.ReactNode; delay: number }) => (
+    <div className="dp-pop grid gap-3 md:grid-cols-[150px_minmax(0,1fr)]" style={{ ['--d' as string]: `${delay}s` }}>
+      <div className="flex items-center gap-3 md:items-start">
+        <span className="flex h-8 w-8 flex-none items-center justify-center rounded-full text-sm font-black" style={{ background: 'var(--accent-soft)', color: 'var(--accent)', border: '2px solid var(--accent)' }}>{n}</span>
+        <span className="text-[11px] font-black uppercase tracking-[0.25em]" style={{ color: 'var(--text-subtle)' }}>{label}</span>
+      </div>
+      <div>{children}</div>
+    </div>
+  )
+  return (
+    <div className="rounded-[var(--radius-card)] p-4 md:p-5" style={inset}>
+      <div className="text-xs font-black uppercase tracking-[0.3em]" style={{ color: 'var(--accent)' }}>Newton&apos;s {ordinal} law</div>
+      <div className="mt-3 grid gap-5">
+        <Row n={1} label="What it is called" delay={0}>
+          <div className="text-2xl font-extrabold" style={{ color: 'var(--text)', letterSpacing: -0.5 }}>{name}</div>
+          {nameNote && <div className={`${hand.className} text-xl leading-tight`} style={{ color: 'var(--text-muted)' }}>{nameNote}</div>}
+        </Row>
+        <Row n={2} label="In words" delay={0.25}>
+          <p className={`${hand.className} text-2xl font-bold leading-snug`} style={{ color: 'var(--text)' }}>&ldquo;{words}&rdquo;</p>
+        </Row>
+        <Row n={3} label="In maths" delay={0.5}>
+          <ol className="grid gap-1.5" style={{ listStyle: 'none', margin: 0, padding: 0 }}>
+            {maths.map((m, i) => (
+              <li key={m} className="dp-pop text-lg font-bold" style={{ color: i === maths.length - 1 ? 'var(--accent)' : 'var(--text)', fontFamily: 'var(--font-mono)', ['--d' as string]: `${0.7 + i * 0.25}s`, ...(i === maths.length - 1 ? { border: '2px solid var(--accent)', borderRadius: 'var(--radius-panel)', padding: '4px 10px', justifySelf: 'start', background: 'var(--accent-soft)' } : {}) }}>
+                <Sci text={m} />
+              </li>
+            ))}
+          </ol>
+          {mathsNote && <div className={`${hand.className} mt-1 text-xl leading-tight`} style={{ color: 'var(--text-muted)' }}>{mathsNote}</div>}
+        </Row>
+      </div>
+    </div>
+  )
+}
+
+// ---------- comparison table ----------
+export function DataTable({ title, head, rows, note, firstColHeader = true }: { title?: string; head: string[]; rows: string[][]; note?: string; firstColHeader?: boolean }) {
+  return (
+    <div>
+      {title && <div className="mb-2 text-xs font-black tracking-[0.3em]" style={{ color: 'var(--accent)' }}>{title.toUpperCase()}</div>}
+      <div className="overflow-x-auto rounded-[var(--radius-card)]" style={inset}>
+        <table className="w-full border-collapse text-left text-sm" style={{ minWidth: 420 }}>
+          <thead>
+            <tr style={{ background: 'var(--surface-2)' }}>
+              {head.map((h, i) => (
+                <th key={i} scope="col" className="px-3 py-2.5 text-xs font-black uppercase tracking-[0.15em]" style={{ color: i === 0 ? 'var(--text-subtle)' : 'var(--accent)' }}>{h}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((r, ri) => (
+              <tr key={ri} className="dp-pop" style={{ ['--d' as string]: `${ri * 0.12}s`, borderTop: '1px solid var(--divider)' }}>
+                {r.map((c, ci) =>
+                  ci === 0 && firstColHeader ? (
+                    <th key={ci} scope="row" className="px-3 py-2.5 font-extrabold" style={{ color: 'var(--text)' }}><Sci text={c} /></th>
+                  ) : (
+                    <td key={ci} className="px-3 py-2.5 font-semibold" style={{ color: 'var(--text)' }}><Sci text={c} /></td>
+                  ),
+                )}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      {note && <div className={`${hand.className} mt-1 text-xl`} style={{ color: 'var(--text-muted)' }}>{note}</div>}
+    </div>
+  )
+}
+
+// ---------- an image from the teacher's own notes, on white so hand-drawn ink stays readable in every theme ----------
+export function Figure({ src, alt, caption, credit }: { src: string; alt: string; caption: string; credit?: string }) {
+  return (
+    <figure className="m-0 overflow-hidden rounded-[var(--radius-card)]" style={{ border: '1px solid var(--border-strong)' }}>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src={src} alt={alt} className="block w-full" style={{ background: "#fff" }} />
+      <figcaption className="px-4 py-2.5 text-sm" style={{ background: 'var(--surface-2)', color: 'var(--text-muted)' }}>
+        {caption}
+        {credit && <span className="ml-2 text-xs" style={{ color: 'var(--text-subtle)' }}>{credit}</span>}
+      </figcaption>
+    </figure>
   )
 }

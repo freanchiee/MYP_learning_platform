@@ -23,6 +23,12 @@ export type WidgetId =
   | 'pendulum'
   | 'zeno-series'
   | 'unit-converter'
+  | 'nfl-diagram'
+  | 'nsl-diagram'
+  | 'inertia-lab'
+  | 'newton-lab'
+  | 'momentum-cases'
+  | 'collision-lab'
 
 export type BoxKind = 'yes' | 'no' | 'opt'
 
@@ -46,6 +52,10 @@ export type Block =
   | { t: 'pills'; groups: { label: string; tone?: 'accent' | 'muted' | 'warn'; items: string[] }[] }
   | { t: 'formulas'; items: { eq: string; legend: string[] }[] }
   | { t: 'note'; text: string; by?: string }
+  /** One of Newton's laws in the class format: what it is called, what it says in words, what it says in maths. */
+  | { t: 'law'; ordinal: string; name: string; nameNote?: string; words: string; maths: string[]; mathsNote?: string }
+  | { t: 'table'; title?: string; head: string[]; rows: string[][]; note?: string; firstColHeader?: boolean }
+  | { t: 'figure'; src: string; alt: string; caption: string; credit?: string }
   | { t: 'steps'; title: string; given: string; steps: { line: string; why: string }[]; answer: string }
   | { t: 'deck'; slides: { id: string; kicker: string; title: string; blocks: Block[] }[] }
   | { t: 'hook'; text: string }
@@ -56,7 +66,7 @@ export type Block =
   | { t: 'def'; term: string; text: string }
   | { t: 'widget'; id: WidgetId; title: string; idea: string; predict?: Mcq }
   | { t: 'desmos'; src: string; title: string; description: string }
-  | ({ t: 'check'; id: string; back?: string } & Mcq)
+  | ({ t: 'check'; id: string; back?: string; backHref?: string; backLabel?: string } & Mcq)
   | { t: 'apply'; id: string; prompt: string; model: string; checklist: string[] }
   | { t: 'retrieval'; items: (Mcq & { from: string })[] }
   | { t: 'summary'; points: string[]; terms: { term: string; def: string }[]; formulas: string[]; errors: string[] }

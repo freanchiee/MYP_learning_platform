@@ -1,10 +1,11 @@
 import type { Lesson, Module } from './types'
 import { PREFACE } from './preface'
 import { KINEMATICS_INTRO } from './kinematics-intro'
+import { A2_FORCE_AND_MOTION } from './a2-force-and-motion'
 
 export * from './types'
 
-export const MODULES: Module[] = [PREFACE, KINEMATICS_INTRO]
+export const MODULES: Module[] = [PREFACE, KINEMATICS_INTRO, A2_FORCE_AND_MOTION]
 
 export const getModule = (slug: string) => MODULES.find((m) => m.slug === slug)
 export const getLesson = (m: Module, slug: string): Lesson | undefined => m.lessons.find((l) => l.slug === slug)

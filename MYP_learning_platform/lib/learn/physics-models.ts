@@ -44,3 +44,25 @@ export const zenoSum = (n: number) => 1 - Math.pow(0.5, n)
 /** Position of an object as seen from a reference that moves at velocity vRef (all 1D, m, m s^-1, s). */
 export const relativePosition = (x0: number, v: number, x0Ref: number, vRef: number, t: number) =>
   x0 + v * t - (x0Ref + vRef * t)
+
+// ---------- A.2 force and momentum ----------
+export const momentum = (m: number, v: number) => m * v
+export const kineticEnergy = (m: number, v: number) => 0.5 * m * v * v
+/** Change in momentum for a change of velocity (1D, signed): dp = m (vf - vi). */
+export const momentumChange = (m: number, vi: number, vf: number) => m * (vf - vi)
+
+/** 1D motion of a body of mass m under a constant net force F (N), from initial velocity v0. */
+export function motionUnderForce(m: number, F: number, v0: number, t: number) {
+  const a = F / m
+  return { a, v: v0 + a * t, x: v0 * t + 0.5 * a * t * t, p: m * (v0 + a * t) }
+}
+
+/**
+ * 1D collision of masses m1, m2 with velocities v1, v2. e is the coefficient of restitution:
+ * e = 1 elastic, e = 0 perfectly inelastic (bodies move together).
+ */
+export function collide1D(m1: number, v1: number, m2: number, v2: number, e: number) {
+  const M = m1 + m2
+  const cm = (m1 * v1 + m2 * v2) / M
+  return { v1: (m1 * v1 + m2 * v2 + m2 * e * (v2 - v1)) / M, v2: (m1 * v1 + m2 * v2 + m1 * e * (v1 - v2)) / M, cm }
+}
