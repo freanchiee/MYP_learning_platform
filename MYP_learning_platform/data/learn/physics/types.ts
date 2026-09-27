@@ -39,6 +39,7 @@ export type WidgetId =
   | 'river-crossing-game'
   | 'fundamental-forces-table'
   | 'terminal-velocity-lab'
+  | 'anchored-pod-lab'
 
 export type BoxKind = 'yes' | 'no' | 'opt'
 

@@ -839,6 +839,31 @@ const lessons: Lesson[] = [
             ],
           },
           {
+            id: 'buoyancy',
+            kicker: 'Buoyancy',
+            title: 'Float, or sink?',
+            blocks: [
+              { t: 'formulas', items: [{ eq: 'F_B = ρ_fluid V g', legend: ['= weight of fluid displaced', 'V: the volume PUSHED OUT OF THE WAY by the object'] }] },
+              {
+                t: 'arrows',
+                head: ['Compare F_B with weight W', 'Result'],
+                rows: [
+                  { from: 'F_B > W', to: 'floats — rises until enough of it is above the surface that F_B falls to equal W' },
+                  { from: 'F_B < W', to: 'sinks' },
+                  { from: 'F_B = W', to: 'stays where it is (neutrally buoyant)' },
+                ],
+              },
+              { t: 'callout', kind: 'idea', title: 'Where the upthrust comes from', text: 'Pressure in a fluid increases with depth. The bottom of a submerged object sits deeper than its top, so the fluid pushes up on the bottom harder than it pushes down on the top. That imbalance IS the buoyant force.' },
+              {
+                t: 'widget',
+                id: 'anchored-pod-lab',
+                title: 'An anchored underwater pod',
+                idea: 'A sensor pod is less dense than water, so it would float — but a cable tethers it to the riverbed at an angle θ. Weight pulls down, the cable pulls down-and-back, so the upthrust must be bigger than the weight alone: F_B = W + T sin θ.',
+                predict: { q: 'Predict: compared with a pod hanging straight down (θ = 90°), the SAME pod tethered at a shallower angle (θ = 40°) needs the cable tension to be…', options: ['smaller, for the same upthrust', 'bigger, for the same upthrust', 'the same either way'], answer: 1, why: 'A shallower angle means less of the tension acts vertically (sin θ is smaller), so a bigger T is needed to supply the same vertical pull, T sin θ.' },
+              },
+            ],
+          },
+          {
             id: 'tension',
             kicker: 'Tension',
             title: 'A string pulls, it never pushes',
@@ -922,13 +947,15 @@ const lessons: Lesson[] = [
         ],
       },
       { t: 'check', id: 'a2-10-c1', q: 'The buoyant force on an object equals…', options: ['the weight of fluid it displaces', 'its own weight', 'the density of the object'], answer: 0, why: 'Archimedes’ principle: F_B = ρ_fluid V g.', back: 'names' },
+      { t: 'check', id: 'a2-10-c1b', q: 'An object floats when…', options: ['F_B > W', 'F_B < W', 'F_B = 0'], answer: 0, why: 'When the buoyant force exceeds the weight, the object rises.', back: 'buoyancy' },
+      { t: 'check', id: 'a2-10-c1c', q: 'A 0.20 m radius sphere of density 500 kg m⁻³ hangs fully underwater from a cable at 60° to the horizontal, tension 120 N. What is the upthrust on it?', options: ['≈ 268 N', '≈ 60 N', '≈ 164 N'], answer: 0, why: 'W = ρVg = 500 × (4/3)π(0.20)³ × 9.81 ≈ 164 N. F_B = W + T sin 60° = 164 + 120 × 0.866 ≈ 268 N.', back: 'buoyancy' },
       { t: 'check', id: 'a2-10-c2', q: 'A string can…', options: ['only pull, never push', 'only push, never pull', 'push or pull equally'], answer: 0, why: 'Tension always pulls along the string.', back: 'tension' },
       { t: 'check', id: 'a2-10-c3', q: 'At the angle where a block just starts to slide, μ equals…', options: ['tan θ', 'sin θ', 'mg cos θ'], answer: 0, why: 'μmg cos θ = mg sin θ gives μ = tan θ.', back: 'friction' },
       { t: 'check', id: 'a2-10-c4', q: 'Static friction compared with dynamic (kinetic) friction on the same surfaces is usually…', options: ['greater', 'smaller', 'exactly equal'], answer: 0, why: 'μ_static > μ_dynamic — it takes more force to start sliding than to keep it sliding.', back: 'friction' },
       { t: 'check', id: 'a2-10-c5', q: 'A ball falling through a fluid reaches terminal velocity when…', options: ['its weight is balanced by the resistive force', 'it stops accelerating due to gravity switching off', 'the fluid runs out'], answer: 0, why: 'At terminal velocity, F_net = 0: weight = drag/viscous force.', back: 'terminal' },
       { t: 'apply', id: 'a2-10-a1', prompt: 'Sketch (in words) what would happen to a drop of honey, a drop of glue, and a drop of oil on the SAME tilted-table experiment. Which would take longest to start visibly moving, and why?', model: 'All three would stay still on the level table (balanced forces) and start moving once tilted (unbalanced forces), just like the water. Honey and glue are far more viscous than water, so the internal resistance to flowing is much larger; the drop would deform and creep very slowly even once tilted, and glue might not visibly move at all within a reasonable time. Oil is less viscous than honey but still more viscous than water, so it would move, just more slowly than the water did.', checklist: ['I said all three still show balanced vs unbalanced forces', 'I linked "slower to move" to higher viscosity', 'I ranked honey/glue as slowest, oil in between', 'I connected this to the terminal-velocity idea (more resistance)'] },
       { t: 'retrieval', items: [{ from: 'A.2 · 9', q: 'Everyday contact forces (friction, tension) are all really…', options: ['the electromagnetic force', 'gravity', 'the strong force'], answer: 0, why: 'Atoms interacting electromagnetically.' }, { from: 'A.2 · 3', q: 'F = kx describes a force that changes an object’s…', options: ['shape', 'speed', 'direction'], answer: 0, why: 'Hooke’s law, a change of shape.' }] },
-      { t: 'summary', points: ['Named forces: weight, normal force, tension, buoyant force, spring force, friction, drag.', 'A string only pulls. Tension is found from F_net = ma, not a standalone formula.', 'f = μN, with μ_static > μ_dynamic; at the point of sliding on an incline, μ = tan θ.', 'Friction, drag, viscosity and electrical resistance are one family: things that oppose motion.', 'A falling object reaches terminal velocity when the resistive force balances its weight.'], terms: [{ term: 'Tension', def: 'the pulling force transmitted along a string, rope or cable' }, { term: 'Buoyant force', def: 'the upward force on an object in a fluid, equal to the weight of fluid displaced' }, { term: 'Terminal velocity', def: 'the constant speed reached when the resistive force balances the weight' }], formulas: ['f = μN', 'μ = tan θ (at the point of sliding)', 'F_B = ρ_fluid V g'], errors: ['Giving tension a fixed formula instead of finding it from F_net = ma.', 'Forgetting μ_static > μ_dynamic.', 'Thinking a denser/more viscous fluid gives a HIGHER terminal velocity — it is the opposite.'] },
+      { t: 'summary', points: ['Named forces: weight, normal force, tension, buoyant force, spring force, friction, drag.', 'F_B = ρ_fluid V g = weight of fluid displaced. F_B > W floats, F_B < W sinks.', 'A string only pulls. Tension is found from F_net = ma, not a standalone formula.', 'f = μN, with μ_static > μ_dynamic; at the point of sliding on an incline, μ = tan θ.', 'Friction, drag, viscosity and electrical resistance are one family: things that oppose motion.', 'A falling object reaches terminal velocity when the resistive force balances its weight.'], terms: [{ term: 'Tension', def: 'the pulling force transmitted along a string, rope or cable' }, { term: 'Buoyant force', def: 'the upward force on an object in a fluid, equal to the weight of fluid displaced' }, { term: 'Terminal velocity', def: 'the constant speed reached when the resistive force balances the weight' }], formulas: ['f = μN', 'μ = tan θ (at the point of sliding)', 'F_B = ρ_fluid V g', 'F_B = W + T sin θ (tethered underwater, cable at θ to the horizontal)'], errors: ['Giving tension a fixed formula instead of finding it from F_net = ma.', 'Forgetting μ_static > μ_dynamic.', 'Thinking a denser/more viscous fluid gives a HIGHER terminal velocity — it is the opposite.', 'Using cos θ instead of sin θ for a cable’s vertical pull, when θ is measured from the horizontal.'] },
     ],
   },
   // ------------------------------------------------------------------ 8 quiz

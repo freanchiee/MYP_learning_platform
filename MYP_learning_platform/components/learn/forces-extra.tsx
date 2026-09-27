@@ -1,8 +1,26 @@
 'use client'
 import { useState } from 'react'
-import { fallVelocity, netFallForce, terminalVelocity, timeConstant } from '@/lib/learn/forces-model'
+import { dragFromTether, fallVelocity, netFallForce, sphereWeight, terminalVelocity, timeConstant, upthrustFromTether } from '@/lib/learn/forces-model'
 
 const ctl = 'rounded-[var(--radius-control)] px-3 py-2 text-xs font-black tracking-wider focus:outline-none focus:ring-2'
+const btn1: React.CSSProperties = { background: 'var(--gradient-cta)', color: 'var(--text-on-accent)' }
+type N = number | string
+function Arrow(props: { x1: N; y1: N; x2: N; y2: N; color: string; w?: number }) {
+  const { color, w = 3 } = props
+  const x1 = Number(props.x1), y1 = Number(props.y1), x2 = Number(props.x2), y2 = Number(props.y2)
+  const dx = x2 - x1, dy = y2 - y1
+  const len = Math.hypot(dx, dy)
+  if (len < 2) return null
+  const ux = dx / len, uy = dy / len
+  const h = Math.min(10, len * 0.5)
+  const bx2 = x2 - ux * h, by2 = y2 - uy * h
+  return (
+    <g stroke={color} fill={color} strokeWidth={w} strokeLinecap="round">
+      <line x1={x1} y1={y1} x2={bx2} y2={by2} />
+      <polygon points={`${x2},${y2} ${bx2 - uy * h * 0.55},${by2 + ux * h * 0.55} ${bx2 + uy * h * 0.55},${by2 - ux * h * 0.55}`} strokeWidth={1} />
+    </g>
+  )
+}
 const btn2: React.CSSProperties = { border: '1px solid var(--border-strong)', color: 'var(--text)', background: 'var(--surface-inset)' }
 const panel: React.CSSProperties = { background: 'var(--surface-inset)', border: '1px solid var(--border)' }
 const fig = { ...panel, borderRadius: 'var(--radius-panel)' } as React.CSSProperties
@@ -118,6 +136,91 @@ export function TerminalVelocityLab() {
           {balanced ? '✓ balanced: weight ≈ resistive force, so the speed has stopped changing' : '✗ unbalanced: weight is still bigger than the resistive force, so the ball keeps speeding up'}
         </div>
         <div className="mt-1 text-xs" style={{ color: 'var(--text-muted)' }}>{cur.label} resists motion more than the fluids with a smaller k, so it gives a LOWER terminal velocity — but reaches that (lower) speed SOONER.</div>
+      </div>
+    </div>
+  )
+}
+
+// ---------------------------------------------------------------- a sphere tethered under the surface
+const POD_RANGES = { r: [0.12, 0.28], rho: [400, 850], angle: [50, 80], T: [120, 380] } as const
+const rnd = (a: number, b: number) => Math.round((a + Math.random() * (b - a)) * 10) / 10
+function makePod() {
+  const r = Math.round((POD_RANGES.r[0] + Math.random() * (POD_RANGES.r[1] - POD_RANGES.r[0])) * 100) / 100
+  const rho = Math.round(POD_RANGES.rho[0] + Math.random() * (POD_RANGES.rho[1] - POD_RANGES.rho[0]))
+  const angle = Math.round(POD_RANGES.angle[0] + Math.random() * (POD_RANGES.angle[1] - POD_RANGES.angle[0]))
+  const T = rnd(POD_RANGES.T[0], POD_RANGES.T[1])
+  return { r, rho, angle, T }
+}
+export function AnchoredPodLab() {
+  const [pod, setPod] = useState(makePod)
+  const [ans, setAns] = useState('')
+  const [res, setRes] = useState<{ ok: boolean; msg: string } | null>(null)
+  const [shown, setShown] = useState(false)
+  const W = sphereWeight(pod.r, pod.rho)
+  const correct = upthrustFromTether(W, pod.T, pod.angle)
+  const drag = dragFromTether(pod.T, pod.angle)
+  const next = () => { setPod(makePod()); setAns(''); setRes(null); setShown(false) }
+  const check = () => {
+    const v = Number(ans)
+    if (!Number.isFinite(v) || ans.trim() === '') return setRes({ ok: false, msg: 'Enter a number, in newtons.' })
+    if (Math.abs(v - correct) <= 0.01 * correct) { setRes({ ok: true, msg: `Correct. F_B = W + T sin θ = ${f2(W)} + ${f2(pod.T)} × sin ${pod.angle}° = ${f2(correct)} N.` }); setShown(true); return }
+    if (Math.abs(v - pod.T * Math.sin((pod.angle * Math.PI) / 180)) <= 0.01 * correct) return setRes({ ok: false, msg: 'You found T sin θ, but forgot to ADD the weight: F_B = W + T sin θ.' })
+    if (Math.abs(v - (W + drag)) <= 0.01 * correct) return setRes({ ok: false, msg: 'You used cos θ instead of sin θ. The vertical (upthrust-balancing) component of tension uses sin θ, since θ is measured from the horizontal.' })
+    setRes({ ok: false, msg: 'Not quite — check the vertical equilibrium: F_B (up) = W (down) + T sin θ (the downward pull of the cable).' })
+  }
+  const rad = (pod.angle * Math.PI) / 180
+  const cx = 170, cy = 70, L = 90
+  const bx = cx - L * Math.cos(rad), by = cy + L * Math.sin(rad)
+  return (
+    <div className="grid gap-4 md:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)]">
+      <figure className="m-0 p-2" style={fig}>
+        <svg viewBox="0 0 340 190" className="w-full" role="img" aria-label={`A sphere of radius ${pod.r} metres and density ${pod.rho} kilograms per cubic metre, held below the water surface by a cable at ${pod.angle} degrees to the horizontal, with tension ${pod.T} newtons.`}>
+          <rect x="0" y="0" width="340" height="20" fill="#bcd7ea" />
+          <text x="6" y="14" fontSize="10" fontWeight="800" fill="#3a6ea5">water surface</text>
+          <rect x="0" y="20" width="340" height="150" fill="#e8f1f8" />
+          <rect x="0" y="170" width="340" height="20" fill="#8a6a45" />
+          <text x="6" y="184" fontSize="10" fontWeight="800" fill="#fff">riverbed</text>
+          <line x1={bx} y1={by} x2={cx} y2={cy} stroke="#333" strokeWidth="2.5" />
+          <circle cx={cx} cy={cy} r="22" fill="var(--accent)" fillOpacity="0.4" stroke="var(--accent)" strokeWidth="2.5" />
+          <circle cx={bx} cy={by} r="3" fill="#333" />
+          <text x={cx - 0.3 * (cx - bx) - 4} y={cy + 0.3 * (by - cy) - 8} fontSize="11" fontWeight="800" fill="#333">θ={pod.angle}°</text>
+          <Arrow x1={cx} y1={cy - 22} x2={cx} y2={cy - 62} color="var(--success)" w={3.5} />
+          <text x={cx + 6} y={cy - 50} fontSize="11" fontWeight="900" fill="var(--success)">F_B (upthrust)</text>
+          <Arrow x1={cx} y1={cy + 22} x2={cx} y2={cy + 52} color="var(--danger)" w={3.5} />
+          <text x={cx + 28} y={cy + 40} fontSize="11" fontWeight="900" fill="var(--danger)">W = {f2(W)} N</text>
+          <Arrow x1={cx} y1={cy} x2={bx} y2={by} color="var(--warning)" w={3} />
+          <text x={bx - 4} y={by - 10} fontSize="11" fontWeight="900" fill="var(--warning)" textAnchor="end">T = {pod.T} N</text>
+          <Arrow x1={cx + 22} y1={cy} x2={cx + 58} y2={cy} color="var(--accent-2)" w={3} />
+          <text x={cx + 24} y={cy - 6} fontSize="10.5" fontWeight="800" fill="var(--accent-2)">current</text>
+        </svg>
+      </figure>
+      <div className="grid content-start gap-3">
+        <div className="rounded-[var(--radius-panel)] p-3 text-sm" style={panel}>
+          <div style={{ color: 'var(--text)' }}>radius r = {pod.r} m, density ρ = {pod.rho} kg m⁻³ (less than water)</div>
+          <div style={{ color: 'var(--text)' }}>weight W = ρVg = <strong>{f2(W)} N</strong> (shown, not asked)</div>
+          <div style={{ color: 'var(--text)' }}>cable: T = {pod.T} N at θ = {pod.angle}° to the horizontal</div>
+        </div>
+        <label className="block text-sm">
+          <span className="font-bold" style={{ color: 'var(--text)' }}>Find the upthrust (buoyant force) on the sphere.</span>
+          <div className="mt-1 flex items-center gap-2">
+            <input value={ans} onChange={(e) => setAns(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && check()} placeholder="upthrust" className={`${ctl} w-32`} style={{ ...btn2, fontFamily: 'var(--font-mono)' }} aria-label="Your answer in newtons" />
+            <span className="text-sm font-bold" style={{ color: 'var(--text)' }}>N</span>
+          </div>
+        </label>
+        <div className="flex flex-wrap gap-2">
+          <button onClick={check} className={ctl} style={btn1}>CHECK</button>
+          <button onClick={next} className={ctl} style={btn2}>NEW PROBLEM</button>
+        </div>
+        {res && (
+          <div role="status" className="rounded-[var(--radius-panel)] px-3 py-2.5 text-sm" style={{ background: res.ok ? 'var(--success-surface)' : 'var(--warning-surface)', color: 'var(--text)', border: `1px solid ${res.ok ? 'var(--success)' : 'var(--warning)'}` }}>
+            <strong>{res.ok ? 'Correct. ' : 'Not quite. '}</strong>{res.msg}
+          </div>
+        )}
+        {shown && (
+          <div className="rounded-[var(--radius-panel)] p-3 text-xs" style={panel}>
+            <div style={{ color: 'var(--text-muted)' }}>Bonus (horizontal equilibrium): the current must be pushing the sphere with a drag force F = T cos θ = {f2(drag)} N — the cable&apos;s horizontal pull balances it.</div>
+          </div>
+        )}
       </div>
     </div>
   )

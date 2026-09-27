@@ -317,4 +317,26 @@ const fm = await import(pathToFileURL(outF).href)
   }
   ok('fallPosition is the integral of fallVelocity (its derivative matches v(t), 300 cases)', posBad === 0)
 }
+// ---- a sphere tethered underwater: sphere weight, and F_B = W + T sin(angle) from vertical equilibrium ----
+{
+  ok('sphere volume: unit radius = 4/3 pi', near(fm.sphereVolume(1), (4 / 3) * Math.PI, 1e-9))
+  // known worked case (low-density 0.23 m sphere, rho 82 kg/m3): weight ~ 41 N
+  ok('sphereWeight matches a known worked case (r=0.23, rho=82) ~ 41 N', near(fm.sphereWeight(0.23, 82), 41.0, 0.5))
+  // known worked case: T = 290 N at 75 deg, W = 41 N -> upthrust ~ 321 N
+  ok('upthrustFromTether matches a known worked case (W=41, T=290, 75deg) ~ 321 N', near(fm.upthrustFromTether(41, 290, 75), 321, 1))
+  // independent check via vector decomposition (lib/learn/vector-model.ts), not just re-running the same trig
+  let bad = 0
+  for (let i = 0; i < 2000; i++) {
+    const r = 0.05 + rnd2() * 0.3, rho = 200 + rnd2() * 700, angle = 30 + rnd2() * 55, T = 20 + rnd2() * 400
+    const W = fm.sphereWeight(r, rho)
+    const tensionComp = vec.toComponents(T, -angle) // tension points down-and-back: below the horizontal
+    const drag = tensionComp.x // cos is even in angle, so this is already +T cos(angle)
+    const upthrust = W - tensionComp.y // vertical equilibrium: F_B + tensionComp.y - W = 0
+    if (Math.abs(upthrust - fm.upthrustFromTether(W, T, angle)) > 1e-6) bad++
+    if (Math.abs(drag - fm.dragFromTether(T, angle)) > 1e-6) bad++
+  }
+  ok('upthrust/drag match an independent vector decomposition of the tension (2000 random cases)', bad === 0)
+  ok('a bigger cable angle (more vertical pull) needs a bigger upthrust for the same tension', fm.upthrustFromTether(50, 200, 80) > fm.upthrustFromTether(50, 200, 40))
+}
+ok('lesson check numbers: r=0.20,rho=500 sphere, T=120N@60deg -> W~164N, F_B~268N', near(fm.sphereWeight(0.20,500), 164.4, 0.1) && near(fm.upthrustFromTether(fm.sphereWeight(0.20,500),120,60), 268.3, 0.1))
 process.exit(fail ? 1 : 0)

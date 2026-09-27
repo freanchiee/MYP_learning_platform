@@ -4,7 +4,7 @@ import type { WidgetId } from '@/data/learn/physics'
 import { makeProblem, type ConvProblem } from '@/lib/learn/conversions'
 import { ForceCarGame, ForceDirectionAnim, ForceShapeAnim, ForceSpeedAnim } from './force-things'
 import { RiverCrossingGame, VectorResolveAnim } from './river-vectors'
-import { FundamentalForcesTable, TerminalVelocityLab } from './forces-extra'
+import { AnchoredPodLab, FundamentalForcesTable, TerminalVelocityLab } from './forces-extra'
 import { CollisionLab, ForceLink, MomentumCases, NewtonLab, NflDiagram, NslDiagram, SpacetimeDiagram } from './physics-a2'
 import {
   C, G, H, inclineAcceleration, massEnergy, pendulumPeriod, photonEnergy, relativePosition, slideAngle, zenoSum,
@@ -516,6 +516,7 @@ const REGISTRY: Record<WidgetId, () => JSX.Element> = {
   'river-crossing-game': RiverCrossingGame,
   'fundamental-forces-table': FundamentalForcesTable,
   'terminal-velocity-lab': TerminalVelocityLab,
+  'anchored-pod-lab': AnchoredPodLab,
 }
 
 export function Widget({ id }: { id: WidgetId }) {

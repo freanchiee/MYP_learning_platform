@@ -40,3 +40,15 @@ export function fallVelocityNumeric(m: number, k: number, t: number, g = G, dt =
   for (let ti = 0; ti < t; ti += dt) v += ((m * g - k * v) / m) * dt
   return v
 }
+
+// ---------------------------------------------------------------- a tethered submerged object
+export const sphereVolume = (r: number) => (4 / 3) * Math.PI * r ** 3
+export const sphereWeight = (r: number, rho: number, g = G) => rho * sphereVolume(r) * g
+
+/**
+ * A sphere less dense than the fluid is held under the surface by a cable to the bed, at angle
+ * `angleDeg` below the horizontal. Vertical equilibrium: F_B = W + T sin(angle). Horizontal
+ * equilibrium (a current pushing the sphere) gives the drag: F_drag = T cos(angle).
+ */
+export const upthrustFromTether = (weight: number, tension: number, angleDeg: number) => weight + tension * Math.sin((angleDeg * Math.PI) / 180)
+export const dragFromTether = (tension: number, angleDeg: number) => tension * Math.cos((angleDeg * Math.PI) / 180)
