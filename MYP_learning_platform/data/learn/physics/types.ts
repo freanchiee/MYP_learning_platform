@@ -35,6 +35,8 @@ export type WidgetId =
   | 'force-direction-anim'
   | 'force-shape-anim'
   | 'force-car-game'
+  | 'vector-resolve-anim'
+  | 'river-crossing-game'
 
 export type BoxKind = 'yes' | 'no' | 'opt'
 

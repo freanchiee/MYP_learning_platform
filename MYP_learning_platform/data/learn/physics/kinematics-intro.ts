@@ -266,5 +266,114 @@ export const KINEMATICS_INTRO: Module = {
         { t: 'summary', points: ['Uniform motion: equal change in position per unit time.', 'Velocity is the rate of change of position.', 'Y = vt predicts position, starting from Y = 0.'], terms: [{ term: 'Velocity', def: 'rate of change of position' }, { term: 'Uniform motion', def: 'constant velocity, no acceleration' }], formulas: ['Y = vt'], errors: ['Forgetting the start-at-zero assumption.', 'Leaving out the unit.'] },
       ],
     },
+
+    // ------------------------------------------------------------------ A.1 · 5
+    {
+      slug: 'vectors-resolving',
+      code: 'A.1 · 5',
+      title: 'Vectors: components and the river',
+      blurb: 'Steer a boat across a flowing river, then learn to resolve any vector into two parts.',
+      syllabus: 'A.1 Kinematics · vectors and scalars',
+      level: 'SL+HL',
+      difficulty: 2,
+      minutes: 20,
+      access: 'free',
+      blocks: [
+        { t: 'hook', text: 'Point a boat straight across a flowing river. Does it land on the opposite bank, or somewhere downstream?' },
+        {
+          t: 'deck',
+          slides: [
+            {
+              id: 'game',
+              kicker: 'Play first',
+              title: 'Cross the river — where do you land?',
+              blocks: [
+                {
+                  t: 'widget',
+                  id: 'river-crossing-game',
+                  title: 'Steer the boat',
+                  idea: 'Try aiming straight across, then try aiming upstream. Watch the three coloured readouts: your boat, the current, and where you actually go.',
+                },
+                { t: 'note', text: 'The boat never quite goes where it points. Two things happen at once: the engine pushes it across, and the current carries it along. Next: how to add those two together.' },
+              ],
+            },
+            {
+              id: 'vectors',
+              kicker: 'What just happened',
+              title: 'Two velocities at once',
+              blocks: [
+                {
+                  t: 'arrows',
+                  head: ['What', 'Direction'],
+                  rows: [
+                    { emoji: '🚤', from: 'the boat’s velocity', to: 'relative to the water, wherever you steer it', note: 'a vector' },
+                    { emoji: '🌊', from: 'the current’s velocity', to: 'always downstream', note: 'a vector' },
+                    { emoji: '🟡', from: 'the boat’s ACTUAL path over the ground', to: 'the sum of the two', note: 'still a vector' },
+                  ],
+                },
+                { t: 'callout', kind: 'idea', title: 'Vector addition', text: 'When two velocities act at once, the real motion is their vector sum: add them tip to tail, or add their components. Direction matters as much as size.' },
+              ],
+            },
+            {
+              id: 'resolve',
+              kicker: 'The tool',
+              title: 'Resolving a vector into components',
+              blocks: [
+                { t: 'p', text: 'Any vector can be split into two parts at right angles to each other: a horizontal part and a vertical part. This is called **resolving** the vector.' },
+                { t: 'formulas', items: [{ eq: 'Vx = V cos θ', legend: ['the horizontal component'] }, { eq: 'Vy = V sin θ', legend: ['the vertical component'] }] },
+                {
+                  t: 'widget',
+                  id: 'vector-resolve-anim',
+                  title: 'Change the vector, watch the components',
+                  idea: 'θ is measured from the horizontal. The two dashed lines are Vx and Vy.',
+                  predict: { q: 'Predict: a vector of magnitude 10 points at 90° (straight up). Its horizontal component Vx is…', options: ['10', '0', '5'], answer: 1, why: 'Vx = V cos 90° = 10 × 0 = 0. All of it is vertical.' },
+                },
+                { t: 'callout', kind: 'warn', title: 'Check it', text: 'The components should always rebuild the original vector: √(Vx² + Vy²) = V. If they don’t, the angle or the trig function is wrong.' },
+              ],
+            },
+            {
+              id: 'analysis',
+              kicker: 'Back to the river',
+              title: 'Resolving the boat’s velocity',
+              blocks: [
+                { t: 'p', text: 'Aim the boat at angle θ from straight across. Only the part of its velocity that points **across** the river gets you to the other side; the part that points **along** the river just adds to the current.' },
+                { t: 'formulas', items: [{ eq: 'across = V cos θ', legend: ['gets you over: t = width / across'] }, { eq: 'along = current + V sin θ', legend: ['carries you downstream: drift = along × t'] }] },
+                {
+                  t: 'table',
+                  head: ['Aim', 'Effect'],
+                  rows: [
+                    ['straight across (θ = 0°)', 'shortest crossing time — but the current still drifts you downstream'],
+                    ['upstream (θ negative)', 'crossing takes longer, but you can cancel the drift completely'],
+                    ['downstream (θ positive)', 'never a good idea: it only adds to the drift'],
+                  ],
+                },
+                { t: 'callout', kind: 'idea', title: 'To land exactly opposite', text: 'Choose θ so that along = 0: aim upstream at θ = −sin⁻¹(current ÷ boat speed). This only works if the boat is faster than the current.' },
+              ],
+            },
+            {
+              id: 'retry',
+              kicker: 'Try again',
+              title: 'Now aim on purpose',
+              blocks: [
+                {
+                  t: 'widget',
+                  id: 'river-crossing-game',
+                  title: 'Land exactly opposite your start',
+                  idea: 'Work out the heading with the formula above, then steer to it and check the drift.',
+                  predict: { q: 'Predict: boat top speed 3 m s⁻¹, current 2 m s⁻¹. To land exactly opposite, you should aim…', options: ['straight across, 0°', 'upstream, about 42°', 'downstream, about 42°'], answer: 1, why: 'θ = −sin⁻¹(2/3) ≈ −41.8°: aim upstream by about 42°.' },
+                },
+              ],
+            },
+          ],
+        },
+        { t: 'check', id: 'a1-5-c1', q: 'A vector of magnitude 8 points at 60° above the horizontal. Its vertical component is…', options: ['4.0', '6.9', '8.0'], answer: 1, why: 'Vy = V sin θ = 8 × sin 60° ≈ 6.9.', back: 'resolve' },
+        { t: 'check', id: 'a1-5-c2', q: 'A boat aims straight across a river (θ = 0°). Compared with aiming slightly upstream, its crossing time is…', options: ['shorter', 'longer', 'the same'], answer: 0, why: 'across = V cos θ is largest at θ = 0°, so the crossing time (width ÷ across) is shortest.', back: 'analysis' },
+        { t: 'check', id: 'a1-5-c3', q: 'A river flows at 2 m s⁻¹. A boat that can only manage 1.5 m s⁻¹…', options: ['can still land exactly opposite its start', 'can never fully cancel the drift', 'will not move at all'], answer: 1, why: 'Cancelling the drift needs the boat faster than the current; here it is not.', back: 'analysis' },
+        { t: 'check', id: 'a1-5-c4', q: 'To rebuild a vector from its components Vx and Vy, its magnitude is…', options: ['Vx + Vy', '√(Vx² + Vy²)', 'Vx × Vy'], answer: 1, why: 'Pythagoras: the components are the two shorter sides of a right triangle.', back: 'resolve' },
+        { t: 'apply', id: 'a1-5-a1', prompt: 'A river is 30 m wide and flows at 1.5 m s⁻¹. A boat can travel at 2.5 m s⁻¹ in still water. If the boat aims straight across, find the time to cross and the drift downstream.', model: 'Aiming straight across, θ = 0°, so across = V cos 0° = 2.5 m s⁻¹ and along = current = 1.5 m s⁻¹ (the boat adds nothing sideways). Time = width / across = 30 / 2.5 = 12 s. Drift = along × time = 1.5 × 12 = 18 m.', checklist: ['I used across = V cos θ with θ = 0°', 'I found time = width / across = 12 s', 'I used along = current only (no boat contribution)', 'I found drift = 18 m'] },
+        { t: 'retrieval', items: [{ from: 'A.1 · 1', q: 'Motion is described…', options: ['relative to a reference point', 'in absolute terms'], answer: 0, why: 'Position is relative.' }, { from: 'A.1 · 4', q: 'Uniform motion means…', options: ['constant velocity', 'constant force'], answer: 0, why: 'No acceleration.' }] },
+        { t: 'summary', points: ['A vector resolves into components: Vx = V cos θ, Vy = V sin θ.', 'When two velocities act at once, the real motion is their vector sum.', 'Crossing a river: only the across component gets you over; the along component (current + boat) causes drift.'], terms: [{ term: 'Resolve', def: 'split a vector into two components at right angles' }, { term: 'Resultant', def: 'the single vector that has the same effect as two or more vectors added together' }], formulas: ['Vx = V cos θ, Vy = V sin θ', 'V = √(Vx² + Vy²)', 'across = V cos θ, along = current + V sin θ'], errors: ['Mixing up sin and cos for the two components.', 'Forgetting the current still acts even when the boat aims straight across.', 'Assuming you can always cancel the drift: only true if the boat is faster than the current.'] },
+      ],
+    },
   ],
 }

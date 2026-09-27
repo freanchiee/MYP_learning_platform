@@ -3,6 +3,7 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import type { WidgetId } from '@/data/learn/physics'
 import { makeProblem, type ConvProblem } from '@/lib/learn/conversions'
 import { ForceCarGame, ForceDirectionAnim, ForceShapeAnim, ForceSpeedAnim } from './force-things'
+import { RiverCrossingGame, VectorResolveAnim } from './river-vectors'
 import { CollisionLab, ForceLink, MomentumCases, NewtonLab, NflDiagram, NslDiagram, SpacetimeDiagram } from './physics-a2'
 import {
   C, G, H, inclineAcceleration, massEnergy, pendulumPeriod, photonEnergy, relativePosition, slideAngle, zenoSum,
@@ -510,6 +511,8 @@ const REGISTRY: Record<WidgetId, () => JSX.Element> = {
   'force-direction-anim': ForceDirectionAnim,
   'force-shape-anim': ForceShapeAnim,
   'force-car-game': ForceCarGame,
+  'vector-resolve-anim': VectorResolveAnim,
+  'river-crossing-game': RiverCrossingGame,
 }
 
 export function Widget({ id }: { id: WidgetId }) {

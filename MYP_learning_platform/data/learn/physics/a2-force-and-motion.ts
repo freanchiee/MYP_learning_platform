@@ -204,15 +204,30 @@ const lessons: Lesson[] = [
     minutes: 20,
     access: 'free',
     blocks: [
-      { t: 'hook', text: 'When you drive, the engine, the brakes, the steering and a bump in the road all use forces. What is each one actually doing to the car?' },
+      { t: 'hook', text: 'Get in and drive first. Then we will name what each control actually does with a force.' },
       {
         t: 'deck',
         slides: [
+          {
+            id: 'car',
+            kicker: 'Play first',
+            title: 'Drive the car — what do you notice?',
+            blocks: [
+              {
+                t: 'widget',
+                id: 'force-car-game',
+                title: 'Drive the car',
+                idea: 'Try ▲ to speed up, ▼ to brake, ◀ ▶ to steer, and drive over a speed breaker. Notice: does each push feel the same, or different?',
+              },
+              { t: 'note', text: 'Speeding up, braking and steering all use a force. So does the bump pushing the spring. Next: what is different about each one?' },
+            ],
+          },
           {
             id: 'three',
             kicker: 'Force can do 3 things',
             title: 'Speed, direction, shape',
             blocks: [
+              { t: 'p', text: 'You just used all three. The engine and the brakes changed the car’s **speed**. Steering changed its **direction**. The speed breaker changed the spring’s **shape**.' },
               {
                 t: 'arrows',
                 head: ['A force can…', 'Formula'],
@@ -277,19 +292,6 @@ const lessons: Lesson[] = [
                 title: 'A spring',
                 idea: 'A pull stretches the spring and a push compresses it. The change of shape is proportional to the force.',
                 predict: { q: 'Predict: a spring extends by 4 cm under 8 N. Under 16 N (still within its limit) it extends by…', options: ['2 cm', '8 cm', '16 cm'], answer: 1, why: 'x = F / k, so doubling F doubles x: 8 cm.' },
-              },
-            ],
-          },
-          {
-            id: 'car',
-            kicker: 'Drive it',
-            title: 'A car uses all three',
-            blocks: [
-              {
-                t: 'widget',
-                id: 'force-car-game',
-                title: 'Drive the car',
-                idea: '▲ engine force with the velocity, ▼ braking force against it, ◀ ▶ tyre friction across it. Then hit a speed breaker and watch the spring.',
               },
             ],
           },

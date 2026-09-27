@@ -197,4 +197,76 @@ const run = (s0, inp, secs, dt = 1 / 240) => { let s = s0, f = null; for (let t 
   ok('F = kx at the peak', near(car.SUSP.k * mid.peak, 22000 * mid.peak, 1e-9))
   ok('breakers repeat every 120 m from x = 60', car.breakerAt(61).xb === 60 && car.breakerAt(185).xb === 180 && near(car.breakerAt(61).s, 1, 1e-12))
 }
+// ---- vector resolution and the river-crossing problem ----
+const outV = path.resolve('node_modules/.cache/vector.mjs')
+await build({ entryPoints: ['lib/learn/vector-model.ts'], outfile: outV, format: 'esm', bundle: true, logLevel: 'silent' })
+const vec = await import(pathToFileURL(outV).href)
+{
+  // resolving: round trip and known values
+  let bad = 0
+  for (let i = 0; i < 3000; i++) {
+    const mag = rnd2() * 20, ang = rnd2() * 360
+    const { x, y } = vec.toComponents(mag, ang)
+    const back = vec.toPolar(x, y)
+    if (Math.abs(back.mag - mag) > 1e-6) bad++
+    const angDiff = Math.min(Math.abs(back.angleDeg - ang), 360 - Math.abs(back.angleDeg - ang))
+    if (mag > 1e-6 && angDiff > 1e-4) bad++
+  }
+  ok('toComponents / toPolar round-trip (3000 random vectors)', bad === 0)
+  const c37 = vec.toComponents(5, 36.869897645844)
+  ok('3-4-5 triangle: components are 4 and 3', near(c37.x, 4, 1e-6) && near(c37.y, 3, 1e-6))
+  const sum = vec.addComponents({ x: 3, y: 0 }, { x: 0, y: 4 })
+  ok('adding perpendicular 3 and 4 gives magnitude 5', near(vec.toPolar(sum.x, sum.y).mag, 5, 1e-9))
+}
+{
+  // river crossing: aim straight across
+  const r0 = vec.riverCrossing(3, 0, 2, 40)
+  ok('aim straight across: time = width / boatSpeed', near(r0.time, 40 / 3, 1e-9))
+  ok('aim straight across: drift = current x time', near(r0.drift, 2 * (40 / 3), 1e-9))
+  // time straight-across is independent of current speed
+  const rA = vec.riverCrossing(3, 0, 0, 40), rB = vec.riverCrossing(3, 0, 5, 40)
+  ok('crossing time at heading 0 does not depend on the current', near(rA.time, rB.time, 1e-9))
+  // heading to cancel drift
+  const h = vec.headingToCancelDrift(5, 3)
+  const rc = vec.riverCrossing(5, h, 3, 40)
+  ok('heading chosen to cancel drift: along (resultant sideways speed) is ~0', Math.abs(rc.along) < 1e-6)
+  ok('cancelling drift needs pointing upstream (negative heading)', h < 0)
+  ok('exact cancelling speed: across = sqrt(boat^2 - current^2)', near(rc.across, Math.sqrt(25 - 9), 1e-9))
+  ok('current faster than the boat: no heading can cancel the drift (NaN)', Number.isNaN(vec.headingToCancelDrift(2, 5)))
+  // straight across (heading 0) gives the minimum crossing time over the reachable headings
+  let minAt0 = true
+  for (let i = 0; i < 500; i++) {
+    const h2 = -80 + rnd2() * 160
+    const t = vec.riverCrossing(3, h2, 2, 40).time
+    if (t < r0.time - 1e-9) minAt0 = false
+  }
+  ok('heading straight across minimises the crossing time (500 random headings)', minAt0)
+  // 90 deg (parallel to the bank): no progress across
+  const r90 = vec.riverCrossing(3, 90, 2, 40)
+  ok('aimed along the bank (90 deg): never reaches the far side', r90.time === Infinity)
+  // random consistency: resultant vector = vector sum of boat velocity + current
+  let vBad = 0
+  for (let i = 0; i < 2000; i++) {
+    const vb = 0.5 + rnd2() * 6, h2 = -80 + rnd2() * 160, vc = rnd2() * 4, w = 10 + rnd2() * 80
+    const r = vec.riverCrossing(vb, h2, vc, w)
+    const boatComp = vec.toComponents(vb, h2) // toComponents(mag, angle) = {x: mag*cos, y: mag*sin} = {across, along} directly
+    const total = vec.addComponents(boatComp, { x: 0, y: vc }) // the current has zero "across" component
+    if (Math.abs(total.x - r.across) > 1e-6 || Math.abs(total.y - r.along) > 1e-6) vBad++
+  }
+  ok('resultant = boat velocity + current, by direct vector addition (2000 random cases)', vBad === 0)
+}
+{
+  // the game's own stepper: accelerates towards max speed, steering is clamped, position accumulates the resultant velocity
+  const NONE = { up: false, left: false, right: false }
+  let s = { across: 0, along: 0, speed: 0, heading: 0 }
+  for (let i = 0; i < 600; i++) s = vec.stepBoat(s, { ...NONE, up: true }, 2, 1 / 60)
+  ok('boat speeds up to its max under sustained throttle', near(s.speed, vec.RIVER.maxSpeed, 1e-6))
+  let s2 = { across: 0, along: 0, speed: 0, heading: 0 }
+  for (let i = 0; i < 400; i++) s2 = vec.stepBoat(s2, { ...NONE, right: true }, 0, 1 / 60)
+  ok('steering is clamped to the maximum heading', near(s2.heading, vec.RIVER.maxHeading, 1e-6))
+  let s3 = { across: 0, along: 0, speed: 2, heading: 0 }
+  const before = s3.across
+  s3 = vec.stepBoat(s3, NONE, 1, 1 / 60)
+  ok('across position only increases while the boat still has forward speed', s3.across > before)
+}
 process.exit(fail ? 1 : 0)
