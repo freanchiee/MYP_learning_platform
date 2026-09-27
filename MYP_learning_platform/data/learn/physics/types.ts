@@ -37,6 +37,8 @@ export type WidgetId =
   | 'force-car-game'
   | 'vector-resolve-anim'
   | 'river-crossing-game'
+  | 'fundamental-forces-table'
+  | 'terminal-velocity-lab'
 
 export type BoxKind = 'yes' | 'no' | 'opt'
 

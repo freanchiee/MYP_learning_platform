@@ -269,4 +269,52 @@ const vec = await import(pathToFileURL(outV).href)
   s3 = vec.stepBoat(s3, NONE, 1, 1 / 60)
   ok('across position only increases while the boat still has forward speed', s3.across > before)
 }
+// ---- buoyancy, tension (a simple two-body system), and falling through a resisting fluid ----
+const outF = path.resolve('node_modules/.cache/forces.mjs')
+await build({ entryPoints: ['lib/learn/forces-model.ts'], outfile: outF, format: 'esm', bundle: true, logLevel: 'silent' })
+const fm = await import(pathToFileURL(outF).href)
+{
+  ok('buoyant force: 500 cm3 in water = 4.9 N', near(fm.buoyantForce(1000, 0.0005), 4.905, 1e-6))
+  ok('buoyant force scales with volume (2000 random cases)', (() => {
+    let bad = 0
+    for (let i = 0; i < 2000; i++) { const rho = 1 + rnd2() * 2000, V = rnd2() * 2; if (Math.abs(fm.buoyantForce(rho, 2 * V) - 2 * fm.buoyantForce(rho, V)) > 1e-9) bad++ }
+    return bad === 0
+  })())
+  const at = fm.atwoodLite(4, 2)
+  ok('two-mass system: a = mB g / (mA+mB)', near(at.a, (2 * 9.81) / 6, 1e-9))
+  ok('two-mass system: T = mA a, matches m1 m2 g/(m1+m2)', near(at.T, (4 * 2 * 9.81) / 6, 1e-9) && near(at.T, at.a * 4, 1e-12))
+  ok('tension is less than the hanging weight (the weight is what accelerates it)', at.T < 2 * 9.81)
+}
+{
+  // terminal velocity: analytic solution matches direct numerical integration
+  let bad = 0
+  for (let i = 0; i < 300; i++) {
+    const m = 0.01 + rnd2() * 0.2, k = 0.01 + rnd2() * 5, t = rnd2() * 3 * fm.timeConstant(m, k)
+    const a1 = fm.fallVelocity(m, k, t), a2 = fm.fallVelocityNumeric(m, k, t)
+    if (Math.abs(a1 - a2) > 1e-3 * Math.max(1, a1)) bad++
+  }
+  ok('fallVelocity (closed form) matches direct numerical integration (300 random cases)', bad === 0)
+  ok('at t = 0 the object is still, v = 0', fm.fallVelocity(0.05, 0.5, 0) === 0)
+  const vLate = fm.fallVelocity(0.05, 0.5, 50 * fm.timeConstant(0.05, 0.5))
+  ok('after many time constants, v approaches the terminal velocity', near(vLate, fm.terminalVelocity(0.05, 0.5), 1e-6))
+  ok('at terminal velocity the net force is ~0 (balanced)', near(fm.netFallForce(0.05, 0.5, 50 * fm.timeConstant(0.05, 0.5)), 0, 1e-6))
+  ok('early on, net force is unbalanced (still speeding up)', fm.netFallForce(0.05, 0.5, 0.001) > 0.1)
+  ok('velocity increases monotonically towards the terminal velocity', (() => {
+    let bad2 = 0, prev = -1
+    for (let t = 0; t < 5; t += 0.05) { const v = fm.fallVelocity(0.05, 0.5, t); if (v < prev - 1e-12) bad2++; prev = v }
+    return bad2 === 0
+  })())
+  // honey (bigger k) vs air (smaller k): lower terminal velocity, but reaches it in less time
+  const air = { m: 0.05, k: 0.05 }, honey = { m: 0.05, k: 2.5 }
+  ok('a more viscous fluid gives a LOWER terminal velocity', fm.terminalVelocity(honey.m, honey.k) < fm.terminalVelocity(air.m, air.k))
+  ok('a more viscous fluid reaches its (lower) terminal velocity SOONER (smaller time constant)', fm.timeConstant(honey.m, honey.k) < fm.timeConstant(air.m, air.k))
+  // fallPosition is the integral of fallVelocity (check the derivative numerically)
+  let posBad = 0
+  for (let i = 0; i < 300; i++) {
+    const m = 0.02 + rnd2() * 0.1, k = 0.1 + rnd2() * 3, t = 0.05 + rnd2() * 2, h = 1e-5
+    const dydt = (fm.fallPosition(m, k, t + h) - fm.fallPosition(m, k, t - h)) / (2 * h)
+    if (Math.abs(dydt - fm.fallVelocity(m, k, t)) > 1e-4) posBad++
+  }
+  ok('fallPosition is the integral of fallVelocity (its derivative matches v(t), 300 cases)', posBad === 0)
+}
 process.exit(fail ? 1 : 0)

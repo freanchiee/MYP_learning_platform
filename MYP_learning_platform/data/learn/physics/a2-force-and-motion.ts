@@ -719,6 +719,218 @@ const lessons: Lesson[] = [
       { t: 'summary', points: ['Imbalance is the cause of motion; a bigger imbalance means more motion.', 'Force = work done per unit displacement (space) = change in momentum per unit time (time).', 'Given the present state and the force, the future (and the past) follows.'], terms: [{ term: 'Imbalance', def: 'a difference (of force, concentration, temperature or potential) that drives a flow' }, { term: 'Work done', def: 'the way energy in one form (E₁) is converted into energy in another form (E₂); a force acting through a displacement' }], formulas: ['WD / x = F = Δp / t'], errors: ['Mixing up energy per distance (force) with energy per time (power).', 'Forgetting the condition: constant force along the displacement.', 'Treating work done as a store of energy: it is the process that converts E₁ into E₂.'] },
     ],
   },
+
+  // ------------------------------------------------------------------ 9 the four fundamental forces
+  {
+    slug: 'four-fundamental-forces',
+    code: 'A.2 · 9',
+    title: 'The four fundamental forces',
+    blurb: 'Every push and pull in the universe comes down to just four forces. How do they compare?',
+    syllabus: 'A.2 Forces and momentum · enrichment: fundamental forces',
+    level: 'SL+HL',
+    difficulty: 2,
+    minutes: 14,
+    access: 'free',
+    blocks: [
+      { t: 'hook', text: 'Gravity holds you to the floor. A magnet holds a fridge note. A nucleus holds together against its own repulsion. Are these really different forces, or the same thing in disguise?' },
+      {
+        t: 'deck',
+        slides: [
+          {
+            id: 'four',
+            kicker: 'May the forces be with you',
+            title: 'Four forces, not one',
+            blocks: [
+              {
+                t: 'table',
+                head: ['Force', 'Acts on…', 'Example'],
+                rows: [
+                  ['Gravitational', 'any matter, because matter has mass — between two or more masses, at rest or moving', 'you and the Earth'],
+                  ['Electromagnetic', 'charges, in electric and magnetic fields — between charges at rest (electric) or moving (magnetic)', 'a magnet and a fridge, static shock'],
+                  ['Weak nuclear', 'particles separated by less than about 10⁻¹⁸ m, roughly 0.1% of a proton’s diameter', 'radioactive decay'],
+                  ['Strong nuclear', 'protons and neutrons in the nucleus, at about 10⁻¹⁵ m', 'holding the nucleus together'],
+                ],
+              },
+              { t: 'note', text: 'Every push or pull you have met — friction, tension, the normal force, a spring, even a chemical bond — is really the electromagnetic force showing up between atoms.' },
+            ],
+          },
+          {
+            id: 'table',
+            kicker: 'Compare them',
+            title: 'Range, strength, mediator',
+            blocks: [
+              {
+                t: 'widget',
+                id: 'fundamental-forces-table',
+                title: 'The four forces, quantitatively',
+                idea: 'Each force is carried (mediated) by a particle. Range and relative strength span enormous numbers, so the strength bars use a log scale.',
+                predict: { q: 'Predict: which force is the STRONGEST, particle for particle?', options: ['Gravitational', 'Weak nuclear', 'Strong nuclear'], answer: 2, why: 'The strong force is the strongest by far — it has to be, to overcome the electric repulsion between protons packed into a tiny nucleus.' },
+              },
+            ],
+          },
+          {
+            id: 'weakest',
+            kicker: 'Weakest, yet everywhere',
+            title: 'Why gravity still matters',
+            blocks: [
+              { t: 'p', text: 'Gravity is the weakest of the four by an enormous margin. But it has two advantages the others do not both share: it has **infinite range**, and it is **always attractive** (never cancels out). Add up the gravity from every particle in a planet, and the weakest force wins on the largest scales.' },
+              { t: 'callout', kind: 'idea', title: 'Not yet found', text: 'The graviton — the particle physicists expect should carry the gravitational force, to match the other three — has never been directly observed. Gravity is the one fundamental force with no confirmed mediator.' },
+            ],
+          },
+        ],
+      },
+      { t: 'check', id: 'a2-9-c1', q: 'Which force is responsible for radioactive decay?', options: ['Weak nuclear', 'Strong nuclear', 'Electromagnetic'], answer: 0, why: 'The weak nuclear force causes processes like beta decay.', back: 'four' },
+      { t: 'check', id: 'a2-9-c2', q: 'Which mediating particle carries the electromagnetic force?', options: ['Photon', 'Gluon', 'Graviton'], answer: 0, why: 'The photon, massless and spin 1.', back: 'table' },
+      { t: 'check', id: 'a2-9-c3', q: 'Why does the weakest fundamental force (gravity) dominate the motion of planets?', options: ['It has infinite range and is always attractive', 'It is actually the strongest at short range', 'The other forces do not act on planets'], answer: 0, why: 'Gravity never cancels and never fades to zero, so it adds up over huge masses and distances.', back: 'weakest' },
+      { t: 'check', id: 'a2-9-c4', q: 'The strong nuclear force acts over a range of about…', options: ['10⁻¹⁵ m', '10⁻¹⁸ m', 'infinite'], answer: 0, why: 'About the size of a nucleus, 10⁻¹⁵ m.', back: 'table' },
+      { t: 'apply', id: 'a2-9-a1', prompt: 'Friction, tension and the normal force are all "contact" forces you meet every day. Which fundamental force are they really examples of, and why does it not feel like a single force?', model: 'They are all the electromagnetic force, acting between the electrons in the outer atoms of two surfaces (or the atoms along a string). It does not feel like "one force" because it shows up in different everyday situations — resisting sliding (friction), pulling along a string (tension), pushing apart two touching surfaces (the normal force) — even though the same force is behind all of them.', checklist: ['I named the electromagnetic force', 'I said it acts between atoms/electrons', 'I gave at least one everyday example', 'I explained why it looks like different forces'] },
+      { t: 'retrieval', items: [{ from: 'A.2 · 3', q: 'A force at 90° to the velocity changes…', options: ['the direction only', 'the speed only'], answer: 0, why: 'Centripetal force.' }, { from: 'A.2 · 2', q: 'F_net = …', options: ['Δp / t', 'mv'], answer: 0, why: 'Rate of change of momentum.' }] },
+      { t: 'summary', points: ['Four fundamental forces: gravitational, electromagnetic, weak nuclear, strong nuclear.', 'Strong is the strongest, gravity by far the weakest, but gravity has infinite range and is always attractive.', 'Everyday contact forces (friction, tension, the normal force) are all really the electromagnetic force.'], terms: [{ term: 'Mediating particle', def: 'the particle that "carries" a fundamental force between two other particles' }, { term: 'Graviton', def: 'the hypothetical particle expected to mediate gravity; never yet observed' }], formulas: [], errors: ['Thinking friction or tension is a separate fundamental force.', 'Assuming the strongest force must dominate everyday life — range and sign matter too.'] },
+    ],
+  },
+  // ------------------------------------------------------------------ 10 everyday forces: friction, drag, buoyancy, tension
+  {
+    slug: 'everyday-forces',
+    code: 'A.2 · 10',
+    title: 'Friction, buoyancy, tension and the rest',
+    blurb: 'The everyday forces you name on a free-body diagram, and what resists motion.',
+    syllabus: 'A.2 Forces and momentum · contact and resistive forces',
+    level: 'SL+HL',
+    difficulty: 2,
+    minutes: 20,
+    access: 'free',
+    blocks: [
+      { t: 'hook', text: 'A stationary drop of water on a level table feels balanced forces. Tilt the table and the forces become unbalanced — it slides. What would the SAME experiment look like with a drop of honey, or glue, or oil?' },
+      {
+        t: 'deck',
+        slides: [
+          {
+            id: 'balanced',
+            kicker: 'The table and the drop',
+            title: 'Balanced vs unbalanced, revisited',
+            blocks: [
+              {
+                t: 'table',
+                head: ['', 'Stationary drop (level table)', 'Moving drop (tilted table)'],
+                rows: [['Forces', 'balanced, F_net = 0', 'unbalanced, F_net ≠ 0']],
+              },
+              { t: 'p', text: 'This lets us conclude that motion (here, transportation) happened only because the table was tilted — an imbalance of forces. Now imagine the same experiment with a drop of **honey**, **glue**, or **oil** instead of water.' },
+            ],
+          },
+          {
+            id: 'names',
+            kicker: 'Name the forces',
+            title: 'A catalogue of everyday forces',
+            blocks: [
+              {
+                t: 'table',
+                head: ['Force', 'Direction', 'Formula / note'],
+                rows: [
+                  ['Weight (gravity)', 'straight down', 'W = mg'],
+                  ['Normal force N', '90° to the surface, pushing away from it', 'from Newton’s 3rd law: the surface pushes back'],
+                  ['Tension T', 'along a string or cable, pulling', 'found from F_net = ma on the system it acts in'],
+                  ['Buoyant force', 'upward, on anything in a fluid', 'F_B = ρ_fluid × V_displaced × g (Archimedes)'],
+                  ['Spring force', 'along the spring, resisting the stretch/squeeze', 'F = kx (Hooke’s law, from A.2 · 3)'],
+                  ['Friction f', 'along the surface, opposing sliding (or attempted sliding)', 'f = μN'],
+                  ['Drag / air resistance', 'opposite the motion, through a fluid', 'grows with speed'],
+                ],
+              },
+              { t: 'callout', kind: 'warn', title: 'All contact, except two', text: 'Every force in this table except weight and the buoyant force is a contact force — and every contact force is really the electromagnetic force between atoms (see A.2 · 9).' },
+            ],
+          },
+          {
+            id: 'tension',
+            kicker: 'Tension',
+            title: 'A string pulls, it never pushes',
+            blocks: [
+              { t: 'p', text: 'A string, rope or cable can only **pull** along its own length — never push. Its tension is not fixed by a formula; it comes out of applying F_net = ma to whatever the string is attached to.' },
+              {
+                t: 'steps',
+                title: 'a block and a hanging mass',
+                given: 'A 4.0 kg block sits on a frictionless table. A string over an ideal pulley connects it to a 2.0 kg mass hanging off the edge. Find the acceleration and the tension.',
+                steps: [
+                  { line: 'Treat both masses as one system: total mass 6.0 kg, driven by the hanging weight m_{B}g', why: 'Only the hanging mass has an unbalanced force along the direction of motion; the table supports the block’s weight.' },
+                  { line: 'a = m_{B}g / (m_{A} + m_{B}) = (2.0 × 9.81) / 6.0 = 3.3 m s⁻²', why: 'F_net,system = m_B g; a = F_net / total mass.' },
+                  { line: 'Now isolate the block: T = m_{A}a = 4.0 × 3.3 = 13 N', why: 'The string is the ONLY horizontal force on the block, so T = m_A a.' },
+                  { line: 'Check: for the hanging mass, m_{B}g − T = m_{B}a → 19.6 − 13 = 6.5 ≈ 2.0 × 3.3 ✓', why: 'The same acceleration must satisfy Newton’s second law for the hanging mass too.' },
+                ],
+                answer: 'a ≈ 3.3 m s⁻², T ≈ 13 N',
+              },
+            ],
+          },
+          {
+            id: 'friction',
+            kicker: 'Friction',
+            title: 'Static, dynamic, and the incline',
+            blocks: [
+              {
+                t: 'arrows',
+                head: ['Type', 'When'],
+                rows: [
+                  { from: 'Static friction', to: 'the surfaces are not sliding yet — friction matches whatever is needed, up to a maximum' },
+                  { from: 'Dynamic (kinetic) friction', to: 'the surfaces are already sliding' },
+                ],
+              },
+              { t: 'formulas', items: [{ eq: 'f = μN', legend: ['μ: coefficient of friction (no units)', 'N: normal force (90° to the surface)', 'μ_static > μ_dynamic'] }] },
+              { t: 'widget', id: 'tilt-forces', title: 'A block on a tilted table', idea: 'The block stays still while the pull down the slope is less than the greatest friction. Push the tilt further and it slides.' },
+              {
+                t: 'steps',
+                title: 'the angle where it just starts to slide',
+                given: 'A block sits on a surface tilted at angle θ. At the critical angle, it is on the point of sliding. Find μ in terms of θ.',
+                steps: [
+                  { line: 'N = mg cos θ,   f = mg sin θ', why: 'Resolve the weight into components along and perpendicular to the slope; at rest, friction balances the along-slope component exactly.' },
+                  { line: 'at the point of sliding, f = μN', why: 'Friction is at its maximum possible (static) value right at the critical angle.' },
+                  { line: 'μmg cos θ = mg sin θ', why: 'Substitute N and f from the line above.' },
+                  { line: 'μ = sin θ / cos θ = tan θ', why: 'The mg cancels — μ depends only on the angle, not the mass.' },
+                ],
+                answer: 'μ = tan θ',
+              },
+            ],
+          },
+          {
+            id: 'resist',
+            kicker: 'What resists motion',
+            title: 'Friction, drag, viscosity, resistance',
+            blocks: [
+              {
+                t: 'table',
+                head: ['Resists…', 'Between…', 'Example'],
+                rows: [
+                  ['Friction', 'solid on solid', 'a book sliding across a desk'],
+                  ['Drag', 'a solid moving through a fluid', 'F_D = ½ C_D ρ A v² — air resistance on a car'],
+                  ['Viscosity', 'layers within a fluid itself', 'why honey pours more slowly than water'],
+                  ['Electrical resistance', 'moving charge', 'the opposition a circuit gives to current'],
+                ],
+              },
+              { t: 'note', text: 'Four different names, one family: something always opposes motion, and it grows the harder (or faster) you push.' },
+            ],
+          },
+          {
+            id: 'terminal',
+            kicker: 'Try it',
+            title: 'Falling through honey, water, air',
+            blocks: [
+              {
+                t: 'widget',
+                id: 'terminal-velocity-lab',
+                title: 'Reaching terminal velocity',
+                idea: 'A falling ball speeds up until resistance grows to match its weight — then the forces balance and the speed stops changing.',
+                predict: { q: 'Predict: the SAME ball is dropped into honey and into water. Compared with water, in honey it reaches…', options: ['a higher terminal velocity, more slowly', 'a lower terminal velocity, but sooner', 'the same terminal velocity either way'], answer: 1, why: 'More resistance (bigger k) means the ball cannot speed up as far before the forces balance, AND it balances sooner.' },
+              },
+            ],
+          },
+        ],
+      },
+      { t: 'check', id: 'a2-10-c1', q: 'The buoyant force on an object equals…', options: ['the weight of fluid it displaces', 'its own weight', 'the density of the object'], answer: 0, why: 'Archimedes’ principle: F_B = ρ_fluid V g.', back: 'names' },
+      { t: 'check', id: 'a2-10-c2', q: 'A string can…', options: ['only pull, never push', 'only push, never pull', 'push or pull equally'], answer: 0, why: 'Tension always pulls along the string.', back: 'tension' },
+      { t: 'check', id: 'a2-10-c3', q: 'At the angle where a block just starts to slide, μ equals…', options: ['tan θ', 'sin θ', 'mg cos θ'], answer: 0, why: 'μmg cos θ = mg sin θ gives μ = tan θ.', back: 'friction' },
+      { t: 'check', id: 'a2-10-c4', q: 'Static friction compared with dynamic (kinetic) friction on the same surfaces is usually…', options: ['greater', 'smaller', 'exactly equal'], answer: 0, why: 'μ_static > μ_dynamic — it takes more force to start sliding than to keep it sliding.', back: 'friction' },
+      { t: 'check', id: 'a2-10-c5', q: 'A ball falling through a fluid reaches terminal velocity when…', options: ['its weight is balanced by the resistive force', 'it stops accelerating due to gravity switching off', 'the fluid runs out'], answer: 0, why: 'At terminal velocity, F_net = 0: weight = drag/viscous force.', back: 'terminal' },
+      { t: 'apply', id: 'a2-10-a1', prompt: 'Sketch (in words) what would happen to a drop of honey, a drop of glue, and a drop of oil on the SAME tilted-table experiment. Which would take longest to start visibly moving, and why?', model: 'All three would stay still on the level table (balanced forces) and start moving once tilted (unbalanced forces), just like the water. Honey and glue are far more viscous than water, so the internal resistance to flowing is much larger; the drop would deform and creep very slowly even once tilted, and glue might not visibly move at all within a reasonable time. Oil is less viscous than honey but still more viscous than water, so it would move, just more slowly than the water did.', checklist: ['I said all three still show balanced vs unbalanced forces', 'I linked "slower to move" to higher viscosity', 'I ranked honey/glue as slowest, oil in between', 'I connected this to the terminal-velocity idea (more resistance)'] },
+      { t: 'retrieval', items: [{ from: 'A.2 · 9', q: 'Everyday contact forces (friction, tension) are all really…', options: ['the electromagnetic force', 'gravity', 'the strong force'], answer: 0, why: 'Atoms interacting electromagnetically.' }, { from: 'A.2 · 3', q: 'F = kx describes a force that changes an object’s…', options: ['shape', 'speed', 'direction'], answer: 0, why: 'Hooke’s law, a change of shape.' }] },
+      { t: 'summary', points: ['Named forces: weight, normal force, tension, buoyant force, spring force, friction, drag.', 'A string only pulls. Tension is found from F_net = ma, not a standalone formula.', 'f = μN, with μ_static > μ_dynamic; at the point of sliding on an incline, μ = tan θ.', 'Friction, drag, viscosity and electrical resistance are one family: things that oppose motion.', 'A falling object reaches terminal velocity when the resistive force balances its weight.'], terms: [{ term: 'Tension', def: 'the pulling force transmitted along a string, rope or cable' }, { term: 'Buoyant force', def: 'the upward force on an object in a fluid, equal to the weight of fluid displaced' }, { term: 'Terminal velocity', def: 'the constant speed reached when the resistive force balances the weight' }], formulas: ['f = μN', 'μ = tan θ (at the point of sliding)', 'F_B = ρ_fluid V g'], errors: ['Giving tension a fixed formula instead of finding it from F_net = ma.', 'Forgetting μ_static > μ_dynamic.', 'Thinking a denser/more viscous fluid gives a HIGHER terminal velocity — it is the opposite.'] },
+    ],
+  },
   // ------------------------------------------------------------------ 8 quiz
   {
     slug: 'quiz-momentum-and-force',
