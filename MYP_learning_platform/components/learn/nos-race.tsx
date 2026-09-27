@@ -20,9 +20,13 @@ const f1 = (x: number, d = 1) => {
   return s === '-0' ? '0' : s
 }
 
-const NOS_BURN = 4 // seconds of held NOS to empty a full tank
-const NOS_RECHARGE = 15 // seconds to refill from empty, while not held
-const WINDOW = 20 // seconds of history shown on the graph
+const NOS_BURN = 5 // REAL seconds of held NOS to empty a full tank (not simulated seconds — see TIME_SCALE)
+const NOS_RECHARGE = 10 // REAL seconds to refill from empty, while not held
+const WINDOW = 50 // simulated seconds of history shown on the graph
+const TIME_SCALE = 4 // the car's own physics run this many simulated seconds per real second — the maths (and the
+// balance points, V_NORMAL/V_BOOST) is untouched, only how fast you get to watch it play out. NOS burns down in
+// REAL time, so holding it for NOS_BURN real seconds still gives the boost enough SIMULATED seconds to nearly
+// reach the new top speed, instead of running dry a third of the way there.
 
 const V_NORMAL = Math.sqrt((CAR.Feng - CAR.roll) / CAR.drag)
 const V_BOOST = Math.sqrt((CAR.Feng + CAR.Fnos - CAR.roll) / CAR.drag)
@@ -60,12 +64,14 @@ export function NosRaceLab() {
     let last = performance.now()
     let frame = 0
     const tick = (now: number) => {
-      const dt = Math.min(0.05, (now - last) / 1000)
+      const dtReal = Math.min(0.05, (now - last) / 1000)
       last = now
       if (runningRef.current) {
         const nosActive = nosHeldRef.current && fuelRef.current > 0
-        const n = Math.max(1, Math.ceil(dt / (1 / 240)))
-        const h = dt / n
+        const dtSim = dtReal * TIME_SCALE
+        const n = Math.max(1, Math.ceil(dtSim / (1 / 240)))
+        const h = dtSim / n // simulated-time substep, drives the physics
+        const hReal = dtReal / n // real-time substep, drives the NOS tank
         const inp: CarInput = { up: true, down: false, left: false, right: false, nos: nosActive }
         let lastForces = { engine: 0, resist: 0 }
         for (let i = 0; i < n; i++) {
@@ -73,7 +79,7 @@ export function NosRaceLab() {
           carRef.current = r.state
           lastForces = r.forces
           // recharge only while NOT held — once it runs dry mid-hold it stays empty until released, it does not flicker back on
-          fuelRef.current = Math.max(0, Math.min(1, fuelRef.current + (nosActive ? -h / NOS_BURN : nosHeldRef.current ? 0 : h / NOS_RECHARGE)))
+          fuelRef.current = Math.max(0, Math.min(1, fuelRef.current + (nosActive ? -hReal / NOS_BURN : nosHeldRef.current ? 0 : hReal / NOS_RECHARGE)))
           tRef.current += h
         }
         if (carRef.current.v > bestRef.current) bestRef.current = carRef.current.v
@@ -116,6 +122,10 @@ export function NosRaceLab() {
   const X = (t: number) => padL + ((t - gx0) / (gx1 - gx0)) * (GW - padL - 8)
   const Y = (v: number) => GH - padB - (v / vMax) * (GH - padB - padT)
   const path = hud.hist.length > 1 ? hud.hist.map((p, i) => `${i === 0 ? 'M' : 'L'} ${X(p.t)} ${Y(p.v)}`).join(' ') : ''
+  const vTicks = [0, 20, 40, 60].filter((v) => v <= vMax)
+  const tTickStep = 10
+  const tTicks: number[] = []
+  for (let t = Math.ceil(gx0 / tTickStep) * tTickStep; t <= gx1; t += tTickStep) tTicks.push(t)
 
   return (
     <div className="grid gap-4">
@@ -195,13 +205,25 @@ export function NosRaceLab() {
             <svg viewBox={`0 0 ${GW} ${GH}`} className="w-full" role="img" aria-label="Speed against time graph, showing the climb to top speed, the nitrous spike, and the decay back down.">
               <line x1={padL} y1={GH - padB} x2={GW - 4} y2={GH - padB} stroke="var(--border-strong)" strokeWidth="1" />
               <line x1={padL} y1={padT} x2={padL} y2={GH - padB} stroke="var(--border-strong)" strokeWidth="1" />
+              {vTicks.map((v) => (
+                <g key={v}>
+                  <line x1={padL - 3} y1={Y(v)} x2={GW - 4} y2={Y(v)} stroke="var(--border)" strokeWidth="0.5" />
+                  <text x={padL - 6} y={Y(v) + 3} fontSize="8" textAnchor="end" fill="var(--text-muted)">{v}</text>
+                </g>
+              ))}
+              {tTicks.map((t) => (
+                <g key={t}>
+                  <line x1={X(t)} y1={GH - padB} x2={X(t)} y2={GH - padB + 3} stroke="var(--border-strong)" strokeWidth="1" />
+                  <text x={X(t)} y={GH - 6} fontSize="8" textAnchor="middle" fill="var(--text-muted)">{t}</text>
+                </g>
+              ))}
               <line x1={padL} y1={Y(V_NORMAL)} x2={GW - 4} y2={Y(V_NORMAL)} stroke="var(--success)" strokeWidth="1" strokeDasharray="4 3" />
-              <text x={GW - 6} y={Y(V_NORMAL) - 3} fontSize="8" textAnchor="end" fill="var(--success)">original top speed</text>
+              <text x={GW - 6} y={Y(V_NORMAL) - 3} fontSize="8" textAnchor="end" fill="var(--success)">original top speed ({f1(V_NORMAL, 0)})</text>
               <line x1={padL} y1={Y(V_BOOST)} x2={GW - 4} y2={Y(V_BOOST)} stroke="#7c5cff" strokeWidth="1" strokeDasharray="4 3" />
-              <text x={GW - 6} y={Y(V_BOOST) - 3} fontSize="8" textAnchor="end" fill="#7c5cff">nitrous top speed</text>
+              <text x={GW - 6} y={Y(V_BOOST) - 3} fontSize="8" textAnchor="end" fill="#7c5cff">nitrous top speed ({f1(V_BOOST, 0)})</text>
               {path && <path d={path} fill="none" stroke="var(--accent)" strokeWidth="2" />}
-              <text x="4" y={padT + 4} fontSize="8" fill="var(--text-muted)">v</text>
-              <text x={GW - 4} y={GH - 4} fontSize="8" textAnchor="end" fill="var(--text-muted)">t</text>
+              <text x="4" y={padT + 4} fontSize="8" fill="var(--text-muted)">v (m s⁻¹)</text>
+              <text x={GW - 4} y={GH - 4} fontSize="8" textAnchor="end" fill="var(--text-muted)">t (s)</text>
             </svg>
           </figure>
           <div className="mt-3 rounded-[var(--radius-panel)] p-3 text-sm" style={panel} aria-live="polite">
