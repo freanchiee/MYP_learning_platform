@@ -24,7 +24,12 @@ function Arrow(props: { x1: N; y1: N; x2: N; y2: N; color: string; w?: number })
 const btn2: React.CSSProperties = { border: '1px solid var(--border-strong)', color: 'var(--text)', background: 'var(--surface-inset)' }
 const panel: React.CSSProperties = { background: 'var(--surface-inset)', border: '1px solid var(--border)' }
 const fig = { ...panel, borderRadius: 'var(--radius-panel)' } as React.CSSProperties
-const f2 = (x: number, d = 2) => (Math.abs(x) < 1e-9 ? '0' : x.toFixed(d).replace(/\.?0+$/, ''))
+function f2(x: number, d = 2) {
+  if (Math.abs(x) < 1e-9) return '0'
+  const raw = x.toFixed(d)
+  const s = d > 0 ? raw.replace(/(\.\d*?)0+$/, '$1').replace(/\.$/, '') : raw
+  return s === '-0' ? '0' : s
+}
 
 // ---------------------------------------------------------------- the four fundamental forces, quantitatively
 const FORCES = [

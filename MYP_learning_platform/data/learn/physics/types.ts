@@ -40,6 +40,7 @@ export type WidgetId =
   | 'fundamental-forces-table'
   | 'terminal-velocity-lab'
   | 'anchored-pod-lab'
+  | 'parachute-lab'
 
 export type BoxKind = 'yes' | 'no' | 'opt'
 

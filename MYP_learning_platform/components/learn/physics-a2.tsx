@@ -20,7 +20,12 @@ function Slider({ label, value, min, max, step, unit, onChange }: { label: strin
     </label>
   )
 }
-const f2 = (x: number, d = 2) => (Math.abs(x) < 1e-9 ? '0' : x.toFixed(d).replace(/\.?0+$/, '').replace('-', '−'))
+function f2(x: number, d = 2) {
+  if (Math.abs(x) < 1e-9) return '0'
+  const raw = x.toFixed(d)
+  const s = d > 0 ? raw.replace(/(\.\d*?)0+$/, '$1').replace(/\.$/, '') : raw
+  return (s === '-0' ? '0' : s).replace('-', '−')
+}
 const sgn = (x: number, d = 2) => (x > 1e-9 ? `+${f2(x, d)}` : f2(x, d))
 
 type Num = number | string

@@ -339,4 +339,43 @@ const fm = await import(pathToFileURL(outF).href)
   ok('a bigger cable angle (more vertical pull) needs a bigger upthrust for the same tension', fm.upthrustFromTether(50, 200, 80) > fm.upthrustFromTether(50, 200, 40))
 }
 ok('lesson check numbers: r=0.20,rho=500 sphere, T=120N@60deg -> W~164N, F_B~268N', near(fm.sphereWeight(0.20,500), 164.4, 0.1) && near(fm.upthrustFromTether(fm.sphereWeight(0.20,500),120,60), 268.3, 0.1))
+// ---- a skydiver: quadratic drag (F = kv^2), speeding up to terminal velocity, then a parachute ----
+{
+  let bad = 0
+  for (let i = 0; i < 400; i++) {
+    const m = 40 + rnd2() * 80, k = 0.05 + rnd2() * 5, t = rnd2() * 6, v0 = rnd2() * fm.terminalVelocityQuad(m, k) * 1.5
+    const a1 = fm.fallVelocityQuad(m, k, t, v0), a2 = fm.fallVelocityQuadNumeric(m, k, t, v0)
+    if (Math.abs(a1 - a2) > 2e-2 * Math.max(1, a1)) bad++
+  }
+  ok('fallVelocityQuad (closed form) matches direct numerical integration (400 random cases, v0 above or below vt)', bad === 0)
+  ok('from rest, v(0) = 0', fm.fallVelocityQuad(80, 0.3, 0) === 0)
+  const vt = fm.terminalVelocityQuad(80, 0.3)
+  ok('starting AT the terminal velocity, it stays there (equilibrium)', near(fm.fallVelocityQuad(80, 0.3, 5, vt), vt, 1e-6))
+  let upBad = 0, prevU = -1
+  for (let t = 0; t < 8; t += 0.1) { const v = fm.fallVelocityQuad(80, 0.3, t, 0); if (v < prevU - 1e-9) upBad++; prevU = v }
+  ok('falling from rest: speed rises monotonically towards the terminal velocity', upBad === 0 && near(fm.fallVelocityQuad(80, 0.3, 200, 0), vt, 1e-3))
+  const v0High = vt * 1.4
+  let downBad = 0, prevD = 1e9
+  for (let t = 0; t < 8; t += 0.1) { const v = fm.fallVelocityQuad(80, 0.3, t, v0High); if (v > prevD + 1e-9) downBad++; prevD = v }
+  ok('starting FASTER than terminal velocity (just after a parachute opens): speed falls monotonically down to it', downBad === 0 && near(fm.fallVelocityQuad(80, 0.3, 200, v0High), vt, 1e-3))
+  ok('just above terminal velocity, the net force is negative (drag exceeds weight: decelerating)', fm.netForceQuad(80, 0.3, v0High) < 0)
+  ok('just below terminal velocity, the net force is positive (still speeding up)', fm.netForceQuad(80, 0.3, vt * 0.8) > 0)
+  ok('at terminal velocity, the net force is ~0 (balanced)', near(fm.netForceQuad(80, 0.3, vt), 0, 1e-9))
+}
+{
+  // the widget's own constants: realistic freefall vt ~ 50 m/s, canopy vt ~ 6 m/s
+  const m = 80, kBody = 0.314, kChute = 21.8
+  const vt1 = fm.terminalVelocityQuad(m, kBody), vt2 = fm.terminalVelocityQuad(m, kChute)
+  ok('body-only terminal velocity is a realistic freefall speed (45-55 m/s)', vt1 > 45 && vt1 < 55)
+  ok('under canopy, terminal velocity is much smaller (5-7 m/s)', vt2 > 5 && vt2 < 7)
+  ok('opening the parachute gives a MUCH smaller terminal velocity', vt2 < vt1 / 5)
+  const tOpen = 8
+  const before = fm.skydiveVelocity(m, kBody, kChute, tOpen, tOpen - 1e-6)
+  const after = fm.skydiveVelocity(m, kBody, kChute, tOpen, tOpen + 1e-6)
+  ok('velocity is continuous at the moment the parachute opens (no jump)', near(before.v, after.v, 1e-3) && before.phase === 'body' && after.phase === 'chute')
+  const soonAfter = fm.skydiveVelocity(m, kBody, kChute, tOpen, tOpen + 0.3)
+  ok('right after the canopy opens, the jumper is still faster than the new terminal velocity (so it decelerates)', soonAfter.v > vt2)
+  const longAfter = fm.skydiveVelocity(m, kBody, kChute, tOpen, tOpen + 30)
+  ok('well after the canopy opens, speed has settled to the new (lower) terminal velocity', near(longAfter.v, vt2, 0.05))
+}
 process.exit(fail ? 1 : 0)

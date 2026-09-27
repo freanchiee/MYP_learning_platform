@@ -7,7 +7,11 @@ const btn1: React.CSSProperties = { background: 'var(--gradient-cta)', color: 'v
 const btn2: React.CSSProperties = { border: '1px solid var(--border-strong)', color: 'var(--text)', background: 'var(--surface-inset)' }
 const panel: React.CSSProperties = { background: 'var(--surface-inset)', border: '1px solid var(--border)' }
 const fig = { ...panel, borderRadius: 'var(--radius-panel)' } as React.CSSProperties
-const f1 = (x: number, d = 1) => (Math.abs(x) < 1e-9 ? '0' : x.toFixed(d).replace('-', '−'))
+const f1 = (x: number, d = 1) => {
+  if (Math.abs(x) < 1e-9) return '0'
+  const s = x.toFixed(d)
+  return (s === '-0' ? '0' : s).replace('-', '−')
+}
 
 function Slider({ label, value, min, max, step, unit, onChange }: { label: string; value: number; min: number; max: number; step: number; unit: string; onChange: (v: number) => void }) {
   return (

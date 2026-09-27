@@ -52,3 +52,39 @@ export const sphereWeight = (r: number, rho: number, g = G) => rho * sphereVolum
  */
 export const upthrustFromTether = (weight: number, tension: number, angleDeg: number) => weight + tension * Math.sin((angleDeg * Math.PI) / 180)
 export const dragFromTether = (tension: number, angleDeg: number) => tension * Math.cos((angleDeg * Math.PI) / 180)
+
+// ---------------------------------------------------------------- a skydiver: quadratic drag, F_drag = k v^2
+// m dv/dt = mg - kv^2. Closed form (from dx/(1-x^2) = (g/vt) dt, x = v/vt):
+//   v(t) = vt * [sinh(lambda t) + x0 cosh(lambda t)] / [cosh(lambda t) + x0 sinh(lambda t)],  lambda = g/vt, x0 = v0/vt
+// Valid whether v0 is below the terminal velocity (speeds up towards it) or above it (slows down towards it) —
+// exactly what happens the instant a parachute opens: v0 > the new (much smaller) terminal velocity.
+export const terminalVelocityQuad = (m: number, k: number, g = G) => Math.sqrt((m * g) / k)
+
+export function fallVelocityQuad(m: number, k: number, t: number, v0 = 0, g = G) {
+  const vt = terminalVelocityQuad(m, k, g)
+  const lambda = g / vt
+  const x0 = v0 / vt
+  const s = Math.sinh(lambda * t)
+  const c = Math.cosh(lambda * t)
+  return (vt * (s + x0 * c)) / (c + x0 * s)
+}
+
+export const netForceQuad = (m: number, k: number, v: number, g = G) => m * g - k * v * v
+
+/** Numerical cross-check only (Euler integration), used by the test script. */
+export function fallVelocityQuadNumeric(m: number, k: number, t: number, v0 = 0, g = G, dt = 1e-5) {
+  let v = v0
+  for (let ti = 0; ti < t; ti += dt) v += ((m * g - k * v * v) / m) * dt
+  return v
+}
+
+/**
+ * A jumper falls under body drag kBody from rest at the moment the rope is cut, then — if
+ * `tOpen` has passed — the parachute opens and drag switches to kChute, continuing smoothly
+ * from whatever speed the jumper had reached.
+ */
+export function skydiveVelocity(m: number, kBody: number, kChute: number, tOpen: number, t: number, g = G) {
+  if (t <= tOpen) return { v: fallVelocityQuad(m, kBody, t, 0, g), phase: 'body' as const }
+  const vAtOpen = fallVelocityQuad(m, kBody, tOpen, 0, g)
+  return { v: fallVelocityQuad(m, kChute, t - tOpen, vAtOpen, g), phase: 'chute' as const }
+}
