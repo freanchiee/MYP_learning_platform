@@ -41,6 +41,7 @@ export type WidgetId =
   | 'terminal-velocity-lab'
   | 'anchored-pod-lab'
   | 'parachute-lab'
+  | 'nos-race-lab'
 
 export type BoxKind = 'yes' | 'no' | 'opt'
 

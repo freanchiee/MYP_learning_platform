@@ -6,6 +6,7 @@ import { ForceCarGame, ForceDirectionAnim, ForceShapeAnim, ForceSpeedAnim } from
 import { RiverCrossingGame, VectorResolveAnim } from './river-vectors'
 import { AnchoredPodLab, FundamentalForcesTable, TerminalVelocityLab } from './forces-extra'
 import { ParachuteLab } from './parachute-lab'
+import { NosRaceLab } from './nos-race'
 import { CollisionLab, ForceLink, MomentumCases, NewtonLab, NflDiagram, NslDiagram, SpacetimeDiagram } from './physics-a2'
 import {
   C, G, H, inclineAcceleration, massEnergy, pendulumPeriod, photonEnergy, relativePosition, slideAngle, zenoSum,
@@ -519,6 +520,7 @@ const REGISTRY: Record<WidgetId, () => JSX.Element> = {
   'terminal-velocity-lab': TerminalVelocityLab,
   'anchored-pod-lab': AnchoredPodLab,
   'parachute-lab': ParachuteLab,
+  'nos-race-lab': NosRaceLab,
 }
 
 export function Widget({ id }: { id: WidgetId }) {

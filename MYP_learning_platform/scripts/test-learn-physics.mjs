@@ -188,6 +188,23 @@ const run = (s0, inp, secs, dt = 1 / 240) => { let s = s0, f = null; for (let t 
   const right = car.stepCar({ ...car.newCar(), v: 5, steer: -car.CAR.maxSteer }, { ...NONE, right: true }, 1 / 240)
   ok('turning right: the sideways force points to the right of the heading', right.forces.latDir[1] < 0 && right.state.th < 0)
 }
+// ---- nitrous boost: a bigger engine force gives a higher top speed, and it decays back down once the boost ends ----
+{
+  const topNormal = run(car.newCar(), { ...NONE, up: true }, 150, 1 / 60)
+  const vNormalExpected = Math.sqrt((car.CAR.Feng - car.CAR.roll) / car.CAR.drag)
+  ok('normal top speed matches Feng = drag v^2 + roll', near(topNormal.s.v, vNormalExpected, 0.2))
+  const topNos = run(car.newCar(), { ...NONE, up: true, nos: true }, 150, 1 / 60)
+  const vNosExpected = Math.sqrt((car.CAR.Feng + car.CAR.Fnos - car.CAR.roll) / car.CAR.drag)
+  ok('with nitrous held down, top speed matches (Feng+Fnos) = drag v^2 + roll', near(topNos.s.v, vNosExpected, 0.2))
+  ok('the nitrous top speed is clearly higher than the normal top speed', topNos.s.v > topNormal.s.v * 1.3)
+  // starting from the boosted top speed, switch nitrous off (still full throttle) and watch it decay back down
+  const afterNos = run({ ...car.newCar(), v: topNos.s.v }, { ...NONE, up: true }, 90, 1 / 60)
+  ok('once the boost ends, speed decays back down towards the ORIGINAL top speed', near(afterNos.s.v, vNormalExpected, 0.3))
+  let overshoot = false, prev = topNos.s.v
+  let s = { ...car.newCar(), v: topNos.s.v }
+  for (let t = 0; t < 90; t += 1 / 60) { const r = car.stepCar(s, { ...NONE, up: true }, 1 / 60); s = r.state; if (s.v < vNormalExpected - 0.5) overshoot = true; if (s.v > prev + 1e-9) overshoot = true; prev = s.v }
+  ok('the decay back to normal top speed is monotonic and never overshoots below it', !overshoot)
+}
 // ---- suspension: the bump squeezes the spring, F = kx, and it relaxes afterwards ----
 {
   const slow = car.crossBreaker(3), mid = car.crossBreaker(10), fast = car.crossBreaker(25)

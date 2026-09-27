@@ -8,6 +8,7 @@ export const CAR = {
   g: 9.81,
   Feng: 2400, // engine force at full throttle, N
   Fbrake: 6000, // braking force, N
+  Fnos: 3600, // extra engine force while the nitrous boost is active, N
   drag: 1.4, // air resistance F = drag v^2, N s^2 m^-2
   roll: 150, // rolling resistance, N (only while moving)
   maxSteer: 0.5236, // 30 degrees
@@ -16,7 +17,7 @@ export const CAR = {
 export const GRIP_LIMIT = CAR.mu * CAR.m * CAR.g // largest sideways tyre force, N
 
 export interface CarState { x: number; y: number; th: number; v: number; steer: number }
-export interface CarInput { up: boolean; down: boolean; left: boolean; right: boolean }
+export interface CarInput { up: boolean; down: boolean; left: boolean; right: boolean; nos?: boolean }
 export interface CarForces {
   engine: number // N, along the velocity
   brake: number // N, opposite the velocity
@@ -37,7 +38,7 @@ export function stepCar(s: CarState, inp: CarInput, dt: number): { state: CarSta
   const steer = s.steer + dSteer
 
   // along the velocity: engine forward, brake and resistance backward
-  const engine = inp.up ? CAR.Feng : 0
+  const engine = inp.up ? CAR.Feng + (inp.nos ? CAR.Fnos : 0) : 0
   const moving = s.v > 1e-6
   const brake = inp.down && moving ? CAR.Fbrake : 0
   const resist = moving ? CAR.drag * s.v * s.v + CAR.roll : 0
