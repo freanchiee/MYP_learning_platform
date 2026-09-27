@@ -81,6 +81,10 @@ const M = 80, K_BODY = 0.314, K_CHUTE = 21.8
 const VT1 = terminalVelocityQuad(M, K_BODY)
 const VT2 = terminalVelocityQuad(M, K_CHUTE)
 const TMAX = 20
+// After the parachute opens, keep playing for at least this many more seconds — the new
+// (much lower) terminal velocity must always have time to actually show on screen, however
+// late the student opens the chute, instead of the animation cutting off mid-deceleration.
+const TAIL_AFTER_OPEN = 8
 
 export function ParachuteLab() {
   const reduced = useReducedMotion()
@@ -88,6 +92,7 @@ export function ParachuteLab() {
   const [playing, setPlaying] = useState(!reduced)
   const [tOpen, setTOpen] = useState<number | null>(null)
   const [hanging, setHanging] = useState(true)
+  const [playEnd, setPlayEnd] = useState(TMAX)
 
   useEffect(() => {
     if (!playing) return
@@ -96,19 +101,23 @@ export function ParachuteLab() {
     const tick = (now: number) => {
       const dt = Math.min(0.05, (now - last) / 1000)
       last = now
-      setT((x) => Math.min(TMAX, x + dt))
+      setT((x) => Math.min(playEnd, x + dt))
       id = requestAnimationFrame(tick)
     }
     id = requestAnimationFrame(tick)
     return () => cancelAnimationFrame(id)
-  }, [playing])
+  }, [playing, playEnd])
   useEffect(() => {
-    if (t >= TMAX) setPlaying(false)
-  }, [t])
+    if (t >= playEnd) setPlaying(false)
+  }, [t, playEnd])
 
-  const cut = () => { setHanging(false); setT(0); setTOpen(null); setPlaying(!reduced) }
-  const restart = () => { setHanging(true); setT(0); setTOpen(null); setPlaying(false) }
-  const openChute = () => setTOpen(t)
+  const cut = () => { setHanging(false); setT(0); setTOpen(null); setPlayEnd(TMAX); setPlaying(!reduced) }
+  const restart = () => { setHanging(true); setT(0); setTOpen(null); setPlayEnd(TMAX); setPlaying(false) }
+  const openChute = () => {
+    setTOpen(t)
+    setPlayEnd((e) => Math.max(e, t + TAIL_AFTER_OPEN)) // extend the timeline so it can settle
+    setPlaying(!reduced) // resume in case it had auto-paused right as the chute opened
+  }
 
   const open = tOpen !== null
   const { v, phase } = hanging ? { v: 0, phase: 'body' as const } : skydiveVelocity(M, K_BODY, K_CHUTE, open ? tOpen! : Infinity, t)
@@ -119,20 +128,26 @@ export function ParachuteLab() {
   const weightPx = 48
   const dragPx = Math.max(4, Math.min(90, (drag / (M * 9.81)) * weightPx))
 
-  // ---- left panel: scrolling sky + jumper ----
+  // ---- left panel: sky scrolling UPWARDS past the jumper (falling, not gliding sideways) ----
   const H = 260
-  const cloudOffset = ((hanging ? 0 : v * t * 3) % 300)
-  const clouds = [40, 150, 260].map((x0) => ((x0 - cloudOffset + 300) % 300))
+  const loopH = H + 80
+  const scroll = (hanging ? 0 : v * t * 3) % loopH
+  const clouds = [
+    { x: 44, y0: 20 },
+    { x: 170, y0: 110 },
+    { x: 80, y0: 200 },
+    { x: 150, y0: 290 },
+  ].map((c) => ({ x: c.x, y: ((c.y0 - scroll + loopH) % loopH) - 40 }))
 
   // ---- right panel: v-t graph ----
   const W = 300, gH = 200, padL = 40, padB = 24
   const vMax = VT1 * 1.15
-  const X = (tt: number) => padL + (tt / TMAX) * (W - padL - 8)
+  const X = (tt: number) => padL + (tt / playEnd) * (W - padL - 8)
   const Y = (vv: number) => gH - padB - (vv / vMax) * (gH - padB - 8)
   const path = () => {
     const pts: string[] = []
-    for (let tt = 0; tt <= (open ? tOpen! : TMAX); tt += TMAX / 200) pts.push(`${X(tt)},${Y(skydiveVelocity(M, K_BODY, K_CHUTE, Infinity, tt).v)}`)
-    if (open) for (let tt = tOpen!; tt <= TMAX; tt += TMAX / 200) pts.push(`${X(tt)},${Y(skydiveVelocity(M, K_BODY, K_CHUTE, tOpen!, tt).v)}`)
+    for (let tt = 0; tt <= (open ? tOpen! : playEnd); tt += playEnd / 200) pts.push(`${X(tt)},${Y(skydiveVelocity(M, K_BODY, K_CHUTE, Infinity, tt).v)}`)
+    if (open) for (let tt = tOpen!; tt <= playEnd; tt += playEnd / 200) pts.push(`${X(tt)},${Y(skydiveVelocity(M, K_BODY, K_CHUTE, tOpen!, tt).v)}`)
     return pts.join(' ')
   }
 
@@ -142,8 +157,8 @@ export function ParachuteLab() {
         <figure className="m-0 overflow-hidden p-0" style={fig}>
           <svg viewBox={`0 0 220 ${H}`} className="w-full" role="img" aria-label={hanging ? 'A jumper hangs from a rope, tension balancing weight.' : `A jumper falls at ${f2(v)} metres per second. ${open ? 'The parachute is open.' : 'Free-falling, no parachute yet.'} ${balanced ? 'Forces are balanced: constant speed.' : net > 0 ? 'Weight is bigger than drag: speeding up.' : 'Drag is bigger than weight: slowing down.'}`}>
             <rect width="220" height={H} fill="#bcdcf0" />
-            {clouds.map((x, i) => (
-              <ellipse key={i} cx={x} cy={40 + i * 15} rx="30" ry="12" fill="#fff" opacity="0.85" />
+            {clouds.map((c, i) => (
+              <ellipse key={i} cx={c.x} cy={c.y} rx="30" ry="12" fill="#fff" opacity="0.85" />
             ))}
             {hanging ? (
               <g>
@@ -195,7 +210,7 @@ export function ParachuteLab() {
         {!hanging && (
           <label className="flex min-w-[160px] flex-1 items-center gap-2 text-xs font-bold" style={{ color: 'var(--text-muted)' }}>
             time
-            <input type="range" min={0} max={TMAX} step={0.05} value={t} onChange={(e) => { setPlaying(false); setT(Number(e.target.value)) }} className="w-full" style={{ accentColor: 'var(--warning)' }} aria-label="Scrub time" />
+            <input type="range" min={0} max={playEnd} step={0.05} value={t} onChange={(e) => { setPlaying(false); setT(Number(e.target.value)) }} className="w-full" style={{ accentColor: 'var(--warning)' }} aria-label="Scrub time" />
           </label>
         )}
       </div>
