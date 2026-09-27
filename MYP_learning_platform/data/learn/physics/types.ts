@@ -31,6 +31,10 @@ export type WidgetId =
   | 'collision-lab'
   | 'spacetime-diagram'
   | 'force-link'
+  | 'force-speed-anim'
+  | 'force-direction-anim'
+  | 'force-shape-anim'
+  | 'force-car-game'
 
 export type BoxKind = 'yes' | 'no' | 'opt'
 

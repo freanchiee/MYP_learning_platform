@@ -192,10 +192,124 @@ const lessons: Lesson[] = [
       { t: 'summary', points: ['F_net,ext = Δp / t: net force is the rate of change of momentum.', 'p = mv is a vector, unit kg m s⁻¹ = N s.', 'For constant mass, F = ma.', 'The gradient of a p–t graph is the net force.'], terms: [{ term: 'Momentum', def: 'mass × velocity, a vector' }, { term: 'Newton second law', def: 'net external force = rate of change of momentum' }], formulas: ['p = mv', 'F_{net,ext} = Δp / t', 'F = ma (constant mass)'], errors: ['Using F = ma when the mass changes.', 'Forgetting that momentum has a direction.'] },
     ],
   },
+  // ------------------------------------------------------------------ 3 what can a force do
+  {
+    slug: 'what-can-a-force-do',
+    code: 'A.2 · 3',
+    title: 'What can a force do?',
+    blurb: 'Change the speed, change the direction, change the shape. Then drive a car and see all three.',
+    syllabus: 'A.2 Forces and momentum · effects of a force',
+    level: 'SL+HL',
+    difficulty: 2,
+    minutes: 20,
+    access: 'free',
+    blocks: [
+      { t: 'hook', text: 'When you drive, the engine, the brakes, the steering and a bump in the road all use forces. What is each one actually doing to the car?' },
+      {
+        t: 'deck',
+        slides: [
+          {
+            id: 'three',
+            kicker: 'Force can do 3 things',
+            title: 'Speed, direction, shape',
+            blocks: [
+              {
+                t: 'arrows',
+                head: ['A force can…', 'Formula'],
+                rows: [
+                  { emoji: '⏩', from: '1  change the SPEED of an object', to: 'F = ma', note: 'F along the line of v' },
+                  { emoji: '↪️', from: '2  change the DIRECTION of a moving object', to: 'F = mv² / r', note: 'F at 90° to v, speed constant' },
+                  { emoji: '🗜️', from: '3  change the SHAPE of an object', to: 'F = kx', note: 'Hooke’s law' },
+                ],
+              },
+            ],
+          },
+          {
+            id: 'speed',
+            kicker: '1 · Change the speed',
+            title: 'Force along the line of motion',
+            blocks: [
+              {
+                t: 'table',
+                head: ['Angle between F and v', 'Acceleration', 'Speed'],
+                rows: [
+                  ['0°  (same direction)', 'a in the same direction as v', 'increases ↑'],
+                  ['180°  (opposite direction)', 'a opposite to v', 'decreases ↓'],
+                ],
+              },
+              { t: 'formulas', items: [{ eq: 'F = ma', legend: ['a = Δv / t', 'm = 2 kg, a = 1 m s⁻² → F = 2 N'] }] },
+              {
+                t: 'widget',
+                id: 'force-speed-anim',
+                title: 'Same direction or opposite?',
+                idea: 'The block starts at 4 m s⁻¹. Flip the direction of the force and watch the speed.',
+                predict: { q: 'Predict: a force acts on a moving block in the direction OPPOSITE to its velocity. Its speed will…', options: ['increase', 'decrease', 'stay the same'], answer: 1, why: 'Force and velocity at 180°: the acceleration is opposite to v, so the speed falls.' },
+              },
+            ],
+          },
+          {
+            id: 'direction',
+            kicker: '2 · Change the direction',
+            title: 'Force at 90° to the motion',
+            blocks: [
+              {
+                t: 'formulas',
+                items: [{ eq: 'F = mv² / r', legend: ['centripetal force', 'the acceleration is a = v² / r', 'note: the speed is constant'] }],
+              },
+              {
+                t: 'widget',
+                id: 'force-direction-anim',
+                title: 'A ball on a circle',
+                idea: 'The force is at 90° to the velocity, so it turns the velocity without changing the speed.',
+                predict: { q: 'Predict: you double the speed but keep the same radius and mass. The force needed becomes…', options: ['2 times as big', '4 times as big', 'the same'], answer: 1, why: 'F = mv² / r, so F ∝ v². Double v, four times the force.' },
+              },
+            ],
+          },
+          {
+            id: 'shape',
+            kicker: '3 · Change the shape',
+            title: 'Squeeze and stretch',
+            blocks: [
+              { t: 'formulas', items: [{ eq: 'F = kx', legend: ['Hooke’s law', 'k: spring constant (N m⁻¹)', 'x: extension or compression (m)'] }] },
+              {
+                t: 'widget',
+                id: 'force-shape-anim',
+                title: 'A spring',
+                idea: 'A pull stretches the spring and a push compresses it. The change of shape is proportional to the force.',
+                predict: { q: 'Predict: a spring extends by 4 cm under 8 N. Under 16 N (still within its limit) it extends by…', options: ['2 cm', '8 cm', '16 cm'], answer: 1, why: 'x = F / k, so doubling F doubles x: 8 cm.' },
+              },
+            ],
+          },
+          {
+            id: 'car',
+            kicker: 'Drive it',
+            title: 'A car uses all three',
+            blocks: [
+              {
+                t: 'widget',
+                id: 'force-car-game',
+                title: 'Drive the car',
+                idea: '▲ engine force with the velocity, ▼ braking force against it, ◀ ▶ tyre friction across it. Then hit a speed breaker and watch the spring.',
+              },
+            ],
+          },
+        ],
+      },
+      { t: 'check', id: 'a2-3-c1', q: 'A force acts in the same direction as an object’s velocity. The object…', options: ['speeds up', 'slows down', 'moves in a circle'], answer: 0, why: 'Force and velocity at 0°: the acceleration is along v, so the speed increases.', back: 'speed' },
+      { t: 'check', id: 'a2-3-c2', q: 'A satellite moves in a circle at constant speed. The force on it is…', options: ['along its velocity', 'at 90° to its velocity', 'opposite to its velocity'], answer: 1, why: 'A force at 90° to the velocity changes the direction only: F = mv² / r.', back: 'direction' },
+      { t: 'check', id: 'a2-3-c3', q: 'A 2.0 kg block has an acceleration of 1.0 m s⁻². The net force on it is…', options: ['0.5 N', '2.0 N', '3.0 N'], answer: 1, why: 'F = ma = 2.0 × 1.0 = 2.0 N.', back: 'speed' },
+      { t: 'check', id: 'a2-3-c4', q: 'A car goes round a bend at a steady speed. The sideways friction force from the tyres changes the car’s…', options: ['direction', 'speed', 'mass'], answer: 0, why: 'The force is at 90° to the velocity, so it changes the direction but not the speed.', back: 'car' },
+      { t: 'check', id: 'a2-3-c5', q: 'A spring with k = 200 N m⁻¹ is pulled with a force of 10 N. The extension is…', options: ['5.0 cm', '20 cm', '0.50 cm'], answer: 0, why: 'x = F / k = 10 / 200 = 0.050 m = 5.0 cm.', back: 'shape' },
+      { t: 'check', id: 'a2-3-c6', q: 'A speed breaker pushes a wheel upwards and squeezes the suspension spring. Which effect of a force is this?', options: ['changing the shape', 'changing the speed', 'changing the direction'], answer: 0, why: 'The spring is compressed: a change of shape, with F = kx.', back: 'car' },
+      { t: 'apply', id: 'a2-3-a1', prompt: 'A car goes round a bend at a steady 10 m s⁻¹. Explain, using what a force can do, why the driver still needs a force although the speed does not change.', model: 'Speed is constant, but velocity is a vector, so turning changes it. A force at 90° to the velocity (the sideways friction of the tyres) changes the direction of the velocity without changing the speed. Its size is F = mv² / r, so without it the car would carry on in a straight line.', checklist: ['I said velocity changes when direction changes', 'I said the force is at 90° to the velocity', 'I said speed is unchanged', 'I gave F = mv² / r'] },
+      { t: 'retrieval', items: [{ from: 'A.2 · 2', q: 'For constant mass, F = …', options: ['ma', 'mv', '½mv²'], answer: 0, why: 'F = Δp / t = ma.' }, { from: 'A.2 · 1', q: 'If F_net = 0 the velocity…', options: ['does not change', 'must be zero', 'keeps increasing'], answer: 0, why: 'Newton’s first law.' }] },
+      { t: 'summary', points: ['A force can change the speed (along v), the direction (at 90° to v) or the shape of an object.', 'Speed: F = ma. Direction: F = mv² / r. Shape: F = kx.', 'Engine force is with the velocity, braking force is against it, tyre friction is across it.'], terms: [{ term: 'Centripetal force', def: 'the force towards the centre that keeps an object moving in a circle' }, { term: 'Hooke’s law', def: 'extension is proportional to the force, F = kx, within the limit of proportionality' }], formulas: ['F = ma', 'F = mv² / r', 'F = kx'], errors: ['Thinking a force is needed to keep an object moving at constant speed.', 'Thinking a force at 90° to the velocity speeds the object up.', 'Forgetting that Hooke’s law only holds up to the limit of proportionality.'] },
+    ],
+  },
   // ------------------------------------------------------------------ 3
   {
     slug: 'newtons-third-law',
-    code: 'A.2 · 3',
+    code: 'A.2 · 4',
     title: "Newton's third law",
     blurb: 'The law of action and reaction: forces come in pairs, on different objects.',
     syllabus: 'A.2 Forces and momentum · Newton’s laws',
@@ -275,7 +389,7 @@ const lessons: Lesson[] = [
   // ------------------------------------------------------------------ 4
   {
     slug: 'momentum-conservation',
-    code: 'A.2 · 4',
+    code: 'A.2 · 5',
     title: 'Momentum conservation',
     blurb: 'Newton’s second and third laws together: what one object gains, the other loses.',
     syllabus: 'A.2 Forces and momentum · conservation of momentum',
@@ -342,14 +456,14 @@ const lessons: Lesson[] = [
       { t: 'check', id: 'a2-4-c2', q: 'The total momentum of a system is conserved when…', options: ['the net external force on it is zero', 'no energy is lost', 'the masses are equal'], answer: 0, why: 'Only an external net force can change the momentum of the system.', back: 'system' },
       { t: 'check', id: 'a2-4-c3', q: 'A 2.0 kg cart at 3.0 m s⁻¹ hits a stationary 1.0 kg cart and they stick together. Their speed is…', options: ['2.0 m s⁻¹', '3.0 m s⁻¹', '1.0 m s⁻¹'], answer: 0, why: '2.0 × 3.0 = (2.0 + 1.0) × v, so v = 2.0 m s⁻¹.', back: 'lab' },
       { t: 'apply', id: 'a2-4-a1', prompt: 'Explain why the momentum of two colliding bodies is conserved, using Newton’s second and third laws.', model: 'The forces the bodies exert on each other are equal and opposite (third law) and act for the same time. By the second law F = Δp / t, so their changes in momentum are equal and opposite, and Δp₁ + Δp₂ = 0. If no external net force acts, the total momentum is conserved.', checklist: ['I used the third law for equal and opposite forces', 'I used F = Δp / t for each body', 'I said the time is the same', 'I concluded the changes cancel'] },
-      { t: 'retrieval', items: [{ from: 'A.2 · 3', q: 'Action and reaction act on…', options: ['different objects', 'the same object', 'no object'], answer: 0, why: 'They never cancel.' }, { from: 'A.2 · 2', q: 'Momentum is measured in…', options: ['kg m s⁻¹', 'J', 'N'], answer: 0, why: 'Or N s.' }] },
+      { t: 'retrieval', items: [{ from: 'A.2 · 4', q: 'Action and reaction act on…', options: ['different objects', 'the same object', 'no object'], answer: 0, why: 'They never cancel.' }, { from: 'A.2 · 2', q: 'Momentum is measured in…', options: ['kg m s⁻¹', 'J', 'N'], answer: 0, why: 'Or N s.' }] },
       { t: 'summary', points: ['Third law: equal and opposite forces. Second law: F = Δp / t.', 'Together: Δp₁ = −Δp₂, so Δp_sys = 0.', 'Momentum is always conserved for an isolated system.'], terms: [{ term: 'Isolated system', def: 'no net external force' }], formulas: ['Δp_{sys} = 0 if F_{net,ext,sys} = 0', 'm_{1}u_{1} + m_{2}u_{2} = m_{1}v_{1} + m_{2}v_{2}'], errors: ['Using conservation when an external force acts (for example friction).', 'Forgetting signs for direction.'] },
     ],
   },
   // ------------------------------------------------------------------ 5
   {
     slug: 'momentum-vs-kinetic-energy',
-    code: 'A.2 · 5',
+    code: 'A.2 · 6',
     title: 'Momentum vs kinetic energy',
     blurb: 'Commonly confused, and once argued over for about sixty years.',
     syllabus: 'A.2 Forces and momentum · momentum and kinetic energy',
@@ -424,14 +538,14 @@ const lessons: Lesson[] = [
       { t: 'check', id: 'a2-5-c3', q: 'Which of these can be negative?', options: ['momentum', 'kinetic energy', 'both'], answer: 0, why: 'Momentum is a vector, so its sign shows direction. E_k = ½mv² is never negative.', back: 'table' },
       { t: 'check', id: 'a2-5-c4', q: 'The argument between Descartes and Leibniz was finally described as…', options: ['largely about words: two different quantities', 'won by Descartes', 'a mistake by Newton'], answer: 0, why: 'd’Alembert (1743) said momentum and vis viva measure different effects of a force.', back: 'history' },
       { t: 'apply', id: 'a2-5-a1', prompt: 'Two identical carts move towards each other at the same speed and stick together. State what happens to the total momentum and to the total kinetic energy, and explain.', model: 'The total momentum before is zero (equal and opposite), and it is still zero after, so it is conserved. The kinetic energy before is positive, but the carts end at rest, so all of it is lost as heat, sound and deformation. Momentum is a vector, kinetic energy is a scalar.', checklist: ['I said momentum is conserved (zero before and after)', 'I said kinetic energy is not conserved', 'I linked it to vector and scalar', 'I said where the energy went'] },
-      { t: 'retrieval', items: [{ from: 'A.2 · 4', q: 'Δp_sys = 0 if…', options: ['F_net,ext = 0', 'E_k is conserved', 'the masses are equal'], answer: 0, why: 'Isolated system.' }, { from: 'A.2 · 2', q: 'p = …', options: ['mv', '½mv²', 'ma'], answer: 0, why: 'Mass × velocity.' }] },
+      { t: 'retrieval', items: [{ from: 'A.2 · 5', q: 'Δp_sys = 0 if…', options: ['F_net,ext = 0', 'E_k is conserved', 'the masses are equal'], answer: 0, why: 'Isolated system.' }, { from: 'A.2 · 2', q: 'p = …', options: ['mv', '½mv²', 'ma'], answer: 0, why: 'Mass × velocity.' }] },
       { t: 'summary', points: ['Momentum p = mv is a vector; kinetic energy E_k = ½mv² is a scalar.', 'Momentum is always conserved in an isolated system; kinetic energy only in elastic collisions.', 'They were argued over as one quantity until d’Alembert (1743).'], terms: [{ term: 'Elastic collision', def: 'kinetic energy is conserved' }, { term: 'Inelastic collision', def: 'kinetic energy is not conserved' }], formulas: ['p = mv', 'E_{k} = ½mv²'], errors: ['Treating kinetic energy as conserved in every collision.', 'Adding momenta without signs.'] },
     ],
   },
   // ------------------------------------------------------------------ 6
   {
     slug: 'momentum-change-cases',
-    code: 'A.2 · 6',
+    code: 'A.2 · 7',
     title: 'Momentum change: four cases',
     blurb: 'When the direction reverses, treat momentum as a vector. Use a number line.',
     syllabus: 'A.2 Forces and momentum · change in momentum',
@@ -502,14 +616,14 @@ const lessons: Lesson[] = [
       { t: 'check', id: 'a2-6-c3', q: 'A ball’s velocity goes from +5 m s⁻¹ to −2 m s⁻¹. The change in velocity is…', options: ['−7 m s⁻¹', '−3 m s⁻¹', '+3 m s⁻¹'], answer: 0, why: '(−2) − (+5) = −7 m s⁻¹, an arrow 7 units long on the number line.', back: 'case4' },
       { t: 'check', id: 'a2-6-c4', q: 'Which mistake gives the wrong answer for a rebound?', options: ['subtracting the speeds and ignoring the direction change', 'choosing a positive direction first', 'using p = mv for each velocity'], answer: 0, why: 'Speeds 5 and 2 give 3, but the vectors 5 and −2 differ by 7.', back: 'line' },
       { t: 'apply', id: 'a2-6-a1', prompt: 'A 0.50 kg ball hits a wall at 4.0 m s⁻¹ and rebounds at 1.0 m s⁻¹. Find the change in momentum. Show your choice of positive direction.', model: 'Take toward the wall as +. v_i = +4.0 m s⁻¹, v_f = −1.0 m s⁻¹. Δv = (−1.0) − (+4.0) = −5.0 m s⁻¹. Δp = 0.50 × (−5.0) = −2.5 kg m s⁻¹, so 2.5 kg m s⁻¹ away from the wall.', checklist: ['I chose a positive direction', 'I gave v_f a negative sign', 'I got Δv = −5.0 m s⁻¹', 'I got −2.5 kg m s⁻¹ with a direction'] },
-      { t: 'retrieval', items: [{ from: 'A.2 · 5', q: 'Momentum is a…', options: ['vector', 'scalar'], answer: 0, why: 'It has a direction.' }, { from: 'A.2 · 2', q: 'F_net = …', options: ['Δp / t', 'mv', '½mv²'], answer: 0, why: 'Rate of change of momentum.' }] },
+      { t: 'retrieval', items: [{ from: 'A.2 · 6', q: 'Momentum is a…', options: ['vector', 'scalar'], answer: 0, why: 'It has a direction.' }, { from: 'A.2 · 2', q: 'F_net = …', options: ['Δp / t', 'mv', '½mv²'], answer: 0, why: 'Rate of change of momentum.' }] },
       { t: 'summary', points: ['Δp = m(v_f − v_i), with signs.', 'If the direction reverses, one velocity is negative.', 'Use the number line: the change is the arrow from i to f.'], terms: [{ term: 'Change in momentum', def: 'final momentum minus initial momentum, a vector' }], formulas: ['Δp = p_{f} − p_{i} = mΔv'], errors: ['Subtracting speeds instead of velocities.', 'Dropping the sign of the final velocity after a rebound.'] },
     ],
   },
   // ------------------------------------------------------------------ 7 force, space and time
   {
     slug: 'force-space-and-time',
-    code: 'A.2 · 7',
+    code: 'A.2 · 8',
     title: 'Force: the link between space and time',
     blurb: 'Imbalance drives motion. Force connects the three dimensions of space with time, and carries the present into the future.',
     syllabus: 'A.2 Forces and momentum · big picture (enrichment)',
@@ -599,7 +713,7 @@ const lessons: Lesson[] = [
       { t: 'check', id: 'a2-7-c3', q: 'The same 6.0 N force acts for 2.0 s. The change in momentum is…', options: ['12 kg m s⁻¹', '3.0 kg m s⁻¹', '8.0 kg m s⁻¹'], answer: 0, why: 'Δp = Ft = 6.0 × 2.0 = 12 kg m s⁻¹. Same number, different quantity and unit.', back: 'evolve' },
       { t: 'check', id: 'a2-7-c4', q: 'In the imbalance table, what plays the role of the imbalance for an electric current?', options: ['a potential difference V_A − V_B', 'a concentration difference', 'a temperature difference'], answer: 0, why: 'Charge flows when there is a potential difference: I ∝ ΔV.', back: 'imbalance' },
       { t: 'apply', id: 'a2-7-a1', prompt: 'Explain how force connects space and time, using two equations.', model: 'Work done is how energy in one form is converted into another. Force is the work done per unit displacement, F = WD / x (for a constant force along the displacement), which ties it to space. It is also the change in momentum per unit time, F = Δp / t, which ties it to time. So one quantity, the net force, links how energy changes over distance with how momentum changes over time.', checklist: ['I wrote F = WD / x', 'I wrote F = Δp / t', 'I linked one to space and the other to time', 'I said both equal the same force'] },
-      { t: 'retrieval', items: [{ from: 'A.2 · 2', q: 'F_net = …', options: ['Δp / t', 'mv', '½mv²'], answer: 0, why: 'Rate of change of momentum.' }, { from: 'A.2 · 5', q: 'Which quantity is a scalar?', options: ['kinetic energy', 'momentum', 'force'], answer: 0, why: 'Kinetic energy has no direction.' }] },
+      { t: 'retrieval', items: [{ from: 'A.2 · 2', q: 'F_net = …', options: ['Δp / t', 'mv', '½mv²'], answer: 0, why: 'Rate of change of momentum.' }, { from: 'A.2 · 6', q: 'Which quantity is a scalar?', options: ['kinetic energy', 'momentum', 'force'], answer: 0, why: 'Kinetic energy has no direction.' }] },
       { t: 'summary', points: ['Imbalance is the cause of motion; a bigger imbalance means more motion.', 'Force = work done per unit displacement (space) = change in momentum per unit time (time).', 'Given the present state and the force, the future (and the past) follows.'], terms: [{ term: 'Imbalance', def: 'a difference (of force, concentration, temperature or potential) that drives a flow' }, { term: 'Work done', def: 'the way energy in one form (E₁) is converted into energy in another form (E₂); a force acting through a displacement' }], formulas: ['WD / x = F = Δp / t'], errors: ['Mixing up energy per distance (force) with energy per time (power).', 'Forgetting the condition: constant force along the displacement.', 'Treating work done as a store of energy: it is the process that converts E₁ into E₂.'] },
     ],
   },

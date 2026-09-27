@@ -155,4 +155,46 @@ for (let i = 0; i < 2000; i++) {
 }
 ok('constant F from rest: momentum/time = F and energy/distance = F (2000 random cases)', linkBad === 0)
 ok('6.0 N for 2.0 m transfers 12 J; 6.0 N for 2.0 s gives 12 kg m/s', near(6 * 2, 12, 1e-12))
+// ---- the car: engine force along v speeds up, brake force against v slows, tyre friction across v turns ----
+const outC = path.resolve('node_modules/.cache/car.mjs')
+await build({ entryPoints: ['lib/learn/car-model.ts'], outfile: outC, format: 'esm', bundle: true, logLevel: 'silent' })
+const car = await import(pathToFileURL(outC).href)
+const NONE = { up: false, down: false, left: false, right: false }
+const run = (s0, inp, secs, dt = 1 / 240) => { let s = s0, f = null; for (let t = 0; t < secs; t += dt) { const r = car.stepCar(s, inp, dt); s = r.state; f = r.forces } return { s, f } }
+{
+  const r0 = car.stepCar(car.newCar(), { ...NONE, up: true }, 0.001)
+  ok('from rest, full throttle: a = Feng / m = 2.0 m/s2', near(r0.forces.a, 2.0, 1e-9) && near(r0.state.v, 0.002, 1e-9))
+  const acc = run(car.newCar(), { ...NONE, up: true }, 6)
+  ok('throttle: speed rises, engine force is along the velocity', acc.s.v > 8 && acc.f.engine === 2400 && acc.f.brake === 0)
+  const top = run(car.newCar(), { ...NONE, up: true }, 150, 1 / 60)
+  ok('air resistance gives a top speed (~40 m/s) where engine force = resistance', near(2400, 1.4 * top.s.v * top.s.v + 150, 5) && top.s.v > 39 && top.s.v < 41.5)
+  const coast0 = { ...car.newCar(), v: 20 }
+  const brk = run(coast0, { ...NONE, down: true }, 8)
+  ok('braking: force opposite the velocity, car stops and never reverses', brk.s.v === 0 && brk.f.engine === 0)
+  const brk1 = car.stepCar(coast0, { ...NONE, down: true }, 0.01)
+  ok('braking deceleration ~ (Fbrake + resistance) / m', near(brk1.forces.a, -(6000 + 1.4 * 400 + 150) / 1200, 1e-9))
+  // steering: sideways force = m v^2 / r, perpendicular to v, speed unchanged
+  const st5 = { ...car.newCar(), v: 5, steer: car.CAR.maxSteer }
+  const t1 = car.stepCar(st5, { ...NONE, left: true }, 1 / 240)
+  const rExp = car.CAR.L / Math.tan(car.CAR.maxSteer)
+  ok('turning radius r = L / tan(steer)', near(t1.forces.turnRadius, rExp, 1e-6))
+  ok('sideways force = m v^2 / r (v after the step)', near(t1.forces.lateral, car.CAR.m * t1.state.v * t1.state.v / rExp, 1e-6) && !t1.forces.skidding)
+  ok('sideways force is perpendicular to the velocity', near(t1.forces.latDir[0] * Math.cos(t1.state.th) + t1.forces.latDir[1] * Math.sin(t1.state.th), 0, 1e-9))
+  const straight = run({ ...car.newCar(), v: 5 }, NONE, 1)
+  const turning = run({ ...car.newCar(), v: 5, steer: car.CAR.maxSteer }, { ...NONE, left: true }, 1)
+  ok('steering changes direction but not speed', near(straight.s.v, turning.s.v, 1e-9) && Math.abs(turning.s.th) > 0.5)
+  const fast = car.stepCar({ ...car.newCar(), v: 15, steer: car.CAR.maxSteer }, { ...NONE, left: true }, 1 / 240)
+  ok('too fast on full lock: tyres reach the grip limit (mu m g)', fast.forces.skidding && near(fast.forces.lateral, car.GRIP_LIMIT, 1e-6))
+  const right = car.stepCar({ ...car.newCar(), v: 5, steer: -car.CAR.maxSteer }, { ...NONE, right: true }, 1 / 240)
+  ok('turning right: the sideways force points to the right of the heading', right.forces.latDir[1] < 0 && right.state.th < 0)
+}
+// ---- suspension: the bump squeezes the spring, F = kx, and it relaxes afterwards ----
+{
+  const slow = car.crossBreaker(3), mid = car.crossBreaker(10), fast = car.crossBreaker(25)
+  ok('bump squeezes the spring (0 < peak <= bump height)', mid.peak > 0.005 && mid.peak <= car.SUSP.h + 1e-6)
+  ok('faster over the breaker: the spring is squeezed more', fast.peak > mid.peak && mid.peak > slow.peak)
+  ok('spring returns to rest after the bump', Math.abs(mid.last) < 1e-3 && Math.abs(fast.last) < 1e-3)
+  ok('F = kx at the peak', near(car.SUSP.k * mid.peak, 22000 * mid.peak, 1e-9))
+  ok('breakers repeat every 120 m from x = 60', car.breakerAt(61).xb === 60 && car.breakerAt(185).xb === 180 && near(car.breakerAt(61).s, 1, 1e-12))
+}
 process.exit(fail ? 1 : 0)
