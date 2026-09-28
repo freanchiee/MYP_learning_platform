@@ -24,6 +24,7 @@ import { feedbackOf } from '@/lib/design-live/feedback'
 import { CRITERION_LETTERS } from '@/lib/design-live/criteria'
 import { SustainabilityGamePlayer } from './game/SustainabilityGame'
 import { LearnPlayer } from './LearnStage'
+import { SelfPacedBar, navOf } from './SelfPaced'
 import { getPersona } from '@/data/design/live/personas'
 import { useCelebration, CelebrationOverlay } from './Celebration'
 
@@ -256,7 +257,18 @@ export default function LiveJoin({ activity, initialCode }: { activity: LiveActi
   }
 
   const team = activity.teams && me.team != null ? activity.teams[me.team] : null
-  const stage = activity.stages[session.stage_idx]
+  // Self-paced activities: each student has their own position, saved on their own row.
+  const selfPaced = !!activity.selfPaced
+  const nav = navOf(me, activity)
+  const myIdx = selfPaced ? nav.stage : session.stage_idx
+  const rawStage = activity.stages[myIdx]
+  // With no host to lock or reveal, quizzes run at the student's own pace (answer shows straight away, points at once).
+  const stage = selfPaced && rawStage?.type === 'mcq' ? { ...rawStage, pacing: 'self-paced' as const } : rawStage
+  const stageSession = selfPaced ? { ...session, state: {} } : session
+  const goStage = (n: number) => {
+    const t = Math.max(0, Math.min(n, activity.stages.length - 1))
+    patchMyData('_nav', { stage: t, max: Math.max(nav.max, t) })
+  }
 
   // Wide, single-focus (mcq/openIdeas/grading) stages read best in a
   // comfortable column even on a laptop-wide screen — the shell itself
@@ -291,8 +303,10 @@ export default function LiveJoin({ activity, initialCode }: { activity: LiveActi
             </div>
           )}
 
+          {session.status === 'active' && selfPaced && <SelfPacedBar activity={activity} idx={myIdx} onGo={goStage} />}
+
           {session.status === 'active' && stage?.type === 'mcq' && (
-            <McqPlayer activity={activity} stage={stage} session={session} me={me} patchMyData={patchMyData} addPoints={addPoints} />
+            <McqPlayer activity={activity} stage={stage} session={stageSession} me={me} patchMyData={patchMyData} addPoints={addPoints} />
           )}
           {session.status === 'active' && stage?.type === 'worksheet' && (
             <WorksheetPlayer stage={stage} allStages={activity.stages} activity={activity} grade={myGrade} me={me} sessionCode={code} patchMyData={patchMyData} reportDraft={reportDraft} celebrate={celebrate} />
@@ -301,7 +315,7 @@ export default function LiveJoin({ activity, initialCode }: { activity: LiveActi
             <OpenIdeasPlayer activity={activity} stage={stage} session={session} me={me} patchMyData={patchMyData} reportDraft={reportDraft} celebrate={celebrate} />
           )}
           {session.status === 'active' && stage?.type === 'learn' && stage.overview && <WorksheetOverview overview={stage.overview} />}
-          {session.status === 'active' && stage?.type === 'learn' && <LearnPlayer key={stage.key} stage={stage} session={session} me={me} patchMyData={patchMyData} accent={activity.theme.accent} />}
+          {session.status === 'active' && stage?.type === 'learn' && <LearnPlayer key={stage.key} stage={stage} session={stageSession} me={me} patchMyData={patchMyData} accent={activity.theme.accent} />}
           {session.status === 'active' && stage?.type === 'boardGame' && stage.overview && <WorksheetOverview overview={stage.overview} />}
           {session.status === 'active' && stage?.type === 'boardGame' && <SustainabilityGamePlayer session={session} me={me} code={code} players={players} patchMyData={patchMyData} addPoints={addPoints} />}
           {session.status === 'active' && stage && stage.type !== 'grading' && (

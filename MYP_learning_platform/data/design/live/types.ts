@@ -265,4 +265,9 @@ export interface LiveActivityDefinition {
   stages: LiveStage[]
   debriefQuestions?: string[]
   exemplarsByChoice?: ExemplarsByChoice
+  /** Every student moves through the stages on their own (position saved on their player row). The host
+   *  screen shows where everyone is; its Next/Previous only change which stage's dashboard the host sees. */
+  selfPaced?: boolean
+  /** Index of the stage a self-paced student starts on, e.g. to begin where a previous activity ended. Default 0. */
+  startStage?: number
 }

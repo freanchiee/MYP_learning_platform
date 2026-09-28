@@ -15,6 +15,7 @@ import ClassPicker from './ClassPicker'
 import { stateForAdvance, stateForBack } from '@/lib/design-live/stageNav'
 import { SustainabilityGameHost } from './game/SustainabilityGame'
 import { LearnHost } from './LearnStage'
+import { SelfPacedOverview, defaultStart } from './SelfPaced'
 import { Podium } from './Podium'
 import { WorksheetReviewModal } from './WorksheetReview'
 import { FeedbackSummary, FeedbackOverview } from './StageFeedback'
@@ -133,7 +134,7 @@ export default function LiveHost({ activity }: { activity: LiveActivityDefinitio
 
   const stage = session ? activity.stages[session.stage_idx] : undefined
 
-  const startSession = () => run(createClient().from('live_sessions').update({ status: 'active', stage_idx: 0, state: {} }).eq('code', code))
+  const startSession = () => run(createClient().from('live_sessions').update({ status: 'active', stage_idx: activity.selfPaced ? defaultStart(activity) : 0, state: {} }).eq('code', code))
   // Moving between stages never throws a stage's host state away (see lib/design-live/stageNav.ts).
   const advanceStage = () => {
     if (!session) return
@@ -246,6 +247,8 @@ export default function LiveHost({ activity }: { activity: LiveActivityDefinitio
           </div>
         )}
 
+        {session.status === 'active' && activity.selfPaced && <SelfPacedOverview activity={activity} players={players} />}
+
         {session.status === 'active' && stage && (
           <StageHost activity={activity} stage={stage} session={session} players={players} grades={grades} patchState={patchState} advanceStage={advanceStage} goBack={goBack} run={run} now={now} onChat={openChat} onReview={setReviewPlayerId} />
         )}
@@ -318,7 +321,7 @@ function StageHost({
   onReview: (id: string) => void
 }) {
   const isLastStage = session.stage_idx >= activity.stages.length - 1
-  const advanceLabel = isLastStage ? 'Finish & show results →' : 'Next stage →'
+  const advanceLabel = isLastStage ? 'Finish & show results →' : activity.selfPaced ? 'View next stage dashboard →' : 'Next stage →'
 
   return (
     <div style={{ display: 'grid', gap: 14 }}>
@@ -331,10 +334,10 @@ function StageHost({
         )}
       </div>
 
-      {stage.type === 'mcq' && <McqHost activity={activity} stage={stage} session={session} players={players} patchState={patchState} now={now} onChat={onChat} />}
+      {stage.type === 'mcq' && <McqHost activity={activity} stage={activity.selfPaced ? { ...stage, pacing: 'self-paced' as const } : stage} session={session} players={players} patchState={patchState} now={now} onChat={onChat} />}
       {stage.type === 'worksheet' && <WorksheetHost stage={stage} players={players} now={now} onChat={onChat} sessionCode={session.code} onReview={onReview} />}
       {stage.type === 'openIdeas' && <OpenIdeasHost activity={activity} stage={stage} session={session} players={players} patchState={patchState} now={now} onChat={onChat} />}
-      {stage.type === 'learn' && <LearnHost stage={stage} session={session} players={players} patchState={patchState} accent={activity.theme.accent} />}
+      {stage.type === 'learn' && <LearnHost stage={stage} session={session} players={players} patchState={patchState} accent={activity.theme.accent} allowPresent={!activity.selfPaced} />}
       {stage.type === 'boardGame' && <SustainabilityGameHost session={session} players={players} patchState={patchState} run={run} />}
       {stage.type === 'grading' && <GradingHost activity={activity} stage={stage} players={players} grades={grades} run={run} session={session} />}
 
@@ -343,7 +346,7 @@ function StageHost({
       <div style={{ display: 'flex', justifyContent: 'center', gap: 12, flexWrap: 'wrap' }}>
         {session.stage_idx > 0 && (
           <button onClick={goBack} style={btnStyle(activity.theme.accent, false, true)} title={`Go back to ${activity.stages[session.stage_idx - 1].label}`}>
-            ← Previous stage
+            {activity.selfPaced ? '← Previous stage dashboard' : '← Previous stage'}
           </button>
         )}
         <button onClick={advanceStage} style={btnStyle(activity.theme.accent, true, true)}>

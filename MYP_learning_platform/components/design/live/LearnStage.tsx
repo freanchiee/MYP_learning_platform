@@ -139,13 +139,15 @@ export function LearnPlayer({
 
 // --------------------------------------------------------------------- host
 export function LearnHost({
-  stage, session, players, patchState, accent,
+  stage, session, players, patchState, accent, allowPresent = true,
 }: {
   stage: LearnStage
   session: LiveSessionRow
   players: LivePlayerRow[]
   patchState: (patch: Record<string, any>) => void
   accent: string
+  /** False in self-paced activities, where there is no shared card to present. */
+  allowPresent?: boolean
 }) {
   const total = stage.pages.length
   const st = (session.state?.[stage.key] || {}) as { present?: boolean; page?: number }
@@ -161,7 +163,7 @@ export function LearnHost({
 
   return (
     <div style={{ display: 'grid', gap: 12 }}>
-      <div style={{ ...cardStyle(accent), display: 'flex', gap: 10, flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between' }}>
+      {allowPresent && <div style={{ ...cardStyle(accent), display: 'flex', gap: 10, flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between' }}>
         <div style={{ fontSize: 13, color: 'var(--text-muted)', maxWidth: 520 }}>
           {present
             ? 'Presenting: every student sees the card you are on. Use Back and Next to teach it, then let them read on their own.'
@@ -170,7 +172,7 @@ export function LearnHost({
         <button onClick={() => setSt({ present: !present, page })} style={btnStyle('#E8672A', present)}>
           {present ? '🎤 Presenting — click to stop' : '🎤 Present to the class'}
         </button>
-      </div>
+      </div>}
 
       {present && (
         <>

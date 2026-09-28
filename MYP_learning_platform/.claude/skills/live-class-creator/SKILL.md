@@ -390,6 +390,10 @@ field like `makeCards` for the 25 digital products (`digital-products.ts`).
 
 A `learn` stage (`LearnStage.tsx`) is a short run of cards: one idea per card, a worked example or a `weak`/`strong` comparison, key terms and a tip. The teacher can switch on **Present** so every student follows the teacher's card, or leave it free so each student reads at their own pace; each student's furthest card is saved in their own data (`data[stageKey].maxPage`) and the host sees a progress bar per student. Use it to TEACH a criterion strand right before students practise it (see `myp3-unit1-kickoff-extended.ts`: Need → Research plan → Product analysis → Brief). Any stage can carry `block` and `minutes` (`StageTiming`) so a teacher can plan a single and a double period; they show only on the host screen. `personaPack: 'everyday'` offers the twelve named everyday users in `everyday-personas.ts` (two per challenge direction).
 
+## Self-paced activities
+
+Set `selfPaced: true` (and optionally `startStage`) on the activity. Each student then moves through the stages on their own: their position is `me.data._nav = { stage, max }` (`SelfPaced.tsx`, `navOf`), so it survives refresh and device changes, and a student with no position starts at `startStage` — use it to begin where an earlier activity ended (students can still go back). Host-paced quizzes automatically run self-paced (the answer shows at once and points are awarded immediately); the `learn` stage has no Present mode. The host screen shows where every student is (`SelfPacedOverview`) and its Next/Previous only change which stage's dashboard the teacher is watching. Put the stages a student might already have done at the front, then set `startStage` to the first new one.
+
 ## What's NOT built yet (known gaps — extend deliberately, don't hack around)
 
 - **Physical/whiteboard rounds with a host-only secret** (Pictionary,

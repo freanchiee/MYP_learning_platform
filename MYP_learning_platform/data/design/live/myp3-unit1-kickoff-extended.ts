@@ -16,8 +16,11 @@
 //     with quick host-paced quizzes and worksheet sections that carry the strand
 //     they evidence. (Week 1 double + Week 2 in the planner.)
 //
-// A teacher runs Block 1, stops on the exit-ticket stage, and carries the same
-// session into Block 2 (students rejoin from "My history"; their work is saved).
+// SELF-PACED: each student moves through the stages on their own, beginning at the
+// first new lesson (stage 2) because the original Unit 1 Kickoff quizzes come first and
+// were already done. The teacher's screen shows where everyone is. Block 1 ends at the
+// exit ticket: tell students to stop there and carry on in Block 2 from the same link
+// (their work and position are saved).
 // `block` and `minutes` on each stage are lesson-planning hints shown to the
 // teacher only. `exemplars` are never shown to students; they feed the fuzzy-match
 // suggestion on the teacher's review screen.
@@ -38,9 +41,14 @@ export const MYP3_UNIT1_KICKOFF_EXTENDED: LiveActivityDefinition = {
   id: 'myp3-unit1-kickoff-extended',
   year: 'MYP3',
   title: 'Unit 1 Kickoff — Extended',
-  subtitle: 'Two class blocks: find a worthwhile need and interview a user (single period), then plan your research, analyse products and write your brief (double period).',
+  subtitle: 'Self-paced, in two class blocks: find a worthwhile need and interview a user (single period), then plan your research, analyse products and write your brief (double period).',
   icon: '🧭',
   theme: { accent: '#2456C9', from: '#0E1626', via: '#152238', to: '#1C2A40' },
+  // Self-paced: students move through the stages themselves, starting AFTER the original
+  // Unit 1 Kickoff (its unpack and spot-the-opportunity quizzes are stages 0 and 1), which
+  // they have already done. They can still go back to them.
+  selfPaced: true,
+  startStage: 2,
   debriefQuestions: [
     'To what extent should a designer prioritise user needs over the environmental impact of material sourcing?',
     'Which piece of evidence changed or confirmed your thinking, and how do you know it was reliable?',
@@ -68,6 +76,23 @@ export const MYP3_UNIT1_KICKOFF_EXTENDED: LiveActivityDefinition = {
       ],
     },
     {
+      type: 'mcq',
+      key: 'spot',
+      label: 'Spot the Opportunity',
+      icon: '🔍',
+      block: BLOCK1,
+      minutes: 6,
+      pacing: 'self-paced',
+      intro: { title: '🔍 Spot the Opportunity', blurb: 'Now switch into Design Detective mode. For each everyday scene, pick the option that names a real problem — not a guess, a want, or someone to blame.' },
+      questions: [
+        { icon: '🔌', context: 'Charging cables', q: 'Charging cables for laptops and tablets get tangled and lost in bags.', options: ['Tangled or missing cables waste time and cause frustration.', 'Cables should be more colourful.', 'Students should not bring devices to school.', 'Laptops charge too slowly.'], correct: 0 },
+        { icon: '📱', context: 'Video calls', q: 'Students propping phones against books for video calls find them sliding or falling over.', options: ['An unstable phone makes hands-free video calls hard to rely on.', 'Phones are too heavy.', 'Students should not use phones for calls.', 'Books are the wrong shape.'], correct: 0 },
+        { icon: '🎧', context: 'Headphones', q: 'Headphones left loose in bags get their wires knotted and the earbuds scratched.', options: ['Loose storage damages headphones and wastes time untangling them.', 'Headphones are too expensive.', 'Students should only use wireless.', 'Bags are too small.'], correct: 0 },
+        { icon: '🔋', context: 'Shared power', q: 'In the design room, three students often need the one wall socket near the workbench at the same time.', options: ['Limited access to the socket creates waiting and disrupts the work session.', 'There should be no phones in class.', 'The workbench is in the wrong place.', 'Students should charge devices at home only.'], correct: 0 },
+        { icon: '🎒', context: 'Studio storage', q: 'Some students cannot find their Design folder or supplies quickly when a lesson starts.', options: ['Disorganised storage wastes lesson time hunting for materials.', 'Lockers are too small for everyone.', 'Students should carry less.', 'The school needs more lockers.'], correct: 0 },
+      ],
+    },
+    {
       type: 'learn',
       key: 'learnNeed',
       label: 'Lesson: A Need Worth Solving',
@@ -75,7 +100,7 @@ export const MYP3_UNIT1_KICKOFF_EXTENDED: LiveActivityDefinition = {
       strand: 'A.i',
       block: BLOCK1,
       minutes: 6,
-      intro: { title: '📘 Criterion A.i — Explain and justify the need', blurb: 'Six short cards. Read them at your own pace, or follow your teacher if they are presenting.' },
+      intro: { title: '📘 Criterion A.i — Explain and justify the need', blurb: 'Five short cards. Read them at your own pace.' },
       pages: [
         {
           icon: '🎯',
@@ -142,23 +167,6 @@ export const MYP3_UNIT1_KICKOFF_EXTENDED: LiveActivityDefinition = {
     },
     {
       type: 'mcq',
-      key: 'spot',
-      label: 'Spot the Opportunity',
-      icon: '🔍',
-      block: BLOCK1,
-      minutes: 6,
-      pacing: 'self-paced',
-      intro: { title: '🔍 Spot the Opportunity', blurb: 'Now switch into Design Detective mode. For each everyday scene, pick the option that names a real problem — not a guess, a want, or someone to blame.' },
-      questions: [
-        { icon: '🔌', context: 'Charging cables', q: 'Charging cables for laptops and tablets get tangled and lost in bags.', options: ['Tangled or missing cables waste time and cause frustration.', 'Cables should be more colourful.', 'Students should not bring devices to school.', 'Laptops charge too slowly.'], correct: 0 },
-        { icon: '📱', context: 'Video calls', q: 'Students propping phones against books for video calls find them sliding or falling over.', options: ['An unstable phone makes hands-free video calls hard to rely on.', 'Phones are too heavy.', 'Students should not use phones for calls.', 'Books are the wrong shape.'], correct: 0 },
-        { icon: '🎧', context: 'Headphones', q: 'Headphones left loose in bags get their wires knotted and the earbuds scratched.', options: ['Loose storage damages headphones and wastes time untangling them.', 'Headphones are too expensive.', 'Students should only use wireless.', 'Bags are too small.'], correct: 0 },
-        { icon: '🔋', context: 'Shared power', q: 'In the design room, three students often need the one wall socket near the workbench at the same time.', options: ['Limited access to the socket creates waiting and disrupts the work session.', 'There should be no phones in class.', 'The workbench is in the wrong place.', 'Students should charge devices at home only.'], correct: 0 },
-        { icon: '🎒', context: 'Studio storage', q: 'Some students cannot find their Design folder or supplies quickly when a lesson starts.', options: ['Disorganised storage wastes lesson time hunting for materials.', 'Lockers are too small for everyone.', 'Students should carry less.', 'The school needs more lockers.'], correct: 0 },
-      ],
-    },
-    {
-      type: 'mcq',
       key: 'goodq',
       label: 'Strong or Weak Research Question?',
       icon: '❓',
@@ -168,7 +176,7 @@ export const MYP3_UNIT1_KICKOFF_EXTENDED: LiveActivityDefinition = {
       pointsPerCorrect: 10,
       intro: {
         title: '❓ Strong or weak?',
-        blurb: 'A good research question is open, about a real person’s experience, and can be answered by research. Your teacher runs this one: answer, then the answer is revealed and points are awarded.',
+        blurb: 'A good research question is open, about a real person’s experience, and can be answered by research. Answer at your own pace: the right answer shows as soon as you choose, and each correct answer earns 10 points.',
       },
       questions: [
         {
@@ -473,7 +481,7 @@ export const MYP3_UNIT1_KICKOFF_EXTENDED: LiveActivityDefinition = {
       minutes: 5,
       pacing: 'host-paced',
       pointsPerCorrect: 10,
-      intro: { title: '🎟️ Exit ticket', blurb: 'Four quick questions to lock in today. Your teacher runs it. Pause here at the end of the single period; Block 2 picks up from the next stage.' },
+      intro: { title: '🎟️ Exit ticket', blurb: 'Four quick questions to lock in today. This is the end of Block 1: stop here unless your teacher says to carry on. Block 2 starts at the next stage.' },
       questions: [
         { icon: '🎯', context: 'Need or want', q: 'Which is a NEED?', options: ['Kwame’s neighbours cannot fit their bikes, so bikes block the corridor every day.', 'The bike room would look nicer with a new paint colour.', 'Everyone would like a cooler bike rack.', 'Kwame wants a bigger office.'], correct: 0 },
         { icon: '💬', context: 'Interview', q: 'Which question is most likely to give you useful evidence from a user?', options: ['“Tell me about the last time this went wrong.”', '“Do you like my idea?”', '“Is this hard, yes or no?”', '“Why are you so bad at this?”'], correct: 0 },
@@ -491,7 +499,7 @@ export const MYP3_UNIT1_KICKOFF_EXTENDED: LiveActivityDefinition = {
       strand: 'A.ii',
       block: BLOCK2,
       minutes: 10,
-      intro: { title: '📘 Criterion A.ii — Construct and prioritise a research plan', blurb: 'A plan is more than a list of questions. Five cards: your teacher may present them, then you read on.' },
+      intro: { title: '📘 Criterion A.ii — Construct and prioritise a research plan', blurb: 'A plan is more than a list of questions. Five cards to read at your own pace.' },
       pages: [
         {
           icon: '📋',
@@ -561,7 +569,7 @@ export const MYP3_UNIT1_KICKOFF_EXTENDED: LiveActivityDefinition = {
       minutes: 8,
       pacing: 'host-paced',
       pointsPerCorrect: 10,
-      intro: { title: '🔀 Sort the sources', blurb: 'Your teacher runs this. Decide if each source is primary or secondary. Answers are revealed and points awarded.' },
+      intro: { title: '🔀 Sort the sources', blurb: 'Decide if each source is primary or secondary. The answer shows as soon as you choose, and each correct answer earns 10 points.' },
       questions: [
         { icon: '🗣️', context: 'Interview', q: 'You interview your grandmother about how she opens jars.', options: ['Primary: you collected it yourself.', 'Secondary: someone else collected it.'], correct: 0 },
         { icon: '📰', context: 'Article', q: 'You read an online article about arthritis-friendly kitchen tools.', options: ['Secondary: someone else collected and wrote it.', 'Primary: you found it yourself.'], correct: 0 },
@@ -900,7 +908,7 @@ export const MYP3_UNIT1_KICKOFF_EXTENDED: LiveActivityDefinition = {
       minutes: 6,
       pacing: 'host-paced',
       pointsPerCorrect: 10,
-      intro: { title: '📏 Measurable or vague?', blurb: 'Your teacher runs this one. Pick the criterion you could actually check with a test or a measurement.' },
+      intro: { title: '📏 Measurable or vague?', blurb: 'Pick the criterion you could actually check with a test or a measurement. Correct answers earn 10 points.' },
       questions: [
         { icon: '🎒', context: 'Bags', q: 'Which is measurable?', options: ['Fits a 15-inch laptop and weighs under 1.2 kg.', 'Looks great.', 'Is a good size.', 'Is comfortable for everyone.'], correct: 0 },
         { icon: '🥫', context: 'Jars', q: 'Which is measurable?', options: ['Opens a standard jar with under 20 N of force.', 'Is easy to use.', 'Feels nice in the hand.', 'Is strong.'], correct: 0 },
