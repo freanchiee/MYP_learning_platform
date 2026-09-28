@@ -71,6 +71,8 @@ export type Block =
   | { t: 'law'; ordinal: string; name: string; nameNote?: string; words: string; maths: string[]; mathsNote?: string }
   | { t: 'table'; title?: string; head: string[]; rows: string[][]; note?: string; firstColHeader?: boolean }
   | { t: 'figure'; src: string; alt: string; caption: string; credit?: string }
+  /** A work we cite and link to but do not reproduce: full citation, a link to where it is lawfully displayed. */
+  | { t: 'source'; title: string; citation: string; note?: string; href: string; linkLabel: string }
   | { t: 'steps'; title: string; given: string; steps: { line: string; why: string }[]; answer: string }
   | { t: 'deck'; slides: { id: string; kicker: string; title: string; blocks: Block[] }[] }
   | { t: 'hook'; text: string }

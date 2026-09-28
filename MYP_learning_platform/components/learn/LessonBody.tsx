@@ -212,6 +212,16 @@ function StaticBlock({ b }: { b: Block }) {
       return <DataTable title={b.title} head={b.head} rows={b.rows} note={b.note} firstColHeader={b.firstColHeader} />
     case 'figure':
       return <Figure src={b.src} alt={b.alt} caption={b.caption} credit={b.credit} />
+    case 'source':
+      return (
+        <aside className="rounded-[var(--radius-card)] p-4" style={{ background: 'var(--surface-2)', border: '1px solid var(--border-strong)' }}>
+          <div className="text-[11px] font-black tracking-[0.3em]" style={{ color: 'var(--accent)' }}>SEE THE ORIGINAL</div>
+          <div className="mt-1 text-base font-extrabold" style={{ color: 'var(--text)' }}>{b.title}</div>
+          <p className="mt-1 text-sm" style={{ color: 'var(--text-muted)' }}>{b.citation}</p>
+          {b.note && <p className="mt-1 text-xs" style={{ color: 'var(--text-subtle)' }}>{b.note}</p>}
+          <a href={b.href} target="_blank" rel="noopener noreferrer" className="mt-2 inline-block text-sm font-bold underline" style={{ color: 'var(--accent)' }}>{b.linkLabel} ↗</a>
+        </aside>
+      )
     case 'steps':
       return <WorkedSteps title={b.title} given={b.given} steps={b.steps} answer={b.answer} />
     default:

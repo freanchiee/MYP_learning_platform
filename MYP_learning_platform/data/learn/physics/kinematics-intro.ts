@@ -572,6 +572,14 @@ export const KINEMATICS_INTRO: Module = {
               blocks: [
                 { t: 'p', text: 'You cannot fill the painted pipe with tobacco. The image **represents** the pipe; it is not the pipe. Every model in physics works the same way: an equation, a graph or a simulation stands in for a real thing, and leaves most of it out.' },
                 {
+                  t: 'source',
+                  title: 'La trahison des images (Ceci n’est pas une pipe), 1929',
+                  citation: 'Magritte, René. The Treachery of Images (This Is Not a Pipe) [La trahison des images (Ceci n’est pas une pipe)]. 1929. Oil on canvas, 60.3 × 81.1 cm. Los Angeles County Museum of Art, accession no. 78.7. Purchased with funds provided by the Mr. and Mrs. William Preston Harrison Collection.',
+                  note: 'Artwork © C. Herscovici / Artists Rights Society (ARS), New York. It is still under copyright, so it is linked here rather than copied: the museum shows it on its own page.',
+                  href: 'https://collections.lacma.org/object/31931',
+                  linkLabel: 'View the painting on the LACMA collections website',
+                },
+                {
                   t: 'table',
                   head: ['The real thing', 'A representation of it'],
                   rows: [['a pipe', 'a painting of a pipe'], ['a ball moving along a line', 'the equation x_f = x_i + vt'], ['a whole car journey', 'a position–time graph'], ['the atom', 'a drawing of electrons orbiting a nucleus']],
