@@ -81,13 +81,16 @@ function Page({ page, index, total, accent }: { page: LearnPage; index: number; 
 
 // ------------------------------------------------------------------ student
 export function LearnPlayer({
-  stage, session, me, patchMyData, accent,
+  stage, session, me, patchMyData, accent, onFinish,
 }: {
   stage: LearnStage
   session: LiveSessionRow
   me: LivePlayerRow
   patchMyData: (stageKey: string, patch: Record<string, any>) => void
   accent: string
+  /** Self-paced activities only: takes the student straight to the next activity stage
+   *  from the last card, since there is no teacher to advance it for them. */
+  onFinish?: () => void
 }) {
   const total = stage.pages.length
   const st = (session.state?.[stage.key] || {}) as { present?: boolean; page?: number }
@@ -129,9 +132,13 @@ export function LearnPlayer({
             />
           ))}
         </div>
-        {idx < total - 1
-          ? <button onClick={() => go(idx + 1)} disabled={present} style={btnStyle(accent, true)}>Next →</button>
-          : <div style={{ fontSize: 13, fontWeight: 700, color: '#1FA98A' }}>🎉 Lesson finished — wait for your teacher</div>}
+        {idx < total - 1 ? (
+          <button onClick={() => go(idx + 1)} disabled={present} style={btnStyle(accent, true)}>Next →</button>
+        ) : onFinish ? (
+          <button onClick={onFinish} style={btnStyle('#1FA98A', true)}>🎉 Lesson finished — continue →</button>
+        ) : (
+          <div style={{ fontSize: 13, fontWeight: 700, color: '#1FA98A' }}>🎉 Lesson finished — wait for your teacher</div>
+        )}
       </div>
     </div>
   )

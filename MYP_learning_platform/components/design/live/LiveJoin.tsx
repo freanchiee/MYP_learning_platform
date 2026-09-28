@@ -281,7 +281,11 @@ export default function LiveJoin({ activity, initialCode }: { activity: LiveActi
   // goes full-bleed, but a single question or prompt shouldn't stretch to
   // fill 1200px. Worksheet/ended stages have genuinely more content and
   // use the full shell width (with their own responsive grids inside).
-  const stageIsNarrow = session.status !== 'active' || stage?.type === 'mcq' || stage?.type === 'openIdeas' || stage?.type === 'grading'
+  // Self-paced activities read better a bit wider than the host-paced narrow column —
+  // there is no projector screen to keep small, and a lesson card or a quiz question
+  // benefits from the extra room, especially on a laptop.
+  const stageIsNarrow = !selfPaced && (session.status !== 'active' || stage?.type === 'mcq' || stage?.type === 'openIdeas' || stage?.type === 'grading')
+  const contentWidth = stageIsNarrow ? 560 : stage?.type === 'learn' || selfPaced ? 800 : '100%'
 
   return (
     <div style={pageBg(activity.theme)}>
@@ -297,7 +301,7 @@ export default function LiveJoin({ activity, initialCode }: { activity: LiveActi
           </Link>
         </div>
 
-        <div style={{ maxWidth: stageIsNarrow ? 560 : stage?.type === 'learn' ? 800 : '100%', width: '100%', margin: '0 auto', display: 'grid', gap: 14 }}>
+        <div style={{ maxWidth: contentWidth, width: '100%', margin: '0 auto', display: 'grid', gap: 14 }}>
           <BadgeRow badges={me.badges} />
           <ErrorBanner message={apiError} onClose={() => setApiError(null)} />
 
@@ -321,7 +325,7 @@ export default function LiveJoin({ activity, initialCode }: { activity: LiveActi
             <OpenIdeasPlayer activity={activity} stage={stage} session={session} me={me} patchMyData={patchMyData} reportDraft={reportDraft} celebrate={celebrate} />
           )}
           {session.status === 'active' && stage?.type === 'learn' && stage.overview && <WorksheetOverview overview={stage.overview} />}
-          {session.status === 'active' && stage?.type === 'learn' && <LearnPlayer key={stage.key} stage={stage} session={stageSession} me={me} patchMyData={patchMyData} accent={activity.theme.accent} />}
+          {session.status === 'active' && stage?.type === 'learn' && <LearnPlayer key={stage.key} stage={stage} session={stageSession} me={me} patchMyData={patchMyData} accent={activity.theme.accent} onFinish={selfPaced ? () => goStage(myIdx + 1) : undefined} />}
           {session.status === 'active' && stage?.type === 'boardGame' && stage.overview && <WorksheetOverview overview={stage.overview} />}
           {session.status === 'active' && stage?.type === 'boardGame' && <SustainabilityGamePlayer session={session} me={me} code={code} players={players} patchMyData={patchMyData} addPoints={addPoints} />}
           {session.status === 'active' && stage && stage.type !== 'grading' && (
