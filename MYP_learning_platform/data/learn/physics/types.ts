@@ -42,6 +42,8 @@ export type WidgetId =
   | 'anchored-pod-lab'
   | 'parachute-lab'
   | 'nos-race-lab'
+  | 'motion-graphs-lab'
+  | 'model-vs-reality-lab'
 
 export type BoxKind = 'yes' | 'no' | 'opt'
 

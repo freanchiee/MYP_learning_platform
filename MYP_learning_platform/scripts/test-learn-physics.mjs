@@ -395,4 +395,36 @@ ok('lesson check numbers: r=0.20,rho=500 sphere, T=120N@60deg -> W~164N, F_B~268
   const longAfter = fm.skydiveVelocity(m, kBody, kChute, tOpen, tOpen + 30)
   ok('well after the canopy opens, speed has settled to the new (lower) terminal velocity', near(longAfter.v, vt2, 0.05))
 }
+// ---- motion graphs: slope of x-t is v, slope of v-t is a, area under v-t is displacement ----
+const outMG = path.resolve('node_modules/.cache/motion-graphs.mjs')
+await build({ entryPoints: ['lib/learn/motion-graphs.ts'], outfile: outMG, format: 'esm', bundle: true, logLevel: 'silent' })
+const mg = await import(pathToFileURL(outMG).href)
+{
+  let bad = 0, bad2 = 0, bad3 = 0
+  for (let i = 0; i < 1000; i++) {
+    const x0 = (rnd2() - 0.5) * 20, u = (rnd2() - 0.5) * 20, a = (rnd2() - 0.5) * 10, t = rnd2() * 10 + 0.1
+    if (Math.abs(mg.gradient((s) => mg.position(x0, u, a, s), t) - mg.velocity(u, a, t)) > 1e-5) bad++
+    if (Math.abs(mg.gradient((s) => mg.velocity(u, a, s), t) - a) > 1e-5) bad2++
+    if (Math.abs(mg.areaUnderVt(u, a, t).total - (mg.position(x0, u, a, t) - x0)) > 1e-9) bad3++
+  }
+  ok('slope of the x-t graph = velocity (1000 random cases)', bad === 0)
+  ok('slope of the v-t graph = acceleration (1000 random cases)', bad2 === 0)
+  ok('area under the v-t graph (rectangle + triangle) = change in position (1000 random cases)', bad3 === 0)
+  const ex = mg.areaUnderVt(5, 1, 5)
+  ok('class example: u = 5 m/s, a = 1 m/s2, 5 s -> rectangle 25 m + triangle 12.5 m = 37.5 m, v = 10 m/s', near(ex.rect, 25, 1e-12) && near(ex.tri, 12.5, 1e-12) && near(ex.total, 37.5, 1e-12) && near(mg.velocity(5, 1, 5), 10, 1e-12) && near(mg.position(0, 5, 1, 5), 37.5, 1e-12))
+  ok('uniform motion: a = 0 makes x-t a straight line through the origin, x = vt', near(mg.position(0, 12.5, 0, 2), 25, 1e-12) && near(mg.velocity(12.5, 0, 9), 12.5, 1e-12))
+  ok('steeper x-t line = bigger velocity: 12.5 > 5 > 2.5 at t = 2', mg.position(0, 12.5, 0, 2) > mg.position(0, 5, 0, 2) && mg.position(0, 5, 0, 2) > mg.position(0, 2.5, 0, 2))
+  ok('average gradient between two points: (30-10)/(9-4) = 4', near(mg.averageGradient(4, 10, 9, 30), 4, 1e-12))
+  const w = mg.walk(3, 4)
+  ok('3 m east then 4 m north: distance 7 m, displacement 5 m, at 53.1 degrees', near(w.distance, 7, 1e-12) && near(w.displacement, 5, 1e-12) && near(w.angleDeg, 53.13, 0.01))
+  ok('distance >= displacement always (1000 random walks)', (() => { for (let i = 0; i < 1000; i++) { const q = mg.walk((rnd2() - 0.5) * 20, (rnd2() - 0.5) * 20); if (q.distance + 1e-9 < q.displacement) return false } return true })())
+}
+{
+  const tr = mg.realTrack(30)
+  const at = (t) => tr.find((p) => Math.abs(p.t - t) < 1e-6)
+  ok('model agrees with reality early on (within 7% at t = 1 s and 2 s)', [1, 2].every((t) => Math.abs(at(t).x - mg.modelPosition(t)) / mg.modelPosition(t) < 0.07))
+  ok('reality is never AHEAD of the no-drag model', tr.every((p) => p.x <= mg.modelPosition(p.t) + 1e-6 && p.v <= mg.modelVelocity(p.t) + 1e-6))
+  ok('the model drifts further from reality with time (position error grows: <10% at 10 s, >30% at 30 s)', (mg.modelPosition(10) - at(10).x) / at(10).x < 0.11 && (mg.modelPosition(30) - at(30).x) / at(30).x > 0.3)
+  ok('the model velocity keeps growing; the real velocity levels off near 40 m/s', mg.modelVelocity(30) > 55 && at(30).v < 41)
+}
 process.exit(fail ? 1 : 0)
