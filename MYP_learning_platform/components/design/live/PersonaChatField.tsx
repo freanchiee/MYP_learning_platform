@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { PERSONA_DIRECTIONS, PERSONAS, personasByDirection, getPersona } from '@/data/design/live/personas'
 import { ROLES, ROLE_ORDER } from '@/lib/design-live/sustainability'
+import { EVERYDAY_CHALLENGES } from '@/data/design/live/everyday-personas'
 import { cardStyle, btnStyle, inputStyle, Avatar } from './ui'
 
 interface ChatMessage {
@@ -37,7 +38,7 @@ export default function PersonaChatField({
   sessionCode: string
   playerId: string
   /** 'community' offers the MYP5 stakeholder representatives instead of the accessibility personas. */
-  pack?: 'accessibility' | 'community'
+  pack?: 'accessibility' | 'community' | 'everyday'
 }) {
   const [text, setText] = useState('')
   const [sending, setSending] = useState(false)
@@ -130,6 +131,26 @@ export default function PersonaChatField({
       setSending(false)
       setRetryNote(null)
     }
+  }
+
+  if (!character && pack === 'everyday') {
+    return (
+      <div style={{ display: 'grid', gap: 10 }}>
+        {EVERYDAY_CHALLENGES.map((c) => (
+          <div key={c.key}>
+            <div style={{ fontSize: 11, fontWeight: 800, color: 'var(--text-muted)', marginBottom: 4 }}>{c.icon} {c.label.toUpperCase()}</div>
+            <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+              {PERSONAS.filter((p) => p.direction === 'everyday' && p.challenge === c.key).map((p) => (
+                <button key={p.id} onClick={() => pickCharacter(p.id)} style={{ ...btnStyle('var(--surface)'), display: 'flex', alignItems: 'center', gap: 8, textAlign: 'left', fontSize: 12.5 }}>
+                  <Avatar seed={p.id} size={28} />
+                  <span>{p.name}, {p.age}<br /><span style={{ fontWeight: 400, fontSize: 11, color: 'var(--text-muted)' }}>{p.represents}</span></span>
+                </button>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    )
   }
 
   if (!character && pack === 'community') {

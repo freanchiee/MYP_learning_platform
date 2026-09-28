@@ -35,7 +35,14 @@ export interface McqQuestion {
   correct: number // index into options — shuffled client-side per viewer, never hidden server-side (v1)
 }
 
-export interface McqStage {
+/** Optional lesson-planning metadata any stage can carry: which class block it belongs to and roughly how long it takes. */
+export interface StageTiming {
+  /** e.g. 'Block 1 · single period'. Shown to the teacher. */
+  block?: string
+  minutes?: number
+}
+
+export interface McqStage extends StageTiming {
   type: 'mcq'
   key: string
   label: string
@@ -80,7 +87,7 @@ export interface WorksheetField {
    *  feeds into the fuzzy-match auto score. */
   celebrateKeywords?: string[]
   /** For 'personaChat': which pack of characters to offer. Default 'accessibility'. */
-  personaPack?: 'accessibility' | 'community'
+  personaPack?: 'accessibility' | 'community' | 'everyday'
   /** Max points this field contributes to its section's fuzzy-match auto
    *  score, for text/textarea fields with exemplars/celebrateKeywords set.
    *  Default 10. */
@@ -128,7 +135,7 @@ export interface WorksheetSection {
   completenessTarget?: number
 }
 
-export interface WorksheetStage {
+export interface WorksheetStage extends StageTiming {
   type: 'worksheet'
   key: string
   label: string
@@ -205,7 +212,35 @@ export interface BoardGameStage {
   overview?: StageOverview
 }
 
-export type LiveStage = McqStage | WorksheetStage | OpenIdeasStage | GradingStage | BoardGameStage
+// ---------------------------------------------------------------
+// Stage: Learn (criterion-specific mini-lesson: read, see a worked example)
+// ---------------------------------------------------------------
+export interface LearnPage {
+  icon?: string
+  title: string
+  /** Short paragraphs, one idea each. */
+  body: string[]
+  bullets?: string[]
+  /** A worked example, or a strong-versus-weak comparison. */
+  example?: { label: string; strong?: string; weak?: string; text?: string; note?: string }
+  keyTerms?: { term: string; meaning: string }[]
+  /** One thing to try or notice; the last page usually asks a retrieval question. */
+  tip?: string
+}
+
+export interface LearnStage extends StageTiming {
+  type: 'learn'
+  key: string
+  label: string
+  icon: string
+  /** The criterion strand this lesson teaches, e.g. 'A.ii'. */
+  strand?: string
+  intro?: { title: string; blurb: string }
+  overview?: StageOverview
+  pages: LearnPage[]
+}
+
+export type LiveStage = McqStage | WorksheetStage | OpenIdeasStage | GradingStage | BoardGameStage | LearnStage
 
 /**
  * Model answers that depend on a choice the student made earlier (for example which community they are

@@ -23,6 +23,7 @@ import { exemplarsFor, revealKey } from '@/lib/design-live/exemplars'
 import { feedbackOf } from '@/lib/design-live/feedback'
 import { CRITERION_LETTERS } from '@/lib/design-live/criteria'
 import { SustainabilityGamePlayer } from './game/SustainabilityGame'
+import { LearnPlayer } from './LearnStage'
 import { getPersona } from '@/data/design/live/personas'
 import { useCelebration, CelebrationOverlay } from './Celebration'
 
@@ -278,7 +279,7 @@ export default function LiveJoin({ activity, initialCode }: { activity: LiveActi
           </Link>
         </div>
 
-        <div style={{ maxWidth: stageIsNarrow ? 560 : '100%', width: '100%', margin: '0 auto', display: 'grid', gap: 14 }}>
+        <div style={{ maxWidth: stageIsNarrow ? 560 : stage?.type === 'learn' ? 800 : '100%', width: '100%', margin: '0 auto', display: 'grid', gap: 14 }}>
           <BadgeRow badges={me.badges} />
           <ErrorBanner message={apiError} onClose={() => setApiError(null)} />
 
@@ -299,6 +300,8 @@ export default function LiveJoin({ activity, initialCode }: { activity: LiveActi
           {session.status === 'active' && stage?.type === 'openIdeas' && (
             <OpenIdeasPlayer activity={activity} stage={stage} session={session} me={me} patchMyData={patchMyData} reportDraft={reportDraft} celebrate={celebrate} />
           )}
+          {session.status === 'active' && stage?.type === 'learn' && stage.overview && <WorksheetOverview overview={stage.overview} />}
+          {session.status === 'active' && stage?.type === 'learn' && <LearnPlayer key={stage.key} stage={stage} session={session} me={me} patchMyData={patchMyData} accent={activity.theme.accent} />}
           {session.status === 'active' && stage?.type === 'boardGame' && stage.overview && <WorksheetOverview overview={stage.overview} />}
           {session.status === 'active' && stage?.type === 'boardGame' && <SustainabilityGamePlayer session={session} me={me} code={code} players={players} patchMyData={patchMyData} addPoints={addPoints} />}
           {session.status === 'active' && stage && stage.type !== 'grading' && (

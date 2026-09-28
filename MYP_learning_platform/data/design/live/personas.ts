@@ -16,13 +16,16 @@ export interface PersonaAnthroRow {
 
 import type { RoleKey } from '@/lib/design-live/sustainability'
 import { COMMUNITY_PERSONAS } from './community-personas'
+import { EVERYDAY_PERSONAS, type EverydayChallenge } from './everyday-personas'
 
 export type AccessibilityDirection = 'onehand' | 'lowvision' | 'sensory' | 'elderly' | 'classroom'
 
 export interface Persona {
   id: string
   /** 'community' personas belong to the MYP5 Sustainability Check pack (see community-personas.ts). */
-  direction: AccessibilityDirection | 'community'
+  direction: AccessibilityDirection | 'community' | 'everyday'
+  /** Everyday pack only: which of the six challenge directions this named user belongs to. */
+  challenge?: EverydayChallenge
   /** Community pack only: which game role this representative speaks for. */
   group?: RoleKey
   /** Community pack only: the organisation or place they represent. */
@@ -158,7 +161,7 @@ const ACCESS_PERSONAS: Persona[] = [
   },
 ]
 
-export const PERSONAS: Persona[] = [...ACCESS_PERSONAS, ...COMMUNITY_PERSONAS]
+export const PERSONAS: Persona[] = [...ACCESS_PERSONAS, ...COMMUNITY_PERSONAS, ...EVERYDAY_PERSONAS]
 
 export function getPersona(id: string): Persona | undefined {
   return PERSONAS.find((p) => p.id === id)

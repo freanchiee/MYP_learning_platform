@@ -14,6 +14,7 @@ import ChatPanel from './ChatPanel'
 import ClassPicker from './ClassPicker'
 import { stateForAdvance, stateForBack } from '@/lib/design-live/stageNav'
 import { SustainabilityGameHost } from './game/SustainabilityGame'
+import { LearnHost } from './LearnStage'
 import { Podium } from './Podium'
 import { WorksheetReviewModal } from './WorksheetReview'
 import { FeedbackSummary, FeedbackOverview } from './StageFeedback'
@@ -323,11 +324,17 @@ function StageHost({
     <div style={{ display: 'grid', gap: 14 }}>
       <div style={{ textAlign: 'center', color: '#fff', fontWeight: 800, fontSize: 15 }}>
         {stage.icon} {stage.label}
+        {'block' in stage && (stage.block || stage.minutes) && (
+          <div style={{ marginTop: 4, fontSize: 11.5, fontWeight: 700, opacity: 0.8 }}>
+            {[stage.block, stage.minutes ? `about ${stage.minutes} min` : ''].filter(Boolean).join(' · ')}
+          </div>
+        )}
       </div>
 
       {stage.type === 'mcq' && <McqHost activity={activity} stage={stage} session={session} players={players} patchState={patchState} now={now} onChat={onChat} />}
       {stage.type === 'worksheet' && <WorksheetHost stage={stage} players={players} now={now} onChat={onChat} sessionCode={session.code} onReview={onReview} />}
       {stage.type === 'openIdeas' && <OpenIdeasHost activity={activity} stage={stage} session={session} players={players} patchState={patchState} now={now} onChat={onChat} />}
+      {stage.type === 'learn' && <LearnHost stage={stage} session={session} players={players} patchState={patchState} accent={activity.theme.accent} />}
       {stage.type === 'boardGame' && <SustainabilityGameHost session={session} players={players} patchState={patchState} run={run} />}
       {stage.type === 'grading' && <GradingHost activity={activity} stage={stage} players={players} grades={grades} run={run} session={session} />}
 

@@ -386,6 +386,10 @@ field like `makeCards` for the 25 digital products (`digital-products.ts`).
 
 **War Quiz side mission.** Two students on the same space can duel over three sustainability questions (`sc_duel_offer/reply/answer` events, state in `game.duel`, telemetry via `DuelBanner` and the log). Points are collected once by each student's own browser from `game.duels` (marked in `me.data.game.paidDuels`) because only a student can update their own row. Host-paced MCQ stages likewise award `pointsPerCorrect` when the host reveals the answer (marked `paid`). Worksheets autosave after 2.5 s of quiet and keep a browser-storage backup.
 
+## Learn stage (criterion-specific mini-lessons)
+
+A `learn` stage (`LearnStage.tsx`) is a short run of cards: one idea per card, a worked example or a `weak`/`strong` comparison, key terms and a tip. The teacher can switch on **Present** so every student follows the teacher's card, or leave it free so each student reads at their own pace; each student's furthest card is saved in their own data (`data[stageKey].maxPage`) and the host sees a progress bar per student. Use it to TEACH a criterion strand right before students practise it (see `myp3-unit1-kickoff-extended.ts`: Need → Research plan → Product analysis → Brief). Any stage can carry `block` and `minutes` (`StageTiming`) so a teacher can plan a single and a double period; they show only on the host screen. `personaPack: 'everyday'` offers the twelve named everyday users in `everyday-personas.ts` (two per challenge direction).
+
 ## What's NOT built yet (known gaps — extend deliberately, don't hack around)
 
 - **Physical/whiteboard rounds with a host-only secret** (Pictionary,
