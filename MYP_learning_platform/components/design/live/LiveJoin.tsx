@@ -53,6 +53,10 @@ export default function LiveJoin({ activity, initialCode }: { activity: LiveActi
   const [session, setSession] = useState<LiveSessionRow | null>(null)
   const [players, setPlayers] = useState<LivePlayerRow[]>([])
   const [me, setMe] = useState<LivePlayerRow | null>(null)
+  // When this browser last saved something to the student's own row. The poll that refreshes `me` from the
+  // server can return a copy from just BEFORE that save landed; applying it would snap the student back
+  // (a Next button that seems to do nothing). So a fresh local save wins for a few seconds.
+  const lastPatchAt = useRef(0)
   const [myGrade, setMyGrade] = useState<LiveGradeRow | null>(null)
   const [nameInput, setNameInput] = useState('')
   const [apiError, setApiError] = useState<string | null>(null)
@@ -84,6 +88,7 @@ export default function LiveJoin({ activity, initialCode }: { activity: LiveActi
   useLiveRow<LiveGradeRow>('live_grades', 'player_id', me?.id, setMyGrade, !!me)
 
   useEffect(() => {
+    if (Date.now() - lastPatchAt.current < 6000) return
     if (userId && players.length) setMe(players.find((p) => p.user_id === userId) || null)
   }, [players, userId])
 
@@ -150,6 +155,7 @@ export default function LiveJoin({ activity, initialCode }: { activity: LiveActi
     if (!me) return
     const sb = createClient()
     const nextData = { ...me.data, [stageKey]: { ...(me.data?.[stageKey] || {}), ...patch } }
+    lastPatchAt.current = Date.now()
     setMe({ ...me, data: nextData })
     const { error } = await sb.from('live_players').update({ data: nextData }).eq('id', me.id)
     if (error) setApiError(error.message)
