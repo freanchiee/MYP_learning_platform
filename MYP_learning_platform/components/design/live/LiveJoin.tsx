@@ -316,13 +316,13 @@ export default function LiveJoin({ activity, initialCode }: { activity: LiveActi
           {session.status === 'active' && selfPaced && <SelfPacedBar activity={activity} idx={myIdx} onGo={goStage} />}
 
           {session.status === 'active' && stage?.type === 'mcq' && (
-            <McqPlayer activity={activity} stage={stage} session={stageSession} me={me} patchMyData={patchMyData} addPoints={addPoints} />
+            <McqPlayer key={stage.key} activity={activity} stage={stage} session={stageSession} me={me} patchMyData={patchMyData} addPoints={addPoints} />
           )}
           {session.status === 'active' && stage?.type === 'worksheet' && (
-            <WorksheetPlayer stage={stage} allStages={activity.stages} activity={activity} grade={myGrade} me={me} sessionCode={code} patchMyData={patchMyData} reportDraft={reportDraft} celebrate={celebrate} />
+            <WorksheetPlayer key={stage.key} stage={stage} allStages={activity.stages} activity={activity} grade={myGrade} me={me} sessionCode={code} patchMyData={patchMyData} reportDraft={reportDraft} celebrate={celebrate} />
           )}
           {session.status === 'active' && stage?.type === 'openIdeas' && (
-            <OpenIdeasPlayer activity={activity} stage={stage} session={session} me={me} patchMyData={patchMyData} reportDraft={reportDraft} celebrate={celebrate} />
+            <OpenIdeasPlayer key={stage.key} activity={activity} stage={stage} session={session} me={me} patchMyData={patchMyData} reportDraft={reportDraft} celebrate={celebrate} />
           )}
           {session.status === 'active' && stage?.type === 'learn' && stage.overview && <WorksheetOverview overview={stage.overview} />}
           {session.status === 'active' && stage?.type === 'learn' && <LearnPlayer key={stage.key} stage={stage} session={stageSession} me={me} patchMyData={patchMyData} accent={activity.theme.accent} onFinish={selfPaced ? () => goStage(myIdx + 1) : undefined} />}
