@@ -582,7 +582,7 @@ export const KINEMATICS_INTRO: Module = {
                 {
                   t: 'steps',
                   title: 'find T, the speed at B, and the deceleration',
-                  given: 'Using the table above: the v–t graph is a triangle, base T, with the peak (at B) reached after 0.80T.',
+                  given: 'A train starts from rest at A, accelerates at 0.20 m s⁻² until it passes B (reached after 0.80 of the total journey time T), then decelerates uniformly to rest at C. The whole A-to-C journey covers 1800 m. On a v–t graph this is a triangle: base T, with the peak (at B) reached after 0.80T.',
                   steps: [
                     { line: 'Speed at B: V = a₁ × (0.80T) = 0.20 × 0.80T = 0.16T', why: 'Uniform acceleration from rest: v = u + at, with u = 0.' },
                     { line: 'Total distance = area of the triangle = ½ × T × V = ½ × T × 0.16T = 0.08T²', why: 'Area under a v–t graph is displacement — the graph is one triangle, base T, height V.' },
@@ -611,7 +611,7 @@ export const KINEMATICS_INTRO: Module = {
                 {
                   t: 'steps',
                   title: 'find the drop height and the rebound height',
-                  given: 'The ball falls for 1.0 s before impact, then rebounds with half its impact speed (a typical energy loss on a bounce).',
+                  given: 'A 0.250 kg ball is released from rest and falls freely (g = 9.80 m s⁻²), reaching the floor after exactly 1.0 s. It bounces, rebounding with half the speed it hit the floor at (a typical energy loss on a bounce).',
                   steps: [
                     { line: 'Drop height: H = ½ g t² = ½ × 9.80 × 1.0² = 4.9 m', why: 'Released from rest, falling for a known time.' },
                     { line: 'Impact speed: v = g t = 9.80 × 1.0 = 9.8 m s⁻¹', why: 'v = u + at, with u = 0.' },
@@ -640,7 +640,7 @@ export const KINEMATICS_INTRO: Module = {
                 {
                   t: 'steps',
                   title: 'find the speed before braking, and the reaction time',
-                  given: 'Work backwards from the skid: it starts at the (unknown) speed u and ends at rest, covering 12.8 m at a known deceleration.',
+                  given: 'A car travels at a steady speed u before the driver reacts to a hazard, covering 29.3 m in that reaction time. The brakes then bring it to rest over a 12.8 m skid, decelerating at 0.85g. Work backwards from the skid: it starts at the (unknown) speed u and ends at rest.',
                   steps: [
                     { line: 'Deceleration: a = 0.85 × 9.8 = 8.33 m s⁻²', why: 'Given as a fraction of g.' },
                     { line: 'v² = u² − 2as, with v = 0: u² = 2 × 8.33 × 12.8 = 213.2', why: 'Rearranging v² = u² + 2as for the braking phase, where the acceleration is negative (a deceleration).' },
@@ -698,7 +698,7 @@ export const KINEMATICS_INTRO: Module = {
                 {
                   t: 'steps',
                   title: 'the maximum safe speed',
-                  given: 'v² = u² + 2as, with the final speed v = 0 and s = 1000 m, a = −0.20 m s⁻².',
+                  given: 'A train driver applies the brake at a yellow signal, 1000 m from a red signal where the train must have already stopped. The maximum deceleration is 0.20 m s⁻², applied uniformly. Use v² = u² + 2as, with the final speed v = 0, s = 1000 m and a = −0.20 m s⁻².',
                   steps: [
                     { line: '0 = u² − 2 × 0.20 × 1000', why: 'Substitute the known values, with deceleration taken as negative.' },
                     { line: 'u² = 400', why: 'Rearrange.' },
@@ -725,7 +725,7 @@ export const KINEMATICS_INTRO: Module = {
                 {
                   t: 'steps',
                   title: 'convert units, then find the minimum acceleration',
-                  given: 'v² = u² + 2as, with u = 0, v = 85 km h⁻¹, s = 1.20 km = 1200 m.',
+                  given: 'An aircraft, initially stationary on a runway, must reach a take-off speed of 85 km h⁻¹ in a distance of no more than 1.20 km, accelerating uniformly throughout. Use v² = u² + 2as, with u = 0, v = 85 km h⁻¹ and s = 1.20 km = 1200 m.',
                   steps: [
                     { line: '85 km h⁻¹ = 85 × 1000 / 3600 ≈ 23.61 m s⁻¹', why: 'Convert to SI units before using the kinematics equations — km h⁻¹ will not work directly.' },
                     { line: 'v² = 2as → a = v² / (2s) = 23.61² / (2 × 1200)', why: 'Rearrange with u = 0.' },
@@ -752,7 +752,7 @@ export const KINEMATICS_INTRO: Module = {
                 {
                   t: 'steps',
                   title: 'find the initial gap, d',
-                  given: 'Both cars are at the same position after t = 20 s. Find how far each has travelled, then compare.',
+                  given: 'Car X travels at a constant 6.0 m s⁻¹. Car Y starts a distance d behind X, already moving at 4.0 m s⁻¹ and accelerating at 0.50 m s⁻². Car Y draws level with car X after 20 s. Both cars are therefore at the same position at t = 20 s: find how far each has travelled, then compare.',
                   steps: [
                     { line: 'Distance travelled by Y: s_Y = u t + ½at² = 4 × 20 + ½ × 0.5 × 20² = 80 + 100 = 180 m', why: 'Y starts at 4.0 m s⁻¹ and accelerates at 0.50 m s⁻².' },
                     { line: 'Distance travelled by X: s_X = 6.0 × 20 = 120 m', why: 'X moves at a constant speed, so distance = speed × time.' },
@@ -779,7 +779,7 @@ export const KINEMATICS_INTRO: Module = {
                 {
                   t: 'steps',
                   title: 'find the acceleration from the drop spacing',
-                  given: 'For uniform acceleration, the average velocity over an interval equals the instantaneous velocity at its MIDPOINT in time.',
+                  given: 'A car with a leaking oil tank accelerates uniformly along a straight road, dripping one drop every 2.0 s. The gap between the 1st and 2nd drops is 9.0 m; between the 2nd and 3rd, 12.0 m. For uniform acceleration, the average velocity over an interval equals the instantaneous velocity at its MIDPOINT in time.',
                   steps: [
                     { line: 'Average velocity, drops 1→2: 9.0 / 2.0 = 4.5 m s⁻¹, at the midpoint t = 1 s', why: 'Average velocity = distance ÷ time for that interval.' },
                     { line: 'Average velocity, drops 2→3: 12.0 / 2.0 = 6.0 m s⁻¹, at the midpoint t = 3 s', why: 'Same idea, for the next interval.' },

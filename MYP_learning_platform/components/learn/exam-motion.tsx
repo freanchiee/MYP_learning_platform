@@ -110,12 +110,29 @@ function Icon({ kind, color, flip }: { kind: Actor['icon']; color: string; flip?
   )
 }
 
-function TrackAnim({ actors, tMax, title, unitLabel = 'm' }: { actors: Actor[]; tMax: number; title: string; unitLabel?: string }) {
+interface VMark { t: number; label: string }
+
+function TrackAnim({ actors, tMax, title, unitLabel = 'm', vMarks }: { actors: Actor[]; tMax: number; title: string; unitLabel?: string; vMarks?: VMark[] }) {
   const { t, setT, playing, setPlaying, reduced } = useScrub(tMax)
   const W = 420, H = 140, roadY = 96, padL = 14, padR = 14
   const xMax = useMemo(() => Math.max(10, ...actors.map((a) => a.xOf(tMax))), [actors, tMax])
   const sx = (W - padL - padR) / xMax
   const X = (x: number) => padL + x * sx
+
+  // ---- the v-t graph: what the worked-example steps are actually describing ----
+  const GW = 420, GH = 130, gPadL = 32, gPadR = 10, gPadT = 10, gPadB = 20
+  const N = 80
+  const vMax = useMemo(() => {
+    let m = 1
+    for (const a of actors) for (let i = 0; i <= N; i++) m = Math.max(m, a.vOf((i / N) * tMax))
+    return m
+  }, [actors, tMax])
+  const GX = (s: number) => gPadL + (s / tMax) * (GW - gPadL - gPadR)
+  const GY = (v: number) => GH - gPadB - (v / vMax) * (GH - gPadB - gPadT)
+  const vTicks = useMemo(() => {
+    const step = vMax / 4
+    return Array.from({ length: 5 }, (_, i) => Math.round(i * step))
+  }, [vMax])
 
   return (
     <div className="grid gap-3">
@@ -144,6 +161,38 @@ function TrackAnim({ actors, tMax, title, unitLabel = 'm' }: { actors: Actor[]; 
           <text x={W - padR} y={H - 6} fontSize="8" textAnchor="end" fill="var(--text-muted)">{f2(xMax, 0)} {unitLabel}</text>
         </svg>
       </figure>
+      <figure className="p-2" style={fig}>
+        <svg viewBox={`0 0 ${GW} ${GH}`} className="w-full" role="img" aria-label={`Speed against time for ${actors.map((a) => a.label).join(' and ')}.`}>
+          <line x1={gPadL} y1={GH - gPadB} x2={GW - gPadR} y2={GH - gPadB} stroke="var(--border-strong)" strokeWidth="1" />
+          <line x1={gPadL} y1={gPadT} x2={gPadL} y2={GH - gPadB} stroke="var(--border-strong)" strokeWidth="1" />
+          {vTicks.map((v) => (
+            <g key={v}>
+              <line x1={gPadL - 3} y1={GY(v)} x2={GW - gPadR} y2={GY(v)} stroke="var(--border)" strokeWidth="0.5" />
+              <text x={gPadL - 5} y={GY(v) + 3} fontSize="7" textAnchor="end" fill="var(--text-muted)">{f2(v, 0)}</text>
+            </g>
+          ))}
+          {vMarks?.map((m) => (
+            <g key={m.label}>
+              <line x1={GX(m.t)} y1={gPadT} x2={GX(m.t)} y2={GH - gPadB} stroke="var(--text-subtle)" strokeDasharray="3 2" strokeWidth="1" />
+              <text x={GX(m.t)} y={GH - 5} fontSize="7" textAnchor="middle" fill="var(--text-muted)">{m.label}</text>
+            </g>
+          ))}
+          {actors.map((a) => {
+            const d = Array.from({ length: N + 1 }, (_, i) => {
+              const s = (i / N) * tMax
+              return `${i ? 'L' : 'M'} ${GX(s)} ${GY(a.vOf(s))}`
+            }).join(' ')
+            return (
+              <g key={a.key}>
+                <path d={d} fill="none" stroke={a.color} strokeWidth="2" />
+                <circle cx={GX(t)} cy={GY(a.vOf(t))} r="3" fill={a.color} />
+              </g>
+            )
+          })}
+          <text x="2" y={gPadT} fontSize="7" fill="var(--text-muted)">v ({unitLabel} s⁻¹)</text>
+          <text x={GW - gPadR} y={gPadT} fontSize="7" textAnchor="end" fill="var(--text-muted)">t (s) →</text>
+        </svg>
+      </figure>
       <Slider label="Time" value={Math.round(t * 100) / 100} min={0} max={tMax} step={tMax / 200} unit="s" onChange={(v) => { setPlaying(false); setT(v) }} />
       {!reduced && <button onClick={() => { if (t >= tMax) setT(0); setPlaying((p) => !p) }} aria-pressed={playing} className={ctl} style={playing ? btn2 : btn1}>{playing ? '⏸ PAUSE' : '▶ PLAY'}</button>}
       <div className="grid gap-1 rounded-[var(--radius-panel)] p-3 text-sm" style={panel} aria-live="polite">
@@ -159,9 +208,9 @@ function TrackAnim({ actors, tMax, title, unitLabel = 'm' }: { actors: Actor[]; 
 
 // ---------------------------------------------------------------- Q1: a train speeds up, then slows to a stop
 export function TrainAccelDecelAnim() {
-  const { T } = em.trainSolve()
+  const { T, tB } = em.trainSolve()
   const actors: Actor[] = [{ key: 'train', label: 'Train', color: 'var(--accent)', icon: 'train', xOf: em.trainPosition, vOf: em.trainVelocity }]
-  return <TrackAnim actors={actors} tMax={T} title="A train speeding up from A to B, then slowing to a stop at C." unitLabel="m" />
+  return <TrackAnim actors={actors} tMax={T} title="A train speeding up from A to B, then slowing to a stop at C." unitLabel="m" vMarks={[{ t: tB, label: 'B (0.80T)' }, { t: T, label: 'C (T)' }]} />
 }
 
 // ---------------------------------------------------------------- Q4: a train must stop at a red signal
@@ -201,7 +250,7 @@ export function CarSkidAnim() {
     key: 'car', label: 'Car', color: 'var(--accent)', icon: 'car', xOf: em.skidPosition, vOf: em.skidVelocity,
     trailFromX: em.skidPosition(tReaction),
   }]
-  return <TrackAnim actors={actors} tMax={tMax} title="A car at constant speed during the driver's reaction time, then braking hard, leaving skid marks." unitLabel="m" />
+  return <TrackAnim actors={actors} tMax={tMax} title="A car at constant speed during the driver's reaction time, then braking hard, leaving skid marks." unitLabel="m" vMarks={[{ t: tReaction, label: 'brakes applied' }]} />
 }
 
 // ---------------------------------------------------------------- Q2: a ball dropped, bounces
