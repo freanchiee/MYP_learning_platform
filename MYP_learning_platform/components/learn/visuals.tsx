@@ -10,6 +10,10 @@ const ctl = 'rounded-[var(--radius-control)] px-3 py-2 text-xs font-black tracki
 const primary: React.CSSProperties = { background: 'var(--gradient-cta)', color: 'var(--text-on-accent)' }
 const secondary: React.CSSProperties = { border: '1px solid var(--border-strong)', color: 'var(--text)', background: 'var(--surface-inset)' }
 const inset: React.CSSProperties = { background: 'var(--surface-inset)', border: '1px solid var(--border)' }
+// Concept explainers (LawCard, tables) stay on the neutral/beige `inset`. Worked EXAMPLES get their own
+// purple wash — `--accent` is the CritABCD brand purple, consistent across every theme (see themes.css) —
+// so a page reads "beige = idea, purple = example or simulation" at a glance.
+const example: React.CSSProperties = { background: 'var(--accent-soft)', border: '1px solid var(--accent)' }
 
 // ---------- the checkbox from the handwritten notes: ☑ ☒ and the dotted "optional" box ----------
 export function Tick({ kind, size = 28, delay = 0, label }: { kind: BoxKind | 'blank'; size?: number; delay?: number; label?: string }) {
@@ -355,7 +359,7 @@ export function WorkedSteps({ title, given, steps, answer }: { title: string; gi
   const [n, setN] = useState(0)
   const [why, setWhy] = useState<number | null>(null)
   return (
-    <div className="rounded-[var(--radius-card)] p-4" style={inset}>
+    <div className="rounded-[var(--radius-card)] p-4" style={example}>
       <div className="text-xs font-black tracking-[0.3em]" style={{ color: 'var(--accent)' }}>WORKED EXAMPLE · {title.toUpperCase()}</div>
       <p className="mt-2 text-sm font-bold" style={{ color: 'var(--text)' }}>{given}</p>
       <ol className="mt-3 grid gap-2">

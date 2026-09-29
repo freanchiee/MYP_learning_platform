@@ -77,16 +77,20 @@ function McqView({ q, saved, onPick, back, backHref, backLabel }: { q: Mcq; save
   )
 }
 
+// Every simulation/game gets the same purple wash, regardless of whether it sits inside a deck slide —
+// `--accent` is the CritABCD brand purple, consistent across every theme. This is the one visual signal
+// that says "this is interactive," everywhere on the site.
 function PredictThenWidget({ b }: { b: Extract<Block, { t: 'widget' }> }) {
   const [pick, setPick] = useState<number | undefined>()
   const [skip, setSkip] = useState(false)
   const unlocked = !b.predict || pick !== undefined || skip
   return (
-    <Card label="Explore">
-      <h3 className="text-lg font-extrabold" style={{ color: 'var(--text)' }}>{b.title}</h3>
+    <section className="rounded-[var(--radius-card)] p-4 md:p-5" style={{ background: 'var(--accent-soft)', border: '1px solid var(--accent)' }}>
+      <div className="text-[11px] font-black uppercase tracking-[0.3em]" style={{ color: 'var(--accent)' }}>Simulation</div>
+      <h3 className="mt-1 text-lg font-extrabold" style={{ color: 'var(--text)' }}>{b.title}</h3>
       <p className="mt-1 text-sm" style={{ color: 'var(--text-muted)' }}><strong>The idea:</strong> {b.idea}</p>
       {b.predict && (
-        <div className="mt-4 rounded-[var(--radius-panel)] p-4" style={{ background: 'var(--accent-soft)', border: '1px solid var(--border)' }}>
+        <div className="mt-4 rounded-[var(--radius-panel)] p-4" style={{ background: 'var(--surface-elevated)', border: '1px solid var(--accent)' }}>
           <McqView q={b.predict} saved={pick} onPick={setPick} />
           {pick === undefined && !skip && (
             <button onClick={() => setSkip(true)} className="mt-2 text-xs font-bold underline" style={{ color: 'var(--text-muted)' }}>Skip and go to the simulation</button>
@@ -96,7 +100,7 @@ function PredictThenWidget({ b }: { b: Extract<Block, { t: 'widget' }> }) {
       <div className="mt-4">
         {unlocked ? <Widget id={b.id} /> : <p className="text-sm" style={{ color: 'var(--text-muted)' }}>Answer the prediction above to unlock the simulation. Then test it.</p>}
       </div>
-    </Card>
+    </section>
   )
 }
 
