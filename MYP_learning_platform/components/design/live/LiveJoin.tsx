@@ -315,27 +315,36 @@ export default function LiveJoin({ activity, initialCode }: { activity: LiveActi
 
           {session.status === 'active' && selfPaced && <SelfPacedBar activity={activity} idx={myIdx} onGo={goStage} />}
 
+          {/* KEYED ON THE STAGE ITSELF: this forces React to fully discard and
+              rebuild everything below — not just swap props — the instant the
+              active stage changes, for host-paced OR self-paced navigation.
+              Without this, a stray leftover render from a stage a student has
+              already left behind could keep showing above the real current
+              stage (seen in production as an old worksheet/lesson repeating
+              at the top of the page). If this still happens, a hard refresh
+              always clears it — state is saved on the server, not lost. */}
+          <div key={`stage-${selfPaced ? myIdx : session.stage_idx}-${stage?.key ?? 'none'}`} style={{ display: 'grid', gap: 14 }}>
           {session.status === 'active' && stage?.type === 'mcq' && (
-            <McqPlayer key={stage.key} activity={activity} stage={stage} session={stageSession} me={me} patchMyData={patchMyData} addPoints={addPoints} />
+            <McqPlayer activity={activity} stage={stage} session={stageSession} me={me} patchMyData={patchMyData} addPoints={addPoints} />
           )}
           {session.status === 'active' && stage?.type === 'worksheet' && (
-            <WorksheetPlayer key={stage.key} stage={stage} allStages={activity.stages} activity={activity} grade={myGrade} me={me} sessionCode={code} patchMyData={patchMyData} reportDraft={reportDraft} celebrate={celebrate} />
+            <WorksheetPlayer stage={stage} allStages={activity.stages} activity={activity} grade={myGrade} me={me} sessionCode={code} patchMyData={patchMyData} reportDraft={reportDraft} celebrate={celebrate} />
           )}
           {session.status === 'active' && stage?.type === 'openIdeas' && (
-            <OpenIdeasPlayer key={stage.key} activity={activity} stage={stage} session={session} me={me} patchMyData={patchMyData} reportDraft={reportDraft} celebrate={celebrate} />
+            <OpenIdeasPlayer activity={activity} stage={stage} session={session} me={me} patchMyData={patchMyData} reportDraft={reportDraft} celebrate={celebrate} />
           )}
           {session.status === 'active' && stage?.type === 'learn' && stage.overview && <WorksheetOverview overview={stage.overview} />}
-          {session.status === 'active' && stage?.type === 'learn' && <LearnPlayer key={stage.key} stage={stage} session={stageSession} me={me} patchMyData={patchMyData} accent={activity.theme.accent} onFinish={selfPaced ? () => goStage(myIdx + 1) : undefined} />}
+          {session.status === 'active' && stage?.type === 'learn' && <LearnPlayer stage={stage} session={stageSession} me={me} patchMyData={patchMyData} accent={activity.theme.accent} onFinish={selfPaced ? () => goStage(myIdx + 1) : undefined} />}
           {session.status === 'active' && stage?.type === 'boardGame' && stage.overview && <WorksheetOverview overview={stage.overview} />}
           {session.status === 'active' && stage?.type === 'boardGame' && <SustainabilityGamePlayer session={session} me={me} code={code} players={players} patchMyData={patchMyData} addPoints={addPoints} />}
           {session.status === 'active' && stage && stage.type !== 'grading' && (
             <StageFeedback
-              key={stage.key}
               stageLabel={`${stage.icon} ${stage.label}`}
               value={feedbackOf(me, stage.key)}
               onSave={(v) => patchMyData('_feedback', { [stage.key]: v })}
             />
           )}
+          </div>
 
           {session.status === 'active' && stage?.type === 'grading' && (
             <div style={cardStyle(activity.theme.accent)}>
