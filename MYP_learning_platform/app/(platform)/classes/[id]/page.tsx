@@ -57,7 +57,7 @@ export default async function ClassPage({ params, searchParams }: { params: { id
   const codes = sessionList.map((s) => s.code)
   const memberIds = memberList.map((m) => m.user_id)
 
-  const needProgress = tab === 'insights' || tab === 'overview' || tab === 'assignments'
+  const needProgress = tab === 'insights' || tab === 'overview' || tab === 'assignments' || tab === 'live'
   const [{ data: players }, { data: grades }, { data: done }, { data: attempts }] = needProgress
     ? await Promise.all([
         codes.length ? supabase.from('live_players').select('id, session_code, user_id, points, data').in('session_code', codes) : Promise.resolve({ data: [] }),
@@ -274,6 +274,49 @@ export default async function ClassPage({ params, searchParams }: { params: { id
               <div className="flex items-center justify-between"><h2 className="text-2xl font-extrabold">Live sessions</h2><Link href="/design/live" className="rounded-[var(--radius-control)] px-4 py-2 text-xs font-black tracking-widest" style={{ background: 'var(--gradient-cta)', color: 'var(--text-on-accent)' }}>HOST A LIVE CLASS</Link></div>
               <p className="mt-1 text-sm" style={muted}>Attach one of your recent live sessions to {cls.name}, or remove it.</p>
               <div className="rounded-[var(--radius-card)] p-4 mt-3" style={glass}><AssignSessions classId={cls.id} sessions={assignable} /></div>
+
+              <h3 className="mt-6 text-lg font-extrabold">History</h3>
+              <p className="mt-1 text-sm" style={muted}>Every session run for {cls.name}, most recent first.</p>
+              {sessionList.length === 0 ? <p className="mt-3 text-sm" style={muted}>No sessions run for this class yet.</p> : (
+                <div className="mt-3 space-y-2">
+                  {sessionList.map((s) => {
+                    const activity = getLiveActivity(s.activity_id)
+                    const rows = memberList.map((m) => ({ m, c: liveCell(m.user_id, s) }))
+                    const joined = rows.filter((r) => r.c.on).length
+                    const gradedCount = rows.filter((r) => r.c.on && r.c.text.startsWith('Graded')).length
+                    return (
+                      <details key={s.code} className="rounded-[var(--radius-card)] p-4" style={glass}>
+                        <summary className="flex cursor-pointer flex-wrap items-center justify-between gap-2">
+                          <div>
+                            <span className="font-extrabold">{activity?.title ?? s.activity_id}</span>
+                            <span className="ml-2 text-xs" style={muted}>{new Date(s.created_at).toLocaleString()}</span>
+                          </div>
+                          <div className="flex items-center gap-2 text-xs font-bold">
+                            <span className="rounded-full px-3 py-1" style={{ background: s.status === 'active' ? 'var(--accent-soft, #ffedd5)' : 'var(--surface-inset)', color: s.status === 'active' ? 'var(--accent, #c2410c)' : 'var(--text-muted)' }}>{s.status === 'active' ? 'Live now' : 'Ended'}</span>
+                            <span style={muted}>{joined}/{memberList.length} joined{gradedCount > 0 ? ` · ${gradedCount} graded` : ''}</span>
+                          </div>
+                        </summary>
+                        {memberList.length === 0 ? <p className="mt-3 text-sm" style={muted}>No students in this class yet.</p> : (
+                          <div className="mt-3 divide-y" style={{ borderColor: 'var(--border)' }}>
+                            {rows.map(({ m, c }) => (
+                              <div key={m.user_id} className="flex items-center justify-between gap-3 py-2 text-sm">
+                                <span className="font-semibold">{m.name || 'Student'}</span>
+                                {c.on && c.playerId && activity ? (
+                                  <StudentAnswerPeek activity={activity} playerId={c.playerId} playerName={m.name || 'Student'} sessionActive={s.status === 'active'} savedData={c.data ?? null}>
+                                    <span style={{ color: 'var(--text)' }}>{c.text}</span>
+                                  </StudentAnswerPeek>
+                                ) : (
+                                  <span style={{ color: 'var(--text-subtle)' }}>{c.text}</span>
+                                )}
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                      </details>
+                    )
+                  })}
+                </div>
+              )}
             </section>
           )}
 
