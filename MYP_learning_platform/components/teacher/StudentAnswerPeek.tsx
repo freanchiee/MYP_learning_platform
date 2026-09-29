@@ -31,10 +31,15 @@ function fieldAnswerText(field: WorksheetField, value: unknown): string {
 function AnswersList({ activity, data }: { activity: LiveActivityDefinition; data: Record<string, any> | null }) {
   const stages = activity.stages.filter((s): s is WorksheetStage => s.type === 'worksheet')
   const blocks = stages.map((stage) => {
-    const rows: { label: string; text: string }[] = []
+    const rows: { label: string; text: string; images?: { url: string; name: string }[] }[] = []
     for (const section of stage.sections) {
       const sectionData = data?.[stage.key]?.[section.key] || {}
       for (const field of section.fields) {
+        if (field.type === 'image') {
+          const images = sectionData[field.key] as { url: string; name: string }[] | undefined
+          if (images?.length) rows.push({ label: field.label, text: '', images })
+          continue
+        }
         const text = fieldAnswerText(field, sectionData[field.key])
         if (text) rows.push({ label: field.label, text })
       }
@@ -52,7 +57,17 @@ function AnswersList({ activity, data }: { activity: LiveActivityDefinition; dat
             {rows.map((r, i) => (
               <div key={i} style={{ fontSize: 12 }}>
                 <div style={{ fontWeight: 700, color: 'var(--text-subtle)', fontSize: 10.5, textTransform: 'uppercase', letterSpacing: 0.4 }}>{r.label}</div>
-                <div style={{ whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>{r.text}</div>
+                {r.images ? (
+                  <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', marginTop: 2 }}>
+                    {r.images.map((img, ii) => (
+                      <a key={ii} href={img.url} target="_blank" rel="noreferrer" onClick={(e) => e.stopPropagation()}>
+                        <img src={img.url} alt={img.name} style={{ width: 44, height: 44, objectFit: 'cover', borderRadius: 6, border: '1px solid var(--border)' }} />
+                      </a>
+                    ))}
+                  </div>
+                ) : (
+                  <div style={{ whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>{r.text}</div>
+                )}
               </div>
             ))}
           </div>

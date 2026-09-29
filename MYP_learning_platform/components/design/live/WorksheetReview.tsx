@@ -206,6 +206,25 @@ export function WorksheetReviewModal({
                           </div>
                         )
                       }
+                      if (f.type === 'image') {
+                        const v = data[f.key] as { url: string; name: string }[] | undefined
+                        return (
+                          <div key={f.key} style={{ fontSize: 12 }}>
+                            <strong style={{ color: 'var(--text-muted)', fontSize: 11 }}>{f.label}</strong>
+                            {!v?.length ? (
+                              <div style={{ color: 'var(--text-muted)', fontStyle: 'italic', marginTop: 2 }}>No images uploaded yet</div>
+                            ) : (
+                              <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginTop: 4 }}>
+                                {v.map((img, i) => (
+                                  <a key={i} href={img.url} target="_blank" rel="noreferrer">
+                                    <img src={img.url} alt={img.name} style={{ width: 72, height: 72, objectFit: 'cover', borderRadius: 8, border: '1.5px solid var(--border)' }} />
+                                  </a>
+                                ))}
+                              </div>
+                            )}
+                          </div>
+                        )
+                      }
                       if (f.type === 'opportunityCards') {
                         const v = data[f.key] as { opportunityId?: string } | undefined
                         const chosen = v?.opportunityId ? getOpportunity(v.opportunityId) : undefined

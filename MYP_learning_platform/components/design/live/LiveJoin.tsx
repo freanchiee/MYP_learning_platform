@@ -15,6 +15,7 @@ import PersonalityPromptField from './PersonalityPromptField'
 import OpportunityCardsField from './OpportunityCardsField'
 import MakeCardsField from './MakeCardsField'
 import ProductCardsField from './ProductCardsField'
+import ImageUploadField from './ImageUploadField'
 import WorksheetOverview, { SectionMarker, StrandBadge } from './WorksheetOverview'
 import CriteriaRingCard from './CriteriaRing'
 import StageFeedback from './StageFeedback'
@@ -754,6 +755,7 @@ function WorksheetPlayer({
                     onDraft={(text) => reportDraft(stage.key, text, s.key)}
                     sessionCode={sessionCode}
                     playerId={me.id}
+                    stageKey={stage.key}
                     lookup={(stageKey, sectionKey, fieldKey) => me.data?.[stageKey]?.[sectionKey]?.[fieldKey]}
                   />
                   {grade?.scores?.[revealKey(stage.key, s.key, f.key)] ? (() => {
@@ -833,6 +835,7 @@ function WorksheetFieldInput({
   onDraft,
   sessionCode,
   playerId,
+  stageKey,
   lookup,
 }: {
   field: WorksheetField
@@ -842,9 +845,19 @@ function WorksheetFieldInput({
   onDraft?: (text: string) => void
   sessionCode?: string
   playerId?: string
+  stageKey?: string
   /** Read a value the student saved earlier, from any stage: (stageKey, sectionKey, fieldKey). */
   lookup?: (stageKey: string, sectionKey: string, fieldKey: string) => any
 }) {
+  if (field.type === 'image') {
+    return (
+      <label style={{ display: 'grid', gap: 4, fontSize: 12, fontWeight: 700, color: 'var(--text-muted)' }}>
+        {field.label}
+        {field.hint && <span style={{ fontWeight: 400, fontSize: 11 }}>{field.hint}</span>}
+        <ImageUploadField value={value} onChange={onChange} onPersist={onPersist ?? onChange} sessionCode={sessionCode!} playerId={playerId!} stageKey={stageKey!} fieldKey={field.key} multiple={field.multiple} />
+      </label>
+    )
+  }
   if (field.type === 'productCards') {
     return <ProductCardsField value={value} onChange={onChange} onPersist={onPersist ?? onChange} preferredGroup={lookup?.('community', 'need', 'community')} />
   }

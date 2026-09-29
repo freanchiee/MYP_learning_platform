@@ -33,6 +33,9 @@ export function worksheetSectionPct(section: WorksheetSection, values: Record<st
       // "Complete" means the student actually asked something, not just picked a character.
       const messages: any[] = v?.messages || []
       if (messages.some((m) => m.from === 'student')) filled += 1
+    } else if (f.type === 'image') {
+      // An empty array (the field's untouched default) is truthy in JS — check length, not just presence.
+      if (Array.isArray(v) && v.length > 0) filled += 1
     } else if (typeof v === 'string' && v.trim().length > (f.type === 'textarea' ? 10 : 1)) {
       filled += 1
     } else if (v) {

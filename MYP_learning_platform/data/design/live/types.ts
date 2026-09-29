@@ -58,7 +58,7 @@ export interface McqStage extends StageTiming {
 // ---------------------------------------------------------------
 // Stage: Worksheet (structured research/build artefacts + grading)
 // ---------------------------------------------------------------
-export type WorksheetFieldType = 'text' | 'textarea' | 'select' | 'table' | 'personaChat' | 'personalityPrompt' | 'opportunityCards' | 'makeCards' | 'productCards'
+export type WorksheetFieldType = 'text' | 'textarea' | 'select' | 'table' | 'personaChat' | 'personalityPrompt' | 'opportunityCards' | 'makeCards' | 'productCards' | 'image'
 
 export interface WorksheetTableColumn {
   key: string
@@ -92,6 +92,16 @@ export interface WorksheetField {
    *  score, for text/textarea fields with exemplars/celebrateKeywords set.
    *  Default 10. */
   points?: number
+  /** For 'image': allow more than one upload (e.g. a build log with several
+   *  dated photos), rather than one photo that gets replaced. Default false. */
+  multiple?: boolean
+}
+
+/** One uploaded 'image' field entry — a build-log screenshot or sketch. */
+export interface WorksheetImageUpload {
+  url: string
+  name: string
+  uploadedAt: string
 }
 
 /** Short, student-facing brief that leads a stage: why, what, what you hand in, how it is assessed. */

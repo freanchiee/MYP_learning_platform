@@ -300,9 +300,10 @@ export const MYP4_PROTOTYPING: LiveActivityDefinition = {
           icon: '🔨',
           criterion: 'C.iii',
           strandLabel: 'Follow your plan to make the solution, and justify changes',
-          blurb: 'Build your first version, then tell the story of what happened. Add a dated journal entry — photos go in your own design folder.',
+          blurb: 'Build your first version, then tell the story of what happened. Add a dated journal entry, with a photo of what you made.',
           fields: [
             { key: 'date', label: 'Date', type: 'text', placeholder: 'e.g. 5 Oct' },
+            { key: 'photos', label: 'Photo(s) of your build', type: 'image', hint: 'A screenshot or photo of your prototype — add more as it changes.', multiple: true },
             {
               key: 'made',
               label: 'What did you make?',

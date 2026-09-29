@@ -562,8 +562,9 @@ export const MYP5_SUSTAINABILITY: LiveActivityDefinition = {
           label: 'Planning drawings',
           icon: '✏️',
           criterion: 'B.iv',
-          blurb: 'Accurate, detailed drawings: screens or a flow diagram detailed enough that someone else could build it. Paste a link to a sketch or wireframe if you have one.',
+          blurb: 'Accurate, detailed drawings: screens or a flow diagram detailed enough that someone else could build it. Upload a photo of your sketch or wireframe if you have one.',
           fields: [
+            { key: 'photos', label: 'Sketch or wireframe photo(s)', type: 'image', hint: 'A screenshot or a photo of a hand-drawn sketch — add more as your design changes.', multiple: true },
             {
               key: 'screens',
               label: 'Screens and their purpose',
