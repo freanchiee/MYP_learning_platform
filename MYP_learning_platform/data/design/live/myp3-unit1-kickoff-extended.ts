@@ -273,10 +273,18 @@ export const MYP3_UNIT1_KICKOFF_EXTENDED: LiveActivityDefinition = {
           criterion: 'A.i',
           strandLabel: CRITERION_A_LABELS['A.i'],
           brief: { title: 'Brief: choose something manageable', points: ['Pick the direction you find most interesting and can research in school.', 'Choose ONE named user you can interview, or a realistic fictional client.', 'Your teacher checks it is manageable in the studio.'] },
+          blurb:
+            'Choosing a persona-pack character? Leave their name blank for now. Pick your direction below, then open the next stage — “Interview Your User” — and choose a character whose situation matches that direction. Interview them first, then come back here and fill in their name and age.',
           fields: [
             { key: 'direction', label: 'Challenge direction', type: 'select', options: ['Physical space', 'Everyday routine', 'Learning experience', 'Inclusion and accessibility', 'Small community experience', 'Wellbeing'] },
             { key: 'usertype', label: 'Who is your user?', type: 'select', options: ['A classmate, family member or teacher I can interview', 'A persona-pack character I will interview here', 'A realistic fictional client'] },
-            { key: 'user', label: 'Your user’s name and age', type: 'text', placeholder: 'e.g. Tariq, 14' },
+            {
+              key: 'user',
+              label: 'Your user’s name and age',
+              type: 'text',
+              placeholder: 'e.g. Tariq, 14',
+              hint: 'Picked a real person or a fictional client? Type their name and age now. Picked a persona-pack character? Go interview them in the next stage first — fill this in afterwards, once you know who they are.',
+            },
           ],
         },
         {
@@ -378,8 +386,17 @@ export const MYP3_UNIT1_KICKOFF_EXTENDED: LiveActivityDefinition = {
           icon: '💬',
           criterion: 'A.ii',
           strandLabel: CRITERION_A_LABELS['A.ii'],
-          brief: { title: 'Brief: ask good questions', points: ['Open questions (“tell me about…”, “what happens when…”) get better answers than yes/no ones.', 'Ask about a real day, the last time it went wrong, and what they have tried.', 'These characters are fictional: treat what they say as leads to check.'] },
-          blurb: 'Pick a character who matches your challenge direction (or any you like) and chat with them. If you have a real user, use these questions with them too.',
+          brief: {
+            title: 'Brief: a simple research plan for your interview',
+            points: [
+              'Pick a character whose situation matches the DIRECTION you chose in the last stage.',
+              '1. Ask who they are and what a normal day looks like for them.',
+              '2. Ask what is hard or annoying about your direction, for them specifically.',
+              '3. Ask what they already do to cope with it.',
+              '4. Ask one follow-up about the most interesting thing they said.',
+            ],
+          },
+          blurb: 'Pick a character who matches your challenge direction (or any you like) and chat with them, following the plan above. If you have a real user, use these same questions with them too.',
           fields: [{ key: 'chat', label: 'Interview a persona-pack user', type: 'personaChat', personaPack: 'everyday' }],
         },
         {

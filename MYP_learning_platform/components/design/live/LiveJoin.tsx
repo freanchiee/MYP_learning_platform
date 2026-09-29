@@ -31,6 +31,20 @@ import { useCelebration, CelebrationOverlay } from './Celebration'
 /** Case-insensitive "does this text contain this word/phrase" check used by
  *  both the keyword-celebration nudge and (loosely) nowhere else — kept
  *  here so WorksheetPlayer/OpenIdeasPlayer share one definition of match. */
+/** Whether a student has done enough of THIS stage that asking "how was this
+ *  part?" makes sense — landing on a stage and immediately being asked to
+ *  rate it (before doing any of it) produced meaningless, premature ratings. */
+function stageComplete(stage: LiveStage, me: LivePlayerRow): boolean {
+  const data = me.data?.[stage.key]
+  if (stage.type === 'mcq') return Object.keys(data?.answers || {}).length >= stage.questions.length
+  if (stage.type === 'learn') return !!data?.done
+  if (stage.type === 'openIdeas') return Object.keys(data || {}).length >= stage.prompts.length
+  if (stage.type === 'worksheet') {
+    return stage.sections.every((s) => worksheetSectionPct(s, data?.[s.key] || {}) >= (s.completenessTarget ?? 0.6) * 100)
+  }
+  return true // boardGame and anything else: no single "done" signal, so don't withhold feedback
+}
+
 function containsKeyword(text: string, keyword: string): boolean {
   return text.toLowerCase().includes(keyword.toLowerCase())
 }
@@ -337,7 +351,7 @@ export default function LiveJoin({ activity, initialCode }: { activity: LiveActi
           {session.status === 'active' && stage?.type === 'learn' && <LearnPlayer stage={stage} session={stageSession} me={me} patchMyData={patchMyData} accent={activity.theme.accent} onFinish={selfPaced ? () => goStage(myIdx + 1) : undefined} />}
           {session.status === 'active' && stage?.type === 'boardGame' && stage.overview && <WorksheetOverview overview={stage.overview} />}
           {session.status === 'active' && stage?.type === 'boardGame' && <SustainabilityGamePlayer session={session} me={me} code={code} players={players} patchMyData={patchMyData} addPoints={addPoints} />}
-          {session.status === 'active' && stage && stage.type !== 'grading' && (
+          {session.status === 'active' && stage && stage.type !== 'grading' && (stageComplete(stage, me) || feedbackOf(me, stage.key)) && (
             <StageFeedback
               stageLabel={`${stage.icon} ${stage.label}`}
               value={feedbackOf(me, stage.key)}
@@ -443,11 +457,17 @@ function McqPlayer({
 }) {
   const answers: Record<number, { choiceIdx: number; correct: boolean }> = me.data?.[stage.key]?.answers || {}
   const points = stage.pointsPerCorrect ?? 10
+  const total = stage.questions.length
 
   const answeredCount = Object.keys(answers).length
-  const selfPacedQIdx = Math.min(answeredCount, stage.questions.length - 1)
+  // Self-paced: which question is ON SCREEN, kept separate from how many have been
+  // ANSWERED — advancing is the student's own explicit "Next question" click, not an
+  // automatic side-effect of answering, so they always get to see whether they were
+  // right before moving on. Starts wherever they left off if they revisit mid-quiz;
+  // `total` itself means "finished, show the summary".
+  const [selfPacedQIdx, setSelfPacedQIdx] = useState(() => Math.min(answeredCount, total))
   const st = session.state?.[stage.key] || { mcqIndex: 0, locked: false, revealed: false }
-  const activeQIdx = stage.pacing === 'self-paced' ? selfPacedQIdx : st.mcqIndex
+  const activeQIdx = stage.pacing === 'self-paced' ? Math.min(selfPacedQIdx, total - 1) : st.mcqIndex
   const q = stage.questions[activeQIdx]
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const order = useMemo(() => shuffle(q.options.map((text, i) => ({ text, i }))), [activeQIdx, q.options])
@@ -463,14 +483,14 @@ function McqPlayer({
   }, [st.revealed, st.mcqIndex, mine?.correct, mine?.paid])
 
   if (stage.pacing === 'self-paced') {
-    const done = answeredCount >= stage.questions.length
     const qIdx = selfPacedQIdx
+    const done = qIdx >= total
     const already = answers[qIdx]
 
     if (done) {
       return (
         <div style={{ ...cardStyle('#1FA98A'), textAlign: 'center' }}>
-          ✅ You&apos;ve answered all {stage.questions.length} questions. {Object.values(answers).filter((a) => a.correct).length}/{stage.questions.length} correct.
+          ✅ You&apos;ve answered all {total} questions. {Object.values(answers).filter((a) => a.correct).length}/{total} correct.
         </div>
       )
     }
@@ -485,7 +505,7 @@ function McqPlayer({
     return (
       <div style={{ display: 'grid', gap: 10 }}>
         <div style={{ textAlign: 'center', fontSize: 12, fontWeight: 700, color: 'rgba(255,255,255,0.8)' }}>
-          Question {qIdx + 1} of {stage.questions.length}
+          Question {qIdx + 1} of {total}
         </div>
         {q.context && (
           <div style={{ ...cardStyle(activity.theme.accent), textAlign: 'center' }}>
@@ -499,6 +519,13 @@ function McqPlayer({
           <div style={{ ...cardStyle(activity.theme.accent), textAlign: 'center', fontSize: 15, fontWeight: 700 }}>{q.q}</div>
         )}
         <MCQOptions order={order} disabled={!!already} selectedIdx={already?.choiceIdx} onPick={pick} correctIdx={q.correct} revealed={!!already} />
+        {already && (
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <button onClick={() => setSelfPacedQIdx(qIdx + 1)} style={btnStyle(activity.theme.accent, true, true)}>
+              {already.correct ? '✅ Correct! ' : '❌ Not quite. '}{qIdx + 1 < total ? 'Next question →' : 'See your results →'}
+            </button>
+          </div>
+        )}
       </div>
     )
   }
