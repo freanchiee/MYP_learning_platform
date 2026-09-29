@@ -13,6 +13,7 @@ import AssignSessions from '@/components/teacher/AssignSessions'
 import InviteCard from '@/components/teacher/InviteCard'
 import ClassLookPicker from '@/components/teacher/ClassLookPicker'
 import { AssignLibrary, DeleteAssignmentButton, RemoveMemberButton } from '@/components/teacher/ClassActions'
+import StudentAnswerPeek from '@/components/teacher/StudentAnswerPeek'
 
 interface SessionRow { code: string; activity_id: string; status: string; created_at: string }
 interface PlayerRow { id: string; session_code: string; user_id: string; points: number; data: Record<string, any> | null }
@@ -89,17 +90,17 @@ export default async function ClassPage({ params, searchParams }: { params: { id
     stages.forEach((st: any) => st.sections.forEach((sec: any) => pcts.push(worksheetSectionPct(sec, data?.[st.key]?.[sec.key] || {}))))
     return pcts.length ? Math.round(pcts.reduce((a, b) => a + b, 0) / pcts.length) : null
   }
-  function liveCell(userId: string, s: SessionRow): { text: string; on: boolean } {
+  function liveCell(userId: string, s: SessionRow): { text: string; on: boolean; playerId?: string; data?: Record<string, any> | null } {
     const p = playerRows.find((x) => x.session_code === s.code && x.user_id === userId)
     if (!p) return { text: '—', on: false }
     const g = gradeRows.find((x) => x.session_code === s.code && x.player_id === p.id)
     if (g?.graded) {
       const vals = Object.values(g.scores).filter((v): v is number => typeof v === 'number')
       const avg = vals.length ? Math.round((vals.reduce((a, b) => a + b, 0) / vals.length) * 10) / 10 : null
-      return { text: avg !== null ? `Graded · avg ${avg}` : 'Graded', on: true }
+      return { text: avg !== null ? `Graded · avg ${avg}` : 'Graded', on: true, playerId: p.id, data: p.data }
     }
     const pct = completion(s.activity_id, p.data)
-    return { text: pct !== null ? `${pct}% done · ${p.points} pts` : `Joined · ${p.points} pts`, on: true }
+    return { text: pct !== null ? `${pct}% done · ${p.points} pts` : `Joined · ${p.points} pts`, on: true, playerId: p.id, data: p.data }
   }
 
   // Library data (only built for that tab)
@@ -230,7 +231,21 @@ export default async function ClassPage({ params, searchParams }: { params: { id
                         <tr key={m.user_id} style={{ borderTop: '1px solid var(--border)' }}>
                           <td className="p-3 font-semibold">{m.name || 'Student'}</td>
                           {assignList.map((a) => { const c = assignmentCell(a, m.user_id); return <td key={a.id} className="p-3" style={{ color: c.on ? 'var(--text)' : 'var(--text-subtle)' }}>{c.text}</td> })}
-                          {sessionList.map((s) => { const c = liveCell(m.user_id, s); return <td key={s.code} className="p-3" style={{ color: c.on ? 'var(--text)' : 'var(--text-subtle)' }}>{c.text}</td> })}
+                          {sessionList.map((s) => {
+                            const c = liveCell(m.user_id, s)
+                            const activity = getLiveActivity(s.activity_id)
+                            return (
+                              <td key={s.code} className="p-3" style={{ color: c.on ? 'var(--text)' : 'var(--text-subtle)' }}>
+                                {c.on && c.playerId && activity ? (
+                                  <StudentAnswerPeek activity={activity} playerId={c.playerId} playerName={m.name || 'Student'} sessionActive={s.status === 'active'} savedData={c.data ?? null}>
+                                    {c.text}
+                                  </StudentAnswerPeek>
+                                ) : (
+                                  c.text
+                                )}
+                              </td>
+                            )
+                          })}
                         </tr>
                       ))}
                     </tbody>
