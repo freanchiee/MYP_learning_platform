@@ -9,7 +9,7 @@ import { getPersonality } from '@/data/design/live/personalities'
 import { getOpportunity } from '@/data/design/live/opportunities'
 import { getMake, isWildCard } from '@/data/design/live/makes'
 import type { LiveActivityDefinition, WorksheetStage, WorksheetField, WorksheetSection } from '@/data/design/live/types'
-import { chosenValue, exemplarsFor, revealKey } from '@/lib/design-live/exemplars'
+import { chosenValues, exemplarsFor, revealKey } from '@/lib/design-live/exemplars'
 import { ExemplarControls } from './ExemplarReveal'
 import type { LivePlayerRow, LiveGradeRow } from '@/lib/design-live/types'
 import { cardStyle, btnStyle, inputStyle, Avatar } from './ui'
@@ -77,7 +77,7 @@ export function WorksheetReviewModal({
   onClose: () => void
 }) {
   const cfg = activity.exemplarsByChoice
-  const choice = chosenValue(cfg, player.data)
+  const choices = chosenValues(cfg, player.data)
   // Which exemplars this student can currently see (stored on their grade row as reveal:<stage>:<section>:<field> = 1).
   const [revealed, setRevealed] = useState<Set<string>>(() => new Set(Object.entries(grade?.scores || {}).filter(([k, v]) => k.startsWith('reveal:') && v).map(([k]) => k)))
   const [revealBusy, setRevealBusy] = useState(false)
@@ -146,11 +146,11 @@ export function WorksheetReviewModal({
             <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontWeight: 800 }}>
               <Avatar seed={player.id} size={30} />
               {player.name}
-              {cfg && (
-                <span style={{ fontSize: 11, fontWeight: 800, background: 'var(--surface-2)', border: '1.5px solid var(--border)', borderRadius: 999, padding: '2px 9px', color: 'var(--text-muted)' }}>
-                  {cfg.noun}: {choice ?? 'not chosen yet'}
+              {choices.map((c) => (
+                <span key={c.noun} style={{ fontSize: 11, fontWeight: 800, background: 'var(--surface-2)', border: '1.5px solid var(--border)', borderRadius: 999, padding: '2px 9px', color: 'var(--text-muted)' }}>
+                  {c.noun}: {c.choice}
                 </span>
-              )}
+              ))}
             </div>
             <button onClick={onClose} style={{ background: 'transparent', border: 'none', cursor: 'pointer', fontSize: 18, color: 'var(--text-muted)' }}>
               ✕
@@ -236,7 +236,7 @@ export function WorksheetReviewModal({
                               {text || 'Not answered yet'}
                             </div>
                             {(f.type === 'text' || f.type === 'textarea') && (
-                              <ExemplarControls resolved={resolved} noun={cfg?.noun} studentName={player.name} revealed={revealed.has(rk)} busy={revealBusy} onToggle={() => toggleReveal([rk])} defaultOpen={revealed.has(rk)} />
+                              <ExemplarControls resolved={resolved} noun={resolved.noun} studentName={player.name} revealed={revealed.has(rk)} busy={revealBusy} onToggle={() => toggleReveal([rk])} defaultOpen={revealed.has(rk)} />
                             )}
                           </div>
                         </div>

@@ -747,9 +747,10 @@ function WorksheetPlayer({
                     playerId={me.id}
                     lookup={(stageKey, sectionKey, fieldKey) => me.data?.[stageKey]?.[sectionKey]?.[fieldKey]}
                   />
-                  {grade?.scores?.[revealKey(stage.key, s.key, f.key)] ? (
-                    <StudentExemplarCard resolved={exemplarsFor(activity.exemplarsByChoice, stage.key, s.key, f, me.data)} noun={activity.exemplarsByChoice?.noun} />
-                  ) : null}
+                  {grade?.scores?.[revealKey(stage.key, s.key, f.key)] ? (() => {
+                    const resolved = exemplarsFor(activity.exemplarsByChoice, stage.key, s.key, f, me.data)
+                    return <StudentExemplarCard resolved={resolved} noun={resolved.noun} />
+                  })() : null}
                   </div>
                 ))}
                 <button onClick={() => saveSection(s.key)} style={{ ...btnStyle('#1FA98A', true), justifySelf: 'start' }}>

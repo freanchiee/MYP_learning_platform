@@ -26,6 +26,7 @@
 // suggestion on the teacher's review screen.
 
 import type { LiveActivityDefinition } from './types'
+import { MYP3_DIRECTION_EXEMPLARS, MYP3_PERSONA_EXEMPLARS } from './myp3-exemplars'
 
 const CRITERION_A_LABELS = {
   'A.i': 'Explain and justify the need for a solution to a problem',
@@ -49,6 +50,21 @@ export const MYP3_UNIT1_KICKOFF_EXTENDED: LiveActivityDefinition = {
   // they have already done. They can still go back to them.
   selfPaced: true,
   startStage: 2,
+  // Two independent choices change which model answer a teacher can reveal:
+  // the DIRECTION picked in "Choose Your Need and Your User" (for the need and
+  // personality-map fields, which are about that direction), and separately
+  // WHICH PERSONA-PACK CHARACTER was interviewed (for the empathy map, which
+  // should reflect that exact person). Checked in this order; a field only
+  // listed under one of them just uses that one.
+  exemplarsByChoice: [
+    { from: { stage: 'choose', section: 'direction', field: 'direction' }, noun: 'direction', byField: MYP3_DIRECTION_EXEMPLARS },
+    {
+      from: { stage: 'interview', section: 'personaChat', field: 'chat' },
+      noun: 'persona',
+      byField: MYP3_PERSONA_EXEMPLARS,
+      extractKey: (v) => (v && typeof v === 'object' ? (v as { characterId?: string }).characterId : undefined),
+    },
+  ],
   debriefQuestions: [
     'To what extent should a designer prioritise user needs over the environmental impact of material sourcing?',
     'Which piece of evidence changed or confirmed your thinking, and how do you know it was reliable?',

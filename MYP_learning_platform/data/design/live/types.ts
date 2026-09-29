@@ -250,8 +250,12 @@ export type LiveStage = McqStage | WorksheetStage | OpenIdeasStage | GradingStag
  */
 export interface ExemplarsByChoice {
   from: { stage: string; section: string; field: string }
-  noun: string // shown to the teacher and student, e.g. 'community'
+  noun: string // shown to the teacher and student, e.g. 'community', 'persona'
   byField: Record<string, Record<string, string[]>>
+  /** The value at `from` usually IS the choice (a plain string, e.g. a select's
+   *  value). When it's something else — e.g. a personaChat field's saved
+   *  `{ characterId, messages }` — this pulls the actual choice key out of it. */
+  extractKey?: (value: unknown) => string | undefined
 }
 
 export interface LiveActivityDefinition {
@@ -264,7 +268,10 @@ export interface LiveActivityDefinition {
   teams?: LiveTeam[] // present => team-based (icebreaker style); absent => individual
   stages: LiveStage[]
   debriefQuestions?: string[]
-  exemplarsByChoice?: ExemplarsByChoice
+  /** One axis (or several, checked in order) that model answers can vary by —
+   *  e.g. the direction a student chose, AND separately which persona-pack
+   *  character they interviewed, each affecting different fields. */
+  exemplarsByChoice?: ExemplarsByChoice | ExemplarsByChoice[]
   /** Every student moves through the stages on their own (position saved on their player row). The host
    *  screen shows where everyone is; its Next/Previous only change which stage's dashboard the host sees. */
   selfPaced?: boolean
