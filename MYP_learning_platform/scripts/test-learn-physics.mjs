@@ -427,4 +427,77 @@ const mg = await import(pathToFileURL(outMG).href)
   ok('the model drifts further from reality with time (position error grows: <10% at 10 s, >30% at 30 s)', (mg.modelPosition(10) - at(10).x) / at(10).x < 0.11 && (mg.modelPosition(30) - at(30).x) / at(30).x > 0.3)
   ok('the model velocity keeps growing; the real velocity levels off near 40 m/s', mg.modelVelocity(30) > 55 && at(30).v < 41)
 }
+// ---- exam-style problems, recreated with our own diagrams/numbers: train, bouncing ball, skidding car ----
+const outEM = path.resolve('node_modules/.cache/exam-motion.mjs')
+await build({ entryPoints: ['lib/learn/exam-motion-model.ts'], outfile: outEM, format: 'esm', bundle: true, logLevel: 'silent' })
+const em = await import(pathToFileURL(outEM).href)
+{
+  // Q1: train A -> B -> C
+  const { T, V, a2, tB } = em.trainSolve()
+  ok('Q1: T = 150 s, V at B = 24 m/s, deceleration B->C = 0.8 m/s2', near(T, 150, 1e-6) && near(V, 24, 1e-6) && near(a2, 0.8, 1e-6))
+  ok('Q1: velocity is continuous at B (no jump)', near(em.trainVelocity(tB - 1e-9), em.trainVelocity(tB + 1e-9), 1e-3))
+  ok('Q1: velocity is exactly zero at C (t = T)', near(em.trainVelocity(T), 0, 1e-9))
+  ok('Q1: total distance A to C matches the given 1800 m', near(em.trainPosition(T), 1800, 1e-3))
+  let mono = true, prevV = -1
+  for (let t = 0; t <= T; t += 1) { const v = em.trainVelocity(t); if (t <= tB && v < prevV - 1e-9) mono = false; prevV = v }
+  ok('Q1: speed rises smoothly to B then falls smoothly to C (no kinks other than at B)', mono)
+}
+{
+  // Q2: bouncing ball
+  ok('Q2: dropped for 1.0 s under g = 9.8, it fell H = 4.9 m', near(em.ballH(), 4.9, 1e-9))
+  ok('Q2: impact speed = g x 1.0 s = 9.8 m/s', near(em.ballImpactSpeed(), 9.8, 1e-9))
+  ok('Q2: rebound speed (e = 0.5) = 4.9 m/s, reaching peak 0.5 s later', near(em.ballReboundSpeed(), 4.9, 1e-9) && near(em.ballTimeToPeak(), 0.5, 1e-9))
+  ok('Q2: max rebound height = 1.225 m, exactly e^2 of the drop height', near(em.ballMaxReboundHeight(), 1.225, 1e-9) && near(em.ballMaxReboundHeight(), 0.5 * 0.5 * em.ballH(), 1e-9))
+  const tPeak = em.BALL.tImpact + em.ballTimeToPeak()
+  ok('Q2: velocity is exactly zero at the peak of the rebound (point M)', near(em.ballVelocity(tPeak), 0, 1e-9))
+  ok('Q2: at the moment of impact the ball is at the floor, height 0', near(em.ballHeight(em.BALL.tImpact), 0, 1e-6))
+  ok('Q2: acceleration is g throughout, even at the peak (velocity 0 there does not mean acceleration 0)', near((em.ballVelocity(tPeak + 1e-3) - em.ballVelocity(tPeak - 1e-3)) / 2e-3, -em.BALL.g, 1e-2))
+  let upBad = 0
+  for (let t = em.BALL.tImpact + 1e-6; t < tPeak; t += 0.01) if (em.ballVelocity(t) < -1e-6) upBad++
+  ok('Q2: between the bounce and the peak the ball is moving upward, slowing down (positive but shrinking velocity)', upBad === 0)
+}
+{
+  // Q3: skidding car
+  const { a, u, tReaction, tSkid } = em.skidSolve()
+  ok('Q3: deceleration = 0.85 x 9.8 = 8.33 m/s2', near(a, 8.33, 1e-6))
+  ok('Q3: speed before braking u ~= 14.6 m/s, from v^2 = 2 x a x skid distance', near(u, 14.6, 0.05))
+  ok('Q3: reaction time ~= 2.0 s (reaction distance / u)', near(tReaction, 2.0, 0.05))
+  ok('Q3: velocity is constant (= u) throughout the reaction phase', near(em.skidVelocity(0), u, 1e-9) && near(em.skidVelocity(tReaction * 0.5), u, 1e-9) && near(em.skidVelocity(tReaction), u, 1e-6))
+  ok('Q3: velocity reaches exactly zero at the end of the skid, never negative', near(em.skidVelocity(tReaction + tSkid), 0, 1e-6) && em.skidVelocity(tReaction + tSkid + 1) >= 0)
+  ok('Q3: distance covered during the reaction phase matches the given 29.3 m', near(em.skidPosition(tReaction), 29.3, 1e-3))
+  ok('Q3: total distance (reaction + skid) matches 29.3 + 12.8 = 42.1 m', near(em.skidPosition(tReaction + tSkid), 42.1, 1e-3))
+}
+{
+  // Q4: train brakes at a yellow signal
+  const { u, tStop } = em.signalSolve()
+  ok('Q4: maximum safe speed at the yellow signal = 20 m/s (v^2 = 2 a s)', near(u, 20, 1e-6))
+  ok('Q4: at that speed it stops in exactly the given 1000 m', near(em.signalPosition(tStop), 1000, 1e-3))
+  ok('Q4: velocity reaches exactly zero at the red signal, never negative', near(em.signalVelocity(tStop), 0, 1e-9) && em.signalVelocity(tStop + 10) >= 0)
+  ok('Q4: any faster than 20 m/s would overshoot 1000 m at this deceleration', em.SIGNAL.distance < (21 * 21) / (2 * em.SIGNAL.a))
+}
+{
+  // Q5: aircraft take-off
+  const { a, tUp } = em.takeoffSolve()
+  ok('Q5: 85 km/h converts to about 23.6 m/s', near(em.TAKEOFF.v0, 23.611, 0.001))
+  ok('Q5: minimum acceleration is about 0.23 m/s2', near(a, 0.2323, 0.001))
+  ok('Q5: at that acceleration, take-off speed is reached in exactly the given 1200 m', near(em.takeoffPosition(tUp), 1200, 1e-3))
+  ok('Q5: velocity never exceeds the take-off speed', em.takeoffVelocity(tUp + 50) <= em.TAKEOFF.v0 + 1e-9)
+}
+{
+  // Q6: two cars, X steady, Y catching up
+  const { d } = em.chaseSolve()
+  ok('Q6: head start d = 60 m', near(d, 60, 1e-6))
+  ok('Q6: X and Y are at the same position at t = 20 s', near(em.chaseXPosition(20), em.chaseYPosition(20), 1e-6))
+  ok('Q6: before they meet, X is ahead; after, Y is ahead (Y catches up, not the other way round)', em.chaseXPosition(10) > em.chaseYPosition(10) && em.chaseYPosition(25) > em.chaseXPosition(25))
+  ok('Q6: Y is still accelerating (its velocity keeps rising) while X stays constant', em.chaseYVelocity(25) > em.chaseYVelocity(5) && em.chaseXVelocity() === 6)
+}
+{
+  // Q7: leaking car, timed by oil drops
+  const { a, u0 } = em.dripsSolve()
+  ok('Q7: acceleration = 0.75 m/s2', near(a, 0.75, 1e-9))
+  ok('Q7: velocity at the first drop = 3.75 m/s', near(u0, 3.75, 1e-9))
+  ok('Q7: distance between drop 1 and drop 2 matches the given 9.0 m', near(em.dripsPosition(2) - em.dripsPosition(0), 9.0, 1e-9))
+  ok('Q7: distance between drop 2 and drop 3 matches the given 12.0 m', near(em.dripsPosition(4) - em.dripsPosition(2), 12.0, 1e-9))
+  ok('Q7: each later gap is bigger than the last (uniform acceleration, not uniform velocity)', em.dripsPosition(6) - em.dripsPosition(4) > em.dripsPosition(4) - em.dripsPosition(2))
+}
 process.exit(fail ? 1 : 0)

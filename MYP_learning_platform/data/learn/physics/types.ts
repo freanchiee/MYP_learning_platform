@@ -44,6 +44,13 @@ export type WidgetId =
   | 'nos-race-lab'
   | 'motion-graphs-lab'
   | 'model-vs-reality-lab'
+  | 'train-accel-decel-anim'
+  | 'ball-bounce-anim'
+  | 'car-skid-anim'
+  | 'signal-train-anim'
+  | 'aircraft-takeoff-anim'
+  | 'chase-cars-anim'
+  | 'oil-drip-car-anim'
 
 export type BoxKind = 'yes' | 'no' | 'opt'
 
