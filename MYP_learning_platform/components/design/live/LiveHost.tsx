@@ -63,6 +63,15 @@ export default function LiveHost({ activity }: { activity: LiveActivityDefinitio
   const [events, setEvents] = useState<LiveEventRow[]>([])
   const [chatReadAt, setChatReadAt] = useState<Record<string, string>>({})
   const now = useNowTick()
+  // Self-paced activities have no single "current stage" — each student moves at their
+  // own pace (see SelfPaced.tsx). The host's Next/Previous here only changes which
+  // stage's dashboard the TEACHER is looking at, so it's kept as local view state
+  // instead of the shared session.stage_idx. This also means an old running session
+  // can never end up crashing this screen just because the activity's stage list grew
+  // or changed shape after the session started — a stale stage_idx read from the DB
+  // was exactly that: reopening host for a self-paced session created before more
+  // stages were added indexed straight into the new (differently shaped) stage list.
+  const [selfPacedViewIdx, setSelfPacedViewIdx] = useState(() => defaultStart(activity))
 
   useEffect(() => {
     const sb = createClient()
@@ -132,18 +141,31 @@ export default function LiveHost({ activity }: { activity: LiveActivityDefinitio
     createSession(hostId)
   }
 
-  const stage = session ? activity.stages[session.stage_idx] : undefined
+  const viewIdx = activity.selfPaced ? selfPacedViewIdx : session?.stage_idx ?? 0
+  const stage = session ? activity.stages[viewIdx] : undefined
 
   const startSession = () => run(createClient().from('live_sessions').update({ status: 'active', stage_idx: activity.selfPaced ? defaultStart(activity) : 0, state: {} }).eq('code', code))
   // Moving between stages never throws a stage's host state away (see lib/design-live/stageNav.ts).
   const advanceStage = () => {
     if (!session) return
+    if (activity.selfPaced) {
+      // Just moving which dashboard the teacher is watching — nothing here is shared
+      // with students, so no DB write and no "restore state" concerns.
+      if (selfPacedViewIdx + 1 >= activity.stages.length) run(createClient().from('live_sessions').update({ status: 'ended' }).eq('code', code))
+      else setSelfPacedViewIdx(selfPacedViewIdx + 1)
+      return
+    }
     const next = session.stage_idx + 1
     if (next >= activity.stages.length) run(createClient().from('live_sessions').update({ status: 'ended' }).eq('code', code))
     else run(createClient().from('live_sessions').update({ stage_idx: next, state: stateForAdvance(session.state, session.stage_idx) }).eq('code', code))
   }
   const goBack = () => {
-    if (!session || session.stage_idx <= 0) return
+    if (!session) return
+    if (activity.selfPaced) {
+      if (selfPacedViewIdx > 0) setSelfPacedViewIdx(selfPacedViewIdx - 1)
+      return
+    }
+    if (session.stage_idx <= 0) return
     const prev = session.stage_idx - 1
     const { state, restored } = stateForBack(session.state, session.stage_idx)
     const msg = `Go back to “${activity.stages[prev].label}”? Students will see that part again and everything they already saved stays.${restored ? '' : ' Its earlier host state (for example the current question) was not kept, so it starts fresh.'}`
@@ -250,7 +272,7 @@ export default function LiveHost({ activity }: { activity: LiveActivityDefinitio
         {session.status === 'active' && activity.selfPaced && <SelfPacedOverview activity={activity} players={players} />}
 
         {session.status === 'active' && stage && (
-          <StageHost activity={activity} stage={stage} session={session} players={players} grades={grades} patchState={patchState} advanceStage={advanceStage} goBack={goBack} run={run} now={now} onChat={openChat} onReview={setReviewPlayerId} />
+          <StageHost activity={activity} stage={stage} viewIdx={viewIdx} session={session} players={players} grades={grades} patchState={patchState} advanceStage={advanceStage} goBack={goBack} run={run} now={now} onChat={openChat} onReview={setReviewPlayerId} />
         )}
 
         {session.status === 'ended' && <EndedHost activity={activity} players={players} session={session} onRestart={newSession} />}
@@ -296,6 +318,7 @@ export default function LiveHost({ activity }: { activity: LiveActivityDefinitio
 function StageHost({
   activity,
   stage,
+  viewIdx,
   session,
   players,
   grades,
@@ -309,6 +332,7 @@ function StageHost({
 }: {
   activity: LiveActivityDefinition
   stage: LiveActivityDefinition['stages'][number]
+  viewIdx: number
   session: LiveSessionRow
   players: LivePlayerRow[]
   grades: LiveGradeRow[]
@@ -320,7 +344,7 @@ function StageHost({
   onChat: (id: string) => void
   onReview: (id: string) => void
 }) {
-  const isLastStage = session.stage_idx >= activity.stages.length - 1
+  const isLastStage = viewIdx >= activity.stages.length - 1
   const advanceLabel = isLastStage ? 'Finish & show results →' : activity.selfPaced ? 'View next stage dashboard →' : 'Next stage →'
 
   return (
@@ -344,8 +368,8 @@ function StageHost({
       {stage.type !== 'grading' && <FeedbackSummary stageKey={stage.key} stageLabel={`${stage.icon} ${stage.label}`} players={players} compact />}
 
       <div style={{ display: 'flex', justifyContent: 'center', gap: 12, flexWrap: 'wrap' }}>
-        {session.stage_idx > 0 && (
-          <button onClick={goBack} style={btnStyle(activity.theme.accent, false, true)} title={`Go back to ${activity.stages[session.stage_idx - 1].label}`}>
+        {viewIdx > 0 && (
+          <button onClick={goBack} style={btnStyle(activity.theme.accent, false, true)} title={`Go back to ${activity.stages[viewIdx - 1].label}`}>
             {activity.selfPaced ? '← Previous stage dashboard' : '← Previous stage'}
           </button>
         )}
