@@ -345,7 +345,7 @@ export default function LiveJoin({ activity, initialCode }: { activity: LiveActi
             <WorksheetPlayer stage={stage} allStages={activity.stages} activity={activity} grade={myGrade} me={me} sessionCode={code} patchMyData={patchMyData} reportDraft={reportDraft} celebrate={celebrate} />
           )}
           {session.status === 'active' && stage?.type === 'openIdeas' && (
-            <OpenIdeasPlayer activity={activity} stage={stage} session={session} me={me} patchMyData={patchMyData} reportDraft={reportDraft} celebrate={celebrate} />
+            <OpenIdeasPlayer activity={activity} stage={stage} session={stageSession} me={me} patchMyData={patchMyData} addPoints={addPoints} reportDraft={reportDraft} celebrate={celebrate} selfPaced={selfPaced} />
           )}
           {session.status === 'active' && stage?.type === 'learn' && stage.overview && <WorksheetOverview overview={stage.overview} />}
           {session.status === 'active' && stage?.type === 'learn' && <LearnPlayer stage={stage} session={stageSession} me={me} patchMyData={patchMyData} accent={activity.theme.accent} onFinish={selfPaced ? () => goStage(myIdx + 1) : undefined} />}
@@ -916,34 +916,46 @@ function OpenIdeasPlayer({
   session,
   me,
   patchMyData,
+  addPoints,
   reportDraft,
   celebrate,
+  selfPaced,
 }: {
   activity: LiveActivityDefinition
   stage: OpenIdeasStage
   session: LiveSessionRow
   me: LivePlayerRow
   patchMyData: (stageKey: string, patch: Record<string, any>) => void
+  addPoints: (delta: number) => void
   reportDraft: (stageKey: string, text: string) => void
   celebrate: (label: string) => void
+  /** No host to advance prompts or lock a round, so each student keeps their
+   *  own position and moves on with an explicit button, like self-paced MCQ. */
+  selfPaced?: boolean
 }) {
+  const total = stage.prompts.length
+  const answeredCount = Object.keys(me.data?.[stage.key] || {}).length
+  const [localIdx, setLocalIdx] = useState(() => Math.min(answeredCount, total))
   const st = session.state?.[stage.key] || { ideaIndex: 0, locked: false, constraintIdx: null }
-  const prompt = stage.prompts[st.ideaIndex]
-  const mine = me.data?.[stage.key]?.[st.ideaIndex]
+  const ideaIndex = selfPaced ? Math.min(localIdx, total - 1) : st.ideaIndex
+  const locked = selfPaced ? false : st.locked
+  const done = selfPaced && localIdx >= total
+  const prompt = stage.prompts[ideaIndex]
+  const mine = !done ? me.data?.[stage.key]?.[ideaIndex] : undefined
   const [text, setText] = useState(mine?.text || '')
   const [flash, setFlash] = useState(false)
   const celebratedRef = useRef<Set<string>>(new Set())
 
   useEffect(() => {
     setText(mine?.text || '')
-  }, [st.ideaIndex])
+  }, [ideaIndex]) // eslint-disable-line react-hooks/exhaustive-deps
 
   const onType = (v: string) => {
     setText(v)
     if (v.trim()) {
       reportDraft(stage.key, v)
       prompt.celebrateKeywords?.forEach((kw) => {
-        const id = `${st.ideaIndex}.${kw.toLowerCase()}`
+        const id = `${ideaIndex}.${kw.toLowerCase()}`
         if (!celebratedRef.current.has(id) && containsKeyword(v, kw)) {
           celebratedRef.current.add(id)
           celebrate(`⭐ Nice! You mentioned "${kw}"`)
@@ -954,21 +966,31 @@ function OpenIdeasPlayer({
 
   const submit = () => {
     if (!text.trim()) return
-    patchMyData(stage.key, { [st.ideaIndex]: { text: text.trim() } })
+    const first = !mine
+    patchMyData(stage.key, { [ideaIndex]: { text: text.trim() } })
+    if (selfPaced && first) addPoints(stage.pointsPerSubmission ?? 10)
     setFlash(true)
     setTimeout(() => setFlash(false), 1200)
+  }
+
+  if (done) {
+    return (
+      <div style={{ ...cardStyle('#1FA98A'), textAlign: 'center' }}>
+        ✅ You&apos;ve answered all {total} prompts.
+      </div>
+    )
   }
 
   return (
     <div style={{ display: 'grid', gap: 10 }}>
       <div style={{ textAlign: 'center', fontSize: 12, fontWeight: 700, color: 'rgba(255,255,255,0.8)' }}>
-        Prompt {st.ideaIndex + 1} of {stage.prompts.length}
+        Prompt {ideaIndex + 1} of {total}
       </div>
       <div style={{ ...cardStyle(activity.theme.accent), textAlign: 'center' }}>
         {prompt.icon && <div style={{ fontSize: 22 }}>{prompt.icon}</div>}
         <div style={{ fontSize: 15, fontWeight: 800 }}>{prompt.text}</div>
       </div>
-      {stage.constraintCards && st.constraintIdx != null && (
+      {!selfPaced && stage.constraintCards && st.constraintIdx != null && (
         <div style={{ ...cardStyle('#D6425E'), textAlign: 'center' }}>
           <div style={{ fontWeight: 800 }}>
             {stage.constraintCards[st.constraintIdx].icon} CONSTRAINT: {stage.constraintCards[st.constraintIdx].label}
@@ -976,11 +998,16 @@ function OpenIdeasPlayer({
           <div style={{ fontSize: 13, color: 'var(--text-muted)' }}>{stage.constraintCards[st.constraintIdx].text}</div>
         </div>
       )}
-      {st.locked && !mine && <div style={{ textAlign: 'center', fontSize: 13, fontWeight: 700, color: '#D6425E' }}>🔒 Time&apos;s up — your teacher has locked this round.</div>}
-      <input value={text} disabled={st.locked} onChange={(e) => onType(e.target.value)} placeholder="Your idea, in a few words…" style={inputStyle} onKeyDown={(e) => e.key === 'Enter' && submit()} />
-      <button onClick={submit} disabled={st.locked} style={btnStyle('#1FA98A', true, true)}>
+      {locked && !mine && <div style={{ textAlign: 'center', fontSize: 13, fontWeight: 700, color: '#D6425E' }}>🔒 Time&apos;s up — your teacher has locked this round.</div>}
+      <input value={text} disabled={locked} onChange={(e) => onType(e.target.value)} placeholder="Your idea, in a few words…" style={inputStyle} onKeyDown={(e) => e.key === 'Enter' && submit()} />
+      <button onClick={submit} disabled={locked} style={btnStyle('#1FA98A', true, true)}>
         {flash ? '✅ Saved!' : mine ? 'Update my idea' : 'Submit my idea'}
       </button>
+      {selfPaced && mine && (
+        <button onClick={() => setLocalIdx(ideaIndex + 1)} style={btnStyle(activity.theme.accent, true, true)}>
+          {ideaIndex + 1 < total ? 'Next prompt →' : 'Finish →'}
+        </button>
+      )}
     </div>
   )
 }

@@ -22,9 +22,15 @@ export const MYP2_EVERYDAY_NEEDS: LiveActivityDefinition = {
   id: 'myp2-everyday-needs',
   year: 'MYP2',
   title: 'Designing for Everyday Needs',
-  subtitle: 'Weeks 1–2 — find a real need, choose a real person to design for, and plan how to understand them.',
+  subtitle: 'Self-paced, Weeks 1–2 — find a real need, choose a real person to design for, and plan how to understand them.',
   icon: '🎒',
   theme: { accent: '#0E7A72', from: '#0B1F1E', via: '#123230', to: '#1A403D' },
+  // Self-paced: every student moves through the four stages on their own — no
+  // host controlling a shared question/idea/index. See lib design-live: this
+  // is safe to add to an activity that already ran host-paced (students' own
+  // saved answers are never touched); a session already IN PROGRESS on the
+  // old host-paced flow should be restarted after this deploys.
+  selfPaced: true,
   debriefQuestions: [
     'Who is your user, and how do you know what they really need?',
     'Which of your assumptions turned out to be wrong?',
