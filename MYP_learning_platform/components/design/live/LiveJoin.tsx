@@ -279,6 +279,12 @@ export default function LiveJoin({ activity, initialCode }: { activity: LiveActi
   const team = activity.teams && me.team != null ? activity.teams[me.team] : null
   // Self-paced activities: each student has their own position, saved on their own row.
   const selfPaced = !!activity.selfPaced
+  // A self-paced student isn't tied to the shared session clock — if the teacher ends
+  // the session (e.g. because most of the class finished, or the period is over), a
+  // student who is still mid-activity should be able to keep going and finish their
+  // own work rather than getting cut off. Host-paced activities still stop at "ended"
+  // since their content only exists relative to a host-controlled shared state.
+  const canWork = session.status === 'active' || (selfPaced && session.status === 'ended')
   const nav = navOf(me, activity)
   const myIdx = selfPaced ? nav.stage : session.stage_idx
   const rawStage = activity.stages[myIdx]
@@ -327,7 +333,7 @@ export default function LiveJoin({ activity, initialCode }: { activity: LiveActi
             </div>
           )}
 
-          {session.status === 'active' && selfPaced && <SelfPacedBar activity={activity} idx={myIdx} onGo={goStage} />}
+          {canWork && selfPaced && <SelfPacedBar activity={activity} idx={myIdx} onGo={goStage} />}
 
           {/* KEYED ON THE STAGE ITSELF: this forces React to fully discard and
               rebuild everything below — not just swap props — the instant the
@@ -338,20 +344,20 @@ export default function LiveJoin({ activity, initialCode }: { activity: LiveActi
               at the top of the page). If this still happens, a hard refresh
               always clears it — state is saved on the server, not lost. */}
           <div key={`stage-${selfPaced ? myIdx : session.stage_idx}-${stage?.key ?? 'none'}`} style={{ display: 'grid', gap: 14 }}>
-          {session.status === 'active' && stage?.type === 'mcq' && (
+          {canWork && stage?.type === 'mcq' && (
             <McqPlayer activity={activity} stage={stage} session={stageSession} me={me} patchMyData={patchMyData} addPoints={addPoints} />
           )}
-          {session.status === 'active' && stage?.type === 'worksheet' && (
+          {canWork && stage?.type === 'worksheet' && (
             <WorksheetPlayer stage={stage} allStages={activity.stages} activity={activity} grade={myGrade} me={me} sessionCode={code} patchMyData={patchMyData} reportDraft={reportDraft} celebrate={celebrate} />
           )}
-          {session.status === 'active' && stage?.type === 'openIdeas' && (
+          {canWork && stage?.type === 'openIdeas' && (
             <OpenIdeasPlayer activity={activity} stage={stage} session={stageSession} me={me} patchMyData={patchMyData} addPoints={addPoints} reportDraft={reportDraft} celebrate={celebrate} selfPaced={selfPaced} />
           )}
-          {session.status === 'active' && stage?.type === 'learn' && stage.overview && <WorksheetOverview overview={stage.overview} />}
-          {session.status === 'active' && stage?.type === 'learn' && <LearnPlayer stage={stage} session={stageSession} me={me} patchMyData={patchMyData} accent={activity.theme.accent} onFinish={selfPaced ? () => goStage(myIdx + 1) : undefined} />}
-          {session.status === 'active' && stage?.type === 'boardGame' && stage.overview && <WorksheetOverview overview={stage.overview} />}
-          {session.status === 'active' && stage?.type === 'boardGame' && <SustainabilityGamePlayer session={session} me={me} code={code} players={players} patchMyData={patchMyData} addPoints={addPoints} />}
-          {session.status === 'active' && stage && stage.type !== 'grading' && (stageComplete(stage, me) || feedbackOf(me, stage.key)) && (
+          {canWork && stage?.type === 'learn' && stage.overview && <WorksheetOverview overview={stage.overview} />}
+          {canWork && stage?.type === 'learn' && <LearnPlayer stage={stage} session={stageSession} me={me} patchMyData={patchMyData} accent={activity.theme.accent} onFinish={selfPaced ? () => goStage(myIdx + 1) : undefined} />}
+          {canWork && stage?.type === 'boardGame' && stage.overview && <WorksheetOverview overview={stage.overview} />}
+          {canWork && stage?.type === 'boardGame' && <SustainabilityGamePlayer session={session} me={me} code={code} players={players} patchMyData={patchMyData} addPoints={addPoints} />}
+          {canWork && stage && stage.type !== 'grading' && (stageComplete(stage, me) || feedbackOf(me, stage.key)) && (
             <StageFeedback
               stageLabel={`${stage.icon} ${stage.label}`}
               value={feedbackOf(me, stage.key)}
@@ -360,7 +366,7 @@ export default function LiveJoin({ activity, initialCode }: { activity: LiveActi
           )}
           </div>
 
-          {session.status === 'active' && stage?.type === 'grading' && (
+          {canWork && stage?.type === 'grading' && (
             <div style={cardStyle(activity.theme.accent)}>
               {myGrade?.graded ? (
                 <div>
@@ -380,7 +386,10 @@ export default function LiveJoin({ activity, initialCode }: { activity: LiveActi
             </div>
           )}
 
-          {session.status === 'ended' && (
+          {/* Self-paced students keep working past "ended" (see canWork above), so the
+              final-results/podium screen — built for a shared host-paced ending — stays
+              out of their way instead of competing with their own in-progress activity. */}
+          {session.status === 'ended' && !selfPaced && (
             <div style={{ display: 'grid', gap: 14 }}>
               <div style={{ ...cardStyle('#FFCF3F'), textAlign: 'center' }}>
                 <div style={{ fontSize: 20, fontWeight: 800 }}>🏆 Final results</div>
