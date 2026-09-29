@@ -75,12 +75,12 @@ export default function LessonPage({ params }: { params: { module: string; lesso
     <div style={{ background: 'var(--bg)', backgroundImage: 'var(--bg-image)', minHeight: '100vh' }}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(LD) }} />
       <GuideTopBar label="DP Physics" />
-      {/* Full-bleed: the page background runs edge to edge, navigation floats over it (diamond rail on the
-          left for this lesson's own sections, a drawer trigger for the whole course) instead of living in
-          fixed grid columns either side of the reading column. */}
+      {/* Full-bleed: the page background runs edge to edge, navigation floats OVER it (diamonds only, labels
+          as a hover tooltip that reserves no layout space) instead of living in fixed grid columns either
+          side of the reading column — so the reading column itself can use most of the screen. */}
       <LessonNavRail items={headings} />
       <CourseDrawer modules={MODULES} activeModule={m.slug} activeLesson={l.slug} />
-      <main className="mx-auto w-full max-w-5xl px-4 py-6 md:px-10 md:py-10 lg:pl-64">
+      <main className="mx-auto w-full max-w-[1400px] px-4 py-6 md:px-10 md:py-10 lg:pl-16">
         <article className="grid min-w-0 content-start gap-5">
           <LessonNavPills items={headings} />
           <header className="p-6 md:p-8" style={{ borderRadius: 'calc(var(--radius-card) + 8px)', background: 'var(--gradient-cta)', color: 'var(--text-on-accent)', boxShadow: 'var(--shadow-card-hover)' }}>

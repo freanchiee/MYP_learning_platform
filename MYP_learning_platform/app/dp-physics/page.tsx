@@ -32,7 +32,7 @@ export default function DpPhysicsHub() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(LD) }} />
       <GuideTopBar label="DP Physics" />
       <CourseDrawer modules={MODULES} />
-      <main className="mx-auto w-full max-w-5xl px-4 py-6 md:px-10 md:py-8">
+      <main className="mx-auto w-full max-w-[1400px] px-4 py-6 md:px-10 md:py-8">
         <header
           className="p-6 md:p-10"
           style={{ borderRadius: 'calc(var(--radius-card) + 8px)', background: 'var(--gradient-cta)', color: 'var(--text-on-accent)', boxShadow: 'var(--shadow-card-hover)' }}

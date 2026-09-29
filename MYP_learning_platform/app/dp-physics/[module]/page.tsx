@@ -28,7 +28,7 @@ export default function ModulePage({ params }: { params: { module: string } }) {
     <div style={{ background: 'var(--bg)', backgroundImage: 'var(--bg-image)', minHeight: '100vh' }}>
       <GuideTopBar label="DP Physics" />
       <CourseDrawer modules={MODULES} activeModule={m.slug} />
-      <main className="mx-auto w-full max-w-5xl px-4 py-6 md:px-10 md:py-8">
+      <main className="mx-auto w-full max-w-[1400px] px-4 py-6 md:px-10 md:py-8">
         <div className="grid content-start gap-6">
           <header className="p-6 md:p-8" style={{ borderRadius: 'calc(var(--radius-card) + 8px)', background: 'var(--gradient-cta)', color: 'var(--text-on-accent)', boxShadow: 'var(--shadow-card-hover)' }}>
             <Link href="/dp-physics" className="text-xs font-black uppercase tracking-[0.3em] underline opacity-90">← All of DP Physics</Link>
