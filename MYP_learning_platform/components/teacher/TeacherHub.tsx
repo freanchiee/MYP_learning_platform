@@ -2,14 +2,20 @@
 
 import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { YEARS, liveActivitiesForYear } from '@/data/design/live/registry'
+import { hostStorageKey } from '@/lib/design-live/hooks'
 import CreateClassForm from './CreateClassForm'
 import SubjectPicker from './SubjectPicker'
 import { CopyInviteButton } from './InviteCard'
 
 const NAV_H = 56
 
-export interface HubClass { id: string; name: string; join_code: string; students: number; assignments: number; emoji: string; from: string; to: string }
+export interface HubLastSession { code: string; activityId: string; activityTitle: string; activityIcon: string; activityExists: boolean; status: 'lobby' | 'active' | 'ended'; createdAt: string }
+export interface HubClass { id: string; name: string; join_code: string; students: number; assignments: number; emoji: string; from: string; to: string; lastSession?: HubLastSession }
+
+const SESSION_STATUS_LABEL: Record<HubLastSession['status'], string> = { lobby: 'Lobby', active: 'Live now', ended: 'Ended' }
+const SESSION_STATUS_COLOR: Record<HubLastSession['status'], string> = { lobby: '#FFCF3F', active: '#1FA98A', ended: 'var(--text-subtle)' }
 export interface HubAssignment { id: string; classId: string; className: string; title: string; kind: string; subject: string; due_at: string | null; done: number; total: number }
 export interface HubResource { slug: string; label: string; icon: string; papers: number; topics: number }
 
@@ -25,10 +31,19 @@ const btnSolid = { background: 'var(--gradient-cta)', color: 'var(--text-on-acce
 const btnGhost = { border: '1px solid var(--border-strong)', color: 'var(--text)' } as const
 
 export default function TeacherHub({ name, subjects, classes, assignments, resources }: { name: string; subjects: string[]; classes: HubClass[]; assignments: HubAssignment[]; resources: HubResource[] }) {
+  const router = useRouter()
   const ref = useRef<HTMLDivElement>(null)
   const [active, setActive] = useState(0)
   const [hover, setHover] = useState<number | null>(null)
   const [mine, setMine] = useState(subjects)
+
+  // Same "resume this exact session" trick as the class dashboard's History
+  // tab and My Live Class History — remember the code this device should
+  // reopen for that activity, then land on its host screen.
+  const openSessionDashboard = (s: HubLastSession) => {
+    localStorage.setItem(hostStorageKey(s.activityId), s.code)
+    router.push(`/design/live/${s.activityId}?host=1`)
+  }
 
   useEffect(() => {
     const el = ref.current
@@ -77,7 +92,28 @@ export default function TeacherHub({ name, subjects, classes, assignments, resou
                           <Link href={`/classes/${c.id}`} className="text-lg font-extrabold hover:underline">{c.name}</Link>
                           <div className="mt-1 text-xs font-bold tracking-widest" style={{ color: 'var(--text-subtle)' }}>CODE <span style={{ color: 'var(--accent)' }}>{c.join_code}</span></div>
                           <div className="mt-2 text-sm" style={{ color: 'var(--text-muted)' }}>{c.students} student{c.students === 1 ? '' : 's'} · {c.assignments} assignment{c.assignments === 1 ? '' : 's'}</div>
-                          <div className="mt-4 flex gap-2">
+                          {c.lastSession && (
+                            <button
+                              onClick={() => c.lastSession!.activityExists && openSessionDashboard(c.lastSession!)}
+                              disabled={!c.lastSession.activityExists}
+                              title={c.lastSession.activityExists ? undefined : 'This activity no longer exists'}
+                              className="mt-3 flex w-full items-center justify-between gap-2 rounded-[var(--radius-panel)] p-2.5 text-left transition-opacity hover:opacity-85 disabled:cursor-not-allowed disabled:opacity-60"
+                              style={{ background: 'var(--surface-inset)', border: '1px solid var(--border)' }}
+                            >
+                              <span className="flex min-w-0 items-center gap-2">
+                                <span className="text-lg shrink-0">{c.lastSession.activityIcon}</span>
+                                <span className="min-w-0">
+                                  <span className="block truncate text-xs font-bold" style={{ color: 'var(--text)' }}>{c.lastSession.activityTitle}</span>
+                                  <span className="text-[10px]" style={{ color: 'var(--text-subtle)' }}>{new Date(c.lastSession.createdAt).toLocaleDateString()}</span>
+                                </span>
+                              </span>
+                              <span className="flex shrink-0 items-center gap-2">
+                                <span className="text-[10px] font-black tracking-wider" style={{ color: SESSION_STATUS_COLOR[c.lastSession.status] }}>{SESSION_STATUS_LABEL[c.lastSession.status]}</span>
+                                <span className="text-[10px] font-black tracking-wider" style={{ color: 'var(--accent)' }}>DASHBOARD →</span>
+                              </span>
+                            </button>
+                          )}
+                          <div className="mt-3 flex gap-2">
                             <Link href={`/classes/${c.id}?tab=library`} className="rounded-[var(--radius-control)] px-3 py-2 text-xs font-black tracking-wider" style={btnSolid}>CREATE ASSIGNMENT</Link>
                             <Link href={`/classes/${c.id}`} className="rounded-[var(--radius-control)] px-3 py-2 text-xs font-black tracking-wider" style={btnGhost}>OPEN</Link>
                             <CopyInviteButton code={c.join_code} />
