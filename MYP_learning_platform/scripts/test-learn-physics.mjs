@@ -500,4 +500,72 @@ const em = await import(pathToFileURL(outEM).href)
   ok('Q7: distance between drop 2 and drop 3 matches the given 12.0 m', near(em.dripsPosition(4) - em.dripsPosition(2), 12.0, 1e-9))
   ok('Q7: each later gap is bigger than the last (uniform acceleration, not uniform velocity)', em.dripsPosition(6) - em.dripsPosition(4) > em.dripsPosition(4) - em.dripsPosition(2))
 }
+// ---- two collision problems, recreated with our own animated diagram and momentum-time graph ----
+const outEC = path.resolve('node_modules/.cache/exam-collisions.mjs')
+await build({ entryPoints: ['lib/learn/exam-collisions-model.ts'], outfile: outEC, format: 'esm', bundle: true, logLevel: 'silent' })
+const ec = await import(pathToFileURL(outEC).href)
+{
+  // shared piecewise momentum/velocity/position ramp
+  let bad = 0
+  for (let i = 0; i < 500; i++) {
+    const m = 0.2 + rnd2() * 5, before = (rnd2() - 0.5) * 20, after = (rnd2() - 0.5) * 20
+    const t0 = rnd2() * 5, t1 = t0 + 0.5 + rnd2() * 5
+    if (Math.abs(ec.collisionMomentum(m, before, after, t0, t1, t0) - m * before) > 1e-9) bad++
+    if (Math.abs(ec.collisionMomentum(m, before, after, t0, t1, t1) - m * after) > 1e-9) bad++
+    if (Math.abs(ec.collisionVelocity(m, before, after, t0, t1, t0 - 1) - before) > 1e-9) bad++
+    if (Math.abs(ec.collisionVelocity(m, before, after, t0, t1, t1 + 1) - after) > 1e-9) bad++
+  }
+  ok('collision momentum/velocity ramp is exactly `before` up to t0 and `after` from t1 on (500 random cases)', bad === 0)
+  // position matches numerical integration of the same velocity function
+  let posBad = 0
+  for (let i = 0; i < 200; i++) {
+    const m = 1, before = (rnd2() - 0.5) * 10, after = (rnd2() - 0.5) * 10, t0 = 1, t1 = 2, tEnd = 3.5
+    const dt = 1 / 20000
+    let x = 0
+    for (let t = 0; t < tEnd; t += dt) x += ec.collisionVelocity(m, before, after, t0, t1, t) * dt
+    const exact = ec.collisionPosition(m, before, after, t0, t1, 0, tEnd)
+    if (Math.abs(x - exact) > 5e-3) posBad++
+  }
+  ok('collisionPosition matches direct numerical integration of collisionVelocity (200 random cases)', posBad === 0)
+}
+{
+  // Problem A: 0.24 kg ball at 16 m/s stops a 0.48 kg ball, which moves off
+  const r = ec.ballsSolve()
+  ok('A: ball Y moves off at 8.0 m/s', near(r.vYf, 8.0, 1e-9))
+  ok('A: kinetic energy lost is 15.36 J (30.72 J -> 15.36 J)', near(r.keBefore, 30.72, 1e-9) && near(r.keAfter, 15.36, 1e-9) && near(r.deltaKE, -15.36, 1e-9))
+  ok('A: force on X from Y is 1920 N, opposing X\'s original motion (negative)', near(r.forceOnX, -1920, 1e-6))
+  ok('A: force on Y from X is 1920 N, the same direction X was moving (Newton\'s third law: equal, opposite)', near(r.forceOnY, 1920, 1e-6) && near(r.forceOnX, -r.forceOnY, 1e-9))
+  const { mX, mY, uX, t0, t1 } = ec.BALLS
+  ok('A: momentum is conserved at every instant through the collision (X + Y constant)', (() => {
+    for (let t = 0; t <= t1 + 0.001; t += 0.0002) {
+      const pX = ec.collisionMomentum(mX, uX, r.vXf, t0, t1, t)
+      const pY = ec.collisionMomentum(mY, ec.BALLS.uY, r.vYf, t0, t1, t)
+      if (Math.abs(pX + pY - mX * uX) > 1e-9) return false
+    }
+    return true
+  })())
+}
+{
+  // Problem B: X (speed 5v) sticks to stationary Y, common speed v afterwards
+  ok('B: conservation of momentum alone gives m_Y / m_X = 4', ec.STICK_MASS_RATIO === 4)
+  const r = ec.stickSolve()
+  ok('B: KE ratio after/before = 1/5, for these illustrative numbers', near(r.keRatio, 0.2, 1e-9))
+  ok('B: same ratio holds for ANY mX, v (scaling check: doubling both leaves the ratio unchanged)', (() => {
+    const mX = 3.7, v = 1.3, mY = 4 * mX, uX = 5 * v
+    const keB = 0.5 * mX * uX * uX, keA = 0.5 * (mX + mY) * v * v
+    return near(keA / keB, 0.2, 1e-9)
+  })())
+  ok('B: force on X from Y is 400 N, opposing X (negative); force on Y from X is 400 N, equal and opposite', near(r.forceOnX, -400, 1e-6) && near(r.forceOnY, 400, 1e-6))
+  const { mX, v, t0, t1 } = ec.STICK
+  ok('B: momentum is conserved at every instant through the collision (X + Y constant)', (() => {
+    const uX = 5 * v
+    for (let t = 0; t <= t1 + 0.005; t += 0.001) {
+      const pX = ec.collisionMomentum(mX, uX, v, t0, t1, t)
+      const pY = ec.collisionMomentum(r.mY, 0, v, t0, t1, t)
+      if (Math.abs(pX + pY - mX * uX) > 1e-9) return false
+    }
+    return true
+  })())
+  ok('B: after the collision, X and Y share the SAME momentum-time value (they move together)', near(ec.collisionMomentum(mX, 5 * v, v, t0, t1, ec.STICK.tMax), ec.collisionMomentum(r.mY, 0, v, t0, t1, ec.STICK.tMax) / ec.STICK_MASS_RATIO, 1e-9))
+}
 process.exit(fail ? 1 : 0)

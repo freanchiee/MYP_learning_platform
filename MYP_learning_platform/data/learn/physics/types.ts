@@ -51,6 +51,8 @@ export type WidgetId =
   | 'aircraft-takeoff-anim'
   | 'chase-cars-anim'
   | 'oil-drip-car-anim'
+  | 'balls-collision-anim'
+  | 'stick-collision-anim'
 
 export type BoxKind = 'yes' | 'no' | 'opt'
 

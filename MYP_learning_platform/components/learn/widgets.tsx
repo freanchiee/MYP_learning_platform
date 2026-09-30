@@ -9,6 +9,7 @@ import { ParachuteLab } from './parachute-lab'
 import { NosRaceLab } from './nos-race'
 import { ModelVsRealityLab, MotionGraphsLab } from './motion-graphs'
 import { AircraftTakeoffAnim, BallBounceAnim, CarSkidAnim, ChaseCarsAnim, OilDripCarAnim, SignalTrainAnim, TrainAccelDecelAnim } from './exam-motion'
+import { BallsCollisionAnim, StickCollisionAnim } from './exam-collisions'
 import { CollisionLab, ForceLink, MomentumCases, NewtonLab, NflDiagram, NslDiagram, SpacetimeDiagram } from './physics-a2'
 import {
   C, G, H, inclineAcceleration, massEnergy, pendulumPeriod, photonEnergy, relativePosition, slideAngle, zenoSum,
@@ -532,6 +533,8 @@ const REGISTRY: Record<WidgetId, () => JSX.Element> = {
   'aircraft-takeoff-anim': AircraftTakeoffAnim,
   'chase-cars-anim': ChaseCarsAnim,
   'oil-drip-car-anim': OilDripCarAnim,
+  'balls-collision-anim': BallsCollisionAnim,
+  'stick-collision-anim': StickCollisionAnim,
 }
 
 export function Widget({ id }: { id: WidgetId }) {
