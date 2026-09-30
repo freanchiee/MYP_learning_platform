@@ -80,9 +80,11 @@ function CollisionAnim({ balls, t0, t1, tMax, title, massUnit = 'kg' }: { balls:
   // ---- the momentum-time graph ----
   const GW = 420, GH = 150, gPadL = 40, gPadR = 10, gPadT = 12, gPadB = 22
   const N = 100
-  const pMax = Math.max(...balls.map((b) => Math.max(Math.abs(b.m * b.before), Math.abs(b.m * b.after)))) * 1.15
+  const pVals = balls.flatMap((b) => [b.m * b.before, b.m * b.after])
+  const pMax = Math.max(...pVals, 0) * 1.15 || 1
+  const pMin = Math.min(...pVals, 0) * (Math.min(...pVals, 0) < 0 ? 1.15 : 1) // 0 unless some momentum is actually negative
   const GX = (s: number) => gPadL + (s / tMax) * (GW - gPadL - gPadR)
-  const GY = (p: number) => GH - gPadB - ((p + pMax) / (2 * pMax)) * (GH - gPadB - gPadT)
+  const GY = (p: number) => GH - gPadB - ((p - pMin) / (pMax - pMin)) * (GH - gPadB - gPadT)
 
   return (
     <div className="grid gap-3">
