@@ -10,7 +10,7 @@ import { NosRaceLab } from './nos-race'
 import { ModelVsRealityLab, MotionGraphsLab } from './motion-graphs'
 import { AircraftTakeoffAnim, BallBounceAnim, CarSkidAnim, ChaseCarsAnim, OilDripCarAnim, SignalTrainAnim, TrainAccelDecelAnim } from './exam-motion'
 import { BallsCollisionAnim, StickCollisionAnim } from './exam-collisions'
-import { CollisionLab, ForceLink, MomentumCases, NewtonLab, NflDiagram, NslDiagram, SpacetimeDiagram } from './physics-a2'
+import { CollisionLab, ForceLink, MomentumCases, NewtonLab, NflDiagram, NslDiagram, SpacetimeDiagram, TensionLab } from './physics-a2'
 import {
   C, G, H, inclineAcceleration, massEnergy, pendulumPeriod, photonEnergy, relativePosition, slideAngle, zenoSum,
 } from '@/lib/learn/physics-models'
@@ -535,6 +535,7 @@ const REGISTRY: Record<WidgetId, () => JSX.Element> = {
   'oil-drip-car-anim': OilDripCarAnim,
   'balls-collision-anim': BallsCollisionAnim,
   'stick-collision-anim': StickCollisionAnim,
+  'tension-lab': TensionLab,
 }
 
 export function Widget({ id }: { id: WidgetId }) {

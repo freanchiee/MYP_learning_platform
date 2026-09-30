@@ -870,6 +870,13 @@ const lessons: Lesson[] = [
             blocks: [
               { t: 'p', text: 'A string, rope or cable can only **pull** along its own length — never push. Its tension is not fixed by a formula; it comes out of applying F_net = ma to whatever the string is attached to.' },
               {
+                t: 'widget',
+                id: 'tension-lab',
+                title: 'A block and a hanging mass',
+                idea: 'Drag either mass. The tension always comes out LESS than the hanging weight — the difference is exactly what accelerates the whole system.',
+                predict: { q: 'Predict: keep m_A fixed and drag m_B up to its largest value. As the hanging mass comes to dominate the system, the acceleration a gets closer and closer to…', options: ['g — the system falls almost as if nothing were holding it back', 'zero — a heavier hanging mass barely moves', 'always exactly half of g, whatever the masses'], answer: 0, why: 'a = m_Bg / (m_A + m_B). As m_B grows much bigger than m_A, the m_A in the denominator barely matters, so a → m_Bg/m_B = g: the tiny block can barely hold the huge mass back.' },
+              },
+              {
                 t: 'steps',
                 title: 'a block and a hanging mass',
                 given: 'A 4.0 kg block sits on a frictionless table. A string over an ideal pulley connects it to a 2.0 kg mass hanging off the edge. Find the acceleration and the tension.',

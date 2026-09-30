@@ -1,6 +1,7 @@
 'use client'
 import { useMemo, useState } from 'react'
 import { collide1D, kineticEnergy, momentumChange, motionUnderForce } from '@/lib/learn/physics-models'
+import { atwoodLite } from '@/lib/learn/forces-model'
 
 // Widgets for A.2 Force and motion. Theme tokens only; every figure has an aria-label and a text readout.
 const ctl = 'rounded-[var(--radius-control)] px-3 py-2 text-xs font-black tracking-wider focus:outline-none focus:ring-2'
@@ -414,6 +415,64 @@ export function ForceLink() {
       <p className="text-sm font-semibold" style={{ color: 'var(--text)' }}>
         Both ratios give the same {F} N. Change the mass and both still equal F: force is what connects how energy changes with distance and how momentum changes with time.
       </p>
+    </div>
+  )
+}
+
+// ---------------------------------------------------------------- tension: a block and a hanging mass
+export function TensionLab() {
+  const [mA, setMA] = useState(4.0)
+  const [mB, setMB] = useState(2.0)
+  const { a, T } = atwoodLite(mA, mB)
+
+  // ---- geometry ----
+  const tableY = 120, tableLeft = 40, tableRight = 300, pulleyX = 300, pulleyY = 90, pulleyR = 12
+  const blockW = 30 + mA * 8, blockH = 26 + mA * 3
+  const blockX = 150 - blockW / 2
+  const ropeDrop = 40 + mB * 10 // how far below the pulley the hanging mass sits
+  const massW = 26 + mB * 8, massH = 22 + mB * 6
+  const massY = pulleyY + ropeDrop
+  const stringToBlockY = tableY - blockH / 2
+
+  return (
+    <div className="grid gap-4">
+      <figure className="m-0 p-2" style={fig}>
+        <svg viewBox="0 0 420 260" className="w-full" role="img" aria-label={`A ${f2(mA, 1)} kilogram block on a frictionless table, connected by a string over a pulley to a ${f2(mB, 1)} kilogram hanging mass. The system accelerates at ${f2(a)} metres per second squared, and the string tension is ${f2(T)} newtons.`}>
+          {/* table */}
+          <line x1={tableLeft} y1={tableY} x2={tableRight} y2={tableY} stroke="var(--text)" strokeWidth="3" />
+          {Array.from({ length: 9 }, (_, i) => (
+            <line key={i} x1={tableLeft + i * 14} y1={tableY} x2={tableLeft + i * 14 - 8} y2={tableY + 12} stroke="var(--border-strong)" strokeWidth="1.5" />
+          ))}
+          {/* pulley */}
+          <circle cx={pulleyX} cy={pulleyY} r={pulleyR} fill="none" stroke="var(--text)" strokeWidth="3" />
+          <line x1={pulleyX - 26} y1={pulleyY - pulleyR - 6} x2={pulleyX + 26} y2={pulleyY - pulleyR - 6} stroke="var(--text)" strokeWidth="3" />
+          <line x1={pulleyX - 18} y1={pulleyY - pulleyR - 6} x2={pulleyX - 18} y2={pulleyY - pulleyR - 16} stroke="var(--text)" strokeWidth="3" />
+          <line x1={pulleyX + 18} y1={pulleyY - pulleyR - 6} x2={pulleyX + 18} y2={pulleyY - pulleyR - 16} stroke="var(--text)" strokeWidth="3" />
+          {/* string: block -> over the pulley -> down to the hanging mass */}
+          <line x1={blockX + blockW} y1={stringToBlockY} x2={pulleyX - pulleyR} y2={pulleyY} stroke="var(--text-muted)" strokeWidth="2" />
+          <line x1={pulleyX} y1={pulleyY + pulleyR} x2={pulleyX} y2={massY - massH / 2} stroke="var(--text-muted)" strokeWidth="2" />
+          {/* block A */}
+          <rect x={blockX} y={tableY - blockH} width={blockW} height={blockH} rx="4" fill="var(--accent)" fillOpacity="0.25" stroke="var(--accent)" strokeWidth="2.5" />
+          <text x={blockX + blockW / 2} y={tableY - blockH / 2 + 4} fontSize="12" fontWeight="800" textAnchor="middle" fill="var(--text)">A</text>
+          <Arrow x1={blockX + blockW + 4} y1={stringToBlockY} x2={blockX + blockW + 4 + Math.min(60, T * 3)} y2={stringToBlockY} color="var(--accent-2)" w={3} />
+          <text x={blockX + blockW + 8} y={stringToBlockY - 8} fontSize="11" fontWeight="800" fill="var(--accent-2)">T</text>
+          {/* hanging mass B */}
+          <rect x={pulleyX - massW / 2} y={massY - massH / 2} width={massW} height={massH} rx="4" fill="var(--warning)" fillOpacity="0.25" stroke="var(--warning)" strokeWidth="2.5" />
+          <text x={pulleyX} y={massY + 4} fontSize="12" fontWeight="800" textAnchor="middle" fill="var(--text)">B</text>
+          <Arrow x1={pulleyX + massW / 2 + 22} y1={massY} x2={pulleyX + massW / 2 + 22} y2={massY + Math.min(50, (mB * 9.81 - T) * 2.2)} color="var(--danger)" w={3} />
+          <text x={pulleyX + massW / 2 + 26} y={massY + 14} fontSize="11" fontWeight="800" fill="var(--danger)">m_Bg − T</text>
+          <text x="20" y="20" fontSize="11" fill="var(--text-subtle)">frictionless table, ideal pulley</text>
+        </svg>
+      </figure>
+      <div className="grid gap-3 sm:grid-cols-2">
+        <Slider label="Block mass m_A" value={mA} min={0.5} max={8} step={0.5} unit="kg" onChange={setMA} />
+        <Slider label="Hanging mass m_B" value={mB} min={0.5} max={8} step={0.5} unit="kg" onChange={setMB} />
+      </div>
+      <div className="grid gap-1 rounded-[var(--radius-panel)] p-3 text-sm" style={panel} aria-live="polite">
+        <div style={{ color: 'var(--text)' }}>Acceleration: a = m_Bg / (m_A + m_B) = <strong>{f2(a)} m s⁻²</strong></div>
+        <div style={{ color: 'var(--text)' }}>Tension: T = m_Aa = <strong>{f2(T)} N</strong></div>
+        <div className="text-xs" style={{ color: 'var(--text-muted)' }}>The tension is always LESS than the hanging weight (m_Bg = {f2(mB * 9.81)} N) — the weight is what accelerates the system, not just holds it.</div>
+      </div>
     </div>
   )
 }

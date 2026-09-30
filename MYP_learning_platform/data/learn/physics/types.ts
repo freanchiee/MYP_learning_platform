@@ -53,6 +53,7 @@ export type WidgetId =
   | 'oil-drip-car-anim'
   | 'balls-collision-anim'
   | 'stick-collision-anim'
+  | 'tension-lab'
 
 export type BoxKind = 'yes' | 'no' | 'opt'
 
