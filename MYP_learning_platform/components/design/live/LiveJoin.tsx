@@ -966,11 +966,17 @@ function OpenIdeasPlayer({
   const mine = !done ? me.data?.[stage.key]?.[ideaIndex] : undefined
   const [text, setText] = useState(mine?.text || '')
   const [flash, setFlash] = useState(false)
+  const [autosaving, setAutosaving] = useState(false)
   const celebratedRef = useRef<Set<string>>(new Set())
+  // What's already saved for THIS prompt, so the autosave timer below only fires on
+  // genuinely new typing — reset whenever the student moves to a different prompt.
+  const lastSavedRef = useRef(mine?.text || '')
 
   useEffect(() => {
     setText(mine?.text || '')
-  }, [ideaIndex]) // eslint-disable-line react-hooks/exhaustive-deps
+    lastSavedRef.current = mine?.text || ''
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ideaIndex])
 
   const onType = (v: string) => {
     setText(v)
@@ -989,11 +995,30 @@ function OpenIdeasPlayer({
   const submit = () => {
     if (!text.trim()) return
     const first = !mine
+    lastSavedRef.current = text.trim()
     patchMyData(stage.key, { [ideaIndex]: { text: text.trim() } })
     if (selfPaced && first) addPoints(stage.pointsPerSubmission ?? 10)
     setFlash(true)
     setTimeout(() => setFlash(false), 1200)
   }
+
+  // Autosave: a student who types an idea and walks away (or the teacher advances
+  // the prompt) without clicking Submit used to lose it outright — worksheets
+  // already autosave on a quiet-for-a-bit timer, so this brings idea prompts to
+  // the same standard instead of relying on the button being clicked at all.
+  useEffect(() => {
+    if (locked || !text.trim() || text.trim() === lastSavedRef.current) return
+    const timer = setTimeout(() => {
+      const first = !mine
+      lastSavedRef.current = text.trim()
+      setAutosaving(true)
+      patchMyData(stage.key, { [ideaIndex]: { text: text.trim() } })
+      if (selfPaced && first) addPoints(stage.pointsPerSubmission ?? 10)
+      setTimeout(() => setAutosaving(false), 700)
+    }, 2500)
+    return () => clearTimeout(timer)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [text])
 
   if (done) {
     return (
@@ -1022,6 +1047,9 @@ function OpenIdeasPlayer({
       )}
       {locked && !mine && <div style={{ textAlign: 'center', fontSize: 13, fontWeight: 700, color: '#D6425E' }}>🔒 Time&apos;s up — your teacher has locked this round.</div>}
       <input value={text} disabled={locked} onChange={(e) => onType(e.target.value)} placeholder="Your idea, in a few words…" style={inputStyle} onKeyDown={(e) => e.key === 'Enter' && submit()} />
+      <div style={{ textAlign: 'right', fontSize: 11, fontWeight: 700, color: 'rgba(255,255,255,0.7)' }}>
+        {autosaving ? '💾 Saving…' : '💾 Saves automatically'}
+      </div>
       <button onClick={submit} disabled={locked} style={btnStyle('#1FA98A', true, true)}>
         {flash ? '✅ Saved!' : mine ? 'Update my idea' : 'Submit my idea'}
       </button>
