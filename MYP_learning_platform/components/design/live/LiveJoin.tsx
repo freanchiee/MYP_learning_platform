@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase/client'
-import { useLiveRow, useLiveTable, shuffle, useLiveDraftReporter } from '@/lib/design-live/hooks'
+import { useLiveRow, useLiveTable, shuffle, useLiveDraftReporter, useTabFocusReporter } from '@/lib/design-live/hooks'
 import { worksheetSectionPct } from '@/lib/design-live/scoring'
 import type { LiveActivityDefinition, LiveStage, McqStage, WorksheetStage, OpenIdeasStage, WorksheetField } from '@/data/design/live/types'
 import type { LiveSessionRow, LivePlayerRow, LiveGradeRow, LiveEventRow } from '@/lib/design-live/types'
@@ -189,6 +189,10 @@ export default function LiveJoin({ activity, initialCode }: { activity: LiveActi
     })
   }
   const reportDraft = useLiveDraftReporter(patchMyRawData)
+  // Lets the teacher's host dashboard see who's actually on the activity right
+  // now vs. switched away to another tab/app (see ui.tsx FocusDot) — seeded from
+  // whatever switch count was already saved, so a reload keeps counting up.
+  useTabFocusReporter(patchMyRawData, me?.data?.focus?.switches ?? 0, !!me)
 
   const addPoints = async (delta: number) => {
     if (!me || !delta) return

@@ -159,6 +159,42 @@ export function useLiveDraftReporter(
   }
 }
 
+export interface LiveFocus {
+  visible: boolean // is THIS browser tab currently the foreground one
+  switches: number // how many times it's gone from visible -> hidden this session
+  at: string // ISO timestamp of the last change
+}
+
+/** Tracks whether a student's browser tab is actually foregrounded on the
+ *  activity, and counts how many times it's been switched away from (tab
+ *  change, app switch, window minimise) — the "on task or not" signal shown
+ *  on the host dashboard (see ui.tsx FocusDot). Reports immediately once
+ *  `enabled`, then on every visibility change; `patchRawData` is read via a
+ *  ref kept fresh every render, so a listener registered once at mount never
+ *  writes back a stale snapshot of the rest of `data` (see patchMyRawData in
+ *  LiveJoin.tsx, which merges into whatever it's called with). */
+export function useTabFocusReporter(patchRawData: (patch: Record<string, any>) => void, initialSwitches: number, enabled: boolean) {
+  const patchRef = useRef(patchRawData)
+  useEffect(() => {
+    patchRef.current = patchRawData
+  })
+  const switchesRef = useRef(initialSwitches)
+
+  useEffect(() => {
+    if (!enabled) return undefined
+    switchesRef.current = initialSwitches
+    const report = () => {
+      const visible = document.visibilityState === 'visible'
+      if (!visible) switchesRef.current += 1
+      patchRef.current({ focus: { visible, switches: switchesRef.current, at: new Date().toISOString() } as LiveFocus })
+    }
+    document.addEventListener('visibilitychange', report)
+    report()
+    return () => document.removeEventListener('visibilitychange', report)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [enabled])
+}
+
 export function shuffle<T>(arr: T[]): T[] {
   const a = [...arr]
   for (let i = a.length - 1; i > 0; i--) {

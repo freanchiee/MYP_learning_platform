@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState } from 'react'
 import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
 import { createClient } from '@/lib/supabase/client'
-import { useLiveRow, useLiveTable, generateJoinCode, hostStorageKey, useNowTick, isDraftFresh, type LiveDraft } from '@/lib/design-live/hooks'
+import { useLiveRow, useLiveTable, generateJoinCode, hostStorageKey, useNowTick, isDraftFresh, type LiveDraft, type LiveFocus } from '@/lib/design-live/hooks'
 import { worksheetSectionPct } from '@/lib/design-live/scoring'
 import type { LiveActivityDefinition, McqStage, WorksheetStage, OpenIdeasStage, GradingStage } from '@/data/design/live/types'
 import type { LiveSessionRow, LivePlayerRow, LiveGradeRow, LiveEventRow } from '@/lib/design-live/types'
@@ -40,7 +40,7 @@ function PlayerChip({ player, now, onChat, sessionCode }: { player: LivePlayerRo
         padding: '3px 6px 3px 3px',
       }}
     >
-      <PlayerPreview name={player.name} draft={player.data?.live as LiveDraft} now={now}>
+      <PlayerPreview name={player.name} draft={player.data?.live as LiveDraft} focus={player.data?.focus as LiveFocus} now={now}>
         <Avatar seed={player.id} size={22} />
         {player.name}
       </PlayerPreview>
@@ -269,7 +269,7 @@ export default function LiveHost({ activity }: { activity: LiveActivityDefinitio
           </div>
         )}
 
-        {session.status === 'active' && activity.selfPaced && <SelfPacedOverview activity={activity} players={players} />}
+        {session.status === 'active' && activity.selfPaced && <SelfPacedOverview activity={activity} players={players} now={now} />}
 
         {session.status === 'active' && stage && (
           <StageHost activity={activity} stage={stage} viewIdx={viewIdx} session={session} players={players} grades={grades} patchState={patchState} advanceStage={advanceStage} goBack={goBack} run={run} now={now} onChat={openChat} onReview={setReviewPlayerId} />
@@ -520,7 +520,7 @@ function McqRoster({
           const color = !a ? 'var(--text-muted)' : a.correct ? '#1FA98A' : '#D6425E'
           return (
             <div key={p.id} style={{ display: 'flex', alignItems: 'center', gap: 6, border: '1.5px solid var(--border)', borderRadius: 10, padding: '6px 8px', fontSize: 12.5 }}>
-              <PlayerPreview name={p.name} draft={p.data?.live as LiveDraft} now={now}>
+              <PlayerPreview name={p.name} draft={p.data?.live as LiveDraft} focus={p.data?.focus as LiveFocus} now={now}>
                 <Avatar seed={p.id} size={22} />
                 <span style={{ fontWeight: 700, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: 110 }}>{p.name}</span>
               </PlayerPreview>
@@ -558,7 +558,7 @@ function McqDashboard({ stage, players, now, onChat, sessionCode }: { stage: Mcq
             <tr key={p.id} style={{ borderTop: '1px solid var(--border)' }}>
               <td style={{ padding: '6px 8px', fontWeight: 700, whiteSpace: 'nowrap' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                  <PlayerPreview name={p.name} draft={p.data?.live as LiveDraft} now={now}>
+                  <PlayerPreview name={p.name} draft={p.data?.live as LiveDraft} focus={p.data?.focus as LiveFocus} now={now}>
                     <Avatar seed={p.id} size={22} />
                     {p.name}
                   </PlayerPreview>
@@ -624,7 +624,7 @@ function WorksheetHost({
             <tr key={p.id} style={{ borderTop: '1px solid var(--border)' }}>
               <td style={{ padding: '6px 8px', fontWeight: 700, whiteSpace: 'nowrap' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                  <PlayerPreview name={p.name} draft={p.data?.live as LiveDraft} now={now}>
+                  <PlayerPreview name={p.name} draft={p.data?.live as LiveDraft} focus={p.data?.focus as LiveFocus} now={now}>
                     <Avatar seed={p.id} size={22} />
                     {p.name}
                   </PlayerPreview>
@@ -755,7 +755,7 @@ function OpenIdeasHost({
       {typingNow.length > 0 && (
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', justifyContent: 'center' }}>
           {typingNow.map((p) => (
-            <PlayerPreview key={p.id} name={p.name} draft={p.data?.live as LiveDraft} now={now}>
+            <PlayerPreview key={p.id} name={p.name} draft={p.data?.live as LiveDraft} focus={p.data?.focus as LiveFocus} now={now}>
               <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4, fontSize: 11.5, color: 'rgba(255,255,255,0.85)' }}>
                 <Avatar seed={p.id} size={18} />
                 {p.name}
@@ -769,7 +769,7 @@ function OpenIdeasHost({
         <div style={{ display: 'grid', gap: 6 }}>
           {submissions.map(({ player, sub }) => (
             <div key={player.id} style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 12.5 }}>
-              <PlayerPreview name={player.name} draft={player.data?.live as LiveDraft} now={now}>
+              <PlayerPreview name={player.name} draft={player.data?.live as LiveDraft} focus={player.data?.focus as LiveFocus} now={now}>
                 <Avatar seed={player.id} size={20} />
               </PlayerPreview>
               <strong>{player.name}:</strong> {sub.text}

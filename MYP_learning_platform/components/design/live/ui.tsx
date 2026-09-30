@@ -3,7 +3,7 @@
 import { createContext, useContext, useState, type CSSProperties, type ReactNode } from 'react'
 import type { LiveTheme } from '@/data/design/live/types'
 import { avatarSvg } from '@/lib/design-live/avatar'
-import { isDraftFresh, type LiveDraft } from '@/lib/design-live/hooks'
+import { isDraftFresh, type LiveDraft, type LiveFocus } from '@/lib/design-live/hooks'
 import { createClient } from '@/lib/supabase/client'
 
 export const cardStyle = (accent?: string): CSSProperties => ({
@@ -225,13 +225,35 @@ export function ProgressStream({
   )
 }
 
+/** Green while a student's browser tab is the foreground one, red while
+ *  they've switched away (another tab, another app, minimised) — with the
+ *  running switch count on hover. A stale reading (nothing reported in a
+ *  while, e.g. their device dropped offline) fades the dot instead of
+ *  confidently claiming green or red. Renders nothing until the student's
+ *  device has reported at least once (see useTabFocusReporter). */
+const FOCUS_STALE_MS = 15000
+
+export function FocusDot({ focus, now }: { focus?: LiveFocus | null; now: number }) {
+  if (!focus?.at) return null
+  const stale = now - Date.parse(focus.at) > FOCUS_STALE_MS
+  const color = stale ? 'var(--border-strong)' : focus.visible ? '#1FA98A' : '#D6425E'
+  const label = stale ? 'No recent signal' : focus.visible ? 'On this activity' : 'Switched away from this tab'
+  return (
+    <span title={`${label}${focus.switches ? ` · switched away ${focus.switches}×` : ''}`} style={{ display: 'inline-flex', alignItems: 'center', gap: 2 }}>
+      <span aria-hidden style={{ width: 8, height: 8, borderRadius: '50%', background: color, flexShrink: 0 }} />
+      {focus.switches > 0 && <span style={{ fontSize: 9, fontWeight: 800, color: 'var(--text-muted)' }}>{focus.switches}×</span>}
+    </span>
+  )
+}
+
 /** Wraps a player's name/avatar with a hover preview of what they're
  *  currently typing (see lib/design-live/hooks.ts useLiveDraftReporter) — a
  *  minified window onto their in-progress answer, for the host dashboard.
  *  `now` should come from useNowTick so the "typing…" cue expires on its
  *  own. Must be rendered under a <PlayerPreviewProvider>. Renders
- *  `children` unchanged if there's no live draft to show. */
-export function PlayerPreview({ name, draft, now, children }: { name: string; draft?: LiveDraft | null; now: number; children: ReactNode }) {
+ *  `children` unchanged if there's no live draft to show. Also shows a
+ *  green/red tab-focus dot (see FocusDot) when `focus` is passed. */
+export function PlayerPreview({ name, draft, focus, now, children }: { name: string; draft?: LiveDraft | null; focus?: LiveFocus | null; now: number; children: ReactNode }) {
   const setPreview = useContext(PlayerPreviewContext)
   const fresh = isDraftFresh(draft, now)
   const canPreview = !!draft?.text
@@ -242,6 +264,7 @@ export function PlayerPreview({ name, draft, now, children }: { name: string; dr
       onMouseLeave={() => canPreview && setPreview?.(null)}
     >
       {children}
+      <FocusDot focus={focus} now={now} />
       {fresh && <span style={{ color: '#1FA98A', fontSize: 10, fontWeight: 800, animation: 'live-pulse 1.2s ease-in-out infinite' }}>✍️</span>}
     </span>
   )
