@@ -12,7 +12,7 @@ import { TEACH_SUBJECTS, paperTitle, subjectLabel } from '@/lib/subjects'
 import AssignSessions from '@/components/teacher/AssignSessions'
 import InviteCard from '@/components/teacher/InviteCard'
 import ClassLookPicker from '@/components/teacher/ClassLookPicker'
-import { AssignLibrary, DeleteAssignmentButton, RemoveMemberButton } from '@/components/teacher/ClassActions'
+import { AssignLibrary, DeleteAssignmentButton, RemoveMemberButton, DeleteClassButton, ReopenSessionButton } from '@/components/teacher/ClassActions'
 import StudentAnswerPeek from '@/components/teacher/StudentAnswerPeek'
 
 interface SessionRow { code: string; activity_id: string; status: string; created_at: string }
@@ -294,6 +294,7 @@ export default async function ClassPage({ params, searchParams }: { params: { id
                           <div className="flex items-center gap-2 text-xs font-bold">
                             <span className="rounded-full px-3 py-1" style={{ background: s.status === 'active' ? 'var(--accent-soft, #ffedd5)' : 'var(--surface-inset)', color: s.status === 'active' ? 'var(--accent, #c2410c)' : 'var(--text-muted)' }}>{s.status === 'active' ? 'Live now' : 'Ended'}</span>
                             <span style={muted}>{joined}/{memberList.length} joined{gradedCount > 0 ? ` · ${gradedCount} graded` : ''}</span>
+                            <span onClick={(e) => e.preventDefault()}><ReopenSessionButton activityId={s.activity_id} code={s.code} activityExists={!!activity} /></span>
                           </div>
                         </summary>
                         {memberList.length === 0 ? <p className="mt-3 text-sm" style={muted}>No students in this class yet.</p> : (
@@ -338,6 +339,11 @@ export default async function ClassPage({ params, searchParams }: { params: { id
                     <RemoveMemberButton classId={cls.id} userId={m.user_id} name={m.name} />
                   </div>
                 ))}
+              </div>
+              <div className="mt-6 rounded-[var(--radius-card)] p-5" style={glass}>
+                <h3 className="text-lg font-extrabold">Danger zone</h3>
+                <p className="mt-1 text-sm" style={muted}>Delete this class for good.</p>
+                <div className="mt-3"><DeleteClassButton classId={cls.id} className={cls.name} /></div>
               </div>
             </section>
           )}

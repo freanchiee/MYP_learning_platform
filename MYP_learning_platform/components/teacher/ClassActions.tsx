@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
+import { hostStorageKey } from '@/lib/design-live/hooks'
 
 const ghost = { border: '1px solid var(--border-strong)', color: 'var(--text)' } as const
 const solid = { background: 'var(--gradient-cta)', color: 'var(--text-on-accent)' } as const
@@ -109,6 +110,84 @@ export function RemoveMemberButton({ classId, userId, name }: { classId: string;
       style={ghost}
     >
       Remove
+    </button>
+  )
+}
+
+// Manage class: permanently delete the class itself. Students, assignments and
+// progress tied to it are gone too (the DB cascades them) — but any live
+// sessions that were ever run for it are NOT deleted, just unassigned (their
+// class_id is set null by the DB), so a teacher's "My Live Class History"
+// still has everything. Typing the class name is the confirmation, same
+// weight as the destructive actions elsewhere in the app.
+export function DeleteClassButton({ classId, className }: { classId: string; className: string }) {
+  const router = useRouter()
+  const [open, setOpen] = useState(false)
+  const [typed, setTyped] = useState('')
+  const [busy, setBusy] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+
+  if (!open) {
+    return (
+      <button onClick={() => setOpen(true)} className="rounded-[var(--radius-control)] px-4 py-2 text-xs font-black tracking-wider" style={{ border: '1.5px solid var(--danger, #D6425E)', color: 'var(--danger, #D6425E)' }}>
+        🗑️ Delete this class
+      </button>
+    )
+  }
+
+  return (
+    <div className="rounded-[var(--radius-card)] p-4" style={{ border: '1.5px solid var(--danger, #D6425E)', background: 'var(--surface-inset)' }}>
+      <div className="text-sm font-bold" style={{ color: 'var(--danger, #D6425E)' }}>This permanently deletes &quot;{className}&quot;</div>
+      <p className="mt-1 text-xs" style={{ color: 'var(--text-muted)' }}>
+        Every student is removed from it and all its assignments go with it. Live sessions you&apos;ve hosted for it are kept (still in your live-class history), just no longer attached to this class. This cannot be undone.
+      </p>
+      <label className="mt-3 block text-xs font-bold" style={{ color: 'var(--text-muted)' }}>
+        Type <b>{className}</b> to confirm
+        <input value={typed} onChange={(e) => setTyped(e.target.value)} className="mt-1 w-full rounded-[var(--radius-control)] px-3 py-2 text-sm" style={{ background: 'var(--surface)', border: '1px solid var(--border-strong)', color: 'var(--text)' }} />
+      </label>
+      {error && <p className="mt-2 text-xs" style={{ color: 'var(--danger, #D6425E)' }}>{error}</p>}
+      <div className="mt-3 flex gap-2">
+        <button
+          disabled={busy || typed !== className}
+          onClick={async () => {
+            setBusy(true)
+            setError(null)
+            const { error: err } = await createClient().from('classes').delete().eq('id', classId)
+            setBusy(false)
+            if (err) return setError(err.message)
+            router.push('/dashboard')
+          }}
+          className="rounded-[var(--radius-control)] px-4 py-2 text-xs font-black tracking-wider disabled:opacity-40"
+          style={{ background: 'var(--danger, #D6425E)', color: '#fff' }}
+        >
+          {busy ? 'Deleting…' : 'Delete permanently'}
+        </button>
+        <button onClick={() => { setOpen(false); setTyped(''); setError(null) }} className="rounded-[var(--radius-control)] px-4 py-2 text-xs font-bold" style={ghost}>
+          Cancel
+        </button>
+      </div>
+    </div>
+  )
+}
+
+// Live sessions History: jump straight into that exact past session's host
+// dashboard (same "remember which code to reopen" trick as My Live Class
+// History / the class dashboard card). Disabled if the activity it was built
+// from no longer exists in the registry.
+export function ReopenSessionButton({ activityId, code, activityExists }: { activityId: string; code: string; activityExists: boolean }) {
+  const router = useRouter()
+  return (
+    <button
+      disabled={!activityExists}
+      title={activityExists ? undefined : 'This activity no longer exists'}
+      onClick={() => {
+        localStorage.setItem(hostStorageKey(activityId), code)
+        router.push(`/design/live/${activityId}?host=1`)
+      }}
+      className="rounded-[var(--radius-control)] px-3 py-1.5 text-xs font-black tracking-wider disabled:cursor-not-allowed disabled:opacity-40"
+      style={solid}
+    >
+      Open dashboard →
     </button>
   )
 }
