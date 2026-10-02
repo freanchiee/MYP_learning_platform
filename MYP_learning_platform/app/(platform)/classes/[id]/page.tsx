@@ -294,7 +294,7 @@ export default async function ClassPage({ params, searchParams }: { params: { id
                           <div className="flex items-center gap-2 text-xs font-bold">
                             <span className="rounded-full px-3 py-1" style={{ background: s.status === 'active' ? 'var(--accent-soft, #ffedd5)' : 'var(--surface-inset)', color: s.status === 'active' ? 'var(--accent, #c2410c)' : 'var(--text-muted)' }}>{s.status === 'active' ? 'Live now' : 'Ended'}</span>
                             <span style={muted}>{joined}/{memberList.length} joined{gradedCount > 0 ? ` · ${gradedCount} graded` : ''}</span>
-                            <span onClick={(e) => e.preventDefault()}><ReopenSessionButton activityId={s.activity_id} code={s.code} activityExists={!!activity} /></span>
+                            <ReopenSessionButton activityId={s.activity_id} code={s.code} activityExists={!!activity} />
                           </div>
                         </summary>
                         {memberList.length === 0 ? <p className="mt-3 text-sm" style={muted}>No students in this class yet.</p> : (

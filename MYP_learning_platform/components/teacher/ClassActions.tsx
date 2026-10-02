@@ -180,7 +180,8 @@ export function ReopenSessionButton({ activityId, code, activityExists }: { acti
     <button
       disabled={!activityExists}
       title={activityExists ? undefined : 'This activity no longer exists'}
-      onClick={() => {
+      onClick={(e) => {
+        e.preventDefault() // this button usually sits inside a <summary> — don't also toggle it open/closed
         localStorage.setItem(hostStorageKey(activityId), code)
         router.push(`/design/live/${activityId}?host=1`)
       }}
