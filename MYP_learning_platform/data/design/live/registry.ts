@@ -4,9 +4,10 @@ import { MYP2_EVERYDAY_NEEDS } from './myp2-everyday-needs'
 import { MYP3_UNIT1_KICKOFF } from './myp3-unit1-kickoff'
 import { MYP3_UNIT1_KICKOFF_EXTENDED } from './myp3-unit1-kickoff-extended'
 import { MYP4_PROTOTYPING } from './myp4-prototyping'
+import { MYP4_DOCUMENTING_BUILD } from './myp4-documenting-build'
 import { MYP5_SUSTAINABILITY } from './myp5-sustainability'
 
-export const LIVE_ACTIVITIES: LiveActivityDefinition[] = [MYP2_DESIGN_STUDIO, MYP2_EVERYDAY_NEEDS, MYP3_UNIT1_KICKOFF, MYP3_UNIT1_KICKOFF_EXTENDED, MYP4_PROTOTYPING, MYP5_SUSTAINABILITY]
+export const LIVE_ACTIVITIES: LiveActivityDefinition[] = [MYP2_DESIGN_STUDIO, MYP2_EVERYDAY_NEEDS, MYP3_UNIT1_KICKOFF, MYP3_UNIT1_KICKOFF_EXTENDED, MYP4_PROTOTYPING, MYP4_DOCUMENTING_BUILD, MYP5_SUSTAINABILITY]
 
 export const YEARS: MypYear[] = ['MYP2', 'MYP3', 'MYP4', 'MYP5']
 
