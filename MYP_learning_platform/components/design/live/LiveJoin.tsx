@@ -909,6 +909,39 @@ function WorksheetFieldInput({
       </label>
     )
   }
+  if (field.type === 'checklist') {
+    const items: { label: string; have: boolean }[] = Array.isArray(value) ? value : []
+    const setItem = (i: number, patch: Partial<{ label: string; have: boolean }>) => {
+      const next = [...items]
+      next[i] = { ...next[i], ...patch }
+      onChange(next)
+    }
+    const addItem = () => onChange([...items, { label: '', have: false }])
+    const removeItem = (i: number) => onChange(items.filter((_, idx) => idx !== i))
+    const gotCount = items.filter((it) => it.have).length
+    return (
+      <div>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
+          <div style={{ fontSize: 12, fontWeight: 700, color: 'var(--text-muted)' }}>{field.label}</div>
+          {items.length > 0 && <div style={{ fontSize: 11, fontWeight: 800, color: gotCount === items.length ? '#1FA98A' : 'var(--text-muted)' }}>{gotCount}/{items.length} ready</div>}
+        </div>
+        {field.hint && <div style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 6 }}>{field.hint}</div>}
+        <div style={{ display: 'grid', gap: 6, marginTop: 6 }}>
+          {items.map((it, i) => (
+            <div key={i} style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+              <input type="checkbox" checked={it.have} onChange={(e) => setItem(i, { have: e.target.checked })} style={{ width: 18, height: 18, flexShrink: 0 }} aria-label={`Got ${it.label || 'this item'}?`} />
+              <input value={it.label} placeholder={field.placeholder || 'e.g. Cardboard'} onChange={(e) => setItem(i, { label: e.target.value })} style={{ ...inputStyle, flex: 1, textDecoration: it.have ? 'line-through' : 'none', opacity: it.have ? 0.7 : 1 }} />
+              <button onClick={() => removeItem(i)} title="Remove" style={{ background: 'transparent', border: 'none', cursor: 'pointer', fontSize: 14, color: 'var(--text-muted)', padding: 4 }}>✕</button>
+            </div>
+          ))}
+          {items.length === 0 && <div style={{ fontSize: 12, color: 'var(--text-subtle)', fontStyle: 'italic' }}>Nothing added yet.</div>}
+        </div>
+        <button onClick={addItem} style={{ ...btnStyle('var(--surface)'), marginTop: 8, fontSize: 12 }}>
+          + Add item
+        </button>
+      </div>
+    )
+  }
   // table
   const rows: Record<string, string>[] = Array.isArray(value) && value.length ? value : Array.from({ length: field.minRows || 2 }, () => ({}))
   const setRow = (i: number, colKey: string, v: string) => {

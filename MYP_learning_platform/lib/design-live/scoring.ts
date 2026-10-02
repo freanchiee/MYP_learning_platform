@@ -36,6 +36,9 @@ export function worksheetSectionPct(section: WorksheetSection, values: Record<st
     } else if (f.type === 'image') {
       // An empty array (the field's untouched default) is truthy in JS — check length, not just presence.
       if (Array.isArray(v) && v.length > 0) filled += 1
+    } else if (f.type === 'checklist') {
+      // "Complete" means they've actually listed something, not that every item is checked off yet.
+      if (Array.isArray(v) && v.some((it) => it?.label?.trim())) filled += 1
     } else if (typeof v === 'string' && v.trim().length > (f.type === 'textarea' ? 10 : 1)) {
       filled += 1
     } else if (v) {

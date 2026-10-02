@@ -58,7 +58,7 @@ export interface McqStage extends StageTiming {
 // ---------------------------------------------------------------
 // Stage: Worksheet (structured research/build artefacts + grading)
 // ---------------------------------------------------------------
-export type WorksheetFieldType = 'text' | 'textarea' | 'select' | 'table' | 'personaChat' | 'personalityPrompt' | 'opportunityCards' | 'makeCards' | 'productCards' | 'image'
+export type WorksheetFieldType = 'text' | 'textarea' | 'select' | 'table' | 'personaChat' | 'personalityPrompt' | 'opportunityCards' | 'makeCards' | 'productCards' | 'image' | 'checklist'
 
 export interface WorksheetTableColumn {
   key: string
@@ -102,6 +102,12 @@ export interface WorksheetImageUpload {
   url: string
   name: string
   uploadedAt: string
+}
+
+/** One row of a 'checklist' field — a material/tool to get, and whether they have it yet. */
+export interface ChecklistItem {
+  label: string
+  have: boolean
 }
 
 /** Short, student-facing brief that leads a stage: why, what, what you hand in, how it is assessed. */

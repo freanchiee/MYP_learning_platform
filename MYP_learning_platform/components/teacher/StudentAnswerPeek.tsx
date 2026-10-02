@@ -21,6 +21,12 @@ function fieldAnswerText(field: WorksheetField, value: unknown): string {
       .filter(Boolean)
       .join(' · ')
   }
+  if (field.type === 'checklist' && Array.isArray(value)) {
+    return (value as { label: string; have: boolean }[])
+      .filter((it) => it.label?.trim())
+      .map((it) => `${it.have ? '✅' : '◻️'} ${it.label}`)
+      .join(' · ')
+  }
   if (field.type === 'text' || field.type === 'textarea' || field.type === 'select') return String(value)
   return '' // interactive types (personaChat, cards, etc.) — shown as a count below instead
 }

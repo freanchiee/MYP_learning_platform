@@ -206,6 +206,27 @@ export function WorksheetReviewModal({
                           </div>
                         )
                       }
+                      if (f.type === 'checklist') {
+                        const items = (data[f.key] as { label: string; have: boolean }[] | undefined) || []
+                        const got = items.filter((it) => it.have).length
+                        return (
+                          <div key={f.key} style={{ fontSize: 12 }}>
+                            <strong style={{ color: 'var(--text-muted)', fontSize: 11 }}>{f.label}</strong>
+                            {items.length === 0 ? (
+                              <div style={{ color: 'var(--text-muted)', fontStyle: 'italic', marginTop: 2 }}>Nothing listed yet</div>
+                            ) : (
+                              <>
+                                <div style={{ fontSize: 10.5, fontWeight: 800, color: got === items.length ? '#1FA98A' : 'var(--text-muted)', marginTop: 2 }}>{got}/{items.length} ready</div>
+                                <ul style={{ margin: '4px 0 0', paddingLeft: 18 }}>
+                                  {items.filter((it) => it.label?.trim()).map((it, i) => (
+                                    <li key={i} style={{ color: it.have ? 'var(--text)' : 'var(--text-muted)' }}>{it.have ? '✅' : '◻️'} {it.label}</li>
+                                  ))}
+                                </ul>
+                              </>
+                            )}
+                          </div>
+                        )
+                      }
                       if (f.type === 'image') {
                         const v = data[f.key] as { url: string; name: string }[] | undefined
                         return (
