@@ -22,6 +22,17 @@ interface AssignmentRow { id: string; kind: string; subject: string; ref: string
 
 const BANKS: Record<string, { topicCanonical?: string }[]> = { biology: BIOLOGY_BANK, chemistry: CHEMISTRY_BANK, physics: PHYSICS_BANK }
 
+// A couple of activities carry a plain function in their config (see
+// myp3-unit1-kickoff-extended's exemplarsByChoice.extractKey) — fine to use
+// client-side, but this page is a Server Component and Next.js cannot
+// serialize a function across the Server->Client prop boundary. The student
+// answer peek only ever reads `stages`/`title`/`icon`/`theme`, never
+// exemplarsByChoice, so just drop it before handing the activity down.
+function clientSafeActivity<T extends { exemplarsByChoice?: unknown } | undefined>(activity: T): T {
+  if (!activity) return activity
+  return { ...activity, exemplarsByChoice: undefined }
+}
+
 const glass = { background: 'var(--surface-elevated)', border: '1px solid var(--border)' } as const
 const muted = { color: 'var(--text-muted)' } as const
 
@@ -237,7 +248,7 @@ export default async function ClassPage({ params, searchParams }: { params: { id
                             return (
                               <td key={s.code} className="p-3" style={{ color: c.on ? 'var(--text)' : 'var(--text-subtle)' }}>
                                 {c.on && c.playerId && activity ? (
-                                  <StudentAnswerPeek activity={activity} playerId={c.playerId} playerName={m.name || 'Student'} sessionActive={s.status === 'active'} savedData={c.data ?? null}>
+                                  <StudentAnswerPeek activity={clientSafeActivity(activity)} playerId={c.playerId} playerName={m.name || 'Student'} sessionActive={s.status === 'active'} savedData={c.data ?? null}>
                                     {c.text}
                                   </StudentAnswerPeek>
                                 ) : (
@@ -303,7 +314,7 @@ export default async function ClassPage({ params, searchParams }: { params: { id
                               <div key={m.user_id} className="flex items-center justify-between gap-3 py-2 text-sm">
                                 <span className="font-semibold">{m.name || 'Student'}</span>
                                 {c.on && c.playerId && activity ? (
-                                  <StudentAnswerPeek activity={activity} playerId={c.playerId} playerName={m.name || 'Student'} sessionActive={s.status === 'active'} savedData={c.data ?? null}>
+                                  <StudentAnswerPeek activity={clientSafeActivity(activity)} playerId={c.playerId} playerName={m.name || 'Student'} sessionActive={s.status === 'active'} savedData={c.data ?? null}>
                                     <span style={{ color: 'var(--text)' }}>{c.text}</span>
                                   </StudentAnswerPeek>
                                 ) : (
