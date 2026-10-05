@@ -36,9 +36,16 @@ components/design/live/          — the ENGINE (do not fork; extend it)
                                     teachers and students — nothing either role does is ever lost
   ChatPanel.tsx                  — private 1:1 host<->student chat thread (over live_events)
   Podium.tsx                     — the Kahoot-style top-3 podium + ranked list "victory screen"
+  ImageUploadField.tsx           — 'image' worksheet field: upload to the live-uploads bucket
+  SelfPaced.tsx                  — self-paced nav (student bar + host SelfPacedOverview)
+components/teacher/
+  StudentAnswerPeek.tsx          — hover-peek a student's answers + live typing, from the class dashboard
+  ClassActions.tsx               — DeleteClassButton, ReopenSessionButton, DeleteAssignmentButton, RemoveMemberButton
 app/(platform)/design/live/...   — routes (gated by the platform's existing login)
+app/(platform)/classes/[id]/page.tsx — class dashboard: Insights hover-peek, Live sessions History, Manage-class delete
 supabase/migrations/0004_live_classes.sql — the ONE generic schema (live_sessions/live_players/live_events/live_grades)
 supabase/migrations/0005_live_chat_rls.sql — scopes live_events reads/writes for private host<->student chat
+supabase migration live_uploads_bucket     — public-read 'live-uploads' Storage bucket for the 'image' field type
 ```
 
 ## The core idea: one generic schema, many activities
@@ -69,9 +76,11 @@ shaped by your activity's own stage config instead.
      ✓/✕/●) or `pacing: 'host-paced'` (host controls the current question,
      everyone answers the same one, host can lock/reveal/advance — this is
      the one to use for a team-vs-team quiz).
-   - **`worksheet`** — structured fields (`text`/`textarea`/`select`/`table`)
+   - **`worksheet`** — structured fields (`text`/`textarea`/`select`/`table`/
+     `image`/`checklist`, plus the interactive card/chat field types below)
      grouped into sections, with auto-completeness % and an optional
-     `grading` stage after it.
+     `grading` stage after it. See "Worksheet field types: image upload and
+     checklist" below for the two newest ones.
    - **`openIdeas`** — quick-fire free-text prompts, host-paced, optional
      constraint cards drawn at random, optional teacher bonus-point buttons
      (for things a machine can't grade: creativity, empathy).
@@ -392,7 +401,169 @@ A `learn` stage (`LearnStage.tsx`) is a short run of cards: one idea per card, a
 
 ## Self-paced activities
 
-Set `selfPaced: true` (and optionally `startStage`) on the activity. Each student then moves through the stages on their own: their position is `me.data._nav = { stage, max }` (`SelfPaced.tsx`, `navOf`), so it survives refresh and device changes, and a student with no position starts at `startStage` — use it to begin where an earlier activity ended (students can still go back). Host-paced quizzes automatically run self-paced (the answer shows at once and points are awarded immediately); the `learn` stage has no Present mode. The host screen shows where every student is (`SelfPacedOverview`) and its Next/Previous only change which stage's dashboard the teacher is watching. Put the stages a student might already have done at the front, then set `startStage` to the first new one.
+Set `selfPaced: true` (and optionally `startStage`) on the activity. Each student then moves through the stages on their own: their position is `me.data._nav = { stage, max }` (`SelfPaced.tsx`, `navOf`), so it survives refresh and device changes, and a student with no position starts at `startStage` — use it to begin where an earlier activity ended (students can still go back). Host-paced quizzes automatically run self-paced (the answer shows at once and points are awarded immediately); the `learn` stage has no Present mode. OpenIdeas prompts get their own local-index self-paced branch too (decoupled `useState`, explicit "Next prompt →" button — mirrors the self-paced MCQ pattern — plus the autosave described below). The host screen shows where every student is (`SelfPacedOverview`) and its Next/Previous only change which stage's dashboard the teacher is watching. Put the stages a student might already have done at the front, then set `startStage` to the first new one.
+
+**A self-paced student is not tied to the shared session clock.** `LiveJoin`'s `canWork` flag is `session.status === 'active' || (selfPaced && session.status === 'ended')` — every stage-rendering condition uses `canWork`, not a raw `session.status === 'active'` check, so a student who hasn't finished keeps working even after the teacher ends the session (the host-paced-only podium/final-results screen is gated `!selfPaced` so it doesn't compete with their still-in-progress work). Mirror this `canWork` pattern if you add a new stage-rendering condition to `LiveJoin.tsx`.
+
+**The host's own navigation for a self-paced activity is local, not shared.** `LiveHost.tsx` keeps a `selfPacedViewIdx` (`useState`, seeded from `defaultStart(activity)`) instead of reading `session.stage_idx` — Next/Previous there just change `selfPacedViewIdx`, no DB write. This was a real production bug once: the shared `stage_idx` column is a bare integer, and if you edit an activity's `stages` array (add/remove/reorder stages) while a self-paced session is still running, a stale `stage_idx` on that old row indexes into the *new* array and can point at the wrong stage or past the end — `activity.stages[stage_idx]` returns `undefined` and the host screen crashes. **If you add another place that derives "which stage" for a self-paced activity, derive it from local view state, never from the shared `session.stage_idx` row.**
+
+## Autosave — no activity should ever need a "remember to click Save"
+
+Every worksheet section autosaves on a 2.5s quiet timer (`WorksheetPlayer`'s
+`useEffect` in `LiveJoin.tsx`, writing changed sections via `patchMyData`) —
+the "💾 Save" button is just an instant manual shortcut on top of that, not
+the only way to persist. `OpenIdeasPlayer` has the same 2.5s debounce (added
+after a real incident: students were losing typed ideas by not clicking
+"Submit my idea" before the teacher advanced the prompt or the class ended).
+MCQ answers, persona-chat messages, and `personalityPrompt`/`opportunityCards`/
+`makeCards`/`productCards`/`image` field picks all persist **immediately** on
+change — there's no debounce because there's no "draft" state for a discrete
+click/upload. **If you add a new interactive field type, decide up front
+whether it behaves like a draft (debounce it, like text) or a discrete action
+(persist it immediately, like a card pick or an upload) — never leave a field
+type that only saves on an explicit click with no autosave backstop.** Low-
+stakes, non-assessed interactions (the optional end-of-stage star-rating
+feedback, the teacher's own "Save grade" button) are the only intentional
+exceptions — they don't hold student activity work.
+
+## Worksheet field types: image upload and checklist
+
+Two more `WorksheetFieldType`s beyond the original list in "Authoring a new
+activity":
+
+- **`image`** (`ImageUploadField.tsx`) — a student attaches a screenshot or
+  photo straight from their device (a build-log photo, a sketch of a
+  wireframe) instead of being told to "keep it in your own folder" or "paste
+  a link". Uploads go to the public `live-uploads` Supabase Storage bucket
+  (migration `live_uploads_bucket`: public-read, `authenticated` can insert,
+  uploader can delete their own via `owner = auth.uid()`), at
+  `${sessionCode}/${playerId}/${stageKey}-${fieldKey}/...`. The field's value
+  is always an array of `{url, name, uploadedAt}` (`WorksheetImageUpload`),
+  even for a single-photo field — set `multiple: true` on the `WorksheetField`
+  to let a student attach more than one. Persists immediately on a successful
+  upload (no debounce — there's no "draft" state for a file). Renders as real
+  thumbnails (not `[object Object]`) in `WorksheetReview.tsx` and
+  `StudentAnswerPeek.tsx` — if you add another field type that stores
+  something other than a plain string, add an explicit branch to both of
+  those, and to `worksheetSectionPct` in `lib/design-live/scoring.ts` (an
+  empty array is *truthy* in JS, so the generic `else if (v)` fallback there
+  would wrongly count an untouched field as "filled" — check `.length`).
+- **`checklist`** (`ChecklistItem[]`, `{label, have}`) — a materials/tools
+  list, each row with a checkbox for "got it yet", an X/Y-ready counter, add/
+  remove rows. Scored as filled once at least one item has a label (not
+  gated on every box being ticked — the point is tracking readiness, not
+  requiring completion to "count"). Rendered as a ✅/◻️ list (not raw JSON)
+  in the same two teacher-facing views as `image`.
+
+## Tracking whether a student is actually on the activity
+
+`useTabFocusReporter` (`lib/design-live/hooks.ts`) listens for
+`document.visibilitychange` in `LiveJoin.tsx` and reports `{visible, switches,
+at}` (`LiveFocus`) into `live_players.data.focus` — green while the tab is
+foregrounded, red the instant it isn't (another tab, another app, the window
+minimised), with a running count of how many times it's switched away this
+session. It seeds the switch counter from whatever was already saved (so a
+reload keeps counting up, not resetting) via a ref kept fresh every render —
+**the listener itself is registered exactly once** (effect deps `[enabled]`,
+`enabled = !!me`), so don't add `me`/`patchRawData` to that effect's deps or
+you'll either miss re-registering correctly or write back a stale snapshot of
+`data` on every render.
+
+On the host side, `<FocusDot focus={...} now={now} />` (`ui.tsx`) renders the
+dot — green/red/grey (grey = no report in the last 15s, i.e. stale/offline,
+so it never confidently claims on/off-task from a dead connection) plus the
+switch count on hover. It's wired into the shared `<PlayerPreview>` (so
+every dashboard that already shows a player's name — roster, MCQ/worksheet/
+openIdeas tables — gets the dot for free, no per-dashboard layout change) and
+separately into `SelfPacedOverview` (which doesn't use `PlayerPreview`). **If
+you add a new place that lists players by name, pass `focus={p.data?.focus as
+LiveFocus}` into `PlayerPreview` (or render `<FocusDot>` directly) rather
+than reinventing the on/off-task signal.**
+
+**This only takes effect for tabs that load the updated code.** A student (or
+the host) who already has the page open in their browser when you deploy a
+change is still running the old bundle — a refresh (or reopening the join
+link) is required before their tab starts reporting/rendering the new
+feature. This is a normal SPA-deploy limitation, not a bug — mention it
+whenever you ship something that depends on already-open sessions picking it
+up.
+
+## Teacher-facing monitoring: hover-peek, class dashboard, history
+
+**`StudentAnswerPeek.tsx`** (`components/teacher/`) — hovering (or
+keyboard-focusing) a student's live-task cell anywhere in the class
+dashboard (`app/(platform)/classes/[id]/page.tsx`, Insights tab AND the Live
+sessions History tab) pops a small popover: every worksheet stage's written
+answers (images shown as thumbnails, checklists/tables summarised as text),
+plus, while the session is still active, a live "✍️ typing now" preview with
+the last ~140 characters of their current draft. It subscribes to the
+player's `live_players` row (`useLiveRow`) **only while the popover is open
+AND the session is still active** — otherwise it reads from the server-
+fetched `savedData` prop with zero extra queries, so hovering a finished
+session's roster doesn't open N realtime subscriptions.
+
+**Class dashboard → Live sessions → History**: every session ever run for
+that class (not just the currently-assigned one) lists as an expandable
+card — date, live/ended status, joined/graded counts, and (via
+`ReopenSessionButton`) an "Open dashboard →" button that jumps straight into
+that exact session's host screen (the same `hostStorageKey` + `?host=1`
+trick `MyActivityHistory.tsx` and the teacher-hub class-card shortcut both
+use). Disabled with a tooltip if the activity it was built from no longer
+exists in the registry.
+
+**Teacher hub class card**: each class card on `/dashboard` shows its most
+recently hosted live session (icon, title, date, status) with the same
+"jump to dashboard" button — resolved server-side in
+`TeacherDashboard.tsx` (one most-recent `live_sessions` row per class,
+`activityExists` computed via `getLiveActivity` so the button can disable
+itself cleanly instead of 404ing).
+
+**Manage class → Danger zone**: `DeleteClassButton` deletes the `classes`
+row (type-the-class-name-to-confirm). The DB already cascades
+`class_members`/`class_assignments` and sets `live_sessions.class_id` to
+`null` rather than deleting those rows (checked via the FK constraints
+directly, not assumed) — so a teacher's hosted-session history survives a
+class being deleted, consistent with the "nothing you've hosted or joined
+is ever lost" philosophy elsewhere in this engine.
+
+## ⚠️ Server/Client boundary: never pass a function-bearing `activity` into a Client Component
+
+**This has caused two separate production outages** (both on
+`myp3-unit1-kickoff-extended`, the one activity whose `exemplarsByChoice`
+carries a plain `extractKey` function) — know this pattern cold before
+touching anything that passes `activity` as a prop:
+
+Next.js cannot serialize a function across the Server Component → Client
+Component prop boundary. Any `app/.../page.tsx` that is a Server Component
+(no `'use client'`) and does `getLiveActivity(id)` then hands the result
+(or any object containing it) to a Client Component **will 500 for every
+request**, the instant that activity's config contains a function anywhere
+in its object graph. Both real incidents:
+
+1. `/design/live/[activityId]/page.tsx` passed `activity` straight into
+   `<LiveActivityRunner>` (client). Fixed by making that whole page a
+   Client Component (`'use client'` at the top) — `getLiveActivity` now
+   runs client-side too, so `activity` never crosses the boundary at all.
+2. `app/(platform)/classes/[id]/page.tsx` (a Server Component doing a lot
+   of real server-only work — `redirect`, `notFound`, several Supabase
+   queries, so turning the *whole page* client-side was not an option)
+   passed `activity` into `<StudentAnswerPeek>` (client) at two call
+   sites. Fixed with a narrow `clientSafeActivity()` helper that strips
+   `exemplarsByChoice` before the prop crosses the boundary —
+   `StudentAnswerPeek` only ever reads `stages`/`title`/`icon`, never
+   `exemplarsByChoice`, so this is lossless for that component.
+
+**When adding a new Server Component that touches `getLiveActivity()` and
+also renders a Client Component:** either (a) make the whole page a Client
+Component if it has no real server-only work, or (b) strip anything
+function-bearing (currently just `exemplarsByChoice`) before it reaches a
+client prop. Don't assume "it worked for every other activity in manual
+testing" proves it's safe — the crash is **config-dependent**, not route-
+dependent: it only fires for an activity whose `exemplarsByChoice` actually
+has an `extractKey`, so testing with a different activity (or no sessions
+for the risky one in that class) silently passes. Search for
+`getLiveActivity\(` to find every place that could re-trigger this before
+shipping a change near one.
 
 ## What's NOT built yet (known gaps — extend deliberately, don't hack around)
 
