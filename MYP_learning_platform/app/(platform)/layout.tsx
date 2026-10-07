@@ -84,6 +84,7 @@ export default async function PlatformLayout({ children }: { children: ReactNode
             { href: '/design',    label: 'Design' },
             { href: '/resources', label: 'Resources' },
             { href: '/settings',  label: 'Settings' },
+            { href: '/pricing',   label: 'Upgrade' },
           ].map(({ href, label }) => (
             <Link
               key={href}
