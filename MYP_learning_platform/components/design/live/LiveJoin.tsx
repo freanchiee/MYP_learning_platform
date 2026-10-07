@@ -25,7 +25,7 @@ import { feedbackOf } from '@/lib/design-live/feedback'
 import { CRITERION_LETTERS } from '@/lib/design-live/criteria'
 import { SustainabilityGamePlayer } from './game/SustainabilityGame'
 import { LearnPlayer } from './LearnStage'
-import { SelfPacedBar, navOf } from './SelfPaced'
+import { SelfPacedBar, ClassTelemetry, navOf } from './SelfPaced'
 import { getPersona } from '@/data/design/live/personas'
 import { useCelebration, CelebrationOverlay } from './Celebration'
 
@@ -352,6 +352,7 @@ export default function LiveJoin({ activity, initialCode }: { activity: LiveActi
           )}
 
           {canWork && selfPaced && <SelfPacedBar activity={activity} idx={myIdx} onGo={goStage} />}
+          {canWork && selfPaced && <ClassTelemetry activity={activity} players={players} meId={me.id} />}
 
           {/* KEYED ON THE STAGE ITSELF: this forces React to fully discard and
               rebuild everything below — not just swap props — the instant the
