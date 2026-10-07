@@ -13,9 +13,10 @@ export const MYP4_PROTOTYPING: LiveActivityDefinition = {
   id: 'myp4-prototyping',
   year: 'MYP4',
   title: 'Prototyping for People',
-  subtitle: 'Ergonomics, Structure and Inclusion — pick a direction, build a persona and empathy map, plan your research.',
+  subtitle: 'Self-paced — pick a direction, build a persona and empathy map, plan your research.',
   icon: '🦾',
   theme: { accent: '#5C3FD6', from: '#150F2A', via: '#1D1640', to: '#241C46' },
+  selfPaced: true,
   stages: [
     {
       type: 'worksheet',
