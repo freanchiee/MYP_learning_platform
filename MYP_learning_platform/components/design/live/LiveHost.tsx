@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect, useMemo, useState } from 'react'
-import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
 import { createClient } from '@/lib/supabase/client'
 import { useLiveRow, useLiveTable, generateJoinCode, hostStorageKey, useNowTick, isDraftFresh, type LiveDraft, type LiveFocus } from '@/lib/design-live/hooks'
@@ -9,13 +8,13 @@ import { worksheetSectionPct } from '@/lib/design-live/scoring'
 import type { LiveActivityDefinition, McqStage, WorksheetStage, OpenIdeasStage, GradingStage } from '@/data/design/live/types'
 import type { LiveSessionRow, LivePlayerRow, LiveGradeRow, LiveEventRow } from '@/lib/design-live/types'
 import { getPersona } from '@/data/design/live/personas'
-import { cardStyle, btnStyle, inputStyle, pageBg, ErrorBanner, QRCode, Avatar, ProgressStream, PlayerPreview, PlayerPreviewProvider, ChatButton, QuickReactButton, QuickReactProvider, UnreadChatContext } from './ui'
+import { cardStyle, btnStyle, inputStyle, pageBg, ErrorBanner, Avatar, ProgressStream, PlayerPreview, PlayerPreviewProvider, ChatButton, QuickReactButton, QuickReactProvider, UnreadChatContext } from './ui'
 import ChatPanel from './ChatPanel'
-import ClassPicker from './ClassPicker'
 import { stateForAdvance, stateForBack } from '@/lib/design-live/stageNav'
 import { SustainabilityGameHost } from './game/SustainabilityGame'
 import { LearnHost } from './LearnStage'
-import { SelfPacedOverview, defaultStart } from './SelfPaced'
+import { defaultStart } from './SelfPaced'
+import { HostRibbon, ProgressDrawer, FloatingNav, JoinCard, useProgressDrawer } from './HostChrome'
 import { Podium } from './Podium'
 import { WorksheetReviewModal } from './WorksheetReview'
 import { FeedbackSummary, FeedbackOverview } from './StageFeedback'
@@ -72,6 +71,7 @@ export default function LiveHost({ activity }: { activity: LiveActivityDefinitio
   // was exactly that: reopening host for a self-paced session created before more
   // stages were added indexed straight into the new (differently shaped) stage list.
   const [selfPacedViewIdx, setSelfPacedViewIdx] = useState(() => defaultStart(activity))
+  const drawer = useProgressDrawer()
 
   useEffect(() => {
     const sb = createClient()
@@ -198,38 +198,29 @@ export default function LiveHost({ activity }: { activity: LiveActivityDefinitio
     <UnreadChatContext.Provider value={unreadIds}>
     <QuickReactProvider>
     <PlayerPreviewProvider>
-    <div style={pageBg(activity.theme)}>
+    <div style={{ ...pageBg(activity.theme), padding: 0 }}>
+      <HostRibbon
+        activity={activity}
+        code={code}
+        joinUrl={joinUrl}
+        hostId={hostId ?? null}
+        classId={session.class_id ?? null}
+        onNewSession={newSession}
+        stageLabel={session.status === 'active' && stage ? `${stage.icon} ${stage.label}` : session.status === 'lobby' ? 'Waiting for students' : 'Finished'}
+        progress={session.status === 'active' ? `${viewIdx + 1}/${activity.stages.length}` : undefined}
+      />
+      {session.status === 'active' && activity.selfPaced && (
+        <ProgressDrawer activity={activity} players={players} now={now} open={drawer.open} onToggle={drawer.setOpen} viewIdx={viewIdx} onPickStage={setSelfPacedViewIdx} />
+      )}
+      <div style={{ padding: '20px 16px 110px', paddingRight: 16 + (session.status === 'active' && activity.selfPaced ? drawer.reserve : 0), transition: 'padding-right .25s' }}>
       <div style={{ maxWidth: 900, margin: '0 auto', display: 'grid', gap: 16 }}>
-        <header style={{ textAlign: 'center', color: '#fff' }}>
-          <div style={{ fontSize: 12, fontWeight: 700, letterSpacing: 2, opacity: 0.7 }}>HOST SCREEN — PROJECT THIS</div>
-          <h1 style={{ fontSize: 26, margin: '4px 0' }}>
-            {activity.icon} {activity.title}
-          </h1>
-          <div style={{ fontSize: 13, opacity: 0.8 }}>{activity.subtitle}</div>
-        </header>
-
         <ErrorBanner message={apiError} onClose={() => setApiError(null)} />
-
-        <div style={{ ...cardStyle(activity.theme.accent), display: 'flex', gap: 20, alignItems: 'center', flexWrap: 'wrap', justifyContent: 'space-between' }}>
-          <div>
-            <div style={{ fontSize: 12, fontWeight: 700, color: 'var(--text-muted)' }}>SESSION CODE</div>
-            <div style={{ fontSize: 36, fontWeight: 800, letterSpacing: '0.08em' }}>{code}</div>
-            <div style={{ fontSize: 12, color: 'var(--text-muted)', wordBreak: 'break-all', marginTop: 4 }}>{joinUrl}</div>
-          </div>
-          {joinUrl && <QRCode url={joinUrl} />}
-          {hostId && code && <ClassPicker code={code} hostId={hostId} classId={session.class_id ?? null} accent={activity.theme.accent} />}
-          <div style={{ display: 'grid', gap: 6 }}>
-            <button onClick={newSession} style={{ ...btnStyle('var(--text-muted)'), fontSize: 12 }}>
-              ↻ New session
-            </button>
-            <Link href="/design/live/history" style={{ ...btnStyle('var(--text-muted)'), fontSize: 12, textAlign: 'center', textDecoration: 'none' }}>
-              📜 My history
-            </Link>
-          </div>
-        </div>
 
         {session.status === 'lobby' && (
           <div style={{ display: 'grid', gap: 14 }}>
+            <div style={{ ...cardStyle(activity.theme.accent), display: 'grid', justifyItems: 'center' }}>
+              <JoinCard code={code} joinUrl={joinUrl} qrSize={200} />
+            </div>
             {activity.teams ? (
               <div style={{ display: 'grid', gridTemplateColumns: `repeat(auto-fit, minmax(220px, 1fr))`, gap: 12 }}>
                 {activity.teams.map((t, ti) => (
@@ -269,13 +260,12 @@ export default function LiveHost({ activity }: { activity: LiveActivityDefinitio
           </div>
         )}
 
-        {session.status === 'active' && activity.selfPaced && <SelfPacedOverview activity={activity} players={players} now={now} />}
-
         {session.status === 'active' && stage && (
-          <StageHost activity={activity} stage={stage} viewIdx={viewIdx} session={session} players={players} grades={grades} patchState={patchState} advanceStage={advanceStage} goBack={goBack} run={run} now={now} onChat={openChat} onReview={setReviewPlayerId} />
+          <StageHost activity={activity} stage={stage} viewIdx={viewIdx} session={session} players={players} grades={grades} patchState={patchState} advanceStage={advanceStage} goBack={goBack} run={run} now={now} onChat={openChat} onReview={setReviewPlayerId} navInset={activity.selfPaced ? drawer.reserve : 0} />
         )}
 
         {session.status === 'ended' && <EndedHost activity={activity} players={players} session={session} onRestart={newSession} />}
+      </div>
       </div>
 
       {chatWithId && (
@@ -329,6 +319,7 @@ function StageHost({
   now,
   onChat,
   onReview,
+  navInset,
 }: {
   activity: LiveActivityDefinition
   stage: LiveActivityDefinition['stages'][number]
@@ -343,6 +334,7 @@ function StageHost({
   now: number
   onChat: (id: string) => void
   onReview: (id: string) => void
+  navInset: number
 }) {
   const isLastStage = viewIdx >= activity.stages.length - 1
   const advanceLabel = isLastStage ? 'Finish & show results →' : activity.selfPaced ? 'View next stage dashboard →' : 'Next stage →'
@@ -367,16 +359,7 @@ function StageHost({
 
       {stage.type !== 'grading' && <FeedbackSummary stageKey={stage.key} stageLabel={`${stage.icon} ${stage.label}`} players={players} compact />}
 
-      <div style={{ display: 'flex', justifyContent: 'center', gap: 12, flexWrap: 'wrap' }}>
-        {viewIdx > 0 && (
-          <button onClick={goBack} style={btnStyle(activity.theme.accent, false, true)} title={`Go back to ${activity.stages[viewIdx - 1].label}`}>
-            {activity.selfPaced ? '← Previous stage dashboard' : '← Previous stage'}
-          </button>
-        )}
-        <button onClick={advanceStage} style={btnStyle(activity.theme.accent, true, true)}>
-          {advanceLabel}
-        </button>
-      </div>
+      <FloatingNav activity={activity} viewIdx={viewIdx} advanceLabel={advanceLabel} onPrev={goBack} onNext={advanceStage} rightInset={navInset} />
     </div>
   )
 }

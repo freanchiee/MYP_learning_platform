@@ -12,8 +12,7 @@
 import { useEffect } from 'react'
 import type { LiveActivityDefinition } from '@/data/design/live/types'
 import type { LivePlayerRow } from '@/lib/design-live/types'
-import { Avatar, cardStyle, btnStyle, FocusDot, CollapsiblePanel } from './ui'
-import type { LiveFocus } from '@/lib/design-live/hooks'
+import { Avatar, cardStyle, btnStyle, CollapsiblePanel } from './ui'
 
 export interface Nav { stage: number; max: number }
 
@@ -67,51 +66,6 @@ export function SelfPacedBar({ activity, idx, onGo }: { activity: LiveActivityDe
         ))}
       </div>
     </div>
-  )
-}
-
-// ---------------------------------------------------------------- host panel
-export function SelfPacedOverview({ activity, players, now }: { activity: LiveActivityDefinition; players: LivePlayerRow[]; now: number }) {
-  const n = activity.stages.length
-  const rows = players.map((p) => ({ p, nav: navOf(p, activity) })).sort((a, b) => b.nav.max - a.nav.max)
-  const perStage = activity.stages.map((_, i) => rows.filter((r) => r.nav.stage === i).length)
-  return (
-    <CollapsiblePanel
-      storageKey="live:host:selfPacedOverview"
-      accent={activity.theme.accent}
-      title="🧭 Self-paced — where everyone is now"
-      summary={`${rows.length} student${rows.length === 1 ? '' : 's'} · ${rows.filter((r) => r.nav.max >= n - 1).length} finished`}
-    >
-      <div style={{ fontSize: 12.5, color: 'var(--text-muted)' }}>
-        Students move through the stages themselves, starting at “{activity.stages[defaultStart(activity)].label}”. The buttons below only change which stage’s dashboard you are watching.
-        {' '}The dot by each name is <span style={{ color: '#1FA98A', fontWeight: 800 }}>green</span> while they&apos;re on this tab and <span style={{ color: '#D6425E', fontWeight: 800 }}>red</span> while they&apos;ve switched away — the number is how many times.
-      </div>
-      <div style={{ display: 'flex', gap: 4, alignItems: 'flex-end', height: 46 }} aria-label="Students per stage">
-        {perStage.map((count, i) => (
-          <div key={i} title={`${activity.stages[i].label}: ${count}`} style={{ flex: 1, display: 'grid', gap: 2, justifyItems: 'center', alignContent: 'end' }}>
-            <span style={{ fontSize: 10, fontWeight: 800, color: 'var(--text-muted)' }}>{count || ''}</span>
-            <span style={{ width: '100%', minHeight: 4, height: Math.min(30, 4 + count * 8), background: count ? activity.theme.accent : 'var(--border)', borderRadius: 4 }} />
-          </div>
-        ))}
-      </div>
-      {rows.length === 0 ? (
-        <div style={{ fontSize: 13, color: 'var(--text-muted)' }}>Waiting for students…</div>
-      ) : (
-        <div style={{ display: 'grid', gap: 6 }}>
-          {rows.map(({ p, nav }) => (
-            <div key={p.id} style={{ display: 'grid', gridTemplateColumns: 'minmax(110px, 180px) 1fr auto', gap: 10, alignItems: 'center', fontSize: 12.5 }}>
-              <span style={{ display: 'flex', alignItems: 'center', gap: 6, fontWeight: 700 }}><Avatar seed={p.id} size={22} />{p.name}<FocusDot focus={p.data?.focus as LiveFocus} now={now} /></span>
-              <span style={{ height: 8, background: 'var(--border)', borderRadius: 999, overflow: 'hidden' }}>
-                <span style={{ display: 'block', height: '100%', width: `${((nav.max + 1) / n) * 100}%`, background: activity.theme.accent, transition: 'width .4s' }} />
-              </span>
-              <span style={{ color: 'var(--text-muted)', whiteSpace: 'nowrap' }}>
-                {activity.stages[nav.stage].icon} {activity.stages[nav.stage].label} · {nav.stage + 1}/{n}
-              </span>
-            </div>
-          ))}
-        </div>
-      )}
-    </CollapsiblePanel>
   )
 }
 
