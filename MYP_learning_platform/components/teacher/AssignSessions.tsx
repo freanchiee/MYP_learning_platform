@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
+import UpgradeNotice from './UpgradeNotice'
 
 export interface AssignableSession { code: string; title: string; status: string; date: string; assigned: boolean }
 
@@ -39,7 +40,7 @@ export default function AssignSessions({ classId, sessions }: { classId: string;
           </button>
         </div>
       ))}
-      {error && <p className="text-sm" style={{ color: 'var(--danger)' }}>{error}</p>}
+      {error && <UpgradeNotice message={error} />}
     </div>
   )
 }
