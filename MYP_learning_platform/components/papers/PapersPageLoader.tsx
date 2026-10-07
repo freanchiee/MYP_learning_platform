@@ -3,6 +3,7 @@ import { createClient } from '@/lib/supabase/server'
 import PapersGates from '@/components/papers/PapersGates'
 import { DEV_NO_AUTH } from '@/lib/dev-auth'
 import { LAUNCHED_PAPERS } from '@/data/launched-papers'
+import { FREE_SAMPLE_PAPER_IDS, paperSubjectSlug } from '@/lib/paper-access'
 
 // paperId prefix → display subject (matches the subject prop each subject page passes).
 const SUBJECT_OF: Record<string, string> = {
@@ -225,9 +226,16 @@ export default async function PapersPageLoader({ subject }: Props) {
   if (!session && !DEV_NO_AUTH) redirect('/login')
   const userId = session?.user?.id
 
-  const attemptsRes = await (userId
-    ? supabase.from('attempts').select('paper_id, status').eq('user_id', userId)
-    : Promise.resolve({ data: [] as AttemptRow[] }))
+  const [attemptsRes, profileRes, fullAccessRes, myClassesRes] = await Promise.all([
+    userId ? supabase.from('attempts').select('paper_id, status').eq('user_id', userId) : Promise.resolve({ data: [] as AttemptRow[] }),
+    userId ? supabase.from('profiles').select('role, unlocked_subjects').eq('id', userId).maybeSingle() : Promise.resolve({ data: null }),
+    userId ? supabase.rpc('has_full_access', { uid: userId }) : Promise.resolve({ data: false }),
+    userId ? supabase.from('class_members').select('class_id').eq('user_id', userId) : Promise.resolve({ data: [] as { class_id: string }[] }),
+  ])
+  const myClassIds = (myClassesRes.data ?? []).map((c) => c.class_id)
+  const assignedRes = myClassIds.length
+    ? await supabase.from('class_assignments').select('ref').eq('kind', 'paper').in('class_id', myClassIds)
+    : { data: [] as { ref: string }[] }
 
   // Code-driven catalog: the source of truth is data/launched-papers.ts (auto-generated
   // from the actual data/papers folders), NOT the Supabase `papers` table — which is often
@@ -260,11 +268,30 @@ export default async function PapersPageLoader({ subject }: Props) {
     attempts.filter(a => a.status === 'in_progress').map(a => a.paper_id)
   )
 
+  // Mirrors paper_access_allowed() in migration subject_paper_paywall — the DB
+  // trigger is the real enforcement, this only decides what shows a 🔒 and
+  // opens the unlock panel instead of starting the paper. A paper already
+  // started/completed is never (re-)locked, even if the rules changed since.
+  const hasFullAccess = !!fullAccessRes.data
+  const isTeacher = profileRes.data?.role === 'teacher'
+  const unlockedSubjects = new Set((profileRes.data?.unlocked_subjects as string[] | null) ?? [])
+  const assignedPaperIds = new Set((assignedRes.data ?? []).map((a) => a.ref))
+  const alreadyTouched = new Set(Array.from(completedPapers).concat(Array.from(inProgressPapers)))
+  const bypassesAllLocks = !userId ? false : hasFullAccess || isTeacher
+  const lockedPaperIds = new Set(
+    bypassesAllLocks
+      ? []
+      : papers
+          .filter((p) => !alreadyTouched.has(p.id) && !FREE_SAMPLE_PAPER_IDS.has(p.id) && !unlockedSubjects.has(paperSubjectSlug(p.id)) && !assignedPaperIds.has(p.id))
+          .map((p) => p.id)
+  )
+
   return (
     <PapersGates
       papers={papers}
       completedPapers={completedPapers}
       inProgressPapers={inProgressPapers}
+      lockedPaperIds={lockedPaperIds}
     />
   )
 }

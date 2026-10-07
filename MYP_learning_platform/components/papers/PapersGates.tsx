@@ -3,6 +3,8 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
+import UnlockPanel from './UnlockPanel'
+import { paperSubjectSlug } from '@/lib/paper-access'
 
 const NAV_H = 56
 
@@ -25,6 +27,7 @@ interface Props {
   papers: Paper[]
   completedPapers: Set<string>
   inProgressPapers: Set<string>
+  lockedPaperIds: Set<string>
 }
 
 const BG: Record<string, { from: string; via: string; to: string }> = {
@@ -141,13 +144,15 @@ function GateBackground({ index }: { index: number }) {
 }
 
 function Gate({
-  group, index, isActive, completedPapers, inProgressPapers,
+  group, index, isActive, completedPapers, inProgressPapers, lockedPaperIds, onLocked,
 }: {
   group: PaperGroup
   index: number
   isActive: boolean
   completedPapers: Set<string>
   inProgressPapers: Set<string>
+  lockedPaperIds: Set<string>
+  onLocked: (paperId: string) => void
 }) {
   const { base, variants } = group
   const bg     = BG[base.subject]     ?? DEFAULT_BG
@@ -157,6 +162,7 @@ function Gate({
   const sess = sessionFull(base.session)
   const isCompleted  = completedPapers.has(base.id)
   const isInProg = inProgressPapers.has(base.id) && !isCompleted
+  const isLocked = lockedPaperIds.has(base.id)
 
   return (
     <section
@@ -226,19 +232,29 @@ function Gate({
               {base.total_marks} MARKS · {base.duration_minutes} MIN · 4 CRITERIA
             </div>
 
-            <Link
-              href={`/exam/${base.id}`}
-              className="mt-10 inline-block font-black text-sm tracking-[0.2em] transition-all hover:opacity-80"
-              style={{
-                background: isCompleted ? 'rgba(173,241,196,0.15)' : action.bg,
-                color: isCompleted ? '#ffffff' : action.ink,
-                border: isCompleted ? '1px solid rgba(173,241,196,0.3)' : 'none',
-                padding: '16px 48px',
-                boxShadow: isCompleted ? 'none' : action.glow,
-              }}
-            >
-              {isCompleted ? 'PRACTICE AGAIN' : isInProg ? 'CONTINUE PAPER' : 'START PAPER'}
-            </Link>
+            {isLocked ? (
+              <button
+                onClick={() => onLocked(base.id)}
+                className="mt-10 inline-block font-black text-sm tracking-[0.2em] transition-all hover:opacity-80"
+                style={{ background: 'rgba(255,255,255,0.1)', color: '#fff', border: '1px solid rgba(255,255,255,0.25)', padding: '16px 48px' }}
+              >
+                🔒 UNLOCK TO START
+              </button>
+            ) : (
+              <Link
+                href={`/exam/${base.id}`}
+                className="mt-10 inline-block font-black text-sm tracking-[0.2em] transition-all hover:opacity-80"
+                style={{
+                  background: isCompleted ? 'rgba(173,241,196,0.15)' : action.bg,
+                  color: isCompleted ? '#ffffff' : action.ink,
+                  border: isCompleted ? '1px solid rgba(173,241,196,0.3)' : 'none',
+                  padding: '16px 48px',
+                  boxShadow: isCompleted ? 'none' : action.glow,
+                }}
+              >
+                {isCompleted ? 'PRACTICE AGAIN' : isInProg ? 'CONTINUE PAPER' : 'START PAPER'}
+              </Link>
+            )}
           </motion.div>
         )}
       </AnimatePresence>
@@ -266,23 +282,14 @@ function Gate({
               {variants.map((v, i) => {
                 const isVDone = completedPapers.has(v.id)
                 const isVProg = inProgressPapers.has(v.id) && !isVDone
-                return (
-                  <Link
-                    key={v.id}
-                    href={`/exam/${v.id}`}
-                    className="flex items-center gap-2.5 px-4 py-2 shrink-0 transition-all hover:opacity-90"
-                    style={{
-                      background: isVDone
-                        ? 'rgba(173,241,196,0.12)'
-                        : 'rgba(255,255,255,0.07)',
-                      border: `1px solid ${isVDone ? 'rgba(173,241,196,0.3)' : 'rgba(255,255,255,0.15)'}`,
-                    }}
-                  >
+                const isVLocked = lockedPaperIds.has(v.id)
+                const content = (
+                  <>
                     <span
                       className="text-[9px] font-black tracking-[0.25em]"
                       style={{ color: isVDone ? '#adf1c4' : 'rgba(255,255,255,0.5)' }}
                     >
-                      {isVDone ? '✓' : isVProg ? '●' : '○'}
+                      {isVLocked ? '🔒' : isVDone ? '✓' : isVProg ? '●' : '○'}
                     </span>
                     <span
                       className="text-xs font-black tracking-widest"
@@ -296,6 +303,19 @@ function Gate({
                     >
                       {v.total_marks}M
                     </span>
+                  </>
+                )
+                const style = {
+                  background: isVDone ? 'rgba(173,241,196,0.12)' : 'rgba(255,255,255,0.07)',
+                  border: `1px solid ${isVDone ? 'rgba(173,241,196,0.3)' : 'rgba(255,255,255,0.15)'}`,
+                } as const
+                return isVLocked ? (
+                  <button key={v.id} onClick={() => onLocked(v.id)} className="flex items-center gap-2.5 px-4 py-2 shrink-0 transition-all hover:opacity-90" style={style}>
+                    {content}
+                  </button>
+                ) : (
+                  <Link key={v.id} href={`/exam/${v.id}`} className="flex items-center gap-2.5 px-4 py-2 shrink-0 transition-all hover:opacity-90" style={style}>
+                    {content}
                   </Link>
                 )
               })}
@@ -326,12 +346,17 @@ function Gate({
   )
 }
 
-export default function PapersGates({ papers, completedPapers, inProgressPapers }: Props) {
+export default function PapersGates({ papers, completedPapers, inProgressPapers, lockedPaperIds }: Props) {
   const containerRef = useRef<HTMLDivElement>(null)
   const [activeIdx, setActiveIdx] = useState(0)
   const [hoveredDot, setHoveredDot] = useState<number | null>(null)
+  const [lockedPrompt, setLockedPrompt] = useState<{ slug: string; label: string } | null>(null)
 
   const groups = groupPapers(papers)
+  const onLocked = (paperId: string) => {
+    const p = papers.find((x) => x.id === paperId)
+    setLockedPrompt({ slug: paperSubjectSlug(paperId), label: p?.subject ?? 'this subject' })
+  }
 
   useEffect(() => {
     const el = containerRef.current
@@ -399,9 +424,13 @@ export default function PapersGates({ papers, completedPapers, inProgressPapers 
             isActive={Math.abs(activeIdx - idx) <= 1}
             completedPapers={completedPapers}
             inProgressPapers={inProgressPapers}
+            lockedPaperIds={lockedPaperIds}
+            onLocked={onLocked}
           />
         ))}
       </div>
+
+      {lockedPrompt && <UnlockPanel subjectSlug={lockedPrompt.slug} subjectLabel={lockedPrompt.label} onClose={() => setLockedPrompt(null)} />}
 
       {/* Diamond nav dots — labels always visible, highlight on hover */}
       <nav

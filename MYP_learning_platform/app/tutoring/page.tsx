@@ -35,7 +35,7 @@ const JSON_LD = {
   ],
 }
 
-export default function TutoringPage() {
+export default function TutoringPage({ searchParams }: { searchParams: { subject?: string } }) {
   return (
     <div style={{ background: 'var(--bg)', backgroundImage: 'var(--bg-image)', minHeight: '100vh' }}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(JSON_LD) }} />
@@ -55,7 +55,7 @@ export default function TutoringPage() {
             It takes a minute. Nothing is charged here — we reply by email first.
           </p>
           <div className="mt-4">
-            <TutoringForm sourcePage="/tutoring" />
+            <TutoringForm sourcePage="/tutoring" initialSubject={searchParams.subject} />
           </div>
         </section>
 

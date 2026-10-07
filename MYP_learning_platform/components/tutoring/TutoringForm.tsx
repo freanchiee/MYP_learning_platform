@@ -9,11 +9,11 @@ const field = 'w-full rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ri
 const fieldStyle = { background: 'var(--surface-inset)', border: '1px solid var(--border-strong)', color: 'var(--text)' } as const
 const label = 'block text-sm font-semibold mb-1'
 
-export default function TutoringForm({ sourcePage }: { sourcePage: string }) {
+export default function TutoringForm({ sourcePage, initialSubject }: { sourcePage: string; initialSubject?: string }) {
   const [submittedBy, setSubmittedBy] = useState<string>('')
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
-  const [subject, setSubject] = useState('')
+  const [subject, setSubject] = useState(() => TUTORING_SUBJECTS.find((s) => s.toLowerCase() === initialSubject?.toLowerCase()) ?? '')
   const [level, setLevel] = useState('')
   const [examBoard, setExamBoard] = useState('')
   const [message, setMessage] = useState('')
