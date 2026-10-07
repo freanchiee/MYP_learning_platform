@@ -14,6 +14,7 @@ import InviteCard from '@/components/teacher/InviteCard'
 import ClassLookPicker from '@/components/teacher/ClassLookPicker'
 import { AssignLibrary, DeleteAssignmentButton, RemoveMemberButton, DeleteClassButton, ReopenSessionButton } from '@/components/teacher/ClassActions'
 import StudentAnswerPeek from '@/components/teacher/StudentAnswerPeek'
+import DownloadReportButton from '@/components/teacher/DownloadReportButton'
 
 interface SessionRow { code: string; activity_id: string; status: string; created_at: string }
 interface PlayerRow { id: string; session_code: string; user_id: string; points: number; data: Record<string, any> | null }
@@ -112,6 +113,21 @@ export default async function ClassPage({ params, searchParams }: { params: { id
     }
     const pct = completion(s.activity_id, p.data)
     return { text: pct !== null ? `${pct}% done · ${p.points} pts` : `Joined · ${p.points} pts`, on: true, playerId: p.id, data: p.data }
+  }
+
+  // Real MYP criterion strand scores only (live_grades.scores also holds
+  // synthetic worksheet-review keys like "ws:stageKey:sectionKey" and
+  // "reveal:..." flags, which aren't meant for a student-facing report).
+  function gradeBreakdown(userId: string, s: SessionRow): { key: string; label: string; score: number }[] | undefined {
+    const p = playerRows.find((x) => x.session_code === s.code && x.user_id === userId)
+    if (!p) return undefined
+    const g = gradeRows.find((x) => x.session_code === s.code && x.player_id === p.id)
+    if (!g?.graded) return undefined
+    const strandLabels = new Map<string, string>()
+    getLiveActivity(s.activity_id)?.stages.forEach((st) => { if (st.type === 'grading') st.strands.forEach((str) => strandLabels.set(str.key, str.label)) })
+    return Object.entries(g.scores)
+      .filter((entry): entry is [string, number] => typeof entry[1] === 'number' && !entry[0].startsWith('ws:') && !entry[0].startsWith('reveal:'))
+      .map(([key, score]) => ({ key, label: strandLabels.get(key) ?? key, score }))
   }
 
   // Library data (only built for that tab)
@@ -240,7 +256,17 @@ export default async function ClassPage({ params, searchParams }: { params: { id
                     <tbody>
                       {memberList.map((m) => (
                         <tr key={m.user_id} style={{ borderTop: '1px solid var(--border)' }}>
-                          <td className="p-3 font-semibold">{m.name || 'Student'}</td>
+                          <td className="p-3 font-semibold">
+                            <div className="flex items-center gap-2">
+                              <span>{m.name || 'Student'}</span>
+                              <DownloadReportButton
+                                studentName={m.name || 'Student'}
+                                className={cls.name}
+                                assignments={assignList.map((a) => ({ title: a.title, subtitle: `${a.kind === 'paper' ? 'Past paper' : 'Topic revision'} · ${subjectLabel(a.subject)}`, result: assignmentCell(a, m.user_id).text }))}
+                                sessions={sessionList.map((s) => ({ title: getLiveActivity(s.activity_id)?.title ?? s.activity_id, date: new Date(s.created_at).toLocaleDateString(), result: liveCell(m.user_id, s).text, grades: gradeBreakdown(m.user_id, s) }))}
+                              />
+                            </div>
+                          </td>
                           {assignList.map((a) => { const c = assignmentCell(a, m.user_id); return <td key={a.id} className="p-3" style={{ color: c.on ? 'var(--text)' : 'var(--text-subtle)' }}>{c.text}</td> })}
                           {sessionList.map((s) => {
                             const c = liveCell(m.user_id, s)
