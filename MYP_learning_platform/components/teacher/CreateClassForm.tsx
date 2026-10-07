@@ -4,6 +4,7 @@ import { useState, type FormEvent } from 'react'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 import { createClassRow } from '@/lib/classes'
+import UpgradeNotice from './UpgradeNotice'
 
 export default function CreateClassForm({ dark = false }: { dark?: boolean }) {
   const router = useRouter()
@@ -42,7 +43,7 @@ export default function CreateClassForm({ dark = false }: { dark?: boolean }) {
       <button disabled={busy || !name.trim()} className="rounded-[var(--radius-control)] px-5 py-2.5 text-sm font-bold disabled:opacity-50" style={dark ? { background: '#fff', color: '#160f2a' } : { background: 'var(--gradient-cta)', color: 'var(--text-on-accent)' }}>
         {busy ? 'Creating…' : 'Create class'}
       </button>
-      {error && <p className="w-full text-sm" style={{ color: 'var(--danger)' }}>{error}</p>}
+      {error && <div className="w-full"><UpgradeNotice message={error} /></div>}
     </form>
   )
 }

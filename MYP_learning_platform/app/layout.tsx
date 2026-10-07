@@ -5,6 +5,7 @@ import { Analytics } from '@vercel/analytics/next'
 import './themes.css'
 import './globals.css'
 import { ThemeProvider } from '@/components/theme/ThemeProvider'
+import TutoringNudge from '@/components/marketing/TutoringNudge'
 import { THEME_BOOTSTRAP_SCRIPT } from '@/lib/theme'
 import { SITE_URL } from '@/lib/site'
 
@@ -135,6 +136,7 @@ export default function RootLayout({
         />
         <ThemeProvider>
           {children}
+          <TutoringNudge />
           <Toaster
             position="top-right"
             toastOptions={{

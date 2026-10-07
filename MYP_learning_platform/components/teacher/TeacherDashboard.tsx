@@ -13,9 +13,10 @@ const BANKS: Record<string, { topicCanonical?: string }[]> = { biology: BIOLOGY_
 
 // Loads the teacher's data; the presentation lives in TeacherHub.
 export default async function TeacherDashboard({ supabase, userId, name }: { supabase: SupabaseClient; userId: string; name: string }) {
-  const [{ data: profile }, { data: classes }] = await Promise.all([
+  const [{ data: profile }, { data: classes }, { data: fullAccess }] = await Promise.all([
     supabase.from('profiles').select('subjects').eq('id', userId).maybeSingle(),
     supabase.from('classes').select('*').eq('teacher_id', userId).order('created_at', { ascending: false }),
+    supabase.rpc('has_full_access', { uid: userId }),
   ])
   const list = (classes ?? []) as ClassRow[]
   const ids = list.map((c) => c.id)
@@ -74,5 +75,5 @@ export default async function TeacherDashboard({ supabase, userId, name }: { sup
     topics: s.topicBank ? new Set((BANKS[s.slug] ?? []).map((q) => q.topicCanonical).filter(Boolean)).size : 0,
   }))
 
-  return <TeacherHub name={name} subjects={(profile?.subjects as string[] | null) ?? []} classes={hubClasses} assignments={hubAssignments} resources={resources} />
+  return <TeacherHub name={name} subjects={(profile?.subjects as string[] | null) ?? []} classes={hubClasses} assignments={hubAssignments} resources={resources} fullAccess={!!fullAccess} />
 }

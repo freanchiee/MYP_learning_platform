@@ -30,7 +30,7 @@ const eyebrow = 'text-[10px] font-black tracking-[0.4em]'
 const btnSolid = { background: 'var(--gradient-cta)', color: 'var(--text-on-accent)' } as const
 const btnGhost = { border: '1px solid var(--border-strong)', color: 'var(--text)' } as const
 
-export default function TeacherHub({ name, subjects, classes, assignments, resources }: { name: string; subjects: string[]; classes: HubClass[]; assignments: HubAssignment[]; resources: HubResource[] }) {
+export default function TeacherHub({ name, subjects, classes, assignments, resources, fullAccess }: { name: string; subjects: string[]; classes: HubClass[]; assignments: HubAssignment[]; resources: HubResource[]; fullAccess: boolean }) {
   const router = useRouter()
   const ref = useRef<HTMLDivElement>(null)
   const [active, setActive] = useState(0)
@@ -77,6 +77,12 @@ export default function TeacherHub({ name, subjects, classes, assignments, resou
                 <div className="mb-3 flex flex-wrap items-end justify-between gap-3">
                   <h2 className="text-2xl font-extrabold">Your active classes</h2>
                 </div>
+                {!fullAccess && (
+                  <div className="mb-3 flex flex-wrap items-center gap-2 rounded-[var(--radius-control)] px-3 py-2 text-xs font-bold" style={{ background: 'var(--surface-2)', border: '1px solid var(--border)', color: 'var(--text-muted)' }}>
+                    <span>🔓 Free plan — 1 class, 1 assigned live task.</span>
+                    <Link href="/pricing" style={{ color: 'var(--accent)' }}>Unlock everything →</Link>
+                  </div>
+                )}
                 <div className="mb-4 rounded-[var(--radius-card)] p-4" style={glass}><CreateClassForm /></div>
                 {classes.length === 0 ? (
                   <p className="text-sm" style={{ color: 'var(--text-subtle)' }}>No classes yet — create one above and share its code with your students.</p>
