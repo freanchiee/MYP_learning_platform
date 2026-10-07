@@ -166,25 +166,37 @@ export default function LiveJoin({ activity, initialCode }: { activity: LiveActi
     setApiError(error.message)
   }
 
+  // The DB write merges server-side (see migration live_players_server_side_merge:
+  // merge_player_data / merge_player_stage_data) instead of a client-side
+  // read-modify-write of the whole `data` column. A blind overwrite from a stale
+  // local snapshot was losing real student work: two saves landing close together
+  // (e.g. a worksheet autosave right as a tab-switch gets reported) could each build
+  // their "next data" from a `me.data` that didn't yet include the other's change,
+  // so whichever write resolved second silently discarded the first. The RPC merges
+  // against the row's actual current value at write time, so concurrent patches can
+  // no longer clobber each other regardless of timing or which one lands last. The
+  // local `setMe` below is only for snappy optimistic UI — it is NOT what gets saved.
   const patchMyData = async (stageKey: string, patch: Record<string, any>) => {
     if (!me) return
     const sb = createClient()
     const nextData = { ...me.data, [stageKey]: { ...(me.data?.[stageKey] || {}), ...patch } }
     lastPatchAt.current = Date.now()
     setMe({ ...me, data: nextData })
-    const { error } = await sb.from('live_players').update({ data: nextData }).eq('id', me.id)
+    const { error } = await sb.rpc('merge_player_stage_data', { p_player_id: me.id, p_stage_key: stageKey, p_patch: patch })
     if (error) setApiError(error.message)
   }
 
   // Same idea as patchMyData but merges at the TOP of `data` (not nested
   // under a stage key) — used for the transient "what am I typing right
-  // now" draft, which isn't per-stage state a host should grade, just a
-  // live preview.
+  // now" draft and tab-focus tracking, neither of which is per-stage state
+  // a host should grade, just a live signal. Also goes through the
+  // server-side merge RPC for the same race-safety reason as patchMyData.
   const patchMyRawData = (patch: Record<string, any>) => {
     if (!me) return
     const sb = createClient()
     const nextData = { ...me.data, ...patch }
-    sb.from('live_players').update({ data: nextData }).eq('id', me.id).then(({ error }) => {
+    setMe({ ...me, data: nextData })
+    sb.rpc('merge_player_data', { p_player_id: me.id, p_patch: patch }).then(({ error }) => {
       if (error) console.error('live: failed to sync draft:', error.message)
     })
   }
@@ -197,7 +209,8 @@ export default function LiveJoin({ activity, initialCode }: { activity: LiveActi
   const addPoints = async (delta: number) => {
     if (!me || !delta) return
     const sb = createClient()
-    await sb.from('live_players').update({ points: me.points + delta }).eq('id', me.id)
+    setMe({ ...me, points: me.points + delta }) // optimistic UI only — the write below is the atomic source of truth
+    await sb.rpc('increment_player_points', { p_player_id: me.id, p_delta: delta })
   }
 
   if (userId === null) {
