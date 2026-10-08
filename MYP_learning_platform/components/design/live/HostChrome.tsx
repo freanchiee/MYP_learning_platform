@@ -160,9 +160,11 @@ export function HostRibbon({
 /** Whether the drawer is docked (reserves space) and how much room it takes. */
 export function useProgressDrawer() {
   const wide = useIsWide()
-  const [open, setOpen, loaded] = useStoredBool('live:host:progressDrawer', true)
-  const docked = wide && open
-  return { open: loaded ? open : false, setOpen, wide, reserve: wide ? (open ? DRAWER_W + 16 : RAIL_W + 8) : 0, docked }
+  const [stored, setStored, loaded] = useStoredBool('live:host:progressDrawer', true)
+  // Narrow screens have no room to dock it: it starts collapsed and, when opened, floats over the page.
+  const [narrowOpen, setNarrowOpen] = useState(false)
+  const open = wide ? loaded && stored : narrowOpen
+  return { open, setOpen: wide ? setStored : setNarrowOpen, wide, reserve: wide ? (open ? DRAWER_W + 16 : RAIL_W + 8) : 0, docked: wide && open }
 }
 
 export function ProgressDrawer({
@@ -328,9 +330,11 @@ export function FloatingNav({
 /** Whether the student's leaderboard is docked (reserves space) and how much room it takes. */
 export function useLeaderboardDrawer() {
   const wide = useIsWide()
-  const [open, setOpen, loaded] = useStoredBool('live:join:leaderboardDrawer', true)
-  const shown = loaded ? open : false
-  return { open: shown, setOpen, reserve: wide ? (shown ? DRAWER_W - 40 + 16 : RAIL_W + 8) : 0 }
+  const [stored, setStored, loaded] = useStoredBool('live:join:leaderboardDrawer', true)
+  // Narrow screens: start collapsed (an open drawer would cover answer buttons) and float when opened.
+  const [narrowOpen, setNarrowOpen] = useState(false)
+  const open = wide ? loaded && stored : narrowOpen
+  return { open, setOpen: wide ? setStored : setNarrowOpen, reserve: wide ? (open ? DRAWER_W - 40 + 16 : RAIL_W + 8) : 0 }
 }
 
 // Student-facing class leaderboard. Shows ONLY name, position, points and badges —
