@@ -1,8 +1,10 @@
-// MYP4 — Prototyping for People: Ergonomics, Structure and Inclusion
-// (Weeks 1-2). Live Class Creator activity: one worksheet stage
-// (direction, persona & empathy map, anthropometrics, research plan)
-// followed by teacher grading against Criterion A strands. Trimmed
-// from the reference build `myp4-prototyping-w1w2.html` — the scripted
+// MYP4 — Prototyping for People: Ergonomics, Structure and Inclusion.
+// Live Class Creator activity covering the full A→B→C→D design cycle:
+// research & empathy (A), develop a range of ideas and choose one (B),
+// build a first prototype (C), test and evaluate it (D) — then a
+// Criteria Review grading stage against A, B and D (C is graded
+// separately, in the Documenting the Build activity). Trimmed from the
+// reference build `myp4-prototyping-w1w2.html` — the scripted
 // persona-chat, accessibility audit and product-range stages are
 // intentionally left out of this v1 port; see the skill doc for how to
 // extend the engine to bring them back.
@@ -28,26 +30,34 @@ export const MYP4_PROTOTYPING: LiveActivityDefinition = {
         brief: {
           context:
             'Most everyday objects are designed for an “average” person. For someone with limited grip, low vision or sensory sensitivity, an ordinary jar, label or classroom can be hard to use. Good designers start from one real person, not the average.',
-          task: 'Choose a direction, build a persona and an empathy map for ONE specific user, record the measurements that matter for them, make a first prototype, and plan the research you still need.',
+          task: 'Choose a direction, build a persona and an empathy map for ONE specific user, develop and choose between a range of ideas, make a first prototype, then test and evaluate it.',
           produce: [
             'A direction and a “How might we…” opportunity for a named user',
-            'A persona with the traits that matter for the design problem',
-            'An empathy map: Says, Thinks, Does, Feels',
+            'A persona with the traits that matter for the design problem, and an empathy map',
             'Anthropometric measurements, each with a reason',
-            'A first prototype with a build log, and a research plan (Week 2)',
+            'A design specification, a range of ideas, and your chosen idea — justified (Criterion B)',
+            'A first prototype with a build log (Criterion C)',
+            'A test plan, results, improvements and the real impact on your user (Criterion D)',
           ],
-          assessedOn: ['A.i', 'A.ii', 'A.iii', 'A.iv', 'C.i', 'C.iii'],
-          time: 'Weeks 1–2 · work at your own pace, your work saves automatically',
+          assessedOn: ['A.i', 'A.ii', 'A.iii', 'A.iv', 'B.i', 'B.ii', 'B.iii', 'B.iv', 'C.i', 'C.iii', 'D.i', 'D.ii', 'D.iii', 'D.iv'],
+          time: 'Work at your own pace, your work saves automatically',
         },
         flow: [
           { strand: 'A.i', title: 'Justify the need', asks: 'Explain why this problem matters, for a specified client.', sections: ['direction', 'opportunity', 'persona'] },
           { strand: 'A.ii', title: 'Research your user', asks: 'Gather primary and secondary research: interviews and simulated voices.', sections: ['personaChat', 'famous'] },
           { strand: 'A.i', title: 'Understand your user', asks: 'Turn what you learned into an empathy map.', sections: ['empathy'] },
           { strand: 'A.ii', title: 'Measure what matters', asks: 'Record anthropometrics and say why each one matters.', sections: ['anthro'] },
-          { strand: 'C.i', title: 'Plan your make', asks: 'Choose what to build and plan your first steps.', where: 'next stage · What Will You Make?' },
-          { strand: 'C.iii', title: 'Build and reflect', asks: 'Follow the plan, then justify what you change.', where: 'next stage · What Will You Make?' },
-          { strand: 'A.ii', title: 'Plan the research', asks: 'Identify and prioritise the research you still need.', where: 'Week 2 · Research Plan' },
-          { strand: 'A.iv', title: 'Teacher review', asks: 'Your teacher reviews everything against A.i–A.iv (including A.iii and A.iv).', where: 'Criterion A Review' },
+          { strand: 'B.i', title: 'Write a specification', asks: 'Decide what your solution must do to count as a success.', where: 'next stage · Develop Your Ideas' },
+          { strand: 'B.ii', title: 'Develop a range of ideas', asks: 'Generate several genuinely different ideas, not variations on one.', where: 'next stage · Develop Your Ideas' },
+          { strand: 'B.iii', title: 'Choose and justify', asks: 'Pick one idea and justify it against your specification.', where: 'next stage · Develop Your Ideas' },
+          { strand: 'B.iv', title: 'Plan it accurately', asks: 'Produce a planning drawing and list what you need to build it.', where: 'next stage · Develop Your Ideas' },
+          { strand: 'C.i', title: 'Plan your make', asks: 'Plan your first steps.', where: 'What Will You Make?' },
+          { strand: 'C.iii', title: 'Build and reflect', asks: 'Follow the plan, then justify what you change.', where: 'What Will You Make?' },
+          { strand: 'D.i', title: 'Design a test', asks: 'Plan a test that actually generates data.', where: 'Evaluate' },
+          { strand: 'D.ii', title: 'Evaluate against your spec', asks: 'Check your results against the specification you wrote, point by point.', where: 'Evaluate' },
+          { strand: 'D.iii', title: 'Explain improvements', asks: 'Say honestly what you would change.', where: 'Evaluate' },
+          { strand: 'D.iv', title: 'Explain the impact', asks: 'Connect your result back to your persona’s empathy map.', where: 'Evaluate' },
+          { strand: 'A.iv', title: 'Teacher review', asks: 'Your teacher reviews everything against A, B and D.', where: 'Criteria Review' },
         ],
       },
       sections: [
@@ -243,13 +253,173 @@ export const MYP4_PROTOTYPING: LiveActivityDefinition = {
     },
     {
       type: 'worksheet',
+      key: 'develop',
+      label: 'Develop Your Ideas',
+      icon: '💡',
+      intro: {
+        title: '💡 Criterion B: Develop Your Ideas',
+        blurb:
+          'Before you build anything, write down what success actually looks like, sketch a genuine RANGE of ideas, choose the strongest one against your own specification, and plan it accurately. Work at your own pace: no need to click Next.',
+      },
+      sections: [
+        {
+          key: 'specification',
+          label: 'Design specification',
+          icon: '📐',
+          criterion: 'B.i',
+          strandLabel: 'Develop a design specification with appropriate success criteria',
+          brief: { title: 'Brief: write success criteria, not a wish list', points: ['Use your persona and empathy map — every line should trace back to something they said, did or felt.', 'Make each point checkable: a stranger could look at your finished prototype and say yes/no.'] },
+          fields: [
+            {
+              key: 'spec',
+              label: 'What must your solution do, to count as a success?',
+              type: 'textarea',
+              hint: 'List 3–4 checkable requirements, each tied to your persona\'s empathy map.',
+              exemplars: [
+                'It must let Marcus open a jar using only his right hand in under 15 seconds, because he currently avoids the task entirely. It must not need a firm two-handed grip, since that hurts his wrist.',
+                'It must make the medicine label readable from arm\'s length for Elias, since small print currently means he asks someone else to check it. It should not need him to pick the bottle up.',
+                'It must let Leo find his headphones and fidget tool by touch, without looking, because he currently waits until the classroom is quieter before searching for them.',
+              ],
+              celebrateKeywords: ['must', 'so that', 'because', 'my user', 'currently'],
+              points: 10,
+            },
+          ],
+        },
+        {
+          key: 'ideas',
+          label: 'A range of ideas',
+          icon: '🧠',
+          criterion: 'B.ii',
+          strandLabel: 'Develop a range of feasible design ideas which can be correctly interpreted by others',
+          blurb: 'Sketch at least THREE genuinely different ideas — not three versions of the same idea. Describe each clearly enough that a classmate could build it from your words alone.',
+          fields: [
+            {
+              key: 'range',
+              label: 'Your ideas',
+              type: 'table',
+              minRows: 3,
+              columns: [
+                { key: 'idea', label: 'Idea', placeholder: 'e.g. Rubber-band grip sleeve' },
+                { key: 'how', label: 'How it works', placeholder: 'e.g. Stretches over the lid for extra friction' },
+                { key: 'fit', label: 'Why it fits your specification', placeholder: 'e.g. No two-handed grip needed' },
+              ],
+            },
+          ],
+        },
+        {
+          key: 'choose',
+          label: 'Choose and justify',
+          icon: '✅',
+          criterion: 'B.iii',
+          strandLabel: 'Present the final chosen design and justify its selection against the specification',
+          blurb: 'Pick ONE idea from the range above. This is the prompt that gets you to a real decision — don\'t skip the comparison.',
+          fields: [
+            { key: 'chosen', label: 'Which idea did you choose?', type: 'text', placeholder: 'e.g. Rubber-band grip sleeve' },
+            {
+              key: 'justify',
+              label: 'Why this one, against your specification — and why not the others?',
+              type: 'textarea',
+              hint: 'Name at least one idea you rejected, and say specifically what it was missing.',
+              exemplars: [
+                'I chose the rubber-band grip sleeve because it meets all three of my specification points, unlike the twist-key idea, which needed two hands and would not have worked for Marcus.',
+                'The large-print sticker overlay won because it directly meets "readable from arm\'s length," whereas the magnifier idea failed my "no picking it up" requirement.',
+                'I picked the labelled foam tray over the colour-coded box because touch alone can tell the slots apart, which my specification requires — colour would not help Leo without looking.',
+              ],
+              celebrateKeywords: ['because', 'compared to', 'unlike', 'meets', 'rejected'],
+              points: 10,
+            },
+          ],
+        },
+        {
+          key: 'drawings',
+          label: 'Planning drawing & requirements',
+          icon: '✏️',
+          criterion: 'B.iv',
+          strandLabel: 'Develop accurate planning drawings/diagrams and outline the requirements for creating the solution',
+          blurb: 'Draw or photograph this on paper (or in any app) — then describe it here so your teacher knows what to look for.',
+          fields: [
+            {
+              key: 'drawing',
+              label: 'Describe your planning drawing',
+              type: 'textarea',
+              hint: 'What does it show — labels, measurements, materials — detailed enough that someone else could follow it?',
+              exemplars: [
+                'My drawing shows the sleeve flattened out with labelled width (9cm) and length (14cm), the rubber band positions marked, and "textured side faces in" noted next to the grip surface.',
+                'The sketch shows the sticker at actual size with the enlarged font, an arrow showing where it sits on the bottle, and a note on which laminate to use so it survives handling.',
+                'The diagram shows the tray from above with each slot measured and labelled by item, plus a side view showing the raised edge that lets Leo feel where one slot ends.',
+              ],
+              celebrateKeywords: ['labelled', 'measurement', 'shows', 'material'],
+              points: 10,
+            },
+            { key: 'requirements', label: 'What do you need to make it?', type: 'checklist', hint: 'Add one row per material or tool — you\'ll use this again at the Build log stage.', placeholder: 'e.g. Rubber bands, scissors' },
+          ],
+        },
+      ],
+    },
+    {
+      type: 'mcq',
+      key: 'developQuiz',
+      label: 'Criterion B Check',
+      icon: '✅',
+      pacing: 'self-paced',
+      intro: { title: '✅ Quick check: Developing Ideas', blurb: 'Four quick questions on what Criterion B actually asks for — free explore, answer in any order.' },
+      pointsPerCorrect: 10,
+      questions: [
+        {
+          q: 'Why do designers develop several different ideas before choosing one?',
+          icon: '🧠',
+          options: [
+            'To have a backup in case the first one fails',
+            'Comparing genuinely different options leads to a stronger final choice than going with the first idea',
+            'It is required for every homework task',
+            'To use up the lesson time',
+          ],
+          correct: 1,
+        },
+        {
+          q: 'A good design specification is…',
+          icon: '📐',
+          options: [
+            'A list of what you personally like',
+            'A vague wish, like "I want it to look nice"',
+            'A checkable list of what the solution must do, based on your research',
+            'The same for every student in the class',
+          ],
+          correct: 2,
+        },
+        {
+          q: '"Justify your chosen design" means…',
+          icon: '✅',
+          options: [
+            'Just describing what you picked',
+            'Picking whichever idea looks the prettiest',
+            'Explaining why this idea beats your OTHER ideas, against your specification',
+            'Asking your teacher to choose for you',
+          ],
+          correct: 2,
+        },
+        {
+          q: 'A planning drawing should be detailed enough that…',
+          icon: '✏️',
+          options: [
+            'Only you can understand it',
+            'Someone else could follow it to build the same thing',
+            'It looks impressive on the page',
+            'It matches a picture found online',
+          ],
+          correct: 1,
+        },
+      ],
+    },
+    {
+      type: 'worksheet',
       key: 'make',
       label: 'What Will You Make?',
       icon: '🛠️',
       intro: {
         title: '🛠️ Enough thinking — make something!',
         blurb:
-          'Pick something to BUILD for your user, from the make menu for your track — or play the wild card and choose your own. Then plan the first steps and start building with what you have at home. Work at your own pace: no need to click Next.',
+          'Time to build the idea you chose and justified in Criterion B. Pick the closest match from the make menu for your track — or play the wild card if nothing fits exactly. Then plan the first steps and start building with what you have at home. Work at your own pace: no need to click Next.',
       },
       sections: [
         {
@@ -258,7 +428,7 @@ export const MYP4_PROTOTYPING: LiveActivityDefinition = {
           icon: '🃏',
           criterion: 'C.i',
           strandLabel: 'Construct a logical plan for what you will make',
-          blurb: 'Your track is listed first. Stuck? Hit 🎲 Surprise me. Have your own idea? Play the wild card.',
+          blurb: 'Your track is listed first. Pick whichever is closest to the idea you chose and justified in Criterion B. Stuck? Hit 🎲 Surprise me. Have your own idea? Play the wild card.',
           fields: [{ key: 'pick', label: 'What will you make?', type: 'makeCards' }],
         },
         {
@@ -330,6 +500,168 @@ export const MYP4_PROTOTYPING: LiveActivityDefinition = {
     },
     {
       type: 'worksheet',
+      key: 'evaluate',
+      label: 'Evaluate',
+      icon: '🔍',
+      intro: {
+        title: '🔍 Criterion D: Evaluate',
+        blurb: 'Test your prototype against the specification you wrote in Criterion B, report what actually happened, and explain the real impact on your user. Work at your own pace: no need to click Next.',
+      },
+      sections: [
+        {
+          key: 'testplan',
+          label: 'Testing method',
+          icon: '🧪',
+          criterion: 'D.i',
+          strandLabel: 'Design detailed and relevant testing methods, which generate data, to measure success',
+          brief: { title: 'Brief: a test that generates real data', points: ['Test the exact thing your specification promised — not something easier.', 'Say what "success" looks like BEFORE you test, so you can\'t move the target afterwards.'] },
+          fields: [
+            {
+              key: 'plan',
+              label: 'How will you test it?',
+              type: 'table',
+              minRows: 2,
+              columns: [
+                { key: 'test', label: 'What you are testing', placeholder: 'e.g. Can open a jar one-handed' },
+                { key: 'method', label: 'Method (who, how many, how)', placeholder: 'e.g. Timed trial, 3 tries, with my user' },
+                { key: 'target', label: 'Success looks like', placeholder: 'e.g. Under 15 seconds, no help' },
+              ],
+            },
+          ],
+        },
+        {
+          key: 'results',
+          label: 'Results & evaluation',
+          icon: '📊',
+          criterion: 'D.ii',
+          strandLabel: 'Evaluate the success of the solution against the specification, based on authentic product testing',
+          blurb: 'Report what actually happened — real numbers and observations, not just "it worked."',
+          fields: [
+            {
+              key: 'results',
+              label: 'What actually happened when you tested it?',
+              type: 'textarea',
+              hint: 'Numbers, times, direct quotes from your tester — evidence, not an opinion.',
+            },
+            {
+              key: 'evaluation',
+              label: 'Does it meet your specification? Go point by point.',
+              type: 'textarea',
+              hint: 'For EACH point in your Criterion B specification, say met / partly met / not met, with the evidence from your results.',
+              exemplars: [
+                'It met my first point: Marcus opened the jar one-handed in 11 seconds, under my 15-second target. It partly met the grip point — he said it still felt tight after several uses.',
+                'The label point was fully met: Elias read it correctly from arm\'s length in all three tries. The "no picking up" point was also met, since it stayed flat on the counter throughout.',
+                'The touch-identification point was met twice but missed once, when Leo confused two slots — so this specification point is only partly met and needs another round.',
+              ],
+              celebrateKeywords: ['met', 'partly met', 'not met', 'evidence', 'specification'],
+              points: 10,
+            },
+          ],
+        },
+        {
+          key: 'improve',
+          label: 'Improvements',
+          icon: '🔧',
+          criterion: 'D.iii',
+          strandLabel: 'Explain how the solution could be improved',
+          fields: [
+            {
+              key: 'improve',
+              label: 'What would you change, and why?',
+              type: 'textarea',
+              hint: 'Tie each change back to something specific that went wrong in testing.',
+              exemplars: [
+                'I would switch the rubber band for textured silicone, because it slipped on the smooth lid during two of three trials.',
+                'I would increase the font size by another 20%, because Elias hesitated on the smallest word even though he read it correctly.',
+                'I would widen the gap between slots by 1cm, because that is exactly where Leo confused two items by touch.',
+              ],
+              celebrateKeywords: ['because', 'would change', 'next version', 'instead'],
+              points: 10,
+            },
+          ],
+        },
+        {
+          key: 'impact',
+          label: 'Impact on your user',
+          icon: '❤️',
+          criterion: 'D.iv',
+          strandLabel: 'Explain the impact of the solution on the client/target audience',
+          blurb: 'Look back at your Week 1 empathy map — does this actually change what they said, thought, did or felt?',
+          fields: [
+            {
+              key: 'impact',
+              label: 'How does this actually change things for your user?',
+              type: 'textarea',
+              hint: 'Connect it directly to a specific line from your empathy map.',
+              exemplars: [
+                'Marcus no longer has to ask for help carrying the jar — the thing he told me he avoided entirely — which should reduce the embarrassment he described feeling.',
+                'Elias can check his own medicine label now instead of always asking someone else, which matches what he said he wanted: not to need to explain himself every time.',
+                'Leo can find his things without looking, so the anxious moments he described before a busy lesson should happen less often.',
+              ],
+              celebrateKeywords: ['no longer', 'instead of', 'now', 'matches'],
+              points: 10,
+            },
+          ],
+        },
+      ],
+    },
+    {
+      type: 'mcq',
+      key: 'evaluateQuiz',
+      label: 'Criterion D Check',
+      icon: '✅',
+      pacing: 'self-paced',
+      intro: { title: '✅ Quick check: Evaluating', blurb: 'Four quick questions on what Criterion D actually asks for — free explore, answer in any order.' },
+      pointsPerCorrect: 10,
+      questions: [
+        {
+          q: 'Good evaluation evidence looks like…',
+          icon: '📊',
+          options: [
+            '"It worked great!"',
+            '"The jar opened in 9 seconds across 3 tries, down from 25 seconds unaided"',
+            'A guess about how it probably went',
+            'A compliment from a friend',
+          ],
+          correct: 1,
+        },
+        {
+          q: '"Evaluate against your specification" means…',
+          icon: '📐',
+          options: [
+            'Compare your results to your OWN success criteria from Criterion B',
+            'Compare your project to a classmate\'s',
+            'Decide whether you personally like it',
+            'Compare it to a product you saw in a shop',
+          ],
+          correct: 0,
+        },
+        {
+          q: 'Explaining impact means…',
+          icon: '❤️',
+          options: [
+            'Saying the project is finished',
+            'Describing the real difference it makes for your specific user',
+            'Counting how many prototypes you made',
+            'Listing the materials you used',
+          ],
+          correct: 1,
+        },
+        {
+          q: 'If your test shows the solution did not fully work, you should…',
+          icon: '🔧',
+          options: [
+            'Leave that result out of your report',
+            'Report it honestly and explain what you would improve',
+            'Only report the tests that went well',
+            'Keep retesting until it works, then report only that one',
+          ],
+          correct: 1,
+        },
+      ],
+    },
+    {
+      type: 'worksheet',
       key: 'week2',
       label: 'Research Plan',
       icon: '📊',
@@ -361,14 +693,22 @@ export const MYP4_PROTOTYPING: LiveActivityDefinition = {
     {
       type: 'grading',
       key: 'grading',
-      label: 'Criterion A Review',
+      label: 'Criteria Review',
       icon: '📋',
-      intro: { title: '📋 Criterion A review & grading', blurb: 'Review each student’s persona, empathy map, anthropometrics and research plan, then grade A.i–A.iv.' },
+      intro: { title: '📋 Criteria review & grading', blurb: 'Review each student’s research, specification, range of ideas, chosen design and evaluation, then grade A, B and D. (Criterion C is graded separately, in Documenting the Build.)' },
       strands: [
         { key: 'A.i', label: 'Justify the need, for a specified client' },
         { key: 'A.ii', label: 'Identify & prioritize primary/secondary research' },
         { key: 'A.iii', label: 'Analyse a range of existing products' },
         { key: 'A.iv', label: 'Detailed brief summarising the research' },
+        { key: 'B.i', label: 'Design specification with appropriate success criteria' },
+        { key: 'B.ii', label: 'Develop a range of feasible design ideas' },
+        { key: 'B.iii', label: 'Present and justify the final chosen design' },
+        { key: 'B.iv', label: 'Accurate planning drawings & requirements' },
+        { key: 'D.i', label: 'Design relevant testing methods that generate data' },
+        { key: 'D.ii', label: 'Evaluate success against the specification' },
+        { key: 'D.iii', label: 'Explain how the solution could be improved' },
+        { key: 'D.iv', label: 'Explain the impact on the client/target audience' },
       ],
     },
   ],
