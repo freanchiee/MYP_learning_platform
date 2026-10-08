@@ -12,7 +12,7 @@
 import { useEffect } from 'react'
 import type { LiveActivityDefinition } from '@/data/design/live/types'
 import type { LivePlayerRow } from '@/lib/design-live/types'
-import { Avatar, cardStyle, btnStyle, CollapsiblePanel } from './ui'
+import { cardStyle, btnStyle } from './ui'
 
 export interface Nav { stage: number; max: number }
 
@@ -66,54 +66,5 @@ export function SelfPacedBar({ activity, idx, onGo }: { activity: LiveActivityDe
         ))}
       </div>
     </div>
-  )
-}
-
-// ------------------------------------------------------------ student panel
-// Kahoot-style class telemetry for a student's own screen. Deliberately shows ONLY
-// name, position, points and badges — never `data` (answers/drafts/chat).
-export function ClassTelemetry({ activity, players, meId }: { activity: LiveActivityDefinition; players: LivePlayerRow[]; meId: string }) {
-  const n = activity.stages.length
-  const rows = players
-    .map((p) => ({ p, nav: navOf(p, activity) }))
-    .sort((a, b) => b.p.points - a.p.points || b.nav.max - a.nav.max || a.p.name.localeCompare(b.p.name))
-  const myRank = rows.findIndex((r) => r.p.id === meId) + 1
-  return (
-    <CollapsiblePanel
-      storageKey="live:join:classTelemetry"
-      accent={activity.theme.accent}
-      title="🏆 Class leaderboard"
-      summary={myRank ? `You're #${myRank} of ${rows.length}` : undefined}
-    >
-      <div style={{ display: 'grid', gap: 6 }} aria-live="off">
-        {rows.map(({ p, nav }, i) => {
-          const you = p.id === meId
-          return (
-            <div
-              key={p.id}
-              style={{
-                display: 'grid', gridTemplateColumns: 'auto minmax(90px, 150px) 1fr auto', gap: 8, alignItems: 'center', fontSize: 12.5,
-                padding: '4px 6px', borderRadius: 'var(--radius-control)', background: you ? 'var(--accent-soft)' : 'transparent',
-              }}
-            >
-              <span style={{ width: 20, fontWeight: 800, color: 'var(--text-muted)' }}>{i + 1}</span>
-              <span style={{ display: 'flex', alignItems: 'center', gap: 6, fontWeight: 700, minWidth: 0 }}>
-                <Avatar seed={p.id} size={22} />
-                <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{p.name}{you ? ' (you)' : ''}</span>
-              </span>
-              <span title={`${activity.stages[nav.stage].label} · ${nav.stage + 1}/${n}`} style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                <span style={{ flex: 1, height: 8, background: 'var(--border)', borderRadius: 999, overflow: 'hidden' }}>
-                  <span style={{ display: 'block', height: '100%', width: `${((nav.max + 1) / n) * 100}%`, background: activity.theme.accent, transition: 'width .4s' }} />
-                </span>
-                <span style={{ fontSize: 11, color: 'var(--text-muted)', whiteSpace: 'nowrap' }}>{activity.stages[nav.stage].icon} {nav.stage + 1}/{n}</span>
-              </span>
-              <span style={{ fontWeight: 800, whiteSpace: 'nowrap' }}>
-                ⭐ {p.points}{p.badges?.length ? <span title={p.badges.join(', ')}> · 🏅 {p.badges.length}</span> : null}
-              </span>
-            </div>
-          )
-        })}
-      </div>
-    </CollapsiblePanel>
   )
 }

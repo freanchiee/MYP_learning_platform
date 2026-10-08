@@ -65,7 +65,11 @@ export function useLiveTable<T>(
         .select('*')
         .eq(filterCol, filterVal)
         .order(orderCol, { ascending: true })
-      if (error) console.error(`live: failed to load ${table}:`, error.message)
+      if (error) {
+        // Keep whatever we already showed: a failed poll must not blank the list.
+        console.error(`live: failed to load ${table}:`, error.message)
+        return
+      }
       if (!cancelled) onData((data as T[]) ?? [])
     }
     fetchIt()

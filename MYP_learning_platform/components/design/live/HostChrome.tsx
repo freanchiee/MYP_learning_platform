@@ -44,7 +44,7 @@ function useMedia(query: string, initial = false) {
 }
 export const useIsWide = () => useMedia('(min-width: 1100px)')
 
-function useStoredBool(key: string, fallback: boolean): [boolean, (v: boolean) => void, boolean] {
+export function useStoredBool(key: string, fallback: boolean): [boolean, (v: boolean) => void, boolean] {
   const [v, setV] = useState(fallback)
   const [loaded, setLoaded] = useState(false)
   useEffect(() => {
@@ -321,5 +321,100 @@ export function FloatingNav({
       </button>
       <style>{`@media (max-width: 560px) { .host-nav-label { display: none } }`}</style>
     </div>
+  )
+}
+
+// ------------------------------------------------- student leaderboard drawer
+/** Whether the student's leaderboard is docked (reserves space) and how much room it takes. */
+export function useLeaderboardDrawer() {
+  const wide = useIsWide()
+  const [open, setOpen, loaded] = useStoredBool('live:join:leaderboardDrawer', true)
+  const shown = loaded ? open : false
+  return { open: shown, setOpen, reserve: wide ? (shown ? DRAWER_W - 40 + 16 : RAIL_W + 8) : 0 }
+}
+
+// Student-facing class leaderboard. Shows ONLY name, position, points and badges —
+// never `data` (answers, drafts, chat).
+export function LeaderboardDrawer({
+  activity, players, me, open, onToggle,
+}: {
+  activity: LiveActivityDefinition
+  players: LivePlayerRow[]
+  me: LivePlayerRow
+  open: boolean
+  onToggle: (v: boolean) => void
+}) {
+  const n = activity.stages.length
+  const t = activity.theme
+  const all = players.some((p) => p.id === me.id) ? players : [...players, me]
+  const rows = all
+    .map((p) => ({ p, nav: navOf(p, activity) }))
+    .sort((a, b) => b.p.points - a.p.points || b.nav.max - a.nav.max || a.p.name.localeCompare(b.p.name))
+  const myRank = rows.findIndex((r) => r.p.id === me.id) + 1
+  const medal = ['🥇', '🥈', '🥉']
+  const W = DRAWER_W - 40
+
+  if (!open) {
+    return (
+      <button
+        onClick={() => onToggle(true)}
+        aria-label="Open class leaderboard"
+        title="Open class leaderboard"
+        style={{
+          ...glass(), position: 'fixed', top: 12, right: 12, zIndex: 25, width: RAIL_W, padding: '12px 0', cursor: 'pointer',
+          borderRadius: 'var(--radius-card)', display: 'grid', justifyItems: 'center', gap: 6, boxShadow: 'var(--shadow-card)', borderTop: `3px solid ${t.accent}`,
+        }}
+      >
+        <span aria-hidden style={{ fontSize: 18 }}>🏆</span>
+        <span style={{ fontWeight: 800, fontSize: 14 }}>#{myRank}</span>
+        <span aria-hidden style={{ fontSize: 11, color: 'var(--text-muted)' }}>◀</span>
+      </button>
+    )
+  }
+
+  return (
+    <aside
+      aria-label="Class leaderboard"
+      style={{
+        ...glass(), position: 'fixed', top: 12, right: 12, bottom: 12, width: `min(${W}px, calc(100vw - 24px))`, zIndex: 25, display: 'flex', flexDirection: 'column',
+        borderRadius: 'var(--radius-card)', boxShadow: 'var(--shadow-card-hover)', borderTop: `3px solid ${t.accent}`, overflow: 'hidden',
+      }}
+    >
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 8, padding: '12px 14px 8px' }}>
+        <div>
+          <div style={{ fontSize: 10, fontWeight: 800, letterSpacing: 1.4, color: 'var(--text-subtle)' }}>CLASS LEADERBOARD</div>
+          <div style={{ fontWeight: 800, fontSize: 15 }}>You&apos;re #{myRank} of {rows.length}</div>
+        </div>
+        <button onClick={() => onToggle(false)} aria-label="Collapse leaderboard" title="Collapse" style={{ cursor: 'pointer', minWidth: 36, minHeight: 36, borderRadius: 'var(--radius-control)', border: '1px solid var(--border-strong)', background: 'transparent', color: 'var(--text)' }}>▶</button>
+      </div>
+      <div style={{ overflowY: 'auto', padding: '0 10px 12px', display: 'grid', gap: 4, alignContent: 'start', flex: 1 }}>
+        {rows.map(({ p, nav }, i) => {
+          const you = p.id === me.id
+          return (
+            <div
+              key={p.id}
+              style={{
+                display: 'grid', gap: 3, padding: '6px 8px', borderRadius: 'var(--radius-control)',
+                background: you ? 'var(--accent-soft)' : 'transparent', border: you ? `1.5px solid ${t.accent}` : '1.5px solid transparent',
+              }}
+              title={`${activity.stages[nav.stage].label} · ${nav.stage + 1}/${n}`}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 12.5, fontWeight: 700 }}>
+                <span style={{ width: 22, textAlign: 'center', fontWeight: 800, color: 'var(--text-muted)' }}>{medal[i] ?? i + 1}</span>
+                <Avatar seed={p.id} size={22} />
+                <span style={{ flex: 1, minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{p.name}{you ? ' (you)' : ''}</span>
+                <span style={{ whiteSpace: 'nowrap', fontWeight: 800 }}>⭐ {p.points}{p.badges?.length ? ` · 🏅${p.badges.length}` : ''}</span>
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 6, paddingLeft: 28 }}>
+                <span style={{ flex: 1, height: 6, background: 'var(--border)', borderRadius: 999, overflow: 'hidden' }}>
+                  <span style={{ display: 'block', height: '100%', width: `${((nav.max + 1) / n) * 100}%`, background: t.accent, transition: 'width .4s' }} />
+                </span>
+                <span style={{ fontSize: 11, color: 'var(--text-muted)', whiteSpace: 'nowrap' }}>{activity.stages[nav.stage].icon} {nav.stage + 1}/{n}</span>
+              </div>
+            </div>
+          )
+        })}
+      </div>
+    </aside>
   )
 }

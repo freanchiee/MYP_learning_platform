@@ -25,7 +25,8 @@ import { feedbackOf } from '@/lib/design-live/feedback'
 import { CRITERION_LETTERS } from '@/lib/design-live/criteria'
 import { SustainabilityGamePlayer } from './game/SustainabilityGame'
 import { LearnPlayer } from './LearnStage'
-import { SelfPacedBar, ClassTelemetry, navOf } from './SelfPaced'
+import { SelfPacedBar, navOf } from './SelfPaced'
+import { LeaderboardDrawer, useLeaderboardDrawer } from './HostChrome'
 import { getPersona } from '@/data/design/live/personas'
 import { useCelebration, CelebrationOverlay } from './Celebration'
 
@@ -67,6 +68,7 @@ export default function LiveJoin({ activity, initialCode }: { activity: LiveActi
   const [sessionExists, setSessionExists] = useState<boolean | null>(null)
   const [session, setSession] = useState<LiveSessionRow | null>(null)
   const [players, setPlayers] = useState<LivePlayerRow[]>([])
+  const lb = useLeaderboardDrawer()
   const [me, setMe] = useState<LivePlayerRow | null>(null)
   // When this browser last saved something to the student's own row. The poll that refreshes `me` from the
   // server can return a copy from just BEFORE that save landed; applying it would snap the student back
@@ -326,7 +328,8 @@ export default function LiveJoin({ activity, initialCode }: { activity: LiveActi
   const contentWidth = stageIsNarrow ? 560 : stage?.type === 'learn' || selfPaced ? 800 : '100%'
 
   return (
-    <div style={pageBg(activity.theme)}>
+    <div style={{ ...pageBg(activity.theme), paddingRight: 16 + (canWork && selfPaced ? lb.reserve : 0), transition: 'padding-right .25s' }}>
+      {canWork && selfPaced && <LeaderboardDrawer activity={activity} players={players} me={me} open={lb.open} onToggle={lb.setOpen} />}
       <div style={{ maxWidth: 'min(1180px, 94vw)', margin: '0 auto', display: 'grid', gap: 18 }}>
         <div style={{ maxWidth: 480, width: '100%', margin: '0 auto', textAlign: 'center', color: '#fff', display: 'grid', justifyItems: 'center', gap: 6 }}>
           <Avatar seed={me.id} size={56} />
@@ -352,7 +355,6 @@ export default function LiveJoin({ activity, initialCode }: { activity: LiveActi
           )}
 
           {canWork && selfPaced && <SelfPacedBar activity={activity} idx={myIdx} onGo={goStage} />}
-          {canWork && selfPaced && <ClassTelemetry activity={activity} players={players} meId={me.id} />}
 
           {/* KEYED ON THE STAGE ITSELF: this forces React to fully discard and
               rebuild everything below — not just swap props — the instant the

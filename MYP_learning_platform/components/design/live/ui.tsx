@@ -1,6 +1,6 @@
 'use client'
 
-import { createContext, useContext, useEffect, useState, type CSSProperties, type ReactNode } from 'react'
+import { createContext, useContext, useState, type CSSProperties, type ReactNode } from 'react'
 import type { LiveTheme } from '@/data/design/live/types'
 import { avatarSvg } from '@/lib/design-live/avatar'
 import { isDraftFresh, type LiveDraft, type LiveFocus } from '@/lib/design-live/hooks'
@@ -451,42 +451,6 @@ export function MCQOptions({
           </button>
         )
       })}
-    </div>
-  )
-}
-
-// Collapsible card whose open/closed choice is remembered per browser (storageKey).
-// Collapsed by default; storage failures (private mode etc.) just fall back to the default.
-export function CollapsiblePanel({
-  storageKey, title, summary, accent, defaultOpen = false, children,
-}: { storageKey: string; title: ReactNode; summary?: ReactNode; accent?: string; defaultOpen?: boolean; children: ReactNode }) {
-  const [open, setOpen] = useState(defaultOpen)
-  useEffect(() => {
-    try {
-      const v = localStorage.getItem(storageKey)
-      if (v === '1') setOpen(true)
-      else if (v === '0') setOpen(false)
-    } catch { /* ignore */ }
-  }, [storageKey])
-  const toggle = () => {
-    const next = !open
-    setOpen(next)
-    try { localStorage.setItem(storageKey, next ? '1' : '0') } catch { /* ignore */ }
-  }
-  return (
-    <div style={{ ...cardStyle(accent), display: 'grid', gap: 10, padding: open ? 18 : '10px 14px' }}>
-      <button
-        onClick={toggle}
-        aria-expanded={open}
-        style={{ all: 'unset', cursor: 'pointer', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 8, minHeight: 28, fontWeight: 800 }}
-      >
-        <span style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
-          {title}
-          {!open && summary && <span style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-muted)' }}>{summary}</span>}
-        </span>
-        <span aria-hidden style={{ fontSize: 12, color: 'var(--text-muted)' }}>{open ? '▲ Hide' : '▼ Show'}</span>
-      </button>
-      {open && children}
     </div>
   )
 }
