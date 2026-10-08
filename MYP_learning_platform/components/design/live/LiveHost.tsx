@@ -87,7 +87,10 @@ export default function LiveHost({ activity }: { activity: LiveActivityDefinitio
   const createSession = async (uid: string) => {
     const sb = createClient()
     const newCode = generateJoinCode()
-    const { error } = await sb.from('live_sessions').insert({ code: newCode, activity_id: activity.id, host_id: uid, status: 'lobby', stage_idx: 0, state: {} })
+    // Launched from a class page ("?class=<uuid>"): attach the new session to that class straight away.
+    const fromUrl = new URLSearchParams(window.location.search).get('class')
+    const classId = fromUrl && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(fromUrl) ? fromUrl : null
+    const { error } = await sb.from('live_sessions').insert({ code: newCode, activity_id: activity.id, host_id: uid, status: 'lobby', stage_idx: 0, state: {}, ...(classId ? { class_id: classId } : {}) })
     if (error) {
       setApiError(error.message)
       return

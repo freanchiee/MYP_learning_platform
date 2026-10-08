@@ -4,22 +4,26 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 import { hostStorageKey } from '@/lib/design-live/hooks'
+import { physicsLiveId } from '@/lib/learn/live-physics'
+import AssignLessons, { type LessonOutline } from './AssignLessons'
 
 const ghost = { border: '1px solid var(--border-strong)', color: 'var(--text)' } as const
 const solid = { background: 'var(--gradient-cta)', color: 'var(--text-on-accent)' } as const
 
 export interface LibItem { ref: string; title: string; assigned: boolean }
 
-// The Library tab: assign a past paper or a topic-wise revision set to the class.
-export function AssignLibrary({ classId, teacherId, subject, papers, topics, canTopics }: { classId: string; teacherId: string; subject: string; papers: LibItem[]; topics: LibItem[]; canTopics: boolean }) {
+type LibTab = 'paper' | 'topic' | 'crit' | 'physics'
+
+// The Library tab: assign a past paper, a topic-wise revision set, a criteria-wise quiz, or DP Physics self-study lessons to the class.
+export function AssignLibrary({ classId, teacherId, subject, papers, topics, crits, outline, startOnPhysics }: { classId: string; teacherId: string; subject: string; papers: LibItem[]; topics: LibItem[]; crits: LibItem[]; outline: LessonOutline[]; startOnPhysics: boolean }) {
   const router = useRouter()
-  const [tab, setTab] = useState<'paper' | 'topic'>('paper')
+  const [tab, setTab] = useState<LibTab>(startOnPhysics ? 'physics' : 'paper')
   const [due, setDue] = useState('')
   const [busy, setBusy] = useState<string | null>(null)
   const [error, setError] = useState<string | null>(null)
   const [q, setQ] = useState('')
 
-  async function assign(kind: 'paper' | 'topic', item: LibItem) {
+  async function assign(kind: 'paper' | 'topic' | 'crit', item: LibItem) {
     setBusy(item.ref)
     setError(null)
     const { error: err } = await createClient().from('class_assignments').insert({
@@ -28,7 +32,7 @@ export function AssignLibrary({ classId, teacherId, subject, papers, topics, can
       kind,
       subject,
       ref: item.ref,
-      title: kind === 'paper' ? `${subject[0].toUpperCase()}${subject.slice(1)} · ${item.title}` : item.title,
+      title: kind === 'paper' || kind === 'crit' ? `${subject[0].toUpperCase()}${subject.slice(1)} · ${item.title}` : item.title,
       due_at: due ? new Date(due).toISOString() : null,
     })
     setBusy(null)
@@ -36,24 +40,27 @@ export function AssignLibrary({ classId, teacherId, subject, papers, topics, can
     router.refresh()
   }
 
-  const list = (tab === 'paper' ? papers : topics).filter((i) => i.title.toLowerCase().includes(q.toLowerCase()))
+  const list = (tab === 'paper' ? papers : tab === 'topic' ? topics : crits).filter((i) => i.title.toLowerCase().includes(q.toLowerCase()))
 
   return (
     <div>
       <div className="flex flex-wrap items-center gap-2">
-        {(['paper', 'topic'] as const).map((k) => (
-          <button key={k} onClick={() => setTab(k)} disabled={k === 'topic' && !canTopics} className="rounded-full px-4 py-2 text-sm font-bold disabled:opacity-40" style={tab === k ? solid : ghost}>
-            {k === 'paper' ? `Past papers (${papers.length})` : `Topic revision (${topics.length})`}
-          </button>
+        {([['paper', `Past papers (${papers.length})`, papers.length], ['topic', `Topic revision (${topics.length})`, topics.length], ['crit', `Criteria quizzes (${crits.length})`, crits.length], ['physics', '⚛️ DP Physics self-study', 1]] as const).map(([k, text, n]) => (
+          <button key={k} onClick={() => setTab(k)} disabled={n === 0} className="rounded-full px-4 py-2 text-sm font-bold disabled:opacity-40" style={tab === k ? solid : ghost}>{text}</button>
         ))}
-        <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search…" className="ml-auto rounded-[var(--radius-control)] px-3 py-2 text-sm" style={{ background: 'var(--surface-inset)', border: '1px solid var(--border-strong)', color: 'var(--text)' }} />
-        <label className="flex items-center gap-2 text-xs" style={{ color: 'var(--text-muted)' }}>
-          Due (optional)
-          <input type="date" value={due} onChange={(e) => setDue(e.target.value)} className="rounded-[var(--radius-control)] px-2 py-1.5 text-sm" style={{ background: 'var(--surface-inset)', border: '1px solid var(--border-strong)', color: 'var(--text)' }} />
-        </label>
+        {tab !== 'physics' && (
+          <>
+            <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search…" className="ml-auto rounded-[var(--radius-control)] px-3 py-2 text-sm" style={{ background: 'var(--surface-inset)', border: '1px solid var(--border-strong)', color: 'var(--text)' }} />
+            <label className="flex items-center gap-2 text-xs" style={{ color: 'var(--text-muted)' }}>
+              Due (optional)
+              <input type="date" value={due} onChange={(e) => setDue(e.target.value)} className="rounded-[var(--radius-control)] px-2 py-1.5 text-sm" style={{ background: 'var(--surface-inset)', border: '1px solid var(--border-strong)', color: 'var(--text)' }} />
+            </label>
+          </>
+        )}
       </div>
-      {error && <p className="mt-3 text-sm" style={{ color: 'var(--danger)' }}>{error}</p>}
-      <div className="mt-4 grid gap-2">
+      {tab === 'physics' && <div className="mt-4"><AssignLessons classId={classId} teacherId={teacherId} outline={outline} /></div>}
+      {tab !== 'physics' && error && <p className="mt-3 text-sm" style={{ color: 'var(--danger)' }}>{error}</p>}
+      {tab !== 'physics' && <div className="mt-4 grid gap-2">
         {list.length === 0 && <p className="text-sm" style={{ color: 'var(--text-subtle)' }}>Nothing found.</p>}
         {list.map((i) => (
           <div key={i.ref} className="flex items-center justify-between gap-3 rounded-[var(--radius-panel)] px-4 py-3 text-sm" style={{ background: 'var(--surface-inset)', border: '1px solid var(--border)' }}>
@@ -67,7 +74,7 @@ export function AssignLibrary({ classId, teacherId, subject, papers, topics, can
             )}
           </div>
         ))}
-      </div>
+      </div>}
     </div>
   )
 }
@@ -89,6 +96,54 @@ export function DeleteAssignmentButton({ id }: { id: string }) {
       style={ghost}
     >
       Remove
+    </button>
+  )
+}
+
+// A dripped lesson: open it for the class now (before its scheduled date).
+export function UnlockNowButton({ id }: { id: string }) {
+  const router = useRouter()
+  const [busy, setBusy] = useState(false)
+  return (
+    <button
+      disabled={busy}
+      onClick={async () => {
+        setBusy(true)
+        await createClient().from('class_assignments').update({ unlock_at: new Date().toISOString() }).eq('id', id)
+        setBusy(false)
+        router.refresh()
+      }}
+      className="rounded-[var(--radius-control)] px-3 py-1.5 text-xs font-bold disabled:opacity-50"
+      style={ghost}
+    >
+      Unlock now
+    </button>
+  )
+}
+
+// A lesson assigned in Live mode: start (or reopen) the live class for it, attached to this class. Reuses the
+// host screen every live activity uses; if a session for this lesson is already running for the class, resume it.
+export function HostLessonLiveButton({ classId, lessonRef }: { classId: string; lessonRef: string }) {
+  const router = useRouter()
+  const [busy, setBusy] = useState(false)
+  const [mod, lesson] = lessonRef.split('/')
+  return (
+    <button
+      disabled={busy}
+      onClick={async () => {
+        setBusy(true)
+        const id = physicsLiveId(mod, lesson)
+        const { data } = await createClient().from('live_sessions').select('code').eq('class_id', classId).eq('activity_id', id).neq('status', 'ended').order('created_at', { ascending: false }).limit(1)
+        try {
+          if (data?.[0]?.code) localStorage.setItem(hostStorageKey(id), data[0].code)
+          else localStorage.removeItem(hostStorageKey(id))
+        } catch { /* storage blocked: host screen just starts a fresh lobby */ }
+        router.push(`/design/live/${id}?host=1&class=${classId}`)
+      }}
+      className="rounded-[var(--radius-control)] px-3 py-1.5 text-xs font-black tracking-wider disabled:opacity-50"
+      style={solid}
+    >
+      {busy ? '…' : '🎮 Host live'}
     </button>
   )
 }
