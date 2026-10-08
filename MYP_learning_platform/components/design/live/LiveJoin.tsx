@@ -101,7 +101,7 @@ export default function LiveJoin({ activity, initialCode }: { activity: LiveActi
   }, [code, activity.id])
 
   useLiveRow<LiveSessionRow>('live_sessions', 'code', code, setSession, !!code)
-  useLiveTable<LivePlayerRow>('live_players', 'session_code', code, setPlayers, !!code)
+  useLiveTable<LivePlayerRow>('live_players', 'session_code', code, setPlayers, !!code, 'joined_at')
   useLiveRow<LiveGradeRow>('live_grades', 'player_id', me?.id, setMyGrade, !!me)
 
   useEffect(() => {
@@ -329,7 +329,7 @@ export default function LiveJoin({ activity, initialCode }: { activity: LiveActi
 
   return (
     <div style={{ ...pageBg(activity.theme), paddingRight: 16 + (canWork && selfPaced ? lb.reserve : 0), transition: 'padding-right .25s' }}>
-      {canWork && selfPaced && <LeaderboardDrawer activity={activity} players={players} me={me} open={lb.open} onToggle={lb.setOpen} />}
+      {canWork && selfPaced && <LeaderboardDrawer activity={activity} code={code} me={me} open={lb.open} onToggle={lb.setOpen} />}
       <div style={{ maxWidth: 'min(1180px, 94vw)', margin: '0 auto', display: 'grid', gap: 18 }}>
         <div style={{ maxWidth: 480, width: '100%', margin: '0 auto', textAlign: 'center', color: '#fff', display: 'grid', justifyItems: 'center', gap: 6 }}>
           <Avatar seed={me.id} size={56} />

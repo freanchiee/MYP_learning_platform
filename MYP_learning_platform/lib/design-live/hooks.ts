@@ -207,3 +207,45 @@ export function shuffle<T>(arr: T[]): T[] {
   }
   return a
 }
+
+export interface LeaderboardRow {
+  id: string
+  name: string
+  points: number
+  badges: string[] | null
+  nav: { stage?: number; max?: number } | null
+}
+
+/** Everyone in a session, reduced to what a leaderboard may show: name, points, badges and
+ *  position (`data._nav`). Selects only those columns, so classmates' answers and drafts are
+ *  never even downloaded by this view. `error` is surfaced so a failure is visible, not blank. */
+export function useClassLeaderboard(code: string | null | undefined, enabled = true) {
+  const [rows, setRows] = useState<LeaderboardRow[]>([])
+  const [error, setError] = useState<string | null>(null)
+  const [loaded, setLoaded] = useState(false)
+  useEffect(() => {
+    if (!enabled || !code) return undefined
+    const sb = createClient()
+    let cancelled = false
+    const fetchIt = async () => {
+      const { data, error: err } = await sb
+        .from('live_players')
+        .select('id,name,points,badges,nav:data->_nav')
+        .eq('session_code', code)
+        .order('joined_at', { ascending: true })
+      if (cancelled) return
+      if (err) { setError(err.message); return }
+      setError(null)
+      setRows((data as unknown as LeaderboardRow[]) ?? [])
+      setLoaded(true)
+    }
+    fetchIt()
+    const channel = sb
+      .channel(`leaderboard-${code}-${Math.random().toString(36).slice(2)}`)
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'live_players', filter: `session_code=eq.${code}` }, fetchIt)
+      .subscribe()
+    const pollId = setInterval(fetchIt, POLL_MS)
+    return () => { cancelled = true; sb.removeChannel(channel); clearInterval(pollId) }
+  }, [code, enabled])
+  return { rows, error, loaded }
+}

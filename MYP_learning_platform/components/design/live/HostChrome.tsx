@@ -14,11 +14,12 @@ import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from 
 import Link from 'next/link'
 import type { LiveActivityDefinition } from '@/data/design/live/types'
 import type { LivePlayerRow } from '@/lib/design-live/types'
-import type { LiveFocus } from '@/lib/design-live/hooks'
+import { useClassLeaderboard, type LeaderboardRow, type LiveFocus } from '@/lib/design-live/hooks'
 import ClassPicker from './ClassPicker'
 import { Avatar, FocusDot, QRCode, cardStyle } from './ui'
 import { defaultStart, navOf } from './SelfPaced'
 
+export const NAV_H = 56 // the site's sticky top bar (app/(platform)/layout.tsx: h-14)
 export const RIBBON_H = 56
 export const DRAWER_W = 340
 export const RAIL_W = 52
@@ -101,7 +102,7 @@ export function HostRibbon({
   return (
     <div
       style={{
-        position: 'sticky', top: 0, zIndex: 30, height: RIBBON_H, display: 'flex', alignItems: 'center', gap: 12, padding: '0 16px',
+        position: 'sticky', top: NAV_H, zIndex: 30, height: RIBBON_H, display: 'flex', alignItems: 'center', gap: 12, padding: '0 16px',
         background: `linear-gradient(90deg, color-mix(in srgb, ${t.from} 82%, transparent), color-mix(in srgb, ${t.via} 82%, transparent))`,
         backdropFilter: 'blur(16px) saturate(1.4)', WebkitBackdropFilter: 'blur(16px) saturate(1.4)',
         borderBottom: `2px solid ${t.accent}`, color: '#fff',
@@ -192,7 +193,7 @@ export function ProgressDrawer({
         aria-label="Open class progress"
         title="Open class progress"
         style={{
-          ...glass(), position: 'fixed', top: RIBBON_H + 12, right: 12, zIndex: 25, width: RAIL_W, padding: '12px 0', cursor: 'pointer',
+          ...glass(), position: 'fixed', top: NAV_H + RIBBON_H + 12, right: 12, zIndex: 25, width: RAIL_W, padding: '12px 0', cursor: 'pointer',
           borderRadius: 'var(--radius-card)', display: 'grid', justifyItems: 'center', gap: 6, boxShadow: 'var(--shadow-card)', borderTop: `3px solid ${t.accent}`,
         }}
       >
@@ -207,7 +208,7 @@ export function ProgressDrawer({
     <aside
       aria-label="Class progress"
       style={{
-        ...glass(), position: 'fixed', top: RIBBON_H + 12, right: 12, bottom: 12, width: `min(${DRAWER_W}px, calc(100vw - 24px))`, zIndex: 25, display: 'flex', flexDirection: 'column',
+        ...glass(), position: 'fixed', top: NAV_H + RIBBON_H + 12, right: 12, bottom: 12, width: `min(${DRAWER_W}px, calc(100vw - 24px))`, zIndex: 25, display: 'flex', flexDirection: 'column',
         borderRadius: 'var(--radius-card)', boxShadow: 'var(--shadow-card-hover)', borderTop: `3px solid ${t.accent}`, overflow: 'hidden',
       }}
     >
@@ -337,26 +338,30 @@ export function useLeaderboardDrawer() {
   return { open, setOpen: wide ? setStored : setNarrowOpen, reserve: wide ? (open ? DRAWER_W - 40 + 16 : RAIL_W + 8) : 0 }
 }
 
-// Student-facing class leaderboard. Shows ONLY name, position, points and badges —
-// never `data` (answers, drafts, chat).
+// Student-facing class leaderboard: information only (no clicks into anyone's work).
+// Shows ONLY name, position, points and badges — never answers, drafts or chat.
 export function LeaderboardDrawer({
-  activity, players, me, open, onToggle,
+  activity, code, me, open, onToggle,
 }: {
   activity: LiveActivityDefinition
-  players: LivePlayerRow[]
+  code: string
   me: LivePlayerRow
   open: boolean
   onToggle: (v: boolean) => void
 }) {
   const n = activity.stages.length
   const t = activity.theme
-  const all = players.some((p) => p.id === me.id) ? players : [...players, me]
+  const { rows: fetched, error, loaded } = useClassLeaderboard(code)
+  const mine: LeaderboardRow = { id: me.id, name: me.name, points: me.points, badges: me.badges, nav: (me.data?._nav as LeaderboardRow['nav']) ?? null }
+  // Use our own live row (instant points / position) in place of the polled copy.
+  const all = fetched.some((r) => r.id === me.id) ? fetched.map((r) => (r.id === me.id ? mine : r)) : [...fetched, mine]
   const rows = all
-    .map((p) => ({ p, nav: navOf(p, activity) }))
+    .map((p) => ({ p, nav: navOf({ data: { _nav: p.nav ?? undefined } }, activity) }))
     .sort((a, b) => b.p.points - a.p.points || b.nav.max - a.nav.max || a.p.name.localeCompare(b.p.name))
   const myRank = rows.findIndex((r) => r.p.id === me.id) + 1
   const medal = ['🥇', '🥈', '🥉']
   const W = DRAWER_W - 40
+  const top = NAV_H + 12
 
   if (!open) {
     return (
@@ -365,7 +370,7 @@ export function LeaderboardDrawer({
         aria-label="Open class leaderboard"
         title="Open class leaderboard"
         style={{
-          ...glass(), position: 'fixed', top: 12, right: 12, zIndex: 25, width: RAIL_W, padding: '12px 0', cursor: 'pointer',
+          ...glass(), position: 'fixed', top, right: 12, zIndex: 25, width: RAIL_W, padding: '12px 0', cursor: 'pointer',
           borderRadius: 'var(--radius-card)', display: 'grid', justifyItems: 'center', gap: 6, boxShadow: 'var(--shadow-card)', borderTop: `3px solid ${t.accent}`,
         }}
       >
@@ -380,7 +385,7 @@ export function LeaderboardDrawer({
     <aside
       aria-label="Class leaderboard"
       style={{
-        ...glass(), position: 'fixed', top: 12, right: 12, bottom: 12, width: `min(${W}px, calc(100vw - 24px))`, zIndex: 25, display: 'flex', flexDirection: 'column',
+        ...glass(), position: 'fixed', top, right: 12, bottom: 12, width: `min(${W}px, calc(100vw - 24px))`, zIndex: 25, display: 'flex', flexDirection: 'column',
         borderRadius: 'var(--radius-card)', boxShadow: 'var(--shadow-card-hover)', borderTop: `3px solid ${t.accent}`, overflow: 'hidden',
       }}
     >
@@ -391,7 +396,9 @@ export function LeaderboardDrawer({
         </div>
         <button onClick={() => onToggle(false)} aria-label="Collapse leaderboard" title="Collapse" style={{ cursor: 'pointer', minWidth: 36, minHeight: 36, borderRadius: 'var(--radius-control)', border: '1px solid var(--border-strong)', background: 'transparent', color: 'var(--text)' }}>▶</button>
       </div>
-      <div style={{ overflowY: 'auto', padding: '0 10px 12px', display: 'grid', gap: 4, alignContent: 'start', flex: 1 }}>
+      {error && <div style={{ margin: '0 14px 8px', fontSize: 12, color: 'var(--danger)' }}>Couldn&apos;t load your classmates: {error}</div>}
+      {!loaded && !error && <div style={{ margin: '0 14px 8px', fontSize: 12, color: 'var(--text-muted)' }}>Loading the class…</div>}
+      <div style={{ overflowY: 'auto', padding: '0 10px 12px', display: 'grid', gap: 4, alignContent: 'start', flex: 1, pointerEvents: 'none', userSelect: 'none' }}>
         {rows.map(({ p, nav }, i) => {
           const you = p.id === me.id
           return (
@@ -401,7 +408,6 @@ export function LeaderboardDrawer({
                 display: 'grid', gap: 3, padding: '6px 8px', borderRadius: 'var(--radius-control)',
                 background: you ? 'var(--accent-soft)' : 'transparent', border: you ? `1.5px solid ${t.accent}` : '1.5px solid transparent',
               }}
-              title={`${activity.stages[nav.stage].label} · ${nav.stage + 1}/${n}`}
             >
               <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 12.5, fontWeight: 700 }}>
                 <span style={{ width: 22, textAlign: 'center', fontWeight: 800, color: 'var(--text-muted)' }}>{medal[i] ?? i + 1}</span>
