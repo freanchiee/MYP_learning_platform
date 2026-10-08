@@ -398,14 +398,14 @@ export function LeaderboardDrawer({
       </div>
       {error && <div style={{ margin: '0 14px 8px', fontSize: 12, color: 'var(--danger)' }}>Couldn&apos;t load your classmates: {error}</div>}
       {!loaded && !error && <div style={{ margin: '0 14px 8px', fontSize: 12, color: 'var(--text-muted)' }}>Loading the class…</div>}
-      <div style={{ overflowY: 'auto', padding: '0 10px 12px', display: 'grid', gap: 4, alignContent: 'start', flex: 1, pointerEvents: 'none', userSelect: 'none' }}>
+      <div style={{ overflowY: 'auto', padding: '0 10px 12px', display: 'grid', gap: 4, alignContent: 'start', flex: 1, minHeight: 0, overscrollBehavior: 'contain' }}>
         {rows.map(({ p, nav }, i) => {
           const you = p.id === me.id
           return (
             <div
               key={p.id}
               style={{
-                display: 'grid', gap: 3, padding: '6px 8px', borderRadius: 'var(--radius-control)',
+                display: 'grid', gap: 3, padding: '6px 8px', borderRadius: 'var(--radius-control)', pointerEvents: 'none', userSelect: 'none',
                 background: you ? 'var(--accent-soft)' : 'transparent', border: you ? `1.5px solid ${t.accent}` : '1.5px solid transparent',
               }}
             >
