@@ -8,7 +8,7 @@
 // this was extracted from (three one-off HTML builds) and how to
 // author a new activity.
 
-export type MypYear = 'MYP2' | 'MYP3' | 'MYP4' | 'MYP5'
+export type MypYear = 'MYP2' | 'MYP3' | 'MYP4' | 'MYP5' | 'DP' // 'DP': activities built on the fly from DP Physics lessons (lib/learn/live-physics.ts)
 
 export interface LiveTheme {
   accent: string // primary brand colour for this activity, e.g. '#2456C9'

@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
+import { UNLOCKABLE_SUBJECTS } from '@/lib/paper-access'
 
 export interface ProAccount {
   id: string
@@ -16,6 +17,28 @@ export default function AccessManager({ initial }: { initial: ProAccount[] }) {
   const [email, setEmail] = useState('')
   const [busy, setBusy] = useState(false)
   const [message, setMessage] = useState<{ text: string; ok: boolean } | null>(null)
+
+  const [subjEmail, setSubjEmail] = useState('')
+  const [subjects, setSubjects] = useState<string[]>([])
+  const [subjBusy, setSubjBusy] = useState(false)
+  const [subjMessage, setSubjMessage] = useState<{ text: string; ok: boolean } | null>(null)
+
+  const toggleSubject = (slug: string) => setSubjects((s) => (s.includes(slug) ? s.filter((x) => x !== slug) : [...s, slug]))
+
+  const unlockSubjects = async () => {
+    const trimmed = subjEmail.trim()
+    if (!trimmed || subjects.length === 0) return
+    setSubjBusy(true)
+    setSubjMessage(null)
+    const { data, error } = await createClient().rpc('admin_unlock_subjects_by_email', { p_email: trimmed, p_subjects: subjects })
+    setSubjBusy(false)
+    if (error) return setSubjMessage({ text: error.message, ok: false })
+    const row = Array.isArray(data) ? data[0] : data
+    if (!row?.found) return setSubjMessage({ text: `No account found for ${trimmed} — they need to have signed in at least once.`, ok: false })
+    setSubjMessage({ text: `✓ Unlocked ${subjects.join(', ')} for ${trimmed}.`, ok: true })
+    setSubjEmail('')
+    setSubjects([])
+  }
 
   const grant = async () => {
     const trimmed = email.trim()
@@ -74,6 +97,43 @@ export default function AccessManager({ initial }: { initial: ProAccount[] }) {
         {message && (
           <div className="mt-3 rounded-lg p-3 text-sm" style={{ background: message.ok ? 'var(--success-surface)' : 'var(--danger-surface)', color: message.ok ? 'var(--success)' : 'var(--danger)' }}>
             {message.text}
+          </div>
+        )}
+      </div>
+
+      <div className="mt-6 rounded-2xl p-5" style={{ border: '1px solid var(--border)', background: 'var(--surface-elevated)' }}>
+        <div className="text-xs font-black tracking-widest" style={{ color: 'var(--text-subtle)' }}>UNLOCK SPECIFIC SUBJECTS (PAPER PAYWALL)</div>
+        <p className="mt-1 text-xs" style={{ color: 'var(--text-subtle)' }}>For the per-subject student paywall on papers (not the teacher full-access plan above).</p>
+        <input
+          value={subjEmail}
+          onChange={(e) => setSubjEmail(e.target.value)}
+          placeholder="student@email.com"
+          type="email"
+          className="mt-3 w-full rounded-md px-3 py-2 text-sm"
+          style={{ background: 'var(--surface-inset)', border: '1px solid var(--border-strong)', color: 'var(--text)' }}
+        />
+        <div className="mt-2 flex flex-wrap gap-2">
+          {UNLOCKABLE_SUBJECTS.map((s) => {
+            const checked = subjects.includes(s.slug)
+            return (
+              <label key={s.slug} className="flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-bold" style={{ border: `1.5px solid ${checked ? 'var(--accent)' : 'var(--border)'}` }}>
+                <input type="checkbox" checked={checked} onChange={() => toggleSubject(s.slug)} />
+                {s.label}
+              </label>
+            )
+          })}
+        </div>
+        <button
+          onClick={unlockSubjects}
+          disabled={subjBusy || !subjEmail.trim() || subjects.length === 0}
+          className="mt-3 rounded-[var(--radius-control)] px-4 py-2 text-xs font-black tracking-wider disabled:opacity-50"
+          style={{ background: 'var(--gradient-cta)', color: 'var(--text-on-accent)' }}
+        >
+          {subjBusy ? '…' : 'UNLOCK SELECTED SUBJECTS'}
+        </button>
+        {subjMessage && (
+          <div className="mt-3 rounded-lg p-3 text-sm" style={{ background: subjMessage.ok ? 'var(--success-surface)' : 'var(--danger-surface)', color: subjMessage.ok ? 'var(--success)' : 'var(--danger)' }}>
+            {subjMessage.text}
           </div>
         )}
       </div>

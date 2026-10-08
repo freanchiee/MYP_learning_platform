@@ -598,3 +598,12 @@ reader/writer is `authenticated`. If a future activity needs to be public
 (no login), it needs its own route outside `(platform)` AND its own RLS
 policies scoped to `anon` — don't just loosen the existing policies, since
 those are shared by every gated activity.
+
+## DP Physics lessons as live activities (dynamic)
+
+An id of the form `dpp--<module>--<lesson>` is not in `LIVE_ACTIVITIES`: `getLiveActivity` builds it on the fly from the lesson data
+(`lib/learn/live-physics.ts`): a host-paced "Predict first" MCQ stage (simulation predictions) and a "Check your understanding" stage
+(the lesson's checks). `year` is `'DP'` and these never appear in the MYP year hubs. The result is plain data and cached, so it is safe to
+pass to Client Components. A teacher assigns a lesson in Live mode from the class Library > DP Physics tab; "Host live" opens
+`/design/live/<id>?host=1&class=<classId>` and `LiveHost.createSession` attaches the session to that class (`?class=` is validated as a UUID).
+Async (self-paced) lesson assignments are separate: `class_assignments.kind='lesson'` with `unlock_at` (drip) and progress in `lesson_progress`.

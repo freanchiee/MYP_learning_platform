@@ -34,5 +34,7 @@ export function paperSubject(id: string): string {
 
 /** Where a student opens an assignment. */
 export function assignmentHref(kind: string, subject: string, ref: string): string {
-  return kind === 'paper' ? `/exam/${ref}` : `/practice/${subject}/topic/${encodeURIComponent(ref)}`
+  if (kind === 'paper') return `/exam/${ref}`
+  if (kind === 'lesson') return `/dp-physics/${ref}`
+  return `/practice/${subject}/${kind === 'crit' ? 'crit' : 'topic'}/${encodeURIComponent(ref)}`
 }

@@ -568,4 +568,91 @@ const ec = await import(pathToFileURL(outEC).href)
   })())
   ok('B: after the collision, X and Y share the SAME momentum-time value (they move together)', near(ec.collisionMomentum(mX, 5 * v, v, t0, t1, ec.STICK.tMax), ec.collisionMomentum(r.mY, 0, v, t0, t1, ec.STICK.tMax) / ec.STICK_MASS_RATIO, 1e-9))
 }
+// ---- assigning lessons to a class: drip schedule, lock state, progress summaries, and lessons run live ----
+const outAS = path.resolve('node_modules/.cache/lesson-assign.mjs')
+await build({ entryPoints: ['lib/learn/assignments.ts'], outfile: outAS, format: 'esm', bundle: true, logLevel: 'silent' })
+const asg = await import(pathToFileURL(outAS).href)
+const outLP = path.resolve('node_modules/.cache/live-physics.mjs')
+await build({ entryPoints: ['lib/learn/live-physics.ts'], outfile: outLP, format: 'esm', bundle: true, logLevel: 'silent' })
+const lp = await import(pathToFileURL(outLP).href)
+const outReg = path.resolve('node_modules/.cache/live-registry.mjs')
+await build({ entryPoints: ['data/design/live/registry.ts'], outfile: outReg, format: 'esm', bundle: true, logLevel: 'silent' })
+const reg = await import(pathToFileURL(outReg).href)
+{
+  const keys = asg.allLessonKeys()
+  ok('every lesson key resolves back to its real lesson, and parses as module/lesson', keys.length > 20 && keys.every((k) => { const r = asg.resolveLesson(k); const p = asg.parseLessonKey(k); return r && p && asg.lessonKey(p.module, p.lesson) === k }))
+  ok('lesson keys are unique', new Set(keys).size === keys.length)
+  ok('a bad or removed ref resolves to nothing', asg.resolveLesson('nope/nothing') === undefined && asg.resolveLesson('onlyone') === undefined && asg.parseLessonKey('a/b/c') === null)
+  ok('no module or lesson slug contains "--" (it separates the parts of a live-activity id)', keys.every((k) => !k.includes('--')))
+  ok('questions-scope links open just the questions; lesson-scope links open the lesson', asg.lessonHref('a1-kinematics/motion-graphs', 'questions') === '/dp-physics/a1-kinematics/motion-graphs?view=questions' && asg.lessonHref('a1-kinematics/motion-graphs') === '/dp-physics/a1-kinematics/motion-graphs')
+}
+{
+  const ks = ['m/a', 'm/b', 'm/c', 'm/d']
+  const d = asg.buildDrip(ks, { startDate: '2026-10-05', everyDays: 3 }) // a Monday
+  const day = (x) => `${x.unlockAt.getFullYear()}-${String(x.unlockAt.getMonth() + 1).padStart(2, '0')}-${String(x.unlockAt.getDate()).padStart(2, '0')}`
+  ok('drip: one lesson every 3 days from the start date, in order', d.map(day).join() === '2026-10-05,2026-10-08,2026-10-11,2026-10-14' && d.map((x) => x.key).join() === ks.join())
+  ok('drip: each unlock is local midnight', d.every((x) => x.unlockAt.getHours() === 0 && x.unlockAt.getMinutes() === 0))
+  const w = asg.buildDrip(ks, { startDate: '2026-10-05', everyDays: 3, skipWeekends: true })
+  ok('drip: skip-weekends moves Sunday 11 Oct to Monday 12 Oct, and never lands on a weekend', day(w[2]) === '2026-10-12' && w.every((x) => x.unlockAt.getDay() !== 0 && x.unlockAt.getDay() !== 6))
+  const sat = asg.buildDrip(['m/a'], { startDate: '2026-10-10', everyDays: 1, skipWeekends: true })
+  ok('drip: a start date on a Saturday rolls to Monday', day(sat[0]) === '2026-10-12')
+  ok('drip: every 0 days unlocks everything on the start date', asg.buildDrip(ks, { startDate: '2026-10-05', everyDays: 0 }).every((x) => day(x) === '2026-10-05'))
+  ok('drip: an invalid date makes no schedule', asg.buildDrip(ks, { startDate: '2026-02-30', everyDays: 1 }).length === 0 && asg.buildDrip(ks, { startDate: 'tomorrow', everyDays: 1 }).length === 0)
+  let mono = true
+  for (let i = 0; i < 300; i++) {
+    const n = 1 + Math.floor(rnd2() * 12), every = Math.floor(rnd2() * 9), sw = rnd2() < 0.5
+    const sched = asg.buildDrip(Array.from({ length: n }, (_, j) => 'm/' + j), { startDate: '2026-09-28', everyDays: every, skipWeekends: sw })
+    for (let j = 1; j < sched.length; j++) if (sched[j].unlockAt < sched[j - 1].unlockAt) mono = false
+  }
+  ok('drip: unlock dates never go backwards (300 random schedules)', mono)
+}
+{
+  const now = new Date('2026-10-05T10:00:00Z')
+  ok('no unlock date = open', asg.unlockState(null, now).state === 'open' && asg.unlockState(undefined, now).state === 'open')
+  ok('a past unlock date is open; a future one is locked until then', asg.unlockState('2026-10-01T00:00:00Z', now).state === 'open' && (() => { const u = asg.unlockState('2026-10-08T00:00:00Z', now); return u.state === 'locked' && u.unlockAt.toISOString() === '2026-10-08T00:00:00.000Z' })())
+  ok('unlocks exactly at the unlock moment (not one second early)', asg.unlockState('2026-10-05T10:00:00Z', now).state === 'open' && asg.unlockState('2026-10-05T10:00:01Z', now).state === 'locked')
+  ok('a garbage date never locks a student out', asg.unlockState('not a date', now).state === 'open')
+  ok('assigned twice: open if ANY assignment is open (a later one cannot lock them out)', asg.lessonAccess([{ unlock_at: '2026-10-20T00:00:00Z' }, { unlock_at: '2026-10-01T00:00:00Z' }], now).state === 'open')
+  const both = asg.lessonAccess([{ unlock_at: '2026-10-20T00:00:00Z' }, { unlock_at: '2026-10-09T00:00:00Z' }], now)
+  ok('assigned twice, both locked: shows the EARLIEST unlock', both.state === 'locked' && both.unlockAt.toISOString() === '2026-10-09T00:00:00.000Z')
+  ok('not assigned at all = open (a free lesson is never locked)', asg.lessonAccess([], now).state === 'open')
+}
+{
+  const found = asg.resolveLesson('a2-force-and-motion/exam-questions-collisions')
+  const qs = asg.lessonChecks(found.lesson)
+  ok('lessonChecks returns every check with its right answer', qs.length === 7 && qs.every((c) => Number.isInteger(c.answer) && c.answer >= 0 && c.answer < c.options.length))
+  const allRight = Object.fromEntries(qs.map((c) => [c.id, c.answer]))
+  const st = asg.lessonStats(found.lesson, allRight)
+  ok('all right = 7 of 7 answered and correct', st.total === 7 && st.answered === 7 && st.correct === 7)
+  const mixed = { ...allRight, [qs[0].id]: (qs[0].answer + 1) % qs[0].options.length }
+  const st2 = asg.lessonStats(found.lesson, mixed)
+  ok('one wrong = 7 answered, 6 correct', st2.answered === 7 && st2.correct === 6)
+  ok('nothing yet = 0 answered; null/undefined progress is safe', asg.lessonStats(found.lesson, {}).answered === 0 && asg.lessonStats(found.lesson, null).correct === 0 && asg.lessonStats(found.lesson, undefined).total === 7)
+  ok('stale check ids from an edited lesson are ignored', asg.lessonStats(found.lesson, { 'gone-id': 2 }).answered === 0)
+  ok('progress labels: done / started / not started', asg.progressLabel(st, true).tone === 'done' && asg.progressLabel(st2, false).tone === 'started' && asg.progressLabel(asg.lessonStats(found.lesson, {}), false).tone === 'none')
+}
+{
+  const id = lp.physicsLiveId('a2-force-and-motion', 'exam-questions-collisions')
+  ok('physics live id round-trips', id === 'dpp--a2-force-and-motion--exam-questions-collisions' && JSON.stringify(lp.parsePhysicsLiveId(id)) === JSON.stringify({ module: 'a2-force-and-motion', lesson: 'exam-questions-collisions' }) && lp.parsePhysicsLiveId('myp3-unit1-kickoff') === null)
+  const act = lp.physicsLiveActivity(id)
+  ok('the live activity has a predict stage and a checks stage, both host-paced', act && act.stages.length === 2 && act.stages.every((s) => s.type === 'mcq' && s.pacing === 'host-paced'))
+  const lessonChecks = asg.resolveLesson('a2-force-and-motion/exam-questions-collisions').lesson
+  const checkStage = act.stages.find((s) => s.key === 'checks')
+  ok('every check becomes a live question with the same options and the same correct index', checkStage.questions.length === 7 && asg.lessonChecks(lessonChecks).every((c, i) => checkStage.questions[i].correct === c.answer && checkStage.questions[i].options.length === c.options.length))
+  ok('predictions from the simulations become their own live questions', act.stages.find((s) => s.key === 'predict').questions.length === 2)
+  ok('every question in every lesson has a valid correct index (all lessons that can run live)', (() => {
+    for (const k of asg.allLessonKeys()) {
+      const a = lp.physicsLiveActivity(lp.physicsLiveId(...k.split('/')))
+      if (!a) continue
+      for (const st of a.stages) for (const q of st.questions) if (!(q.correct >= 0 && q.correct < q.options.length) || q.options.length < 2) return false
+    }
+    return true
+  })())
+  ok('maths markup is stripped for the live screens: m_{A}g -> m_Ag, v^{2} -> v^2', lp.plainMaths('m_{A}g and v^{2}') === 'm_Ag and v^2')
+  ok('an unknown or non-physics id gives no activity', lp.physicsLiveActivity('dpp--nope--nothing') === undefined && lp.physicsLiveActivity('myp3-unit1-kickoff') === undefined)
+  ok('the live-activity object is cached (stable identity between renders)', lp.physicsLiveActivity(id) === lp.physicsLiveActivity(id))
+  ok('the activity contains only plain data (nothing a Server Component could not pass to a Client one)', JSON.stringify(act) === JSON.stringify(JSON.parse(JSON.stringify(act))))
+  ok('the registry resolves both a normal MYP activity and a physics lesson', reg.getLiveActivity('myp3-unit1-kickoff')?.year === 'MYP3' && reg.getLiveActivity(id)?.year === 'DP')
+  ok('physics lessons do NOT appear in the MYP year hubs', reg.YEARS.every((y) => reg.liveActivitiesForYear(y).every((a) => !a.id.startsWith('dpp--'))))
+}
 process.exit(fail ? 1 : 0)

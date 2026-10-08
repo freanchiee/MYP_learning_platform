@@ -9,17 +9,24 @@ import { BIOLOGY_BANK } from '@/data/practice/biology-bank'
 import { CHEMISTRY_BANK } from '@/data/practice/chemistry-bank'
 import { PHYSICS_BANK } from '@/data/practice/physics-bank'
 import { TEACH_SUBJECTS, paperTitle, subjectLabel } from '@/lib/subjects'
+import { MODULES } from '@/data/learn/physics'
+import { lessonChecks, lessonStats, progressLabel, resolveLesson, formatUnlock, unlockState } from '@/lib/learn/assignments'
+import { lessonHasLiveQuestions, physicsLiveId } from '@/lib/learn/live-physics'
 import AssignSessions from '@/components/teacher/AssignSessions'
 import InviteCard from '@/components/teacher/InviteCard'
 import ClassLookPicker from '@/components/teacher/ClassLookPicker'
-import { AssignLibrary, DeleteAssignmentButton, RemoveMemberButton, DeleteClassButton, ReopenSessionButton } from '@/components/teacher/ClassActions'
+import { AssignLibrary, DeleteAssignmentButton, RemoveMemberButton, DeleteClassButton, ReopenSessionButton, UnlockNowButton, HostLessonLiveButton } from '@/components/teacher/ClassActions'
 import StudentAnswerPeek from '@/components/teacher/StudentAnswerPeek'
 import DownloadReportButton from '@/components/teacher/DownloadReportButton'
 
 interface SessionRow { code: string; activity_id: string; status: string; created_at: string }
 interface PlayerRow { id: string; session_code: string; user_id: string; points: number; data: Record<string, any> | null }
 interface GradeRow { session_code: string; player_id: string; scores: Record<string, number | null>; graded: boolean }
-interface AssignmentRow { id: string; kind: string; subject: string; ref: string; title: string; due_at: string | null; created_at: string }
+interface AssignmentRow { id: string; kind: string; subject: string; ref: string; title: string; due_at: string | null; created_at: string; mode?: string; scope?: string; unlock_at?: string | null; position?: number | null }
+interface LessonProgressRow { user_id: string; lesson_key: string; checks: Record<string, number> | null; done: boolean | null }
+
+const KIND_LABEL: Record<string, string> = { paper: 'Past paper', topic: 'Topic revision', crit: 'Criteria quiz', lesson: 'DP Physics lesson' }
+const kindLabel = (a: AssignmentRow) => a.kind === 'lesson' ? `DP Physics · ${a.mode === 'live' ? 'live class' : a.scope === 'questions' ? 'self-paced questions' : 'self-paced lesson'}` : KIND_LABEL[a.kind] ?? a.kind
 
 const BANKS: Record<string, { topicCanonical?: string }[]> = { biology: BIOLOGY_BANK, chemistry: CHEMISTRY_BANK, physics: PHYSICS_BANK }
 
@@ -59,7 +66,7 @@ export default async function ClassPage({ params, searchParams }: { params: { id
   const [{ data: members }, { data: sessions }, { data: assigns }, { data: profile }, { data: mine }] = await Promise.all([
     supabase.from('class_members').select('*').eq('class_id', cls.id).order('name'),
     supabase.from('live_sessions').select('code, activity_id, status, created_at').eq('class_id', cls.id).order('created_at', { ascending: false }),
-    supabase.from('class_assignments').select('id, kind, subject, ref, title, due_at, created_at').eq('class_id', cls.id).order('created_at', { ascending: false }),
+    supabase.from('class_assignments').select('id, kind, subject, ref, title, due_at, created_at, mode, scope, unlock_at, position').eq('class_id', cls.id).order('position', { ascending: true, nullsFirst: false }).order('created_at', { ascending: false }),
     supabase.from('profiles').select('subjects').eq('id', user.id).maybeSingle(),
     supabase.from('live_sessions').select('code, activity_id, status, created_at, class_id').eq('host_id', user.id).order('created_at', { ascending: false }).limit(20),
   ])
@@ -70,7 +77,8 @@ export default async function ClassPage({ params, searchParams }: { params: { id
   const memberIds = memberList.map((m) => m.user_id)
 
   const needProgress = tab === 'insights' || tab === 'overview' || tab === 'assignments' || tab === 'live'
-  const [{ data: players }, { data: grades }, { data: done }, { data: attempts }] = needProgress
+  const lessonKeys = assignList.filter((a) => a.kind === 'lesson').map((a) => a.ref)
+  const [{ data: players }, { data: grades }, { data: done }, { data: attempts }, { data: lpData }] = needProgress
     ? await Promise.all([
         codes.length ? supabase.from('live_players').select('id, session_code, user_id, points, data').in('session_code', codes) : Promise.resolve({ data: [] }),
         codes.length ? supabase.from('live_grades').select('session_code, player_id, scores, graded').in('session_code', codes) : Promise.resolve({ data: [] }),
@@ -78,14 +86,44 @@ export default async function ClassPage({ params, searchParams }: { params: { id
         assignList.some((a) => a.kind === 'paper') && memberIds.length
           ? supabase.from('attempts').select('user_id, paper_id, total_score, max_score').eq('status', 'completed').in('paper_id', assignList.filter((a) => a.kind === 'paper').map((a) => a.ref)).in('user_id', memberIds)
           : Promise.resolve({ data: [] }),
+        lessonKeys.length && memberIds.length ? supabase.from('lesson_progress').select('user_id, lesson_key, checks, done').in('lesson_key', lessonKeys).in('user_id', memberIds) : Promise.resolve({ data: [] }),
       ])
-    : [{ data: [] }, { data: [] }, { data: [] }, { data: [] }]
+    : [{ data: [] }, { data: [] }, { data: [] }, { data: [] }, { data: [] }]
+  const lessonRows = (lpData ?? []) as LessonProgressRow[]
   const playerRows = (players ?? []) as PlayerRow[]
   const gradeRows = (grades ?? []) as GradeRow[]
   const doneRows = (done ?? []) as { assignment_id: string; user_id: string }[]
   const attemptRows = (attempts ?? []) as { user_id: string; paper_id: string; total_score: number | null; max_score: number | null }[]
 
+  // 0..1 for a progress bar: papers/topic sets/quizzes are done or not; a lesson counts the questions answered;
+  // a live-class lesson is "in" once the student joined the session run for this class.
+  function assignmentFraction(a: AssignmentRow, userId: string): number {
+    if (a.kind === 'lesson' && a.mode !== 'live') {
+      const row = lessonRows.find((r) => r.user_id === userId && r.lesson_key === a.ref)
+      const found = resolveLesson(a.ref)
+      if (!row || !found) return 0
+      if (row.done) return 1
+      const st = lessonStats(found.lesson, row.checks)
+      return st.total ? st.answered / st.total : 0
+    }
+    return assignmentCell(a, userId).on ? 1 : 0
+  }
+  const classProgress = (a: AssignmentRow) => memberList.length ? Math.round((memberList.reduce((n, m) => n + assignmentFraction(a, m.user_id), 0) / memberList.length) * 100) : 0
+
   function assignmentCell(a: AssignmentRow, userId: string): { text: string; on: boolean } {
+    if (a.kind === 'lesson') {
+      if (a.mode === 'live') {
+        const id = physicsLiveId(...(a.ref.split('/') as [string, string]))
+        const sess = sessionList.filter((s) => s.activity_id === id)
+        const hit = sess.map((s) => liveCell(userId, s)).find((c) => c.on)
+        return hit ?? { text: sess.length ? 'Not joined' : 'Not run yet', on: false }
+      }
+      const row = lessonRows.find((r) => r.user_id === userId && r.lesson_key === a.ref)
+      const found = resolveLesson(a.ref)
+      if (!row || !found) return { text: '—', on: false }
+      const label = progressLabel(lessonStats(found.lesson, row.checks), !!row.done)
+      return { text: label.text, on: label.tone !== 'none' }
+    }
     if (a.kind === 'paper') {
       const best = attemptRows.filter((t) => t.user_id === userId && t.paper_id === a.ref).sort((x, y) => (y.total_score ?? 0) - (x.total_score ?? 0))[0]
       if (!best) return { text: '—', on: false }
@@ -94,7 +132,7 @@ export default async function ClassPage({ params, searchParams }: { params: { id
     }
     return doneRows.some((d) => d.assignment_id === a.id && d.user_id === userId) ? { text: 'Done ✓', on: true } : { text: '—', on: false }
   }
-  const doneCount = (a: AssignmentRow) => memberList.filter((m) => assignmentCell(a, m.user_id).on).length
+  const doneCount = (a: AssignmentRow) => memberList.filter((m) => assignmentFraction(a, m.user_id) >= 1).length
 
   function completion(activityId: string, data: Record<string, any> | null): number | null {
     const stages = getLiveActivity(activityId)?.stages.filter((st) => st.type === 'worksheet') ?? []
@@ -131,13 +169,25 @@ export default async function ClassPage({ params, searchParams }: { params: { id
   }
 
   // Library data (only built for that tab)
+  // Any subject can be assigned to any class; the subjects the teacher said they teach come first.
   const teacherSubjects = ((profile?.subjects as string[] | null) ?? []).filter((s) => TEACH_SUBJECTS.some((t) => t.slug === s))
-  const subjectOptions = teacherSubjects.length ? teacherSubjects : TEACH_SUBJECTS.filter((s) => s.slug === 'physics' || s.slug === 'chemistry' || s.slug === 'biology').map((s) => s.slug)
+  const subjectOptions = [...teacherSubjects, ...TEACH_SUBJECTS.map((t) => t.slug).filter((s) => !teacherSubjects.includes(s))]
   const subject = subjectOptions.includes(searchParams.subject ?? '') ? searchParams.subject! : subjectOptions[0]
   const assignedRefs = new Set(assignList.map((a) => `${a.kind}:${a.subject}:${a.ref}`))
   const papers = LAUNCHED_PAPERS.filter((p) => p.startsWith(`${subject}-`)).map((p) => ({ ref: p, title: paperTitle(p), assigned: assignedRefs.has(`paper:${subject}:${p}`) }))
   const topicNames = Array.from(new Set((BANKS[subject] ?? []).map((q) => q.topicCanonical).filter((t): t is string => !!t))).sort()
   const topics = topicNames.map((t) => ({ ref: t, title: t, assigned: assignedRefs.has(`topic:${subject}:${t}`) }))
+
+  const critCounts: Record<string, number> = {}
+  for (const q of ((BANKS[subject] ?? []) as { crit?: string }[])) if (q.crit) critCounts[q.crit] = (critCounts[q.crit] ?? 0) + 1
+  const CRIT_NAMES: Record<string, string> = { A: 'Criterion A · Knowing & Understanding', B: 'Criterion B · Inquiring & Designing', C: 'Criterion C · Processing & Evaluating', D: 'Criterion D · Reflecting on Impacts' }
+  const crits = Object.keys(critCounts).sort().map((c) => ({ ref: c, title: `${CRIT_NAMES[c] ?? `Criterion ${c}`} (${critCounts[c]} questions)`, assigned: assignedRefs.has(`crit:${subject}:${c}`) }))
+  const assignedLessons = new Set(assignList.filter((a) => a.kind === 'lesson').map((a) => a.ref))
+  const outline = MODULES.map((m) => ({
+    module: m.slug,
+    moduleTitle: m.title,
+    lessons: m.lessons.map((l) => ({ key: `${m.slug}/${l.slug}`, code: l.code, title: l.title, minutes: l.minutes, checks: lessonChecks(l).length, live: lessonHasLiveQuestions(l), assigned: assignedLessons.has(`${m.slug}/${l.slug}`) })),
+  }))
 
   const assignable = (mine ?? []).filter((x) => x.class_id === null || x.class_id === cls.id).map((x) => ({
     code: x.code,
@@ -227,22 +277,45 @@ export default async function ClassPage({ params, searchParams }: { params: { id
           {tab === 'assignments' && (
             <section>
               <div className="flex items-center justify-between"><h2 className="text-2xl font-extrabold">Assignments</h2><Link href={href('library')} className="rounded-[var(--radius-control)] px-4 py-2 text-xs font-black tracking-widest" style={{ background: 'var(--gradient-cta)', color: 'var(--text-on-accent)' }}>CREATE ASSIGNMENT</Link></div>
-              {assignList.length === 0 ? <p className="mt-4 text-sm" style={muted}>No assignments yet.</p> : assignList.map((a) => (
-                <div key={a.id} className="mt-3 flex flex-wrap items-center justify-between gap-3 rounded-[var(--radius-card)] p-4" style={glass}>
-                  <div>
-                    <div className="font-extrabold">{a.title}</div>
-                    <div className="text-xs" style={muted}>{a.kind === 'paper' ? 'Past paper' : 'Topic revision'} · {subjectLabel(a.subject)}{a.due_at ? ` · due ${new Date(a.due_at).toLocaleDateString()}` : ''}</div>
+              {assignList.length === 0 ? <p className="mt-4 text-sm" style={muted}>No assignments yet.</p> : assignList.map((a) => {
+                const pct = classProgress(a)
+                const lock = a.kind === 'lesson' && a.mode !== 'live' ? unlockState(a.unlock_at) : null
+                const planned = a.kind === 'lesson' && a.mode === 'live' && a.unlock_at ? new Date(a.unlock_at) : null
+                return (
+                  <div key={a.id} className="mt-3 rounded-[var(--radius-card)] p-4" style={glass}>
+                    <div className="flex flex-wrap items-center justify-between gap-3">
+                      <div>
+                        <div className="font-extrabold">{a.title}</div>
+                        <div className="text-xs" style={muted}>
+                          {kindLabel(a)}{a.kind !== 'lesson' ? ` · ${subjectLabel(a.subject)}` : ''}{a.due_at ? ` · due ${new Date(a.due_at).toLocaleDateString()}` : ''}
+                          {lock?.state === 'locked' && <> · <b>🔒 opens {formatUnlock(lock.unlockAt)}</b></>}
+                          {lock?.state === 'open' && a.unlock_at && <> · unlocked</>}
+                          {planned && <> · planned {planned.toLocaleDateString()}</>}
+                        </div>
+                      </div>
+                      <div className="flex flex-wrap items-center gap-2">
+                        <span className="text-sm" style={muted}>{doneCount(a)} / {memberList.length} done</span>
+                        {a.kind === 'lesson' && a.mode === 'live' && <HostLessonLiveButton classId={cls.id} lessonRef={a.ref} />}
+                        {lock?.state === 'locked' && <UnlockNowButton id={a.id} />}
+                        <DeleteAssignmentButton id={a.id} />
+                      </div>
+                    </div>
+                    <div className="mt-3 flex items-center gap-3">
+                      <div className="h-2 flex-1 overflow-hidden rounded-full" style={{ background: 'var(--surface-inset)' }} role="progressbar" aria-valuenow={pct} aria-valuemin={0} aria-valuemax={100} aria-label={`${a.title} class progress`}>
+                        <div className="h-full rounded-full" style={{ width: `${pct}%`, background: 'var(--gradient-cta)' }} />
+                      </div>
+                      <span className="w-10 text-right text-xs font-bold" style={muted}>{pct}%</span>
+                    </div>
                   </div>
-                  <div className="flex items-center gap-3"><span className="text-sm" style={muted}>{doneCount(a)} / {memberList.length} done</span><DeleteAssignmentButton id={a.id} /></div>
-                </div>
-              ))}
+                )
+              })}
             </section>
           )}
 
           {tab === 'insights' && (
             <section>
               <h2 className="text-2xl font-extrabold">Insights</h2>
-              <p className="mt-1 text-sm" style={muted}>Papers show the student&apos;s best score; topic revision shows when they mark it done; live tasks show worksheet completion.</p>
+              <p className="mt-1 text-sm" style={muted}>Papers show the best score; topic sets and criteria quizzes show when a student marks them done; DP Physics lessons show questions answered (saved as they work); live tasks show completion.</p>
               {memberList.length === 0 ? <p className="mt-4 text-sm" style={muted}>No students have joined yet — share the class code.</p> : assignList.length + sessionList.length === 0 ? <p className="mt-4 text-sm" style={muted}>Nothing to track yet.</p> : (
                 <div className="mt-4 overflow-x-auto rounded-[var(--radius-card)]" style={glass}>
                   <table className="w-full min-w-[560px] text-left text-sm">
@@ -262,7 +335,7 @@ export default async function ClassPage({ params, searchParams }: { params: { id
                               <DownloadReportButton
                                 studentName={m.name || 'Student'}
                                 className={cls.name}
-                                assignments={assignList.map((a) => ({ title: a.title, subtitle: `${a.kind === 'paper' ? 'Past paper' : 'Topic revision'} · ${subjectLabel(a.subject)}`, result: assignmentCell(a, m.user_id).text }))}
+                                assignments={assignList.map((a) => ({ title: a.title, subtitle: `${kindLabel(a)}${a.kind !== 'lesson' ? ` · ${subjectLabel(a.subject)}` : ''}`, result: assignmentCell(a, m.user_id).text }))}
                                 sessions={sessionList.map((s) => ({ title: getLiveActivity(s.activity_id)?.title ?? s.activity_id, date: new Date(s.created_at).toLocaleDateString(), result: liveCell(m.user_id, s).text, grades: gradeBreakdown(m.user_id, s) }))}
                               />
                             </div>
@@ -295,14 +368,14 @@ export default async function ClassPage({ params, searchParams }: { params: { id
           {tab === 'library' && (
             <section>
               <h2 className="text-2xl font-extrabold">Library</h2>
-              <p className="mt-1 text-sm" style={muted}>Free resources for your subjects. Assign a past paper or topic revision to this class.</p>
+              <p className="mt-1 text-sm" style={muted}>Assign past papers, topic revision and criteria-wise quizzes from any subject, or self-study DP Physics lessons (live or self-paced, optionally dripped).</p>
               <div className="mt-4 flex flex-wrap gap-2">
                 {subjectOptions.map((s) => (
                   <Link key={s} href={`/classes/${cls.id}?tab=library&subject=${s}`} className="rounded-full px-4 py-2 text-sm font-bold" style={s === subject ? { background: 'var(--gradient-cta)', color: 'var(--text-on-accent)' } : { border: '1px solid var(--border-strong)', color: 'var(--text)' }}>{subjectLabel(s)}</Link>
                 ))}
               </div>
-              {teacherSubjects.length === 0 && <p className="mt-3 text-xs" style={muted}>Tip: choose the subjects you teach on your dashboard to personalise this list.</p>}
-              <div className="mt-5"><AssignLibrary key={subject} classId={cls.id} teacherId={user.id} subject={subject} papers={papers} topics={topics} canTopics={topics.length > 0} /></div>
+              {teacherSubjects.length === 0 && <p className="mt-3 text-xs" style={muted}>Tip: choose the subjects you teach on your dashboard to list them first.</p>}
+              <div className="mt-5"><AssignLibrary key={subject} classId={cls.id} teacherId={user.id} subject={subject} papers={papers} topics={topics} crits={crits} outline={outline} startOnPhysics={/(dp|ib|ibdp)|physics/i.test(cls.name)} /></div>
             </section>
           )}
 

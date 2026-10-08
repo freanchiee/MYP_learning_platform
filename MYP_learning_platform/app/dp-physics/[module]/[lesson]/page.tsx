@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation'
 import { MODULES, getLesson, getModule, neighbours } from '@/data/learn/physics'
 import { SITE_URL } from '@/lib/site'
 import GuideTopBar from '@/components/guides/GuideTopBar'
-import LessonBody from '@/components/learn/LessonBody'
+import LessonGate from '@/components/learn/LessonGate'
 import { LessonChips } from '@/components/learn/LessonMeta'
 import LessonNavRail from '@/components/learn/LessonNavRail'
 import LessonNavPills from '@/components/learn/LessonNavPills'
@@ -92,7 +92,7 @@ export default function LessonPage({ params }: { params: { module: string; lesso
             <p className="mt-2 max-w-2xl text-base opacity-95">{l.blurb}</p>
             <div className="mt-4"><LessonChips l={l} onHero /></div>
           </header>
-          <LessonBody lessonKey={`${m.slug}/${l.slug}`} blocks={l.blocks} />
+          <LessonGate lessonKey={`${m.slug}/${l.slug}`} blocks={l.blocks} />
           <div className="flex flex-col gap-3 sm:flex-row">{navLink(prev, '← Previous')}{navLink(next, 'Next →')}</div>
         </article>
       </main>
