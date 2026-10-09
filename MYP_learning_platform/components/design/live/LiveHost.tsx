@@ -14,7 +14,7 @@ import { stateForAdvance, stateForBack } from '@/lib/design-live/stageNav'
 import { SustainabilityGameHost } from './game/SustainabilityGame'
 import { LearnHost } from './LearnStage'
 import { defaultStart } from './SelfPaced'
-import { HostRibbon, ProgressDrawer, RemovablePlayerAvatar, FloatingNav, JoinCard, useProgressDrawer } from './HostChrome'
+import { HostRibbon, ProgressDrawer, RemovablePlayerAvatar, EditModeContext, FloatingNav, JoinCard, useProgressDrawer } from './HostChrome'
 import { Podium } from './Podium'
 import { WorksheetReviewModal } from './WorksheetReview'
 import { FeedbackSummary, FeedbackOverview } from './StageFeedback'
@@ -70,6 +70,7 @@ export default function LiveHost({ activity }: { activity: LiveActivityDefinitio
   // or changed shape after the session started — a stale stage_idx read from the DB
   // was exactly that: reopening host for a self-paced session created before more
   // stages were added indexed straight into the new (differently shaped) stage list.
+  const [editMode, setEditMode] = useState(false)
   const [selfPacedViewIdx, setSelfPacedViewIdx] = useState(() => defaultStart(activity))
   const drawer = useProgressDrawer()
 
@@ -198,11 +199,14 @@ export default function LiveHost({ activity }: { activity: LiveActivityDefinitio
   const teamCounts = activity.teams?.map((_, t) => players.filter((p) => p.team === t).length)
 
   return (
+    <EditModeContext.Provider value={editMode && session.status === 'active'}>
     <UnreadChatContext.Provider value={unreadIds}>
     <QuickReactProvider>
     <PlayerPreviewProvider>
     <div style={{ ...pageBg(activity.theme), padding: 0 }}>
       <HostRibbon
+        editMode={editMode}
+        onToggleEdit={session.status === 'active' ? () => setEditMode((v) => !v) : undefined}
         activity={activity}
         code={code}
         joinUrl={joinUrl}
@@ -305,6 +309,7 @@ export default function LiveHost({ activity }: { activity: LiveActivityDefinitio
     </PlayerPreviewProvider>
     </QuickReactProvider>
     </UnreadChatContext.Provider>
+    </EditModeContext.Provider>
   )
 }
 
