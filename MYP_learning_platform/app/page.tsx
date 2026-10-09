@@ -1,7 +1,7 @@
 import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
 import { SITE_FAQ, SITE_COURSES, SITE_URL } from '@/lib/site'
-import LandingPage from './landing/page'
+import LandingPage from '@/components/marketing/LandingPage'
 
 // FAQPage structured data — scoped to the public homepage. Strongest GEO signal
 // (AI engines quote these); also eligible for Google FAQ rich results.

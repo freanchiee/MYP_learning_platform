@@ -7,6 +7,9 @@ export const metadata: Metadata = {
   // Bare title — the root layout's template appends " · CritABCD".
   title: 'Free Resources',
   description: 'Free, no-login interactive quizzes, simulations and revision tools for IB MYP.',
+  // Without this, the page silently inherits the root layout's alternates.canonical: '/',
+  // which told Google this page's canonical was the homepage — a self-inflicted duplicate.
+  alternates: { canonical: '/resources' },
 }
 
 export default function ResourcesPage() {

@@ -5,6 +5,8 @@ export const metadata: Metadata = {
   title: 'Gameducation — Live Classes',
   description:
     'Turn any MYP Design lesson into a live, Kahoot-style class — real-time dashboards, live typing previews, private chat, and a podium finish.',
+  // Without this, the page silently inherits the root layout's alternates.canonical: '/'.
+  alternates: { canonical: '/gameducation' },
 }
 
 export default function GameducationPage() {
