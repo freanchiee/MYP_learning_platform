@@ -14,7 +14,7 @@ import { stateForAdvance, stateForBack } from '@/lib/design-live/stageNav'
 import { SustainabilityGameHost } from './game/SustainabilityGame'
 import { LearnHost } from './LearnStage'
 import { defaultStart } from './SelfPaced'
-import { HostRibbon, ProgressDrawer, RemovePlayerButton, FloatingNav, JoinCard, useProgressDrawer } from './HostChrome'
+import { HostRibbon, ProgressDrawer, RemovablePlayerAvatar, FloatingNav, JoinCard, useProgressDrawer } from './HostChrome'
 import { Podium } from './Podium'
 import { WorksheetReviewModal } from './WorksheetReview'
 import { FeedbackSummary, FeedbackOverview } from './StageFeedback'
@@ -507,7 +507,7 @@ function McqRoster({
           return (
             <div key={p.id} style={{ display: 'flex', alignItems: 'center', gap: 6, border: '1.5px solid var(--border)', borderRadius: 10, padding: '6px 8px', fontSize: 12.5 }}>
               <PlayerPreview name={p.name} draft={p.data?.live as LiveDraft} focus={p.data?.focus as LiveFocus} now={now}>
-                <Avatar seed={p.id} size={22} />
+                <RemovablePlayerAvatar playerId={p.id} name={p.name} size={22} />
                 <span style={{ fontWeight: 700, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: 110 }}>{p.name}</span>
               </PlayerPreview>
               <span style={{ marginLeft: 'auto', fontWeight: 800, color, whiteSpace: 'nowrap' }}>{!a ? '● waiting' : a.correct ? '✓' : '✕'}</span>
@@ -516,7 +516,6 @@ function McqRoster({
               </span>
               <ChatButton playerId={p.id} onClick={() => onChat(p.id)} title={`Message ${p.name}`} />
               <QuickReactButton sessionCode={sessionCode} playerId={p.id} playerName={p.name} />
-              <RemovePlayerButton playerId={p.id} name={p.name} />
             </div>
           )
         })}
@@ -546,12 +545,11 @@ function McqDashboard({ stage, players, now, onChat, sessionCode }: { stage: Mcq
               <td style={{ padding: '6px 8px', fontWeight: 700, whiteSpace: 'nowrap' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                   <PlayerPreview name={p.name} draft={p.data?.live as LiveDraft} focus={p.data?.focus as LiveFocus} now={now}>
-                    <Avatar seed={p.id} size={22} />
+                    <RemovablePlayerAvatar playerId={p.id} name={p.name} size={22} />
                     {p.name}
                   </PlayerPreview>
                   <ChatButton playerId={p.id} onClick={() => onChat(p.id)} title={`Message ${p.name}`} />
                   <QuickReactButton sessionCode={sessionCode} playerId={p.id} playerName={p.name} />
-                  <RemovePlayerButton playerId={p.id} name={p.name} />
                 </div>
               </td>
               {stage.questions.map((_, i) => {
@@ -613,12 +611,11 @@ function WorksheetHost({
               <td style={{ padding: '6px 8px', fontWeight: 700, whiteSpace: 'nowrap' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                   <PlayerPreview name={p.name} draft={p.data?.live as LiveDraft} focus={p.data?.focus as LiveFocus} now={now}>
-                    <Avatar seed={p.id} size={22} />
+                    <RemovablePlayerAvatar playerId={p.id} name={p.name} size={22} />
                     {p.name}
                   </PlayerPreview>
                   <ChatButton playerId={p.id} onClick={() => onChat(p.id)} title={`Message ${p.name}`} />
                   <QuickReactButton sessionCode={sessionCode} playerId={p.id} playerName={p.name} />
-                  <RemovePlayerButton playerId={p.id} name={p.name} />
                   <button
                     onClick={() => onReview(p.id)}
                     title={`Review & score ${p.name}'s work`}
@@ -759,13 +756,12 @@ function OpenIdeasHost({
           {submissions.map(({ player, sub }) => (
             <div key={player.id} style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 12.5 }}>
               <PlayerPreview name={player.name} draft={player.data?.live as LiveDraft} focus={player.data?.focus as LiveFocus} now={now}>
-                <Avatar seed={player.id} size={20} />
+                <RemovablePlayerAvatar playerId={player.id} name={player.name} size={20} />
               </PlayerPreview>
               <strong>{player.name}:</strong> {sub.text}
               <span style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 4 }}>
                 <ChatButton playerId={player.id} onClick={() => onChat(player.id)} title={`Message ${player.name}`} />
                 <QuickReactButton sessionCode={session.code} playerId={player.id} playerName={player.name} />
-                <RemovePlayerButton playerId={player.id} name={player.name} />
               </span>
             </div>
           ))}
