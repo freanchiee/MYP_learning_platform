@@ -15,7 +15,8 @@ export function GET() {
   out.push('')
   out.push(
     '> CritABCD is a next-generation learning site for the IB Middle Years Programme (MYP): free guides and articles, interactive resources, live classes, past papers and practice against the four IB MYP criteria (A–D). This file contains the text of every public guide and article. Short index: ' +
-      `${SITE_URL}/llms.txt`
+      `${SITE_URL}/llms.txt` +
+      `. An MCP server with structured list/get/search tools over this same content is available at ${SITE_URL}/api/mcp.`
   )
   out.push('')
 

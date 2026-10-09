@@ -25,6 +25,7 @@ CritABCD is for MYP students (roughly ages 11–16) and their teachers. Work is 
 - Blog (explained topics, each with a free interactive activity): https://www.critabcd.com/blog
 - Subject guides: https://www.critabcd.com/guides
 - Full text of every public guide and article, as one plain-text file: https://www.critabcd.com/llms-full.txt
+- MCP server (structured tool access to guides and blog content — list/get/search): https://www.critabcd.com/api/mcp
 - Sitemap: https://www.critabcd.com/sitemap.xml
 
 ## FAQ
