@@ -377,7 +377,15 @@ export default function LiveJoin({ activity, initialCode }: { activity: LiveActi
           {canWork && stage?.type === 'learn' && stage.overview && <WorksheetOverview overview={stage.overview} />}
           {canWork && stage?.type === 'learn' && <LearnPlayer stage={stage} session={stageSession} me={me} patchMyData={patchMyData} accent={activity.theme.accent} onFinish={selfPaced ? () => goStage(myIdx + 1) : undefined} />}
           {canWork && stage?.type === 'boardGame' && stage.overview && <WorksheetOverview overview={stage.overview} />}
-          {canWork && stage?.type === 'boardGame' && <SustainabilityGamePlayer session={session} me={me} code={code} players={players} patchMyData={patchMyData} addPoints={addPoints} />}
+          {canWork && stage?.type === 'boardGame' && selfPaced && stage.asyncRecap && !session.state?.game && (
+            <div style={{ ...cardStyle(activity.theme.accent), display: 'grid', gap: 10 }}>
+              <h3 style={{ margin: 0, fontSize: 18, fontWeight: 800 }}>{stage.asyncRecap.title}</h3>
+              {stage.asyncRecap.body.map((p, i) => <p key={i} style={{ margin: 0, fontSize: 14.5, lineHeight: 1.6 }}>{p}</p>)}
+              {stage.asyncRecap.bullets && <ul style={{ margin: 0, paddingLeft: 20, display: 'grid', gap: 6, fontSize: 14, lineHeight: 1.5 }}>{stage.asyncRecap.bullets.map((b, i) => <li key={i}>{b}</li>)}</ul>}
+              <div><button onClick={() => goStage(myIdx + 1)} style={btnStyle(activity.theme.accent, true)}>Continue to the quiz →</button></div>
+            </div>
+          )}
+          {canWork && stage?.type === 'boardGame' && !(selfPaced && stage.asyncRecap && !session.state?.game) && <SustainabilityGamePlayer session={session} me={me} code={code} players={players} patchMyData={patchMyData} addPoints={addPoints} />}
           {canWork && stage && stage.type !== 'grading' && (stageComplete(stage, me) || feedbackOf(me, stage.key)) && (
             <StageFeedback
               stageLabel={`${stage.icon} ${stage.label}`}

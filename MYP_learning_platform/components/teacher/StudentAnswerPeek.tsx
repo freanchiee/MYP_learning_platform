@@ -9,27 +9,10 @@
 
 import { useEffect, useRef, useState, type ReactNode } from 'react'
 import { useLiveRow, isDraftFresh, useNowTick, type LiveDraft } from '@/lib/design-live/hooks'
-import type { LiveActivityDefinition, WorksheetField, WorksheetStage } from '@/data/design/live/types'
+import { fieldAnswerText } from '@/lib/design-live/studentWork'
+import type { LiveActivityDefinition, WorksheetStage } from '@/data/design/live/types'
 
 interface LivePlayerData { id: string; data: Record<string, any> | null }
-
-function fieldAnswerText(field: WorksheetField, value: unknown): string {
-  if (value == null || value === '') return ''
-  if (field.type === 'table' && Array.isArray(value)) {
-    return (value as Record<string, string>[])
-      .map((row) => (field.columns || []).map((c) => row[c.key]).filter(Boolean).join(' — '))
-      .filter(Boolean)
-      .join(' · ')
-  }
-  if (field.type === 'checklist' && Array.isArray(value)) {
-    return (value as { label: string; have: boolean }[])
-      .filter((it) => it.label?.trim())
-      .map((it) => `${it.have ? '✅' : '◻️'} ${it.label}`)
-      .join(' · ')
-  }
-  if (field.type === 'text' || field.type === 'textarea' || field.type === 'select') return String(value)
-  return '' // interactive types (personaChat, cards, etc.) — shown as a count below instead
-}
 
 /** Every worksheet stage's written answers, stage by stage — not just
  *  whichever one the student happens to be on, since a teacher peeking in

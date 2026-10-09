@@ -226,6 +226,9 @@ export interface BoardGameStage {
   intro?: { title: string; blurb: string }
   /** Shown to students above the game, so the brief comes BEFORE play. */
   overview?: StageOverview
+  /** Self-paced activities only: the game can't run solo, so a student sees this recap (and a Continue
+   *  button) instead — unless the teacher has actually started the game for the session. */
+  asyncRecap?: { title: string; body: string[]; bullets?: string[] }
 }
 
 // ---------------------------------------------------------------
