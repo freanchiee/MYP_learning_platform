@@ -10,7 +10,7 @@
 // Stage content below keeps the engine's sticker-card look; this chrome is the
 // modern "glass" layer around it.
 
-import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react'
+import { createContext, useContext, useEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react'
 import Link from 'next/link'
 import type { LiveActivityDefinition } from '@/data/design/live/types'
 import type { LivePlayerRow } from '@/lib/design-live/types'
@@ -86,7 +86,7 @@ const ribbonBtn = (active?: boolean): CSSProperties => ({
 })
 
 export function HostRibbon({
-  activity, code, joinUrl, hostId, classId, onNewSession, stageLabel, progress, leading,
+  activity, code, joinUrl, hostId, classId, onNewSession, stageLabel, progress, leading, editMode, onToggleEdit,
 }: {
   activity: LiveActivityDefinition
   code: string | null
@@ -97,6 +97,9 @@ export function HostRibbon({
   stageLabel?: string
   progress?: string
   leading?: ReactNode
+  /** Host edit mode (shows the per-student remove badges). Omit onToggleEdit to hide the button. */
+  editMode?: boolean
+  onToggleEdit?: () => void
 }) {
   const [open, setOpen] = useState<null | 'join' | 'class'>(null)
   const t = activity.theme
@@ -137,6 +140,9 @@ export function HostRibbon({
       </button>
 
       <div style={{ display: 'flex', gap: 8 }}>
+        {onToggleEdit && (
+          <button title={editMode ? 'Done editing' : 'Edit the roster: show remove buttons on each student'} aria-label="Edit roster" aria-pressed={!!editMode} style={ribbonBtn(!!editMode)} onClick={onToggleEdit}>{editMode ? '✓' : '✏️'} <span className="host-ribbon-label">{editMode ? 'Done' : 'Edit'}</span></button>
+        )}
         {hostId && code && (
           <button title="Assign to class" aria-label="Assign to class" aria-expanded={open === 'class'} style={ribbonBtn(open === 'class')} onClick={() => setOpen(open === 'class' ? null : 'class')}>🎓 <span className="host-ribbon-label">Class</span></button>
         )}
@@ -169,16 +175,20 @@ export function useProgressDrawer() {
   return { open, setOpen: wide ? setStored : setNarrowOpen, wide, reserve: wide ? (open ? DRAWER_W + 16 : RAIL_W + 8) : 0, docked: wide && open }
 }
 
+/** Host edit mode: while on, each student's avatar shows its remove badge. Off by default so the dashboard stays uncluttered. */
+export const EditModeContext = createContext(false)
+
 /** Host-only: a student's avatar with a small remove badge pinned to its top-left corner. Tucked away from the
  *  row's other buttons so it can't be hit by accident; removing still asks for confirmation and deletes the
  *  student's player row (their work and grade for this session) via the host-delete policy. */
 export function RemovablePlayerAvatar({ playerId, name, size, onError }: { playerId: string; name: string; size: number; onError?: (msg: string) => void }) {
+  const editMode = useContext(EditModeContext)
   const [busy, setBusy] = useState(false)
   const fail = (m: string) => (onError ? onError(m) : alert(m))
   return (
     <span style={{ position: 'relative', display: 'inline-flex', flex: '0 0 auto' }}>
       <Avatar seed={playerId} size={size} />
-      <button
+      {editMode && <button
         disabled={busy}
         aria-label={`Remove ${name} from this session`}
         title={`Remove ${name} from this session`}
@@ -198,7 +208,7 @@ export function RemovablePlayerAvatar({ playerId, name, size, onError }: { playe
         }}
       >
         ×
-      </button>
+      </button>}
     </span>
   )
 }
