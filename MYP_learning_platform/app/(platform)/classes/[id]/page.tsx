@@ -18,6 +18,8 @@ import ClassLookPicker from '@/components/teacher/ClassLookPicker'
 import { AssignLibrary, DeleteAssignmentButton, RemoveMemberButton, DeleteClassButton, ReopenSessionButton, UnlockNowButton, HostLessonLiveButton } from '@/components/teacher/ClassActions'
 import StudentAnswerPeek from '@/components/teacher/StudentAnswerPeek'
 import DownloadReportButton from '@/components/teacher/DownloadReportButton'
+import DownloadWorkButton from '@/components/teacher/DownloadWorkButton'
+import { collectWork } from '@/lib/design-live/studentWork'
 
 interface SessionRow { code: string; activity_id: string; status: string; created_at: string }
 interface PlayerRow { id: string; session_code: string; user_id: string; points: number; data: Record<string, any> | null }
@@ -332,6 +334,7 @@ export default async function ClassPage({ params, searchParams }: { params: { id
                           <td className="p-3 font-semibold">
                             <div className="flex items-center gap-2">
                               <span>{m.name || 'Student'}</span>
+                              <RemoveMemberButton classId={cls.id} userId={m.user_id} name={m.name} compact />
                               <DownloadReportButton
                                 studentName={m.name || 'Student'}
                                 className={cls.name}
@@ -412,13 +415,18 @@ export default async function ClassPage({ params, searchParams }: { params: { id
                             {rows.map(({ m, c }) => (
                               <div key={m.user_id} className="flex items-center justify-between gap-3 py-2 text-sm">
                                 <span className="font-semibold">{m.name || 'Student'}</span>
-                                {c.on && c.playerId && activity ? (
-                                  <StudentAnswerPeek activity={clientSafeActivity(activity)} playerId={c.playerId} playerName={m.name || 'Student'} sessionActive={s.status === 'active'} savedData={c.data ?? null}>
-                                    <span style={{ color: 'var(--text)' }}>{c.text}</span>
-                                  </StudentAnswerPeek>
-                                ) : (
-                                  <span style={{ color: 'var(--text-subtle)' }}>{c.text}</span>
-                                )}
+                                <span className="flex items-center gap-3">
+                                  {c.on && c.playerId && activity ? (
+                                    <>
+                                      <StudentAnswerPeek activity={clientSafeActivity(activity)} playerId={c.playerId} playerName={m.name || 'Student'} sessionActive={s.status === 'active'} savedData={c.data ?? null}>
+                                        <span style={{ color: 'var(--text)' }}>{c.text}</span>
+                                      </StudentAnswerPeek>
+                                      <DownloadWorkButton studentName={m.name || 'Student'} className={cls.name} activityTitle={activity.title} date={new Date(s.created_at).toLocaleDateString()} blocks={collectWork(activity, c.data)} />
+                                    </>
+                                  ) : (
+                                    <span style={{ color: 'var(--text-subtle)' }}>{c.text}</span>
+                                  )}
+                                </span>
                               </div>
                             ))}
                           </div>

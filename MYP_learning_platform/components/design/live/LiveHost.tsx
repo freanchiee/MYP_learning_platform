@@ -14,7 +14,7 @@ import { stateForAdvance, stateForBack } from '@/lib/design-live/stageNav'
 import { SustainabilityGameHost } from './game/SustainabilityGame'
 import { LearnHost } from './LearnStage'
 import { defaultStart } from './SelfPaced'
-import { HostRibbon, ProgressDrawer, FloatingNav, JoinCard, useProgressDrawer } from './HostChrome'
+import { HostRibbon, ProgressDrawer, RemovePlayerButton, FloatingNav, JoinCard, useProgressDrawer } from './HostChrome'
 import { Podium } from './Podium'
 import { WorksheetReviewModal } from './WorksheetReview'
 import { FeedbackSummary, FeedbackOverview } from './StageFeedback'
@@ -516,6 +516,7 @@ function McqRoster({
               </span>
               <ChatButton playerId={p.id} onClick={() => onChat(p.id)} title={`Message ${p.name}`} />
               <QuickReactButton sessionCode={sessionCode} playerId={p.id} playerName={p.name} />
+              <RemovePlayerButton playerId={p.id} name={p.name} />
             </div>
           )
         })}
@@ -550,6 +551,7 @@ function McqDashboard({ stage, players, now, onChat, sessionCode }: { stage: Mcq
                   </PlayerPreview>
                   <ChatButton playerId={p.id} onClick={() => onChat(p.id)} title={`Message ${p.name}`} />
                   <QuickReactButton sessionCode={sessionCode} playerId={p.id} playerName={p.name} />
+                  <RemovePlayerButton playerId={p.id} name={p.name} />
                 </div>
               </td>
               {stage.questions.map((_, i) => {
@@ -616,6 +618,7 @@ function WorksheetHost({
                   </PlayerPreview>
                   <ChatButton playerId={p.id} onClick={() => onChat(p.id)} title={`Message ${p.name}`} />
                   <QuickReactButton sessionCode={sessionCode} playerId={p.id} playerName={p.name} />
+                  <RemovePlayerButton playerId={p.id} name={p.name} />
                   <button
                     onClick={() => onReview(p.id)}
                     title={`Review & score ${p.name}'s work`}
@@ -762,6 +765,7 @@ function OpenIdeasHost({
               <span style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 4 }}>
                 <ChatButton playerId={player.id} onClick={() => onChat(player.id)} title={`Message ${player.name}`} />
                 <QuickReactButton sessionCode={session.code} playerId={player.id} playerName={player.name} />
+                <RemovePlayerButton playerId={player.id} name={player.name} />
               </span>
             </div>
           ))}

@@ -16,6 +16,7 @@ import type { LiveActivityDefinition } from '@/data/design/live/types'
 import type { LivePlayerRow } from '@/lib/design-live/types'
 import { useClassLeaderboard, type LeaderboardRow, type LiveFocus } from '@/lib/design-live/hooks'
 import ClassPicker from './ClassPicker'
+import { createClient } from '@/lib/supabase/client'
 import { Avatar, FocusDot, QRCode, cardStyle } from './ui'
 import { defaultStart, navOf } from './SelfPaced'
 
@@ -168,6 +169,33 @@ export function useProgressDrawer() {
   return { open, setOpen: wide ? setStored : setNarrowOpen, wide, reserve: wide ? (open ? DRAWER_W + 16 : RAIL_W + 8) : 0, docked: wide && open }
 }
 
+/** Host-only: remove a student from this live session (deletes their player row, work and grade for it). */
+export function RemovePlayerButton({ playerId, name, onError }: { playerId: string; name: string; onError?: (msg: string) => void }) {
+  const [busy, setBusy] = useState(false)
+  return (
+    <button
+      disabled={busy}
+      aria-label={`Remove ${name} from this session`}
+      title={`Remove ${name} from this session`}
+      onClick={async (e) => {
+        e.stopPropagation()
+        if (!confirm(`Remove ${name} from this live session? Their answers and grade for this session are deleted.`)) return
+        setBusy(true)
+        const { error, count } = await createClient().from('live_players').delete({ count: 'exact' }).eq('id', playerId)
+        setBusy(false)
+        if (error) onError ? onError(error.message) : alert(error.message)
+        else if (!count) {
+          const m = 'Could not remove the student (no permission, or already gone).'
+          onError ? onError(m) : alert(m)
+        }
+      }}
+      style={{ cursor: 'pointer', border: 'none', background: 'transparent', color: '#D6425E', fontWeight: 900, fontSize: 13, lineHeight: 1, padding: '2px 4px', opacity: busy ? 0.4 : 0.8 }}
+    >
+      ✕
+    </button>
+  )
+}
+
 export function ProgressDrawer({
   activity, players, now, open, onToggle, viewIdx, onPickStage,
 }: {
@@ -249,6 +277,7 @@ export function ProgressDrawer({
               <span style={{ flex: 1, minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{p.name}</span>
               <FocusDot focus={p.data?.focus as LiveFocus} now={now} />
               <span style={{ fontSize: 11, color: 'var(--text-muted)', whiteSpace: 'nowrap' }}>{activity.stages[nav.stage].icon} {nav.stage + 1}/{n}</span>
+              <RemovePlayerButton playerId={p.id} name={p.name} />
             </div>
             <span style={{ height: 6, background: 'var(--border)', borderRadius: 999, overflow: 'hidden' }}>
               <span style={{ display: 'block', height: '100%', width: `${((nav.max + 1) / n) * 100}%`, background: t.accent, transition: 'width .4s' }} />

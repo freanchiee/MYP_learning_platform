@@ -29,12 +29,28 @@ export const MYP5_SUSTAINABILITY: LiveActivityDefinition = {
   theme: { accent: '#1E7A5F', from: '#0B1F17', via: '#123526', to: '#1E4A36' },
   // Model answers written for the community each student chose in "Community & need".
   exemplarsByChoice: { from: { stage: 'community', section: 'need', field: 'community' }, noun: 'community', byField: MYP5_EXEMPLARS },
+  // Asynchronous: every student works through the stages on their own, so anyone who missed the live game
+  // can still complete the whole unit. The game stage becomes an optional recap unless the teacher runs it live.
+  selfPaced: true,
   stages: [
     {
       type: 'boardGame',
       key: 'game',
       label: 'The Game',
       icon: '🎲',
+      asyncRecap: {
+        title: 'Missed the live game? Here is what it taught',
+        body: [
+          'In the game every player takes a role in a materials economy. In Phase 1 the economy grows, but every step of making a product has a cost, and someone bears it, often a community with little say.',
+          'In Phase 2 the carbon debt created in Phase 1 has to be paid down together, which is where carbon credits come in: some are real, some are worthless, and greenwashing hides the difference.',
+        ],
+        bullets: [
+          'Growth has hidden costs: workers, land and communities absorb what the market does not price.',
+          'A credit only counts if it is additional, verified and permanent.',
+          'Offsetting is the last step: reduce first, offset only what you cannot yet cut.',
+          'A fair solution asks who gains, who pays and whether the community consented.',
+        ],
+      },
       intro: { title: '🎲 Sustainability Check', blurb: 'Everyone gets a role in the materials economy. Grow the economy in Phase 1, then pay the carbon debt down together in Phase 2.' },
       overview: {
         brief: {
@@ -74,9 +90,9 @@ export const MYP5_SUSTAINABILITY: LiveActivityDefinition = {
       key: 'creditcheck',
       label: 'Carbon Credit Check',
       icon: '🧾',
-      pacing: 'host-paced',
+      pacing: 'self-paced',
       pointsPerCorrect: 10,
-      intro: { title: '🧾 What did the market teach you?', blurb: 'Seven quick questions on carbon credits, offsets and greenwashing. Your teacher runs it: lock the round, reveal the correct answer, and every correct answer earns points.' },
+      intro: { title: '🧾 What did the market teach you?', blurb: 'Seven quick questions on carbon credits, offsets and greenwashing. Work through them at your own pace: you see the answer straight away, and every correct answer earns points.' },
       questions: [
         { icon: '🌍', context: 'The basics', q: 'What does ONE carbon credit stand for?', options: ['One tree planted anywhere', 'One tonne of carbon dioxide (or equivalent) avoided or removed', 'One tonne of rubbish recycled', 'One kilowatt-hour of clean energy'], correct: 1 },
         { icon: '🧪', context: 'A real credit', q: 'A credit is “additional” when…', options: ['It is cheap to buy', 'The emissions cut would NOT have happened without the money from the credit', 'It comes from a very big company', 'It is sold in another country'], correct: 1 },
