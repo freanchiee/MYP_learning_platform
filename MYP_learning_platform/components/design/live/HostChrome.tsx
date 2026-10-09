@@ -16,6 +16,7 @@ import type { LiveActivityDefinition } from '@/data/design/live/types'
 import type { LivePlayerRow } from '@/lib/design-live/types'
 import { useClassLeaderboard, type LeaderboardRow, type LiveFocus } from '@/lib/design-live/hooks'
 import ClassPicker from './ClassPicker'
+import { createClient } from '@/lib/supabase/client'
 import { Avatar, FocusDot, QRCode, cardStyle } from './ui'
 import { defaultStart, navOf } from './SelfPaced'
 
@@ -168,6 +169,40 @@ export function useProgressDrawer() {
   return { open, setOpen: wide ? setStored : setNarrowOpen, wide, reserve: wide ? (open ? DRAWER_W + 16 : RAIL_W + 8) : 0, docked: wide && open }
 }
 
+/** Host-only: a student's avatar with a small remove badge pinned to its top-left corner. Tucked away from the
+ *  row's other buttons so it can't be hit by accident; removing still asks for confirmation and deletes the
+ *  student's player row (their work and grade for this session) via the host-delete policy. */
+export function RemovablePlayerAvatar({ playerId, name, size, onError }: { playerId: string; name: string; size: number; onError?: (msg: string) => void }) {
+  const [busy, setBusy] = useState(false)
+  const fail = (m: string) => (onError ? onError(m) : alert(m))
+  return (
+    <span style={{ position: 'relative', display: 'inline-flex', flex: '0 0 auto' }}>
+      <Avatar seed={playerId} size={size} />
+      <button
+        disabled={busy}
+        aria-label={`Remove ${name} from this session`}
+        title={`Remove ${name} from this session`}
+        onClick={async (e) => {
+          e.stopPropagation()
+          if (!confirm(`Remove ${name} from this live session? Their answers and grade for this session are deleted.`)) return
+          setBusy(true)
+          const { error, count } = await createClient().from('live_players').delete({ count: 'exact' }).eq('id', playerId)
+          setBusy(false)
+          if (error) fail(error.message)
+          else if (!count) fail('Could not remove the student (no permission, or already gone).')
+        }}
+        style={{
+          position: 'absolute', top: -6, left: -6, width: 14, height: 14, padding: 0, borderRadius: '50%', cursor: 'pointer',
+          background: '#D6425E', color: '#fff', border: '1.5px solid var(--surface, #fff)', fontSize: 9, fontWeight: 900, lineHeight: '10px',
+          display: 'grid', placeItems: 'center', opacity: busy ? 0.4 : 0.9, boxShadow: 'none',
+        }}
+      >
+        ×
+      </button>
+    </span>
+  )
+}
+
 export function ProgressDrawer({
   activity, players, now, open, onToggle, viewIdx, onPickStage,
 }: {
@@ -245,7 +280,7 @@ export function ProgressDrawer({
         {rows.map(({ p, nav }) => (
           <div key={p.id} style={{ display: 'grid', gap: 3 }} title={`${activity.stages[nav.stage].label} · ${nav.stage + 1}/${n}`}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 12.5, fontWeight: 700 }}>
-              <Avatar seed={p.id} size={20} />
+              <RemovablePlayerAvatar playerId={p.id} name={p.name} size={20} />
               <span style={{ flex: 1, minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{p.name}</span>
               <FocusDot focus={p.data?.focus as LiveFocus} now={now} />
               <span style={{ fontSize: 11, color: 'var(--text-muted)', whiteSpace: 'nowrap' }}>{activity.stages[nav.stage].icon} {nav.stage + 1}/{n}</span>

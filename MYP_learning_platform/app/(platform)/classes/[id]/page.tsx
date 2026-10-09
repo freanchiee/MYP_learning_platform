@@ -18,10 +18,12 @@ import ClassLookPicker from '@/components/teacher/ClassLookPicker'
 import { AssignLibrary, DeleteAssignmentButton, RemoveMemberButton, DeleteClassButton, ReopenSessionButton, UnlockNowButton, HostLessonLiveButton } from '@/components/teacher/ClassActions'
 import StudentAnswerPeek from '@/components/teacher/StudentAnswerPeek'
 import DownloadReportButton from '@/components/teacher/DownloadReportButton'
+import DownloadWorkButton from '@/components/teacher/DownloadWorkButton'
+import { buildWorkDoc } from '@/lib/design-live/studentWork'
 
 interface SessionRow { code: string; activity_id: string; status: string; created_at: string }
 interface PlayerRow { id: string; session_code: string; user_id: string; points: number; data: Record<string, any> | null }
-interface GradeRow { session_code: string; player_id: string; scores: Record<string, number | null>; graded: boolean }
+interface GradeRow { session_code: string; player_id: string; scores: Record<string, number | null>; feedback?: string | null; graded: boolean }
 interface AssignmentRow { id: string; kind: string; subject: string; ref: string; title: string; due_at: string | null; created_at: string; mode?: string; scope?: string; unlock_at?: string | null; position?: number | null }
 interface LessonProgressRow { user_id: string; lesson_key: string; checks: Record<string, number> | null; done: boolean | null }
 
@@ -81,7 +83,7 @@ export default async function ClassPage({ params, searchParams }: { params: { id
   const [{ data: players }, { data: grades }, { data: done }, { data: attempts }, { data: lpData }] = needProgress
     ? await Promise.all([
         codes.length ? supabase.from('live_players').select('id, session_code, user_id, points, data').in('session_code', codes) : Promise.resolve({ data: [] }),
-        codes.length ? supabase.from('live_grades').select('session_code, player_id, scores, graded').in('session_code', codes) : Promise.resolve({ data: [] }),
+        codes.length ? supabase.from('live_grades').select('session_code, player_id, scores, feedback, graded').in('session_code', codes) : Promise.resolve({ data: [] }),
         assignList.length ? supabase.from('assignment_progress').select('assignment_id, user_id').in('assignment_id', assignList.map((a) => a.id)) : Promise.resolve({ data: [] }),
         assignList.some((a) => a.kind === 'paper') && memberIds.length
           ? supabase.from('attempts').select('user_id, paper_id, total_score, max_score').eq('status', 'completed').in('paper_id', assignList.filter((a) => a.kind === 'paper').map((a) => a.ref)).in('user_id', memberIds)
@@ -166,6 +168,13 @@ export default async function ClassPage({ params, searchParams }: { params: { id
     return Object.entries(g.scores)
       .filter((entry): entry is [string, number] => typeof entry[1] === 'number' && !entry[0].startsWith('ws:') && !entry[0].startsWith('reveal:'))
       .map(([key, score]) => ({ key, label: strandLabels.get(key) ?? key, score }))
+  }
+
+  // One student's whole piece of work for one live session, structured for the PDF download.
+  const className = cls.name
+  function workDocFor(s: SessionRow, student: string, activity: NonNullable<ReturnType<typeof getLiveActivity>>, playerId: string, data: Record<string, any> | null) {
+    const g = gradeRows.find((x) => x.session_code === s.code && x.player_id === playerId)
+    return buildWorkDoc(activity, data, { student, className, date: new Date(s.created_at).toLocaleDateString(), grade: g ? { scores: g.scores, feedback: g.feedback ?? '', graded: g.graded } : null })
   }
 
   // Library data (only built for that tab)
@@ -332,6 +341,7 @@ export default async function ClassPage({ params, searchParams }: { params: { id
                           <td className="p-3 font-semibold">
                             <div className="flex items-center gap-2">
                               <span>{m.name || 'Student'}</span>
+                              <RemoveMemberButton classId={cls.id} userId={m.user_id} name={m.name} compact />
                               <DownloadReportButton
                                 studentName={m.name || 'Student'}
                                 className={cls.name}
@@ -412,13 +422,18 @@ export default async function ClassPage({ params, searchParams }: { params: { id
                             {rows.map(({ m, c }) => (
                               <div key={m.user_id} className="flex items-center justify-between gap-3 py-2 text-sm">
                                 <span className="font-semibold">{m.name || 'Student'}</span>
-                                {c.on && c.playerId && activity ? (
-                                  <StudentAnswerPeek activity={clientSafeActivity(activity)} playerId={c.playerId} playerName={m.name || 'Student'} sessionActive={s.status === 'active'} savedData={c.data ?? null}>
-                                    <span style={{ color: 'var(--text)' }}>{c.text}</span>
-                                  </StudentAnswerPeek>
-                                ) : (
-                                  <span style={{ color: 'var(--text-subtle)' }}>{c.text}</span>
-                                )}
+                                <span className="flex items-center gap-3">
+                                  {c.on && c.playerId && activity ? (
+                                    <>
+                                      <StudentAnswerPeek activity={clientSafeActivity(activity)} playerId={c.playerId} playerName={m.name || 'Student'} sessionActive={s.status === 'active'} savedData={c.data ?? null}>
+                                        <span style={{ color: 'var(--text)' }}>{c.text}</span>
+                                      </StudentAnswerPeek>
+                                      <DownloadWorkButton doc={workDocFor(s, m.name || 'Student', activity, c.playerId, c.data ?? null)} />
+                                    </>
+                                  ) : (
+                                    <span style={{ color: 'var(--text-subtle)' }}>{c.text}</span>
+                                  )}
+                                </span>
                               </div>
                             ))}
                           </div>

@@ -148,23 +148,24 @@ export function HostLessonLiveButton({ classId, lessonRef }: { classId: string; 
   )
 }
 
-export function RemoveMemberButton({ classId, userId, name }: { classId: string; userId: string; name: string }) {
+export function RemoveMemberButton({ classId, userId, name, compact }: { classId: string; userId: string; name: string; compact?: boolean }) {
   const router = useRouter()
   const [busy, setBusy] = useState(false)
   return (
     <button
       disabled={busy}
       onClick={async () => {
-        if (!confirm(`Remove ${name || 'this student'} from the class?`)) return
+        if (!confirm(`Remove ${name || 'this student'} from the class? Their live-session work is kept, but they lose access to the class.`)) return
         setBusy(true)
         await createClient().from('class_members').delete().eq('class_id', classId).eq('user_id', userId)
         setBusy(false)
         router.refresh()
       }}
-      className="rounded-[var(--radius-control)] px-3 py-1.5 text-xs font-bold disabled:opacity-50"
-      style={ghost}
+      title={compact ? `Remove ${name || 'this student'} from the class` : undefined}
+      className={compact ? 'rounded-[var(--radius-control)] px-2.5 py-1 text-[10px] font-black tracking-wider disabled:opacity-50' : 'rounded-[var(--radius-control)] px-3 py-1.5 text-xs font-bold disabled:opacity-50'}
+      style={compact ? { border: '1px solid var(--danger, #D6425E)', color: 'var(--danger, #D6425E)', whiteSpace: 'nowrap' } : ghost}
     >
-      Remove
+      {compact ? '✕ REMOVE' : 'Remove'}
     </button>
   )
 }
