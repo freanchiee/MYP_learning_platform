@@ -14,7 +14,7 @@ import { stateForAdvance, stateForBack } from '@/lib/design-live/stageNav'
 import { SustainabilityGameHost } from './game/SustainabilityGame'
 import { LearnHost } from './LearnStage'
 import { defaultStart } from './SelfPaced'
-import { HostRibbon, ProgressDrawer, FloatingNav, JoinCard, useProgressDrawer } from './HostChrome'
+import { HostRibbon, ProgressDrawer, RemovePlayerButton, FloatingNav, JoinCard, useProgressDrawer } from './HostChrome'
 import { Podium } from './Podium'
 import { WorksheetReviewModal } from './WorksheetReview'
 import { FeedbackSummary, FeedbackOverview } from './StageFeedback'
@@ -45,6 +45,7 @@ function PlayerChip({ player, now, onChat, sessionCode }: { player: LivePlayerRo
       </PlayerPreview>
       {onChat && <ChatButton playerId={player.id} onClick={() => onChat(player.id)} title={`Message ${player.name}`} />}
       {sessionCode && <QuickReactButton sessionCode={sessionCode} playerId={player.id} playerName={player.name} />}
+      {sessionCode && <RemovePlayerButton playerId={player.id} name={player.name} />}
     </motion.span>
   )
 }
