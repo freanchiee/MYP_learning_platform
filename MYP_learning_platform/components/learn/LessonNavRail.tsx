@@ -17,14 +17,16 @@ export default function LessonNavRail({ items }: { items: NavItem[] }) {
   return (
     <nav
       aria-label="On this page"
-      className="fixed z-40 hidden max-h-[80vh] flex-col gap-2 overflow-y-auto lg:flex"
-      style={{ left: '1.25rem', top: '50%', transform: 'translateY(-50%)' }}
+      className="fixed z-40 hidden flex-col justify-between lg:flex"
+      // No scrolling and no overflow clipping: the diamonds share the height (up to 80vh), so a long lesson just packs
+      // them closer instead of growing a scrollbar, and the hover label is never cut off.
+      style={{ left: '1.25rem', top: '50%', transform: 'translateY(-50%)', height: `min(80vh, ${items.length * 26}px)` }}
     >
       {items.map((it, i) => {
         const isActive = i === active
         const isHov = hovered === i
         return (
-          <div key={it.id} className="relative">
+          <div key={it.id} className="relative flex min-h-0 flex-1 items-center">
             <button
               onClick={() => go(it.id)}
               onMouseEnter={() => setHovered(i)}
@@ -34,7 +36,7 @@ export default function LessonNavRail({ items }: { items: NavItem[] }) {
               aria-current={isActive ? 'true' : undefined}
               aria-label={it.text}
               className="flex items-center justify-center focus:outline-none"
-              style={{ width: 26, height: 26 }}
+              style={{ width: 26, height: '100%', maxHeight: 26 }}
             >
               <span
                 aria-hidden
@@ -58,8 +60,11 @@ export default function LessonNavRail({ items }: { items: NavItem[] }) {
                 transform: `translateY(-50%) translateX(${isHov ? '0' : '-6px'})`,
                 opacity: isHov ? 1 : 0,
                 transition: 'opacity 0.12s ease, transform 0.12s ease',
-                background: 'var(--surface-elevated)',
-                border: '1px solid var(--accent)',
+                // see-through "glass" so the page still shows behind the label
+                background: 'color-mix(in srgb, var(--surface-elevated) 72%, transparent)',
+                backdropFilter: 'blur(6px)',
+                WebkitBackdropFilter: 'blur(6px)',
+                border: '1px solid color-mix(in srgb, var(--accent) 60%, transparent)',
                 color: 'var(--text)',
                 boxShadow: 'var(--shadow-card)',
               }}
