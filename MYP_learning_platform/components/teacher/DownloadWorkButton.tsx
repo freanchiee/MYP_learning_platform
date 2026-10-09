@@ -1,65 +1,58 @@
 'use client'
 
-// One student's actual written answers for one live task, as a PDF the teacher
-// can save, print or attach as evidence. Built client-side from the answers the
-// class page already fetched (see collectWork), so it needs no extra query.
+// One student's work for one live task, as a designed PDF: organised by design-cycle
+// criterion and strand, with the student's own words clearly separated from task
+// context and reference answers (see lib/design-live/workPdf.ts). Meant to be read by
+// the teacher, revised from by the student, or handed to an AI to help with grading.
+// Built entirely client-side from data the class page already fetched.
 
 import { useState } from 'react'
-import type { WorkBlock } from '@/lib/design-live/studentWork'
+import type { WorkDoc } from '@/lib/design-live/studentWork'
+import { buildWorkPdf, type ImageMap } from '@/lib/design-live/workPdf'
 
-const MARGIN = 40
-const PAGE_BOTTOM = 790
-const WIDTH = 515
+// Uploaded sketches/photos are embedded in the PDF. pdfmake only takes JPEG/PNG, so every
+// image is redrawn onto a canvas (which also normalises webp/heic-ish formats and caps size).
+async function loadImage(url: string): Promise<ImageMap[string] | null> {
+  try {
+    const ctl = new AbortController()
+    const t = setTimeout(() => ctl.abort(), 8000)
+    const res = await fetch(url, { signal: ctl.signal })
+    clearTimeout(t)
+    if (!res.ok) return null
+    const bmp = await createImageBitmap(await res.blob())
+    const scale = Math.min(1, 1100 / Math.max(bmp.width, bmp.height))
+    const w = Math.max(1, Math.round(bmp.width * scale))
+    const h = Math.max(1, Math.round(bmp.height * scale))
+    const canvas = document.createElement('canvas')
+    canvas.width = w
+    canvas.height = h
+    const ctx = canvas.getContext('2d')
+    if (!ctx) return null
+    ctx.fillStyle = '#fff'
+    ctx.fillRect(0, 0, w, h)
+    ctx.drawImage(bmp, 0, 0, w, h)
+    return { dataUrl: canvas.toDataURL('image/jpeg', 0.85), w, h }
+  } catch {
+    return null // CORS/format/network: the PDF falls back to a link for that image
+  }
+}
 
-// jsPDF's built-in fonts are Latin-1 only: strip emoji/symbols so they don't turn into garbage.
-const clean = (t: string) => t.replace(/[^ -~ -ÿ–—‘’“”•…\n]/g, '').replace(/ {2,}/g, ' ').trim()
-
-export default function DownloadWorkButton({ studentName, className, activityTitle, date, blocks }: {
-  studentName: string
-  className: string
-  activityTitle: string
-  date: string
-  blocks: WorkBlock[]
-}) {
+export default function DownloadWorkButton({ doc }: { doc: WorkDoc }) {
   const [busy, setBusy] = useState(false)
 
   const download = async () => {
     setBusy(true)
     try {
-      const { jsPDF } = await import('jspdf')
-      const doc = new jsPDF({ unit: 'pt', format: 'a4' })
-      let y = 60
-      const room = (n: number) => { if (y + n > PAGE_BOTTOM) { doc.addPage(); y = 60 } }
-      const write = (text: string, size: number, bold: boolean, color: number, indent = 0) => {
-        doc.setFont('helvetica', bold ? 'bold' : 'normal')
-        doc.setFontSize(size)
-        doc.setTextColor(color)
-        const lines = doc.splitTextToSize(clean(text) || '-', WIDTH - indent) as string[]
-        for (const line of lines) { room(size + 4); doc.text(line, MARGIN + indent, y); y += size + 4 }
-      }
+      const urls = Array.from(new Set(doc.criteria.flatMap((c) => c.strands.flatMap((s) => s.sections.flatMap((x) => x.items.flatMap((i) => (i.kind === 'images' ? i.images.map((im) => im.url) : [])))))))
+      const images: ImageMap = {}
+      await Promise.all(urls.map(async (u) => { const img = await loadImage(u); if (img) images[u] = img }))
 
-      write(activityTitle, 18, true, 0)
-      write(`${studentName} - ${className}`, 12, true, 40)
-      write(`${date} - downloaded ${new Date().toLocaleDateString()}`, 9, false, 120)
-      y += 14
-
-      if (blocks.length === 0) write('No written answers saved yet.', 10.5, false, 130)
-      blocks.forEach((b) => {
-        room(40)
-        write(b.stage, 13, true, 0)
-        doc.setLineWidth(0.5); doc.line(MARGIN, y - 8, MARGIN + WIDTH, y - 8)
-        y += 4
-        b.rows.forEach((r) => {
-          room(30)
-          write(r.label.toUpperCase(), 8.5, true, 110)
-          if (r.images?.length) r.images.forEach((im) => write(`Image: ${im.name} (${im.url})`, 9, false, 60, 8))
-          else write(r.text, 10.5, false, 0, 8)
-          y += 6
-        })
-        y += 8
-      })
-
-      doc.save(`${studentName.replace(/\s+/g, '_')}_${activityTitle.replace(/\s+/g, '_')}.pdf`)
+      const pdfMakeMod: any = await import('pdfmake/build/pdfmake')
+      const vfsMod: any = await import('pdfmake/build/vfs_fonts')
+      const pdfMake = pdfMakeMod.default ?? pdfMakeMod
+      pdfMake.vfs = vfsMod.pdfMake?.vfs ?? vfsMod.default?.pdfMake?.vfs ?? vfsMod.default ?? vfsMod
+      const safe = (t: string) => t.replace(/[^\w-]+/g, '_')
+      pdfMake.createPdf(buildWorkPdf(doc, images)).download(`${safe(doc.student)}_${safe(doc.activityTitle)}_design-cycle.pdf`)
     } finally {
       setBusy(false)
     }
@@ -69,11 +62,11 @@ export default function DownloadWorkButton({ studentName, className, activityTit
     <button
       onClick={(e) => { e.preventDefault(); e.stopPropagation(); download() }}
       disabled={busy}
-      title={`Download ${studentName}'s work for ${activityTitle}`}
+      title={`Download ${doc.student}'s work for ${doc.activityTitle} as a design-cycle PDF`}
       className="rounded-[var(--radius-control)] px-2.5 py-1 text-[10px] font-black tracking-wider disabled:opacity-50"
       style={{ border: '1px solid var(--border-strong)', color: 'var(--text)', whiteSpace: 'nowrap' }}
     >
-      {busy ? '…' : '⬇️ Work'}
+      {busy ? 'Building…' : '⬇️ Work PDF'}
     </button>
   )
 }
