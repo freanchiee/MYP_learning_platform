@@ -236,13 +236,13 @@ export function ArrowList({ title, head, rows }: { title?: string; head?: [strin
         )}
         {rows.map((r, i) => (
           <div key={r.from} role="row" className="dp-pop grid grid-cols-[1fr_44px_1.2fr] items-center gap-2 px-4 py-2.5" style={{ ['--d' as string]: `${i * 0.12}s`, borderTop: i || head ? '1px solid var(--divider)' : undefined }}>
-            <span className="text-sm font-extrabold" style={{ color: 'var(--text)', fontFamily: 'var(--font-mono)' }}>{r.emoji && <span aria-hidden>{r.emoji} </span>}{r.from}</span>
+            <span className="text-sm font-extrabold" style={{ color: 'var(--text)', fontFamily: 'var(--font-mono)' }}>{r.emoji && <span aria-hidden>{r.emoji} </span>}<Sci text={r.from} /></span>
             <svg width="44" height="14" viewBox="0 0 44 14" aria-hidden>
               <path className="dp-draw" style={{ ['--len' as string]: 40, ['--d' as string]: `${i * 0.12 + 0.2}s` }} d="M2 7 H40 M34 2 L41 7 L34 12" stroke="var(--accent)" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
             <span className="text-sm font-semibold" style={{ color: 'var(--text)' }}>
-              {r.to}
-              {r.note && <span className={`${hand.className} ml-2 text-lg`} style={{ color: 'var(--text-muted)' }}>{r.note}</span>}
+              <Sci text={r.to} />
+              {r.note && <span className={`${hand.className} ml-2 text-lg`} style={{ color: 'var(--text-muted)' }}><Sci text={r.note} /></span>}
             </span>
           </div>
         ))}
@@ -259,7 +259,7 @@ export function Pills({ groups }: { groups: { label: string; tone?: 'accent' | '
           <div className={`${hand.className} text-xl font-bold`} style={{ color: g.tone === 'warn' ? 'var(--warning)' : 'var(--accent)' }}>{g.label}</div>
           <div className="mt-1 flex flex-wrap gap-2">
             {g.items.map((it) => (
-              <span key={it} className="rounded-full px-3 py-1 text-sm font-bold" style={{ background: g.tone === 'muted' ? 'var(--surface-2)' : 'var(--accent-soft)', color: 'var(--text)' }}>{it}</span>
+              <span key={it} className="rounded-full px-3 py-1 text-sm font-bold" style={{ background: g.tone === 'muted' ? 'var(--surface-2)' : 'var(--accent-soft)', color: 'var(--text)' }}><Sci text={it} /></span>
             ))}
           </div>
         </div>
@@ -361,7 +361,7 @@ export function WorkedSteps({ title, given, steps, answer }: { title: string; gi
   return (
     <div className="rounded-[var(--radius-card)] p-4" style={example}>
       <div className="text-xs font-black tracking-[0.3em]" style={{ color: 'var(--accent)' }}>WORKED EXAMPLE · {title.toUpperCase()}</div>
-      <p className="mt-2 text-sm font-bold" style={{ color: 'var(--text)' }}>{given}</p>
+      <p className="mt-2 text-sm font-bold" style={{ color: 'var(--text)' }}><Sci text={given} /></p>
       <ol className="mt-3 grid gap-2">
         {steps.slice(0, n).map((s, i) => (
           <li key={i} className="dp-pop">
@@ -370,7 +370,7 @@ export function WorkedSteps({ title, given, steps, answer }: { title: string; gi
               <div className="min-w-0 flex-1">
                 <div className="text-base font-bold" style={{ color: 'var(--text)', fontFamily: 'var(--font-mono)' }}><Sci text={s.line} /></div>
                 <button onClick={() => setWhy(why === i ? null : i)} aria-expanded={why === i} className={`${hand.className} text-lg underline`} style={{ color: 'var(--text-muted)' }}>why this step?</button>
-                {why === i && <div className="dp-pop text-sm" style={{ color: 'var(--text-muted)' }}>{s.why}</div>}
+                {why === i && <div className="dp-pop text-sm" style={{ color: 'var(--text-muted)' }}><Sci text={s.why} /></div>}
               </div>
             </div>
           </li>
@@ -378,7 +378,7 @@ export function WorkedSteps({ title, given, steps, answer }: { title: string; gi
       </ol>
       {n >= steps.length && (
         <div className="dp-pop mt-3 rounded-[var(--radius-panel)] px-3 py-2 text-base font-extrabold" style={{ background: 'var(--success-surface)', color: 'var(--text)', border: '1px solid var(--success)' }}>
-          Answer: {answer}
+          Answer: <Sci text={answer} />
         </div>
       )}
       <div className="mt-3 flex gap-2">
@@ -402,7 +402,7 @@ export function Sci({ text }: { text: string }) {
 }
 
 // ---------- a Newton's law, always in the same three parts ----------
-export function LawCard({ ordinal, name, nameNote, words, maths, mathsNote }: { ordinal: string; name: string; nameNote?: string; words: string; maths: string[]; mathsNote?: string }) {
+export function LawCard({ ordinal, kicker, name, nameNote, words, maths, mathsNote }: { ordinal: string; kicker?: string; name: string; nameNote?: string; words: string; maths: string[]; mathsNote?: string }) {
   const Row = ({ n, label, children, delay }: { n: number; label: string; children: React.ReactNode; delay: number }) => (
     <div className="dp-pop grid gap-3 md:grid-cols-[150px_minmax(0,1fr)]" style={{ ['--d' as string]: `${delay}s` }}>
       <div className="flex items-center gap-3 md:items-start">
@@ -414,7 +414,7 @@ export function LawCard({ ordinal, name, nameNote, words, maths, mathsNote }: { 
   )
   return (
     <div className="rounded-[var(--radius-card)] p-4 md:p-5" style={inset}>
-      <div className="text-xs font-black uppercase tracking-[0.3em]" style={{ color: 'var(--accent)' }}>Newton&apos;s {ordinal} law</div>
+      <div className="text-xs font-black uppercase tracking-[0.3em]" style={{ color: 'var(--accent)' }}>{kicker ?? <>Newton&apos;s {ordinal} law</>}</div>
       <div className="mt-3 grid gap-5">
         <Row n={1} label="What it is called" delay={0}>
           <div className="text-2xl font-extrabold" style={{ color: 'var(--text)', letterSpacing: -0.5 }}>{name}</div>

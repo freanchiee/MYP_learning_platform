@@ -211,7 +211,7 @@ function StaticBlock({ b }: { b: Block }) {
     case 'note':
       return <HandNote text={b.text} by={b.by} />
     case 'law':
-      return <LawCard ordinal={b.ordinal} name={b.name} nameNote={b.nameNote} words={b.words} maths={b.maths} mathsNote={b.mathsNote} />
+      return <LawCard ordinal={b.ordinal} kicker={b.kicker} name={b.name} nameNote={b.nameNote} words={b.words} maths={b.maths} mathsNote={b.mathsNote} />
     case 'table':
       return <DataTable title={b.title} head={b.head} rows={b.rows} note={b.note} firstColHeader={b.firstColHeader} />
     case 'figure':

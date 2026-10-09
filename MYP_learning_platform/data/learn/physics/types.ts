@@ -54,6 +54,9 @@ export type WidgetId =
   | 'balls-collision-anim'
   | 'stick-collision-anim'
   | 'tension-lab'
+  | 'field-lines-lab'
+  | 'spring-work-lab'
+  | 'orbit-lab'
 
 export type BoxKind = 'yes' | 'no' | 'opt'
 
@@ -78,7 +81,7 @@ export type Block =
   | { t: 'formulas'; items: { eq: string; legend: string[] }[] }
   | { t: 'note'; text: string; by?: string }
   /** One of Newton's laws in the class format: what it is called, what it says in words, what it says in maths. */
-  | { t: 'law'; ordinal: string; name: string; nameNote?: string; words: string; maths: string[]; mathsNote?: string }
+  | { t: 'law'; ordinal: string; kicker?: string; name: string; nameNote?: string; words: string; maths: string[]; mathsNote?: string }
   | { t: 'table'; title?: string; head: string[]; rows: string[][]; note?: string; firstColHeader?: boolean }
   | { t: 'figure'; src: string; alt: string; caption: string; credit?: string }
   /** A work we cite and link to but do not reproduce: full citation, a link to where it is lawfully displayed. */

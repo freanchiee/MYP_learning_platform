@@ -10,6 +10,7 @@ import { NosRaceLab } from './nos-race'
 import { ModelVsRealityLab, MotionGraphsLab } from './motion-graphs'
 import { AircraftTakeoffAnim, BallBounceAnim, CarSkidAnim, ChaseCarsAnim, OilDripCarAnim, SignalTrainAnim, TrainAccelDecelAnim } from './exam-motion'
 import { BallsCollisionAnim, StickCollisionAnim } from './exam-collisions'
+import { FieldLinesLab, OrbitLab, SpringWorkLab } from './fields'
 import { CollisionLab, ForceLink, MomentumCases, NewtonLab, NflDiagram, NslDiagram, SpacetimeDiagram, TensionLab } from './physics-a2'
 import {
   C, G, H, inclineAcceleration, massEnergy, pendulumPeriod, photonEnergy, relativePosition, slideAngle, zenoSum,
@@ -536,6 +537,9 @@ const REGISTRY: Record<WidgetId, () => JSX.Element> = {
   'balls-collision-anim': BallsCollisionAnim,
   'stick-collision-anim': StickCollisionAnim,
   'tension-lab': TensionLab,
+  'field-lines-lab': FieldLinesLab,
+  'spring-work-lab': SpringWorkLab,
+  'orbit-lab': OrbitLab,
 }
 
 export function Widget({ id }: { id: WidgetId }) {
