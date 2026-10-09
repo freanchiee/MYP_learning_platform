@@ -25,6 +25,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     })),
     { url: `${SITE_URL}/dp-physics`, changeFrequency: 'weekly', priority: 0.8 },
+    { url: `${SITE_URL}/dp-physics/formulas`, changeFrequency: 'weekly', priority: 0.9 },
     ...MODULES.flatMap((m) => [
       { url: `${SITE_URL}/dp-physics/${m.slug}`, changeFrequency: 'weekly' as const, priority: 0.7 },
       ...m.lessons.map((l) => ({ url: `${SITE_URL}/dp-physics/${m.slug}/${l.slug}`, changeFrequency: 'monthly' as const, priority: 0.7 })),

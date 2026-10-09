@@ -42,6 +42,7 @@ export default function DpPhysicsHub() {
           <p className="mt-3 max-w-2xl text-base opacity-95 md:text-lg">
             Short lessons you can do alone: read one idea, predict, test it in a simulation, then check yourself. Built class by class from our own classroom notes.
           </p>
+          <Link href="/dp-physics/formulas" className="mt-4 inline-block rounded-full px-4 py-2 text-sm font-black" style={{ background: 'var(--surface-elevated)', color: 'var(--text)' }}>📐 IB physics formula sheet →</Link>
         </header>
 
         <div className="mt-6 grid content-start gap-6">
