@@ -87,3 +87,7 @@ export const SITE_FAQ: { q: string; a: string }[] = [
     a: 'Gameducation is CritABCD’s live, teacher-hosted classroom feature for MYP Design (Years 2–4) — quizzes, worksheets and team icebreakers projected to the class, with students joining from their own device via a join code, real-time dashboards, private chat and a Kahoot-style podium finish.',
   },
 ]
+
+/** The homepage with campaign tags, so Vercel Analytics shows which surface a visit came from
+ *  (a student's share button, the host's projector screen, a downloaded PDF, ...). */
+export const shareUrl = (source: string) => `${SITE_URL}/?utm_source=${source}&utm_medium=live-class`

@@ -11,6 +11,7 @@
 import type { Content, ContentTable, TDocumentDefinitions, TableCell } from 'pdfmake/interfaces'
 import type { WorkDoc, WorkItem, WorkStrand, WorkCriterion } from './studentWork'
 import { CRITERIA } from './criteria'
+import { shareUrl } from '@/lib/site'
 
 export type ImageMap = Record<string, { dataUrl: string; w: number; h: number }>
 
@@ -304,7 +305,7 @@ export function buildWorkPdf(doc: WorkDoc, images: ImageMap = {}): TDocumentDefi
         widths: ['*'],
         body: [[{
           stack: [
-            { text: 'DESIGN CYCLE PORTFOLIO', fontSize: 8, bold: true, color: tint(doc.accent, 0.78), characterSpacing: 1.6 },
+            { text: 'DESIGN CYCLE PORTFOLIO  |  CRITABCD.COM', fontSize: 8, bold: true, color: tint(doc.accent, 0.78), characterSpacing: 1.6, link: shareUrl('work-pdf') },
             { text: clean(doc.activityTitle), fontSize: 26, bold: true, color: '#FFFFFF', margin: [0, 4, 0, 0] },
             { text: clean(doc.student), fontSize: 15, color: '#FFFFFF', margin: [0, 4, 0, 0] },
             { text: `${clean(doc.className)}   |   ${doc.date}`, fontSize: 9, color: tint(doc.accent, 0.78), margin: [0, 2, 0, 12] },
@@ -410,6 +411,7 @@ export function buildWorkPdf(doc: WorkDoc, images: ImageMap = {}): TDocumentDefi
     footer: (page: number, count: number) => ({
       columns: [
         { text: `${clean(doc.className)}  |  generated ${new Date().toLocaleDateString()}`, fontSize: 7.5, color: FAINT },
+        { text: 'Made with CritABCD - critabcd.com', fontSize: 7.5, color: doc.accent, alignment: 'center', link: shareUrl('work-pdf') },
         { text: `Page ${page} of ${count}`, fontSize: 7.5, color: FAINT, alignment: 'right' },
       ],
       margin: [40, 18, 40, 0],

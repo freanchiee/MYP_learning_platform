@@ -73,6 +73,8 @@ export function JoinCard({ code, joinUrl, qrSize = 170 }: { code: string | null;
         <div style={{ fontSize: 11, fontWeight: 800, letterSpacing: 1.4, color: 'var(--text-muted)' }}>SESSION CODE</div>
         <div style={{ fontSize: 44, fontWeight: 800, letterSpacing: '0.08em', lineHeight: 1 }}>{code}</div>
         <div style={{ fontSize: 12, color: 'var(--text-muted)', wordBreak: 'break-all', maxWidth: 260 }}>{joinUrl}</div>
+        <div style={{ fontSize: 13, fontWeight: 800, marginTop: 4 }}>Join at <span style={{ color: 'var(--accent)' }}>critabcd.com</span></div>
+        <div style={{ fontSize: 11.5, color: 'var(--text-muted)' }}>CritABCD · free IB MYP guides, practice &amp; live classes</div>
       </div>
     </div>
   )
