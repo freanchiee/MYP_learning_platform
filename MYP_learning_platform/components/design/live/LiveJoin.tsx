@@ -25,6 +25,7 @@ import { feedbackOf } from '@/lib/design-live/feedback'
 import { CRITERION_LETTERS } from '@/lib/design-live/criteria'
 import { SustainabilityGamePlayer } from './game/SustainabilityGame'
 import { LearnPlayer } from './LearnStage'
+import ShareFooter from './ShareFooter'
 import { SelfPacedBar, navOf } from './SelfPaced'
 import { LeaderboardDrawer, useLeaderboardDrawer } from './HostChrome'
 import { getPersona } from '@/data/design/live/personas'
@@ -451,6 +452,7 @@ export default function LiveJoin({ activity, initialCode }: { activity: LiveActi
               )}
             </div>
           )}
+          {canWork && <ShareFooter accent={activity.theme.accent} />}
         </div>
       </div>
       <CelebrationOverlay bursts={bursts} />
