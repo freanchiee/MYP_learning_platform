@@ -3,6 +3,8 @@ import { SITE_URL } from '@/lib/site'
 import { GUIDES } from '@/data/guides'
 import { POSTS } from '@/data/blog'
 import { MODULES } from '@/data/learn/physics'
+import { CRITERION_KEYS } from '@/data/seo/criterion-guides'
+import { SAMPLE_QUESTIONS } from '@/data/seo/sample-questions'
 
 // Served at /sitemap.xml. Only genuinely public (non-auth-gated) pages belong here —
 // the subject/exam/design routes redirect to /login for crawlers, so they're omitted.
@@ -24,6 +26,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly' as const,
       priority: 0.8,
     })),
+    // Free criterion-by-criterion study guides (one per subject and criterion) and original sample questions.
+    ...GUIDES.flatMap((g) =>
+      CRITERION_KEYS.map((k) => ({ url: `${SITE_URL}/guides/${g.slug}/criterion-${k.toLowerCase()}`, changeFrequency: 'monthly' as const, priority: 0.7 }))
+    ),
+    { url: `${SITE_URL}/sample-questions`, changeFrequency: 'weekly', priority: 0.8 },
+    ...SAMPLE_QUESTIONS.map((q) => ({ url: `${SITE_URL}/sample-questions/${q.subject}/${q.slug}`, changeFrequency: 'monthly' as const, priority: 0.6 })),
     { url: `${SITE_URL}/dp-physics`, changeFrequency: 'weekly', priority: 0.8 },
     { url: `${SITE_URL}/dp-physics/formulas`, changeFrequency: 'weekly', priority: 0.9 },
     ...MODULES.flatMap((m) => [

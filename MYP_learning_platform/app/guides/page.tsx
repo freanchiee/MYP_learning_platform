@@ -47,6 +47,12 @@ export default function GuidesHubPage() {
           graded. Each page links to the official IB guide and to free practice on CritABCD.
         </p>
 
+        <p className="mt-4">
+          <Link href="/sample-questions" className="text-base font-bold" style={{ color: 'var(--accent)' }}>
+            Free sample questions with mark schemes →
+          </Link>
+        </p>
+
         <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {GUIDES.map((g) => (
             <Link

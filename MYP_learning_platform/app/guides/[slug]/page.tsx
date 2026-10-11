@@ -7,6 +7,7 @@ import GuideTopBar from '@/components/guides/GuideTopBar'
 import SubjectExplorer from '@/components/guides/SubjectExplorer'
 import InterestForm from '@/components/leads/InterestForm'
 import { interestsForGuide } from '@/lib/interests'
+import { CRITERION_KEYS, CRITERION_TITLES, SUBJECT_GROUP } from '@/data/seo/criterion-guides'
 
 export function generateStaticParams() {
   return GUIDES.map((g) => ({ slug: g.slug }))
@@ -194,6 +195,24 @@ export default function GuidePage({ params }: { params: { slug: string } }) {
                 </summary>
                 <p className="mt-3 text-base leading-relaxed" style={{ color: 'var(--text-muted)' }}>{f.a}</p>
               </details>
+            ))}
+          </div>
+        </div>
+
+        {/* Criterion-by-criterion guides */}
+        <div className="mt-6">
+          <h2 className="text-xs font-black tracking-widest" style={{ color: 'var(--text-subtle)' }}>CRITERION-BY-CRITERION GUIDES</h2>
+          <div className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            {CRITERION_KEYS.map((k) => (
+              <Link
+                key={k}
+                href={`/guides/${g.slug}/criterion-${k.toLowerCase()}`}
+                className="rounded-2xl p-4"
+                style={{ background: 'var(--surface-elevated)', border: '1px solid var(--border)' }}
+              >
+                <div className="text-sm font-black" style={{ color: 'var(--accent)' }}>Criterion {k}</div>
+                <div className="mt-0.5 font-bold" style={{ color: 'var(--text)' }}>{CRITERION_TITLES[SUBJECT_GROUP[g.slug]][k]} →</div>
+              </Link>
             ))}
           </div>
         </div>

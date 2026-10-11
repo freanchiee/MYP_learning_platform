@@ -21,15 +21,16 @@ export default function GuideTopBar({ label = 'MYP Guides' }: { label?: string }
       </Link>
       <nav className="flex items-center gap-1">
         {[
-          { href: '/', label: 'Home' },
+          { href: '/', label: 'Home', hideOnPhone: true },
           { href: '/guides', label: 'Guides' },
+          { href: '/sample-questions', label: 'Questions' },
           { href: '/blog', label: 'Blog' },
           { href: '/resources', label: 'Resources' },
         ].map((l) => (
           <Link
             key={l.href}
             href={l.href}
-            className="rounded-lg px-2 py-1.5 sm:px-3.5 text-sm font-semibold"
+            className={`rounded-lg px-2 py-1.5 sm:px-3.5 text-sm font-semibold${'hideOnPhone' in l && l.hideOnPhone ? ' hidden sm:block' : ''}`}
             style={{ color: 'var(--nav-fg)' }}
           >
             {l.label}
