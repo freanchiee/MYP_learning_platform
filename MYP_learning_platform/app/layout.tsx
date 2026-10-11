@@ -7,7 +7,7 @@ import './globals.css'
 import { ThemeProvider } from '@/components/theme/ThemeProvider'
 import TutoringNudge from '@/components/marketing/TutoringNudge'
 import { THEME_BOOTSTRAP_SCRIPT } from '@/lib/theme'
-import { SITE_URL } from '@/lib/site'
+import { SITE_URL, SOCIAL_PROFILES, BRAND_ALIASES } from '@/lib/site'
 
 const sourceSans3 = Source_Sans_3({
   subsets: ['latin'],
@@ -98,16 +98,18 @@ const JSON_LD = {
       '@type': 'EducationalOrganization',
       '@id': `${SITE_URL}/#org`,
       name: SITE_NAME,
-      alternateName: 'CritABCD — The Next-Gen IB MYP Learning Site',
+      alternateName: ['CritABCD — The Next-Gen IB MYP Learning Site', ...BRAND_ALIASES],
       url: SITE_URL,
       logo: OG_IMAGE,
       description: SITE_DESC,
+      ...(SOCIAL_PROFILES.length ? { sameAs: SOCIAL_PROFILES.map((p) => p.url) } : {}),
     },
     {
       '@type': 'WebSite',
       '@id': `${SITE_URL}/#website`,
       url: SITE_URL,
       name: SITE_NAME,
+      alternateName: BRAND_ALIASES,
       description: SITE_DESC,
       inLanguage: 'en',
       publisher: { '@id': `${SITE_URL}/#org` },
