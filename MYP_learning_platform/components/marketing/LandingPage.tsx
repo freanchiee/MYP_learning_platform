@@ -657,6 +657,7 @@ export default function LandingPage() {
         <span>CritABCD · The Next-Gen MYP Learning Site · {new Date().getFullYear()}</span>
         <span className="flex flex-wrap justify-center gap-x-4 gap-y-1">
           <Link href="/guides" className="hover:opacity-100">Guides</Link>
+          <Link href="/sample-questions" className="hover:opacity-100">Free questions</Link>
           <Link href="/blog" className="hover:opacity-100">Blog</Link>
           <Link href="/gameducation" className="hover:opacity-100">Live classes</Link>
           <Link href="/tutoring" className="hover:opacity-100">Tutoring</Link>
