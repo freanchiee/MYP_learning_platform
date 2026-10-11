@@ -91,3 +91,15 @@ export const SITE_FAQ: { q: string; a: string }[] = [
 /** The homepage with campaign tags, so Vercel Analytics shows which surface a visit came from
  *  (a student's share button, the host's projector screen, a downloaded PDF, ...). */
 export const shareUrl = (source: string) => `${SITE_URL}/?utm_source=${source}&utm_medium=live-class`
+
+/** Official CritABCD profiles (Instagram, YouTube, LinkedIn, X, ...). Paste full https:// URLs here and they are
+ *  added to the site's structured data as schema.org `sameAs`, which helps Google connect the brand to its
+ *  profiles, and shown on the About page. Leave empty until the profiles exist; never add a profile you do not run. */
+export const SOCIAL_PROFILES: { label: string; url: string }[] = [
+  // { label: 'Instagram', url: 'https://www.instagram.com/<handle>/' },
+  // { label: 'YouTube', url: 'https://www.youtube.com/@<handle>' },
+  // { label: 'LinkedIn', url: 'https://www.linkedin.com/company/<handle>/' },
+]
+
+/** Other spellings people use for the brand, so search engines treat them as the same entity. */
+export const BRAND_ALIASES = ['Crit ABCD', 'critabcd.com']

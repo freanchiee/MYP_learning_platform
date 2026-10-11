@@ -661,6 +661,7 @@ export default function LandingPage() {
           <Link href="/blog" className="hover:opacity-100">Blog</Link>
           <Link href="/gameducation" className="hover:opacity-100">Live classes</Link>
           <Link href="/tutoring" className="hover:opacity-100">Tutoring</Link>
+          <Link href="/about" className="hover:opacity-100">About</Link>
           <Link href="/updates" className="hover:opacity-100">Get updates</Link>
         </span>
       </footer>
