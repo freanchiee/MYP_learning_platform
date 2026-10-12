@@ -14,6 +14,7 @@ import { stateForAdvance, stateForBack } from '@/lib/design-live/stageNav'
 import { SustainabilityGameHost } from './game/SustainabilityGame'
 import { LearnHost } from './LearnStage'
 import { defaultStart } from './SelfPaced'
+import { WorkPdfButton, HostWorkProvider } from './HostWorkPdf'
 import { HostRibbon, ProgressDrawer, RemovablePlayerAvatar, EditModeContext, FloatingNav, JoinCard, useProgressDrawer } from './HostChrome'
 import { Podium } from './Podium'
 import { WorksheetReviewModal } from './WorksheetReview'
@@ -219,6 +220,7 @@ export default function LiveHost({ activity }: { activity: LiveActivityDefinitio
 
   return (
     <EditModeContext.Provider value={editMode && session.status === 'active'}>
+    <HostWorkProvider value={{ activity, className: `Live session ${code}`, grades }}>
     <UnreadChatContext.Provider value={unreadIds}>
     <QuickReactProvider>
     <PlayerPreviewProvider>
@@ -330,6 +332,7 @@ export default function LiveHost({ activity }: { activity: LiveActivityDefinitio
     </PlayerPreviewProvider>
     </QuickReactProvider>
     </UnreadChatContext.Provider>
+    </HostWorkProvider>
     </EditModeContext.Provider>
   )
 }
@@ -542,6 +545,7 @@ function McqRoster({
               </span>
               <ChatButton playerId={p.id} onClick={() => onChat(p.id)} title={`Message ${p.name}`} />
               <QuickReactButton sessionCode={sessionCode} playerId={p.id} playerName={p.name} />
+              <WorkPdfButton player={p} />
             </div>
           )
         })}
@@ -576,6 +580,7 @@ function McqDashboard({ stage, players, now, onChat, sessionCode }: { stage: Mcq
                   </PlayerPreview>
                   <ChatButton playerId={p.id} onClick={() => onChat(p.id)} title={`Message ${p.name}`} />
                   <QuickReactButton sessionCode={sessionCode} playerId={p.id} playerName={p.name} />
+                  <WorkPdfButton player={p} />
                 </div>
               </td>
               {stage.questions.map((_, i) => {
@@ -642,6 +647,7 @@ function WorksheetHost({
                   </PlayerPreview>
                   <ChatButton playerId={p.id} onClick={() => onChat(p.id)} title={`Message ${p.name}`} />
                   <QuickReactButton sessionCode={sessionCode} playerId={p.id} playerName={p.name} />
+                  <WorkPdfButton player={p} />
                   <button
                     onClick={() => onReview(p.id)}
                     title={`Review & score ${p.name}'s work`}
@@ -788,6 +794,7 @@ function OpenIdeasHost({
               <span style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 4 }}>
                 <ChatButton playerId={player.id} onClick={() => onChat(player.id)} title={`Message ${player.name}`} />
                 <QuickReactButton sessionCode={session.code} playerId={player.id} playerName={player.name} />
+                <WorkPdfButton player={player} />
               </span>
             </div>
           ))}

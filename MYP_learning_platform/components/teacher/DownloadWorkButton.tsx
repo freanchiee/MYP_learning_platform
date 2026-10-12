@@ -37,12 +37,23 @@ async function loadImage(url: string): Promise<ImageMap[string] | null> {
   }
 }
 
-export default function DownloadWorkButton({ doc }: { doc: WorkDoc }) {
+export default function DownloadWorkButton(props: {
+  /** The finished document, or `getDoc` to build it only when the button is clicked (use that on busy screens). */
+  doc?: WorkDoc
+  getDoc?: () => WorkDoc
+  studentName?: string
+  activityTitle?: string
+  /** A compact icon-only button for crowded rows such as the live host dashboard. */
+  icon?: boolean
+}) {
+  const { icon } = props
+  const label = `${props.studentName ?? props.doc?.student ?? 'this student'}'s work${props.activityTitle ?? props.doc?.activityTitle ? ` for ${props.activityTitle ?? props.doc?.activityTitle}` : ''}`
   const [busy, setBusy] = useState(false)
 
   const download = async () => {
     setBusy(true)
     try {
+      const doc = (props.doc ?? props.getDoc?.())!
       const urls = Array.from(new Set(doc.criteria.flatMap((c) => c.strands.flatMap((s) => s.sections.flatMap((x) => x.items.flatMap((i) => (i.kind === 'images' ? i.images.map((im) => im.url) : [])))))))
       const images: ImageMap = {}
       await Promise.all(urls.map(async (u) => { const img = await loadImage(u); if (img) images[u] = img }))
@@ -62,11 +73,14 @@ export default function DownloadWorkButton({ doc }: { doc: WorkDoc }) {
     <button
       onClick={(e) => { e.preventDefault(); e.stopPropagation(); download() }}
       disabled={busy}
-      title={`Download ${doc.student}'s work for ${doc.activityTitle} as a design-cycle PDF`}
-      className="rounded-[var(--radius-control)] px-2.5 py-1 text-[10px] font-black tracking-wider disabled:opacity-50"
-      style={{ border: '1px solid var(--border-strong)', color: 'var(--text)', whiteSpace: 'nowrap' }}
+      aria-label={`Download ${label} as a design-cycle PDF`}
+      title={`Download ${label} as a design-cycle PDF`}
+      className={icon ? 'disabled:opacity-50' : 'rounded-[var(--radius-control)] px-2.5 py-1 text-[10px] font-black tracking-wider disabled:opacity-50'}
+      style={icon
+        ? { cursor: 'pointer', border: 'none', background: 'transparent', color: 'inherit', fontSize: 14, lineHeight: 1, padding: '2px 3px' }
+        : { border: '1px solid var(--border-strong)', color: 'var(--text)', whiteSpace: 'nowrap' }}
     >
-      {busy ? 'Building…' : '⬇️ Work PDF'}
+      {busy ? (icon ? '…' : 'Building…') : icon ? '⬇️' : '⬇️ Work PDF'}
     </button>
   )
 }

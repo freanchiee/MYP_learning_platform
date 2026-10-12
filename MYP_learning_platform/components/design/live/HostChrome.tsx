@@ -17,6 +17,7 @@ import type { LivePlayerRow } from '@/lib/design-live/types'
 import { useClassLeaderboard, type LeaderboardRow, type LiveFocus } from '@/lib/design-live/hooks'
 import ClassPicker from './ClassPicker'
 import { createClient } from '@/lib/supabase/client'
+import { WorkPdfButton } from './HostWorkPdf'
 import { Avatar, FocusDot, QRCode, cardStyle } from './ui'
 import { defaultStart, navOf } from './SelfPaced'
 
@@ -301,6 +302,7 @@ export function ProgressDrawer({
               <RemovablePlayerAvatar playerId={p.id} name={p.name} size={20} />
               <span style={{ flex: 1, minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{p.name}</span>
               <FocusDot focus={p.data?.focus as LiveFocus} now={now} />
+              <WorkPdfButton player={p} />
               <span style={{ fontSize: 11, color: 'var(--text-muted)', whiteSpace: 'nowrap' }}>{activity.stages[nav.stage].icon} {nav.stage + 1}/{n}</span>
             </div>
             <span style={{ height: 6, background: 'var(--border)', borderRadius: 999, overflow: 'hidden' }}>
