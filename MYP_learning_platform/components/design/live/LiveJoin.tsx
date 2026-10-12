@@ -906,11 +906,11 @@ function FloatingPersonaChat({
         style={{ ...btnStyle('#5C3FD6', true), borderRadius: 999, padding: '8px 14px', fontSize: 12.5, display: 'flex', alignItems: 'center', gap: 6, boxShadow: '3px 3px 0 var(--text)' }}
       >
         <Avatar seed={character.id} size={20} />
-        {open ? '✕ Close' : `Chat with ${character.name}`}
+        {open ? `✕ Close chat with ${character.name}` : `💬 Interview ${character.name}`}
       </button>
       {open && (
         <div style={{ width: 'min(340px, calc(100vw - 32px))', maxHeight: '75vh', overflowY: 'auto' }}>
-          {note && <div style={{ fontSize: 11.5, fontWeight: 700, color: 'rgba(255,255,255,0.85)', marginBottom: 6, textAlign: 'right' }}>{note}</div>}
+          <div style={{ fontSize: 12.5, fontWeight: 800, color: '#fff', marginBottom: 6, textAlign: 'right' }}>You are interviewing {character.name}{note ? <span style={{ fontWeight: 600, opacity: 0.85 }}> · {note}</span> : null}</div>
           <PersonaChatField value={value as any} onChange={onChange} onPersist={onPersist} onDraft={onDraft} sessionCode={sessionCode} playerId={playerId} />
         </div>
       )}
