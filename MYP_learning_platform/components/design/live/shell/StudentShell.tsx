@@ -8,6 +8,7 @@
 //   TOP BAR     where you are (stage x of y), overall progress, a clear "My work" download button, Previous / Next.
 //   PAGE        the stage's own content (children), unchanged.
 //
+// Sticky offsets clear the site's own sticky top bar (56px, z-40): the stage rail and this header stick below it, never over it.
 // On phones the rail becomes a "Stages" drawer. `?ui=classic` in the address switches back to the old layout.
 // Everything uses theme tokens; the live engine's own "sticker" card style (cardStyle) is kept.
 // The student can also pick a "look" (Classic / Journal / Quest / Editorial / Pop). Those are scoped to this workspace:
@@ -216,7 +217,7 @@ export default function StudentShell({
         .cs-rail[data-folded="true"] .cs-full { display: none !important; }
         .cs-rail[data-folded="true"] .cs-mini { display: grid !important; }
         .cs-rail[data-folded="true"] { padding-right: 4px; }
-        .cs-rail { position: sticky; top: 12px; display: grid; gap: 14px; max-height: calc(100vh - 24px); overflow-y: auto; overflow-x: hidden; padding: 4px 8px 12px 4px; scrollbar-width: thin; box-sizing: border-box; }
+        .cs-rail { position: sticky; top: 68px; display: grid; gap: 14px; max-height: calc(100vh - 80px); overflow-y: auto; overflow-x: hidden; padding: 4px 8px 12px 4px; scrollbar-width: thin; box-sizing: border-box; }
         .cs-close, .cs-menu { display: none; }
         .cs-rail > * { min-width: 0; }
         .cs-tab:hover { filter: brightness(0.97); }
@@ -239,7 +240,7 @@ export default function StudentShell({
       {railOpen && <div className="cs-scrim" onClick={() => setRailOpen(false)} style={{ position: 'fixed', inset: 0, zIndex: 60, background: 'rgba(0,0,0,.45)' }} />}
 
       <div style={{ minWidth: 0, display: 'grid', gap: 14 }}>
-        <header className="cs-bar" style={{ ...cardStyle(accent), padding: '10px 14px', position: 'sticky', top: 8, zIndex: 40, display: 'grid', gap: 8 }}>
+        <header className="cs-bar" style={{ ...cardStyle(accent), padding: '10px 14px', position: 'sticky', top: 60, zIndex: 30, display: 'grid', gap: 8 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
             <button className="cs-menu" onClick={() => setRailOpen(true)} style={{ ...btnStyle('var(--text-muted)'), padding: '7px 11px', alignItems: 'center', gap: 6 }} aria-label="Open the list of stages">☰ Stages</button>
             <div className="cs-menu" aria-hidden style={{ alignItems: 'center' }}><CriteriaRing current={curLetter} progress={progress} present={present} size={44} /></div>

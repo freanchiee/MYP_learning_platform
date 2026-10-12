@@ -47,7 +47,10 @@
 [data-live-theme="journal"] .cs-rings { display: flex; flex-direction: column; justify-content: space-between; position: absolute; left: -22px; top: 30px; bottom: 30px; z-index: 3; pointer-events: none; }
 [data-live-theme="journal"] .cs-rings i { display: block; position: relative; width: 38px; height: 11px; border-radius: 6px; border: 1.5px solid #4B4B57; background: linear-gradient(#E4E4EA, #8E8E9A); box-shadow: 0 2px 0 rgba(0,0,0,.18); }
 [data-live-theme="journal"] .cs-rings i::after { content: ''; position: absolute; right: -12px; top: 50%; width: 10px; height: 10px; margin-top: -5px; border-radius: 50%; background: #6E5E42; box-shadow: inset 0 2px 0 rgba(0,0,0,.35); }
-[data-live-theme="journal"] .cs-spine { display: grid; gap: 10px; position: absolute; left: -62px; top: 150px; z-index: 4; }
+/* the spine tabs are a sticky grid item in the rail's cell, so they stay in view while the page scrolls */
+[data-live-theme="journal"] .cs-rail { grid-column: 1; grid-row: 1; }
+[data-live-theme="journal"] .cs-grid > :last-child { grid-column: 2; grid-row: 1; }
+[data-live-theme="journal"] .cs-spine { display: grid; gap: 10px; position: sticky; top: 150px; grid-column: 1; grid-row: 1; align-self: start; justify-self: start; width: 46px; margin-left: -104px; z-index: 4; }
 [data-live-theme="journal"] .cs-spine-tab { width: 46px; min-height: 64px; border: 2px solid #2A2733; border-right: 0; border-radius: 14px 0 0 14px; color: #fff; font-weight: 800; font-size: 20px; cursor: pointer; box-shadow: -3px 3px 0 rgba(42,39,51,.3); }
 [data-live-theme="journal"] .cs-spine-tab[data-cur="true"] { width: 60px; margin-left: -14px; min-height: 74px; outline: 3px solid #fff; }
 [data-live-theme="journal"] .cs-nav, [data-live-theme="pop"] .cs-nav { overflow: visible !important; }
@@ -154,6 +157,7 @@
 @media (max-width: 920px) {
   [data-live-theme="journal"] .cs-grid { margin-left: 0; padding: 0; background: none; border: 0; box-shadow: none; }
   [data-live-theme="journal"] .cs-rings, [data-live-theme="journal"] .cs-spine { display: none; }
+  [data-live-theme="journal"] .cs-rail, [data-live-theme="journal"] .cs-grid > :last-child { grid-column: auto; grid-row: auto; }
   [data-live-theme="journal"] .cs-bar::before, [data-live-theme="journal"] .cs-bar::after { display: none; }
 }
 @media (prefers-reduced-motion: reduce) { [data-live-theme] * { transition: none !important; } }
