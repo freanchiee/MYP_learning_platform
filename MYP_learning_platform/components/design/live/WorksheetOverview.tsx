@@ -22,13 +22,13 @@ export function StrandBadge({ strand, label, compact }: { strand: string; label?
 }
 
 /** Shown at the top of an OPEN section: which criterion and strand this is, plus the section brief. */
-export function SectionMarker({ section, progress, present }: { section: WorksheetSection; progress?: Partial<Record<string, number>>; present?: string[] }) {
+export function SectionMarker({ section, progress, present, hideRing }: { section: WorksheetSection; progress?: Partial<Record<string, number>>; present?: string[]; hideRing?: boolean }) {
   if (!section.criterion && !section.brief) return null
   const c = section.criterion ? criterionOf(section.criterion) : null
   const label = section.strandLabel ?? (section.criterion ? STRAND_LABELS[section.criterion] : undefined)
   return (
     <div style={{ borderLeft: `5px solid ${c?.color ?? 'var(--border-strong)'}`, background: 'var(--surface-2)', borderRadius: 'var(--radius-panel)', padding: '10px 14px', display: 'flex', gap: 14, alignItems: 'center', flexWrap: 'wrap' }}>
-      {c && c.letter && <CriteriaRing current={c.letter} progress={progress ?? {}} present={present ?? ['A', 'B', 'C', 'D']} size={72} />}
+      {!hideRing && c && c.letter && <CriteriaRing current={c.letter} progress={progress ?? {}} present={present ?? ['A', 'B', 'C', 'D']} size={72} />}
       <div style={{ flex: 1, minWidth: 220, display: 'grid', gap: 6 }}>
         {c && section.criterion && (
           <div style={{ fontSize: 12.5, fontWeight: 800, color: 'var(--text)' }}>
@@ -107,9 +107,9 @@ function FlowStrip({ flow, pct, labels, onJump }: { flow: FlowStep[]; pct: Recor
   )
 }
 
-export default function WorksheetOverview({ overview, sections = [], pct = {}, onJump = () => {} }: { overview?: StageOverview; sections?: WorksheetSection[]; pct?: Record<string, number>; onJump?: (sectionKey: string) => void }) {
+export default function WorksheetOverview({ overview, sections = [], pct = {}, onJump = () => {}, defaultOpen = true }: { overview?: StageOverview; sections?: WorksheetSection[]; pct?: Record<string, number>; onJump?: (sectionKey: string) => void; defaultOpen?: boolean }) {
   const ov = overview
-  const [open, setOpen] = useState(true)
+  const [open, setOpen] = useState(defaultOpen)
   if (!ov || (!ov.brief && !ov.flow?.length)) return null
   const letters = Array.from(new Set((ov.flow ?? []).map((f) => criterionOf(f.strand).letter).filter(Boolean)))
   return (
