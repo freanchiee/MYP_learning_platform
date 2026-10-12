@@ -25,9 +25,12 @@ import { CriteriaRing } from '../CriteriaRing'
 import MyWorkDownloads from '../MyWorkDownloads'
 import { Avatar, btnStyle, cardStyle } from '../ui'
 import LiveThemePicker from './LiveThemePicker'
+import LiveTour, { markTourDone, tourDone } from './LiveTour'
 import './liveThemes.css'
 
 const NEUTRAL = 'var(--border-strong)'
+// The first-visit tour opens at most once per page load, even if storage is blocked and it cannot remember being done.
+let tourShownThisLoad = false
 
 export default function StudentShell({
   enabled, activity, me, code, grade, idx, maxIdx, onGo, theme, onTheme, children,
@@ -50,6 +53,13 @@ export default function StudentShell({
   useEffect(() => { try { setFolded(localStorage.getItem('myp:rail-folded') === '1') } catch { /* ignore */ } }, [])
   const toggleFold = () => { setFolded((f) => { try { localStorage.setItem('myp:rail-folded', f ? '0' : '1') } catch { /* ignore */ } return !f }) }
   const [dlOpen, setDlOpen] = useState(false)
+  const [tourOpen, setTourOpen] = useState(false)
+  // First visit on this device: start the walkthrough once the layout has settled.
+  useEffect(() => {
+    if (!enabled || tourShownThisLoad || tourDone()) return undefined
+    const t = setTimeout(() => { tourShownThisLoad = true; setTourOpen(true) }, 900)
+    return () => clearTimeout(t)
+  }, [enabled])
   const dlRef = useRef<HTMLDivElement>(null)
   const railRef = useRef<HTMLElement>(null)
   const stages = activity.stages
@@ -107,7 +117,7 @@ export default function StudentShell({
         })}
         <button onClick={() => setDlOpen(true)} style={{ ...btnStyle(accent), padding: '6px 8px', width: '100%' }} aria-label="Download my work" title="My work · PDF">📄</button>
       </div>
-      <div className="cs-full cs-profile" style={{ ...cardStyle(accent), padding: 14, display: 'grid', gap: 12 }}>
+      <div className="cs-full cs-profile" data-tour="profile" style={{ ...cardStyle(accent), padding: 14, display: 'grid', gap: 12 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
           <Avatar seed={me.id} size={38} />
           <div style={{ minWidth: 0, flex: 1 }}>
@@ -136,7 +146,7 @@ export default function StudentShell({
         </div>
       </div>
 
-      <nav className="cs-full cs-nav" style={{ ...cardStyle(accent), padding: '10px 10px 10px 14px', overflow: 'hidden', minWidth: 0 }} aria-label="Stages">
+      <nav className="cs-full cs-nav" data-tour="stages" style={{ ...cardStyle(accent), padding: '10px 10px 10px 14px', overflow: 'hidden', minWidth: 0 }} aria-label="Stages">
         <ol className="cs-ol" style={{ listStyle: 'none', margin: 0, padding: 0, display: 'grid', gap: 5 }}>
           {rows.map(({ s, i, letter, strands, pct }, n) => {
             const isCur = i === idx
@@ -185,6 +195,7 @@ export default function StudentShell({
         <button onClick={() => { setDlOpen(true); setRailOpen(false) }} style={{ ...btnStyle(accent, true), width: '100%' }}>📄 My work · PDF</button>
         <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 11.5 }}>
           <Link href="/design/live/history" style={{ color: 'var(--text-muted)', fontWeight: 700 }}>📜 My history</Link>
+          <button onClick={() => { setTourOpen(true); setRailOpen(false) }} style={{ color: 'var(--text-muted)', fontWeight: 700, background: 'none', border: 'none', padding: 0, cursor: 'pointer', fontSize: 11.5, boxShadow: 'none' }} title="Take the tour of this page again">🧭 Tour</button>
           <button
             onClick={() => { const u = new URL(window.location.href); u.searchParams.set('ui', 'classic'); window.location.href = u.toString() }}
             style={{ color: 'var(--text-subtle)', fontWeight: 700, background: 'none', border: 'none', padding: 0, cursor: 'pointer', fontSize: 11.5, boxShadow: 'none' }}
@@ -199,6 +210,8 @@ export default function StudentShell({
 
   return (
     <div className="cs-grid" data-folded={folded}>
+      {/* First: the journal look styles the LAST child as the page column, and the tour is fixed-position anyway. */}
+      <LiveTour open={tourOpen} onClose={() => { markTourDone(); setTourOpen(false) }} />
       {/* Journal look only (hidden by CSS in every other look): spiral binding and the A-B-C-D index tabs on the spine. */}
       <div className="cs-rings" aria-hidden>{Array.from({ length: 22 }, (_, i) => <i key={i} />)}</div>
       <div className="cs-spine" role="group" aria-label="Jump to a criterion">
@@ -240,9 +253,9 @@ export default function StudentShell({
       {railOpen && <div className="cs-scrim" onClick={() => setRailOpen(false)} style={{ position: 'fixed', inset: 0, zIndex: 60, background: 'rgba(0,0,0,.45)' }} />}
 
       <div style={{ minWidth: 0, display: 'grid', gap: 14 }}>
-        <header className="cs-bar" style={{ ...cardStyle(accent), padding: '10px 14px', position: 'sticky', top: 60, zIndex: 30, display: 'grid', gap: 8 }}>
+        <header className="cs-bar" data-tour="topbar" style={{ ...cardStyle(accent), padding: '10px 14px', position: 'sticky', top: 60, zIndex: 30, display: 'grid', gap: 8 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
-            <button className="cs-menu" onClick={() => setRailOpen(true)} style={{ ...btnStyle('var(--text-muted)'), padding: '7px 11px', alignItems: 'center', gap: 6 }} aria-label="Open the list of stages">☰ Stages</button>
+            <button className="cs-menu" onClick={() => setRailOpen(true)} style={{ ...btnStyle('var(--text-muted)'), padding: '7px 11px', alignItems: 'center', gap: 6 }} aria-label="Open the list of stages" data-tour="stages-btn">☰ Stages</button>
             <div className="cs-menu" aria-hidden style={{ alignItems: 'center' }}><CriteriaRing current={curLetter} progress={progress} present={present} size={44} /></div>
             <div style={{ minWidth: 0, flex: '1 1 220px' }}>
               <div className="cs-kicker" style={{ fontSize: 10.5, fontWeight: 900, letterSpacing: '0.16em', color: curLetter && curCrit ? critColor(curLetter) : 'var(--text-subtle)' }}>
@@ -251,7 +264,7 @@ export default function StudentShell({
               <div className="cs-title" style={{ fontWeight: 900, fontSize: 17, lineHeight: 1.2, overflow: 'hidden', textOverflow: 'ellipsis' }}>{curStage?.icon} {curStage?.label}</div>
             </div>
 
-            <div ref={dlRef} style={{ position: 'relative' }}>
+            <div ref={dlRef} data-tour="mywork" style={{ position: 'relative' }}>
               <button onClick={() => setDlOpen(!dlOpen)} aria-expanded={dlOpen} className="cs-mywork" style={{ ...btnStyle(accent), padding: '8px 13px' }} title="Download your work as PDFs">📄 My work</button>
               {dlOpen && (
                 <div role="dialog" aria-label="Download your work" style={{ position: 'absolute', right: 0, top: 'calc(100% + 8px)', width: 'min(400px, 88vw)', zIndex: 50 }}>
@@ -259,13 +272,13 @@ export default function StudentShell({
                 </div>
               )}
             </div>
-            <LiveThemePicker theme={theme} onTheme={onTheme} />
-            <div style={{ display: 'flex', gap: 8 }}>
+            <LiveThemePicker theme={theme} onTheme={onTheme} onTour={() => setTourOpen(true)} />
+            <div data-tour="nav-btns" style={{ display: 'flex', gap: 8 }}>
               <button onClick={() => onGo(idx - 1)} disabled={idx === 0} style={{ ...btnStyle('var(--text-muted)'), padding: '8px 12px' }} aria-label="Previous stage">←<span className="cs-hide-sm"> Previous</span></button>
               <button className="cs-next" onClick={() => onGo(idx + 1)} disabled={idx >= last} style={{ ...btnStyle(accent, true), padding: '8px 14px' }} aria-label="Next stage"><span className="cs-hide-sm">Next stage </span>→</button>
             </div>
           </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+          <div data-tour="progress" style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
             <div className="cs-overall" style={{ flex: 1, height: 7, borderRadius: 999, background: 'var(--border)', overflow: 'hidden' }} role="progressbar" aria-valuenow={overall} aria-valuemin={0} aria-valuemax={100} aria-label="Overall progress">
               <div className="cs-overall-fill" style={{ height: '100%', width: `${overall}%`, background: `linear-gradient(90deg, ${accent}, var(--accent-2, ${accent}))`, transition: 'width .5s' }} />
             </div>
