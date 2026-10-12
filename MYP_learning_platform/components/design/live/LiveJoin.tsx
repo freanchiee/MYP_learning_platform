@@ -313,6 +313,7 @@ export default function LiveJoin({ activity, initialCode }: { activity: LiveActi
   }
 
   const team = activity.teams && me.team != null ? activity.teams[me.team] : null
+  const personaLoc = findPersonaField(activity)
   // Self-paced activities: each student has their own position, saved on their own row.
   const selfPaced = !!activity.selfPaced
   // A self-paced student isn't tied to the shared session clock — if the teacher ends
@@ -470,6 +471,21 @@ export default function LiveJoin({ activity, initialCode }: { activity: LiveActi
           {canWork && <ShareFooter accent={activity.theme.accent} />}
         </div>
       </div>
+      {/* The interview, from ANY screen: once a character has been chosen, a bubble on every other stage opens the same chat and
+          saves to the same transcript, so primary research can be collected whatever the student is working on. On the
+          stage that holds the interview itself, that stage's own bubble does this job. */}
+      {canWork && personaLoc && !(stage?.type === 'worksheet' && stage.key === personaLoc.stageKey) && (
+        <FloatingPersonaChat
+          value={me.data?.[personaLoc.stageKey]?.[personaLoc.sectionKey]?.[personaLoc.fieldKey]}
+          onChange={() => {}}
+          onPersist={(v) => patchMyData(personaLoc.stageKey, { [personaLoc.sectionKey]: { ...(me.data?.[personaLoc.stageKey]?.[personaLoc.sectionKey] ?? {}), [personaLoc.fieldKey]: v } })}
+          onDraft={(text) => reportDraft(personaLoc.stageKey, text, personaLoc.sectionKey)}
+          sessionCode={code}
+          playerId={me.id}
+          rightOffset={selfPaced ? lb.reserve : 0}
+          note="💾 Saved to your research notes"
+        />
+      )}
       <CelebrationOverlay bursts={bursts} />
     </div>
   )
@@ -656,8 +672,18 @@ function WorksheetPlayer({
       setDrafts((d) => {
         const next = { ...d }
         let changed = false
-        for (const [k, v] of Object.entries(local)) {
-          if (!(k in next) || !v || Object.keys(v).length === 0) continue
+        for (const [k, rawV] of Object.entries(local)) {
+          if (!(k in next) || !rawV || Object.keys(rawV).length === 0) continue
+          // The interview can now also be done from other screens (GlobalPersonaChat), which saves straight to the
+          // database. Keep whichever transcript is longer so an older browser backup can never roll a newer chat back.
+          let v = rawV
+          for (const f of stage.sections.find((x) => x.key === k)?.fields ?? []) {
+            if (f.type !== 'personaChat') continue
+            const db = me.data?.[stage.key]?.[k]?.[f.key]
+            const mine = rawV[f.key]
+            const best = (db?.messages?.length ?? 0) >= (mine?.messages?.length ?? 0) ? db : mine
+            if (best) v = { ...v, [f.key]: best }
+          }
           if (JSON.stringify(v) !== JSON.stringify(d[k])) { next[k] = v; changed = true }
         }
         return changed ? next : d
@@ -832,6 +858,19 @@ function WorksheetPlayer({
   )
 }
 
+
+/** Where the activity's interview (personaChat) field lives, if it has one. */
+function findPersonaField(activity: LiveActivityDefinition): { stageKey: string; sectionKey: string; fieldKey: string; pack?: 'accessibility' | 'community' | 'everyday' } | null {
+  for (const st of activity.stages) {
+    if (st.type !== 'worksheet') continue
+    for (const sec of st.sections) {
+      const f = sec.fields.find((x) => x.type === 'personaChat')
+      if (f) return { stageKey: st.key, sectionKey: sec.key, fieldKey: f.key, pack: f.personaPack }
+    }
+  }
+  return null
+}
+
 /** A collapsed bubble docked to the right edge — expand it to keep talking
  *  to the persona while filling in any OTHER section (the empathy map,
  *  most often) without switching back to the Interview section. Renders
@@ -843,6 +882,8 @@ function FloatingPersonaChat({
   onDraft,
   sessionCode,
   playerId,
+  rightOffset = 0,
+  note,
 }: {
   value: { characterId: string; messages: unknown[] } | undefined
   onChange: (v: any) => void
@@ -850,21 +891,26 @@ function FloatingPersonaChat({
   onDraft: (text: string) => void
   sessionCode: string
   playerId: string
+  /** Extra space to leave on the right, e.g. for a docked leaderboard. */
+  rightOffset?: number
+  /** A line shown above the chat when it is open. */
+  note?: string
 }) {
   const [open, setOpen] = useState(false)
   const character = value?.characterId ? getPersona(value.characterId) : undefined
   if (!character) return null
   return (
-    <div style={{ position: 'fixed', right: 16, top: '50%', transform: 'translateY(-50%)', zIndex: 44, display: 'flex', flexDirection: 'row-reverse', alignItems: 'flex-start', gap: 8 }}>
+    <div style={{ position: 'fixed', right: 16 + rightOffset, top: '50%', transform: 'translateY(-50%)', zIndex: 44, display: 'flex', flexDirection: 'row-reverse', alignItems: 'flex-start', gap: 8 }}>
       <button
         onClick={() => setOpen(!open)}
         style={{ ...btnStyle('#5C3FD6', true), borderRadius: 999, padding: '8px 14px', fontSize: 12.5, display: 'flex', alignItems: 'center', gap: 6, boxShadow: '3px 3px 0 var(--text)' }}
       >
         <Avatar seed={character.id} size={20} />
-        {open ? '✕ Close' : `Chat with ${character.name}`}
+        {open ? `✕ Close chat with ${character.name}` : `💬 Interview ${character.name}`}
       </button>
       {open && (
         <div style={{ width: 'min(340px, calc(100vw - 32px))', maxHeight: '75vh', overflowY: 'auto' }}>
+          <div style={{ fontSize: 12.5, fontWeight: 800, color: '#fff', marginBottom: 6, textAlign: 'right' }}>You are interviewing {character.name}{note ? <span style={{ fontWeight: 600, opacity: 0.85 }}> · {note}</span> : null}</div>
           <PersonaChatField value={value as any} onChange={onChange} onPersist={onPersist} onDraft={onDraft} sessionCode={sessionCode} playerId={playerId} />
         </div>
       )}
