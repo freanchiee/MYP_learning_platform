@@ -37,6 +37,10 @@ export default function StudentShell({
   children: ReactNode
 }) {
   const [railOpen, setRailOpen] = useState(false)
+  // Desktop: the rail can fold down to a slim strip of numbered dots. The choice is remembered on this device.
+  const [folded, setFolded] = useState(false)
+  useEffect(() => { try { setFolded(localStorage.getItem('myp:rail-folded') === '1') } catch { /* ignore */ } }, [])
+  const toggleFold = () => { setFolded((f) => { try { localStorage.setItem('myp:rail-folded', f ? '0' : '1') } catch { /* ignore */ } return !f }) }
   const [dlOpen, setDlOpen] = useState(false)
   const dlRef = useRef<HTMLDivElement>(null)
   const railRef = useRef<HTMLElement>(null)
@@ -78,14 +82,30 @@ export default function StudentShell({
   const curStage = stages[idx]
 
   const rail = (
-    <aside ref={railRef} className="cs-rail" data-open={railOpen} aria-label="Your stages">
-      <div style={{ ...cardStyle(accent), padding: 14, display: 'grid', gap: 12 }}>
+    <aside ref={railRef} className="cs-rail" data-open={railOpen} data-folded={folded} aria-label="Your stages">
+      <div className="cs-mini" style={{ ...cardStyle(accent), padding: '10px 6px', display: 'none', justifyItems: 'center', gap: 8 }}>
+        <button onClick={toggleFold} style={{ ...btnStyle(accent, true), padding: '6px 8px', width: '100%' }} aria-label="Expand the stages panel" title="Show stages">»</button>
+        <CriteriaRing current={curLetter} progress={progress} present={present} size={46} />
+        {rows.map(({ s, i, letter, pct }) => {
+          const c = letter ? CRITERIA[letter].color : NEUTRAL
+          const done = pct >= 100
+          return (
+            <button key={s.key} onClick={() => onGo(i)} aria-current={i === idx ? 'step' : undefined} title={`${s.label} · ${pct}%`} aria-label={`${s.label}, ${pct}% done`}
+              style={{ width: 34, height: 34, borderRadius: 999, cursor: 'pointer', fontSize: 12, fontWeight: 900, color: done ? '#fff' : 'var(--text)', background: done ? 'var(--success, #1FA98A)' : `conic-gradient(${c} ${pct * 3.6}deg, var(--surface-2) 0)`, border: i === idx ? `3px solid ${accent}` : '1.5px solid var(--border-strong)', padding: 0, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', boxShadow: 'none' }}>
+              <span style={{ width: 24, height: 24, borderRadius: 999, background: done ? 'transparent' : 'var(--surface)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}>{done ? '✓' : i + 1}</span>
+            </button>
+          )
+        })}
+        <button onClick={() => setDlOpen(true)} style={{ ...btnStyle(accent), padding: '6px 8px', width: '100%' }} aria-label="Download my work" title="My work · PDF">📄</button>
+      </div>
+      <div className="cs-full" style={{ ...cardStyle(accent), padding: 14, display: 'grid', gap: 12 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
           <Avatar seed={me.id} size={38} />
           <div style={{ minWidth: 0, flex: 1 }}>
             <div style={{ fontWeight: 800, fontSize: 13.5, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{me.name}</div>
             <div style={{ fontSize: 12, fontWeight: 700, color: 'var(--text-muted)' }}>⭐ {me.points} pts</div>
           </div>
+          <button className="cs-fold" onClick={toggleFold} aria-label="Collapse the stages panel" title="Collapse" style={{ ...btnStyle('var(--text-muted)'), padding: '4px 10px' }}>«</button>
           <button className="cs-close" onClick={() => setRailOpen(false)} aria-label="Close stages" style={{ ...btnStyle('var(--text-muted)'), padding: '4px 10px' }}>✕</button>
         </div>
 
@@ -107,7 +127,7 @@ export default function StudentShell({
         </div>
       </div>
 
-      <nav style={{ ...cardStyle(accent), padding: '10px 8px 10px 14px', overflow: 'visible' }} aria-label="Stages">
+      <nav className="cs-full" style={{ ...cardStyle(accent), padding: '10px 10px 10px 14px', overflow: 'hidden', minWidth: 0 }} aria-label="Stages">
         <ol style={{ listStyle: 'none', margin: 0, padding: 0, display: 'grid', gap: 5 }}>
           {rows.map(({ s, i, letter, strands, pct }, n) => {
             const isCur = i === idx
@@ -130,7 +150,7 @@ export default function StudentShell({
                     width: '100%', textAlign: 'left', cursor: 'pointer', display: 'grid', gridTemplateColumns: '24px 1fr', gap: 8, alignItems: 'center', padding: '7px 10px 7px 8px',
                     color: 'var(--text)', background: isCur ? 'var(--accent-soft)' : 'var(--surface-2)', borderRadius: 'var(--radius-control)',
                     border: isCur ? `2.5px solid ${accent}` : '1.5px solid var(--border)', borderLeft: `6px solid ${c}`,
-                    marginRight: isCur ? -14 : 0, boxShadow: isCur ? `3px 3px 0 ${accent}` : 'none', opacity: isCur || done || i <= maxIdx ? 1 : 0.8,
+                    boxShadow: isCur ? `3px 3px 0 ${accent}` : 'none', opacity: isCur || done || i <= maxIdx ? 1 : 0.8,
                   }}
                 >
                   <span aria-hidden style={{ width: 22, height: 22, borderRadius: 999, background: done ? 'var(--success, #1FA98A)' : isCur ? accent : 'var(--surface)', color: done || isCur ? '#fff' : 'var(--text-muted)', border: done || isCur ? 'none' : '1.5px solid var(--border-strong)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontSize: 11, fontWeight: 900 }}>
@@ -152,7 +172,7 @@ export default function StudentShell({
         </ol>
       </nav>
 
-      <div style={{ ...cardStyle(accent), padding: 12, display: 'grid', gap: 8 }}>
+      <div className="cs-full" style={{ ...cardStyle(accent), padding: 12, display: 'grid', gap: 8 }}>
         <button onClick={() => { setDlOpen(true); setRailOpen(false) }} style={{ ...btnStyle(accent, true), width: '100%' }}>📄 My work · PDF</button>
         <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 11.5 }}>
           <Link href="/design/live/history" style={{ color: 'var(--text-muted)', fontWeight: 700 }}>📜 My history</Link>
@@ -169,16 +189,25 @@ export default function StudentShell({
   )
 
   return (
-    <div className="cs-grid">
+    <div className="cs-grid" data-folded={folded}>
       <style>{`
-        .cs-grid { display: grid; grid-template-columns: 308px minmax(0, 1fr); gap: 18px; align-items: start; }
-        .cs-rail { position: sticky; top: 12px; display: grid; gap: 14px; max-height: calc(100vh - 24px); overflow-y: auto; padding: 4px 26px 12px 4px; scrollbar-width: thin; box-sizing: border-box; }
+        .cs-grid { display: grid; grid-template-columns: 308px minmax(0, 1fr); gap: 18px; align-items: start; transition: grid-template-columns .2s; }
+        .cs-grid[data-folded="true"] { grid-template-columns: 74px minmax(0, 1fr); }
+        .cs-rail[data-folded="true"] .cs-full { display: none !important; }
+        .cs-rail[data-folded="true"] .cs-mini { display: grid !important; }
+        .cs-rail[data-folded="true"] { padding-right: 4px; }
+        .cs-rail { position: sticky; top: 12px; display: grid; gap: 14px; max-height: calc(100vh - 24px); overflow-y: auto; overflow-x: hidden; padding: 4px 8px 12px 4px; scrollbar-width: thin; box-sizing: border-box; }
         .cs-close, .cs-menu { display: none; }
+        .cs-rail > * { min-width: 0; }
         .cs-tab:hover { filter: brightness(0.97); }
         .cs-tab:focus-visible, .cs-bar button:focus-visible { outline: 3px solid ${accent}; outline-offset: 2px; }
         @media (max-width: 920px) {
           .cs-grid { grid-template-columns: minmax(0, 1fr); }
+          .cs-grid, .cs-grid[data-folded="true"] { grid-template-columns: minmax(0, 1fr); }
           .cs-rail { display: none; }
+          .cs-rail[data-folded="true"] .cs-full { display: grid !important; }
+          .cs-rail[data-folded="true"] .cs-mini { display: none !important; }
+          .cs-fold { display: none; }
           .cs-rail[data-open="true"] { display: grid; position: fixed; z-index: 70; inset: 0 auto 0 0; width: min(340px, 90vw); max-height: none; padding: 12px; background: rgba(8,10,20,.72); backdrop-filter: blur(6px); }
           .cs-menu { display: inline-flex; }
           .cs-close { display: inline-flex; }
