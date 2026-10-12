@@ -57,6 +57,13 @@ export type WidgetId =
   | 'field-lines-lab'
   | 'spring-work-lab'
   | 'orbit-lab'
+  | 'parcel-drop-anim'
+  | 'independence-lab'
+  | 'supply-drop-game'
+  | 'crosswind-landing-game'
+  | 'umbrella-walk-game'
+  | 'aberration-lab'
+  | 'wall-problem-lab'
 
 export type BoxKind = 'yes' | 'no' | 'opt'
 

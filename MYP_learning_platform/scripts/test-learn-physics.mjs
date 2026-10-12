@@ -735,4 +735,107 @@ const physData = await import(pathToFileURL(outDF).href)
   ok('lesson text has no unrendered markup in places that do not render it (checks, apply, retrieval)', mod.lessons.every((l) => l.blocks.filter((b) => ['check', 'apply', 'retrieval'].includes(b.t)).every((b) => !/_\{|\^\{/.test(JSON.stringify(b)))))
   ok('widgets used by Theme D exist as ids', ['field-lines-lab', 'spring-work-lab', 'orbit-lab'].every((id) => JSON.stringify(mod).includes(`"id":"${id}"`)))
 }
+// ---- A.1 · projectile motion: independence, parcel, ball over a wall, vector addition, umbrella, stellar aberration ----
+const outPJ = path.resolve('node_modules/.cache/projectile-model.mjs')
+await build({ entryPoints: ['lib/learn/projectile-model.ts'], outfile: outPJ, format: 'esm', bundle: true, logLevel: 'silent' })
+const pjm = await import(pathToFileURL(outPJ).href)
+const outRM = path.resolve('node_modules/.cache/relative-motion-model.mjs')
+await build({ entryPoints: ['lib/learn/relative-motion-model.ts'], outfile: outRM, format: 'esm', bundle: true, logLevel: 'silent' })
+const rmm = await import(pathToFileURL(outRM).href)
+{
+  const kin = physData.MODULES.find((x) => x.slug === 'a1-kinematics')
+  const lesson = (slug) => kin.lessons.find((l) => l.slug === slug)
+  const text = (slug) => JSON.stringify(lesson(slug))
+  const has = (slug, s) => text(slug).includes(s)
+  ok('the six new A.1 lessons exist and are in order', ['independence-of-motion', 'exam-questions-three', 'exam-questions-four', 'vector-addition-crosswind-umbrella', 'stellar-aberration'].every((s) => !!lesson(s)) && kin.lessons.findIndex((l) => l.slug === 'independence-of-motion') < kin.lessons.findIndex((l) => l.slug === 'exam-questions-three'))
+
+  // --- independence of x and y motion (the notes use g = 10)
+  const B = rmm.BALLS
+  ok('Q1: ball from 50 m with g = 10 takes √10 = 3.16 s', near(rmm.fallTimeG(B.h, B.g), Math.sqrt(10), 1e-12) && has('independence-of-motion', 't = √(100 / 10) = √10 = 3.16 s'))
+  ok('Q2: R = 5 × 3.16 = 15.8 m', near(rmm.horizontalRange(B.u, B.h, B.g), 15.811, 0.005) && has('independence-of-motion', 'R = 15.8 m'))
+  ok('Q3: displacement of B = √(R² + 50²) = √2750 = 52.4 m, at 72.5° below the horizontal', near(rmm.displacementOfB(B.u, B.h, B.g), 52.44, 0.005) && near(Math.atan(50 / rmm.horizontalRange(B.u, B.h, B.g)) * 180 / Math.PI, 72.45, 0.01) && has('independence-of-motion', 'd = √2750 = 52.4 m') && has('independence-of-motion', '72.5° below the horizontal'))
+  ok('A and B are at the same height at every moment, and A has no sideways motion', [0, 0.5, 1.7, 3.1].every((t) => near(rmm.ballA(B.h, B.g, t).y, rmm.ballB(B.u, B.h, B.g, t).y, 1e-12)) && rmm.ballA(B.h, B.g, 2).x === 0)
+  ok('cliff check: 8 m/s from 80 m (g = 10) gives 4.0 s and 32 m; marble off a 1.25 m table at 2.0 m/s gives 0.50 s and 1.0 m', near(rmm.fallTimeG(80, 10), 4, 1e-12) && near(rmm.horizontalRange(8, 80, 10), 32, 1e-9) && near(rmm.fallTimeG(1.25, 10), 0.5, 1e-12) && near(rmm.horizontalRange(2, 1.25, 10), 1, 1e-12))
+  ok('supply drop: the lead distance is u √(2h/g), and a parcel released that far before the target lands on it', (() => { const u = 40, h = 80, g = 9.8, target = 400; const rel = target - rmm.leadDistance(u, h, g); return near(rmm.dropLandingX(rel, u, h, g), target, 1e-9) })())
+
+  // --- the parcel (g = 9.8)
+  const P = pjm.PARCEL_QUESTION
+  ok('parcel: t = 3.586 s ≈ 3.6 s, v_y = 35.1 m/s, speed 54.7–54.8 m/s, 40° below horizontal, lands 151 m ahead', near(pjm.fallTime(P.h), 3.5857, 5e-4) && near(pjm.landingVy(P.h), 35.14, 0.01) && near(pjm.landingSpeed(P.u, P.h), 54.76, 0.01) && near(pjm.landingAngle(P.u, P.h), 39.9, 0.1) && near(pjm.landingRange(P.u, P.h), 150.6, 0.1))
+  ok('parcel: the lesson quotes 3.6 s, 35.1, 54.7 and the rounding trap 35.3 (= 9.8 × 3.6)', has('exam-questions-three', 't = √12.86 = 3.59 s ≈ 3.6 s') && has('exam-questions-three', '35.1 m s⁻¹, downward') && has('exam-questions-three', '54.7 m s⁻¹') && has('exam-questions-three', '35.3') && near(9.8 * 3.6, 35.28, 0.005))
+  ok('parcel: the unrounded v_y gives 54.8, the rounded 35.1 gives 54.7, energy gives √(u² + 2gh) = 54.8', near(Math.hypot(42, 35.1), 54.74, 0.01) && near(Math.sqrt(42 * 42 + 2 * 9.8 * 63), 54.76, 0.01) && near(pjm.landingVy(63), Math.sqrt(2 * 9.8 * 63), 1e-9))
+  ok('parcel: 30 m/s from 80 m lands at 49.7 m/s ≈ 50 m/s; the cliff of c2 uses √(2 × 9.8 × 45 / …) = 3.0 s', near(pjm.landingSpeed(30, 80), 49.68, 0.01) && near(pjm.fallTime(45), 3.03, 0.01))
+
+  // --- the ball thrown over a wall (g = 9.81)
+  const W = pjm.WALL_QUESTION
+  const th = { u: W.u, angleDeg: W.angleDeg, y0: W.y0, g: W.g }
+  const c = pjm.launchComponents(th)
+  ok('wall: v_x = 16.85 and v_y = 14.14 m/s', near(c.vx, 16.853, 0.001) && near(c.vy, 14.141, 0.001) && has('exam-questions-four', '16.85') && has('exam-questions-four', '14.14'))
+  ok('wall (i): t = 36 / 16.85 = 2.136 s ≈ 2.1 s', near(pjm.timeToDistance(th, 36), 2.136, 0.0005))
+  ok('wall (iii): height at the wall = 7.83 + 1.2 = 9.03 m', near(pjm.heightAtDistance(th, 36), 9.026, 0.001) && near(pjm.heightAtDistance(th, 36) - 1.2, 7.826, 0.001) && has('exam-questions-four', 'h = 7.83 + 1.2 = 9.03 m'))
+  ok('wall: rounding t to 2.1 s gives 9.3 m instead of 9.0 m (the quoted trap)', near(pjm.heightAtTime(th, 2.1), 9.266, 0.002) && near(pjm.heightAtTime(th, 2.1) - pjm.heightAtTime(th, pjm.timeToDistance(th, 36)), 0.24, 0.02) && has('exam-questions-four', 'h = 9.3 m') && has('exam-questions-four', '−6.8 m s⁻¹') && near(c.vy - th.g * pjm.timeToDistance(th, 36), -6.81, 0.01))
+  ok('wall: the same ball lands about 50.0 m away and peaks at 11.4 m', near(pjm.throwLandingRange(th), 49.98, 0.01) && near(pjm.apexHeight(th), 11.39, 0.01))
+  ok('wall: the three outcomes — clears a lower wall, hits a taller one (at the same 9.03 m), and falls short of a far wall', (() => {
+    const a = pjm.wallOutcome(th, 36, 8), b = pjm.wallOutcome(th, 36, 12), cc = pjm.wallOutcome(th, 60, 5)
+    return a.kind === 'clears' && near(a.margin, 1.026, 0.002) && b.kind === 'hits' && near(b.heightAtWall, 9.026, 0.002) && cc.kind === 'short' && near(cc.range, 49.98, 0.01)
+  })())
+  ok('wall: just-clears distances — at the exam height the far wall is 36 m; a 5 m wall can stand from 5.05 m to 43.5 m; a wall above the apex is impossible', (() => {
+    const j = pjm.justClearsDistances(th, pjm.heightAtDistance(th, 36)), k = pjm.justClearsDistances(th, 5)
+    return near(j.d2, 36, 1e-6) && near(k.d1, 5.05, 0.01) && near(k.d2, 43.53, 0.01) && pjm.justClearsDistances(th, 12) === null
+  })())
+  ok('wall: a ball placed at either just-clears distance is level with the wall top; walls in between are cleared, walls outside are hit', (() => {
+    const hw = 7, j = pjm.justClearsDistances(th, hw)
+    return near(pjm.heightAtDistance(th, j.d1), hw, 1e-6) && near(pjm.heightAtDistance(th, j.d2), hw, 1e-6) && pjm.wallOutcome(th, (j.d1 + j.d2) / 2, hw).kind === 'clears' && pjm.wallOutcome(th, j.d2 + 2, hw).kind === 'hits' && pjm.wallOutcome(th, Math.max(0.5, j.d1 - 2), hw).kind === 'hits'
+  })())
+  ok('wall: thrown from above the wall top, the nearest cleared position is 0', pjm.justClearsDistances({ u: 15, angleDeg: 30, y0: 3, g: 9.81 }, 2).d1 === 0)
+  ok('wall: 300 random throws — the outcome always agrees with comparing heights, and the just-clears distance really is level with the wall', (() => {
+    for (let i = 0; i < 300; i++) {
+      const t2 = { u: 8 + rnd2() * 30, angleDeg: 15 + rnd2() * 60, y0: rnd2() * 2.5, g: 9.81 }
+      const R = pjm.throwLandingRange(t2), d = 2 + rnd2() * R * 0.95, hw = 1 + rnd2() * 12
+      const o = pjm.wallOutcome(t2, d, hw), y = pjm.heightAtDistance(t2, d)
+      if (o.kind === 'clears' ? !(y >= hw) : o.kind === 'hits' ? !(y < hw) : false) return false
+      const jc = pjm.justClearsDistances(t2, hw)
+      if (jc && !near(pjm.heightAtDistance(t2, jc.d2), hw, 1e-7)) return false
+      if (!jc && !(hw > pjm.apexHeight(t2))) return false
+    }
+    return true
+  })())
+  ok('wall: a throw from the ground at 20 m/s, 30°: t = 1.73 s and 2.6 m high at 30 m', (() => { const t3 = { u: 20, angleDeg: 30, y0: 0, g: 9.81 }; return near(pjm.timeToDistance(t3, 30), 1.732, 0.001) && near(pjm.heightAtDistance(t3, 30), 2.605, 0.01) && near(pjm.launchComponents(t3).vy, 10, 1e-9) })())
+
+  // --- vector addition: crosswind landing
+  const CW = rmm.CROSSWIND
+  ok('crosswind: 50 km/h across a 200 km/h airspeed needs a 14.5° crab angle and 193.6 km/h along the runway', near(Math.abs(rmm.crabAngleDeg(CW.airspeed, CW.wind)), 14.4775, 0.001) && near(rmm.groundSpeedWhenCrabbing(CW.airspeed, CW.wind), 193.649, 0.001) && has('vector-addition-crosswind-umbrella', 'θ = sin⁻¹(0.25) = 14.5°') && has('vector-addition-crosswind-umbrella', '193.6 km h⁻¹'))
+  ok('crosswind: at the crab angle the sideways velocity is zero, whichever way the wind blows', [50, -50, 30, -60].every((w) => near(rmm.groundVelocity(200, rmm.crabAngleDeg(200, w), w).vx, 0, 1e-9)))
+  ok('crosswind: pointing straight along the runway drifts 1.0 km over 4 km (72 s × 50 km/h)', near(rmm.lateralOffset(200, 0, 50, 4), 1.0, 1e-9) && has('vector-addition-crosswind-umbrella', '1.0 km off the runway'))
+  ok('crosswind: the ground velocity is exactly (air velocity) + (wind), and with no wind it equals the nose velocity', (() => { const g1 = rmm.groundVelocity(200, 20, 35); const g0 = rmm.groundVelocity(200, 20, 0); return near(g1.vx, 200 * Math.sin(20 * Math.PI / 180) + 35, 1e-9) && near(g1.vy, g0.vy, 1e-9) && near(g0.vx, 200 * Math.sin(20 * Math.PI / 180), 1e-9) })())
+  ok('swimmer crossing a 0.60 m/s river at 1.5 m/s: 23.6° upstream, 1.4 m/s across', near(Math.asin(0.6 / 1.5) * 180 / Math.PI, 23.58, 0.01) && near(Math.sqrt(1.5 * 1.5 - 0.36), 1.375, 0.001))
+
+  // --- vector addition: walking in rain
+  ok('umbrella: tan θ = W / v gives 14.0° (2 vs 8), 10.6°, 20.6°, 32.0°, and 26.6° for 3 vs 6', [[1.5, 8, 10.6], [2, 8, 14.0], [3, 8, 20.6], [5, 8, 32.0], [3, 6, 26.6]].every(([w, v, a]) => near(rmm.rainAngleDeg(w, v), a, 0.05)))
+  ok('umbrella: rain speed relative to the walker is √(8² + 2²) = 8.25 and √(6² + 3²) = 6.7 m/s', near(Math.hypot(8, 2), 8.246, 0.001) && near(Math.hypot(6, 3), 6.708, 0.001) && has('vector-addition-crosswind-umbrella', '8.25 m s⁻¹'))
+  ok('umbrella: the rain relative to the walker is the rain velocity minus the walker velocity', (() => { const r = rmm.rainRelativeToWalker(2, 8); return r.vx === -2 && r.vy === -8 })())
+  ok('umbrella: standing still, an upright umbrella keeps you completely dry', rmm.dryFraction(0, 8, 0) === 1)
+  ok('umbrella: at a brisk walk (3–4 m/s) an upright umbrella leaves you wet, and leaning by tanθ = W/v keeps you dry', [3, 4].every((w) => rmm.dryFraction(w, 8, 0) < 0.8 && rmm.dryFraction(w, 8, rmm.rainAngleDeg(w, 8)) >= 0.95))
+  ok('umbrella: the challenge speeds (2.5 to 4.5 m/s) can all be solved by the formula tilt', [2.5, 3, 3.5, 4, 4.5].every((w) => rmm.dryFraction(w, 8, rmm.rainAngleDeg(w, 8)) >= 0.95))
+  ok('umbrella: leaning the wrong way (backwards) is never better than the formula tilt', [3, 4, 5].every((w) => rmm.dryFraction(w, 8, -15) <= rmm.dryFraction(w, 8, rmm.rainAngleDeg(w, 8))))
+  ok('umbrella: dryness never exceeds 100% or drops below 0%', (() => { for (let w = 0; w <= 8; w += 0.5) for (let t = -30; t <= 70; t += 5) { const d = rmm.dryFraction(w, 8, t); if (d < 0 || d > 1) return false } return true })())
+  ok('umbrella: upright, the canopy centre is directly above the hand', near(rmm.canopyCentre(0).x, 0, 1e-12) && near(rmm.canopyCentre(0).y, 1.9, 1e-12) && rmm.canopyCentre(30).x > 0)
+
+  // --- stellar aberration
+  ok('the Earth’s orbital speed is 2πr/T = 2.98e4 m/s', near(rmm.earthOrbitSpeed(), 29783, 5) && has('stellar-aberration', 'v = 2.98 × 10⁴ m s⁻¹ = 29.8 km s⁻¹'))
+  ok('aberration: tan α = v/c = 9.93e-5, which is 20.5 arcseconds (0.0057°)', near(rmm.aberrationRad(rmm.earthOrbitSpeed()), 9.934e-5, 1e-7) && near(rmm.radToArcsec(rmm.aberrationRad(rmm.earthOrbitSpeed())), 20.49, 0.01) && has('stellar-aberration', '20.5″') && has('stellar-aberration', '9.93 × 10⁻⁵') && near(20.5 / 3600, 0.005694, 1e-6))
+  ok('Bradley backwards: v / tan(20.5″) = 3.00e8 m/s', near(rmm.speedOfLightFromAberration(rmm.earthOrbitSpeed(), rmm.arcsecToRad(20.5)), 3.0e8, 1.5e6) && has('stellar-aberration', 'c = 3.00 × 10⁸ m s⁻¹'))
+  ok('aberration: arcseconds and radians convert both ways', near(rmm.radToArcsec(rmm.arcsecToRad(20.5)), 20.5, 1e-9) && near(rmm.arcsecToRad(3600), Math.PI / 180, 1e-12))
+  ok('aberration is the umbrella triangle: the same formula tan = v/c gives 14.0° for 2 m/s of rain at 8 m/s and 20.5″ for the Earth', near(Math.atan(2 / 8) * 180 / Math.PI, 14.04, 0.01) && near(rmm.rainAngleDeg(2, 8), 14.04, 0.01))
+  ok('check c4 of stellar-aberration: the wrong options come from forgetting the unit conversion', near(rmm.earthOrbitSpeed() / 20.5, 1453, 5))
+
+  // --- every new check is well formed, markup-free, and each new lesson can run live
+  const newSlugs = ['independence-of-motion', 'exam-questions-three', 'exam-questions-four', 'vector-addition-crosswind-umbrella', 'stellar-aberration']
+  ok('new A.1 lessons: every check has 3 options and a valid answer index; ids unique within each lesson', newSlugs.every((s) => { const cs = lesson(s).blocks.filter((b) => b.t === 'check'); const ids = lesson(s).blocks.filter((b) => b.t === 'check' || b.t === 'apply').map((b) => b.id); return cs.length >= 5 && cs.every((q) => q.options.length === 3 && q.answer >= 0 && q.answer < 3) && new Set(ids).size === ids.length }))
+  ok('new A.1 lessons: correct answers are spread over the options', newSlugs.every((s) => new Set(lesson(s).blocks.filter((b) => b.t === 'check').map((q) => q.answer)).size >= 2))
+  ok('new A.1 lessons: no unrendered _{ } or ^{ } markup in checks, apply or retrieval text', newSlugs.every((s) => lesson(s).blocks.filter((b) => ['check', 'apply', 'retrieval'].includes(b.t)).every((b) => !/_\{|\^\{/.test(JSON.stringify(b)))))
+  ok('new A.1 lessons can all run as a live class', newSlugs.every((s) => lp.lessonHasLiveQuestions(lesson(s))))
+  ok('the new widgets are used by the lessons', ['independence-lab', 'supply-drop-game', 'parcel-drop-anim', 'wall-problem-lab', 'crosswind-landing-game', 'umbrella-walk-game', 'aberration-lab'].every((id) => JSON.stringify(kin).includes(`"id":"${id}"`)))
+  const optA = (slug, id) => { const q = lesson(slug).blocks.find((b) => b.id === id); return q.options[q.answer] }
+  ok('numeric answers in the new checks match the physics', optA('independence-of-motion', 'a1-9a-c2') === '4.0 s' && optA('independence-of-motion', 'a1-9a-c3') === '32 m' && optA('exam-questions-four', 'a1-9d-c1') === '14.1 m s⁻¹' && optA('exam-questions-four', 'a1-9d-c4') === '2.6 m' && optA('exam-questions-four', 'a1-9d-c7') === '9.03 m' && optA('vector-addition-crosswind-umbrella', 'a1-9e-c2') === '194 km h⁻¹' && optA('vector-addition-crosswind-umbrella', 'a1-9e-c3') === '26.6°, from in front' && optA('vector-addition-crosswind-umbrella', 'a1-9e-c4') === '6.7 m s⁻¹' && optA('stellar-aberration', 'a1-9f-c2') === '9.93 × 10⁻⁵' && optA('stellar-aberration', 'a1-9f-c4') === '3.00 × 10⁸ m s⁻¹')
+}
 process.exit(fail ? 1 : 0)

@@ -11,6 +11,9 @@ import { ModelVsRealityLab, MotionGraphsLab } from './motion-graphs'
 import { AircraftTakeoffAnim, BallBounceAnim, CarSkidAnim, ChaseCarsAnim, OilDripCarAnim, SignalTrainAnim, TrainAccelDecelAnim } from './exam-motion'
 import { BallsCollisionAnim, StickCollisionAnim } from './exam-collisions'
 import { FieldLinesLab, OrbitLab, SpringWorkLab } from './fields'
+import { ParcelDropAnim } from './projectile'
+import { AberrationLab, CrosswindLandingGame, IndependenceLab, SupplyDropGame, UmbrellaWalkGame } from './relative-motion'
+import { WallProblemLab } from './wall-problem'
 import { CollisionLab, ForceLink, MomentumCases, NewtonLab, NflDiagram, NslDiagram, SpacetimeDiagram, TensionLab } from './physics-a2'
 import {
   C, G, H, inclineAcceleration, massEnergy, pendulumPeriod, photonEnergy, relativePosition, slideAngle, zenoSum,
@@ -540,6 +543,13 @@ const REGISTRY: Record<WidgetId, () => JSX.Element> = {
   'field-lines-lab': FieldLinesLab,
   'spring-work-lab': SpringWorkLab,
   'orbit-lab': OrbitLab,
+  'parcel-drop-anim': ParcelDropAnim,
+  'independence-lab': IndependenceLab,
+  'supply-drop-game': SupplyDropGame,
+  'crosswind-landing-game': CrosswindLandingGame,
+  'umbrella-walk-game': UmbrellaWalkGame,
+  'aberration-lab': AberrationLab,
+  'wall-problem-lab': WallProblemLab,
 }
 
 export function Widget({ id }: { id: WidgetId }) {

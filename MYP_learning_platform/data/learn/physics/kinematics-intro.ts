@@ -800,6 +800,810 @@ export const KINEMATICS_INTRO: Module = {
         { t: 'summary', points: ['"Just enough" problems (a signal, a runway) both come down to v² = u² + 2as with one speed equal to zero.', 'Always convert to consistent SI units (m, s, m s⁻¹) before using a kinematics equation.', 'In a chase problem, the gap equals the difference between the two distances travelled by the time they meet.', 'For uniform acceleration, average velocity across an interval = instantaneous velocity at its midpoint — this is how ticker-tape and oil-drop spacing reveal acceleration.'], terms: [{ term: 'Midpoint velocity', def: 'for uniform acceleration, the average velocity over an interval, which equals the instantaneous velocity halfway through it in time' }], formulas: ['v² = u² + 2as', 'v = u + at', 'x = ut + ½at²'], errors: ['Using a speed in km h⁻¹ directly in a kinematics equation.', 'Forgetting the initial gap when two vehicles are said to "meet" or "draw level".', 'Treating average velocity as if it applied at the START or END of an interval instead of its midpoint.'] },
       ],
     },
+    // ------------------------------------------------------------------ A.1 · 9b
+    {
+      slug: 'independence-of-motion',
+      code: 'A.1 · 9b',
+      title: 'Independence of motion: x and y',
+      blurb: 'Drop one ball, throw another sideways. They land together. Horizontal and vertical motion do not depend on each other, and only the time links them.',
+      syllabus: 'A.1 Kinematics · projectile motion, independence of horizontal and vertical components',
+      level: 'SL+HL',
+      difficulty: 2,
+      minutes: 22,
+      access: 'free',
+      blocks: [
+        { t: 'hook', text: 'Two balls leave the same height at the same moment. One is simply dropped. The other is thrown sideways. Which hits the ground first? Your gut says the dropped one. Your gut is wrong.' },
+        {
+          t: 'deck',
+          slides: [
+            {
+              id: 'setup',
+              kicker: 'The question',
+              title: 'Ball A is dropped. Ball B is thrown sideways.',
+              blocks: [
+                { t: 'p', text: 'Two small balls, **A** and **B**, start together from a height of 50 m above level ground. A is released from rest (free fall). B is projected horizontally at 5 m s⁻¹. Air resistance is negligible. Take g = 10 m s⁻².' },
+                { t: 'table', head: ['Part', 'Task'], rows: [['Q1', 'Find the time taken for ball A to hit the ground'], ['Q2', 'Find the horizontal distance R from the start at which ball B lands'], ['Q3', 'Find the displacement of ball B from its start to where it lands']] },
+              ],
+            },
+            {
+              id: 'idea',
+              kicker: 'The idea',
+              title: 'Horizontal and vertical motion are not dependent',
+              blocks: [
+                {
+                  t: 'table',
+                  head: ['', 'Horizontal motion', 'Vertical motion'],
+                  rows: [
+                    ['Acceleration', '0 (nothing pushes sideways)', 'g = 10 m s⁻² downward'],
+                    ['Initial velocity of A', '0', '0'],
+                    ['Initial velocity of B', '5 m s⁻¹', '0'],
+                    ['Equation to use', 's = ut (uniform motion)', 's = ut + ½at², v = u + at, v² = u² + 2as'],
+                  ],
+                  firstColHeader: true,
+                },
+                { t: 'callout', kind: 'idea', title: 'What links the two axes?', text: 'Only the time. The same clock runs for the horizontal and the vertical motion. Solve one axis to get the time, then carry that time over to the other axis.' },
+              ],
+            },
+            {
+              id: 'lab',
+              kicker: 'Try it',
+              title: 'Release both balls',
+              blocks: [
+                {
+                  t: 'widget',
+                  id: 'independence-lab',
+                  title: 'Same height, same time, every time',
+                  idea: 'Press Release both. The dotted lines join the two balls at equal times: they are always at the same height. Change B’s speed and the picture widens, but the landing time does not move.',
+                  predict: { q: 'Predict: B is thrown sideways at 5 m s⁻¹ and A is dropped, both from the same height. Compared with A, B takes…', options: ['the same time to land', 'longer to land', 'less time to land'], answer: 0, why: 'Only the vertical motion decides the time, and both balls start with zero vertical velocity and accelerate at g. Sideways speed changes WHERE B lands, not WHEN.' },
+                },
+              ],
+            },
+            {
+              id: 'q1',
+              kicker: 'Q1 · time',
+              title: 'Time for A to hit the ground',
+              blocks: [
+                {
+                  t: 'steps',
+                  title: 'free fall from 50 m',
+                  given: 'Ball A is dropped from rest from a height of 50 m. Take g = 10 m s⁻² and down as positive. Pick the equation that contains what you know (s, u, a) and what you want (t).',
+                  steps: [
+                    { line: 's = ut + ½at²', why: 'v = u + at is not the one to use here: it needs the final velocity v, which we do not know yet.' },
+                    { line: '50 = 0 × t + ½ × 10 × t²', why: 'u = 0 (released from rest) and a = g = 10 m s⁻².' },
+                    { line: '50 = 5t²', why: 'Simplify.' },
+                    { line: 't = √(100 / 10) = √10 = 3.16 s', why: 'The same as t = √(2s / a) = √(2 × 50 / 10). Take the positive root.' },
+                  ],
+                  answer: 't = 3.16 s',
+                },
+              ],
+            },
+            {
+              id: 'q2',
+              kicker: 'Q2 · range',
+              title: 'How far across does B land?',
+              blocks: [
+                {
+                  t: 'steps',
+                  title: 'horizontal distance R',
+                  given: 'Ball B is projected horizontally at 5 m s⁻¹ from the same 50 m height. The same clock runs for both axes, so B is in the air for the same time as A.',
+                  steps: [
+                    { line: 't(B) = t(A) = 3.16 s', why: 'Independence: B falls exactly like A, so it takes the same time to reach the ground.' },
+                    { line: 'R = speed × time = 5 × 3.16', why: 'Horizontally there is no acceleration, so the motion is uniform: s = ut.' },
+                    { line: 'R = 15.8 m', why: 'To 3 significant figures (15.81 m exactly).' },
+                  ],
+                  answer: 'R = 15.8 m',
+                },
+              ],
+            },
+            {
+              id: 'q3',
+              kicker: 'Q3 · displacement',
+              title: 'Displacement of B',
+              blocks: [
+                {
+                  t: 'steps',
+                  title: 'put the two parts together',
+                  given: 'Displacement is the straight line (a vector) from where B starts to where it lands. It has a horizontal part R = 15.8 m and a vertical part of 50 m, at right angles.',
+                  steps: [
+                    { line: 'd = √(R² + 50²)', why: 'Pythagoras, because the two parts are at right angles.' },
+                    { line: 'd = √(15.8² + 50²) = √(250 + 2500)', why: '15.8² is 250 (exactly 5² × 10).' },
+                    { line: 'd = √2750 = 52.4 m', why: 'Evaluate.' },
+                    { line: 'direction: tan⁻¹(50 / 15.8) = 72.5° below the horizontal', why: 'Optional: the direction of the displacement.' },
+                  ],
+                  answer: '52.4 m, at 72.5° below the horizontal',
+                },
+                { t: 'callout', kind: 'warn', title: 'Displacement is not the distance along the curve', text: 'The curved path B follows is longer than the 52.4 m straight line. Displacement is the straight-line change of position, a vector.' },
+              ],
+            },
+            {
+              id: 'game',
+              kicker: 'Play',
+              title: 'Supply drop',
+              blocks: [
+                { t: 'p', text: 'You are the pilot. The crate must land on the target, so decide WHEN to release. Switch off easy mode and use the same two steps as Q1 and Q2: find the time to fall, then the distance travelled sideways in that time.' },
+                { t: 'widget', id: 'supply-drop-game', title: 'Hit the target', idea: 'Press Release (or the space bar). Use “Show the lead distance” if you get stuck.' },
+              ],
+            },
+            {
+              id: 'myth',
+              kicker: 'Misconceptions',
+              title: 'Three things people get wrong',
+              blocks: [
+                {
+                  t: 'pills',
+                  groups: [
+                    { label: '✗ Common mistakes', tone: 'warn', items: ['B takes longer because it has further to go', 'B falls more slowly because it is moving sideways', 'Gravity pulls less on a ball that is moving'] },
+                    { label: '✓ Better', items: ['Sideways speed does not change the fall: same height, same time', 'Gravity acts only downward, so only the vertical motion changes', 'The two axes share only the time'] },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        { t: 'check', id: 'a1-9a-c1', q: 'Two balls leave the same height together, one dropped from rest and one thrown sideways. Ignoring air resistance, they hit the ground…', options: ['first, the one dropped from rest', 'at the same time', 'first, the one thrown sideways'], answer: 1, why: 'The vertical motion is the same for both (starts at 0, accelerates at g), so the time to fall is the same. The sideways velocity only decides how far across it lands.', back: 'idea' },
+        { t: 'check', id: 'a1-9a-c2', q: 'A ball is projected horizontally at 8 m s⁻¹ from a cliff 80 m high (g = 10 m s⁻²). The time to reach the sea is…', options: ['2.8 s', '4.0 s', '8.0 s'], answer: 1, why: '80 = ½ × 10 × t² gives t² = 16, so t = 4.0 s. The 8 m s⁻¹ is not needed for the time.', back: 'q1' },
+        { t: 'check', id: 'a1-9a-c3', q: 'For the same ball, how far from the foot of the cliff does it land?', options: ['32 m', '8 m', '320 m'], answer: 0, why: 'R = speed × time = 8 × 4.0 = 32 m. The horizontal motion is uniform.', back: 'q2' },
+        { t: 'check', id: 'a1-9a-c4', q: 'Ignoring air resistance, the horizontal component of a projectile’s velocity during its flight…', options: ['decreases because of gravity', 'increases as it falls', 'stays constant'], answer: 2, why: 'Gravity acts vertically. Nothing acts horizontally, so a_x = 0 and v_x does not change.', back: 'idea' },
+        { t: 'check', id: 'a1-9a-c5', q: 'Which quantity is the same for the horizontal motion and the vertical motion of a projectile?', options: ['the acceleration', 'the time', 'the velocity'], answer: 1, why: 'The same clock runs for both axes. Acceleration (0 and g) and velocity are different for the two axes.', back: 'idea' },
+        { t: 'check', id: 'a1-9a-c6', q: 'In Q3 the displacement of B (52.4 m) compared with its horizontal distance R = 15.8 m is…', options: ['larger, because it also includes the 50 m fall', 'smaller, because the path is curved', 'equal'], answer: 0, why: 'Displacement is the straight line from start to landing point: √(R² + 50²), which is larger than either part.', back: 'q3' },
+        { t: 'apply', id: 'a1-9a-a1', prompt: 'A marble rolls off the edge of a table 1.25 m high at 2.0 m s⁻¹. Use g = 10 m s⁻². Find (a) the time to reach the floor and (b) how far from the edge of the table it lands.', model: '(a) Vertical axis: s = ut + ½at² with u = 0: 1.25 = ½ × 10 × t², so t² = 0.25 and t = 0.50 s. (b) Horizontal axis, uniform motion: R = speed × time = 2.0 × 0.50 = 1.0 m from the edge.', checklist: ['I used the vertical axis only for the time', 'I used u = 0 vertically', 'I used R = speed × time horizontally with the SAME time', 'I gave units and a sensible number of significant figures'] },
+        { t: 'retrieval', items: [{ from: 'A.1 · 6', q: 'A body falls from rest with acceleration 10 m s⁻². After 3.0 s it has fallen…', options: ['45 m', '30 m', '90 m'], answer: 0, why: 's = ½at² = ½ × 10 × 3² = 45 m.' }, { from: 'A.1 · 7', q: 'The gradient of a velocity–time graph is…', options: ['acceleration', 'displacement'], answer: 0, why: 'Gradient of v–t is a.' }] },
+        { t: 'summary', points: ['Horizontal and vertical motion of a projectile are independent: gravity changes only the vertical motion.', 'Horizontally: a = 0, so s = ut. Vertically: a = g, so use s = ut + ½at², v = u + at, v² = u² + 2as.', 'The only link between the axes is the time. Find it from one axis and use it in the other.', 'Displacement is the straight-line vector, found by Pythagoras from its two parts.'], terms: [{ term: 'Projectile', def: 'an object moving under gravity alone (no air resistance)' }, { term: 'Component', def: 'the part of a vector along one axis' }], formulas: ['s = ut + ½at²', 'R = u_{x}t', 'd = √(R² + h²)'], errors: ['Thinking sideways speed changes the time of fall.', 'Using the horizontal speed in the vertical equation.', 'Giving the curved path length instead of the straight-line displacement.'] },
+      ],
+    },
+    // ------------------------------------------------------------------ A.1 · 9c
+    {
+      slug: 'exam-questions-three',
+      code: 'A.1 · 9c',
+      title: 'Exam question III: a parcel dropped from an aircraft',
+      blurb: 'Split the motion into a horizontal and a vertical axis. Four parts: the path, the time, the vertical speed and the landing speed.',
+      syllabus: 'A.1 Kinematics · projectile motion: components, s = ut + ½at², v = u + at',
+      level: 'SL+HL',
+      difficulty: 3,
+      minutes: 24,
+      access: 'free',
+      blocks: [
+        { t: 'hook', text: 'An aircraft flying level releases a parcel. Does the parcel drop straight down? Does it fall for longer than one dropped from a hovering helicopter at the same height? Keep the two axes apart and the whole problem falls out.' },
+        {
+          t: 'deck',
+          slides: [
+            {
+              id: 'question',
+              kicker: 'The question · 4 parts, 7 marks',
+              title: 'A parcel released from a small aircraft',
+              blocks: [
+                { t: 'p', text: 'A small aircraft is flying horizontally at 42 m s⁻¹, at a height of 63 m above level ground. It releases a small parcel. Air resistance is negligible.' },
+                { t: 'table', head: ['Given', 'Value'], rows: [['Velocity of the aircraft (and parcel) at release', '42 m s⁻¹, horizontal'], ['Height above the ground', '63 m'], ['Air resistance', 'negligible'], ['Take g as', '9.8 m s⁻²']] },
+                { t: 'table', head: ['Part', 'Task', 'Marks'], rows: [['(i)', 'Sketch the path of the parcel from the aircraft to the ground', '1'], ['(ii)', 'Calculate the time from release to reaching the ground', '3'], ['(iii)', 'Calculate the vertical component of the velocity just before it lands', '1'], ['(iv)', 'Determine the speed at which it lands', '2']] },
+                { t: 'callout', kind: 'idea', title: 'Plan', text: 'Split the motion into a horizontal axis and a vertical axis. They never affect each other, so solve each one separately and put them back together at the end.' },
+              ],
+            },
+            {
+              id: 'axes',
+              kicker: 'The key idea',
+              title: 'Two independent axes',
+              blocks: [
+                {
+                  t: 'table',
+                  head: ['', 'Horizontal (x)', 'Vertical (y)'],
+                  rows: [
+                    ['Initial velocity', 'u_{x} = 42 m s⁻¹', 'u_{y} = 0 (it was released level)'],
+                    ['Acceleration', 'a_{x} = 0 (no air resistance)', 'a_{y} = g = 9.8 m s⁻², downward'],
+                    ['Velocity', 'constant: 42 m s⁻¹', 'grows: v_{y} = g t'],
+                    ['Equation to use', 'x = u_{x} t', 'y = ½ g t²'],
+                  ],
+                  firstColHeader: true,
+                },
+                { t: 'note', text: 'The most common slip: writing u_y = 42. The parcel is released level, so its INITIAL vertical velocity is 0. It only gains downward speed because of gravity.' },
+              ],
+            },
+            {
+              id: 'animate',
+              kicker: 'Watch it first',
+              title: 'Release the parcel',
+              blocks: [
+                {
+                  t: 'widget',
+                  id: 'parcel-drop-anim',
+                  title: 'The parcel, and the numbers as it falls',
+                  idea: 'Drag the time slider or press Release. Switch on the 0.5 s dots: equal steps across, growing steps down. Change the speed and height and watch what changes.',
+                  predict: { q: 'Predict: one parcel is released from the moving aircraft. Another is dropped from rest from the same height at the same instant. Ignoring air resistance, which reaches the ground first?', options: ['they land at the same time', 'the one dropped from rest', 'the one released from the aircraft'], answer: 0, why: 'Only the vertical motion decides the time. Both start with zero vertical velocity and both accelerate at g. The horizontal speed changes WHERE it lands, not WHEN.' },
+                },
+                { t: 'note', text: 'Try it: change the aircraft speed and the time stays the same. Change the height and it changes.' },
+              ],
+            },
+            {
+              id: 'path',
+              kicker: 'Part (i) · 1 mark',
+              title: 'Sketch the path',
+              blocks: [
+                {
+                  t: 'arrows',
+                  head: ['Feature of the path', 'Why'],
+                  rows: [
+                    { from: 'starts horizontal', to: 'at release the velocity is 42 m s⁻¹ along the flight direction, with no vertical part', emoji: '➡️' },
+                    { from: 'curves downward', to: 'v_{y} keeps growing as gravity acts', note: 'a parabola', emoji: '↘️' },
+                    { from: 'gets steeper', to: 'v_{x} stays 42 but v_{y} increases, so the angle below the horizontal grows', emoji: '📈' },
+                    { from: 'lands ahead of the release point', to: 'it keeps moving forward at 42 m s⁻¹ the whole time', emoji: '📍' },
+                  ],
+                },
+                { t: 'callout', kind: 'warn', title: 'Not a straight line', text: 'It is neither straight down nor a straight slope. It is a curve that starts flat and gets steeper. Extra, not asked: it lands x = 42 × 3.586 ≈ 151 m ahead of the release point.' },
+              ],
+            },
+            {
+              id: 'time',
+              kicker: 'Part (ii) · 3 marks',
+              title: 'Time to reach the ground',
+              blocks: [
+                {
+                  t: 'steps',
+                  title: 'time of fall, vertical axis only',
+                  given: 'A parcel is released from an aircraft flying level at 42 m s⁻¹, 63 m above the ground. Find the time from release to reaching the ground. Use the vertical axis only: u_{y} = 0, a = 9.8 m s⁻² downward, s = 63 m.',
+                  steps: [
+                    { line: 's = u_{y}t + ½at²', why: 'The equation with s, u, a and t. Apply it to the vertical axis only.' },
+                    { line: '63 = 0 × t + ½ × 9.8 × t²', why: 'u_{y} = 0 because the parcel is released level, so the first term vanishes.' },
+                    { line: '63 = 4.9 t²', why: '½ × 9.8 = 4.9.' },
+                    { line: 't² = 63 / 4.9 = 12.86', why: 'Rearrange for t².' },
+                    { line: 't = √12.86 = 3.59 s ≈ 3.6 s', why: 'Square root. The 42 m s⁻¹ was not needed: horizontal speed does not change how long it takes to fall.' },
+                  ],
+                  answer: 't ≈ 3.6 s (3.586 s unrounded)',
+                },
+                { t: 'callout', kind: 'note', title: 'Keep the unrounded value', text: 'Store 3.5857… in your calculator (use the answer key) for the next parts rather than re-typing 3.6.' },
+              ],
+            },
+            {
+              id: 'vy',
+              kicker: 'Part (iii) · 1 mark',
+              title: 'Vertical component just before landing',
+              blocks: [
+                {
+                  t: 'steps',
+                  title: 'vertical velocity at the ground',
+                  given: 'The parcel has been falling for t = 3.586 s with a = 9.8 m s⁻², starting with no vertical velocity. Find the vertical component of its velocity just before it lands.',
+                  steps: [
+                    { line: 'v = u + at (vertical axis)', why: 'Final velocity from initial velocity, acceleration and time.' },
+                    { line: 'v_{y} = 0 + 9.8 × 3.586', why: 'u_{y} = 0. Use the unrounded t.' },
+                    { line: 'v_{y} = 35.1 m s⁻¹, downward', why: 'State the direction: it points down.' },
+                  ],
+                  answer: '35.1 m s⁻¹ downward',
+                },
+                { t: 'callout', kind: 'warn', title: 'A rounding trap', text: 'With the rounded t = 3.6 s you get 9.8 × 3.6 = 35.3 m s⁻¹, not 35.1. Keep the unrounded time. A check that needs no time at all: v_y = √(2gh) = √(2 × 9.8 × 63) = 35.1 m s⁻¹.' },
+              ],
+            },
+            {
+              id: 'speed',
+              kicker: 'Part (iv) · 2 marks',
+              title: 'Speed on landing',
+              blocks: [
+                {
+                  t: 'steps',
+                  title: 'put the two components back together',
+                  given: 'Just before landing the parcel has a horizontal component of 42 m s⁻¹ (unchanged) and a vertical component of 35.1 m s⁻¹ downward, at right angles. Find its speed.',
+                  steps: [
+                    { line: 'v_{x} = 42 m s⁻¹', why: 'No horizontal force, so the horizontal component never changed.' },
+                    { line: 'v = √(v_{x}² + v_{y}²)', why: 'The components are at right angles, so Pythagoras gives the size of the resultant.' },
+                    { line: 'v = √(42² + 35.1²) = √(1764 + 1232) = 54.7 m s⁻¹', why: 'Substitute and evaluate.' },
+                    { line: 'tan θ = 35.1 / 42, so θ ≈ 40° below the horizontal', why: 'Optional: the direction of the velocity at landing.' },
+                  ],
+                  answer: 'speed ≈ 55 m s⁻¹ (54.7 with v_y rounded to 35.1; 54.8 with unrounded values)',
+                },
+              ],
+            },
+            {
+              id: 'energy',
+              kicker: 'Check it another way',
+              title: 'Energy gives the same speed',
+              blocks: [
+                {
+                  t: 'steps',
+                  title: 'gravitational PE becomes kinetic energy',
+                  given: 'Use energy to check part (iv). With no air resistance, the parcel’s gravitational potential energy lost equals the kinetic energy gained. Let the parcel have mass m.',
+                  steps: [
+                    { line: '½mv² = ½m(42)² + m g h', why: 'KE at landing = KE at release + the GPE lost in falling 63 m.' },
+                    { line: 'v² = 42² + 2 × 9.8 × 63 = 1764 + 1234.8', why: 'Cancel m, then substitute.' },
+                    { line: 'v = √2998.8 = 54.8 m s⁻¹', why: 'Matches the 54.7 within rounding: 35.1 was rounded before squaring.' },
+                  ],
+                  answer: 'The mass cancels: the landing speed does not depend on how heavy the parcel is.',
+                },
+              ],
+            },
+            {
+              id: 'myth',
+              kicker: 'Misconceptions',
+              title: 'Four classic slips',
+              blocks: [
+                {
+                  t: 'pills',
+                  groups: [
+                    { label: '✗ Common mistakes', tone: 'warn', items: ['It falls straight down because it was “dropped”', 'The 42 m s⁻¹ makes it take longer to fall', 'The landing speed is 35.1 m s⁻¹ (only the vertical part)', 'u_{y} = 42 m s⁻¹'] },
+                    { label: '✓ Better', items: ['It keeps moving forward at 42 m s⁻¹ while it falls', 'The time depends only on the height and g', 'Landing speed = the resultant of 42 and 35.1, about 55 m s⁻¹', 'u_{y} = 0 for a level release'] },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        { t: 'check', id: 'a1-9b-c1', q: 'A parcel is released from an aircraft flying level at 42 m s⁻¹. The initial VERTICAL velocity of the parcel is…', options: ['0', '42 m s⁻¹ downward', '9.8 m s⁻¹ downward'], answer: 0, why: 'The aircraft is flying level, so there is no vertical motion at release. The parcel only gains downward speed because of gravity.', back: 'axes' },
+        { t: 'check', id: 'a1-9b-c2', q: 'An aircraft flying level at 55 m s⁻¹ releases a parcel 45 m above level ground. Ignoring air resistance (g = 9.8 m s⁻²), the time to reach the ground is about…', options: ['9.2 s', '3.0 s', '0.82 s'], answer: 1, why: '45 = ½ × 9.8 × t² gives t² = 90 / 9.8 = 9.18, so t = 3.0 s. The 55 m s⁻¹ is not used. (9.2 is t², and 0.82 is 45 ÷ 55.)', back: 'time' },
+        { t: 'check', id: 'a1-9b-c3', q: 'Just before the parcel in the question lands, the horizontal component of its velocity is…', options: ['42 m s⁻¹', '0', '35.1 m s⁻¹'], answer: 0, why: 'Nothing pushes it sideways (no air resistance), so the horizontal component stays at its release value, 42 m s⁻¹.', back: 'axes' },
+        { t: 'check', id: 'a1-9b-c4', q: 'A small aircraft flies level at 30 m s⁻¹ and releases a parcel 80 m above level ground. Ignoring air resistance, the speed at which the parcel reaches the ground is about…', options: ['40 m s⁻¹', '50 m s⁻¹', '70 m s⁻¹'], answer: 1, why: 'v_y = √(2gh) = √(2 × 9.8 × 80) = 39.6 m s⁻¹. Speed = √(30² + 39.6²) = 49.7 ≈ 50 m s⁻¹. Adding 30 + 39.6 would wrongly give about 70, and 40 is only the vertical part.', back: 'speed' },
+        { t: 'check', id: 'a1-9b-c5', q: 'While the parcel falls, the aircraft keeps flying level at a constant 42 m s⁻¹. Ignoring air resistance on the parcel, where is the aircraft relative to the parcel?', options: ['directly above it', 'ahead of it', 'behind it'], answer: 0, why: 'Both keep the same horizontal velocity, 42 m s⁻¹, so they stay in the same vertical line.', back: 'animate' },
+        { t: 'check', id: 'a1-9b-c6', q: 'The time a parcel takes to reach the ground after release from a level-flying aircraft depends on…', options: ['the height and g only', 'the height, g and the aircraft’s speed', 'the aircraft’s speed only'], answer: 0, why: 'Time of fall comes from the vertical axis, h = ½gt². The horizontal speed only decides how far it travels.', back: 'time' },
+        { t: 'apply', id: 'a1-9b-a1', prompt: 'The aircraft flies twice as fast, at 84 m s⁻¹, at the same height of 63 m. State what happens to (a) the time to reach the ground and (b) the horizontal distance the parcel travels. Explain using the two axes.', model: '(a) The time is unchanged at 3.6 s. It comes from the vertical axis, h = ½gt² with u_y = 0, and neither the height nor g has changed. (b) The horizontal distance is x = u_x t = 84 × 3.586 ≈ 301 m, twice the 151 m before, because the parcel moves forward at a constant 84 m s⁻¹ for the same time.', checklist: ['I said the time is unchanged and why (vertical axis only)', 'I used u_y = 0 and h = ½gt²', 'I said the horizontal distance doubles (about 301 m)', 'I used x = u_x t with constant horizontal velocity'] },
+        { t: 'retrieval', items: [{ from: 'A.1 · 9', q: 'Before using v² = u² + 2as with a speed in km h⁻¹, you should…', options: ['convert it to m s⁻¹', 'leave it in km h⁻¹', 'convert the distance to km'], answer: 0, why: 'The equations need consistent SI units.' }, { from: 'A.1 · 6', q: 'A body starts from rest with constant acceleration. If the time is doubled, the distance travelled becomes…', options: ['four times as large', 'twice as large', 'half as large'], answer: 0, why: 's = ½at², so s ∝ t².' }] },
+        { t: 'summary', points: ['Split projectile motion into two independent axes: constant velocity horizontally, constant acceleration g vertically.', 'A level release means u_y = 0. The time of fall comes from h = ½gt² and does not depend on the horizontal speed.', 'The vertical component at the ground is v_y = gt (or √(2gh)). The horizontal component stays the same.', 'The landing speed is the resultant √(v_x² + v_y²), found by Pythagoras. Energy gives the same answer.'], terms: [{ term: 'Component', def: 'the part of a vector along one chosen axis' }, { term: 'Resultant', def: 'the single vector made from the components, found by Pythagoras' }], formulas: ['s = u_{y}t + ½at²', 'v = u + at', 'x = u_{x}t', 'v = √(v_{x}² + v_{y}²)', 'v² = u_{x}² + 2gh'], errors: ['Writing u_y = 42 for a level release.', 'Using the horizontal speed to find the time of fall.', 'Quoting only the vertical component as the landing speed.', 'Rounding t to 3.6 s before using it again.'] },
+      ],
+    },
+    // ------------------------------------------------------------------ A.1 · 9d
+    {
+      slug: 'exam-questions-four',
+      code: 'A.1 · 9d',
+      title: 'Exam question IV: a ball thrown over a wall',
+      blurb: 'Launch at an angle. Resolve into components, find the time, then the height. Then change every number and finish with one of three questions.',
+      syllabus: 'A.1 Kinematics · projectile motion at an angle, components, s = ut + ½at²',
+      level: 'SL+HL',
+      difficulty: 3,
+      minutes: 30,
+      access: 'free',
+      blocks: [
+        { t: 'hook', text: 'A student throws a ball at a wall. Will it get over? If the wall were further away, would it still? And if it hits, how high up? One set of equations answers all three.' },
+        {
+          t: 'deck',
+          slides: [
+            {
+              id: 'question',
+              kicker: 'The question · 7 marks',
+              title: 'A ball thrown over a wall',
+              blocks: [
+                { t: 'p', text: 'A student throws a ball over a vertical wall. The ball leaves the hand 1.2 m above level ground with a speed of 22 m s⁻¹, at 40° above the horizontal. The wall is a horizontal distance of 36 m from the student. Air resistance is negligible.' },
+                { t: 'table', head: ['Part', 'Task', 'Marks'], rows: [['(a)', 'Define velocity', '1'], ['(b)(i)', 'Determine the time taken for the ball to reach the wall', '2'], ['(b)(ii)', 'Calculate the vertical component u of the initial velocity of the ball', '1'], ['(b)(iii)', 'The ball just goes over the wall. Calculate the height h of the wall', '3']] },
+              ],
+            },
+            {
+              id: 'define',
+              kicker: 'Part (a) · 1 mark',
+              title: 'Define velocity',
+              blocks: [
+                { t: 'def', term: 'Velocity', text: 'The rate of change of displacement (displacement per unit time). It is a vector: it has a direction as well as a size.' },
+                { t: 'callout', kind: 'warn', title: 'Say “displacement”', text: 'Not “distance per unit time”, which is speed. Not just “speed with a direction”. The word that earns the mark is displacement.' },
+              ],
+            },
+            {
+              id: 'plan',
+              kicker: 'The plan',
+              title: 'Sign convention, then two axes',
+              blocks: [
+                {
+                  t: 'table',
+                  head: ['', 'x-axis (horizontal)', 'y-axis (vertical)'],
+                  rows: [
+                    ['Sign convention', 'toward the wall = +', 'up = +, down = −'],
+                    ['Acceleration', 'a_{x} = 0 (uniform motion)', 'a_{y} = −g = −9.81 m s⁻²'],
+                    ['Initial velocity', 'u_{x} = 22 cos 40° = 16.85 m s⁻¹', 'u_{y} = 22 sin 40° = 14.14 m s⁻¹'],
+                    ['Equation', 's = ut', 's = ut + ½at²'],
+                  ],
+                  firstColHeader: true,
+                },
+                { t: 'callout', kind: 'idea', title: 'Assign the signs first', text: 'Decide up is +. Then u_y = +14.14 m s⁻¹ and the acceleration is −9.81 m s⁻². Everything else follows from that choice. The two axes share only the time.' },
+              ],
+            },
+            {
+              id: 'ii',
+              kicker: 'Part (b)(ii) · 1 mark',
+              title: 'Vertical component of the initial velocity',
+              blocks: [
+                {
+                  t: 'steps',
+                  title: 'resolve the launch velocity',
+                  given: 'The ball leaves the hand at 22 m s⁻¹ at 40° above the horizontal. Resolve this into a horizontal component and a vertical component.',
+                  steps: [
+                    { line: 'sin 40° = u_{y} / 22', why: 'The vertical component is the side opposite the angle in the velocity triangle.' },
+                    { line: 'u_{y} = 22 sin 40° = 14.14 m s⁻¹', why: 'Upward, so positive. This is the INITIAL vertical velocity.' },
+                    { line: 'u_{x} = 22 cos 40° = 16.85 m s⁻¹', why: 'The horizontal component, needed for the time to the wall.' },
+                  ],
+                  answer: 'u = 14.1 m s⁻¹ (upward)',
+                },
+              ],
+            },
+            {
+              id: 'i',
+              kicker: 'Part (b)(i) · 2 marks',
+              title: 'Time to reach the wall',
+              blocks: [
+                {
+                  t: 'steps',
+                  title: 'horizontal axis only',
+                  given: 'The wall is 36 m away. Horizontally there is no acceleration, so the ball moves at the constant 16.85 m s⁻¹.',
+                  steps: [
+                    { line: 't = d / u_{x} = 36 / 16.85', why: 'Uniform motion: time = distance ÷ speed.' },
+                    { line: 't = 2.136 s ≈ 2.1 s', why: 'Keep 2.136 s in the calculator for the next part.' },
+                  ],
+                  answer: 't = 2.1 s (2.136 s unrounded)',
+                },
+              ],
+            },
+            {
+              id: 'iii',
+              kicker: 'Part (b)(iii) · 3 marks',
+              title: 'Height of the wall',
+              blocks: [
+                {
+                  t: 'steps',
+                  title: 'vertical axis, at the time the ball reaches the wall',
+                  given: 'The ball just goes over the wall, so the wall’s height equals the ball’s height when it reaches the wall, at t = 2.136 s. First find how far above the launch point it is, then add the 1.2 m it started above the ground.',
+                  steps: [
+                    { line: 's = u_{y}t + ½at²', why: 'Vertical axis, with up positive.' },
+                    { line: 's = 14.14 × 2.136 + ½ × (−9.81) × 2.136²', why: 'a = −9.81 m s⁻² because gravity acts down.' },
+                    { line: 's = 30.21 − 22.38 = 7.83 m', why: 'The ball is 7.83 m above the point where it left the hand.' },
+                    { line: 'h = 7.83 + 1.2 = 9.03 m', why: 'Check the initial conditions: it was thrown from 1.2 m above the ground, so add 1.2 m.' },
+                  ],
+                  answer: 'h = 9.0 m',
+                },
+                { t: 'callout', kind: 'warn', title: 'A rounding trap', text: 'Using t = 2.1 s gives s = 14.14 × 2.1 − 4.905 × 2.1² = 29.7 − 21.6 = 8.1 m, so h = 9.3 m. Using 2.136 s gives h = 9.0 m. The answer shifts by 0.3 m because near the wall the ball is falling quickly (v_y = −6.8 m s⁻¹), so a small error in t makes a big error in the height. Keep the unrounded time and round only the final answer.' },
+              ],
+            },
+            {
+              id: 'lab',
+              kicker: 'Make your own',
+              title: 'Change the numbers, change the question',
+              blocks: [
+                {
+                  t: 'widget',
+                  id: 'wall-problem-lab',
+                  title: 'Ball over a wall: edit everything',
+                  idea: 'Change the speed, angle, release height, wall distance and wall height. The question rewrites itself, the ball flies, and the worked solution updates. Pick one of the three finishing questions, or press the dice for a random one.',
+                  predict: { q: 'Predict: with the exam numbers (22 m s⁻¹ at 40° from 1.2 m), the wall is moved much further away, to 60 m. The ball…', options: ['lands before it reaches the wall', 'still reaches the wall, but lower', 'hits the wall higher up'], answer: 0, why: 'The ball lands about 50 m from the thrower (range ≈ 50.0 m). A wall at 60 m is never reached.' },
+                },
+              ],
+            },
+            {
+              id: 'three',
+              kicker: 'Three ways to finish',
+              title: 'Whichever question is asked, the method is the same',
+              blocks: [
+                {
+                  t: 'arrows',
+                  head: ['The question', 'What you do'],
+                  rows: [
+                    { from: 'Will it clear the wall?', to: 'find y at the wall’s distance, then compare it with the wall height', note: 't = d / u_x, then y = y₀ + u_y t − ½gt²', emoji: '⚖️' },
+                    { from: 'How far should the wall be?', to: 'solve y = wall height for t, take the LATER root, then d = u_x t', note: 'a quadratic: two roots, up and down', emoji: '📏' },
+                    { from: 'How high does it hit?', to: 'the height y at the wall’s distance is where it meets the wall', note: 'if y is below the top, that is where it hits', emoji: '🎯' },
+                  ],
+                },
+                { t: 'callout', kind: 'note', title: 'The ball is at the wall height twice', text: 'A ball that rises over a given height is at that height once going up and once coming down. A wall at any distance between those two points is cleared. The farthest wall that is still just cleared is the one on the way down.' },
+              ],
+            },
+            {
+              id: 'myth',
+              kicker: 'Misconceptions',
+              title: 'Things to avoid',
+              blocks: [
+                {
+                  t: 'pills',
+                  groups: [
+                    { label: '✗ Common mistakes', tone: 'warn', items: ['Using 22 m s⁻¹ as the vertical (or horizontal) speed', 'Forgetting to add the 1.2 m release height', 'Rounding t before using it again', 'Using g = +9.81 with up positive'] },
+                    { label: '✓ Better', items: ['Resolve: u_y = 22 sin 40°, u_x = 22 cos 40°', 'Height above ground = release height + s', 'Keep the unrounded time', 'Up positive means a = −9.81 m s⁻²'] },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        { t: 'check', id: 'a1-9d-c1', q: 'A ball is thrown at 22 m s⁻¹ at 40° above the horizontal. The initial vertical component of its velocity is…', options: ['14.1 m s⁻¹', '16.9 m s⁻¹', '22 m s⁻¹'], answer: 0, why: 'u_y = 22 sin 40° = 14.1 m s⁻¹. (16.9 is 22 cos 40°, the horizontal component.)', back: 'ii' },
+        { t: 'check', id: 'a1-9d-c2', q: 'At the highest point of its flight (no air resistance), the vertical component of the ball’s velocity is…', options: ['equal to g', 'zero', 'equal to the horizontal component'], answer: 1, why: 'It has stopped rising and not yet started falling, so v_y = 0. The horizontal component is unchanged.', back: 'plan' },
+        { t: 'check', id: 'a1-9d-c3', q: 'A ball is thrown from the ground at 20 m s⁻¹, 30° above the horizontal, toward a wall 30 m away. The time to reach the wall is about…', options: ['1.7 s', '1.5 s', '3.0 s'], answer: 0, why: 'u_x = 20 cos 30° = 17.3 m s⁻¹, so t = 30 / 17.3 = 1.73 s. (1.5 is 30 ÷ 20, which ignores the angle.)', back: 'i' },
+        { t: 'check', id: 'a1-9d-c4', q: 'For the same throw (g = 9.81 m s⁻²) the ball’s height above the ground when it reaches the wall is…', options: ['17.3 m', '14.7 m', '2.6 m'], answer: 2, why: 'u_y = 10 m s⁻¹. y = 10 × 1.732 − ½ × 9.81 × 1.732² = 17.32 − 14.72 = 2.6 m. (17.3 forgets gravity; 14.7 is the gravity term alone.)', back: 'iii' },
+        { t: 'check', id: 'a1-9d-c5', q: 'The ball “just goes over” a wall. This means that at the wall, the height of the ball…', options: ['is zero', 'equals the height of the wall', 'equals the height it was released from'], answer: 1, why: 'Just clearing means the ball is level with the top of the wall as it passes.', back: 'iii' },
+        { t: 'check', id: 'a1-9d-c6', q: 'In part (iii), rounding the time 2.136 s to 2.1 s changes the height by about 0.3 m. The main reason is that…', options: ['g changes with height', 'the ball is falling quickly there, so its height is sensitive to the time', 'the horizontal speed changes with time'], answer: 1, why: 'Near the wall v_y is about −6.8 m s⁻¹, so an error of 0.036 s in t changes the height by about 0.25 m.', back: 'iii' },
+        { t: 'check', id: 'a1-9d-c7', q: 'The vertical displacement of the ball from the launch point, when it reaches the wall, is 7.83 m. The wall’s height above the ground is…', options: ['9.03 m', '7.83 m', '6.63 m'], answer: 0, why: 'The ball started 1.2 m above the ground: 7.83 + 1.2 = 9.03 m.', back: 'iii' },
+        { t: 'apply', id: 'a1-9d-a1', prompt: 'The student throws at the same angle, 40°, but a little faster. The wall stays 36 m away. Explain, using the equations, what happens to the height of the ball at the wall.', model: 'With a larger speed u, both u_x = u cos 40° and u_y = u sin 40° increase. The time to reach the wall, t = 36 / u_x, becomes smaller, so gravity has less time to pull the ball down, and u_y t is larger. Both effects raise y = y₀ + u_y t − ½gt². Written together, y = y₀ + d tan θ − g d² / (2u² cos²θ): a bigger u makes the last term smaller, so y is larger.', checklist: ['I said both components increase', 'I said the time to the wall decreases (t = d / u_x)', 'I linked less time to less fall under gravity', 'I used y = y₀ + u_y t − ½gt² (or the combined form)'] },
+        { t: 'retrieval', items: [{ from: 'A.1 · 9c', q: 'The horizontal component of a projectile’s velocity (no air resistance) is…', options: ['constant', 'growing', 'zero at the top'], answer: 0, why: 'No horizontal force, so no horizontal acceleration.' }, { from: 'A.1 · 9b', q: 'A ball is dropped and another is thrown sideways from the same height. They…', options: ['land at the same time', 'land at different times'], answer: 0, why: 'The vertical motions are identical.' }] },
+        { t: 'summary', points: ['Resolve the launch velocity: u_x = u cosθ, u_y = u sinθ. Fix a sign convention: up is +, so a_y = −g.', 'Time comes from the horizontal axis: t = d / u_x. Height comes from the vertical axis: y = y₀ + u_y t − ½gt².', 'Add the release height to get the height above the ground. Keep the unrounded time.', 'Three finishing questions: will it clear (compare), how far should the wall be (solve y = h, take the later root), how high does it hit (y at the wall).'], terms: [{ term: 'Velocity', def: 'rate of change of displacement, a vector' }, { term: 'Component', def: 'the part of a vector along one axis' }], formulas: ['u_{x} = u cosθ', 'u_{y} = u sinθ', 't = d / u_{x}', 'y = y_{0} + u_{y}t − ½gt²'], errors: ['Using 22 m s⁻¹ as a component.', 'Forgetting to add the release height.', 'Rounding the time too early.', 'Mixing the sign of g.'] },
+      ],
+    },
+
+    // ------------------------------------------------------------------ A.1 · 9e
+    {
+      slug: 'vector-addition-crosswind-umbrella',
+      code: 'A.1 · 9e',
+      title: 'Adding velocities: crosswind landing and the umbrella',
+      blurb: 'Land a plane in a crosswind, then keep dry in the rain. Two games, one triangle of velocities.',
+      syllabus: 'A.1 Kinematics · relative velocity, vector addition, components',
+      level: 'SL+HL',
+      difficulty: 3,
+      minutes: 28,
+      access: 'free',
+      blocks: [
+        { t: 'hook', text: 'To fly straight down a runway in a crosswind, the pilot does not point the nose along the runway. To stay dry in the rain, you do not hold the umbrella straight up. Different scenes, same triangle.' },
+        {
+          t: 'deck',
+          slides: [
+            {
+              id: 'rule',
+              kicker: 'The rule',
+              title: 'Velocities add as vectors',
+              blocks: [
+                { t: 'formulas', items: [{ eq: 'v_{over the ground} = v_{through the air} + v_{of the air (wind)}', legend: ['draw them head to tail', 'the sum is the third side of the triangle', 'it is the velocity you actually have over the ground'] }] },
+                {
+                  t: 'arrows',
+                  head: ['Vector', 'In the crosswind landing'],
+                  rows: [
+                    { from: 'through the air', to: '200 km h⁻¹ along the nose', note: 'what the pilot controls', emoji: '✈️' },
+                    { from: 'of the air', to: '50 km h⁻¹ sideways', note: 'the wind', emoji: '💨' },
+                    { from: 'over the ground', to: 'their vector sum', note: 'where the plane really goes', emoji: '➡️' },
+                  ],
+                },
+              ],
+            },
+            {
+              id: 'game',
+              kicker: 'Play',
+              title: 'Land the plane in a crosswind',
+              blocks: [
+                {
+                  t: 'widget',
+                  id: 'crosswind-landing-game',
+                  title: 'Steer the nose, watch the sum',
+                  idea: 'Press Start, then steer with the slider or the arrow keys. The blue arrow is the nose, the light-blue arrow is the wind, the black arrow is where you actually go. Aim the black arrow at the runway.',
+                  predict: { q: 'Predict: a 50 km h⁻¹ crosswind blows from the left. To fly straight along the runway, the pilot should point the nose…', options: ['along the runway', 'slightly to the left, into the wind', 'slightly to the right, with the wind'], answer: 1, why: 'The plane’s sideways velocity through the air must cancel the wind’s sideways velocity, so the nose points into the wind.' },
+                },
+              ],
+            },
+            {
+              id: 'solve',
+              kicker: 'The solution',
+              title: 'The crab angle',
+              blocks: [
+                {
+                  t: 'steps',
+                  title: 'no drift, straight down the runway',
+                  given: 'A plane flies at 200 km h⁻¹ through the air. A steady 50 km h⁻¹ wind blows across the runway (at 90° to it). The pilot wants the plane to move straight along the runway.',
+                  steps: [
+                    { line: 'sideways: V sinθ = W', why: 'For zero sideways drift, the sideways part of the plane’s velocity through the air must cancel the wind.' },
+                    { line: 'sinθ = W / V = 50 / 200 = 0.25', why: 'Divide.' },
+                    { line: 'θ = sin⁻¹(0.25) = 14.5°', why: 'The nose points 14.5° into the wind: the “crab angle”.' },
+                    { line: 'ground speed = √(V² − W²) = √(200² − 50²) = 193.6 km h⁻¹', why: 'Pythagoras: the air velocity of 200 km h⁻¹ is the hypotenuse of the triangle, so the speed along the runway is a bit less.' },
+                  ],
+                  answer: 'θ = 14.5° into the wind; speed along the runway 193.6 km h⁻¹',
+                },
+                { t: 'callout', kind: 'note', title: 'What if the pilot ignores the wind?', text: 'Pointing the nose straight along the runway, the plane drifts sideways at 50 km h⁻¹. Flying 4 km at 200 km h⁻¹ takes 72 s, so it ends up 50 × 72 / 3600 = 1.0 km off the runway.' },
+              ],
+            },
+            {
+              id: 'rain',
+              kicker: 'Same triangle, new scene',
+              title: 'Walking in the rain',
+              blocks: [
+                {
+                  t: 'widget',
+                  id: 'umbrella-walk-game',
+                  title: 'Keep dry',
+                  idea: 'Change your walking speed, then lean the umbrella forward until the “body kept dry” meter is as high as it goes. Switch between watching from the pavement and from the walker.',
+                  predict: { q: 'Predict: the rain falls straight down and you walk forward at a steady speed. Relative to YOU, the rain comes…', options: ['straight down', 'from in front of you, slanting', 'from behind you, slanting'], answer: 1, why: 'You walk into the rain. From your point of view the rain has your velocity taken away: it moves backward as well as down, so it comes at you from the front.' },
+                },
+              ],
+            },
+            {
+              id: 'rainsolve',
+              kicker: 'The solution',
+              title: 'How far to lean the umbrella',
+              blocks: [
+                {
+                  t: 'steps',
+                  title: 'velocity of the rain relative to the walker',
+                  given: 'Rain falls vertically at 8 m s⁻¹. A person walks at 2 m s⁻¹ along a pavement. Find the angle at which the umbrella should lean, and the speed at which the rain meets the person.',
+                  steps: [
+                    { line: 'v(rain relative to walker) = v(rain) − v(walker)', why: 'Velocity relative to an observer is the object’s velocity minus the observer’s velocity.' },
+                    { line: 'components: 8 m s⁻¹ down and 2 m s⁻¹ backward', why: 'Subtracting the walker’s forward 2 m s⁻¹ leaves a backward 2 m s⁻¹.' },
+                    { line: 'tanθ = W / v = 2 / 8 = 0.25, so θ = 14.0°', why: 'θ is measured from the vertical. The rain comes from the front, so lean the umbrella forward by 14.0°.' },
+                    { line: 'speed = √(8² + 2²) = 8.25 m s⁻¹', why: 'Pythagoras: you meet the rain a little faster than it falls.' },
+                  ],
+                  answer: 'lean forward 14.0° from the vertical; the rain meets the walker at 8.25 m s⁻¹',
+                },
+                {
+                  t: 'table',
+                  head: ['Walking pace', 'Speed W (m s⁻¹)', 'Lean θ = tan⁻¹(W / 8)'],
+                  rows: [['stroll', '1.5', '10.6°'], ['walk', '2', '14.0°'], ['brisk walk', '3', '20.6°'], ['jog', '5', '32.0°']],
+                  note: 'Rain speed 8 m s⁻¹. The faster you go, the more you must lean.',
+                },
+              ],
+            },
+            {
+              id: 'compare',
+              kicker: 'Compare',
+              title: 'Same method, different triangle',
+              blocks: [
+                {
+                  t: 'table',
+                  head: ['', 'Crosswind landing', 'Walking in rain'],
+                  rows: [
+                    ['Known speed through the medium', '200 km h⁻¹ (the hypotenuse)', '8 m s⁻¹ (a side: vertical)'],
+                    ['Other velocity', 'the wind, 50 km h⁻¹', 'you, 2 m s⁻¹'],
+                    ['What you choose', 'the heading of the nose', 'the lean of the umbrella'],
+                    ['Condition', 'sinθ = W / V', 'tanθ = W / v'],
+                  ],
+                  firstColHeader: true,
+                  note: 'Draw the triangle every time and ask: which side do I know? The plane’s 200 km h⁻¹ is the longest side; the rain’s 8 m s⁻¹ is a shorter one.',
+                },
+              ],
+            },
+            {
+              id: 'myth',
+              kicker: 'Misconceptions',
+              title: 'Common slips',
+              blocks: [
+                {
+                  t: 'pills',
+                  groups: [
+                    { label: '✗ Common mistakes', tone: 'warn', items: ['Point the nose at the runway to land on it', 'Rain falls straight down for the walker too', 'Always use tanθ = W / V'] },
+                    { label: '✓ Better', items: ['Point the nose into the wind so the SUM points along the runway', 'The walker sees the rain slanted: rain velocity minus walker velocity', 'Sketch the triangle first; sin, cos or tan depends on which sides you know'] },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        { t: 'check', id: 'a1-9e-c1', q: 'A plane flies at 200 km h⁻¹ through the air in a 50 km h⁻¹ crosswind. To fly straight along the runway, the nose must point…', options: ['along the runway', 'into the wind by 14.5°', 'with the wind by 14.5°'], answer: 1, why: 'sinθ = 50 / 200 = 0.25, so θ = 14.5°, and the nose points into the wind to cancel the drift.', back: 'solve' },
+        { t: 'check', id: 'a1-9e-c2', q: 'For that landing, the plane’s speed along the runway is about…', options: ['200 km h⁻¹', '250 km h⁻¹', '194 km h⁻¹'], answer: 2, why: '√(200² − 50²) = 193.6 ≈ 194 km h⁻¹. It is slightly less than 200 because part of the airspeed is used to cancel the wind.', back: 'solve' },
+        { t: 'check', id: 'a1-9e-c3', q: 'Rain falls vertically at 6.0 m s⁻¹. You run at 3.0 m s⁻¹. From you, the rain seems to come at what angle from the vertical?', options: ['26.6°, from in front', '63.4°, from in front', '26.6°, from behind'], answer: 0, why: 'tanθ = 3.0 / 6.0 = 0.50, so θ = 26.6°. You run into the rain, so it comes from the front.', back: 'rainsolve' },
+        { t: 'check', id: 'a1-9e-c4', q: 'For the same runner and rain, the speed of the rain relative to the runner is…', options: ['9.0 m s⁻¹', '6.7 m s⁻¹', '3.0 m s⁻¹'], answer: 1, why: '√(6.0² + 3.0²) = 6.7 m s⁻¹. The two components are at right angles, so use Pythagoras, not addition.', back: 'rainsolve' },
+        { t: 'check', id: 'a1-9e-c5', q: 'You walk faster in the same rain. To stay dry, the umbrella should lean…', options: ['less', 'the same', 'more, toward the direction you are walking'], answer: 2, why: 'tanθ = W / v grows with W, so the rain comes in more slanted and the umbrella must lean further forward.', back: 'rain' },
+        { t: 'check', id: 'a1-9e-c6', q: 'A pilot ignores the wind and points the nose straight along the runway. The plane will…', options: ['fly straight along the runway', 'drift sideways with the wind', 'turn into the wind'], answer: 1, why: 'Its ground velocity is the sum of the nose velocity and the wind, so the sideways wind velocity is added to the motion.', back: 'game' },
+        { t: 'apply', id: 'a1-9e-a1', prompt: 'A swimmer can swim at 1.5 m s⁻¹ in still water and wants to cross a river straight across to the opposite bank. The river flows at 0.60 m s⁻¹. At what angle upstream should she aim, and how fast does she cross?', model: 'To go straight across, her upstream component must cancel the current: 1.5 sinθ = 0.60, so sinθ = 0.40 and θ = 23.6° upstream of straight across. Her speed across is the other component: 1.5 cosθ = √(1.5² − 0.60²) = 1.4 m s⁻¹.', checklist: ['I drew the triangle with the swimmer’s 1.5 m s⁻¹ as the hypotenuse', 'I used sinθ = 0.60 / 1.5', 'I found θ = 23.6° upstream', 'I used Pythagoras for the speed across (1.4 m s⁻¹)'] },
+        { t: 'retrieval', items: [{ from: 'A.1 · 9c', q: 'The landing speed of a parcel is found from its components by…', options: ['Pythagoras: √(v_x² + v_y²)', 'adding them', 'multiplying them'], answer: 0, why: 'The components are at right angles.' }, { from: 'A.1 · 9d', q: 'A ball thrown at 30° at 20 m s⁻¹ has u_y equal to…', options: ['10 m s⁻¹', '17.3 m s⁻¹', '20 m s⁻¹'], answer: 0, why: '20 sin 30° = 10 m s⁻¹.' }] },
+        { t: 'summary', points: ['Velocities add as vectors, head to tail: v(ground) = v(air) + v(wind).', 'Crosswind landing: point the nose into the wind, sinθ = W / V, ground speed √(V² − W²).', 'Rain on a walker: v(rain relative) = v(rain) − v(walker), tanθ = W / v, lean the umbrella forward.', 'Sketch the triangle, work out which sides you know, then choose sin, cos, tan or Pythagoras.'], terms: [{ term: 'Relative velocity', def: 'the velocity of one thing as seen by another: v(A) − v(B)' }, { term: 'Crab angle', def: 'the angle a pilot points the nose into the wind so the plane tracks straight' }], formulas: ['v_{ground} = v_{air} + v_{wind}', 'sinθ = W / V', 'tanθ = W / v', 'v_{rel} = v_{A} − v_{B}'], errors: ['Pointing the nose at the destination in a crosswind.', 'Adding the speeds instead of using Pythagoras.', 'Forgetting that the walker sees the rain slanted.'] },
+      ],
+    },
+
+    // ------------------------------------------------------------------ A.1 · 9f
+    {
+      slug: 'stellar-aberration',
+      code: 'A.1 · 9f',
+      title: 'Stellar aberration and the speed of light',
+      blurb: 'The umbrella problem again, but the rain is starlight and the walker is the Earth. A tilted telescope gives the speed of light.',
+      syllabus: 'A.1 Kinematics · relative velocity applied to starlight, speed of light',
+      level: 'SL+HL',
+      difficulty: 3,
+      minutes: 24,
+      access: 'free',
+      blocks: [
+        { t: 'hook', text: 'Point a telescope straight at a star overhead and you miss it. The telescope is fine. The Earth is moving. It is exactly why you tilt an umbrella forward when you walk in the rain.' },
+        {
+          t: 'deck',
+          slides: [
+            {
+              id: 'link',
+              kicker: 'The link',
+              title: 'Rain and umbrella, starlight and telescope',
+              blocks: [
+                {
+                  t: 'table',
+                  head: ['', 'Walking in the rain', 'Observing a star'],
+                  rows: [
+                    ['What falls straight down', 'rain, 8 m s⁻¹', 'starlight, 3.00 × 10⁸ m s⁻¹'],
+                    ['The moving observer', 'you, 2 m s⁻¹', 'the Earth, 29.8 km s⁻¹'],
+                    ['What you tilt', 'the umbrella', 'the telescope'],
+                    ['Tilt angle', 'tanθ = 2 / 8, 14.0°', 'tanα = v / c, 20.5 arcseconds'],
+                  ],
+                  firstColHeader: true,
+                },
+                { t: 'note', text: 'You tilt the umbrella forward because you walk into the rain. You tilt the telescope forward because the Earth moves into the light. The reason is the same: subtract the observer’s velocity from the velocity of the thing coming at you.' },
+              ],
+            },
+            {
+              id: 'lab',
+              kicker: 'Try it',
+              title: 'Switch between rain and starlight',
+              blocks: [
+                {
+                  t: 'widget',
+                  id: 'aberration-lab',
+                  title: 'The same triangle, two scenes',
+                  idea: 'Compare the two scenes, then press “Six months later”. For starlight the tilt is only 20 arcseconds, so the picture exaggerates it. The bottom panel runs Bradley’s method backwards: measure α, get c.',
+                  predict: { q: 'Predict: the Earth moves at about 30 km s⁻¹ and starlight at about 300 000 km s⁻¹. The telescope’s tilt will be…', options: ['about 20 arcseconds: tiny', 'about 20 degrees', 'zero, because light is too fast to be affected'], answer: 0, why: 'tanα = v / c is about 10⁻⁴, so α is about 10⁻⁴ radians, which is about 20 arcseconds (0.0057°). Small, but measurable with a good telescope.' },
+                },
+              ],
+            },
+            {
+              id: 'v',
+              kicker: 'First, the Earth’s speed',
+              title: 'How fast does the Earth move?',
+              blocks: [
+                {
+                  t: 'steps',
+                  title: 'orbital speed',
+                  given: 'The Earth goes once round the Sun in one year, T = 3.156 × 10⁷ s, on a nearly circular orbit of radius r = 1.496 × 10¹¹ m.',
+                  steps: [
+                    { line: 'v = 2πr / T', why: 'One orbit is a distance 2πr, covered in a time T.' },
+                    { line: 'v = 2π × 1.496 × 10¹¹ / 3.156 × 10⁷', why: 'Substitute.' },
+                    { line: 'v = 2.98 × 10⁴ m s⁻¹ = 29.8 km s⁻¹', why: 'About 107 000 km per hour.' },
+                  ],
+                  answer: 'v = 29.8 km s⁻¹',
+                },
+              ],
+            },
+            {
+              id: 'calc',
+              kicker: 'The aberration angle',
+              title: 'How far must the telescope tilt?',
+              blocks: [
+                {
+                  t: 'steps',
+                  title: 'tanα = v / c',
+                  given: 'A telescope points at a star directly overhead. The Earth moves at v = 2.98 × 10⁴ m s⁻¹, at right angles to the starlight, which travels at c = 3.00 × 10⁸ m s⁻¹.',
+                  steps: [
+                    { line: 'tanα = v / c', why: 'Same triangle as the umbrella: the observer’s speed over the speed of what is falling toward you.' },
+                    { line: 'tanα = 2.98 × 10⁴ / 3.00 × 10⁸ = 9.93 × 10⁻⁵', why: 'Divide.' },
+                    { line: 'α = 9.93 × 10⁻⁵ rad', why: 'The angle is tiny, so tanα ≈ α in radians.' },
+                    { line: 'α = 9.93 × 10⁻⁵ × (180 / π) × 3600 = 20.5″', why: 'Radians to degrees to arcseconds (1° = 3600″).' },
+                  ],
+                  answer: 'α = 20.5 arcseconds (0.0057°)',
+                },
+              ],
+            },
+            {
+              id: 'bradley',
+              kicker: 'Using it',
+              title: 'Measure the tilt, find the speed of light',
+              blocks: [
+                { t: 'p', text: 'In the 1720s the astronomer James Bradley saw nearby stars drift in small ellipses over a year. The cause was the Earth’s motion, not the stars’ own. The size of the drift is α, and the Earth’s orbital speed v is known, so the speed of light follows. His result was close to the modern 3.00 × 10⁸ m s⁻¹.' },
+                {
+                  t: 'steps',
+                  title: 'run it backwards',
+                  given: 'A star directly overhead is observed to shift by α = 20.5″ when the Earth is moving at right angles to the starlight at v = 2.98 × 10⁴ m s⁻¹. Find the speed of light.',
+                  steps: [
+                    { line: 'α = 20.5 / 3600 degrees = 5.69 × 10⁻³° = 9.94 × 10⁻⁵ rad', why: 'Convert arcseconds to degrees, then to radians (× π / 180).' },
+                    { line: 'c = v / tanα = 2.98 × 10⁴ / 9.94 × 10⁻⁵', why: 'Rearrange tanα = v / c.' },
+                    { line: 'c = 3.00 × 10⁸ m s⁻¹', why: 'The speed of light, from a measurement of starlight and the Earth’s motion.' },
+                  ],
+                  answer: 'c = 3.00 × 10⁸ m s⁻¹',
+                },
+              ],
+            },
+            {
+              id: 'year',
+              kicker: 'Through the year',
+              title: 'Six months later the tilt reverses',
+              blocks: [
+                {
+                  t: 'arrows',
+                  head: ['A star seen from…', 'What the telescope does over a year'],
+                  rows: [
+                    { from: 'the pole of the Earth’s orbit', to: 'traces a tiny circle, angular radius 20.5″', emoji: '⭕' },
+                    { from: 'the plane of the orbit', to: 'swings back and forth along a line', emoji: '↔️' },
+                    { from: 'anywhere in between', to: 'traces a small ellipse', emoji: '🥚' },
+                  ],
+                },
+                { t: 'callout', kind: 'idea', title: 'Not the same as parallax', text: 'Parallax is the shift from seeing the star from two places, and it depends on the star’s distance: nearer stars shift more. Aberration depends only on v / c, so every star at a given position in the sky shows the same shift, near or far.' },
+              ],
+            },
+            {
+              id: 'myth',
+              kicker: 'Misconceptions',
+              title: 'Two things to avoid',
+              blocks: [
+                {
+                  t: 'pills',
+                  groups: [
+                    { label: '✗ Common mistakes', tone: 'warn', items: ['The star really moves in an ellipse', 'Aberration is bigger for near stars, like parallax'] },
+                    { label: '✓ Better', items: ['The star stays put. The Earth’s velocity tilts the direction we must point', 'The size is v / c: independent of the star’s distance'] },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        { t: 'check', id: 'a1-9f-c1', q: 'Stellar aberration is caused by…', options: ['the star’s distance from the Earth', 'the Earth’s motion while light travels down the telescope', 'the bending of light by the atmosphere'], answer: 1, why: 'The Earth moves sideways while the light travels down the tube, so the telescope must tilt, like an umbrella in the rain.', back: 'link' },
+        { t: 'check', id: 'a1-9f-c2', q: 'The Earth’s orbital speed is 2.98 × 10⁴ m s⁻¹ and the speed of light is 3.00 × 10⁸ m s⁻¹. The value of tanα is…', options: ['9.93 × 10⁻⁵', '1.01 × 10⁴', '9.93 × 10⁻³'], answer: 0, why: 'tanα = v / c = 2.98 × 10⁴ / 3.00 × 10⁸ = 9.93 × 10⁻⁵.', back: 'calc' },
+        { t: 'check', id: 'a1-9f-c3', q: 'A telescope is tilted forward to see a star. Six months later, to see the same star it must be tilted…', options: ['the same way', 'the other way', 'not at all'], answer: 1, why: 'Six months later the Earth moves in the opposite direction, so the relative velocity of the starlight flips and so does the tilt.', back: 'year' },
+        { t: 'check', id: 'a1-9f-c4', q: 'A star overhead shifts by 20.5″ when the Earth’s speed is 29.8 km s⁻¹ at right angles to the light. The speed of light is…', options: ['3.00 × 10⁵ m s⁻¹', '1.45 × 10³ m s⁻¹', '3.00 × 10⁸ m s⁻¹'], answer: 2, why: 'c = v / tanα with α converted to radians (9.94 × 10⁻⁵): 2.98 × 10⁴ / 9.94 × 10⁻⁵ = 3.00 × 10⁸ m s⁻¹. Forgetting to convert the angle or the speed to SI gives the other options.', back: 'bradley' },
+        { t: 'check', id: 'a1-9f-c5', q: 'In the rain-and-umbrella comparison, the rain plays the role of…', options: ['starlight', 'the Earth', 'the telescope'], answer: 0, why: 'Rain is what falls straight down; starlight is what arrives from far away. You are the Earth and the umbrella is the telescope.', back: 'link' },
+        { t: 'check', id: 'a1-9f-c6', q: 'Compared with parallax, the size of stellar aberration depends on the distance to the star…', options: ['strongly: nearer stars shift more', 'not at all: it depends only on v / c', 'only for stars in the plane of the orbit'], answer: 1, why: 'Aberration comes from the Earth’s velocity and the speed of light, not from the star’s distance. Parallax is the one that depends on distance.', back: 'year' },
+        { t: 'apply', id: 'a1-9f-a1', prompt: 'Explain the link between tilting an umbrella in the rain and tilting a telescope to see a star. Include the equation and say what each symbol is in each case.', model: 'In both cases a moving observer meets something that falls straight down. Relative to the observer, its velocity is its own velocity minus the observer’s, so it comes in slanted from the front. The tilt satisfies tanα = v / c, where v is the observer’s speed (the walker, or the Earth at 29.8 km s⁻¹) and c is the speed of the thing arriving (the rain at about 8 m s⁻¹, or starlight at 3.00 × 10⁸ m s⁻¹). For the walker this is 14°; for the telescope only 20.5 arcseconds, because v / c is so small.', checklist: ['I said the observer moves into what falls toward them', 'I said relative velocity = its velocity minus the observer’s', 'I wrote tanα = v / c and named v and c for each case', 'I compared the sizes (14° and 20.5 arcseconds)'] },
+        { t: 'retrieval', items: [{ from: 'A.1 · 9e', q: 'Rain falls at 8 m s⁻¹ and you walk at 2 m s⁻¹. The umbrella should lean by…', options: ['14.0°', '75.9°', '0°'], answer: 0, why: 'tanθ = 2 / 8.' }, { from: 'A.1 · 9e', q: 'The velocity of A relative to B is…', options: ['v(A) − v(B)', 'v(A) + v(B)', 'v(A) × v(B)'], answer: 0, why: 'Subtract the observer’s velocity.' }] },
+        { t: 'summary', points: ['A moving observer sees what falls toward them slanted: relative velocity = its velocity minus the observer’s.', 'Telescope tilt (stellar aberration): tanα = v / c, about 9.93 × 10⁻⁵ rad, which is 20.5 arcseconds.', 'The tilt reverses six months later; over a year a star traces a tiny ellipse (a circle at the orbit’s pole, a line in its plane).', 'Measuring α and knowing v gives c = v / tanα, about 3.00 × 10⁸ m s⁻¹.'], terms: [{ term: 'Stellar aberration', def: 'the apparent shift of a star’s position caused by the Earth’s velocity' }, { term: 'Arcsecond', def: '1/3600 of a degree' }], formulas: ['tanα = v / c', 'v = 2πr / T', 'c = v / tanα'], errors: ['Forgetting to convert the angle from arcseconds to radians.', 'Thinking aberration depends on the star’s distance.', 'Using v in km s⁻¹ and c in m s⁻¹.'] },
+      ],
+    },
     // ------------------------------------------------------------------ A.1 · 10
     {
       slug: 'models-not-a-pipe',
