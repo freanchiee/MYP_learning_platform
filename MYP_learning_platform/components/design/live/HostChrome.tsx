@@ -423,6 +423,7 @@ export function LeaderboardDrawer({
       <button
         onClick={() => onToggle(true)}
         aria-label="Open class leaderboard"
+        data-tour="leaderboard"
         title="Open class leaderboard"
         style={{
           ...glass(), position: 'fixed', top, right: 12, zIndex: 25, width: RAIL_W, padding: '12px 0', cursor: 'pointer',
@@ -439,6 +440,7 @@ export function LeaderboardDrawer({
   return (
     <aside
       aria-label="Class leaderboard"
+      data-tour="leaderboard"
       style={{
         ...glass(), position: 'fixed', top, right: 12, bottom: 12, width: `min(${W}px, calc(100vw - 24px))`, zIndex: 25, display: 'flex', flexDirection: 'column',
         borderRadius: 'var(--radius-card)', boxShadow: 'var(--shadow-card-hover)', borderTop: `3px solid ${t.accent}`, overflow: 'hidden',

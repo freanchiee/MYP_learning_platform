@@ -529,7 +529,7 @@ export default function LiveJoin({ activity, initialCode }: { activity: LiveActi
 function StudentChatToggle({ sessionCode, me, accent }: { sessionCode: string; me: LivePlayerRow; accent: string }) {
   const [open, setOpen] = useState(false)
   return (
-    <div style={{ position: 'fixed', left: 16, bottom: 16, zIndex: 45, display: 'grid', gap: 8, justifyItems: 'start' }}>
+    <div data-tour="chat" style={{ position: 'fixed', left: 16, bottom: 16, zIndex: 45, display: 'grid', gap: 8, justifyItems: 'start' }}>
       {open && (
         <div style={{ width: 'min(320px, calc(100vw - 32px))' }}>
           <ChatPanel sessionCode={sessionCode} playerId={me.id} playerName={me.name} asHost={false} accent={accent} />
@@ -1009,7 +1009,7 @@ function FloatingPersonaChat({
     if (d?.moved) { try { localStorage.setItem('myp:interview-pos', JSON.stringify(pos)) } catch { /* ignore */ } } else setOpen((o) => !o)
   }
   return (
-    <div style={{ position: 'fixed', right: 16 + rightOffset, bottom: 16, transform: `translate(${pos.x}px, ${pos.y}px)`, zIndex: 46, display: 'flex', flexDirection: pos.y < -window.innerHeight / 2 ? 'column' : 'column-reverse', alignItems: 'flex-end', gap: 8, maxWidth: 'calc(100vw - 32px)' }}>
+    <div data-tour="interview" style={{ position: 'fixed', right: 16 + rightOffset, bottom: 16, transform: `translate(${pos.x}px, ${pos.y}px)`, zIndex: 46, display: 'flex', flexDirection: pos.y < -window.innerHeight / 2 ? 'column' : 'column-reverse', alignItems: 'flex-end', gap: 8, maxWidth: 'calc(100vw - 32px)' }}>
       <button
         onPointerDown={onDown}
         onPointerMove={onMove}

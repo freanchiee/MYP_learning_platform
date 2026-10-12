@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from 'react'
 import { LIVE_THEMES, type LiveThemeId } from '@/lib/design-live/liveTheme'
 import { btnStyle } from '../ui'
 
-export default function LiveThemePicker({ theme, onTheme }: { theme: LiveThemeId; onTheme: (t: LiveThemeId) => void }) {
+export default function LiveThemePicker({ theme, onTheme, onTour }: { theme: LiveThemeId; onTheme: (t: LiveThemeId) => void; onTour?: () => void }) {
   const [open, setOpen] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
   useEffect(() => {
@@ -20,7 +20,7 @@ export default function LiveThemePicker({ theme, onTheme }: { theme: LiveThemeId
   const current = LIVE_THEMES.find((t) => t.id === theme) ?? LIVE_THEMES[0]
 
   return (
-    <div ref={ref} className="cs-theme" style={{ position: 'relative' }}>
+    <div ref={ref} className="cs-theme" data-tour="look" style={{ position: 'relative' }}>
       <button onClick={() => setOpen(!open)} aria-expanded={open} aria-haspopup="true" title={`Look: ${current.label}. Change how this page looks`} aria-label={`Change the look of this page. Now: ${current.label}`} style={{ ...btnStyle('var(--text-muted)'), padding: '8px 11px', display: 'inline-flex', alignItems: 'center', gap: 6 }}>
         <span aria-hidden>🎨</span><span className="cs-hide-sm">Look</span>
       </button>
@@ -42,6 +42,12 @@ export default function LiveThemePicker({ theme, onTheme }: { theme: LiveThemeId
               </button>
             )
           })}
+          {onTour && (
+            <button role="menuitem" onClick={() => { setOpen(false); onTour() }}
+              style={{ display: 'flex', alignItems: 'center', gap: 10, textAlign: 'left', minHeight: 48, padding: '6px 10px', marginTop: 2, cursor: 'pointer', borderRadius: 10, color: 'var(--text)', background: 'transparent', border: '2px solid transparent', borderTop: '1.5px dashed var(--border-strong)', boxShadow: 'none', font: 'inherit', fontWeight: 800, fontSize: 14 }}>
+              <span aria-hidden>🧭</span> Take the tour again
+            </button>
+          )}
         </div>
       )}
     </div>
