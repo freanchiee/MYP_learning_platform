@@ -65,6 +65,8 @@ function pickTeam(players: LivePlayerRow[], teamCount: number): number {
 
 export default function LiveJoin({ activity, initialCode }: { activity: LiveActivityDefinition; initialCode: string }) {
   const [userId, setUserId] = useState<string | null | undefined>(undefined)
+  // True while the interview itself is on screen (its own chat is right there, so the floating bubble steps aside).
+  const [interviewOnScreen, setInterviewOnScreen] = useState(false)
   const [userEmail, setUserEmail] = useState('')
   const [profileName, setProfileName] = useState('')
   const [code, setCode] = useState(initialCode.toUpperCase())
@@ -401,7 +403,7 @@ export default function LiveJoin({ activity, initialCode }: { activity: LiveActi
             <McqPlayer activity={activity} stage={stage} session={stageSession} me={me} patchMyData={patchMyData} addPoints={addPoints} />
           )}
           {canWork && stage?.type === 'worksheet' && (
-            <WorksheetPlayer stage={stage} allStages={activity.stages} activity={activity} grade={myGrade} me={me} sessionCode={code} patchMyData={patchMyData} reportDraft={reportDraft} celebrate={celebrate} journal={shellOn} onNextStage={selfPaced ? () => goStage(myIdx + 1) : undefined} />
+            <WorksheetPlayer stage={stage} allStages={activity.stages} activity={activity} grade={myGrade} me={me} sessionCode={code} patchMyData={patchMyData} reportDraft={reportDraft} celebrate={celebrate} journal={shellOn} onNextStage={selfPaced ? () => goStage(myIdx + 1) : undefined} onInterviewOnScreen={setInterviewOnScreen} />
           )}
           {canWork && stage?.type === 'openIdeas' && (
             <OpenIdeasPlayer activity={activity} stage={stage} session={stageSession} me={me} patchMyData={patchMyData} addPoints={addPoints} reportDraft={reportDraft} celebrate={celebrate} selfPaced={selfPaced} />
@@ -495,7 +497,7 @@ export default function LiveJoin({ activity, initialCode }: { activity: LiveActi
       {/* The interview, from ANY screen: once a character has been chosen, a bubble on every other stage opens the same chat and
           saves to the same transcript, so primary research can be collected whatever the student is working on. On the
           stage that holds the interview itself, that stage's own bubble does this job. */}
-      {canWork && personaLoc && !(stage?.type === 'worksheet' && stage.key === personaLoc.stageKey) && (
+      {canWork && personaLoc && !(stage?.type === 'worksheet' && stage.key === personaLoc.stageKey && interviewOnScreen) && (
         <FloatingPersonaChat
           value={me.data?.[personaLoc.stageKey]?.[personaLoc.sectionKey]?.[personaLoc.fieldKey]}
           onChange={() => {}}
@@ -656,11 +658,14 @@ export function WorksheetPlayer({
   celebrate,
   journal,
   onNextStage,
+  onInterviewOnScreen,
 }: {
   /** Journal layout: the stage's sections are tabs, one page open at a time, with Previous / Next section. */
   journal?: boolean
   /** Called by the last section's "Finish this stage" button. */
   onNextStage?: () => void
+  /** Tells the page whether this stage's interview section is the one being shown. */
+  onInterviewOnScreen?: (on: boolean) => void
   stage: WorksheetStage
   allStages: LiveStage[]
   activity: LiveActivityDefinition
@@ -785,6 +790,12 @@ export function WorksheetPlayer({
   // WHOLE activity (this stage from live drafts, other stages from what is already saved).
   const activeKey = journal ? (stage.sections.some((x) => x.key === openSection) ? openSection : stage.sections[0]?.key) : openSection
   const currentSection = stage.sections.find((x) => x.key === (activeKey ?? openSection))
+  const interviewShown = !!personaField && (journal ? activeKey === personaField.sectionKey : openSection === personaField.sectionKey)
+  useEffect(() => {
+    onInterviewOnScreen?.(interviewShown)
+    return () => onInterviewOnScreen?.(false)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [interviewShown])
   const currentStrand = currentSection?.criterion ?? stage.sections.find((x) => x.criterion)?.criterion
   const { criteriaProgress, criteriaPresent } = useMemo(() => {
     const acc: Record<string, number[]> = {}
@@ -919,16 +930,6 @@ export function WorksheetPlayer({
         )
       })}
     </div>
-    {personaField && openSection !== personaField.sectionKey && (
-      <FloatingPersonaChat
-        value={personaValue}
-        onChange={(v) => updateField(personaField.sectionKey, personaField.fieldKey, v)}
-        onPersist={(v) => persistField(personaField.sectionKey, personaField.fieldKey, v)}
-        onDraft={(text) => reportDraft(stage.key, text, personaField.sectionKey)}
-        sessionCode={sessionCode}
-        playerId={me.id}
-      />
-    )}
     </>
   )
 }
@@ -975,17 +976,18 @@ function FloatingPersonaChat({
   const character = value?.characterId ? getPersona(value.characterId) : undefined
   if (!character) return null
   return (
-    <div style={{ position: 'fixed', right: 16 + rightOffset, top: '50%', transform: 'translateY(-50%)', zIndex: 44, display: 'flex', flexDirection: 'row-reverse', alignItems: 'flex-start', gap: 8 }}>
+    <div style={{ position: 'fixed', right: 16 + rightOffset, bottom: 16, zIndex: 46, display: 'flex', flexDirection: 'column-reverse', alignItems: 'flex-end', gap: 8, maxWidth: 'calc(100vw - 32px)' }}>
       <button
         onClick={() => setOpen(!open)}
-        style={{ ...btnStyle('#5C3FD6', true), borderRadius: 999, padding: '8px 14px', fontSize: 12.5, display: 'flex', alignItems: 'center', gap: 6, boxShadow: '3px 3px 0 var(--text)' }}
+        aria-expanded={open}
+        style={{ ...btnStyle('#5C3FD6', true), borderRadius: 999, padding: '9px 16px 9px 10px', fontSize: 13, display: 'flex', alignItems: 'center', gap: 8, boxShadow: '3px 3px 0 var(--text)' }}
       >
-        <Avatar seed={character.id} size={20} />
+        <Avatar seed={character.id} size={26} />
         {open ? `✕ Close chat with ${character.name}` : `💬 Interview ${character.name}`}
       </button>
       {open && (
-        <div style={{ width: 'min(340px, calc(100vw - 32px))', maxHeight: '75vh', overflowY: 'auto' }}>
-          <div style={{ fontSize: 12.5, fontWeight: 800, color: '#fff', marginBottom: 6, textAlign: 'right' }}>You are interviewing {character.name}{note ? <span style={{ fontWeight: 600, opacity: 0.85 }}> · {note}</span> : null}</div>
+        <div style={{ width: 'min(360px, calc(100vw - 32px))', maxHeight: '70vh', overflowY: 'auto' }}>
+          <div style={{ fontSize: 12.5, fontWeight: 800, color: '#fff', marginBottom: 6, textAlign: 'right', textShadow: '0 1px 3px rgba(0,0,0,.6)' }}>You are interviewing {character.name}{note ? <span style={{ fontWeight: 600, opacity: 0.9 }}> · {note}</span> : null}</div>
           <PersonaChatField value={value as any} onChange={onChange} onPersist={onPersist} onDraft={onDraft} sessionCode={sessionCode} playerId={playerId} />
         </div>
       )}
