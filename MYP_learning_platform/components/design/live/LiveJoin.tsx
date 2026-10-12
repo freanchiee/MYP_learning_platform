@@ -23,11 +23,12 @@ import StageFeedback from './StageFeedback'
 import { StudentExemplarCard } from './ExemplarReveal'
 import { exemplarsFor, revealKey } from '@/lib/design-live/exemplars'
 import { feedbackOf } from '@/lib/design-live/feedback'
-import { CRITERION_LETTERS } from '@/lib/design-live/criteria'
+import { CRITERION_LETTERS, criterionOf } from '@/lib/design-live/criteria'
 import { SustainabilityGamePlayer } from './game/SustainabilityGame'
 import { LearnPlayer } from './LearnStage'
 import ShareFooter from './ShareFooter'
 import MyWorkDownloads from './MyWorkDownloads'
+import StudentShell from './shell/StudentShell'
 import { SelfPacedBar, navOf } from './SelfPaced'
 import { LeaderboardDrawer, useLeaderboardDrawer } from './HostChrome'
 import { getPersona } from '@/data/design/live/personas'
@@ -81,6 +82,8 @@ export default function LiveJoin({ activity, initialCode }: { activity: LiveActi
   const [nameInput, setNameInput] = useState('')
   const [apiError, setApiError] = useState<string | null>(null)
   const [joining, setJoining] = useState(false)
+  // `?ui=classic` keeps the previous layout; everyone else gets the stage rail + journal workspace on self-paced activities.
+  const [classicUi] = useState(() => typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('ui') === 'classic')
 
   useEffect(() => {
     const sb = createClient()
@@ -323,6 +326,7 @@ export default function LiveJoin({ activity, initialCode }: { activity: LiveActi
   // own work rather than getting cut off. Host-paced activities still stop at "ended"
   // since their content only exists relative to a host-controlled shared state.
   const canWork = session.status === 'active' || (selfPaced && session.status === 'ended')
+  const shellOn = canWork && selfPaced && !classicUi
   const nav = navOf(me, activity)
   const myIdx = selfPaced ? nav.stage : session.stage_idx
   const rawStage = activity.stages[myIdx]
@@ -343,13 +347,13 @@ export default function LiveJoin({ activity, initialCode }: { activity: LiveActi
   // there is no projector screen to keep small, and a lesson card or a quiz question
   // benefits from the extra room, especially on a laptop.
   const stageIsNarrow = !selfPaced && (session.status !== 'active' || stage?.type === 'mcq' || stage?.type === 'openIdeas' || stage?.type === 'grading')
-  const contentWidth = stageIsNarrow ? 560 : stage?.type === 'learn' || selfPaced ? 800 : '100%'
+  const contentWidth = shellOn ? '100%' : stageIsNarrow ? 560 : stage?.type === 'learn' || selfPaced ? 800 : '100%'
 
   return (
     <div style={{ ...pageBg(activity.theme), paddingRight: 16 + (canWork && selfPaced ? lb.reserve : 0), transition: 'padding-right .25s' }}>
       {canWork && selfPaced && <LeaderboardDrawer activity={activity} code={code} me={me} open={lb.open} onToggle={lb.setOpen} />}
       <div style={{ maxWidth: 'min(1180px, 94vw)', margin: '0 auto', display: 'grid', gap: 18 }}>
-        <div style={{ maxWidth: 480, width: '100%', margin: '0 auto', textAlign: 'center', color: '#fff', display: 'grid', justifyItems: 'center', gap: 6 }}>
+        {!shellOn && <div style={{ maxWidth: 480, width: '100%', margin: '0 auto', textAlign: 'center', color: '#fff', display: 'grid', justifyItems: 'center', gap: 6 }}>
           <Avatar seed={me.id} size={56} />
           <div style={{ fontWeight: 800 }}>
             {team ? `${team.icon} ${me.name} · ${team.name}` : `👋 ${me.name}`}
@@ -358,7 +362,17 @@ export default function LiveJoin({ activity, initialCode }: { activity: LiveActi
           <Link href="/design/live/history" style={{ fontSize: 11, color: 'rgba(255,255,255,0.7)' }}>
             📜 My history
           </Link>
-        </div>
+          {selfPaced && classicUi && (
+            <button
+              onClick={() => { const u = new URL(window.location.href); u.searchParams.delete('ui'); window.location.href = u.toString() }}
+              style={{ fontSize: 11, color: 'rgba(255,255,255,0.85)', background: 'none', border: 'none', cursor: 'pointer', textDecoration: 'underline', boxShadow: 'none' }}
+            >
+              ✨ Try the new workspace
+            </button>
+          )}
+        </div>}
+
+        <StudentShell enabled={shellOn} activity={activity} me={me} code={code} grade={myGrade} idx={myIdx} maxIdx={nav.max} onGo={goStage}>
 
         <div style={{ maxWidth: contentWidth, width: '100%', margin: '0 auto', display: 'grid', gap: 14 }}>
           <BadgeRow badges={me.badges} />
@@ -372,7 +386,7 @@ export default function LiveJoin({ activity, initialCode }: { activity: LiveActi
             </div>
           )}
 
-          {canWork && selfPaced && <SelfPacedBar activity={activity} idx={myIdx} onGo={goStage} />}
+          {canWork && selfPaced && !shellOn && <SelfPacedBar activity={activity} idx={myIdx} onGo={goStage} />}
 
           {/* KEYED ON THE STAGE ITSELF: this forces React to fully discard and
               rebuild everything below — not just swap props — the instant the
@@ -387,7 +401,7 @@ export default function LiveJoin({ activity, initialCode }: { activity: LiveActi
             <McqPlayer activity={activity} stage={stage} session={stageSession} me={me} patchMyData={patchMyData} addPoints={addPoints} />
           )}
           {canWork && stage?.type === 'worksheet' && (
-            <WorksheetPlayer stage={stage} allStages={activity.stages} activity={activity} grade={myGrade} me={me} sessionCode={code} patchMyData={patchMyData} reportDraft={reportDraft} celebrate={celebrate} />
+            <WorksheetPlayer stage={stage} allStages={activity.stages} activity={activity} grade={myGrade} me={me} sessionCode={code} patchMyData={patchMyData} reportDraft={reportDraft} celebrate={celebrate} journal={shellOn} onNextStage={selfPaced ? () => goStage(myIdx + 1) : undefined} />
           )}
           {canWork && stage?.type === 'openIdeas' && (
             <OpenIdeasPlayer activity={activity} stage={stage} session={stageSession} me={me} patchMyData={patchMyData} addPoints={addPoints} reportDraft={reportDraft} celebrate={celebrate} selfPaced={selfPaced} />
@@ -476,6 +490,7 @@ export default function LiveJoin({ activity, initialCode }: { activity: LiveActi
           )}
           {canWork && <ShareFooter accent={activity.theme.accent} />}
         </div>
+        </StudentShell>
       </div>
       {/* The interview, from ANY screen: once a character has been chosen, a bubble on every other stage opens the same chat and
           saves to the same transcript, so primary research can be collected whatever the student is working on. On the
@@ -629,7 +644,7 @@ function McqPlayer({
   )
 }
 
-function WorksheetPlayer({
+export function WorksheetPlayer({
   stage,
   allStages,
   activity,
@@ -639,7 +654,13 @@ function WorksheetPlayer({
   patchMyData,
   reportDraft,
   celebrate,
+  journal,
+  onNextStage,
 }: {
+  /** Journal layout: the stage's sections are tabs, one page open at a time, with Previous / Next section. */
+  journal?: boolean
+  /** Called by the last section's "Finish this stage" button. */
+  onNextStage?: () => void
   stage: WorksheetStage
   allStages: LiveStage[]
   activity: LiveActivityDefinition
@@ -762,7 +783,8 @@ function WorksheetPlayer({
 
   // The CritABCD dial: which criterion is open right now, and how complete each criterion is across the
   // WHOLE activity (this stage from live drafts, other stages from what is already saved).
-  const currentSection = stage.sections.find((x) => x.key === openSection)
+  const activeKey = journal ? (stage.sections.some((x) => x.key === openSection) ? openSection : stage.sections[0]?.key) : openSection
+  const currentSection = stage.sections.find((x) => x.key === (activeKey ?? openSection))
   const currentStrand = currentSection?.criterion ?? stage.sections.find((x) => x.criterion)?.criterion
   const { criteriaProgress, criteriaPresent } = useMemo(() => {
     const acc: Record<string, number[]> = {}
@@ -790,13 +812,14 @@ function WorksheetPlayer({
     <div style={{ textAlign: 'right', fontSize: 11.5, fontWeight: 700, color: 'rgba(255,255,255,0.75)', marginBottom: 6 }}>
       {saveState === 'saving' ? '💾 Saving…' : saveState === 'saved' ? '✅ All changes saved' : '💾 Your work saves automatically'}
     </div>
-    {criteriaPresent.length > 0 && (
+    {!journal && criteriaPresent.length > 0 && (
       <div style={{ ...cardStyle('#5C3FD6'), marginBottom: 14 }}>
         <div style={{ fontSize: 10.5, fontWeight: 900, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'var(--text-subtle)', marginBottom: 8 }}>Where you are · CritABCD</div>
         <CriteriaRingCard currentStrand={currentStrand} progress={criteriaProgress} present={criteriaPresent} />
       </div>
     )}
     <WorksheetOverview
+      defaultOpen={!journal}
       overview={stage.overview}
       sections={stage.sections}
       pct={Object.fromEntries(stage.sections.map((s) => [s.key, worksheetSectionPct(s, drafts[s.key])]))}
@@ -805,13 +828,42 @@ function WorksheetPlayer({
         setTimeout(() => document.getElementById(`ws-${k}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 60)
       }}
     />
-    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 14, alignItems: 'start' }}>
-      {stage.sections.map((s) => {
+    {journal && (
+      <div role="tablist" aria-label="Pages in this stage" style={{ display: 'flex', gap: 6, overflowX: 'auto', alignItems: 'flex-end', padding: '4px 6px 0' }}>
+        {stage.sections.map((s, n) => {
+          const act = s.key === activeKey
+          const spct = Math.round(worksheetSectionPct(s, drafts[s.key]))
+          const tc = s.criterion ? criterionOf(s.criterion).color : 'var(--border-strong)'
+          return (
+            <button
+              key={s.key}
+              role="tab"
+              aria-selected={act}
+              onClick={() => { setOpenSection(s.key); window.scrollTo({ top: 0, behavior: 'smooth' }) }}
+              title={`${s.label} · ${spct}% done`}
+              style={{
+                flex: '0 0 auto', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 7, padding: '8px 14px 9px', fontSize: 12.5, fontWeight: act ? 900 : 700, color: 'var(--text)',
+                background: act ? 'var(--surface)' : 'var(--surface-2)', border: '2.5px solid var(--text)', borderTop: `6px solid ${tc}`,
+                borderBottom: act ? '2.5px solid var(--surface)' : '2.5px solid var(--text)', borderRadius: '12px 12px 0 0',
+                marginBottom: act ? -2.5 : 0, position: 'relative', zIndex: act ? 2 : 1, opacity: act ? 1 : 0.88, boxShadow: 'none',
+              }}
+            >
+              <span style={{ color: 'var(--text-subtle)', fontWeight: 900 }}>{n + 1}</span>
+              <span>{s.icon} {s.label}</span>
+              {s.criterion && <span style={{ fontSize: 10, fontWeight: 900, color: tc === 'var(--border-strong)' ? 'var(--text-subtle)' : tc }}>{s.criterion}</span>}
+              <span style={{ fontSize: 10.5, fontWeight: 800, color: spct >= 70 ? 'var(--success, #1FA98A)' : 'var(--text-subtle)' }}>{spct >= 70 ? '✓' : `${spct}%`}</span>
+            </button>
+          )
+        })}
+      </div>
+    )}
+    <div style={{ display: 'grid', gridTemplateColumns: journal ? 'minmax(0, 1fr)' : 'repeat(auto-fit, minmax(280px, 1fr))', gap: 14, alignItems: 'start' }}>
+      {(journal ? stage.sections.filter((x) => x.key === activeKey) : stage.sections).map((s) => {
         const pct = worksheetSectionPct(s, drafts[s.key])
-        const open = openSection === s.key
+        const open = journal || openSection === s.key
         return (
-          <div key={s.key} id={`ws-${s.key}`} style={{ ...cardStyle(pct >= 70 ? '#1FA98A' : 'var(--border)'), gridColumn: open ? '1 / -1' : undefined, scrollMarginTop: 72 }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', cursor: 'pointer' }} onClick={() => setOpenSection(open ? undefined : s.key)}>
+          <div key={s.key} id={`ws-${s.key}`} style={{ ...cardStyle(pct >= 70 ? '#1FA98A' : 'var(--border)'), gridColumn: open ? '1 / -1' : undefined, scrollMarginTop: 72, ...(journal ? { borderTopLeftRadius: 0 } : {}) }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', cursor: journal ? 'default' : 'pointer' }} onClick={() => { if (!journal) setOpenSection(open ? undefined : s.key) }}>
               <div style={{ fontWeight: 800 }}>
                 {s.icon} {s.label}
                 {s.criterion && <span style={{ marginLeft: 8 }}><StrandBadge strand={s.criterion} compact /></span>}
@@ -820,7 +872,7 @@ function WorksheetPlayer({
             </div>
             {open && (
               <div style={{ marginTop: 10, display: 'grid', gap: 10, maxWidth: s.fields.some((f) => f.type === 'personaChat') ? 960 : s.fields.some((f) => grade?.scores?.[revealKey(stage.key, s.key, f.key)]) ? 1180 : 720 }}>
-                <SectionMarker section={s} progress={criteriaProgress} present={criteriaPresent} />
+                <SectionMarker section={s} progress={criteriaProgress} present={criteriaPresent} hideRing={journal} />
                 {s.blurb && <div style={{ fontSize: 12.5, color: 'var(--text-muted)' }}>{s.blurb}</div>}
                 {s.fields.map((f) => (
                   <div key={f.key} style={{ display: 'grid', gap: 12, alignItems: 'start', gridTemplateColumns: grade?.scores?.[revealKey(stage.key, s.key, f.key)] ? 'repeat(auto-fit, minmax(300px, 1fr))' : 'minmax(0, 1fr)' }}>
@@ -841,9 +893,26 @@ function WorksheetPlayer({
                   })() : null}
                   </div>
                 ))}
-                <button onClick={() => saveSection(s.key)} style={{ ...btnStyle('#1FA98A', true), justifySelf: 'start' }}>
-                  {savedFlash === s.key ? '✅ Saved!' : '💾 Save'}
-                </button>
+                {journal ? (
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 10, flexWrap: 'wrap', paddingTop: 6, borderTop: '1.5px dashed var(--border-strong)' }}>
+                    <button onClick={() => { const i = stage.sections.findIndex((x) => x.key === s.key); if (i > 0) { saveSection(s.key); setOpenSection(stage.sections[i - 1].key); window.scrollTo({ top: 0, behavior: 'smooth' }) } }} disabled={stage.sections[0]?.key === s.key} style={btnStyle('var(--text-muted)')}>← Previous page</button>
+                    <button onClick={() => saveSection(s.key)} style={btnStyle('#1FA98A')}>{savedFlash === s.key ? '✅ Saved!' : '💾 Save'}</button>
+                    {(() => {
+                      const i = stage.sections.findIndex((x) => x.key === s.key)
+                      const isLast = i === stage.sections.length - 1
+                      if (isLast && !onNextStage) return null
+                      return (
+                        <button onClick={() => { saveSection(s.key); if (isLast) onNextStage?.(); else { setOpenSection(stage.sections[i + 1].key); window.scrollTo({ top: 0, behavior: 'smooth' }) } }} style={btnStyle('#1FA98A', true)}>
+                          {isLast ? 'Finish this stage → next stage' : 'Next page →'}
+                        </button>
+                      )
+                    })()}
+                  </div>
+                ) : (
+                  <button onClick={() => saveSection(s.key)} style={{ ...btnStyle('#1FA98A', true), justifySelf: 'start' }}>
+                    {savedFlash === s.key ? '✅ Saved!' : '💾 Save'}
+                  </button>
+                )}
               </div>
             )}
           </div>
