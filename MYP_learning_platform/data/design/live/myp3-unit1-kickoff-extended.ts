@@ -16,6 +16,10 @@
 //     with quick host-paced quizzes and worksheet sections that carry the strand
 //     they evidence. (Week 1 double + Week 2 in the planner.)
 //
+//   BLOCKS 3–5 — the rest of the design cycle (data in myp3-unit1-design-cycle.ts). A model Criterion A, then for B,
+//     C and D: an exemplar module (a worked "pattern knob" case), a quick check, and the worksheet where the student
+//     develops, makes and evaluates their OWN solution for the need they chose in Block 1.
+//
 // SELF-PACED: each student moves through the stages on their own, beginning at the
 // first new lesson (stage 2) because the original Unit 1 Kickoff quizzes come first and
 // were already done. The teacher's screen shows where everyone is. Block 1 ends at the
@@ -27,6 +31,7 @@
 
 import type { LiveActivityDefinition } from './types'
 import { MYP3_DIRECTION_EXEMPLARS, MYP3_PERSONA_EXEMPLARS } from './myp3-exemplars'
+import { DESIGN_CYCLE_STAGES } from './myp3-unit1-design-cycle'
 
 const CRITERION_A_LABELS = {
   'A.i': 'Explain and justify the need for a solution to a problem',
@@ -42,7 +47,7 @@ export const MYP3_UNIT1_KICKOFF_EXTENDED: LiveActivityDefinition = {
   id: 'myp3-unit1-kickoff-extended',
   year: 'MYP3',
   title: 'Unit 1 Kickoff — Extended',
-  subtitle: 'Self-paced, in two class blocks: find a worthwhile need and interview a user (single period), then plan your research, analyse products and write your brief (double period).',
+  subtitle: 'Self-paced run through the whole design cycle: find a need and interview a user (Block 1), research and write your brief (Block 2), then develop ideas (B), make the solution (C) and evaluate it (D), each with a worked exemplar.',
   icon: '🧭',
   theme: { accent: '#2456C9', from: '#0E1626', via: '#152238', to: '#1C2A40' },
   // Self-paced: students move through the stages themselves, starting AFTER the original
@@ -70,6 +75,8 @@ export const MYP3_UNIT1_KICKOFF_EXTENDED: LiveActivityDefinition = {
     'Which piece of evidence changed or confirmed your thinking, and how do you know it was reliable?',
     'Which of your assumptions about your user turned out to be wrong?',
     'Is it always possible to design something that balances how it looks, how well it works and its impact on the planet?',
+    'Which design decision you made most changed the final solution, and what evidence was it based on?',
+    'How did your test results change what you would design next?',
   ],
   stages: [
     // ================================================================ BLOCK 1
@@ -1090,17 +1097,31 @@ export const MYP3_UNIT1_KICKOFF_EXTENDED: LiveActivityDefinition = {
         },
       ],
     },
+    // ================================================ BLOCKS 3–5: B, C, D (see myp3-unit1-design-cycle.ts)
+    ...DESIGN_CYCLE_STAGES,
     {
       type: 'grading',
       key: 'grading',
-      label: 'Criterion A Review',
+      label: 'Criteria Review (A–D)',
       icon: '📋',
-      intro: { title: '📋 Criterion A: Inquiring and Analysing', blurb: 'Grade each student against A.i–A.iv (1–8) from their work across both blocks, using the fuzzy-match suggestions as a guide.' },
+      intro: { title: '📋 Criteria A–D review', blurb: 'Grade each student against every strand they have completed (1–8) from their work across all blocks, using the fuzzy-match suggestions as a guide. Leave a strand blank if it has not been reached.' },
       strands: [
         { key: 'A.i', label: 'A.i Explain and justify the need for a solution' },
         { key: 'A.ii', label: 'A.ii Construct a research plan, stating and prioritising primary and secondary research' },
         { key: 'A.iii', label: 'A.iii Analyse a group of similar products' },
         { key: 'A.iv', label: 'A.iv Develop a design brief that presents the analysis' },
+        { key: 'B.i', label: 'B.i Develop a design specification' },
+        { key: 'B.ii', label: 'B.ii Present a range of feasible design ideas' },
+        { key: 'B.iii', label: 'B.iii Present the chosen design and justify it' },
+        { key: 'B.iv', label: 'B.iv Develop accurate planning drawings' },
+        { key: 'C.i', label: 'C.i Construct a logical plan' },
+        { key: 'C.ii', label: 'C.ii Demonstrate excellent technical skills' },
+        { key: 'C.iii', label: 'C.iii Follow the plan to make a solution that functions' },
+        { key: 'C.iv', label: 'C.iv Justify changes to the design and plan' },
+        { key: 'D.i', label: 'D.i Design testing methods that generate data' },
+        { key: 'D.ii', label: 'D.ii Explain success against the specification' },
+        { key: 'D.iii', label: 'D.iii Explain how the solution could be improved' },
+        { key: 'D.iv', label: 'D.iv Explain the impact on the client or audience' },
       ],
     },
   ],

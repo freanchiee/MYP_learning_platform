@@ -904,7 +904,7 @@ function GradeCard({
               🎭 Interviewed <strong>{getPersona(personaChat.characterId)?.name || personaChat.characterId}</strong> — {personaChat.count} question{personaChat.count === 1 ? '' : 's'} asked
             </div>
           )}
-          <div style={{ display: 'grid', gridTemplateColumns: `repeat(${stage.strands.length}, 1fr)`, gap: 6 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: `repeat(auto-fill, minmax(${stage.strands.length > 6 ? 78 : 56}px, 1fr))`, gap: 6 }}>
             {stage.strands.map((s) => (
               <div key={s.key}>
                 <div style={{ fontSize: 10, fontWeight: 800, color: 'var(--text-muted)' }}>{s.key}</div>
