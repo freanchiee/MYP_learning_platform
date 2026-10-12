@@ -18,7 +18,7 @@ import ClassLookPicker from '@/components/teacher/ClassLookPicker'
 import { AssignLibrary, DeleteAssignmentButton, RemoveMemberButton, DeleteClassButton, ReopenSessionButton, UnlockNowButton, HostLessonLiveButton } from '@/components/teacher/ClassActions'
 import StudentAnswerPeek from '@/components/teacher/StudentAnswerPeek'
 import DownloadReportButton from '@/components/teacher/DownloadReportButton'
-import DownloadWorkButton from '@/components/teacher/DownloadWorkButton'
+import WorkPdfMenu from '@/components/teacher/WorkPdfMenu'
 import { buildWorkDoc } from '@/lib/design-live/studentWork'
 
 interface SessionRow { code: string; activity_id: string; status: string; created_at: string }
@@ -428,7 +428,7 @@ export default async function ClassPage({ params, searchParams }: { params: { id
                                       <StudentAnswerPeek activity={clientSafeActivity(activity)} playerId={c.playerId} playerName={m.name || 'Student'} sessionActive={s.status === 'active'} savedData={c.data ?? null}>
                                         <span style={{ color: 'var(--text)' }}>{c.text}</span>
                                       </StudentAnswerPeek>
-                                      <DownloadWorkButton doc={workDocFor(s, m.name || 'Student', activity, c.playerId, c.data ?? null)} />
+                                      <WorkPdfMenu doc={workDocFor(s, m.name || 'Student', activity, c.playerId, c.data ?? null)} />
                                     </>
                                   ) : (
                                     <span style={{ color: 'var(--text-subtle)' }}>{c.text}</span>

@@ -305,7 +305,7 @@ export function buildWorkPdf(doc: WorkDoc, images: ImageMap = {}): TDocumentDefi
         widths: ['*'],
         body: [[{
           stack: [
-            { text: 'DESIGN CYCLE PORTFOLIO  |  CRITABCD.COM', fontSize: 8, bold: true, color: tint(doc.accent, 0.78), characterSpacing: 1.6, link: shareUrl('work-pdf') },
+            { text: `${doc.scopeLabel ? doc.scopeLabel.toUpperCase() : 'DESIGN CYCLE PORTFOLIO'}  |  CRITABCD.COM`, fontSize: 8, bold: true, color: tint(doc.accent, 0.78), characterSpacing: 1.6, link: shareUrl('work-pdf') },
             { text: clean(doc.activityTitle), fontSize: 26, bold: true, color: '#FFFFFF', margin: [0, 4, 0, 0] },
             { text: clean(doc.student), fontSize: 15, color: '#FFFFFF', margin: [0, 4, 0, 0] },
             { text: `${clean(doc.className)}   |   ${doc.date}`, fontSize: 9, color: tint(doc.accent, 0.78), margin: [0, 2, 0, 12] },
@@ -343,7 +343,7 @@ export function buildWorkPdf(doc: WorkDoc, images: ImageMap = {}): TDocumentDefi
         ] as Content[])
       : []),
 
-    eyebrow('Progression through the design cycle'),
+    eyebrow(doc.scopeLabel ? `${doc.scopeLabel} - progress` : 'Progression through the design cycle'),
     cycleOverview(doc),
     eyebrow('Journey at a glance - strand by strand'),
     { text: '', margin: [0, 3] },
@@ -401,7 +401,7 @@ export function buildWorkPdf(doc: WorkDoc, images: ImageMap = {}): TDocumentDefi
     pageSize: 'A4',
     pageMargins: [40, 52, 40, 48],
     info: {
-      title: `${doc.activityTitle} - ${doc.student}`,
+      title: `${doc.activityTitle} - ${doc.student}${doc.scopeLabel ? ` - ${doc.scopeLabel}` : ''}`,
       author: 'CritABCD',
       subject: `Design cycle portfolio (criteria A-D) for ${doc.student}, ${doc.className}`,
       keywords: 'MYP Design, design cycle, criterion A, criterion B, criterion C, criterion D, student work',

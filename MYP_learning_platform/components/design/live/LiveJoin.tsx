@@ -27,6 +27,7 @@ import { CRITERION_LETTERS } from '@/lib/design-live/criteria'
 import { SustainabilityGamePlayer } from './game/SustainabilityGame'
 import { LearnPlayer } from './LearnStage'
 import ShareFooter from './ShareFooter'
+import MyWorkDownloads from './MyWorkDownloads'
 import { SelfPacedBar, navOf } from './SelfPaced'
 import { LeaderboardDrawer, useLeaderboardDrawer } from './HostChrome'
 import { getPersona } from '@/data/design/live/personas'
@@ -467,6 +468,11 @@ export default function LiveJoin({ activity, initialCode }: { activity: LiveActi
                 </div>
               )}
             </div>
+          )}
+          {/* At the end of the activity (the last stage reached, or once the session is over) the student can download
+              their own work: each criterion as Checkpoint 1 / Checkpoint 2 / all together, plus everything. */}
+          {canWork && (session.status === 'ended' || nav.max >= activity.stages.length - 1) && (
+            <MyWorkDownloads activity={activity} me={me} code={code} grade={myGrade} />
           )}
           {canWork && <ShareFooter accent={activity.theme.accent} />}
         </div>
