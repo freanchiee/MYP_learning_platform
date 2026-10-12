@@ -973,14 +973,44 @@ function FloatingPersonaChat({
   note?: string
 }) {
   const [open, setOpen] = useState(false)
+  // Drag the bubble anywhere: the offset from its default corner is kept on this device.
+  const [pos, setPos] = useState({ x: 0, y: 0 })
+  const dragRef = useRef<{ sx: number; sy: number; ox: number; oy: number; moved: boolean } | null>(null)
+  useEffect(() => { try { const r = JSON.parse(localStorage.getItem('myp:interview-pos') || 'null'); if (r && typeof r.x === 'number' && typeof r.y === 'number') setPos(r) } catch { /* ignore */ } }, [])
   const character = value?.characterId ? getPersona(value.characterId) : undefined
   if (!character) return null
+  const clamp = (x: number, y: number) => ({
+    x: Math.min(0, Math.max(x, 32 - window.innerWidth + rightOffset)),
+    y: Math.min(0, Math.max(y, 80 - window.innerHeight)),
+  })
+  const onDown = (e: React.PointerEvent) => {
+    dragRef.current = { sx: e.clientX, sy: e.clientY, ox: pos.x, oy: pos.y, moved: false }
+    ;(e.currentTarget as HTMLElement).setPointerCapture(e.pointerId)
+  }
+  const onMove = (e: React.PointerEvent) => {
+    const d = dragRef.current
+    if (!d) return
+    const dx = e.clientX - d.sx, dy = e.clientY - d.sy
+    if (!d.moved && Math.hypot(dx, dy) < 6) return
+    d.moved = true
+    setPos(clamp(d.ox + dx, d.oy + dy))
+  }
+  const onUp = () => {
+    const d = dragRef.current
+    dragRef.current = null
+    if (d?.moved) { try { localStorage.setItem('myp:interview-pos', JSON.stringify(pos)) } catch { /* ignore */ } } else setOpen((o) => !o)
+  }
   return (
-    <div style={{ position: 'fixed', right: 16 + rightOffset, bottom: 16, zIndex: 46, display: 'flex', flexDirection: 'column-reverse', alignItems: 'flex-end', gap: 8, maxWidth: 'calc(100vw - 32px)' }}>
+    <div style={{ position: 'fixed', right: 16 + rightOffset, bottom: 16, transform: `translate(${pos.x}px, ${pos.y}px)`, zIndex: 46, display: 'flex', flexDirection: pos.y < -window.innerHeight / 2 ? 'column' : 'column-reverse', alignItems: 'flex-end', gap: 8, maxWidth: 'calc(100vw - 32px)' }}>
       <button
-        onClick={() => setOpen(!open)}
+        onPointerDown={onDown}
+        onPointerMove={onMove}
+        onPointerUp={onUp}
+        onPointerCancel={() => { dragRef.current = null }}
+        onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setOpen(!open) } }}
         aria-expanded={open}
-        style={{ ...btnStyle('#5C3FD6', true), borderRadius: 999, padding: '9px 16px 9px 10px', fontSize: 13, display: 'flex', alignItems: 'center', gap: 8, boxShadow: '3px 3px 0 var(--text)' }}
+        title="Drag to move · tap to open"
+        style={{ ...btnStyle('#5C3FD6', true), touchAction: 'none', cursor: 'grab', userSelect: 'none', borderRadius: 999, padding: '9px 16px 9px 10px', fontSize: 13, display: 'flex', alignItems: 'center', gap: 8, boxShadow: '3px 3px 0 var(--text)' }}
       >
         <Avatar seed={character.id} size={26} />
         {open ? `✕ Close chat with ${character.name}` : `💬 Interview ${character.name}`}
