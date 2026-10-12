@@ -8,9 +8,9 @@ import { createClient } from '@/lib/supabase/client'
 
 export const cardStyle = (accent?: string): CSSProperties => ({
   background: 'var(--surface)',
-  border: '2.5px solid var(--text)',
+  border: 'var(--lv-card-border, 2.5px solid var(--text))',
   borderRadius: 'var(--radius-card)',
-  boxShadow: `4px 4px 0 ${accent || 'var(--text)'}`,
+  boxShadow: `var(--lv-card-shadow, 4px 4px 0 ${accent || 'var(--text)'})`,
   padding: 18,
   color: 'var(--text)',
 })
@@ -20,11 +20,11 @@ export const btnStyle = (color: string, filled = false, big = false): CSSPropert
   fontSize: big ? 16 : 14,
   cursor: 'pointer',
   background: filled ? color : 'var(--surface)',
-  color: filled ? '#fff' : 'var(--text)',
-  border: '2.5px solid var(--text)',
-  borderRadius: 10,
+  color: filled ? 'var(--lv-on-fill, #fff)' : 'var(--text)',
+  border: 'var(--lv-btn-border, 2.5px solid var(--text))',
+  borderRadius: 'var(--lv-btn-radius, 10px)',
   padding: big ? '13px 22px' : '9px 15px',
-  boxShadow: '3px 3px 0 var(--text)',
+  boxShadow: 'var(--lv-btn-shadow, 3px 3px 0 var(--text))',
 })
 
 export const inputStyle: CSSProperties = {
@@ -42,7 +42,9 @@ export function pageBg(theme: LiveTheme): CSSProperties {
   return {
     minHeight: '100vh',
     padding: '24px 16px 60px',
-    background: `linear-gradient(160deg, ${theme.from} 0%, ${theme.via} 55%, ${theme.to} 100%)`,
+    // The live student themes (shell/liveThemes.css) swap these through CSS variables; unset, nothing changes.
+    background: `var(--lv-page-bg, linear-gradient(160deg, ${theme.from} 0%, ${theme.via} 55%, ${theme.to} 100%))`,
+    fontFamily: 'var(--lv-font-ui, inherit)',
   }
 }
 

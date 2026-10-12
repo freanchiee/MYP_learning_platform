@@ -6,6 +6,9 @@ export const CRITERIA: Record<string, { name: string; color: string }> = {
   D: { name: 'Evaluating', color: '#1FA98A' },
 }
 
+/** A criterion's colour as a CSS value. The live student themes may re-tint it (--lv-crit-a…d, e.g. lighter on a dark theme); unset, it is the constant above. */
+export const critColor = (letter: string) => `var(--lv-crit-${letter.toLowerCase()}, ${CRITERIA[letter]?.color ?? '#6B7280'})`
+
 export const CRITERION_LETTERS = ['A', 'B', 'C', 'D'] as const
 
 /** 'A.ii' -> { letter: 'A', name: 'Inquiring and analysing', color }. Non-criterion tags ('Reflection') get an empty letter. */
