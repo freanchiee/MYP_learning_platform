@@ -1,0 +1,159 @@
+/* ============================================================================
+   LIVE STUDENT LOOKS — Journal · Quest · Editorial · Pop
+   ----------------------------------------------------------------------------
+   Scope: the self-paced live-class student workspace ONLY. Every rule hangs off
+   [data-live-theme="…"], an attribute LiveJoin sets on its own page wrapper (and
+   only while the workspace shell is on). "Classic" sets no attribute, so it is the
+   unthemed UI. Nothing here touches the platform-wide Atlas themes (app/themes.css).
+
+   How a look works
+   1. It re-declares the semantic tokens the live UI already reads (--surface, --text,
+      --border, --radius-card …) for this subtree only.
+   2. It sets the --lv-* hooks that ui.tsx / StudentShell read with built-in fallbacks
+      (--lv-card-shadow, --lv-btn-radius, --lv-accent, --lv-crit-a…d, --lv-page-bg …).
+   3. For things drawn with inline styles it overrides the cs-* class hooks with
+      !important (tabs, header, progress bar, leaderboard).
+   Fonts come from lib/design-live/liveFonts.ts (--lv-f-*), loaded only when used.
+   ========================================================================== */
+
+/* ── shared by every look ─────────────────────────────────────────────────── */
+[data-live-theme] { font-family: var(--lv-font-ui); color: var(--text); }
+[data-live-theme] button, [data-live-theme] input, [data-live-theme] textarea, [data-live-theme] select { font-family: inherit; }
+[data-live-theme] button { min-height: 40px; }
+[data-live-theme] .cs-mini button { min-height: 0; }
+[data-live-theme] :focus-visible { outline: 3px solid var(--lv-focus, currentColor); outline-offset: 2px; }
+[data-live-theme] .cs-rings, [data-live-theme] .cs-spine { display: none; }
+[data-live-theme] .cs-spine-tab:disabled { opacity: .4; cursor: not-allowed; }
+
+/* ═════════════════════════════ 1 · JOURNAL ═════════════════════════════════ */
+[data-live-theme="journal"] {
+  --surface: #FFFDF6; --surface-2: #F6EDD6; --text: #2A2733; --text-muted: #4A4553; --text-subtle: #5B5566;
+  --border: #D9CDB0; --border-strong: #8C7E62; --accent-soft: #EAF1FF; --accent-2: #2DD4BF; --success: #15803D;
+  --radius-card: 12px; --radius-control: 10px;
+  --lv-accent: #1D4ED8; --lv-interview: #7E22CE; --lv-focus: #1D4ED8; --lv-on-fill: #fff; --lv-on-crit: #fff;
+  --lv-crit-a: #1D4ED8; --lv-crit-b: #7E22CE; --lv-crit-c: #C2410C; --lv-crit-d: #15803D;
+  --lv-page-bg: radial-gradient(#D8C9A8 1.2px, transparent 1.2px) 0 0 / 20px 20px, #E6D9BE;
+  --lv-font-ui: var(--lv-f-hanken), system-ui, sans-serif;
+  --lv-card-shadow: 3px 4px 0 rgba(42,39,51,.35);
+  --lv-btn-shadow: 2px 3px 0 rgba(42,39,51,.85); --lv-btn-radius: 10px;
+  --lv-tab-radius: 6px 14px 14px 6px; --lv-tab-cur-transform: translateX(10px); --lv-tab-cur-shadow: 4px 5px 0 rgba(29,78,216,.35);
+}
+/* the notebook: tan cover, ruled dotted paper, ring binding, index tabs on the spine */
+[data-live-theme="journal"] .cs-grid {
+  position: relative; margin-left: 46px; padding: 18px 18px 18px 42px; border-radius: 12px; border: 2px solid #2A2733;
+  background: radial-gradient(#E9DDBF 1px, transparent 1px) 0 0 / 18px 18px, #FBF5E6;
+  box-shadow: 0 0 0 10px #B58A58, 0 0 0 12px #2A2733, 10px 14px 0 12px rgba(42,39,51,.28);
+}
+[data-live-theme="journal"] .cs-rings { display: flex; flex-direction: column; justify-content: space-between; position: absolute; left: -22px; top: 30px; bottom: 30px; z-index: 3; pointer-events: none; }
+[data-live-theme="journal"] .cs-rings i { display: block; position: relative; width: 38px; height: 11px; border-radius: 6px; border: 1.5px solid #4B4B57; background: linear-gradient(#E4E4EA, #8E8E9A); box-shadow: 0 2px 0 rgba(0,0,0,.18); }
+[data-live-theme="journal"] .cs-rings i::after { content: ''; position: absolute; right: -12px; top: 50%; width: 10px; height: 10px; margin-top: -5px; border-radius: 50%; background: #6E5E42; box-shadow: inset 0 2px 0 rgba(0,0,0,.35); }
+[data-live-theme="journal"] .cs-spine { display: grid; gap: 10px; position: absolute; left: -62px; top: 150px; z-index: 4; }
+[data-live-theme="journal"] .cs-spine-tab { width: 46px; min-height: 64px; border: 2px solid #2A2733; border-right: 0; border-radius: 14px 0 0 14px; color: #fff; font-weight: 800; font-size: 20px; cursor: pointer; box-shadow: -3px 3px 0 rgba(42,39,51,.3); }
+[data-live-theme="journal"] .cs-spine-tab[data-cur="true"] { width: 60px; margin-left: -14px; min-height: 74px; outline: 3px solid #fff; }
+[data-live-theme="journal"] .cs-nav, [data-live-theme="pop"] .cs-nav { overflow: visible !important; }
+/* handwriting + washi tape */
+[data-live-theme="journal"] .cs-title { font-family: var(--lv-f-caveat), cursive !important; font-size: 32px !important; font-weight: 700 !important; line-height: 1.05 !important; }
+[data-live-theme="journal"] .cs-kicker { display: inline-block; padding: 2px 12px; background: rgba(147,180,250,.6); border-left: 3px dotted #fff; border-right: 3px dotted #fff; color: #1E3A8A !important; }
+[data-live-theme="journal"] .cs-bar::before, [data-live-theme="journal"] .cs-bar::after { content: ''; position: absolute; top: -9px; width: 78px; height: 24px; border-inline: 3px dotted rgba(255,255,255,.75); pointer-events: none; }
+[data-live-theme="journal"] .cs-bar::before { left: -16px; transform: rotate(-38deg); background: rgba(243,198,76,.85); }
+[data-live-theme="journal"] .cs-bar::after { right: -16px; transform: rotate(38deg); background: rgba(244,162,180,.85); }
+[data-live-theme="journal"] .cs-overall { height: 18px !important; border: 2px solid #2A2733 !important; background: #FFFDF6 !important; }
+[data-live-theme="journal"] .cs-overall-fill { background: linear-gradient(90deg, #1D4ED8, #2DD4BF) !important; border-right: 2px solid #2A2733; }
+[data-live-theme="journal"] .cs-profile { background-image: repeating-linear-gradient(to bottom, transparent 0, transparent 31px, #D3DFEA 31px, #D3DFEA 32px) !important; }
+[data-live-theme="journal"] aside[aria-label="Class leaderboard"], [data-live-theme="journal"] button[aria-label="Open class leaderboard"] {
+  background: #FFFDF6 !important; backdrop-filter: none !important; border: 2px solid #2A2733 !important; border-radius: 12px !important; box-shadow: 3px 4px 0 rgba(42,39,51,.35) !important;
+}
+
+/* ═════════════════════════════ 2 · QUEST (dark) ════════════════════════════ */
+[data-live-theme="quest"] {
+  color-scheme: dark;
+  --surface: #161B25; --surface-2: #1E2635; --text: #E8ECF4; --text-muted: #C3CCDD; --text-subtle: #9AA5B8;
+  --border: #2B3345; --border-strong: #4A5670; --accent-soft: rgba(96,165,250,.16); --accent-2: #C084FC; --success: #4ADE80;
+  --radius-card: 16px; --radius-control: 12px;
+  --lv-accent: #60A5FA; --lv-interview: #C4A8FF; --lv-focus: #93C5FD; --lv-on-fill: #0B1020; --lv-on-crit: #0B1020;
+  --lv-crit-a: #60A5FA; --lv-crit-b: #C084FC; --lv-crit-c: #FB923C; --lv-crit-d: #4ADE80;
+  --lv-page-bg: radial-gradient(1200px 500px at 50% -10%, #18233A 0, #0E1219 60%), #0E1219;
+  --lv-font-ui: var(--lv-f-plex), system-ui, sans-serif;
+  --lv-card-border: 1px solid #2B3345; --lv-card-shadow: 0 12px 40px rgba(0,0,0,.4);
+  --lv-btn-border: 1px solid #3A455C; --lv-btn-radius: 12px; --lv-btn-shadow: 0 6px 18px rgba(0,0,0,.35);
+  --lv-tab-radius: 0 14px 14px 0; --lv-tab-cur-shadow: 0 0 28px rgba(96,165,250,.28);
+}
+/* the stage list becomes a quest path: a rail with a node per stage */
+[data-live-theme="quest"] .cs-ol { position: relative; }
+[data-live-theme="quest"] .cs-ol::before { content: ''; position: absolute; left: 21px; top: 0; bottom: 0; width: 2px; background: #3A455C; }
+[data-live-theme="quest"] .cs-tab { position: relative; z-index: 1; background: transparent !important; border: 1px solid transparent !important; border-left-width: 3px !important; }
+[data-live-theme="quest"] .cs-tab[aria-current="step"] { background: linear-gradient(90deg, rgba(96,165,250,.22), rgba(96,165,250,.06)) !important; border-color: #60A5FA !important; }
+[data-live-theme="quest"] .cs-num { position: relative; box-shadow: 0 0 0 3px var(--surface); }
+[data-live-theme="quest"] .cs-tab[aria-current="step"] .cs-num { box-shadow: 0 0 0 3px var(--surface), 0 0 14px rgba(96,165,250,.8); }
+[data-live-theme="quest"] .cs-group { position: relative; z-index: 1; padding: 2px 0; background: var(--surface); }
+[data-live-theme="quest"] .cs-title { font-family: var(--lv-f-sora), sans-serif !important; font-size: 23px !important; font-weight: 700 !important; }
+[data-live-theme="quest"] .cs-kicker, [data-live-theme="quest"] .cs-pct { font-family: var(--lv-f-dmmono), monospace; }
+[data-live-theme="quest"] .cs-bar { border-color: #3A5A93 !important; box-shadow: 0 0 0 1px rgba(96,165,250,.15), 0 12px 40px rgba(0,0,0,.4) !important; }
+[data-live-theme="quest"] .cs-overall { height: 16px !important; background: #2B3345 !important; }
+[data-live-theme="quest"] .cs-overall-fill { background: #FBBF24 !important; }
+[data-live-theme="quest"] .cs-pct { color: #FBBF24; font-size: 13.5px !important; }
+[data-live-theme="quest"] .cs-next { box-shadow: 0 0 0 4px rgba(96,165,250,.22), 0 8px 24px rgba(96,165,250,.35) !important; }
+[data-live-theme="quest"] .cs-dial svg { filter: drop-shadow(0 0 6px rgba(96,165,250,.35)); }
+[data-live-theme="quest"] aside[aria-label="Class leaderboard"], [data-live-theme="quest"] button[aria-label="Open class leaderboard"] { border: 1px solid #2B3345 !important; box-shadow: 0 12px 40px rgba(0,0,0,.45) !important; }
+
+/* ═════════════════════════════ 3 · EDITORIAL ═══════════════════════════════ */
+[data-live-theme="editorial"] {
+  --surface: #FFFFFF; --surface-2: #F7F6F1; --text: #111111; --text-muted: #333333; --text-subtle: #555555;
+  --border: #D6D3CA; --border-strong: #111111; --accent-soft: #EAF1FF; --accent-2: #1D4ED8; --success: #15803D;
+  --radius-card: 2px; --radius-control: 2px;
+  --lv-accent: #1D4ED8; --lv-interview: #7E22CE; --lv-focus: #1D4ED8; --lv-on-fill: #fff; --lv-on-crit: #fff;
+  --lv-crit-a: #1D4ED8; --lv-crit-b: #7E22CE; --lv-crit-c: #C2410C; --lv-crit-d: #15803D;
+  --lv-page-bg: #F7F6F1;
+  --lv-font-ui: var(--lv-f-space), system-ui, sans-serif;
+  --lv-card-border: 1px solid #111; --lv-card-shadow: none;
+  --lv-btn-border: 2px solid #111; --lv-btn-radius: 2px; --lv-btn-shadow: none;
+  --lv-tab-radius: 0; --lv-tab-cur-shadow: none; --lv-tab-cur-transform: none;
+}
+[data-live-theme="editorial"] .cs-profile, [data-live-theme="editorial"] .cs-nav, [data-live-theme="editorial"] .cs-foot { border-top: 3px solid #111 !important; }
+[data-live-theme="editorial"] .cs-tab { background: transparent !important; border: 0 !important; border-bottom: 1px solid #D6D3CA !important; box-shadow: none !important; border-radius: 0 !important; }
+[data-live-theme="editorial"] .cs-tab[aria-current="step"] { background: #111 !important; color: #fff !important; border-bottom-color: #111 !important; clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 50%, calc(100% - 12px) 100%, 0 100%); }
+[data-live-theme="editorial"] .cs-tab[aria-current="step"] span { color: #fff !important; }
+[data-live-theme="editorial"] .cs-tab[aria-current="step"] .cs-num { background: #1D4ED8 !important; }
+[data-live-theme="editorial"] .cs-group { padding-top: 8px; border-top: 3px solid #111; }
+[data-live-theme="editorial"] .cs-bar { background: transparent !important; border: 0 !important; border-top: 3px solid #111 !important; border-bottom: 1px solid #111 !important; box-shadow: none !important; }
+[data-live-theme="editorial"] .cs-title { font-size: 34px !important; font-weight: 700 !important; letter-spacing: -.03em !important; line-height: 1.05 !important; }
+[data-live-theme="editorial"] .cs-kicker { font-family: var(--lv-f-dmmono), monospace; font-weight: 500 !important; font-size: 12.5px !important; }
+[data-live-theme="editorial"] .cs-overall { height: 18px !important; border: 2px solid #111 !important; border-radius: 0 !important; background: #E3E0D6 !important; }
+[data-live-theme="editorial"] .cs-overall-fill { background: #111 !important; }
+[data-live-theme="editorial"] .cs-pct { font-size: 26px !important; letter-spacing: -.03em; min-width: 110px !important; }
+[data-live-theme="editorial"] aside[aria-label="Class leaderboard"], [data-live-theme="editorial"] button[aria-label="Open class leaderboard"] { border: 1px solid #111 !important; border-top: 3px solid #111 !important; border-radius: 2px !important; box-shadow: none !important; background: #fff !important; backdrop-filter: none !important; }
+
+/* ═════════════════════════════ 4 · POP BLOCKS ══════════════════════════════ */
+[data-live-theme="pop"] {
+  --surface: #FFFFFF; --surface-2: #FFFFFF; --text: #111111; --text-muted: #2B2B2B; --text-subtle: #4A4A4A;
+  --border: #E5E1D6; --border-strong: #111111; --accent-soft: #CFE2FF; --accent-2: #FFD23F; --success: #4FD67A;
+  --radius-card: 18px; --radius-control: 13px;
+  --lv-accent: #5B9DFF; --lv-interview: #B388FF; --lv-focus: #111; --lv-on-fill: #111; --lv-on-crit: #111;
+  --lv-crit-a: #5B9DFF; --lv-crit-b: #B388FF; --lv-crit-c: #FF9A3C; --lv-crit-d: #4FD67A;
+  --lv-page-bg: radial-gradient(#D9D3C3 1.5px, transparent 1.5px) 0 0 / 22px 22px, #F4F1EA;
+  --lv-font-ui: var(--lv-f-lexend), system-ui, sans-serif;
+  --lv-card-border: 3px solid #111; --lv-card-shadow: 6px 6px 0 #111;
+  --lv-btn-border: 3px solid #111; --lv-btn-radius: 14px; --lv-btn-shadow: 4px 4px 0 #111;
+  --lv-tab-radius: 13px; --lv-tab-cur-transform: translateX(10px) rotate(-1deg); --lv-tab-cur-shadow: 6px 6px 0 #111;
+}
+[data-live-theme="pop"] button:active { translate: 2px 2px; }
+[data-live-theme="pop"] .cs-tab { border-width: 2.5px !important; border-color: #111 !important; border-left-width: 8px !important; box-shadow: 3px 3px 0 #111; }
+[data-live-theme="pop"] .cs-tab[aria-current="step"] { background: #FFD23F !important; box-shadow: 6px 6px 0 #111 !important; }
+[data-live-theme="pop"] .cs-tab[aria-current="step"] .cs-num { background: #111 !important; color: #fff !important; }
+[data-live-theme="pop"] .cs-group { display: inline-block; padding: 3px 10px !important; border: 2.5px solid #111; border-left: 10px solid currentColor; border-radius: 12px; background: #fff; }
+[data-live-theme="pop"] .cs-group-t { color: #111; }
+[data-live-theme="pop"] .cs-title { font-size: 26px !important; font-weight: 800 !important; letter-spacing: -.02em; }
+[data-live-theme="pop"] .cs-kicker { display: inline-block; padding: 1px 8px; background: #CFE2FF; border: 2px solid #111; border-radius: 8px; color: #111 !important; }
+[data-live-theme="pop"] .cs-overall { height: 28px !important; border: 3px solid #111; border-radius: 16px !important; background: #fff !important; }
+[data-live-theme="pop"] .cs-overall-fill { background: repeating-linear-gradient(135deg, #FFD23F 0 12px, #FFC300 12px 24px) !important; border-right: 3px solid #111; }
+[data-live-theme="pop"] .cs-next { background: #FFD23F !important; color: #111 !important; font-weight: 800; }
+[data-live-theme="pop"] .cs-dial svg path { stroke: #111 !important; stroke-width: 2px !important; }
+[data-live-theme="pop"] aside[aria-label="Class leaderboard"], [data-live-theme="pop"] button[aria-label="Open class leaderboard"] { background: #FFF7D6 !important; backdrop-filter: none !important; border: 3px solid #111 !important; border-radius: 18px !important; box-shadow: 6px 6px 0 #111 !important; }
+
+/* ── phones: the decorative notebook goes away, everything else just re-tints ── */
+@media (max-width: 920px) {
+  [data-live-theme="journal"] .cs-grid { margin-left: 0; padding: 0; background: none; border: 0; box-shadow: none; }
+  [data-live-theme="journal"] .cs-rings, [data-live-theme="journal"] .cs-spine { display: none; }
+  [data-live-theme="journal"] .cs-bar::before, [data-live-theme="journal"] .cs-bar::after { display: none; }
+}
+@media (prefers-reduced-motion: reduce) { [data-live-theme] * { transition: none !important; } }

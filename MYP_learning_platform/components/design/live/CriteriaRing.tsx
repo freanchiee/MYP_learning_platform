@@ -1,5 +1,5 @@
 'use client'
-import { CRITERIA, CRITERION_LETTERS } from '@/lib/design-live/criteria'
+import { CRITERIA, CRITERION_LETTERS, critColor } from '@/lib/design-live/criteria'
 
 const polar = (cx: number, cy: number, r: number, deg: number) => {
   const a = ((deg - 90) * Math.PI) / 180
@@ -29,14 +29,14 @@ export function CriteriaRing({ current, progress, present, size = 132 }: { curre
         const a0 = i * 90 + 3, a1 = i * 90 + 87
         const isCur = current === l
         const on = present.includes(l)
-        const c = CRITERIA[l].color
+        const c = critColor(l)
         const r0 = isCur ? 30 : 34, r1 = isCur ? 58 : 52
         const pct = Math.max(0, Math.min(100, progress[l] ?? 0))
         const [lx, ly] = polar(cx, cy, (r0 + r1) / 2, (a0 + a1) / 2)
         return (
           <g key={l} opacity={on ? 1 : 0.35}>
-            <path d={seg(cx, cy, r0, r1, a0, a1)} fill={c} fillOpacity={isCur ? 0.35 : 0.18} stroke={c} strokeWidth={isCur ? 2.5 : 1} strokeDasharray={on ? undefined : '3 3'} />
-            {pct > 0 && <path d={seg(cx, cy, r0, r1, a0, a0 + ((a1 - a0) * pct) / 100)} fill={c} fillOpacity={isCur ? 0.95 : 0.75} />}
+            <path d={seg(cx, cy, r0, r1, a0, a1)} style={{ fill: c, stroke: c }} fillOpacity={isCur ? 0.35 : 0.18} strokeWidth={isCur ? 2.5 : 1} strokeDasharray={on ? undefined : '3 3'} />
+            {pct > 0 && <path d={seg(cx, cy, r0, r1, a0, a0 + ((a1 - a0) * pct) / 100)} style={{ fill: c }} fillOpacity={isCur ? 0.95 : 0.75} />}
             <text x={lx} y={ly} textAnchor="middle" dominantBaseline="central" fontSize={isCur ? 20 : 15} fontWeight={900} fill="var(--text)" style={{ paintOrder: 'stroke', stroke: 'var(--surface)', strokeWidth: 3 }}>{l}</text>
           </g>
         )

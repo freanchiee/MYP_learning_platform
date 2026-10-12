@@ -29,6 +29,8 @@ import { LearnPlayer } from './LearnStage'
 import ShareFooter from './ShareFooter'
 import MyWorkDownloads from './MyWorkDownloads'
 import StudentShell from './shell/StudentShell'
+import { LIVE_FONT_CLASSES } from '@/lib/design-live/liveFonts'
+import { useLiveTheme } from '@/lib/design-live/liveTheme'
 import { SelfPacedBar, navOf } from './SelfPaced'
 import { LeaderboardDrawer, useLeaderboardDrawer } from './HostChrome'
 import { getPersona } from '@/data/design/live/personas'
@@ -75,6 +77,8 @@ export default function LiveJoin({ activity, initialCode }: { activity: LiveActi
   const [session, setSession] = useState<LiveSessionRow | null>(null)
   const [players, setPlayers] = useState<LivePlayerRow[]>([])
   const lb = useLeaderboardDrawer()
+  // The student's chosen look for the self-paced workspace (remembered on this device). Only applied when the workspace is on.
+  const [liveTheme, setLiveTheme] = useLiveTheme()
   const [me, setMe] = useState<LivePlayerRow | null>(null)
   // When this browser last saved something to the student's own row. The poll that refreshes `me` from the
   // server can return a copy from just BEFORE that save landed; applying it would snap the student back
@@ -352,7 +356,11 @@ export default function LiveJoin({ activity, initialCode }: { activity: LiveActi
   const contentWidth = shellOn ? '100%' : stageIsNarrow ? 560 : stage?.type === 'learn' || selfPaced ? 800 : '100%'
 
   return (
-    <div style={{ ...pageBg(activity.theme), paddingRight: 16 + (canWork && selfPaced ? lb.reserve : 0), transition: 'padding-right .25s' }}>
+    <div
+      className={shellOn ? LIVE_FONT_CLASSES : undefined}
+      data-live-theme={shellOn && liveTheme !== 'default' ? liveTheme : undefined}
+      style={{ ...pageBg(activity.theme), paddingRight: 16 + (canWork && selfPaced ? lb.reserve : 0), transition: 'padding-right .25s' }}
+    >
       {canWork && selfPaced && <LeaderboardDrawer activity={activity} code={code} me={me} open={lb.open} onToggle={lb.setOpen} />}
       <div style={{ maxWidth: 'min(1180px, 94vw)', margin: '0 auto', display: 'grid', gap: 18 }}>
         {!shellOn && <div style={{ maxWidth: 480, width: '100%', margin: '0 auto', textAlign: 'center', color: '#fff', display: 'grid', justifyItems: 'center', gap: 6 }}>
@@ -374,7 +382,7 @@ export default function LiveJoin({ activity, initialCode }: { activity: LiveActi
           )}
         </div>}
 
-        <StudentShell enabled={shellOn} activity={activity} me={me} code={code} grade={myGrade} idx={myIdx} maxIdx={nav.max} onGo={goStage}>
+        <StudentShell enabled={shellOn} activity={activity} me={me} code={code} grade={myGrade} idx={myIdx} maxIdx={nav.max} onGo={goStage} theme={liveTheme} onTheme={setLiveTheme}>
 
         <div style={{ maxWidth: contentWidth, width: '100%', margin: '0 auto', display: 'grid', gap: 14 }}>
           <BadgeRow badges={me.badges} />
@@ -527,7 +535,7 @@ function StudentChatToggle({ sessionCode, me, accent }: { sessionCode: string; m
           <ChatPanel sessionCode={sessionCode} playerId={me.id} playerName={me.name} asHost={false} accent={accent} />
         </div>
       )}
-      <button onClick={() => setOpen(!open)} style={{ ...btnStyle(accent, true), borderRadius: 999, padding: '10px 16px', fontSize: 13, boxShadow: '3px 3px 0 var(--text)' }}>
+      <button onClick={() => setOpen(!open)} style={{ ...btnStyle(`var(--lv-accent, ${accent})`, true), borderRadius: 999, padding: '10px 16px', fontSize: 13, boxShadow: 'var(--lv-btn-shadow, 3px 3px 0 var(--text))' }}>
         {open ? '✕ Close chat' : '💬 Chat with your teacher'}
       </button>
     </div>
@@ -1010,7 +1018,7 @@ function FloatingPersonaChat({
         onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setOpen(!open) } }}
         aria-expanded={open}
         title="Drag to move · tap to open"
-        style={{ ...btnStyle('#5C3FD6', true), touchAction: 'none', cursor: 'grab', userSelect: 'none', borderRadius: 999, padding: '9px 16px 9px 10px', fontSize: 13, display: 'flex', alignItems: 'center', gap: 8, boxShadow: '3px 3px 0 var(--text)' }}
+        style={{ ...btnStyle('var(--lv-interview, #5C3FD6)', true), touchAction: 'none', cursor: 'grab', userSelect: 'none', borderRadius: 999, padding: '9px 16px 9px 10px', fontSize: 13, display: 'flex', alignItems: 'center', gap: 8, boxShadow: 'var(--lv-btn-shadow, 3px 3px 0 var(--text))' }}
       >
         <Avatar seed={character.id} size={26} />
         {open ? `✕ Close chat with ${character.name}` : `💬 Interview ${character.name}`}
