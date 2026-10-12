@@ -91,6 +91,8 @@ export interface WorkDoc {
   quizzes: WorkQuiz[]
   stageFeedback: { stage: string; stars: number; liked?: string; improve?: string }[]
   grade?: { strands: { key: string; label: string; score: number }[]; feedback: string }
+  /** Set on a PDF that covers only part of the work, e.g. 'Criterion A · Checkpoint 1 of 2'. */
+  scopeLabel?: string
 }
 
 const ROMAN = ['i', 'ii', 'iii', 'iv', 'v', 'vi']
@@ -246,5 +248,74 @@ export function buildWorkDoc(
     quizzes,
     stageFeedback,
     grade,
+  }
+}
+
+// ---------------------------------------------------------------- criterion checkpoints
+// A student's work can be downloaded as: everything, one PDF per criterion, or each criterion split into two
+// CHECKPOINTS (so a long criterion can be handed in or marked in two sittings). The split falls on a strand
+// boundary (A.i-A.ii | A.iii-A.iv); a criterion with a single strand is split by section instead; a criterion
+// too small to split has just the one PDF. Which criteria exist depends on the activity.
+
+export interface PdfScope { criterion: string; checkpoint?: 1 | 2 }
+export interface PdfScopeOption { id: string; label: string; detail?: string; kind: 'all' | 'criterion' | 'checkpoint'; criterion?: string; scope?: PdfScope }
+
+const statusOf = (pct: number): WorkStrand['status'] => (pct >= 60 ? 'complete' : pct > 0 ? 'partial' : 'none')
+const avg = (ns: number[]) => (ns.length ? Math.round(ns.reduce((a, b) => a + b, 0) / ns.length) : 0)
+
+/** The two halves of a criterion's strands: [checkpoint 1, checkpoint 2]. Checkpoint 2 is empty when it cannot be split. */
+export function splitCheckpoints(c: WorkCriterion): [WorkStrand[], WorkStrand[]] {
+  if (c.strands.length >= 2) {
+    const mid = Math.ceil(c.strands.length / 2)
+    return [c.strands.slice(0, mid), c.strands.slice(mid)]
+  }
+  const only = c.strands[0]
+  if (!only || only.sections.length < 2) return [c.strands, []]
+  const mid = Math.ceil(only.sections.length / 2)
+  const part = (sections: WorkSection[]): WorkStrand => {
+    const pct = avg(sections.map((x) => x.pct))
+    return { ...only, sections, pct, status: statusOf(pct) }
+  }
+  return [[part(only.sections.slice(0, mid))], [part(only.sections.slice(mid))]]
+}
+
+const strandRange = (ss: WorkStrand[]) => (ss.length > 1 ? `${ss[0].key} to ${ss[ss.length - 1].key}` : ss[0]?.key ?? '')
+
+/** The downloads on offer for a piece of work: only for the criteria it actually has. */
+export function listPdfScopes(doc: WorkDoc): PdfScopeOption[] {
+  const out: PdfScopeOption[] = []
+  for (const c of doc.criteria) {
+    if (!c.letter) continue
+    const [one, two] = splitCheckpoints(c)
+    if (two.length) {
+      out.push({ id: `${c.letter}1`, kind: 'checkpoint', criterion: c.letter, label: `Criterion ${c.letter} · Checkpoint 1`, detail: strandRange(one), scope: { criterion: c.letter, checkpoint: 1 } })
+      out.push({ id: `${c.letter}2`, kind: 'checkpoint', criterion: c.letter, label: `Criterion ${c.letter} · Checkpoint 2`, detail: strandRange(two), scope: { criterion: c.letter, checkpoint: 2 } })
+    }
+    out.push({ id: `${c.letter}`, kind: 'criterion', criterion: c.letter, label: two.length ? `Criterion ${c.letter} · all together` : `Criterion ${c.letter}`, detail: strandRange(c.strands), scope: { criterion: c.letter } })
+  }
+  out.push({ id: 'all', kind: 'all', label: doc.criteria.some((c) => c.letter) ? 'Everything' : 'My work', scope: undefined })
+  return out
+}
+
+/** The same work document narrowed to one criterion, or one checkpoint of it. */
+export function scopeDoc(doc: WorkDoc, scope?: PdfScope): WorkDoc {
+  if (!scope) return doc
+  const crit = doc.criteria.find((c) => c.letter === scope.criterion)
+  if (!crit) return doc
+  const [one, two] = splitCheckpoints(crit)
+  const strands = scope.checkpoint === 1 ? one : scope.checkpoint === 2 ? two : crit.strands
+  const pct = avg(strands.map((s) => s.pct))
+  const kept = new Set(strands.map((s) => s.key))
+  const sections = strands.flatMap((s) => s.sections)
+  const label = scope.checkpoint ? `Criterion ${crit.letter} · Checkpoint ${scope.checkpoint} of 2` : `Criterion ${crit.letter}`
+  return {
+    ...doc,
+    scopeLabel: label,
+    criteria: [{ ...crit, strands, pct }],
+    completionPct: avg(sections.map((x) => x.pct)),
+    wordCount: sections.reduce((n, sec) => n + sec.items.reduce((m, it) => m + itemWords(it), 0), 0),
+    quizzes: [],
+    stageFeedback: [],
+    grade: doc.grade ? { ...doc.grade, strands: doc.grade.strands.filter((g) => kept.has(g.key) || (scope.checkpoint ? false : g.key.startsWith(`${crit.letter}.`))) } : undefined,
   }
 }
