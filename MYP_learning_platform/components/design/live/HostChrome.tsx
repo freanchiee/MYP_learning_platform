@@ -88,7 +88,7 @@ const ribbonBtn = (active?: boolean): CSSProperties => ({
 })
 
 export function HostRibbon({
-  activity, code, joinUrl, hostId, classId, onNewSession, stageLabel, progress, leading, editMode, onToggleEdit,
+  activity, code, joinUrl, hostId, classId, onNewSession, stageLabel, progress, leading, editMode, onToggleEdit, onRecalc, recalcBusy,
 }: {
   activity: LiveActivityDefinition
   code: string | null
@@ -102,6 +102,9 @@ export function HostRibbon({
   /** Host edit mode (shows the per-student remove badges). Omit onToggleEdit to hide the button. */
   editMode?: boolean
   onToggleEdit?: () => void
+  /** Host: recalculate every student's points from their recorded work. */
+  onRecalc?: () => void
+  recalcBusy?: boolean
 }) {
   const [open, setOpen] = useState<null | 'join' | 'class'>(null)
   const t = activity.theme
@@ -142,6 +145,9 @@ export function HostRibbon({
       </button>
 
       <div style={{ display: 'flex', gap: 8 }}>
+        {onRecalc && (
+          <button title="Recalculate every student's points from their recorded answers" aria-label="Recalculate points" style={ribbonBtn()} disabled={recalcBusy} onClick={onRecalc}>🧮 <span className="host-ribbon-label">{recalcBusy ? 'Working…' : 'Points'}</span></button>
+        )}
         {onToggleEdit && (
           <button title={editMode ? 'Done editing' : 'Edit the roster: show remove buttons on each student'} aria-label="Edit roster" aria-pressed={!!editMode} style={ribbonBtn(!!editMode)} onClick={onToggleEdit}>{editMode ? '✓' : '✏️'} <span className="host-ribbon-label">{editMode ? 'Done' : 'Edit'}</span></button>
         )}
