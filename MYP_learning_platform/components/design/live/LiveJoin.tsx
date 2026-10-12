@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { createClient } from '@/lib/supabase/client'
 import { useLiveRow, useLiveTable, shuffle, useLiveDraftReporter, useTabFocusReporter } from '@/lib/design-live/hooks'
 import { worksheetSectionPct } from '@/lib/design-live/scoring'
+import { pointsSignature } from '@/lib/design-live/points'
 import type { LiveActivityDefinition, LiveStage, McqStage, WorksheetStage, OpenIdeasStage, WorksheetField } from '@/data/design/live/types'
 import type { LiveSessionRow, LivePlayerRow, LiveGradeRow, LiveEventRow } from '@/lib/design-live/types'
 import { cardStyle, btnStyle, inputStyle, pageBg, ErrorBanner, BadgeRow, MCQOptions, Avatar } from './ui'
@@ -150,7 +151,7 @@ export default function LiveJoin({ activity, initialCode }: { activity: LiveActi
     const team = activity.teams ? pickTeam(players, activity.teams.length) : null
     const { data, error } = await sb
       .from('live_players')
-      .insert({ session_code: code, user_id: userId, name, team, points: 0, badges: [], data: {} })
+      .insert({ session_code: code, user_id: userId, name, team, badges: [], data: {} })
       .select()
       .maybeSingle()
     if (!error) {
@@ -209,12 +210,26 @@ export default function LiveJoin({ activity, initialCode }: { activity: LiveActi
   // whatever switch count was already saved, so a reload keeps counting up.
   useTabFocusReporter(patchMyRawData, me?.data?.focus?.switches ?? 0, !!me)
 
-  const addPoints = async (delta: number) => {
-    if (!me || !delta) return
-    const sb = createClient()
-    setMe({ ...me, points: me.points + delta }) // optimistic UI only — the write below is the atomic source of truth
-    await sb.rpc('increment_player_points', { p_player_id: me.id, p_delta: delta })
-  }
+  // Points are calculated on the server from this student's recorded work (lib/design-live/points.ts); the browser never
+  // says how many points to add. Whenever something that can change the score changes (and once on load, which also
+  // corrects any total inflated before this existed), ask the server to recalculate and show what it says.
+  // addPoints is kept only so the stage components need no changes: it does nothing by itself.
+  const addPoints = (_delta: number) => {}
+  const pointsSig = me && session ? pointsSignature(activity, me.data, session.state, me.id) : ''
+  useEffect(() => {
+    if (!me || !pointsSig) return undefined
+    const playerId = me.id
+    const timer = setTimeout(async () => {
+      try {
+        const res = await fetch('/api/live/points', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ playerId }) })
+        if (!res.ok) return
+        const { points } = (await res.json()) as { points: number }
+        setMe((m) => (m && m.id === playerId && m.points !== points ? { ...m, points } : m))
+      } catch { /* offline: the next change tries again */ }
+    }, 800)
+    return () => clearTimeout(timer)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [me?.id, pointsSig])
 
   if (userId === null) {
     // Send them to sign in (or create an account — the login page's OTP

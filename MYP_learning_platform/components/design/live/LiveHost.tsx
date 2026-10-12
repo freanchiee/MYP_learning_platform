@@ -71,6 +71,7 @@ export default function LiveHost({ activity }: { activity: LiveActivityDefinitio
   // was exactly that: reopening host for a self-paced session created before more
   // stages were added indexed straight into the new (differently shaped) stage list.
   const [editMode, setEditMode] = useState(false)
+  const [recalcBusy, setRecalcBusy] = useState(false)
   const [selfPacedViewIdx, setSelfPacedViewIdx] = useState(() => defaultStart(activity))
   const drawer = useProgressDrawer()
 
@@ -196,6 +197,24 @@ export default function LiveHost({ activity }: { activity: LiveActivityDefinitio
     )
   }
 
+  // Points are calculated by the server from each student's recorded answers. This re-runs it for the whole class,
+  // which also corrects any total that was inflated before points became server-calculated.
+  const recalcPoints = async () => {
+    if (!code || recalcBusy) return
+    setRecalcBusy(true)
+    try {
+      const res = await fetch('/api/live/points/recompute', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ code }) })
+      const j = await res.json()
+      if (!res.ok) throw new Error(j.error || 'Could not recalculate')
+      setApiError(null)
+      alert(j.corrected ? `Recalculated ${j.players} students: ${j.corrected} total${j.corrected === 1 ? ' was' : 's were'} corrected (largest drop ${j.biggestDrop} points).` : `Checked ${j.players} students: every total was already correct.`)
+    } catch (e) {
+      setApiError(e instanceof Error ? e.message : 'Could not recalculate points')
+    } finally {
+      setRecalcBusy(false)
+    }
+  }
+
   const teamCounts = activity.teams?.map((_, t) => players.filter((p) => p.team === t).length)
 
   return (
@@ -205,6 +224,8 @@ export default function LiveHost({ activity }: { activity: LiveActivityDefinitio
     <PlayerPreviewProvider>
     <div style={{ ...pageBg(activity.theme), padding: 0 }}>
       <HostRibbon
+        onRecalc={code ? recalcPoints : undefined}
+        recalcBusy={recalcBusy}
         editMode={editMode}
         onToggleEdit={session.status === 'active' ? () => setEditMode((v) => !v) : undefined}
         activity={activity}
