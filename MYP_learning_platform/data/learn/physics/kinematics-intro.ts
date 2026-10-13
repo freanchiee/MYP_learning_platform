@@ -821,6 +821,7 @@ export const KINEMATICS_INTRO: Module = {
               kicker: 'The question',
               title: 'Ball A is dropped. Ball B is thrown sideways.',
               blocks: [
+                { t: 'diagram', id: 'independence', caption: 'The situation, not to scale. The dotted lines show that A and B are at the same height at the same moments; B just also moves sideways.' },
                 { t: 'p', text: 'Two small balls, **A** and **B**, start together from a height of 50 m above level ground. A is released from rest (free fall). B is projected horizontally at 5 m s⁻¹. Air resistance is negligible. Take g = 10 m s⁻².' },
                 { t: 'table', head: ['Part', 'Task'], rows: [['Q1', 'Find the time taken for ball A to hit the ground'], ['Q2', 'Find the horizontal distance R from the start at which ball B lands'], ['Q3', 'Find the displacement of ball B from its start to where it lands']] },
               ],
@@ -972,6 +973,7 @@ export const KINEMATICS_INTRO: Module = {
               kicker: 'The question · 4 parts, 7 marks',
               title: 'A parcel released from a small aircraft',
               blocks: [
+                { t: 'diagram', id: 'parcel', caption: 'The situation, not to scale. Part (i) asks you to sketch the dashed path: starts flat, curves down, lands ahead of the release point.' },
                 { t: 'p', text: 'A small aircraft is flying horizontally at 42 m s⁻¹, at a height of 63 m above level ground. It releases a small parcel. Air resistance is negligible.' },
                 { t: 'table', head: ['Given', 'Value'], rows: [['Velocity of the aircraft (and parcel) at release', '42 m s⁻¹, horizontal'], ['Height above the ground', '63 m'], ['Air resistance', 'negligible'], ['Take g as', '9.8 m s⁻²']] },
                 { t: 'table', head: ['Part', 'Task', 'Marks'], rows: [['(i)', 'Sketch the path of the parcel from the aircraft to the ground', '1'], ['(ii)', 'Calculate the time from release to reaching the ground', '3'], ['(iii)', 'Calculate the vertical component of the velocity just before it lands', '1'], ['(iv)', 'Determine the speed at which it lands', '2']] },
@@ -1155,6 +1157,7 @@ export const KINEMATICS_INTRO: Module = {
               kicker: 'The question · 7 marks',
               title: 'A ball thrown over a wall',
               blocks: [
+                { t: 'diagram', id: 'wall', caption: 'The situation, drawn to scale. The dashed curve is the path; the three unknowns are the time to the wall, the vertical component u_y of the launch velocity, and the wall height h.' },
                 { t: 'p', text: 'A student throws a ball over a vertical wall. The ball leaves the hand 1.2 m above level ground with a speed of 22 m s⁻¹, at 40° above the horizontal. The wall is a horizontal distance of 36 m from the student. Air resistance is negligible.' },
                 { t: 'table', head: ['Part', 'Task', 'Marks'], rows: [['(a)', 'Define velocity', '1'], ['(b)(i)', 'Determine the time taken for the ball to reach the wall', '2'], ['(b)(ii)', 'Calculate the vertical component u of the initial velocity of the ball', '1'], ['(b)(iii)', 'The ball just goes over the wall. Calculate the height h of the wall', '3']] },
               ],
@@ -1323,6 +1326,7 @@ export const KINEMATICS_INTRO: Module = {
               kicker: 'The rule',
               title: 'Velocities add as vectors',
               blocks: [
+                { t: 'diagram', id: 'crosswind', caption: 'Top view of the same landing, flown two ways. The black arrow is the sum of the other two: it is where the aircraft actually goes.' },
                 { t: 'formulas', items: [{ eq: 'v_{over the ground} = v_{through the air} + v_{of the air (wind)}', legend: ['draw them head to tail', 'the sum is the third side of the triangle', 'it is the velocity you actually have over the ground'] }] },
                 {
                   t: 'arrows',
@@ -1476,6 +1480,7 @@ export const KINEMATICS_INTRO: Module = {
               kicker: 'The link',
               title: 'Rain and umbrella, starlight and telescope',
               blocks: [
+                { t: 'diagram', id: 'aberration', caption: 'Starlight comes straight down; the Earth moves sideways; so the telescope must tilt forward. The right-hand triangle is the same one as for rain and an umbrella.' },
                 {
                   t: 'table',
                   head: ['', 'Walking in the rain', 'Observing a star'],

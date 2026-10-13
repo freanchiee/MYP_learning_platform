@@ -91,6 +91,8 @@ export type Block =
   | { t: 'law'; ordinal: string; kicker?: string; name: string; nameNote?: string; words: string; maths: string[]; mathsNote?: string }
   | { t: 'table'; title?: string; head: string[]; rows: string[][]; note?: string; firstColHeader?: boolean }
   | { t: 'figure'; src: string; alt: string; caption: string; credit?: string }
+  /** A labelled diagram drawn in code (follows the theme). id picks it from components/learn/diagrams.tsx. */
+  | { t: 'diagram'; id: 'independence' | 'parcel' | 'wall' | 'crosswind' | 'aberration'; caption: string }
   /** A work we cite and link to but do not reproduce: full citation, a link to where it is lawfully displayed. */
   | { t: 'source'; title: string; citation: string; note?: string; href: string; linkLabel: string }
   | { t: 'steps'; title: string; given: string; steps: { line: string; why: string }[]; answer: string }

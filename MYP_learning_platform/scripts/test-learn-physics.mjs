@@ -828,6 +828,10 @@ const rmm = await import(pathToFileURL(outRM).href)
   ok('aberration is the umbrella triangle: the same formula tan = v/c gives 14.0° for 2 m/s of rain at 8 m/s and 20.5″ for the Earth', near(Math.atan(2 / 8) * 180 / Math.PI, 14.04, 0.01) && near(rmm.rainAngleDeg(2, 8), 14.04, 0.01))
   ok('check c4 of stellar-aberration: the wrong options come from forgetting the unit conversion', near(rmm.earthOrbitSpeed() / 20.5, 1453, 5))
 
+  // --- the first slide of each of these lessons carries a picture of the situation (physics is a picture subject)
+  const firstSlide = (slug) => lesson(slug).blocks.find((b) => b.t === 'deck').slides[0]
+  const expectDiagram = { 'independence-of-motion': 'independence', 'exam-questions-three': 'parcel', 'exam-questions-four': 'wall', 'vector-addition-crosswind-umbrella': 'crosswind', 'stellar-aberration': 'aberration' }
+  ok('the first slide of each new A.1 lesson opens with a labelled diagram, with a caption', Object.entries(expectDiagram).every(([slug, id]) => { const d = firstSlide(slug).blocks[0]; return d.t === 'diagram' && d.id === id && d.caption.length > 40 }))
   // --- every new check is well formed, markup-free, and each new lesson can run live
   const newSlugs = ['independence-of-motion', 'exam-questions-three', 'exam-questions-four', 'vector-addition-crosswind-umbrella', 'stellar-aberration']
   ok('new A.1 lessons: every check has 3 options and a valid answer index; ids unique within each lesson', newSlugs.every((s) => { const cs = lesson(s).blocks.filter((b) => b.t === 'check'); const ids = lesson(s).blocks.filter((b) => b.t === 'check' || b.t === 'apply').map((b) => b.id); return cs.length >= 5 && cs.every((q) => q.options.length === 3 && q.answer >= 0 && q.answer < 3) && new Set(ids).size === ids.length }))

@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from 'react'
 import type { Block, Mcq } from '@/data/learn/physics'
 import { useLessonProgress } from '@/lib/learn/progress'
 import { Widget } from './widgets'
+import { Diagram } from './diagrams'
 import { ArrowList, DataTable, Sci, Deck, DeckCtx, Figure, Flow, Formulas, HandNote, LawCard, Matrix, Pills, WorkedSteps } from './visuals'
 
 const ctl = 'rounded-[var(--radius-control)] px-4 py-2 text-xs font-black tracking-wider focus:outline-none focus:ring-2'
@@ -216,6 +217,8 @@ function StaticBlock({ b }: { b: Block }) {
       return <DataTable title={b.title} head={b.head} rows={b.rows} note={b.note} firstColHeader={b.firstColHeader} />
     case 'figure':
       return <Figure src={b.src} alt={b.alt} caption={b.caption} credit={b.credit} />
+    case 'diagram':
+      return <Diagram id={b.id} caption={b.caption} />
     case 'source':
       return (
         <aside className="rounded-[var(--radius-card)] p-4" style={{ background: 'var(--surface-2)', border: '1px solid var(--border-strong)' }}>
