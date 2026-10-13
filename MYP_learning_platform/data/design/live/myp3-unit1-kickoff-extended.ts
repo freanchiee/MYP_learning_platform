@@ -753,6 +753,29 @@ export const MYP3_UNIT1_KICKOFF_EXTENDED: LiveActivityDefinition = {
           ],
         },
         {
+          key: 'sketches',
+          label: 'Photos and sketches',
+          icon: '📸',
+          criterion: 'A.ii',
+          strandLabel: CRITERION_A_LABELS['A.ii'],
+          brief: { title: 'Brief: show your evidence, not just describe it', points: ['Add photos of what you observed, notes from an interview, or sketches of how your user does the task now.', 'Label each one: what it shows and what you learned from it.', 'These go into your downloaded PDF.'] },
+          fields: [
+            { key: 'images', label: 'Upload photos and sketches', type: 'image', hint: 'A photo of a paper sketch is fine. Add as many as you need.', multiple: true },
+            {
+              key: 'captions',
+              label: 'What does each picture show, and what did you learn from it?',
+              type: 'textarea',
+              hint: 'Number them in the order you uploaded them: 1, 2, 3.',
+              exemplars: [
+                '1: My sketch of how Tariq packs his bag at night. It shows he puts kit in last, so he forgets it. 2: A photo of the hallway by the door where nothing reminds him.',
+                'Picture 1 shows the jar lids Rosa struggles with, and her grip. It taught me the lids are too smooth for her fingers.',
+              ],
+              celebrateKeywords: ['shows', 'learned', 'because', 'user', 'sketch'],
+              points: 10,
+            },
+          ],
+        },
+        {
           key: 'assumptions',
           label: 'Assumptions vs evidence',
           icon: '⚖️',
