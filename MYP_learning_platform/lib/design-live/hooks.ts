@@ -9,15 +9,20 @@
 import { useEffect, useRef, useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { createLiveFetcher } from '@/lib/design-live/fetcher'
+import { affectsList, leaderboardCachedFields, leaderboardChangeFields, rosterFields, type RowChange } from '@/lib/design-live/changes'
+import type { LivePlayerRow } from '@/lib/design-live/types'
 
 /** Realtime change feed + a polling safety net + catch-up on tab focus, with the request policy in fetcher.ts:
  *  one request at a time, slow polling while realtime is connected, nothing while the tab is hidden, and bursts of
  *  change events merged into a single refetch. Returns the cleanup function. */
-function startLive(sb: ReturnType<typeof createClient>, channelKey: string, table: string, filter: string, run: () => Promise<void>) {
+function startLive(sb: ReturnType<typeof createClient>, channelKey: string, table: string, filter: string, run: () => Promise<void>, wantsChange?: (change: RowChange) => boolean) {
   const fetcher = createLiveFetcher({ run, isHidden: () => document.hidden })
   const channel = sb
     .channel(`${channelKey}-${Math.random().toString(36).slice(2)}`)
-    .on('postgres_changes', { event: '*', schema: 'public', table, filter }, () => fetcher.trigger())
+    .on('postgres_changes', { event: '*', schema: 'public', table, filter }, (payload) => {
+      // A change that cannot alter what this screen shows (e.g. another student's autosave) does not trigger a refetch.
+      if (!wantsChange || wantsChange(payload as unknown as RowChange)) fetcher.trigger()
+    })
     .subscribe((status) => fetcher.setConnected(status === 'SUBSCRIBED'))
   const onVis = () => fetcher.onVisible()
   document.addEventListener('visibilitychange', onVis)
@@ -34,7 +39,8 @@ export function useLiveRow<T>(
   filterCol: string,
   filterVal: string | null | undefined,
   onData: (row: T | null) => void,
-  enabled = true
+  enabled = true,
+  options: { keepOnError?: boolean } = {}
 ) {
   useEffect(() => {
     if (!enabled || !filterVal) return undefined
@@ -42,7 +48,11 @@ export function useLiveRow<T>(
     let cancelled = false
     const fetchIt = async () => {
       const { data, error } = await sb.from(table).select('*').eq(filterCol, filterVal).maybeSingle()
-      if (error) console.error(`live: failed to load ${table}:`, error.message)
+      if (error) {
+        console.error(`live: failed to load ${table}:`, error.message)
+        // keepOnError: a failed fetch is not "the row is gone", so leave what the screen already has.
+        if (options.keepOnError) return
+      }
       if (!cancelled) onData((data as T) ?? null)
     }
     const stop = startLive(sb, `${table}-row-${filterVal}`, table, `${filterCol}=eq.${filterVal}`, fetchIt)
@@ -223,6 +233,7 @@ export function useClassLeaderboard(code: string | null | undefined, enabled = t
     if (!enabled || !code) return undefined
     const sb = createClient()
     let cancelled = false
+    const held = new Map<string, Record<string, unknown>>()
     const fetchIt = async () => {
       const { data, error: err } = await sb
         .from('live_players')
@@ -232,11 +243,45 @@ export function useClassLeaderboard(code: string | null | undefined, enabled = t
       if (cancelled) return
       if (err) { setError(err.message); return }
       setError(null)
-      setRows((data as unknown as LeaderboardRow[]) ?? [])
+      const list = (data as unknown as LeaderboardRow[]) ?? []
+      held.clear()
+      list.forEach((r) => held.set(r.id, r as unknown as Record<string, unknown>))
+      setRows(list)
       setLoaded(true)
     }
-    const stop = startLive(sb, `leaderboard-${code}`, 'live_players', `session_code=eq.${code}`, fetchIt)
+    const stop = startLive(sb, `leaderboard-${code}`, 'live_players', `session_code=eq.${code}`, fetchIt, (change) => affectsList(change, held, leaderboardCachedFields, leaderboardChangeFields))
     return () => { cancelled = true; stop() }
   }, [code, enabled])
   return { rows, error, loaded }
+}
+
+/** Everyone in a session, reduced to what the class roster needs: who has joined, their team and their score.
+ *  Selects ONLY those columns, never `data`, so a student screen does not download every classmate's answers
+ *  (that was the biggest multiplier on live-class traffic). Rows are shaped like LivePlayerRow with an empty
+ *  `data`, so they can stand in where only names, teams, points or a head-count are used. Autosaves by other
+ *  students do not trigger a refetch (see changes.ts); joins, removals and score/name/team changes do. */
+export function useClassRoster(code: string | null | undefined, enabled = true): LivePlayerRow[] {
+  const [rows, setRows] = useState<LivePlayerRow[]>([])
+  useEffect(() => {
+    if (!enabled || !code) return undefined
+    const sb = createClient()
+    let cancelled = false
+    const held = new Map<string, Record<string, unknown>>()
+    const fetchIt = async () => {
+      const { data, error } = await sb
+        .from('live_players')
+        .select('id,session_code,user_id,name,team,points,badges,joined_at')
+        .eq('session_code', code)
+        .order('joined_at', { ascending: true })
+      if (cancelled) return
+      if (error) { console.error('live: failed to load the roster:', error.message); return } // keep what we showed
+      const list = ((data ?? []) as unknown as Omit<LivePlayerRow, 'data'>[]).map((r) => ({ ...r, badges: r.badges ?? [], data: {} }))
+      held.clear()
+      list.forEach((r) => held.set(r.id, r as unknown as Record<string, unknown>))
+      setRows(list)
+    }
+    const stop = startLive(sb, `roster-${code}`, 'live_players', `session_code=eq.${code}`, fetchIt, (change) => affectsList(change, held, rosterFields))
+    return () => { cancelled = true; stop() }
+  }, [code, enabled])
+  return rows
 }

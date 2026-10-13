@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase/client'
-import { useLiveRow, useLiveTable, shuffle, useLiveDraftReporter, useTabFocusReporter } from '@/lib/design-live/hooks'
+import { useLiveRow, useLiveTable, useClassRoster, shuffle, useLiveDraftReporter, useTabFocusReporter } from '@/lib/design-live/hooks'
 import { worksheetSectionPct } from '@/lib/design-live/scoring'
 import { pointsSignature } from '@/lib/design-live/points'
 import type { LiveActivityDefinition, LiveStage, McqStage, WorksheetStage, OpenIdeasStage, WorksheetField } from '@/data/design/live/types'
@@ -75,7 +75,6 @@ export default function LiveJoin({ activity, initialCode }: { activity: LiveActi
   const [codeInput, setCodeInput] = useState(initialCode.toUpperCase())
   const [sessionExists, setSessionExists] = useState<boolean | null>(null)
   const [session, setSession] = useState<LiveSessionRow | null>(null)
-  const [players, setPlayers] = useState<LivePlayerRow[]>([])
   const lb = useLeaderboardDrawer()
   // The student's chosen look for the self-paced workspace (remembered on this device). Only applied when the workspace is on.
   const [liveTheme, setLiveTheme] = useLiveTheme()
@@ -113,13 +112,37 @@ export default function LiveJoin({ activity, initialCode }: { activity: LiveActi
   }, [code, activity.id])
 
   useLiveRow<LiveSessionRow>('live_sessions', 'code', code, setSession, !!code)
-  useLiveTable<LivePlayerRow>('live_players', 'session_code', code, setPlayers, !!code, 'joined_at')
+  // The class roster: names, teams, scores and the head-count only. Deliberately NOT the full rows: a student screen
+  // must not download every classmate's answers (`data`), which used to multiply the traffic with class size.
+  const players = useClassRoster(code, !!code)
   useLiveRow<LiveGradeRow>('live_grades', 'player_id', me?.id, setMyGrade, !!me)
 
-  useEffect(() => {
+  // My own full row (answers and all), kept fresh by watching ONLY my row, not the whole table.
+  // keepOnError: a failed fetch must never read as "my row is gone" and drop the student back to the join screen.
+  useLiveRow<LivePlayerRow>('live_players', 'id', me?.id, (row) => {
     if (Date.now() - lastPatchAt.current < 6000) return
-    if (userId && players.length) setMe(players.find((p) => p.user_id === userId) || null)
-  }, [players, userId])
+    setMe(row)
+  }, !!me, { keepOnError: true })
+
+  // First load: find my row if I have already joined with this account. Re-checked if the roster later shows me
+  // (joined from another tab or device).
+  const rosterHasMe = !!userId && players.some((p) => p.user_id === userId)
+  useEffect(() => {
+    if (!code || !userId || me) return
+    let cancelled = false
+    createClient()
+      .from('live_players')
+      .select('*')
+      .eq('session_code', code)
+      .eq('user_id', userId)
+      .maybeSingle()
+      .then(({ data }) => {
+        if (cancelled || !data || Date.now() - lastPatchAt.current < 6000) return
+        setMe((cur) => cur ?? (data as LivePlayerRow))
+      })
+    return () => { cancelled = true }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [code, userId, !!me, rosterHasMe])
 
   // A teacher's quick reaction (see ui.tsx QuickReactButton) is a
   // live_events row addressed to this player — pick up NEW ones (not the

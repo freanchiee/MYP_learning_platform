@@ -1021,6 +1021,46 @@ const lf = await import(pathToFileURL(outLF).href)
     ok('… and polls at the normal rate', log.runs === 2)
   }
   const hooksSrc = (await import('node:fs')).readFileSync('lib/design-live/hooks.ts', 'utf8')
-  ok('the live hooks no longer use the old fixed 3 s setInterval poll; all three go through startLive', !/setInterval\(fetchIt/.test(hooksSrc) && !hooksSrc.includes('POLL_MS') && (hooksSrc.match(/startLive\(/g) || []).length === 4 && hooksSrc.includes('fetcher.setConnected(status === \'SUBSCRIBED\')') && hooksSrc.includes('document.hidden'))
+  ok('the live hooks no longer use the old fixed 3 s setInterval poll; all three go through startLive', !/setInterval\(fetchIt/.test(hooksSrc) && !hooksSrc.includes('POLL_MS') && (hooksSrc.match(/startLive\(/g) || []).length === 5 && hooksSrc.includes('fetcher.setConnected(status === \'SUBSCRIBED\')') && hooksSrc.includes('document.hidden'))
+}
+// ---- students no longer download everyone's full rows: the change filter, the roster, and the wiring ----
+const outCH = path.resolve('node_modules/.cache/live-changes.mjs')
+await build({ entryPoints: ['lib/design-live/changes.ts'], outfile: outCH, format: 'esm', bundle: true, logLevel: 'silent' })
+const ch = await import(pathToFileURL(outCH).href)
+{
+  const row = (id, extra = {}) => ({ id, name: 'Student ' + id, team: null, points: 10, badges: [], ...extra })
+  const held = new Map([['a', row('a')], ['b', row('b', { points: 30, badges: ['🏅'] })]])
+  const upd = (nu) => ({ eventType: 'UPDATE', new: nu, old: { id: nu.id } })
+  const aff = (c) => ch.affectsList(c, held, ch.rosterFields)
+  ok('a join or a removal always triggers a refetch', aff({ eventType: 'INSERT', new: row('c') }) && aff({ eventType: 'DELETE', old: { id: 'a' } }))
+  ok('another student’s autosave (only `data` changed) does NOT trigger a roster refetch', !aff(upd({ ...row('a'), data: { stage1: { answer: 'lots of typing' } } })))
+  ok('a score, name, team or badge change DOES trigger one', aff(upd(row('a', { points: 20 }))) && aff(upd(row('a', { name: 'Renamed' }))) && aff(upd(row('a', { team: 2 }))) && aff(upd(row('b', { badges: ['🏅', '⭐'] }))))
+  ok('an identical badges array (a new array object) is not a change', !aff(upd(row('b', { points: 30, badges: ['🏅'] }))))
+  ok('an update for a row we have not seen yet, or with no id, refetches (safe default)', aff(upd(row('zzz'))) && aff({ eventType: 'UPDATE', new: { name: 'x' } }) && aff({ eventType: 'UPDATE', new: null }))
+  const lbHeld = new Map([['a', { id: 'a', name: 'Ann', points: 10, badges: [], nav: { stage: 1, max: 2 } }], ['b', { id: 'b', name: 'Bo', points: 5, badges: null, nav: null }]])
+  const lb = (c) => ch.affectsList(c, lbHeld, ch.leaderboardCachedFields, ch.leaderboardChangeFields)
+  ok('leaderboard: a change of position inside `data._nav` triggers a refetch', lb(upd({ id: 'a', name: 'Ann', points: 10, badges: [], data: { _nav: { stage: 2, max: 2 } } })))
+  ok('leaderboard: typing answers (other `data`, same name/points/badges/position) does not', !lb(upd({ id: 'a', name: 'Ann', points: 10, badges: [], data: { _nav: { stage: 1, max: 2 }, stage1: { answer: 'x'.repeat(500) } } })) && !lb(upd({ id: 'b', name: 'Bo', points: 5, badges: null, data: { notes: 'hello' } })))
+  ok('leaderboard: points or badges changing triggers a refetch', lb(upd({ id: 'a', name: 'Ann', points: 20, badges: [], data: { _nav: { stage: 1, max: 2 } } })) && lb(upd({ id: 'b', name: 'Bo', points: 5, badges: ['🏅'], data: {} })))
+  // a whole class: 30 students, 1000 autosaves, 3 real score changes
+  const cls = new Map(Array.from({ length: 30 }, (_, i) => [String(i), row(String(i), { points: i })]))
+  let refetches = 0
+  for (let n = 0; n < 1000; n++) {
+    const i = String(n % 30)
+    const scoreChange = n === 100 || n === 400 || n === 700
+    if (ch.affectsList(upd({ ...row(i, { points: Number(i) + (scoreChange ? 5 : 0) }), data: { n } }), cls, ch.rosterFields)) refetches++
+  }
+  ok('30 students making 1000 autosaves cause only 3 roster refetches (the 3 real score changes), not 1000', refetches === 3)
+
+  const fs = await import('node:fs')
+  const hooks = fs.readFileSync('lib/design-live/hooks.ts', 'utf8')
+  const join = fs.readFileSync('components/design/live/LiveJoin.tsx', 'utf8')
+  const rosterFn = hooks.slice(hooks.indexOf('export function useClassRoster'))
+  ok('the roster query selects named small columns and never `data`', rosterFn.includes(".select('id,session_code,user_id,name,team,points,badges,joined_at')") && !/select\([^)]*\bdata\b/.test(rosterFn))
+  ok('the student screen no longer subscribes to the whole live_players table with select(*)', !/useLiveTable<LivePlayerRow>\('live_players'/.test(join) && join.includes('useClassRoster(code, !!code)'))
+  ok('the student watches ONLY their own row (filter by id), without dropping to the join screen on a failed fetch', join.includes("useLiveRow<LivePlayerRow>('live_players', 'id', me?.id") && join.includes('{ keepOnError: true }'))
+  ok('the 6-second "my own save wins" guard is kept for the own-row refresh', (join.match(/Date\.now\(\) - lastPatchAt\.current < 6000/g) || []).length >= 2)
+  ok('the leaderboard and roster hooks filter realtime events; the generic hooks still refetch on every event', hooks.includes('affectsList(change, held, rosterFields)') && hooks.includes('leaderboardCachedFields, leaderboardChangeFields') && hooks.includes('if (!wantsChange || wantsChange('))
+  ok('useLiveRow keeps its old behaviour by default (a failed fetch still reports null) and only opts in to keepOnError', hooks.includes('options: { keepOnError?: boolean } = {}') && hooks.includes('if (options.keepOnError) return'))
 }
 process.exit(fail ? 1 : 0)
