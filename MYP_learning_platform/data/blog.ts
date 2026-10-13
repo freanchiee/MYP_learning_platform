@@ -3,6 +3,7 @@
 // All content is original — written for CritABCD, not copied from IB materials.
 
 import { ARTIFACT_POSTS } from './blog-artifact-posts'
+import { DP_PHYSICS_POSTS } from './blog-dp-physics-posts'
 import { PERSONA_DIRECTIONS } from './design/live/personas'
 import { OPPORTUNITIES } from './design/live/opportunities'
 
@@ -727,7 +728,7 @@ const CORE_POSTS: BlogPost[] = [
 ]
 
 // Posts that wrap an interactive artifact live in their own file to keep this one readable.
-export const POSTS: BlogPost[] = [...CORE_POSTS, ...ARTIFACT_POSTS]
+export const POSTS: BlogPost[] = [...CORE_POSTS, ...ARTIFACT_POSTS, ...DP_PHYSICS_POSTS]
 
 export function getPost(slug: string): BlogPost | undefined {
   return POSTS.find((p) => p.slug === slug)

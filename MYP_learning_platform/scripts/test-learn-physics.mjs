@@ -842,4 +842,43 @@ const rmm = await import(pathToFileURL(outRM).href)
   const optA = (slug, id) => { const q = lesson(slug).blocks.find((b) => b.id === id); return q.options[q.answer] }
   ok('numeric answers in the new checks match the physics', optA('independence-of-motion', 'a1-9a-c2') === '4.0 s' && optA('independence-of-motion', 'a1-9a-c3') === '32 m' && optA('exam-questions-four', 'a1-9d-c1') === '14.1 m s⁻¹' && optA('exam-questions-four', 'a1-9d-c4') === '2.6 m' && optA('exam-questions-four', 'a1-9d-c7') === '9.03 m' && optA('vector-addition-crosswind-umbrella', 'a1-9e-c2') === '194 km h⁻¹' && optA('vector-addition-crosswind-umbrella', 'a1-9e-c3') === '26.6°, from in front' && optA('vector-addition-crosswind-umbrella', 'a1-9e-c4') === '6.7 m s⁻¹' && optA('stellar-aberration', 'a1-9f-c2') === '9.93 × 10⁻⁵' && optA('stellar-aberration', 'a1-9f-c4') === '3.00 × 10⁸ m s⁻¹')
 }
+// ---- the DP Physics blog posts: SEO shape, working links, and every number they quote ----
+const outBL = path.resolve('node_modules/.cache/blog.mjs')
+await build({ entryPoints: ['data/blog.ts'], outfile: outBL, format: 'esm', bundle: true, logLevel: 'silent' })
+const blog = await import(pathToFileURL(outBL).href)
+{
+  const dp = blog.POSTS.filter((p) => p.tags.includes('DP Physics'))
+  const text = (slug) => JSON.stringify(blog.POSTS.find((p) => p.slug === slug))
+  const has = (slug, ...parts) => parts.every((s) => text(slug).includes(s))
+  ok('8 DP Physics posts are published and every blog slug is unique', dp.length === 8 && new Set(blog.POSTS.map((p) => p.slug)).size === blog.POSTS.length)
+  ok('each post has a short SEO title (≤ 49 chars), a 100–165 char description, 3+ FAQ items and 2+ related links', dp.every((p) => (p.seoTitle ?? '').length > 0 && p.seoTitle.length <= 49 && p.description.length >= 100 && p.description.length <= 165 && p.faq.length >= 3 && p.related.length >= 2))
+  ok('slugs are lowercase-hyphenated and carry the keyword', dp.every((p) => /^[a-z0-9]+(-[a-z0-9]+)+$/.test(p.slug) && p.slug.length > 30))
+  const lessonRoutes = new Set(physData.MODULES.flatMap((m) => m.lessons.map((l) => `/dp-physics/${m.slug}/${l.slug}`)))
+  const okHref = (h) => lessonRoutes.has(h) || h === '/dp-physics/formulas' || h.startsWith('/blog/') && blog.POSTS.some((p) => `/blog/${p.slug}` === h) || ['/guides/physics'].includes(h)
+  ok('every related link in the DP posts points at a real lesson, blog post or the formula sheet', dp.every((p) => p.related.every((r) => okHref(r.href))))
+  ok('each post links to at least one lesson', dp.every((p) => p.related.some((r) => lessonRoutes.has(r.href))))
+  ok('every post has a FAQ with answers long enough to be useful, and an intro of 150+ chars', dp.every((p) => p.faq.every((f) => f.q.endsWith('?') && f.a.length > 60) && p.intro.length > 150))
+
+  // independence (g = 10)
+  ok('independence post: 3.16 s, 15.8 m, 52.4 m and 72.5°', has('projectile-motion-horizontal-vertical-independence-ib-physics', '3.16 s', '15.8 m', '52.4 m', '72.5°') && near(rmm.fallTimeG(50, 10), 3.1623, 1e-3) && near(rmm.horizontalRange(5, 50, 10), 15.81, 0.01) && near(rmm.displacementOfB(5, 50, 10), 52.44, 0.01))
+  // parcel
+  ok('parcel post: 3.59 s, 35.1 m/s, 54.7 and 54.8 m/s, 35.3 trap, 151 m', has('projectile-motion-parcel-dropped-from-aircraft-worked-example', 't = 3.59 s', '35.1 m/s', '54.7 m/s', '54.8 m/s', '35.3 m/s', '151 m') && near(pjm.fallTime(63), 3.586, 0.001) && near(pjm.landingVy(63), 35.14, 0.01) && near(pjm.landingRange(42, 63), 150.6, 0.1))
+  // wall
+  const thW = { u: 22, angleDeg: 40, y0: 1.2, g: 9.81 }
+  const j8 = pjm.justClearsDistances(thW, 8)
+  ok('wall post: 16.85, 14.14, 2.136 s, 7.83, 9.03 m, 9.3 trap, apex 11.4 m, range 50.0 m', has('projectile-motion-over-a-wall-will-it-clear-worked-solution', '16.85 m/s', '14.14 m/s', '2.136 s', '7.83 m', '9.03 m', '9.3 m', '11.4 m', '50.0 m') && near(pjm.heightAtDistance(thW, 36), 9.026, 0.002) && near(pjm.apexHeight(thW), 11.39, 0.01) && near(pjm.throwLandingRange(thW), 49.98, 0.02))
+  ok('wall post: an 8 m wall is cleared by 1.03 m, just cleared at 38.3 m, with the nearest at 10.3 m; a 12 m wall is hit 9.03 m up, 2.97 m below the top', has('projectile-motion-over-a-wall-will-it-clear-worked-solution', '1.03 m', '38.3 m', '10.3 m', '2.97 m') && near(j8.d2, 38.31, 0.01) && near(j8.d1, 10.3, 0.05) && near(pjm.heightAtDistance(thW, 36) - 8, 1.026, 0.003) && near(12 - pjm.heightAtDistance(thW, 36), 2.974, 0.003) && near(pjm.apexHeight(thW) - 1.2, 14.141 ** 2 / 19.62, 1e-3))
+  // crosswind
+  ok('crosswind post: 14.5°, 193.6 km/h, 72 s, 1.0 km, and the swimmer’s 23.6° and 1.4 m/s', has('crosswind-landing-relative-velocity-vector-addition-physics', '14.5°', '193.6 km/h', '72 s', '1.0 km', '23.6°', '1.4 m/s') && near(Math.abs(rmm.crabAngleDeg(200, 50)), 14.48, 0.01) && near(rmm.groundSpeedWhenCrabbing(200, 50), 193.65, 0.01) && near(rmm.lateralOffset(200, 0, 50, 4), 1, 1e-9) && near(Math.asin(0.4) * 180 / Math.PI, 23.58, 0.01) && near(Math.sqrt(2.25 - 0.36), 1.375, 0.001))
+  // umbrella
+  ok('umbrella post: 14.0°, 8.25 m/s and the lean table 10.6°, 14.0°, 20.6°, 32.0°', has('umbrella-rain-walking-relative-velocity-physics-explained', '14.0°', '8.25 m/s', '10.6°', '20.6°', '32.0°') && [[1.5, 10.6], [2, 14.0], [3, 20.6], [5, 32.0]].every(([w, a]) => near(rmm.rainAngleDeg(w, 8), a, 0.05)) && near(Math.hypot(8, 2), 8.246, 0.001))
+  // aberration
+  ok('aberration post: 29.8 km/s, 9.93e-5, 20.5″ (0.0057°), c = 3.00e8', has('stellar-aberration-explained-speed-of-light-bradley', '2.98 × 10⁴ m/s', '9.93 × 10⁻⁵', '20.5 arcseconds', '0.0057 degrees', '3.00 × 10⁸ m/s') && near(rmm.earthOrbitSpeed(), 29783, 5) && near(rmm.aberrationRad(rmm.earthOrbitSpeed()), 9.934e-5, 1e-7) && near(rmm.radToArcsec(rmm.aberrationRad(rmm.earthOrbitSpeed())), 20.49, 0.01) && near(rmm.speedOfLightFromAberration(rmm.earthOrbitSpeed(), rmm.arcsecToRad(20.5)), 3.0e8, 1.5e6))
+  // fields
+  ok('fields post: Earth–Moon 1.98e20 N, hydrogen 8.2e-8 N and 3.6e-47 N, wires 4.0e-4 N/m, g at 2R = 2.5', has('gravitational-electric-magnetic-fields-ib-physics-theme-d', '1.98 × 10²⁰ N', '8.2 × 10⁻⁸ N', '3.6 × 10⁻⁴⁷ N', '4.0 × 10⁻⁴ N', '2.5 N/kg') && near(fld.gravForce(fld.M_EARTH, fld.M_MOON, fld.D_EARTH_MOON), 1.985e20, 5e17) && near(fld.coulombForce(fld.E_CHARGE, fld.E_CHARGE, 5.3e-11), 8.19e-8, 1e-9) && near(fld.wireForcePerMetre(10, 10, 0.05), 4e-4, 1e-9) && near(9.8 / 4, 2.45, 1e-9))
+  // orbits
+  const eISS = fld.orbitEnergies(fld.M_EARTH, 500, 6.78e6)
+  ok('orbits post: ISS 7.66e3 m/s, 5.56e3 s (93 min), 8.7 N/kg (88%), energies +1.47e10 / −2.94e10 / −1.47e10 J, escape 1.12e4 m/s', has('orbital-speed-escape-velocity-derivation-ib-physics', '7.66 × 10³ m/s', '5.56 × 10³ s', '93 minutes', '8.7 N/kg', '88%', '1.47 × 10¹⁰ J', '2.94 × 10¹⁰ J', '1.12 × 10⁴ m/s') && near(fld.orbitSpeed(fld.M_EARTH, 6.78e6), 7660, 5) && near(fld.orbitPeriod(fld.M_EARTH, 6.78e6), 5560, 5) && near(fld.gravField(fld.M_EARTH, 6.78e6), 8.66, 0.05) && near(eISS.ke, 1.47e10, 3e7) && near(eISS.gpe, -2.94e10, 6e7) && near(eISS.te, -1.47e10, 3e7) && near(fld.escapeSpeed(fld.M_EARTH, fld.R_EARTH), 1.12e4, 50))
+  ok('the blog hub copy mentions DP Physics, and the DP posts appear in the sitemap data via POSTS', blog.POSTS.slice(-8).every((p) => p.tags.includes('DP Physics')))
+}
 process.exit(fail ? 1 : 0)

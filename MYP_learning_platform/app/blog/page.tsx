@@ -5,13 +5,13 @@ import { SITE_URL } from '@/lib/site'
 import GuideTopBar from '@/components/guides/GuideTopBar'
 
 export const metadata: Metadata = {
-  title: 'MYP Blog — Syllabus, Grading & Study Guides',
+  title: 'MYP & DP Physics Blog: Syllabus, Grading & Study Guides',
   description:
-    'Free articles on the IB MYP: how it’s graded, the assessment criteria, command terms, eAssessment and study tips for Sciences, Individuals & Societies and Design.',
+    'Free articles on the IB MYP and DP Physics: how the MYP is graded, assessment criteria, command terms and worked solutions to projectile motion, relative velocity, fields and orbits.',
   alternates: { canonical: '/blog' },
   openGraph: {
-    title: 'MYP Blog · CritABCD',
-    description: 'Clear, free articles explaining the IB MYP — grading, criteria, command terms, eAssessment and more.',
+    title: 'MYP & DP Physics Blog · CritABCD',
+    description: 'Clear, free articles on the IB MYP and DP Physics: grading, criteria, command terms and worked physics solutions.',
     url: `${SITE_URL}/blog`,
   },
 }
@@ -41,8 +41,9 @@ export default function BlogHubPage() {
           MYP Blog
         </h1>
         <p className="mt-4 text-lg leading-relaxed" style={{ color: 'var(--text-muted)' }}>
-          Plain-English guides to how the IB Middle Years Programme works — grading, the assessment
-          criteria, command terms, eAssessment and study tips.
+          Plain-English guides to how the IB Middle Years Programme works (grading, the assessment
+          criteria, command terms, eAssessment and study tips), plus worked solutions and explainers
+          for IB DP Physics.
         </p>
 
         <div className="mt-10 space-y-4">
