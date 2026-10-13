@@ -482,6 +482,7 @@ export const MYP5_SUSTAINABILITY: LiveActivityDefinition = {
           criterion: 'B.ii',
           blurb: 'Develop at least three different ideas. Annotate so a stranger could understand and build them from your notes alone.',
           fields: [
+            { key: 'sketches', label: 'Upload your idea sketches', type: 'image', hint: 'A photo of a paper sketch or a screenshot is fine. Add as many as you need.', multiple: true },
             {
               key: 'range',
               label: 'Ideas',
@@ -653,6 +654,7 @@ export const MYP5_SUSTAINABILITY: LiveActivityDefinition = {
           criterion: 'C.i',
           blurb: 'A plan a peer could follow: steps, tools, time and checkpoints.',
           fields: [
+            { key: 'prototypePhotos', label: 'Photos of your prototype or plan sketches', type: 'image', hint: 'Show what you are making and how far you have got. Add a new photo as it changes.', multiple: true },
             {
               key: 'steps',
               label: 'Plan',
@@ -695,6 +697,7 @@ export const MYP5_SUSTAINABILITY: LiveActivityDefinition = {
           criterion: 'C.iv',
           blurb: 'Fill this in as you go. Any change to your design or plan must be fully justified.',
           fields: [
+            { key: 'changePhotos', label: 'Photos that show what changed', type: 'image', hint: 'Before and after photos, or a sketch of the change.', multiple: true },
             {
               key: 'log',
               label: 'Change log',
@@ -715,6 +718,7 @@ export const MYP5_SUSTAINABILITY: LiveActivityDefinition = {
           criterion: 'D.i',
           blurb: 'Design a test that produces real, measurable data — not opinions. Predict the result first.',
           fields: [
+            { key: 'testPhotos', label: 'Photos of your testing', type: 'image', hint: 'Your prototype being tested, or your results sheet.', multiple: true },
             {
               key: 'method',
               label: 'Test design',

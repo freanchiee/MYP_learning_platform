@@ -293,6 +293,7 @@ export const MYP4_PROTOTYPING: LiveActivityDefinition = {
           strandLabel: 'Develop a range of feasible design ideas which can be correctly interpreted by others',
           blurb: 'Sketch at least THREE genuinely different ideas — not three versions of the same idea. Describe each clearly enough that a classmate could build it from your words alone.',
           fields: [
+            { key: 'sketches', label: 'Upload your idea sketches', type: 'image', hint: 'A photo of a paper sketch or a screenshot is fine. Add as many as you need.', multiple: true },
             {
               key: 'range',
               label: 'Your ideas',
@@ -338,6 +339,7 @@ export const MYP4_PROTOTYPING: LiveActivityDefinition = {
           strandLabel: 'Develop accurate planning drawings/diagrams and outline the requirements for creating the solution',
           blurb: 'Draw or photograph this on paper (or in any app) — then describe it here so your teacher knows what to look for.',
           fields: [
+            { key: 'drawingImages', label: 'Upload your planning drawing(s)', type: 'image', hint: 'Photo or screenshot of your dimensioned drawing, labelled with sizes and materials.', multiple: true },
             {
               key: 'drawing',
               label: 'Describe your planning drawing',
@@ -537,6 +539,7 @@ export const MYP4_PROTOTYPING: LiveActivityDefinition = {
           strandLabel: 'Evaluate the success of the solution against the specification, based on authentic product testing',
           blurb: 'Report what actually happened — real numbers and observations, not just "it worked."',
           fields: [
+            { key: 'testPhotos', label: 'Photos of the testing and your prototype', type: 'image', hint: 'Show your prototype being tested, or your results sheet. Add as many as you need.', multiple: true },
             {
               key: 'results',
               label: 'What actually happened when you tested it?',
