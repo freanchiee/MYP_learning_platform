@@ -173,6 +173,7 @@ export const MYP2_EVERYDAY_NEEDS: LiveActivityDefinition = {
           icon: '👀',
           blurb: 'Look carefully for a few minutes. Write ONLY what you can see or hear — no opinions yet.',
           fields: [
+            { key: 'observePhotos', label: 'Photos or sketches of what you observed', type: 'image', hint: 'A photo or a quick sketch on paper is fine. Add as many as you need.', multiple: true },
             {
               key: 'log',
               label: 'My observation log',
@@ -399,6 +400,7 @@ export const MYP2_EVERYDAY_NEEDS: LiveActivityDefinition = {
           icon: '🗺️',
           blurb: 'Walk through your user’s day around this need, step by step. Where does it go wrong?',
           fields: [
+            { key: 'journeySketch', label: 'Sketch your user’s journey', type: 'image', hint: 'Draw the steps as a storyboard or map, then upload a photo of it.', multiple: true },
             {
               key: 'steps',
               label: 'My user’s journey',
