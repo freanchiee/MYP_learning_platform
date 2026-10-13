@@ -8,8 +8,26 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
+import { createLiveFetcher } from '@/lib/design-live/fetcher'
 
-const POLL_MS = 3000
+/** Realtime change feed + a polling safety net + catch-up on tab focus, with the request policy in fetcher.ts:
+ *  one request at a time, slow polling while realtime is connected, nothing while the tab is hidden, and bursts of
+ *  change events merged into a single refetch. Returns the cleanup function. */
+function startLive(sb: ReturnType<typeof createClient>, channelKey: string, table: string, filter: string, run: () => Promise<void>) {
+  const fetcher = createLiveFetcher({ run, isHidden: () => document.hidden })
+  const channel = sb
+    .channel(`${channelKey}-${Math.random().toString(36).slice(2)}`)
+    .on('postgres_changes', { event: '*', schema: 'public', table, filter }, () => fetcher.trigger())
+    .subscribe((status) => fetcher.setConnected(status === 'SUBSCRIBED'))
+  const onVis = () => fetcher.onVisible()
+  document.addEventListener('visibilitychange', onVis)
+  fetcher.start()
+  return () => {
+    fetcher.stop()
+    sb.removeChannel(channel)
+    document.removeEventListener('visibilitychange', onVis)
+  }
+}
 
 export function useLiveRow<T>(
   table: string,
@@ -27,21 +45,10 @@ export function useLiveRow<T>(
       if (error) console.error(`live: failed to load ${table}:`, error.message)
       if (!cancelled) onData((data as T) ?? null)
     }
-    fetchIt()
-    const channel = sb
-      .channel(`${table}-row-${filterVal}-${Math.random().toString(36).slice(2)}`)
-      .on('postgres_changes', { event: '*', schema: 'public', table, filter: `${filterCol}=eq.${filterVal}` }, fetchIt)
-      .subscribe()
-    const pollId = setInterval(fetchIt, POLL_MS)
-    const onVis = () => {
-      if (!document.hidden) fetchIt()
-    }
-    document.addEventListener('visibilitychange', onVis)
+    const stop = startLive(sb, `${table}-row-${filterVal}`, table, `${filterCol}=eq.${filterVal}`, fetchIt)
     return () => {
       cancelled = true
-      sb.removeChannel(channel)
-      clearInterval(pollId)
-      document.removeEventListener('visibilitychange', onVis)
+      stop()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [table, filterCol, filterVal, enabled])
@@ -72,21 +79,10 @@ export function useLiveTable<T>(
       }
       if (!cancelled) onData((data as T[]) ?? [])
     }
-    fetchIt()
-    const channel = sb
-      .channel(`${table}-${filterVal}-${Math.random().toString(36).slice(2)}`)
-      .on('postgres_changes', { event: '*', schema: 'public', table, filter: `${filterCol}=eq.${filterVal}` }, fetchIt)
-      .subscribe()
-    const pollId = setInterval(fetchIt, POLL_MS)
-    const onVis = () => {
-      if (!document.hidden) fetchIt()
-    }
-    document.addEventListener('visibilitychange', onVis)
+    const stop = startLive(sb, `${table}-${filterVal}`, table, `${filterCol}=eq.${filterVal}`, fetchIt)
     return () => {
       cancelled = true
-      sb.removeChannel(channel)
-      clearInterval(pollId)
-      document.removeEventListener('visibilitychange', onVis)
+      stop()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [table, filterCol, filterVal, enabled, orderCol])
@@ -239,13 +235,8 @@ export function useClassLeaderboard(code: string | null | undefined, enabled = t
       setRows((data as unknown as LeaderboardRow[]) ?? [])
       setLoaded(true)
     }
-    fetchIt()
-    const channel = sb
-      .channel(`leaderboard-${code}-${Math.random().toString(36).slice(2)}`)
-      .on('postgres_changes', { event: '*', schema: 'public', table: 'live_players', filter: `session_code=eq.${code}` }, fetchIt)
-      .subscribe()
-    const pollId = setInterval(fetchIt, POLL_MS)
-    return () => { cancelled = true; sb.removeChannel(channel); clearInterval(pollId) }
+    const stop = startLive(sb, `leaderboard-${code}`, 'live_players', `session_code=eq.${code}`, fetchIt)
+    return () => { cancelled = true; stop() }
   }, [code, enabled])
   return { rows, error, loaded }
 }

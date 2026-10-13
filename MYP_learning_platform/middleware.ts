@@ -1,9 +1,7 @@
 import { createServerClient } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
 import { DEV_NO_AUTH } from '@/lib/dev-auth'
-
-const PROTECTED_ROUTES = ['/dashboard', '/exam', '/results', '/papers']
-const AUTH_ROUTES = ['/login', '/signup']
+import { AUTH_TIMEOUT_MS, gate, hasSessionCookie, withTimeout, type Visitor } from '@/lib/auth-gate'
 
 export async function middleware(request: NextRequest) {
   // Dev-only: skip the login gate entirely so the platform is browsable
@@ -16,50 +14,48 @@ export async function middleware(request: NextRequest) {
     request,
   })
 
-  const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-    {
-      cookies: {
-        getAll() {
-          return request.cookies.getAll()
+  // Anonymous visitors (no login cookie) never touch Supabase here, so public pages such as /dp-physics keep
+  // working even when Supabase is slow. Signed-in visitors are checked, but we wait at most AUTH_TIMEOUT_MS: if
+  // Supabase does not answer, the request carries on (pages and row-level security still enforce access).
+  let visitor: Visitor = 'anonymous'
+  if (hasSessionCookie(request.cookies.getAll().map((c) => c.name))) {
+    const supabase = createServerClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+      {
+        cookies: {
+          getAll() {
+            return request.cookies.getAll()
+          },
+          setAll(cookiesToSet) {
+            cookiesToSet.forEach(({ name, value }) =>
+              request.cookies.set(name, value)
+            )
+            supabaseResponse = NextResponse.next({
+              request,
+            })
+            cookiesToSet.forEach(({ name, value, options }) =>
+              supabaseResponse.cookies.set(name, value, options)
+            )
+          },
         },
-        setAll(cookiesToSet) {
-          cookiesToSet.forEach(({ name, value }) =>
-            request.cookies.set(name, value)
-          )
-          supabaseResponse = NextResponse.next({
-            request,
-          })
-          cookiesToSet.forEach(({ name, value, options }) =>
-            supabaseResponse.cookies.set(name, value, options)
-          )
-        },
-      },
-    }
-  )
+      }
+    )
 
-  // Refresh session — IMPORTANT: do not remove this call.
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
+    // Refresh session — IMPORTANT: do not remove this call.
+    const result = await withTimeout(supabase.auth.getUser(), AUTH_TIMEOUT_MS)
+    visitor = result === 'timeout' ? 'unknown' : result.data.user ? 'user' : 'anonymous'
+  }
 
-  const pathname = request.nextUrl.pathname
+  const action = gate(request.nextUrl.pathname, visitor)
 
-  const isProtected = PROTECTED_ROUTES.some(
-    (route) => pathname === route || pathname.startsWith(route + '/')
-  )
-  const isAuthRoute = AUTH_ROUTES.some(
-    (route) => pathname === route || pathname.startsWith(route + '/')
-  )
-
-  if (isProtected && !user) {
+  if (action === 'login') {
     const url = request.nextUrl.clone()
     url.pathname = '/login'
     return NextResponse.redirect(url)
   }
 
-  if (isAuthRoute && user) {
+  if (action === 'dashboard') {
     const url = request.nextUrl.clone()
     url.pathname = '/dashboard'
     return NextResponse.redirect(url)

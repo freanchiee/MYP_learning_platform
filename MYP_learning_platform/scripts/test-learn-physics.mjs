@@ -881,4 +881,146 @@ const blog = await import(pathToFileURL(outBL).href)
   ok('orbits post: ISS 7.66e3 m/s, 5.56e3 s (93 min), 8.7 N/kg (88%), energies +1.47e10 / −2.94e10 / −1.47e10 J, escape 1.12e4 m/s', has('orbital-speed-escape-velocity-derivation-ib-physics', '7.66 × 10³ m/s', '5.56 × 10³ s', '93 minutes', '8.7 N/kg', '88%', '1.47 × 10¹⁰ J', '2.94 × 10¹⁰ J', '1.12 × 10⁴ m/s') && near(fld.orbitSpeed(fld.M_EARTH, 6.78e6), 7660, 5) && near(fld.orbitPeriod(fld.M_EARTH, 6.78e6), 5560, 5) && near(fld.gravField(fld.M_EARTH, 6.78e6), 8.66, 0.05) && near(eISS.ke, 1.47e10, 3e7) && near(eISS.gpe, -2.94e10, 6e7) && near(eISS.te, -1.47e10, 3e7) && near(fld.escapeSpeed(fld.M_EARTH, fld.R_EARTH), 1.12e4, 50))
   ok('the blog hub copy mentions DP Physics, and the DP posts appear in the sitemap data via POSTS', blog.POSTS.slice(-8).every((p) => p.tags.includes('DP Physics')))
 }
+// ---- speed fixes: the middleware gate and the live-class refetch policy ----
+const outAG = path.resolve('node_modules/.cache/auth-gate.mjs')
+await build({ entryPoints: ['lib/auth-gate.ts'], outfile: outAG, format: 'esm', bundle: true, logLevel: 'silent' })
+const ag = await import(pathToFileURL(outAG).href)
+const outLF = path.resolve('node_modules/.cache/live-fetcher.mjs')
+await build({ entryPoints: ['lib/design-live/fetcher.ts'], outfile: outLF, format: 'esm', bundle: true, logLevel: 'silent' })
+const lf = await import(pathToFileURL(outLF).href)
+{
+  // ----- middleware gate
+  ok('a visitor with no login cookie is anonymous (Supabase is never asked): none, unrelated and code-verifier cookies do not count', !ag.hasSessionCookie([]) && !ag.hasSessionCookie(['theme', '_ga']) && !ag.hasSessionCookie(['sb-abc123-auth-token-code-verifier']))
+  ok('the Supabase session cookie, plain or chunked, counts as signed in', ag.hasSessionCookie(['sb-abc123-auth-token']) && ag.hasSessionCookie(['x', 'sb-abc123-auth-token.0', 'sb-abc123-auth-token.1']))
+  ok('public pages are served to anonymous AND unknown visitors, and /dp-physics never redirects', ['/', '/dp-physics', '/dp-physics/formulas', '/blog/x', '/guides/physics', '/classes/abc'].every((p) => ['anonymous', 'unknown', 'user'].every((v) => ag.gate(p, v) === 'continue')))
+  ok('protected routes send anonymous visitors to login', ['/dashboard', '/dashboard/x', '/exam/p1', '/results/9', '/papers'].every((p) => ag.gate(p, 'anonymous') === 'login'))
+  ok('a signed-in visitor reaches protected routes, and is bounced from /login and /signup to the dashboard', ag.gate('/dashboard', 'user') === 'continue' && ag.gate('/login', 'user') === 'dashboard' && ag.gate('/signup', 'user') === 'dashboard' && ag.gate('/login', 'anonymous') === 'continue')
+  ok('if Supabase does not answer (unknown) nobody is locked out or redirected, protected or not', ['/dashboard', '/exam/p1', '/login', '/dp-physics'].every((p) => ag.gate(p, 'unknown') === 'continue'))
+  ok('a route that only starts with a protected word is not protected (/dashboards-x, /examples)', ag.gate('/dashboards-x', 'anonymous') === 'continue' && ag.gate('/examples', 'anonymous') === 'continue')
+  ok('the auth timeout is 3 seconds', ag.AUTH_TIMEOUT_MS === 3000)
+  ok('withTimeout: fast value passes through; slow and rejecting promises become "timeout"', (await ag.withTimeout(Promise.resolve(7), 50)) === 7 && (await ag.withTimeout(new Promise((r) => setTimeout(() => r(1), 300)), 30)) === 'timeout' && (await ag.withTimeout(Promise.reject(new Error('down')), 50)) === 'timeout')
+  const mwSrc = (await import('node:fs')).readFileSync('middleware.ts', 'utf8')
+  ok('middleware only calls Supabase inside the "has a login cookie" branch, with the timeout', (mwSrc.match(/auth\.getUser\(/g) || []).length === 1 && mwSrc.indexOf('hasSessionCookie(') < mwSrc.indexOf('auth.getUser(') && mwSrc.includes('withTimeout(supabase.auth.getUser(), AUTH_TIMEOUT_MS)') && mwSrc.includes('createServerClient(') && mwSrc.indexOf('hasSessionCookie(') < mwSrc.indexOf('createServerClient('))
+
+  // ----- live refetch policy, on a fake clock
+  const flush = async () => { for (let i = 0; i < 12; i++) await Promise.resolve() }
+  const clock = () => {
+    let t = 0, id = 0
+    const q = new Map()
+    return {
+      sc: { set: (fn, ms) => { const i = ++id; q.set(i, { at: t + ms, fn }); return i }, clear: (i) => q.delete(i), now: () => t },
+      now: () => t,
+      after: (ms, fn) => { const i = ++id; q.set(i, { at: t + ms, fn }); return i },
+      async advance(ms) {
+        const end = t + ms
+        for (;;) {
+          let next = null
+          for (const [i, e] of q) if (e.at <= end && (!next || e.at < next.e.at)) next = { i, e }
+          if (!next) break
+          q.delete(next.i); t = next.e.at; next.e.fn(); await flush()
+        }
+        t = end; await flush()
+      },
+    }
+  }
+  const make = (opts = {}, duration = 0) => {
+    const c = clock()
+    const log = { runs: 0, active: 0, maxActive: 0, hidden: false, fail: false, duration }
+    const f = lf.createLiveFetcher({
+      scheduler: c.sc,
+      isHidden: () => log.hidden,
+      run: async () => { log.runs++; log.active++; log.maxActive = Math.max(log.maxActive, log.active); try { if (log.duration > 0) await new Promise((res) => c.after(log.duration, res)); if (log.fail) throw new Error('boom') } finally { log.active-- } },
+      ...opts,
+    })
+    return { c, log, f }
+  }
+
+  {
+    const { c, log, f } = make()
+    f.start(); await flush()
+    ok('start fetches once straight away', log.runs === 1)
+    await c.advance(3000); await c.advance(3000); await c.advance(3000)
+    ok('with no realtime connection it polls every 3 s (runs at 0, 3, 6, 9 s)', log.runs === 4)
+  }
+  {
+    const { c, log, f } = make()
+    f.start(); await flush(); f.setConnected(true)
+    await c.advance(9999)
+    ok('with realtime connected it polls only every 10 s (nothing before 10 s)', log.runs === 1)
+    await c.advance(1)
+    ok('… and then once at 10 s', log.runs === 2)
+    await c.advance(20000)
+    ok('… and again at 20 s and 30 s (3 polls in 30 s, not 10)', log.runs === 4)
+    f.setConnected(false); await c.advance(3000)
+    ok('if realtime drops it goes back to 3 s polling', log.runs === 5)
+  }
+  {
+    const { c, log, f } = make({}, 5000)
+    f.start(); await flush()
+    for (let i = 0; i < 600; i++) { f.trigger(); await c.advance(100) }
+    await c.advance(20000)
+    ok('never more than ONE request in flight, even with a slow backend and constant change events', log.maxActive === 1 && log.runs > 3)
+  }
+  {
+    const { c, log, f } = make()
+    f.start(); await flush(); f.setConnected(true)
+    for (let i = 0; i < 30; i++) f.trigger()
+    await c.advance(299)
+    ok('a burst of 30 change events does nothing until the 300 ms window closes', log.runs === 1)
+    await c.advance(1)
+    ok('… then becomes exactly ONE refetch', log.runs === 2)
+    f.trigger(); await c.advance(300)
+    ok('a later single event gets its own refetch', log.runs === 3)
+  }
+  {
+    const { c, log, f } = make({}, 1000)
+    f.start(); await flush()
+    f.trigger(); await c.advance(300); // run #1 still going (1000 ms), trigger fires at 300 ms: merged into one follow-up
+    f.trigger(); await c.advance(300); f.trigger(); await c.advance(300)
+    await c.advance(1500)
+    ok('events that arrive while a fetch is running are merged into a single follow-up fetch', log.maxActive === 1 && log.runs >= 2 && log.runs <= 4)
+  }
+  {
+    const { c, log, f } = make()
+    f.start(); await flush(); f.setConnected(true)
+    log.hidden = true
+    f.trigger(); await c.advance(60000)
+    ok('a hidden tab neither polls nor refetches on change events (60 s, 1 run)', log.runs === 1)
+    f.onVisible(); await flush()
+    ok('… and does nothing if it is still hidden when visibility fires', log.runs === 1)
+    log.hidden = false; f.onVisible(); await flush()
+    ok('… then catches up exactly once the moment it becomes visible', log.runs === 2)
+  }
+  {
+    const fast = make({}, 100), slow = make({}, 2500)
+    for (const m of [fast, slow]) { m.f.start(); await flush(); await m.c.advance(120000) }
+    ok('slow responses back the polling off (a 2.5 s backend is hit far less often than a fast one)', slow.log.runs < fast.log.runs / 2 && slow.log.maxActive === 1)
+    slow.log.duration = 100
+    const before = slow.log.runs
+    await slow.c.advance(60000)
+    ok('… and once the backend is quick again the polling speeds back up', slow.log.runs - before >= 2)
+  }
+  {
+    const { c, log, f } = make({ fastMs: 1000 })
+    f.start(); await flush(); log.fail = true
+    await c.advance(5000)
+    ok('a failing fetch is swallowed and the next poll still happens', log.runs >= 5)
+  }
+  {
+    const { c, log, f } = make()
+    f.start(); await flush(); f.trigger(); f.stop()
+    await c.advance(60000)
+    f.trigger(); f.onVisible(); f.setConnected(true); await c.advance(60000)
+    ok('after stop nothing fires, whatever happens (no leaked timers or late fetches)', log.runs === 1)
+  }
+  {
+    const { c, log, f } = make()
+    f.start(); f.start(); await flush()
+    ok('calling start twice does not start two loops', log.runs === 1)
+    await c.advance(3000)
+    ok('… and polls at the normal rate', log.runs === 2)
+  }
+  const hooksSrc = (await import('node:fs')).readFileSync('lib/design-live/hooks.ts', 'utf8')
+  ok('the live hooks no longer use the old fixed 3 s setInterval poll; all three go through startLive', !/setInterval\(fetchIt/.test(hooksSrc) && !hooksSrc.includes('POLL_MS') && (hooksSrc.match(/startLive\(/g) || []).length === 4 && hooksSrc.includes('fetcher.setConnected(status === \'SUBSCRIBED\')') && hooksSrc.includes('document.hidden'))
+}
 process.exit(fail ? 1 : 0)
