@@ -35,6 +35,7 @@ import { SelfPacedBar, navOf } from './SelfPaced'
 import { LeaderboardDrawer, useLeaderboardDrawer } from './HostChrome'
 import { getPersona } from '@/data/design/live/personas'
 import { useCelebration, CelebrationOverlay } from './Celebration'
+import LeadCaptureField from './LeadCaptureField'
 
 /** Case-insensitive "does this text contain this word/phrase" check used by
  *  both the keyword-celebration nudge and (loosely) nowhere else — kept
@@ -967,7 +968,7 @@ export function WorksheetPlayer({
 
 
 /** Where the activity's interview (personaChat) field lives, if it has one. */
-function findPersonaField(activity: LiveActivityDefinition): { stageKey: string; sectionKey: string; fieldKey: string; pack?: 'accessibility' | 'community' | 'everyday' } | null {
+function findPersonaField(activity: LiveActivityDefinition): { stageKey: string; sectionKey: string; fieldKey: string; pack?: 'accessibility' | 'community' | 'everyday' | 'society' } | null {
   for (const st of activity.stages) {
     if (st.type !== 'worksheet') continue
     for (const sec of st.sections) {
@@ -1094,7 +1095,12 @@ function WorksheetFieldInput({
     return <MakeCardsField value={value} onChange={onChange} onPersist={onPersist ?? onChange} preferredDirection={lookup?.('week1', 'direction', 'direction')} />
   }
   if (field.type === 'personaChat') {
-    return <PersonaChatField value={value} onChange={onChange} onPersist={onPersist!} onDraft={onDraft!} sessionCode={sessionCode!} playerId={playerId!} pack={field.personaPack} />
+    const topicFrom = field.personaTopicFrom
+    const preferredTopic = topicFrom ? lookup?.(topicFrom.stage, topicFrom.section, topicFrom.field) : undefined
+    return <PersonaChatField value={value} onChange={onChange} onPersist={onPersist!} onDraft={onDraft!} sessionCode={sessionCode!} playerId={playerId!} pack={field.personaPack} preferredTopic={typeof preferredTopic === 'string' ? preferredTopic : undefined} />
+  }
+  if (field.type === 'leadCapture') {
+    return <LeadCaptureField field={field} value={value} onPersist={onPersist ?? onChange} />
   }
   if (field.type === 'personalityPrompt') {
     return <PersonalityPromptField value={value} onChange={onChange} onPersist={onPersist ?? onChange} />

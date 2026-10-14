@@ -607,3 +607,10 @@ An id of the form `dpp--<module>--<lesson>` is not in `LIVE_ACTIVITIES`: `getLiv
 pass to Client Components. A teacher assigns a lesson in Live mode from the class Library > DP Physics tab; "Host live" opens
 `/design/live/<id>?host=1&class=<classId>` and `LiveHost.createSession` attaches the session to that class (`?class=` is validated as a UUID).
 Async (self-paced) lesson assignments are separate: `class_assignments.kind='lesson'` with `unlock_at` (drip) and progress in `lesson_progress`.
+
+## Individuals & Societies exemplars (MYP4 Geography, History) and lead capture
+
+`data/design/live/is-shared.ts` exports `buildSocietyActivity(config)`: one skeleton (Start Here → Checkpoint 1 A → Investigating lesson → Investigate worksheet B → Source pack → Checkpoint 2 D → Think and Communicate A/C/D → What Next? → Criteria Review) filled by plain data in `myp4-geography-urban-water.ts` and `myp4-history-industrial-revolution.ts`. A new I&S subject is one more config file. The strands in `IS_STRANDS` are the IB's Year 3/5 I&S strands (C = Communicating, D = Thinking critically). Sources inside are constructed and labelled so; never invent real quotations.
+- `subject` on a definition adds a chip on the hub card (default 'Design').
+- `personaPack: 'society'` + `personaTopicFrom` (the direction select) offers only the characters whose `topic` matches the student's direction (`society-personas.ts`; topic text must equal the select option exactly). The prompt lives in `app/api/persona-chat/route.ts`.
+- `leadCapture` field (`LeadCaptureField.tsx`) wraps `InterestForm` + a tutoring link, tagged with the activity in `source_page`. Students under 16 cannot sign up, so the copy addresses a parent/teacher. It counts as complete once `{ sent: true }` is saved.

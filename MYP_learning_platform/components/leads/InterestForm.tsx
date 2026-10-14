@@ -18,12 +18,15 @@ export default function InterestForm({
   heading = 'Want updates on the subjects and tools that matter to you?',
   blurb = 'Choose what interests you and leave your email. We may contact you about it. Nothing is charged, and you can unsubscribe or ask for your details to be deleted at any time.',
   defaultRole = '',
+  onSubmitted,
 }: {
   sourcePage: string
   defaultInterests?: string[]
   heading?: string
   blurb?: string
   defaultRole?: string
+  /** Called once after the lead has been saved. */
+  onSubmitted?: () => void
 }) {
   const [role, setRole] = useState(defaultRole)
   const [email, setEmail] = useState('')
@@ -52,6 +55,7 @@ export default function InterestForm({
       const data = await resp.json().catch(() => null)
       if (!resp.ok || !data?.ok) throw new Error(data?.error || 'Could not send that just now — please try again in a moment.')
       setDone(true)
+      onSubmitted?.()
     } catch (err) {
       setError(err instanceof TypeError ? 'Could not reach the server — please check your connection and try again.' : (err as Error).message)
     } finally {

@@ -27,7 +27,7 @@ export default function LiveHub() {
           Live Classes
         </h1>
         <p className="mt-4 max-w-2xl text-lg leading-relaxed" style={{ color: 'var(--text-muted)' }}>
-          Kahoot-style, teacher-hosted sessions built for MYP Design — a quiz, a worksheet, or a team icebreaker,
+          Kahoot-style, teacher-hosted sessions for MYP Design, Geography and History — a quiz, a worksheet, or a team icebreaker,
           projected on the big screen while every student answers live from their own device. Pick a year group to
           see what&apos;s live.
         </p>
@@ -52,7 +52,10 @@ export default function LiveHub() {
                       className="group flex flex-col rounded-3xl p-6 transition-transform hover:-translate-y-1"
                       style={{ background: `linear-gradient(145deg, ${a.theme.from} 0%, ${a.theme.via} 55%, ${a.theme.to} 100%)` }}
                     >
-                      <div className="text-3xl">{a.icon}</div>
+                      <div className="flex items-center justify-between">
+                        <div className="text-3xl">{a.icon}</div>
+                        <span className="rounded-full px-2.5 py-1 text-[10px] font-black tracking-widest" style={{ background: 'rgba(255,255,255,0.16)', color: '#fff' }}>{(a.subject ?? 'Design').toUpperCase()}</span>
+                      </div>
                       <h3 className="mt-2 text-xl font-extrabold leading-tight text-white">{a.title}</h3>
                       <p className="mt-2 flex-1 text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.75)' }}>
                         {a.subtitle}

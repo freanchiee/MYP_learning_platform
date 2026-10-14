@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { PERSONA_DIRECTIONS, PERSONAS, personasByDirection, getPersona } from '@/data/design/live/personas'
 import { ROLES, ROLE_ORDER } from '@/lib/design-live/sustainability'
 import { EVERYDAY_CHALLENGES } from '@/data/design/live/everyday-personas'
+import { SOCIETY_TOPIC_ICONS } from '@/data/design/live/society-personas'
 import { cardStyle, btnStyle, inputStyle, Avatar } from './ui'
 
 interface ChatMessage {
@@ -30,6 +31,7 @@ export default function PersonaChatField({
   sessionCode,
   playerId,
   pack = 'accessibility',
+  preferredTopic,
 }: {
   value: PersonaChatValue | undefined
   onChange: (v: PersonaChatValue) => void
@@ -38,8 +40,11 @@ export default function PersonaChatField({
   sessionCode: string
   playerId: string
   /** 'community' offers the MYP5 stakeholder representatives instead of the accessibility personas. */
-  pack?: 'accessibility' | 'community' | 'everyday'
+  pack?: 'accessibility' | 'community' | 'everyday' | 'society'
+  /** 'society' pack: the direction the student chose earlier; its characters are offered first. */
+  preferredTopic?: string
 }) {
+  const [showAllTopics, setShowAllTopics] = useState(false)
   const [text, setText] = useState('')
   const [sending, setSending] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -149,6 +154,37 @@ export default function PersonaChatField({
             </div>
           </div>
         ))}
+      </div>
+    )
+  }
+
+  if (!character && pack === 'society') {
+    const allTopics = Array.from(new Set(PERSONAS.filter((p) => p.direction === 'society').map((p) => p.topic || '')))
+    const focused = !!preferredTopic && allTopics.includes(preferredTopic) && !showAllTopics
+    const topics = focused ? [preferredTopic as string] : allTopics
+    return (
+      <div style={{ display: 'grid', gap: 10 }}>
+        {focused ? (
+          <div style={{ fontSize: 12, color: 'var(--text-muted)' }}>Showing people connected to your direction. Choose one to interview.</div>
+        ) : (
+          !preferredTopic && <div style={{ fontSize: 12, color: 'var(--text-muted)' }}>Pick a direction above to see the people connected to it, or choose anyone here.</div>
+        )}
+        {topics.map((t) => (
+          <div key={t}>
+            <div style={{ fontSize: 11, fontWeight: 800, color: 'var(--text-muted)', marginBottom: 4 }}>{SOCIETY_TOPIC_ICONS[t] || '👥'} {t.toUpperCase()}</div>
+            <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+              {PERSONAS.filter((p) => p.direction === 'society' && p.topic === t).map((p) => (
+                <button key={p.id} onClick={() => pickCharacter(p.id)} style={{ ...btnStyle('var(--surface)'), display: 'flex', alignItems: 'center', gap: 8, textAlign: 'left', fontSize: 12.5 }}>
+                  <Avatar seed={p.id} size={28} />
+                  <span>{p.name}, {p.age}<br /><span style={{ fontWeight: 400, fontSize: 11, color: 'var(--text-muted)' }}>{p.represents}</span></span>
+                </button>
+              ))}
+            </div>
+          </div>
+        ))}
+        {focused && (
+          <button onClick={() => setShowAllTopics(true)} style={{ ...btnStyle('var(--surface)'), fontSize: 11.5, justifySelf: 'start' }}>Show people from the other directions</button>
+        )}
       </div>
     )
   }

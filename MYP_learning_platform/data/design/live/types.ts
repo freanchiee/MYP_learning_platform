@@ -58,7 +58,7 @@ export interface McqStage extends StageTiming {
 // ---------------------------------------------------------------
 // Stage: Worksheet (structured research/build artefacts + grading)
 // ---------------------------------------------------------------
-export type WorksheetFieldType = 'text' | 'textarea' | 'select' | 'table' | 'personaChat' | 'personalityPrompt' | 'opportunityCards' | 'makeCards' | 'productCards' | 'image' | 'checklist'
+export type WorksheetFieldType = 'text' | 'textarea' | 'select' | 'table' | 'personaChat' | 'personalityPrompt' | 'opportunityCards' | 'makeCards' | 'productCards' | 'image' | 'checklist' | 'leadCapture'
 
 export interface WorksheetTableColumn {
   key: string
@@ -87,7 +87,13 @@ export interface WorksheetField {
    *  feeds into the fuzzy-match auto score. */
   celebrateKeywords?: string[]
   /** For 'personaChat': which pack of characters to offer. Default 'accessibility'. */
-  personaPack?: 'accessibility' | 'community' | 'everyday'
+  personaPack?: 'accessibility' | 'community' | 'everyday' | 'society'
+  /** For 'personaChat' with the 'society' pack: the select field whose value is the direction the student chose;
+   *  only that direction's characters are offered first. */
+  personaTopicFrom?: { stage: string; section: string; field: string }
+  /** For 'leadCapture': the interests ticked by default, and the page name stored with the lead. */
+  leadInterests?: string[]
+  leadSource?: string
   /** Max points this field contributes to its section's fuzzy-match auto
    *  score, for text/textarea fields with exemplars/celebrateKeywords set.
    *  Default 10. */
@@ -280,6 +286,8 @@ export interface ExemplarsByChoice {
 export interface LiveActivityDefinition {
   id: string
   year: MypYear
+  /** Subject shown on the hub card, e.g. 'Geography'. Defaults to 'Design'. */
+  subject?: string
   title: string
   subtitle: string
   icon: string
