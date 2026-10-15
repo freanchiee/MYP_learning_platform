@@ -55,6 +55,10 @@ export const SITE_COURSES: { name: string; href: string; description: string }[]
 // Keep answers factual, self-contained and BLUF. If you edit these, update llms.txt.
 export const SITE_FAQ: { q: string; a: string }[] = [
   {
+    q: 'What is Strandhoot?',
+    a: 'Strandhoot is CritABCD’s live, game-style classroom activity for the IB MYP, where progress is tracked strand by strand (A.i, B.ii, D.iii and so on). Teachers host it or students work at their own pace, and the teacher sees each student’s evidence against every criterion strand. See https://www.critabcd.com/strandhoot.',
+  },
+  {
     q: 'What is CritABCD?',
     a: 'CritABCD is a next-generation learning site for the IB Middle Years Programme (MYP): free guides and articles, interactive labs and resources, live teacher-hosted classes, past papers and practice across several MYP subjects.',
   },

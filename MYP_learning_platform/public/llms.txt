@@ -41,3 +41,7 @@ CritABCD is for MYP students (roughly ages 11–16) and their teachers. Work is 
 - Product name: CritABCD (styled as "CritABCD").
 - Category: education / IB MYP learning site (guides, resources, live classes, e-assessment practice).
 - IB MYP assessment uses four criteria (A–D), each 1–8; the specific criterion titles differ by subject group.
+
+## Strandhoot
+- Strandhoot is CritABCD's live, game-style MYP classroom activity: teachers host or students self-pace, progress is tracked strand by strand (A.i, B.ii, D.iii...), and the teacher grades each strand 1-8. Exemplars: MYP4 Geography (Cities, Water and Fairness), MYP4 History (The Industrial Revolution: Change for Whom?) and MYP Design.
+- Overview and comparison with Kahoot: https://www.critabcd.com/strandhoot

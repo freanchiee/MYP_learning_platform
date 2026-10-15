@@ -5,6 +5,7 @@ import { POSTS } from '@/data/blog'
 import { MODULES } from '@/data/learn/physics'
 import { CRITERION_KEYS } from '@/data/seo/criterion-guides'
 import { SAMPLE_QUESTIONS } from '@/data/seo/sample-questions'
+import { publicActivities } from '@/lib/strandhoot'
 
 // Served at /sitemap.xml. Only genuinely public (non-auth-gated) pages belong here —
 // the subject/exam/design routes redirect to /login for crawlers, so they're omitted.
@@ -22,6 +23,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${SITE_URL}/guides`, changeFrequency: 'monthly', priority: 0.9 },
     { url: `${SITE_URL}/gameducation`, changeFrequency: 'monthly', priority: 0.7 },
     { url: `${SITE_URL}/tutoring`, changeFrequency: 'monthly', priority: 0.6 },
+    { url: `${SITE_URL}/strandhoot`, changeFrequency: 'weekly', priority: 0.9 },
+    ...publicActivities().map((a) => ({ url: `${SITE_URL}/strandhoot/${a.id}`, changeFrequency: 'monthly' as const, priority: 0.8 })),
     ...GUIDES.map((g) => ({
       url: `${SITE_URL}/guides/${g.slug}`,
       changeFrequency: 'monthly' as const,

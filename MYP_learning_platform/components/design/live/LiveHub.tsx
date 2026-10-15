@@ -21,10 +21,10 @@ export default function LiveHub() {
         </div>
 
         <div className="mt-4 text-xs font-black tracking-[0.35em]" style={{ color: 'var(--accent)' }}>
-          LIVE CLASS · HOST FROM ANY DEVICE · STUDENTS JOIN WITH A CODE
+          STRANDHOOT · LIVE CLASS · HOST FROM ANY DEVICE · STUDENTS JOIN WITH A CODE
         </div>
         <h1 className="mt-2 text-4xl font-extrabold md:text-6xl" style={{ color: 'var(--text)', letterSpacing: '-1px' }}>
-          Live Classes
+          Strandhoot
         </h1>
         <p className="mt-4 max-w-2xl text-lg leading-relaxed" style={{ color: 'var(--text-muted)' }}>
           Kahoot-style, teacher-hosted sessions for MYP Design, Geography and History — a quiz, a worksheet, or a team icebreaker,
