@@ -24,7 +24,9 @@
 
 import type {
   ActivityBrief,
+  FieldCoach,
   FlowStep,
+  KeywordGroup,
   LearnPage,
   LiveActivityDefinition,
   LiveTheme,
@@ -47,6 +49,78 @@ export const IS_STRANDS = {
   'D.iii': 'Analyse sources by origin and purpose, recognising value and limitations',
   'D.iv': 'Recognise different perspectives and explain their implications',
 } as const
+
+/** Subject words to add to a field's shared coach, by level. Typos and endings are forgiven when matched. */
+export interface SubjectWords {
+  basic?: string[]
+  developed?: string[]
+  justified?: string[]
+}
+
+/** Per-subject words for each coached written answer. Geography and History differ here; the shared lists below do not. */
+export interface SocietyCoachWords {
+  rq?: SubjectWords
+  evaluation?: SubjectWords
+  perspectives?: SubjectWords
+  argument?: SubjectWords
+  explain?: SubjectWords
+  audience?: SubjectWords
+}
+
+// Shared coach words. Level means HOW the answer is built, not how long it is:
+//   basic = names the thing · developed = explains why · justified = links cause, effect and stake.
+// Words are plain thinking moves; the subject lists add the vocabulary of the topic. Students only ever
+// see what they hit (see lib/design-live/answerFeedback.ts), so these lists are never shown.
+const SHARED_WORDS: Record<keyof SocietyCoachWords, Required<SubjectWords>> = {
+  rq: {
+    basic: ['to what extent', 'how far', 'why did', 'why do', 'why does', 'how did', 'how has', 'how can', 'how have'],
+    developed: ['rather than', 'compared with', 'between', 'since', 'over the last', 'in the last', 'impact on', 'effect on', 'cause of', 'responsible for'],
+    justified: ['and how', 'and what', 'whether', 'most important', 'main reason', 'balance'],
+  },
+  evaluation: {
+    basic: ['worked well', 'strength', 'strongest', 'useful', 'helped', 'weakest'],
+    developed: ['because', 'limitation', 'however', 'missing', 'biased', 'one-sided', 'too thin', 'only one', 'could not check', 'did not'],
+    justified: ['next time', 'i would improve', 'i would add', 'i would change', 'to improve', 'instead', 'second source', 'check against', 'cross-check', 'more reliable', 'real person', 'fictional', 'too wide', 'too narrow'],
+  },
+  perspectives: {
+    basic: ['perspective', 'point of view', 'view', 'sees', 'believes', 'would want', 'argues'],
+    developed: ['whereas', 'by contrast', 'on the other hand', 'however', 'because', 'while', 'but'],
+    justified: ['implication', 'implies', 'as a result', 'this means', 'which means', 'therefore', 'consequence', 'leads to', 'so the plan', 'would oppose', 'would push'],
+  },
+  argument: {
+    basic: ['i argue', 'my claim', 'mainly', 'mostly', 'more than', 'to a limited extent', 'to a large extent', 'mixed', 'rather than'],
+    developed: ['source a', 'source b', 'source c', 'shows', 'suggests', 'according to', 'for example', 'because', 'however', 'whereas', 'by contrast'],
+    justified: ['this shows that', 'this suggests', 'which means', 'therefore', 'overall', 'on balance', 'although', 'even so', 'this is because', 'outweigh', 'the other side', 'counter'],
+  },
+  explain: {
+    basic: ['for example', 'for instance'],
+    developed: ['because', 'which means', 'leads to', 'this creates', 'results in', 'so that', 'as a result'],
+    justified: ['even when', 'at the same time', 'which makes', 'even though', 'whereas', 'however', 'more than', 'faster than', 'in turn'],
+  },
+  audience: {
+    basic: ['audience', 'reader', 'readers', 'purpose', 'tone', 'formal', 'informal'],
+    developed: ['because', 'simple', 'simpler', 'plain', 'specific', 'explain', 'example', 'short', 'headings', 'define'],
+    justified: ['so that', 'which means', 'therefore', 'recommend', 'persuade', 'convince', 'inform', 'lead with', 'suits', 'suitable for', 'jargon'],
+  },
+}
+
+/** Join the shared words with a subject's own, removing repeats, into the three level groups the coach reads. */
+function mergeWords(field: keyof SocietyCoachWords, extra?: SubjectWords): KeywordGroup[] {
+  const base = SHARED_WORDS[field]
+  const seen = new Set<string>()
+  const take = (words: string[]) =>
+    words.filter((w) => {
+      const k = w.toLowerCase()
+      if (seen.has(k)) return false
+      seen.add(k)
+      return true
+    })
+  return [
+    { level: 'basic', words: take([...(extra?.basic ?? []), ...base.basic]) },
+    { level: 'developed', words: take([...(extra?.developed ?? []), ...base.developed]) },
+    { level: 'justified', words: take([...(extra?.justified ?? []), ...base.justified]) },
+  ]
+}
 
 export interface SocietyConfig {
   id: string
@@ -87,6 +161,8 @@ export interface SocietyConfig {
   explainKeywords: string[]
   evaluateExemplars: string[]
   reportTitleHint: string
+  /** Subject vocabulary for the answer coach on each written field (shared thinking words are added automatically). */
+  coachWords?: SocietyCoachWords
 }
 
 const BLOCK1 = 'Lesson 1 · single period'
@@ -125,6 +201,46 @@ export function buildSocietyActivity(c: SocietyConfig): LiveActivityDefinition {
     { strand: 'B.iv', title: 'Evaluate your work', asks: IS_STRANDS['B.iv'], where: 'Investigate (last section)' },
   ]
 
+  const w = c.coachWords ?? {}
+
+  // Scaffolds are sentence frames with blanks and step prompts, never a model answer. They cost points to unlock.
+  const rqCoach: FieldCoach = {
+    groups: mergeWords('rq', w.rq),
+    scaffold: {
+      frame: 'To what extent / How far [did or has] [a cause or action] [lead to or change something] for [a named group] in [a place] [between or since a time], [rather than another explanation]?',
+      steps: [
+        'WHERE AND WHEN: name one place and one time period.',
+        'WHO: name the group of people the question is about.',
+        'WHAT: what do you want to explain? Pick one cause, change or effect.',
+        'CONTRAST: add “rather than…” or “compared with…” so the question can be argued.',
+        'CHECK: could you answer it with the sources in the pack? If not, narrow it.',
+      ],
+    },
+    hints: [
+      'Test your question: could two people look at the same evidence and disagree? If not, it asks for a fact, not an argument.',
+      'Is your place or time precise enough that someone else could find the same evidence?',
+      'Could you add a contrast, such as another possible cause or another group? That makes the question focused.',
+    ],
+  }
+  const argumentCoach: FieldCoach = {
+    groups: mergeWords('argument', w.argument),
+    scaffold: {
+      frame: 'CLAIM: [answer the question in one sentence]. EVIDENCE: [Source ?] shows [a fact or number]. EXPLANATION: This matters because [how it supports your claim]. LINK: Overall, [answer the question again], although [one counter-view].',
+      steps: [
+        'CLAIM: answer the question directly, with a judgement such as “mainly”, “partly” or “to a limited extent”.',
+        'EVIDENCE: use two pieces of evidence, each with its source (Source A, B or C, or your log).',
+        'EXPLANATION: after each piece, say HOW it supports your claim, not just what it says.',
+        'COUNTER: admit one thing that points the other way, then say why it matters less.',
+        'LINK: finish by answering the question again, in different words.',
+      ],
+    },
+    hints: [
+      'Does each piece of evidence say which source it came from?',
+      'After your evidence, add a sentence that starts “This shows…” or “This means…” to explain how it proves your claim.',
+      'What would someone who disagrees say? Add one counter-view and weigh it.',
+    ],
+  }
+
   const dirOpts = c.directions
   const topicFrom = { stage: 'investigate', section: 'direction', field: 'direction' }
 
@@ -158,6 +274,7 @@ export function buildSocietyActivity(c: SocietyConfig): LiveActivityDefinition {
           hint: `A weak question: ${c.rq.weak}  A stronger one: ${c.rq.strong}`,
           exemplars: c.rq.exemplars,
           celebrateKeywords: c.rq.keywords,
+          coach: rqCoach,
           points: 10,
         },
         {
@@ -256,6 +373,7 @@ export function buildSocietyActivity(c: SocietyConfig): LiveActivityDefinition {
           type: 'textarea',
           exemplars: c.evaluateExemplars,
           celebrateKeywords: ['limitation', 'next time', 'because', 'improve', 'missing', 'bias'],
+          coach: { groups: mergeWords('evaluation', w.evaluation) },
           points: 10,
         },
       ],
@@ -277,6 +395,7 @@ export function buildSocietyActivity(c: SocietyConfig): LiveActivityDefinition {
           type: 'textarea',
           exemplars: c.explainExemplars,
           celebrateKeywords: c.explainKeywords,
+          coach: { groups: mergeWords('explain', w.explain) },
           points: 10,
         },
       ],
@@ -341,6 +460,7 @@ export function buildSocietyActivity(c: SocietyConfig): LiveActivityDefinition {
           type: 'textarea',
           exemplars: c.perspectiveExemplars,
           celebrateKeywords: ['perspective', 'whereas', 'however', 'implication', 'as a result', 'because'],
+          coach: { groups: mergeWords('perspectives', w.perspectives) },
           points: 10,
         },
       ],
@@ -360,6 +480,7 @@ export function buildSocietyActivity(c: SocietyConfig): LiveActivityDefinition {
           type: 'textarea',
           exemplars: c.argumentExemplars,
           celebrateKeywords: c.argumentKeywords,
+          coach: argumentCoach,
           points: 10,
         },
       ],
@@ -382,6 +503,7 @@ export function buildSocietyActivity(c: SocietyConfig): LiveActivityDefinition {
             'Because my audience is younger students, I will use simpler words, explain each key term and use one clear example.',
           ],
           celebrateKeywords: ['because', 'tone', 'audience', 'purpose', 'formal', 'explain'],
+          coach: { groups: mergeWords('audience', w.audience) },
           points: 10,
         },
       ],
