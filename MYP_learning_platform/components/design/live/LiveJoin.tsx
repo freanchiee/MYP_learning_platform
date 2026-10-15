@@ -919,6 +919,8 @@ export function WorksheetPlayer({
                 {s.blurb && <div style={{ fontSize: 12.5, color: 'var(--text-muted)' }}>{s.blurb}</div>}
                 {s.fields.map((f) => (
                   <div key={f.key} style={{ display: 'grid', gap: 12, alignItems: 'start', gridTemplateColumns: grade?.scores?.[revealKey(stage.key, s.key, f.key)] ? 'repeat(auto-fit, minmax(300px, 1fr))' : 'minmax(0, 1fr)' }}>
+                  <div style={{ display: 'grid', gap: 8, minWidth: 0 }}>
+                  {f.scaffoldByChoice && <ScaffoldBox spec={f.scaffoldByChoice} lookup={(a, b, c) => me.data?.[a]?.[b]?.[c]} />}
                   <WorksheetFieldInput
                     field={f}
                     value={drafts[s.key]?.[f.key]}
@@ -930,6 +932,7 @@ export function WorksheetPlayer({
                     stageKey={stage.key}
                     lookup={(stageKey, sectionKey, fieldKey) => me.data?.[stageKey]?.[sectionKey]?.[fieldKey]}
                   />
+                  </div>
                   {grade?.scores?.[revealKey(stage.key, s.key, f.key)] ? (() => {
                     const resolved = exemplarsFor(activity.exemplarsByChoice, stage.key, s.key, f, me.data)
                     return <StudentExemplarCard resolved={resolved} noun={resolved.noun} />
@@ -1054,6 +1057,25 @@ function FloatingPersonaChat({
         </div>
       )}
     </div>
+  )
+}
+
+/** Worked examples for the student's own earlier choice (e.g. their design direction), shown above the field. */
+function ScaffoldBox({ spec, lookup }: { spec: NonNullable<WorksheetField['scaffoldByChoice']>; lookup: (a: string, b: string, c: string) => any }) {
+  const chosen = lookup(spec.from.stage, spec.from.section, spec.from.field)
+  const key = typeof chosen === 'string' ? chosen : ''
+  const lines = (key && spec.byValue[key]) || (key ? spec.byValue['*'] : undefined)
+  return (
+    <details open={!!lines} style={{ background: 'var(--accent-soft, var(--surface-2))', border: '1.5px dashed var(--border-strong)', borderRadius: 'var(--radius-control)', padding: '8px 12px', fontSize: 12.5 }}>
+      <summary style={{ cursor: 'pointer', fontWeight: 800 }}>💡 {spec.title ?? 'Examples for your direction'}{key ? ` · ${key}` : ''}</summary>
+      {lines ? (
+        <ul style={{ margin: '8px 0 2px', paddingLeft: 18, display: 'grid', gap: 5, lineHeight: 1.45 }}>
+          {lines.map((l, i) => <li key={i}>{l}</li>)}
+        </ul>
+      ) : (
+        <div style={{ marginTop: 6, color: 'var(--text-muted)' }}>Choose your direction in “Persona &amp; Empathy” to see examples written for it. They are models, not answers to copy.</div>
+      )}
+    </details>
   )
 }
 
