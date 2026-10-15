@@ -115,6 +115,27 @@ export const MYP4_PROTOTYPING: LiveActivityDefinition = {
               ],
               celebrateKeywords: ['how might we', 'so that', 'because', 'for'],
               points: 10,
+              coach: {
+                groups: [
+                  { level: 'basic', words: ['how might we', 'help', 'a way to', 'make it easier', 'cannot', 'struggles', 'needs'] },
+                  { level: 'developed', words: ['so that', 'because', 'currently', 'right now', 'without', 'instead of', 'at the moment'] },
+                  { level: 'justified', words: ['frustrating', 'independence', 'avoids', 'embarrassed', 'safe', 'falls behind', 'loses', 'calmer', 'cannot concentrate', 'relies on', 'private', 'confidence'] },
+                ],
+                scaffold: {
+                  frame: 'How might we help [name] [do something] so that [what changes for them], because [why it is hard now]?',
+                  steps: [
+                    'WHO: use your user’s name.',
+                    'DO: what do they want to be able to do?',
+                    'SO THAT: what improves for them?',
+                    'BECAUSE: why is it hard at the moment?',
+                  ],
+                },
+                hints: [
+                  'Use your user’s name and say what they want to be able to do.',
+                  'Add why it matters to them, with “so that” or “because”.',
+                  'Check it is a question about the problem, not about a gadget you already imagine.',
+                ],
+              },
             },
           ],
         },
@@ -140,6 +161,18 @@ export const MYP4_PROTOTYPING: LiveActivityDefinition = {
               ],
               celebrateKeywords: ['grip', 'mobility', 'sensory', 'vision', 'reach'],
               points: 10,
+              coach: {
+                groups: [
+                  { level: 'basic', words: ['grip', 'mobility', 'vision', 'reach', 'hearing', 'strength', 'sensory', 'hand', 'wrist', 'arthritis', 'low vision', 'balance', 'noise', 'sensitive'] },
+                  { level: 'developed', words: ['because', 'which makes', 'limited', 'reduced', 'difficult', 'cannot', 'one hand', 'tasks'] },
+                  { level: 'justified', words: ['so tasks', 'hard to', 'affects', 'matters for', 'for this design', 'one-handed operation', 'means he', 'means she', 'means they'] },
+                ],
+                hints: [
+                  'Name a physical or sensory trait, not just an age or a job.',
+                  'Say how that trait affects the tasks they do.',
+                  'Say which trait matters most for the design and why.',
+                ],
+              },
             },
           ],
         },
@@ -176,6 +209,18 @@ export const MYP4_PROTOTYPING: LiveActivityDefinition = {
               ],
               celebrateKeywords: ['assumption', 'check', 'source', 'evidence', 'simulated'],
               points: 10,
+              coach: {
+                groups: [
+                  { level: 'basic', words: ['simulated', 'AI', 'answer', 'suggested', 'surprised', 'interview'] },
+                  { level: 'developed', words: ['assumption', 'check', 'verify', 'confirm', 'source', 'evidence', 'real user', 'because'] },
+                  { level: 'justified', words: ['not evidence', 'only an assumption', 'needs checking', 'rely on', 'secondary research', 'published source', 'cannot prove', 'real person', 'trust'] },
+                ],
+                hints: [
+                  'Pick two or three answers and say which are assumptions.',
+                  'For each, name a real source that could confirm it.',
+                  'Say what you will do before you rely on any of them in your design.',
+                ],
+              },
             },
           ],
         },
@@ -207,6 +252,18 @@ export const MYP4_PROTOTYPING: LiveActivityDefinition = {
               ],
               celebrateKeywords: ['because', "i can't", 'i wish'],
               points: 10,
+              coach: {
+                groups: [
+                  { level: 'basic', words: ["I can't", 'I wish', 'I just', 'I avoid', "it's easier", 'I leave'] },
+                  { level: 'developed', words: ['because', 'so I', 'so that', 'end up', 'instead', 'again', 'every time', 'otherwise'] },
+                  { level: 'justified', words: ['asking someone', 'ask for help', 'hurt', 'embarrassed', 'give up', 'without help', 'independent', "I'd rather", 'burden'] },
+                ],
+                hints: [
+                  'Write it in their voice, in quotation marks, as they would really say it.',
+                  'Add the reason they give: what happens when they try?',
+                  'Use something your interview or persona traits told you.',
+                ],
+              },
             },
             {
               key: 'thinks',
@@ -220,6 +277,18 @@ export const MYP4_PROTOTYPING: LiveActivityDefinition = {
               ],
               celebrateKeywords: ['worried', 'embarrassed', 'wonders', 'hopes'],
               points: 10,
+              coach: {
+                groups: [
+                  { level: 'basic', words: ['wonders', 'worries', 'hopes', 'fears', 'thinks', 'suspects', 'wishes'] },
+                  { level: 'developed', words: ['whether', 'if people', 'that others', 'because', 'but', 'might', 'could'] },
+                  { level: 'justified', words: ['singled out', 'notice', 'lazy', 'explain himself', 'explain herself', 'explain themselves', 'judged', 'a burden', 'independence', 'dignity', 'embarrassed'] },
+                ],
+                hints: [
+                  'Go beneath what they say. What do they think but keep to themselves?',
+                  'Say what they think others think of them.',
+                  'Add what they hope for, so the thought shows what they want.',
+                ],
+              },
             },
             {
               key: 'does',
@@ -233,6 +302,18 @@ export const MYP4_PROTOTYPING: LiveActivityDefinition = {
               ],
               celebrateKeywords: ['instead', 'avoids', 'asks for help', 'currently'],
               points: 10,
+              coach: {
+                groups: [
+                  { level: 'basic', words: ['currently', 'avoids', 'asks for help', 'switches', 'waits', 'instead', 'takes', 'uses', 'skips'] },
+                  { level: 'developed', words: ['because', 'more trips', 'whenever', 'only when', 'so that', 'to avoid', 'workaround'] },
+                  { level: 'justified', words: ['when fewer people', 'in front of', 'longer than', 'rely on', 'gives up', 'independence', 'extra time', 'extra effort', 'risk'] },
+                ],
+                hints: [
+                  'Describe what you could see them do, not how they feel.',
+                  'Say what they work around, and what it costs them.',
+                  'Add when or where they do it, so it is specific.',
+                ],
+              },
             },
             {
               key: 'feels',
@@ -246,6 +327,18 @@ export const MYP4_PROTOTYPING: LiveActivityDefinition = {
               ],
               celebrateKeywords: ['frustrated', 'anxious', 'relieved', 'confident'],
               points: 10,
+              coach: {
+                groups: [
+                  { level: 'basic', words: ['frustrated', 'anxious', 'embarrassed', 'relieved', 'confident', 'self-conscious', 'hopeful', 'worried', 'tired'] },
+                  { level: 'developed', words: ['because', 'when', 'after', 'whenever', 'but', 'and'] },
+                  { level: 'justified', words: ['in front', 'dropping', 'asking', 'longer', 'watched', 'days', 'smoothly', 'independence'] },
+                ],
+                hints: [
+                  'Use a precise feeling word. “Bad” is not enough.',
+                  'Link each feeling to the moment that causes it.',
+                  'Add a contrasting feeling: when does it go well, and how do they feel then?',
+                ],
+              },
             },
           ],
         },
@@ -303,6 +396,27 @@ export const MYP4_PROTOTYPING: LiveActivityDefinition = {
               ],
               celebrateKeywords: ['must', 'so that', 'because', 'my user', 'currently'],
               points: 10,
+              coach: {
+                groups: [
+                  { level: 'basic', words: ['must', 'should', 'needs to', 'must not', 'success', 'requirement'] },
+                  { level: 'developed', words: ['because', 'since', 'so that', 'currently', 'my user', 'under', 'at least', 'within', 'seconds', 'measure', 'test', 'using only'] },
+                  { level: 'justified', words: ['empathy map', 'told me', 'avoids', 'which hurts', 'embarrass', 'independence', 'yes or no', 'checkable', 'safe', 'trace'] },
+                ],
+                scaffold: {
+                  frame: 'It must [measurable requirement] because [what the persona said or does now]. It must not [thing] since [reason].',
+                  steps: [
+                    'MUST: a requirement with a number or yes/no.',
+                    'LINK: which line of your empathy map or research is it from?',
+                    'MUST NOT: something it should never do.',
+                    'CHECK: could a stranger test it?',
+                  ],
+                },
+                hints: [
+                  'Put a number or a clear yes/no in each requirement, so a stranger could check it.',
+                  'Say where each one comes from: what did your user say, do or feel?',
+                  'Add at least one must-not, with a reason.',
+                ],
+              },
             },
           ],
         },
@@ -349,6 +463,26 @@ export const MYP4_PROTOTYPING: LiveActivityDefinition = {
               ],
               celebrateKeywords: ['because', 'compared to', 'unlike', 'meets', 'rejected'],
               points: 10,
+              coach: {
+                groups: [
+                  { level: 'basic', words: ['chose', 'picked', 'selected', 'idea', 'rejected', 'specification', 'meets'] },
+                  { level: 'developed', words: ['because', 'unlike', 'compared to', 'whereas', 'while', 'instead of', 'failed', 'would not', 'needed', 'too'] },
+                  { level: 'justified', words: ['my specification requires', 'not have worked', 'missing', 'only idea', 'all three', 'directly meets', 'for my user', 'trade-off', 'although'] },
+                ],
+                scaffold: {
+                  frame: 'I chose [idea] because it meets [spec points]. Unlike [rejected idea], which [what it was missing], it [advantage for my user].',
+                  steps: [
+                    'CHOICE: which idea, and which specification points does it meet?',
+                    'REJECTED: name another idea and say what it lacked.',
+                    'USER: why is the winner better for your user?',
+                  ],
+                },
+                hints: [
+                  'Match your choice to specific points in your specification.',
+                  'Name at least one idea you rejected and say what it was missing.',
+                  'Explain it in terms of your user, not what you personally like.',
+                ],
+              },
             },
           ],
         },
@@ -373,6 +507,18 @@ export const MYP4_PROTOTYPING: LiveActivityDefinition = {
               ],
               celebrateKeywords: ['labelled', 'measurement', 'shows', 'material'],
               points: 10,
+              coach: {
+                groups: [
+                  { level: 'basic', words: ['shows', 'labelled', 'labels', 'measurement', 'dimensions', 'material', 'arrow', 'view', 'side view', 'top view', 'scale', 'cm', 'mm', 'annotated'] },
+                  { level: 'developed', words: ['with', 'noted', 'marked', 'plus', 'so that', 'enlarged', 'actual size', 'from above', 'flattened', 'next to'] },
+                  { level: 'justified', words: ['someone else', 'could build', 'so it fits', 'where it sits', 'which surface', 'exact', 'how it fits', 'shows how'] },
+                ],
+                hints: [
+                  'List what the drawing shows: parts, labels, sizes.',
+                  'Name the materials and where they go.',
+                  'Say what a maker would need to know that is not obvious from the shape alone.',
+                ],
+              },
             },
             { key: 'requirements', label: 'What do you need to make it?', type: 'checklist', hint: 'Add one row per material or tool — you\'ll use this again at the Build log stage.', placeholder: 'e.g. Rubber bands, scissors' },
           ],
@@ -398,6 +544,8 @@ export const MYP4_PROTOTYPING: LiveActivityDefinition = {
             'To use up the lesson time',
           ],
           correct: 1,
+          strand: 'B.ii',
+          why: 'Comparing genuinely different options shows what each does well and badly, so the final choice is better than going with the first idea.',
         },
         {
           q: 'A good design specification is…',
@@ -409,6 +557,8 @@ export const MYP4_PROTOTYPING: LiveActivityDefinition = {
             'The same for every student in the class',
           ],
           correct: 2,
+          strand: 'B.i',
+          why: 'A specification lists checkable requirements based on your research, so a stranger can test the finished product against it.',
         },
         {
           q: '"Justify your chosen design" means…',
@@ -420,6 +570,8 @@ export const MYP4_PROTOTYPING: LiveActivityDefinition = {
             'Asking your teacher to choose for you',
           ],
           correct: 2,
+          strand: 'B.iii',
+          why: 'To justify is to give reasons. A strong reason compares the chosen idea with the others, against your specification.',
         },
         {
           q: 'A planning drawing should be detailed enough that…',
@@ -431,6 +583,8 @@ export const MYP4_PROTOTYPING: LiveActivityDefinition = {
             'It matches a picture found online',
           ],
           correct: 1,
+          strand: 'B.iv',
+          why: 'A planning drawing is for a maker. It needs labels, sizes and materials so someone else could follow it and build the same thing.',
         },
       ],
     },
@@ -474,6 +628,26 @@ export const MYP4_PROTOTYPING: LiveActivityDefinition = {
               ],
               celebrateKeywords: ['prove', 'test', 'so that', 'my user', 'works'],
               points: 10,
+              coach: {
+                groups: [
+                  { level: 'basic', words: ['prove', 'prototype', 'must prove', 'first version', 'shows', 'works', 'test'] },
+                  { level: 'developed', words: ['so that', 'because', 'by testing', 'with my user', 'on a real', 'try', 'check', 'so I can'] },
+                  { level: 'justified', words: ['only one thing', 'the riskiest', 'biggest risk', 'if it fails', 'before I spend', 'decide whether', 'my specification', 'the main problem', 'otherwise'] },
+                ],
+                scaffold: {
+                  frame: 'My first prototype must prove that [one thing] so that [why it matters to my user], and I will test it by [how].',
+                  steps: [
+                    'ONE THING: what is the biggest risk in your idea?',
+                    'WHY: why does that matter to your user?',
+                    'HOW: how will you check it works?',
+                  ],
+                },
+                hints: [
+                  'Choose one thing, the riskiest part of the idea.',
+                  'Say how you will test it, and with whom.',
+                  'Say what you will decide after you see the result.',
+                ],
+              },
             },
             {
               key: 'steps',
@@ -503,6 +677,18 @@ export const MYP4_PROTOTYPING: LiveActivityDefinition = {
               label: 'What did you make?',
               type: 'textarea',
               hint: 'Describe your first version: what it looks like and what you made it from.',
+              coach: {
+                groups: [
+                  { level: 'basic', words: ['made', 'built', 'cut', 'glued', 'taped', 'folded', 'prototype', 'first version', 'cardboard', 'foam', 'card', 'plastic', 'fabric', 'wood', 'rubber', 'silicone'] },
+                  { level: 'developed', words: ['from', 'using', 'shaped', 'measuring', 'cm', 'mm', 'layers', 'so that', 'attached', 'which', 'about'] },
+                  { level: 'justified', words: ['to fit', 'to match', 'my drawing', 'following my plan', 'different from', 'because', 'handle', 'grip', 'thick'] },
+                ],
+                hints: [
+                  'Say what it looks like and what it is made from.',
+                  'Add sizes or how the parts fit together.',
+                  'Say what is the same as, or different from, your plan.',
+                ],
+              },
             },
             {
               key: 'learned',
@@ -516,6 +702,27 @@ export const MYP4_PROTOTYPING: LiveActivityDefinition = {
               ],
               celebrateKeywords: ['worked', 'did not', 'because', 'change', 'next'],
               points: 10,
+              coach: {
+                groups: [
+                  { level: 'basic', words: ['worked', 'did not', 'failed', 'slipped', 'too', 'fits', 'felt'] },
+                  { level: 'developed', words: ['because', 'but', 'however', 'so next', 'next time', 'will change', 'instead', 'which meant', 'unexpected', 'surprised'] },
+                  { level: 'justified', words: ['next version', 'I will change', 'tested', 'evidence', 'my user said', 'did not expect', 'the problem was', 'this showed', 'therefore', 'specification'] },
+                ],
+                scaffold: {
+                  frame: 'It worked because [reason], but [part] did not work because [reason], so next I will [change].',
+                  steps: [
+                    'WORKED: what went well, and why?',
+                    'DID NOT: what failed or surprised you?',
+                    'CAUSE: what was the problem?',
+                    'NEXT: one change that fixes it.',
+                  ],
+                },
+                hints: [
+                  'Say what worked and what did not, with a reason for each.',
+                  'Include something that surprised you.',
+                  'End with one change you will make and how it fixes the problem.',
+                ],
+              },
             },
           ],
         },
@@ -566,6 +773,18 @@ export const MYP4_PROTOTYPING: LiveActivityDefinition = {
               label: 'What actually happened when you tested it?',
               type: 'textarea',
               hint: 'Numbers, times, direct quotes from your tester — evidence, not an opinion.',
+              coach: {
+                groups: [
+                  { level: 'basic', words: ['tested', 'trial', 'tries', 'tester', 'seconds', 'out of', 'results', 'measured', 'observed', 'said'] },
+                  { level: 'developed', words: ['compared', 'average', 'under', 'over', 'whereas', 'but', 'twice', 'once', 'every time', 'failed', 'succeeded'] },
+                  { level: 'justified', words: ['target', 'threshold', 'quote', 'hesitated', 'struggled', 'unaided', 'without help', 'before', 'evidence'] },
+                ],
+                hints: [
+                  'Give numbers: times, counts or how many tries.',
+                  'Add a quotation or an observation from your tester.',
+                  'Compare with something: your target, or what happened without the prototype.',
+                ],
+              },
             },
             {
               key: 'evaluation',
@@ -579,6 +798,27 @@ export const MYP4_PROTOTYPING: LiveActivityDefinition = {
               ],
               celebrateKeywords: ['met', 'partly met', 'not met', 'evidence', 'specification'],
               points: 10,
+              coach: {
+                groups: [
+                  { level: 'basic', words: ['met', 'partly met', 'not met', 'fully met', 'partly', 'specification', 'point'] },
+                  { level: 'developed', words: ['because', 'evidence', 'target', 'seconds', 'tries', 'tester', 'tested', 'result'] },
+                  { level: 'justified', words: ['under my', 'target of', 'but', 'still', 'needs another round', 'only partly', 'missed', 'so this point', 'quote', 'out of', 'compared with'] },
+                ],
+                scaffold: {
+                  frame: 'Specification point 1: [met / partly met / not met] because [number or quote from my test]. Point 2: …',
+                  steps: [
+                    'ONE POINT AT A TIME: list your specification points.',
+                    'VERDICT: met, partly met or not met.',
+                    'EVIDENCE: a number, time or quote for each.',
+                    'HONEST: say clearly which point needs more work.',
+                  ],
+                },
+                hints: [
+                  'Go through your specification one point at a time, not as one lump.',
+                  'For each, say met, partly met or not met, and give the evidence.',
+                  'Be honest about any point that was only partly met. What did the evidence show?',
+                ],
+              },
             },
           ],
         },
@@ -601,6 +841,27 @@ export const MYP4_PROTOTYPING: LiveActivityDefinition = {
               ],
               celebrateKeywords: ['because', 'would change', 'next version', 'instead'],
               points: 10,
+              coach: {
+                groups: [
+                  { level: 'basic', words: ['would change', 'would', 'improve', 'switch', 'increase', 'widen', 'add', 'replace', 'next version', 'instead'] },
+                  { level: 'developed', words: ['because', 'during testing', 'in the test', 'slipped', 'hesitated', 'failed', 'trials', 'tries', 'which', 'so that'] },
+                  { level: 'justified', words: ['exactly where', 'that is where', 'the problem was', 'which would fix', 'so my user', 'meet my specification', 'trade-off', 'evidence', 'therefore'] },
+                ],
+                scaffold: {
+                  frame: 'I would change [part] to [change] because [what went wrong in testing], which would [help my user].',
+                  steps: [
+                    'PART: what would you change?',
+                    'CHANGE: to what?',
+                    'EVIDENCE: which result or comment from testing shows the problem?',
+                    'BENEFIT: how does the change help your user?',
+                  ],
+                },
+                hints: [
+                  'Name the part you would change and what you would change it to.',
+                  'Tie each change to something that went wrong in your test.',
+                  'Say how the change would help your user meet the specification.',
+                ],
+              },
             },
           ],
         },
@@ -624,6 +885,27 @@ export const MYP4_PROTOTYPING: LiveActivityDefinition = {
               ],
               celebrateKeywords: ['no longer', 'instead of', 'now', 'matches'],
               points: 10,
+              coach: {
+                groups: [
+                  { level: 'basic', words: ['no longer', 'now', 'instead of', 'can', 'user', 'empathy map', 'matches', 'change'] },
+                  { level: 'developed', words: ['because', 'which', 'so', 'before', 'used to', 'previously', 'less', 'more', 'anxious', 'embarrassed'] },
+                  { level: 'justified', words: ['what they said', 'told me', 'which matches', 'should reduce', 'independence', 'confidence', 'without help', 'difference', 'daily'] },
+                ],
+                scaffold: {
+                  frame: 'My user can now [do something] instead of [what they did before]. This links to their empathy map where they [said or felt]. So [difference it makes].',
+                  steps: [
+                    'NOW: what can they do?',
+                    'BEFORE: what did they do or avoid?',
+                    'LINK: which empathy-map line does this change?',
+                    'DIFFERENCE: how does it change their day or feelings?',
+                  ],
+                },
+                hints: [
+                  'Go back to your empathy map and pick one line.',
+                  'Say what your user does now compared with before.',
+                  'Say how that changes how they feel or what they can do for themselves.',
+                ],
+              },
             },
           ],
         },
@@ -648,6 +930,8 @@ export const MYP4_PROTOTYPING: LiveActivityDefinition = {
             'A compliment from a friend',
           ],
           correct: 1,
+          strand: 'D.ii',
+          why: 'Evidence is specific and measured: numbers, tries and what was compared. Feelings and compliments are not evidence.',
         },
         {
           q: '"Evaluate against your specification" means…',
@@ -659,6 +943,8 @@ export const MYP4_PROTOTYPING: LiveActivityDefinition = {
             'Compare it to a product you saw in a shop',
           ],
           correct: 0,
+          strand: 'D.ii',
+          why: 'The measure of success is your own specification from Criterion B, so you check each point against what the test showed.',
         },
         {
           q: 'Explaining impact means…',
@@ -670,6 +956,8 @@ export const MYP4_PROTOTYPING: LiveActivityDefinition = {
             'Listing the materials you used',
           ],
           correct: 1,
+          strand: 'D.iv',
+          why: 'Impact is the real difference the product makes for your specific user, such as what they can now do or no longer have to ask for.',
         },
         {
           q: 'If your test shows the solution did not fully work, you should…',
@@ -681,6 +969,8 @@ export const MYP4_PROTOTYPING: LiveActivityDefinition = {
             'Keep retesting until it works, then report only that one',
           ],
           correct: 1,
+          strand: 'D.iii',
+          why: 'Honest reporting shows you understand what went wrong, and explaining how to improve it is exactly what Criterion D.iii asks for.',
         },
       ],
     },

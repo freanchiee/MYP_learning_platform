@@ -70,6 +70,18 @@ export const MYP4_DOCUMENTING_BUILD: LiveActivityDefinition = {
               ],
               celebrateKeywords: ['made from', 'so that', 'my user', 'uses it'],
               points: 10,
+              coach: {
+                groups: [
+                  { level: 'basic', words: ['made from', 'final', 'build', 'finished', 'prototype', 'wood', 'card', 'silicone', 'rubber', 'foam', 'plastic'] },
+                  { level: 'developed', words: ['so that', 'so', 'which', 'clamps', 'holds', 'uses', 'my user', 'from', 'fixed'] },
+                  { level: 'justified', words: ['without needing', 'by touch', 'one hand', 'as intended', 'works as', 'fits', 'my user uses', 'only needs'] },
+                ],
+                hints: [
+                  'Say what it is and what it is made from.',
+                  'Explain how your user uses it, step by step.',
+                  'Say how it works as intended for them: what does it let them do?',
+                ],
+              },
             },
             {
               key: 'changes',
@@ -83,12 +95,45 @@ export const MYP4_DOCUMENTING_BUILD: LiveActivityDefinition = {
               ],
               celebrateKeywords: ['planned', 'changed', 'because', 'tested', 'instead'],
               points: 10,
+              coach: {
+                groups: [
+                  { level: 'basic', words: ['planned', 'changed', 'plan', 'instead', 'originally', 'switched', 'replaced', 'doubled', 'widened'] },
+                  { level: 'developed', words: ['because', 'so I', 'which', 'tested', 'after testing', 'but', 'too', 'slipped'] },
+                  { level: 'justified', words: ['fixed the problem', 'that change', 'which fixed', 'evidence', 'test results', 'my user said', 'so that', 'improved', 'held'] },
+                ],
+                scaffold: {
+                  frame: 'I planned [original], but [what went wrong], so I changed to [new thing]. That change [what it fixed], shown by [evidence].',
+                  steps: [
+                    'PLAN: what did you intend?',
+                    'PROBLEM: what went wrong or did not fit?',
+                    'CHANGE: what did you do instead?',
+                    'EVIDENCE: how do you know it helped?',
+                  ],
+                },
+                hints: [
+                  'Compare what you planned with what you built. Be specific about the difference.',
+                  'Give the reason for each change, from a test or something your user said.',
+                  'Say what the change fixed.',
+                ],
+              },
             },
             {
               key: 'next',
               label: 'If you had another week, what would you try next?',
               type: 'textarea',
               hint: 'One honest idea — a material, a shape, or a test you did not get to.',
+              coach: {
+                groups: [
+                  { level: 'basic', words: ['try', 'next', 'would', 'another week', 'material', 'shape', 'test', 'idea'] },
+                  { level: 'developed', words: ['because', 'so that', 'instead', 'which', 'test with', 'compare'] },
+                  { level: 'justified', words: ['did not get', 'to see whether', 'my user', 'weakness', 'the problem was', 'limit', 'improve', 'find out'] },
+                ],
+                hints: [
+                  'Pick one idea and be specific about the material, shape or test.',
+                  'Say what weakness in your build it would fix.',
+                  'Say how you would know it worked.',
+                ],
+              },
             },
           ],
         },
