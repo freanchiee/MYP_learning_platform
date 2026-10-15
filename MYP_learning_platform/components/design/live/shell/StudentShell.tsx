@@ -9,7 +9,7 @@
 //   PAGE        the stage's own content (children), unchanged.
 //
 // Sticky offsets clear the site's own sticky top bar (56px, z-40): the stage rail and this header stick below it, never over it.
-// On phones the rail becomes a "Stages" drawer. `?ui=classic` in the address switches back to the old layout.
+// On phones the rail becomes a "Stages" drawer.
 // Everything uses theme tokens; the live engine's own "sticker" card style (cardStyle) is kept.
 // The student can also pick a "look" (Classic / Journal / Quest / Editorial / Pop). Those are scoped to this workspace:
 // the page wrapper in LiveJoin carries data-live-theme and liveThemes.css re-skins through CSS variables and the cs-* class hooks below.
@@ -198,13 +198,6 @@ export default function StudentShell({
         <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 11.5 }}>
           <Link href="/design/live/history" style={{ color: 'var(--text-muted)', fontWeight: 700 }}>📜 My history</Link>
           <button onClick={() => { setTourOpen(true); setRailOpen(false) }} style={{ color: 'var(--text-muted)', fontWeight: 700, background: 'none', border: 'none', padding: 0, cursor: 'pointer', fontSize: 11.5, boxShadow: 'none' }} title="Take the tour of this page again">🧭 Tour</button>
-          <button
-            onClick={() => { const u = new URL(window.location.href); u.searchParams.set('ui', 'classic'); window.location.href = u.toString() }}
-            style={{ color: 'var(--text-subtle)', fontWeight: 700, background: 'none', border: 'none', padding: 0, cursor: 'pointer', fontSize: 11.5, boxShadow: 'none' }}
-            title="Go back to the previous layout"
-          >
-            Classic view
-          </button>
         </div>
       </div>
     </aside>

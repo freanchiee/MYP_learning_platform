@@ -91,8 +91,6 @@ export default function LiveJoin({ activity, initialCode }: { activity: LiveActi
   const [nameInput, setNameInput] = useState('')
   const [apiError, setApiError] = useState<string | null>(null)
   const [joining, setJoining] = useState(false)
-  // `?ui=classic` keeps the previous layout; everyone else gets the stage rail + journal workspace on self-paced activities.
-  const [classicUi] = useState(() => typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('ui') === 'classic')
 
   useEffect(() => {
     const sb = createClient()
@@ -360,7 +358,7 @@ export default function LiveJoin({ activity, initialCode }: { activity: LiveActi
   // own work rather than getting cut off. Host-paced activities still stop at "ended"
   // since their content only exists relative to a host-controlled shared state.
   const canWork = session.status === 'active' || (selfPaced && session.status === 'ended')
-  const shellOn = canWork && selfPaced && !classicUi
+  const shellOn = canWork && selfPaced
   const nav = navOf(me, activity)
   const myIdx = selfPaced ? nav.stage : session.stage_idx
   const rawStage = activity.stages[myIdx]
@@ -412,14 +410,6 @@ export default function LiveJoin({ activity, initialCode }: { activity: LiveActi
           <Link href="/design/live/history" style={{ fontSize: 11, color: 'rgba(255,255,255,0.7)' }}>
             📜 My history
           </Link>
-          {selfPaced && classicUi && (
-            <button
-              onClick={() => { const u = new URL(window.location.href); u.searchParams.delete('ui'); window.location.href = u.toString() }}
-              style={{ fontSize: 11, color: 'rgba(255,255,255,0.85)', background: 'none', border: 'none', cursor: 'pointer', textDecoration: 'underline', boxShadow: 'none' }}
-            >
-              ✨ Try the new workspace
-            </button>
-          )}
         </div>}
 
         <StudentShell enabled={shellOn} activity={activity} me={me} code={code} grade={myGrade} idx={myIdx} maxIdx={nav.max} onGo={goStage} theme={liveTheme} onTheme={setLiveTheme}>
