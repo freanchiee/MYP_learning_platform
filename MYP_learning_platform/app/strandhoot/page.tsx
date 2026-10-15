@@ -4,6 +4,7 @@ import GuideTopBar from '@/components/guides/GuideTopBar'
 import InterestForm from '@/components/leads/InterestForm'
 import { SITE_URL } from '@/lib/site'
 import { publicActivities, STRANDHOOT_FAQ } from '@/lib/strandhoot'
+import { MODULES } from '@/data/learn/physics'
 
 export const metadata: Metadata = {
   title: 'Strandhoot — live MYP classroom activities, graded strand by strand',
@@ -46,6 +47,9 @@ const COMPARE = [
   ['Marking', 'Automatic score', 'Teacher grades each strand; suggested scores help'],
 ]
 
+const YEARS = ['MYP2', 'MYP3', 'MYP4', 'MYP5']
+const physicsLessonCount = MODULES.reduce((n, m) => n + m.lessons.length, 0)
+
 export default function StrandhootPage() {
   const acts = publicActivities()
   return (
@@ -76,19 +80,36 @@ export default function StrandhootPage() {
 
         <h2 id="activities" className="mt-14 text-2xl font-extrabold" style={{ color: 'var(--text)' }}>Strandhoot activities</h2>
         <p className="mt-1 text-sm" style={{ color: 'var(--text-muted)' }}>Open any activity to preview the strands, checkpoints and stages before you host it.</p>
-        <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {acts.map((a) => (
-            <Link key={a.id} href={`/strandhoot/${a.id}`} className="group flex flex-col rounded-2xl p-5 transition-transform hover:-translate-y-1" style={{ background: 'var(--surface-elevated)', border: '1px solid var(--border)', borderTop: `4px solid ${a.accent}` }}>
-              <div className="flex items-center justify-between">
-                <span className="text-3xl">{a.icon}</span>
-                <span className="rounded-full px-2.5 py-1 text-[10px] font-black tracking-widest" style={{ background: 'var(--accent-soft)', color: 'var(--text)' }}>{a.year} · {a.subject.toUpperCase()}</span>
+        {YEARS.map((year) => {
+          const list = acts.filter((a) => a.year === year)
+          if (!list.length) return null
+          return (
+            <section key={year} className="mt-8">
+              <h3 className="text-lg font-extrabold" style={{ color: 'var(--text)' }}>{year}</h3>
+              <div className="mt-3 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {list.map((a) => (
+                  <Link key={a.id} href={`/strandhoot/${a.id}`} className="group flex flex-col rounded-2xl p-5 transition-transform hover:-translate-y-1" style={{ background: 'var(--surface-elevated)', border: '1px solid var(--border)', borderTop: `4px solid ${a.accent}` }}>
+                    <div className="flex items-center justify-between">
+                      <span className="text-3xl">{a.icon}</span>
+                      <span className="rounded-full px-2.5 py-1 text-[10px] font-black tracking-widest" style={{ background: 'var(--accent-soft)', color: 'var(--text)' }}>{a.year} · {a.subject.toUpperCase()}</span>
+                    </div>
+                    <h4 className="mt-2 text-lg font-extrabold leading-tight" style={{ color: 'var(--text)' }}>{a.title}</h4>
+                    <p className="mt-1 flex-1 text-sm leading-relaxed" style={{ color: 'var(--text-muted)' }}>{a.subtitle}</p>
+                    <span className="mt-3 text-xs font-bold" style={{ color: 'var(--text-subtle)' }}>{a.strands.length ? `${a.strands.length} strands · ` : ''}{a.checkpoints} quiz stage{a.checkpoints === 1 ? '' : 's'}{a.hasInterview ? ' · interviews' : ''}{a.selfPaced ? ' · self-paced' : ' · hosted live'}</span>
+                  </Link>
+                ))}
               </div>
-              <h3 className="mt-2 text-lg font-extrabold leading-tight" style={{ color: 'var(--text)' }}>{a.title}</h3>
-              <p className="mt-1 flex-1 text-sm leading-relaxed" style={{ color: 'var(--text-muted)' }}>{a.subtitle}</p>
-              <span className="mt-3 text-xs font-bold" style={{ color: 'var(--text-subtle)' }}>{a.strands.length} strands · {a.checkpoints} checkpoint{a.checkpoints === 1 ? '' : 's'}{a.hasInterview ? ' · interviews' : ''}</span>
-            </Link>
-          ))}
-        </div>
+            </section>
+          )
+        })}
+        <section className="mt-8">
+          <h3 className="text-lg font-extrabold" style={{ color: 'var(--text)' }}>DP Physics</h3>
+          <Link href="/dp-physics" className="mt-3 flex flex-col rounded-2xl p-5 transition-transform hover:-translate-y-1" style={{ background: 'var(--surface-elevated)', border: '1px solid var(--border)', borderTop: '4px solid #2456C9' }}>
+            <h4 className="text-lg font-extrabold" style={{ color: 'var(--text)' }}>Every DP Physics lesson can be run live</h4>
+            <p className="mt-1 text-sm leading-relaxed" style={{ color: 'var(--text-muted)' }}>Each of the {physicsLessonCount} lessons across {MODULES.length} modules has predict-first and check-your-understanding questions that a teacher can host as a live class.</p>
+            <span className="mt-3 text-xs font-bold" style={{ color: 'var(--text-subtle)' }}>Browse DP Physics lessons →</span>
+          </Link>
+        </section>
 
         <h2 className="mt-14 text-2xl font-extrabold" style={{ color: 'var(--text)' }}>Strandhoot and Kahoot: what is different</h2>
         <p className="mt-1 text-sm" style={{ color: 'var(--text-muted)' }}>Kahoot is a good tool for quick quizzes. Strandhoot is built for a different job: gathering evidence against MYP criteria.</p>
@@ -126,7 +147,7 @@ export default function StrandhootPage() {
         <div id="sign-up" className="mt-14">
           <InterestForm
             sourcePage="/strandhoot"
-            defaultInterests={['Live classes for teachers (Gameducation)', 'Free interactive resources']}
+            defaultInterests={['Live classes for teachers (Strandhoot)', 'Free interactive resources']}
             heading="Get the next free Strandhoot activity"
             blurb="Teachers, parents and guardians: leave an email and tick what you want. We may contact you about it, nothing is charged, and you can unsubscribe at any time."
           />

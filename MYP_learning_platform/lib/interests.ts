@@ -13,7 +13,7 @@ export const INTEREST_SUBJECTS = ['MYP Physics', 'MYP Chemistry', 'MYP Biology',
 
 export const INTEREST_EXPERIENCES = [
   'Past papers & practice',
-  'Live classes for teachers (Gameducation)',
+  'Live classes for teachers (Strandhoot)',
   'Free interactive resources',
   '1:1 tutoring',
 ] as const

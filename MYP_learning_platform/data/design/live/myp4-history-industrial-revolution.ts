@@ -21,7 +21,7 @@ export const MYP4_HISTORY_INDUSTRIAL_REVOLUTION = buildSocietyActivity({
     statementOfInquiry: 'New technology can transform how people work and live, but its benefits and costs fall unevenly, so historians must weigh the perspectives of those it helped and those it harmed.',
     inquiryQuestions: ['What caused the factory system to grow in Britain?', 'How did industrial change affect different groups of people?', 'How did Britain’s empire connect to industry in other parts of the world?'],
   },
-  leadInterests: ['MYP Humanities', 'Free interactive resources', 'Live classes for teachers (Gameducation)', '1:1 tutoring'],
+  leadInterests: ['MYP Humanities', 'Free interactive resources', 'Live classes for teachers (Strandhoot)', '1:1 tutoring'],
   leadSource: '/design/live/myp4-history-industrial-revolution',
   hookPages: [
     {

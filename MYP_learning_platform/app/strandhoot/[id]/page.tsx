@@ -80,7 +80,7 @@ export default function StrandhootActivityPage({ params }: { params: { id: strin
         <div id="sign-up" className="mt-12">
           <InterestForm
             sourcePage={`/strandhoot/${a.id}`}
-            defaultInterests={[subjectInterest, 'Live classes for teachers (Gameducation)']}
+            defaultInterests={[subjectInterest, 'Live classes for teachers (Strandhoot)']}
             heading="Get the next free Strandhoot activity for your subject"
             blurb="Teachers, parents and guardians: leave an email and tick what you want. We may contact you about it, nothing is charged, and you can unsubscribe at any time."
           />

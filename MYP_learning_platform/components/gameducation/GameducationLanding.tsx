@@ -280,7 +280,7 @@ export default function GameducationLanding() {
         <InterestForm
           sourcePage="/gameducation"
           defaultRole="teacher"
-          defaultInterests={['Live classes for teachers (Gameducation)']}
+          defaultInterests={['Live classes for teachers (Strandhoot)']}
           heading="Want early access to new live-class activities?"
           blurb="Tell us which subjects you teach and we may email you about new live-class activities. Nothing is charged, and you can unsubscribe any time."
         />

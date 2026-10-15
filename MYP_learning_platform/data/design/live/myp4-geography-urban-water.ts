@@ -20,7 +20,7 @@ export const MYP4_GEOGRAPHY_URBAN_WATER = buildSocietyActivity({
     statementOfInquiry: 'Cities are systems in which growth, climate and decisions about resources interact, so who gets water depends on choices as well as on rainfall.',
     inquiryQuestions: ['Why do some city neighbourhoods have more water than others?', 'How can a growing city supply water fairly and sustainably?', 'Whose views count when water is limited?'],
   },
-  leadInterests: ['MYP Geography', 'MYP Humanities', 'Free interactive resources', 'Live classes for teachers (Gameducation)'],
+  leadInterests: ['MYP Geography', 'MYP Humanities', 'Free interactive resources', 'Live classes for teachers (Strandhoot)'],
   leadSource: '/design/live/myp4-geography-urban-water',
   hookPages: [
     {
