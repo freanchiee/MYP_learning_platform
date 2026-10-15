@@ -9,6 +9,8 @@ export interface ResolvedExemplars {
   noun?: string
   /** true = written for this student's choice; false = the general exemplars on the field. */
   specific: boolean
+  /** true when the activity varies model answers by a student choice at all (false = only general examples exist). */
+  configured?: boolean
 }
 
 export type PlayerData = unknown
@@ -60,7 +62,7 @@ export function exemplarsFor(cfg: ExemplarsConfig, stageKey: string, sectionKey:
     if (!choice) continue
     if (!fallback) fallback = { choice, noun: c.noun }
     const specific = c.byField[fieldRef(stageKey, sectionKey, field.key)]?.[choice]
-    if (specific?.length) return { texts: specific, choice, noun: c.noun, specific: true }
+    if (specific?.length) return { texts: specific, choice, noun: c.noun, specific: true, configured: true }
   }
-  return { texts: field.exemplars ?? [], choice: fallback?.choice, noun: fallback?.noun, specific: false }
+  return { texts: field.exemplars ?? [], choice: fallback?.choice, noun: fallback?.noun, specific: false, configured: toList(cfg).length > 0 }
 }

@@ -24,7 +24,7 @@ export function ExemplarControls({ resolved, noun, studentName, revealed, onTogg
           {revealed ? `✅ Revealed to ${first} · tap to hide` : `📤 Reveal to ${first}`}
         </button>
         <span style={{ fontSize: 10.5, fontWeight: 700, color: resolved.specific ? '#1FA98A' : 'var(--text-subtle)' }}>
-          {resolved.specific ? `written for ${noun ?? 'choice'}: ${resolved.choice}` : resolved.choice ? `general example (none written for ${resolved.choice})` : `general example (${first} has not chosen a ${noun ?? 'option'} yet)`}
+          {resolved.specific ? `written for ${noun ?? 'choice'}: ${resolved.choice}` : resolved.choice ? `general example (none written for ${resolved.choice})` : resolved.configured === false ? 'general example' : `general example (${first} has not chosen a ${noun ?? 'option'} yet)`}
         </span>
       </div>
       {preview && (
