@@ -39,5 +39,7 @@ export interface LiveGradeRow {
   scores: Record<string, number | null>
   feedback: string
   graded: boolean
+  /** Teacher feedback per worksheet section: { '<stageKey>.<sectionKey>': { text, at } }. */
+  section_feedback?: Record<string, { text: string; at: string }>
   updated_at: string
 }

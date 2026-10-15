@@ -15,7 +15,7 @@ import { cardStyle, btnStyle } from './ui'
 export default function MyWorkDownloads({ activity, me, code, grade }: { activity: LiveActivityDefinition; me: LivePlayerRow; code: string; grade: LiveGradeRow | null }) {
   const [busy, setBusy] = useState<string | null>(null)
   const doc = useMemo(
-    () => buildWorkDoc(activity, me.data, { student: me.name, className: `Live session ${code}`, date: new Date().toLocaleDateString(), grade: grade ? { scores: grade.scores, feedback: grade.feedback ?? '', graded: grade.graded } : null }),
+    () => buildWorkDoc(activity, me.data, { student: me.name, className: `Live session ${code}`, date: new Date().toLocaleDateString(), grade: grade ? { scores: grade.scores, feedback: grade.feedback ?? '', graded: grade.graded } : null, sectionFeedback: grade?.section_feedback }),
     [activity, me.data, me.name, code, grade]
   )
   const options = useMemo(() => listPdfScopes(doc), [doc])

@@ -33,7 +33,7 @@ const NEUTRAL = 'var(--border-strong)'
 let tourShownThisLoad = false
 
 export default function StudentShell({
-  enabled, activity, me, code, grade, idx, maxIdx, onGo, theme, onTheme, children,
+  enabled, activity, me, code, grade, idx, maxIdx, onGo, theme, onTheme, feedbackByStage, children,
 }: {
   enabled: boolean
   activity: LiveActivityDefinition
@@ -43,6 +43,8 @@ export default function StudentShell({
   idx: number
   maxIdx: number
   onGo: (n: number) => void
+  /** Stage key -> number of sections with teacher feedback the student has not opened yet. */
+  feedbackByStage?: Record<string, number>
   theme: LiveThemeId
   onTheme: (t: LiveThemeId) => void
   children: ReactNode
@@ -177,7 +179,7 @@ export default function StudentShell({
                   </span>
                   <span style={{ minWidth: 0, display: 'grid', gap: 3 }}>
                     <span style={{ fontSize: 12.5, fontWeight: isCur ? 900 : 700, lineHeight: 1.2, overflow: 'hidden', textOverflow: 'ellipsis', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical' }}>
-                      {s.icon} {s.label}
+                      {s.icon} {s.label}{feedbackByStage?.[s.key] ? <span title="New teacher feedback" aria-label="New teacher feedback"> 💬</span> : null}
                     </span>
                     {strands.length > 0 && <span style={{ fontSize: 10, fontWeight: 800, color: 'var(--text-subtle)' }}>{strands.join(' · ')}</span>}
                     <span style={{ height: 4, borderRadius: 999, background: 'var(--border)', overflow: 'hidden' }} role="progressbar" aria-valuenow={pct} aria-valuemin={0} aria-valuemax={100} aria-label={`${s.label} progress`}>

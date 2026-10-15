@@ -20,6 +20,7 @@ import ImageUploadField from './ImageUploadField'
 import WorksheetOverview, { SectionMarker, StrandBadge } from './WorksheetOverview'
 import CriteriaRingCard from './CriteriaRing'
 import StageFeedback from './StageFeedback'
+import { feedbackFor, feedbackKey, isUnseen, unseenKeys } from '@/lib/design-live/sectionFeedback'
 import { StudentExemplarCard } from './ExemplarReveal'
 import { exemplarsFor, revealKey } from '@/lib/design-live/exemplars'
 import { feedbackOf } from '@/lib/design-live/feedback'
@@ -327,6 +328,7 @@ export default function LiveJoin({ activity, initialCode }: { activity: LiveActi
           <h2>{activity.title}</h2>
           <div style={{ color: 'var(--text-muted)', fontSize: 13, marginBottom: 10 }}>Session {code}</div>
           <ErrorBanner message={apiError} onClose={() => setApiError(null)} />
+
           <input
             value={nameLocked ? profileName : nameInput || userEmail}
             disabled={nameLocked}
@@ -367,6 +369,18 @@ export default function LiveJoin({ activity, initialCode }: { activity: LiveActi
     const t = Math.max(0, Math.min(n, activity.stages.length - 1))
     patchMyData('_nav', { stage: t, max: Math.max(nav.max, t) })
   }
+
+  // Teacher feedback the student has not opened yet (one chip per section, tapping it goes to that stage).
+  const feedbackAlerts = unseenKeys(myGrade?.section_feedback, me.data?._feedbackSeen).flatMap((k) => {
+    const [stageKey, sectionKey] = k.split('.')
+    const stageIdx = activity.stages.findIndex((x) => x.key === stageKey)
+    const st = activity.stages[stageIdx]
+    if (!st || st.type !== 'worksheet') return []
+    const sec = st.sections.find((x) => x.key === sectionKey)
+    return sec ? [{ key: k, stageIdx, label: `${sec.icon ?? ''} ${st.label} · ${sec.label}`.trim() }] : []
+  })
+  const feedbackByStage: Record<string, number> = {}
+  feedbackAlerts.forEach((a) => { const sk = activity.stages[a.stageIdx].key; feedbackByStage[sk] = (feedbackByStage[sk] ?? 0) + 1 })
 
   // Wide, single-focus (mcq/openIdeas/grading) stages read best in a
   // comfortable column even on a laptop-wide screen — the shell itself
@@ -411,6 +425,20 @@ export default function LiveJoin({ activity, initialCode }: { activity: LiveActi
         <div style={{ maxWidth: contentWidth, width: '100%', margin: '0 auto', display: 'grid', gap: 14 }}>
           <BadgeRow badges={me.badges} />
           <ErrorBanner message={apiError} onClose={() => setApiError(null)} />
+
+          {canWork && feedbackAlerts.length > 0 && (
+            <div role="status" style={{ ...cardStyle('#5C3FD6'), display: 'grid', gap: 8 }}>
+              <div style={{ fontWeight: 900 }}>💬 Your teacher left feedback on {feedbackAlerts.length === 1 ? '1 section' : `${feedbackAlerts.length} sections`}</div>
+              <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+                {feedbackAlerts.map((a) => (
+                  <button key={a.key} onClick={() => { if (selfPaced) goStage(a.stageIdx) }} disabled={!selfPaced} style={{ ...btnStyle('#5C3FD6', true), padding: '6px 12px', fontSize: 12.5 }}>
+                    {a.label}{selfPaced ? ' →' : ''}
+                  </button>
+                ))}
+              </div>
+              {!selfPaced && <div style={{ fontSize: 12, color: 'var(--text-muted)' }}>Find it on the section named above.</div>}
+            </div>
+          )}
 
           <StudentChatToggle sessionCode={code} me={me} accent={activity.theme.accent} />
 
@@ -828,6 +856,18 @@ export function WorksheetPlayer({
     return () => onInterviewOnScreen?.(false)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [interviewShown])
+
+  // Teacher feedback on a section: shown on the section, flagged on its tab until it has been opened.
+  const seenMap: Record<string, string> = me.data?._feedbackSeen ?? {}
+  const fbOf = (sectionKey: string) => feedbackFor(grade?.section_feedback, stage.key, sectionKey)
+  const fbNew = (sectionKey: string) => isUnseen(fbOf(sectionKey), seenMap, feedbackKey(stage.key, sectionKey))
+  const viewedKey = journal ? activeKey : openSection
+  const viewedFb = viewedKey ? fbOf(viewedKey) : undefined
+  useEffect(() => {
+    if (!viewedKey || !viewedFb || !fbNew(viewedKey)) return
+    patchMyData('_feedbackSeen', { [feedbackKey(stage.key, viewedKey)]: viewedFb.at })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [viewedKey, viewedFb?.at])
   const currentStrand = currentSection?.criterion ?? stage.sections.find((x) => x.criterion)?.criterion
   const { criteriaProgress, criteriaPresent } = useMemo(() => {
     const acc: Record<string, number[]> = {}
@@ -893,6 +933,7 @@ export function WorksheetPlayer({
             >
               <span style={{ color: 'var(--text-subtle)', fontWeight: 900 }}>{n + 1}</span>
               <span>{s.icon} {s.label}</span>
+              {fbNew(s.key) && <span title="New feedback from your teacher" aria-label="New feedback from your teacher" style={{ fontSize: 12 }}>💬</span>}
               {s.criterion && <span style={{ fontSize: 10, fontWeight: 900, color: tc === 'var(--border-strong)' ? 'var(--text-subtle)' : tc }}>{s.criterion}</span>}
               <span style={{ fontSize: 10.5, fontWeight: 800, color: spct >= 70 ? 'var(--success, #1FA98A)' : 'var(--text-subtle)' }}>{spct >= 70 ? '✓' : `${spct}%`}</span>
             </button>
@@ -916,6 +957,13 @@ export function WorksheetPlayer({
             {open && (
               <div style={{ marginTop: 10, display: 'grid', gap: 10, maxWidth: s.fields.some((f) => f.type === 'personaChat') ? 960 : s.fields.some((f) => grade?.scores?.[revealKey(stage.key, s.key, f.key)]) ? 1180 : 720 }}>
                 <SectionMarker section={s} progress={criteriaProgress} present={criteriaPresent} hideRing={journal} />
+                {fbOf(s.key) && (
+                  <div role="note" style={{ background: 'var(--accent-soft, var(--surface-2))', border: '2.5px solid var(--text)', borderRadius: 'var(--radius-panel)', padding: '10px 12px', display: 'grid', gap: 4 }}>
+                    <div style={{ fontSize: 11, fontWeight: 900, letterSpacing: '0.12em' }}>💬 FEEDBACK FROM YOUR TEACHER</div>
+                    <div style={{ fontSize: 13.5, lineHeight: 1.5, whiteSpace: 'pre-wrap' }}>{fbOf(s.key)!.text}</div>
+                    <div style={{ fontSize: 10.5, color: 'var(--text-muted)' }}>{new Date(fbOf(s.key)!.at).toLocaleDateString()}</div>
+                  </div>
+                )}
                 {s.blurb && <div style={{ fontSize: 12.5, color: 'var(--text-muted)' }}>{s.blurb}</div>}
                 {s.fields.map((f) => (
                   <div key={f.key} style={{ display: 'grid', gap: 12, alignItems: 'start', gridTemplateColumns: grade?.scores?.[revealKey(stage.key, s.key, f.key)] ? 'repeat(auto-fit, minmax(300px, 1fr))' : 'minmax(0, 1fr)' }}>
