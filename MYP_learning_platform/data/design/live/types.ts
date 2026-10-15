@@ -92,6 +92,13 @@ export interface WorksheetField {
    *  score, for text/textarea fields with exemplars/celebrateKeywords set.
    *  Default 10. */
   points?: number
+  /** Examples the STUDENT sees under the field, chosen by an earlier answer (e.g. the design direction they picked).
+   *  `from` points at that earlier select; `byValue` maps its value to example lines; '*' is the fallback. */
+  scaffoldByChoice?: {
+    from: { stage: string; section: string; field: string }
+    title?: string
+    byValue: Record<string, string[]>
+  }
   /** For 'image': allow more than one upload (e.g. a build log with several
    *  dated photos), rather than one photo that gets replaced. Default false. */
   multiple?: boolean

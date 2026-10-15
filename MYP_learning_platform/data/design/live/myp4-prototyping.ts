@@ -10,12 +10,13 @@
 // extend the engine to bring them back.
 
 import type { LiveActivityDefinition } from './types'
+import { PRODUCT_BRIEF_STAGES } from './myp4-product-brief'
 
 export const MYP4_PROTOTYPING: LiveActivityDefinition = {
   id: 'myp4-prototyping',
   year: 'MYP4',
   title: 'Prototyping for People',
-  subtitle: 'Self-paced — pick a direction, build a persona and empathy map, plan your research.',
+  subtitle: 'Self-paced run through the design cycle — pick a direction, research your user, analyse products and write a brief, then develop, make and evaluate your solution.',
   icon: '🦾',
   theme: { accent: '#5C3FD6', from: '#150F2A', via: '#1D1640', to: '#241C46' },
   selfPaced: true,
@@ -57,7 +58,9 @@ export const MYP4_PROTOTYPING: LiveActivityDefinition = {
           { strand: 'D.ii', title: 'Evaluate against your spec', asks: 'Check your results against the specification you wrote, point by point.', where: 'Evaluate' },
           { strand: 'D.iii', title: 'Explain improvements', asks: 'Say honestly what you would change.', where: 'Evaluate' },
           { strand: 'D.iv', title: 'Explain the impact', asks: 'Connect your result back to your persona’s empathy map.', where: 'Evaluate' },
-          { strand: 'A.iv', title: 'Teacher review', asks: 'Your teacher reviews everything against A, B and D.', where: 'Criteria Review' },
+          { strand: 'A.iii', title: 'Analyse existing products', asks: 'Compare three real products for your user and find the gap.', where: 'Product Analysis & Brief' },
+          { strand: 'A.iv', title: 'Write the brief', asks: 'Summarise your research as a brief with measurable criteria.', where: 'Product Analysis & Brief' },
+          { strand: 'Review', title: 'Teacher review', asks: 'Your teacher reviews everything against A, B and D.', where: 'Criteria Review' },
         ],
       },
       sections: [
@@ -693,6 +696,8 @@ export const MYP4_PROTOTYPING: LiveActivityDefinition = {
         },
       ],
     },
+    // A.iii and A.iv (see myp4-product-brief.ts), placed after the Research Plan so saved positions are unchanged
+    ...PRODUCT_BRIEF_STAGES,
     {
       type: 'grading',
       key: 'grading',
