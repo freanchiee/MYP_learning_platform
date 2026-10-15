@@ -5,6 +5,7 @@
 // Component and pass to a client component as props. The PDF itself is laid out
 // from this in lib/design-live/workPdf.ts.
 
+import { feedbackFor, type SectionFeedbackMap } from '@/lib/design-live/sectionFeedback'
 import type { LiveActivityDefinition, WorksheetField, WorksheetSection, WorksheetStage, McqStage, GradingStage, ActivityBrief } from '@/data/design/live/types'
 import { CRITERIA, STRAND_LABELS, criterionOf } from '@/lib/design-live/criteria'
 import { exemplarsFor } from '@/lib/design-live/exemplars'
@@ -51,6 +52,8 @@ export interface WorkSection {
   guidance: string[]
   pct: number
   items: WorkItem[]
+  /** The teacher's written feedback on this section, if any. Not student work. */
+  teacherFeedback?: { text: string; at: string }
 }
 
 export interface WorkStrand {
@@ -158,7 +161,7 @@ function itemWords(it: WorkItem): number {
 export function buildWorkDoc(
   activity: LiveActivityDefinition,
   data: Record<string, any> | null | undefined,
-  meta: { student: string; className: string; date: string; grade?: { scores: Record<string, number | null>; feedback?: string; graded: boolean } | null }
+  meta: { student: string; className: string; date: string; grade?: { scores: Record<string, number | null>; feedback?: string; graded: boolean } | null; sectionFeedback?: SectionFeedbackMap | null }
 ): WorkDoc {
   const worksheets = activity.stages.filter((s): s is WorksheetStage => s.type === 'worksheet')
   const byStrand = new Map<string, { sections: WorkSection[] }>()
@@ -180,6 +183,7 @@ export function buildWorkDoc(
         guidance: section.brief ? [section.brief.title, ...section.brief.points] : [],
         pct: Math.round(worksheetSectionPct(section, sd)),
         items,
+        teacherFeedback: feedbackFor(meta.sectionFeedback, stage.key, section.key),
       })
       byStrand.set(key, entry)
     }

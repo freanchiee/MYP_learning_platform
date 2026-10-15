@@ -12,6 +12,7 @@ import type { LiveActivityDefinition, WorksheetStage, WorksheetField, WorksheetS
 import { chosenValues, exemplarsFor, revealKey } from '@/lib/design-live/exemplars'
 import { ExemplarControls } from './ExemplarReveal'
 import type { LivePlayerRow, LiveGradeRow } from '@/lib/design-live/types'
+import { feedbackFor, feedbackKey } from '@/lib/design-live/sectionFeedback'
 import { cardStyle, btnStyle, inputStyle, Avatar } from './ui'
 
 function fieldAnswerText(field: WorksheetField, value: unknown): string {
@@ -40,6 +41,48 @@ function sectionAutoScore(section: WorksheetSection, data: Record<string, unknow
     auto += fuzzyMatchPoints(fieldAnswerText(f, data?.[f.key]), exemplarsFor(activity.exemplarsByChoice, stageKey, section.key, f, playerData).texts, f.celebrateKeywords, points)
   })
   return { auto, max }
+}
+
+
+/** The teacher's written feedback on ONE section. Sending it tells the student, and it goes into their PDF. */
+function SectionFeedbackBox({ sessionCode, player, grade, stageKey, sectionKey }: { sessionCode: string; player: LivePlayerRow; grade?: LiveGradeRow; stageKey: string; sectionKey: string }) {
+  const key = feedbackKey(stageKey, sectionKey)
+  const sent = feedbackFor(grade?.section_feedback, stageKey, sectionKey)
+  const [text, setText] = useState(sent?.text ?? '')
+  const [busy, setBusy] = useState(false)
+  const [err, setErr] = useState<string | null>(null)
+  const seenAt: string | undefined = player.data?._feedbackSeen?.[key]
+  const seen = !!sent && !!seenAt && seenAt >= sent.at
+  const dirty = text.trim() !== (sent?.text ?? '')
+  const send = async (value: string) => {
+    setBusy(true)
+    setErr(null)
+    const { error } = await createClient().rpc('set_section_feedback', { p_code: sessionCode, p_player: player.id, p_key: key, p_text: value })
+    setBusy(false)
+    if (error) setErr('Could not save: ' + error.message)
+    else if (!value.trim()) setText('')
+  }
+  return (
+    <div style={{ marginBottom: 10, background: 'var(--accent-soft, var(--surface-2))', border: '1.5px solid var(--border-strong)', borderRadius: 10, padding: 10, display: 'grid', gap: 6 }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', gap: 8, alignItems: 'center', flexWrap: 'wrap' }}>
+        <strong style={{ fontSize: 12 }}>💬 Feedback for {player.name.split(' ')[0]} on this section</strong>
+        {sent && <span style={{ fontSize: 10.5, fontWeight: 800, color: seen ? '#1FA98A' : 'var(--text-muted)' }}>{seen ? '✓ Seen by student' : '● Sent, not opened yet'}</span>}
+      </div>
+      <textarea
+        value={text}
+        onChange={(e) => setText(e.target.value)}
+        placeholder="What worked, and one thing to do next. The student is told when you send it, and it appears in their PDF."
+        style={{ ...inputStyle, minHeight: 64 }}
+      />
+      <div style={{ display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap' }}>
+        <button onClick={() => send(text)} disabled={busy || !text.trim() || !dirty} style={{ ...btnStyle('#5C3FD6', true), padding: '6px 14px' }}>
+          {busy ? 'Sending…' : sent ? 'Update feedback' : 'Send feedback'}
+        </button>
+        {sent && <button onClick={() => send('')} disabled={busy} style={{ ...btnStyle('var(--text-muted)'), padding: '6px 12px' }}>Remove</button>}
+        {err && <span style={{ fontSize: 11.5, color: 'var(--danger, #D64545)' }}>{err}</span>}
+      </div>
+    </div>
+  )
 }
 
 const scoreKey = (stageKey: string, sectionKey: string) => `ws:${stageKey}:${sectionKey}`
@@ -294,6 +337,7 @@ export function WorksheetReviewModal({
                       </button>
                     )
                   })()}
+                  <SectionFeedbackBox sessionCode={sessionCode} player={player} grade={grade} stageKey={stage.key} sectionKey={s.key} />
                   {max > 0 && (
                     <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                       <span style={{ fontSize: 11.5, color: 'var(--text-muted)' }}>Score (auto-suggested {auto}/{max}):</span>

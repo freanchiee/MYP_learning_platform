@@ -31,6 +31,7 @@ export function WorkPdfButton({ player }: { player: LivePlayerRow }) {
           className: ctx.className,
           date: new Date().toLocaleDateString(),
           grade: g ? { scores: g.scores, feedback: g.feedback ?? '', graded: g.graded } : null,
+          sectionFeedback: g?.section_feedback,
         })
       }}
     />

@@ -283,10 +283,19 @@ function criterionChapter(c: WorkCriterion, doc: WorkDoc, images: ImageMap): Con
       if (sec.guidance.length)
         out.push({ text: [{ text: 'TASK CONTEXT - WHAT GOOD LOOKS LIKE  ', fontSize: 7, bold: true, color: FAINT, characterSpacing: 0.9 }, { text: sec.guidance.map(clean).join('  |  '), fontSize: 8, color: MUTED }], margin: [0, 0, 0, 6], lineHeight: 1.25 } as Content)
       sec.items.forEach((it) => out.push(...itemContent(it, c.color, images)))
+      if (sec.teacherFeedback) {
+        out.push({
+          table: { widths: [3.5, '*'], body: [[{ text: '', fillColor: FB }, { stack: [{ text: `TEACHER FEEDBACK  |  ${new Date(sec.teacherFeedback.at).toLocaleDateString()}`, fontSize: 7, bold: true, color: FB, characterSpacing: 0.9 }, { text: clean(sec.teacherFeedback.text), fontSize: 9.5, color: INK, margin: [0, 3, 0, 0], lineHeight: 1.3 }], fillColor: tint(FB, 0.92) }]] },
+          layout: { ...noBorders, paddingLeft: (i: number) => (i === 0 ? 0 : 8), paddingRight: () => 8, paddingTop: () => 6, paddingBottom: () => 6 },
+          margin: [0, 4, 0, 8],
+        } as Content)
+      }
     })
   })
   return out
 }
+
+const FB = '#B4570A' // teacher feedback accent
 
 // ---------------------------------------------------------------- document
 export function buildWorkPdf(doc: WorkDoc, images: ImageMap = {}): TDocumentDefinitions {
@@ -320,7 +329,7 @@ export function buildWorkPdf(doc: WorkDoc, images: ImageMap = {}): TDocumentDefi
     },
 
     eyebrow('How to read this document'),
-    { text: "Every block is labelled in text, so the distinction survives copy-paste and AI processing. Only blocks labelled STUDENT'S WORK were written or chosen by the student.", fontSize: 8.5, color: MUTED, margin: [0, 2, 0, 6], lineHeight: 1.25 },
+    { text: "Every block is labelled in text, so the distinction survives copy-paste and AI processing. Only blocks labelled STUDENT'S WORK were written or chosen by the student. Blocks labelled TEACHER FEEDBACK are the teacher's comments on that section, not student work.", fontSize: 8.5, color: MUTED, margin: [0, 2, 0, 6], lineHeight: 1.25 },
     {
       table: {
         widths: ['*', '*', '*'],
