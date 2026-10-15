@@ -10,6 +10,7 @@
 // activity keep their place (stages are saved by position).
 
 import type { LiveStage } from './types'
+import { MYP3_SPEC_PRIORITY, MYP3_CHOICE_JUSTIFICATION, MYP3_DRAWING_NOTES, MYP3_MAKING_METHOD, MYP3_TECHNICAL_SKILLS, MYP3_WORKS_AS_INTENDED, MYP3_EXPLAIN_SUCCESS, MYP3_IMPROVEMENTS, MYP3_IMPACT, MYP3_FINAL_JOURNAL } from './myp23-coaches'
 
 const BLOCK_EXA = 'Block 3 · Model Criterion A'
 const BLOCK_B = 'Block 3 · Develop ideas (Criterion B)'
@@ -144,10 +145,10 @@ export const DESIGN_CYCLE_STAGES: LiveStage[] = [
     pointsPerCorrect: 10,
     intro: { title: '✅ Quick check: Developing ideas', blurb: 'Pick the strongest answer. The answer shows as soon as you choose, and each correct answer earns 10 points.' },
     questions: [
-      { icon: '📐', context: 'Specification', q: 'Which specification line is strongest?', options: ['It should be strong and easy to use.', 'Turns with under 15 N of force, because the user could not manage more in my test.', 'It must look nice.', 'It should be better than other knobs.'], correct: 1 },
-      { icon: '🧠', context: 'Range of ideas', q: 'Which set is a genuine RANGE of ideas?', options: ['The same knob in red, blue and green.', 'Raised dots, linear ridges and a two-tone pointer.', 'Three drawings of one idea from different angles.', 'One idea and two copies.'], correct: 1 },
-      { icon: '✅', context: 'Justify', q: 'What makes a choice justified?', options: ['Choosing the one you drew best.', 'Saying it is your favourite.', 'Comparing it with the other ideas against the specification, line by line.', 'Asking a friend which they like.'], correct: 2 },
-      { icon: '✏️', context: 'Planning drawing', q: 'Which makes a planning drawing accurate?', options: ['Colourful shading.', 'Labelled dimensions, views and materials.', 'A photo from the internet.', 'A very small sketch.'], correct: 1 },
+      { icon: '📐', context: 'Specification', q: 'Which specification line is strongest?', options: ['It should be strong and easy to use.', 'Turns with under 15 N of force, because the user could not manage more in my test.', 'It must look nice.', 'It should be better than other knobs.'], correct: 1, strand: 'B.i', why: 'A strong specification line has a number you can test and a reason from your evidence. The others are opinions.' },
+      { icon: '🧠', context: 'Range of ideas', q: 'Which set is a genuine RANGE of ideas?', options: ['The same knob in red, blue and green.', 'Raised dots, linear ridges and a two-tone pointer.', 'Three drawings of one idea from different angles.', 'One idea and two copies.'], correct: 1, strand: 'B.ii', why: 'A range changes something big: the grip pattern, the shape or how it works. The same knob in three colours, or three drawings of one idea, is still one idea.' },
+      { icon: '✅', context: 'Justify', q: 'What makes a choice justified?', options: ['Choosing the one you drew best.', 'Saying it is your favourite.', 'Comparing it with the other ideas against the specification, line by line.', 'Asking a friend which they like.'], correct: 2, strand: 'B.iii', why: 'A justified choice compares the ideas against the specification, line by line, so the reason is evidence and not taste.' },
+      { icon: '✏️', context: 'Planning drawing', q: 'Which makes a planning drawing accurate?', options: ['Colourful shading.', 'Labelled dimensions, views and materials.', 'A photo from the internet.', 'A very small sketch.'], correct: 1, strand: 'B.iv', why: 'Labelled dimensions, views and materials mean someone else could make it from your drawing alone.' },
     ],
   },
   {
@@ -188,6 +189,7 @@ export const DESIGN_CYCLE_STAGES: LiveStage[] = [
             ],
             celebrateKeywords: ['because', 'user', 'evidence', 'test', 'matters'],
             points: 10,
+          coach: MYP3_SPEC_PRIORITY,
           },
         ],
       },
@@ -243,6 +245,7 @@ export const DESIGN_CYCLE_STAGES: LiveStage[] = [
             ],
             celebrateKeywords: ['because', 'unlike', 'meets', 'specification', 'rejected'],
             points: 10,
+          coach: MYP3_CHOICE_JUSTIFICATION,
           },
         ],
       },
@@ -266,6 +269,7 @@ export const DESIGN_CYCLE_STAGES: LiveStage[] = [
             ],
             celebrateKeywords: ['views', 'mm', 'labelled', 'material', 'scale'],
             points: 10,
+          coach: MYP3_DRAWING_NOTES,
           },
           { key: 'requirements', label: 'What do you need to make it?', type: 'checklist', hint: 'One row per material or tool. You will use this list again when you make it.', placeholder: 'e.g. Silicone, 3D printer' },
         ],
@@ -332,10 +336,10 @@ export const DESIGN_CYCLE_STAGES: LiveStage[] = [
     pointsPerCorrect: 10,
     intro: { title: '✅ Quick check: Creating the solution', blurb: 'The answer shows as soon as you choose, and each correct answer earns 10 points.' },
     questions: [
-      { icon: '📋', context: 'Plan', q: 'Which plan step could a classmate follow?', options: ['Make it.', 'Cut the base 40 mm wide from 3 mm acrylic using the laser cutter (10 min), checking the width with a ruler.', 'Do the building.', 'Use some tools.'], correct: 1 },
-      { icon: '🔧', context: 'Technical skill', q: 'Which shows good technical skill?', options: ['Rushing so it is finished first.', 'Measuring, checking against the drawing, and recording it with dated photos.', 'Skipping safety rules to save time.', 'Copying a classmate’s method.'], correct: 1 },
-      { icon: '✅', context: 'Works as intended', q: 'When does a solution “work as intended”?', options: ['When it looks finished.', 'When it does the job in the specification, such as turning with under 15 N of force.', 'When the teacher says so.', 'When it is the same as an existing product.'], correct: 1 },
-      { icon: '🔁', context: 'Changes', q: 'Which is a justified change?', options: ['“I changed the colour.”', '“I made the ridges taller because they felt too faint, which improves the grip line.”', '“I changed it a bit.”', '“It was easier.”'], correct: 1 },
+      { icon: '📋', context: 'Plan', q: 'Which plan step could a classmate follow?', options: ['Make it.', 'Cut the base 40 mm wide from 3 mm acrylic using the laser cutter (10 min), checking the width with a ruler.', 'Do the building.', 'Use some tools.'], correct: 1, strand: 'C.i', why: 'A step a classmate can follow says what to do, with what, how big and how long, and how to check it.' },
+      { icon: '🔧', context: 'Technical skill', q: 'Which shows good technical skill?', options: ['Rushing so it is finished first.', 'Measuring, checking against the drawing, and recording it with dated photos.', 'Skipping safety rules to save time.', 'Copying a classmate’s method.'], correct: 1, strand: 'C.ii', why: 'Technical skill is careful, safe, checked work: measuring, comparing with the drawing and recording it with dated photos.' },
+      { icon: '✅', context: 'Works as intended', q: 'When does a solution “work as intended”?', options: ['When it looks finished.', 'When it does the job in the specification, such as turning with under 15 N of force.', 'When the teacher says so.', 'When it is the same as an existing product.'], correct: 1, strand: 'C.iii', why: 'It works as intended when it does what your specification says, such as turning with under 15 N. Looking finished is not enough.' },
+      { icon: '🔁', context: 'Changes', q: 'Which is a justified change?', options: ['“I changed the colour.”', '“I made the ridges taller because they felt too faint, which improves the grip line.”', '“I changed it a bit.”', '“It was easier.”'], correct: 1, strand: 'C.iv', why: 'A justified change says what changed, why (from your making or your user) and what it does to the specification.' },
     ],
   },
   {
@@ -377,6 +381,7 @@ export const DESIGN_CYCLE_STAGES: LiveStage[] = [
             ],
             celebrateKeywords: ['because', 'method', 'time', 'material', 'available'],
             points: 10,
+          coach: MYP3_MAKING_METHOD,
           },
         ],
       },
@@ -399,6 +404,7 @@ export const DESIGN_CYCLE_STAGES: LiveStage[] = [
             ],
             celebrateKeywords: ['measured', 'checked', 'safely', 'accurate', 'tool'],
             points: 10,
+          coach: MYP3_TECHNICAL_SKILLS,
           },
         ],
       },
@@ -421,6 +427,7 @@ export const DESIGN_CYCLE_STAGES: LiveStage[] = [
             ],
             celebrateKeywords: ['works', 'because', 'specification', 'tested', 'fits'],
             points: 10,
+          coach: MYP3_WORKS_AS_INTENDED,
           },
         ],
       },
@@ -509,10 +516,10 @@ export const DESIGN_CYCLE_STAGES: LiveStage[] = [
     pointsPerCorrect: 10,
     intro: { title: '✅ Quick check: Evaluating', blurb: 'The answer shows as soon as you choose, and each correct answer earns 10 points.' },
     questions: [
-      { icon: '🧪', context: 'Testing', q: 'Which test generates data?', options: ['Asking “do you like it?”', 'Timing how long it takes the user to turn it 10 times and measuring the force with a spring scale.', 'Looking at it carefully.', 'Showing it to a friend.'], correct: 1 },
-      { icon: '📏', context: 'Evaluating', q: 'How do you evaluate against the specification?', options: ['Say it is great.', 'Go through each line and say met, partly met or not met, with the test result.', 'Only mention the successes.', 'Compare it to a bought product.'], correct: 1 },
-      { icon: '🔧', context: 'Improvement', q: 'Which is a useful improvement?', options: ['Make it better.', 'Round off the ridge tops because the user said they were sharp.', 'Change the colour.', 'Make it bigger.'], correct: 1 },
-      { icon: '🌍', context: 'Impact', q: 'What does “impact on the user” mean?', options: ['How much it cost.', 'What difference it makes in their real life, using what they said or did.', 'How many people liked a photo.', 'How long it took to make.'], correct: 1 },
+      { icon: '🧪', context: 'Testing', q: 'Which test generates data?', options: ['Asking “do you like it?”', 'Timing how long it takes the user to turn it 10 times and measuring the force with a spring scale.', 'Looking at it carefully.', 'Showing it to a friend.'], correct: 1, strand: 'D.i', why: 'A test that generates data gives numbers or counted observations, like timing ten turns and reading the force. Opinions and glances do not.' },
+      { icon: '📏', context: 'Evaluating', q: 'How do you evaluate against the specification?', options: ['Say it is great.', 'Go through each line and say met, partly met or not met, with the test result.', 'Only mention the successes.', 'Compare it to a bought product.'], correct: 1, strand: 'D.ii', why: 'Evaluate line by line, with the test result, and be honest about what was not met.' },
+      { icon: '🔧', context: 'Improvement', q: 'Which is a useful improvement?', options: ['Make it better.', 'Round off the ridge tops because the user said they were sharp.', 'Change the colour.', 'Make it bigger.'], correct: 1, strand: 'D.iii', why: 'An improvement comes from a test result and says exactly what to change.' },
+      { icon: '🌍', context: 'Impact', q: 'What does “impact on the user” mean?', options: ['How much it cost.', 'What difference it makes in their real life, using what they said or did.', 'How many people liked a photo.', 'How long it took to make.'], correct: 1, strand: 'D.iv', why: 'Impact is the real difference to your user, backed by what they said or did.' },
     ],
   },
   {
@@ -575,6 +582,7 @@ export const DESIGN_CYCLE_STAGES: LiveStage[] = [
             ],
             celebrateKeywords: ['met', 'because', 'result', 'specification', 'user said'],
             points: 10,
+          coach: MYP3_EXPLAIN_SUCCESS,
           },
         ],
       },
@@ -596,6 +604,7 @@ export const DESIGN_CYCLE_STAGES: LiveStage[] = [
             ],
             celebrateKeywords: ['because', 'next version', 'test', 'user', 'change'],
             points: 10,
+          coach: MYP3_IMPROVEMENTS,
           },
         ],
       },
@@ -616,6 +625,7 @@ export const DESIGN_CYCLE_STAGES: LiveStage[] = [
             ],
             celebrateKeywords: ['difference', 'user', 'because', 'independent', 'others'],
             points: 10,
+          coach: MYP3_IMPACT,
           },
           {
             key: 'journal',
@@ -627,6 +637,7 @@ export const DESIGN_CYCLE_STAGES: LiveStage[] = [
             ],
             celebrateKeywords: ['learned', 'next time', 'because', 'test', 'user'],
             points: 10,
+          coach: MYP3_FINAL_JOURNAL,
           },
           { key: 'confidence', label: 'How confident are you in your solution?', type: 'select', options: ['Very confident', 'Fairly confident', 'A bit unsure', 'I need help'] },
         ],

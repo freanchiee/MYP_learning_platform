@@ -17,6 +17,7 @@
 // auto-score suggestion on the teacher's review screen (WorksheetReview.tsx).
 
 import type { LiveActivityDefinition } from './types'
+import { MYP2_PROBLEM, MYP2_OPPORTUNITY, MYP2_WHY_MATTERS, MYP2_FINDINGS, MYP2_WHAT_CHANGED, MYP2_JOURNAL } from './myp23-coaches'
 
 export const MYP2_EVERYDAY_NEEDS: LiveActivityDefinition = {
   id: 'myp2-everyday-needs',
@@ -59,6 +60,8 @@ export const MYP2_EVERYDAY_NEEDS: LiveActivityDefinition = {
             'A design opportunity — a problem written so a designer can start solving it.',
           ],
           correct: 0,
+          strand: 'A.i',
+          why: 'You can see and count it, with no opinion added: an observation.',
         },
         {
           icon: '🚪', context: 'The corridor',
@@ -69,6 +72,8 @@ export const MYP2_EVERYDAY_NEEDS: LiveActivityDefinition = {
             'A design opportunity — a problem written so a designer can start solving it.',
           ],
           correct: 0,
+          strand: 'A.i',
+          why: 'It says what is not working for people (pushed, late, nervous): a problem.',
         },
         {
           icon: '🚪', context: 'The corridor',
@@ -79,6 +84,8 @@ export const MYP2_EVERYDAY_NEEDS: LiveActivityDefinition = {
             'A problem — something that is not working well for a person.',
           ],
           correct: 0,
+          strand: 'A.i',
+          why: '“How might we…” turns a problem into a question a designer can start on: an opportunity.',
         },
         {
           icon: '🎒', context: 'School bags',
@@ -89,6 +96,8 @@ export const MYP2_EVERYDAY_NEEDS: LiveActivityDefinition = {
             'A design opportunity — a problem written so a designer can start solving it.',
           ],
           correct: 0,
+          strand: 'A.i',
+          why: 'It is only what you can see, with no judgement about whether it is good or bad: an observation.',
         },
         {
           icon: '🎒', context: 'School bags',
@@ -99,6 +108,8 @@ export const MYP2_EVERYDAY_NEEDS: LiveActivityDefinition = {
             'A design opportunity — a problem written so a designer can start solving it.',
           ],
           correct: 0,
+          strand: 'A.i',
+          why: 'It says something is not working for people (backs hurt) and why: a problem.',
         },
         {
           icon: '🎒', context: 'School bags',
@@ -109,6 +120,8 @@ export const MYP2_EVERYDAY_NEEDS: LiveActivityDefinition = {
             'An observation — something you can see or hear, with no opinion added.',
           ],
           correct: 0,
+          strand: 'A.i',
+          why: 'It starts with “How might we” and points towards a solution without choosing one: an opportunity.',
         },
         {
           icon: '🍽️', context: 'Lunch',
@@ -119,6 +132,8 @@ export const MYP2_EVERYDAY_NEEDS: LiveActivityDefinition = {
             'A design opportunity — a problem written so a designer can start solving it.',
           ],
           correct: 0,
+          strand: 'A.i',
+          why: 'It says what is not working for a person (little time to eat, so they rush): a problem.',
         },
         {
           icon: '📝', context: 'Homework',
@@ -129,6 +144,8 @@ export const MYP2_EVERYDAY_NEEDS: LiveActivityDefinition = {
             'A problem — something that is not working well for a person.',
           ],
           correct: 0,
+          strand: 'A.i',
+          why: 'It describes what is there (where the board is, how small the writing is) without saying it is a problem: an observation.',
         },
         {
           icon: '📝', context: 'Homework',
@@ -139,6 +156,8 @@ export const MYP2_EVERYDAY_NEEDS: LiveActivityDefinition = {
             'A problem — something that is not working well for a person.',
           ],
           correct: 0,
+          strand: 'A.i',
+          why: '“How might we…” is the sign of an opportunity.',
         },
       ],
     },
@@ -205,6 +224,7 @@ export const MYP2_EVERYDAY_NEEDS: LiveActivityDefinition = {
               ],
               celebrateKeywords: ['because', 'struggle', 'hard to', 'so they'],
               points: 10,
+            coach: MYP2_PROBLEM,
             },
           ],
         },
@@ -227,6 +247,7 @@ export const MYP2_EVERYDAY_NEEDS: LiveActivityDefinition = {
               ],
               celebrateKeywords: ['how might we', 'so that', 'help'],
               points: 10,
+            coach: MYP2_OPPORTUNITY,
             },
           ],
         },
@@ -255,6 +276,7 @@ export const MYP2_EVERYDAY_NEEDS: LiveActivityDefinition = {
               ],
               celebrateKeywords: ['because', 'every day', 'feel', 'so that'],
               points: 10,
+            coach: MYP2_WHY_MATTERS,
             },
           ],
         },
@@ -265,7 +287,7 @@ export const MYP2_EVERYDAY_NEEDS: LiveActivityDefinition = {
           blurb: 'Designers keep a dated journal. Add today’s date and one thing you learned or wondered about.',
           fields: [
             { key: 'date', label: 'Date', type: 'text', placeholder: 'e.g. 22 Sep' },
-            { key: 'entry', label: 'Journal entry', type: 'textarea', hint: 'What surprised you this week? What are you still unsure about?' },
+            { key: 'entry', label: 'Journal entry', type: 'textarea', hint: 'What surprised you this week? What are you still unsure about?', coach: MYP2_JOURNAL },
           ],
         },
       ],
@@ -432,6 +454,7 @@ export const MYP2_EVERYDAY_NEEDS: LiveActivityDefinition = {
               ],
               celebrateKeywords: ['said', 'observed', 'evidence', 'because'],
               points: 10,
+            coach: MYP2_FINDINGS,
             },
             {
               key: 'change',
@@ -444,6 +467,7 @@ export const MYP2_EVERYDAY_NEEDS: LiveActivityDefinition = {
               ],
               celebrateKeywords: ['changed', 'realised', 'instead', 'assumed'],
               points: 10,
+            coach: MYP2_WHAT_CHANGED,
             },
           ],
         },
@@ -454,7 +478,7 @@ export const MYP2_EVERYDAY_NEEDS: LiveActivityDefinition = {
           blurb: 'Date your entry and record one thing you learned from your user.',
           fields: [
             { key: 'date', label: 'Date', type: 'text', placeholder: 'e.g. 29 Sep' },
-            { key: 'entry', label: 'Journal entry', type: 'textarea', hint: 'What did your user say that surprised you?' },
+            { key: 'entry', label: 'Journal entry', type: 'textarea', hint: 'What did your user say that surprised you?', coach: MYP2_JOURNAL },
           ],
         },
       ],
