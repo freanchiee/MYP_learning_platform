@@ -51,6 +51,8 @@ function SectionFeedbackBox({ sessionCode, player, grade, stageKey, sectionKey }
   const [text, setText] = useState(sent?.text ?? '')
   const [busy, setBusy] = useState(false)
   const [err, setErr] = useState<string | null>(null)
+  // Shown straight after a successful send, so the button visibly did something even before the row refreshes.
+  const [justSent, setJustSent] = useState<string | null>(null)
   const seenAt: string | undefined = player.data?._feedbackSeen?.[key]
   const seen = !!sent && !!seenAt && seenAt >= sent.at
   const dirty = text.trim() !== (sent?.text ?? '')
@@ -60,13 +62,17 @@ function SectionFeedbackBox({ sessionCode, player, grade, stageKey, sectionKey }
     const { error } = await createClient().rpc('set_section_feedback', { p_code: sessionCode, p_player: player.id, p_key: key, p_text: value })
     setBusy(false)
     if (error) setErr('Could not save: ' + error.message)
-    else if (!value.trim()) setText('')
+    else if (!value.trim()) { setText(''); setJustSent('Feedback removed') }
+    else {
+      setJustSent(`✓ Sent to ${player.name.split(' ')[0]} at ${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`)
+      setTimeout(() => setJustSent(null), 6000)
+    }
   }
   return (
     <div style={{ marginBottom: 10, background: 'var(--accent-soft, var(--surface-2))', border: '1.5px solid var(--border-strong)', borderRadius: 10, padding: 10, display: 'grid', gap: 6 }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', gap: 8, alignItems: 'center', flexWrap: 'wrap' }}>
         <strong style={{ fontSize: 12 }}>💬 Feedback for {player.name.split(' ')[0]} on this section</strong>
-        {sent && <span style={{ fontSize: 10.5, fontWeight: 800, color: seen ? '#1FA98A' : 'var(--text-muted)' }}>{seen ? '✓ Seen by student' : '● Sent, not opened yet'}</span>}
+        {sent && <span style={{ fontSize: 10.5, fontWeight: 800, color: seen ? '#1FA98A' : 'var(--text-muted)' }}>{seen ? '✓ Seen by student' : `● Sent${sent.at ? ' ' + new Date(sent.at).toLocaleString([], { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) : ''}, not opened yet`}</span>}
       </div>
       <textarea
         value={text}
@@ -80,6 +86,7 @@ function SectionFeedbackBox({ sessionCode, player, grade, stageKey, sectionKey }
         </button>
         {sent && <button onClick={() => send('')} disabled={busy} style={{ ...btnStyle('var(--text-muted)'), padding: '6px 12px' }}>Remove</button>}
         {err && <span style={{ fontSize: 11.5, color: 'var(--danger, #D64545)' }}>{err}</span>}
+        {justSent && !err && <span role="status" style={{ fontSize: 12, fontWeight: 800, color: '#1FA98A' }}>{justSent}</span>}
       </div>
     </div>
   )

@@ -29,6 +29,10 @@ export interface LiveTeam {
 // ---------------------------------------------------------------
 export interface McqQuestion {
   q: string
+  /** Criterion strand this question checks, e.g. 'A.i'. Used to summarise a quiz strand by strand. */
+  strand?: string
+  /** One or two sentences shown after the student answers: why the right answer is right. */
+  why?: string
   context?: string // short label shown above the stem, e.g. a scenario name
   icon?: string
   options: string[]
@@ -66,6 +70,30 @@ export interface WorksheetTableColumn {
   placeholder?: string
 }
 
+/** How well an answer is built: names the thing (basic), explains why (developed), links cause, effect and stake (justified). */
+export type AnswerLevel = 'basic' | 'developed' | 'justified'
+
+/** Words or phrases that show a level of thinking. Typos and endings are forgiven when matching. */
+export interface KeywordGroup {
+  level: AnswerLevel
+  words: string[]
+}
+
+/** A sentence frame plus step prompts a student can unlock, at the cost of a few points. */
+export interface FieldScaffold {
+  frame: string
+  steps: string[]
+}
+
+/** Live, private coaching on a written answer: coloured highlights, a level meter, an optional scaffold and hints. */
+export interface FieldCoach {
+  groups: KeywordGroup[]
+  /** Unlock with points (see SCAFFOLD_COST in lib/design-live/answerFeedback.ts). */
+  scaffold?: FieldScaffold
+  /** Nudges towards the next level, shown one at a time once the answer reaches level 5. Never the model answer. */
+  hints?: string[]
+}
+
 export interface WorksheetField {
   key: string
   label: string
@@ -91,6 +119,8 @@ export interface WorksheetField {
   /** For 'personaChat' with the 'society' pack: the select field whose value is the direction the student chose;
    *  only that direction's characters are offered first. */
   personaTopicFrom?: { stage: string; section: string; field: string }
+  /** Turns on the answer coach for this text/textarea field. */
+  coach?: FieldCoach
   /** For 'leadCapture': the interests ticked by default, and the page name stored with the lead. */
   leadInterests?: string[]
   leadSource?: string

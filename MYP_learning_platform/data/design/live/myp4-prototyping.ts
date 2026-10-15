@@ -11,6 +11,7 @@
 
 import type { LiveActivityDefinition } from './types'
 import { PRODUCT_BRIEF_STAGES } from './myp4-product-brief'
+import { MYP4_LEARN_NEED, MYP4_CHECK_NEED, MYP4_LEARN_PLAN, MYP4_NEED_SECTION } from './myp4-criterion-a'
 import { MYP4_DIRECTION_EXEMPLARS, MYP4_PERSONA_EXEMPLARS } from './myp4-exemplars'
 
 export const MYP4_PROTOTYPING: LiveActivityDefinition = {
@@ -33,6 +34,10 @@ export const MYP4_PROTOTYPING: LiveActivityDefinition = {
     },
   ],
   stages: [
+    // Criterion A self-learning slides and checkpoint, before the worksheet (same pattern as MYP3).
+    MYP4_LEARN_NEED,
+    MYP4_CHECK_NEED,
+    MYP4_LEARN_PLAN,
     {
       type: 'worksheet',
       key: 'week1',
@@ -56,7 +61,7 @@ export const MYP4_PROTOTYPING: LiveActivityDefinition = {
           time: 'Work at your own pace, your work saves automatically',
         },
         flow: [
-          { strand: 'A.i', title: 'Justify the need', asks: 'Explain why this problem matters, for a specified client.', sections: ['direction', 'opportunity', 'persona'] },
+          { strand: 'A.i', title: 'Justify the need', asks: 'Explain why this problem matters, for a specified client.', sections: ['direction', 'opportunity', 'persona', 'need'] },
           { strand: 'A.ii', title: 'Research your user', asks: 'Gather primary and secondary research: interviews and simulated voices.', sections: ['personaChat', 'famous'] },
           { strand: 'A.i', title: 'Understand your user', asks: 'Turn what you learned into an empathy map.', sections: ['empathy'] },
           { strand: 'A.ii', title: 'Measure what matters', asks: 'Record anthropometrics and say why each one matters.', sections: ['anthro'] },
@@ -138,6 +143,7 @@ export const MYP4_PROTOTYPING: LiveActivityDefinition = {
             },
           ],
         },
+        MYP4_NEED_SECTION,
         {
           key: 'personaChat',
           label: 'Interview',

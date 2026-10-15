@@ -6,6 +6,7 @@ import { ROLES, ROLE_ORDER } from '@/lib/design-live/sustainability'
 import { EVERYDAY_CHALLENGES } from '@/data/design/live/everyday-personas'
 import { SOCIETY_TOPIC_ICONS } from '@/data/design/live/society-personas'
 import { cardStyle, btnStyle, inputStyle, Avatar } from './ui'
+import { guardedChange, noPasteHandlers, useNotice } from './AnswerCoach'
 
 interface ChatMessage {
   from: 'student' | 'character'
@@ -45,6 +46,7 @@ export default function PersonaChatField({
   preferredTopic?: string
 }) {
   const [showAllTopics, setShowAllTopics] = useState(false)
+  const [pasteNotice, notifyPaste] = useNotice()
   const [text, setText] = useState('')
   const [sending, setSending] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -297,10 +299,11 @@ export default function PersonaChatField({
         <div style={{ display: 'flex', gap: 6 }}>
           <input
             value={text}
-            onChange={(e) => {
-              setText(e.target.value)
-              if (e.target.value.trim()) onDraft(e.target.value)
-            }}
+            onChange={guardedChange(text, (v) => {
+              setText(v)
+              if (v.trim()) onDraft(v)
+            }, notifyPaste)}
+            {...noPasteHandlers(notifyPaste)}
             onKeyDown={(e) => e.key === 'Enter' && send()}
             placeholder={`Ask ${character.name} something…`}
             style={inputStyle}
@@ -309,6 +312,7 @@ export default function PersonaChatField({
             Send
           </button>
         </div>
+        {pasteNotice && <div role="status" style={{ fontSize: 11.5, fontWeight: 700, color: '#D6425E' }}>🚫 {pasteNotice}</div>}
       </div>
     </div>
   )

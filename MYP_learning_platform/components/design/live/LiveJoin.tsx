@@ -37,6 +37,8 @@ import { LeaderboardDrawer, useLeaderboardDrawer } from './HostChrome'
 import { getPersona } from '@/data/design/live/personas'
 import { useCelebration, CelebrationOverlay } from './Celebration'
 import LeadCaptureField from './LeadCaptureField'
+import AnswerCoach, { guardedChange, noPasteHandlers, useNotice } from './AnswerCoach'
+import { resolveCoach } from '@/lib/design-live/answerFeedback'
 
 /** Case-insensitive "does this text contain this word/phrase" check used by
  *  both the keyword-celebration nudge and (loosely) nowhere else — kept
@@ -642,11 +644,7 @@ function McqPlayer({
     const already = answers[qIdx]
 
     if (done) {
-      return (
-        <div style={{ ...cardStyle('#1FA98A'), textAlign: 'center' }}>
-          ✅ You&apos;ve answered all {total} questions. {Object.values(answers).filter((a) => a.correct).length}/{total} correct.
-        </div>
-      )
+      return <QuizSummary stage={stage} answers={answers} />
     }
 
     const pick = (choiceIdx: number) => {
@@ -673,6 +671,7 @@ function McqPlayer({
           <div style={{ ...cardStyle(activity.theme.accent), textAlign: 'center', fontSize: 15, fontWeight: 700 }}>{q.q}</div>
         )}
         <MCQOptions order={order} disabled={!!already} selectedIdx={already?.choiceIdx} onPick={pick} correctIdx={q.correct} revealed={!!already} />
+        {already && q.why && <WhyBox ok={already.correct} why={q.why} strand={q.strand} />}
         {already && (
           <div style={{ display: 'flex', justifyContent: 'center' }}>
             <button onClick={() => setSelfPacedQIdx(qIdx + 1)} style={btnStyle(activity.theme.accent, true, true)}>
@@ -702,6 +701,57 @@ function McqPlayer({
       </div>
       {st.locked && !mine && <div style={{ textAlign: 'center', fontSize: 13, fontWeight: 700, color: '#D6425E' }}>🔒 Time&apos;s up — your teacher has locked this round.</div>}
       <MCQOptions order={order} disabled={st.locked || !!mine} selectedIdx={mine?.choiceIdx} onPick={pick} correctIdx={q.correct} revealed={!!st.revealed} />
+      {st.revealed && q.why && <WhyBox ok={!!mine?.correct} why={q.why} strand={q.strand} />}
+    </div>
+  )
+}
+
+/** One or two sentences on why the right answer is right, shown straight after a quiz question is answered. */
+function WhyBox({ ok, why, strand }: { ok: boolean; why: string; strand?: string }) {
+  return (
+    <div role="note" style={{ background: ok ? 'rgba(31,169,138,0.14)' : 'rgba(214,66,94,0.10)', border: `1.5px solid ${ok ? '#1FA98A' : '#D6425E'}`, borderRadius: 10, padding: '8px 12px', fontSize: 13, lineHeight: 1.45, color: 'var(--text)' }}>
+      <strong>{ok ? '✅ Why this is right' : '💡 Why the right answer is right'}{strand ? ` · ${strand}` : ''}.</strong> {why}
+    </div>
+  )
+}
+
+/** The end-of-quiz summary: score per strand, and the ones to look at again with their explanation. */
+function QuizSummary({ stage, answers }: { stage: McqStage; answers: Record<number, { choiceIdx: number; correct: boolean }> }) {
+  const total = stage.questions.length
+  const right = Object.values(answers).filter((a) => a.correct).length
+  const byStrand = new Map<string, { ok: number; n: number }>()
+  stage.questions.forEach((q, i) => {
+    const k = q.strand || 'Other'
+    const e = byStrand.get(k) ?? { ok: 0, n: 0 }
+    e.n++
+    if (answers[i]?.correct) e.ok++
+    byStrand.set(k, e)
+  })
+  const missed = stage.questions.map((q, i) => ({ q, i })).filter(({ i }) => answers[i] && !answers[i].correct)
+  return (
+    <div style={{ ...cardStyle('#1FA98A'), display: 'grid', gap: 10 }}>
+      <div style={{ textAlign: 'center', fontWeight: 800 }}>✅ You&apos;ve answered all {total} questions: {right}/{total} correct.</div>
+      {byStrand.size > 0 && !(byStrand.size === 1 && byStrand.has('Other')) && (
+        <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', justifyContent: 'center' }}>
+          {Array.from(byStrand.entries()).map(([k, e]) => (
+            <span key={k} style={{ fontSize: 12, fontWeight: 800, padding: '4px 10px', borderRadius: 999, background: e.ok === e.n ? 'rgba(31,169,138,0.16)' : 'rgba(214,66,94,0.12)', border: `1px solid ${e.ok === e.n ? '#1FA98A' : '#D6425E'}` }}>
+              {k}: {e.ok}/{e.n}
+            </span>
+          ))}
+        </div>
+      )}
+      {missed.length > 0 && (
+        <div style={{ display: 'grid', gap: 6 }}>
+          <div style={{ fontSize: 12, fontWeight: 800, color: 'var(--text-muted)' }}>LOOK AGAIN</div>
+          {missed.map(({ q, i }) => (
+            <div key={i} style={{ fontSize: 12.5, lineHeight: 1.45 }}>
+              <strong>{q.q}</strong>
+              <div>Right answer: {q.options[q.correct]}</div>
+              {q.why && <div style={{ color: 'var(--text-muted)' }}>{q.why}</div>}
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   )
 }
@@ -979,6 +1029,7 @@ export function WorksheetPlayer({
                     playerId={me.id}
                     stageKey={stage.key}
                     lookup={(stageKey, sectionKey, fieldKey) => me.data?.[stageKey]?.[sectionKey]?.[fieldKey]}
+                    coachCtx={{ points: me.points ?? 0, scaffoldOpen: !!me.data?._spent?.[`${stage.key}.${s.key}.${f.key}`], onUnlockScaffold: () => patchMyData('_spent', { [`${stage.key}.${s.key}.${f.key}`]: true }) }}
                   />
                   </div>
                   {grade?.scores?.[revealKey(stage.key, s.key, f.key)] ? (() => {
@@ -1137,7 +1188,10 @@ function WorksheetFieldInput({
   playerId,
   stageKey,
   lookup,
+  coachCtx,
 }: {
+  /** Present when the field has `coach`: the student's points, whether the scaffold is already unlocked, and how to unlock it. */
+  coachCtx?: { points: number; scaffoldOpen: boolean; onUnlockScaffold: () => void }
   field: WorksheetField
   value: any
   onChange: (v: any) => void
@@ -1149,6 +1203,10 @@ function WorksheetFieldInput({
   /** Read a value the student saved earlier, from any stage: (stageKey, sectionKey, fieldKey). */
   lookup?: (stageKey: string, sectionKey: string, fieldKey: string) => any
 }) {
+  const [pasteNotice, notifyPaste] = useNotice()
+  if (coachCtx && (field.type === 'textarea' || field.type === 'text') && resolveCoach(field)) {
+    return <AnswerCoach field={field} value={typeof value === 'string' ? value : ''} onChange={onChange} points={coachCtx.points} scaffoldOpen={coachCtx.scaffoldOpen} onUnlockScaffold={coachCtx.onUnlockScaffold} />
+  }
   if (field.type === 'image') {
     return (
       <label style={{ display: 'grid', gap: 4, fontSize: 12, fontWeight: 700, color: 'var(--text-muted)' }}>
@@ -1182,7 +1240,8 @@ function WorksheetFieldInput({
     return (
       <label style={{ display: 'grid', gap: 4, fontSize: 12, fontWeight: 700, color: 'var(--text-muted)' }}>
         {field.label}
-        <input value={value || ''} placeholder={field.placeholder} onChange={(e) => onChange(e.target.value)} style={inputStyle} />
+        <input value={value || ''} placeholder={field.placeholder} onChange={guardedChange(value || '', onChange, notifyPaste)} {...noPasteHandlers(notifyPaste)} style={inputStyle} />
+        {pasteNotice && <span role="status" style={{ color: '#D6425E', fontWeight: 700, fontSize: 11 }}>🚫 {pasteNotice}</span>}
       </label>
     )
   }
@@ -1191,7 +1250,8 @@ function WorksheetFieldInput({
       <label style={{ display: 'grid', gap: 4, fontSize: 12, fontWeight: 700, color: 'var(--text-muted)' }}>
         {field.label}
         {field.hint && <span style={{ fontWeight: 400, fontSize: 11 }}>{field.hint}</span>}
-        <textarea value={value || ''} placeholder={field.placeholder} onChange={(e) => onChange(e.target.value)} style={{ ...inputStyle, minHeight: 70 }} />
+        <textarea value={value || ''} placeholder={field.placeholder} onChange={guardedChange(value || '', onChange, notifyPaste)} {...noPasteHandlers(notifyPaste)} style={{ ...inputStyle, minHeight: 70 }} />
+        {pasteNotice && <span role="status" style={{ color: '#D6425E', fontWeight: 700, fontSize: 11 }}>🚫 {pasteNotice}</span>}
       </label>
     )
   }
@@ -1316,6 +1376,7 @@ function OpenIdeasPlayer({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ideaIndex])
 
+  const [ideaPasteNotice, notifyIdeaPaste] = useNotice()
   const onType = (v: string) => {
     setText(v)
     if (v.trim()) {
@@ -1384,7 +1445,8 @@ function OpenIdeasPlayer({
         </div>
       )}
       {locked && !mine && <div style={{ textAlign: 'center', fontSize: 13, fontWeight: 700, color: '#D6425E' }}>🔒 Time&apos;s up — your teacher has locked this round.</div>}
-      <input value={text} disabled={locked} onChange={(e) => onType(e.target.value)} placeholder="Your idea, in a few words…" style={inputStyle} onKeyDown={(e) => e.key === 'Enter' && submit()} />
+      <input value={text} disabled={locked} onChange={guardedChange(text, onType, notifyIdeaPaste)} {...noPasteHandlers(notifyIdeaPaste)} placeholder="Your idea, in a few words…" style={inputStyle} onKeyDown={(e) => e.key === 'Enter' && submit()} />
+      {ideaPasteNotice && <div role="status" style={{ color: '#D6425E', fontWeight: 700, fontSize: 11.5 }}>🚫 {ideaPasteNotice}</div>}
       <div style={{ textAlign: 'right', fontSize: 11, fontWeight: 700, color: 'rgba(255,255,255,0.7)' }}>
         {autosaving ? '💾 Saving…' : '💾 Saves automatically'}
       </div>
