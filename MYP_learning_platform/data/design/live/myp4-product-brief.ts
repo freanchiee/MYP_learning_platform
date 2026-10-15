@@ -180,6 +180,26 @@ export const PRODUCT_BRIEF_STAGES: LiveStage[] = [
             ],
             celebrateKeywords: ['none of', 'gap', 'opportunity', 'because', 'my user'],
             points: 10,
+            coach: {
+              groups: [
+                { level: 'basic', words: ['none of', 'products', 'gap', 'opportunity', 'all three', 'each'] },
+                { level: 'developed', words: ['because', 'so there is', 'but', 'only', 'cannot', 'needs', 'costs', 'bulky', 'expensive'] },
+                { level: 'justified', words: ['opportunity to design', 'repeated', 'more than one', 'for my user', 'none combines', 'leaves out', 'portable', 'that gap'] },
+              ],
+              scaffold: {
+                frame: 'None of the products [limitation], so there is an opportunity to [what to design] for [user].',
+                steps: [
+                  'LOOK: which limitation appears more than once?',
+                  'MEANING: what does that leave out for your user?',
+                  'OPPORTUNITY: what could you design to fill the gap?',
+                ],
+              },
+              hints: [
+                'Look for a limitation that appears in more than one of your products.',
+                'Say what that means for your user.',
+                'Turn it into a design opportunity: what could a new product do?',
+              ],
+            },
           },
         ],
       },
@@ -203,6 +223,18 @@ export const PRODUCT_BRIEF_STAGES: LiveStage[] = [
             ],
             celebrateKeywords: ['designing', 'for', 'made from', 'because', 'research'],
             points: 10,
+            coach: {
+              groups: [
+                { level: 'basic', words: ['I am designing', 'designing', 'for', 'made from', 'product'] },
+                { level: 'developed', words: ['because', 'my research shows', 'interview', 'analysis', 'needs', 'cannot'] },
+                { level: 'justified', words: ['product analysis', 'my research shows', 'needs a way to', 'without', 'so that'] },
+              ],
+              hints: [
+                'Name the product, the user, and what it is made from.',
+                'Add the “because”: what did your research show?',
+                'Mention both your interview and your product analysis as evidence.',
+              ],
+            },
           },
           {
             key: 'text',
@@ -216,6 +248,27 @@ export const PRODUCT_BRIEF_STAGES: LiveStage[] = [
             ],
             celebrateKeywords: ['showed', 'found', 'must', 'must not', 'interview', 'analysis'],
             points: 10,
+            coach: {
+              groups: [
+                { level: 'basic', words: ['my interview', 'my analysis', 'must', 'solution', 'user'] },
+                { level: 'developed', words: ['showed', 'found', 'because', 'research', 'evidence', 'observation'] },
+                { level: 'justified', words: ['must not', 'must be', 'under', 'at least', 'portable', 'easy to clean', 'budget', 'no product', 'all three', 'avoids'] },
+              ],
+              scaffold: {
+                frame: '[Name] [need]. My interview showed [evidence], and my analysis found [gap in existing products]. My solution must [2 or 3 testable things] and must not [thing].',
+                steps: [
+                  'USER AND NEED: one sentence.',
+                  'EVIDENCE: what the interview and the product analysis showed.',
+                  'MUST: two or three testable requirements.',
+                  'MUST NOT: one thing to avoid.',
+                ],
+              },
+              hints: [
+                'Name your evidence: what your interview showed and what your analysis found.',
+                'Make each “must” specific enough to test.',
+                'End with what it must not do.',
+              ],
+            },
           },
           {
             key: 'criteria',

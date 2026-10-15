@@ -94,13 +94,13 @@ export const MYP5_SUSTAINABILITY: LiveActivityDefinition = {
       pointsPerCorrect: 10,
       intro: { title: '🧾 What did the market teach you?', blurb: 'Seven quick questions on carbon credits, offsets and greenwashing. Work through them at your own pace: you see the answer straight away, and every correct answer earns points.' },
       questions: [
-        { icon: '🌍', context: 'The basics', q: 'What does ONE carbon credit stand for?', options: ['One tree planted anywhere', 'One tonne of carbon dioxide (or equivalent) avoided or removed', 'One tonne of rubbish recycled', 'One kilowatt-hour of clean energy'], correct: 1 },
-        { icon: '🧪', context: 'A real credit', q: 'A credit is “additional” when…', options: ['It is cheap to buy', 'The emissions cut would NOT have happened without the money from the credit', 'It comes from a very big company', 'It is sold in another country'], correct: 1 },
-        { icon: '🪜', context: 'The mitigation ladder', q: 'A firm buys offsets so it does not have to change its factory. What is the best description?', options: ['Smart — offsets are the same as cutting emissions', 'Greenwashing risk — you should reduce first and offset only what you cannot yet cut', 'Illegal in every country', 'The best way to help the community'], correct: 1 },
-        { icon: '🏛️', context: 'Two markets', q: 'In a compliance (cap-and-trade) market, who sets the limit?', options: ['The company', 'The consumer', 'The government or regulator', 'The community'], correct: 2 },
-        { icon: '🎲', context: 'The cheap offsets in the game', q: 'Why did “cheap offsets” sometimes give you worthless credits?', options: ['Bad luck only', 'Low-price credits are more likely to fail additionality or verification checks', 'Because the dice were rigged', 'Because credits expire in a day'], correct: 1 },
-        { icon: '🌳', context: 'Permanence', q: 'A forest that stores carbon burns down next year. What is the problem for the credit?', options: ['None — the credit was already sold', 'The stored carbon is released again, so the saving was not permanent', 'The credit becomes more valuable', 'The community must pay a fine'], correct: 1 },
-        { icon: '⚖️', context: 'Who pays?', q: 'An offset project stops villagers farming land so a company abroad can claim credits. Which concern matters most for a designer?', options: ['Whether the logo is green', 'Consent and fairness: did the community agree, and do they share the benefit?', 'How many credits were sold', 'Nothing — it is legal'], correct: 1 },
+        { icon: '🌍', context: 'The basics', q: 'What does ONE carbon credit stand for?', options: ['One tree planted anywhere', 'One tonne of carbon dioxide (or equivalent) avoided or removed', 'One tonne of rubbish recycled', 'One kilowatt-hour of clean energy'], correct: 1, strand: 'Credits', why: 'One credit stands for one tonne of carbon dioxide (or equivalent) avoided or removed. It is a measured unit, not a tree or a pile of rubbish.' },
+        { icon: '🧪', context: 'A real credit', q: 'A credit is “additional” when…', options: ['It is cheap to buy', 'The emissions cut would NOT have happened without the money from the credit', 'It comes from a very big company', 'It is sold in another country'], correct: 1, strand: 'Credits', why: '“Additional” means the cut would not have happened without the credit money. If it would have happened anyway, the credit adds nothing.' },
+        { icon: '🪜', context: 'The mitigation ladder', q: 'A firm buys offsets so it does not have to change its factory. What is the best description?', options: ['Smart — offsets are the same as cutting emissions', 'Greenwashing risk — you should reduce first and offset only what you cannot yet cut', 'Illegal in every country', 'The best way to help the community'], correct: 1, strand: 'Mitigation', why: 'Reduce first and offset only what you cannot yet cut. Using offsets to avoid changing the factory is how greenwashing hides real emissions.' },
+        { icon: '🏛️', context: 'Two markets', q: 'In a compliance (cap-and-trade) market, who sets the limit?', options: ['The company', 'The consumer', 'The government or regulator', 'The community'], correct: 2, strand: 'Markets', why: 'A compliance market is created by law, so the government or regulator sets the cap. In a voluntary market companies choose to buy credits.' },
+        { icon: '🎲', context: 'The cheap offsets in the game', q: 'Why did “cheap offsets” sometimes give you worthless credits?', options: ['Bad luck only', 'Low-price credits are more likely to fail additionality or verification checks', 'Because the dice were rigged', 'Because credits expire in a day'], correct: 1, strand: 'Credits', why: 'Very cheap credits are more likely to fail additionality or verification checks, so the saving may not be real.' },
+        { icon: '🌳', context: 'Permanence', q: 'A forest that stores carbon burns down next year. What is the problem for the credit?', options: ['None — the credit was already sold', 'The stored carbon is released again, so the saving was not permanent', 'The credit becomes more valuable', 'The community must pay a fine'], correct: 1, strand: 'Credits', why: 'Permanence means the carbon stays stored. If the forest burns, the carbon returns to the air and the saving is lost.' },
+        { icon: '⚖️', context: 'Who pays?', q: 'An offset project stops villagers farming land so a company abroad can claim credits. Which concern matters most for a designer?', options: ['Whether the logo is green', 'Consent and fairness: did the community agree, and do they share the benefit?', 'How many credits were sold', 'Nothing — it is legal'], correct: 1, strand: 'Fairness', why: 'A designer asks who gains and who pays. A credit that takes land from a community without its consent or a share of the benefit is not fair.' },
       ],
     },
     {
@@ -150,6 +150,18 @@ export const MYP5_SUSTAINABILITY: LiveActivityDefinition = {
               ],
               celebrateKeywords: ['who', 'live', 'work', 'rely', 'families', 'households'],
               points: 10,
+              coach: {
+                groups: [
+                  { level: 'basic', words: ['residents', 'workers', 'families', 'households', 'shoppers', 'staff', 'consumers', 'villagers', 'town', 'city', 'factory', 'village', 'live', 'work'] },
+                  { level: 'developed', words: ['rely on', 'depend on', 'most are', 'many of', 'generations', 'limited budget', 'low income', 'on a budget', 'downstream', 'in common', 'because'] },
+                  { level: 'justified', words: ['little say', 'no say', 'cannot refuse', 'cannot afford', 'bear the cost', 'exposed to', 'vulnerable', 'at risk', 'limited choice', 'no power', 'send money home'] },
+                ],
+                hints: [
+                  'Say where they live or work, and what ties this group together.',
+                  'Add what they depend on, or what they cannot easily change about their situation.',
+                  'Say how much say they have: who listens to them and who decides for them?',
+                ],
+              },
             },
             {
               key: 'need',
@@ -164,6 +176,27 @@ export const MYP5_SUSTAINABILITY: LiveActivityDefinition = {
               ],
               celebrateKeywords: ['how might we', 'so that', 'because', 'for'],
               points: 10,
+              coach: {
+                groups: [
+                  { level: 'basic', words: ['how might we', 'help', 'let', 'a way to', 'residents', 'workers', 'shoppers', 'communities', 'citizens'] },
+                  { level: 'developed', words: ['so that', 'because', 'currently', 'right now', 'at the moment', 'cannot', 'without', 'no way', 'officials', 'keep saying'] },
+                  { level: 'justified', words: ['income', 'at risk', 'jobs', 'lose', 'fear', 'no say', 'not believed', 'without proof', 'evidence', 'trust', 'health', 'fairness', 'consent', 'act', 'who pays'] },
+                ],
+                scaffold: {
+                  frame: 'How might we help [community] [do something] so that [what changes for them], because [why it is hard or unfair for them now]?',
+                  steps: [
+                    'WHO: name the community, not “people”.',
+                    'NEED: what are they unable to do, prove or change?',
+                    'WHY NOW: what makes it hard or unfair at the moment, and who has the power?',
+                    'STAKE: what do they lose or risk if it stays the same? Keep it a need, not an app.',
+                  ],
+                },
+                hints: [
+                  'Show why this is hard for the community right now. What do they do or put up with at the moment?',
+                  'Add who is affected and what they lose if nothing changes.',
+                  'Check the sentence is a need, not a solution. Could someone design in many different ways from it?',
+                ],
+              },
             },
             {
               key: 'evidence',
@@ -177,6 +210,18 @@ export const MYP5_SUSTAINABILITY: LiveActivityDefinition = {
               ],
               celebrateKeywords: ['because', 'meter', 'tile', 'cost', 'showed'],
               points: 10,
+              coach: {
+                groups: [
+                  { level: 'basic', words: ['tile', 'meter', 'phase 1', 'phase 2', 'card', 'round', 'landed on', 'chose', 'choice', 'offsets', 'credits', 'dice'] },
+                  { level: 'developed', words: ['because', 'showed me', 'showed us', 'revealed', 'dropped', 'fell', 'rose', 'that is where', 'that made me', 'so'] },
+                  { level: 'justified', words: ['community meter', 'wellbeing', 'land health', 'never chose', 'had no say', 'least say', 'absorb', 'worthless credits', 'nobody asked', 'no benefit', 'trust', 'fairness', 'who pays'] },
+                ],
+                hints: [
+                  'Name the exact moment: which tile, card, choice or meter?',
+                  'Say what changed because of it, and who felt the cost.',
+                  'Link that moment to the need you wrote above: why does it show the same problem?',
+                ],
+              },
             },
           ],
         },
@@ -210,6 +255,26 @@ export const MYP5_SUSTAINABILITY: LiveActivityDefinition = {
               ],
               celebrateKeywords: ['because', 'first', 'depends', 'rather than'],
               points: 10,
+              coach: {
+                groups: [
+                  { level: 'basic', words: ['interview', 'survey', 'observe', 'observation', 'representative', 'analyse', 'secondary', 'primary', 'reading', 'first'] },
+                  { level: 'developed', words: ['because', 'since', 'depends', 'everything else', 'before I can', 'rather than', 'instead of', 'otherwise'] },
+                  { level: 'justified', words: ['only guessing', 'cannot tell me', 'actually do', 'real experience', 'could change my', 'biggest risk', 'most important', 'without knowing', 'assumption'] },
+                ],
+                scaffold: {
+                  frame: 'If I only had time for one piece of research it would be [method with a source], because [what depends on it] and [why other research cannot tell me that].',
+                  steps: [
+                    'CHOOSE: which one piece, and which method?',
+                    'WHAT DEPENDS: what will you design or decide using it?',
+                    'WHY NOT THE OTHERS: what can this give you that reading or a quick search cannot?',
+                  ],
+                },
+                hints: [
+                  'Name the method and the source, not just the topic.',
+                  'Say what the rest of your design depends on knowing.',
+                  'Explain why another kind of research could not give you this answer.',
+                ],
+              },
             },
             {
               key: 'ethics',
@@ -223,6 +288,27 @@ export const MYP5_SUSTAINABILITY: LiveActivityDefinition = {
               ],
               celebrateKeywords: ['consent', 'anonymise', 'permission', 'withdraw', 'private'],
               points: 10,
+              coach: {
+                groups: [
+                  { level: 'basic', words: ['consent', 'permission', 'anonymise', 'anonymous', 'private', 'names', 'withdraw', 'privacy'] },
+                  { level: 'developed', words: ['explain the purpose', 'plain language', 'will not collect', 'only store', 'school account', 'choose whether', 'at any time', 'check quotes', 'delete', 'because'] },
+                  { level: 'justified', words: ['avoid harm', 'identify', 'exposed', 'vulnerable', 'pressure', 'reprisal', 'protect', 'personal data', 'not share', 'trust', 'safe'] },
+                ],
+                scaffold: {
+                  frame: 'I will [get consent by …], protect people by [anonymising / storing privately …], and avoid harm by [what I will not collect or share], because [who could be at risk].',
+                  steps: [
+                    'CONSENT: how will you ask, and can people stop?',
+                    'PRIVACY: names, notes, storage.',
+                    'LIMITS: what you will not collect or share.',
+                    'RISK: who could be hurt if this was not done carefully?',
+                  ],
+                },
+                hints: [
+                  'Say how you will ask people, not only that you will.',
+                  'Say what you will not collect, and where notes are kept.',
+                  'Think about who could be put at risk if their words were identified. How do you prevent that?',
+                ],
+              },
             },
           ],
         },
@@ -253,6 +339,18 @@ export const MYP5_SUSTAINABILITY: LiveActivityDefinition = {
               ],
               celebrateKeywords: ['because', 'nobody', 'we cannot', 'told'],
               points: 10,
+              coach: {
+                groups: [
+                  { level: 'basic', words: ['told', 'nobody', 'we cannot', 'we are told', 'asked', 'listen', 'ignored', 'they say'] },
+                  { level: 'developed', words: ['because', 'but', 'yet', 'even though', 'every day', 'again and again', 'still'] },
+                  { level: 'justified', words: ['our children', 'our families', 'our jobs', 'afford', 'proof', 'no choice', 'nobody asked', 'cannot say no', 'no say', 'trust'] },
+                ],
+                hints: [
+                  'Write words the group would really use, in quotation marks.',
+                  'Add a “but” or “because”: what is the reason behind the complaint?',
+                  'Use a line from your interview, then add what the whole group would say, not just one person.',
+                ],
+              },
             },
             {
               key: 'thinks',
@@ -266,6 +364,18 @@ export const MYP5_SUSTAINABILITY: LiveActivityDefinition = {
               ],
               celebrateKeywords: ['worry', 'fear', 'wonders', 'hope', 'suspect'],
               points: 10,
+              coach: {
+                groups: [
+                  { level: 'basic', words: ['worry', 'worries', 'fear', 'fears', 'wonder', 'wonders', 'hope', 'hopes', 'suspect', 'believe'] },
+                  { level: 'developed', words: ['whether', 'that no one', 'will not', 'might', 'could', 'because', 'but'] },
+                  { level: 'justified', words: ['speaking up', 'worse', 'jobs', 'not matter', 'believe', 'without proof', 'families', 'at risk', 'blamed', 'believed'] },
+                ],
+                hints: [
+                  'Go beneath what they say. What do they fear or hope but not announce?',
+                  'Say what they think might happen to them if they speak up or act.',
+                  'Add a thought that shows the stake for their families, jobs or health.',
+                ],
+              },
             },
             {
               key: 'does',
@@ -279,6 +389,18 @@ export const MYP5_SUSTAINABILITY: LiveActivityDefinition = {
               ],
               celebrateKeywords: ['currently', 'instead', 'avoid', 'collect', 'swap'],
               points: 10,
+              coach: {
+                groups: [
+                  { level: 'basic', words: ['currently', 'collect', 'avoid', 'swap', 'warn', 'attend', 'cover for', 'repair', 'compare', 'stay quiet', 'instead'] },
+                  { level: 'developed', words: ['but', 'have no', 'no shared', 'only when', 'whenever', 'to keep', 'to stay', 'so that', 'because'] },
+                  { level: 'justified', words: ['no shared record', 'keep their jobs', 'own cost', 'no way', 'nothing changes', 'extra time', 'extra cost', 'at risk', 'workaround'] },
+                ],
+                hints: [
+                  'Describe actions you could watch, not feelings.',
+                  'Say why they do it that way. What are they working around?',
+                  'Add what it costs them: time, money, safety or being heard.',
+                ],
+              },
             },
             {
               key: 'feels',
@@ -292,6 +414,18 @@ export const MYP5_SUSTAINABILITY: LiveActivityDefinition = {
               ],
               celebrateKeywords: ['frustrated', 'anxious', 'ignored', 'relieved', 'proud'],
               points: 10,
+              coach: {
+                groups: [
+                  { level: 'basic', words: ['angry', 'ignored', 'anxious', 'frustrated', 'trapped', 'tired', 'proud', 'relieved', 'overwhelmed', 'guilty', 'invisible', 'worried', 'unsure'] },
+                  { level: 'developed', words: ['because', 'but', 'when', 'after', 'whenever', 'of not being', 'unsure who'] },
+                  { level: 'justified', words: ['seriously', 'children', 'listens', 'trust', 'powerless', 'control'] },
+                ],
+                hints: [
+                  'Use specific feeling words, not “bad” or “upset”.',
+                  'Link each feeling to what causes it.',
+                  'Add a feeling that shows a mix: what makes them proud or hopeful as well?',
+                ],
+              },
             },
           ],
         },
@@ -345,6 +479,27 @@ export const MYP5_SUSTAINABILITY: LiveActivityDefinition = {
               ],
               celebrateKeywords: ['must', 'because', 'leaves out', 'gap', 'so'],
               points: 10,
+              coach: {
+                groups: [
+                  { level: 'basic', words: ['existing', 'apps', 'tools', 'products', 'most', 'all of them', 'none of', 'report', 'measure'] },
+                  { level: 'developed', words: ['because', 'which means', 'leaves out', 'new product', 'must', 'gap', 'misses', 'assume'] },
+                  { level: 'justified', words: ['trust', 'loop', 'phone', 'offline', 'excluded', 'as a result', 'therefore', 'literacy'] },
+                ],
+                scaffold: {
+                  frame: 'The range shows that [pattern across the products], which leaves out [who], so a new product must [requirement] because [evidence from my analysis].',
+                  steps: [
+                    'PATTERN: what do most of the products share or miss?',
+                    'WHO IS LEFT OUT: which people, and why?',
+                    'REQUIREMENT: what must yours do differently?',
+                    'EVIDENCE: which product or interview shows this?',
+                  ],
+                },
+                hints: [
+                  'Say what the products have in common, not what each one does.',
+                  'Say who this leaves out and why.',
+                  'Turn the pattern into a requirement: what must a new product do that none of these do?',
+                ],
+              },
             },
           ],
         },
@@ -387,6 +542,27 @@ export const MYP5_SUSTAINABILITY: LiveActivityDefinition = {
               ],
               celebrateKeywords: ['must', 'will design', 'research showed', 'must not', 'evidence'],
               points: 10,
+              coach: {
+                groups: [
+                  { level: 'basic', words: ['I will design', 'the client', 'my product', 'digital', 'app', 'tool', 'web', 'residents', 'workers', 'shoppers'] },
+                  { level: 'developed', words: ['research showed', 'interview showed', 'my analysis', 'found that', 'because', 'evidence', 'must', 'so that'] },
+                  { level: 'justified', words: ['must not', 'must avoid', 'offline', 'no account', 'protect', 'privacy', 'anonymous', 'trust', 'consent', 'low-cost phone', 'clear response', 'not exclude'] },
+                ],
+                scaffold: {
+                  frame: 'I will design [product] for [community] because [need]. My research showed [evidence]. It must [2 or 3 things], and it must not [harm, exclusion or data risk].',
+                  steps: [
+                    'WHO AND WHAT: the community, the need and the kind of product.',
+                    'EVIDENCE: name what your research and product analysis showed.',
+                    'MUST: two or three things you could test.',
+                    'MUST NOT: one thing that would harm or exclude the community.',
+                  ],
+                },
+                hints: [
+                  'Name the evidence: which interview, product or game moment led you here?',
+                  'Be specific about what the product must do. Could someone test each one?',
+                  'Add what it must not do: think about harm, cost, data and who it leaves out.',
+                ],
+              },
             },
           ],
         },
@@ -448,6 +624,18 @@ export const MYP5_SUSTAINABILITY: LiveActivityDefinition = {
               ],
               celebrateKeywords: ['must not', 'exclude', 'data', 'harm', 'cost'],
               points: 10,
+              coach: {
+                groups: [
+                  { level: 'basic', words: ['must not', 'should not', 'never', 'avoid', 'not require', 'without'] },
+                  { level: 'developed', words: ['because', 'data', 'exclude', 'cost', 'account', 'real names', 'location', 'smartphone', 'guilt', 'paid'] },
+                  { level: 'justified', words: ['expose', 'reprisal', 'at risk', 'vulnerable', 'unfair', 'sensitive', 'more data', 'hide', 'watched', 'trust', 'identify', 'harm'] },
+                ],
+                hints: [
+                  'Think about who could be harmed or left out by the product, not just what it does.',
+                  'Add a reason for each must-not, from your research.',
+                  'Cover data and cost as well: what would you never collect, and what would you never charge for?',
+                ],
+              },
             },
           ],
         },
@@ -472,6 +660,18 @@ export const MYP5_SUSTAINABILITY: LiveActivityDefinition = {
               ],
               celebrateKeywords: ['how might we', 'so that', 'because', 'for'],
               points: 10,
+              coach: {
+                groups: [
+                  { level: 'basic', words: ['how might we', 'give', 'let', 'help', 'tool', 'app', 'log', 'report', 'checker'] },
+                  { level: 'developed', words: ['so that', 'because', 'simple', 'offline', 'quickly', 'in under', 'currently', 'right now'] },
+                  { level: 'justified', words: ['no longer', 'dismiss', 'trust', 'risk', 'fear', 'evidence', 'council', 'consent', 'anonymous', 'cannot afford', 'speaking up'] },
+                ],
+                hints: [
+                  'Name the community and what your product lets them do.',
+                  'Say why it matters to them: what changes if it works?',
+                  'Check that it sets a goal for a digital product without describing screens yet.',
+                ],
+              },
             },
           ],
         },
@@ -507,6 +707,27 @@ export const MYP5_SUSTAINABILITY: LiveActivityDefinition = {
               ],
               celebrateKeywords: ['because', 'screen', 'button', 'shows', 'so that'],
               points: 10,
+              coach: {
+                groups: [
+                  { level: 'basic', words: ['screen', 'button', 'icon', 'tap', 'tapping', 'home', 'page', 'menu', 'map', 'photo'] },
+                  { level: 'developed', words: ['because', 'shows', 'opens', 'asks', 'then', 'next', 'saves', 'so that', 'large', 'big'] },
+                  { level: 'justified', words: ['limited literacy', 'offline', 'old phone', 'low-cost', 'anonymous', 'no name', 'confirmation', 'sync', 'cannot read', 'so nobody', 'accessible', 'so they can'] },
+                ],
+                scaffold: {
+                  frame: 'The [screen] shows [elements]. Tapping [element] does [action] because [reason for this community]. Then [what happens next].',
+                  steps: [
+                    'SCREEN: which one, and what is its job?',
+                    'PARTS: list each element and what it does.',
+                    'WHY: tie one design choice to your community.',
+                    'NEXT: where does the user go or what is saved?',
+                  ],
+                },
+                hints: [
+                  'Walk through the screen one element at a time: what is it, where is it, what does it do?',
+                  'Give the reason for each choice, linked to your community.',
+                  'Say what happens next, so a developer could build it without asking you.',
+                ],
+              },
             },
           ],
         },
@@ -539,6 +760,27 @@ export const MYP5_SUSTAINABILITY: LiveActivityDefinition = {
               ],
               celebrateKeywords: ['because', 'weighted', 'whereas', 'lower', 'highest', 'research'],
               points: 10,
+              coach: {
+                groups: [
+                  { level: 'basic', words: ['scores', 'score', 'highest', 'chosen', 'won', 'idea', 'matrix', 'weighted', 'weight'] },
+                  { level: 'developed', words: ['because', 'whereas', 'lower', 'unlike', 'compared', 'while', 'criterion'] },
+                  { level: 'justified', words: ['although', 'however', 'research', 'interview', 'trade-off', 'must not', 'penalised', 'heavily weighted', 'essential', 'only idea', 'failed', 'lost on', 'matters more'] },
+                ],
+                scaffold: {
+                  frame: '[Idea] scores highest because [criterion + weight + evidence]. [Other idea] scored lower because [reason]. Although [trade-off], my research says [why it still wins].',
+                  steps: [
+                    'WINNER: name it and the criteria it does best on.',
+                    'WEIGHTS: link the heaviest criterion to your research.',
+                    'COMPARE: say why at least one other idea scored lower.',
+                    'TRADE-OFF: what does the winner give up, and why is that fine?',
+                  ],
+                },
+                hints: [
+                  'Go criterion by criterion: which ones does the winner beat the others on?',
+                  'Say how the weights come from your research.',
+                  'Be honest about a trade-off: where does the winner lose, and why is that acceptable?',
+                ],
+              },
             },
           ],
         },
@@ -560,6 +802,18 @@ export const MYP5_SUSTAINABILITY: LiveActivityDefinition = {
               ],
               celebrateKeywords: ['servers', 'energy', 'data', 'device', 'old phones', 'storage'],
               points: 10,
+              coach: {
+                groups: [
+                  { level: 'basic', words: ['servers', 'energy', 'data', 'storage', 'devices', 'phones', 'images', 'hosting', 'video', 'scripts'] },
+                  { level: 'developed', words: ['because', 'keep images small', 'compress', 'avoid', 'lightweight', 'store only', 'offline', 'old phones', 'delete', 'autoplay'] },
+                  { level: 'justified', words: ['e-waste', 'new devices', 'forever', 'provider', 'renewable', 'saves data', 'saves energy', 'does not force', 'last longer', 'reduce first'] },
+                ],
+                hints: [
+                  'Name where the energy or materials go: servers, devices, data, images.',
+                  'Say one concrete choice that keeps each one light.',
+                  'Link it to your community: how does a lighter product help them?',
+                ],
+              },
             },
             {
               key: 'credits',
@@ -604,6 +858,18 @@ export const MYP5_SUSTAINABILITY: LiveActivityDefinition = {
               ],
               celebrateKeywords: ['then', 'saved', 'syncs', 'reads', 'status'],
               points: 10,
+              coach: {
+                groups: [
+                  { level: 'basic', words: ['opens', 'taps', 'user', 'screen', 'report', 'submit', 'photo', 'category', 'saved', 'map'] },
+                  { level: 'developed', words: ['then', 'next', 'after', 'when', 'syncs', 'sent', 'store', 'reads', 'dashboard', 'status'] },
+                  { level: 'justified', words: ['acknowledged', 'sees the status', 'without logging in', 'no name', 'offline', 'when signal returns', 'response', 'confirmation', 'anonymous'] },
+                ],
+                hints: [
+                  'Follow the data from the first tap to the last screen, in order.',
+                  'Say where the information is stored and who can read it.',
+                  'Add what the user sees at the end, so the flow closes the loop.',
+                ],
+              },
             },
             {
               key: 'requirements',
@@ -677,6 +943,26 @@ export const MYP5_SUSTAINABILITY: LiveActivityDefinition = {
               ],
               celebrateKeywords: ['because', 'first', 'reuse', 'checkpoint', 'peer'],
               points: 10,
+              coach: {
+                groups: [
+                  { level: 'basic', words: ['plan', 'step', 'steps', 'tool', 'time', 'order', 'first', 'checkpoint', 'peer'] },
+                  { level: 'developed', words: ['because', 'riskiest', 'reuse', 'same', 'before', 'so that', 'template', 'without asking', 'can follow'] },
+                  { level: 'justified', words: ['saves time', 'avoid waste', 'reduces risk', 'if something fails', 'backup', 'is done', 'partner can check', 'not repeat', 'efficient'] },
+                ],
+                scaffold: {
+                  frame: 'The plan is efficient because [ordering and reuse]. A peer could follow it because each step names [tool, time and checkpoint].',
+                  steps: [
+                    'ORDER: which step comes first, and why?',
+                    'REUSE: what do you use more than once?',
+                    'FOLLOWABLE: what makes each step clear to someone else?',
+                  ],
+                },
+                hints: [
+                  'Say how you ordered the steps and why that order saves time.',
+                  'Name what you reuse so you do not do work twice.',
+                  'Explain how a peer could tell each step is finished without asking you.',
+                ],
+              },
             },
             {
               key: 'risks',
@@ -740,6 +1026,18 @@ export const MYP5_SUSTAINABILITY: LiveActivityDefinition = {
               ],
               celebrateKeywords: ['predict', 'expect', 'because', 'threshold', 'compare'],
               points: 10,
+              coach: {
+                groups: [
+                  { level: 'basic', words: ['predict', 'expect', 'prediction', 'think', 'testers', 'test', 'threshold', 'seconds'] },
+                  { level: 'developed', words: ['because', 'but', 'about', 'hesitate', 'confuse', 'compare', 'record', 'success threshold', 'pause'] },
+                  { level: 'justified', words: ['this would mean', 'which would show', 'I will change', 'evidence', 'not be met', 'unexpected', 'compare with', 'if it fails'] },
+                ],
+                hints: [
+                  'Give a number or a clear outcome, not “it will work”.',
+                  'Say what could go wrong and why.',
+                  'Say how you will compare the result with your success threshold.',
+                ],
+              },
             },
             {
               key: 'consent',
@@ -751,6 +1049,18 @@ export const MYP5_SUSTAINABILITY: LiveActivityDefinition = {
               ],
               celebrateKeywords: ['consent', 'anonymous', 'stop', 'invented', 'private'],
               points: 10,
+              coach: {
+                groups: [
+                  { level: 'basic', words: ['consent', 'anonymous', 'permission', 'stop', 'invented', 'private', 'sample data', 'withdraw', 'names'] },
+                  { level: 'developed', words: ['explain', 'ask', 'record only', 'timings', 'no real', 'store', 'without names', 'at any time', 'choose', 'thank'] },
+                  { level: 'justified', words: ['protect', 'harm', 'personal', 'exposed', 'safe', 'identify', 'pressure', 'embarrass', 'delete after', 'trust'] },
+                ],
+                hints: [
+                  'Say how you will ask and what you will tell testers first.',
+                  'Say what you will collect, and what you will not.',
+                  'Think about what could embarrass or expose a tester, and how you prevent it.',
+                ],
+              },
             },
           ],
         },
@@ -771,6 +1081,27 @@ export const MYP5_SUSTAINABILITY: LiveActivityDefinition = {
               ],
               celebrateKeywords: ['could', 'benefit', 'risk', 'because', 'community'],
               points: 10,
+              coach: {
+                groups: [
+                  { level: 'basic', words: ['residents', 'workers', 'community', 'shoppers', 'benefit', 'gain', 'impact', 'better', 'worse'] },
+                  { level: 'developed', words: ['could', 'might', 'because', 'if it works', 'which could', 'but', 'however', 'a risk is', 'speed up', 'improve'] },
+                  { level: 'justified', words: ['risk', 'misused', 'ignored', 'raise tension', 'tool should', 'must not reveal', 'worse off', 'power', 'trust', 'unintended', 'reprisal', 'as a result'] },
+                ],
+                scaffold: {
+                  frame: 'If it works, [who] gain [benefit], which could [effect]. A risk is [harm or misuse], so [how the design prevents it].',
+                  steps: [
+                    'BENEFIT: who gains, and what changes?',
+                    'EFFECT: what could that lead to?',
+                    'RISK: who could be worse off, or how could it be misused?',
+                    'FIX: what in your design reduces the risk?',
+                  ],
+                },
+                hints: [
+                  'Say who benefits and how things change for them.',
+                  'Add who could be worse off, or how the tool could be misused.',
+                  'Say how your design reduces that risk.',
+                ],
+              },
             },
             {
               key: 'circular',
@@ -783,6 +1114,18 @@ export const MYP5_SUSTAINABILITY: LiveActivityDefinition = {
               ],
               celebrateKeywords: ['delete', 'open-source', 'hand over', 'reuse', 'servers', 'devices', 'e-waste'],
               points: 10,
+              coach: {
+                groups: [
+                  { level: 'basic', words: ['delete', 'data', 'servers', 'devices', 'code', 'open-source', 'hand over', 'reuse', 'recycle', 'end of life', 'e-waste', 'backups'] },
+                  { level: 'developed', words: ['because', 'project ends', 'export', 'publish', 'switch off', 'old phones', 'offline', 'instead of'] },
+                  { level: 'justified', words: ['nothing left', 'no e-waste', 'community owns', 'others can reuse', 'does not create', 'avoid new devices', 'who looks after', 'long term', 'responsibility'] },
+                ],
+                hints: [
+                  'Cover each part: data, servers, devices and code.',
+                  'Say who looks after it, or who gets it, when you stop.',
+                  'Say how this avoids creating waste or leaving something behind.',
+                ],
+              },
             },
           ],
         },
@@ -803,6 +1146,27 @@ export const MYP5_SUSTAINABILITY: LiveActivityDefinition = {
               ],
               celebrateKeywords: ['because', 'however', 'game', 'shared', 'evidence'],
               points: 10,
+              coach: {
+                groups: [
+                  { level: 'basic', words: ['designer', 'manufacturer', 'consumer', 'government', 'corporation', 'responsibility', 'shared'] },
+                  { level: 'developed', words: ['because', 'however', 'although', 'in the game', 'game showed', 'when we', 'controls', 'decide', 'choose', 'demand'] },
+                  { level: 'justified', words: ['rules were weak', 'cheap offsets', 'first responsibility', 'what is possible', 'only chose among', 'power', 'who pays', 'consent', 'depends on', 'evidence', 'round'] },
+                ],
+                scaffold: {
+                  frame: 'I think [who] bears most responsibility because [reason about power or choice]. In the game, [moment] showed [what]. However, [who else] also [role], because [reason].',
+                  steps: [
+                    'POSITION: choose designer, manufacturer or consumer.',
+                    'REASON: what power or choice do they have?',
+                    'GAME EVIDENCE: one specific moment.',
+                    'OTHER SIDE: who shares the responsibility?',
+                  ],
+                },
+                hints: [
+                  'Pick one group and give a reason that is about power or choice.',
+                  'Use one moment from the game as evidence. What happened, and who decided?',
+                  'Acknowledge another side: who else holds some responsibility, and why?',
+                ],
+              },
             },
             {
               key: 'atl',
@@ -814,6 +1178,18 @@ export const MYP5_SUSTAINABILITY: LiveActivityDefinition = {
               ],
               celebrateKeywords: ['prioritised', 'consent', 'improve', 'next time', 'checked'],
               points: 10,
+              coach: {
+                groups: [
+                  { level: 'basic', words: ['prioritised', 'consent', 'research', 'interview', 'ranked', 'checked', 'improve', 'next time', 'ethics'] },
+                  { level: 'developed', words: ['instead of', 'rather than', 'because', 'differently', 'this time', 'earlier', 'updated'] },
+                  { level: 'justified', words: ['real person', 'would improve', 'would change', 'which meant', 'learned', 'weakness', 'limit', 'bias', 'assumption', 'so that'] },
+                ],
+                hints: [
+                  'Name one specific thing you did differently, not a general feeling.',
+                  'Say what difference it made to your research.',
+                  'Name a weakness in your research and what you would do about it.',
+                ],
+              },
             },
           ],
         },
