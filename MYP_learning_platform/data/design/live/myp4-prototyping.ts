@@ -11,6 +11,7 @@
 
 import type { LiveActivityDefinition } from './types'
 import { PRODUCT_BRIEF_STAGES } from './myp4-product-brief'
+import { MYP4_DIRECTION_EXEMPLARS, MYP4_PERSONA_EXEMPLARS } from './myp4-exemplars'
 
 export const MYP4_PROTOTYPING: LiveActivityDefinition = {
   id: 'myp4-prototyping',
@@ -20,6 +21,17 @@ export const MYP4_PROTOTYPING: LiveActivityDefinition = {
   icon: '🦾',
   theme: { accent: '#5C3FD6', from: '#150F2A', via: '#1D1640', to: '#241C46' },
   selfPaced: true,
+  // Model answers follow the student's own choices: the DIRECTION they picked (need, specification, choice, drawing,
+  // prototype, test, improvements, brief) and, separately, the persona they interviewed (empathy map, impact).
+  exemplarsByChoice: [
+    { from: { stage: 'week1', section: 'direction', field: 'direction' }, noun: 'direction', byField: MYP4_DIRECTION_EXEMPLARS },
+    {
+      from: { stage: 'week1', section: 'personaChat', field: 'chat' },
+      noun: 'persona',
+      byField: MYP4_PERSONA_EXEMPLARS,
+      extractKey: (v) => (v && typeof v === 'object' ? (v as { characterId?: string }).characterId : undefined),
+    },
+  ],
   stages: [
     {
       type: 'worksheet',
