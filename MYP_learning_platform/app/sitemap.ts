@@ -24,6 +24,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${SITE_URL}/gameducation`, changeFrequency: 'monthly', priority: 0.7 },
     { url: `${SITE_URL}/tutoring`, changeFrequency: 'monthly', priority: 0.6 },
     { url: `${SITE_URL}/strandhoot`, changeFrequency: 'weekly', priority: 0.9 },
+    { url: `${SITE_URL}/privacy`, changeFrequency: 'yearly', priority: 0.3 },
+    { url: `${SITE_URL}/terms`, changeFrequency: 'yearly', priority: 0.3 },
+    { url: `${SITE_URL}/impressum`, changeFrequency: 'yearly', priority: 0.3 },
     ...publicActivities().map((a) => ({ url: `${SITE_URL}/strandhoot/${a.id}`, changeFrequency: 'monthly' as const, priority: 0.8 })),
     ...GUIDES.map((g) => ({
       url: `${SITE_URL}/guides/${g.slug}`,

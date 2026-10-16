@@ -1,3 +1,4 @@
+import LegalFooter from '@/components/legal/LegalFooter'
 import type { Metadata } from 'next'
 import { Source_Sans_3, JetBrains_Mono } from 'next/font/google'
 import { Toaster } from 'react-hot-toast'
@@ -142,6 +143,7 @@ export default function RootLayout({
         />
         <ThemeProvider>
           {children}
+          <LegalFooter />
           <TutoringNudge />
           <Toaster
             position="top-right"

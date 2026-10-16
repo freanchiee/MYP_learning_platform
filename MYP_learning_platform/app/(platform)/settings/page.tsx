@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import type { AIProvider } from '@/lib/ai-grading'
 import ThemeSwitcher from '@/components/theme/ThemeSwitcher'
+import DeleteMyData from '@/components/settings/DeleteMyData'
 
 const PROVIDERS: { id: AIProvider; label: string; placeholder: string; docsUrl: string; defaultModel: string; models: string[] }[] = [
   {
@@ -267,6 +268,10 @@ export default function SettingsPage() {
             <ThemeSwitcher variant="panel" />
           </div>
         </div>
+
+        <div className="h-px my-10" style={{ background: 'var(--divider)' }} />
+
+        <DeleteMyData />
 
       </div>
     </div>
