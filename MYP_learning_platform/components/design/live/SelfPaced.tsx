@@ -16,15 +16,40 @@ import { cardStyle, btnStyle } from './ui'
 
 export interface Nav { stage: number; max: number }
 
+/** What is saved: the stage NUMBER (older rows, and old tabs) and the stage KEY (`k`, furthest `mk`). The key wins, so
+ *  inserting or reordering stages never moves a student. */
+export interface SavedNav { stage?: number; max?: number; k?: string; mk?: string }
+
+/** The fields to save for a position, carrying the stage keys. */
+export function navPatch(activity: LiveActivityDefinition, stage: number, max: number): SavedNav {
+  return { stage, max, k: activity.stages[stage]?.key, mk: activity.stages[max]?.key }
+}
+
 export function defaultStart(activity: LiveActivityDefinition): number {
   return Math.max(0, Math.min(activity.startStage ?? 0, activity.stages.length - 1))
 }
 
+/** Where a saved position points now: by key if it has one, else through the activity's legacy stage order, else as a plain number. */
+function resolveStage(activity: LiveActivityDefinition, key: string | undefined, num: number | undefined): number | undefined {
+  if (key) {
+    const i = activity.stages.findIndex((s) => s.key === key)
+    if (i >= 0) return i
+  }
+  if (num == null) return undefined
+  const legacy = activity.legacyStageKeys?.[num]
+  if (legacy) {
+    const i = activity.stages.findIndex((s) => s.key === legacy)
+    if (i >= 0) return i
+  }
+  return num
+}
+
 export function navOf(player: Pick<LivePlayerRow, 'data'> | null | undefined, activity: LiveActivityDefinition): Nav {
-  const raw = (player?.data?._nav ?? {}) as { stage?: number; max?: number }
+  const raw = (player?.data?._nav ?? {}) as SavedNav
   const last = activity.stages.length - 1
-  const stage = Math.max(0, Math.min(raw.stage ?? defaultStart(activity), last))
-  return { stage, max: Math.max(stage, Math.min(raw.max ?? stage, last)) }
+  const stage = Math.max(0, Math.min(resolveStage(activity, raw.k, raw.stage) ?? defaultStart(activity), last))
+  const max = Math.max(stage, Math.min(resolveStage(activity, raw.mk, raw.max) ?? stage, last))
+  return { stage, max }
 }
 
 // -------------------------------------------------------------- student bar

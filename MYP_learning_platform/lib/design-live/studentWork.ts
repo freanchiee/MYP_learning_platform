@@ -170,7 +170,7 @@ export function buildWorkDoc(
   for (const stage of worksheets) {
     for (const section of stage.sections as WorksheetSection[]) {
       const sd = data?.[stage.key]?.[section.key] || {}
-      const items = section.fields.map((f) => {
+      const items = section.fields.filter((f) => f.type !== 'gameEvidence' && f.type !== 'leadCapture').map((f) => {
         const ex = f.type === 'text' || f.type === 'textarea' ? exemplarsFor(activity.exemplarsByChoice as any, stage.key, section.key, f, data).texts.slice(0, 1) : []
         return fieldItem(f, sd[f.key], ex)
       })

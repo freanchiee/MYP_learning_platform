@@ -19,6 +19,7 @@
 
 import type { LiveActivityDefinition } from './types'
 import { MYP5_EXEMPLARS } from './myp5-exemplars'
+import { MYP5_LEARN_A, MYP5_CHECK_A, MYP5_LEARN_B, MYP5_CHECK_B, MYP5_LEARN_CD, MYP5_CHECK_CD } from './myp5-lessons'
 
 export const MYP5_SUSTAINABILITY: LiveActivityDefinition = {
   id: 'myp5-sustainability',
@@ -32,6 +33,9 @@ export const MYP5_SUSTAINABILITY: LiveActivityDefinition = {
   // Asynchronous: every student works through the stages on their own, so anyone who missed the live game
   // can still complete the whole unit. The game stage becomes an optional recap unless the teacher runs it live.
   selfPaced: true,
+  // The stages as they were before the lessons and checkpoints were inserted. A student whose saved position is a bare
+  // number (saved before this) is read through this list, so nobody part-way through is moved.
+  legacyStageKeys: ['game', 'creditcheck', 'community', 'ideation', 'planreflect', 'grading'],
   stages: [
     {
       type: 'boardGame',
@@ -103,6 +107,8 @@ export const MYP5_SUSTAINABILITY: LiveActivityDefinition = {
         { icon: '⚖️', context: 'Who pays?', q: 'An offset project stops villagers farming land so a company abroad can claim credits. Which concern matters most for a designer?', options: ['Whether the logo is green', 'Consent and fairness: did the community agree, and do they share the benefit?', 'How many credits were sold', 'Nothing — it is legal'], correct: 1, strand: 'Fairness', why: 'A designer asks who gains and who pays. A credit that takes land from a community without its consent or a share of the benefit is not fair.' },
       ],
     },
+    MYP5_LEARN_A,
+    MYP5_CHECK_A,
     {
       type: 'worksheet',
       key: 'community',
@@ -138,6 +144,7 @@ export const MYP5_SUSTAINABILITY: LiveActivityDefinition = {
           blurb: 'Explain and justify the need for a solution for a specified client or target audience — grounded in what you saw in the game.',
           fields: [
             { key: 'community', label: 'Whose community are you designing for?', type: 'select', options: ['Government', 'Corporation', 'Factory Worker', 'Consumer', 'Frontline Community'] },
+            { key: 'gameCards', label: 'Your game, as evidence', type: 'gameEvidence' },
             {
               key: 'citizens',
               label: 'Describe these citizens',
@@ -568,6 +575,8 @@ export const MYP5_SUSTAINABILITY: LiveActivityDefinition = {
         },
       ],
     },
+    MYP5_LEARN_B,
+    MYP5_CHECK_B,
     {
       type: 'worksheet',
       key: 'ideation',
@@ -886,6 +895,8 @@ export const MYP5_SUSTAINABILITY: LiveActivityDefinition = {
         },
       ],
     },
+    MYP5_LEARN_CD,
+    MYP5_CHECK_CD,
     {
       type: 'worksheet',
       key: 'planreflect',

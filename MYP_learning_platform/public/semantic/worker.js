@@ -4,15 +4,17 @@
 // the wording or spelling differs. It is a general sentence-similarity model, not trained on MYP rubrics, so it is
 // used only as ONE signal in the answer coach (see lib/design-live/answerFeedback.ts), never as a grade.
 //
-// The runtime library (transformers.js, pinned) is loaded from a CDN; the model files are ours. If either cannot be
-// loaded (blocked network, old browser) the page falls back to rule-based coaching and nothing breaks.
+// Everything is served from this site: the model (/models/), the runtime (transformers.js 3.0.2, /semantic/transformers.min.js)
+// and its WebAssembly engine (/semantic/ort-wasm-simd-threaded.jsep.wasm), so no outside network or CDN is needed. If it
+// cannot load (old browser, blocked downloads) the page falls back to rule-based coaching and nothing breaks.
 
-import { pipeline, env } from 'https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.0.2'
+import { pipeline, env } from '/semantic/transformers.min.js'
 
 env.allowRemoteModels = false
 env.allowLocalModels = true
 env.localModelPath = '/models/'
 env.backends.onnx.wasm.numThreads = 1
+env.backends.onnx.wasm.wasmPaths = '/semantic/'
 
 let extractor = null
 let loading = null

@@ -614,3 +614,11 @@ Async (self-paced) lesson assignments are separate: `class_assignments.kind='les
 - `subject` on a definition adds a chip on the hub card (default 'Design').
 - `personaPack: 'society'` + `personaTopicFrom` (the direction select) offers only the characters whose `topic` matches the student's direction (`society-personas.ts`; topic text must equal the select option exactly). The prompt lives in `app/api/persona-chat/route.ts`.
 - `leadCapture` field (`LeadCaptureField.tsx`) wraps `InterestForm` + a tutoring link, tagged with the activity in `source_page`. Students under 16 cannot sign up, so the copy addresses a parent/teacher. It counts as complete once `{ sent: true }` is saved.
+
+## Self-paced positions survive new stages (legacyStageKeys)
+
+A self-paced student's position is saved as the stage NUMBER and, from now on, the stage KEY (`_nav = { stage, max, k, mk }`, `navOf`/`navPatch` in `SelfPaced.tsx`). The key wins, so inserting or reordering stages never moves anyone. A position saved before that has only a number: set `legacyStageKeys` on the activity to the stage keys in order **as they were before your change**, and those numbers are read through that list. Do this whenever you insert stages into an activity students may already be working through (see `myp5-sustainability.ts`). Only list a layout that really existed; if two layouts shared the same numbers there is no way to tell them apart.
+
+## Teacher panel, game evidence cards, network check
+
+`CoachDashboard.tsx` sits above each worksheet stage on the host screen: for coached fields it lists who is below level 5 or has not started, lowest first (rule-based estimate, same as points). `gameEvidence` is a read-only field (`GameEvidenceField.tsx`) that shows the student's own role and moves from `session.state.game`; it is excluded from completeness, review and PDFs. `NetworkCheck.tsx` on the activity's first screen tests whether the on-device model can load on this network. The model, runtime and WebAssembly engine are all served from this site (`public/models`, `public/semantic`), so no CDN is needed.

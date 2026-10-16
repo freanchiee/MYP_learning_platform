@@ -6,7 +6,8 @@
 import type { WorksheetSection, McqQuestion } from '@/data/design/live/types'
 
 export function worksheetSectionPct(section: WorksheetSection, values: Record<string, any>): number {
-  const fields = section.fields
+  // Read-only reference cards and the sign-up card are not answers, so they never count towards completeness.
+  const fields = section.fields.filter((f) => f.type !== 'gameEvidence' && f.type !== 'leadCapture')
   if (!fields.length) return 0
   let filled = 0
   fields.forEach((f) => {

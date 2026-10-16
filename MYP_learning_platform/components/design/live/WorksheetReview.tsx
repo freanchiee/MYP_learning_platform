@@ -218,7 +218,7 @@ export function WorksheetReviewModal({
                     {s.criterion && <span style={{ marginLeft: 8, fontSize: 10.5, fontWeight: 800, color: 'var(--text-muted)' }}>Criterion {s.criterion}</span>}
                   </div>
                   <div style={{ display: 'grid', gap: 8, marginBottom: 10 }}>
-                    {s.fields.map((f) => {
+                    {s.fields.filter((f) => f.type !== 'gameEvidence' && f.type !== 'leadCapture').map((f) => {
                       if (f.type === 'personaChat') {
                         const v = data[f.key] as { characterId?: string; messages?: { from: string }[] } | undefined
                         const persona = v?.characterId ? getPersona(v.characterId) : undefined

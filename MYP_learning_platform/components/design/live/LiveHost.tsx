@@ -1,5 +1,6 @@
 'use client'
 
+import CoachDashboard from './CoachDashboard'
 import { useEffect, useMemo, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { createClient } from '@/lib/supabase/client'
@@ -383,6 +384,7 @@ function StageHost({
       </div>
 
       {stage.type === 'mcq' && <McqHost activity={activity} stage={activity.selfPaced ? { ...stage, pacing: 'self-paced' as const } : stage} session={session} players={players} patchState={patchState} now={now} onChat={onChat} />}
+      {stage.type === 'worksheet' && <CoachDashboard stage={stage} players={players} onChat={onChat} />}
       {stage.type === 'worksheet' && <WorksheetHost stage={stage} players={players} now={now} onChat={onChat} sessionCode={session.code} onReview={onReview} />}
       {stage.type === 'openIdeas' && <OpenIdeasHost activity={activity} stage={stage} session={session} players={players} patchState={patchState} now={now} onChat={onChat} />}
       {stage.type === 'learn' && <LearnHost stage={stage} session={session} players={players} patchState={patchState} accent={activity.theme.accent} allowPresent={!activity.selfPaced} />}

@@ -23,6 +23,16 @@ const nextConfig = {
   async headers() {
     return [
       {
+        // The runtime and its WebAssembly engine are pinned versions too.
+        source: '/semantic/:file(.+\.wasm|transformers\.min\.js)',
+        headers: [{ key: 'Cache-Control', value: 'public, max-age=604800, stale-while-revalidate=86400' }],
+      },
+      {
+        // The on-device model never changes under the same path: let browsers keep it for a week.
+        source: '/models/:path*',
+        headers: [{ key: 'Cache-Control', value: 'public, max-age=604800, stale-while-revalidate=86400' }],
+      },
+      {
         source: '/artifacts/:path*',
         headers: [{ key: 'X-Robots-Tag', value: 'noindex' }],
       },

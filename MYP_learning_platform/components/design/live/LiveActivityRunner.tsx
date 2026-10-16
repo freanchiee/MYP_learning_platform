@@ -7,6 +7,7 @@ import type { LiveActivityDefinition } from '@/data/design/live/types'
 import LiveHost from './LiveHost'
 import LiveJoin from './LiveJoin'
 import { btnStyle, pageBg } from './ui'
+import NetworkCheck from './NetworkCheck'
 
 export default function LiveActivityRunner({ activity }: { activity: LiveActivityDefinition }) {
   const params = useSearchParams()
@@ -35,6 +36,7 @@ export default function LiveActivityRunner({ activity }: { activity: LiveActivit
               🙋 I have a join code
             </button>
           </div>
+          <NetworkCheck />
         </div>
       </div>
     </div>

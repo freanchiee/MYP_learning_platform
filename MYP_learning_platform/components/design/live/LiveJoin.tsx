@@ -32,13 +32,15 @@ import MyWorkDownloads from './MyWorkDownloads'
 import StudentShell from './shell/StudentShell'
 import { LIVE_FONT_CLASSES } from '@/lib/design-live/liveFonts'
 import { useLiveTheme } from '@/lib/design-live/liveTheme'
-import { SelfPacedBar, navOf } from './SelfPaced'
+import { SelfPacedBar, navOf, navPatch } from './SelfPaced'
 import { LeaderboardDrawer, useLeaderboardDrawer } from './HostChrome'
 import { getPersona } from '@/data/design/live/personas'
 import { useCelebration, CelebrationOverlay } from './Celebration'
 import LeadCaptureField from './LeadCaptureField'
+import GameEvidenceField from './GameEvidenceField'
 import AnswerCoach, { guardedChange, noPasteHandlers, useNotice } from './AnswerCoach'
 import { resolveCoach } from '@/lib/design-live/answerFeedback'
+import { preloadSemantic } from '@/lib/design-live/semantic'
 
 /** Case-insensitive "does this text contain this word/phrase" check used by
  *  both the keyword-celebration nudge and (loosely) nowhere else — kept
@@ -266,6 +268,16 @@ export default function LiveJoin({ activity, initialCode }: { activity: LiveActi
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [me?.id, pointsSig])
 
+  // Warm the on-device smart check in the background a few seconds after joining, so it is ready before the first
+  // answer (only for activities with written answers). If it cannot load, the coach falls back to keywords.
+  const hasWrittenAnswers = activity.stages.some((s) => s.type === 'worksheet')
+  const joined = !!me
+  useEffect(() => {
+    if (!joined || !hasWrittenAnswers) return undefined
+    const t = setTimeout(preloadSemantic, 4000)
+    return () => clearTimeout(t)
+  }, [joined, hasWrittenAnswers])
+
   if (userId === null) {
     // Send them to sign in (or create an account — the login page's OTP
     // flow does both, there's no separate signup) with `next` pointing
@@ -367,7 +379,7 @@ export default function LiveJoin({ activity, initialCode }: { activity: LiveActi
   const stageSession = selfPaced ? { ...session, state: {} } : session
   const goStage = (n: number) => {
     const t = Math.max(0, Math.min(n, activity.stages.length - 1))
-    patchMyData('_nav', { stage: t, max: Math.max(nav.max, t) })
+    patchMyData('_nav', navPatch(activity, t, Math.max(nav.max, t)))
   }
 
   // Teacher feedback the student has not opened yet (one chip per section, tapping it goes to that stage).
@@ -455,7 +467,7 @@ export default function LiveJoin({ activity, initialCode }: { activity: LiveActi
             <McqPlayer activity={activity} stage={stage} session={stageSession} me={me} patchMyData={patchMyData} addPoints={addPoints} />
           )}
           {canWork && stage?.type === 'worksheet' && (
-            <WorksheetPlayer stage={stage} allStages={activity.stages} activity={activity} grade={myGrade} me={me} sessionCode={code} patchMyData={patchMyData} reportDraft={reportDraft} celebrate={celebrate} journal={shellOn} onNextStage={selfPaced ? () => goStage(myIdx + 1) : undefined} onInterviewOnScreen={setInterviewOnScreen} />
+            <WorksheetPlayer gameState={session.state?.game} stage={stage} allStages={activity.stages} activity={activity} grade={myGrade} me={me} sessionCode={code} patchMyData={patchMyData} reportDraft={reportDraft} celebrate={celebrate} journal={shellOn} onNextStage={selfPaced ? () => goStage(myIdx + 1) : undefined} onInterviewOnScreen={setInterviewOnScreen} />
           )}
           {canWork && stage?.type === 'openIdeas' && (
             <OpenIdeasPlayer activity={activity} stage={stage} session={stageSession} me={me} patchMyData={patchMyData} addPoints={addPoints} reportDraft={reportDraft} celebrate={celebrate} selfPaced={selfPaced} />
@@ -747,6 +759,7 @@ function QuizSummary({ stage, answers }: { stage: McqStage; answers: Record<numb
 }
 
 export function WorksheetPlayer({
+  gameState,
   stage,
   allStages,
   activity,
@@ -762,6 +775,8 @@ export function WorksheetPlayer({
 }: {
   /** Journal layout: the stage's sections are tabs, one page open at a time, with Previous / Next section. */
   journal?: boolean
+  /** The live game's state (session.state.game), for fields that show the student's own game moves. */
+  gameState?: any
   /** Called by the last section's "Finish this stage" button. */
   onNextStage?: () => void
   /** Tells the page whether this stage's interview section is the one being shown. */
@@ -1019,6 +1034,7 @@ export function WorksheetPlayer({
                     playerId={me.id}
                     stageKey={stage.key}
                     lookup={(stageKey, sectionKey, fieldKey) => me.data?.[stageKey]?.[sectionKey]?.[fieldKey]}
+                    gameState={gameState}
                     coachCtx={{ points: me.points ?? 0, scaffoldOpen: !!me.data?._spent?.[`${stage.key}.${s.key}.${f.key}`], onUnlockScaffold: () => patchMyData('_spent', { [`${stage.key}.${s.key}.${f.key}`]: true }) }}
                   />
                   </div>
@@ -1179,7 +1195,9 @@ function WorksheetFieldInput({
   stageKey,
   lookup,
   coachCtx,
+  gameState,
 }: {
+  gameState?: any
   /** Present when the field has `coach`: the student's points, whether the scaffold is already unlocked, and how to unlock it. */
   coachCtx?: { points: number; scaffoldOpen: boolean; onUnlockScaffold: () => void }
   field: WorksheetField
@@ -1197,6 +1215,7 @@ function WorksheetFieldInput({
   if (coachCtx && (field.type === 'textarea' || field.type === 'text') && resolveCoach(field)) {
     return <AnswerCoach field={field} value={typeof value === 'string' ? value : ''} onChange={onChange} points={coachCtx.points} scaffoldOpen={coachCtx.scaffoldOpen} onUnlockScaffold={coachCtx.onUnlockScaffold} />
   }
+  if (field.type === 'gameEvidence') return <GameEvidenceField game={gameState} playerId={playerId!} />
   if (field.type === 'image') {
     return (
       <label style={{ display: 'grid', gap: 4, fontSize: 12, fontWeight: 700, color: 'var(--text-muted)' }}>

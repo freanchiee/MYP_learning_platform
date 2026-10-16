@@ -62,7 +62,7 @@ export interface McqStage extends StageTiming {
 // ---------------------------------------------------------------
 // Stage: Worksheet (structured research/build artefacts + grading)
 // ---------------------------------------------------------------
-export type WorksheetFieldType = 'text' | 'textarea' | 'select' | 'table' | 'personaChat' | 'personalityPrompt' | 'opportunityCards' | 'makeCards' | 'productCards' | 'image' | 'checklist' | 'leadCapture'
+export type WorksheetFieldType = 'text' | 'textarea' | 'select' | 'table' | 'personaChat' | 'personalityPrompt' | 'opportunityCards' | 'makeCards' | 'productCards' | 'image' | 'checklist' | 'leadCapture' | 'gameEvidence'
 
 export interface WorksheetTableColumn {
   key: string
@@ -339,6 +339,10 @@ export interface LiveActivityDefinition {
   /** Every student moves through the stages on their own (position saved on their player row). The host
    *  screen shows where everyone is; its Next/Previous only change which stage's dashboard the host sees. */
   selfPaced?: boolean
+  /** The stage keys, in order, as the activity was BEFORE stages were inserted, for self-paced positions saved
+   *  as a bare number. A saved position with no stage key is read through this list, so inserting a stage never
+   *  moves a student who is part-way through. Positions saved from now on carry the key and do not need it. */
+  legacyStageKeys?: string[]
   /** Index of the stage a self-paced student starts on, e.g. to begin where a previous activity ended. Default 0. */
   startStage?: number
 }
