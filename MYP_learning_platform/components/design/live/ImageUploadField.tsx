@@ -2,13 +2,13 @@
 
 // A build-log style upload: students attach a screenshot or a photo of a
 // sketch straight from their device, no external link or "photos go in
-// your own design folder" workaround needed. Uploads go to the public
-// `live-uploads` Supabase Storage bucket (see supabase migration
-// live_uploads_bucket), one object per file at
-// `${sessionCode}/${playerId}/${stageKey}-${fieldKey}/...` — public read
-// (so a teacher's browser can just show the URL), insert restricted to
-// signed-in users, delete restricted to the uploader's own files.
+// your own design folder" workaround needed. Uploads go to the PRIVATE
+// `live-uploads` Supabase Storage bucket, one object per file at
+// `${sessionCode}/${playerId}/${stageKey}-${fieldKey}/...`. Only the uploader,
+// the session host and the class teacher can read them, through short-lived
+// signed links (see lib/design-live/uploads.ts and migration 0019).
 
+import SignedThumb from './SignedThumb'
 import { useRef, useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import type { WorksheetImageUpload } from '@/data/design/live/types'
@@ -97,9 +97,7 @@ export default function ImageUploadField({
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
           {images.map((img, i) => (
             <div key={img.url} style={{ position: 'relative' }}>
-              <a href={img.url} target="_blank" rel="noreferrer">
-                <img src={img.url} alt={img.name} style={{ width: 84, height: 84, objectFit: 'cover', borderRadius: 8, border: '1.5px solid var(--border)', display: 'block' }} />
-              </a>
+              <SignedThumb url={img.url} name={img.name} style={{ width: 84, height: 84, objectFit: 'cover', borderRadius: 8, border: '1.5px solid var(--border)', display: 'block' }} />
               <button
                 onClick={() => remove(i)}
                 title="Remove"

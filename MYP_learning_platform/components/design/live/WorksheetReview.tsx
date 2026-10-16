@@ -1,5 +1,6 @@
 'use client'
 
+import SignedThumb from './SignedThumb'
 import { getProduct, isWildProduct } from '@/data/design/live/digital-products'
 import { useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
@@ -287,9 +288,7 @@ export function WorksheetReviewModal({
                             ) : (
                               <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginTop: 4 }}>
                                 {v.map((img, i) => (
-                                  <a key={i} href={img.url} target="_blank" rel="noreferrer">
-                                    <img src={img.url} alt={img.name} style={{ width: 72, height: 72, objectFit: 'cover', borderRadius: 8, border: '1.5px solid var(--border)' }} />
-                                  </a>
+                                  <SignedThumb key={i} url={img.url} name={img.name} style={{ width: 72, height: 72, objectFit: 'cover', borderRadius: 8, border: '1.5px solid var(--border)' }} />
                                 ))}
                               </div>
                             )}

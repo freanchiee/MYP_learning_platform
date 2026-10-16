@@ -7,6 +7,7 @@
 // while the popover is open, using the same live_players row the host screen
 // itself watches during a session.
 
+import SignedThumb from '@/components/design/live/SignedThumb'
 import { useEffect, useRef, useState, type ReactNode } from 'react'
 import { useLiveRow, isDraftFresh, useNowTick, type LiveDraft } from '@/lib/design-live/hooks'
 import { fieldAnswerText } from '@/lib/design-live/studentWork'
@@ -49,9 +50,7 @@ function AnswersList({ activity, data }: { activity: LiveActivityDefinition; dat
                 {r.images ? (
                   <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', marginTop: 2 }}>
                     {r.images.map((img, ii) => (
-                      <a key={ii} href={img.url} target="_blank" rel="noreferrer" onClick={(e) => e.stopPropagation()}>
-                        <img src={img.url} alt={img.name} style={{ width: 44, height: 44, objectFit: 'cover', borderRadius: 6, border: '1px solid var(--border)' }} />
-                      </a>
+                      <SignedThumb key={ii} url={img.url} name={img.name} onLinkClick={(e) => e.stopPropagation()} style={{ width: 44, height: 44, objectFit: 'cover', borderRadius: 6, border: '1px solid var(--border)' }} />
                     ))}
                   </div>
                 ) : (

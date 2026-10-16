@@ -4,12 +4,13 @@
 
 import type { WorkDoc } from './studentWork'
 import { buildWorkPdf, type ImageMap } from './workPdf'
+import { signedUploadUrl } from './uploads'
 
 async function loadImage(url: string): Promise<ImageMap[string] | null> {
   try {
     const ctl = new AbortController()
     const t = setTimeout(() => ctl.abort(), 8000)
-    const res = await fetch(url, { signal: ctl.signal })
+    const res = await fetch(await signedUploadUrl(url), { signal: ctl.signal })
     clearTimeout(t)
     if (!res.ok) return null
     const bmp = await createImageBitmap(await res.blob())

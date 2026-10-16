@@ -15,8 +15,8 @@ import type { LivePlayerRow } from '@/lib/design-live/types'
 /** Realtime change feed + a polling safety net + catch-up on tab focus, with the request policy in fetcher.ts:
  *  one request at a time, slow polling while realtime is connected, nothing while the tab is hidden, and bursts of
  *  change events merged into a single refetch. Returns the cleanup function. */
-function startLive(sb: ReturnType<typeof createClient>, channelKey: string, table: string, filter: string, run: () => Promise<void>, wantsChange?: (change: RowChange) => boolean) {
-  const fetcher = createLiveFetcher({ run, isHidden: () => document.hidden })
+function startLive(sb: ReturnType<typeof createClient>, channelKey: string, table: string, filter: string, run: () => Promise<void>, wantsChange?: (change: RowChange) => boolean, timing?: { fastMs?: number; slowMs?: number }) {
+  const fetcher = createLiveFetcher({ run, isHidden: () => document.hidden, ...timing })
   const channel = sb
     .channel(`${channelKey}-${Math.random().toString(36).slice(2)}`)
     .on('postgres_changes', { event: '*', schema: 'public', table, filter }, (payload) => {
@@ -33,6 +33,10 @@ function startLive(sb: ReturnType<typeof createClient>, channelKey: string, tabl
     document.removeEventListener('visibilitychange', onVis)
   }
 }
+
+/** Lists built from live_roster() only hear realtime changes to the student's OWN row (other students' rows are private),
+ *  so they also re-check every few seconds. */
+const ROSTER_TIMING = { fastMs: 3000, slowMs: 5000 }
 
 export function useLiveRow<T>(
   table: string,
@@ -235,21 +239,18 @@ export function useClassLeaderboard(code: string | null | undefined, enabled = t
     let cancelled = false
     const held = new Map<string, Record<string, unknown>>()
     const fetchIt = async () => {
-      const { data, error: err } = await sb
-        .from('live_players')
-        .select('id,name,points,badges,nav:data->_nav')
-        .eq('session_code', code)
-        .order('joined_at', { ascending: true })
+      // live_roster() returns names, points and positions only (never answers) and only to people in the session.
+      const { data, error: err } = await sb.rpc('live_roster', { p_code: code })
       if (cancelled) return
       if (err) { setError(err.message); return }
       setError(null)
-      const list = (data as unknown as LeaderboardRow[]) ?? []
+      const list = ((data as unknown as LeaderboardRow[]) ?? []).map((r) => ({ id: r.id, name: r.name, points: r.points, badges: r.badges ?? [], nav: r.nav ?? null }) as LeaderboardRow)
       held.clear()
       list.forEach((r) => held.set(r.id, r as unknown as Record<string, unknown>))
       setRows(list)
       setLoaded(true)
     }
-    const stop = startLive(sb, `leaderboard-${code}`, 'live_players', `session_code=eq.${code}`, fetchIt, (change) => affectsList(change, held, leaderboardCachedFields, leaderboardChangeFields))
+    const stop = startLive(sb, `leaderboard-${code}`, 'live_players', `session_code=eq.${code}`, fetchIt, (change) => affectsList(change, held, leaderboardCachedFields, leaderboardChangeFields), ROSTER_TIMING)
     return () => { cancelled = true; stop() }
   }, [code, enabled])
   return { rows, error, loaded }
@@ -268,19 +269,15 @@ export function useClassRoster(code: string | null | undefined, enabled = true):
     let cancelled = false
     const held = new Map<string, Record<string, unknown>>()
     const fetchIt = async () => {
-      const { data, error } = await sb
-        .from('live_players')
-        .select('id,session_code,user_id,name,team,points,badges,joined_at')
-        .eq('session_code', code)
-        .order('joined_at', { ascending: true })
+      const { data, error } = await sb.rpc('live_roster', { p_code: code })
       if (cancelled) return
       if (error) { console.error('live: failed to load the roster:', error.message); return } // keep what we showed
-      const list = ((data ?? []) as unknown as Omit<LivePlayerRow, 'data'>[]).map((r) => ({ ...r, badges: r.badges ?? [], data: {} }))
+      const list = ((data ?? []) as unknown as (Omit<LivePlayerRow, 'data' | 'user_id'> & { user_id: string | null })[]).map((r) => ({ ...r, user_id: r.user_id ?? '', badges: r.badges ?? [], data: {} }))
       held.clear()
       list.forEach((r) => held.set(r.id, r as unknown as Record<string, unknown>))
       setRows(list)
     }
-    const stop = startLive(sb, `roster-${code}`, 'live_players', `session_code=eq.${code}`, fetchIt, (change) => affectsList(change, held, rosterFields))
+    const stop = startLive(sb, `roster-${code}`, 'live_players', `session_code=eq.${code}`, fetchIt, (change) => affectsList(change, held, rosterFields), ROSTER_TIMING)
     return () => { cancelled = true; stop() }
   }, [code, enabled])
   return rows

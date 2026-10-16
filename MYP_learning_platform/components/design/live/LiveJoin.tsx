@@ -110,12 +110,19 @@ export default function LiveJoin({ activity, initialCode }: { activity: LiveActi
     if (!code) return
     ;(async () => {
       const sb = createClient()
-      const { data } = await sb.from('live_sessions').select('code').eq('code', code).eq('activity_id', activity.id).maybeSingle()
-      setSessionExists(!!data)
+      // Before someone has joined they are not allowed to read the session table; this function tells them only
+      // that it exists (and its status), never the game state or the host.
+      const { data } = await sb.rpc('live_session_for_join', { p_code: code })
+      const row = (data as LiveSessionRow[] | null)?.[0]
+      const ok = !!row && row.activity_id === activity.id
+      setSessionExists(ok)
+      if (ok && row) setSession((cur) => cur ?? row)
     })()
   }, [code, activity.id])
 
-  useLiveRow<LiveSessionRow>('live_sessions', 'code', code, setSession, !!code)
+  // Once joined, the real row (with state) arrives through the table. Before that the table returns nothing, so keep the
+  // limited row from live_session_for_join instead of dropping back to "Connecting…".
+  useLiveRow<LiveSessionRow>('live_sessions', 'code', code, (row) => setSession((cur) => row ?? cur), !!code)
   // The class roster: names, teams, scores and the head-count only. Deliberately NOT the full rows: a student screen
   // must not download every classmate's answers (`data`), which used to multiply the traffic with class size.
   const players = useClassRoster(code, !!code)
