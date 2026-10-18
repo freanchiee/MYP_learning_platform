@@ -1,4 +1,5 @@
 import { redirect } from 'next/navigation'
+import { PAPERS_HREF } from '@/lib/papers-flag'
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase/server'
 import type { Profile, UserBadge, Attempt } from '@/lib/types'
@@ -200,7 +201,7 @@ export default async function DashboardPage() {
                 NO BADGES YET
               </p>
               <Link
-                href="/papers"
+                href={PAPERS_HREF}
                 className="inline-block font-black text-xs tracking-[0.2em] transition-opacity hover:opacity-80"
                 style={{ background: 'var(--accent)', color: 'var(--text-on-accent)', padding: '12px 32px' }}
               >
@@ -264,7 +265,7 @@ export default async function DashboardPage() {
                   NO COMPLETED ATTEMPTS YET
                 </p>
                 <Link
-                  href="/papers"
+                  href={PAPERS_HREF}
                   className="inline-block font-black text-xs tracking-[0.2em] transition-opacity hover:opacity-80"
                   style={{ background: 'var(--gradient-cta)', color: 'var(--text-on-accent)', padding: '14px 40px' }}
                 >
