@@ -12,6 +12,7 @@ import SignedThumb from './SignedThumb'
 import { useRef, useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import type { WorksheetImageUpload } from '@/data/design/live/types'
+import { shrinkImage } from '@/lib/design-live/shrinkImage'
 import { btnStyle } from './ui'
 
 const MAX_BYTES = 8 * 1024 * 1024
@@ -50,7 +51,16 @@ export default function ImageUploadField({
     const sb = createClient()
     setUploading(true)
     const uploaded: WorksheetImageUpload[] = []
-    for (const file of files) {
+    for (const original of files) {
+      if (!ACCEPTED.includes(original.type)) {
+        setError(`${original.name}: only PNG, JPG, WEBP or GIF images.`)
+        continue
+      }
+      if (original.size > 25 * 1024 * 1024) {
+        setError(`${original.name} is too large — try a smaller photo.`)
+        continue
+      }
+      const file = await shrinkImage(original) // phone photos are shrunk before upload (saves data for everyone)
       if (!ACCEPTED.includes(file.type)) {
         setError(`${file.name}: only PNG, JPG, WEBP or GIF images.`)
         continue
