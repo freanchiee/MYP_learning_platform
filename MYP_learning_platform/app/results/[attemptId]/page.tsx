@@ -1,4 +1,5 @@
 import { redirect, notFound } from 'next/navigation'
+import { PAPERS_HREF } from '@/lib/papers-flag'
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase/server'
 import type { Attempt, QuestionGradeResult } from '@/lib/types'
@@ -392,7 +393,7 @@ export default async function ResultsPage({
         {/* ── Practice Again ── */}
         <div className="flex justify-center py-4">
           <Link
-            href="/papers"
+            href={PAPERS_HREF}
             className="inline-flex items-center gap-2 px-8 py-3 rounded-card text-sm font-semibold transition-opacity hover:opacity-90"
             style={{ background: 'var(--gradient-cta)', color: 'var(--text-on-accent)' }}
           >

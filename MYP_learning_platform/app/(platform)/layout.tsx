@@ -4,6 +4,7 @@ import type { ReactNode } from 'react'
 import { createClient } from '@/lib/supabase/server'
 import type { Profile } from '@/lib/types'
 import PapersDropdownNav from '@/components/nav/PapersDropdownNav'
+import { PAPERS_OPEN } from '@/lib/papers-flag'
 import Wordmark from '@/components/brand/Wordmark'
 import ThemeSwitcher from '@/components/theme/ThemeSwitcher'
 import ThemeSync from '@/components/theme/ThemeSync'
@@ -94,7 +95,7 @@ export default async function PlatformLayout({ children }: { children: ReactNode
               {label}
             </Link>
           ))}
-          <PapersDropdownNav />
+          {PAPERS_OPEN && <PapersDropdownNav />}
         </div>
 
         {/* Right: user + XP + theme + logout */}

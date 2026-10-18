@@ -1,5 +1,6 @@
 'use client'
 
+import { PAPERS_HREF } from '@/lib/papers-flag'
 import { useState, useEffect, useRef } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import Link from 'next/link'
@@ -129,7 +130,7 @@ export default function DashboardHero({
           </p>
           <div className="flex items-center justify-center gap-3 flex-wrap">
             <Link
-              href="/papers"
+              href={PAPERS_HREF}
               className="group inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-bold text-sm tracking-wide transition-transform hover:scale-[1.03]"
               style={{ background: dark ? '#adf1c4' : 'var(--accent)', color: dark ? '#0a0a0a' : 'var(--text-on-accent)' }}
             >
